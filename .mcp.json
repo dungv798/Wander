@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "code-review-graph": {
+      "type": "stdio",
+      "command": "C:\\Users\\dungv\\.local\\bin\\code-review-graph.exe",
+      "args": [
+        "serve",
+        "--repo",
+        "D:\\Wander"
+      ],
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    }
+  }
+}

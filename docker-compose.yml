@@ -1,0 +1,39 @@
+# Môi trường cục bộ của Wander.
+#   docker compose up -d postgres            # chỉ cơ sở dữ liệu (chạy backend bằng gradlew bootRun)
+#   docker compose --profile app up -d --build   # cả backend trong container (cần build jar trước)
+# Mật khẩu dưới đây CHỈ dùng cho máy cá nhân. Trên AWS, mật khẩu nằm ở Secrets Manager (docs/architecture/aws-deployment.md).
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: wander
+      POSTGRES_USER: wander
+      POSTGRES_PASSWORD: wander
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - wander-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wander -d wander"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    profiles: ["app"]
+    build: ./backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      WANDER_DB_URL: jdbc:postgresql://postgres:5432/wander
+      WANDER_DB_USER: wander
+      WANDER_DB_PASSWORD: wander
+      WANDER_WEB_DIR: /web
+    volumes:
+      - ./web/dist:/web:ro
+    ports:
+      - "127.0.0.1:8787:8787"
+
+volumes:
+  wander-pg:

@@ -1,0 +1,54 @@
+# Cấu hình theo 12-factor: mọi giá trị môi trường lấy từ biến môi trường để chạy được cả máy cá nhân lẫn AWS
+# (ECS/App Runner đặt biến môi trường; mật khẩu DB lấy từ Secrets Manager — xem docs/architecture/aws-deployment.md).
+spring:
+  application:
+    name: wander-backend
+  datasource:
+    url: ${WANDER_DB_URL:jdbc:postgresql://localhost:5433/wander}
+    username: ${WANDER_DB_USER:wander}
+    password: ${WANDER_DB_PASSWORD:wander}
+  jpa:
+    open-in-view: false
+    hibernate:
+      # Schema do Flyway quản lý; Hibernate chỉ kiểm tra entity khớp bảng.
+      ddl-auto: validate
+    properties:
+      hibernate:
+        # Nạp theo lô để tránh N+1 khi đọc mục và trạng thái hoàn thành.
+        default_batch_fetch_size: 64
+        jdbc:
+          time_zone: UTC
+  web:
+    resources:
+      # Tắt phục vụ tĩnh mặc định; giao diện được phục vụ có kiểm soát qua wander.web.dir (WebConfig).
+      add-mappings: false
+  flyway:
+    locations: classpath:db/migration
+
+server:
+  address: ${WANDER_BIND_ADDRESS:127.0.0.1}
+  port: ${PORT:8787}
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+wander:
+  web:
+    # Thư mục giao diện đã build. Để trống thì chỉ chạy API (ví dụ khi giao diện nằm trên S3/CloudFront).
+    dir: ${WANDER_WEB_DIR:}
+  limits:
+    identity-per-hour: ${WANDER_LIMIT_IDENTITY:30}
+    recovery-per-hour: ${WANDER_LIMIT_RECOVERY:30}
+    approval-per-hour: ${WANDER_LIMIT_APPROVAL:20}
+
+logging:
+  level:
+    org.hibernate.SQL: ${WANDER_LOG_SQL:info}

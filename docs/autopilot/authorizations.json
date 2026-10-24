@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "note": "Standing user authorizations for /wander-autopilot. Only the user edits this file; the guard blocks the autopilot from writing it. Empty lists mean NOTHING is authorized: the autopilot records recommendations and never changes the master plan or any status. The master plan is additionally write-protected by permissions.deny and the guard hook, so listing a class here does not by itself enable plan edits.",
+  "auto_resolve_classes": [],
+  "doc_write_allow": []
+}
