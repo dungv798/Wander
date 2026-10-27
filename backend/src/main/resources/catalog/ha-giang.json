@@ -1,0 +1,721 @@
+{
+  "id": "ha-giang",
+  "name": "Hà Giang",
+  "region": "Đông Bắc",
+  "tagline": "Cao nguyên đá, đèo, ruộng bậc thang",
+  "coverPlaceId": "hoang-su-phi",
+  "references": [
+    {
+      "id": "tp-ha-giang",
+      "name": "TP Hà Giang",
+      "lat": 22.8233,
+      "lon": 104.9836,
+      "approximate": true
+    },
+    {
+      "id": "dong-van",
+      "name": "thị trấn Đồng Văn",
+      "lat": 23.28177778,
+      "lon": 105.35989444,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 9–11 đẹp nhất: lúa chín, hoa tam giác mạch.",
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "notes": [
+        "Tháng 9–10 lúa chín ở các ruộng bậc thang. Tháng 10–11 hoa tam giác mạch nở.",
+        "Khoảng tháng 5–8 mưa nhiều, đường dễ trơn và sạt lở. Tháng 9 vẫn có thể mưa."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Áo ấm, áo mưa, thuốc say xe, tiền mặt…",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Áo gió / áo ấm"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa"
+        },
+        {
+          "icon": "check",
+          "title": "Giày đế bám"
+        },
+        {
+          "icon": "check",
+          "title": "Thuốc say xe"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        },
+        {
+          "icon": "check",
+          "title": "Tiền mặt"
+        },
+        {
+          "icon": "check",
+          "title": "Giấy tờ và bằng lái"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Thắng cố, thịt trâu gác bếp, mèn mén, mật ong bạc hà.",
+      "items": [
+        {
+          "icon": "soup",
+          "title": "Thắng cố",
+          "text": "Món hầm nhiều loại thịt, hay bán ở chợ phiên."
+        },
+        {
+          "icon": "meat",
+          "title": "Thịt trâu gác bếp",
+          "text": "Thịt trâu hun khói, ăn kèm chẩm chéo."
+        },
+        {
+          "icon": "wheat",
+          "title": "Mèn mén",
+          "text": "Món bột ngô hấp của người Mông."
+        },
+        {
+          "icon": "bulb",
+          "title": "Mật ong bạc hà",
+          "text": "Mật ong từ hoa bạc hà vùng cao."
+        }
+      ]
+    },
+    {
+      "id": "thien",
+      "layout": "PLACES",
+      "category": "canh",
+      "icon": "trees",
+      "title": "Thiên nhiên",
+      "summary": "Đèo, sông, cao nguyên đá, ruộng bậc thang.",
+      "items": [
+        {
+          "icon": "",
+          "title": "Đèo Mã Pì Lèng",
+          "text": "Cung đèo ôm vách núi, dưới chân là sông Nho Quế xanh ngọc. Bình minh ở đây đáng thức dậy sớm.",
+          "placeId": "deo-ma-pi-leng"
+        },
+        {
+          "icon": "",
+          "title": "Sông Nho Quế",
+          "text": "Đi thuyền giữa hẻm vực Tu Sản, nước xanh ngọc, hai bên là vách đá dựng đứng.",
+          "placeId": "song-nho-que"
+        },
+        {
+          "icon": "",
+          "title": "Cao nguyên đá Đồng Văn",
+          "text": "Công viên địa chất toàn cầu với những triền núi đá xám nối nhau, đường đèo uốn lượn.",
+          "placeId": "cao-nguyen-da"
+        },
+        {
+          "icon": "",
+          "title": "Ruộng bậc thang Hoàng Su Phì",
+          "text": "Những bậc ruộng vàng óng khi lúa chín, trải dài trên sườn núi như bậc thang lên trời.",
+          "placeId": "hoang-su-phi"
+        }
+      ]
+    },
+    {
+      "id": "dv",
+      "layout": "ROWS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Dịch vụ và trải nghiệm",
+      "summary": "Homestay, thuê xe máy, chợ phiên, thuyền Nho Quế.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Homestay",
+          "text": "Hay gặp ở Quản Bạ, Đồng Văn, Mèo Vạc."
+        },
+        {
+          "icon": "motorbike",
+          "title": "Thuê xe máy",
+          "text": "Thường thuê ở TP Hà Giang."
+        },
+        {
+          "icon": "users",
+          "title": "Tour và người dẫn đường",
+          "text": "Hợp với người không rành đường đèo."
+        },
+        {
+          "icon": "route",
+          "title": "Thuyền trên sông Nho Quế",
+          "text": "Đi giữa hẻm vực Tu Sản."
+        },
+        {
+          "icon": "building-store",
+          "title": "Chợ phiên Đồng Văn",
+          "text": "Họp vào sáng Chủ nhật."
+        }
+      ]
+    },
+    {
+      "id": "dichuyen",
+      "layout": "ROWS",
+      "category": "leo",
+      "icon": "motorbike",
+      "title": "Di chuyển",
+      "summary": "Xe máy hoặc ô tô thuê kèm tài xế.",
+      "items": [
+        {
+          "icon": "motorbike",
+          "title": "Đi trong vùng",
+          "text": "Xe máy, hoặc ô tô thuê kèm tài xế."
+        },
+        {
+          "icon": "alert-triangle",
+          "title": "Lưu ý",
+          "text": "Đường đèo hẹp, đổ xăng ở thị trấn trước khi lên đèo, sóng yếu ở một số đoạn."
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "cot-co-lung-cu",
+      "name": "Cột cờ Lũng Cú",
+      "category": "van",
+      "area": "Đồng Văn",
+      "hook": "Đứng dưới lá cờ ở cực Bắc, nhìn mây trôi qua những dãy núi đá trùng điệp.",
+      "summary": "Cột cờ Lũng Cú là một cột cờ quốc gia nằm ở đỉnh Lũng Cú hay còn gọi là đỉnh núi Rồng (Long Sơn) có độ cao khoảng 1.470 m so với mực nước biển, thuộc xã Lũng Cú, tỉnh Tuyên Quang, Việt Nam. Cột cờ Lũng Cú cách điểm cực Bắc Việt Nam khoảng 3,3 km theo đường chim bay. Từ trên đỉnh cột cờ nhìn xuống đất có 02 ao nước hai bên núi quanh năm không bao giờ cạn nước được gọi là mắt rồng, là nguồn nước cho người dân tộc hai bản sử dụng. Cột cờ cách trung tâm…",
+      "lat": 23.36794444,
+      "lon": 105.31563333,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Lá cờ trên đỉnh tháp",
+        "Bậc thang lên đỉnh",
+        "Toàn cảnh núi đá"
+      ],
+      "verdict": "must",
+      "verdictReason": "Điểm cực Bắc, gần như ai lên Hà Giang cũng ghé.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Sáng sớm trời thường trong, nhìn xa. Chiều dễ có mây che tầm nhìn.",
+      "tips": [
+        "Mang áo gió, trên đỉnh thường có gió mạnh.",
+        "Đến sớm để tránh đông và mây che."
+      ],
+      "photos": [
+        {
+          "file": "cot-co-lung-cu-1.jpg",
+          "author": "Leminhel at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%99t_c%E1%BB%9D_L%C5%A9ng_C%C3%BA.JPG"
+        },
+        {
+          "file": "cot-co-lung-cu-2.jpg",
+          "author": "Lost Cosmonauts",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lung_cu_view.jpg"
+        },
+        {
+          "file": "cot-co-lung-cu-3.jpg",
+          "author": "Leminhel at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A1_c%E1%BB%9D_Vi%E1%BB%87t_Nam_tr%C3%AAn_%C4%91%E1%BB%89nh_C%E1%BB%99t_c%E1%BB%9D_L%C5%A9ng_C%C3%BA.JPG"
+        }
+      ],
+      "wikipediaTitle": "Cột cờ Lũng Cú"
+    },
+    {
+      "id": "deo-ma-pi-leng",
+      "name": "Đèo Mã Pì Lèng",
+      "category": "canh",
+      "area": "Mèo Vạc",
+      "hook": "Cung đèo ôm vách núi, dưới chân là sông Nho Quế xanh ngọc. Bình minh ở đây đáng thức dậy sớm.",
+      "summary": "Đèo Mã Pí Lèng (còn được phiên âm là Mã Pì Lèng, Mả Pì Lèng, hay Mã Pỉ Lèng), là đèo trên quốc lộ 4C ở vùng đất xã Đồng Văn và xã Mèo Vạc thuộc tỉnh Tuyên Quang, Việt Nam. Quốc lộ 4C là con đường mang tên Đường Hạnh Phúc nối liền phường Hà Giang 1 với xã Đồng Văn 23°16′42″B 105°21′40″Đ và xã Mèo Vạc 23°09′48″B 105°24′37″Đ thuộc Cao nguyên Đồng Văn. Đèo Mã Pí Lèng là cung đường đèo hiểm trở dài khoảng 20 km, vượt núi Mã Pí Lèng ở sườn phía đông với…",
+      "lat": 23.240808,
+      "lon": 105.410942,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "2–3 giờ",
+      "difficulty": "Vừa",
+      "highlights": [
+        "Vách núi và vực sâu",
+        "Sông Nho Quế bên dưới",
+        "Điểm ngắm bình minh"
+      ],
+      "verdict": "must",
+      "verdictReason": "Cảnh đẹp nhất cung đèo, đáng dừng chân chụp ảnh.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Bình minh và chiều muộn cho màu ánh sáng đẹp nhất. Giữa trưa nắng gắt, ảnh phẳng.",
+      "tips": [
+        "Đi chậm, đường đèo hẹp và nhiều khúc cua gấp.",
+        "Mang áo ấm nếu ngắm bình minh."
+      ],
+      "photos": [
+        {
+          "file": "deo-ma-pi-leng-1.jpg",
+          "author": "Hoach Le Dinh",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng,_Vietnam.jpg"
+        },
+        {
+          "file": "deo-ma-pi-leng-2.jpg",
+          "author": "Hoach Le Dinh",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng_Pass,_Vietnam.jpg"
+        },
+        {
+          "file": "deo-ma-pi-leng-3.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A8o_M%C3%A3_P%C3%AD_L%C3%A8ng,_th%C3%A1ng_2_n%C4%83m_2022.jpg"
+        },
+        {
+          "file": "deo-ma-pi-leng-4.jpg",
+          "author": "Khánh Hmoong",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đèo Mã Pí Lèng"
+    },
+    {
+      "id": "song-nho-que",
+      "name": "Sông Nho Quế",
+      "category": "canh",
+      "area": "Mèo Vạc",
+      "hook": "Đi thuyền giữa hẻm vực Tu Sản, nước xanh ngọc, hai bên là vách đá dựng đứng.",
+      "summary": "Sông Nho Quế là một phụ lưu của sông Gâm. Sông bắt nguồn từ Trung Quốc có tên 南利河 Nán lì hé (sông Nam Lợi) hoặc 普梅河 Pǔ méi hé (sông Phổ Mai), khi chảy vào Việt Nam thì tạo ra một đoạn là biên giới Việt-Trung ở vùng cực bắc đất nước tại xã Lũng Cú và xã Đồng Văn, sau đó chảy vào nội địa tỉnh Tuyên Quang.",
+      "lat": 23.136758,
+      "lon": 105.530373,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Nửa ngày",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Đi thuyền trong hẻm vực",
+        "Nước xanh ngọc",
+        "Vách đá hai bên"
+      ],
+      "verdict": "must",
+      "verdictReason": "Trải nghiệm khác hẳn đi đèo, nhìn cảnh từ dưới lên.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng ít gió và nước thường lặng hơn.",
+      "tips": [
+        "Mặc áo phao theo hướng dẫn của người lái thuyền.",
+        "Mang mũ và kem chống nắng, trên sông ít bóng râm."
+      ],
+      "photos": [
+        {
+          "file": "song-nho-que-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%C3%B4ng_Nho_Qu%E1%BA%BF_2022_-_NKS.jpg"
+        },
+        {
+          "file": "song-nho-que-2.jpg",
+          "author": "Benjamin Smith",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_9.jpg"
+        },
+        {
+          "file": "song-nho-que-3.jpg",
+          "author": "Benjamin Smith",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_1.jpg"
+        },
+        {
+          "file": "song-nho-que-4.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:TuSan_Canyon.jpg"
+        }
+      ],
+      "wikipediaTitle": "Sông Nho Quế"
+    },
+    {
+      "id": "dinh-vuong",
+      "name": "Dinh thự họ Vương",
+      "category": "van",
+      "area": "Đồng Văn",
+      "hook": "Dinh thự của vua Mèo: sân trong lát đá, nhà gỗ mái ngói, lạc giữa thung lũng núi.",
+      "summary": "Khu dinh thự của vua Mèo, tên dùng trong các văn bản là Dinh thự họ Vương, hay còn được gọi với tên Nhà Vương tọa lạc trong một thung lũng thuộc địa bàn xã Sà Phìn, Tuyên Quang. Toàn bộ dinh thự vua Mèo có diện tích gần 3.000 m2, được khởi công vào năm 1898 và hoàn thành vào 9 năm sau đó tức 1907. Quá trình xây dựng tốn 15 vạn đồng bạc trắng Đông Dương, tương đương 150 tỷ đồng ngày nay. Khu dinh thự đã được Bộ Văn hóa, Thể thao và Du lịch xếp vào…",
+      "lat": 23.256492,
+      "lon": 105.262146,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Sân trong lát đá",
+        "Nhà gỗ mái ngói",
+        "Kiến trúc pha nhiều nét"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Đáng ghé nếu bạn thích văn hóa và kiến trúc.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Tránh giờ trưa nắng. Buổi sáng thường vắng khách hơn.",
+      "tips": [
+        "Nên hỏi giờ mở cửa trước khi đến.",
+        "Mang giày dễ đi, sân đá có chỗ trơn."
+      ],
+      "photos": [
+        {
+          "file": "dinh-vuong-1.jpg",
+          "author": "Khánh Hmoong",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_th%E1%BB%B1_vua_M%C3%A8o_h%E1%BB%8D_V%C6%B0%C6%A1ng_-_Vuong%E2%80%99s_Palace,_%C4%90%E1%BB%93ng_V%C4%83n.jpg"
+        },
+        {
+          "file": "dinh-vuong-2.jpg",
+          "author": "BacLuong at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:SaPhin_HaGiang_Vietnam.JPG"
+        },
+        {
+          "file": "dinh-vuong-3.jpg",
+          "author": "The original uploader was BacLuong at Vietnamese Wikipedia.",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Turtle_Hill_@SaPhin_HaGiang_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Dinh thự họ Vương"
+    },
+    {
+      "id": "pho-co-dong-van",
+      "name": "Phố cổ Đồng Văn",
+      "category": "van",
+      "area": "Đồng Văn",
+      "hook": "Dãy nhà tường đất mái ngói âm dương, quán cà phê nhìn ra phố. Chợ phiên họp sáng Chủ nhật.",
+      "summary": "Phố cổ Đồng Văn nằm ở xã Đồng Văn, tỉnh Tuyên Quang. Khu vực trung tâm xã Đồng Văn xưa thuộc tổng Đông Quan, châu Nguyên Bình, phủ Tường Vân, tỉnh Tuyên Quang và có lịch sử phát triển về kiến trúc, văn hóa hàng trăm năm. Những năm 1880, khi chiếm đóng khu vực này, người Pháp đã có những quy hoạch và để lại những điểm nhấn quan trọng về quy hoạch và kiến trúc, đặc biệt là chợ Đồng Văn, xây bằng đá trong những năm 1920 gần như còn nguyên vẹn đến ngày…",
+      "lat": 23.28177778,
+      "lon": 105.35989444,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Nhà tường đất mái ngói",
+        "Quán cà phê trên phố",
+        "Chợ phiên sáng Chủ nhật"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Hợp để nghỉ chân, ăn uống và dạo phố giữa hành trình.",
+      "bestSlots": [
+        "sang",
+        "toi"
+      ],
+      "slotReason": "Sáng Chủ nhật có chợ phiên. Tối phố lên đèn, dạo mát dễ chịu.",
+      "tips": [
+        "Đến sáng Chủ nhật nếu muốn đi chợ phiên.",
+        "Đổ xăng và nạp tiền mặt ở đây trước khi đi tiếp."
+      ],
+      "photos": [
+        {
+          "file": "pho-co-dong-van-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Qu%E1%BA%A3ng_%C4%90%C3%B4ng_22_H%C3%A0ng_Bu%E1%BB%93m.jpg"
+        },
+        {
+          "file": "pho-co-dong-van-2.jpg",
+          "author": "HuangWending18072009",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dong_Van_old_town.jpg"
+        },
+        {
+          "file": "pho-co-dong-van-3.jpg",
+          "author": "Khoitran1957",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ph%E1%BB%97_C%E1%BB%95.jpg"
+        }
+      ],
+      "wikipediaTitle": "Phố cổ Đồng Văn"
+    },
+    {
+      "id": "cao-nguyen-da",
+      "name": "Cao nguyên đá Đồng Văn",
+      "category": "canh",
+      "area": "Đồng Văn",
+      "hook": "Công viên địa chất toàn cầu với những triền núi đá xám nối nhau, đường đèo uốn lượn.",
+      "summary": "Cao nguyên đá Đồng Văn (hay sơn nguyên Đồng Văn) là một cao nguyên đá trải rộng trên các xã Tùng Vài, Nghĩa Thuận, Quản Bạ, Cán Tỷ, Bạch Đích, Thắng Mố, Lùng Tám, Yên Minh, Phố Bảng, Sà Phìn, Lũng Phìn, Mậu Duệ, Đường Thượng, Du Già, Lũng Cú, Đồng Văn, Sủng Máng, Tát Ngà, Ngọc Long, Mèo Vạc, Khâu Vai, Niêm Sơn, Sơn Vĩ của tỉnh Tuyên Quang, Việt Nam. Ngày 3 tháng 10 năm 2010, hồ sơ \"Công viên Địa chất Cao nguyên đá Đồng Văn\" đã được Hội đồng tư vấn…",
+      "lat": 23.280947,
+      "lon": 105.363972,
+      "bestMonths": [
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 10–11",
+      "duration": "Cả ngày",
+      "difficulty": "Vừa",
+      "highlights": [
+        "Triền núi đá xám",
+        "Đường đèo uốn lượn",
+        "Công viên địa chất toàn cầu"
+      ],
+      "verdict": "must",
+      "verdictReason": "Là lý do nhiều người chọn Hà Giang, cảnh khác hẳn vùng khác.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Nắng xiên đầu và cuối ngày làm núi đá nổi khối rõ hơn.",
+      "tips": [
+        "Dành cả ngày, các điểm cách nhau khá xa.",
+        "Đổ đủ xăng trước khi lên cao nguyên."
+      ],
+      "photos": [
+        {
+          "file": "cao-nguyen-da-1.jpg",
+          "author": "Zennysmile",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Road_to_Dong_Van.jpg"
+        },
+        {
+          "file": "cao-nguyen-da-2.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BA%BBm_Tu_S%E1%BA%A3n_2-2022.jpg"
+        },
+        {
+          "file": "cao-nguyen-da-3.jpg",
+          "author": "Benjamin Smith",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_2.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cao nguyên đá Đồng Văn"
+    },
+    {
+      "id": "hoang-su-phi",
+      "name": "Ruộng bậc thang Hoàng Su Phì",
+      "category": "canh",
+      "area": "Hoàng Su Phì",
+      "hook": "Những bậc ruộng vàng óng khi lúa chín, trải dài trên sườn núi như bậc thang lên trời.",
+      "summary": "Hoàng Su Phì là một huyện miền núi cũ nằm ở phía tây tỉnh Hà Giang, Việt Nam.",
+      "lat": 22.743143,
+      "lon": 104.677594,
+      "bestMonths": [
+        9,
+        10
+      ],
+      "bestLabel": "Cuối tháng 9–đầu tháng 10",
+      "duration": "Nửa ngày",
+      "difficulty": "Vừa",
+      "highlights": [
+        "Ruộng bậc thang lúa chín",
+        "Sườn núi trải dài",
+        "Bản làng giữa ruộng"
+      ],
+      "verdict": "must",
+      "verdictReason": "Rất đẹp đúng mùa lúa chín. Ngoài mùa thì kém hấp dẫn hơn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Nắng xiên làm bậc thang vàng hơn. Giữa trưa màu bị phẳng.",
+      "tips": [
+        "Hỏi tình hình lúa trước khi đi, mùa chín mỗi năm lệch vài tuần.",
+        "Điểm này nằm lệch về phía tây, cần thêm thời gian di chuyển."
+      ],
+      "photos": [
+        {
+          "file": "hoang-su-phi-1.jpg",
+          "author": "Quangpraha",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ru%E1%BB%99ng_b%E1%BA%ADc_thang_%E1%BB%9F_Ho%C3%A0ng_Su_Ph%C3%AC.jpg"
+        },
+        {
+          "file": "hoang-su-phi-2.jpg",
+          "author": "Nguyễn Trọng Nguyễn 2000",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:PH%C3%99_SA_TR%C3%8AN_CAO_NGUY%C3%8AN_%C4%90%C3%81.jpg"
+        },
+        {
+          "file": "hoang-su-phi-3.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3n_Ph%C3%B9ng_-_NKS.jpg"
+        },
+        {
+          "file": "hoang-su-phi-4.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ru%E1%BB%99ng_b%E1%BA%ADc_thang_B%E1%BA%A3n_Ph%C3%B9ng_1_-_NKS.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hoàng Su Phì (huyện)"
+    },
+    {
+      "id": "cong-troi-quan-ba",
+      "name": "Cổng trời Quản Bạ",
+      "category": "canh",
+      "area": "Quản Bạ",
+      "hook": "Dừng chân ở đỉnh đèo, nhìn xuống thung lũng và những ngọn núi đôi trong sương sớm.",
+      "summary": "Cổng trời Quản Bạ hay đèo Quản Bạ là các ngọn đèo trên quốc lộ 4C ở vùng đất xã Quản Bạ, tỉnh Tuyên Quang, Việt Nam. Nơi đây có độ cao hơn 1500m, là điểm xuất phát của một địa danh nổi tiếng khác \"Con đường hạnh phúc\" và là cửa ngõ đầu tiên dẫn vào cao nguyên đá Đồng Văn kỳ vĩ. Do sự phát triển giao thông và du lịch dẫn đến tên gọi Cổng trời Quản Bạ chỉ đến hai đèo khác nhau, cách nhau cỡ 6 km với trung tâm xã Quản Bạ 23°03′54″B 104°59′26″Đ ở giữa…",
+      "lat": 23.052335,
+      "lon": 104.993273,
+      "bestMonths": [
+        9,
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 9–4",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Điểm dừng chân trên đèo",
+        "Thung lũng bên dưới",
+        "Núi đôi trong sương"
+      ],
+      "verdict": "ifconv",
+      "verdictReason": "Nằm trên đường đi, dừng ngắn để ngắm và chụp ảnh.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Sương sớm làm thung lũng đẹp hơn.",
+      "tips": [
+        "Dừng xe ở chỗ rộng, đường đèo hẹp.",
+        "Thường là điểm dừng đầu tiên khi từ TP Hà Giang lên."
+      ],
+      "photos": [
+        {
+          "file": "cong-troi-quan-ba-1.jpg",
+          "author": "BacLuong at Vietnamese Wikipedia",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:DongHa-QuanBa_HaGiang%272007.jpg"
+        },
+        {
+          "file": "cong-troi-quan-ba-2.jpg",
+          "author": "The original uploader was Thái Nhi at Vietnamese Wikipedia.",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:DuonglencongtroiQuanBa.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cổng trời Quản Bạ"
+    },
+    {
+      "id": "tay-con-linh",
+      "name": "Tây Côn Lĩnh",
+      "category": "leo",
+      "area": "Vị Xuyên",
+      "hook": "Đỉnh 2.428 m, rừng già và mây. Chuyến leo hai ngày một đêm cho người thích thử sức.",
+      "summary": "Tây Côn Lĩnh là một đỉnh núi trên khối núi thượng nguồn sông Chảy ở phía tây bắc tỉnh Tuyên Quang, dãy núi Tây Côn Lĩnh trải dải trên các xã Thàng Tín, Lao Chải, Hoàng Su Phì, Thanh Thủy, Tân Tiến, Cao Bồ, Nậm Dịch, Thượng Sơn, Tân Quang, Thông Nguyên, cách phường Hà Giang 1 18 km. Với độ cao 2.431 m, đây là đỉnh núi cao nhất vùng Đông Bắc, thường được gọi là \"nóc nhà Đông Bắc\". Trên đỉnh núi có mốc trắc địa. Dưới chân núi là rừng nguyên sinh á nhiệt…",
+      "lat": 22.80156,
+      "lon": 104.806078,
+      "bestMonths": [
+        3,
+        4,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 3–4 và 10–11",
+      "duration": "2 ngày",
+      "difficulty": "Khó",
+      "highlights": [
+        "Cột mốc đỉnh 2.428 m",
+        "Rừng già",
+        "Biển mây"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Dành cho người thích leo núi, không hợp chuyến đi nhanh.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Xuất phát sớm để kịp đến nơi nghỉ trước khi trời tối.",
+      "tips": [
+        "Nên đi cùng người dẫn đường.",
+        "Mang đồ giữ ấm và áo mưa, thời tiết trên núi đổi nhanh."
+      ],
+      "photos": [
+        {
+          "file": "tay-con-linh-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tayconlinh_summit.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tây Côn Lĩnh"
+    }
+  ]
+}

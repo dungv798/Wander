@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC "-//Checkstyle//DTD SuppressionXpathFilter Experimental Configuration 1.2//EN" "https://checkstyle.org/dtds/suppressions_1_2_xpath_experimental.dtd">
+<!--
+  Ngoại lệ chuỗi trong chú thích KHAI BÁO (chính chú thích là nơi duy nhất khai báo giá trị đó):
+  - @SuppressWarnings("...") : tên cảnh báo của trình biên dịch.
+  - Ánh xạ JPA (@Table, @Column, @JoinColumn, @Entity): tên bảng/cột là siêu dữ liệu ánh xạ với schema Flyway.
+  Mọi chuỗi khác trong chú thích (đường dẫn @RequestMapping, @Query...) vẫn phải dùng hằng số.
+  Ngoại lệ thứ hai: giá trị đi kèm hằng số của enum (mã ngắn, nhãn). Enum chính là nơi định nghĩa các giá trị đó.
+-->
+<suppressions>
+    <suppress-xpath checks="IllegalTokenText"
+                    query="//ANNOTATION[./IDENT[@text='SuppressWarnings' or @text='Table' or @text='Column' or @text='JoinColumn' or @text='Entity' or @text='CollectionTable' or @text='OneToMany' or @text='ManyToOne']]//STRING_LITERAL"/>
+    <suppress-xpath checks="IllegalTokenText" query="//ENUM_CONSTANT_DEF//STRING_LITERAL"/>
+    <!-- Nhãn tham số ràng buộc với câu JPQL (@Param("id") khớp ":id" trong @Query); câu JPQL thì nằm ở hằng số -->
+    <suppress-xpath checks="IllegalTokenText" query="//ANNOTATION[./IDENT[@text='Param']]//STRING_LITERAL"/>
+    <!-- Siêu dữ liệu ánh xạ MapStruct (ADR-008): @Mapper(componentModel = "spring"), @Mapping(target = "...") -->
+    <suppress-xpath checks="IllegalTokenText" query="//ANNOTATION[./IDENT[@text='Mapper' or @text='Mapping']]//STRING_LITERAL"/>
+</suppressions>

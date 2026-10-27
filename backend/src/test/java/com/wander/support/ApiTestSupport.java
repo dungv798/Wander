@@ -29,7 +29,8 @@ import tools.jackson.databind.json.JsonMapper;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
         "wander.limits.identity-per-hour=100000",
         "wander.limits.recovery-per-hour=100000",
-        "wander.limits.approval-per-hour=100000"})
+        "wander.limits.approval-per-hour=100000",
+        "wander.limits.catalog-per-minute=100000"})
 public abstract class ApiTestSupport {
 
     static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine");
@@ -108,8 +109,23 @@ public abstract class ApiTestSupport {
         }
     }
 
+    /** Như {@link #call(String, String, String)} nhưng kèm header tùy ý (ví dụ X-Forwarded-For). */
+    protected Res callWithHeaders(String method, String path, Map<String, String> headers) {
+        try {
+            return send(method, path, null, null, headers);
+        } catch (IOException | InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
     private Res send(String method, String path, String token, String json) throws IOException, InterruptedException {
+        return send(method, path, token, json, Map.of());
+    }
+
+    private Res send(String method, String path, String token, String json, Map<String, String> headers)
+            throws IOException, InterruptedException {
         HttpRequest.Builder b = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + path));
+        headers.forEach(b::header);
         if (token != null) b.header("Authorization", "Bearer " + token);
         if (json != null) b.header("Content-Type", "application/json");
         b.method(method, json == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofString(json));

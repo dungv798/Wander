@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN" "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!--
+  Cổng quy ước mã backend (docs/architecture/backend-conventions.md, mục "Quy ước mã bắt buộc").
+  Chạy bằng ./gradlew checkstyleMain (nằm trong ./gradlew check). Chỉ kiểm mã chính, không kiểm test.
+  Mọi module đã sạch (27/10/2026); suppressions.xml chỉ miễn tệp hằng số và lớp khởi động.
+-->
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="error"/>
+
+    <module name="SuppressionFilter">
+        <property name="file" value="${config_loc}/suppressions.xml"/>
+    </module>
+
+    <!-- Hygiene định dạng (ADR-013): xuống dòng cuối tệp, không tab, không khoảng trắng thừa cuối dòng -->
+    <module name="NewlineAtEndOfFile"/>
+    <module name="FileTabCharacter"/>
+    <module name="RegexpSingleline">
+        <property name="format" value="[ \t]+$"/>
+        <property name="message" value="Khoảng trắng thừa ở cuối dòng"/>
+    </module>
+
+    <module name="TreeWalker">
+        <!-- Ngoại lệ chuỗi trong chú thích khai báo (xem suppressions-xpath.xml); bộ lọc này phải là con của TreeWalker -->
+        <module name="SuppressionXpathFilter">
+            <property name="file" value="${config_loc}/suppressions-xpath.xml"/>
+        </module>
+
+        <!-- DOC-1: mỗi method (kể cả private) có Javadoc ngay trên tên, nói method làm gì -->
+        <module name="MissingJavadocMethod">
+            <property name="scope" value="private"/>
+            <!-- Getter/setter thuần của entity JPA lặp lại tên trường nên được miễn (xem DOC-1); mọi method khác bắt buộc -->
+            <property name="allowMissingPropertyJavadoc" value="true"/>
+            <property name="allowedAnnotations" value="Override"/>
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
+
+        <!-- CON-1..3: không số ma thuật (ngoài -1, 0, 1, 2) và không chuỗi ma thuật; hằng số nằm trong tệp *Constants -->
+        <module name="MagicNumber">
+            <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
+            <property name="ignoreHashCodeMethod" value="true"/>
+            <property name="ignoreAnnotation" value="false"/>
+        </module>
+        <module name="IllegalTokenText">
+            <property name="tokens" value="STRING_LITERAL"/>
+            <property name="format" value="^&quot;.+&quot;$"/>
+            <property name="message" value="CON-2: chuỗi ma thuật; đưa vào tệp *Constants, *ErrorCodes, *Messages hoặc *Fields"/>
+        </module>
+
+        <!-- NAM-5: tên lớp mô tả vai trò, không dùng từ mơ hồ -->
+        <module name="TypeName">
+            <property name="format" value="^(?!.*(Helper|Util|Utils|Utility|Manager|Misc|Stuff|Base|Common|Data|Info|Thing)$)[A-Z][A-Za-z0-9]*$"/>
+            <message key="name.invalidPattern" value="NAM-5: tên lớp ''{0}'' mơ hồ hoặc sai dạng; đặt theo vai trò (ví dụ TripCommandHandler)"/>
+        </module>
+        <module name="MethodName"/>
+        <module name="MemberName"/>
+        <module name="ParameterName"/>
+        <module name="LocalVariableName"/>
+        <module name="ConstantName">
+            <!-- Logger đặt tên "log" theo thông lệ SLF4J; còn lại là HOA_GẠCH_DƯỚI -->
+            <property name="format" value="^(log|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)$"/>
+        </module>
+
+        <!-- SIM-1: tránh phức tạp -->
+        <module name="MethodLength">
+            <property name="max" value="40"/>
+            <property name="countEmpty" value="false"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="6"/>
+            <property name="ignoreOverriddenMethods" value="true"/>
+            <!-- Bộ dựng (constructor injection, record) không tính: số phụ thuộc/trường không phải độ phức tạp của hàm -->
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
+        <module name="CyclomaticComplexity">
+            <property name="max" value="10"/>
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="2"/>
+        </module>
+        <module name="NestedForDepth">
+            <property name="max" value="2"/>
+        </module>
+        <module name="BooleanExpressionComplexity">
+            <property name="max" value="4"/>
+        </module>
+
+        <!-- Mã gọn gàng -->
+        <module name="UnusedImports"/>
+        <module name="RedundantImport"/>
+        <module name="AvoidStarImport"/>
+        <!-- import static trước, một dòng trống, rồi các import còn lại; mỗi nhóm theo thứ tự ASCII -->
+        <module name="CustomImportOrder">
+            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+        </module>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="FinalClass"/>
+    </module>
+
+    <module name="FileLength">
+        <property name="max" value="400"/>
+    </module>
+</module>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN" "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<!--
+  Danh sách miễn theo kiểu bậc thang (ADR-013 + quy ước mã bắt buộc):
+  - Tệp hằng số được phép chứa chuỗi (đó chính là nơi chuỗi phải nằm).
+  - Lớp khởi động Spring Boot có hàm main tĩnh nên được miễn luật "lớp tiện ích".
+  - Từ 27/10/2026 mọi module (shared, catalog, identity, planning) đã sạch nên không còn dòng miễn theo module.
+    KHÔNG thêm module/tệp vào danh sách miễn; mã mới phải đạt ngay.
+-->
+<suppressions>
+    <!-- Nơi chứa chuỗi hợp lệ -->
+    <suppress checks="IllegalTokenText" files=".*(Constants|ErrorCodes|Messages|Fields)\.java"/>
+    <suppress checks="MagicNumber" files=".*(Constants|ErrorCodes|Messages|Fields)\.java"/>
+
+    <!-- Lớp khởi động ứng dụng -->
+    <suppress checks="HideUtilityClassConstructor" files="WanderApplication\.java"/>
+
+    <!-- Module chờ di chuyển (mỗi dòng xóa khi module xong) -->
+</suppressions>

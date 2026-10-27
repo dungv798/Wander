@@ -137,13 +137,14 @@ class PlanningApiIT extends ApiTestSupport {
     }
 
     @Test
-    @DisplayName("A-3: tiêu đề và ngày bắt buộc; ngày phải nằm trong chuyến")
+    @DisplayName("A-3: tiêu đề bắt buộc; ngày sai định dạng hoặc ngoài chuyến bị từ chối (ngày null = Chưa có ngày, DR-011 A1)")
     void itemFieldValidation() {
         User u = newUser();
         String path = "/api/trips/" + newTrip(u.token()) + "/items";
         Map<String, Object> base = map("day", DAY2, "type", "food", "title", "Phở");
         assertThat(call("POST", path, u.token(), with(base, "title", " ")).code()).isEqualTo("REQUIRED");
-        assertThat(call("POST", path, u.token(), with(base, "day", null)).code()).isEqualTo("INVALID_DATE");
+        assertThat(call("POST", path, u.token(), with(base, "day", "2026-13-45")).code()).isEqualTo("INVALID_DATE");
+        assertThat(call("POST", path, u.token(), with(base, "day", 20260830)).code()).isEqualTo("INVALID_DATE");
         assertThat(call("POST", path, u.token(), with(base, "day", "2026-09-07")).code()).isEqualTo("DAY_OUT_OF_RANGE");
         assertThat(call("POST", path, u.token(), with(base, "timeOfDay", "25:00")).status()).isEqualTo(400);
         assertThat(call("POST", path, u.token(), with(base, "timeOfDay", "9h")).code()).isEqualTo("MALFORMED");
@@ -342,22 +343,188 @@ class PlanningApiIT extends ApiTestSupport {
     // ---- R12: đổi ngày chuyến ----
 
     @Test
-    @DisplayName("R12: không cho đổi khoảng ngày nếu còn mục nằm ngoài, kể cả mục đã xóa mềm")
-    void dateChangeBlockedByOrphans() {
+    @DisplayName("R12 mới (DR-011 A1): đổi khoảng ngày luôn được; mục (kể cả đã xóa mềm) ngoài khoảng về \"Chưa có ngày\"; khôi phục không lỗi")
+    void dateChangeMovesOrphansToUnscheduled() {
         User u = newUser();
         String trip = newTrip(u.token());
-        String live = newItem(u.token(), trip, Map.of("day", "2026-08-29"));
-        Res blocked = call("PATCH", "/api/trips/" + trip, u.token(), Map.of("startDate", DAY2));
-        assertThat(blocked.status()).isEqualTo(409);
-        assertThat(blocked.code()).isEqualTo("DATES_ORPHAN_ITEMS");
-        assertThat(blocked.list("error.details.dates")).containsExactly("2026-08-29");
+        String live = newItem(u.token(), trip, Map.of("day", "2026-08-29", "title", "Còn hiện"));
+        String gone = newItem(u.token(), trip, Map.of("day", "2026-08-29", "title", "Đã xóa"));
+        String inside = newItem(u.token(), trip, Map.of("day", DAY2, "title", "Trong khoảng"));
+        call("DELETE", "/api/trips/" + trip + "/items/" + gone, u.token());
 
-        call("DELETE", "/api/trips/" + trip + "/items/" + live, u.token());
-        assertThat(call("PATCH", "/api/trips/" + trip, u.token(), Map.of("startDate", DAY2)).status()).isEqualTo(409);
+        Res changed = call("PATCH", "/api/trips/" + trip, u.token(), Map.of("startDate", DAY2));
+        assertThat(changed.status()).isEqualTo(200);
 
-        call("DELETE", "/api/trips/" + trip + "/items/" + live + "/permanent", u.token());
-        assertThat(call("PATCH", "/api/trips/" + trip, u.token(), Map.of("startDate", DAY2)).status()).isEqualTo(200);
-        assertThat(call("GET", "/api/trips/" + trip, u.token()).num("dayCount")).isEqualTo(8);
+        Res detail = call("GET", "/api/trips/" + trip, u.token());
+        assertThat(detail.num("dayCount")).isEqualTo(8);
+        assertThat(detail.list("unscheduled")).hasSize(1);
+        assertThat(detail.str("unscheduled.0.id")).isEqualTo(live);
+        assertThat(detail.str("unscheduled.0.day")).isNull();
+        assertThat(titlesAndPositions(detail, 0)).containsExactly("Trong khoảng@0");
+
+        Res trash = call("GET", "/api/trips/" + trip + "/trash", u.token());
+        assertThat(trash.str("items.0.id")).isEqualTo(gone);
+        assertThat(trash.str("items.0.day")).as("mục đã xóa cũng về Chưa có ngày").isNull();
+
+        Res restored = call("POST", "/api/trips/" + trip + "/items/" + gone + "/restore", u.token());
+        assertThat(restored.status()).isEqualTo(200);
+        assertThat(restored.str("item.day")).isNull();
+        assertThat(call("GET", "/api/trips/" + trip, u.token()).list("unscheduled")).hasSize(2);
+        assertThat(inside).isNotBlank();
+    }
+
+    @Test
+    @DisplayName("mục chưa có ngày: tạo không ngày, tính vào tổng và \"chưa biết giá\", gán ngày và bỏ ngày bằng PATCH")
+    void unscheduledItemsInTotalsAndPatch() {
+        User u = newUser();
+        String trip = newTrip(u.token(), Map.of("budget", 1000));
+        Res created = call("POST", "/api/trips/" + trip + "/items", u.token(), map("day", null, "type", "food", "title", "Phở", "cost", 120));
+        assertThat(created.status()).isEqualTo(201);
+        assertThat(created.str("item.day")).isNull();
+        String id = created.str("item.id");
+        newItem(u.token(), trip, Map.of("day", DAY2, "title", "Có ngày", "cost", 80));
+        call("POST", "/api/trips/" + trip + "/items", u.token(), map("type", "task", "title", "In vé"));
+
+        Res detail = call("GET", "/api/trips/" + trip, u.token());
+        assertThat(detail.list("unscheduled")).as("thiếu khóa day cũng là Chưa có ngày").hasSize(2);
+        assertThat(detail.num("totals.extraK")).as("tổng tính cả mục chưa có ngày").isEqualTo(200);
+        assertThat(detail.num("totals.unscheduledK")).isEqualTo(120);
+        assertThat(detail.list("pendingTasks")).hasSize(1);
+        assertThat(detail.str("pendingTasks.0.day")).isNull();
+
+        Res assigned = call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), Map.of("day", DAY2));
+        assertThat(assigned.str("item.day")).isEqualTo(DAY2);
+        assertThat(call("GET", "/api/trips/" + trip, u.token()).list("unscheduled")).hasSize(1);
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), Map.of("note", "x")).str("item.day"))
+                .as("không nêu ngày thì giữ nguyên").isEqualTo(DAY2);
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), map("day", null)).str("item.day")).isNull();
+        assertThat(call("GET", "/api/trips/" + trip, u.token()).list("unscheduled")).hasSize(2);
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), Map.of("day", "2027-01-01")).code())
+                .isEqualTo("DAY_OUT_OF_RANGE");
+    }
+
+    @Test
+    @DisplayName("liên kết kho: placeId lưu và trả về, sửa/xóa được, sai dạng bị từ chối; chuyến của người khác vẫn 404")
+    void placeLink() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        Res created = call("POST", "/api/trips/" + trip + "/items", u.token(),
+                item(map("title", "Cột cờ Lũng Cú", "placeId", "cot-co-lung-cu")));
+        assertThat(created.status()).isEqualTo(201);
+        assertThat(created.str("item.placeId")).isEqualTo("cot-co-lung-cu");
+        String id = created.str("item.id");
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), Map.of("note", "x")).str("item.placeId"))
+                .as("không nêu thì giữ nguyên").isEqualTo("cot-co-lung-cu");
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), map("placeId", "")).str("item.placeId")).isNull();
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), Map.of("placeId", "đổi thành nơi khác!")).code())
+                .isEqualTo("MALFORMED");
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + id, u.token(), Map.of("placeId", 5)).code()).isEqualTo("MALFORMED");
+        assertThat(call("POST", "/api/trips/" + trip + "/items", u.token(), item(map("placeId", "x".repeat(61)))).status()).isEqualTo(400);
+        assertThat(call("GET", "/api/trips/" + trip + "/items/" + id, newUser().token()).status()).isEqualTo(404);
+    }
+
+    // ---- lát 3: tên chuyến không trùng, gán ngày hàng loạt + Hoàn tác ----
+
+    @Test
+    @DisplayName("tên chuyến không trùng theo từng chủ (DR-006): thêm hậu tố - 2, - 3 (số nhỏ nhất chưa dùng); đổi lại tên của chính nó thì giữ")
+    void tripNamesAreUniquePerOwner() {
+        User u = newUser();
+        call("POST", "/api/trips", u.token(), trip(map("name", "Hà Giang")));
+        Res second = call("POST", "/api/trips", u.token(), trip(map("name", "Hà Giang")));
+        assertThat(second.str("trip.name")).isEqualTo("Hà Giang - 2");
+        Res third = call("POST", "/api/trips", u.token(), trip(map("name", "Hà Giang")));
+        assertThat(third.str("trip.name")).isEqualTo("Hà Giang - 3");
+
+        assertThat(call("PATCH", "/api/trips/" + second.str("trip.id"), u.token(), Map.of("name", "Hà Giang - 2")).str("trip.name"))
+                .as("tên của chính chuyến này không tính là trùng").isEqualTo("Hà Giang - 2");
+        assertThat(call("PATCH", "/api/trips/" + third.str("trip.id"), u.token(), Map.of("name", "Hà Giang")).str("trip.name"))
+                .as("trùng chuyến đầu; số nhỏ nhất chưa dùng sau khi bỏ tên cũ của chính nó").isEqualTo("Hà Giang - 3");
+        assertThat(call("POST", "/api/trips", newUser().token(), trip(map("name", "Hà Giang"))).str("trip.name"))
+                .as("chủ khác không bị tính").isEqualTo("Hà Giang");
+    }
+
+    @Test
+    @DisplayName("gán ngày hàng loạt nguyên tử + Hoàn tác: một lệnh đổi nhiều mục, gửi lại trạng thái cũ thì về đúng ngày và thứ tự")
+    void scheduleBulkAssignAndUndo() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String a = newItem(u.token(), trip, Map.of("day", DAY2, "title", "A"));
+        String b = newItem(u.token(), trip, Map.of("day", DAY2, "title", "B"));
+        String c = newItem(u.token(), trip, Map.of("day", DAY2, "title", "C"));
+        Res created = call("POST", "/api/trips/" + trip + "/items", u.token(), map("day", null, "type", "food", "title", "D"));
+        String d = created.str("item.id");
+        String path = "/api/trips/" + trip + "/schedule";
+
+        Res forward = call("POST", path, u.token(), map("assignments", List.of(
+                map("itemId", d, "day", DAY2, "position", 0), map("itemId", a, "day", "2026-08-31"), map("itemId", b, "day", "2026-08-31"))));
+        assertThat(forward.status()).isEqualTo(200);
+        assertThat(titlesAndPositions(forward, 1)).containsExactly("D@0", "C@1");
+        assertThat(titlesAndPositions(forward, 2)).containsExactly("A@0", "B@1");
+        assertThat(forward.list("unscheduled")).isEmpty();
+
+        Res undo = call("POST", path, u.token(), map("assignments", List.of(
+                map("itemId", d, "day", null), map("itemId", a, "day", DAY2, "position", 0),
+                map("itemId", b, "day", DAY2, "position", 1), map("itemId", c, "day", DAY2, "position", 2))));
+        assertThat(undo.status()).isEqualTo(200);
+        assertThat(titlesAndPositions(undo, 1)).containsExactly("A@0", "B@1", "C@2");
+        assertThat(titlesAndPositions(undo, 2)).isEmpty();
+        assertThat(undo.list("unscheduled")).hasSize(1);
+        assertThat(undo.str("unscheduled.0.id")).isEqualTo(d);
+    }
+
+    @Test
+    @DisplayName("lịch gồm đổi khoảng ngày + gán ngày trong một lệnh: Hoàn tác đổi ngày chuyến khôi phục cả khoảng ngày lẫn ngày từng mục")
+    void scheduleUndoesDateRangeChange() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String first = newItem(u.token(), trip, Map.of("day", "2026-08-29", "title", "Ngày đầu"));
+        String path = "/api/trips/" + trip + "/schedule";
+
+        call("PATCH", "/api/trips/" + trip, u.token(), Map.of("startDate", DAY2));
+        Res moved = call("GET", "/api/trips/" + trip, u.token());
+        assertThat(moved.list("unscheduled")).hasSize(1);
+
+        Res undo = call("POST", path, u.token(), map("startDate", "2026-08-29", "endDate", "2026-09-06",
+                "assignments", List.of(map("itemId", first, "day", "2026-08-29", "position", 0))));
+        assertThat(undo.status()).isEqualTo(200);
+        assertThat(undo.num("dayCount")).isEqualTo(9);
+        assertThat(titlesAndPositions(undo, 0)).containsExactly("Ngày đầu@0");
+        assertThat(undo.list("unscheduled")).isEmpty();
+    }
+
+    @Test
+    @DisplayName("lịch: lỗi ở một phần tử thì không đổi gì (kể cả khoảng ngày); kiểm tra đầu vào; chuyến của người khác 404")
+    void scheduleIsAtomicAndValidated() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String a = newItem(u.token(), trip, Map.of("day", DAY2, "title", "A"));
+        String gone = newItem(u.token(), trip, Map.of("day", DAY2, "title", "Đã xóa"));
+        call("DELETE", "/api/trips/" + trip + "/items/" + gone, u.token());
+        String path = "/api/trips/" + trip + "/schedule";
+
+        Res bad = call("POST", path, u.token(), map("startDate", "2026-09-01",
+                "assignments", List.of(map("itemId", a, "day", "2026-09-02"), map("itemId", a, "day", "2026-09-03"))));
+        assertThat(bad.status()).isEqualTo(400);
+        assertThat(bad.code()).isEqualTo("DUPLICATE_ASSIGNMENT");
+        Res unchanged = call("GET", "/api/trips/" + trip, u.token());
+        assertThat(unchanged.str("trip.startDate")).as("khoảng ngày không bị đổi khi lệnh lỗi").isEqualTo("2026-08-29");
+        assertThat(titlesAndPositions(unchanged, 1)).containsExactly("A@0");
+
+        assertThat(call("POST", path, u.token(), map("assignments", List.of(map("itemId", gone, "day", DAY2)))).code()).isEqualTo("ITEM_DELETED");
+        assertThat(call("POST", path, u.token(), map("assignments", List.of(map("itemId", a, "day", "2027-01-01")))).code())
+                .isEqualTo("DAY_OUT_OF_RANGE");
+        assertThat(call("POST", path, u.token(), map("assignments", List.of(map("itemId", a, "day", "không phải ngày")))).code())
+                .isEqualTo("INVALID_DATE");
+        assertThat(call("POST", path, u.token(), map("assignments", List.of(map("itemId", "00000000-0000-0000-0000-000000000000", "day", DAY2)))).status())
+                .isEqualTo(404);
+        assertThat(call("POST", path, u.token(), map("assignments", "abc")).code()).isEqualTo("MALFORMED");
+        assertThat(call("POST", path, u.token(), map("assignments", List.of("x"))).code()).isEqualTo("MALFORMED");
+        assertThat(call("POST", path, u.token(), Map.of()).code()).as("không có gì để làm").isEqualTo("REQUIRED");
+        List<Object> tooMany = new ArrayList<>();
+        for (int i = 0; i < 501; i++) tooMany.add(map("itemId", a, "day", DAY2));
+        assertThat(call("POST", path, u.token(), map("assignments", tooMany)).code()).isEqualTo("TOO_MANY");
+
+        assertThat(call("POST", path, newUser().token(), map("assignments", List.of(map("itemId", a, "day", DAY2)))).status()).isEqualTo(404);
     }
 
     @Test

@@ -10,8 +10,19 @@ import org.springframework.test.context.TestPropertySource;
 /** Giới hạn tần suất (Q16 câu 6). Context riêng với giới hạn thấp để không ảnh hưởng các test khác. */
 @TestPropertySource(properties = {
         "wander.limits.identity-per-hour=2",
-        "wander.limits.recovery-per-hour=3"})
+        "wander.limits.recovery-per-hour=3",
+        "wander.limits.catalog-per-minute=4"})
 class RateLimitIT extends ApiTestSupport {
+
+    @Test
+    @DisplayName("kho địa điểm công khai có giới hạn tốc độ theo địa chỉ: vượt ngưỡng thì 429 RATE_LIMITED")
+    void limitsPublicCatalogPerAddress() {
+        for (int i = 0; i < 4; i++) assertThat(call("GET", "/api/catalog/destinations", null).status()).isEqualTo(200);
+        Res limited = call("GET", "/api/catalog/destinations", null);
+        assertThat(limited.status()).isEqualTo(429);
+        assertThat(limited.code()).isEqualTo("RATE_LIMITED");
+        assertThat(call("GET", "/api/catalog/destinations/ha-giang", null).status()).as("cùng một bộ đếm cho mọi route catalog").isEqualTo(429);
+    }
 
     @Test
     @DisplayName("chống lạm dụng: giới hạn số danh tính và số lần thử khôi phục từ một địa chỉ")

@@ -1,0 +1,183 @@
+package com.wander.catalog.infrastructure.adapter;
+
+import com.wander.catalog.domain.constant.CatalogConstants;
+import com.wander.catalog.domain.constant.CatalogMessages;
+import com.wander.catalog.domain.model.Destination;
+import com.wander.catalog.domain.model.GeoPoint;
+import com.wander.catalog.domain.model.GuideItem;
+import com.wander.catalog.domain.model.GuideSection;
+import com.wander.catalog.domain.model.Photo;
+import com.wander.catalog.domain.model.Place;
+import com.wander.catalog.domain.model.ReferencePoint;
+import com.wander.catalog.domain.port.PlaceCatalog;
+import com.wander.catalog.domain.rule.SearchText;
+import com.wander.catalog.domain.vocabulary.PlaceCategory;
+import com.wander.catalog.domain.vocabulary.TimeSlot;
+import com.wander.catalog.domain.vocabulary.Verdict;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.stereotype.Component;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.json.JsonMapper;
+
+/**
+ * Adapter đọc kho địa điểm biên tập từ classpath (ADR-009, ADR-010): mỗi điểm đến một tệp {@code catalog/<id>.json},
+ * ảnh ở {@code catalog/photos/}. Nạp và kiểm tra hết lúc khởi động: dữ liệu sai hay thiếu ảnh thì ứng dụng không chạy,
+ * để lỗi biên tập lộ ngay thay vì thành thẻ hỏng trên giao diện.
+ */
+@Component
+public class ClasspathPlaceCatalog implements PlaceCatalog {
+
+    private final Map<String, Destination> byId;
+
+    /** Nạp mọi tệp điểm đến khớp {@code pattern}, kiểm tra hết, và sắp theo tên (không dấu) để kết quả ổn định. */
+    public ClasspathPlaceCatalog(@Value(CatalogConstants.LOCATION_EXPRESSION) String pattern) {
+        JsonMapper mapper = JsonMapper.builder().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build();
+        Map<String, Destination> loaded = loadAll(mapper, pattern);
+        this.byId = loaded.values().stream().sorted(Comparator.comparing(destination -> SearchText.normalize(destination.name())))
+                .collect(LinkedHashMap::new, (map, destination) -> map.put(destination.id(), destination), Map::putAll);
+    }
+
+    @Override
+    public List<Destination> searchDestinations(String query) {
+        String normalizedQuery = SearchText.normalize(query);
+        if (normalizedQuery.isEmpty()) return List.copyOf(byId.values());
+        return byId.values().stream().filter(destination -> matches(destination, normalizedQuery)).toList();
+    }
+
+    @Override
+    public Optional<Destination> destination(String id) {
+        return Optional.ofNullable(id == null ? null : byId.get(id));
+    }
+
+    /** Điểm đến khớp chuỗi tìm kiếm (đã chuẩn hóa) ở tên, vùng hoặc mô tả ngắn. */
+    private static boolean matches(Destination destination, String normalizedQuery) {
+        return SearchText.normalize(destination.name()).contains(normalizedQuery)
+                || SearchText.normalize(destination.region()).contains(normalizedQuery)
+                || SearchText.normalize(destination.tagline()).contains(normalizedQuery);
+    }
+
+    /** Đọc mọi tệp khớp mẫu; hai tệp cùng mã điểm đến hoặc tệp không đọc được thì ném lỗi khởi động. */
+    private static Map<String, Destination> loadAll(JsonMapper mapper, String pattern) {
+        Map<String, Destination> loaded = new LinkedHashMap<>();
+        try {
+            for (Resource file : new PathMatchingResourcePatternResolver().getResources(pattern)) {
+                Destination destination = read(mapper, file);
+                if (loaded.put(destination.id(), destination) != null) {
+                    throw new IllegalStateException(CatalogMessages.DESTINATION_ID_DUPLICATED.formatted(destination.id()));
+                }
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException(CatalogMessages.CATALOG_UNREADABLE, e);
+        }
+        return loaded;
+    }
+
+    /** Đọc một tệp điểm đến, dựng domain và kiểm tra mọi ảnh có thật trong classpath; sai thì nêu tên tệp. */
+    private static Destination read(JsonMapper mapper, Resource file) {
+        String fileName = String.valueOf(file.getFilename());
+        try (InputStream in = file.getInputStream()) {
+            DestinationFile source = mapper.readValue(in, DestinationFile.class);
+            List<Place> places = source.places().stream().map(place -> toPlace(source.id(), place)).toList();
+            Destination destination = new Destination(source.id(), source.name(), source.region(), source.tagline(), source.coverPlaceId(),
+                    source.references().stream().map(ClasspathPlaceCatalog::toReference).toList(),
+                    source.guide().stream().map(ClasspathPlaceCatalog::toSection).toList(), places);
+            requirePhotoFilesExist(places);
+            return destination;
+        } catch (IOException | RuntimeException e) {
+            throw new IllegalStateException(CatalogMessages.CATALOG_FILE_CORRUPT.formatted(fileName, e.getMessage()), e);
+        }
+    }
+
+    /** Mọi ảnh của mọi địa điểm đều có tệp trong thư mục ảnh của classpath. */
+    private static void requirePhotoFilesExist(List<Place> places) {
+        for (Place place : places) {
+            for (Photo photo : place.photos()) {
+                String path = CatalogConstants.PHOTO_CLASSPATH_DIR + photo.file();
+                if (!new ClassPathResource(path).exists()) {
+                    throw new IllegalStateException(CatalogMessages.PHOTO_FILE_MISSING.formatted(path, place.id()));
+                }
+            }
+        }
+    }
+
+    /** Dựng địa điểm domain từ dòng dữ liệu; tọa độ chỉ có khi đủ cả vĩ độ lẫn kinh độ. */
+    private static Place toPlace(String destinationId, PlaceFile source) {
+        PlaceCategory category = requireCategory(source.category());
+        Verdict verdict = Verdict.fromCode(source.verdict())
+                .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.VERDICT_INVALID.formatted(source.verdict())));
+        GeoPoint location = source.lat() == null || source.lon() == null ? null : new GeoPoint(source.lat(), source.lon());
+        List<Photo> photos = source.photos().stream()
+                .map(photo -> new Photo(photo.file(), photo.author(), photo.license(), photo.sourceUrl())).toList();
+        return new Place(source.id(), destinationId, source.name(), category, source.area(), source.hook(), source.summary(), location,
+                source.bestMonths(), source.bestLabel(), source.duration(), source.difficulty(), source.highlights(), verdict,
+                source.verdictReason(), toTimeSlots(source.bestSlots()), source.slotReason(), source.tips(), photos, source.wikipediaTitle());
+    }
+
+    /** Tập buổi trong ngày từ danh sách mã; mã lạ thì ném lỗi dữ liệu. */
+    private static Set<TimeSlot> toTimeSlots(List<String> codes) {
+        Set<TimeSlot> slots = EnumSet.noneOf(TimeSlot.class);
+        for (String code : codes) {
+            slots.add(TimeSlot.fromCode(code)
+                    .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.TIME_SLOT_INVALID.formatted(code))));
+        }
+        return slots;
+    }
+
+    /** Dựng mốc tham chiếu domain; thiếu tọa độ thì ném lỗi dữ liệu. */
+    private static ReferencePoint toReference(ReferenceFile source) {
+        if (source.lat() == null || source.lon() == null) {
+            throw new IllegalArgumentException(CatalogMessages.REFERENCE_COORDINATES_MISSING.formatted(source.id()));
+        }
+        return new ReferencePoint(source.id(), source.name(), new GeoPoint(source.lat(), source.lon()), source.approximate());
+    }
+
+    /** Dựng khối cẩm nang domain từ dòng dữ liệu. */
+    private static GuideSection toSection(SectionFile source) {
+        PlaceCategory category = requireCategory(source.category());
+        List<GuideItem> items = source.items().stream()
+                .map(item -> new GuideItem(item.icon(), item.title(), item.text(), item.placeId())).toList();
+        return new GuideSection(source.id(), GuideSection.Layout.valueOf(source.layout()), category, source.icon(), source.title(),
+                source.summary(), source.bestMonths(), source.rainyMonths(), source.notes(), items);
+    }
+
+    /** Loại địa điểm theo mã; mã lạ thì ném lỗi dữ liệu. */
+    private static PlaceCategory requireCategory(String code) {
+        return PlaceCategory.fromCode(code)
+                .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.CATEGORY_INVALID.formatted(code)));
+    }
+
+    // ---- hình dạng tệp JSON (chỉ dùng trong adapter) ----
+    record DestinationFile(String id, String name, String region, String tagline, String coverPlaceId, List<ReferenceFile> references,
+                           List<SectionFile> guide, List<PlaceFile> places) {
+    }
+
+    record ReferenceFile(String id, String name, Double lat, Double lon, boolean approximate) {
+    }
+
+    record SectionFile(String id, String layout, String category, String icon, String title, String summary, List<Integer> bestMonths,
+                       List<Integer> rainyMonths, List<String> notes, List<ItemFile> items) {
+    }
+
+    record ItemFile(String icon, String title, String text, String placeId) {
+    }
+
+    record PlaceFile(String id, String name, String category, String area, String hook, String summary, Double lat, Double lon, List<Integer> bestMonths,
+                     String bestLabel, String duration, String difficulty, List<String> highlights, String verdict, String verdictReason,
+                     List<String> bestSlots, String slotReason, List<String> tips, List<PhotoFile> photos, String wikipediaTitle) {
+    }
+
+    record PhotoFile(String file, String author, String license, String sourceUrl) {
+    }
+}

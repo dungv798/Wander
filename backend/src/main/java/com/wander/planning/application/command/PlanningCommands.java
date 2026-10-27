@@ -41,4 +41,11 @@ public final class PlanningCommands {
 
     public record SetTaskDone(UUID ownerId, UUID tripId, UUID itemId, Object done) {
     }
+
+    /**
+     * Lệnh "lịch": tùy chọn đổi khoảng ngày chuyến và gán ngày hàng loạt cho các mục, tất cả trong một giao dịch và một lần
+     * tăng phiên bản. Gửi lại trạng thái cũ là cách Hoàn tác (kể cả Hoàn tác đổi khoảng ngày).
+     */
+    public record ApplySchedule(UUID ownerId, UUID tripId, Map<String, Object> input) {
+    }
 }

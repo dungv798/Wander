@@ -1,4 +1,4 @@
-# Ảnh chạy backend (dùng cho docker compose cục bộ và, khi được duyệt, ECS Fargate / App Runner trên AWS).
+# Ảnh chạy backend (dùng cho docker compose cục bộ và, khi được duyệt, ECS Fargate trên AWS — ADR-006).
 # Build jar trước: .\gradlew.bat bootJar  (hoặc tools\dev.ps1 backend-build)
 FROM eclipse-temurin:21-jre-alpine
 

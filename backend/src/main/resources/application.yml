@@ -44,10 +44,15 @@ wander:
   web:
     # Thư mục giao diện đã build. Để trống thì chỉ chạy API (ví dụ khi giao diện nằm trên S3/CloudFront).
     dir: ${WANDER_WEB_DIR:}
+    # Số proxy tin cậy trước ứng dụng để lấy địa chỉ người gọi từ X-Forwarded-For (AD-6). 0 = bỏ qua header.
+    # Sau CloudFront -> ALB đặt 2, chỉ khi ALB chỉ nhận lưu lượng từ CloudFront (ADR-006).
+    trusted-proxy-hops: ${WANDER_TRUSTED_PROXY_HOPS:0}
   limits:
     identity-per-hour: ${WANDER_LIMIT_IDENTITY:30}
     recovery-per-hour: ${WANDER_LIMIT_RECOVERY:30}
     approval-per-hour: ${WANDER_LIMIT_APPROVAL:20}
+    # Đọc kho địa điểm công khai (DR-008 Q-a), mỗi phút cho một địa chỉ.
+    catalog-per-minute: ${WANDER_LIMIT_CATALOG:120}
 
 logging:
   level:

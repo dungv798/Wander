@@ -42,6 +42,7 @@ class StaticWebIT extends ApiTestSupport {
         assertThat(home.raw().body()).contains("<title>Wander</title>");
         assertThat(home.raw().headers().firstValue("Content-Security-Policy").orElse("")).contains("default-src 'self'");
         assertThat(home.raw().headers().firstValue("X-Frame-Options")).hasValue("DENY");
+        assertThat(home.raw().headers().firstValue("Strict-Transport-Security")).hasValue("max-age=31536000");
         assertThat(home.raw().headers().firstValue("Cache-Control")).hasValue("no-cache");
 
         Res asset = call("GET", "/assets/app-123.js", null);
