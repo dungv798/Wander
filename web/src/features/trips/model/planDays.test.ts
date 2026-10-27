@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { planDays } from './planDays.ts';
-import { INITIAL_TRIPS_STATE, createTrip } from './tripState.ts';
+import { S0 as INITIAL_TRIPS_STATE, createTrip } from './tripFixtures.ts';
 
 const HUB = { lat: 22.8233, lon: 104.9836 };
 const COORDS: Record<string, { lat: number; lon: number }> = {

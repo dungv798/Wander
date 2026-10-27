@@ -7,7 +7,7 @@ import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
 import { DeckScreen, DestScreen, DiscoverProvider, HomeScreen, PickedScreen, PlaceSheetProvider, useDiscover } from '../features/discover/index.ts';
 import type { AddingMode, PlaceView } from '../features/discover/index.ts';
-import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useSessionExpired } from '../features/identity/index.ts';
+import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
 import { SettingsScreen } from '../features/settings/index.ts';
 import { OnboardScreen, OnboardingProvider, useOnboarding } from '../features/onboarding/index.ts';
 import { TemplatesSection } from '../features/templates/index.ts';
@@ -25,14 +25,14 @@ function usePickedCount(): number {
 function useAddingMode(tripId: string | null): AddingMode | undefined {
   const { trip, actions } = useTrips();
   const toast = useToast();
+  const report = useReportError();
   const t = trip(tripId);
   if (!t) return undefined;
   return {
     title: t.name,
     excludeIds: t.items.flatMap((i) => (i.placeId ? [i.placeId] : [])),
     onAdd: (place) => {
-      actions.addPlaces(t.id, [place]);
-      toast.show(COPY.deck.addedToTrip);
+      actions.addPlaces(t.id, [place]).then(() => toast.show(COPY.deck.addedToTrip)).catch(report);
     },
     onDone: () => navigate(VIEW.TRIP, t.id, 'ov'),
   };
@@ -100,15 +100,15 @@ export function App() {
     <ErrorBoundary>
       <DiscoverProvider>
         <OnboardingProvider>
-        <TripsProvider>
           <ToastProvider>
             <IdentityProvider>
-              <PlaceSheetProvider>
-                <Shell />
-              </PlaceSheetProvider>
+              <TripsProvider>
+                <PlaceSheetProvider>
+                  <Shell />
+                </PlaceSheetProvider>
+              </TripsProvider>
             </IdentityProvider>
           </ToastProvider>
-        </TripsProvider>
         </OnboardingProvider>
       </DiscoverProvider>
     </ErrorBoundary>

@@ -13,13 +13,13 @@ export interface TemplateTripSpec {
   readonly days: readonly (readonly PlaceRef[])[];
 }
 
-/** Tạo chuyến mới có sẵn các địa điểm xếp vào đúng ngày và thứ tự của lịch mẫu. Trả chuyến đã xếp. Gọi sau cổng danh tính. */
-export function useCreateFromTemplate(): (spec: TemplateTripSpec) => Trip {
+/** Tạo chuyến mới có sẵn các địa điểm xếp vào đúng ngày và thứ tự của lịch mẫu. Trả chuyến đã xếp (mã do máy chủ cấp). Gọi sau cổng danh tính; thất bại ném `ApiError`. */
+export function useCreateFromTemplate(): (spec: TemplateTripSpec) => Promise<Trip> {
   const { actions } = useTrips();
   return useCallback(
-    (spec) => {
+    async (spec) => {
       const endDate = addDays(spec.startDate, Math.max(spec.days.length, 1) - 1);
-      const trip = actions.create({ name: spec.name, destinationId: spec.destinationId, startDate: spec.startDate, endDate }, spec.days.flat());
+      const trip = await actions.create({ name: spec.name, destinationId: spec.destinationId, startDate: spec.startDate, endDate }, spec.days.flat());
       const plan: Record<string, { day: string; position: number }> = {};
       spec.days.forEach((places, d) => {
         places.forEach((p, position) => {
@@ -27,7 +27,7 @@ export function useCreateFromTemplate(): (spec: TemplateTripSpec) => Trip {
           if (item) plan[item.id] = { day: addDays(spec.startDate, d), position };
         });
       });
-      actions.applyPlan(trip.id, plan as DayPlan);
+      await actions.applyPlan(trip.id, plan as DayPlan);
       return actions.current(trip.id) ?? trip;
     },
     [actions],

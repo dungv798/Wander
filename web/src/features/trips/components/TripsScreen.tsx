@@ -22,7 +22,7 @@ function useCoverOf(destId: string): (placeId: string | null) => string | null {
 
 /** Màn "Chuyến đi": danh sách chuyến của bạn, nút tạo mới (nhanh hoặc theo bước), hoặc trạng thái rỗng dẫn tới Khám phá. */
 export function TripsScreen({ destId }: { readonly destId: string }) {
-  const { state } = useTrips();
+  const { state, status, reload } = useTrips();
   const [sheet, setSheet] = useState<'create' | 'wizard' | null>(null);
   const coverOf = useCoverOf(destId);
   const { state: dest } = useDestination(destId);
@@ -38,7 +38,14 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
           <IconButton icon="shield" label={T.list.security} onClick={() => navigate(VIEW.SECURITY)} />
         </div>
       </div>
-      {state.trips.length ? (
+      {status === 'loading' && !state.trips.length ? (
+        <div className="waitbox pad-x" role="status">
+          <span className="spin" aria-hidden="true" />
+          {T.list.loading}
+        </div>
+      ) : status === 'error' ? (
+        <EmptyState title={T.list.errorTitle} text={T.list.errorText} actions={<Button onClick={reload}>{T.list.retry}</Button>} />
+      ) : state.trips.length ? (
         <div className="stack pad-x spaced-lg">
           {state.trips.map((t) => (
             <TripCard key={t.id} trip={t} cover={t.items.map((i) => coverOf(i.placeId)).find(Boolean) ?? fallbackCover} />

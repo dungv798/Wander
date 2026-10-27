@@ -1,87 +1,134 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
-import { IS_DEV } from '../../../shared/const/env.ts';
+import { PairingCode } from '../../../shared/domain/PairingCode.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle, WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
+import type { StepUpRequested } from '../api/IdentityGateway.ts';
 import { useAttemptLock, useIdentity } from '../hooks/identityContext.ts';
+import { replacementSession } from '../hooks/issueSpecs.ts';
+import { useReportError } from '../hooks/useReportError.ts';
+import { IDENTITY } from '../model/identity.const.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
-import { checkCode, hasCode, newMatchNumber } from '../model/identityServer.ts';
+import type { ReauthAttempt } from '../model/identityFlow.types.ts';
 
 interface ReauthProps {
   readonly title: string;
   readonly why: string;
-  /** Chạy sau khi xác thực lại thành công (tờ này đã đóng). */
-  readonly onOk: () => void;
+  /** Thử một bằng chứng; trả true khi đã xác thực xong (luồng kế tiếp đã mở), false khi chưa đủ (sai mã, chưa được duyệt). */
+  readonly attempt: ReauthAttempt;
   readonly onClose: () => void;
 }
 
 type Mode = 'device' | 'code';
 
 /** Xác thực lại bằng MÃ KHÔI PHỤC: sai quá 5 lần ở máy này thì khóa tạm (D23); thông báo sai luôn chung, không nói còn mấy lần. */
-function CodeMode({ onVerified }: { readonly onVerified: () => void }) {
-  const { server } = useIdentity();
+function CodeMode({ attempt }: { readonly attempt: ReauthAttempt }) {
+  const report = useReportError();
   const [value, setValue] = useState('');
+  const [busy, setBusy] = useState(false);
   const { locked, failed, fail, reset } = useAttemptLock('reauth');
+  /** Gửi mã làm bằng chứng; sai thì đếm lần thử, đúng thì luồng kế tiếp đã mở. */
+  const verify = (): void => {
+    setBusy(true);
+    attempt({ type: 'code', code: value })
+      .then((ok) => (ok ? reset() : fail()))
+      .catch(report)
+      .finally(() => setBusy(false));
+  };
   return (
     <>
       <Field code label={C.reauth.codeLabel} value={value} onChange={setValue} disabled={locked} hint={C.reauth.codeHelp} />
       {failed || locked ? <WarnBox>{locked ? C.reauth.locked : C.reauth.wrong}</WarnBox> : null}
-      <Button
-        block
-        disabled={locked}
-        onClick={() => {
-          if (checkCode(server, value)) {
-            reset();
-            onVerified();
-          } else fail();
-        }}
-      >
+      <Button block disabled={locked || busy} onClick={verify}>
         {C.reauth.verify}
       </Button>
     </>
   );
 }
 
-/** Xác thực lại bằng THIẾT BỊ TIN CẬY KHÁC: hiện số khớp, chờ thiết bị kia chọn đúng số (bản thử: nút giả lập, chỉ có khi phát triển). */
-function DeviceMode({ deviceName, onApproved }: { readonly deviceName: string; readonly onApproved: () => void }) {
-  const [number] = useState(() => newMatchNumber());
-  const [state, setState] = useState<'idle' | 'sent' | 'denied'>('idle');
+/**
+ * Xác thực lại bằng THIẾT BỊ TIN CẬY KHÁC (DR-018 E1): máy này hiện mã duyệt + số khớp; thiết bị kia nhập mã ở "Thêm thiết bị mới"
+ * rồi chọn đúng số. Máy này hỏi lại mỗi giây tới khi được duyệt hoặc mã hết hạn (5 phút).
+ */
+function DeviceMode({ attempt }: { readonly attempt: ReauthAttempt }) {
+  const { actions } = useIdentity();
+  const report = useReportError();
+  const [request, setRequest] = useState<StepUpRequested | null>(null);
+  const [expired, setExpired] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const finished = useRef(false);
+
+  /** Xin mã duyệt mới từ máy chủ. */
+  const send = (): void => {
+    setBusy(true);
+    setExpired(false);
+    actions.requestStepUp().then(setRequest).catch(report).finally(() => setBusy(false));
+  };
+
+  useEffect(() => {
+    if (!request) return undefined;
+    finished.current = false;
+    let inFlight = false; // lời gọi trước chưa về thì không gọi chồng (tránh hai lần phát mã cùng lúc)
+    const timer = window.setInterval(() => {
+      if (finished.current || inFlight) return;
+      if (Date.now() > request.expiresAt) {
+        finished.current = true;
+        setRequest(null);
+        setExpired(true);
+        return;
+      }
+      inFlight = true;
+      attempt({ type: 'approval', requestId: request.requestId }).then((ok) => {
+        if (ok) finished.current = true;
+      }).catch(() => undefined).finally(() => {
+        inFlight = false;
+      });
+    }, IDENTITY.POLL_MS);
+    return () => {
+      finished.current = true;
+      window.clearInterval(timer);
+    };
+  }, [request, attempt]);
+
+  if (!request) {
+    return (
+      <>
+        {expired ? <WarnBox>{C.reauth.expired}</WarnBox> : null}
+        <Button block disabled={busy} onClick={send}>{C.reauth.send}</Button>
+      </>
+    );
+  }
   return (
     <>
-      <p className="note">{fill(C.reauth.deviceText, { name: deviceName, n: number })}</p>
-      {state === 'idle' ? <Button block onClick={() => setState('sent')}>{C.reauth.send}</Button> : null}
-      {state === 'sent' ? (
-        <div className="waitbox" role="status">
-          <span className="spin" aria-hidden="true" />
-          {fill(C.reauth.waiting, { name: deviceName })}
-        </div>
-      ) : null}
-      {state === 'denied' ? <WarnBox>{C.reauth.denied}</WarnBox> : null}
-      {IS_DEV && state === 'sent' ? (
-        <div className="protobox">
-          <b>{C.demo.title}</b>
-          <p className="note">{C.demo.note}</p>
-          <Button onClick={onApproved}>{C.demo.reauthApprove}</Button>
-          <Button kind="ghost" onClick={() => setState('denied')}>{C.demo.reauthDeny}</Button>
-        </div>
-      ) : null}
+      <p className="note">{fill(C.reauth.deviceText, { code: PairingCode.parse(request.approvalCode)?.format() ?? request.approvalCode, n: request.number })}</p>
+      <div className="pairbox">
+        <b className="pcode big">{PairingCode.parse(request.approvalCode)?.format() ?? request.approvalCode}</b>
+        <span className="note">{C.recover.numberLabel}</span>
+        <b className="pcode big">{request.number}</b>
+      </div>
+      <div className="waitbox" role="status">
+        <span className="spin" aria-hidden="true" />
+        {C.reauth.waiting}
+      </div>
     </>
   );
 }
 
 /** Tờ xác thực lại (S12) cho thao tác nhạy cảm: chọn thiết bị tin cậy khác hoặc mã khôi phục; mỗi thao tác cần một lần xác thực riêng. */
-export function ReauthSheet({ title, why, onOk, onClose }: ReauthProps) {
-  const { server, session, identity, actions, startFlow, closeFlow } = useIdentity();
-  const others = (identity?.devices ?? []).filter((d) => d.id !== session.deviceId);
-  const canCode = hasCode(server);
+export function ReauthSheet({ title, why, attempt, onClose }: ReauthProps) {
+  const { identity, actions, startFlow, closeFlow } = useIdentity();
+  const report = useReportError();
+  const others = (identity?.devices ?? []).filter((d) => !d.current);
+  const canCode = identity?.hasCode === true;
   const [mode, setMode] = useState<Mode>(others.length ? 'device' : 'code');
-  /** Thành công: đóng tờ rồi chạy thao tác đang chờ. */
-  const done = (): void => {
-    closeFlow();
-    onOk();
-  };
+  /** Chưa có mã và chưa có thiết bị khác: cho tạo mã đầu tiên (không cần bằng chứng vì chưa có mã hiện hành, MĐ-2). */
+  const issueFirst = (): void =>
+    startFlow({
+      kind: 'issue',
+      issue: { purpose: 'regen', open: async () => replacementSession(actions, await actions.beginReplacement()), onDone: closeFlow, onOpenFailed: report },
+    });
   return (
     <Sheet label={title} onClose={onClose}>
       <div className="pp">
@@ -92,7 +139,7 @@ export function ReauthSheet({ title, why, onOk, onClose }: ReauthProps) {
         {!canCode && !others.length ? (
           <>
             <WarnBox>{C.reauth.needCode}</WarnBox>
-            <Button block onClick={() => startFlow({ kind: 'issue', issue: { purpose: 'regen', onCommit: actions.commitCode, onDone: closeFlow } })}>
+            <Button block onClick={issueFirst}>
               {C.reauth.issueFirst}
             </Button>
           </>
@@ -102,7 +149,7 @@ export function ReauthSheet({ title, why, onOk, onClose }: ReauthProps) {
               {others.length ? <ChipToggle pressed={mode === 'device'} onClick={() => setMode('device')}>{C.reauth.modeDevice}</ChipToggle> : null}
               {canCode ? <ChipToggle pressed={mode === 'code'} onClick={() => setMode('code')}>{C.reauth.modeCode}</ChipToggle> : null}
             </div>
-            {mode === 'device' && others[0] ? <DeviceMode deviceName={others[0].name} onApproved={done} /> : <CodeMode onVerified={done} />}
+            {mode === 'device' && others.length ? <DeviceMode attempt={attempt} /> : <CodeMode attempt={attempt} />}
           </>
         )}
         <Button kind="ghost" block onClick={onClose}>

@@ -1,33 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { sanitizeServer, sanitizeSession } from './identitySanitize.ts';
+import { NO_SESSION, sanitizeSession } from './identitySanitize.ts';
 
-const GOOD = {
-  identity: { createdAt: 5, codeHash: 'h1:abc', devices: [{ id: 'd1', name: 'Điện thoại', at: 1 }], events: [{ at: 2, kind: 'created', device: 'Điện thoại' }], unseen: true },
-  pairing: { code: '0123ABCD', number: 42, name: 'Máy mới', at: 3, status: 'waiting' },
-  requests: [1, 2],
-};
-
-test('máy chủ giả hợp lệ được giữ nguyên', () => {
-  const s = sanitizeServer(GOOD)!;
-  assert.equal(s.identity?.devices[0]?.name, 'Điện thoại');
-  assert.equal(s.pairing?.number, 42);
-  assert.deepEqual(s.requests, [1, 2]);
+test('cờ phiên hợp lệ được giữ; mốc đã biết hỏng bị bỏ nhưng không làm hỏng cờ khác', () => {
+  assert.deepEqual(sanitizeSession({ recovered: true, known: { hasCode: true, deviceCount: 2 } }), { recovered: true, known: { hasCode: true, deviceCount: 2 } });
+  assert.deepEqual(sanitizeSession({ recovered: true, known: { hasCode: 'x', deviceCount: 2 } }), { recovered: true, known: null });
+  assert.deepEqual(sanitizeSession({ known: { hasCode: true, deviceCount: -1 } }), { recovered: false, known: null });
+  assert.deepEqual(sanitizeSession({ known: { hasCode: true, deviceCount: 1.5 } }), { recovered: false, known: null });
 });
 
-test('dữ liệu hỏng: không phải đối tượng → null; danh tính không còn thiết bị hợp lệ → chưa có danh tính', () => {
-  assert.equal(sanitizeServer('x'), null);
-  assert.equal(sanitizeServer({ identity: { devices: [{ id: 1 }] } })!.identity, null);
+test('giá trị không phải đối tượng thì bỏ (rơi về mặc định ở PersistentStore)', () => {
+  for (const bad of [null, 'x', 5, [], undefined]) assert.equal(sanitizeSession(bad), null);
+  assert.deepEqual(NO_SESSION, { recovered: false, known: null });
 });
 
-test('sự kiện lạ và yêu cầu ghép có mã sai bị bỏ, phần còn lại giữ', () => {
-  const s = sanitizeServer({ ...GOOD, identity: { ...GOOD.identity, events: [{ at: 1, kind: 'la' }, { at: 2, kind: 'code' }] }, pairing: { ...GOOD.pairing, code: 'ngan' } })!;
-  assert.deepEqual(s.identity?.events.map((e) => e.kind), ['code']);
-  assert.equal(s.pairing, null);
-});
-
-test('phiên: thiếu deviceId → null (chưa có danh tính trên máy này); kiểu sai bị bỏ', () => {
-  assert.deepEqual(sanitizeSession({}), { deviceId: null, recovered: false });
-  assert.deepEqual(sanitizeSession({ deviceId: 'd1', recovered: true }), { deviceId: 'd1', recovered: true });
-  assert.equal(sanitizeSession(null), null);
+test('không bao giờ mang bí mật: trường lạ như token bị bỏ khi làm sạch', () => {
+  const s = sanitizeSession({ recovered: false, known: null, token: 'A'.repeat(43), deviceId: 'x' });
+  assert.deepEqual(s, { recovered: false, known: null });
 });

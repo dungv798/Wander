@@ -1,14 +1,15 @@
 import { useMemo } from 'react';
+import { apiClient } from '../../../shared/api/defaultClient.ts';
 import { useResource } from '../../../shared/hooks/useResource.ts';
 import type { ResourceState } from '../../../shared/hooks/useResource.ts';
 import { useDestination } from '../../discover/index.ts';
-import { StaticTemplateRepository } from '../api/StaticTemplateRepository.ts';
+import { HttpTemplateRepository } from '../api/HttpTemplateRepository.ts';
 import type { TemplateRepository } from '../api/TemplateRepository.ts';
 import type { TemplateView } from '../model/template.types.ts';
 import { toTemplateViews } from '../model/templateMapper.ts';
 
-/** Kho dùng chung của ứng dụng (bản giả); FE-10 đổi thành kho gọi API. */
-const DEFAULT_REPOSITORY: TemplateRepository = new StaticTemplateRepository();
+/** Kho dùng chung của ứng dụng: gọi API lịch mẫu của backend. */
+const DEFAULT_REPOSITORY: TemplateRepository = new HttpTemplateRepository(apiClient);
 
 /** Lịch mẫu của một điểm đến đã ghép với kho địa điểm (đợi cả hai tải xong). Lỗi mạng trả `error` để màn tự quyết (khối ẩn đi, không chặn trang). */
 export function useTemplates(destId: string, repo: TemplateRepository = DEFAULT_REPOSITORY): { state: ResourceState<TemplateView[]>; retry: () => void } {

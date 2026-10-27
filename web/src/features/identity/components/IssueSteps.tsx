@@ -60,10 +60,12 @@ interface CheckProps {
   readonly indexes: readonly number[];
   readonly onConfirm: () => void;
   readonly onBack: () => void;
+  /** Đang chờ máy chủ chốt mã: khóa nút để không bấm hai lần. */
+  readonly busy?: boolean;
 }
 
 /** Bước 2: nhập lại 2 trong 6 nhóm do hệ thống chọn (DR-018 B3); sai thì báo "chưa khớp", không lộ nhóm nào sai. */
-export function CheckStep({ code, indexes, onConfirm, onBack }: CheckProps) {
+export function CheckStep({ code, indexes, onConfirm, onBack, busy = false }: CheckProps) {
   const [answers, setAnswers] = useState<string[]>(() => indexes.map(() => ''));
   const [wrong, setWrong] = useState(false);
   const heading = useFocusOnMount<HTMLHeadingElement>();
@@ -89,6 +91,7 @@ export function CheckStep({ code, indexes, onConfirm, onBack }: CheckProps) {
       <div className="stack">
         <Button
           block
+          disabled={busy}
           onClick={() => {
             if (code.matchesChallenge(indexes, answers)) onConfirm();
             else setWrong(true);

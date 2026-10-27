@@ -1,0 +1,28 @@
+/** Đường dẫn và mã lỗi API danh tính (khớp `IdentityApiConstants`/`IdentityErrorCodes` của backend). */
+export const IDENTITY_API = {
+  IDENTITY: '/api/identity',
+  SESSIONS: '/api/sessions',
+  CURRENT_SESSION: '/api/sessions/current',
+  EVENTS: '/api/events',
+  EVENTS_SEEN: '/api/events/seen',
+  CODE_STATUS: '/api/recovery-code',
+  CODE_BEGIN: '/api/recovery-code/begin',
+  CODE_CONFIRM: '/api/recovery-code/confirm',
+  STEP_UP_REQUESTS: '/api/step-up/requests',
+  STEP_UP_PREVIEW: '/api/step-up/preview',
+  STEP_UP_APPROVE: '/api/step-up/approve',
+  STEP_UP_DENY: '/api/step-up/deny',
+  RECOVERY_START: '/api/recovery/start',
+  RECOVERY_COMPLETE: '/api/recovery/complete',
+  LINKS: '/api/device-links',
+  LINK_PREVIEW: '/api/device-links/preview',
+  LINK_APPROVE: '/api/device-links/approve',
+  LINK_DENY: '/api/device-links/deny',
+  /** Thao tác nhạy cảm cần xác thực lại. */
+  OPERATION_REGENERATE: 'regenerate_code',
+  INVALID_PAIRING_CODE: 'INVALID_PAIRING_CODE',
+  INVALID_APPROVAL_CODE: 'INVALID_APPROVAL_CODE',
+  MATCH_MISMATCH: 'MATCH_MISMATCH',
+  STEP_UP_REQUIRED: 'STEP_UP_REQUIRED',
+  UNAUTHENTICATED: 'UNAUTHENTICATED',
+} as const;

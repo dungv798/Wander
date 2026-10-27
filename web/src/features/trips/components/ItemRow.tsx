@@ -2,6 +2,7 @@ import { fill } from '../../../shared/const/copy.vi.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { CATEGORY_ICON } from '../../discover/index.ts';
+import { useFire } from '../hooks/useFire.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { ITEM_KINDS } from '../model/trip.const.ts';
@@ -24,6 +25,7 @@ interface ItemRowProps {
 /** Hàng chọn nhanh ngày cho mục chưa có ngày. */
 function AssignRow({ item }: { readonly item: TripItem }) {
   const { actions } = useTrips();
+  const fire = useFire();
   const { trip, days, announce } = useTripView();
   return (
     <div className="assign">
@@ -34,7 +36,7 @@ function AssignRow({ item }: { readonly item: TripItem }) {
           className="dchip"
           type="button"
           onClick={() => {
-            actions.assignDay(trip.id, item.id, d);
+            fire(actions.assignDay(trip.id, item.id, d));
             announce(fill(T.pickDay.assigned, { n: k + 1 }));
           }}
         >
@@ -48,9 +50,10 @@ function AssignRow({ item }: { readonly item: TripItem }) {
 /** Nút lên/xuống của chế độ sắp xếp (thay thế đầy đủ cho kéo thả; bàn phím và đọc màn hình dùng được). */
 function MoveButtons({ item, name, sort }: { readonly item: TripItem; readonly name: string; readonly sort: { readonly first: boolean; readonly last: boolean } }) {
   const { actions } = useTrips();
+  const fire = useFire();
   const { trip, cat, announce } = useTripView();
   const move = (dir: 'up' | 'down'): void => {
-    actions.moveItem(trip.id, item.id, dir);
+    fire(actions.moveItem(trip.id, item.id, dir));
     const peers = item.day ? dayItems(trip, item.day) : [];
     const at = peers.findIndex((i) => i.id === item.id);
     const next = Math.max(0, Math.min(peers.length - 1, at + (dir === 'up' ? -1 : 1)));
@@ -67,6 +70,7 @@ function MoveButtons({ item, name, sort }: { readonly item: TripItem; readonly n
 /** Một hàng mục trong chuyến: ảnh/biểu tượng (kèm số thứ tự), loại + khu vực, tên, câu dẫn, chip giờ/giá/đặt chỗ; việc cần làm có ô tích. */
 export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
   const { actions } = useTrips();
+  const fire = useFire();
   const { trip, cat, days, tab, openItem, announce } = useTripView();
   const place = cat.place(item.placeId);
   const kind = ITEM_KINDS[item.type];
@@ -101,7 +105,7 @@ export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
             aria-pressed={item.done}
             aria-label={fill(T.view.taskToggle, { name })}
             onClick={() => {
-              actions.toggleDone(trip.id, item.id);
+              fire(actions.toggleDone(trip.id, item.id));
               announce(fill(item.done ? T.view.taskUndo : T.view.taskDone, { name }));
             }}
           >

@@ -4,15 +4,16 @@ import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { useIdentity } from '../hooks/identityContext.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
-import { expiredBranch } from '../model/identityServer.ts';
+import { expiredBranch } from '../model/identitySnapshot.ts';
 
 /**
- * Màn hết phiên (S19) khi máy này không còn là thiết bị tin cậy (bị thu hồi từ nơi khác). Hai nhánh: A còn mã/thiết bị khác → "Mở trên máy này";
- * B không còn gì để khôi phục → nói thẳng không khôi phục được (D20, D26). Không nêu thời hạn phiên (chưa chốt).
+ * Màn hết phiên (S19) khi máy chủ không còn nhận phiên của máy này (bị thu hồi từ nơi khác). Hai nhánh theo điều đã biết lần cuối:
+ * A còn mã hoặc thiết bị khác → "Mở trên máy này"; B không còn gì để khôi phục → nói thẳng không khôi phục được (D20, D26).
+ * Không nêu thời hạn phiên (chưa chốt).
  */
 export function ExpiredScreen() {
-  const { server, actions } = useIdentity();
-  const branch = expiredBranch(server);
+  const { session, actions } = useIdentity();
+  const branch = expiredBranch(session.known);
   /** Quên phiên cũ của máy này rồi đi tới màn khác. */
   const leave = (to: typeof VIEW.RECOVER | typeof VIEW.EXPLORE): void => {
     actions.loseSession();

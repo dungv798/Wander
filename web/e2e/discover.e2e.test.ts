@@ -149,10 +149,10 @@ test('cẩm nang: khối mở/đóng đúng aria-expanded, danh sách mang gì �
 test('lỗi tải kho: có thông báo, nút Thử lại hoạt động, không trắng trang', async () => {
   const { ctx } = await phone();
   const page = await ctx.newPage();
-  await page.route('**/data/catalog/ha-giang.json', (r) => r.abort());
+  await page.route('**/api/catalog/destinations/ha-giang', (r) => r.abort());
   await page.goto(`${baseUrl}/#/dest/ha-giang`);
   await page.getByRole('alert').getByText('Không tải được dữ liệu').waitFor();
-  await page.unroute('**/data/catalog/ha-giang.json');
+  await page.unroute('**/api/catalog/destinations/ha-giang');
   await page.getByRole('button', { name: 'Thử lại' }).click();
   await page.locator('.dhero h1').waitFor();
   assert.equal(await page.locator('.dhero h1').textContent(), 'Hà Giang');

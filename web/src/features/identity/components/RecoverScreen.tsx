@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ApiError } from '../../../shared/api/ApiError.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
-import { IS_DEV } from '../../../shared/const/env.ts';
 import { PairingCode } from '../../../shared/domain/PairingCode.ts';
-import { useNow } from '../../../shared/hooks/useNow.ts';
+import { RecoveryCode } from '../../../shared/domain/RecoveryCode.ts';
 import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle, WarnBox } from '../../../shared/ui/Controls.tsx';
@@ -11,85 +11,146 @@ import { Field } from '../../../shared/ui/Field.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
 import { useAttemptLock, useIdentity } from '../hooks/identityContext.ts';
+import { RetryState } from './SecurityScreen.tsx';
+import { recoverySession } from '../hooks/issueSpecs.ts';
+import { useReportError } from '../hooks/useReportError.ts';
 import { IDENTITY } from '../model/identity.const.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
-import { checkCode, pairingExpired } from '../model/identityServer.ts';
+import type { PairingRequest } from '../model/identity.types.ts';
 
 type Mode = 'code' | 'device';
 
-/** Khôi phục bằng MÃ: nhập đúng thì nhận mã thay thế (KHÔNG được bỏ qua) và phải nhập lại 2 nhóm; mã chỉ mất hiệu lực khi mã mới được xác nhận (QĐ-6). */
+/** Mã lỗi backend khi mã khôi phục sai, đã dùng hoặc hết hiệu lực (một mã chung, MĐ-8). */
+const WRONG_CODE_ERRORS: readonly string[] = ['INVALID_CODE', 'CODE_ALREADY_USED', 'INVALID_ATTEMPT'];
+
+/**
+ * Khôi phục bằng MÃ: máy chủ kiểm mã, nếu đúng thì sinh mã thay thế (KHÔNG được bỏ qua) và phải nhập lại 2 nhóm; mã cũ chỉ mất hiệu lực
+ * khi mã mới được xác nhận (QĐ-6). Hết hạn lần thử (15 phút) thì bắt đầu lại.
+ */
 function CodeRecover() {
-  const { server, actions, startFlow, closeFlow } = useIdentity();
+  const { actions, startFlow, closeFlow } = useIdentity();
   const toast = useToast();
+  const report = useReportError();
   const [value, setValue] = useState('');
+  const [busy, setBusy] = useState(false);
   const { locked, failed, fail, reset } = useAttemptLock('recover');
-  /** Mở luồng phát mã thay thế; hết hạn lần thử thì phải bắt đầu lại. */
-  const start = (): void =>
-    startFlow({
-      kind: 'issue',
-      issue: {
-        purpose: 'recover',
-        expiresAt: Date.now() + IDENTITY.ATTEMPT_TTL_MS,
-        onExpired: () => {
-          closeFlow();
-          toast.show(C.recover.attemptExpired);
+  /** Gửi mã lên máy chủ; đúng thì mở luồng phát mã thay thế, sai thì đếm lần thử (bền, khóa tạm khi sai đủ 5 lần). */
+  const submit = (): void => {
+    if (!RecoveryCode.parse(value)) {
+      fail();
+      return;
+    }
+    setBusy(true);
+    actions.startRecovery(value).then((attempt) => {
+      reset();
+      setValue(''); // mã chưa bị tiêu thụ: không để nó nằm lại trong ô nhập
+      startFlow({
+        kind: 'issue',
+        issue: {
+          purpose: 'recover',
+          open: async () => recoverySession(actions, attempt),
+          onOpenFailed: report,
+          onExpired: () => {
+            closeFlow();
+            toast.show(C.recover.attemptExpired);
+          },
+          onDone: () => {
+            closeFlow();
+            toast.show(C.recover.recovered);
+            navigate(VIEW.TRIPS);
+          },
         },
-        onCommit: (code) => {
-          actions.joinHere('recovered');
-          actions.commitCode(code);
-        },
-        onDone: () => {
-          closeFlow();
-          toast.show(C.recover.recovered);
-          navigate(VIEW.TRIPS);
-        },
-      },
-    });
+      });
+    }).catch((e: unknown) => {
+      if (e instanceof ApiError && WRONG_CODE_ERRORS.includes(e.code)) fail();
+      else report(e);
+    }).finally(() => setBusy(false));
+  };
   return (
     <>
       <Field code label={C.recover.codeLabel} value={value} onChange={setValue} disabled={locked} hint={C.recover.codeHelp} />
       {failed || locked ? <WarnBox>{locked ? C.recover.locked : C.recover.wrong}</WarnBox> : null}
-      <Button
-        block
-        disabled={locked}
-        onClick={() => {
-          if (checkCode(server, value)) {
-            reset();
-            start();
-          } else fail();
-        }}
-      >
+      <Button block disabled={locked || busy} onClick={submit}>
         {C.recover.next}
       </Button>
     </>
   );
 }
 
-/** Khôi phục bằng THIẾT BỊ CŨ DUYỆT: máy này hiện mã ghép + số khớp; khi thiết bị cũ duyệt đúng số, máy này vào danh sách thiết bị tin cậy. */
-function DeviceRecover() {
-  const { server, actions } = useIdentity();
+/** Kết quả hỏi trạng thái yêu cầu ghép đang chờ ở máy này. */
+type Outcome = 'denied' | 'expired' | null;
+
+/**
+ * Hỏi trạng thái yêu cầu ghép mỗi giây tới khi được duyệt (máy này nhận phiên và về danh sách chuyến đi), bị từ chối hoặc hết hạn
+ * (xóa yêu cầu và báo kết quả). Chỉ nhận phiên MỘT lần dù React chạy effect hai lần.
+ */
+function usePairingPoll(request: PairingRequest | null, setRequest: (r: PairingRequest | null) => void, setOutcome: (o: Outcome) => void): void {
+  const { actions } = useIdentity();
   const toast = useToast();
-  const [limited, setLimited] = useState(false);
-  const now = useNow(IDENTITY.POLL_MS);
-  const p = server.pairing;
-  const expired = p ? pairingExpired(p, now) : false;
-  const approved = p?.status === 'approved' && !expired && Boolean(server.identity);
-  const joined = useRef(false);
+  const [joined] = useState(() => ({ done: false }));
   useEffect(() => {
-    if (!approved || joined.current) return; // một lần duy nhất (StrictMode chạy effect hai lần)
-    joined.current = true;
-    actions.joinHere('paired');
-    toast.show(C.recover.recovered);
-    navigate(VIEW.TRIPS);
-  }, [approved, actions, toast]);
-  if (!p || p.status === 'denied' || expired) {
+    if (!request) return undefined;
+    let stopped = false;
+    const timer = window.setInterval(() => {
+      if (stopped) return;
+      if (Date.now() > request.expiresAt) {
+        stopped = true;
+        setRequest(null);
+        setOutcome('expired');
+        return;
+      }
+      actions.pairingStatus(request).then((status) => {
+        if (stopped) return;
+        if (status === 'approved' && !joined.done) {
+          stopped = true;
+          joined.done = true; // một lần duy nhất (StrictMode chạy effect hai lần)
+          void actions.joinHere(request).then(() => {
+            toast.show(C.recover.recovered);
+            navigate(VIEW.TRIPS);
+          });
+        } else if (status === 'denied' || status === 'expired') {
+          stopped = true;
+          setRequest(null);
+          setOutcome(status);
+        }
+      }).catch(() => undefined);
+    }, IDENTITY.POLL_MS);
+    return () => {
+      stopped = true;
+      window.clearInterval(timer);
+    };
+  }, [request, actions, toast, joined, setRequest, setOutcome]);
+}
+
+/**
+ * Khôi phục bằng THIẾT BỊ CŨ DUYỆT (DR-018 E1): máy này hiện mã ghép + số khớp do máy chủ cấp và hỏi lại mỗi giây; khi thiết bị cũ chọn
+ * đúng số, máy này trở thành thiết bị tin cậy. Bí mật phiên do máy này tự sinh, chỉ có hiệu lực sau khi được duyệt.
+ */
+function DeviceRecover() {
+  const { actions } = useIdentity();
+  const report = useReportError();
+  const [request, setRequest] = useState<PairingRequest | null>(null);
+  const [outcome, setOutcome] = useState<Outcome>(null);
+  const [limited, setLimited] = useState(false);
+  const [busy, setBusy] = useState(false);
+  /** Xin mã ghép mới; null nghĩa là quá hạn mức yêu cầu (3 lần mỗi 10 phút). */
+  const show = (): void => {
+    setBusy(true);
+    setOutcome(null);
+    setLimited(false);
+    actions.requestPairing().then((r) => (r ? setRequest(r) : setLimited(true))).catch(report).finally(() => setBusy(false));
+  };
+
+  usePairingPoll(request, setRequest, setOutcome);
+
+  if (!request) {
     return (
       <>
         <p className="note">{C.recover.deviceText}</p>
-        {p?.status === 'denied' ? <WarnBox>{C.recover.denied}</WarnBox> : null}
-        {expired && p?.status !== 'denied' ? <WarnBox>{C.recover.expired}</WarnBox> : null}
+        {outcome === 'denied' ? <WarnBox>{C.recover.denied}</WarnBox> : null}
+        {outcome === 'expired' ? <WarnBox>{C.recover.expired}</WarnBox> : null}
         {limited ? <WarnBox>{C.recover.limit}</WarnBox> : null}
-        <Button block onClick={() => setLimited(actions.requestPairing() === null)}>
+        <Button block disabled={busy} onClick={show}>
           {C.recover.show}
         </Button>
       </>
@@ -99,31 +160,25 @@ function DeviceRecover() {
     <>
       <div className="pairbox">
         <span className="note">{C.recover.pairLabel}</span>
-        <b className="pcode big">{PairingCode.parse(p.code)?.format() ?? p.code}</b>
+        <b className="pcode big">{PairingCode.parse(request.code)?.format() ?? request.code}</b>
         <span className="note">{C.recover.numberLabel}</span>
-        <b className="pcode big">{p.number}</b>
+        <b className="pcode big">{request.number}</b>
         <span className="note">{C.recover.pairHint}</span>
       </div>
       <div className="waitbox" role="status">
         <span className="spin" aria-hidden="true" />
         {C.recover.waiting}
       </div>
-      {IS_DEV ? (
-        <div className="protobox">
-          <b>{C.demo.title}</b>
-          <p className="note">{C.demo.note}</p>
-          <Button onClick={() => actions.decidePairing('approved')}>{C.demo.approveFromOld}</Button>
-          <Button kind="ghost" onClick={() => actions.decidePairing('denied')}>{C.demo.denyFromOld}</Button>
-        </div>
-      ) : null}
     </>
   );
 }
 
-/** Màn "Mở chuyến đi trên máy này" (S13) cho người đã dùng Wander ở thiết bị khác: bằng mã khôi phục hoặc thiết bị cũ duyệt. Máy đã có danh tính thì chỉ báo và dẫn tới Bảo mật. */
+/** Màn "Mở chuyến đi trên máy này" (S13) cho người đã dùng Wander ở thiết bị khác: bằng mã khôi phục hoặc thiết bị cũ duyệt. Máy đã có danh tính thì chỉ chỉ sang Bảo mật. */
 export function RecoverScreen() {
-  const { identity } = useIdentity();
+  const { identity, status } = useIdentity();
   const [mode, setMode] = useState<Mode>('code');
+  // đang nạp hoặc không nạp được: máy có thể vẫn có phiên dùng được, nên chưa cho khôi phục (sẽ đè lên phiên đó)
+  if (status === 'loading' || status === 'error') return <RetryState />;
   if (identity) {
     return <EmptyState title={C.recover.already} text="" actions={<Button onClick={() => navigate(VIEW.SECURITY)}>{C.recover.alreadyAction}</Button>} />;
   }

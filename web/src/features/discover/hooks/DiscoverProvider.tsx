@@ -1,10 +1,11 @@
+import { apiClient } from '../../../shared/api/defaultClient.ts';
 import { createContext, useContext, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { STORAGE } from '../../../shared/const/app.const.ts';
 import { useStore } from '../../../shared/hooks/useStore.ts';
 import { PersistentStore } from '../../../shared/state/PersistentStore.ts';
 import type { CatalogRepository } from '../api/CatalogRepository.ts';
-import { StaticCatalogRepository } from '../api/StaticCatalogRepository.ts';
+import { HttpCatalogRepository } from '../api/HttpCatalogRepository.ts';
 import * as S from '../model/discoverState.ts';
 import type { CategoryFilter, Decision, DiscoverState } from '../model/discoverState.ts';
 
@@ -39,7 +40,7 @@ interface DiscoverProviderProps {
 
 /** Cấp kho biên tập và trạng thái khám phá (lưu cục bộ) cho cây giao diện: một nguồn sự thật cho mỗi loại dữ liệu. */
 export function DiscoverProvider({ children, catalog, store }: DiscoverProviderProps) {
-  const [defaultRepo] = useState(() => new StaticCatalogRepository());
+  const [defaultRepo] = useState(() => new HttpCatalogRepository(apiClient));
   const repo = catalog ?? defaultRepo;
   const [created] = useState(() => new PersistentStore<DiscoverState>(STORAGE.DISCOVER, S.INITIAL_DISCOVER_STATE, S.sanitizeDiscoverState));
   const kv = store ?? created;

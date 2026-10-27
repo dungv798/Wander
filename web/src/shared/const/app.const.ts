@@ -1,11 +1,10 @@
 /** Khóa lưu trữ phía trình duyệt. Chỉ dữ liệu không bí mật (RG-6: không thêm nơi lưu bí mật khác). */
 export const STORAGE = {
   DISCOVER: 'wander.web.discover.v1',
-  TRIPS: 'wander.web.trips.v1',
-  /** Máy chủ giả của danh tính (bản thử; FE-10 bỏ). Chỉ giữ BĂM của mã khôi phục. */
-  SERVER: 'wander.web.server.v1',
-  /** Phiên của thiết bị này: chỉ mã thiết bị, không bí mật. */
-  SESSION: 'wander.web.session.v1',
+  /** Bí mật phiên (Bearer) của máy này; giữ ở localStorage theo AD-1 tới khi xét lại ở RG-6. */
+  TOKEN: 'wander.web.token.v1',
+  /** Cờ của máy này (vừa khôi phục) và mốc đã biết để chọn nhánh màn hết phiên; KHÔNG chứa bí mật. */
+  SESSION: 'wander.web.session.v2',
   /** Đếm lần nhập sai mã của máy này (bền qua tải lại). */
   LOCKS: 'wander.web.locks.v1',
   /** Đã xem giới thiệu lần đầu (chỉ hiện một lần). */

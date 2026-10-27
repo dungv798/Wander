@@ -5,7 +5,7 @@ import { Progress } from '../../../shared/ui/Controls.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
-import { TRIP_PACES } from '../model/trip.const.ts';
+import { TRIP_PACES, kindLabel } from '../model/trip.const.ts';
 import { dayItems, placeCount, roadKm, unassignedItems } from '../model/tripMath.ts';
 import { coordOf } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
@@ -102,7 +102,7 @@ function TripOptions() {
   if (!has) return null;
   return (
     <div className="chips">
-      {trip.kind ? <span className="chip tint cat-luu">{fill(T.view.kindChip, { kind: trip.kind })}</span> : null}
+      {trip.kind ? <span className="chip tint cat-luu">{fill(T.view.kindChip, { kind: kindLabel(trip.kind) })}</span> : null}
       {trip.interests.map((k) => (
         <span key={k} className={`chip tint cat-${k}`}>{names.get(k) ?? k}</span>
       ))}

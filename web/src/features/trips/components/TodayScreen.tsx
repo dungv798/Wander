@@ -11,6 +11,7 @@ import { Field } from '../../../shared/ui/Field.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { CATEGORY_ICON, DestinationGate } from '../../discover/index.ts';
+import { useFire } from '../hooks/useFire.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { ITEM_KINDS } from '../model/trip.const.ts';
 import type { Trip, TripItem } from '../model/trip.types.ts';
@@ -36,6 +37,7 @@ function MapLink({ name, lat, lon }: { readonly name: string; readonly lat: numb
 /** Một mục của hôm nay: giờ (hoặc "Cả ngày"), tên, loại; việc cần làm tích xong được; địa điểm có liên kết mở bản đồ. */
 function TodayItem({ trip, item, cat }: { readonly trip: Trip; readonly item: TripItem; readonly cat: TripCatalog }) {
   const { actions } = useTrips();
+  const fire = useFire();
   const place = cat.place(item.placeId);
   const name = itemName(item, cat);
   const kind = ITEM_KINDS[item.type];
@@ -51,7 +53,7 @@ function TodayItem({ trip, item, cat }: { readonly trip: Trip; readonly item: Tr
         {place && place.lat !== null && place.lon !== null ? <MapLink name={name} lat={place.lat} lon={place.lon} /> : null}
       </span>
       {item.type === 'task' ? (
-        <button className="taskchk" type="button" aria-pressed={item.done} aria-label={fill(T.view.taskToggle, { name })} onClick={() => actions.toggleDone(trip.id, item.id)}>
+        <button className="taskchk" type="button" aria-pressed={item.done} aria-label={fill(T.view.taskToggle, { name })} onClick={() => fire(actions.toggleDone(trip.id, item.id))}>
           <Icon name="check" />
         </button>
       ) : null}

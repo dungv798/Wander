@@ -6,3 +6,4 @@ export { RecoverScreen } from './components/RecoverScreen.tsx';
 export { ExpiredScreen } from './components/ExpiredScreen.tsx';
 export { parseDeviceName } from './model/deviceName.ts';
 export { IDENTITY_COPY } from './model/identity.copy.ts';
+export { useReportError } from './hooks/useReportError.ts';

@@ -6,6 +6,7 @@ import { Icon } from '../../../shared/ui/Icon.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
 import { CATEGORY_ICON } from '../../discover/index.ts';
+import { useReportError } from '../../identity/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { useUndoable } from '../hooks/useUndoable.ts';
@@ -79,8 +80,10 @@ export function TrashSheet({ onClose }: { readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
   const toast = useToast();
+  const report = useReportError();
   const { trip, cat, days } = useTripView();
   const [purging, setPurging] = useState<TrashEntry | null>(null);
+  const [busy, setBusy] = useState(false);
   const [now] = useState(() => Date.now());
 
   /** Khôi phục một mục (có Hoàn tác); nói rõ khi ngày cũ không còn nên mục về "Chưa có ngày". */
@@ -91,13 +94,18 @@ export function TrashSheet({ onClose }: { readonly onClose: () => void }) {
       return;
     }
     const dayLost = entry.day !== null && !days.includes(entry.day);
-    undoable(trip.id, () => actions.restoreItem(trip.id, entry.id), fill(dayLost ? T.trash.restoredNoDay : T.trash.restored, { name }));
+    if (busy) return;
+    setBusy(true);
+    undoable(trip.id, () => actions.restoreItem(trip.id, entry.id).finally(() => setBusy(false)), fill(dayLost ? T.trash.restoredNoDay : T.trash.restored, { name }));
   };
   /** Xóa vĩnh viễn rồi quay lại danh sách. */
   const purge = (entry: TrashEntry): void => {
-    actions.purgeItem(trip.id, entry.id);
-    toast.show(fill(T.trash.purged, { name: itemName(entry.item, cat) }));
-    setPurging(null);
+    if (busy) return;
+    setBusy(true);
+    actions.purgeItem(trip.id, entry.id).then(() => {
+      toast.show(fill(T.trash.purged, { name: itemName(entry.item, cat) }));
+      setPurging(null);
+    }).catch(report).finally(() => setBusy(false));
   };
 
   return (

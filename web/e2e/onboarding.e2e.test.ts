@@ -6,9 +6,9 @@ import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
+import { storedTrips } from './seed.ts';
 
 const ONBOARDING_KEY = 'wander.web.onboarding.v1';
-const TRIPS_KEY = 'wander.web.trips.v1';
 
 let server: ViteDevServer;
 let browser: Browser;
@@ -42,6 +42,8 @@ async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
 /** Trang sạch (xóa lưu trữ, CHƯA xem giới thiệu), tùy chọn đánh dấu đã xem, rồi tới địa chỉ. */
 async function open(ctx: BrowserContext, url: string, seen = false): Promise<Page> {
   const page = await ctx.newPage();
+  // đặt cờ "đã xem" TRƯỚC mã ứng dụng ở mọi lần nạp: tránh đua với trang cũ (đã nạp khi cờ còn trống) ghi đè lại lúc tải lại
+  if (seen) await page.addInitScript((key) => localStorage.setItem(key, '{"done":true}'), ONBOARDING_KEY);
   await page.goto(`${baseUrl}/#/deck/ha-giang`);
   await page.evaluate(([key, done]) => {
     localStorage.clear();
@@ -113,12 +115,12 @@ test('Lịch mẫu (đã được PO duyệt 27/10: không còn nhãn nháp), xe
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
   await page.locator('.thead h1').waitFor();
   assert.equal(await page.locator('.thead h1').textContent(), 'Vòng cung của tôi');
-  const trip = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}').trips[0], TRIPS_KEY);
-  const days = [...new Set(trip.items.map((i: { day: string }) => i.day))].sort() as string[];
+  const trip = (await storedTrips(page)).trips[0]!;
+  const days = [...new Set(trip.items.map((i) => i.day))].sort() as string[];
   assert.equal(days.length, 3);
   assert.equal(trip.items.length, 7);
-  assert.equal(trip.items.every((i: { day: string | null }) => i.day !== null), true, 'không còn mục "Chưa có ngày"');
-  const day1 = trip.items.filter((i: { day: string }) => i.day === days[0]).sort((a: { position: number }, b: { position: number }) => a.position - b.position).map((i: { placeId: string }) => i.placeId);
+  assert.equal(trip.items.every((i) => i.day !== null), true, 'không còn mục "Chưa có ngày"');
+  const day1 = trip.items.filter((i) => i.day === days[0]).sort((a, b) => (a.position ?? 0) - (b.position ?? 0)).map((i) => i.placeId);
   assert.deepEqual(day1, ['cong-troi-quan-ba', 'dinh-vuong', 'pho-co-dong-van']);
   assert.equal(trip.endDate, days[2], 'ngày về = ngày đi + 2');
   assert.deepEqual(errors, []);
@@ -135,7 +137,7 @@ test('Lịch mẫu có ngày chuyển tiếp (không địa điểm mới) vẫn
   await dialog.getByRole('button', { name: 'Tạo chuyến đi' }).click();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
   await page.locator('.thead h1').waitFor();
-  const trip = await page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}').trips[0], TRIPS_KEY);
+  const trip = (await storedTrips(page)).trips[0]!;
   assert.equal(trip.items.length, 2);
   const span = (new Date(trip.endDate).getTime() - new Date(trip.startDate).getTime()) / 86_400_000;
   assert.equal(span, 2, 'chuyến 3 ngày dù ngày 2 trống');

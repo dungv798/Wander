@@ -1,50 +1,44 @@
 import { useToast } from '../../../shared/ui/Toast.tsx';
 import { useIdentity } from '../hooks/identityContext.ts';
+import { firstIssueSpec } from '../hooks/issueSpecs.ts';
+import { useReportError } from '../hooks/useReportError.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
-import type { Flow, IssueSpec } from '../model/identityFlow.types.ts';
+import type { Flow } from '../model/identityFlow.types.ts';
 import { PairConfirmSheet, RevokeSheet } from './DeviceSheets.tsx';
 import { IntroSheet } from './IntroSheet.tsx';
 import { IssueCodeSheet } from './IssueCodeSheet.tsx';
 import { ReauthSheet } from './ReauthSheet.tsx';
 
-/** Luồng lần đầu (F2): tạo danh tính + chốt mã khi nhập lại đúng, hoặc "Để sau" (danh tính chưa có mã) rồi đi tiếp việc đang chờ. */
-function useFirstIssue(onSaved: () => void): IssueSpec {
-  const { actions, closeFlow } = useIdentity();
+/** Tờ giới thiệu lưu lần đầu (F2) và luồng hiện mã đi sau nó; "Để sau" tạo danh tính chưa có mã rồi đi tiếp việc đang chờ. */
+function IntroFlow({ onSaved, replacing }: { readonly onSaved: () => unknown; readonly replacing: boolean }) {
+  const { actions, startFlow, closeFlow } = useIdentity();
   const toast = useToast();
-  return {
-    purpose: 'first',
-    onCommit: (code) => {
-      actions.createHere();
-      actions.commitCode(code);
-    },
-    onDone: () => {
+  const report = useReportError();
+  /** Chỉ tạo danh tính (chưa có mã), đóng tờ, chạy việc đang chờ và nhắc tạo mã ở Bảo mật. */
+  const saveLater = (): void => {
+    actions.ensureIdentity().then(() => {
       closeFlow();
-      onSaved();
-    },
-    onSkip: () => {
-      actions.createHere();
-      closeFlow();
-      onSaved();
-      toast.show(C.intro.skipSaved);
-    },
+      // việc đi tiếp (tạo chuyến) có thể mất một nhịp: nhắc "chưa có mã" sau khi nó xong để không bị thông báo khác đè
+      // chỉ nhắc khi việc đi tiếp thành công (false = đã báo lỗi; nhắc ngay sẽ đè mất thông báo lỗi)
+      return Promise.resolve(onSaved()).then((ok) => {
+        if (ok !== false) toast.show(C.intro.skipSaved);
+      }).catch(() => undefined);
+    }).catch(report);
   };
-}
-
-/** Tờ giới thiệu lưu lần đầu và luồng hiện mã đi sau nó. */
-function IntroFlow({ onSaved, replacing }: { readonly onSaved: () => void; readonly replacing: boolean }) {
-  const { startFlow, closeFlow, actions } = useIdentity();
-  const toast = useToast();
-  const first = useFirstIssue(onSaved);
   return (
     <IntroSheet
       replacing={replacing}
-      onCreate={() => startFlow({ kind: 'issue', issue: first })}
-      onLater={() => {
-        actions.createHere();
-        closeFlow();
-        onSaved();
-        toast.show(C.intro.skipSaved);
-      }}
+      onCreate={() => startFlow({
+        kind: 'issue',
+        issue: firstIssueSpec(actions, {
+          onDone: () => {
+            closeFlow();
+            onSaved();
+          },
+          onSkip: saveLater,
+        }),
+      })}
+      onLater={saveLater}
       onClose={closeFlow}
     />
   );
@@ -59,10 +53,10 @@ export function IdentityFlowHost({ flow }: { readonly flow: Flow }) {
     case 'issue':
       return <IssueCodeSheet issue={flow.issue} onClose={closeFlow} />;
     case 'reauth':
-      return <ReauthSheet title={flow.title} why={flow.why} onOk={flow.onOk} onClose={closeFlow} />;
+      return <ReauthSheet title={flow.title} why={flow.why} attempt={flow.attempt} onClose={closeFlow} />;
     case 'revoke':
       return <RevokeSheet deviceId={flow.deviceId} onClose={closeFlow} />;
     case 'pairConfirm':
-      return <PairConfirmSheet pairing={flow.pairing} onClose={closeFlow} />;
+      return <PairConfirmSheet preview={flow.preview} onClose={closeFlow} />;
   }
 }

@@ -6,7 +6,7 @@ import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { useIdentity } from '../hooks/identityContext.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
-import { ActivitySection, CodeSection, DemoBox, DevicesSection, PairSection } from './SecuritySections.tsx';
+import { ActivitySection, CodeSection, DevicesSection, PairSection } from './SecuritySections.tsx';
 
 /** Đầu trang Bảo mật: nút quay lại (về danh sách chuyến đi), tiêu đề và lời dẫn. */
 function SecurityHead() {
@@ -22,18 +22,34 @@ function SecurityHead() {
   );
 }
 
-/** Màn Bảo mật (S11): trạng thái mã khôi phục, thiết bị tin cậy, hoạt động gần đây, thêm thiết bị mới. Chưa có danh tính thì nói rõ và dẫn tới khám phá/khôi phục. */
+/** Không nạp được danh tính (mạng): KHÔNG coi là chưa có danh tính; cho thử lại. */
+export function RetryState() {
+  const { actions } = useIdentity();
+  return (
+    <>
+      <SecurityHead />
+      <EmptyState title={C.security.errorTitle} text={C.security.errorText} actions={<Button onClick={() => void actions.refresh()}>{C.security.retry}</Button>} />
+    </>
+  );
+}
+
+/** Màn Bảo mật (S11): trạng thái mã khôi phục, thiết bị tin cậy, hoạt động gần đây, thêm thiết bị mới. Chưa có danh tính thì nói rõ và dẫn đi tiếp. */
 export function SecurityScreen() {
-  const { identity, session, actions } = useIdentity();
-  const [hadUnseen] = useState(() => Boolean(identity?.unseen));
+  const { status, identity, session, actions } = useIdentity();
+  const [hadUnseen, setHadUnseen] = useState(false);
   const [wasRecovered] = useState(() => session.recovered);
+  const unseen = identity?.unseen === true;
   const here = identity !== null;
+  // Nhớ rằng LẦN MỞ NÀY có hoạt động chưa xem (để hiện hộp nhắc), rồi đánh dấu đã xem ở máy chủ.
+  if (unseen && !hadUnseen) setHadUnseen(true);
   useEffect(() => {
-    if (!here) return;
-    actions.touch();
-    actions.markSeen();
-    actions.ackRecovered();
+    if (unseen) void actions.markSeen().catch(() => undefined);
+  }, [unseen, actions]);
+  useEffect(() => {
+    if (here) actions.ackRecovered();
   }, [here, actions]);
+  if (status === 'loading') return <SecurityHead />;
+  if (status === 'error') return <RetryState />;
   if (!identity) {
     return (
       <>
@@ -50,9 +66,6 @@ export function SecurityScreen() {
             </>
           }
         />
-        <div className="stack pad-x">
-          <DemoBox />
-        </div>
       </>
     );
   }
@@ -73,10 +86,9 @@ export function SecurityScreen() {
           </div>
         ) : null}
         <CodeSection />
-        <DevicesSection identity={identity} deviceId={session.deviceId} />
+        <DevicesSection identity={identity} />
         <ActivitySection identity={identity} />
         <PairSection />
-        <DemoBox />
       </div>
     </>
   );

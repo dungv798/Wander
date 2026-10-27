@@ -11,6 +11,7 @@ import { useToast } from '../../../shared/ui/Toast.tsx';
 import { useDestination, useDiscover } from '../../discover/index.ts';
 import { useRequireIdentity } from '../../identity/index.ts';
 import type { PlaceRef } from '../model/tripState.ts';
+import { useReportError } from '../../identity/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { DEFAULT_START_WEEKDAY, DEFAULT_TRIP_DAYS } from '../model/trip.const.ts';
 import { parseDates, parseMoneyField, parseTripName } from '../model/tripForms.ts';
@@ -121,6 +122,8 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
   const [v, setV] = useState<TripFormValues>(defaultValues);
   const [tripId, setTripId] = useState(state.trips[0]?.id ?? '');
   const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const report = useReportError();
   const set = (p: Partial<TripFormValues>): void => setV((cur) => ({ ...cur, ...p }));
   const hasPicked = picked.length > 0;
   const defaultName = uniqueName(state.trips, destName);
@@ -132,8 +135,8 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
     if (hasPicked && mode === 'add') {
       const t = state.trips.find((x) => x.id === tripId);
       if (!t) return;
-      actions.addPlaces(t.id, picked);
-      finish(t.id, t.name);
+      setBusy(true);
+      actions.addPlaces(t.id, picked).then(() => finish(t.id, t.name)).catch(report).finally(() => setBusy(false));
       return;
     }
     const name = parseTripName(v.name.trim() || defaultName);
@@ -143,8 +146,14 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
     const bud = parseMoneyField(v.budget, T.create.budget);
     if (!bud.ok) return setError(bud.error);
     requireIdentity(() => {
-      const trip = actions.create({ name: name.value, destinationId: destId, ...dates.value, styles: v.styles, pace: v.pace, budgetK: bud.value }, picked);
-      finish(trip.id, trip.name);
+      setBusy(true);
+      return actions.create({ name: name.value, destinationId: destId, ...dates.value, styles: v.styles, pace: v.pace, budgetK: bud.value }, picked).then((trip) => {
+        finish(trip.id, trip.name);
+        return true;
+      }).catch((e: unknown) => {
+        report(e);
+        return false;
+      }).finally(() => setBusy(false));
     });
   };
 
@@ -160,7 +169,7 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
         {hasPicked ? <PickedModes mode={mode} onMode={setMode} form={form} trips={state.trips} tripId={tripId} onTrip={setTripId} /> : form}
         {error ? <WarnBox>{error}</WarnBox> : null}
         <div className="stack">
-          <Button block onClick={submit}>{hasPicked ? T.create.confirm : T.create.submit}</Button>
+          <Button block disabled={busy} onClick={submit}>{hasPicked ? T.create.confirm : T.create.submit}</Button>
           <Button kind="ghost" block onClick={onClose}>{T.create.cancel}</Button>
         </div>
       </div>

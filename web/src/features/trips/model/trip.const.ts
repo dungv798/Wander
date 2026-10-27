@@ -38,7 +38,18 @@ export const TRIP_PACES: readonly { readonly code: string; readonly label: strin
 ];
 
 /** "Ai đi" ở bước tạo chuyến theo bước: nhãn kiểu chuyến, chưa phải danh sách thành viên (F2). */
-export const TRIP_KINDS: readonly string[] = ['Một mình', 'Gia đình', 'Bạn bè', 'Cặp đôi', 'Công việc'];
+export const TRIP_KINDS: readonly { readonly code: string; readonly label: string }[] = [
+  { code: 'solo', label: 'Một mình' },
+  { code: 'family', label: 'Gia đình' },
+  { code: 'friends', label: 'Bạn bè' },
+  { code: 'couple', label: 'Cặp đôi' },
+  { code: 'work', label: 'Công việc' },
+];
+
+/** Nhãn tiếng Việt của một mã kiểu chuyến; mã lạ (backend thêm mới) thì hiện nguyên mã. */
+export function kindLabel(code: string): string {
+  return TRIP_KINDS.find((k) => k.code === code)?.label ?? code;
+}
 
 /** Số bước của trình tạo chuyến theo bước. */
 export const WIZARD_STEPS = ['where', 'when', 'who', 'interests', 'budget', 'review'] as const;

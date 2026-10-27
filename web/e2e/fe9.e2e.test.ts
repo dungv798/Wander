@@ -6,7 +6,8 @@ import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
-import { TRIPS_KEY, seedIdentity, seedTrips } from './seed.ts';
+import { addDevice, api, createOwner, devicesOf, loginAs } from './backend.ts';
+import { seedIdentity, seedTrips, seededOf } from './seed.ts';
 
 let server: ViteDevServer;
 let browser: Browser;
@@ -45,15 +46,15 @@ async function open(ctx: BrowserContext, hash: string, opts: { trips?: boolean; 
     localStorage.clear();
     localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
   });
-  if (opts.trips) await seedTrips(page);
+  const seeded = opts.trips ? await seedTrips(page) : null;
   if (opts.identity) await seedIdentity(page, opts.identity);
-  await page.goto(`${baseUrl}/${hash}`);
+  await page.goto(`${baseUrl}/${seeded ? hash.replace('mau-ha-giang', seeded.tripId) : hash}`);
   return page;
 }
 
 /** Ngày đi của chuyến mẫu đang lưu. */
 async function startDate(page: Page): Promise<string> {
-  return page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}').trips[0].startDate as string, TRIPS_KEY);
+  return Promise.resolve(seededOf(page).start);
 }
 
 /** Ngày thứ `n` (0 = ngày đi) của chuyến mẫu. */
@@ -81,7 +82,7 @@ test('Hôm nay: trước ngày đi báo còn mấy ngày; giả lập ngày 1 th
   const toggle = page.getByRole('button', { name: /Hoàn thành: Đổ xăng trước khi lên đèo/ });
   assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
   await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+  await page.getByRole('button', { name: /Hoàn thành: Đổ xăng trước khi lên đèo/ }).and(page.locator('[aria-pressed="true"]')).waitFor();
   await page.getByLabel('Giả lập ngày').fill(await dayOf(page, 5));
   await page.getByRole('heading', { name: 'Chuyến đi đã kết thúc' }).waitFor();
   assert.deepEqual(errors, []);
@@ -92,11 +93,10 @@ test('Hôm nay: chưa có chuyến thì nói rõ; chuyến chưa chắc ngày kh
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/today');
   await page.getByRole('heading', { name: 'Chưa có chuyến đi' }).waitFor();
-  await page.evaluate((k) => {
-    const s = { trips: [{ id: 'chua-chac', name: 'Chưa chắc', destinationId: 'ha-giang', startDate: '2026-12-01', endDate: '2026-12-03', datesTentative: true, kind: null, interests: [], styles: [], pace: null, budgetK: null, items: [], createdAt: 1 }] };
-    localStorage.setItem(k, JSON.stringify(s));
-  }, TRIPS_KEY);
-  await page.reload();
+  const owner = await createOwner();
+  const made = await api('POST', '/api/trips', owner.token, { name: 'Chưa chắc', destination: 'ha-giang', startDate: '2026-12-01', endDate: '2026-12-03', datesTentative: true });
+  assert.equal(made.status < 300, true);
+  await loginAs(page, owner.token);
   await page.getByRole('heading', { name: 'Chuyến này chưa chắc ngày' }).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
@@ -122,9 +122,10 @@ test('Lưu hoặc gửi lịch trình: ba kiểu xem trước từ dữ liệu t
   await ctx.close();
 });
 
-test('Cài đặt: đổi tên thiết bị (kiểm rỗng/dài), quyền riêng tư ghi rõ là bản nháp, xem lại giới thiệu, hộp lỗi theo mã không đếm lần thử', async () => {
+test('Cài đặt: đổi tên thiết bị (kiểm rỗng, lưu ở máy chủ), quyền riêng tư ghi rõ là bản nháp, xem lại giới thiệu', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '#/settings', { identity: { withCode: true } });
+  const page = await open(ctx, '#/settings');
+  const owner = await seedIdentity(page, { withCode: true });
   await page.getByRole('heading', { name: 'Cài đặt' }).waitFor();
   await page.getByText('Bản nháp, chưa phải chính sách pháp lý.').waitFor();
   await page.getByLabel('Tên thiết bị').fill('   ');
@@ -133,16 +134,7 @@ test('Cài đặt: đổi tên thiết bị (kiểm rỗng/dài), quyền riêng
   await page.getByLabel('Tên thiết bị').fill('Điện thoại của Dũng');
   await page.getByRole('button', { name: 'Lưu tên' }).click();
   await page.getByRole('status').getByText('Đã lưu tên thiết bị').waitFor();
-  const name = await page.evaluate(() => JSON.parse(localStorage.getItem('wander.web.server.v1') ?? '{}').identity.devices[0].name);
-  assert.equal(name, 'Điện thoại của Dũng');
-  await page.getByRole('button', { name: 'RATE_LIMITED' }).click();
-  const alert = page.locator('.errbox');
-  await alert.getByText('Bạn thao tác hơi nhanh').waitFor();
-  await alert.getByText('Mã lỗi: RATE_LIMITED').waitFor();
-  assert.doesNotMatch((await alert.textContent()) ?? '', /còn \d+ lần/);
-  await page.getByRole('button', { name: 'STEP_UP_REQUIRED' }).click();
-  await page.locator('.errbox').getByRole('button', { name: 'Mở Bảo mật' }).click();
-  await page.getByRole('heading', { name: 'Bảo mật' }).waitFor();
+  assert.equal((await devicesOf(owner.token))[0]?.name, 'Điện thoại của Dũng');
   await page.goto(`${baseUrl}/#/settings`);
   await page.getByRole('button', { name: 'Xem lại giới thiệu' }).click();
   await page.getByRole('heading', { name: 'Có một nơi đang đợi bạn' }).waitFor();
@@ -150,21 +142,31 @@ test('Cài đặt: đổi tên thiết bị (kiểm rỗng/dài), quyền riêng
   await ctx.close();
 });
 
+/** Máy này (đã nạp xong danh tính) bị một thiết bị tin cậy khác thu hồi, rồi tải lại: máy chủ không còn nhận phiên. */
+async function revokedByOther(page: Page, owner: { token: string }): Promise<void> {
+  await page.getByLabel('Tên thiết bị').waitFor(); // đã nạp xong → ghi nhớ "còn mã / số thiết bị" lúc đó
+  const tablet = await addDevice(owner.token, 'Máy tính bảng'); // thêm SAU lần nạp cuối của máy này
+  const phoneDevice = (await devicesOf(owner.token)).find((x) => x.current);
+  assert.ok(phoneDevice);
+  assert.equal((await api('DELETE', `/api/sessions/${phoneDevice.id}`, tablet)).status < 300, true);
+  await page.reload();
+}
+
 test('hết phiên nhánh A (còn mã khôi phục): dẫn tới Mở trên máy này', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '#/settings', { identity: { withCode: true } });
-  await page.getByRole('button', { name: 'Giả lập: hết phiên' }).click();
+  const page = await open(ctx, '#/settings');
+  await revokedByOther(page, await seedIdentity(page, { withCode: true }));
   await page.getByRole('heading', { name: 'Phiên đã hết' }).waitFor();
   await page.getByRole('button', { name: 'Mở trên máy này' }).click();
   await page.getByRole('heading', { name: 'Mở chuyến đi trên máy này' }).waitFor();
-  assert.deepEqual(errors, []);
+  assert.deepEqual(errors.filter((e) => !/status of 401/.test(e)), []); // 401 là phản hồi đúng khi máy bị thu hồi
   await ctx.close();
 });
 
-test('hết phiên nhánh B (đã bỏ qua mã, không còn thiết bị khác): nói thẳng không khôi phục được, chỉ có Về Khám phá', async () => {
+test('hết phiên nhánh B (đã bỏ qua mã, lần cuối chỉ có một thiết bị): nói thẳng không khôi phục được, chỉ có Về Khám phá', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '#/settings', { identity: {} });
-  await page.getByRole('button', { name: 'Giả lập: hết phiên' }).click();
+  const page = await open(ctx, '#/settings');
+  await revokedByOther(page, await seedIdentity(page));
   await page.getByRole('heading', { name: 'Không khôi phục được' }).waitFor();
   assert.equal(await page.getByRole('button', { name: 'Mở trên máy này' }).count(), 0);
   await page.getByRole('button', { name: 'Về Khám phá' }).click();
@@ -176,6 +178,24 @@ test('hết phiên nhánh B (đã bỏ qua mã, không còn thiết bị khác):
   await page.getByText(/chuyến đi cũ sẽ mất vĩnh viễn/).waitFor();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
   await page.locator('.thead h1').waitFor();
+  assert.deepEqual(errors.filter((e) => !/status of 401/.test(e)), []); // 401 là phản hồi đúng khi máy bị thu hồi
+  await ctx.close();
+});
+
+test('Cài đặt "Bạn mê gì?": chọn loại, lưu theo danh tính (máy chủ), tải lại vẫn còn', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/settings');
+  const owner = await seedIdentity(page, { withCode: false });
+  await page.getByRole('heading', { name: 'Bạn mê gì?' }).waitFor();
+  const chip = page.getByRole('group', { name: 'Loại nơi bạn thích' }).getByRole('button', { name: /Ẩm thực/ });
+  await chip.waitFor();
+  await chip.click();
+  await page.getByRole('button', { name: 'Lưu sở thích' }).click();
+  await page.getByRole('status').getByText('Đã lưu sở thích').waitFor();
+  const saved = (await api('GET', '/api/preferences', owner.token)).body?.['interests'] as { code: string }[];
+  assert.deepEqual(saved.map((i) => i.code), ['am']);
+  await page.reload();
+  await page.getByRole('group', { name: 'Loại nơi bạn thích' }).getByRole('button', { name: /Ẩm thực/ }).and(page.locator('[aria-pressed="true"]')).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });

@@ -1,8 +1,7 @@
 import { LIMITS } from '../../../shared/const/limits.const.ts';
 import { randomId } from '../../../shared/lib/randomId.ts';
-import { PLACE_KIND } from './trip.const.ts';
-import type { ItemKind, Trip, TripItem, TripsState } from './trip.types.ts';
-import { dayItems, isPlain, tripDays } from './tripMath.ts';
+import type { Trip, TripItem, TripsState } from './trip.types.ts';
+import { dayItems, tripDays } from './tripMath.ts';
 
 /** Nguồn mã định danh (thay được khi test, nguyên lý D). */
 export type IdSource = () => string;
@@ -43,18 +42,9 @@ export interface NewTrip {
 /** Địa điểm cần thêm vào chuyến (chỉ cần mã và loại địa điểm trong kho để suy ra loại mục). */
 export interface PlaceRef {
   readonly id: string;
+  /** Tên hiển thị (nếu có): backend bắt buộc mục có tiêu đề, nên mục từ kho mang tên làm tiêu đề lưu kèm. */
+  readonly name?: string;
   readonly category: string;
-}
-
-/** Một mục từ địa điểm trong kho: chưa có ngày, loại suy ra từ loại địa điểm, chưa biết giá. */
-export function placeItem(place: PlaceRef, id: IdSource = randomId): TripItem {
-  const type = PLACE_KIND[place.category] ?? 'sightseeing';
-  return { id: id(), placeId: place.id, type, title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false };
-}
-
-/** Mục tự do (hoặc Nghỉ, Việc cần làm): giá/đặt chỗ chỉ có ở loại có giá. */
-export function freeItem(type: ItemKind, title: string, id: IdSource = randomId): TripItem {
-  return { id: id(), placeId: null, type, title, day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: isPlain(type) ? null : 'pending', done: false };
 }
 
 /**
@@ -67,81 +57,11 @@ export function normalize(t: Trip): Trip {
   return { ...t, items: t.items.map((i) => (i.day ? { ...i, position: order.get(i.id) ?? null } : { ...i, position: null })) };
 }
 
-/** Tạo chuyến mới (kèm các địa điểm đã chọn ở mục "Chưa có ngày"); trả trạng thái mới và chuyến vừa tạo. */
-export function createTrip(s: TripsState, n: NewTrip, places: readonly PlaceRef[], id: IdSource = randomId, now: number = Date.now()): { state: TripsState; trip: Trip } {
-  const trip: Trip = {
-    id: id(), name: uniqueName(s.trips, n.name, id), destinationId: n.destinationId, startDate: n.startDate, endDate: n.endDate, datesTentative: n.datesTentative ?? false,
-    kind: n.kind ?? null, interests: n.interests ?? [], styles: n.styles ?? [], pace: n.pace ?? null, budgetK: n.budgetK ?? null, items: places.map((p) => placeItem(p, id)), trash: [], createdAt: now,
-  };
-  return { state: { trips: [...s.trips, trip] }, trip };
-}
-
-/** Thay một chuyến theo mã bằng kết quả của `change`; chuyến không có thì giữ nguyên. */
-export function mapTrip(s: TripsState, tripId: string, change: (t: Trip) => Trip): TripsState {
-  return { trips: s.trips.map((t) => (t.id === tripId ? change(t) : t)) };
-}
-
-/** Thêm các địa điểm chưa có trong chuyến (không thêm trùng) vào "Chưa có ngày". */
-export function addPlaces(t: Trip, places: readonly PlaceRef[], id: IdSource = randomId): Trip {
-  const have = new Set(t.items.map((i) => i.placeId));
-  return { ...t, items: [...t.items, ...places.filter((p) => !have.has(p.id)).map((p) => placeItem(p, id))] };
-}
-
-/** Thêm một mục đã dựng sẵn; nếu có ngày thì xếp vào cuối ngày đó. */
-export function addItem(t: Trip, item: TripItem): Trip {
-  return normalize({ ...t, items: [...t.items, { ...item, position: null }] });
-}
-
 /** Thay đổi cho phép khi sửa một mục. */
 export type ItemPatch = Partial<Omit<TripItem, 'id' | 'placeId'>>;
 
-/**
- * Sửa một mục. Đổi sang loại Nghỉ/Việc cần làm thì xóa chi phí, "đã bao gồm", giá tham khảo, đặt chỗ; bỏ "đã bao gồm" thì xóa giá tham
- * khảo (R4). Đổi ngày thì xuống cuối ngày mới; ngày cũ và ngày mới đều được đánh số lại 0..n-1.
- */
-export function updateItem(t: Trip, itemId: string, patch: ItemPatch): Trip {
-  const changedDay = patch.day !== undefined && t.items.find((i) => i.id === itemId)?.day !== patch.day;
-  return normalize({
-    ...t,
-    items: t.items.map((i) => {
-      if (i.id !== itemId) return i;
-      const next: TripItem = { ...i, ...patch, position: changedDay ? null : (patch.position ?? i.position) };
-      return isPlain(next.type) ? { ...next, costK: null, included: false, referenceK: null, booking: null } : { ...next, referenceK: next.included ? next.referenceK : null, booking: next.booking ?? 'pending' };
-    }),
-  });
-}
-
-/** Xếp một mục vào ngày (null = về "Chưa có ngày"); xuống cuối ngày. Chọn lại đúng ngày hiện tại thì không đổi gì. */
-export function assignDay(t: Trip, itemId: string, day: string | null): Trip {
-  return t.items.find((i) => i.id === itemId)?.day === day ? t : updateItem(t, itemId, { day });
-}
-
-/** Đổi chỗ một mục lên/xuống một vị trí trong ngày của nó; không đổi nếu đã ở biên. */
-export function moveItem(t: Trip, itemId: string, dir: 'up' | 'down'): Trip {
-  const item = t.items.find((i) => i.id === itemId);
-  if (!item?.day) return t;
-  const arr = dayItems(t, item.day);
-  const q = arr.findIndex((i) => i.id === itemId);
-  const r = dir === 'up' ? q - 1 : q + 1;
-  if (r < 0 || r >= arr.length) return t;
-  const order = arr.map((i) => i.id);
-  [order[q], order[r]] = [order[r] as string, order[q] as string];
-  return { ...t, items: t.items.map((i) => (i.day === item.day ? { ...i, position: order.indexOf(i.id) } : i)) };
-}
-
-/** Đánh dấu xong/chưa xong một việc cần làm (một người dùng ở Lát 1a). */
-export function toggleDone(t: Trip, itemId: string): Trip {
-  return { ...t, items: t.items.map((i) => (i.id === itemId && i.type === 'task' ? { ...i, done: !i.done } : i)) };
-}
-
 /** Kết quả gợi ý xếp ngày: mã mục → ngày và vị trí. */
 export type DayPlan = Readonly<Record<string, { readonly day: string; readonly position: number }>>;
-
-/** Áp dụng một gợi ý xếp ngày: chỉ cho mục đang "Chưa có ngày" và ngày thuộc chuyến (kế hoạch cũ/sai không ghi đè mục đã xếp). */
-export function applyPlan(t: Trip, plan: DayPlan): Trip {
-  const days = new Set(tripDays(t));
-  return normalize({ ...t, items: t.items.map((i) => (i.day === null && plan[i.id] && days.has(plan[i.id]!.day) ? { ...i, day: plan[i.id]!.day, position: plan[i.id]!.position } : i)) });
-}
 
 /** Thông tin sửa chuyến (tên, ngày) và tùy chọn dời lịch. */
 export interface TripEdit {

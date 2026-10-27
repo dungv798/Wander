@@ -3,6 +3,15 @@ export const SETTINGS_COPY = {
   eyebrow: 'Wander',
   title: 'Cài đặt',
   back: 'Quay lại',
+  interests: {
+    title: 'Bạn mê gì?',
+    text: 'Chọn những loại nơi bạn thích. Lưu theo danh tính của bạn nên sang máy khác vẫn còn.',
+    group: 'Loại nơi bạn thích',
+    save: 'Lưu sở thích',
+    saved: 'Đã lưu sở thích',
+    loading: 'Đang tải sở thích…',
+    none: 'Chưa có danh tính. Chọn sở thích được sau khi bạn lưu chuyến đi đầu tiên.',
+  },
   device: {
     title: 'Thiết bị này',
     text: 'Tên giúp bạn nhận ra máy này trong danh sách thiết bị tin cậy.',
@@ -24,7 +33,7 @@ export const SETTINGS_COPY = {
     points: [
       'Wander không hỏi email hay số điện thoại; danh tính của bạn là ẩn danh.',
       'Mã khôi phục chỉ hiện một lần; Wander không giữ bản đọc được của mã.',
-      'Ở bản thử này chuyến đi lưu ngay trên thiết bị của bạn.',
+      'Chuyến đi lưu trên máy chủ của Wander, gắn với danh tính ẩn danh của bạn (không email, không số điện thoại).',
     ],
   },
   mistaken: {

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { INITIAL_TRIPS_STATE as S0, assignDay, createTrip, freeItem, addItem, updateItem } from './tripState.ts';
+import { S0, assignDay, createTrip, freeItem, addItem, updateItem } from './tripFixtures.ts';
 import { calendarEvents, costCell, imageCards, pdfTable, undatedCount } from './exportPreview.ts';
 import type { Trip } from './trip.types.ts';
 

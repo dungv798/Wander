@@ -9,7 +9,7 @@ const MIME_BY_EXT: Record<string, string> = { '.json': 'application/json; charse
 
 /**
  * Pha FE chưa có backend: phục vụ kho biên tập THẬT (JSON và ảnh) từ thư mục tài nguyên của backend, cùng đường dẫn mà bản thật sẽ dùng
- * (`/catalog/photos/*`) và tệp thô cho kho giả (`/data/catalog/*.json`). Chỉ chạy khi phát triển/preview, không vào bản dựng.
+ * (`/catalog/photos/*`). Chỉ chạy khi phát triển/preview, không vào bản dựng.
  */
 function catalogDevServer(): Plugin {
   /** Gắn middleware phục vụ tệp từ kho biên tập. */
@@ -18,7 +18,6 @@ function catalogDevServer(): Plugin {
       const url = decodeURIComponent((req.url ?? '').split('?')[0] ?? '');
       let file: string | null = null;
       if (url.startsWith('/catalog/photos/')) file = path.join(CATALOG_DIR, 'photos', url.slice('/catalog/photos/'.length));
-      else if (url.startsWith('/data/catalog/') && url.endsWith('.json')) file = path.join(CATALOG_DIR, url.slice('/data/catalog/'.length));
       if (!file || !file.startsWith(CATALOG_DIR) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
         next();
         return;

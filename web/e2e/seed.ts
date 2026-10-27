@@ -1,8 +1,8 @@
 import type { Page } from 'playwright-core';
-import { fakeHash } from '../src/features/identity/model/identityServer.ts';
+import { TOKEN_KEY, addDevice, api, createOwner, loginAs } from './backend.ts';
+import type { Owner } from './backend.ts';
 
-/** Dữ liệu mẫu dùng chung cho e2e, chụp ảnh và quét truy cập: một chuyến Hà Giang 3 ngày ghi thẳng vào localStorage (đúng khóa và hình dạng `TripsState`). */
-export const TRIPS_KEY = 'wander.web.trips.v1';
+/** Dữ liệu mẫu dùng chung cho e2e, chụp ảnh và quét truy cập: một chuyến Hà Giang 3 ngày, dựng qua API backend thật bởi `seedTrips`. */
 const DAY_MS = 86_400_000;
 const FIRST_DAY_OFFSET = 3;
 
@@ -45,32 +45,104 @@ export function sampleTripsState(): { trips: Record<string, unknown>[] } {
   };
 }
 
-/** Ghi chuyến mẫu vào localStorage của trang đang mở rồi tải lại (kho đọc localStorage lúc khởi tạo). */
-export async function seedTrips(page: Page): Promise<void> {
-  await page.evaluate(([key, value]) => localStorage.setItem(key as string, JSON.stringify(value)), [TRIPS_KEY, sampleTripsState()] as const);
-  await page.reload();
+/** Mã chuyến/mục do máy chủ cấp cho dữ liệu mẫu của một trang, kèm bí danh cũ (`a1`…`u3`) để test đọc dễ. */
+export interface Seeded {
+  readonly tripId: string;
+  readonly alias: ReadonlyMap<string, string>;
+  readonly start: string;
+}
+const seededByPage = new WeakMap<Page, Seeded>();
+
+/** Nhãn "Ai đi" của dữ liệu mẫu cũ thành mã kiểu chuyến của backend. */
+const KIND_CODE: Readonly<Record<string, string>> = { 'Bạn bè': 'friends', 'Một mình': 'solo', 'Gia đình': 'family', 'Cặp đôi': 'couple', 'Công việc': 'work' };
+
+/** Dựng chuyến mẫu qua API backend thật: danh tính mới, chuyến Hà Giang 3 ngày với đủ mục mẫu; đăng nhập trang bằng bí mật phiên rồi tải lại. */
+export async function seedTrips(page: Page): Promise<Seeded> {
+  const owner = await createOwner();
+  const sample = sampleTripsState().trips[0]!;
+  const created = await api('POST', '/api/trips', owner.token, {
+    name: sample['name'], destination: sample['destinationId'], startDate: sample['startDate'], endDate: sample['endDate'], budget: sample['budgetK'],
+    styles: sample['styles'], pace: sample['pace'], datesTentative: sample['datesTentative'], kind: KIND_CODE[sample['kind'] as string] ?? null, interests: sample['interests'],
+  });
+  const tripId = (created.body?.['trip'] as { id: string }).id;
+  const alias = new Map<string, string>();
+  for (const it of sample['items'] as Record<string, unknown>[]) {
+    const r = await api('POST', `/api/trips/${tripId}/items`, owner.token, {
+      placeId: it['placeId'], type: it['type'], title: it['title'] || it['placeId'], day: it['day'], timeOfDay: it['timeOfDay'], durationMin: it['durationMin'], note: it['note'],
+      cost: it['costK'], included: it['included'], referenceCost: it['referenceK'], booking: it['booking'],
+    });
+    if (r.status >= 300) throw new Error(`Thêm mục mẫu ${String(it['id'])} thất bại: ${r.status} ${JSON.stringify(r.body)}`);
+    alias.set((r.body?.['item'] as { id: string }).id, it['id'] as string);
+  }
+  await loginAs(page, owner.token);
+  const seeded = { tripId, alias, start: sample['startDate'] as string };
+  seededByPage.set(page, seeded);
+  return seeded;
 }
 
-const SERVER_KEY = 'wander.web.server.v1';
-const SESSION_KEY = 'wander.web.session.v1';
+/** Dữ liệu mẫu của trang này (phải đã gọi `seedTrips`). */
+export function seededOf(page: Page): Seeded {
+  const seeded = seededByPage.get(page);
+  if (!seeded) throw new Error('Trang này chưa được seedTrips');
+  return seeded;
+}
 
-/** Danh tính mẫu cho ảnh chụp/kiểm thử: máy này + (tùy chọn) một máy tính bảng, có hoặc chưa có mã khôi phục. */
-export async function seedIdentity(page: Page, opts: { withCode?: boolean; tablet?: boolean } = {}): Promise<void> {
-  const now = Date.now();
-  const server = {
-    identity: {
-      createdAt: now - 9 * 86_400_000,
-      codeHash: opts.withCode ? fakeHash('7K2QFR9XMT4B8HDWJ3NC5VZ6AE1G0Y') : null,
-      devices: [{ id: 'this', name: 'Điện thoại', at: now }, ...(opts.tablet ? [{ id: 'tab', name: 'Máy tính bảng', at: now - 3 * 86_400_000 }] : [])],
-      events: [{ at: now - 3 * 86_400_000, kind: 'paired', device: 'Máy tính bảng' }, { at: now - 9 * 86_400_000, kind: 'created', device: 'Điện thoại' }],
-      unseen: false,
-    },
-    pairing: null,
-    requests: [],
-  };
-  await page.evaluate(([k1, v1, k2, v2]) => {
-    localStorage.setItem(k1 as string, JSON.stringify(v1));
-    localStorage.setItem(k2 as string, JSON.stringify(v2));
-  }, [SERVER_KEY, server, SESSION_KEY, { deviceId: 'this', recovered: false }] as const);
-  await page.reload();
+/** Một mục như test cần đọc (mã đã đổi về bí danh nếu là mục mẫu). */
+export interface StoredItem {
+  id: string;
+  placeId: string | null;
+  day: string | null;
+  position: number | null;
+  costK: number | null;
+  type: string;
+  title: string;
+  done: boolean;
+  included: boolean;
+  booking: string | null;
+}
+/** Một chuyến như test cần đọc. */
+export interface StoredTrip {
+  id: string;
+  name: string;
+  kind: string | null;
+  interests: string[];
+  styles: string[];
+  datesTentative: boolean;
+  budgetK: number | null;
+  startDate: string;
+  endDate: string;
+  items: StoredItem[];
+  trashCount: number;
+}
+
+/** Đọc các chuyến của chủ trang này TỪ MÁY CHỦ (nguồn sự thật), mục "Chưa có ngày" gộp vào `items` với `day: null`. */
+export async function storedTrips(page: Page): Promise<{ trips: StoredTrip[] }> {
+  const token = await page.evaluate((k) => (JSON.parse(localStorage.getItem(k) ?? 'null') as { token?: string } | null)?.token ?? null, TOKEN_KEY);
+  if (!token) return { trips: [] };
+  const alias = seededByPage.get(page)?.alias;
+  const list = (await api('GET', '/api/trips', token)).body?.['trips'] as { id: string }[];
+  const trips: StoredTrip[] = [];
+  for (const { id } of list) {
+    const d = (await api('GET', `/api/trips/${id}`, token)).body as { trip: Record<string, unknown>; days: { items: Record<string, unknown>[] }[]; unscheduled: Record<string, unknown>[]; trashCount: number };
+    const t = d.trip;
+    const items = [...d.days.flatMap((x) => x.items), ...d.unscheduled].map((i) => ({
+      id: alias?.get(i['id'] as string) ?? (i['id'] as string), placeId: (i['placeId'] as string | null) ?? null, day: (i['day'] as string | null) ?? null,
+      position: i['day'] === null ? null : (i['position'] as number), costK: (i['costK'] as number | null) ?? null, type: i['type'] as string, title: i['title'] as string,
+      done: i['done'] === true, included: i['included'] === true, booking: (i['booking'] as string | null) ?? null,
+    }));
+    trips.push({
+      id, name: t['name'] as string, kind: ((t['kind'] as { code: string } | null)?.code) ?? null, interests: ((t['interests'] as { code: string }[]) ?? []).map((x) => x.code),
+      styles: ((t['styles'] as { code: string }[]) ?? []).map((x) => x.code), datesTentative: t['datesTentative'] === true, budgetK: (t['budgetK'] as number | null) ?? null,
+      startDate: t['startDate'] as string, endDate: t['endDate'] as string, items, trashCount: d.trashCount,
+    });
+  }
+  return { trips };
+}
+
+/** Danh tính thật cho ảnh chụp/kiểm thử: tạo qua API backend, thêm (tùy chọn) mã khôi phục và một máy tính bảng, rồi đăng nhập trang bằng bí mật phiên của "Điện thoại". */
+export async function seedIdentity(page: Page, opts: { withCode?: boolean; tablet?: boolean } = {}): Promise<Owner> {
+  const owner = await createOwner({ withCode: opts.withCode === true });
+  if (opts.tablet) await addDevice(owner.token, 'Máy tính bảng');
+  await loginAs(page, owner.token);
+  return owner;
 }

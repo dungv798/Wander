@@ -97,7 +97,7 @@ export function AddToDaySheet({ onClose }: { readonly onClose: () => void }) {
   if (!day) return null;
   const submit = (): void => {
     onClose();
-    if (chosen.length) undoable(trip.id, () => chosen.forEach((id) => actions.assignDay(trip.id, id, day)), fill(T.addToDay.added, { c: chosen.length, n }));
+    if (chosen.length) undoable(trip.id, () => actions.assignMany(trip.id, chosen, day), fill(T.addToDay.added, { c: chosen.length, n }));
   };
   return (
     <Sheet label={fill(T.addToDay.title, { n })} onClose={onClose}>

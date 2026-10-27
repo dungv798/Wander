@@ -9,7 +9,7 @@ export { DeckScreen } from './components/DeckScreen.tsx';
 export type { AddingMode } from './model/addingMode.ts';
 export { PickedScreen } from './components/PickedScreen.tsx';
 export { DestinationGate } from './components/DestinationGate.tsx';
-export { CATEGORY_ICON, COMING_SOON } from './model/discover.const.ts';
+export { CATEGORY_ICON, CATEGORY_NAME, COMING_SOON } from './model/discover.const.ts';
 export { firstPhotoUrl, mainAway, placeById, coverPlace } from './model/destinationQueries.ts';
 export { hubMarker, placeMarkers } from './model/mapMarkers.ts';
 export { pickedOf } from './model/discoverState.ts';

@@ -4,7 +4,7 @@
 export type ErrorAction = 'retry' | 'security' | 'trips' | 'recover' | 'reload' | 'close';
 
 /** Nhóm lỗi có chung lời nhắc. */
-export type ErrorKind = 'invalid' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'tooLarge' | 'network' | 'internal';
+export type ErrorKind = 'invalid' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'trashFull' | 'tooLarge' | 'network' | 'internal';
 
 /** Lời nhắc của một nhóm lỗi. */
 export interface ErrorInfo {
@@ -23,6 +23,7 @@ export const ERROR_INFO: Readonly<Record<ErrorKind, ErrorInfo>> = {
   conflict: { title: 'Chuyến đi đã thay đổi', text: 'Có thay đổi mới hơn ở nơi khác nên Wander không ghi đè. Tải lại để xem bản mới nhất.', action: 'reload' },
   notFound: { title: 'Không tìm thấy', text: 'Mục này có thể đã bị xóa, hoặc chuyến đi không còn ở máy này.', action: 'trips' },
   inTrash: { title: 'Mục đã được xử lý', text: 'Mục này đã nằm trong Đã xóa gần đây hoặc đã được khôi phục. Danh sách sẽ được đồng bộ lại.', action: 'reload' },
+  trashFull: { title: 'Đã xóa gần đây đã đầy', text: 'Hãy xóa vĩnh viễn bớt mục ở Đã xóa gần đây rồi thử lại.', action: 'close' },
   tooLarge: { title: 'Dữ liệu quá lớn', text: 'Dữ liệu gửi đi quá lớn. Rút gọn nội dung rồi thử lại.', action: 'close' },
   network: { title: 'Không kết nối được', text: 'Kiểm tra mạng rồi thử lại. Việc bạn vừa làm chưa được lưu.', action: 'retry' },
   internal: { title: 'Có lỗi ở phía Wander', text: 'Việc bạn vừa làm chưa được lưu. Thử lại sau ít phút.', action: 'retry' },
@@ -40,6 +41,7 @@ export const CODE_KIND: ReadonlyMap<string, ErrorKind> = new Map(
       ['conflict', ['CONCURRENT_MODIFICATION']],
       ['notFound', ['NOT_FOUND']],
       ['inTrash', ['ITEM_DELETED', 'ALREADY_DELETED', 'NOT_DELETED', 'NOT_IN_TRASH']],
+      ['trashFull', ['TRASH_FULL']],
       ['tooLarge', ['BODY_TOO_LARGE']],
       ['network', ['NETWORK']],
       ['invalid', ['REQUIRED', 'TOO_LONG', 'TOO_LARGE', 'NEGATIVE', 'MALFORMED', 'INVALID_DATE', 'OUT_OF_RANGE', 'START_REQUIRED', 'END_REQUIRED', 'END_BEFORE_START', 'TOO_MANY', 'DATES_ORPHAN_ITEMS', 'DAY_OUT_OF_RANGE', 'INVALID_JSON']],

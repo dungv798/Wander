@@ -1,19 +1,17 @@
 import { useRef, useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { LIMITS } from '../../../shared/const/limits.const.ts';
-import { VIEW } from '../../../shared/const/routes.const.ts';
 import { addDays, dayMonth, fullDate, nextWeekday, todayLocal } from '../../../shared/lib/dates.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle, CheckRow, WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
-import { useToast } from '../../../shared/ui/Toast.tsx';
 import { useRequireIdentity } from '../../identity/index.ts';
 import { CATEGORY_ICON, COMING_SOON, useDestination } from '../../discover/index.ts';
 import type { DestinationDetail } from '../../discover/index.ts';
+import { useCreateTripFlow } from '../hooks/useCreateTripFlow.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
-import { DEFAULT_START_WEEKDAY, DEFAULT_TRIP_DAYS, TRIP_KINDS, WIZARD_STEPS } from '../model/trip.const.ts';
+import { DEFAULT_START_WEEKDAY, DEFAULT_TRIP_DAYS, TRIP_KINDS, WIZARD_STEPS, kindLabel } from '../model/trip.const.ts';
 import type { WizardStep } from '../model/trip.const.ts';
 import { parseDates, parseMoneyField, parseTripName } from '../model/tripForms.ts';
 import { uniqueName } from '../model/tripState.ts';
@@ -88,7 +86,7 @@ function StepBody({ step, d, set, dest, defaultName }: { readonly step: WizardSt
         <p className="note">{T.wizard.whoNote}</p>
         <div className="chips" role="group" aria-label={T.wizard.whoGroup}>
           {TRIP_KINDS.map((k) => (
-            <ChipToggle key={k} pressed={d.kind === k} onClick={() => set({ kind: d.kind === k ? null : k })}>{k}</ChipToggle>
+            <ChipToggle key={k.code} pressed={d.kind === k.code} onClick={() => set({ kind: d.kind === k.code ? null : k.code })}>{k.label}</ChipToggle>
           ))}
         </div>
       </>
@@ -119,7 +117,7 @@ function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; reado
       <ul className="wzsum">
         <li><b>{T.wizard.summaryDest}</b> {dest?.name}</li>
         <li><b>{T.wizard.summaryDates}</b> {d.tentative ? fill(T.wizard.tentativeSummary, { n: d.days, start: dayMonth(d.start) }) : `${dayMonth(d.start)} – ${dayMonth(d.end)}`}</li>
-        <li><b>{T.wizard.summaryKind}</b> {d.kind ?? T.wizard.notChosen}</li>
+        <li><b>{T.wizard.summaryKind}</b> {d.kind ? kindLabel(d.kind) : T.wizard.notChosen}</li>
         <li><b>{T.wizard.summaryInterests}</b> {d.interests.length ? d.interests.map((k) => names.get(k) ?? k).join(', ') : T.wizard.notChosen}</li>
         <li><b>{T.wizard.summaryBudget}</b> {budget.ok && budget.value !== null ? money(budget.value) : T.wizard.notSet}</li>
       </ul>
@@ -133,8 +131,8 @@ function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; reado
  * kiểu chuyến và sở thích LƯU vào chuyến (DR-018 F2). Mỗi bước kiểm lỗi trước khi sang bước sau; tiêu đề bước nhận focus để đọc màn hình.
  */
 export function TripWizard({ destId, onClose }: { readonly destId: string; readonly onClose: () => void }) {
-  const { state, actions } = useTrips();
-  const toast = useToast();
+  const { state } = useTrips();
+  const { busy, create } = useCreateTripFlow(onClose);
   const requireIdentity = useRequireIdentity();
   const { state: destState } = useDestination(destId);
   const dest = destState.status === 'ready' ? destState.data : null;
@@ -162,12 +160,7 @@ export function TripWizard({ destId, onClose }: { readonly destId: string; reado
     if (!tripName.ok) return setError(tripName.error);
     if (!dates.ok) return setError(dates.error);
     if (!bud.ok) return setError(bud.error);
-    requireIdentity(() => {
-      const trip = actions.create({ name: tripName.value, destinationId: destId, ...dates.value, kind: d.kind, interests: d.interests, budgetK: bud.value }, []);
-      onClose();
-      navigate(VIEW.TRIP, trip.id, 'ov');
-      toast.show(fill(T.create.saved, { name: trip.name }));
-    });
+    requireIdentity(() => create({ name: tripName.value, destinationId: destId, ...dates.value, kind: d.kind, interests: d.interests, budgetK: bud.value }));
   };
 
   const label = T.wizard.steps[name];
@@ -184,7 +177,7 @@ export function TripWizard({ destId, onClose }: { readonly destId: string; reado
         <StepBody step={name} d={d} set={set} dest={dest} defaultName={defaultName} />
         {error ? <WarnBox>{error}</WarnBox> : null}
         <div className="stack">
-          <Button block onClick={next}>{last ? T.wizard.create : T.wizard.next}</Button>
+          <Button block disabled={busy} onClick={next}>{last ? T.wizard.create : T.wizard.next}</Button>
           {step > 0 ? <Button kind="ghost" block onClick={() => go(step - 1)}>{T.wizard.back}</Button> : null}
           <Button kind="ghost" block onClick={onClose}>{T.create.cancel}</Button>
         </div>

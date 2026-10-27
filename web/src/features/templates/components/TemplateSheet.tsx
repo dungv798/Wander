@@ -10,7 +10,7 @@ import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
 import { firstPhotoUrl } from '../../discover/index.ts';
-import { useRequireIdentity } from '../../identity/index.ts';
+import { useReportError, useRequireIdentity } from '../../identity/index.ts';
 import { useCreateFromTemplate } from '../../trips/index.ts';
 import type { TemplateView } from '../model/template.types.ts';
 import { DEFAULT_START_WEEKDAY } from '../model/templates.const.ts';
@@ -56,6 +56,8 @@ function UseForm({ template, destId, onBack, onClose }: SheetProps & { readonly 
   const toast = useToast();
   const requireIdentity = useRequireIdentity();
   const create = useCreateFromTemplate();
+  const report = useReportError();
+  const [busy, setBusy] = useState(false);
   const [name, setName] = useState(template.title);
   const [start, setStart] = useState(() => nextWeekday(todayLocal(), DEFAULT_START_WEEKDAY));
   const [error, setError] = useState('');
@@ -67,10 +69,16 @@ function UseForm({ template, destId, onBack, onClose }: SheetProps & { readonly 
     if (trimmed.length > LIMITS.MAX_TRIP_NAME) return setError(fill(T.sheet.errors.nameLong, { max: LIMITS.MAX_TRIP_NAME }));
     if (!valid) return setError(T.sheet.errors.date);
     requireIdentity(() => {
-      const trip = create({ name: trimmed, destinationId: destId, startDate: start, days: template.days.map((d) => d.places) });
-      onClose();
-      navigate(VIEW.TRIP, trip.id, 'ov');
-      toast.show(fill(T.sheet.created, { name: trip.name }));
+      setBusy(true);
+      return create({ name: trimmed, destinationId: destId, startDate: start, days: template.days.map((d) => d.places) }).then((trip) => {
+        onClose();
+        navigate(VIEW.TRIP, trip.id, 'ov');
+        toast.show(fill(T.sheet.created, { name: trip.name }));
+        return true;
+      }).catch((e: unknown) => {
+        report(e);
+        return false;
+      }).finally(() => setBusy(false));
     });
   };
   return (
@@ -83,7 +91,7 @@ function UseForm({ template, destId, onBack, onClose }: SheetProps & { readonly 
       <Field label={T.sheet.start} type="date" value={start} onChange={setStart} hint={valid ? `${fullDate(start)} → ${fill(T.sheet.end, { date: fullDate(addDays(start, template.days.length - 1)) })}` : ''} />
       {error ? <WarnBox>{error}</WarnBox> : null}
       <div className="stack">
-        <Button block onClick={submit}>{T.sheet.create}</Button>
+        <Button block disabled={busy} onClick={submit}>{T.sheet.create}</Button>
         <Button kind="ghost" block onClick={onBack}>{T.sheet.back}</Button>
       </div>
     </div>

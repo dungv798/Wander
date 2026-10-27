@@ -6,7 +6,7 @@ export const CATEGORY_ICON: Readonly<Record<CategoryCode, IconName>> = {
   canh: 'trees', van: 'columns', am: 'tools-kitchen-2', leo: 'mountain', luu: 'bed', cho: 'building-store',
 };
 
-/** Tên loại (dùng ở kho giả khi tính view; backend trả sẵn `categoryName`). */
+/** Tên loại theo mã (khớp `PlaceCategory`/`TripInterest` của backend); dùng cho danh mục sở thích. */
 export const CATEGORY_NAME: Readonly<Record<CategoryCode, string>> = {
   canh: 'Cảnh quan', van: 'Văn hóa', am: 'Ẩm thực', leo: 'Leo núi', luu: 'Lưu trú', cho: 'Chợ',
 };

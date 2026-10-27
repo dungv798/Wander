@@ -1,90 +1,87 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { STORAGE } from '../../../shared/const/app.const.ts';
+import { apiClient } from '../../../shared/api/defaultClient.ts';
 import { useStore } from '../../../shared/hooks/useStore.ts';
 import { PersistentStore } from '../../../shared/state/PersistentStore.ts';
-import type { Trip, TripItem, TripsState } from '../model/trip.types.ts';
-import { sanitizeTripsState } from '../model/tripSanitize.ts';
-import * as T from '../model/tripState.ts';
-import * as Trash from '../model/tripTrash.ts';
-import type { DayPlan, EditResult, ItemPatch, NewTrip, PlaceRef, TripEdit } from '../model/tripState.ts';
+import { useIdentity } from '../../identity/index.ts';
+import { HttpTripsGateway } from '../api/HttpTripsGateway.ts';
+import type { TripsGateway } from '../api/TripsGateway.ts';
+import type { Trip, TripsState } from '../model/trip.types.ts';
+import { mergeLoaded } from '../model/tripOrder.ts';
+import { INITIAL_TRIPS_STATE } from '../model/tripState.ts';
+import { createTripsActions } from './tripsActions.ts';
+import type { TripsActions } from './tripsActions.ts';
 
-/** Các thao tác trên kho chuyến đi (mỗi thao tác là một hàm thuần ở `tripState.ts`). Bản backend thật (FE-10) thay phần cài đặt, giữ hợp đồng này. */
-export interface TripsActions {
-  readonly create: (n: NewTrip, places: readonly PlaceRef[]) => Trip;
-  readonly addPlaces: (tripId: string, places: readonly PlaceRef[]) => void;
-  readonly addItem: (tripId: string, item: TripItem) => void;
-  readonly updateItem: (tripId: string, itemId: string, patch: ItemPatch) => void;
-  readonly assignDay: (tripId: string, itemId: string, day: string | null) => void;
-  readonly moveItem: (tripId: string, itemId: string, dir: 'up' | 'down') => void;
-  readonly toggleDone: (tripId: string, itemId: string) => void;
-  readonly applyPlan: (tripId: string, plan: DayPlan) => void;
-  readonly editTrip: (tripId: string, e: TripEdit) => EditResult | null;
-  /** Xóa mềm một mục (vào "Đã xóa gần đây"). */
-  readonly trashItem: (tripId: string, itemId: string) => void;
-  /** Khôi phục một mục từ thùng rác; trả `dayLost` (ngày cũ không còn nên về Chưa có ngày) hoặc null nếu không có mục. */
-  readonly restoreItem: (tripId: string, entryId: string) => { readonly dayLost: boolean } | null;
-  /** Xóa vĩnh viễn một mục khỏi thùng rác (không hoàn tác được). */
-  readonly purgeItem: (tripId: string, entryId: string) => void;
-  /** Đặt lại nguyên một chuyến về ảnh chụp đã lưu (dùng cho Hoàn tác). */
-  readonly restore: (snapshot: Trip) => void;
-  /** Chuyến hiện tại theo mã (đọc thẳng kho, không qua render); dùng để so sánh khi Hoàn tác. */
-  readonly current: (tripId: string) => Trip | undefined;
-}
+export type { TripsActions };
+
+/** Tình trạng nạp danh sách chuyến: `loading` (đang nạp lần đầu), `ready` (đã nạp, hoặc chưa có danh tính nên chưa có chuyến), `error` (không nạp được). */
+export type TripsStatus = 'loading' | 'ready' | 'error';
 
 interface TripsContextValue {
+  readonly status: TripsStatus;
   readonly state: TripsState;
   readonly actions: TripsActions;
   /** Chuyến theo mã; undefined nếu không có. */
   readonly trip: (id: string | null) => Trip | undefined;
+  /** Nạp lại mọi chuyến từ máy chủ (nút "Thử lại"). */
+  readonly reload: () => void;
 }
 
 const TripsContext = createContext<TripsContextValue | null>(null);
 
-/** Cấp kho chuyến đi (lưu cục bộ, làm sạch khi đọc) cho cây giao diện. */
-export function TripsProvider({ children, store }: { readonly children: ReactNode; readonly store?: PersistentStore<TripsState> }) {
-  const [created] = useState(() => new PersistentStore<TripsState>(STORAGE.TRIPS, T.INITIAL_TRIPS_STATE, sanitizeTripsState));
-  const kv = store ?? created;
-  const state = useStore(kv);
-  const actions = useMemo<TripsActions>(
-    () => ({
-      create: (n, places) => {
-        const r = T.createTrip(kv.getSnapshot(), n, places);
-        kv.update(() => r.state);
-        return r.trip;
-      },
-      addPlaces: (id, places) => kv.update((s) => T.mapTrip(s, id, (t) => T.addPlaces(t, places))),
-      addItem: (id, item) => kv.update((s) => T.mapTrip(s, id, (t) => T.addItem(t, item))),
-      updateItem: (id, itemId, patch) => kv.update((s) => T.mapTrip(s, id, (t) => T.updateItem(t, itemId, patch))),
-      assignDay: (id, itemId, day) => kv.update((s) => T.mapTrip(s, id, (t) => T.assignDay(t, itemId, day))),
-      moveItem: (id, itemId, dir) => kv.update((s) => T.mapTrip(s, id, (t) => T.moveItem(t, itemId, dir))),
-      toggleDone: (id, itemId) => kv.update((s) => T.mapTrip(s, id, (t) => T.toggleDone(t, itemId))),
-      applyPlan: (id, plan) => kv.update((s) => T.mapTrip(s, id, (t) => T.applyPlan(t, plan))),
-      editTrip: (id, e) => {
-        let result: EditResult | null = null;
-        kv.update((s) => T.mapTrip(s, id, (t) => {
-          result = T.editTrip(t, { ...e, name: T.uniqueName(s.trips.filter((x) => x.id !== id), e.name) });
-          return result.trip;
-        }));
-        return result;
-      },
-      trashItem: (id, itemId) => kv.update((s) => T.mapTrip(s, id, (t) => Trash.trashItem(t, itemId, T.randomId(), Date.now()))),
-      restoreItem: (id, entryId) => {
-        let result: { dayLost: boolean } | null = null;
-        kv.update((s) => T.mapTrip(s, id, (t) => {
-          const r = Trash.restoreItem(t, entryId);
-          result = r ? { dayLost: r.dayLost } : null;
-          return r ? r.trip : t;
-        }));
-        return result;
-      },
-      purgeItem: (id, entryId) => kv.update((s) => T.mapTrip(s, id, (t) => Trash.purgeItem(t, entryId))),
-      current: (id) => kv.getSnapshot().trips.find((t) => t.id === id),
-      restore: (snap) => kv.update((s) => T.mapTrip(s, snap.id, () => snap)),
-    }),
-    [kv],
-  );
-  const value = useMemo<TripsContextValue>(() => ({ state, actions, trip: (id) => state.trips.find((t) => t.id === id) }), [state, actions]);
+/** Khóa nội bộ của kho trong bộ nhớ (không ghi ra localStorage). */
+const TRIPS_STORE_KEY = 'trips.server';
+
+/** Kết quả nạp danh sách: `idle` chưa nạp, `ok`, `failed`; gắn với `round` để bỏ kết quả của lần nạp cũ. */
+interface LoadState {
+  readonly round: number;
+  readonly result: 'idle' | 'ok' | 'failed';
+}
+
+/**
+ * Cấp kho chuyến đi cho cây giao diện. MÁY CHỦ là nguồn sự thật: kho trong bộ nhớ chỉ là bản đọc lại, nạp khi danh tính sẵn sàng và sau mỗi
+ * thao tác. Phải nằm trong `IdentityProvider`. Chưa có danh tính (hoặc hết phiên) thì không có chuyến nào.
+ */
+export function TripsProvider({ children, gateway }: { readonly children: ReactNode; readonly gateway?: TripsGateway }) {
+  const [store] = useState(() => new PersistentStore<TripsState>(TRIPS_STORE_KEY, INITIAL_TRIPS_STATE, () => null, null));
+  const [defaultGateway] = useState<TripsGateway>(() => new HttpTripsGateway(apiClient));
+  const api = gateway ?? defaultGateway;
+  const state = useStore(store);
+  const { status: identityStatus } = useIdentity();
+  const [round, setRound] = useState(0);
+  const [load, setLoad] = useState<LoadState>({ round: -1, result: 'idle' });
+  const ready = identityStatus === 'ready';
+  // danh tính vào/ra trạng thái sẵn sàng (hết phiên, khôi phục, ghép máy): kết quả nạp cũ không còn đúng, nạp lại
+  const [prevReady, setPrevReady] = useState(ready);
+  if (prevReady !== ready) {
+    setPrevReady(ready);
+    setRound((r) => r + 1);
+  }
+
+  useEffect(() => {
+    if (!ready) {
+      store.update(() => INITIAL_TRIPS_STATE);
+      return undefined;
+    }
+    let live = true;
+    const started = store.getSnapshot();
+    api.loadAll().then((trips) => {
+      if (!live) return;
+      // thao tác ghi xen giữa lúc nạp: chuyến đã được đọc lại sau đó giữ bản mới, chuyến mới tạo không mất
+      store.update((cur) => ({ trips: mergeLoaded(started, cur, trips) }));
+      setLoad({ round, result: 'ok' });
+    }).catch(() => {
+      if (live) setLoad({ round, result: 'failed' });
+    });
+    return () => {
+      live = false;
+    };
+  }, [ready, api, store, round]);
+
+  const actions = useMemo(() => createTripsActions({ gateway: api, store }), [api, store]);
+  const reload = useCallback(() => setRound((r) => r + 1), []);
+  const status: TripsStatus = identityStatus === 'error' ? 'error' : identityStatus === 'loading' ? 'loading' : !ready ? 'ready' : load.round !== round ? 'loading' : load.result === 'failed' ? 'error' : 'ready';
+  const value = useMemo<TripsContextValue>(() => ({ status, state, actions, trip: (id) => state.trips.find((t) => t.id === id), reload }), [status, state, actions, reload]);
   return <TripsContext.Provider value={value}>{children}</TripsContext.Provider>;
 }
 

@@ -12,7 +12,7 @@
     backend-test    Chay toan bo test backend (JUnit, ArchUnit, Testcontainers PostgreSQL)
     backend-build   Build jar backend
     web-build       Cai dependency va build giao dien
-    e2e             Build tat ca, chay backend Java + giao dien, chay cac kich ban trinh duyet that (e2e/browser.test.ts)
+    e2e             Build tat ca, chay backend Java + giao dien, chay cac kich ban trinh duyet that (web/e2e, backend that cong 8787)
     run             Bat PostgreSQL roi chay backend (cong 8787) phuc vu ca giao dien web/dist (chay web-build truoc)
     verify          doctor + tools-check + backend-test + e2e
 #>
@@ -208,17 +208,33 @@ function Wait-Health([string]$url, [int]$seconds) {
     return $false
 }
 
+# Khóa HMAC băm mã khôi phục (DR-018 B3): dùng biến môi trường nếu đã đặt, nếu không thì sinh một khóa cục bộ ngẫu nhiên và nhớ ở
+# .logs\dev-recovery-pepper.txt (thư mục bị git bỏ qua) để dữ liệu thử còn dùng được sau khi chạy lại. Không in khóa ra màn hình.
+function Ensure-RecoveryPepper {
+    if ($env:WANDER_RECOVERY_PEPPER) { return }
+    $file = Join-Path $Logs 'dev-recovery-pepper.txt'
+    if (-not (Test-Path $file)) {
+        $bytes = New-Object byte[] 48
+        [System.Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+        Set-Content -Path $file -Value ([Convert]::ToBase64String($bytes)) -Encoding ascii
+    }
+    $env:WANDER_RECOVERY_PEPPER = (Get-Content -Path $file -Raw).Trim()
+}
+
 function E2E {
     if ((Db-Up) -ne 0) { return 1 }
     if ((Backend-Build) -ne 0) { return 1 }
     if ((Web-Build) -ne 0) { return 1 }
     $jar = Join-Path $Root 'backend\build\libs\wander-backend.jar'
-    $port = 18787
+    $port = 8787 # cổng mà proxy /api của Vite trong web/ trỏ tới
     $env:PORT = "$port"
     $env:WANDER_WEB_DIR = (Join-Path $Root 'web\dist')
     $env:WANDER_LIMIT_IDENTITY = '1000'
     $env:WANDER_LIMIT_RECOVERY = '1000'
     $env:WANDER_LIMIT_APPROVAL = '1000'
+    $env:WANDER_LIMIT_APPROVAL_REQUESTS = '1000'
+    $env:WANDER_LIMIT_CATALOG = '100000'
+    Ensure-RecoveryPepper
     $out = Join-Path $Logs 'e2e-backend.out.log'
     $err = Join-Path $Logs 'e2e-backend.err.log'
     $proc = Start-Process -FilePath 'java' -ArgumentList @('-jar', $jar) -PassThru -NoNewWindow `
@@ -229,8 +245,8 @@ function E2E {
             return 1
         }
         $env:WANDER_BASE_URL = "http://127.0.0.1:$port"
-        Push-Location $Root
-        $code = Run 'e2e (node --test, trinh duyet Edge/Chrome that)' { node --test --test-concurrency=1 e2e/browser.test.ts }
+        Push-Location (Join-Path $Root 'web')
+        $code = Run 'e2e web (node --test, trinh duyet Edge/Chrome that, backend that)' { npm run e2e }
         Pop-Location
         return $code
     } finally {
@@ -241,6 +257,7 @@ function E2E {
 
 function Run-Backend {
     if ((Db-Up) -ne 0) { return 1 }
+    Ensure-RecoveryPepper
     $env:WANDER_WEB_DIR = (Join-Path $Root 'web\dist')
     Push-Location (Join-Path $Root 'backend')
     $code = Run 'gradlew bootRun' { .\gradlew.bat bootRun --console=plain }

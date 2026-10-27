@@ -7,6 +7,7 @@ import { ChipToggle, CheckRow, WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useTrips } from '../hooks/TripsProvider.tsx';
+import { freeInput } from '../hooks/tripsActions.ts';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { useTrashItem } from '../hooks/useTrashItem.ts';
 import { useUndoable } from '../hooks/useUndoable.ts';
@@ -15,7 +16,6 @@ import type { ItemKind, TripItem } from '../model/trip.types.ts';
 import { parseItemForm, parseMoneyField } from '../model/tripForms.ts';
 import type { ItemForm } from '../model/tripForms.ts';
 import { isPlain } from '../model/tripMath.ts';
-import { freeItem } from '../model/tripState.ts';
 import { itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
@@ -118,15 +118,7 @@ export function ItemEditorSheet({ itemId, preset, onClose }: { readonly itemId: 
       return setError(fill(T.editor.clearConfirm, { kind: ITEM_KINDS[f.type].label }));
     }
     const message = fill(T.editor.saved, { name: parsed.value.patch.title || (item ? itemName(item, cat) : ITEM_KINDS[f.type].label) });
-    undoable(trip.id, () => {
-      let id = itemId;
-      if (!id) {
-        const created = freeItem(f.type, parsed.value.patch.title);
-        actions.addItem(trip.id, created);
-        id = created.id;
-      }
-      actions.updateItem(trip.id, id, parsed.value.patch);
-    }, message);
+    undoable(trip.id, () => (itemId ? actions.updateItem(trip.id, itemId, parsed.value.patch) : actions.addItem(trip.id, freeInput(f.type, parsed.value.patch))), message);
     onClose();
   };
   const heading = titleOf(Boolean(item), f.isPlace, f.type);

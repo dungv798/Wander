@@ -68,7 +68,7 @@ node web/scripts/swipe-perf.mjs # đo độ mượt kéo thẻ (trình duyệt k
 
 Trong chế độ `dev`, các màn cần "thiết bị khác" hay máy chủ (ghép thiết bị, hết phiên, lỗi theo mã, giả lập ngày ở Hôm nay) có hộp **BẢN THỬ/GIẢ LẬP**; hộp này không hiển thị ở bản dựng (`vite build`), dù chữ của nó vẫn nằm trong gói JS. Danh tính ẩn danh, mã khôi phục và thiết bị đang chạy trên **máy chủ giả lưu trong trình duyệt** (`wander.web.server.v1`, chỉ giữ băm giả của mã), nên khôi phục chuyến đi thật chờ backend (FE-10). Lần đầu mở ứng dụng sẽ vào màn giới thiệu; thêm `?intro=0` vào địa chỉ để bỏ qua.
 
-Lưu ý: giao diện mới đang dùng API giả nên **chưa chạy đúng khi do backend phục vụ `webdist`** và `e2e/browser.test.ts` (gốc repo) viết cho giao diện cũ; nối backend ở lát FE-10 (`docs/implementation/todo-fe.md`). Bản giao diện cũ giữ ở `legacy/web-v1/`.
+Giao diện gọi API thật qua `/api` (khi phát triển Vite chuyển tiếp tới backend ở cổng 8787). Kịch bản trình duyệt thật nằm ở `web/e2e/` (cần backend chạy ở cổng 8787; `toolsdev.ps1 e2e` tự dựng và chạy). Bản giao diện cũ giữ ở `legacy/web-v1/`.
 
 Không dùng PowerShell hay Windows? Các lệnh trên giống nhau trên macOS/Linux (`./gradlew bootRun`); chỉ `tools/dev.ps1` là dành cho Windows.
 
@@ -100,6 +100,7 @@ Mặc định chạy được ngay trên máy cá nhân. Giá trị mặc địn
 | `WANDER_DB_URL` / `WANDER_DB_USER` / `WANDER_DB_PASSWORD` | `jdbc:postgresql://localhost:5433/wander` / `wander` / `wander` | Kết nối PostgreSQL (mật khẩu mặc định **chỉ cho máy cá nhân**) |
 | `WANDER_WEB_DIR` | trống | Thư mục giao diện đã build (vd `web\dist`); trống = chỉ API |
 | `WANDER_LIMIT_IDENTITY`, `WANDER_LIMIT_RECOVERY`, `WANDER_LIMIT_APPROVAL` | `30`, `30`, `20` | Giới hạn thao tác mỗi giờ (tạo danh tính, khôi phục/ghép thiết bị, duyệt) |
+| `WANDER_RECOVERY_PEPPER` | **bắt buộc**, không mặc định | Khóa HMAC-SHA-256 băm mã khôi phục, từ 32 byte (DR-018 B3). Thiếu hoặc ngắn thì ứng dụng không khởi động. `tools\dev.ps1` tự sinh khóa cục bộ ở `.logs\dev-recovery-pepper.txt`; đổi khóa làm mọi mã khôi phục hiện có vô hiệu |
 | `WANDER_TRUSTED_PROXY_HOPS` | `0` | Số proxy tin cậy trước ứng dụng để lấy địa chỉ người gọi (`0` = bỏ qua `X-Forwarded-For`; sau CloudFront → ALB là `2`, chỉ khi ALB đã khóa nguồn) |
 | `WANDER_LOG_SQL` | `info` | Đặt `debug` để xem câu SQL của Hibernate |
 
@@ -129,7 +130,7 @@ Dự án có workflow cho Claude Code (`.claude/`, hướng dẫn: [`docs/agent-
 | `backend/` | Backend Java (modular monolith `identity`, `planning`, `shared`), migration Flyway, test |
 | `web/` | Giao diện React + TypeScript (Vite) theo chuẩn `docs/architecture/frontend-standards.md`: `src/{app,features,shared,styles}`; API giả cho tới FE-10 |
 | `legacy/web-v1/` | Giao diện React cũ (thay bởi `web/` mới; giữ để tham khảo, có thể xóa) |
-| `e2e/` | Kịch bản trình duyệt thật (Playwright core) |
+| `web/e2e/` | Kịch bản trình duyệt thật (Playwright core) trên backend thật |
 | `tools/` | `dev.ps1` (lệnh Windows), `wander-status.mjs` |
 | `docs/` | Kế hoạch (`wander-master-plan.md`, **chỉ PO sửa**), kiến trúc + ADR, quyết định sản phẩm (`decisions/`), mặc định và cổng phát hành (`implementation/decisions.md`) |
 | `docker-compose.yml` | PostgreSQL cục bộ (+ backend trong container, profile `app`) |
