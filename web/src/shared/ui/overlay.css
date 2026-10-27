@@ -1,0 +1,41 @@
+/* Màn hình làm lại 26/10/2026 theo phản hồi của PO (docs/ux/PO-FEEDBACK-2026-10-26.md). Nạp SAU app.css, adaptive.css, web.css.
+   Quy ước: CHỈ dùng token (../tokens.css), không màu hex; chuyển động chỉ transform/opacity (và filter ở nền onboarding);
+   mọi chuyển động tắt khi prefers-reduced-motion (quy tắc chung ở web.css) và khung cuối vẫn đọc được.
+   Mục lục: 1 thẻ quẹt · 2 tờ phủ · 3 trang chủ · 4 trang điểm đến · 5 onboarding · 6 chi tiết địa điểm. */
+
+.hscroll, .monthrow { scroll-padding-inline: var(--gutter); }   /* ảnh đầu hàng cuộn ngang không bị cuộn lệch khi mở */
+
+/* ===== 2. Tờ phủ: cùng nền cảnh với màn quẹt; ô nhập trắng; tấm mờ tông mực xanh, không đen ===== */
+.sheet { background: var(--backdrop); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sheet.drawer { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.panel { background: var(--scene); }
+.panel .field input, .panel .field select, .panel .field textarea { background: var(--surface); border: 1.5px solid var(--border-ctrl); }
+.panel .opt { background: var(--surface); }
+.panel .opt.on { border-color: var(--brand); background: var(--surface); box-shadow: 0 0 0 3px var(--brand-soft); }
+.panel .fchip[aria-pressed="false"] { background: var(--surface); border-color: var(--line); color: var(--ink); }
+.panel .fchip[aria-pressed="true"] { background: var(--brand-2); color: var(--on-brand-2); border-color: var(--brand-2); }
+/* nhắc nhẹ còn lại ở danh sách chuyến khi chưa có mã khôi phục (một dòng, chạm để tạo mã) */
+.nocode { display: flex; align-items: flex-start; gap: 8px; width: 100%; min-height: var(--tap); padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); color: var(--ink); font-size: var(--fs-sm); font-weight: 600; text-align: left; }
+.nocode .ic { margin-top: 2px; color: var(--brand-ink); }
+.skipnote { display: flex; align-items: flex-start; gap: 6px; }
+.skipnote .ic { margin-top: 2px; color: var(--brand-ink); }
+
+/* ===== 6. Chi tiết địa điểm: nhận định lên đầu, sáu thông tin nhanh thay vì khối chữ dài ===== */
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.facts li { display: grid; align-content: start; gap: 2px; padding: 12px 10px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--line); }
+.facts .ib { display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 4px; border-radius: 50%; background: var(--brand-soft); color: var(--brand-ink); }
+.facts b { font: 700 16px/1.15 var(--font-display); }
+.facts li > span:last-child { font-size: 12px; line-height: 1.3; color: var(--muted); }
+.rate { background: var(--surface); border: 1px solid var(--line); }
+/* nút "Ảnh sau" trùng tên lớp .next với thẻ gợi ý ở Tổng quan nên bị nền trắng, viền và lưới của thẻ đó: đặt lại */
+.gnav.next { display: grid; grid-template-columns: none; place-items: center; padding: 0; border: 0; border-radius: 50%; background: var(--chip-photo); }
+
+/* Biểu tượng xoay 180° (nút "Ảnh sau" dùng lại hình mũi tên trái). */
+.ic.flip { transform: rotate(180deg); }
+.spaced { margin-top: 8px; }
+.stack.tight { gap: 8px; }
+.note.inline { display: flex; align-items: center; gap: 6px; }
+
+/* Hộp lỗi theo mã (S20): tiêu đề, lời tiếng Việt, mã nhỏ để hỏi hỗ trợ. */
+.errbox { display: grid; gap: 10px; padding: 16px; border-radius: var(--r-lg); background: var(--warn-bg); color: var(--warn-ink); }
+.errbox .errcode { margin: 0; font-size: 12px; opacity: 0.85; color: inherit; }

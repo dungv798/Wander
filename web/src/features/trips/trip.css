@@ -1,0 +1,69 @@
+/* Màn chuyến đi (v6, 26/10/2026): bản đồ địa hình chiếm cả màn, danh sách là tờ kéo được ba nấc. Chỉ dùng token. */
+.mapbox { position: relative; height: 330px; background: var(--map-low); }
+.tmap { position: absolute; inset: 0; }
+.sheet-head { flex: none; touch-action: none; cursor: grab; }
+.sheet-scroll { min-height: 0; }
+
+@media (max-width: 1279px) {
+  #screen[data-view="trip"] { overflow: hidden; padding-bottom: 0; }
+  #screen[data-view="trip"] .mapbox { position: absolute; inset: 0; height: auto; }
+  #screen[data-view="trip"] .sheetbody { position: absolute; z-index: var(--z-raised); left: 0; right: 0; top: var(--sheet-top, 72px); bottom: 0; max-width: none; margin: 0; min-height: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-xl) var(--r-xl) 0 0; background: var(--bg); box-shadow: 0 -16px 40px -18px rgba(20, 33, 58, 0.45); transform: translateY(var(--sy, 0px)); will-change: transform; }
+  #screen[data-view="trip"] .sheetbody.is-anim { transition: transform 0.5s var(--ease-spring); }
+  #screen[data-view="trip"] .sheet-head { padding-top: 10px; }
+  #screen[data-view="trip"] .sheet-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-bottom: calc(var(--hide, 0px) + 150px); }
+  #screen[data-view="trip"] .grab { margin-bottom: 8px; }
+}
+@media (min-width: 1280px) {
+  #screen[data-view="trip"] .sheetbody { display: flex; flex-direction: column; overflow: hidden; }
+  #screen[data-view="trip"] .sheet-head { touch-action: auto; cursor: default; }
+  #screen[data-view="trip"] .sheet-scroll { flex: 1; overflow-y: auto; padding-bottom: 150px; }
+}
+
+/* vào màn: tờ trồi lên bằng thuộc tính `translate` (không đụng `transform` đang dùng cho nấc kéo) */
+@keyframes sheetRise { from { opacity: 0; translate: 0 48px; } to { opacity: 1; translate: 0 0; } }
+#screen[data-view="trip"].enter > .sheetbody { animation: sheetRise var(--dur-scene) var(--ease-out) both; }
+#screen[data-view="trip"].enter > .mapbox { animation: fadeIn var(--dur-scene) linear both; }
+
+/* đầu tờ gọn hơn; tab ngày là viên thuốc (một màu nhấn); chip chọn ngày trung tính */
+.thead { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; padding-bottom: 8px; }
+.thead img { width: 52px; height: 52px; border-radius: var(--r-md); }
+.thead h1 { font-size: 24px; }
+.thead .note { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dtabs { gap: 8px; border-bottom: 0; margin: 0 -16px; padding: 4px 16px 12px; }
+.dtab { min-height: var(--tap); padding: 8px 16px; border: 0; border-radius: var(--r-pill); background: var(--surface); color: var(--ink); box-shadow: var(--sh-1); }
+.dtab[aria-selected="true"] { background: var(--day-accent); color: var(--on-brand-2); box-shadow: var(--cta-glow); }
+.dchip { border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); box-shadow: var(--sh-1); }
+@media (hover: hover) { .dchip:hover { border-color: var(--day-accent); color: var(--day-accent); } }
+.irow .im b { background: var(--day-accent); color: var(--on-brand-2); }
+
+@media (min-width: 1280px) { #screen[data-view="trip"] .grab { display: none; } }
+
+/* thanh nắm là nút (bàn phím, đọc màn hình): vùng chạm 44 px, thanh nhìn thấy nhỏ ở giữa */
+.grab { display: grid; place-items: center; width: 96px; height: var(--tap); margin: -14px auto -6px; padding: 0; border: 0; background: none; cursor: grab; }
+.grab::before { content: ""; width: 44px; height: 5px; border-radius: 3px; background: var(--line); }
+
+/* Danh sách "Đã xóa gần đây": bỏ dấu đầu dòng mặc định của ul. */
+.trashlist { list-style: none; padding: 0; margin: 0; }
+
+/* "Hôm nay": danh sách mục theo giờ, liên kết mở bản đồ ngoài. */
+.todaylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.todayrow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
+.todayrow.done .tdbody b { text-decoration: line-through; opacity: 0.7; }
+.todayrow .tdtime { font: 700 15px/1.3 var(--font-display); color: var(--brand-ink); }
+.todayrow .tdbody { display: grid; gap: 4px; }
+.todayrow .tdbody b { display: flex; align-items: center; gap: 6px; font-size: 16px; }
+.maplink { width: fit-content; min-height: var(--tap); text-decoration: none; }
+/* Xem trước lưu/gửi lịch trình. */
+.expcard { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
+.expcard h3 { margin: 0; }
+.exptable { width: 100%; border-collapse: collapse; font-size: 14px; }
+.exptable th, .exptable td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+.exptable .num { text-align: right; white-space: nowrap; }
+.exptable tfoot td { font-weight: 700; border-bottom: 0; }
+.expscroll { overflow-x: auto; }
+.exptable td:first-child { white-space: nowrap; }
+.exp-gap { margin-top: 16px; }
+.todayrow .taskchk { position: static; margin: 0; }
+/* Cột chữ của hàng mục co được ở màn hẹp (320 px): chip dài tự xuống dòng thay vì đẩy cả hàng ra ngoài mép. */
+.irow .tx { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.mchip { max-width: 100%; }

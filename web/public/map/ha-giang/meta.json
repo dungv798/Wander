@@ -1,0 +1,25 @@
+{
+ "dest": "ha-giang",
+ "zoom": 12,
+ "width": 3072,
+ "height": 3072,
+ "origin": [
+  828928,
+  453888
+ ],
+ "bbox": [
+  104.6,
+  22.55,
+  105.6,
+  23.45
+ ],
+ "elevationRangeM": [
+  128,
+  1751
+ ],
+ "heightSize": [
+  768,
+  768
+ ],
+ "credit": "Độ cao: AWS Terrain Tiles (SRTM và nguồn khác). Đường, sông: © OpenStreetMap contributors (ODbL)."
+}

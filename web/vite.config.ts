@@ -1,11 +1,42 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { defineConfig } from 'vite';
+import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Giao diện gọi API cùng nguồn qua /api; khi phát triển, Vite chuyển tiếp tới server Node (npm run start:api).
+const CATALOG_DIR = path.resolve(import.meta.dirname, '../backend/src/main/resources/catalog');
+const MIME_BY_EXT: Record<string, string> = { '.json': 'application/json; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
+
+/**
+ * Pha FE chưa có backend: phục vụ kho biên tập THẬT (JSON và ảnh) từ thư mục tài nguyên của backend, cùng đường dẫn mà bản thật sẽ dùng
+ * (`/catalog/photos/*`) và tệp thô cho kho giả (`/data/catalog/*.json`). Chỉ chạy khi phát triển/preview, không vào bản dựng.
+ */
+function catalogDevServer(): Plugin {
+  /** Gắn middleware phục vụ tệp từ kho biên tập. */
+  const attach = (use: (fn: (req: { url?: string }, res: { statusCode: number; setHeader: (k: string, v: string) => void; end: (b?: Buffer | string) => void }, next: () => void) => void) => void): void => {
+    use((req, res, next) => {
+      const url = decodeURIComponent((req.url ?? '').split('?')[0] ?? '');
+      let file: string | null = null;
+      if (url.startsWith('/catalog/photos/')) file = path.join(CATALOG_DIR, 'photos', url.slice('/catalog/photos/'.length));
+      else if (url.startsWith('/data/catalog/') && url.endsWith('.json')) file = path.join(CATALOG_DIR, url.slice('/data/catalog/'.length));
+      if (!file || !file.startsWith(CATALOG_DIR) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
+        next();
+        return;
+      }
+      res.statusCode = 200;
+      res.setHeader('Content-Type', MIME_BY_EXT[path.extname(file).toLowerCase()] ?? 'application/octet-stream');
+      res.end(fs.readFileSync(file));
+    });
+  };
+  return {
+    name: 'wander-catalog-dev',
+    configureServer: (s) => attach((fn) => s.middlewares.use(fn)),
+    configurePreviewServer: (s) => attach((fn) => s.middlewares.use(fn)),
+  };
+}
+
+// Giao diện gọi API cùng nguồn qua /api; khi phát triển, Vite chuyển tiếp tới backend Java (cổng 8787, xem README.md mục 3).
 export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,
-    proxy: { '/api': 'http://127.0.0.1:8787' },
-  },
+  plugins: [react(), catalogDevServer()],
+  server: { port: 5173, proxy: { '/api': 'http://127.0.0.1:8787' } },
 });

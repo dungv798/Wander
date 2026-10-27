@@ -1,0 +1,19 @@
+import { COPY, fill } from '../../../shared/const/copy.vi.ts';
+import type { PhotoView } from '../model/Catalog.types.ts';
+
+const AUTHOR_MAX_LENGTH = 28;
+
+/** Nhãn nguồn ảnh nổi trên ảnh khi chạm nút ⓘ: tác giả, giấy phép và liên kết ảnh gốc (ghi công bắt buộc theo giấy phép). */
+export function CreditPill({ photo }: { readonly photo: PhotoView | undefined }) {
+  if (!photo) return null;
+  const author = (photo.author || COPY.place.unknownAuthor).slice(0, AUTHOR_MAX_LENGTH);
+  return (
+    <div className="credit-pill">
+      {fill(COPY.place.photoCreditShort, { author, license: photo.license })}
+      {' · '}
+      <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer">
+        {COPY.place.sourceOriginal}
+      </a>
+    </div>
+  );
+}

@@ -1,0 +1,16 @@
+/* Thứ tự nạp = thứ tự cascade của prototype đã duyệt (docs/ux/prototype/index.html). Đổi thứ tự có thể đổi giao diện. */
+@import '../styles/fonts.css';
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/root.css';
+@import '../styles/adaptive.css';
+@import '../styles/web.css';
+@import '../shared/ui/overlay.css';
+@import '../shared/map/map.css';
+@import '../features/discover/deck.css';
+@import '../features/discover/home.css';
+@import '../features/onboarding/onboarding.css';
+@import '../styles/vibe.css';
+@import '../features/trips/trip.css';
+@import '../features/identity/identity.css';
+@import '../features/templates/templates.css';

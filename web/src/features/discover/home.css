@@ -1,0 +1,120 @@
+/* Trang chủ và trang điểm đến (v6, 26/10/2026): trời có mặt trời và mây, câu mời đổi luân phiên, quạt ảnh sống, khối gợi cảm hứng. Chỉ dùng token. */
+
+/* ===== Hero điện thoại ===== */
+.sky { position: relative; height: 520px; overflow: hidden; background: linear-gradient(var(--sky-1), var(--sky-2) 66%, transparent); }
+.sky-sun { position: absolute; top: -56px; right: -64px; width: 176px; opacity: 0.95; }
+.sky-sun .as-rays { transform-origin: 60px 60px; animation: spin 70s linear infinite; }
+.cloud.c1 { width: 260px; height: 120px; left: -60px; top: 150px; }
+.cloud.c2 { width: 300px; height: 130px; right: -80px; top: 280px; }
+.cloud.c3 { width: 220px; height: 100px; left: 40px; top: 410px; }
+.logo { top: 22px; font-size: 46px; color: var(--brand-2); }
+.tagline { position: absolute; top: 76px; left: 0; right: 0; height: 28px; font: 700 18px/28px var(--font-display); text-align: center; color: var(--ink); }
+.tagline span { position: absolute; inset: 0; opacity: 0; animation: hookCycle 14s ease-in-out infinite; animation-delay: calc(var(--n) * 3.5s); }
+@keyframes hookCycle { 0% { opacity: 0; translate: 0 10px; } 4% { opacity: 1; translate: 0 0; } 22% { opacity: 1; translate: 0 0; } 27% { opacity: 0; translate: 0 -10px; } 100% { opacity: 0; } }
+.sky .plane { position: absolute; top: 118px; right: -26px; width: 232px; transform: rotate(-6deg); filter: drop-shadow(0 16px 14px rgba(20, 33, 58, 0.22)); animation: planeCruise 7s ease-in-out infinite; }
+@keyframes planeCruise { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: -10px -10px; rotate: 1.5deg; } }
+.sky .compass { position: absolute; right: 14px; bottom: 36px; width: 78px; z-index: 3; filter: drop-shadow(0 10px 10px rgba(20, 33, 58, 0.3)); }
+.ac-needle { transform-origin: 50px 50px; animation: needleSwing 6s ease-in-out infinite; }
+@keyframes needleSwing { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(28deg); } }
+.pin { position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 6px; max-width: 72vw; padding: 6px 12px 6px 8px; border-radius: var(--r-pill); white-space: nowrap; background: var(--surface); color: var(--ink); font-size: 13px; font-weight: 700; box-shadow: var(--sh-1); animation: pinFloat 5s ease-in-out infinite; }
+.pin .ic { color: var(--brand-2); }
+.pin.p1 { left: 16px; top: 128px; }
+.pin.p2 { left: 52px; top: 172px; animation-delay: -2.4s; }
+@keyframes pinFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* thẻ giữa của quạt: ảnh các nơi chạy luân phiên, tên đổi theo ảnh, dấu thích nảy lên như vừa quẹt phải */
+.fan .f2.live img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: liveFade 16s linear infinite; animation-delay: calc(var(--n) * 4s); }
+.fan .f2.live img:first-of-type { opacity: 1; }
+.fan .f2.live span { opacity: 0; animation: liveFade 16s linear infinite; animation-delay: calc(var(--n) * 4s); }
+.fan .f2.live span:nth-of-type(1) { opacity: 1; }
+@keyframes liveFade { 0% { opacity: 0; } 6% { opacity: 1; } 25% { opacity: 1; } 31% { opacity: 0; } 100% { opacity: 0; } }
+.live-ok { position: absolute; z-index: 3; top: 12px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--white); background: radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.7), transparent 44%), var(--gem-like); box-shadow: 0 8px 14px -6px rgba(0, 0, 0, 0.5); animation: likePop 4s ease-in-out infinite; }
+.live-ok .ic { width: 24px; height: 24px; stroke-width: 3.2; }
+@keyframes likePop { 0%, 52% { opacity: 0; scale: 0.3; } 60% { opacity: 1; scale: 1.18; } 68%, 88% { opacity: 1; scale: 1; } 96%, 100% { opacity: 0; scale: 0.8; } }
+.search { background: var(--surface); box-shadow: var(--card-shadow); border: 0; }
+@media (prefers-reduced-motion: reduce) { .tagline span:first-child { opacity: 1; animation: none; } .live-ok { animation: none; opacity: 0; } }
+
+/* ===== Dải tên nơi chạy ngang ===== */
+.ribbon { overflow: hidden; margin: 22px 0 0; background: var(--brand-soft); color: var(--brand-ink); border-block: 1px solid var(--line); }
+.ribbon-track { display: flex; width: max-content; padding: 10px 0; animation: ribbonRun 44s linear infinite; }
+.ribbon-track span { display: inline-flex; align-items: center; gap: 8px; margin-right: 28px; font: 700 15px/1 var(--font-display); white-space: nowrap; }
+@keyframes ribbonRun { to { transform: translateX(-50%); } }
+
+/* ===== Các khối nội dung ===== */
+.sec-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sec-head .linkbtn { display: inline-flex; align-items: center; gap: 4px; }
+.hscroll, .monthrow { scroll-padding-inline: var(--gutter); }
+/* ô "Bạn đang mê gì?" */
+.moods { gap: 12px; }
+.mood { position: relative; flex: 0 0 150px; height: 190px; border: 0; padding: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--photo-bg); color: var(--on-photo); text-align: left; scroll-snap-align: start; box-shadow: var(--card-shadow); }
+.mood img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-scene) var(--ease-out); }
+.mood::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--scrim) 4%, transparent 62%); }
+.mood-in { position: absolute; z-index: 1; inset: auto 12px 12px 12px; display: grid; gap: 2px; justify-items: start; }
+.mood-ic, .dfacts .ib, .facts .ib { background: var(--gem-grad); color: var(--on-gem, var(--white)); box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.6), inset 0 -4px 6px rgba(0, 0, 0, 0.16), 0 8px 14px -8px rgba(20, 33, 58, 0.5); }
+.mood-ic { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 4px; border-radius: 13px; }
+.mood b { overflow-wrap: anywhere; font: 700 17px/1.1 var(--font-display); }
+.mood-in > span:last-child { font-size: 13px; }
+@media (hover: hover) { .mood:hover img, .mcard:hover img, .mini:hover img { transform: scale(1.06); } }
+/* hàng "Nên đi tháng này": cuộn ngang trên điện thoại, lưới từ 768 */
+.monthrow { display: flex; gap: 12px; margin-inline: calc(-1 * var(--gutter)); padding: 4px var(--gutter) 12px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+.monthrow::-webkit-scrollbar { display: none; }
+.mcard { flex: 0 0 150px; scroll-snap-align: start; }
+.mc-badge { position: absolute; z-index: 1; top: 10px; left: 10px; display: inline-flex; align-items: center; gap: 5px; max-width: calc(100% - 20px); padding: 4px 10px; overflow: hidden; border-radius: var(--r-pill); text-overflow: ellipsis; white-space: nowrap; background: var(--sun); color: var(--on-sun); font-size: 12.5px; font-weight: 700; }
+@media (min-width: 768px) { .monthrow { display: grid; margin-inline: 0; padding: 0; overflow: visible; } .mcard { flex: initial; } }
+/* lịch mẫu */
+.tpls { gap: 14px; }
+.tpl { display: grid; flex: 0 0 286px; gap: 8px; align-content: start; padding: 16px; border-radius: var(--r-xl); background: var(--surface); box-shadow: var(--card-shadow); scroll-snap-align: start; }
+.tpl-photos { display: flex; height: 92px; padding-left: 6px; }
+.tpl-photos img { width: 92px; height: 92px; border: 3px solid var(--white); border-radius: 24px; object-fit: cover; box-shadow: 0 8px 14px -8px rgba(20, 33, 58, 0.5); rotate: calc((var(--k) - 1.5) * 4deg); }
+.tpl-photos img:not(:first-child) { margin-left: -26px; }
+.tpl h3 { font: 800 20px/1.15 var(--font-display); }
+.tpl-meta { margin: 0; font-size: 13px; font-weight: 700; color: var(--brand-ink); }
+.tpl-note { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+.tpl .btn { margin-top: 4px; min-height: 48px; }
+/* bản đồ địa hình dạng thẻ */
+.mapcard { position: relative; height: 320px; border-radius: var(--r-xl); border: 3px solid var(--white); box-shadow: var(--card-shadow); }
+/* ảnh thẻ lớn có chuyển động chậm; chia sẻ ảnh với trang điểm đến khi chuyển màn */
+.dcard img { transform-origin: 60% 50%; animation: kenburns 18s ease-in-out infinite alternate; view-transition-name: cover; }
+.dcard, .tcard { box-shadow: var(--card-shadow); }
+
+/* ===== Trang điểm đến ===== */
+.dhero { height: 270px; }
+.dhero > img { transform-origin: 50% 82%; animation: kenburns 24s ease-in-out infinite alternate; view-transition-name: cover; }
+.dhero::after { background: linear-gradient(to top, var(--scrim) 4%, transparent 62%), linear-gradient(var(--scrim), transparent 28%); opacity: 0.92; }
+.dhero .in { gap: 4px; bottom: 38px; }
+.dhero h1 { font-size: 46px; }
+.dhero-region { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 4px 12px; border-radius: var(--r-pill); background: var(--chip-photo); font-size: 13px; font-weight: 700; }
+.dhero-tag { max-width: 34ch; font-size: 15px; font-weight: 600; }
+.dbody { margin-top: -24px; }
+.dfacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.dfacts li { display: grid; justify-items: center; gap: 2px; padding: 12px 6px; text-align: center; border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--card-shadow); }
+.dfacts .ib { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 2px; border-radius: 13px; }
+.dfacts b { font: 800 24px/1.05 var(--font-display); }
+.dfacts li > span:last-child { font-size: 12.5px; line-height: 1.25; color: var(--muted); }
+.dcta { display: grid; gap: 10px; }
+.dcta .btn { width: 100%; min-height: 54px; }
+.peek .mini { flex-basis: 132px; height: 172px; }
+@media (min-width: 768px) {
+  #screen[data-view="dest"] .dhero { height: 320px; }
+  .dcta { grid-template-columns: 1.4fr 1fr; }
+  .peek .mini { flex-basis: 170px; height: 220px; }
+  .mapcard { height: 420px; }
+}
+
+/* ===== Bản đồ toàn màn trong tờ phủ ===== */
+.mapfull { position: relative; flex: 1; min-height: 0; border-radius: inherit; overflow: hidden; }
+.mapbig { position: absolute; inset: 0; }
+.mapfull .close { position: absolute; top: 14px; right: 14px; z-index: 5; }
+.panel.full:has(.mapfull) { background: var(--map-low); }
+.minimap.tm-mini { position: relative; height: 170px; border-radius: var(--r-lg); overflow: hidden; background: var(--map-low); }
+
+.mapcard-s { height: 220px; margin-bottom: 4px; }
+
+/* thị sai khi cuộn (trình duyệt hỗ trợ scroll-driven animations): mặt trời và quạt ảnh trôi chậm hơn nội dung */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sky-sun, .sky .fan { animation: parallaxDown linear both; animation-timeline: scroll(nearest); animation-range: 0 520px; }
+    .sky-sun { --py: 70px; } .sky .fan { --py: 46px; }
+  }
+}
+@keyframes parallaxDown { to { translate: 0 var(--py, 40px); } }

@@ -1,0 +1,410 @@
+// Kiểm thử đầu-cuối của tính năng Chuyến đi (pha FE, API giả) trên trình duyệt thật, khung nhìn điện thoại.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import { createServer } from 'vite';
+import type { ViteDevServer } from 'vite';
+import { chromium } from 'playwright-core';
+import type { Browser, BrowserContext, Page } from 'playwright-core';
+import { TRIPS_KEY, seedTrips } from './seed.ts';
+
+let server: ViteDevServer;
+let browser: Browser;
+let baseUrl = '';
+
+test.before(async () => {
+  server = await createServer({ configFile: path.resolve(import.meta.dirname, '../vite.config.ts'), server: { port: 0 }, logLevel: 'error' });
+  await server.listen();
+  baseUrl = (server.resolvedUrls?.local[0] ?? '').replace(/\/$/, '');
+  browser = await chromium.launch({ channel: 'chrome', headless: true }).catch(() => chromium.launch({ channel: 'msedge', headless: true }));
+});
+
+test.after(async () => {
+  await browser?.close();
+  await server?.close();
+});
+
+/** Ngữ cảnh điện thoại 390×844 và danh sách lỗi console/trang. */
+async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, locale: 'vi-VN' });
+  const errors: string[] = [];
+  ctx.on('page', (p) => {
+    p.on('pageerror', (e) => errors.push(e.message));
+    p.on('console', (m) => {
+      if (m.type() === 'error') errors.push(m.text());
+    });
+  });
+  return { ctx, errors };
+}
+
+/** Trang sạch (xóa lưu trữ), tùy chọn nạp chuyến mẫu, rồi tới địa chỉ hash. */
+async function open(ctx: BrowserContext, hash: string, seed = false): Promise<Page> {
+  const page = await ctx.newPage();
+  await page.goto(`${baseUrl}/#/`);
+  await page.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'); // bỏ qua giới thiệu lần đầu (có test riêng)
+  });
+  await page.reload(); // kho "đã xem giới thiệu" đọc lúc khởi tạo nên phải nạp lại
+  if (seed) await seedTrips(page);
+  await page.goto(`${baseUrl}/${hash}`);
+  return page;
+}
+
+/** Đọc các chuyến đang lưu ở localStorage (để khẳng định dữ liệu thật đã ghi). */
+async function storedTrips(page: Page): Promise<{ trips: { name: string; kind: string | null; interests: string[]; datesTentative: boolean; items: { id: string; placeId: string | null; day: string | null; costK: number | null; position: number | null }[] }[] }> {
+  return page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? '{"trips":[]}'), TRIPS_KEY);
+}
+
+test('tạo chuyến trống từ trang điểm đến: có trong danh sách và còn sau khi tải lại', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/dest/ha-giang');
+  await page.getByRole('button', { name: 'Tạo chuyến đi' }).click();
+  await page.getByRole('button', { name: 'Tạo chuyến đi' }).last().click();
+  await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
+  await page.locator('.thead h1').waitFor();
+  assert.equal(await page.locator('.thead h1').textContent(), 'Hà Giang');
+  await page.goto(`${baseUrl}/#/trips`);
+  await page.locator('.tcard h3', { hasText: 'Hà Giang' }).waitFor();
+  await page.reload();
+  await page.locator('.tcard').waitFor();
+  assert.equal(await page.locator('.tcard').count(), 1);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('lưu các nơi đã chọn thành chuyến: nơi đó nằm ở "Chưa có ngày" và bị gỡ khỏi "Đã chọn"', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/deck/ha-giang');
+  await page.locator('.card.front').waitFor();
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('button', { name: 'Xem đã chọn (1)' }).waitFor();
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('button', { name: 'Xem đã chọn (2)' }).waitFor();
+  await page.getByRole('button', { name: 'Xem đã chọn (2)' }).click();
+  await page.getByRole('button', { name: /Lưu 2 địa điểm thành chuyến đi/ }).click();
+  await page.getByRole('button', { name: 'Xác nhận' }).click();
+  await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
+  await page.locator('.thead h1').waitFor();
+  const stored = await storedTrips(page);
+  assert.equal(stored.trips[0]?.items.length, 2);
+  assert.ok(stored.trips[0]?.items.every((i) => i.day === null && i.placeId));
+  await page.goto(`${baseUrl}/#/picked`);
+  await page.getByText('Chưa chọn nơi nào').waitFor();
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('tạo từng bước: sai ngày bị chặn ở đúng bước; kiểu chuyến, sở thích, ngân sách được LƯU vào chuyến (DR-018 F2)', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trips');
+  await page.getByRole('button', { name: 'Tạo từng bước' }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByRole('heading', { name: 'Đi đâu' }).waitFor();
+  await dialog.getByRole('button', { name: 'Tiếp' }).click();
+  await dialog.getByRole('heading', { name: 'Khi nào' }).waitFor();
+  const start = await dialog.getByLabel('Ngày đi').inputValue();
+  await dialog.getByLabel('Ngày về').fill('2020-01-01');
+  await dialog.getByRole('button', { name: 'Tiếp' }).click();
+  await dialog.getByRole('alert').getByText('Ngày về phải sau hoặc bằng ngày đi.').waitFor();
+  await dialog.getByLabel('Ngày về').fill(start);
+  await dialog.getByRole('button', { name: 'Tiếp' }).click();
+  await dialog.getByRole('button', { name: 'Bạn bè' }).click();
+  await dialog.getByRole('button', { name: 'Tiếp' }).click();
+  await dialog.getByRole('button', { name: 'Cảnh quan' }).click();
+  await dialog.getByRole('button', { name: 'Tiếp' }).click();
+  await dialog.getByLabel(/Ngân sách/).fill('2000');
+  await dialog.getByRole('button', { name: 'Tiếp' }).click();
+  await dialog.getByRole('heading', { name: 'Xem lại' }).waitFor();
+  assert.match((await dialog.locator('.wzsum').textContent()) ?? '', /Bạn bè/);
+  await dialog.getByRole('button', { name: 'Tạo chuyến đi' }).click();
+  await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
+  await page.locator('.thead h1').waitFor();
+  const saved = (await storedTrips(page)).trips[0] as unknown as { kind: string; interests: string[]; budgetK: number };
+  assert.equal(saved.kind, 'Bạn bè');
+  assert.deepEqual(saved.interests, ['canh']);
+  assert.equal(saved.budgetK, 2000);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('chi phí theo D17/D18: trống là chưa biết, 0 là biết bằng không, "đã bao gồm" không cộng; ngân sách còn lại', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  const box = page.locator('.costbox');
+  await box.waitFor();
+  assert.match((await box.locator('.bigmoney b').textContent()) ?? '', /^750\.000\s₫$/);
+  assert.match((await box.textContent()) ?? '', /Chưa tính 4 mục chưa biết giá/);
+  assert.match((await box.textContent()) ?? '', /1 mục đã bao gồm, không cộng vào tổng/);
+  assert.match((await box.textContent()) ?? '', /còn lại 2\.250\.000\s₫/);
+  assert.match((await box.textContent()) ?? '', /Đã đặt 1\/\d+ mục có đặt chỗ/);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('xếp ngày bằng chip, thấy ở tab ngày; Hoàn tác bằng thông báo đưa mục về chưa có ngày', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  const row = page.locator('.swipe', { hasText: 'Phố cổ Đồng Văn' });
+  await row.locator('xpath=following-sibling::div[contains(@class,"assign")][1]').getByRole('button', { name: 'Ngày 2' }).click();
+  await page.getByRole('tab', { name: 'Ngày 2' }).click();
+  await page.locator('.irow', { hasText: 'Phố cổ Đồng Văn' }).waitFor();
+  const stored = await storedTrips(page);
+  assert.ok(stored.trips[0]?.items.find((i) => i.placeId === 'pho-co-dong-van')?.day);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('sắp xếp trong ngày: nút lên/xuống đổi vị trí và lưu', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  await page.getByRole('button', { name: 'Sắp xếp' }).click();
+  const names = async (): Promise<string[]> => page.locator('.irow h3').allTextContents();
+  const before = await names();
+  await page.getByRole('button', { name: new RegExp(`Chuyển «${before[1]}» lên`) }).click();
+  const after = await names();
+  assert.equal(after[0], before[1]);
+  assert.equal(after[1], before[0]);
+  await page.reload();
+  await page.getByRole('tab', { name: 'Ngày 1' }).waitFor();
+  assert.equal((await names())[0], before[1], 'thứ tự được lưu');
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('sửa mục: kiểm lỗi tiền âm; xóa giá thành "Chưa biết giá"; lưu rồi Hoàn tác khôi phục', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByLabel(/Chi phí, nghìn đồng/).fill('-5');
+  await dialog.getByRole('button', { name: 'Lưu', exact: true }).click();
+  await dialog.getByRole('alert').getByText(/chỉ nhập số từ 0 trở lên/).waitFor();
+  await dialog.getByLabel(/Chi phí, nghìn đồng/).fill('');
+  await dialog.getByRole('button', { name: 'Lưu', exact: true }).click();
+  await dialog.waitFor({ state: 'detached' });
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).getByText('Chưa biết giá').waitFor();
+  await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).getByText(/120\.000/).waitFor();
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('thêm mục tự do và việc cần làm; tích xong việc cần làm', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/2', true);
+  await page.getByRole('button', { name: 'Thêm mục vào ngày này' }).click();
+  await page.getByRole('button', { name: /^Việc cần làm/ }).click();
+  await page.getByRole('dialog').getByLabel('Tên').fill('Mua vé');
+  await page.getByRole('dialog').getByRole('button', { name: 'Lưu', exact: true }).click();
+  const task = page.locator('.swipe', { hasText: 'Mua vé' });
+  await task.waitFor();
+  const toggle = task.getByRole('button', { name: /Hoàn thành: Mua vé/ });
+  assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
+  await toggle.click();
+  await page.locator('.swipe', { hasText: 'Mua vé' }).locator('button[aria-pressed="true"]').waitFor();
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('sửa ngày chuyến làm mất ngày: báo số mục, bấm Lưu lần hai xác nhận, mục về "Chưa có ngày", Hoàn tác được (DR-011 A1)', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.getByRole('button', { name: 'Sửa chuyến đi' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Sửa chuyến đi' });
+  const start = await dialog.getByLabel('Ngày đi').inputValue();
+  await dialog.getByLabel('Ngày về').fill(start);
+  await dialog.getByLabel(/Dời cả lịch/).uncheck();
+  await dialog.getByRole('button', { name: 'Lưu thay đổi' }).click();
+  await dialog.getByRole('alert').getByText(/chuyển về “Chưa có ngày”/).waitFor();
+  await dialog.getByRole('button', { name: 'Lưu thay đổi' }).click();
+  await dialog.waitFor({ state: 'detached' });
+  const after = await storedTrips(page);
+  assert.equal(after.trips[0]?.items.filter((i) => i.day === null).length, 3 + 2 + 2, 'ngày 2 và 3 trở về chưa có ngày');
+  await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();
+  assert.equal((await storedTrips(page)).trips[0]?.items.filter((i) => i.day === null).length, 3);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('"Xếp giúp tôi": xem trước rồi áp dụng; mọi mục có ngày; Hoàn tác', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.getByRole('button', { name: 'Xếp giúp tôi' }).click();
+  await page.locator('.plan').waitFor();
+  await page.getByRole('button', { name: 'Áp dụng gợi ý' }).click();
+  await page.getByText('Mọi địa điểm đã có ngày', { exact: true }).first().waitFor();
+  assert.equal((await storedTrips(page)).trips[0]?.items.filter((i) => i.day === null).length, 0);
+  await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();
+  assert.equal((await storedTrips(page)).trips[0]?.items.filter((i) => i.day === null).length, 3);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('thêm địa điểm vào chuyến từ bộ thẻ: không hiện lại nơi đã có; quẹt phải thêm vào "Chưa có ngày"', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.getByRole('button', { name: 'Thêm địa điểm' }).click();
+  await page.locator('.card.front').waitFor();
+  assert.match((await page.locator('.card.front h2').textContent()) ?? '', /Cổng trời Quản Bạ/, 'nơi đầu tiên chưa có trong chuyến');
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('button', { name: 'Lưu' }).click();
+  await page.locator('.thead h1').waitFor();
+  assert.ok((await storedTrips(page)).trips[0]?.items.some((i) => i.placeId === 'cong-troi-quan-ba' && i.day === null));
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('bản đồ chuyến: tab ngày vẽ tuyến có nhãn km và ghim đánh số', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  await page.locator('.tmroot[data-ready="1"] .tm-seg').first().waitFor({ state: 'attached', timeout: 15000 });
+  assert.ok((await page.locator('.tm-seg-label').count()) >= 1);
+  assert.ok((await page.locator('.tm-pin-body b').count()) >= 2);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('dữ liệu chuyến đi hỏng không làm trắng trang; chuyến lạ có thông báo và đường về', async () => {
+  const { ctx, errors } = await phone();
+  const page = await ctx.newPage();
+  await page.goto(`${baseUrl}/#/`);
+  await page.evaluate((key) => localStorage.setItem(key, '{"trips":[null,{"id":"x"},{"id":"ok","name":"T","startDate":"2026-02-30","endDate":"2026-03-01"}]}'), TRIPS_KEY);
+  await page.goto(`${baseUrl}/#/trips`);
+  await page.getByRole('button', { name: 'Đi khám phá' }).waitFor();
+  await page.goto(`${baseUrl}/#/trip/khong-co/ov`);
+  await page.getByText('Không tìm thấy chuyến đi').waitFor();
+  await page.getByRole('button', { name: 'Về Chuyến đi' }).click();
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('Hoàn tác không ghi đè thao tác xen giữa: đổi chỗ sau khi lưu rồi bấm Hoàn tác thì báo không hoàn tác được', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).click();
+  await page.getByRole('dialog').getByLabel(/Chi phí, nghìn đồng/).fill('999');
+  await page.getByRole('dialog').getByRole('button', { name: 'Lưu', exact: true }).click();
+  await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).waitFor();
+  await page.getByRole('button', { name: 'Sắp xếp' }).click();
+  await page.getByRole('button', { name: /Chuyển «Ăn trưa \(mẫu\)» lên/ }).click();
+  const costOf = async (): Promise<number | null | undefined> => (await storedTrips(page)).trips[0]?.items.find((i) => i.id === 'a4')?.costK;
+  assert.equal(await costOf(), 999);
+  await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();
+  await page.getByText('không hoàn tác được').waitFor();
+  assert.equal(await costOf(), 999, 'giá mới vẫn còn, không bị ghi đè');
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('tổng tiền vượt 1.000.000.000 nghìn đồng không làm sập màn chuyến đi', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.evaluate((key) => {
+    const s = JSON.parse(localStorage.getItem(key) ?? '{}');
+    s.trips[0].items[0].costK = 900000000;
+    s.trips[0].items[1].costK = 900000000;
+    localStorage.setItem(key, JSON.stringify(s));
+  }, TRIPS_KEY);
+  await page.reload();
+  await page.locator('.costbox .bigmoney b').waitFor();
+  assert.match((await page.locator('.costbox .bigmoney b').textContent()) ?? '', /^1\.800\.000\.720\.000/);
+  assert.equal(await page.getByRole('alert').count(), 0);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('tab chuyến đi: mũi tên đổi tab, chỉ tab đang chọn nằm trong thứ tự Tab, tabpanel gắn nhãn theo tab', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.getByRole('tab', { name: 'Tổng quan' }).focus();
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('tab', { name: 'Ngày 1', selected: true }).waitFor();
+  assert.equal(await page.getByRole('tab', { name: 'Ngày 2' }).getAttribute('tabindex'), '-1');
+  assert.equal(await page.getByRole('tabpanel').getAttribute('aria-labelledby'), 'trip-tab-1');
+  await page.keyboard.press('End');
+  await page.getByRole('tab', { name: 'Ngày 3', selected: true }).waitFor();
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+/** Số mục (chưa xóa) của chuyến mẫu và số mục trong thùng rác, đọc từ localStorage. */
+async function trashCounts(page: Page): Promise<{ items: number; trash: number; ids: string[] }> {
+  const t = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? '{"trips":[]}').trips[0], TRIPS_KEY);
+  return { items: t.items.length, trash: (t.trash ?? []).length, ids: (t.trash ?? []).map((e: { item: { id: string } }) => e.item.id) };
+}
+
+test('xóa mục từ trình sửa: vào Đã xóa gần đây, Hoàn tác đưa về đúng chỗ; khôi phục từ thùng rác về đúng ngày và vị trí', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  const before = await trashCounts(page);
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Xóa khỏi chuyến đi' }).click();
+  await page.getByRole('status').getByText(/Đã xóa «Ăn trưa \(mẫu\)»/).waitFor();
+  assert.deepEqual(await trashCounts(page), { items: before.items - 1, trash: 1, ids: ['a4'] });
+  await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).waitFor();
+  assert.deepEqual(await trashCounts(page), { items: before.items, trash: 0, ids: [] });
+  // xóa lại rồi khôi phục từ thùng rác
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Xóa khỏi chuyến đi' }).click();
+  await page.getByRole('tab', { name: 'Tổng quan' }).click();
+  await page.getByRole('button', { name: /Đã xóa gần đây \(1\)/ }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByText('Ăn trưa (mẫu)').waitFor();
+  await dialog.getByRole('button', { name: 'Khôi phục «Ăn trưa (mẫu)»' }).click();
+  await dialog.getByText('Chưa có mục nào bị xóa').waitFor();
+  const stored = (await storedTrips(page)).trips[0]!.items.find((i) => i.id === 'a4')!;
+  assert.equal(stored.position, 3, 'về đúng vị trí cũ trong ngày');
+  assert.ok(stored.day, 'về đúng ngày cũ');
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('xóa vĩnh viễn hỏi xác nhận; Hủy giữ nguyên, Xóa vĩnh viễn làm mất hẳn', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  await page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Xóa khỏi chuyến đi' }).click();
+  await page.getByRole('tab', { name: 'Tổng quan' }).click();
+  await page.getByRole('button', { name: /Đã xóa gần đây \(1\)/ }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByRole('button', { name: 'Xóa vĩnh viễn «Ăn trưa (mẫu)»' }).click();
+  await dialog.getByRole('heading', { name: /Xóa vĩnh viễn «Ăn trưa \(mẫu\)»\?/ }).waitFor();
+  await dialog.getByRole('button', { name: 'Hủy' }).click();
+  assert.equal((await trashCounts(page)).trash, 1);
+  await dialog.getByRole('button', { name: 'Xóa vĩnh viễn «Ăn trưa (mẫu)»' }).click();
+  await dialog.getByRole('button', { name: 'Xóa vĩnh viễn', exact: true }).click();
+  await dialog.getByText('Chưa có mục nào bị xóa').waitFor();
+  assert.deepEqual(await trashCounts(page), { items: (await trashCounts(page)).items, trash: 0, ids: [] });
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('xóa địa điểm từ tờ chi tiết của chuyến; khôi phục khi ngày cũ không còn nói rõ về Chưa có ngày', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
+  await page.locator('.irow', { hasText: 'Dinh thự họ Vương' }).first().click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Xóa khỏi chuyến đi' }).click();
+  await page.getByRole('status').getByText(/Đã xóa «/).waitFor();
+  assert.deepEqual((await trashCounts(page)).ids, ['a2']);
+  // dời ngày đi lên một ngày: ngày đầu không còn trong chuyến
+  await page.getByRole('tab', { name: 'Tổng quan' }).click();
+  await page.getByRole('button', { name: 'Sửa chuyến đi' }).click();
+  const edit = page.getByRole('dialog', { name: 'Sửa chuyến đi' });
+  const start = await edit.getByLabel('Ngày đi').inputValue();
+  const next = new Date(`${start}T00:00:00`);
+  next.setDate(next.getDate() + 1);
+  const iso = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}-${String(next.getDate()).padStart(2, '0')}`;
+  await edit.getByLabel('Ngày đi').fill(iso);
+  await edit.getByRole('button', { name: 'Lưu thay đổi' }).click();
+  await edit.getByRole('alert').waitFor();
+  await edit.getByRole('button', { name: 'Lưu thay đổi' }).click();
+  await edit.waitFor({ state: 'detached' });
+  await page.getByRole('button', { name: /Đã xóa gần đây \(1\)/ }).click();
+  await page.getByRole('dialog').getByRole('button', { name: /Khôi phục «/ }).click();
+  await page.getByRole('status').getByText(/ngày cũ không còn trong chuyến/).waitFor();
+  assert.equal((await storedTrips(page)).trips[0]!.items.find((i) => i.id === 'a2')!.day, null);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});

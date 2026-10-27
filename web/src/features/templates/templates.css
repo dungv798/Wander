@@ -1,0 +1,15 @@
+/* Lịch mẫu: hàng thẻ cuộn ngang ở trang Khám phá và danh sách theo ngày trong tờ chi tiết. Chỉ dùng token. */
+.tplrow { display: flex; gap: 12px; overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding: 4px var(--gutter) 12px; scroll-snap-type: x proximity; scrollbar-width: none; }
+.tplrow::-webkit-scrollbar { display: none; }
+.tplcard { flex: 0 0 240px; scroll-snap-align: start; display: grid; text-align: left; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow); color: var(--ink); }
+.tplimg { display: block; aspect-ratio: 16 / 10; background: var(--photo-bg); overflow: hidden; }
+.tplimg img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--m-slow) var(--ease-out); }
+.tpltx { display: grid; gap: 4px; padding: 12px 14px 14px; justify-items: start; }
+.tpltx b { font: 700 17px/1.2 var(--font-display); }
+@media (hover: hover) { .tplcard:hover img { transform: scale(1.05); } }
+.tpl-day { display: grid; gap: 8px; }
+.tpl-day h3 { margin: 0; width: fit-content; padding: 4px 12px; border-radius: var(--r-pill); background: var(--day-accent); color: var(--on-brand-2); font: 700 13px/1.3 var(--font-body); }
+.tpl-places { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.tpl-places li { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: center; }
+.tpl-places img { width: 48px; height: 48px; border-radius: 14px; object-fit: cover; background: var(--photo-bg); }
+.tpl-places b { display: block; font-size: 16px; }

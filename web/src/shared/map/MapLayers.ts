@@ -1,0 +1,195 @@
+import { MAP } from './map.const.ts';
+import { arcSegments, clusterPins, pinBox, placeLabels, townIsCrowded } from './mapGeometry.ts';
+import type { Box } from './mapGeometry.ts';
+import { buildBaseSvg, buildRouteSvg, readRamp } from './mapSvg.ts';
+import type { MapData, MapMode, MapRoute, Pt, ProjectedMarker, Size } from './map.types.ts';
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const TRANSLATE_DIGITS = 1;
+
+/** Biến đổi tọa độ bản đồ sang màn hình (do camera cung cấp). */
+export type Project = (p: Pt) => Pt;
+
+/** Ngữ cảnh để bố trí lại ghim, cụm và nhãn sau khi camera dừng. */
+export interface LayoutContext {
+  readonly markers: readonly ProjectedMarker[];
+  readonly mode: MapMode;
+  readonly selected: string | null;
+  readonly project: Project;
+  readonly size: Size;
+  readonly scale: number;
+  readonly onCluster: (ids: string[]) => void;
+  readonly clusterLabel: (n: number) => string;
+}
+
+/** Đặt `translate3d` (bằng GPU) cho một phần tử theo tọa độ màn hình. */
+function moveTo(el: HTMLElement, at: Pt): void {
+  el.style.transform = `translate3d(${at[0].toFixed(TRANSLATE_DIGITS)}px, ${at[1].toFixed(TRANSLATE_DIGITS)}px, 0)`;
+}
+
+/** Lớp hiển thị của bản đồ: nền SVG, ghim, cụm, nhãn, tên thị trấn và tuyến. Chỉ thao tác DOM, không biết camera hay cử chỉ. */
+export class MapLayers {
+  readonly svg: SVGSVGElement;
+  private readonly labels: HTMLElement;
+  private readonly pins: HTMLElement;
+  private routeGroup: SVGGElement | null = null;
+  private readonly markerEls = new Map<string, HTMLButtonElement>();
+  private clusters: { el: HTMLButtonElement; p: Pt }[] = [];
+  private towns: { el: HTMLElement; p: Pt }[] = [];
+  private segMids: { index: number; p: Pt }[] = [];
+
+  /** Dựng khung rỗng (SVG nền, lớp nhãn, lớp ghim) vào phần tử chứa. */
+  constructor(host: HTMLElement) {
+    this.svg = document.createElementNS(SVG_NS, 'svg');
+    this.svg.setAttribute('class', 'tm-svg');
+    this.svg.setAttribute('aria-hidden', 'true');
+    this.labels = Object.assign(document.createElement('div'), { className: 'tm-labels' });
+    this.labels.setAttribute('aria-hidden', 'true');
+    this.pins = Object.assign(document.createElement('div'), { className: 'tm-pins' });
+    host.replaceChildren(this.svg, this.labels, this.pins);
+  }
+
+  /** Dựng nền (ảnh độ cao, bóng núi, sông, đường) và tên thị trấn từ dữ liệu đã tải. */
+  mountBase(data: MapData, uid: string, host: HTMLElement, showTowns: boolean): void {
+    this.svg.innerHTML = buildBaseSvg(data, uid, readRamp(host));
+    this.routeGroup = this.svg.querySelector<SVGGElement>('.tm-route');
+    this.towns = (showTowns ? data.vectors.places.filter((p) => p.k === 'city' || p.k === 'town') : []).map((p) => {
+      const el = Object.assign(document.createElement('span'), { className: 'tm-town', textContent: p.n });
+      this.labels.appendChild(el);
+      return { el, p: p.p };
+    });
+  }
+
+  /** Đồng bộ phần tử ghim với danh sách hiện hành (thêm, cập nhật, gỡ). `onPin` được gọi khi chạm ghim. */
+  syncMarkers(markers: readonly ProjectedMarker[], selected: string | null, onPin?: (id: string) => void): void {
+    const keep = new Set(markers.map((m) => m.id));
+    markers.forEach((m, i) => {
+      let el = this.markerEls.get(m.id);
+      if (!el) {
+        el = Object.assign(document.createElement('button'), { type: 'button' });
+        el.dataset['id'] = m.id;
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          onPin?.(m.id);
+        });
+        this.pins.appendChild(el);
+        this.markerEls.set(m.id, el);
+      }
+      el.style.setProperty('--i', String(i));
+      el.className = ['tm-pin', m.muted ? 'is-muted' : '', m.kind === 'hub' ? 'is-hub' : '', m.id === selected ? 'is-sel' : ''].filter(Boolean).join(' ');
+      el.setAttribute('aria-label', (m.num != null ? `${m.num}. ` : '') + (m.label || m.id));
+      // bản đồ chỉ để xem (không có onPin): ghim là hình trang trí, không phải nút bàn phím
+      el.tabIndex = onPin ? 0 : -1;
+      el.toggleAttribute('aria-hidden', !onPin);
+      el.replaceChildren(this.pinBody(m));
+    });
+    this.markerEls.forEach((el, id) => {
+      if (keep.has(id)) return;
+      el.remove();
+      this.markerEls.delete(id);
+    });
+  }
+
+  /** Thân ghim: ảnh tròn (nếu có) và số thứ tự hoặc chấm mốc. */
+  private pinBody(m: ProjectedMarker): HTMLElement {
+    const body = Object.assign(document.createElement('span'), { className: 'tm-pin-body' });
+    if (m.thumb) body.appendChild(Object.assign(document.createElement('img'), { alt: '', src: m.thumb }));
+    if (m.num != null) body.appendChild(Object.assign(document.createElement('b'), { textContent: String(m.num) }));
+    else if (m.kind === 'hub') body.appendChild(Object.assign(document.createElement('i'), { className: 'tm-hub-dot' }));
+    return body;
+  }
+
+  /** Bật/tắt vòng sáng của ghim đang chọn. */
+  select(id: string | null): void {
+    this.markerEls.forEach((el, k) => el.classList.toggle('is-sel', k === id));
+  }
+
+  /** Vẽ tuyến (cung nối các ghim theo thứ tự id) cùng nhãn km của từng đoạn. */
+  drawRoute(route: MapRoute | null, markers: readonly ProjectedMarker[], reduced: boolean): void {
+    this.labels.querySelectorAll('.tm-seg-label').forEach((n) => n.remove());
+    this.segMids = [];
+    if (!this.routeGroup) return;
+    this.routeGroup.innerHTML = '';
+    if (!route) return;
+    const have = route.ids.map((id, k) => ({ p: markers.find((m) => m.id === id)?.p, k })).filter((x): x is { p: Pt; k: number } => Boolean(x.p));
+    const { segs, all } = arcSegments(have.map((x) => x.p));
+    this.routeGroup.innerHTML = buildRouteSvg(segs, all, have.length, reduced);
+    this.segMids = segs.map((s) => ({ index: s.index, p: s.mid }));
+    have.forEach((x, i) => {
+      const text = i ? route.labels[x.k - 1] : '';
+      if (!text) return;
+      const label = Object.assign(document.createElement('span'), { className: 'tm-seg-label', textContent: text });
+      label.dataset['i'] = String(i);
+      this.labels.appendChild(label);
+    });
+  }
+
+  /** Dời mọi phần tử HTML theo camera (gọi mỗi khung hình khi bay/kéo). */
+  place(project: Project, markers: readonly ProjectedMarker[]): void {
+    markers.forEach((m) => {
+      const el = this.markerEls.get(m.id);
+      if (el) moveTo(el, project(m.p));
+    });
+    this.clusters.forEach((c) => moveTo(c.el, project(c.p)));
+    this.towns.forEach((t) => moveTo(t.el, project(t.p)));
+    this.segMids.forEach((m) => {
+      const el = this.labels.querySelector<HTMLElement>(`.tm-seg-label[data-i="${m.index}"]`);
+      if (el) moveTo(el, project(m.p));
+    });
+  }
+
+  /** Sau khi camera dừng: gộp cụm (chế độ duyệt), đặt nhãn không chồng, ẩn/hiện tên thị trấn. */
+  layout(ctx: LayoutContext): void {
+    this.place(ctx.project, ctx.markers);
+    const shown = this.rebuildClusters(ctx);
+    this.place(ctx.project, ctx.markers);
+    const pinBoxes: Box[] = ctx.markers.filter((m) => shown.get(m.id)).map((m) => pinBox(ctx.project(m.p), MAP.PIN_HALF));
+    this.clusters.forEach((c) => pinBoxes.push(pinBox(ctx.project(c.p), MAP.CLUSTER_HALF)));
+    const labelBoxes = this.placePinLabels(ctx, shown, pinBoxes);
+    this.towns.forEach((t) => t.el.classList.toggle('is-on', ctx.scale >= MAP.TOWN_MIN_SCALE && !townIsCrowded(ctx.project(t.p), [...pinBoxes, ...labelBoxes])));
+  }
+
+  /** Gộp các ghim gần nhau thành cụm; trả bảng ghim nào đang hiện (false = đã vào cụm). */
+  private rebuildClusters(ctx: LayoutContext): Map<string, boolean> {
+    this.clusters.forEach((c) => c.el.remove());
+    this.clusters = [];
+    const shown = new Map(ctx.markers.map((m) => [m.id, true]));
+    if (ctx.mode === 'browse') {
+      const pins = ctx.markers.filter((m) => m.kind !== 'hub').map((m) => ({ id: m.id, p: m.p, s: ctx.project(m.p) }));
+      for (const g of clusterPins(pins)) {
+        g.ids.forEach((id) => shown.set(id, false));
+        const el = Object.assign(document.createElement('button'), { type: 'button', className: 'tm-cluster' });
+        el.setAttribute('aria-label', ctx.clusterLabel(g.ids.length));
+        el.appendChild(Object.assign(document.createElement('b'), { textContent: String(g.ids.length) }));
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          ctx.onCluster(g.ids);
+        });
+        this.pins.appendChild(el);
+        this.clusters.push({ el, p: g.p });
+      }
+    }
+    this.markerEls.forEach((el, id) => el.classList.toggle('is-hidden', shown.get(id) === false));
+    return shown;
+  }
+
+  /** Đặt nhãn tên cho các ghim đang hiện (ghim đang chọn trước, ghim mờ sau); trả các hộp nhãn đã đặt. */
+  private placePinLabels(ctx: LayoutContext, shown: Map<string, boolean>, pinBoxes: readonly Box[]): Box[] {
+    this.labels.querySelectorAll('.tm-pin-label').forEach((n) => n.remove());
+    const order = ctx.markers
+      .filter((m) => shown.get(m.id) && m.label && (!m.muted || m.id === ctx.selected))
+      .sort((a, b) => Number(b.id === ctx.selected) - Number(a.id === ctx.selected) || Number(Boolean(a.muted)) - Number(Boolean(b.muted)));
+    const els = order.map((m) => {
+      const el = Object.assign(document.createElement('span'), { className: m.muted ? 'tm-pin-label is-muted' : 'tm-pin-label', textContent: m.label });
+      this.labels.appendChild(el);
+      return { m, el, w: el.offsetWidth, h: el.offsetHeight };
+    });
+    const { placed, boxes } = placeLabels(els.map((e) => ({ id: e.m.id, at: ctx.project(e.m.p), w: e.w, h: e.h })), pinBoxes, ctx.size);
+    els.forEach((e) => {
+      const at = placed.get(e.m.id);
+      if (at) moveTo(e.el, at);
+      else e.el.remove();
+    });
+    return boxes;
+  }
+}
