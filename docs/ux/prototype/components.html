@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wander: thư viện thành phần</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  /* Chỉ bố cục trang trưng bày, không phải thành phần. */
+  .gal { max-width: 1100px; margin: 0 auto; padding: var(--s-5) var(--gutter) var(--s-8); display: grid; gap: var(--s-7); }
+  .sec { display: grid; gap: var(--s-4); } .sec > h2 { font: 800 var(--fs-xl)/var(--lh-tight) var(--font-display); box-shadow: 0 1px 0 var(--line); padding-bottom: var(--s-2); }
+  .sw { display: flex; flex-wrap: wrap; gap: var(--s-2); } .sw span { display: grid; place-items: center; width: 64px; height: 44px; border-radius: var(--r-sm); font-size: var(--fs-xs); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="gal">
+  <header class="sec">
+    <h1 class="t-hero">Thư viện thành phần</h1>
+    <p class="t-note">Nguồn: <code>tokens.css</code> + <code>components.css</code>. Mọi màu đi qua token; vùng chạm tối thiểu 44 px; giao diện sáng và tối theo hệ thống. Dữ liệu và ảnh là mẫu từ kho biên tập.</p>
+  </header>
+
+  <section class="sec" id="mau"><h2>Màu theo vai trò, loại và ngày</h2>
+    <div class="sw">
+      <span style="background:var(--bg);color:var(--ink);box-shadow:inset 0 0 0 1px var(--border-ctrl)">bg</span>
+      <span style="background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--border-ctrl)">surface</span>
+      <span style="background:var(--surface-2);color:var(--ink)">surface-2</span>
+      <span style="background:var(--ink);color:var(--bg)">ink</span>
+      <span style="background:linear-gradient(135deg,var(--cta-1),var(--cta-2));color:var(--on-cta)">CTA</span>
+      <span style="background:var(--sun);color:var(--on-sun)">sun</span>
+      <span style="background:var(--like);color:var(--on-like)">like</span>
+      <span style="background:var(--skip);color:var(--on-skip)">skip</span>
+      <span style="background:var(--warn-bg);color:var(--warn-ink);box-shadow:inset 0 0 0 1px var(--warn-line)">chờ duyệt</span>
+    </div>
+    <div class="sw">
+      <span data-cat="canh" style="background:var(--cat);color:var(--on-cat)">canh</span><span data-cat="van" style="background:var(--cat);color:var(--on-cat)">van</span><span data-cat="am" style="background:var(--cat);color:var(--on-cat)">am</span><span data-cat="leo" style="background:var(--cat);color:var(--on-cat)">leo</span><span data-cat="luu" style="background:var(--cat);color:var(--on-cat)">luu</span><span data-cat="cho" style="background:var(--cat);color:var(--on-cat)">cho</span>
+    </div>
+    <div class="sw">
+      <span data-day="1" style="background:var(--day);color:var(--on-day)">Ngày 1</span><span data-day="2" style="background:var(--day);color:var(--on-day)">Ngày 2</span><span data-day="3" style="background:var(--day);color:var(--on-day)">Ngày 3</span><span data-day="4" style="background:var(--day);color:var(--on-day)">Ngày 4</span><span data-day="5" style="background:var(--day);color:var(--on-day)">Ngày 5</span><span data-day="6" style="background:var(--day);color:var(--on-day)">Ngày 6</span><span data-day="7" style="background:var(--day);color:var(--on-day)">Ngày 7</span>
+    </div>
+  </section>
+
+  <section class="sec" id="chu"><h2>Chữ</h2>
+    <p class="t-hero">Quẹt nơi mê</p>
+    <p class="t-h1">Hà Giang, 9 địa điểm</p>
+    <p class="t-h2">Ruộng bậc thang Hoàng Su Phì</p>
+    <p class="t-h3">Cách TP Hà Giang ~104 km · ước tính</p>
+    <p>Nội dung 16 px: Đứng dưới lá cờ ở cực Bắc, nhìn mây trôi qua những dãy núi đá trùng điệp. Tổng phải trả thêm <span class="money" data-money="1500000"></span> · Ngày 2 · T7 31/10.</p>
+    <p class="t-note">Ghi chú 14 px: khoảng cách và thời gian đi là ước tính.</p>
+    <p class="t-label">Nhãn nhỏ 12 px</p>
+  </section>
+
+  <section class="sec" id="nut"><h2>Nút</h2>
+    <div class="u-row">
+      <button class="btn primary" type="button"><i data-i="check"></i>Chọn nơi này</button>
+      <button class="btn secondary" type="button"><i data-i="x"></i>Bỏ qua</button>
+      <button class="btn danger" type="button"><i data-i="trash"></i>Xóa</button>
+      <button class="btn sun" type="button"><i data-i="rosette-discount-check"></i>Nên ghé</button>
+      <button class="btn primary" type="button" aria-disabled="true">Không dùng được</button>
+      <button class="btn primary" type="button" aria-busy="true">Đang lưu…</button>
+    </div>
+    <div class="u-row">
+      <button class="icon-btn" type="button" aria-label="Quay lại"><i data-i="chevron-left"></i></button>
+      <button class="icon-btn" type="button" aria-label="Chia sẻ"><i data-i="share-2"></i></button>
+      <button class="round-btn small" type="button" aria-label="Hoàn tác"><i data-i="arrow-back-up"></i></button>
+      <button class="round-btn skip" type="button" aria-label="Bỏ qua"><i data-i="x" data-size="xl"></i></button>
+      <button class="round-btn like" type="button" aria-label="Chọn nơi này"><i data-i="check" data-size="xl"></i></button>
+    </div>
+    <p class="t-note">Mọi nút chỉ-biểu-tượng có nhãn aria. Mỗi thao tác chạm lướt có nút tương đương (quẹt = Bỏ qua/Chọn).</p>
+  </section>
+
+  <section class="sec" id="trangthai"><h2>Trạng thái: hover, focus, pressed, disabled, lỗi, đang tải</h2>
+    <div class="u-row">
+      <button class="btn primary" type="button">Mặc định</button>
+      <button class="btn primary is-hover" type="button">Hover</button>
+      <button class="btn primary is-focus" type="button">Focus</button>
+      <button class="btn primary is-pressed" type="button">Pressed</button>
+      <button class="btn primary" type="button" aria-disabled="true">Disabled</button>
+      <button class="btn primary" type="button" aria-busy="true">Đang tải</button>
+    </div>
+    <div class="u-row">
+      <button class="btn secondary" type="button">Mặc định</button>
+      <button class="btn secondary is-hover" type="button">Hover</button>
+      <button class="btn secondary is-focus" type="button">Focus</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Chip</button>
+      <button class="filter-chip is-hover" type="button" aria-pressed="false">Chip hover</button>
+      <button class="filter-chip" type="button" aria-pressed="true" data-cat="canh">Chip chọn</button>
+    </div>
+    <div class="u-grid">
+      <div class="field"><label for="s1">Ô nhập: mặc định</label><input class="input" id="s1" placeholder="Ví dụ Hà Giang"></div>
+      <div class="field"><label for="s2">Ô nhập: focus</label><input class="input is-focus" id="s2" value="Hà Giang"></div>
+      <div class="field"><label for="s3">Ô nhập: không dùng được</label><input class="input" id="s3" value="Không sửa được" disabled></div>
+      <div class="field"><label for="s4">Ô nhập: đang tải</label><input class="input" id="s4" value="Đang kiểm tra…" aria-busy="true" readonly></div>
+    </div>
+  </section>
+
+  <section class="sec" id="chip"><h2>Chip, nhãn, huy hiệu</h2>
+    <div class="u-row">
+      <span class="chip" data-cat="canh"><i data-i="trees" data-size="s"></i>Cảnh quan</span>
+      <span class="chip" data-cat="van"><i data-i="columns" data-size="s"></i>Văn hóa</span>
+      <span class="chip" data-cat="am"><i data-i="tools-kitchen-2" data-size="s"></i>Ẩm thực</span>
+      <span class="chip" data-cat="leo"><i data-i="mountain" data-size="s"></i>Leo núi</span>
+      <span class="chip" data-cat="luu"><i data-i="bed" data-size="s"></i>Lưu trú</span>
+      <span class="chip" data-cat="cho"><i data-i="building-store" data-size="s"></i>Chợ</span>
+    </div>
+    <div class="u-row">
+      <span class="chip solid" data-cat="van"><i data-i="columns" data-size="s"></i>Văn hóa</span>
+      <span class="chip solid" data-cat="am"><i data-i="tools-kitchen-2" data-size="s"></i>Ẩm thực</span>
+      <span class="chip sun"><i data-i="rosette-discount-check" data-size="s"></i>Nên ghé</span>
+      <span class="chip warn"><i data-i="clock" data-size="s"></i>Chờ duyệt</span>
+      <span class="chip"><i data-i="calendar-event" data-size="s"></i>Tháng 9–11</span>
+      <span class="chip"><i data-i="route" data-size="s"></i>~104 km · ước tính</span>
+      <span class="cat-badge" data-cat="canh" role="img" aria-label="Loại Cảnh quan"><i data-i="trees"></i></span>
+      <span class="cat-badge" data-cat="am" role="img" aria-label="Loại Ẩm thực"><i data-i="tools-kitchen-2"></i></span>
+    </div>
+    <div class="u-row" role="group" aria-label="Bộ lọc loại">
+      <span class="day-chip" data-day="1">Ngày 1</span><span class="day-chip" data-day="2">Ngày 2</span><span class="day-chip" data-day="3">Ngày 3</span>
+      <button class="filter-chip" type="button" aria-pressed="false">Tất cả</button>
+      <button class="filter-chip" type="button" data-cat="canh" aria-pressed="true"><i data-i="trees" data-size="s"></i>Cảnh quan</button>
+      <button class="filter-chip" type="button" data-cat="leo" aria-pressed="false"><i data-i="mountain" data-size="s"></i>Leo núi</button>
+    </div>
+    <div class="u-row"><span class="chip photo">Chip trên ảnh (nền tối)</span>
+      <span class="avatars" role="group" aria-label="Thành viên: Bình, Mai và 1 người nữa"><span aria-hidden="true">B</span><span aria-hidden="true">M</span><span aria-hidden="true">+1</span></span></div>
+  </section>
+
+  <section class="sec" id="the"><h2>Thẻ</h2>
+    <div class="u-grid">
+      <a class="photo-card" data-cat="canh" href="#" aria-label="Ruộng bậc thang Hoàng Su Phì, Cảnh quan, nửa ngày">
+        <img alt="" src="/catalog/photos/hoang-su-phi-1.jpg">
+        <span class="corner cat-badge" data-cat="canh" aria-hidden="true"><i data-i="trees"></i></span>
+        <span class="scrim"><span class="t-h2">Ruộng bậc thang Hoàng Su Phì</span><span class="on-photo-note">Hoàng Su Phì · Nửa ngày</span></span>
+      </a>
+      <div class="u-stack">
+        <button class="row-card" type="button" data-cat="canh" data-day="1">
+          <span class="thumb"><img alt="" src="/catalog/photos/deo-ma-pi-leng-1.jpg"><span class="num" aria-label="Thứ tự 1">1</span></span>
+          <span><span class="kind"><i data-i="trees" data-size="s"></i>Cảnh quan · Mèo Vạc</span><span class="t-h3" style="display:block">Đèo Mã Pì Lèng</span><span class="t-note" style="display:block">Cung đèo ôm vách núi, dưới chân là sông Nho Quế.</span></span>
+        </button>
+        <button class="row-card pending" type="button" data-cat="canh">
+          <span class="thumb"><img alt="" src="/catalog/photos/song-nho-que-1.jpg"></span>
+          <span><span class="kind"><i data-i="clock" data-size="s"></i>Bình đề nghị xóa · chờ duyệt</span><span class="t-h3" style="display:block">Sông Nho Quế</span><span class="t-note" style="display:block">Đi thuyền mất gần nửa buổi, cả nhóm dễ say sóng.</span></span>
+        </button>
+        <div class="u-row"><div class="stat" data-cat="canh"><b>8</b><span>địa điểm</span></div><div class="stat" data-cat="van"><b>3</b><span>ngày</span></div><div class="stat" data-cat="leo"><b>~62</b><span>km · ước tính</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="form"><h2>Biểu mẫu</h2>
+    <div class="u-grid">
+      <div class="field"><label for="f1">Tên chuyến đi</label><input class="input" id="f1" value="Hà Giang - 2"></div>
+      <div class="field"><label for="f2">Ngày đi</label><input class="input" id="f2" type="date" value="2026-10-31" aria-describedby="d2"><p class="hint" id="d2" data-date-for="f2"></p></div>
+      <div class="field"><label for="f3">Chi phí, nghìn đồng</label><div class="input-suffix"><input class="input" id="f3" inputmode="numeric" value="150" aria-describedby="h3"><span id="p3" data-money="150000">= 150.000 ₫</span></div><p class="hint" id="h3">Để trống nếu chưa biết giá.</p></div>
+      <div class="field"><label for="f4">Ngày về</label><input class="input" id="f4" type="date" value="2026-10-30" aria-invalid="true" aria-describedby="e4"><p class="err" id="e4" role="alert"><i data-i="alert-triangle" data-size="s"></i>Ngày về không được trước ngày đi.</p></div>
+      <div class="switch"><button type="button" role="switch" aria-checked="true" aria-labelledby="sw1"></button><span id="sw1">Cho phép người có liên kết xem</span></div>
+      <label class="check-row"><input type="checkbox" checked>Đã bao gồm trong giá phòng</label>
+      <div class="segmented" role="group" aria-label="Xem với tư cách"><button type="button" aria-pressed="true">Người tạo</button><button type="button" aria-pressed="false">Thành viên</button></div>
+    </div>
+  </section>
+
+  <section class="sec" id="nav"><h2>Điều hướng</h2>
+    <div class="u-grid">
+      <nav class="tabbar" aria-label="Điều hướng chính (điện thoại)">
+        <a href="#" aria-current="page"><i data-i="compass" data-size="l"></i>Khám phá</a>
+        <a href="#" aria-label="Đã chọn, 3 địa điểm"><i data-i="bookmarks" data-size="l"></i>Đã chọn<span class="dot-badge" aria-hidden="true">3</span></a>
+        <a href="#"><i data-i="calendar-event" data-size="l"></i>Chuyến đi</a>
+      </nav>
+      <nav class="sidenav" aria-label="Điều hướng chính (máy tính)">
+        <a href="#" aria-current="page"><i data-i="compass"></i>Khám phá</a>
+        <a href="#"><i data-i="bookmarks"></i>Đã chọn</a>
+        <a href="#"><i data-i="calendar-event"></i>Chuyến đi</a>
+      </nav>
+      <div>
+        <div class="day-tabs" role="tablist" aria-label="Các ngày của chuyến" id="tabs">
+          <button role="tab" id="tab-ov" aria-controls="panel-ov" aria-selected="false" tabindex="-1" type="button">Tổng quan</button>
+          <button role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1" type="button" data-day="1">Ngày 1</button>
+          <button role="tab" id="tab-2" aria-controls="panel-2" aria-selected="true" tabindex="0" type="button" data-day="2">Ngày 2</button>
+          <button role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1" type="button" data-day="3">Ngày 3</button>
+        </div>
+        <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" class="t-note" style="padding-top:var(--s-3)">Nội dung Ngày 2 (dùng phím ← → để đổi tab).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="phanhoi"><h2>Phản hồi và trạng thái</h2>
+    <div class="u-grid">
+      <div class="toast" role="status"><span>Đã xóa «Sông Nho Quế»</span><button type="button">Hoàn tác</button></div>
+      <div class="banner" role="status"><b>1 đề nghị xóa đang chờ bạn</b><span>Quẹt phải để giữ lại, quẹt trái để đồng ý xóa.</span></div>
+      <div class="u-stack" aria-busy="true" aria-label="Đang tải"><div class="skeleton" aria-hidden="true" style="height:140px"></div><div class="skeleton" aria-hidden="true" style="height:20px;width:70%"></div><div class="skeleton" aria-hidden="true" style="height:16px;width:40%"></div></div>
+      <div class="empty"><span class="art" aria-hidden="true"><i data-i="compass" data-size="xl"></i></span><h3 class="t-h2">Chưa chọn nơi nào</h3><p class="t-note">Quẹt phải những nơi bạn muốn đến, chúng sẽ nằm ở đây.</p><button class="btn primary" type="button">Bắt đầu khám phá</button></div>
+      <div class="u-stack"><p class="t-note" id="pg">Đã có ngày 5/8</p><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="5" aria-labelledby="pg"><i style="width:62%"></i></div></div>
+      <div class="sheet-backdrop"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dlg1"><div class="grab" aria-hidden="true"></div><h3 class="t-h2" id="dlg1">Xếp 3 nơi vào ngày nào?</h3><div class="u-row"><button class="day-chip" data-day="1" type="button">Ngày 1</button><button class="day-chip" data-day="2" type="button">Ngày 2</button><button class="day-chip" data-day="3" type="button">Ngày 3</button></div><button class="btn primary block" type="button">Xác nhận</button></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="icon"><h2>Biểu tượng (Tabler, MIT, nét 2 px)</h2>
+    <div class="u-row" id="iconlist"></div>
+  </section>
+</div>
+<script src="icons.js"></script>
+<script src="format.js"></script>
+<script>
+  var l = document.getElementById('iconlist');
+  WI.names.forEach(function (n) { var s = document.createElement('span'); s.className = 'chip'; s.innerHTML = WI.html(n) + n; l.appendChild(s); });
+  // Tab ngày: phím mũi tên (roving tabindex) và chọn
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('#tabs [role=tab]'));
+    function select(t) { tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; if (x.dataset.day) x.style.setProperty('--day', 'var(--day-' + x.dataset.day + ')'); }); t.focus(); }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) { var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length]); } });
+    });
+    tabs.forEach(function (x) { if (x.dataset.day) x.style.setProperty('--day', 'var(--day-' + x.dataset.day + ')'); });
+  })();
+</script>
+</body>
+</html>

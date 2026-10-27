@@ -1,0 +1,19 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>lab</title>
+<link rel=stylesheet href="../fonts.css"><link rel=stylesheet href="../tokens.css"><link rel=stylesheet href="../app/map.css">
+<style>body{margin:0;font-family:var(--font-body)} #m{width:100vw;height:100vh}</style>
+<div id=m></div>
+<script src="../app/map.js"></script>
+<script>
+const q=new URLSearchParams(location.search);
+fetch('/data/catalog/ha-giang.json').then(r=>r.json()).then(c=>{
+  const pl=c.places.filter(p=>p.lat);
+  const m=new TerrainMap(document.getElementById('m'),{dest:'ha-giang',onPin:id=>{m.select(id)}});
+  const mode=q.get('mode')||'browse';
+  const ids=(q.get('ids')?q.get('ids').split(','):pl.map(p=>p.id));
+  m.setMode(mode);
+  m.setMarkers(pl.filter(p=>ids.includes(p.id)||mode==='browse').map((p,i)=>({id:p.id,lat:p.lat,lon:p.lon,label:p.name,num:mode==='route'?i+1:null,thumb:'/catalog/photos/'+p.photos[0].file,muted:mode==='route'&&!ids.includes(p.id)})));
+  if(mode==='route'){ m.setRoute(ids,ids.slice(1).map((_,i)=>(8+i*5)+' km')); }
+  m.fitTo(mode==='route'?ids:null,{animate:false});
+  window.m=m;
+});
+</script>

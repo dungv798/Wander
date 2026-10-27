@@ -1,5 +1,7 @@
-# Triển khai trên AWS — đề xuất (`PROPOSED`, CHƯA DUYỆT, CHƯA TẠO TÀI NGUYÊN)
+# Triển khai trên AWS — hướng đã chọn (ADR-006 `APPROVED` 24/10/2026), CHƯA TẠO TÀI NGUYÊN
 
+> **Cập nhật 24/10/2026:** PO chọn ECS Fargate + ALB + RDS PostgreSQL single-AZ, CloudFront cùng origin, CDK TypeScript, rate limit in-memory 1 task — xem [ADR-006](adr/ADR-006-aws-fargate-cdk.md). **App Runner đã bị loại**: AWS không nhận khách hàng mới từ 30/04/2026 (cột App Runner ở §3 chỉ còn để tham khảo lịch sử). Việc tạo tài nguyên vẫn cần PO duyệt riêng sau khi tra giá và đặt budget alarm.
+>
 > Bị chặn bởi **RG-1** (thiết kế xác thực Q16 chưa duyệt) và **RG-5** (chưa sẵn sàng triển khai).
 > Không được tạo tài nguyên AWS, khóa bí mật hay pipeline triển khai khi PO chưa duyệt AD-2/AD-3.
 

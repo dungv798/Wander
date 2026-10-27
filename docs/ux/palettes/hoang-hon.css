@@ -1,0 +1,19 @@
+/* Hướng C "Hoàng hôn": tím violet làm thương hiệu, nút gradient hồng sang cam như bầu trời lúc chiều, nắng vàng điểm nhấn. Nổi bật, giàu cảm xúc, khác hẳn mẫu cam-đỏ.
+   Chỉ ghi đè token; thử: node docs/ux/tools/check-palette.mjs hoang-hon */
+:root {
+  --bg: #faf7ff; --surface: #ffffff; --surface-2: #eee6ff; --line: #dccff5; --ink: #1d1448; --muted: #554b7e; --border-ctrl: #76699f;
+  --brand: #7b52f0; --brand-ink: #3b1c97; --brand-soft: #e5dbff; --brand-2: #6a3fe0; --on-brand-2: #ffffff; --tint: #e9ddff; --tint-ink: #3b1c97;
+  --cta-1: #ff7b6e; --cta-g1: #ff8fb8; --cta-2: #ff8a3d; --cta-1-hover: #f06b62; --cta-2-hover: #f06b62; --on-cta: #2a0b1c;
+  --cta-glow: 0 12px 26px -10px rgba(255, 95, 162, 0.55);
+  --sun: #ffd166; --sun-hi: #fff0b8; --on-sun: #1d1448;
+  --sky: #3659dc; --sky-soft: #e0e8ff; --sky-1: #cbbcff; --sky-2: #ffeee4;
+  --warn-bg: #e0e8ff; --warn-line: #3f6df0; --warn-ink: #1d3f9c;
+  --glass: rgba(255, 255, 255, 0.84); --backdrop: rgba(29, 20, 72, 0.42);
+  --ambient-a: #d6c4ff; --ambient-b: #ffc9a6; --ambient-c: #ffb3d1;
+  --gem-grad: linear-gradient(150deg, #9a6cff, #5428d4); --on-gem: #ffffff;
+  --obj-hi: #ffffff; --obj-mid: #f0e8ff; --obj-lo: #c8b4ff; --obj-edge: #a98af0; --obj-accent: #ff5fa2;
+  --map-low: #f8f4ff; --map-mid: #e4ddf6; --map-high: #f6dfcf; --map-peak: #e3b6a4; --map-shade: 0.5;
+  --map-water: #86b2ff; --map-road: #ffffff; --map-road-casing: #d3c4dd;
+  --card-shadow: 0 18px 34px -20px rgba(29, 20, 72, 0.5);
+  --scene: linear-gradient(#d8ccff, #faf7ff 42%);
+}

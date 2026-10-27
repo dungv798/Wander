@@ -1,0 +1,86 @@
+/* Bộ thẻ quẹt (v6, 26/10/2026 theo PO): ảnh của MỖI địa điểm là nền cả màn; tiêu đề, thông tin và nút nổi đè lên ảnh.
+   Điện thoại: thẻ tràn mép; máy tính: nền là chính ảnh đó làm mờ, thẻ dọc lớn ở giữa. Chỉ dùng token; chuyển động transform/opacity. */
+
+/* ---- sân khấu ---- */
+#screen.immersive { padding: 0; overflow: hidden; background: var(--photo-bg); color: var(--on-photo); }
+#screen.immersive::before { content: ""; position: absolute; inset: -60px; background: var(--stage, none) center / cover no-repeat; filter: blur(34px) saturate(1.25) brightness(0.6); transform: scale(1.1); }
+.deckbar, .filters { position: relative; z-index: 6; }
+.deckbar { padding-block: 12px 6px; color: var(--on-photo); }
+.deckbar h1 { color: var(--on-photo); }
+.deckbar .note { color: var(--on-photo); opacity: 0.85; }
+.deckbar .iconbtn { background: var(--chip-photo); color: var(--on-photo); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: none; }
+.deckbar .pill { box-shadow: var(--cta-glow); }
+.filters { padding-block: 2px 10px; }
+.filters .fchip { min-height: var(--tap); background: var(--chip-photo); color: var(--on-photo); border: 1px solid rgba(255, 255, 255, 0.35); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.filters .fchip[aria-pressed="true"] { background: var(--on-photo); color: var(--ink-fixed); border-color: var(--on-photo); }
+.deckwrap { position: relative; flex: 1; min-height: 0; padding: 0; display: block; container-type: size; }
+.deck { position: absolute; inset: 0; margin: 0 auto; min-height: 0; }
+.deck.deck-empty { display: grid; place-items: center; }
+
+@media (max-width: 767px) {
+  .deckbar { position: absolute; z-index: 6; top: calc(26px + env(safe-area-inset-top, 0px)); left: 0; right: 0; padding-block: 0; }
+  .filters { position: absolute; z-index: 6; top: calc(26px + 60px + env(safe-area-inset-top, 0px)); left: 0; right: 0; padding-block: 0; }
+  .deckwrap { position: absolute; inset: 0; }
+}
+@media (min-width: 768px) {
+  #screen.immersive { display: flex; flex-direction: column; align-items: center; }
+  .deck { width: min(100cqw, 100cqh * 0.74); max-width: 580px; }
+  #screen.immersive > .deckwrap { margin-bottom: 14px; }
+}
+
+/* ---- thẻ ---- */
+.card { position: absolute; inset: 0; overflow: hidden; background: var(--photo-bg); color: var(--on-photo); user-select: none; -webkit-user-select: none; touch-action: none; transform-origin: 50% 100%; will-change: transform; transition: transform var(--dur-slow) var(--ease-out), filter var(--dur-slow) linear; }
+@media (min-width: 768px) { .card { border-radius: var(--r-xl); box-shadow: 0 34px 60px -26px rgba(0, 0, 0, 0.7); } }
+.card.front { cursor: grab; }
+.card .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+.card-veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, var(--scrim) 0%, transparent 20%), linear-gradient(to top, var(--scrim) 0%, transparent 56%); opacity: 0.92; }
+.card.depth-1 { pointer-events: none; transform: translateY(calc(22px * (1 - var(--p, 0)))) scale(calc(0.93 + 0.07 * var(--p, 0))); filter: brightness(calc(0.62 + 0.38 * var(--p, 0))); }
+.card.depth-2 { pointer-events: none; transform: translateY(40px) scale(0.86); filter: brightness(0.45); }
+.card:not(.front) .card-info, .card:not(.front) .segs, .card:not(.front) .stamp { visibility: hidden; }
+.segs { top: calc(10px + env(safe-area-inset-top, 0px)); }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.card .credit-btn { position: static; pointer-events: auto; background: var(--chip-photo); }
+.card .credit-pill { top: auto; right: 12px; bottom: calc(var(--actions-h, 132px) + 190px + env(safe-area-inset-bottom, 0px)); }
+.card .banner-top { top: calc(70px + env(safe-area-inset-top, 0px)); }
+
+.card-info { --actions-h: 132px; position: absolute; left: 0; right: 0; bottom: calc(var(--actions-h, 132px) + env(safe-area-inset-bottom, 0px)); display: grid; gap: 8px; padding: 0 20px; pointer-events: none; animation: cardInfoIn var(--dur-scene) var(--ease-out) both; }
+.card h2 { font: 800 clamp(30px, 8.6vw, 40px) / 1.02 var(--font-display); color: var(--on-photo); text-wrap: balance; }
+.card-cat { width: fit-content; background: var(--on-photo); color: var(--ink-fixed); }
+.card-cat .ic { color: var(--brand-2); }
+.card-area { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--on-photo); font-size: var(--fs-md); font-weight: 600; opacity: 0.95; }
+.card-facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.card-facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600; background: rgba(255, 255, 255, 0.2); color: var(--on-photo); border: 1px solid rgba(255, 255, 255, 0.3); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.card .hook { margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 15px; line-height: 1.45; color: var(--on-photo); opacity: 0.94; }
+.card-info > * { animation: cardInfoIn var(--dur-scene) var(--ease-out) both; }
+.card-info > *:nth-child(2) { animation-delay: 60ms; } .card-info > *:nth-child(3) { animation-delay: 110ms; } .card-info > *:nth-child(4) { animation-delay: 160ms; } .card-info > *:nth-child(5) { animation-delay: 210ms; }
+@keyframes cardInfoIn { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+
+/* ---- dấu THÍCH / BỎ QUA: huy hiệu bóng kính lớn ---- */
+.stamp { position: absolute; z-index: 5; top: 26%; display: grid; place-items: center; width: 96px; height: 96px; padding: 0; border: 0; border-radius: 50%; background: none; opacity: 0; pointer-events: none; color: var(--white); font-size: 0; }
+.stamp::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.8), transparent 42%), var(--gem-bg); box-shadow: inset 0 -8px 14px rgba(0, 0, 0, 0.22), inset 0 5px 8px rgba(255, 255, 255, 0.5), 0 18px 30px -10px rgba(0, 0, 0, 0.6); }
+.stamp .ic { position: relative; width: 50px; height: 50px; stroke-width: 3.4; }
+.stamp.r { left: 24px; --gem-bg: var(--gem-like); transform: rotate(-12deg); }
+.stamp.l { right: 24px; --gem-bg: var(--gem-skip); transform: rotate(12deg); }
+
+/* ---- nút hành động nổi ở đáy ---- */
+.actions { position: absolute; z-index: 6; left: 0; right: 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: flex-end; justify-content: center; gap: 16px; pointer-events: none; }
+.act { pointer-events: auto; display: grid; justify-items: center; gap: 6px; color: var(--on-photo); font-size: 12px; font-weight: 700; }
+.round { display: grid; place-items: center; width: 62px; height: 62px; padding: 0; border: 1.5px solid rgba(255, 255, 255, 0.45); border-radius: 50%; background: rgba(255, 255, 255, 0.2); color: var(--on-photo); box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.65); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: transform var(--dur-press) var(--ease-out); }
+.round:active { transform: scale(0.9); }
+.round .ic { width: 28px; height: 28px; stroke-width: 2.6; }
+.round.small { width: 46px; height: 46px; } .round.small .ic { width: 22px; height: 22px; stroke-width: 2.2; }
+.round.l { background: var(--white); color: var(--skip); border-color: var(--white); }
+.round.r { width: 78px; height: 78px; border: 0; background: radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.55), transparent 44%), var(--gem-like); color: var(--white); animation: likePulse 2.6s ease-in-out infinite; }
+.round.r .ic { width: 38px; height: 38px; stroke-width: 3; }
+.round:disabled { opacity: 0.4; }
+@keyframes likePulse { 0%, 100% { box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.65), 0 0 0 0 rgba(62, 224, 139, 0.55); } 60% { box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.65), 0 0 0 16px rgba(62, 224, 139, 0); } }
+@media (prefers-reduced-motion: reduce) { .round.r { animation: none; } .card-info, .card-info > * { animation: none; } }
+
+/* ---- thẻ trong tờ phủ (xem đề nghị xóa): không có nút nổi ---- */
+.panel .deck { position: relative; height: min(62vh, 480px); width: 100%; max-width: none; }
+.panel .card { border-radius: var(--r-lg); }
+.panel .card-info { --actions-h: 0px; bottom: 16px; }
+
+/* tên dài và màn thấp: thẻ vẫn gọn */
+.card h2 { overflow-wrap: anywhere; }
+@media (max-height: 680px) { .card .hook { display: none; } .card-facts li:nth-child(3) { display: none; } }

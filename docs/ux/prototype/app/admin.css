@@ -1,0 +1,104 @@
+/* Cổng quản trị (T14). Dùng chung token của app (app.css); chỉ tối ưu cho màn rộng nhưng dùng được từ 390 px. */
+:root { --ok-bg: #d8f3e3; --ok-ink: #0a5a31; --bad-bg: #fde0dd; --bad-ink: #8c1d14; --draft-bg: #e9e4dc; --draft-ink: #3f4a5a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ok-bg: #12402a; --ok-ink: #a7e8c4; --bad-bg: #4a1d1a; --bad-ink: #ffc2bb; --draft-bg: #2a3a50; --draft-ink: #c6d6e8; } }
+:root[data-theme="dark"] { --ok-bg: #12402a; --ok-ink: #a7e8c4; --bad-bg: #4a1d1a; --bad-ink: #ffc2bb; --draft-bg: #2a3a50; --draft-ink: #c6d6e8; }
+
+html, body.admin { height: auto; overflow: visible; }
+body.admin { min-height: 100vh; }
+.admin .logo { position: static; font-size: 26px; color: var(--brand-2); display: inline-block; }
+.admin h1 { font-family: var(--font-display); font-size: 30px; line-height: 1.15; margin: 0; }
+.admin h2 { font-family: var(--font-display); font-size: 20px; line-height: 1.2; margin: 0 0 4px; }
+.admin h1:focus { outline: none; }
+.admin .note { color: var(--muted); font-size: 14px; }
+.admin .ic { width: 20px; height: 20px; flex: none; }
+.admin .ic.s { width: 16px; height: 16px; }
+.admin .ic.l { width: 28px; height: 28px; }
+
+.atop { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 14px max(16px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--line); background: var(--surface); position: sticky; top: 0; z-index: 5; }
+.abrand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.proto { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 700; }
+.aright { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 6px max(16px, env(safe-area-inset-left, 0px)); font-size: 14px; color: var(--muted); }
+.crumbs .ic.sep { transform: rotate(-90deg); width: 14px; height: 14px; }
+.crumbs [aria-current] { color: var(--ink); font-weight: 700; }
+.amain { max-width: 1200px; margin: 0 auto; padding: 8px max(16px, env(safe-area-inset-left, 0px)) 80px; display: grid; gap: 20px; }
+.ahead { display: grid; gap: 6px; }
+.arow2 { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.abar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.acard { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 14px; min-width: 0; box-shadow: var(--shadow); }
+.alogin { min-height: 100vh; display: grid; place-items: center; padding: 24px max(16px, env(safe-area-inset-left, 0px)); }
+.alogin .acard { width: min(440px, 100%); }
+.alogin .protobox { margin-top: 4px; }
+
+.alist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.arow { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 14px; align-items: center; min-width: 0; }
+.arow.muted { background: transparent; }
+.acell { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; min-width: 0; }
+.acell.main { display: grid; gap: 2px; }
+.acell.main b { overflow-wrap: anywhere; }
+.acell.thumb img, .acell.thumb .noimg { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; display: grid; place-items: center; background: var(--surface-2); }
+.noimg { color: var(--muted); }
+.noimg.big { width: 100%; height: 160px; border-radius: 14px; display: grid; place-items: center; gap: 4px; align-content: center; background: var(--surface-2); }
+.acell.act { justify-content: flex-start; }
+@media (min-width: 768px) {
+  .arow { grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) minmax(0, 1.2fr) auto; }
+  .arow:has(.thumb) { grid-template-columns: 64px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.6fr) auto; }
+  .acell.act { justify-content: flex-end; }
+}
+
+.badge { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 700; line-height: 1.2; }
+.badge.ok { background: var(--ok-bg); color: var(--ok-ink); }
+.badge.bad { background: var(--bad-bg); color: var(--bad-ink); }
+.badge.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.badge.draft { background: var(--draft-bg); color: var(--draft-ink); }
+.count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; border-radius: 11px; background: var(--bad-bg); color: var(--bad-ink); font-size: 12px; font-weight: 800; padding: 0 6px; }
+
+.tabs { display: flex; gap: 6px; border-bottom: 1.5px solid var(--line); overflow-x: auto; }
+.tab { border: 0; background: none; color: var(--muted); font-weight: 700; font-size: 16px; padding: 12px 16px; min-height: 48px; border-bottom: 3px solid transparent; margin-bottom: -1.5px; white-space: nowrap; display: inline-flex; gap: 8px; align-items: center; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand-2); }
+
+.qlist { display: grid; gap: 12px; }
+.acard.q ul, .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.acard.q li, .rules li { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; line-height: 1.45; }
+.acard.q li .ic, .rules li .ic { margin-top: 2px; }
+li.bad .ic { color: var(--bad-ink); }
+li.warn .ic { color: var(--warn-ink); }
+li.ok .ic { color: var(--ok-ink); }
+
+.aform { display: grid; gap: 20px; align-items: start; }
+.aform > form { display: grid; gap: 16px; min-width: 0; }
+.aside { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 1100px) { .aform { grid-template-columns: minmax(0, 1fr) 380px; } .aside { position: sticky; top: 76px; } }
+.lbl { font-size: 14px; color: var(--muted); font-weight: 600; }
+.ro { margin: 0; padding: 10px 12px; border-radius: 14px; background: var(--surface-2); font-size: 14px; line-height: 1.5; max-height: 7.5em; overflow: auto; }
+.ferr { margin: 0; color: var(--bad-ink); background: var(--bad-bg); border-radius: 10px; padding: 6px 10px; font-size: 14px; font-weight: 600; }
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--skip); }
+.photo { border: 1.5px solid var(--line); border-radius: 18px; padding: 12px; display: grid; gap: 10px; margin: 0; min-width: 0; }
+.photo legend { font-weight: 700; padding: 0 6px; }
+.photo img { width: 100%; max-height: 160px; object-fit: cover; border-radius: 12px; }
+.pv { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--surface-2); }
+.pv img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.pvin { padding: 12px 14px; display: grid; gap: 4px; }
+.pvin span { color: var(--muted); font-size: 14px; }
+.pvin p { margin: 0; font-size: 15px; }
+.admin .field label { font-size: 14px; color: var(--muted); font-weight: 600; }
+.admin .field input, .admin .field select, .admin .field textarea { color: var(--ink); font: inherit; }
+.admin .btn { min-height: 44px; }
+.admin .linkbtn { min-height: 44px; display: inline-flex; align-items: center; }
+.admin .fchip { min-height: 44px; }
+.admin .empty { margin: 24px auto; }
+.admin .field input:disabled { opacity: .7; }
+
+.admin .toast { bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 480px) { .tab { padding: 12px 12px; font-size: 15px; } .atop { gap: 8px 12px; } }
+.admin .protobox b { text-transform: none; letter-spacing: 0; font-size: 14px; }
+@media (max-width: 480px) { .admin h1 { font-size: 24px; } }
+
+/* Tạo điểm đến mới (DG-2 A5, khung) */
+.ndform { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; margin-top: 16px; }
+.ndform label { width: 100%; font-weight: 700; color: var(--ink); }
+.ndform input { flex: 1 1 220px; min-height: 44px; padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); }
+.ndform .btn { min-height: 44px; }
+#nd-why { margin-top: 8px; }

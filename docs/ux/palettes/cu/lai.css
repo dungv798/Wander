@@ -1,0 +1,47 @@
+/* Hướng "lai" (DG-2, B1): nền xanh trời nhạt, vàng nhấn/huy hiệu/vạch, cam cho nút chính. Chỉ đổi màu; giữ tên token của app.css dòng 5–41.
+   Vàng (--sun, nền --cat-am-t) là nền/huy hiệu/vạch, KHÔNG làm chữ. Khung "chờ duyệt" (--warn-*) là hổ phách đậm có viền nâu cam, tách khỏi vàng chanh nhấn. */
+:root {
+  --cta: #d93a0b; --cta-hover: #c4350a; --on-cta: #ffffff;   /* nút cam cố định ở cả sáng và tối: chữ trắng ≥ 4,5:1 */
+  --sky-1: #b5d7f0; --sky-2: #e6f4fd; --bg: #eef7fe; --surface: #ffffff; --surface-2: #dcecfa; --ink: #0f2542; --muted: #3d5470; --line: #c3dbee;
+  --brand: #f4511e; --brand-2: #d93a0b; --brand-ink: #b8340a; --brand-soft: #ffe2d6; --sun: #ffd23f; --sky: #1556b8; --sky-soft: #d9eafc;
+  --like: #0f8f4e; --skip: #c62828;
+  --warn-bg: #ffe6c2; --warn-line: #c76a00; --warn-ink: #5a2f00;
+  --glass: rgba(255,255,255,.86); --scrim: rgba(8,22,44,.88); --shadow: 0 1px 3px rgba(15,37,66,.10); --shadow-float: 0 16px 34px -18px rgba(15,37,66,.5);
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Baloo 2", "Be Vietnam Pro", system-ui, sans-serif;
+  --d1: #d93a0b; --d2: #7a3fe0; --d3: #1a64d6; --d4: #0a7f94; --d5: #0b8050; --d6: #c8206f; --d7: #a65b00; --on-d: #ffffff;
+  --cat-canh-b: #0e9a63; --cat-canh-t: #d9f5e6; --cat-canh-i: #0a6b45; --cat-canh-on: #ffffff;
+  --cat-van-b: #7a45e0;  --cat-van-t: #ece4ff;  --cat-van-i: #5429b0;  --cat-van-on: #ffffff;
+  --cat-am-b: #c47c00;   --cat-am-t: #fff0b8;   --cat-am-i: #7a4600;   --cat-am-on: #0f2542;
+  --cat-leo-b: #1a73e0;  --cat-leo-t: #dcecff;  --cat-leo-i: #1650b0;  --cat-leo-on: #ffffff;
+  --cat-luu-b: #0a8a9c;  --cat-luu-t: #d3f3f7;  --cat-luu-i: #0a6270;  --cat-luu-on: #ffffff;
+  --cat-cho-b: #d6307e;  --cat-cho-t: #ffe0ee;  --cat-cho-i: #a81e5a;  --cat-cho-on: #ffffff;
+}
+.cat-canh { --cb: var(--cat-canh-b); --ct: var(--cat-canh-t); --ci: var(--cat-canh-i); --con: var(--cat-canh-on); }
+.cat-van { --cb: var(--cat-van-b); --ct: var(--cat-van-t); --ci: var(--cat-van-i); --con: var(--cat-van-on); }
+.cat-am { --cb: var(--cat-am-b); --ct: var(--cat-am-t); --ci: var(--cat-am-i); --con: var(--cat-am-on); }
+.cat-leo { --cb: var(--cat-leo-b); --ct: var(--cat-leo-t); --ci: var(--cat-leo-i); --con: var(--cat-leo-on); }
+.cat-luu { --cb: var(--cat-luu-b); --ct: var(--cat-luu-t); --ci: var(--cat-luu-i); --con: var(--cat-luu-on); }
+.cat-cho { --cb: var(--cat-cho-b); --ct: var(--cat-cho-t); --ci: var(--cat-cho-i); --con: var(--cat-cho-on); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --sky-1: #1d4f86; --sky-2: #173a66; --bg: #0c2140; --surface: #132f52; --surface-2: #1b3d68; --ink: #eaf4ff; --muted: #a6c0dc; --line: #2b4d76;
+    --brand: #ff8a5c; --brand-2: #f4511e; --brand-ink: #ffb08f; --brand-soft: #4d2a1c; --sun: #ffd54a; --sky: #7fb4ff; --sky-soft: #1a3a63; --like: #3ec886; --skip: #ff7a72;
+    --warn-bg: #3f2a0c; --warn-line: #e09a2e; --warn-ink: #ffdfa6; --glass: rgba(19,47,82,.9); --shadow: 0 1px 3px rgba(0,0,0,.4); --shadow-float: 0 16px 34px -18px rgba(0,0,0,.85); color-scheme: dark;
+    --d1: #ff8a5c; --d2: #b79cff; --d3: #7db2ff; --d4: #4fd3e6; --d5: #4cd49a; --d6: #ff8fbe; --d7: #ffc857; --on-d: #0c2140;
+    --cat-canh-b: #3ed08f; --cat-canh-t: #11382f; --cat-canh-i: #6fe0b0; --cat-canh-on: #0c2140;
+    --cat-van-b: #a98bff;  --cat-van-t: #2b2358; --cat-van-i: #c2adff;  --cat-van-on: #0c2140;
+    --cat-am-b: #ffc83d;   --cat-am-t: #3b3010; --cat-am-i: #ffd777;   --cat-am-on: #0c2140;
+    --cat-leo-b: #6aa9ff;  --cat-leo-t: #183560; --cat-leo-i: #8dbfff;  --cat-leo-on: #0c2140;
+    --cat-luu-b: #3fd0e0;  --cat-luu-t: #103a44; --cat-luu-i: #6fdcea;  --cat-luu-on: #0c2140;
+    --cat-cho-b: #ff7fb4;  --cat-cho-t: #44203a; --cat-cho-i: #ff9fc7;  --cat-cho-on: #0c2140; }
+}
+:root[data-theme="dark"] { --sky-1: #1d4f86; --sky-2: #173a66; --bg: #0c2140; --surface: #132f52; --surface-2: #1b3d68; --ink: #eaf4ff; --muted: #a6c0dc; --line: #2b4d76;
+    --brand: #ff8a5c; --brand-2: #f4511e; --brand-ink: #ffb08f; --brand-soft: #4d2a1c; --sun: #ffd54a; --sky: #7fb4ff; --sky-soft: #1a3a63; --like: #3ec886; --skip: #ff7a72;
+    --warn-bg: #3f2a0c; --warn-line: #e09a2e; --warn-ink: #ffdfa6; --glass: rgba(19,47,82,.9); --shadow: 0 1px 3px rgba(0,0,0,.4); --shadow-float: 0 16px 34px -18px rgba(0,0,0,.85); color-scheme: dark;
+    --d1: #ff8a5c; --d2: #b79cff; --d3: #7db2ff; --d4: #4fd3e6; --d5: #4cd49a; --d6: #ff8fbe; --d7: #ffc857; --on-d: #0c2140;
+    --cat-canh-b: #3ed08f; --cat-canh-t: #11382f; --cat-canh-i: #6fe0b0; --cat-canh-on: #0c2140;
+    --cat-van-b: #a98bff;  --cat-van-t: #2b2358; --cat-van-i: #c2adff;  --cat-van-on: #0c2140;
+    --cat-am-b: #ffc83d;   --cat-am-t: #3b3010; --cat-am-i: #ffd777;   --cat-am-on: #0c2140;
+    --cat-leo-b: #6aa9ff;  --cat-leo-t: #183560; --cat-leo-i: #8dbfff;  --cat-leo-on: #0c2140;
+    --cat-luu-b: #3fd0e0;  --cat-luu-t: #103a44; --cat-luu-i: #6fdcea;  --cat-luu-on: #0c2140;
+    --cat-cho-b: #ff7fb4;  --cat-cho-t: #44203a; --cat-cho-i: #ff9fc7;  --cat-cho-on: #0c2140; }

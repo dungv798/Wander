@@ -1,0 +1,370 @@
+[
+  {
+    "fg": "--ink",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "chữ chính trên nền trang"
+  },
+  {
+    "fg": "--ink",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ chính trên thẻ"
+  },
+  {
+    "fg": "--ink",
+    "bg": "--surface-2",
+    "min": 4.5,
+    "note": "chữ chính trên nền phụ"
+  },
+  {
+    "fg": "--muted",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "chữ phụ trên nền trang"
+  },
+  {
+    "fg": "--muted",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ phụ trên thẻ"
+  },
+  {
+    "fg": "--muted",
+    "bg": "--surface-2",
+    "min": 4.5,
+    "note": "chữ phụ trên nền phụ"
+  },
+  {
+    "fg": "--brand-ink",
+    "bg": "--brand-soft",
+    "min": 4.5,
+    "note": "chữ nhấn trên nền cam nhạt"
+  },
+  {
+    "fg": "--brand-ink",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ nhấn trên thẻ"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-1",
+    "min": 4.5,
+    "note": "chữ nút chính (đầu gradient)"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-2",
+    "min": 4.5,
+    "note": "chữ nút chính (cuối gradient)"
+  },
+  {
+    "fg": "--on-sun",
+    "bg": "--sun",
+    "min": 4.5,
+    "note": "chữ nhãn Nên ghé"
+  },
+  {
+    "fg": "--sky",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "liên kết trên thẻ"
+  },
+  {
+    "fg": "--sky",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "liên kết trên nền trang"
+  },
+  {
+    "fg": "--on-like",
+    "bg": "--like",
+    "min": 4.5,
+    "note": "chữ/biểu tượng trên nút Chọn"
+  },
+  {
+    "fg": "--on-skip",
+    "bg": "--skip",
+    "min": 4.5,
+    "note": "chữ/biểu tượng trên nút Xóa"
+  },
+  {
+    "fg": "--skip",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ lỗi/xóa trên thẻ"
+  },
+  {
+    "fg": "--warn-ink",
+    "bg": "--warn-bg",
+    "min": 4.5,
+    "note": "chữ trên khung chờ duyệt"
+  },
+  {
+    "fg": "--on-cat-canh",
+    "bg": "--cat-canh",
+    "min": 4.5,
+    "note": "chip loại Cảnh quan (nền đặc)"
+  },
+  {
+    "fg": "--on-cat-van",
+    "bg": "--cat-van",
+    "min": 4.5,
+    "note": "chip loại Văn hóa"
+  },
+  {
+    "fg": "--on-cat-am",
+    "bg": "--cat-am",
+    "min": 4.5,
+    "note": "chip loại Ẩm thực"
+  },
+  {
+    "fg": "--on-cat-leo",
+    "bg": "--cat-leo",
+    "min": 4.5,
+    "note": "chip loại Leo núi"
+  },
+  {
+    "fg": "--on-cat-luu",
+    "bg": "--cat-luu",
+    "min": 4.5,
+    "note": "chip loại Lưu trú"
+  },
+  {
+    "fg": "--on-cat-cho",
+    "bg": "--cat-cho",
+    "min": 4.5,
+    "note": "chip loại Chợ"
+  },
+  {
+    "fg": "--cat-canh-ink",
+    "bg": "--cat-canh-tint",
+    "min": 4.5,
+    "note": "nhãn loại nền nhạt"
+  },
+  {
+    "fg": "--cat-van-ink",
+    "bg": "--cat-van-tint",
+    "min": 4.5,
+    "note": "nhãn loại nền nhạt"
+  },
+  {
+    "fg": "--cat-am-ink",
+    "bg": "--cat-am-tint",
+    "min": 4.5,
+    "note": "nhãn loại nền nhạt"
+  },
+  {
+    "fg": "--cat-leo-ink",
+    "bg": "--cat-leo-tint",
+    "min": 4.5,
+    "note": "nhãn loại nền nhạt"
+  },
+  {
+    "fg": "--cat-luu-ink",
+    "bg": "--cat-luu-tint",
+    "min": 4.5,
+    "note": "nhãn loại nền nhạt"
+  },
+  {
+    "fg": "--cat-cho-ink",
+    "bg": "--cat-cho-tint",
+    "min": 4.5,
+    "note": "nhãn loại nền nhạt"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-1",
+    "min": 4.5,
+    "note": "chip Ngày 1"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-2",
+    "min": 4.5,
+    "note": "chip Ngày 2"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-3",
+    "min": 4.5,
+    "note": "chip Ngày 3"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-4",
+    "min": 4.5,
+    "note": "chip Ngày 4"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-5",
+    "min": 4.5,
+    "note": "chip Ngày 5"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-6",
+    "min": 4.5,
+    "note": "chip Ngày 6"
+  },
+  {
+    "fg": "--on-day",
+    "bg": "--day-7",
+    "min": 4.5,
+    "note": "chip Ngày 7"
+  },
+  {
+    "fg": "--border-ctrl",
+    "bg": "--bg",
+    "min": 3,
+    "note": "viền ô nhập/công tắc tắt trên --bg"
+  },
+  {
+    "fg": "--border-ctrl",
+    "bg": "--surface",
+    "min": 3,
+    "note": "viền ô nhập/công tắc tắt trên --surface"
+  },
+  {
+    "fg": "--border-ctrl",
+    "bg": "--surface-2",
+    "min": 3,
+    "note": "viền ô nhập/công tắc tắt trên --surface-2"
+  },
+  {
+    "fg": "--focus",
+    "bg": "--bg",
+    "min": 3,
+    "note": "vòng focus trên --bg"
+  },
+  {
+    "fg": "--focus",
+    "bg": "--surface",
+    "min": 3,
+    "note": "vòng focus trên --surface"
+  },
+  {
+    "fg": "--ink-fixed",
+    "bg": "--white",
+    "min": 3,
+    "note": "vòng đôi focus trên ảnh: lớp trong trắng so với lớp ngoài tối"
+  },
+  {
+    "fg": "--day-1",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 1 trên thẻ"
+  },
+  {
+    "fg": "--day-2",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 2 trên thẻ"
+  },
+  {
+    "fg": "--day-3",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 3 trên thẻ"
+  },
+  {
+    "fg": "--day-4",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 4 trên thẻ"
+  },
+  {
+    "fg": "--day-5",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 5 trên thẻ"
+  },
+  {
+    "fg": "--day-6",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 6 trên thẻ"
+  },
+  {
+    "fg": "--day-7",
+    "bg": "--surface",
+    "min": 3,
+    "note": "gạch chân tab/số thứ tự ngày 7 trên thẻ"
+  },
+  {
+    "fg": "--cat-canh",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại canh (đồ họa) trên thẻ"
+  },
+  {
+    "fg": "--cat-van",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại van (đồ họa) trên thẻ"
+  },
+  {
+    "fg": "--cat-am-ink",
+    "bg": "--surface",
+    "min": 3,
+    "note": "viền huy hiệu Ẩm thực (vàng nhạt không đủ 3:1 một mình, nên có viền chữ-đậm)"
+  },
+  {
+    "fg": "--cat-leo",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại leo (đồ họa) trên thẻ"
+  },
+  {
+    "fg": "--cat-luu",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại luu (đồ họa) trên thẻ"
+  },
+  {
+    "fg": "--cat-cho",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại cho (đồ họa) trên thẻ"
+  },
+  {
+    "fg": "--like",
+    "bg": "--surface",
+    "min": 3,
+    "note": "nút Chọn / thanh tiến độ trên thẻ"
+  },
+  {
+    "fg": "--skip",
+    "bg": "--surface",
+    "min": 3,
+    "note": "biểu tượng Bỏ qua trên thẻ"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-1-hover",
+    "min": 4.5,
+    "note": "chữ nút chính khi hover (đầu gradient)"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-2-hover",
+    "min": 4.5,
+    "note": "chữ nút chính khi hover (cuối gradient)"
+  },
+  {
+    "fg": "--on-photo",
+    "bg": "--scrim",
+    "min": 4.5,
+    "note": "chữ trắng trên lớp tối dưới ảnh (ảnh trắng xấu nhất)",
+    "over": "#ffffff"
+  },
+  {
+    "fg": "--on-photo",
+    "bg": "--chip-photo",
+    "min": 4.5,
+    "note": "chip chữ trắng trên ảnh (ảnh trắng xấu nhất)",
+    "over": "#ffffff"
+  }
+]

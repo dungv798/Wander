@@ -1,0 +1,203 @@
+/* Token thiết kế Wander: NGUỒN DUY NHẤT của bộ màu và thang đo (PO 26/10/2026: "một bộ màu nhận diện thương hiệu, tái sử dụng toàn hệ thống").
+   Quy ước:
+   - Tên theo VAI TRÒ (không theo màu). Thành phần và màn hình chỉ dùng token, không viết màu hex.
+   - Thương hiệu chỉ có 4 họ màu: HỔ PHÁCH/CAM (hành động, nhấn), NẮNG/BƠ (nền ấm), TRỜI XANH (liên kết, thông tin, "chờ duyệt"), MỰC XANH ĐẬM (chữ).
+     Hai màu trạng thái dùng riêng cho ý nghĩa: XANH LÁ = đã chọn/đã xong, ĐỎ = xóa/lỗi. Không thêm họ màu thứ sáu.
+   - LOẠI địa điểm không còn màu riêng: phân biệt bằng biểu tượng và chữ (6 token --cat-* cùng một giá trị, giữ tên để mã cũ không vỡ).
+   - NGÀY trong chuyến xoay vòng 3 màu thương hiệu (cam, trời, mực); số ngày luôn ghi bằng chữ nên màu chỉ là điểm nhấn.
+   - Sáng là mặc định và là bản được tinh chỉnh. Tối: giữ khung để dùng sau, CHƯA tinh chỉnh (PO: "nền tối để sau").
+   Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
+
+:root {
+  /* ---- Nền và chữ ---- */
+  --bg: #fff8d8;             /* bơ nhạt: nền trang */
+  --surface: #ffffff;        /* thẻ, tờ phủ, ô nhập */
+  --surface-2: #fff2c2;      /* nền phụ dịu (không chói): ô chọn, nhóm nhỏ */
+  --ink: #14213a;
+  --muted: #45506a;
+  --line: #f0dc8a;           /* đường kẻ TRANG TRÍ (không mang thông tin); viền điều khiển dùng --border-ctrl */
+  --border-ctrl: #6b7a90;    /* viền ô nhập, track công tắc: ≥ 3:1 so với nền liền kề */
+
+  /* ---- Họ HỔ PHÁCH/CAM: hành động chính và nhấn (chữ trắng trên nút CTA phải ≥ 4,5:1) ---- */
+  --brand: #d9680a;          /* logo, biểu tượng lớn, viền nhấn (không làm nền chữ nhỏ) */
+  --brand-ink: #7d3d00;      /* chữ nhấn trên nền sáng */
+  --brand-soft: #ffe68a;
+  --tint: #ffeeb0; --tint-ink: #7d3d00;   /* nền nhạt + chữ cho chip loại/nhãn (đổi theo bộ màu) */     /* nền chọn/bật nhẹ */
+  --cta-1: #ff8a00;          /* nút chính: màu phẳng; gradient đi từ --cta-g1 sang --cta-2 */
+  --cta-2: #ff6a00;
+  --cta-g1: #ffb01f;
+  --cta-1-hover: #f07400;
+  --cta-2-hover: #f07400;
+  --on-cta: #2a1700;
+  --sun: #ffc400;            /* nhãn "Nên ghé", điểm nhấn ấm */
+  --on-sun: #12233d;
+
+  /* ---- Họ TRỜI XANH: liên kết, thông tin, trạng thái "chờ duyệt" ---- */
+  --sky: #0b58b8;
+  --sky-soft: #d9eefc;
+  --sky-1: #8fd3fb;          /* bầu trời minh họa (màn mở đầu, khung quẹt) */
+  --sky-2: #ffe872;
+
+  /* ---- Trạng thái (chỉ dùng cho đúng ý nghĩa) ---- */
+  --like: #0b7a47;           /* đã chọn, đã xong */
+  --on-like: #ffffff;
+  --skip: #c62828;           /* bỏ qua, xóa, lỗi */
+  --on-skip: #ffffff;
+  --warn-bg: #d9eefc;        /* "chờ duyệt", cần chú ý: dùng họ trời xanh, không còn màu tím riêng */
+  --warn-line: #0b58b8;
+  --warn-ink: #08407f;
+  --on-warn: #ffffff;
+
+  /* ---- LOẠI địa điểm: một bộ giá trị cho cả sáu loại (khác nhau bằng biểu tượng + chữ) ---- */
+  --cat-canh: var(--brand-2);  --on-cat-canh: var(--on-brand-2);  --cat-canh-tint: var(--tint);  --cat-canh-ink: var(--tint-ink);
+  --cat-van: var(--brand-2);   --on-cat-van: var(--on-brand-2);   --cat-van-tint: var(--tint);   --cat-van-ink: var(--tint-ink);
+  --cat-am: var(--brand-2);    --on-cat-am: var(--on-brand-2);    --cat-am-tint: var(--tint);    --cat-am-ink: var(--tint-ink);
+  --cat-leo: var(--brand-2);   --on-cat-leo: var(--on-brand-2);   --cat-leo-tint: var(--tint);   --cat-leo-ink: var(--tint-ink);
+  --cat-luu: var(--brand-2);   --on-cat-luu: var(--on-brand-2);   --cat-luu-tint: var(--tint);   --cat-luu-ink: var(--tint-ink);
+  --cat-cho: var(--brand-2);   --on-cat-cho: var(--on-brand-2);   --cat-cho-tint: var(--tint);   --cat-cho-ink: var(--tint-ink);
+
+  /* ---- NGÀY trong chuyến: xoay vòng cam, trời, mực; chữ trắng trên nền ngày ---- */
+  --day-1: var(--day-accent); --day-2: var(--day-accent); --day-3: var(--day-accent); --day-4: var(--day-accent); --day-5: var(--day-accent); --day-6: var(--day-accent); --day-7: var(--day-accent);
+  --on-day: #ffffff;
+  --ink-fixed: #12233d;      /* chữ/viền luôn tối, không đổi theo giao diện (vòng focus trên ảnh) */
+  --white: #ffffff;
+
+  /* ---- Phủ trên ảnh (thẻ ảnh luôn có lớp tối phía dưới để chữ trắng đọc được) ---- */
+  --scrim: rgba(10, 14, 20, 0.88);   /* trung tính (Taste: scrim chỉ hợp lệ khi gần trung tính) */
+  --on-photo: #ffffff;
+  --photo-bg: #0b1a2e;               /* nền tối đặt sau ảnh trong lúc ảnh tải */
+  --glass: rgba(255, 251, 235, 0.88);
+  --chip-photo: rgba(7, 19, 38, 0.78);   /* nền chip nằm trên ảnh */
+  --backdrop: rgba(92, 52, 8, 0.34);     /* tấm mờ sau tờ phủ: tông nâu ấm nhạt, không còn đen đặc */
+
+  /* ---- Nền cảnh dùng chung (màn quẹt, tờ phủ): trời nắng sang bơ ---- */
+  --scene: linear-gradient(var(--sky-2), var(--bg) 40%);
+
+  /* ---- Khoảng cách (thang 4 px) ---- */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+
+  /* ---- Bán kính ---- */
+  --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-xl: 30px; --r-pill: 999px;
+
+  /* ---- Độ nổi ---- */
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.08);          /* tấm tĩnh: bóng rất nhẹ (< 8% đen, mờ nhỏ) */
+  --sh-2: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --sh-float: 0 16px 34px -18px rgba(18, 35, 61, 0.5);   /* chỉ lớp nổi thật: hộp thoại, tờ phủ, toast, thanh tab nổi */
+
+  /* ---- Tầng (z-index) ---- */
+  --z-raised: 2; --z-sticky: 10; --z-nav: 20; --z-sheet: 30; --z-popover: 40; --z-dialog: 50; --z-toast: 60;
+  --tabbar-h: 112px;   /* chiều cao vùng thanh tab nổi + khoảng trống để nội dung không bị che */
+
+  /* ---- Chuyển động: chọn theo quãng đường và ngữ cảnh, không một thời lượng cho mọi thứ ---- */
+  --dur-press: 90ms;    /* phản hồi chạm */
+  --dur-fast: 140ms;    /* đổi màu, bật/tắt nhỏ */
+  --dur-med: 240ms;     /* mở tờ phủ, lật thẻ */
+  --dur-slow: 360ms;    /* thẻ bay khỏi màn hình */
+  --dur-scene: 520ms;   /* vào màn, hiện dần khi cuộn */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* ---- Chữ ---- */
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Baloo 2", "Be Vietnam Pro", system-ui, sans-serif;
+  --fs-xs: 12px; --fs-sm: 14px; --fs-md: 16px; --fs-lg: 18px; --fs-xl: 22px; --fs-2xl: 28px; --fs-3xl: 36px; --fs-hero: 42px;
+  --lh-body: 1.55; --lh-tight: 1.25; /* tiêu đề Baloo 2: dòng cao đủ cho dấu tiếng Việt (Ệ, Ầ) */
+
+  /* ---- Biểu tượng và vùng chạm ---- */
+  --icon-s: 16px; --icon-m: 20px; --icon-l: 26px; --icon-xl: 30px;
+  --tap: 44px;
+  --focus: var(--sky);
+
+  /* ---- Điểm ngắt (dùng trong @media, ghi ở đây để tra) ---- */
+  --bp-tablet: 768px; --bp-desktop: 1280px;
+
+  /* ---- Vòng 26/10/2026 (v6): nút/gradient, ngày, nền sinh động, bản đồ, vật thể 3D. Đổi bộ màu = đổi các token này. ---- */
+  --cta-grad: linear-gradient(90deg, var(--cta-g1), var(--cta-2));
+  --cta-grad-hover: linear-gradient(90deg, var(--cta-g1), var(--cta-1-hover));
+  --card-shadow: 0 18px 34px -20px rgba(20, 33, 58, 0.45);   /* bóng thẻ: đổ nhẹ, đổi theo bộ màu */
+  --cta-glow: 0 10px 24px -10px rgba(255, 106, 0, 0.55);   /* bóng màu dưới nút chính */
+  --day-accent: var(--brand-2);    /* MỌI ngày dùng một màu nhấn; số ngày/nhãn mới là thứ phân biệt (PO 26/10: nhiều màu gây rối) */
+  --day-muted: var(--border-ctrl); /* ngày không đang xem (bản đồ, danh sách) */
+  --ambient-a: #ffd36e; --ambient-b: #8fd3fb; --ambient-c: #ffb38a;   /* ba đốm sáng nền trôi chậm */
+  --sun-hi: #fff4b8;
+  --gem-like: linear-gradient(150deg, #3ee08b, #0b8f4e);   /* huy hiệu bóng kính: chọn */
+  --gem-skip: linear-gradient(150deg, #ff7a7a, #d62839);   /* huy hiệu bóng kính: bỏ qua */
+  --gem-grad: linear-gradient(150deg, var(--cta-g1), var(--cta-2));    /* ô biểu tượng bóng kính */
+  --obj-hi: #ffffff; --obj-mid: #ffe6d6; --obj-lo: #ffb98a; --obj-edge: #f0a070; --obj-accent: #ff6a2a;   /* vật thể minh họa (máy bay, la bàn…) */
+  --map-land: #fff3cf; --map-low: #fff8e0; --map-mid: #ffe7a6; --map-high: #f3c98b; --map-peak: #d99a6a;
+  --map-shade: 0.55;               /* độ đậm lớp bóng núi */
+  --map-water: #8fd3fb; --map-water-line: #5fb8ef; --map-road: #ffffff; --map-road-casing: #e0b46a;
+  --map-route: var(--brand-2); --map-route-halo: #ffffff; --map-pin: var(--brand-2); --map-pin-muted: var(--border-ctrl); --map-label: var(--ink-fixed);
+
+  /* ---- Tên cũ của mã prototype (alias, KHÔNG thêm tên mới ở đây; gỡ khi web thật dùng token chuẩn) ---- */
+  --cta: var(--cta-1); --cta-hover: var(--cta-1-hover); --cta-g2: var(--cta-2);
+  --brand-2: #b84c00;        /* cam đậm: nút phụ, huy hiệu đếm (chữ trắng 5,9:1) */
+  --on-brand-2: #ffffff;
+  --shadow: var(--sh-2); --shadow-float: var(--sh-float);
+  --d1: var(--day-1); --d2: var(--day-2); --d3: var(--day-3); --d4: var(--day-4); --d5: var(--day-5); --d6: var(--day-6); --d7: var(--day-7); --on-d: var(--on-day);
+  --cat-canh-b: var(--cat-canh); --cat-canh-t: var(--cat-canh-tint); --cat-canh-i: var(--cat-canh-ink); --cat-canh-on: var(--on-cat-canh);
+  --cat-van-b: var(--cat-van); --cat-van-t: var(--cat-van-tint); --cat-van-i: var(--cat-van-ink); --cat-van-on: var(--on-cat-van);
+  --cat-am-b: var(--cat-am); --cat-am-t: var(--cat-am-tint); --cat-am-i: var(--cat-am-ink); --cat-am-on: var(--on-cat-am);
+  --cat-leo-b: var(--cat-leo); --cat-leo-t: var(--cat-leo-tint); --cat-leo-i: var(--cat-leo-ink); --cat-leo-on: var(--on-cat-leo);
+  --cat-luu-b: var(--cat-luu); --cat-luu-t: var(--cat-luu-tint); --cat-luu-i: var(--cat-luu-ink); --cat-luu-on: var(--on-cat-luu);
+  --cat-cho-b: var(--cat-cho); --cat-cho-t: var(--cat-cho-tint); --cat-cho-i: var(--cat-cho-ink); --cat-cho-on: var(--on-cat-cho);
+
+  color-scheme: light;
+}
+
+/* ---- TỐI: khung dự phòng, chưa tinh chỉnh (PO 26/10/2026). Hai khối dưới phải giống hệt nhau (contrast.mjs kiểm). ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15223d; --surface: #1e2f52; --surface-2: #27406b; --ink: #fff7e0; --muted: #bccae6; --line: #3a5585;
+    --brand: #ffb938; --brand-ink: #ffd37a; --brand-soft: #4d3b10;
+    --tint: #4d3b10; --tint-ink: #ffd37a;
+    --cta-1: #ff8a00; --cta-2: #ff6a00; --on-cta: #2a1700;
+    --sun: #ffd24a; --on-sun: #12233d; --sky: #8cc8ff; --sky-soft: #1c3a63;
+    --like: #3ec886; --on-like: #06241a; --skip: #ff8a80; --on-skip: #2a0a08;
+    --warn-bg: #1c3a63; --warn-line: #8cc8ff; --warn-ink: #d9eefc; --on-warn: #0b1a2e;
+    --cat-canh: #ffb938; --on-cat-canh: #0e1a30; --cat-canh-tint: #4d3b10; --cat-canh-ink: #ffd37a;
+    --cat-van: #ffb938; --on-cat-van: #0e1a30; --cat-van-tint: #4d3b10; --cat-van-ink: #ffd37a;
+    --cat-am: #ffb938; --on-cat-am: #0e1a30; --cat-am-tint: #4d3b10; --cat-am-ink: #ffd37a;
+    --cat-leo: #ffb938; --on-cat-leo: #0e1a30; --cat-leo-tint: #4d3b10; --cat-leo-ink: #ffd37a;
+    --cat-luu: #ffb938; --on-cat-luu: #0e1a30; --cat-luu-tint: #4d3b10; --cat-luu-ink: #ffd37a;
+    --cat-cho: #ffb938; --on-cat-cho: #0e1a30; --cat-cho-tint: #4d3b10; --cat-cho-ink: #ffd37a;
+    --day-1: #ffb938; --day-2: #ffb938; --day-3: #ffb938; --day-4: #ffb938; --day-5: #ffb938; --day-6: #ffb938; --day-7: #ffb938; --on-day: #0e1a30;
+    --glass: rgba(30, 47, 82, 0.9); --backdrop: rgba(0, 0, 0, 0.62);
+    --sky-1: #1f4a7a; --sky-2: #2c3a73;
+    --sh-1: 0 1px 2px rgba(0, 0, 0, 0.08); --sh-2: 0 1px 3px rgba(0, 0, 0, 0.08); --sh-float: 0 16px 34px -18px rgba(0, 0, 0, 0.85);
+    --border-ctrl: #7f97b5;
+    --cta-1-hover: #f07400; --cta-2-hover: #f07400;
+    --brand-2: #ffa310; --on-brand-2: #0b1a2e;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #15223d; --surface: #1e2f52; --surface-2: #27406b; --ink: #fff7e0; --muted: #bccae6; --line: #3a5585;
+  --brand: #ffb938; --brand-ink: #ffd37a; --brand-soft: #4d3b10;
+  --tint: #4d3b10; --tint-ink: #ffd37a;
+  --cta-1: #ff8a00; --cta-2: #ff6a00; --on-cta: #2a1700;
+  --sun: #ffd24a; --on-sun: #12233d; --sky: #8cc8ff; --sky-soft: #1c3a63;
+  --like: #3ec886; --on-like: #06241a; --skip: #ff8a80; --on-skip: #2a0a08;
+  --warn-bg: #1c3a63; --warn-line: #8cc8ff; --warn-ink: #d9eefc; --on-warn: #0b1a2e;
+  --cat-canh: #ffb938; --on-cat-canh: #0e1a30; --cat-canh-tint: #4d3b10; --cat-canh-ink: #ffd37a;
+  --cat-van: #ffb938; --on-cat-van: #0e1a30; --cat-van-tint: #4d3b10; --cat-van-ink: #ffd37a;
+  --cat-am: #ffb938; --on-cat-am: #0e1a30; --cat-am-tint: #4d3b10; --cat-am-ink: #ffd37a;
+  --cat-leo: #ffb938; --on-cat-leo: #0e1a30; --cat-leo-tint: #4d3b10; --cat-leo-ink: #ffd37a;
+  --cat-luu: #ffb938; --on-cat-luu: #0e1a30; --cat-luu-tint: #4d3b10; --cat-luu-ink: #ffd37a;
+  --cat-cho: #ffb938; --on-cat-cho: #0e1a30; --cat-cho-tint: #4d3b10; --cat-cho-ink: #ffd37a;
+  --day-1: #ffb938; --day-2: #ffb938; --day-3: #ffb938; --day-4: #ffb938; --day-5: #ffb938; --day-6: #ffb938; --day-7: #ffb938; --on-day: #0e1a30;
+  --glass: rgba(30, 47, 82, 0.9); --backdrop: rgba(0, 0, 0, 0.62);
+  --sky-1: #1f4a7a; --sky-2: #2c3a73;
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.08); --sh-2: 0 1px 3px rgba(0, 0, 0, 0.08); --sh-float: 0 16px 34px -18px rgba(0, 0, 0, 0.85);
+  --border-ctrl: #7f97b5;
+  --cta-1-hover: #f07400; --cta-2-hover: #f07400;
+  --brand-2: #ffa310; --on-brand-2: #0b1a2e;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-press: 1ms; --dur-fast: 1ms; --dur-med: 1ms; --dur-slow: 1ms; --dur-scene: 1ms; }
+}

@@ -12,7 +12,7 @@ flowchart TB
     UI[Màn hình] --> API_TS[api.ts — gọi /api/*]
   end
   subgraph backend["backend/ (Spring Boot, modular monolith)"]
-    F[SessionAuthenticationFilter] --> C1[identity.api]
+    F[SecurityFilterChain<br/>AuthenticationFilter + SessionAuthenticationProvider] --> C1[identity.api]
     F --> C2[planning.api]
     C1 --> A1[identity.application] --> D1[identity.domain]
     C2 --> A2c[planning.application.command] --> D2[planning.domain]
@@ -28,7 +28,7 @@ flowchart TB
 
 ## 2. Một yêu cầu đi qua hệ thống (ví dụ: thêm mục)
 
-1. `POST /api/trips/{id}/items` → `ResponseHeadersFilter` (header) → `SessionAuthenticationFilter` (kiểm tra Bearer, đặt `AuthenticatedPrincipal`).
+1. `POST /api/trips/{id}/items` → `ResponseHeadersFilter` (header) → chuỗi Spring Security (`SecurityConfig`: `AuthenticationFilter` đọc Bearer, `SessionAuthenticationProvider` kiểm tra phiên ở DB, đặt `AuthenticatedPrincipal` vào SecurityContext; ADR-005).
 2. `TripController.addItem` nhận `JsonBody` (JSON thô, ≤ 64 KB) và principal.
 3. Gửi lệnh `PlanningCommands.AddItem` tới `PlanningCommandHandler` (một giao dịch):
    nạp `Trip` qua `TripRepository` → kiểm tra nhập liệu bằng `RawInput` (D17: "1.5" là MALFORMED) → `trip.addItem(...)` giữ bất biến thứ tự → lưu.
@@ -40,17 +40,17 @@ flowchart TB
 
 | Đường dẫn | Nội dung |
 |---|---|
-| `backend/src/main/java/com/wander/shared/kernel` | Lỗi có mã, `Patch`, thời gian, `Ids`, `AuthenticatedPrincipal` |
-| `backend/src/main/java/com/wander/shared/web` | Bắt lỗi → JSON, đọc thân JSON, giới hạn tần suất, header bảo mật, phục vụ `web/dist` |
-| `…/planning/domain` | `Trip` (aggregate root), `Item`, `CostInfo`, `DateRange`, `ItemType`, `Vnd`, port `TripRepository` |
+| `backend/src/main/java/com/wander/shared/kernel` | `constant/` (hằng số nền và hệ thống, mã và lời báo lỗi dùng chung) · `error/` (`WanderException`, `ErrorKind`) · `util/` (`Texts`, `Ids`, `Patch`, `Timestamps`, `CodedValue`...) · `security/` (`AuthenticatedPrincipal`) |
+| `backend/src/main/java/com/wander/shared/web` | `error/` (bắt lỗi → JSON) · `request/` (đọc thân JSON, địa chỉ người gọi, principal) · `ratelimit/` · `filter/` (header bảo mật) · `config/` (cấu hình web, phục vụ `web/dist`) · `constant/` (`HttpConstants`) |
+| `…/planning/api` | `controller/` (`TripController`) · `constant/` (đường dẫn, khóa JSON) |
+| `…/planning/domain` | `model/` (`Trip` aggregate root, `Item`, `ItemCost`, `DateRange`...) · `vocabulary/` (enum: `ItemType`...) · `rule/` (`ItemText`, `Vnd`) · `constant/` · `port/` (`TripRepository`) |
 | `…/planning/application` | `command/` (lệnh + handler), `query/` (read model + `PlanningQueries`), `input/RawInput` |
-| `…/planning/infrastructure/persistence` | Entity JPA, adapter `JpaTripRepository`, `JpaTripReadModel` |
+| `…/planning/infrastructure/persistence` | `entity/` · `adapter/` (`JpaTripRepository`, `JpaTripReadModel`) · `mapper/` (MapStruct) · `constant/` (JPQL) |
 | `…/identity/**` | Cùng cấu trúc; Spring Data JPA repository; **RG-1: thiết kế chưa duyệt** |
 | `backend/src/main/resources/db/migration` | Flyway SQL |
 | `backend/src/test/java` | `ArchitectureTest` (ArchUnit), test domain thuần, test API tích hợp (`*IT`, Testcontainers) |
 | `web/` | Giao diện React + TypeScript (không đổi) |
-| `e2e/` | 4 kịch bản trình duyệt thật, chạy với backend Java (`tools/dev.ps1 e2e`) |
-| `legacy/ts-server/` | Server TypeScript cũ — chỉ để tham chiếu hợp đồng API (AD-10) |
+| `e2e/` | 6 kịch bản trình duyệt thật (24/10/2026), chạy với backend Java (`tools/dev.ps1 e2e`) |
 | `tools/dev.ps1` | Lệnh phát triển trên Windows, ghi log vào `.logs/` |
 
 ## 4. Kiểm thử (kim tự tháp)
@@ -79,8 +79,8 @@ Lệnh: `powershell -ExecutionPolicy Bypass -File tools\dev.ps1 backend-test` (h
 
 | Khái niệm | Xem ở đâu | Điểm đáng chú ý |
 |---|---|---|
-| Aggregate root, bất biến | `planning/domain/Trip.java` | Chỉ `Trip` đổi vị trí mục; vị trí luôn 0..n-1 |
-| Value object | `CostInfo`, `DateRange` | Không thể tồn tại ở trạng thái sai (kiểm tra trong constructor) |
+| Aggregate root, bất biến | `planning/domain/model/Trip.java` | Chỉ `Trip` đổi vị trí mục; vị trí luôn 0..n-1 |
+| Value object | `ItemCost`, `DateRange` | Không thể tồn tại ở trạng thái sai (kiểm tra trong constructor) |
 | Port & adapter | `TripRepository` ↔ `JpaTripRepository`; `IdentityStore` ↔ `JpaIdentityStore` | Domain định nghĩa interface, infrastructure cài đặt |
 | CQRS | `PlanningCommandHandler` vs `PlanningQueries` + `JpaTripReadModel` | Lệnh trả id; truy vấn trả record phẳng |
 | Khóa lạc quan | `TripEntity.version`, `OPTIMISTIC_FORCE_INCREMENT` | 409 thay vì mất dữ liệu khi hai người sửa (chuẩn bị cho 1b) |

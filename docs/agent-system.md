@@ -1,148 +1,121 @@
 # Hệ thống agent cho Wander
 
-Hướng dẫn dùng bộ agent và skill của Claude Code cho Wander: **review planning**, **ra quyết định kiến trúc cùng PO** và **làm/rà code** trên stack đã duyệt (ADR-002). Agent không ra quyết định sản phẩm hay kiến trúc; PO quyết.
+Cách dùng bộ agent và skill của Claude Code cho Wander: **xem tiến độ**, **ra quyết định kiến trúc/sản phẩm cùng PO**, **làm và rà code** trên stack đã duyệt (ADR-002, ADR-004). Agent phân tích và khuyến nghị; **PO quyết**.
 
-> **Cập nhật 24/10/2026 — xem mục 12** (stack Java đã duyệt, quy tắc hỏi theo Tầng A/B/C, agent và skill mới).
+> Cấu trúc lại ngày 24/10/2026: một "bộ hợp đồng" chung (`wander-kit`) nạp sẵn cho mọi agent, hội đồng agent có ngân sách cứng (`/wander-council`), skill chạy test thật (`/wander-verify`) và xem trạng thái (`/wander-status`), quy tắc code chỉ nạp khi mở file code.
 
-> Phiên bản cấu hình khớp với `docs/wander-master-plan.md` **v0.3**. Kiểm tra lại nếu kế hoạch đổi phiên bản (xem `.claude/rules/wander-product-context.md`).
-
-## 1. Kiến trúc
+## 1. Tổng quan
 
 ```
-Bạn ──► Phiên Claude Code chính (điều phối + trọng tài)
-            │  đọc đúng các mục cần thiết của kế hoạch
-            ├──► wander-product-analyst     (phạm vi, luồng, tiêu chí nghiệm thu)
-            ├──► wander-software-architect  (mô hình dữ liệu, phương án kỹ thuật)
-            ├──► wander-security-reviewer   (danh tính, khôi phục, quyền)
-            ├──► wander-skeptic-qa          (phản biện, ca biên, mâu thuẫn, thiếu test)
-            └──► wander-code-reviewer       (rà code Java/TS theo checklist, dùng code-review-graph)
+PO ──► Phiên Claude Code chính (điều phối + trọng tài duy nhất)
+         │  skill: /wander-status · /wander-council · /wander-feature · /wander-verify · /wander-review …
+         ├──► wander-software-architect   thiết kế, system design, phương án AD-x, giải thích để học
+         ├──► wander-security-reviewer    danh tính, khôi phục, phiên, giới hạn tần suất, quyền (thiết kế + code)
+         ├──► wander-product-analyst      phạm vi, tiêu chí nghiệm thu, phụ thuộc 1a/1b
+         ├──► wander-skeptic-qa           phản biện, ca biên, thiếu test
+         └──► wander-code-reviewer        rà thay đổi Java/TS, dùng code-review-graph
 ```
 
-- Phiên chính là **orchestrator và trọng tài cuối**. `/wander-autopilot` chỉ dùng 4 agent planning; `wander-code-reviewer` dùng trong `/wander-feature` và `/wander-review` (code).
-- Bốn agent chuyên môn **chỉ đọc** (`tools: Read, Grep, Glob`), không có Bash, không ghi file, không có công cụ `Agent` nên **không tự gọi agent khác**.
-- Mỗi agent chạy trong ngữ cảnh riêng, chỉ trả về báo cáo ngắn theo cùng một mẫu 9 mục.
-- Mọi quyết định sản phẩm thuộc về bạn. Agent chỉ đưa khuyến nghị.
+- Agent **chỉ đọc** (`tools: Read, Grep, Glob`; code-reviewer thêm các công cụ đọc đồ thị code). Không có Bash/Edit/Write/Agent ⇒ **không tự sửa file, không gọi agent khác**. Đây là rào chắn thật (allowlist công cụ).
+- Agent không "nói chuyện" trực tiếp với nhau: phản biện đi qua phiên chính, phiên chính quyết định khi nào dừng.
+- Mỗi agent nạp sẵn skill `wander-kit` (tóm tắt dự án, nhãn trạng thái, Tầng A/B/C, quy tắc bằng chứng, mẫu báo cáo). Thân file agent chỉ còn phần riêng của vai trò ⇒ ngắn, không trùng lặp.
 
-## 2. Các file nằm ở đâu
+## 2. Bắt đầu một phiên làm việc
 
-| Mục đích | Đường dẫn |
+| Muốn | Gõ |
 |---|---|
-| Ngữ cảnh chung, ngắn | `CLAUDE.md` |
-| Bản đồ mục của kế hoạch + trạng thái đã xác minh | `.claude/rules/wander-product-context.md` |
-| Ranh giới an toàn | `.claude/rules/planning-safety.md` |
-| Mẫu báo cáo + nhãn phân loại | `.claude/rules/review-output.md` |
-| 4 agent | `.claude/agents/wander-*.md` |
-| 3 skill | `.claude/skills/wander-review/` (kèm `reference.md`), `wander-decision-audit/`, `wander-spec-review/` |
-| Quyền (chặn sửa kế hoạch, chặn đọc `.env`) | `.claude/settings.json` |
-| Kế hoạch tổng thể (nguồn sự thật, **không sửa**) | `docs/wander-master-plan.md` |
+| Biết đang ở đâu, nên làm gì tiếp | `/wander-status` |
+| Chốt một quyết định kỹ thuật/sản phẩm (AD-x, Q-x, câu hỏi thiết kế) | `/wander-council AD-1` · `/wander-council Q17 xóa cả chuyến` |
+| Chỉ muốn đọc phân tích, chưa chốt | `/wander-council AD-2 report` hoặc `/wander-review <mục tiêu>` |
+| Làm một story / sửa lỗi | `/wander-feature A-15 giờ ước chừng` |
+| Chạy test thật | `/wander-verify` (backend) · `/wander-verify e2e` · `/wander-verify verify` (tất cả) |
+| Kiểm một câu/đề xuất với kế hoạch | `/wander-decision-audit <câu>` |
+| Review spec trước khi code | `/wander-spec-review <file>` |
+| Review planning không cần người trông, tiếp tục được | `/wander-autopilot <mục tiêu>` (xem `docs/autopilot/README.md`) |
+| Hỏi một góc nhìn duy nhất (rẻ nhất) | `@agent-wander-software-architect so sánh cookie HttpOnly và bearer cho AD-1, đừng chọn hộ` |
 
-## 3. Gọi agent
+`/wander-status` có thể được Claude tự gọi khi bạn hỏi "tiến độ thế nào"; các skill còn lại chỉ chạy khi bạn gõ (tắt tự kích hoạt để không tốn ngữ cảnh và không tự chạy việc tốn kém).
 
-Dùng khi bạn cần **một góc nhìn** (rẻ hơn gọi cả nhóm):
+## 3. `/wander-council` — agent tự làm, tự phản biện, chỉ đưa PO điều quan trọng
 
-- Trong phiên Claude Code: `@agent-wander-security-reviewer rà soát rủi ro khi chủ chuyến mở chuyến trên thiết bị mới (D15, Q16)`
-- Hoặc nói tự nhiên: "Dùng subagent wander-software-architect so sánh hai hướng cho Q16, đừng chọn hướng nào."
-- Chạy cả phiên với một agent: `claude --agent wander-skeptic-qa`
+1. **Khung câu hỏi**: phân tầng. Tầng B → tự chọn mặc định, ghi `decisions.md` §2, dừng. Tầng C → trả lời luôn. Chỉ Tầng A mới họp.
+2. **Bảng dữ kiện** (≤ 25 dòng): phiên chính đọc một lần (kế hoạch, ADR, gate, code, web nếu cần giá/phiên bản) rồi đưa cùng một bảng cho mọi agent ⇒ agent không đọc lại cùng tài liệu.
+3. **Vòng 1 – độc lập, song song**: 2–3 agent theo bảng định tuyến (`.claude/skills/wander-review/reference.md`); luôn có `wander-skeptic-qa` khi PO phải chọn giữa các phương án. Không agent nào thấy kết luận của agent khác.
+4. **Bảng hội tụ**: Đồng thuận (Tầng B → áp dụng luôn; Tầng A → thành khuyến nghị) · Bất đồng vật chất → vòng 2 · Bất đồng không vật chất → phiên chính tự quyết, ghi lại · Câu hỏi mới ngoài phạm vi → **gác lại** trong `open-decisions.md` · Thiếu bằng chứng → `UNVERIFIED`.
+5. **Vòng 2 – phản biện có mục tiêu**: chỉ agent liên quan, trích nguyên văn ý kiến đối lập, trả lời `Chấp nhận` / `Giữ nguyên` / `Thu hẹp` ≤ 200 chữ. Còn bất đồng ⇒ giữ nguyên cho PO thấy, **không có vòng 3**.
+6. **Một trang cho PO**: đã thống nhất · cần anh chốt (phương án, đánh đổi, đảo ngược được không, *học được gì / giống gì ở FPT*, khuyến nghị) · đã gác lại · chi phí (số agent/vòng/lượt).
+7. **Hỏi** bằng `AskUserQuestion` (≤ 4 câu) → **ghi** ADR (`docs/architecture/adr/`) hoặc bản ghi quyết định sản phẩm (`docs/decisions/`), cập nhật `open-decisions.md`.
 
-| Agent | Dùng khi |
-|---|---|
-| `wander-product-analyst` | Phạm vi, luồng người dùng, tiêu chí nghiệm thu, phụ thuộc 1a/1b, phân loại câu hỏi mở (Q11, P13…) |
-| `wander-software-architect` | So sánh phương án mô hình dữ liệu, thứ tự mục, chi phí, xóa mềm, di chuyển 1a→1b |
-| `wander-security-reviewer` | Danh tính ẩn danh, khôi phục quyền, rò link/mã, quyền thành viên ở 1b |
-| `wander-skeptic-qa` | Phản biện một đề xuất, ca biên (qua nửa đêm, trống/0/đã bao gồm, xóa/khôi phục), ước tính |
+**Ngân sách cứng** (chống lặp vô hạn): ≤ 2 vòng · ≤ 6 lượt gọi agent · ≤ 4 agent ở vòng 1 · ≤ 3 điểm vào vòng 2 · 1 lần thử lại cho agent không trả gì · ≤ 4 câu hỏi cho PO. Hết ngân sách ⇒ tóm tắt với những gì có.
 
-## 4. Gọi skill
+## 4. `/wander-feature` và `/wander-verify`
 
-Các skill chỉ chạy khi bạn gõ lệnh (đã tắt tự kích hoạt để không tốn ngữ cảnh):
+- `/wander-feature`: truy nguồn → hỏi Tầng A (hoặc chuyển sang council) → phác thiết kế ≤ 15 dòng → code theo thứ tự domain → migration → hạ tầng → command/query → API → test → `/wander-verify` → `wander-code-reviewer` → ghi `decisions.md` → báo cáo kèm **"Học được gì"**. Ngân sách: ≤ 1 lần hỏi architect, ≤ 2 lượt review, ≤ 3 vòng sửa-test.
+- `/wander-verify`: chạy `tools/dev.ps1` thật (nền, không chờ vòng), đọc kết quả từ `.logs/*.status`, dòng `RESULT:` và JUnit XML qua `node tools/wander-status.mjs --tests`. Phân loại lỗi môi trường (Docker tắt, JDK, cổng) và lỗi code. Không bao giờ báo kết quả chưa đọc.
+- Phiên cloud nối với máy Windows: shell của cầu nối không chạy được lệnh Windows ⇒ chạy task VS Code "Wander: …" rồi đọc log.
 
-| Lệnh | Việc làm |
-|---|---|
-| `/wander-review <mục tiêu hẹp>` | Review nhiều góc nhìn có giới hạn: song song một vòng + tối đa một vòng phản biện, rồi báo cáo hợp nhất |
-| `/wander-decision-audit <đề xuất/câu cần kiểm>` | Truy nguồn từng mệnh đề, tìm mâu thuẫn, soạn bản ghi quyết định để bạn duyệt. Không dùng agent con |
-| `/wander-spec-review <đường dẫn spec>` | Review spec Lát 1a/1b trước khi code: blocker, vấn đề quan trọng, vấn đề nhỏ, câu hỏi mở |
+## 5. File nằm ở đâu
 
-## 5. Ví dụ: review Q16
+| Mục đích | Đường dẫn | Nạp khi nào |
+|---|---|---|
+| Ngữ cảnh dự án | `CLAUDE.md` (< 100 dòng) | Mọi phiên |
+| Ranh giới an toàn, ngân sách | `.claude/rules/planning-safety.md` | Luôn |
+| Hỏi gì / tự quyết gì (Tầng A/B/C) | `.claude/rules/decision-materiality.md` | Luôn |
+| Quy ước backend (tầng, công thức thay đổi, bẫy JPA, chạy test) | `.claude/rules/backend.md` | Khi mở file `backend/**` |
+| Quy ước giao diện + e2e | `.claude/rules/frontend.md` | Khi mở `web/**`, `e2e/**` |
+| Bản đồ mục của kế hoạch + sổ trạng thái + băm sha256 | `.claude/rules/wander-product-context.md` | Khi mở kế hoạch / autopilot; agent đọc theo yêu cầu |
+| Mẫu báo cáo đầy đủ | `.claude/rules/review-output.md` | Khi mở `docs/autopilot/**`, `docs/reviews/**` |
+| Hợp đồng chung của agent | `.claude/skills/wander-kit/SKILL.md` | Nạp sẵn vào mỗi agent (không phải lệnh) |
+| Bảng định tuyến + mẫu brief | `.claude/skills/wander-review/reference.md` | Khi chạy review/council/autopilot |
+| Ảnh chụp trạng thái | `tools/wander-status.mjs` | `/wander-status`, `/wander-verify` |
+| Quyền, hook | `.claude/settings.json` | Mọi phiên |
+| Kế hoạch (nguồn sự thật, **không sửa**) | `docs/wander-master-plan.md` | Chỉ đọc đúng mục cần |
 
-```
-/wander-review Q16: thiết kế xác thực và khôi phục quyền chủ chuyến (D15)
-```
+Skill do code-review-graph cài (`debug-issue`, `explore-codebase`, `refactor-safely`, `review-changes`) giữ nguyên; lệnh `code-review-graph install` có thể ghi lại chúng.
 
-Điều xảy ra: orchestrator đọc §7.4 (R13), §9.1 (A-0), §14.1 (D15), §15.1 (Q16), §12; gọi song song `wander-security-reviewer`, `wander-software-architect`, `wander-skeptic-qa`; nếu có bất đồng đáng kể thì chạy **một** vòng phản biện nhắm đúng agent liên quan; rồi trả báo cáo kết thúc bằng danh sách điều **bạn** cần quyết. Không file nào bị đổi.
+## 6. Thêm hoặc sửa agent
 
-## 6. Prompt mẫu (copy-paste)
+1. `.claude/agents/<ten>.md`: `name` khớp tên file; `description` nói rõ khi nào dùng (Claude dựa vào đây để chọn agent).
+2. `tools: Read, Grep, Glob` (bốn agent planning **phải giữ đúng chuỗi này** — preflight của autopilot kiểm tra). Không thêm Bash/Edit/Write/Agent nếu bạn chưa đồng ý.
+3. `skills: [wander-kit]` để nhận hợp đồng chung; thân file chỉ ghi phần riêng: đọc gì, phương pháp, không được làm gì.
+4. Không đặt `permissionMode`, `hooks`, `memory` (memory tự cấp quyền ghi).
+5. Thêm dòng vào bảng định tuyến `reference.md` (3 cột, tên agent bỏ tiền tố `wander-`).
+6. Chạy `node --test .claude/scripts/autopilot.test.mjs` và `node .claude/scripts/autopilot.mjs dry-run --target "<mục tiêu>"` để chắc preflight còn PASS.
 
-1. **Review một quyết định chưa chốt**
-   ```
-   @agent-wander-product-analyst Phân loại Q11 và P13 theo kế hoạch: đã quyết gì, chưa quyết gì, mỗi đáp án sẽ làm thay đổi điều gì. Đừng chọn hộ tôi.
-   ```
-2. **Review đa agent có giới hạn**
-   ```
-   /wander-review Mô hình chi phí Q3/Q4 (D17, D18, R2–R4) và ánh xạ 32 ô "—" trong chuyến thật
-   ```
-3. **Review spec trước khi code**
-   ```
-   /wander-spec-review docs/slices/lat-1a.md
-   ```
-4. **Nhờ orchestrator so sánh các khuyến nghị mâu thuẫn**
-   ```
-   Hai báo cáo vừa rồi (architect và security) bất đồng về phương án khôi phục. Hãy lập bảng bất đồng: ai nói gì, bằng chứng nào, bằng chứng nào sẽ phân xử. Chỉ gọi lại đúng hai agent đó, tối đa một vòng, rồi dừng và hỏi tôi.
-   ```
+## 7. Token và chi phí
 
-## 7. Thêm agent mới một cách an toàn
+- Agent song song với ngữ cảnh tách biệt cho góc nhìn **độc lập** nhưng tốn **nhiều token tổng** hơn một lượt đọc. Vì vậy: Tầng B/C không bao giờ họp; bảng dữ kiện dùng chung; chọn ít agent nhất; câu hỏi nhỏ dùng một agent hoặc `/wander-decision-audit`.
+- `effort`: architect/security/code-reviewer `high`, analyst/QA `medium`; `model: inherit`. `maxTurns` 16–24.
+- RTK nén đầu ra lệnh shell; code-review-graph thay việc đọc cả thư mục bằng truy vấn đồ thị.
 
-1. Tạo `.claude/agents/<ten>.md` với `name` khớp tên file, `description` nêu rõ khi nào dùng/không dùng.
-2. Mặc định `tools: Read, Grep, Glob`. Không thêm `Bash`, `Edit`, `Write`, `Agent`, `WebFetch` nếu chưa có lý do ghi rõ và bạn đồng ý.
-3. Không đặt `permissionMode: bypassPermissions`; không thêm `hooks`.
-4. Trong thân agent: vai trò, những việc **không được làm**, và "tuân theo `.claude/rules/review-output.md`". Đừng chép lại kế hoạch.
-5. Thêm một dòng vào bảng định tuyến trong `.claude/skills/wander-review/reference.md`, rồi chạy kiểm tra ở mục 9.
+## 8. Giới hạn đã biết
 
-## 8. Giữ ngữ cảnh và token gọn
+- Quy tắc trong `CLAUDE.md`, rule và skill là **chỉ dẫn** cho model. Rào chắn cứng chỉ gồm `tools` của agent, `permissions.deny` (`.env`) và hook autopilot (đang tắt bằng `"matcher": "NONE"`; matcher để bật lại: `Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell|Agent|Task`). Việc "không sửa kế hoạch" ngoài autopilot hiện **chỉ dựa vào chỉ dẫn** — nên thêm `"Edit(/docs/wander-master-plan.md)"` và `"Write(/docs/wander-master-plan.md)"` vào `permissions.deny` nếu muốn chặn cứng (thay đổi quyền nên để PO tự làm).
+- `code-review-graph install` ghi đè `.claude/settings.json` (nó không đọc được JSON có chú thích `//`). `tools/dev.ps1 install-tools` đã bỏ qua bước này nếu `.mcp.json` có sẵn cấu hình; nếu lỡ chạy, gộp lại quyền + hook autopilot + hook của code-review-graph. Không thêm chú thích `//` vào file này.
+- Bản đồ trạng thái trong `wander-product-context.md` đã xác minh với kế hoạch v0.4; băm sha256 thay đổi ⇒ phải xác minh lại. Kiểm tra: `Get-FileHash docs\wander-master-plan.md -Algorithm SHA256`.
+- Không tự động: sửa kế hoạch, duyệt quyết định, triển khai cloud, tạo bí mật, commit (chỉ khi PO bảo).
 
-- `CLAUDE.md` và 3 rule rất ngắn; bản đồ mục giúp agent chỉ đọc đúng phần cần.
-- Skill tắt tự kích hoạt: tên và mô tả của chúng không chiếm ngữ cảnh mỗi lượt.
-- Chỉ gọi agent cần thiết (bảng định tuyến). Câu hỏi nhỏ dùng `/wander-decision-audit` hoặc một agent.
-- Giới hạn cứng: một vòng song song + tối đa một vòng phản biện; agent con không gọi thêm agent; `maxTurns: 16`.
-- Đánh đổi thật: chạy song song với ngữ cảnh tách biệt giúp các góc nhìn **độc lập** nhưng thường tốn **nhiều token tổng cộng hơn** một lượt đọc đơn. Mức tiết kiệm không được cam kết; xem số đo ở báo cáo kiểm tra (nếu có) thay vì phỏng đoán.
-- Mỗi agent chạy theo model của phiên (`model: inherit`) và `effort: medium`. Có thể đổi trong frontmatter nếu muốn rẻ hơn, đổi lại có thể giảm chất lượng.
+## 9. Lịch sử
 
-## 9. Kiểm tra hệ thống
+- 23/10/2026: agent tự chọn stack TypeScript/SQLite (ADR-001) mà không hỏi, lại hỏi PO những chi tiết vụn ⇒ thêm quy tắc Tầng A/B/C.
+- 24/10/2026: PO chọn stack Java (ADR-002) và Java 21 + Boot 4.1 (ADR-004); thêm `wander-code-reviewer`, `/wander-feature`, RTK, code-review-graph. Sau đó cấu trúc lại: `wander-kit`, `/wander-council` (thay `/wander-architecture-decision`), `/wander-verify`, `/wander-status`, rule backend/frontend theo đường dẫn, rút gọn agent và rule luôn nạp.
 
-- Cấu trúc: chạy script kiểm tra frontmatter/đường dẫn (xem báo cáo kiểm tra) hoặc mở `/agents` trong Claude Code để thấy bốn agent.
-- Hành vi: chạy lại năm bài thử mô tả ở mục "Bài thử hành vi" của `docs/agent-system-validation.md` (mỗi bài vài chục xu USD theo giá niêm yết; xem số đo trong file đó).
-- An toàn: kế hoạch không đổi, đối chiếu băm sha256 ghi trong `.claude/rules/wander-product-context.md`:
-  `sha256sum docs/wander-master-plan.md` (Windows PowerShell: `Get-FileHash docs\wander-master-plan.md -Algorithm SHA256`).
+## Công cụ ngoài đã đánh giá (25/10/2026)
 
-## 10. Giới hạn đã biết và điều cố ý không tự động
+Nguồn: ba nhóm agent đánh giá độc lập (đọc mã thật, giấy phép, hook, cách cài). Số "tiết kiệm" của nhà phát hành không được dùng làm bằng chứng.
 
-- Quyền chỉ đọc của agent con là **cơ chế thật** (allowlist công cụ). Phiên chính vẫn có Bash/Edit theo quyền thường; `deny` trên `Edit(/docs/wander-master-plan.md)` chặn công cụ sửa file nhưng **không chặn mọi lệnh Bash** (ví dụ chuyển hướng ghi). Đừng chạy phiên chính ở chế độ bỏ qua quyền.
-- Agent teams (nhắn tin trực tiếp giữa agent) **không được dùng**; hệ thống không phụ thuộc vào chúng. Phản biện chạy qua orchestrator.
-- Quy tắc trong `CLAUDE.md` và rule là chỉ dẫn cho model, không phải rào chắn cứng. Rào chắn cứng chỉ gồm `tools` của agent và `permissions.deny`.
-- Bản đồ trạng thái trong rule là bản sao đã xác minh theo v0.3; nếu kế hoạch đổi, phải xác minh lại (có băm sha256 để phát hiện).
-- Không tự động: sửa kế hoạch, duyệt quyết định, chạy review định kỳ, lưu báo cáo, lặp review khi có thay đổi nhỏ, tạo spec, viết code.
+| Công cụ | Quyết định | Lý do và cách dùng |
+|---|---|---|
+| RTK | Giữ, đã cài | Hook Bash toàn cục. `rtk gain` đo được 113 lệnh, 51,9% (22,7K token) ở lần đo hôm nay; tổng tiết kiệm nhỏ. Telemetry tắt |
+| Headroom | Bỏ qua | Proxy nền thấy toàn bộ prompt, lưu nội dung gốc plaintext, beacon bật mặc định, chồng chéo với RTK |
+| Context7 | Cài (phạm vi project, `.mcp.json`) | Tra tài liệu đúng phiên bản cho Spring Boot 4 / Jackson 3. Gửi tên thư viện + câu hỏi tới Upstash, không gửi mã. Cần duyệt MCP project ở phiên sau; chưa dùng API key |
+| Repomix | Không cài; `npx repomix@1.18.1` khi cần | Đo thật: backend + web + docs/ux nén = 83.121 token. Chỉ để tổng quan một lần; làm việc tương tác dùng code-review-graph |
+| Superpowers | Chép riêng `systematic-debugging` | Không cài plugin (hook SessionStart ép gọi skill, kỹ năng tự commit/worktree trái luật dự án) |
+| Addy Osmani agent-skills | Chép `planning-and-task-breakdown`, `spec-driven-development`, `test-driven-development` | Đường ghi file đổi về `docs/implementation/`; ví dụ TDD là JS, đã ghi chú dùng JUnit |
+| Anthropic Skills, plugin chính thức | Cài khi cần | Phần lớn trùng thứ đã có |
+| Everything Claude Code | Bỏ qua | 130 KB mô tả, 27 hook, ghi vào `~/.claude` |
+| revfactory/harness, wshobson/agents | Bỏ qua | Sinh agent có quyền ghi, trái `planning-safety.md`; khung hiện có đủ dùng |
+| UI/UX Pro Max | Giữ (project), `disable-model-invocation`, đã sửa `${CLAUDE_SKILL_DIR}` | Cần Python 3 để chạy `search.py`; máy chưa có. Dùng để rà màn đã làm, không để định hướng lại thiết kế |
+| Taste-Skill | Đưa sang `~/.claude/skills` (user), `disable-model-invocation` | Luật chống gradient/bóng/kính trái hướng thiết kế PO chọn (app du lịch rực rỡ). Chỉ mượn vòng "chụp màn hình, xem, sửa" |
 
-## 11. /wander-autopilot (chạy trọn một mục tiêu, có thể tiếp tục)
-
-Một lệnh thay cho chuỗi prompt thủ công: `/wander-autopilot <mục tiêu hẹp>`; xem trước bằng `dry-run <mục tiêu>`; tiếp tục bằng `resume`. Dùng lại 4 agent và bảng định tuyến của `/wander-review`; thêm máy trạng thái (`.claude/scripts/autopilot.mjs`) và hook chặn cứng (`.claude/hooks/autopilot-guard.mjs`). Hướng dẫn đầy đủ, giới hạn và cách khởi động: `docs/autopilot/README.md`.
-
-- Không sửa kế hoạch, không viết code, không nâng đề xuất thành quyết định; kết quả mỗi lần chạy nằm trong `docs/autopilot/runs/<run-id>/`.
-- Tối đa 2 vòng review (khớp quy tắc 7 trong `planning-safety.md`), tối đa 8 lần gọi agent, giới hạn thử lại và resume được ép bằng mã.
-- Hook PreToolUse và `permissions.allow` hẹp được thêm vào `.claude/settings.json`. Hook nằm ở cấp dự án; 4 agent vẫn không có hook riêng (mục 7). Hook chỉ **hạn chế**, không bao giờ cấp quyền.
-
-
-## 12. Cập nhật 24/10/2026 — workflow mới
-
-**Vấn đề cũ:** agent tự chọn stack (TypeScript/SQLite, ADR-001) mà không hỏi, trong khi báo cáo đầy câu hỏi vụn (dấu thập phân, ký hiệu ₫). **Sửa:**
-
-| Thay đổi | File |
-|---|---|
-| Stack do PO chọn: Java/Spring Boot, Clean Architecture, DDD, CQRS, JPA/Hibernate, PostgreSQL, AWS, giao diện TypeScript | `docs/architecture/adr/ADR-002-java-spring-stack.md` |
-| Quy tắc hỏi theo mức ảnh hưởng: **Tầng A** (stack, kiến trúc, thư viện mới, bảo mật, AWS/chi phí, khó đảo ngược) → hỏi PO, có phương án + khuyến nghị + "học được gì"; **Tầng B** → tự chọn, ghi `decisions.md`; **Tầng C** → làm luôn | `.claude/rules/decision-materiality.md` |
-| Hàng đợi quyết định kỹ thuật AD-1…AD-11 | `docs/architecture/open-decisions.md` |
-| Agent kiến trúc viết lại: biết stack, nhìn theo system design, phân tầng câu hỏi, giải thích để học | `.claude/agents/wander-software-architect.md` |
-| Agent mới rà code: checklist 9 điểm, xếp BLOCKER/MAJOR/MINOR/NIT, "điểm tốt đáng học" | `.claude/agents/wander-code-reviewer.md` |
-| 3 agent còn lại: thêm lọc Tầng A/B; security và QA đọc được code | `.claude/agents/*.md` |
-| Skill `/wander-architecture-decision <AD-x hoặc câu hỏi>`: chuẩn bị phương án → hỏi PO → ghi ADR | `.claude/skills/wander-architecture-decision/` |
-| Skill `/wander-feature <story>`: truy nguồn → hỏi Tầng A → thiết kế → code → test thật trên Windows → rà code → ghi lại → "học được gì" | `.claude/skills/wander-feature/` |
-| Công cụ: RTK (proxy giảm token cho lệnh shell, hook toàn cục) và code-review-graph (đồ thị code qua MCP, `.mcp.json`; hook cập nhật đồ thị sau mỗi lần sửa) | `CLAUDE.md` mục "Tooling" |
-
-Ghi chú `.claude/settings.json`: `code-review-graph install` đã ghi đè file này (nó không đọc được JSON có chú thích `//`); đã gộp lại quyền cũ + hook autopilot (vẫn tắt bằng `"matcher": "NONE"` như trước — dòng chú thích gốc `Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell|Agent|Task` là matcher để bật lại) + hook của code-review-graph. Không thêm chú thích `//` vào file này nữa.
+Kỹ năng chép về đều đặt `disable-model-invocation: true` (chỉ chạy khi gõ lệnh hoặc khi `wander-feature` gọi), để mô tả không chiếm ngữ cảnh mỗi phiên.

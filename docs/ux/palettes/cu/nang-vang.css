@@ -1,0 +1,38 @@
+/* Hướng "nang-vang" (Nắng vàng): nền vàng nắng, xanh trời nhạt làm màu phụ, nút hổ phách chữ mực tối.
+   Chỉ đổi màu so với app.css (dòng 5-41); giữ tên token, bóng, gradient, huy hiệu, phông. */
+:root {
+  --cta: #ff9d0a; --cta-hover: #f08400; --on-cta: #2a1700;   /* nút hổ phách cố định ở cả sáng và tối: chữ mực tối */
+  --sky-1: #bfe3fa; --sky-2: #ffec9e; --bg: #fff3c4; --surface: #ffffff; --surface-2: #ffe486; --ink: #14213a; --muted: #45506a; --line: #f0d77a;
+  --brand: #c76a00; --brand-2: #a85600; --brand-ink: #7d3d00; --brand-soft: #ffdf7d; --sun: #ffc400; --sky: #0b58b8; --sky-soft: #d9eefc;
+  --like: #0f8f4e; --skip: #d32f2f;
+  --warn-bg: #ece3ff; --warn-line: #8a5ad8; --warn-ink: #3b1c85;
+  --glass: rgba(255,251,235,.88); --scrim: rgba(7,19,38,.88); --shadow: 0 1px 3px rgba(20,33,58,.12); --shadow-float: 0 16px 34px -18px rgba(20,33,58,.5);
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Baloo 2", "Be Vietnam Pro", system-ui, sans-serif;
+  --d1: #ec6a13; --d2: #ab76f4; --d3: #4293f0; --d4: #0da0a5; --d5: #0da559; --d6: #f1559e; --d7: #bf8a0a;
+  --on-d: #0e1a30;
+  --cat-canh-b: #0da559; --cat-canh-t: #dcf6e6; --cat-canh-i: #0a5a37; --cat-canh-on: #0e1a30;
+  --cat-van-b: #ab76f4; --cat-van-t: #eee4ff; --cat-van-i: #53279e; --cat-van-on: #0e1a30;
+  --cat-am-b: #cc8500; --cat-am-t: #ffe9a8; --cat-am-i: #6b3d00; --cat-am-on: #0e1a30;
+  --cat-leo-b: #4293f0; --cat-leo-t: #dcecfd; --cat-leo-i: #0f4c9e; --cat-leo-on: #0e1a30;
+  --cat-luu-b: #0da0a5; --cat-luu-t: #d6f3f4; --cat-luu-i: #075a5e; --cat-luu-on: #0e1a30;
+  --cat-cho-b: #f1559e; --cat-cho-t: #ffe0ee; --cat-cho-i: #9a1a58; --cat-cho-on: #0e1a30;
+}
+.cat-canh { --cb: var(--cat-canh-b); --ct: var(--cat-canh-t); --ci: var(--cat-canh-i); --con: var(--cat-canh-on); }
+.cat-van { --cb: var(--cat-van-b); --ct: var(--cat-van-t); --ci: var(--cat-van-i); --con: var(--cat-van-on); }
+.cat-am { --cb: var(--cat-am-b); --ct: var(--cat-am-t); --ci: var(--cat-am-i); --con: var(--cat-am-on); }
+.cat-leo { --cb: var(--cat-leo-b); --ct: var(--cat-leo-t); --ci: var(--cat-leo-i); --con: var(--cat-leo-on); }
+.cat-luu { --cb: var(--cat-luu-b); --ct: var(--cat-luu-t); --ci: var(--cat-luu-i); --con: var(--cat-luu-on); }
+.cat-cho { --cb: var(--cat-cho-b); --ct: var(--cat-cho-t); --ci: var(--cat-cho-i); --con: var(--cat-cho-on); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --sky-1: #1f4a7a; --sky-2: #5a4a1c; --bg: #15223d; --surface: #1e2f52; --surface-2: #27406b; --ink: #fff7e0; --muted: #bccae6; --line: #3a5585;
+    --brand: #ffb938; --brand-2: #ffa310; --brand-ink: #ffd37a; --brand-soft: #4d3b10; --sun: #ffd24a; --sky: #8cc8ff; --sky-soft: #1c3a63; --like: #3ec886; --skip: #ff8a80;
+    --warn-bg: #3a2a66; --warn-line: #a98af0; --warn-ink: #e6dcff; --glass: rgba(30,47,82,.9); --shadow: 0 1px 3px rgba(0,0,0,.4); --shadow-float: 0 16px 34px -18px rgba(0,0,0,.85);
+    --cat-canh-t: #11402f; --cat-canh-i: #6fe0ab; --cat-van-t: #34265e; --cat-van-i: #c9aeff; --cat-am-t: #4a3a10; --cat-am-i: #ffd24a;
+    --cat-leo-t: #1a3a66; --cat-leo-i: #8cc8ff; --cat-luu-t: #0f3e45; --cat-luu-i: #66dde3; --cat-cho-t: #4a2140; --cat-cho-i: #ff9cc8; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --sky-1: #1f4a7a; --sky-2: #5a4a1c; --bg: #15223d; --surface: #1e2f52; --surface-2: #27406b; --ink: #fff7e0; --muted: #bccae6; --line: #3a5585;
+    --brand: #ffb938; --brand-2: #ffa310; --brand-ink: #ffd37a; --brand-soft: #4d3b10; --sun: #ffd24a; --sky: #8cc8ff; --sky-soft: #1c3a63; --like: #3ec886; --skip: #ff8a80;
+    --warn-bg: #3a2a66; --warn-line: #a98af0; --warn-ink: #e6dcff; --glass: rgba(30,47,82,.9); --shadow: 0 1px 3px rgba(0,0,0,.4); --shadow-float: 0 16px 34px -18px rgba(0,0,0,.85);
+    --cat-canh-t: #11402f; --cat-canh-i: #6fe0ab; --cat-van-t: #34265e; --cat-van-i: #c9aeff; --cat-am-t: #4a3a10; --cat-am-i: #ffd24a;
+    --cat-leo-t: #1a3a66; --cat-leo-i: #8cc8ff; --cat-luu-t: #0f3e45; --cat-luu-i: #66dde3; --cat-cho-t: #4a2140; --cat-cho-i: #ff9cc8; color-scheme: dark; }

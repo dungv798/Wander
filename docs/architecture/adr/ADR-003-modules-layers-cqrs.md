@@ -1,6 +1,7 @@
 # ADR-003 — Cách áp dụng Clean Architecture, DDD và CQRS trong backend
 
-- **Trạng thái:** `PROPOSED` (Claude thiết kế để hiện thực ADR-002; PO duyệt hoặc yêu cầu đổi). Đang chạy trong code.
+- **Trạng thái:** `APPROVED` — PO duyệt ngày 24/10/2026 ("Duyệt, sửa 3 chỗ chữ trước") sau phiên `/wander-council` về các quyết định kỹ thuật còn lại; 3 chỗ chữ đã sửa ở §1, §3, §5. Claude thiết kế để hiện thực ADR-002. Đang chạy trong code.
+- **Việc kèm theo (Tier B, chưa làm):** thêm test `*IT` hai request song song cùng một chuyến, một request nhận `409 CONCURRENT_MODIFICATION` (§4 hiện có cơ chế trong code nhưng chưa thấy test bao phủ).
 - **Phạm vi:** `backend/src/main/java/com/wander/**`.
 
 ## 1. Module = bounded context
@@ -12,6 +13,8 @@
 | `shared` | `kernel` (lỗi, Patch, thời gian, id, principal) và `web` (lỗi HTTP, đọc JSON, giới hạn tần suất, header) | — |
 
 Hai module **không gọi nhau**. `planning` chỉ biết `identityId` của chủ qua `AuthenticatedPrincipal` (shared.kernel). Bảng `trips` không có khóa ngoại sang `identities` — đây là chủ đích để tách thành service riêng được.
+
+**Một cơ sở dữ liệu, một schema chung, không khóa ngoại chéo module.** Khóa ngoại chỉ được dùng giữa các bảng *cùng module* (ví dụ các bảng của `identity` trỏ về `identities`). Module này không có khóa ngoại sang bảng của module kia; tham chiếu chéo chỉ là id thuần (như `owner_identity_id`). Hệ quả: tách service sau này (hoặc sang 1b) không phải gỡ ràng buộc dữ liệu, nhưng toàn vẹn chéo module do ứng dụng bảo đảm, không do DB.
 
 ## 2. Tầng trong mỗi module (Clean Architecture)
 
@@ -30,6 +33,8 @@ api ─────────► application ─────────► do
 Luật này được **thực thi** bởi `backend/src/test/java/com/wander/ArchitectureTest.java` (ArchUnit): vi phạm ⇒ build đỏ.
 
 ## 3. CQRS ở mức "cùng cơ sở dữ liệu"
+
+> **Phạm vi:** CQRS (tách `command`/`query`/`input`) chỉ áp dụng cho module `planning`. Module `identity` dùng các service (`IdentityService`, `RecoveryService`, `DeviceLinkService`) trong `application`, chưa tách lệnh/truy vấn. Luật ArchUnit `queriesDoNotLoadAggregates` chỉ phủ gói `..application.query..`, nên `identity` **không** bị ràng buộc bởi luật đó. Tách `identity` theo CQRS là việc tùy chọn sau, không bắt buộc.
 
 - **Lệnh** (`PlanningCommands` → `PlanningCommandHandler`): nạp aggregate qua `TripRepository`, gọi hành vi domain, lưu. Trả về **id**, không trả dữ liệu hiển thị.
 - **Truy vấn** (`PlanningQueries` + `TripReadModel`): JPQL constructor expression trả record phẳng, không nạp aggregate, không dirty-checking.
@@ -50,7 +55,7 @@ Luật này được **thực thi** bởi `backend/src/test/java/com/wander/Arch
 |---|---|---|---|
 | Dùng entity JPA làm domain | Ít code | Domain dính framework, khó test thuần, lazy-loading rò vào nghiệp vụ | Không chọn (đi ngược mục tiêu học Clean Architecture) |
 | Package-by-layer toàn hệ thống (`controller/`, `service/`…) như nhiều dự án | Quen thuộc | Ranh giới module mờ, khó tách service | Không chọn |
-| Spring Modulith thay ArchUnit | Kiểm tra module + tài liệu tự sinh | Thêm phụ thuộc, khái niệm mới | Để PO quyết (AD-8) |
+| Spring Modulith thay ArchUnit | Kiểm tra module + tài liệu tự sinh | Thêm phụ thuộc, khái niệm mới | Giữ ArchUnit (AD-8, mặc định 24/10/2026; xem lại khi có module thứ ba) |
 | Mediator/CommandBus | Tách controller khỏi handler | Gián tiếp hơn, chưa cần | Không chọn lúc này |
 
 ## 6. Hệ quả cần PO biết

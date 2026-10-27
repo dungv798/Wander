@@ -1,0 +1,19 @@
+/* Hướng B "Nhiệt đới": xanh ngọc (turquoise) làm màu thương hiệu, nút san hô-hồng, xoài vàng điểm nhấn. Mát, trẻ, khác biệt với các app du lịch cam-đỏ.
+   Chỉ ghi đè token; thử: node docs/ux/tools/check-palette.mjs nhiet-doi */
+:root {
+  --bg: #effbf9; --surface: #ffffff; --surface-2: #daf4ef; --line: #bde5de; --ink: #08333a; --muted: #3f5f67; --border-ctrl: #5b7d84;
+  --brand: #0aa39a; --brand-ink: #064d49; --brand-soft: #c9f1ea; --brand-2: #087f7a; --on-brand-2: #ffffff; --tint: #d3f4ee; --tint-ink: #064d49;
+  --cta-1: #ff6f61; --cta-g1: #ff9a66; --cta-2: #ff4d6d; --cta-1-hover: #f0605a; --cta-2-hover: #f0605a; --on-cta: #2b0a10;
+  --cta-glow: 0 12px 26px -10px rgba(255, 77, 109, 0.55);
+  --sun: #ffb627; --sun-hi: #ffe7a1; --on-sun: #08333a;
+  --sky: #0f6bd8; --sky-soft: #d7ebff; --sky-1: #86e3d7; --sky-2: #edfcf9;
+  --warn-bg: #d7ebff; --warn-line: #0f6bd8; --warn-ink: #0a3d82;
+  --glass: rgba(255, 255, 255, 0.84); --backdrop: rgba(6, 55, 58, 0.4);
+  --ambient-a: #9ee8de; --ambient-b: #ffd6a8; --ambient-c: #ffb0c4;
+  --gem-grad: linear-gradient(150deg, #14c7b7, #067a7c); --on-gem: #ffffff;
+  --obj-hi: #ffffff; --obj-mid: #def7f2; --obj-lo: #8fdcd0; --obj-edge: #4fbfb1; --obj-accent: #ff4d6d;
+  --map-low: #f1fbf9; --map-mid: #d3efe5; --map-high: #f2e6c6; --map-peak: #e0bd90; --map-shade: 0.5;
+  --map-water: #66c7ee; --map-road: #ffffff; --map-road-casing: #cfc3a6;
+  --card-shadow: 0 18px 34px -20px rgba(6, 55, 58, 0.5);
+  --scene: linear-gradient(#a8ece3, #effbf9 42%);
+}

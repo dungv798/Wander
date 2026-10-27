@@ -30,7 +30,7 @@
 
 ## 3. Hệ quả
 
-- Server TypeScript cũ chuyển vào `legacy/ts-server/` làm **bản tham chiếu hợp đồng API**; xóa khi PO xác nhận backend Java đã ngang bằng (AD-10).
+- Server TypeScript cũ chuyển vào `legacy/ts-server/` làm **bản tham chiếu hợp đồng API**; đã xóa theo [ADR-007](ADR-007-remove-legacy-ts-server.md) (AD-10, 24/10/2026) — bản cũ xem bằng `git show b6bd606:legacy/ts-server/<file>`.
 - Hợp đồng HTTP `/api/*` giữ nguyên từng trường và mã lỗi, nên giao diện và 4 kịch bản e2e dùng lại không sửa.
 - Các agent không còn được nói "chưa chọn stack". Mọi lựa chọn công nghệ **ngoài** bảng trên (thêm thư viện runtime, dịch vụ AWS, framework bảo mật, đổi kiến trúc) là quyết định **Tầng A** — phải hỏi PO (`.claude/rules/decision-materiality.md`).
 

@@ -1,0 +1,320 @@
+[
+  {
+    "fg": "--ink",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "chữ chính trên nền trang"
+  },
+  {
+    "fg": "--ink",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ chính trên thẻ"
+  },
+  {
+    "fg": "--ink",
+    "bg": "--surface-2",
+    "min": 4.5,
+    "note": "chữ chính trên nền phụ"
+  },
+  {
+    "fg": "--muted",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "chữ phụ trên nền trang"
+  },
+  {
+    "fg": "--muted",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ phụ trên thẻ"
+  },
+  {
+    "fg": "--muted",
+    "bg": "--surface-2",
+    "min": 4.5,
+    "note": "chữ phụ trên nền phụ"
+  },
+  {
+    "fg": "--brand-ink",
+    "bg": "--brand-soft",
+    "min": 4.5,
+    "note": "tab đang chọn"
+  },
+  {
+    "fg": "--brand-ink",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "chữ cam trên nền trang"
+  },
+  {
+    "fg": "--sky",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "liên kết trên thẻ"
+  },
+  {
+    "fg": "--sky",
+    "bg": "--bg",
+    "min": 4.5,
+    "note": "liên kết trên nền trang"
+  },
+  {
+    "fg": "--warn-ink",
+    "bg": "--warn-bg",
+    "min": 4.5,
+    "note": "khung chờ duyệt"
+  },
+  {
+    "fg": "--skip",
+    "bg": "--surface",
+    "min": 4.5,
+    "note": "chữ/biểu tượng Bỏ qua trên thẻ"
+  },
+  {
+    "fg": "--like",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu Chọn là đồ họa"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta",
+    "min": 4.5,
+    "note": "chữ trắng trên nút cam"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-hover",
+    "min": 4.5,
+    "note": "chữ trắng trên nút cam khi hover"
+  },
+  {
+    "fg": "--cat-canh-i",
+    "bg": "--cat-canh-t",
+    "min": 4.5,
+    "note": "chữ/biểu tượng loại cảnh đẹp trên nền nhạt"
+  },
+  {
+    "fg": "--cat-canh-on",
+    "bg": "--cat-canh-b",
+    "min": 3,
+    "note": "biểu tượng trong huy hiệu tròn loại cảnh đẹp (đồ họa)"
+  },
+  {
+    "fg": "--cat-canh-b",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại cảnh đẹp nổi trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--cat-van-i",
+    "bg": "--cat-van-t",
+    "min": 4.5,
+    "note": "chữ/biểu tượng loại văn hóa trên nền nhạt"
+  },
+  {
+    "fg": "--cat-van-on",
+    "bg": "--cat-van-b",
+    "min": 3,
+    "note": "biểu tượng trong huy hiệu tròn loại văn hóa (đồ họa)"
+  },
+  {
+    "fg": "--cat-van-b",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại văn hóa nổi trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--cat-am-i",
+    "bg": "--cat-am-t",
+    "min": 4.5,
+    "note": "chữ/biểu tượng loại ẩm thực trên nền nhạt"
+  },
+  {
+    "fg": "--cat-am-on",
+    "bg": "--cat-am-b",
+    "min": 3,
+    "note": "biểu tượng trong huy hiệu tròn loại ẩm thực (đồ họa)"
+  },
+  {
+    "fg": "--cat-am-b",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại ẩm thực nổi trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--cat-leo-i",
+    "bg": "--cat-leo-t",
+    "min": 4.5,
+    "note": "chữ/biểu tượng loại leo/trải nghiệm trên nền nhạt"
+  },
+  {
+    "fg": "--cat-leo-on",
+    "bg": "--cat-leo-b",
+    "min": 3,
+    "note": "biểu tượng trong huy hiệu tròn loại leo/trải nghiệm (đồ họa)"
+  },
+  {
+    "fg": "--cat-leo-b",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại leo/trải nghiệm nổi trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--cat-luu-i",
+    "bg": "--cat-luu-t",
+    "min": 4.5,
+    "note": "chữ/biểu tượng loại lưu trú trên nền nhạt"
+  },
+  {
+    "fg": "--cat-luu-on",
+    "bg": "--cat-luu-b",
+    "min": 3,
+    "note": "biểu tượng trong huy hiệu tròn loại lưu trú (đồ họa)"
+  },
+  {
+    "fg": "--cat-luu-b",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại lưu trú nổi trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--cat-cho-i",
+    "bg": "--cat-cho-t",
+    "min": 4.5,
+    "note": "chữ/biểu tượng loại chợ/mua sắm trên nền nhạt"
+  },
+  {
+    "fg": "--cat-cho-on",
+    "bg": "--cat-cho-b",
+    "min": 3,
+    "note": "biểu tượng trong huy hiệu tròn loại chợ/mua sắm (đồ họa)"
+  },
+  {
+    "fg": "--cat-cho-b",
+    "bg": "--surface",
+    "min": 3,
+    "note": "huy hiệu loại chợ/mua sắm nổi trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d1",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 1"
+  },
+  {
+    "fg": "--d1",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 1 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d2",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 2"
+  },
+  {
+    "fg": "--d2",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 2 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d3",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 3"
+  },
+  {
+    "fg": "--d3",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 3 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d4",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 4"
+  },
+  {
+    "fg": "--d4",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 4 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d5",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 5"
+  },
+  {
+    "fg": "--d5",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 5 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d6",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 6"
+  },
+  {
+    "fg": "--d6",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 6 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--on-d",
+    "bg": "--d7",
+    "min": 4.5,
+    "note": "chữ trên nhãn ngày 7"
+  },
+  {
+    "fg": "--d7",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu tuyến ngày 7 trên thẻ (đồ họa)"
+  },
+  {
+    "fg": "--ink",
+    "bg": "--sky-1",
+    "min": 4.5,
+    "note": "chữ trên nền trời phía trên"
+  },
+  {
+    "fg": "--ink",
+    "bg": "--sky-2",
+    "min": 4.5,
+    "note": "chữ trên nền trời phía dưới"
+  },
+  {
+    "fg": "--brand",
+    "bg": "--surface",
+    "min": 3,
+    "note": "màu nhấn thương hiệu là đồ họa trên thẻ"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-g1",
+    "min": 4.5,
+    "note": "chữ trên đầu sáng của nút gradient"
+  },
+  {
+    "fg": "--on-cta",
+    "bg": "--cta-g2",
+    "min": 4.5,
+    "note": "chữ trên đầu cam của nút gradient"
+  },
+  {
+    "fg": "--on-warn",
+    "bg": "--warn-line",
+    "min": 4.5,
+    "note": "chữ trên nhãn/chấm chờ duyệt"
+  }
+]

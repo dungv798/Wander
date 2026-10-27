@@ -1,0 +1,2428 @@
+[
+  {
+    "id": "t2-components",
+    "path": "/components.html",
+    "waitFor": ".gal",
+    "fullPage": true
+  },
+  {
+    "id": "t2-mau",
+    "path": "/components.html",
+    "waitFor": "#mau",
+    "element": "#mau"
+  },
+  {
+    "id": "t2-chu",
+    "path": "/components.html",
+    "waitFor": "#chu",
+    "element": "#chu"
+  },
+  {
+    "id": "t2-nut",
+    "path": "/components.html",
+    "waitFor": "#nut",
+    "element": "#nut"
+  },
+  {
+    "id": "t2-chip",
+    "path": "/components.html",
+    "waitFor": "#chip",
+    "element": "#chip"
+  },
+  {
+    "id": "t2-the",
+    "path": "/components.html",
+    "waitFor": "#the",
+    "element": "#the"
+  },
+  {
+    "id": "t2-form",
+    "path": "/components.html",
+    "waitFor": "#form",
+    "element": "#form"
+  },
+  {
+    "id": "t2-nav",
+    "path": "/components.html",
+    "waitFor": "#nav",
+    "element": "#nav"
+  },
+  {
+    "id": "t2-phanhoi",
+    "path": "/components.html",
+    "waitFor": "#phanhoi",
+    "element": "#phanhoi"
+  },
+  {
+    "id": "t2-trangthai",
+    "path": "/components.html",
+    "waitFor": "#trangthai",
+    "element": "#trangthai"
+  },
+  {
+    "id": "app-explore",
+    "path": "/",
+    "waitFor": ".sky, .hero-w"
+  },
+  {
+    "id": "app-dest",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      }
+    ]
+  },
+  {
+    "id": "app-deck",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      }
+    ]
+  },
+  {
+    "id": "app-info",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      },
+      {
+        "click": "[data-act=\"info\"]"
+      },
+      {
+        "waitFor": "#gal"
+      },
+      {
+        "wait": 400
+      }
+    ]
+  },
+  {
+    "id": "app-picked",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": ".deckbar .pill"
+      },
+      {
+        "waitFor": ".grid .tile"
+      }
+    ]
+  },
+  {
+    "id": "app-trips",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      }
+    ]
+  },
+  {
+    "id": "app-trip",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-loading",
+    "path": "/?state=loading",
+    "waitFor": ".skeleton"
+  },
+  {
+    "id": "app-error",
+    "path": "/?state=error",
+    "waitFor": "[role=\"alert\"]"
+  },
+  {
+    "id": "app-offline",
+    "path": "/?state=offline",
+    "waitFor": ".offline-bar"
+  },
+  {
+    "id": "app-create",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"create\"]"
+      },
+      {
+        "waitFor": "#s-name"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-create-tent",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"create\"]"
+      },
+      {
+        "waitFor": "#s-name"
+      },
+      {
+        "click": "#s-tent"
+      },
+      {
+        "waitFor": "#s-n"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-edit-error",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"editTrip\"]"
+      },
+      {
+        "waitFor": "#e-end"
+      },
+      {
+        "fill": [
+          "#e-end",
+          "2000-01-01"
+        ]
+      },
+      {
+        "click": "[data-act=\"doEdit\"]"
+      },
+      {
+        "waitFor": "#e-warn .warnbox"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-day",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"1\"]"
+      },
+      {
+        "waitFor": ".dayhead"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-plan",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"autoPlan\"]"
+      },
+      {
+        "waitFor": ".plan"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-addday",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"2\"]"
+      },
+      {
+        "click": "[data-act=\"addToDay\"]"
+      },
+      {
+        "waitFor": "[data-pick]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-share",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "#panel .pp"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-review",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"review\"]"
+      },
+      {
+        "waitFor": "#panel .card.front"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-member",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-role=\"member\"]"
+      },
+      {
+        "waitFor": "[data-role=\"member\"][aria-pressed=\"true\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-costbox",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "waitFor": ".costbox"
+      },
+      {
+        "wait": 350
+      }
+    ],
+    "element": ".costbox"
+  },
+  {
+    "id": "app-add-item",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"2\"]"
+      },
+      {
+        "click": "[data-act=\"addItem\"]"
+      },
+      {
+        "waitFor": ".addopt"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-item-edit",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"1\"]"
+      },
+      {
+        "click": ".irow:has(.ktile)"
+      },
+      {
+        "waitFor": "#i-title"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-item-edit-place",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"1\"]"
+      },
+      {
+        "click": ".irow.cat-van >> nth=0"
+      },
+      {
+        "waitFor": "#panel"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-sorting",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"1\"]"
+      },
+      {
+        "click": "[data-act=\"sortToggle\"]"
+      },
+      {
+        "waitFor": "[data-act^=\"move:\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-day2",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"2\"]"
+      },
+      {
+        "waitFor": ".taskchk"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-trash",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-go=\"trash\"]"
+      },
+      {
+        "waitFor": ".trashrow"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-purge-confirm",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-go=\"trash\"]"
+      },
+      {
+        "waitFor": ".trashrow"
+      },
+      {
+        "click": "[data-act^=\"purge:\"]"
+      },
+      {
+        "waitFor": "[data-act^=\"purgeYes:\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-reauth",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": ".seccard"
+      },
+      {
+        "click": "[data-act=\"regenCode\"]"
+      },
+      {
+        "waitFor": "#panel .chips"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-reauth-code",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": ".seccard"
+      },
+      {
+        "click": "[data-act=\"regenCode\"]"
+      },
+      {
+        "click": "[data-act=\"reauthMode:code\"]"
+      },
+      {
+        "waitFor": "#r-code"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-newcode",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": ".seccard"
+      },
+      {
+        "click": "[data-act=\"regenCode\"]"
+      },
+      {
+        "click": "[data-act=\"reauthMode:code\"]"
+      },
+      {
+        "fill": [
+          "#r-code",
+          "7K2QF-R9XMT-4B8HD-WJ3NC-5VZ6A-E1G0Y"
+        ]
+      },
+      {
+        "click": "[data-act=\"reauthCode\"]"
+      },
+      {
+        "waitFor": "#newcode"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-id-intro",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": ".deckbar .pill"
+      },
+      {
+        "waitFor": ".grid .tile"
+      },
+      {
+        "click": "[data-act=\"create\"]"
+      },
+      {
+        "waitFor": "#s-name"
+      },
+      {
+        "click": "[data-act=\"doCreate\"]"
+      },
+      {
+        "waitFor": "[data-act=\"idCreate\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-id-code",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": ".deckbar .pill"
+      },
+      {
+        "waitFor": ".grid .tile"
+      },
+      {
+        "click": "[data-act=\"create\"]"
+      },
+      {
+        "waitFor": "#s-name"
+      },
+      {
+        "click": "[data-act=\"doCreate\"]"
+      },
+      {
+        "click": "[data-act=\"idCreate\"]"
+      },
+      {
+        "waitFor": "#newcode"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-id-skip",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": ".deckbar .pill"
+      },
+      {
+        "waitFor": ".grid .tile"
+      },
+      {
+        "click": "[data-act=\"create\"]"
+      },
+      {
+        "waitFor": "#s-name"
+      },
+      {
+        "click": "[data-act=\"doCreate\"]"
+      },
+      {
+        "click": "[data-act=\"idCreate\"]"
+      },
+      {
+        "waitFor": "#newcode"
+      },
+      {
+        "click": "[data-act=\"codeSkip\"]"
+      },
+      {
+        "waitFor": "#toast:not([hidden])"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-security",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": ".seccard"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-security-nocode",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".dcard"
+      },
+      {
+        "waitFor": ".dhero"
+      },
+      {
+        "click": "[data-go=\"deck\"]"
+      },
+      {
+        "waitFor": ".deck .card.front"
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": "[data-act=\"like\"]"
+      },
+      {
+        "wait": 450
+      },
+      {
+        "click": ".deckbar .pill"
+      },
+      {
+        "waitFor": ".grid .tile"
+      },
+      {
+        "click": "[data-act=\"create\"]"
+      },
+      {
+        "waitFor": "#s-name"
+      },
+      {
+        "click": "[data-act=\"doCreate\"]"
+      },
+      {
+        "click": "[data-act=\"idCreate\"]"
+      },
+      {
+        "waitFor": "#newcode"
+      },
+      {
+        "click": "[data-act=\"codeSkip\"]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": ".top [data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": "[data-act=\"issueNow\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-revoke",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": ".seccard"
+      },
+      {
+        "click": "[data-act^=\"revoke:\"]"
+      },
+      {
+        "waitFor": "[data-act^=\"revokeYes:\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-recover",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": "[data-go=\"recover\"]"
+      },
+      {
+        "waitFor": "#rc-code"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-recover-device",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": "[data-go=\"recover\"]"
+      },
+      {
+        "waitFor": "#rc-code"
+      },
+      {
+        "click": "[data-act=\"recMode:device\"]"
+      },
+      {
+        "click": "[data-act=\"recPair\"]"
+      },
+      {
+        "waitFor": ".pairbox"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-recover-newcode",
+    "path": "/?fresh=1&intro=0",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": "[data-go=\"recover\"]"
+      },
+      {
+        "waitFor": "#rc-code"
+      },
+      {
+        "fill": [
+          "#rc-code",
+          "7K2QF-R9XMT-4B8HD-WJ3NC-5VZ6A-E1G0Y"
+        ]
+      },
+      {
+        "click": "[data-act=\"recCode\"]"
+      },
+      {
+        "waitFor": "#newcode"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-pair-confirm",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"security\"]:visible"
+      },
+      {
+        "waitFor": ".seccard"
+      },
+      {
+        "click": "[data-act=\"protoPair\"]"
+      },
+      {
+        "waitFor": ".protobox .pcode"
+      },
+      {
+        "eval": "document.getElementById('p-code').value = document.querySelector('.protobox .pcode').textContent.trim()"
+      },
+      {
+        "click": "[data-act=\"pairApprove\"]"
+      },
+      {
+        "waitFor": "[data-act=\"pairYes\"]"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-conflict",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"protoConflict\"]"
+      },
+      {
+        "waitFor": "[data-act=\"conflictReload\"]"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-share-on",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "#panel .pp"
+      },
+      {
+        "waitFor": "#lnk"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-join",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "#panel .pp"
+      },
+      {
+        "waitFor": "#lnk"
+      },
+      {
+        "click": "[data-act=\"protoJoin\"]"
+      },
+      {
+        "waitFor": "#j-name"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-join-off",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "#panel .pp"
+      },
+      {
+        "waitFor": "#lnk"
+      },
+      {
+        "click": "[data-act=\"protoJoinOff\"]"
+      },
+      {
+        "waitFor": "#panel [role=\"alert\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-request",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-role=\"member\"]"
+      },
+      {
+        "waitFor": "[data-role=\"member\"][aria-pressed=\"true\"]"
+      },
+      {
+        "click": "[data-item-open]:has-text(\"Tây Côn Lĩnh\")"
+      },
+      {
+        "click": "#panel [data-resolve^=\"ask:\"]"
+      },
+      {
+        "waitFor": "#q-reason"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-task-who",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-dtab=\"2\"]"
+      },
+      {
+        "click": ".swipe:has-text(\"Đổ xăng\") .irow"
+      },
+      {
+        "waitFor": "#panel .who"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-search-empty",
+    "path": "/",
+    "waitFor": "#q",
+    "actions": [
+      {
+        "fill": [
+          "#q",
+          "Paris"
+        ]
+      },
+      {
+        "waitFor": "#sec .empty"
+      },
+      {
+        "wait": 200
+      }
+    ]
+  },
+  {
+    "id": "app-img-fail",
+    "path": "/",
+    "blockImages": true,
+    "waitFor": ".dcard img.imgfail",
+    "actions": [
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-login",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-dests",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-dest",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-open-dest]"
+      },
+      {
+        "waitFor": "[role=\"tablist\"]"
+      },
+      {
+        "waitFor": ".arow:has(.thumb)"
+      },
+      {
+        "wait": 400
+      }
+    ]
+  },
+  {
+    "id": "app-admin-guide",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-open-dest]"
+      },
+      {
+        "waitFor": "[role=\"tablist\"]"
+      },
+      {
+        "click": "#tab-guide"
+      },
+      {
+        "waitFor": "[data-guide]"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-place",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-open-dest]"
+      },
+      {
+        "waitFor": "[role=\"tablist\"]"
+      },
+      {
+        "click": "[data-edit=\"cot-co-lung-cu\"]"
+      },
+      {
+        "waitFor": "#p-name"
+      },
+      {
+        "wait": 400
+      }
+    ]
+  },
+  {
+    "id": "app-admin-place-new",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-open-dest]"
+      },
+      {
+        "waitFor": "[role=\"tablist\"]"
+      },
+      {
+        "click": "[data-act=\"newPlace\"]"
+      },
+      {
+        "waitFor": "#p-name"
+      },
+      {
+        "fill": [
+          "#p-name",
+          "Thác Chiêng Khương"
+        ]
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-quality",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-open-dest]"
+      },
+      {
+        "waitFor": "[role=\"tablist\"]"
+      },
+      {
+        "click": "[data-act=\"newPlace\"]"
+      },
+      {
+        "waitFor": "#p-name"
+      },
+      {
+        "fill": [
+          "#p-name",
+          "Thác Chiêng Khương"
+        ]
+      },
+      {
+        "click": "[data-act=\"saveDraft\"]"
+      },
+      {
+        "waitFor": "#toast"
+      },
+      {
+        "click": "[data-go=\"dest\"]"
+      },
+      {
+        "click": "#tab-quality"
+      },
+      {
+        "waitFor": ".acard.q"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-expired",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-act=\"expire\"]"
+      },
+      {
+        "waitFor": "[role=\"alert\"]"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-onb-1",
+    "path": "/?fresh=1",
+    "waitFor": ".obx h1",
+    "actions": [
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-onb-2",
+    "path": "/?fresh=1",
+    "waitFor": ".obx h1",
+    "actions": [
+      {
+        "click": "[data-act=\"obNext\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-onb-3",
+    "path": "/?fresh=1",
+    "waitFor": ".obx h1",
+    "actions": [
+      {
+        "click": "[data-act=\"obNext\"]"
+      },
+      {
+        "click": "[data-act=\"obNext\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-wz-1",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"wizard\"]"
+      },
+      {
+        "waitFor": "#wz-h"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-wz-2",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"wizard\"]"
+      },
+      {
+        "waitFor": "#wz-h"
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-wz-3",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"wizard\"]"
+      },
+      {
+        "waitFor": "#wz-h"
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-wz-kind=\"Bạn bè\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-wz-4",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"wizard\"]"
+      },
+      {
+        "waitFor": "#wz-h"
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-wz-int=\"canh\"]"
+      },
+      {
+        "click": "[data-wz-int=\"am\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-wz-5",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"wizard\"]"
+      },
+      {
+        "waitFor": "#wz-h"
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-wz-6",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-act=\"wizard\"]"
+      },
+      {
+        "waitFor": "#wz-h"
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "click": "[data-act=\"wzNext\"]"
+      },
+      {
+        "wait": 120
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-dayroutes",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "wait": 300
+      },
+      {
+        "waitFor": ".dayroutes"
+      }
+    ],
+    "element": ".dayroutes"
+  },
+  {
+    "id": "app-today-before",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-go=\"today\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-today-day1",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-go=\"today\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "click": "[data-act^=\"todaySim:\"][data-act*=\"-\"]"
+      },
+      {
+        "waitFor": ".trow"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-today-after",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-go=\"today\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "click": "[data-act=\"todaySim:after\"]"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-settings",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"settings\"]:visible"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "wait": 300
+      }
+    ],
+    "fullPage": true
+  },
+  {
+    "id": "app-error-code",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"settings\"]:visible"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "click": "[data-act=\"simErr:RATE_LIMITED\"]"
+      },
+      {
+        "waitFor": "#panel [role=alert]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-expired-a",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"settings\"]:visible"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "click": "[data-act=\"simExpire\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-expired-b",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-go=\"settings\"]:visible"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "click": "[data-act=\"simExpire\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "click": "[data-act=\"expBranch:B\"]"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-export-anh",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-what=\"PDF\"]"
+      },
+      {
+        "click": "[data-what=\"Ảnh\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "wait": 300
+      }
+    ],
+    "fullPage": true
+  },
+  {
+    "id": "app-export-pdf",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-what=\"PDF\"]"
+      },
+      {
+        "click": "[data-what=\"PDF\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "wait": 300
+      }
+    ],
+    "fullPage": true
+  },
+  {
+    "id": "app-export-lich",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-what=\"PDF\"]"
+      },
+      {
+        "click": "[data-what=\"Lịch\"]"
+      },
+      {
+        "waitFor": "h1"
+      },
+      {
+        "wait": 300
+      }
+    ],
+    "fullPage": true
+  },
+  {
+    "id": "app-admin-newdest",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-act=\"newDest\"]"
+      },
+      {
+        "waitFor": ".badge.draft"
+      },
+      {
+        "wait": 300
+      }
+    ]
+  },
+  {
+    "id": "app-admin-upload",
+    "path": "/admin.html",
+    "waitFor": ".alogin",
+    "actions": [
+      {
+        "click": "[data-act=\"enter\"]"
+      },
+      {
+        "waitFor": ".alist"
+      },
+      {
+        "click": "[data-open-dest]"
+      },
+      {
+        "waitFor": "[role=tablist]"
+      },
+      {
+        "click": ".arow:has(.thumb) button"
+      },
+      {
+        "waitFor": "#pf"
+      },
+      {
+        "click": "[data-act=\"addPhoto\"]"
+      },
+      {
+        "wait": 350
+      }
+    ],
+    "fullPage": true
+  },
+  {
+    "id": "app-members",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-act=\"protoJoin\"]"
+      },
+      {
+        "click": "[data-act=\"protoJoin\"]"
+      },
+      {
+        "fill": [
+          "#j-name",
+          "Lan Anh"
+        ]
+      },
+      {
+        "click": "[data-act=\"joinGo\"]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-role=\"owner\"]"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-act^=\"rmMember:\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  },
+  {
+    "id": "app-member-remove",
+    "path": "/",
+    "waitFor": "#screen > *",
+    "actions": [
+      {
+        "click": ".tab[data-go=\"trips\"]"
+      },
+      {
+        "waitFor": ".tcard"
+      },
+      {
+        "click": "[data-trip]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-act=\"protoJoin\"]"
+      },
+      {
+        "click": "[data-act=\"protoJoin\"]"
+      },
+      {
+        "fill": [
+          "#j-name",
+          "Lan Anh"
+        ]
+      },
+      {
+        "click": "[data-act=\"joinGo\"]"
+      },
+      {
+        "waitFor": ".mapbox"
+      },
+      {
+        "click": "[data-role=\"owner\"]"
+      },
+      {
+        "click": ".mapbox [data-act=\"shareSheet\"]"
+      },
+      {
+        "waitFor": "[data-act^=\"rmMember:\"]"
+      },
+      {
+        "click": "[data-act^=\"rmMember:\"]"
+      },
+      {
+        "waitFor": "[data-act^=\"rmMemberYes:\"]"
+      },
+      {
+        "wait": 350
+      }
+    ]
+  }
+]
