@@ -2,7 +2,6 @@
 name: wander-spec-review
 description: Review a future Lát 1a or Lát 1b specification file BEFORE implementation. Checks traceability to approved requirements, acceptance and negative cases, data integrity, authorization, error handling and recovery, testability, scope, unresolved assumptions, and migration. Returns blockers, important issues, minor issues and open questions separately. Read-only; never edits the spec or the plan.
 argument-hint: "<path to spec file, e.g. docs/slices/lat-1a.md>"
-disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Agent
 ---
 

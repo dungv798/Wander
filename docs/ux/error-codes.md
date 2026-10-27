@@ -29,13 +29,13 @@
 | Mã | Lời gợi ý (Tầng B) |
 |---|---|
 | `REQUIRED` | "Hãy nhập …" |
-| `TOO_LONG` | "Tối đa N ký tự" (N theo ô: tên chuyến 120, tên mục 200, ghi chú 2000, lý do 200) |
+| `TOO_LONG` | "Tối đa N ký tự" (N theo ô: tên chuyến 120, tên mục 200, ghi chú 2000, lý do 200, tên thiết bị 60 ký tự thật, `deviceName`) |
 | `TOO_LARGE` | "Số quá lớn" (ngân sách/chi phí ≤ 1.000.000.000 nghìn) |
 | `NEGATIVE` | "Chỉ nhập số từ 0 trở lên" |
-| `MALFORMED`, `INVALID_DATE`, `OUT_OF_RANGE` | "Giá trị chưa đúng định dạng" / "Ngày không hợp lệ" / "Ngoài khoảng cho phép" |
+| `MALFORMED`, `INVALID_DATE`, `OUT_OF_RANGE` | "Giá trị chưa đúng định dạng" / "Ngày không hợp lệ" / "Ngoài khoảng cho phép". `MALFORMED` cũng cho `deviceName` có ký tự vô hình/điều khiển và `datesTentative` không phải boolean thật |
 | `START_REQUIRED`, `END_REQUIRED`, `END_BEFORE_START` | "Hãy chọn ngày đi/về", "Ngày về phải sau hoặc bằng ngày đi" |
 | `TOO_MANY` | "Quá nhiều lựa chọn" (ví dụ phong cách tối đa 5) |
-| `INVALID_TYPE`, `INVALID_STYLE`, `INVALID_PACE`, `INVALID_ORDER`, `INVALID_BOOKING`, `BOOKING_NOT_APPLICABLE`, `REFERENCE_REQUIRES_INCLUDED` | lỗi do giao diện gửi sai (ít gặp); hiện "Có lỗi ở phía Wander" + mã; riêng `REFERENCE_REQUIRES_INCLUDED`: "Giá tham khảo chỉ nhập khi đã tick 'Đã bao gồm'" |
+| `INVALID_TYPE`, `INVALID_STYLE`, `INVALID_PACE`, `INVALID_KIND`, `INVALID_INTEREST` (ADR-014: "ai đi" và sở thích; gửi nhãn tiếng Việt thay vì mã cũng là lỗi này), `INVALID_ORDER`, `INVALID_BOOKING`, `BOOKING_NOT_APPLICABLE`, `REFERENCE_REQUIRES_INCLUDED` | lỗi do giao diện gửi sai (ít gặp); hiện "Có lỗi ở phía Wander" + mã; riêng `REFERENCE_REQUIRES_INCLUDED`: "Giá tham khảo chỉ nhập khi đã tick 'Đã bao gồm'" |
 
 ## 5. Truyền tải và nội bộ
 `INVALID_JSON`, `BODY_TOO_LARGE`, `METHOD_NOT_ALLOWED`, `INTERNAL` → "Có lỗi ở phía Wander. Việc bạn vừa làm chưa được lưu. Thử lại sau ít phút." (`BODY_TOO_LARGE`: "Dữ liệu gửi đi quá lớn. Rút gọn nội dung rồi thử lại."). Mất mạng: không có mã, dùng thanh "Ngoại tuyến" (F14).

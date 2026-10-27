@@ -19,7 +19,7 @@ Quy ước: mỗi lát có tiêu chí và cách kiểm; một lát chưa xong th
 
 ## Cụm D — hoàn thiện
 - [x] **FE-8** (xong 27/10/2026) giới thiệu lần đầu + Lịch mẫu (3 bản nháp có nhãn, chờ PO duyệt từng lịch). **FE-9** (xong 27/10/2026) Hôm nay, Cài đặt, lỗi theo mã, hết phiên, xem trước lưu/gửi lịch trình (chưa tạo tệp).
-- [ ] **FE-10** nối backend thật (`Http*Repository`), viết lại e2e. *Sau khi backend lát tương ứng xong.*
+- [~] **FE-10** nối backend thật: **10a xong 27/10/2026** (catalog + lịch mẫu qua API thật, e2e 51/51); còn 10b chuyến/mục, 10c danh tính, 10d dọn kho giả + viết lại e2e gốc. (`Http*Repository`), viết lại e2e (`Http*Repository`), viết lại e2e. *Sau khi backend lát tương ứng xong.*
 
 ## Checkpoint
 - [x] Sau FE-0…FE-2: build + lint + test xanh.

@@ -2,7 +2,6 @@
 name: wander-council
 description: Let Wander specialist agents work independently, challenge each other once, converge, and bring the PO only the decisions that matter. Use for an AD-x technical decision, a Q-/P- product question, a design for one story, or a disputed approach. Hard budget (2 rounds, 6 dispatches), Tier-B points auto-defaulted and logged, Tier-A summarised on one page and asked with AskUserQuestion, answer recorded as an ADR or decision record.
 argument-hint: "<AD-id | Q-id | câu hỏi thiết kế>  [report]   e.g. 'AD-1', 'Q17 xóa cả chuyến', 'thiết kế A-15 giờ ước chừng', 'AD-2 report'"
-disable-model-invocation: true
 allowed-tools: Read Grep Glob Agent WebSearch WebFetch AskUserQuestion Write(/docs/architecture/**) Edit(/docs/architecture/**) Write(/docs/decisions/**) Edit(/docs/decisions/**) Edit(/docs/implementation/decisions.md)
 ---
 

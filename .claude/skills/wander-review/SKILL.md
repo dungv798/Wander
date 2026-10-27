@@ -2,7 +2,6 @@
 name: wander-review
 description: Bounded multi-specialist review of ONE focused Wander target (a plan area such as Q16 recovery or the cost model, a design, or implemented code) that ends in a consolidated report — no question asked, nothing decided, no file written. Use when the PO wants analysis to read; use /wander-council when he wants to decide.
 argument-hint: "<focused target, e.g. 'Q16 identity and recovery' or 'code: backend planning module'>"
-disable-model-invocation: true
 allowed-tools: Read Grep Glob Agent
 ---
 

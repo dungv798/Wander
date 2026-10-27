@@ -2,7 +2,6 @@
 name: wander-decision-audit
 description: Check one proposed decision, spec statement, or change against the Wander master plan. Traces each claim to a plan source, classifies it (APPROVED, PROPOSED, OPEN, CONTRADICTION, INFERENCE, UNVERIFIED), finds contradictions and missing requirements, lists affected requirements, and drafts a decision record for human approval. Single-agent, no delegation; never edits the plan or marks anything approved.
 argument-hint: "<the proposed decision or statement to audit>"
-disable-model-invocation: true
 allowed-tools: Read, Grep, Glob
 ---
 

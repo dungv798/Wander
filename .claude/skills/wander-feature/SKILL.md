@@ -2,7 +2,6 @@
 name: wander-feature
 description: Implement ONE Wander story or change end to end in the approved stack (Java/Spring Boot Clean Architecture + DDD + CQRS backend, React/TypeScript web): trace to the plan, stop only for Tier-A decisions, design, implement, test for real (domain, ArchUnit, Testcontainers API tests, e2e), review with wander-code-reviewer, log defaults, and explain what was learned. Use for A-/B- stories or bug fixes.
 argument-hint: "<story ID or change, e.g. 'A-15 giờ ước chừng' or 'fix: reorder ignores trashed items'>"
-disable-model-invocation: true
 ---
 
 # wander-feature

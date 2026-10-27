@@ -68,7 +68,11 @@ Kế hoạch: `plan.md`. Mỗi việc làm theo `/wander-design` (vòng: thiết
 - [x] **Backend lát 1:** catalog công khai + giới hạn tốc độ (DR-008 Q-a) + `lat/lon` cho `ReferenceView`. — xong 27/10/2026 qua TDD: 4 test mới/sửa đỏ trước (`.logs/lat1-red.log`) rồi xanh; toàn bộ 140 test / 19 lớp PASSED, 0 lỗi, Checkstyle 0 vi phạm (`.logs/lat1-green.log`). Chi tiết ở `docs/implementation/decisions.md` mục "Lát backend 1".
 - [x] **Backend lát 2:** mục chưa có ngày + liên kết kho (`place_id`) + R12 mới (DR-011 A1). — xong 27/10/2026: migration `V4`, domain `Item`/`Trip`, API, 4 test mới; 147 test / 19 lớp PASSED, 0 lỗi, Checkstyle 0 vi phạm (`.logs/lat2-3.log`). Chi tiết ở `decisions.md` mục "Lát backend 2".
 - [x] **Backend lát 3:** tên chuyến không trùng theo chủ (DR-006) + lệnh lịch `POST /api/trips/{id}/schedule` (đổi khoảng ngày và/hoặc gán ngày hàng loạt nguyên tử, dùng để Hoàn tác). — xong 27/10/2026; `./gradlew check` xanh, 158 test (`.logs/gate-check-1.log`). Chi tiết ở `decisions.md` mục "Lát backend 3".
+- [x] **Backend: `kind` và `interests` của chuyến (DR-018 F2, ADR-014).** — xong 27/10/2026: migration `V7`, `TripKind`/`TripInterest`, test API đỏ trước (`.logs/kind-red.log`), `VocabularyParityTest`; `./gradlew check` xanh, 188 test (`.logs/kind-check.log`).
 - [x] **Cổng chất lượng (ADR-013):** JaCoCo + hygiene Checkstyle + QA-4 + `tools/quality.ps1` + workflow CI chưa bật. — xong 27/10/2026, xem `decisions.md` mục "Cổng chất lượng".
+- [x] **Backend lát 4:** thùng rác giữ đến khi xóa tay (DR-011 A2/B1). — xong 27/10/2026: kiểm lại phát hiện LỖI THỨ TỰ khi khôi phục không theo thứ tự xóa; sửa `Trip.softDelete/restore` (test đỏ thật trước: `.logs/lat4-red.log`), thêm 4 test API. Chi tiết ở `decisions.md` mục "Lát backend 4–6".
+- [x] **Backend lát 5:** tên thiết bị (`deviceName`) ở tạo danh tính, ghép máy, khôi phục + `PATCH /api/sessions/current`. — xong 27/10/2026: migration `V5`, 7 test `DeviceNameApiIT` (đỏ thật 6/7 trước: `.logs/lat5-red.log`).
+- [x] **Backend lát 6:** cờ `datesTentative` của chuyến (DR-018 A3). — xong 27/10/2026: migration `V6`, 5 test `TripDatesTentativeApiIT` (đỏ thật trước: `.logs/lat6-red.log`). `./gradlew check` xanh, 183 test sau phản biện và sửa (`.logs/lat456-check2.log`).
 
 ---
 
@@ -111,3 +115,18 @@ Nguyên nhân đã tái hiện (đọc từ ảnh/số đo, 25/10): (1) cuộn: 
 - [x] **U6 Trang chủ web** (hero ảnh nhiều lớp, tường ảnh theo loại, "tháng này nên đi" từ dữ liệu thật). Mobile: thêm chuyển động cho hero hiện có.
 - [x] **U7 Mã khôi phục:** đổi nhãn "Bỏ qua" thành "Để sau" nói rõ chuyến vẫn được tạo, tách khỏi "Hủy"; thêm bước "Đã lưu mã" (xem lại, sao chép, tải .txt, in). Cập nhật `F02`, `F08`.
 - [ ] **U8 Kiểm cuối:** `flows.mjs`, `a11y-scan`, `contrast`, Taste, ảnh; phản biện `wander-skeptic-qa`.
+
+## Giai đoạn "Hoàn tất Lát 1a" (27/10/2026; xem `plan.md` cuối tệp). Mỗi việc đi qua `/wander-feature`; không sang việc sau khi việc trước chưa xanh
+- [x] **BE-7 Lịch mẫu qua API (N-2).** — xong 27/10/2026: `GET /api/catalog/destinations/{id}/templates`, 199 test PASSED (`.logs/be7-check2.log`), `wander-code-reviewer` 0 BLOCKER/MAJOR (4 MINOR đã sửa). Chi tiết ở `decisions.md` mục "BE-7". FE-10 phải ánh xạ `placeIds` → `places`.
+- [x] **BE-8 Ghép máy có số khớp (DR-018 E1).** — xong 27/10/2026: số khớp cho cả ghép máy và step-up, hạn mức 3/10 phút, khóa dòng; 221 test PASSED (`.logs/be8-check2.log`). **F1** (kẻ chỉ có một phiên tự ghép phiên thứ hai rồi tự duyệt step-up): PO chọn C, chấp nhận rủi ro, nhắc ở RG-2 cùng B2. Chi tiết ở `decisions.md` mục "BE-8".
+- [x] **BE-9 HMAC mã khôi phục (DR-018 B3).** — xong 27/10/2026: HMAC-SHA-256 có khóa `WANDER_RECOVERY_PEPPER`, không mặc định, fail-fast; V9 vô hiệu mã cũ; 228 test PASSED (`.logs/be9-check2.log`). Còn chờ PO (Tầng A): chiến lược xoay khóa. Secrets Manager thật chờ RG-5.
+- [x] **Checkpoint BE:** `./gradlew check` xanh (228 test); `wander-security-reviewer` đã rà BE-8 (F1: PO chấp nhận rủi ro, nhắc ở RG-2); BE-7/8/9 ghi ở `decisions.md`.
+- [x] **BE-10 Sở thích theo danh tính ("Bạn mê gì?")** (PO chọn lưu theo danh tính, 27/10/2026): xong — `GET/PUT /api/preferences`, bảng `owner_preferences` (V10), upsert nguyên tử; 244 test PASSED (`.logs/be11-check2.log`).
+- [x] **BE-11 Nhật ký sự kiện bảo mật** (cần cho "Hoạt động gần đây" của FE-10c): xong — `GET /api/events`, `POST /api/events/seen`, bảng `identity_events` (V11), giữ 50 sự kiện, cờ chưa xem theo mã sự kiện.
+- [x] **FE-10a Hạ tầng HTTP + catalog + lịch mẫu.** — xong 27/10/2026: `ApiClient`, `HttpCatalogRepository`, `HttpTemplateRepository`; 158 test đơn vị PASS; e2e `web/` 51/51 PASS trên backend thật (`.logs/fe10a-web-e2e-2.log`). Chi tiết ở `decisions.md` mục "FE-10a". Tiếp theo: FE-10b (chuyến và mục).
+- [x] **FE-10b Chuyến và mục trên API thật.** — xong 27/10/2026 (máy chủ trước, Hoàn tác bằng lệnh ngược `revertPlan`); `npm test` 187 PASS, e2e 54/54. Chi tiết ở `decisions.md` mục "FE-10b + FE-10d".
+- [x] **FE-10c Danh tính trên API thật.** — xong 27/10/2026: tạo danh tính, mã khôi phục hai pha, ghép máy bằng số khớp, khôi phục, danh sách thiết bị, đổi tên, hết phiên; gỡ máy chủ giả. 163 test đơn vị PASS; e2e `web/` 54/54 PASS trên backend thật (`.logs/fe10c-web-e2e-2.log`). Chi tiết ở `decisions.md` mục FE-10c.
+- [x] **FE-10d Dọn kho giả + e2e.** — xong 27/10/2026: `tools\dev.ps1 e2e` exit 0, 54/54 PASS trên backend thật (`.logs/fe10d-dev-e2e.log`); `verify` đầy đủ (kèm test backend, cần Docker) chưa chạy lại.
+- [x] **Checkpoint FE+BE** (27→28/10/2026): `verify` đầy đủ PASS; `wander-code-reviewer` + `wander-skeptic-qa` đã rà FE-10b và các lỗi đã sửa (xem `decisions.md` mục "Đêm 27→28/10"). Còn mở: quyết định Tầng A "xóa chuyến" và các mục (b)–(e) ở đó.
+- [x] **Màn "Bạn mê gì?"** (PO duyệt 27/10): mục ở Cài đặt nối `PUT /api/preferences/interests`.
+- [x] **Trần thùng rác 500 ở backend** (DR-020): `TRASH_FULL`.

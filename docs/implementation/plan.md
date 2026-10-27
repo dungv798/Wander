@@ -83,3 +83,34 @@ A2 (onboarding), A3 (tạo chuyến), A4 (tuyến), A5 (Hôm nay), A6 (hết phi
 
 ## Câu hỏi mở (còn)
 Q3 (cài đặt/giới thiệu, mặc định dựng khung), Q4 (quản trị khung, mặc định dựng), Q5 (PO chọn bộ màu), Q7 (màu loại/ngày, mặc định tính lại), Q9 (nhập từ mạng xã hội/dùng thử trả phí: không làm). Q-d, A3, B2/B3/B4, E1, Q6–Q9/Q12 vẫn chờ PO ở backend.
+
+---
+# Giai đoạn "Hoàn tất Lát 1a": backend còn lại + nối FE với API thật (27/10/2026)
+
+## Tổng quan
+Backend lõi đã xong (danh tính, chuyến, mục, chi phí, thùng rác, lịch hàng loạt, tên thiết bị, ngày chưa chắc, `kind`/`interests`; `./gradlew check` xanh, 188 test). Còn: ba việc backend theo quyết định đã duyệt (lịch mẫu N-2, ghép máy có số khớp E1, HMAC mã khôi phục B3) và FE-10 (thay kho giả bằng API thật, viết lại e2e). Làm theo lát dọc, mỗi lát qua `/wander-feature` (TDD, phản biện bằng agent).
+
+## Quyết định về thứ tự
+- Backend trước FE-10 vì FE-10 phụ thuộc hợp đồng API ổn định; riêng lịch mẫu làm trước vì màn Trang chủ cần.
+- FE-10 chia nhỏ theo miền (hạ tầng + catalog → chuyến/mục → danh tính) để mỗi lát chạy được và kiểm được bằng e2e thật.
+- Việc cần hạ tầng AWS (khu vực IP bằng header CloudFront B4/E5, Secrets Manager thật cho pepper) để sau RG-5; pepper dùng biến môi trường trước.
+
+## Đồ thị phụ thuộc
+```
+BE-7 lịch mẫu ──┐
+BE-8 ghép máy E1 ┼─► FE-10a hạ tầng HTTP + catalog ─► FE-10b chuyến/mục ─► FE-10c danh tính ─► FE-10d e2e + dist
+BE-9 HMAC B3 ───┘
+```
+
+## Rủi ro và cách giảm
+| Rủi ro | Mức | Cách giảm |
+|---|---|---|
+| FE-10 quá lớn một lát | Cao | chia 4 lát (a–d), mỗi lát có e2e riêng, không sang lát sau khi chưa xanh |
+| Hợp đồng API lệch với kiểu FE (position, kind mã, Hoàn tác) | Trung bình | viết bộ test hợp đồng (golden) giữa FE và `*IT`; đọc `error-codes.md` |
+| Đổi cách băm mã khôi phục làm hỏng dữ liệu cũ | Thấp (chưa triển khai thật) | migration đánh dấu mã cũ hết hiệu lực hoặc băm lại; chỉ có dữ liệu thử |
+| Nội dung lịch mẫu chưa được PO duyệt từng lịch | Trung bình | API trả cờ `draft`; FE hiện nhãn "Bản nháp" |
+
+## Câu hỏi mở (còn)
+- PO duyệt nội dung từng lịch mẫu (N-2).
+- Lưu "Bạn mê gì?" theo danh tính (bảng mới) hay chỉ trên máy.
+- Cho máy cũ xem tên máy lạ trước khi duyệt ghép (F3, đổi luồng xác thực, Tầng A).

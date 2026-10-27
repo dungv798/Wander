@@ -2,7 +2,6 @@
 name: wander-autopilot
 description: Run ONE focused Wander planning target end to end, unattended and resumable. Checklist of stages, parallel specialist reviews (max 2 rounds), reconcile, consolidate, validate, checkpointed report. Never edits the master plan, never promotes a proposal to a decision. Use `dry-run <target>` first or `resume`.
 argument-hint: "<focused target, e.g. 'Q16 auth and recovery'> | dry-run <target> | resume [run-id]"
-disable-model-invocation: true
 allowed-tools: Read Grep Glob Agent Write(/docs/autopilot/**) Edit(/docs/autopilot/**) Bash(node .claude/scripts/autopilot.mjs *)
 ---
 
