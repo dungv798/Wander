@@ -6,9 +6,6 @@
     "node": ">=24"
   },
   "scripts": {
-    "test:legacy": "node --test \"legacy/ts-server/test/**/*.test.ts\"",
-    "typecheck:legacy": "tsc -p legacy/ts-server/tsconfig.json",
-    "start:legacy": "node legacy/ts-server/src/api/main.ts",
     "build:web": "npm --prefix web run build",
     "typecheck:web": "npm --prefix web run typecheck",
     "test:e2e": "node --test --test-concurrency=1 \"e2e/**/*.test.ts\""
