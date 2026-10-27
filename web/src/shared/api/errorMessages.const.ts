@@ -16,7 +16,7 @@ export interface ErrorInfo {
 /** Lời nhắc theo nhóm. */
 export const ERROR_INFO: Readonly<Record<ErrorKind, ErrorInfo>> = {
   invalid: { title: 'Dữ liệu chưa hợp lệ', text: 'Kiểm tra lại các ô vừa nhập rồi thử lại. Nếu vẫn lỗi, hãy báo kèm mã bên dưới.', action: 'close' },
-  expired: { title: 'Phiên đã hết', text: 'Wander cần bạn mở lại chuyến đi trên máy này. Chữ bạn đang gõ chưa mất.', action: 'recover' },
+  expired: { title: 'Phiên đã hết', text: 'Wander cần bạn mở lại chuyến đi trên máy này.', action: 'recover' },
   stepUp: { title: 'Cần xác thực lại', text: 'Thao tác này cần xác thực lại bằng thiết bị tin cậy khác hoặc mã khôi phục.', action: 'security' },
   rate: { title: 'Bạn thao tác hơi nhanh', text: 'Chờ một lúc rồi thử lại. Dữ liệu của bạn không mất.', action: 'close' },
   recovery: { title: 'Chưa mở được', text: 'Mã chưa đúng hoặc không còn hiệu lực.', action: 'close' },

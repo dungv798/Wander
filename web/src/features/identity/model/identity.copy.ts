@@ -178,7 +178,7 @@ export const IDENTITY_COPY = {
   },
   expired: {
     title: 'Phiên đã hết',
-    textA: 'Máy này không còn được phép mở chuyến đi. Bạn mở lại được bằng mã khôi phục hoặc thiết bị tin cậy khác. Chữ bạn đang gõ chưa mất.',
+    textA: 'Máy này không còn được phép mở chuyến đi. Bạn mở lại được bằng mã khôi phục hoặc thiết bị tin cậy khác.',
     titleB: 'Không khôi phục được',
     textB: 'Bạn đã bỏ qua mã khôi phục và không còn thiết bị tin cậy nào, nên không ai mở lại được chuyến đi này, kể cả Wander. Đây là cách danh tính ẩn danh bảo vệ bạn.',
     open: 'Mở trên máy này',
