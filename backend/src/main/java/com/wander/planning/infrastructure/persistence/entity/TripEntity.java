@@ -47,6 +47,16 @@ public class TripEntity {
     @Column(length = PlanningConstants.PACE_COLUMN_LENGTH)
     private String pace;
 
+    @Column(length = PlanningConstants.KIND_COLUMN_LENGTH)
+    private String kind;
+
+    /** Mã sở thích cách nhau bằng dấu phẩy, theo thứ tự khai báo; rỗng = không có. */
+    @Column(nullable = false, length = PlanningConstants.INTERESTS_COLUMN_LENGTH)
+    private String interests = "";
+
+    @Column(name = "dates_tentative", nullable = false)
+    private boolean datesTentative;
+
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
@@ -84,6 +94,12 @@ public class TripEntity {
     public void setStyles(String v) { this.styles = v; }
     public String getPace() { return pace; }
     public void setPace(String v) { this.pace = v; }
+    public String getKind() { return kind; }
+    public void setKind(String v) { this.kind = v; }
+    public String getInterests() { return interests; }
+    public void setInterests(String v) { this.interests = v; }
+    public boolean isDatesTentative() { return datesTentative; }
+    public void setDatesTentative(boolean v) { this.datesTentative = v; }
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant v) { this.createdAt = v; }
     public Instant getUpdatedAt() { return updatedAt; }

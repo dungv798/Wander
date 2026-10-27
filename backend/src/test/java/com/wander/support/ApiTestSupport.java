@@ -30,8 +30,13 @@ import tools.jackson.databind.json.JsonMapper;
         "wander.limits.identity-per-hour=100000",
         "wander.limits.recovery-per-hour=100000",
         "wander.limits.approval-per-hour=100000",
-        "wander.limits.catalog-per-minute=100000"})
+        "wander.limits.catalog-per-minute=100000",
+        "wander.limits.approval-requests-per-window=100000",
+        "wander.security.recovery-pepper=" + ApiTestSupport.TEST_RECOVERY_PEPPER})
 public abstract class ApiTestSupport {
+
+    /** Khóa HMAC của mã khôi phục dùng trong test (chỉ cho test; khóa thật nằm ngoài mã nguồn). */
+    public static final String TEST_RECOVERY_PEPPER = "test-only-pepper-0123456789-abcdefghijklmnopqrstuv";
 
     static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine");
 

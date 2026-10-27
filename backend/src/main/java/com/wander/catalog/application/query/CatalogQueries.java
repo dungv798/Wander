@@ -44,6 +44,15 @@ public class CatalogQueries {
                 destination.places().stream().map(place -> toPlaceView(destination, place)).toList());
     }
 
+    /** Lịch mẫu của một điểm đến theo thứ tự biên tập; điểm đến không có trong kho thì ném lỗi không tìm thấy, chưa có lịch thì rỗng. */
+    public List<CatalogViews.TemplateView> templates(String destinationId) {
+        catalog.destination(destinationId).orElseThrow(WanderException::notFound);
+        return catalog.templates(destinationId).stream()
+                .map(template -> new CatalogViews.TemplateView(template.id(), template.title(), template.summary(), template.status().code(),
+                        template.days().stream().map(day -> new CatalogViews.TemplateDayView(day.placeIds(), day.note())).toList()))
+                .toList();
+    }
+
     /** Tóm tắt một điểm đến cho màn Khám phá: tháng đẹp, ảnh bìa và vài địa điểm xem trước. */
     private static CatalogViews.DestinationSummary toSummary(Destination destination) {
         List<Integer> bestMonths = destination.guide().stream()

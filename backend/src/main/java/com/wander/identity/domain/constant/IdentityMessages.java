@@ -48,6 +48,37 @@ public final class IdentityMessages {
     /** Cần xác thực lại để thực hiện thao tác. */
     public static final String STEP_UP_REQUIRED = "Cần xác thực lại để thực hiện thao tác này.";
 
+    /** Đổi tên thiết bị nhưng không nêu trường deviceName. */
+    public static final String DEVICE_NAME_REQUIRED = "Cần nêu tên thiết bị (để trống nếu muốn xóa tên).";
+
+    /** Số khớp nằm ngoài khoảng hai chữ số. */
+    public static final String MATCH_NUMBER_OUT_OF_RANGE = "Số khớp phải là số hai chữ số";
+
+    /** Sai số lượng lựa chọn. */
+    public static final String MATCH_OPTIONS_COUNT = "Số lựa chọn của số khớp không đúng";
+
+    /** Lựa chọn trùng nhau. */
+    public static final String MATCH_OPTIONS_DUPLICATED = "Các lựa chọn của số khớp bị trùng";
+
+    /** Lựa chọn không chứa số thật. */
+    public static final String MATCH_OPTIONS_MISSING_REAL = "Các lựa chọn của số khớp không chứa số thật";
+
+    /** Chuỗi lựa chọn đã lưu không đọc được; tham số: chuỗi. */
+    public static final String MATCH_OPTIONS_UNREADABLE = "Không đọc được các lựa chọn số khớp: %s";
+
+    /** Thiếu số khớp khi duyệt. */
+    public static final String MATCH_NUMBER_REQUIRED = "Cần chọn số khớp để duyệt.";
+
+    /** Chọn sai số khớp: yêu cầu bị từ chối. */
+    public static final String MATCH_MISMATCH = "Số đã chọn không khớp, yêu cầu đã bị từ chối.";
+
+    /** Khóa băm mã khôi phục thiếu hoặc quá ngắn (KHÔNG kèm giá trị khóa); tham số: số byte tối thiểu. */
+    public static final String RECOVERY_PEPPER_WEAK =
+            "Thiếu hoặc quá ngắn khóa băm mã khôi phục: đặt WANDER_RECOVERY_PEPPER (thuộc tính wander.security.recovery-pepper) dài ít nhất %d byte";
+
+    /** Môi trường chạy không có HMAC-SHA-256. */
+    public static final String RECOVERY_HMAC_UNAVAILABLE = "Môi trường chạy không có HMAC-SHA-256 để băm mã khôi phục";
+
     private IdentityMessages() {
     }
 }

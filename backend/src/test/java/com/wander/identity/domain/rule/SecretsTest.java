@@ -21,9 +21,9 @@ class SecretsTest {
     }
 
     @Test
-    void hashesAreHexAndDomainSeparated() {
+    void sessionTokenHashAndShortCodes() {
         String n = Secrets.normalize(Secrets.newRecoveryCode(), 30);
-        assertThat(Secrets.hashRecoveryCode(n)).matches("^[0-9a-f]{64}$").isNotEqualTo(Secrets.hashToken(n));
+        assertThat(Secrets.hashToken(n)).matches("^[0-9a-f]{64}$");
         assertThat(Secrets.newSessionToken()).matches(Secrets.SESSION_TOKEN.pattern()).hasSize(43);
         assertThat(Secrets.newShortCode()).matches("^[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$");
     }

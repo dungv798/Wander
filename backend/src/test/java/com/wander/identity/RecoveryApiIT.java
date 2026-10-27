@@ -254,10 +254,10 @@ class RecoveryApiIT extends ApiTestSupport {
         assertThat(call("GET", statusPath, null).str("status")).isEqualTo("pending");
         assertThat(call("GET", "/api/trips/" + trip, newDevice).status()).isEqualTo(401);
 
-        assertThat(call("POST", "/api/device-links/approve", u.token(), Map.of("pairingCode", link.str("pairingCode"))).status()).isEqualTo(200);
+        assertThat(call("POST", "/api/device-links/approve", u.token(), map("pairingCode", link.str("pairingCode"), "number", link.num("matchNumber"))).status()).isEqualTo(200);
         assertThat(call("GET", statusPath, null).str("status")).isEqualTo("approved");
         assertThat(call("GET", "/api/trips/" + trip, newDevice).status()).isEqualTo(200);
-        assertThat(call("POST", "/api/device-links/approve", u.token(), Map.of("pairingCode", link.str("pairingCode"))).code())
+        assertThat(call("POST", "/api/device-links/approve", u.token(), map("pairingCode", link.str("pairingCode"), "number", link.num("matchNumber"))).code())
                 .isEqualTo("INVALID_PAIRING_CODE");
     }
 
@@ -266,10 +266,10 @@ class RecoveryApiIT extends ApiTestSupport {
     void deviceLinkRejections() {
         User u = newUser();
         Res link = call("POST", "/api/device-links", null, Map.of("sessionToken", newSessionToken()));
-        assertThat(call("POST", "/api/device-links/approve", u.token(), Map.of("pairingCode", "AAAA-AAAA")).code()).isEqualTo("INVALID_PAIRING_CODE");
-        assertThat(call("POST", "/api/device-links/approve", null, Map.of("pairingCode", link.str("pairingCode"))).status()).isEqualTo(401);
+        assertThat(call("POST", "/api/device-links/approve", u.token(), map("pairingCode", "AAAA-AAAA", "number", 42)).code()).isEqualTo("INVALID_PAIRING_CODE");
+        assertThat(call("POST", "/api/device-links/approve", null, map("pairingCode", link.str("pairingCode"), "number", link.num("matchNumber"))).status()).isEqualTo(401);
         jdbc.sql("UPDATE device_links SET expires_at = '2020-01-01T00:00:00Z' WHERE id = ?::uuid").param(link.str("requestId")).update();
-        assertThat(call("POST", "/api/device-links/approve", u.token(), Map.of("pairingCode", link.str("pairingCode"))).code())
+        assertThat(call("POST", "/api/device-links/approve", u.token(), map("pairingCode", link.str("pairingCode"), "number", link.num("matchNumber"))).code())
                 .isEqualTo("INVALID_PAIRING_CODE");
         assertThat(call("GET", "/api/device-links/" + link.str("requestId"), null).str("status")).isEqualTo("expired");
         assertThat(call("GET", "/api/device-links/khong-co", null).status()).isEqualTo(404);
@@ -373,7 +373,7 @@ class RecoveryApiIT extends ApiTestSupport {
 
         Res req = call("POST", "/api/step-up/requests", u.token(), Map.of("operation", "regenerate_code"));
         assertThat(req.status()).isEqualTo(201);
-        Map<String, Object> approval = Map.of("approvalCode", req.str("approvalCode"));
+        Map<String, Object> approval = map("approvalCode", req.str("approvalCode"), "number", req.num("matchNumber"));
         Map<String, Object> evidence = Map.of("evidence", Map.of("type", "approval", "requestId", req.str("requestId")));
 
         assertThat(call("POST", "/api/step-up/approve", u.token(), approval).code()).isEqualTo("INVALID_APPROVAL_CODE");

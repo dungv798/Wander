@@ -30,6 +30,9 @@ services:
       WANDER_DB_USER: wander
       WANDER_DB_PASSWORD: wander
       WANDER_WEB_DIR: /web
+      # Bắt buộc khi chạy backend, từ 32 byte trở lên (DR-018 B3): rỗng hoặc ngắn thì backend KHÔNG khởi động (bộ băm từ chối, lời báo
+      # nêu tên biến). Cố ý không dùng ":?" vì compose nội suy cả với lệnh chỉ bật postgres. Đặt biến môi trường của shell trước khi chạy.
+      WANDER_RECOVERY_PEPPER: ${WANDER_RECOVERY_PEPPER:-}
     volumes:
       - ./web/dist:/web:ro
     ports:

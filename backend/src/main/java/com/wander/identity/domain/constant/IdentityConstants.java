@@ -33,6 +33,25 @@ public final class IdentityConstants {
     /** Số byte ngẫu nhiên của bí mật phiên mới (256 bit). */
     public static final int SESSION_TOKEN_BYTES = 32;
 
+    /** Số khớp nhỏ nhất và lớn nhất (hai chữ số, DR-018 E1). */
+    public static final int MATCH_NUMBER_MIN = 10;
+    public static final int MATCH_NUMBER_MAX = 99;
+
+    /** Số lựa chọn hiện cho máy duyệt: một số thật và các số nhiễu. */
+    public static final int MATCH_OPTION_COUNT = 3;
+
+    /** Dấu ngăn cách các lựa chọn khi lưu một cột. */
+    public static final String MATCH_OPTIONS_SEPARATOR = ",";
+
+    /** Độ dài tối đa của tên thiết bị (khớp CHECK ở migration V5). */
+    public static final int MAX_DEVICE_NAME_LENGTH = 60;
+
+    /** Dãy khoảng trắng (kể cả dấu cách không ngắt) trong tên thiết bị, được gộp thành một dấu cách. */
+    public static final String DEVICE_NAME_WHITESPACE_REGEX = "[\\p{Zs}\\s]+";
+
+    /** Dấu cách đơn dùng khi gộp khoảng trắng trong tên thiết bị. */
+    public static final String SINGLE_SPACE = " ";
+
     /** Độ dài tối đa của mã người dùng nhập, để chặn đầu vào quá lớn trước khi chuẩn hóa. */
     public static final int MAX_CODE_INPUT_LENGTH = 80;
 
@@ -50,6 +69,21 @@ public final class IdentityConstants {
 
     /** Tiền tố khi băm mã khôi phục, để băm mã khác với băm bí mật phiên. */
     public static final String RECOVERY_HASH_PREFIX = "wander-recovery-v1:";
+
+    /** Số sự kiện bảo mật giữ lại cho mỗi danh tính và trả về cho "Hoạt động gần đây" (BE-11). */
+    public static final int MAX_EVENTS_PER_IDENTITY = 50;
+
+    /** Biểu thức cấu hình lấy khóa băm mã khôi phục; KHÔNG có giá trị mặc định (thiếu thì Spring không khởi động). */
+    public static final String RECOVERY_PEPPER_EXPRESSION = "${wander.security.recovery-pepper}";
+
+    /** Tiền tố của placeholder cấu hình chưa được giải quyết; khóa bắt đầu bằng tiền tố này bị coi là thiếu khóa. */
+    public static final String PLACEHOLDER_PREFIX = "${";
+
+    /** Thuật toán HMAC dùng để băm mã khôi phục (DR-018 B3). */
+    public static final String RECOVERY_HMAC_ALGORITHM = "HmacSHA256";
+
+    /** Độ dài tối thiểu của khóa (pepper) băm mã khôi phục, tính bằng byte (256 bit). */
+    public static final int RECOVERY_PEPPER_MIN_BYTES = 32;
 
     /** Hạn của lần thử khôi phục chờ và mã thay thế chưa xác nhận (MĐ-6). Giá trị cụ thể: chờ spec. */
     public static final Duration PENDING_TTL = Duration.ofMinutes(15);

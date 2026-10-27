@@ -12,10 +12,13 @@ import com.wander.planning.domain.model.ItemCost;
 import com.wander.planning.domain.model.ItemDetails;
 import com.wander.planning.domain.model.Trip;
 import com.wander.planning.domain.model.TripOptions;
+import com.wander.planning.domain.port.PreferencesStore;
 import com.wander.planning.domain.port.TripRepository;
+import com.wander.planning.domain.rule.Interests;
 import com.wander.planning.domain.rule.TripNaming;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
+import com.wander.planning.domain.vocabulary.TripInterest;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.util.Ids;
@@ -44,12 +47,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlanningCommandHandler {
 
     private final TripRepository trips;
+    private final PreferencesStore preferences;
     private final Clock clock;
 
-    /** Nhận cổng lưu chuyến và đồng hồ (test thay bằng đồng hồ giả). */
-    public PlanningCommandHandler(TripRepository trips, Clock clock) {
+    /** Nhận cổng lưu chuyến, cổng lưu sở thích theo danh tính và đồng hồ (test thay bằng đồng hồ giả). */
+    public PlanningCommandHandler(TripRepository trips, PreferencesStore preferences, Clock clock) {
         this.trips = trips;
+        this.preferences = preferences;
         this.clock = clock;
+    }
+
+    /**
+     * Thay toàn bộ sở thích theo danh tính (BE-10). Phải nêu khóa {@code interests} (thiếu ⇒ REQUIRED); null hoặc rỗng = xóa;
+     * mã lạ hoặc sai kiểu ⇒ INVALID_INTEREST và không đổi gì.
+     */
+    public void setInterestPreferences(PlanningCommands.SetInterestPreferences command) {
+        Map<String, Object> input = command.input();
+        if (!input.containsKey(PlanningFields.INTERESTS)) {
+            throw WanderException.invalid(ErrorCodes.REQUIRED, PlanningMessages.FIELD_REQUIRED, PlanningFields.INTERESTS);
+        }
+        List<TripInterest> interests = Interests.normalize(RawInput.interests(input.get(PlanningFields.INTERESTS)));
+        preferences.saveInterests(command.ownerId(), interests, Timestamps.now(clock));
     }
 
     /** Tạo chuyến mới của chủ; trả mã chuyến. */
@@ -61,7 +79,9 @@ public class PlanningCommandHandler {
         String name = uniqueTripName(command.ownerId(), null, requestedName);
         DateRange range = range(input.get(PlanningFields.START_DATE), input.get(PlanningFields.END_DATE));
         TripOptions options = new TripOptions(RawInput.budget(input.get(PlanningFields.BUDGET)),
-                RawInput.styles(input.get(PlanningFields.STYLES)), RawInput.pace(input.get(PlanningFields.PACE)));
+                RawInput.styles(input.get(PlanningFields.STYLES)), RawInput.pace(input.get(PlanningFields.PACE)),
+                RawInput.datesTentative(input.get(PlanningFields.DATES_TENTATIVE)), RawInput.kind(input.get(PlanningFields.KIND)),
+                RawInput.interests(input.get(PlanningFields.INTERESTS)));
         Trip trip = Trip.plan(command.ownerId(), name, destination, range, options, Timestamps.now(clock));
         trips.save(trip);
         return trip.id();
@@ -82,7 +102,10 @@ public class PlanningCommandHandler {
         TripOptions options = new TripOptions(
                 valueOrCurrent(input, PlanningFields.BUDGET, RawInput::budget, current.budgetK()),
                 valueOrCurrent(input, PlanningFields.STYLES, RawInput::styles, current.styles()),
-                valueOrCurrent(input, PlanningFields.PACE, RawInput::pace, current.pace()));
+                valueOrCurrent(input, PlanningFields.PACE, RawInput::pace, current.pace()),
+                valueOrCurrent(input, PlanningFields.DATES_TENTATIVE, RawInput::datesTentative, current.datesTentative()),
+                valueOrCurrent(input, PlanningFields.KIND, RawInput::kind, current.kind()),
+                valueOrCurrent(input, PlanningFields.INTERESTS, RawInput::interests, current.interests()));
         Instant now = Timestamps.now(clock);
         trip.changeDetails(name, destination, range, now);
         trip.changeOptions(options, now);

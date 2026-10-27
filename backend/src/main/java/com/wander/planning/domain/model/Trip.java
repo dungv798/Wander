@@ -23,7 +23,9 @@ import java.util.UUID;
 /**
  * Aggregate root "Chuyến đi". Mọi thay đổi mục đi qua đây để giữ các bất biến:
  * <ul>
- *   <li>Mục còn hiện trong một ngày có vị trí liền mạch 0..n-1, thứ tự thủ công (D16).</li>
+ *   <li>Mục còn hiện trong một ngày có thứ tự thủ công theo vị trí lưu, tăng dần (D16). Vị trí được đánh số lại liền mạch
+ *       0..n-1 khi thêm, sắp xếp lại hoặc chèn vào ngày; xóa mềm và chuyển mục ra khỏi ngày KHÔNG đánh số lại nên có thể
+ *       có khoảng trống (giữ chỗ cho mục trong thùng rác). API luôn trả thứ hạng liền mạch, xem {@code PlanningQueries}.</li>
  *   <li>Mục hoặc thuộc một ngày nằm trong khoảng ngày của chuyến, hoặc "Chưa có ngày" (ngày null, vẫn có thứ tự riêng).
  *       R12 mới (DR-011 A1): đổi khoảng ngày luôn được; mục (kể cả đã xóa mềm) nằm ngoài khoảng mới tự về "Chưa có ngày".</li>
  *   <li>Xóa mềm giữ nguyên ngày và vị trí cũ để khôi phục về đúng chỗ (D19, R7).</li>
@@ -171,22 +173,35 @@ public final class Trip {
         this.updatedAt = now;
     }
 
-    /** D19/R7: xóa mềm. Mục rời khỏi lịch và tổng, giữ ngày và vị trí cũ. */
+    /**
+     * D19/R7: xóa mềm. Mục rời khỏi lịch và tổng, giữ ngày và vị trí cũ. Các mục còn hiện KHÔNG bị đánh số lại: chỗ của mục
+     * đã xóa được giữ (vị trí có khoảng trống) để khôi phục theo bất kỳ thứ tự nào vẫn về đúng chỗ cũ.
+     */
     public Item softDelete(UUID itemId, Instant now) {
         Item item = item(itemId);
         if (item.isDeleted()) throw WanderException.conflict(PlanningErrorCodes.ALREADY_DELETED, PlanningMessages.ITEM_DELETED);
+        if (items.stream().filter(Item::isDeleted).count() >= PlanningConstants.MAX_TRASH_ITEMS) {
+            throw WanderException.conflict(PlanningErrorCodes.TRASH_FULL, PlanningMessages.TRASH_FULL);
+        }
         item.markDeleted(now);
-        renumber(liveItems(item.day()));
         return item;
     }
 
-    /** Hoàn tác và "khôi phục từ Đã xóa gần đây" là cùng một thao tác: về đúng ngày và vị trí cũ. */
+    /**
+     * Hoàn tác và "khôi phục từ Đã xóa gần đây" là cùng một thao tác: về đúng ngày và chỗ cũ. Mục giữ nguyên vị trí đã lưu
+     * (không đánh số lại các mục khác, để mục còn trong thùng rác vẫn so sánh được). Chỉ khi vị trí đó đã bị mục khác chiếm
+     * (sau một lần sắp xếp lại) mới chèn nó đứng trước các mục từ vị trí đó trở đi và đánh số lại liền mạch.
+     */
     public Item restore(UUID itemId, Instant now) {
         Item item = item(itemId);
         if (!item.isDeleted()) throw WanderException.conflict(PlanningErrorCodes.NOT_DELETED, PlanningMessages.NOT_DELETED);
         List<Item> live = liveItems(item.day());
+        boolean positionTaken = live.stream().anyMatch(other -> other.position() == item.position());
         item.markRestored(now);
-        renumber(insertAt(live, item, item.position()));
+        if (positionTaken) {
+            int slot = (int) live.stream().filter(other -> other.position() < item.position()).count();
+            renumber(insertAt(live, item, slot));
+        }
         return item;
     }
 
@@ -234,12 +249,13 @@ public final class Trip {
         }
     }
 
-    /** Chuyển mục sang ngày {@code day} (null = "Chưa có ngày"): đánh số lại vùng cũ và chèn vào vùng mới (mặc định cuối). */
+    /**
+     * Chuyển mục sang ngày {@code day} (null = "Chưa có ngày"): chèn vào vùng mới (mặc định cuối) và đánh số lại vùng mới.
+     * Vùng cũ KHÔNG đánh số lại (để lại khoảng trống) cho khỏi làm mất chỗ của mục đang nằm trong "Đã xóa gần đây".
+     */
     private void moveToDay(Item item, LocalDate day, Integer requestedPosition) {
-        LocalDate oldDay = item.day();
         List<Item> target = liveItems(day);
         item.moveTo(day);
-        renumber(liveItems(oldDay));
         renumber(insertAt(target, item, requestedPosition == null ? target.size() : requestedPosition));
     }
 

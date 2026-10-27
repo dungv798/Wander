@@ -4,11 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wander.catalog.domain.model.Destination;
+import com.wander.catalog.domain.model.ItineraryTemplate;
 import com.wander.catalog.domain.model.Place;
+import com.wander.catalog.domain.vocabulary.TemplateStatus;
 import com.wander.catalog.infrastructure.adapter.ClasspathPlaceCatalog;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 class CatalogDataTest {
 
     private static final String REAL = "classpath*:catalog/*.json";
+    private static final String REAL_TEMPLATES = "classpath*:catalog/templates/*.json";
     private static final Set<String> OPEN_LICENSES = Set.of("CC BY 2.0", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 4.0", "CC0", "Public domain");
 
     @Test
@@ -32,6 +36,86 @@ class CatalogDataTest {
             assertThat(p.photos()).as("ảnh của " + p.id()).isNotEmpty();
             p.photos().forEach(ph -> assertThat(OPEN_LICENSES).as("giấy phép ảnh " + ph.file()).contains(ph.license()));
         }
+    }
+
+    @Test
+    @DisplayName("BE-7: lịch mẫu thật nạp được, đã duyệt (DR-020), địa điểm có thật; điểm đến chưa có lịch trả danh sách rỗng")
+    void realTemplatesAreValid() {
+        var catalog = new ClasspathPlaceCatalog(REAL, REAL_TEMPLATES);
+        List<ItineraryTemplate> templates = catalog.templates("ha-giang");
+        assertThat(templates).extracting(ItineraryTemplate::id).containsExactly("vong-cung-3-ngay", "dong-van-cuoi-tuan", "tay-bac-leo-nui");
+        assertThat(templates).extracting(ItineraryTemplate::status).containsOnly(TemplateStatus.APPROVED);
+        Set<String> placeIds = catalog.destination("ha-giang").orElseThrow().places().stream().map(Place::id).collect(java.util.stream.Collectors.toSet());
+        for (ItineraryTemplate t : templates) {
+            t.days().forEach(day -> assertThat(placeIds).containsAll(day.placeIds()));
+        }
+        assertThat(catalog.templates("khong-co")).isEmpty();
+        assertThat(catalog.templates(null)).isEmpty();
+        assertThat(new ClasspathPlaceCatalog(REAL).templates("ha-giang")).as("không cấu hình lịch mẫu thì rỗng").isEmpty();
+    }
+
+    @Test
+    @DisplayName("BE-7: lịch mẫu hỏng làm ứng dụng không khởi động: địa điểm lạ, địa điểm lặp, trường lạ (giờ/giá), trạng thái lạ, điểm đến lạ")
+    void brokenTemplatesFailFast(@TempDir Path dir) throws IOException {
+        Files.writeString(dir.resolve("ha-giang.json"), Files.readString(Path.of("src/main/resources/catalog/ha-giang.json")));
+        String valid = Files.readString(Path.of("src/main/resources/catalog/templates/ha-giang.json"));
+        Path templates = Files.createDirectory(dir.resolve("templates"));
+        String destinations = "file:" + dir + "/ha-giang.json";
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replace("cong-troi-quan-ba", "dia-diem-khong-co"));
+        assertFails(destinations, templates, "dia-diem-khong-co");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replaceFirst("\"dinh-vuong\"", "\"cong-troi-quan-ba\""));
+        assertFails(destinations, templates, "cong-troi-quan-ba");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replaceFirst("\"summary\"", "\"price\": 100000, \"summary\""));
+        assertFails(destinations, templates, "ha-giang.json");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replaceFirst("\"id\": \"vong-cung-3-ngay\",", "\"id\": \"vong-cung-3-ngay\", \"startTime\": \"08:00\","));
+        assertFails(destinations, templates, "ha-giang.json");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replaceFirst("(\"status\": \")approved(\",\\s+\"days\")", "$1duyet$2"));
+        assertFails(destinations, templates, "duyet");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replace("\"destinationId\": \"ha-giang\"", "\"destinationId\": \"sa-pa\""));
+        assertFails(destinations, templates, "sa-pa");
+
+        Files.writeString(templates.resolve("ha-giang.json"), "{ không phải json");
+        assertFails(destinations, templates, "ha-giang.json");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replaceFirst("\"destinationId\"", "\"status\": \"draft\", \"destinationId\""));
+        assertFails(destinations, templates, "ha-giang.json");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replaceFirst("\"destinationId\"", "\"note\": \"ghi chú tệp\", \"destinationId\""));
+        assertFails(destinations, templates, "ha-giang.json");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replace("\"id\": \"dong-van-cuoi-tuan\"", "\"id\": \"vong-cung-3-ngay\""));
+        assertFails(destinations, templates, "vong-cung-3-ngay");
+
+        Files.writeString(templates.resolve("ha-giang.json"), valid.replace("\"note\": \"Tiếp tục chặng leo Tây Côn Lĩnh (nơi này cần khoảng 2 ngày).\"", "\"note\": \"  \""));
+        assertFails(destinations, templates, "ghi chú");
+    }
+
+    @Test
+    @DisplayName("BE-7: trạng thái draft được giữ nguyên (không tự thành đã duyệt); hai tệp cùng điểm đến bị từ chối")
+    void draftIsKeptAndDuplicateFilesRejected(@TempDir Path dir) throws IOException {
+        Files.writeString(dir.resolve("ha-giang.json"), Files.readString(Path.of("src/main/resources/catalog/ha-giang.json")));
+        String valid = Files.readString(Path.of("src/main/resources/catalog/templates/ha-giang.json"));
+        Path templates = Files.createDirectory(dir.resolve("templates"));
+        String destinations = "file:" + dir + "/ha-giang.json";
+
+        Files.writeString(templates.resolve("a.json"), valid.replace("\"status\": \"approved\"", "\"status\": \"draft\""));
+        var catalog = new ClasspathPlaceCatalog(destinations, "file:" + templates + "/*.json");
+        assertThat(catalog.templates("ha-giang")).hasSize(3).extracting(ItineraryTemplate::status).containsOnly(TemplateStatus.DRAFT);
+
+        Files.writeString(templates.resolve("b.json"), valid);
+        assertFails(destinations, templates, "ha-giang");
+    }
+
+    /** Khẳng định nạp kho với tệp lịch mẫu này thất bại với lỗi khởi động có chứa {@code fragment}. */
+    private static void assertFails(String destinations, Path templates, String fragment) {
+        assertThatThrownBy(() -> new ClasspathPlaceCatalog(destinations, "file:" + templates + "/*.json"))
+                .isInstanceOf(IllegalStateException.class).hasMessageContaining(fragment);
     }
 
     @Test

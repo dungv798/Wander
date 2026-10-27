@@ -40,6 +40,12 @@ public class StepUpRequestEntity {
     @Column(name = "expires_at", nullable = false)
     private Instant expiresAt;
 
+    @Column(name = "match_number", nullable = false)
+    private int matchNumber;
+
+    @Column(name = "match_options", nullable = false)
+    private String matchOptions;
+
     public UUID getId() { return id; }
     public void setId(UUID v) { this.id = v; }
     public UUID getIdentityId() { return identityId; }
@@ -58,4 +64,8 @@ public class StepUpRequestEntity {
     public void setCreatedAt(Instant v) { this.createdAt = v; }
     public Instant getExpiresAt() { return expiresAt; }
     public void setExpiresAt(Instant v) { this.expiresAt = v; }
+    public int getMatchNumber() { return matchNumber; }
+    public void setMatchNumber(int v) { this.matchNumber = v; }
+    public String getMatchOptions() { return matchOptions; }
+    public void setMatchOptions(String v) { this.matchOptions = v; }
 }

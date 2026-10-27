@@ -15,6 +15,8 @@ import com.wander.planning.domain.model.DateRange;
 import com.wander.planning.domain.rule.Vnd;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
+import com.wander.planning.domain.vocabulary.TripInterest;
+import com.wander.planning.domain.vocabulary.TripKind;
 import com.wander.planning.domain.vocabulary.TripPace;
 import com.wander.planning.domain.vocabulary.TripStyle;
 import com.wander.shared.kernel.error.WanderException;
@@ -23,7 +25,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -48,6 +52,11 @@ public class PlanningQueries {
         return read.listTrips(ownerId).stream().map(PlanningQueries::toView).toList();
     }
 
+    /** Sở thích theo danh tính (BE-10): mã + nhãn theo thứ tự cố định; chưa đặt thì rỗng. */
+    public List<Choice> interestPreferences(UUID ownerId) {
+        return interestChoices(read.interestPreferences(ownerId));
+    }
+
     /** Một chuyến của chủ; chuyến của người khác coi như không có (404). */
     public TripView trip(UUID ownerId, UUID tripId) {
         return toView(requireTrip(ownerId, tripId));
@@ -56,7 +65,8 @@ public class PlanningQueries {
     /** Một mục của chuyến, kèm trạng thái hoàn thành của chủ. */
     public ItemView item(UUID ownerId, UUID tripId, UUID itemId) {
         requireTrip(ownerId, tripId);
-        ItemRow row = read.item(tripId, itemId).orElseThrow(WanderException::notFound);
+        ItemRow row = rankedItems(tripId).stream().filter(found -> found.id().equals(itemId)).findFirst()
+                .orElseThrow(WanderException::notFound);
         return toView(row, read.doneItemIds(tripId, ownerId).contains(itemId));
     }
 
@@ -64,7 +74,7 @@ public class PlanningQueries {
     public List<ItemView> dayItems(UUID ownerId, UUID tripId, LocalDate day) {
         requireTrip(ownerId, tripId);
         Set<UUID> done = read.doneItemIds(tripId, ownerId);
-        return read.items(tripId).stream()
+        return rankedItems(tripId).stream()
                 .filter(row -> row.deletedAt() == null && day.equals(row.day()))
                 .map(row -> toView(row, done.contains(row.id())))
                 .toList();
@@ -80,7 +90,7 @@ public class PlanningQueries {
     /** A-11 xem lịch, A-13 tổng theo ngày/loại, A-16 việc cần làm chưa xong. */
     public TripDetail detail(UUID ownerId, UUID tripId) {
         TripRow trip = requireTrip(ownerId, tripId);
-        TripTally tally = TripTally.of(read.items(tripId), read.doneItemIds(tripId, ownerId));
+        TripTally tally = TripTally.of(rankedItems(tripId), read.doneItemIds(tripId, ownerId));
         DateRange range = new DateRange(trip.startDate(), trip.endDate());
         List<DayView> days = dayViews(range, tally);
         Totals totals = new Totals(tally.extraK(), Vnd.fromThousands(tally.extraK()),
@@ -106,9 +116,19 @@ public class PlanningQueries {
                         .toList();
         Choice pace = trip.pace() == null ? null
                 : TripPace.fromCode(trip.pace()).map(found -> new Choice(found.code(), found.label())).orElse(new Choice(trip.pace(), trip.pace()));
+        Choice kind = trip.kind() == null ? null
+                : TripKind.fromCode(trip.kind()).map(found -> new Choice(found.code(), found.label())).orElse(new Choice(trip.kind(), trip.kind()));
         return new TripView(trip.id().toString(), trip.name(), trip.destination(), trip.startDate().toString(), trip.endDate().toString(),
-                trip.budgetK(), Vnd.fromThousandsOrNull(trip.budgetK()), styles, pace,
+                trip.budgetK(), Vnd.fromThousandsOrNull(trip.budgetK()), styles, pace, trip.datesTentative(), kind, interestChoices(trip.interests()),
                 Timestamps.format(trip.createdAt()), Timestamps.format(trip.updatedAt()));
+    }
+
+    /** Sở thích có nhãn từ chuỗi mã cách nhau bằng dấu phẩy; mã lạ trong dữ liệu hiện nguyên mã. */
+    private static List<Choice> interestChoices(String csv) {
+        if (csv == null || csv.isBlank()) return List.of();
+        return Arrays.stream(csv.split(PlanningConstants.STYLE_CODE_SEPARATOR))
+                .map(code -> TripInterest.fromCode(code).map(found -> new Choice(found.code(), found.label())).orElse(new Choice(code, code)))
+                .toList();
     }
 
     /** Dạng hiển thị của mục: nhãn loại và đặt chỗ, giờ dạng HH:mm, tiền đầy đủ, trạng thái hoàn thành. */
@@ -121,6 +141,30 @@ public class PlanningQueries {
                 row.title(), row.timeOfDay() == null ? null : TIME_OF_DAY.format(row.timeOfDay()), row.durationMin(), row.note(),
                 row.costK(), Vnd.fromThousandsOrNull(row.costK()), row.included(), row.referenceK(),
                 Vnd.fromThousandsOrNull(row.referenceK()), row.bookingStatus(), bookingLabel, done, Timestamps.format(row.deletedAt()));
+    }
+
+    /** Mọi mục của chuyến, mục còn hiện mang thứ hạng liền mạch trong ngày (xem {@link #withDenseLivePositions}). */
+    private List<ItemRow> rankedItems(UUID tripId) {
+        return withDenseLivePositions(read.items(tripId));
+    }
+
+    /**
+     * Hợp đồng API: {@code position} của mục còn hiện là thứ hạng liền mạch 0..n-1 trong ngày (hoặc trong vùng "Chưa có ngày"),
+     * dù khóa lưu có khoảng trống do mục đã xóa giữ chỗ (lát 4). Nhờ vậy giá trị đọc từ view dùng lại được làm {@code position}
+     * khi thêm, chuyển hoặc Hoàn tác. Mục đã xóa giữ nguyên vị trí lưu. Đầu vào phải đã sắp theo ngày rồi vị trí lưu.
+     */
+    static List<ItemRow> withDenseLivePositions(List<ItemRow> rows) {
+        Map<String, Integer> nextRankByDay = new HashMap<>();
+        List<ItemRow> ranked = new ArrayList<>(rows.size());
+        for (ItemRow row : rows) {
+            if (row.deletedAt() != null) {
+                ranked.add(row);
+                continue;
+            }
+            int rank = nextRankByDay.merge(String.valueOf(row.day()), 1, Integer::sum) - 1;
+            ranked.add(row.withPosition(rank));
+        }
+        return ranked;
     }
 
     /** Chuyến của đúng chủ; không có thì 404. */

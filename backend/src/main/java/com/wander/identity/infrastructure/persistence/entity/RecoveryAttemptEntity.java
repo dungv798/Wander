@@ -40,6 +40,9 @@ public class RecoveryAttemptEntity {
     @Column(name = "expires_at", nullable = false)
     private Instant expiresAt;
 
+    @Column(name = "device_name")
+    private String deviceName;
+
     public UUID getId() { return id; }
     public void setId(UUID v) { this.id = v; }
     public String getAttemptKey() { return attemptKey; }
@@ -58,4 +61,6 @@ public class RecoveryAttemptEntity {
     public void setCreatedAt(Instant v) { this.createdAt = v; }
     public Instant getExpiresAt() { return expiresAt; }
     public void setExpiresAt(Instant v) { this.expiresAt = v; }
+    public String getDeviceName() { return deviceName; }
+    public void setDeviceName(String v) { this.deviceName = v; }
 }

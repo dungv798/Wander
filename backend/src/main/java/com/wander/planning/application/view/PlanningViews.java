@@ -17,7 +17,7 @@ public final class PlanningViews {
 
     public record TripView(String id, String name, String destination, String startDate, String endDate,
                            Long budgetK, String budgetFormatted, List<Choice> styles, Choice pace,
-                           String createdAt, String updatedAt) {
+                           boolean datesTentative, Choice kind, List<Choice> interests, String createdAt, String updatedAt) {
     }
 
     /**

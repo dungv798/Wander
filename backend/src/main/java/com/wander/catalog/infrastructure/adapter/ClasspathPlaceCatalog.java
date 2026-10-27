@@ -6,23 +6,32 @@ import com.wander.catalog.domain.model.Destination;
 import com.wander.catalog.domain.model.GeoPoint;
 import com.wander.catalog.domain.model.GuideItem;
 import com.wander.catalog.domain.model.GuideSection;
+import com.wander.catalog.domain.model.ItineraryTemplate;
 import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.model.Place;
 import com.wander.catalog.domain.model.ReferencePoint;
+import com.wander.catalog.domain.model.TemplateDay;
 import com.wander.catalog.domain.port.PlaceCatalog;
+import com.wander.catalog.domain.rule.CatalogValidation;
 import com.wander.catalog.domain.rule.SearchText;
 import com.wander.catalog.domain.vocabulary.PlaceCategory;
+import com.wander.catalog.domain.vocabulary.TemplateStatus;
 import com.wander.catalog.domain.vocabulary.TimeSlot;
 import com.wander.catalog.domain.vocabulary.Verdict;
+import com.wander.shared.kernel.util.ImmutableLists;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -40,13 +49,25 @@ import tools.jackson.databind.json.JsonMapper;
 public class ClasspathPlaceCatalog implements PlaceCatalog {
 
     private final Map<String, Destination> byId;
+    private final Map<String, List<ItineraryTemplate>> templatesByDestination;
 
-    /** Nạp mọi tệp điểm đến khớp {@code pattern}, kiểm tra hết, và sắp theo tên (không dấu) để kết quả ổn định. */
-    public ClasspathPlaceCatalog(@Value(CatalogConstants.LOCATION_EXPRESSION) String pattern) {
+    /** Chỉ nạp điểm đến, không có lịch mẫu (dùng trong test của riêng kho địa điểm). */
+    public ClasspathPlaceCatalog(String pattern) {
+        this(pattern, "");
+    }
+
+    /**
+     * Nạp mọi tệp điểm đến khớp {@code pattern} và mọi tệp lịch mẫu khớp {@code templatesPattern} (rỗng = không có), kiểm tra hết,
+     * và sắp điểm đến theo tên (không dấu) để kết quả ổn định.
+     */
+    @Autowired
+    public ClasspathPlaceCatalog(@Value(CatalogConstants.LOCATION_EXPRESSION) String pattern,
+                                 @Value(CatalogConstants.TEMPLATES_LOCATION_EXPRESSION) String templatesPattern) {
         JsonMapper mapper = JsonMapper.builder().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build();
         Map<String, Destination> loaded = loadAll(mapper, pattern);
         this.byId = loaded.values().stream().sorted(Comparator.comparing(destination -> SearchText.normalize(destination.name())))
                 .collect(LinkedHashMap::new, (map, destination) -> map.put(destination.id(), destination), Map::putAll);
+        this.templatesByDestination = loadTemplates(mapper, templatesPattern, byId);
     }
 
     @Override
@@ -59,6 +80,11 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
     @Override
     public Optional<Destination> destination(String id) {
         return Optional.ofNullable(id == null ? null : byId.get(id));
+    }
+
+    @Override
+    public List<ItineraryTemplate> templates(String destinationId) {
+        return destinationId == null ? List.of() : templatesByDestination.getOrDefault(destinationId, List.of());
     }
 
     /** Điểm đến khớp chuỗi tìm kiếm (đã chuẩn hóa) ở tên, vùng hoặc mô tả ngắn. */
@@ -82,6 +108,54 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
             throw new IllegalStateException(CatalogMessages.CATALOG_UNREADABLE, e);
         }
         return loaded;
+    }
+
+    /** Đọc mọi tệp lịch mẫu khớp mẫu (rỗng = không có); tệp trỏ tới điểm đến lạ, trùng điểm đến hoặc hỏng thì ném lỗi khởi động. */
+    private static Map<String, List<ItineraryTemplate>> loadTemplates(JsonMapper mapper, String pattern, Map<String, Destination> destinations) {
+        Map<String, List<ItineraryTemplate>> loaded = new LinkedHashMap<>();
+        if (pattern == null || pattern.isBlank()) return loaded;
+        try {
+            for (Resource file : new PathMatchingResourcePatternResolver().getResources(pattern)) {
+                String fileName = String.valueOf(file.getFilename());
+                try (InputStream in = file.getInputStream()) {
+                    TemplatesFile source = mapper.readValue(in, TemplatesFile.class);
+                    List<ItineraryTemplate> templates = toTemplates(source, destinations);
+                    if (loaded.put(source.destinationId(), templates) != null) {
+                        throw new IllegalStateException(CatalogMessages.TEMPLATE_FILE_DUPLICATED.formatted(source.destinationId()));
+                    }
+                } catch (IOException | RuntimeException e) {
+                    throw new IllegalStateException(CatalogMessages.CATALOG_FILE_CORRUPT.formatted(fileName, e.getMessage()), e);
+                }
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException(CatalogMessages.CATALOG_UNREADABLE, e);
+        }
+        return loaded;
+    }
+
+    /** Dựng lịch mẫu domain từ một tệp: điểm đến phải có trong kho, mỗi địa điểm phải có trong điểm đến, mã lịch không trùng. */
+    private static List<ItineraryTemplate> toTemplates(TemplatesFile source, Map<String, Destination> destinations) {
+        Destination destination = destinations.get(source.destinationId());
+        CatalogValidation.require(destination != null, CatalogMessages.TEMPLATE_DESTINATION_UNKNOWN, source.destinationId());
+        Set<String> placeIds = destination.places().stream().map(Place::id).collect(Collectors.toSet());
+        Set<String> seenIds = new HashSet<>();
+        List<ItineraryTemplate> templates = new ArrayList<>();
+        for (TemplateEntry entry : source.templates()) {
+            ItineraryTemplate template = toTemplate(entry);
+            CatalogValidation.require(seenIds.add(template.id()), CatalogMessages.TEMPLATE_ID_DUPLICATED, destination.id(), template.id());
+            template.requirePlacesIn(placeIds, destination.id());
+            templates.add(template);
+        }
+        return List.copyOf(templates);
+    }
+
+    /** Dựng một lịch mẫu domain; trạng thái lạ KHÔNG được coi là đã duyệt mà là lỗi dữ liệu. */
+    private static ItineraryTemplate toTemplate(TemplateEntry entry) {
+        TemplateStatus status = TemplateStatus.fromCode(entry.status())
+                .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.TEMPLATE_STATUS_INVALID.formatted(entry.id(), entry.status())));
+        List<TemplateDay> days = ImmutableLists.copyOrEmpty(entry.days()).stream()
+                .map(day -> new TemplateDay(day.places(), day.note())).toList();
+        return new ItineraryTemplate(entry.id(), entry.title(), entry.summary(), status, days);
     }
 
     /** Đọc một tệp điểm đến, dựng domain và kiểm tra mọi ảnh có thật trong classpath; sai thì nêu tên tệp. */
@@ -161,6 +235,15 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
     // ---- hình dạng tệp JSON (chỉ dùng trong adapter) ----
     record DestinationFile(String id, String name, String region, String tagline, String coverPlaceId, List<ReferenceFile> references,
                            List<SectionFile> guide, List<PlaceFile> places) {
+    }
+
+    record TemplatesFile(String destinationId, List<TemplateEntry> templates) {
+    }
+
+    record TemplateEntry(String id, String title, String summary, String status, List<TemplateDayEntry> days) {
+    }
+
+    record TemplateDayEntry(List<String> places, String note) {
     }
 
     record ReferenceFile(String id, String name, Double lat, Double lon, boolean approximate) {

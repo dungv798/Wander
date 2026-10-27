@@ -63,6 +63,15 @@ public final class PlanningFields {
     /** Mã mục trong một phần tử gán ngày. */
     public static final String ITEM_ID = "itemId";
 
+    /** "Ai đi" của chuyến (ADR-014). */
+    public static final String KIND = "kind";
+
+    /** Sở thích của chuyến (ADR-014). */
+    public static final String INTERESTS = "interests";
+
+    /** Cờ ngày đi/về chưa chắc (DR-018 A3). */
+    public static final String DATES_TENTATIVE = "datesTentative";
+
     /** Mã địa điểm trong kho biên tập mà mục liên kết tới. */
     public static final String PLACE_ID = "placeId";
 

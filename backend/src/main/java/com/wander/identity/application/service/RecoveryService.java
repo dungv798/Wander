@@ -4,9 +4,11 @@ import com.wander.identity.application.input.IdentityFields;
 import com.wander.identity.application.input.IdentityInput;
 import com.wander.identity.application.view.IdentityViews.Approved;
 import com.wander.identity.application.view.IdentityViews.Committed;
+import com.wander.identity.application.view.IdentityViews.Denied;
 import com.wander.identity.application.view.IdentityViews.RecoveryStarted;
 import com.wander.identity.application.view.IdentityViews.ReplacementBegun;
 import com.wander.identity.application.view.IdentityViews.StepUpCreated;
+import com.wander.identity.application.view.IdentityViews.StepUpPreview;
 import com.wander.identity.domain.constant.IdentityConstants;
 import com.wander.identity.domain.constant.IdentityErrorCodes;
 import com.wander.identity.domain.constant.IdentityMessages;
@@ -19,7 +21,10 @@ import com.wander.identity.domain.model.IdentityModel.Session;
 import com.wander.identity.domain.model.IdentityModel.StepUpRequest;
 import com.wander.identity.domain.model.IdentityModel.StepUpState;
 import com.wander.identity.domain.port.IdentityStore;
+import com.wander.identity.domain.port.RecoveryCodeHasher;
+import com.wander.identity.domain.rule.MatchChallenge;
 import com.wander.identity.domain.rule.Secrets;
+import com.wander.identity.domain.vocabulary.EventKind;
 import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.security.AuthenticatedPrincipal;
 import com.wander.shared.kernel.util.Ids;
@@ -47,11 +52,15 @@ public class RecoveryService {
 
     private final IdentityStore store;
     private final Clock clock;
+    private final RecoveryCodeHasher hasher;
+    private final SecurityEventService events;
 
-    /** Nhận cổng lưu trữ và đồng hồ (test thay bằng đồng hồ giả). */
-    public RecoveryService(IdentityStore store, Clock clock) {
+    /** Nhận cổng lưu trữ, đồng hồ (test thay bằng đồng hồ giả), bộ băm mã khôi phục có khóa và nhật ký sự kiện bảo mật. */
+    public RecoveryService(IdentityStore store, Clock clock, RecoveryCodeHasher hasher, SecurityEventService events) {
         this.store = store;
         this.clock = clock;
+        this.hasher = hasher;
+        this.events = events;
     }
 
     // ---------- Khôi phục bằng mã (KP-C, D24) ----------
@@ -63,22 +72,23 @@ public class RecoveryService {
     public RecoveryStarted startRecovery(Map<String, Object> input) {
         String attemptKey = IdentityInput.attemptKey(input.get(IdentityFields.ATTEMPT_ID));
         String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(input.get(IdentityFields.SESSION_TOKEN)));
+        String deviceName = IdentityInput.deviceName(input.get(IdentityFields.DEVICE_NAME));
         String normalized = Secrets.normalize(input.get(IdentityFields.CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null) throw invalidCode();
 
-        RecoveryCode oldCode = store.findActiveCodeByHash(Secrets.hashRecoveryCode(normalized)).orElseThrow(RecoveryService::invalidCode);
+        RecoveryCode oldCode = store.findActiveCodeByHash(hasher.hash(normalized)).orElseThrow(RecoveryService::invalidCode);
         String replacement = Secrets.newRecoveryCode();
-        String replacementHash = Secrets.hashDisplayedRecoveryCode(replacement);
+        String replacementHash = hasher.hashDisplayed(replacement);
         Instant now = Timestamps.now(clock);
         Instant expiresAt = now.plus(IdentityConstants.PENDING_TTL);
 
         Optional<RecoveryAttempt> existing = store.findAttemptForUpdate(attemptKey);
         if (existing.isPresent()) {
-            store.saveAttempt(restartedAttempt(existing.get(), oldCode, tokenHash, replacementHash, expiresAt));
+            store.saveAttempt(restartedAttempt(existing.get(), oldCode, tokenHash, replacementHash, expiresAt, deviceName));
         } else {
             if (store.isTokenHashInUse(tokenHash)) throw IdentityInput.tokenInUse();
             store.saveAttempt(new RecoveryAttempt(UUID.randomUUID(), attemptKey, oldCode.identityId(), oldCode.id(), replacementHash,
-                    tokenHash, AttemptState.PENDING, now, expiresAt));
+                    tokenHash, AttemptState.PENDING, now, expiresAt, deviceName));
         }
         return new RecoveryStarted(attemptKey, replacement, Timestamps.format(expiresAt));
     }
@@ -91,7 +101,7 @@ public class RecoveryService {
         String attemptKey = IdentityInput.attemptKey(input.get(IdentityFields.ATTEMPT_ID));
         String normalized = Secrets.normalize(input.get(IdentityFields.REPLACEMENT_CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null) throw invalidReplacement();
-        String replacementHash = Secrets.hashRecoveryCode(normalized);
+        String replacementHash = hasher.hash(normalized);
 
         RecoveryAttempt attempt = store.findAttemptForUpdate(attemptKey).orElseThrow(RecoveryService::invalidCode);
         if (!attempt.replacementHash().equals(replacementHash)) throw invalidReplacement();
@@ -106,8 +116,9 @@ public class RecoveryService {
                 .orElseThrow(() -> WanderException.conflict(IdentityErrorCodes.CODE_ALREADY_USED, IdentityMessages.CODE_ALREADY_USED));
         store.invalidateRecoveryCode(oldCode.invalidate(IdentityConstants.INVALIDATED_BY_RECOVERY, now));
         store.addRecoveryCode(RecoveryCode.issue(attempt.identityId(), attempt.replacementHash(), now));
-        store.addSession(Session.open(attempt.identityId(), attempt.sessionTokenHash(), now));
+        store.addSession(Session.open(attempt.identityId(), attempt.sessionTokenHash(), attempt.deviceName(), now));
         store.saveAttempt(attempt.withState(AttemptState.COMMITTED));
+        events.record(attempt.identityId(), EventKind.RECOVERED, attempt.deviceName());
         return Committed.YES;
     }
 
@@ -127,7 +138,7 @@ public class RecoveryService {
         Instant expiresAt = now.plus(IdentityConstants.PENDING_TTL);
         UUID id = UUID.randomUUID();
         store.saveReplacement(new CodeReplacement(id, principal.identityId(), principal.sessionId(),
-                current.map(RecoveryCode::id).orElse(null), Secrets.hashDisplayedRecoveryCode(replacement),
+                current.map(RecoveryCode::id).orElse(null), hasher.hashDisplayed(replacement),
                 ReplacementState.PENDING, now, expiresAt));
         return new ReplacementBegun(id.toString(), replacement, Timestamps.format(expiresAt));
     }
@@ -143,7 +154,7 @@ public class RecoveryService {
         if (replacement.isExpired(now)) {
             throw WanderException.invalid(IdentityErrorCodes.ATTEMPT_EXPIRED, IdentityMessages.REPLACEMENT_EXPIRED, null);
         }
-        if (!replacement.replacementHash().equals(Secrets.hashRecoveryCode(normalized))) throw invalidReplacement();
+        if (!replacement.replacementHash().equals(hasher.hash(normalized))) throw invalidReplacement();
         Optional<RecoveryCode> current = store.findActiveCode(principal.identityId());
         if (!Objects.equals(current.map(RecoveryCode::id).orElse(null), replacement.oldCodeId())) {
             throw WanderException.conflict(IdentityErrorCodes.CODE_CHANGED, IdentityMessages.CODE_CHANGED);
@@ -151,6 +162,7 @@ public class RecoveryService {
         current.ifPresent(code -> store.invalidateRecoveryCode(code.invalidate(IdentityConstants.INVALIDATED_BY_REPLACEMENT, now)));
         store.addRecoveryCode(RecoveryCode.issue(principal.identityId(), replacement.replacementHash(), now));
         store.saveReplacement(replacement.withState(ReplacementState.COMMITTED));
+        events.record(principal.identityId(), EventKind.CODE, null);
         return Committed.YES;
     }
 
@@ -165,19 +177,59 @@ public class RecoveryService {
         Instant expiresAt = now.plus(IdentityConstants.APPROVAL_TTL);
         UUID id = UUID.randomUUID();
         String approvalCode = Secrets.newShortCode();
+        MatchChallenge challenge = MatchChallenge.random();
         store.saveStepUp(new StepUpRequest(id, principal.identityId(), principal.sessionId(), operation, approvalCode,
-                StepUpState.PENDING, null, now, expiresAt));
-        return new StepUpCreated(id.toString(), approvalCode, Timestamps.format(expiresAt));
+                StepUpState.PENDING, null, now, expiresAt, challenge.number(), challenge.optionsText()));
+        return new StepUpCreated(id.toString(), approvalCode, challenge.number(), Timestamps.format(expiresAt));
     }
 
-    /** Phải do một phiên KHÁC của cùng danh tính duyệt: phiên đang xin không tự duyệt chính nó. */
+    /**
+     * Máy duyệt xem trước yêu cầu xác thực lại (DR-018 E1): thao tác, tên máy đang xin (tự khai, chưa xác minh), thời điểm và các
+     * lựa chọn số khớp cố định lúc tạo. Không đổi trạng thái.
+     */
+    public StepUpPreview previewStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
+        StepUpRequest request = findApprovableStepUp(principal, input, false);
+        String requesterName = store.findActiveSession(request.sessionId(), principal.identityId()).map(Session::deviceName).orElse(null);
+        return new StepUpPreview(request.id().toString(), request.operation(), requesterName, Timestamps.format(request.createdAt()),
+                request.challenge().options());
+    }
+
+    /** Máy duyệt từ chối chủ động: yêu cầu thành denied và không bao giờ duyệt lại được. */
+    public Denied denyStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
+        store.saveStepUp(findApprovableStepUp(principal, input, true).deny());
+        return Denied.YES;
+    }
+
+    /**
+     * Phải do một phiên KHÁC của cùng danh tính duyệt, bằng cách CHỌN ĐÚNG SỐ KHỚP: phiên đang xin không tự duyệt chính nó.
+     * Chọn sai ⇒ yêu cầu bị từ chối vĩnh viễn (giữ lại dù ném lỗi, nên {@code noRollbackFor}). Số thiếu/sai dạng bị từ chối
+     * trước khi đụng tới yêu cầu. LƯU Ý: mọi {@code WanderException} thêm vào
+     * phương thức này SAU lần ghi sẽ commit dở; chỉ ném lỗi trước khi ghi hoặc ngay sau lần ghi từ chối.
+     */
+    @Transactional(noRollbackFor = WanderException.class)
     public Approved approveStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        String code = Secrets.normalize(input.get(IdentityFields.APPROVAL_CODE), IdentityConstants.SHORT_CODE_SYMBOLS);
-        if (code == null) throw invalidApprovalCode();
-        StepUpRequest request = store.findApprovableStepUp(Secrets.formatShort(code), principal.identityId(), principal.sessionId(),
-                Timestamps.now(clock)).orElseThrow(RecoveryService::invalidApprovalCode);
+        int chosen = IdentityInput.matchNumber(input.get(IdentityFields.NUMBER));
+        StepUpRequest request = findApprovableStepUp(principal, input, true);
+        if (!request.challenge().matches(chosen)) {
+            store.saveStepUp(request.deny());
+            throw WanderException.forbidden(IdentityErrorCodes.MATCH_MISMATCH, IdentityMessages.MATCH_MISMATCH);
+        }
         store.saveStepUp(request.approve(principal.sessionId()));
         return Approved.YES;
+    }
+
+    /**
+     * Yêu cầu xác thực lại đang chờ, còn hạn, đúng danh tính và do phiên KHÁC xin; {@code lock} = khóa dòng (duyệt/từ chối, để
+     * đồng thời chỉ một lượt thắng) hay đọc thường (xem trước). Sai mã ⇒ INVALID_APPROVAL_CODE.
+     */
+    private StepUpRequest findApprovableStepUp(AuthenticatedPrincipal principal, Map<String, Object> input, boolean lock) {
+        String code = Secrets.normalize(input.get(IdentityFields.APPROVAL_CODE), IdentityConstants.SHORT_CODE_SYMBOLS);
+        if (code == null) throw invalidApprovalCode();
+        String approvalCode = Secrets.formatShort(code);
+        Instant now = Timestamps.now(clock);
+        return (lock ? store.findApprovableStepUpForUpdate(approvalCode, principal.identityId(), principal.sessionId(), now)
+                : store.findApprovableStepUp(approvalCode, principal.identityId(), principal.sessionId(), now))
+                .orElseThrow(RecoveryService::invalidApprovalCode);
     }
 
     // ---------- hỗ trợ ----------
@@ -197,9 +249,9 @@ public class RecoveryService {
     }
 
     /** Mã người dùng trình phải khớp mã khôi phục hiện hành; không khớp thì ném lỗi {@code denied}. */
-    private static void requireMatchesCurrentCode(Object typedCode, RecoveryCode current, WanderException denied) {
+    private void requireMatchesCurrentCode(Object typedCode, RecoveryCode current, WanderException denied) {
         String normalized = Secrets.normalize(typedCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
-        if (normalized == null || !Secrets.hashRecoveryCode(normalized).equals(current.codeHash())) throw denied;
+        if (normalized == null || !hasher.hash(normalized).equals(current.codeHash())) throw denied;
     }
 
     /** Dùng (một lần) phê duyệt đã được duyệt cho đúng phiên và thao tác; không có thì ném STEP_UP_REQUIRED. */
@@ -214,12 +266,12 @@ public class RecoveryService {
 
     /** Lần thử đã có được bắt đầu lại, nhưng chỉ cho chính bên đã tạo (cùng mã, cùng bí mật phiên) và khi còn chờ (MĐ-6). */
     private static RecoveryAttempt restartedAttempt(RecoveryAttempt attempt, RecoveryCode oldCode, String tokenHash,
-                                                    String replacementHash, Instant expiresAt) {
+                                                    String replacementHash, Instant expiresAt, String deviceName) {
         boolean sameOwner = attempt.state() == AttemptState.PENDING
                 && attempt.oldCodeId().equals(oldCode.id())
                 && attempt.sessionTokenHash().equals(tokenHash);
         if (!sameOwner) throw invalidCode();
-        return attempt.restart(replacementHash, expiresAt);
+        return attempt.restart(replacementHash, expiresAt, deviceName);
     }
 
     /** Lỗi mã khôi phục sai hoặc đã được dùng. */

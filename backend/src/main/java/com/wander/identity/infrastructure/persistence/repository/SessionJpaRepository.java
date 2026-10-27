@@ -31,6 +31,11 @@ public interface SessionJpaRepository extends JpaRepository<SessionEntity, UUID>
     @Query(IdentityQueryConstants.TOUCH_SESSION)
     void touch(@Param("id") UUID id, @Param("now") Instant now);
 
+    /** Đặt hoặc xóa tên thiết bị của phiên chưa bị thu hồi. */
+    @Modifying
+    @Query(IdentityQueryConstants.RENAME_SESSION)
+    void rename(@Param("id") UUID id, @Param("name") String name);
+
     /** Thu hồi phiên nếu chưa bị thu hồi. */
     @Modifying
     @Query(IdentityQueryConstants.REVOKE_SESSION)

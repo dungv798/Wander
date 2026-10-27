@@ -39,6 +39,12 @@ public final class IdentityFields {
     /** Bỏ qua việc tạo mã khôi phục lúc tạo danh tính. */
     public static final String SKIP_RECOVERY_CODE = "skipRecoveryCode";
 
+    /** Số khớp mà người duyệt chọn. */
+    public static final String NUMBER = "number";
+
+    /** Tên thiết bị do thiết bị tự khai. */
+    public static final String DEVICE_NAME = "deviceName";
+
     /** Loại bằng chứng: trình mã khôi phục hiện hành. */
     public static final String EVIDENCE_TYPE_CODE = "code";
 

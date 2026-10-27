@@ -24,6 +24,12 @@ public final class PlanningErrorCodes {
     /** Kiểu chuyến không hợp lệ. */
     public static final String INVALID_STYLE = "INVALID_STYLE";
 
+    /** "Ai đi" không hợp lệ. */
+    public static final String INVALID_KIND = "INVALID_KIND";
+
+    /** Sở thích không hợp lệ. */
+    public static final String INVALID_INTEREST = "INVALID_INTEREST";
+
     /** Nhịp chuyến không hợp lệ. */
     public static final String INVALID_PACE = "INVALID_PACE";
 
@@ -38,6 +44,9 @@ public final class PlanningErrorCodes {
 
     /** Mục đã bị xóa nên không sửa được. */
     public static final String ITEM_DELETED = "ITEM_DELETED";
+
+    /** "Đã xóa gần đây" của chuyến đã đầy. */
+    public static final String TRASH_FULL = "TRASH_FULL";
 
     /** Mục đã bị xóa rồi. */
     public static final String ALREADY_DELETED = "ALREADY_DELETED";

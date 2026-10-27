@@ -329,6 +329,102 @@ class PlanningApiIT extends ApiTestSupport {
     }
 
     @Test
+    @DisplayName("lát 4 (DR-011 A2/B1): thùng rác chỉ của chủ chuyến; xóa vĩnh viễn từng mục chỉ cần phiên chủ chuyến, không xác thực lại")
+    void trashIsOwnerOnlyAndPurgeNeedsNoStepUp() {
+        User owner = newUser();
+        User other = newUser();
+        String trip = newTrip(owner.token());
+        String it = newItem(owner.token(), trip, Map.of("title", "A"));
+        String base = "/api/trips/" + trip + "/items/" + it;
+        call("DELETE", base, owner.token());
+
+        assertThat(call("GET", "/api/trips/" + trip + "/trash", other.token()).status()).isEqualTo(404);
+        assertThat(call("POST", base + "/restore", other.token()).status()).isEqualTo(404);
+        assertThat(call("DELETE", base + "/permanent", other.token()).status()).isEqualTo(404);
+        assertThat(call("GET", "/api/trips/" + trip + "/trash", owner.token()).list("items")).hasSize(1);
+
+        assertThat(call("DELETE", base + "/permanent", owner.token()).status()).isEqualTo(204);
+    }
+
+    @Test
+    @DisplayName("lát 4: thùng rác xếp mục xóa gần nhất trước; trashCount đúng; xóa vĩnh viễn một mục không đụng mục khác")
+    void trashOrderAndCount() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String a = newItem(u.token(), trip, Map.of("title", "A"));
+        String b = newItem(u.token(), trip, Map.of("title", "B"));
+        String c = newItem(u.token(), trip, Map.of("title", "C"));
+        for (String id : List.of(a, b, c)) {
+            call("DELETE", "/api/trips/" + trip + "/items/" + id, u.token());
+            jdbc.sql("UPDATE items SET deleted_at = now() + (? || ' seconds')::interval WHERE id = ?::uuid")
+                    .param(String.valueOf(List.of(a, b, c).indexOf(id))).param(id).update();
+        }
+        Res trash = call("GET", "/api/trips/" + trip + "/trash", u.token());
+        assertThat(List.of(trash.str("items.0.title"), trash.str("items.1.title"), trash.str("items.2.title")))
+                .containsExactly("C", "B", "A");
+        assertThat(call("GET", "/api/trips/" + trip, u.token()).num("trashCount")).isEqualTo(3);
+
+        assertThat(call("DELETE", "/api/trips/" + trip + "/items/" + b + "/permanent", u.token()).status()).isEqualTo(204);
+        assertThat(call("GET", "/api/trips/" + trip, u.token()).num("trashCount")).isEqualTo(2);
+        Res remaining = call("GET", "/api/trips/" + trip + "/trash", u.token());
+        assertThat(remaining.list("items")).hasSize(2);
+        assertThat(List.of(remaining.str("items.0.title"), remaining.str("items.1.title"))).containsExactly("C", "A");
+    }
+
+    @Test
+    @DisplayName("lát 4: xóa vĩnh viễn việc cần làm đã tick xong không lỗi (dọn cả dấu hoàn thành)")
+    void purgeCompletedTask() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String task = newItem(u.token(), trip, Map.of("type", "task", "title", "In vé"));
+        String base = "/api/trips/" + trip + "/items/" + task;
+        assertThat(call("PUT", base + "/done", u.token(), Map.of("done", true)).status()).isEqualTo(200);
+        call("DELETE", base, u.token());
+        assertThat(call("DELETE", base + "/permanent", u.token()).status()).isEqualTo(204);
+        assertThat(jdbc.sql("SELECT count(*) FROM item_completions").query(Long.class).single()).isZero();
+    }
+
+    @Test
+    @DisplayName("lát 4: xóa rồi khôi phục hai mục theo thứ tự xóa vẫn về đúng chỗ cũ qua API")
+    void restoreInDeletionOrderKeepsOrder() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String a = newItem(u.token(), trip, Map.of("title", "A"));
+        String b = newItem(u.token(), trip, Map.of("title", "B"));
+        newItem(u.token(), trip, Map.of("title", "C"));
+        call("DELETE", "/api/trips/" + trip + "/items/" + a, u.token());
+        call("DELETE", "/api/trips/" + trip + "/items/" + b, u.token());
+        assertThat(titles(u, trip, 1)).containsExactly("C");
+        call("POST", "/api/trips/" + trip + "/items/" + a + "/restore", u.token());
+        call("POST", "/api/trips/" + trip + "/items/" + b + "/restore", u.token());
+        assertThat(titles(u, trip, 1)).containsExactly("A", "B", "C");
+    }
+
+    @Test
+    @DisplayName("lát 4 (QA): position trong API luôn là thứ hạng liền mạch 0..n-1 của mục còn hiện, kể cả khi có mục đã xóa chiếm chỗ; Hoàn tác bằng position đọc từ view về đúng chỗ")
+    void viewPositionsAreDenseRanks() {
+        User u = newUser();
+        String trip = newTrip(u.token());
+        String a = newItem(u.token(), trip, Map.of("title", "A"));
+        String b = newItem(u.token(), trip, Map.of("title", "B"));
+        newItem(u.token(), trip, Map.of("title", "C"));
+        newItem(u.token(), trip, Map.of("title", "D"));
+        call("DELETE", "/api/trips/" + trip + "/items/" + a, u.token());
+
+        Res detail = call("GET", "/api/trips/" + trip, u.token());
+        assertThat(List.of(detail.num("days.1.items.0.position"), detail.num("days.1.items.1.position"), detail.num("days.1.items.2.position")))
+                .containsExactly(0L, 1L, 2L);
+        long positionOfB = detail.num("days.1.items.0.position");
+        assertThat(call("GET", "/api/trips/" + trip + "/items/" + b, u.token()).num("item.position")).isEqualTo(positionOfB);
+
+        assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + b, u.token(), Map.of("day", "2026-08-31")).status()).isEqualTo(200);
+        Res undo = call("POST", "/api/trips/" + trip + "/schedule", u.token(),
+                map("assignments", List.of(map("itemId", b, "day", "2026-08-30", "position", positionOfB))));
+        assertThat(undo.status()).as(String.valueOf(undo.body())).isEqualTo(200);
+        assertThat(titles(u, trip, 1)).containsExactly("B", "C", "D");
+    }
+
+    @Test
     @DisplayName("A-8: không khôi phục mục chưa xóa; không sửa mục đã xóa")
     void deletedItemRules() {
         User u = newUser();

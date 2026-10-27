@@ -18,6 +18,12 @@ public final class PlanningMessages {
     /** Kiểu chuyến không hợp lệ. */
     public static final String STYLE_INVALID = "Kiểu chuyến không hợp lệ.";
 
+    /** "Ai đi" không hợp lệ. */
+    public static final String KIND_INVALID = "Kiểu người đi không hợp lệ.";
+
+    /** Sở thích không hợp lệ. */
+    public static final String INTEREST_INVALID = "Sở thích không hợp lệ.";
+
     /** Nhịp chuyến không hợp lệ. */
     public static final String PACE_INVALID = "Nhịp chuyến không hợp lệ.";
 
@@ -42,7 +48,10 @@ public final class PlanningMessages {
     /** Mục đã bị xóa nên không sửa được. */
     public static final String ITEM_DELETED_EDIT = "Mục đã bị xóa. Hãy khôi phục trước khi sửa.";
 
-    /** Mục đã bị xóa. */
+    /** "Đã xóa gần đây" của chuyến đã đầy (DR-020). */
+    public static final String TRASH_FULL = "Đã xóa gần đây đã đầy. Hãy xóa vĩnh viễn bớt mục rồi thử lại.";
+
+    /** Mục đã bị xóa (thông báo chung). */
     public static final String ITEM_DELETED = "Mục đã bị xóa.";
 
     /** Mục chưa bị xóa. */
@@ -62,6 +71,12 @@ public final class PlanningMessages {
 
     /** Lỗi dữ liệu: kiểu chuyến lạ trong cơ sở dữ liệu; tham số: mã. */
     public static final String UNKNOWN_TRIP_STYLE = "Unknown trip style in database: %s";
+
+    /** Lỗi dữ liệu: "ai đi" lạ trong cơ sở dữ liệu; tham số: mã. */
+    public static final String UNKNOWN_TRIP_KIND = "Unknown trip kind in database: %s";
+
+    /** Lỗi dữ liệu: sở thích lạ trong cơ sở dữ liệu; tham số: mã. */
+    public static final String UNKNOWN_TRIP_INTEREST = "Unknown trip interest in database: %s";
 
     /** Lỗi dữ liệu: nhịp chuyến lạ trong cơ sở dữ liệu; tham số: mã. */
     public static final String UNKNOWN_TRIP_PACE = "Unknown trip pace in database: %s";

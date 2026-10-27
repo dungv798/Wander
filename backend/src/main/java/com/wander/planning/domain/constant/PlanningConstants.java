@@ -30,6 +30,9 @@ public final class PlanningConstants {
     /** Số phần tử tối đa của một lệnh gán ngày hàng loạt (bằng trần "Đã xóa gần đây", DR-020). */
     public static final int MAX_ASSIGNMENTS = 500;
 
+    /** Trần "Đã xóa gần đây" của một chuyến (DR-020): đầy thì chặn xóa thêm, không tự xóa vĩnh viễn mục cũ (D19). Khớp `LIMITS.MAX_TRASH` ở giao diện. */
+    public static final int MAX_TRASH_ITEMS = 500;
+
     /** Dấu nối trước hậu tố số khi tên chuyến trùng (DR-006). */
     public static final String NAME_SUFFIX_SEPARATOR = " - ";
 
@@ -113,6 +116,15 @@ public final class PlanningConstants {
 
     /** Độ dài cột {@code trips.styles}. */
     public static final int STYLES_COLUMN_LENGTH = 100;
+
+    /** Số sở thích tối đa của một chuyến (bằng số loại địa điểm). */
+    public static final int MAX_INTERESTS = 6;
+
+    /** Độ dài cột {@code trips.interests}. */
+    public static final int INTERESTS_COLUMN_LENGTH = 100;
+
+    /** Độ dài cột {@code trips.kind}. */
+    public static final int KIND_COLUMN_LENGTH = 16;
 
     /** Độ dài cột {@code trips.pace}. */
     public static final int PACE_COLUMN_LENGTH = 16;

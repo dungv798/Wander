@@ -2,6 +2,9 @@ package com.wander.planning.domain.model;
 
 import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.constant.PlanningFields;
+import com.wander.planning.domain.rule.Interests;
+import com.wander.planning.domain.vocabulary.TripInterest;
+import com.wander.planning.domain.vocabulary.TripKind;
 import com.wander.planning.domain.vocabulary.TripPace;
 import com.wander.planning.domain.vocabulary.TripStyle;
 import com.wander.shared.kernel.constant.ErrorCodes;
@@ -18,12 +21,26 @@ import java.util.List;
  *   <li>{@code styles}: kiểu chuyến, tối đa {@value PlanningConstants#MAX_STYLES}, không trùng, lưu theo thứ tự khai báo của
  *       {@link TripStyle}. Chỉ là nhãn.</li>
  *   <li>{@code pace}: nhịp chuyến. Chỉ là nhãn.</li>
+ *   <li>{@code datesTentative}: ngày đi/về chưa chắc (DR-018 A3). Chỉ là nhãn; ngày vẫn bắt buộc và vẫn được kiểm.</li>
+ *   <li>{@code kind}: "ai đi" (chọn một) và {@code interests}: sở thích (tối đa {@value PlanningConstants#MAX_INTERESTS}, không
+ *       trùng, theo thứ tự khai báo) (DR-018 F2, ADR-014). Chỉ là nhãn.</li>
  * </ul>
  */
-public record TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace) {
+public record TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace, boolean datesTentative, TripKind kind,
+                          List<TripInterest> interests) {
 
     /** Không có tùy chọn nào được đặt. */
-    public static final TripOptions NONE = new TripOptions(null, List.of(), null);
+    public static final TripOptions NONE = new TripOptions(null, List.of(), null, false, null, List.of());
+
+    /** Tùy chọn với ngày đã chốt, chưa đặt "ai đi" và sở thích. */
+    public TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace) {
+        this(budgetK, styles, pace, false, null, List.of());
+    }
+
+    /** Tùy chọn chưa đặt "ai đi" và sở thích. */
+    public TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace, boolean datesTentative) {
+        this(budgetK, styles, pace, datesTentative, null, List.of());
+    }
 
     public TripOptions {
         requireValidBudget(budgetK);
@@ -31,6 +48,7 @@ public record TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace) {
                 .distinct().sorted(Comparator.comparingInt(Enum::ordinal)).toList();
         if (distinct.size() > PlanningConstants.MAX_STYLES) throw WanderException.invalidValue(ErrorCodes.TOO_MANY, PlanningFields.STYLES);
         styles = distinct;
+        interests = Interests.normalize(interests);
     }
 
     /** Ngân sách (nếu có) phải không âm và không vượt mức tối đa như chi phí. */

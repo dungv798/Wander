@@ -12,6 +12,12 @@ public final class CatalogApiConstants {
     /** Một điểm đến theo mã. */
     public static final String DESTINATION_PATH = "/destinations/{id}";
 
+    /** Lịch mẫu của một điểm đến (N-2). */
+    public static final String TEMPLATES_PATH = DESTINATION_PATH + "/templates";
+
+    /** Khóa JSON của danh sách lịch mẫu. */
+    public static final String KEY_TEMPLATES = "templates";
+
     /** Tên tham số tìm kiếm. */
     public static final String QUERY_PARAM = "q";
 

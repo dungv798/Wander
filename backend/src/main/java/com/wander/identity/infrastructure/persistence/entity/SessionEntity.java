@@ -31,6 +31,9 @@ public class SessionEntity {
     @Column(name = "revoked_at")
     private Instant revokedAt;
 
+    @Column(name = "device_name")
+    private String deviceName;
+
     public UUID getId() { return id; }
     public void setId(UUID v) { this.id = v; }
     public UUID getIdentityId() { return identityId; }
@@ -43,4 +46,6 @@ public class SessionEntity {
     public void setLastSeenAt(Instant v) { this.lastSeenAt = v; }
     public Instant getRevokedAt() { return revokedAt; }
     public void setRevokedAt(Instant v) { this.revokedAt = v; }
+    public String getDeviceName() { return deviceName; }
+    public void setDeviceName(String v) { this.deviceName = v; }
 }

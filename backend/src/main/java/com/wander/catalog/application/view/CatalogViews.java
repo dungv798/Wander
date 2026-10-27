@@ -39,6 +39,14 @@ public final class CatalogViews {
     }
 
     /** Mốc tham chiếu để tính khoảng cách; có tọa độ để giao diện vẽ bản đồ nhỏ. {@code approximate} = tọa độ chưa kiểm chứng. */
+    /** Một ngày của lịch mẫu: mã địa điểm theo thứ tự đi (ghép với địa điểm của điểm đến ở phía gọi) và ghi chú biên tập. */
+    public record TemplateDayView(List<String> placeIds, String note) {
+    }
+
+    /** Lịch mẫu của điểm đến (N-2). {@code status} là mã duyệt ({@code draft}/{@code approved}); không có giờ, giá hay đánh giá. */
+    public record TemplateView(String id, String title, String summary, String status, List<TemplateDayView> days) {
+    }
+
     public record ReferenceView(String id, String name, double lat, double lon, boolean approximate) {
     }
 

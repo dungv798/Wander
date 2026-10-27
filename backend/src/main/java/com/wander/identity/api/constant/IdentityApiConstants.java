@@ -30,6 +30,21 @@ public final class IdentityApiConstants {
     /** Danh sách phiên. */
     public static final String SESSIONS_PATH = "/sessions";
 
+    /** Xem trước một yêu cầu ghép ở máy duyệt (tên máy, thời điểm, các lựa chọn số khớp). */
+    public static final String DEVICE_LINK_PREVIEW_PATH = DEVICE_LINKS_PATH + "/preview";
+
+    /** Từ chối chủ động một yêu cầu ghép. */
+    public static final String DEVICE_LINK_DENY_PATH = DEVICE_LINKS_PATH + "/deny";
+
+    /** Nhật ký sự kiện bảo mật (BE-11). */
+    public static final String EVENTS_PATH = "/events";
+
+    /** Đánh dấu đã xem nhật ký. */
+    public static final String EVENTS_SEEN_PATH = "/events/seen";
+
+    /** Phiên của chính thiết bị đang gọi (đổi tên thiết bị). */
+    public static final String CURRENT_SESSION_PATH = SESSIONS_PATH + "/current";
+
     /** Một phiên theo mã. */
     public static final String SESSION_BY_ID_PATH = SESSIONS_PATH + "/{id}";
 
@@ -47,6 +62,12 @@ public final class IdentityApiConstants {
 
     /** Duyệt phê duyệt xác thực lại. */
     public static final String STEP_UP_APPROVE_PATH = "/step-up/approve";
+
+    /** Xem trước một yêu cầu xác thực lại ở máy duyệt. */
+    public static final String STEP_UP_PREVIEW_PATH = "/step-up/preview";
+
+    /** Từ chối chủ động một yêu cầu xác thực lại. */
+    public static final String STEP_UP_DENY_PATH = "/step-up/deny";
 
     /** Mẫu đường dẫn công khai: tạo danh tính. */
     public static final String PUBLIC_IDENTITY_PATTERN = BASE_PATH + IDENTITY_PATH;

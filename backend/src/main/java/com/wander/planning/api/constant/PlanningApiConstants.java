@@ -36,6 +36,15 @@ public final class PlanningApiConstants {
     /** Khóa JSON của danh sách chuyến. */
     public static final String KEY_TRIPS = "trips";
 
+    /** Sở thích theo danh tính (BE-10). */
+    public static final String PREFERENCES_PATH = "/api/preferences";
+
+    /** Phần đường dẫn của sở thích. */
+    public static final String INTERESTS_PATH = "/interests";
+
+    /** Khóa JSON của danh sách sở thích. */
+    public static final String KEY_INTERESTS = "interests";
+
     /** Khóa JSON của một chuyến. */
     public static final String KEY_TRIP = "trip";
 

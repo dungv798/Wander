@@ -1,5 +1,7 @@
 package com.wander.identity.domain.model;
 
+import com.wander.identity.domain.rule.MatchChallenge;
+import com.wander.identity.domain.vocabulary.EventKind;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -17,11 +19,12 @@ public final class IdentityModel {
     }
 
     /** Phiên của một thiết bị; server chỉ giữ băm của bí mật phiên. */
-    public record Session(UUID id, UUID identityId, String tokenHash, Instant createdAt, Instant lastSeenAt, Instant revokedAt) {
+    public record Session(UUID id, UUID identityId, String tokenHash, Instant createdAt, Instant lastSeenAt, Instant revokedAt,
+                          String deviceName) {
 
-        /** Mở phiên mới cho danh tính, chưa bị thu hồi. */
-        public static Session open(UUID identityId, String tokenHash, Instant now) {
-            return new Session(UUID.randomUUID(), identityId, tokenHash, now, now, null);
+        /** Mở phiên mới cho danh tính, chưa bị thu hồi; {@code deviceName} là nhãn thiết bị tự khai (có thể null). */
+        public static Session open(UUID identityId, String tokenHash, String deviceName, Instant now) {
+            return new Session(UUID.randomUUID(), identityId, tokenHash, now, now, null, deviceName);
         }
 
         /** Phiên còn hiệu lực (chưa bị thu hồi). */
@@ -55,21 +58,24 @@ public final class IdentityModel {
 
     /** Lần thử khôi phục (KP-C, D24): mã cũ chỉ vô hiệu khi mã thay thế được xác nhận (commit). */
     public record RecoveryAttempt(UUID id, String attemptKey, UUID identityId, UUID oldCodeId, String replacementHash,
-                                  String sessionTokenHash, AttemptState state, Instant createdAt, Instant expiresAt) {
+                                  String sessionTokenHash, AttemptState state, Instant createdAt, Instant expiresAt,
+                                  String deviceName) {
 
         /** Đã quá hạn tại thời điểm {@code now}. */
         public boolean isExpired(Instant now) {
             return !expiresAt.isAfter(now);
         }
 
-        /** Bản bắt đầu lại cùng lần thử với mã thay thế mới và hạn mới. */
-        public RecoveryAttempt restart(String newReplacementHash, Instant newExpiresAt) {
-            return new RecoveryAttempt(id, attemptKey, identityId, oldCodeId, newReplacementHash, sessionTokenHash, state, createdAt, newExpiresAt);
+        /** Bản bắt đầu lại cùng lần thử với mã thay thế mới và hạn mới; tên thiết bị mới (nếu có) thay tên cũ, không nêu thì giữ tên cũ. */
+        public RecoveryAttempt restart(String newReplacementHash, Instant newExpiresAt, String newDeviceName) {
+            return new RecoveryAttempt(id, attemptKey, identityId, oldCodeId, newReplacementHash, sessionTokenHash, state, createdAt, newExpiresAt,
+                    newDeviceName != null ? newDeviceName : deviceName);
         }
 
         /** Bản có trạng thái mới. */
         public RecoveryAttempt withState(AttemptState newState) {
-            return new RecoveryAttempt(id, attemptKey, identityId, oldCodeId, replacementHash, sessionTokenHash, newState, createdAt, expiresAt);
+            return new RecoveryAttempt(id, attemptKey, identityId, oldCodeId, replacementHash, sessionTokenHash, newState, createdAt, expiresAt,
+                    deviceName);
         }
     }
 
@@ -91,12 +97,21 @@ public final class IdentityModel {
         }
     }
 
+    /** Một sự kiện bảo mật của danh tính (BE-11); {@code deviceName} là nhãn tự khai (có thể null), chưa xác minh. */
+    public record SecurityEvent(UUID identityId, EventKind kind, String deviceName, Instant occurredAt) {
+    }
+
     /** Trạng thái một yêu cầu ghép thiết bị. */
-    public enum LinkState { PENDING, APPROVED, EXPIRED }
+    public enum LinkState { PENDING, APPROVED, EXPIRED, DENIED }
 
     /** Thiết bị tin cậy duyệt thiết bị mới (D21). Bí mật phiên do thiết bị mới tự sinh; server chỉ giữ băm. */
     public record DeviceLink(UUID id, String pairingCode, String sessionTokenHash, LinkState state, UUID identityId,
-                             Instant createdAt, Instant expiresAt) {
+                             Instant createdAt, Instant expiresAt, String deviceName, int matchNumber, String matchOptions) {
+
+        /** Thử thách số khớp của yêu cầu (DR-018 E1). */
+        public MatchChallenge challenge() {
+            return MatchChallenge.of(matchNumber, matchOptions);
+        }
 
         /** Trạng thái người dùng thấy: yêu cầu còn chờ nhưng quá hạn thì coi là hết hạn. */
         public LinkState visibleState(Instant now) {
@@ -105,25 +120,46 @@ public final class IdentityModel {
 
         /** Bản đã được duyệt bởi danh tính của thiết bị cũ. */
         public DeviceLink approve(UUID approverIdentityId) {
-            return new DeviceLink(id, pairingCode, sessionTokenHash, LinkState.APPROVED, approverIdentityId, createdAt, expiresAt);
+            return new DeviceLink(id, pairingCode, sessionTokenHash, LinkState.APPROVED, approverIdentityId, createdAt, expiresAt,
+                    deviceName, matchNumber, matchOptions);
+        }
+
+        /** Bản bị từ chối (chọn sai số hoặc từ chối chủ động): không bao giờ duyệt lại được. */
+        public DeviceLink deny() {
+            return new DeviceLink(id, pairingCode, sessionTokenHash, LinkState.DENIED, identityId, createdAt, expiresAt,
+                    deviceName, matchNumber, matchOptions);
         }
     }
 
     /** Trạng thái một yêu cầu xác thực lại. */
-    public enum StepUpState { PENDING, APPROVED, CONSUMED }
+    public enum StepUpState { PENDING, APPROVED, CONSUMED, DENIED }
 
     /** Xác thực lại bằng phê duyệt từ một phiên KHÁC của cùng danh tính (D25, MĐ-1). */
     public record StepUpRequest(UUID id, UUID identityId, UUID sessionId, String operation, String approvalCode,
-                                StepUpState state, UUID approvedBySession, Instant createdAt, Instant expiresAt) {
+                                StepUpState state, UUID approvedBySession, Instant createdAt, Instant expiresAt,
+                                int matchNumber, String matchOptions) {
+
+        /** Thử thách số khớp của yêu cầu (DR-018 E1). */
+        public MatchChallenge challenge() {
+            return MatchChallenge.of(matchNumber, matchOptions);
+        }
+
+        /** Bản bị từ chối (chọn sai số hoặc từ chối chủ động): không bao giờ duyệt lại được. */
+        public StepUpRequest deny() {
+            return new StepUpRequest(id, identityId, sessionId, operation, approvalCode, StepUpState.DENIED, null, createdAt, expiresAt,
+                    matchNumber, matchOptions);
+        }
 
         /** Bản đã được phê duyệt bởi một phiên khác. */
         public StepUpRequest approve(UUID approverSession) {
-            return new StepUpRequest(id, identityId, sessionId, operation, approvalCode, StepUpState.APPROVED, approverSession, createdAt, expiresAt);
+            return new StepUpRequest(id, identityId, sessionId, operation, approvalCode, StepUpState.APPROVED, approverSession, createdAt, expiresAt,
+                    matchNumber, matchOptions);
         }
 
         /** Bản đã được dùng (mỗi phê duyệt chỉ dùng một lần). */
         public StepUpRequest consume() {
-            return new StepUpRequest(id, identityId, sessionId, operation, approvalCode, StepUpState.CONSUMED, approvedBySession, createdAt, expiresAt);
+            return new StepUpRequest(id, identityId, sessionId, operation, approvalCode, StepUpState.CONSUMED, approvedBySession, createdAt, expiresAt,
+                    matchNumber, matchOptions);
         }
     }
 }

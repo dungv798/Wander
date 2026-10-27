@@ -3,6 +3,7 @@ package com.wander.planning.domain.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.rule.Vnd;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
@@ -10,7 +11,10 @@ import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.util.Patch;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +40,7 @@ class TripTest {
     }
 
     @Test
-    @DisplayName("vị trí trong ngày luôn liền mạch 0..n-1 sau thêm, xóa mềm, khôi phục")
+    @DisplayName("vị trí trong ngày liền mạch 0..n-1 sau thêm và khôi phục; xóa mềm giữ chỗ cho mục đã xóa (cho phép khoảng trống)")
     void positionsStayContiguous() {
         Trip t = trip();
         Item a = t.addItem(D2, details("A"), null, NOW);
@@ -45,7 +49,8 @@ class TripTest {
         assertThat(titles(t, D2)).containsExactly("C", "A", "B");
 
         t.softDelete(a.id(), NOW);
-        assertThat(t.liveItems(D2)).extracting(Item::position).containsExactly(0, 1);
+        assertThat(titles(t, D2)).containsExactly("C", "B");
+        assertThat(t.liveItems(D2)).extracting(Item::position).containsExactly(0, 2);
         t.restore(a.id(), NOW);
         assertThat(titles(t, D2)).containsExactly("C", "A", "B");
         assertThat(t.liveItems(D2)).extracting(Item::position).containsExactly(0, 1, 2);
@@ -131,7 +136,7 @@ class TripTest {
         t.editItem(second.id(), second.details(), Patch.of(D2), null, NOW);
         assertThat(second.day()).isEqualTo(D2);
         assertThat(titles(t, null)).containsExactly("Một");
-        assertThat(t.liveItems(null)).extracting(Item::position).containsExactly(0);
+        assertThat(t.liveItems(null)).extracting(Item::position).as("vùng cũ giữ khoảng trống, vẫn tăng dần").isSorted().doesNotHaveDuplicates();
 
         t.editItem(second.id(), second.details(), Patch.absent(), null, NOW);
         assertThat(second.day()).as("không nêu ngày thì giữ nguyên").isEqualTo(D2);
@@ -142,6 +147,92 @@ class TripTest {
 
         assertThatThrownBy(() -> t.editItem(second.id(), second.details(), Patch.of(LocalDate.parse("2027-01-01")), null, NOW))
                 .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("DAY_OUT_OF_RANGE"));
+    }
+
+    @Test
+    @DisplayName("D19: xóa vài mục rồi khôi phục theo BẤT KỲ thứ tự nào đều về đúng chỗ cũ (thử mọi tập xóa x mọi thứ tự khôi phục)")
+    void restoreInAnyOrderKeepsOriginalOrder() {
+        List<String> original = List.of("A", "B", "C", "D", "E");
+        for (int mask = 1; mask < (1 << original.size()); mask++) {
+            List<String> deleted = new ArrayList<>();
+            for (int i = 0; i < original.size(); i++) if ((mask & (1 << i)) != 0) deleted.add(original.get(i));
+            for (List<String> restoreOrder : permutations(deleted)) {
+                Trip t = trip();
+                Map<String, Item> byTitle = new HashMap<>();
+                for (String title : original) byTitle.put(title, t.addItem(D2, details(title), null, NOW));
+                for (String title : deleted) t.softDelete(byTitle.get(title).id(), NOW);
+                for (String title : restoreOrder) t.restore(byTitle.get(title).id(), NOW);
+                assertThat(titles(t, D2)).as("xóa %s, khôi phục theo thứ tự %s", deleted, restoreOrder).containsExactlyElementsOf(original);
+            }
+        }
+    }
+
+    /** Mọi hoán vị của danh sách (danh sách nhỏ, chỉ dùng trong test). */
+    private static List<List<String>> permutations(List<String> items) {
+        if (items.size() <= 1) return List.of(items);
+        List<List<String>> result = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            List<String> rest = new ArrayList<>(items);
+            String head = rest.remove(i);
+            for (List<String> tail : permutations(rest)) {
+                List<String> permutation = new ArrayList<>();
+                permutation.add(head);
+                permutation.addAll(tail);
+                result.add(permutation);
+            }
+        }
+        return result;
+    }
+
+    @Test
+    @DisplayName("QA: chuyển một mục sang ngày khác khi còn mục trong thùng rác: khôi phục vẫn về đúng chỗ cạnh hàng xóm cũ")
+    void restoreAfterMovingAnotherItemAway() {
+        List<String> original = List.of("A", "B", "C", "D", "E");
+        LocalDate d3 = LocalDate.parse("2026-08-31");
+        for (List<String> restoreOrder : permutations(List.of("A", "B"))) {
+            Trip t = trip();
+            Map<String, Item> byTitle = new HashMap<>();
+            for (String title : original) byTitle.put(title, t.addItem(D2, details(title), null, NOW));
+            t.softDelete(byTitle.get("A").id(), NOW);
+            t.softDelete(byTitle.get("B").id(), NOW);
+            t.assignDays(List.of(new DayAssignment(byTitle.get("C").id(), d3, null)), NOW);
+            for (String title : restoreOrder) t.restore(byTitle.get(title).id(), NOW);
+            assertThat(titles(t, D2)).as("khôi phục theo thứ tự %s", restoreOrder).containsExactly("A", "B", "D", "E");
+            assertThat(titles(t, d3)).containsExactly("C");
+        }
+    }
+
+    @Test
+    @DisplayName("vị trí đã lưu bị mục khác chiếm (sau khi thêm mục): khôi phục vẫn về trước mục đang giữ chỗ và đánh số lại liền mạch")
+    void restoreWhenStoredPositionIsTaken() {
+        Trip t = trip();
+        Item a = t.addItem(D2, details("A"), null, NOW);
+        Item b = t.addItem(D2, details("B"), null, NOW);
+        Item c = t.addItem(D2, details("C"), null, NOW);
+        t.softDelete(b.id(), NOW);
+        t.addItem(D2, details("D"), null, NOW);
+        // thêm mục đánh số lại liền mạch: C (vị trí 1) nay chiếm chỗ đã lưu của B (vị trí 1)
+        assertThat(t.liveItems(D2)).extracting(Item::position).containsExactly(0, 1, 2);
+        assertThat(b.position()).isEqualTo(1);
+
+        t.restore(b.id(), NOW);
+        assertThat(titles(t, D2)).containsExactly("A", "B", "C", "D");
+        assertThat(t.liveItems(D2)).extracting(Item::position).containsExactly(0, 1, 2, 3);
+        assertThat(a.position()).isZero();
+        assertThat(c.position()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("xóa mềm một mục chưa có ngày rồi khôi phục: vẫn ở \"Chưa có ngày\", đúng chỗ cũ")
+    void unscheduledItemRestoresToUnscheduledSlot() {
+        Trip t = trip();
+        Item a = t.addItem(null, details("A"), null, NOW);
+        t.addItem(null, details("B"), null, NOW);
+        t.softDelete(a.id(), NOW);
+        assertThat(titles(t, null)).containsExactly("B");
+        t.restore(a.id(), NOW);
+        assertThat(titles(t, null)).containsExactly("A", "B");
+        assertThat(a.day()).isNull();
     }
 
     @Test
@@ -159,7 +250,7 @@ class TripTest {
         assertThat(titles(t, D2)).containsExactly("D", "C");
         assertThat(titles(t, d3)).containsExactly("A", "B");
         assertThat(titles(t, null)).isEmpty();
-        assertThat(t.liveItems(D2)).extracting(Item::position).containsExactly(0, 1);
+        assertThat(t.liveItems(D2)).extracting(Item::position).as("chuyển mục ra khỏi ngày để lại khoảng trống nhưng vẫn tăng dần").isSorted().doesNotHaveDuplicates();
 
         t.assignDays(List.of(new DayAssignment(d.id(), null, null), new DayAssignment(a.id(), D2, 0),
                 new DayAssignment(b.id(), D2, 1), new DayAssignment(c.id(), D2, 2)), NOW);
@@ -261,5 +352,21 @@ class TripTest {
         assertThat(Vnd.fromThousands(150)).isEqualTo("150.000 ₫");
         assertThat(Vnd.fromThousands(1500)).isEqualTo("1.500.000 ₫");
         assertThat(Vnd.fromThousands(1_000_000_000L)).isEqualTo("1.000.000.000.000 ₫");
+    }
+
+    @Test
+    @DisplayName("thùng rác đầy (trần 500 mục, DR-020): xóa mềm thêm bị chặn bằng TRASH_FULL, không tự xóa vĩnh viễn mục cũ; xóa vĩnh viễn một mục thì xóa tiếp được")
+    void trashHasACeiling() {
+        Trip t = trip();
+        List<Item> items = new ArrayList<>();
+        for (int i = 0; i <= PlanningConstants.MAX_TRASH_ITEMS; i++) items.add(t.addItem(D2, details("M" + i), null, NOW));
+        for (int i = 0; i < PlanningConstants.MAX_TRASH_ITEMS; i++) t.softDelete(items.get(i).id(), NOW);
+        Item last = items.get(PlanningConstants.MAX_TRASH_ITEMS);
+        assertThatThrownBy(() -> t.softDelete(last.id(), NOW))
+                .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("TRASH_FULL"));
+        assertThat(titles(t, D2)).containsExactly("M" + PlanningConstants.MAX_TRASH_ITEMS);
+        t.purge(items.get(0).id());
+        t.softDelete(last.id(), NOW);
+        assertThat(titles(t, D2)).isEmpty();
     }
 }

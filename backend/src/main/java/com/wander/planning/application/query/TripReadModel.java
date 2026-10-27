@@ -26,6 +26,9 @@ public interface TripReadModel {
     /** Mục đã xóa mềm, xóa gần nhất trước. */
     List<ItemRow> trash(UUID tripId);
 
+    /** Sở thích theo danh tính dạng chuỗi mã cách nhau bằng dấu phẩy; chưa đặt thì chuỗi rỗng. */
+    String interestPreferences(UUID ownerId);
+
     /** Mã các mục mà người này đã đánh dấu hoàn thành. */
     Set<UUID> doneItemIds(UUID tripId, UUID personId);
 }

@@ -66,6 +66,24 @@ public final class CatalogConstants {
     /** Số địa điểm xem trước tối đa trên thẻ điểm đến. */
     public static final int PREVIEW_PLACE_COUNT = 3;
 
+    /** Nơi tìm tệp lịch mẫu (mỗi điểm đến một tệp {@code catalog/templates/<id>.json}); cấu hình được để test dùng dữ liệu riêng. */
+    public static final String TEMPLATES_LOCATION_EXPRESSION = "${wander.catalog.templates-location:classpath*:catalog/templates/*.json}";
+
+    /** Mã lịch mẫu: slug chữ thường, số và dấu gạch ngang. */
+    public static final String TEMPLATE_ID_REGEX = "^[a-z0-9]+(-[a-z0-9]+)*$";
+
+    /** Độ dài tối đa mã lịch mẫu. */
+    public static final int TEMPLATE_ID_MAX_LENGTH = 60;
+
+    /** Độ dài tối đa tên lịch mẫu. */
+    public static final int TEMPLATE_TITLE_MAX_LENGTH = 120;
+
+    /** Độ dài tối đa đoạn mô tả và ghi chú của lịch mẫu. */
+    public static final int TEMPLATE_TEXT_MAX_LENGTH = 400;
+
+    /** Số ngày tối đa của một lịch mẫu (khớp trần phòng thủ của giao diện). */
+    public static final int TEMPLATE_MAX_DAYS = 30;
+
     /** Độ dài tối đa của chuỗi tìm kiếm điểm đến; phần dư bị cắt. */
     public static final int SEARCH_QUERY_MAX_LENGTH = 80;
 

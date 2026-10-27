@@ -25,8 +25,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 class SecurityIT extends ApiTestSupport {
 
     /**
-     * Hợp đồng: đúng bảy điểm cuối này không cần phiên (tạo danh tính, khôi phục, ghép thiết bị, và hai route đọc kho địa
-     * điểm theo DR-008 Q-a, có giới hạn tốc độ theo địa chỉ).
+     * Hợp đồng: đúng tám điểm cuối này không cần phiên (tạo danh tính, khôi phục, ghép thiết bị, và ba route đọc kho địa
+     * điểm — danh sách, chi tiết, lịch mẫu — theo DR-008 Q-a và DR-018 N-2, có giới hạn tốc độ theo địa chỉ).
      */
     private static final Set<String> PUBLIC = Set.of(
             "POST /api/identity",
@@ -35,7 +35,8 @@ class SecurityIT extends ApiTestSupport {
             "POST /api/device-links",
             "GET /api/device-links/{id}",
             "GET /api/catalog/destinations",
-            "GET /api/catalog/destinations/{id}");
+            "GET /api/catalog/destinations/{id}",
+            "GET /api/catalog/destinations/{id}/templates");
 
     private static final String WELL_FORMED_UNKNOWN_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
@@ -71,7 +72,7 @@ class SecurityIT extends ApiTestSupport {
     }
 
     @Test
-    @DisplayName("kiểm kê route: đúng 7 điểm cuối công khai, mọi /api còn lại trả 401 UNAUTHENTICATED khi thiếu hoặc sai phiên")
+    @DisplayName("kiểm kê route: đúng 8 điểm cuối công khai, mọi /api còn lại trả 401 UNAUTHENTICATED khi thiếu hoặc sai phiên")
     void routeInventory() {
         List<Route> routes = apiRoutes();
         assertThat(routes.size()).as("kiểm kê không được rỗng (tránh test đạt vì không kiểm gì)").isGreaterThan(20);

@@ -9,6 +9,8 @@ import com.wander.planning.domain.model.Trip;
 import com.wander.planning.domain.model.TripOptions;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
+import com.wander.planning.domain.vocabulary.TripInterest;
+import com.wander.planning.domain.vocabulary.TripKind;
 import com.wander.planning.domain.vocabulary.TripPace;
 import com.wander.planning.domain.vocabulary.TripStyle;
 import com.wander.planning.infrastructure.persistence.adapter.JpaTripRepository;
@@ -45,7 +47,7 @@ public interface TripMapper {
     /** Chuyến domain từ entity (dựng qua constructor nên mọi bất biến được kiểm tra). */
     @Mapping(target = "ownerId", source = "ownerIdentityId")
     @Mapping(target = "range", expression = "java(new DateRange(e.getStartDate(), e.getEndDate()))")
-    @Mapping(target = "options", expression = "java(new TripOptions(e.getBudgetK(), styles(e.getStyles()), pace(e.getPace())))")
+    @Mapping(target = "options", expression = "java(new TripOptions(e.getBudgetK(), styles(e.getStyles()), pace(e.getPace()), e.isDatesTentative(), kind(e.getKind()), interests(e.getInterests())))")
     Trip toDomain(TripEntity e);
 
     /** Chuỗi mã cách nhau bằng dấu phẩy → danh sách (rỗng = không có). Mã lạ trong cơ sở dữ liệu là lỗi dữ liệu. */
@@ -61,6 +63,26 @@ public interface TripMapper {
     default TripPace pace(String code) {
         if (code == null) return null;
         return TripPace.fromCode(code).orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_TRIP_PACE.formatted(code)));
+    }
+
+    /** "Ai đi" từ mã đã lưu; null giữ nguyên null, mã lạ là lỗi dữ liệu. */
+    default TripKind kind(String code) {
+        if (code == null) return null;
+        return TripKind.fromCode(code).orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_TRIP_KIND.formatted(code)));
+    }
+
+    /** Chuỗi mã sở thích cách nhau bằng dấu phẩy → danh sách (rỗng = không có); mã lạ là lỗi dữ liệu. */
+    default List<TripInterest> interests(String csv) {
+        if (csv == null || csv.isBlank()) return List.of();
+        return Arrays.stream(csv.split(PlanningConstants.STYLE_CODE_SEPARATOR))
+                .map(code -> TripInterest.fromCode(code.trim())
+                        .orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_TRIP_INTEREST.formatted(code))))
+                .toList();
+    }
+
+    /** Danh sách sở thích → chuỗi mã cách nhau bằng dấu phẩy để lưu một cột. */
+    default String interestCodes(List<TripInterest> interests) {
+        return interests.stream().map(TripInterest::code).collect(Collectors.joining(PlanningConstants.STYLE_CODE_SEPARATOR));
     }
 
     /** Danh sách kiểu chuyến → chuỗi mã cách nhau bằng dấu phẩy để lưu một cột. */
@@ -104,6 +126,9 @@ public interface TripMapper {
     @Mapping(target = "budgetK", expression = "java(trip.options().budgetK())")
     @Mapping(target = "styles", expression = "java(styleCodes(trip.options().styles()))")
     @Mapping(target = "pace", expression = "java(trip.options().pace() == null ? null : trip.options().pace().code())")
+    @Mapping(target = "kind", expression = "java(trip.options().kind() == null ? null : trip.options().kind().code())")
+    @Mapping(target = "interests", expression = "java(interestCodes(trip.options().interests()))")
+    @Mapping(target = "datesTentative", expression = "java(trip.options().datesTentative())")
     @Mapping(target = "updatedAt", expression = "java(trip.updatedAt())")
     @Mapping(target = "ownerIdentityId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)

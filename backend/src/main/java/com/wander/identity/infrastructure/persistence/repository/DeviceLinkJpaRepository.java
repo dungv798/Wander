@@ -20,6 +20,10 @@ public interface DeviceLinkJpaRepository extends JpaRepository<DeviceLinkEntity,
     /** Mã ghép đang được một yêu cầu ở trạng thái đã cho còn hạn dùng. */
     boolean existsByPairingCodeAndStateAndExpiresAtAfter(String pairingCode, String state, Instant now);
 
+    /** Yêu cầu ghép còn chờ và còn hạn theo mã ghép, đọc KHÔNG khóa (xem trước chỉ đọc nên không chặn các lượt khác). */
+    @Query(IdentityQueryConstants.ACTIVE_LINK_BY_PAIRING_CODE)
+    List<DeviceLinkEntity> findActiveByPairingCode(@Param("code") String code, @Param("now") Instant now);
+
     /** Yêu cầu ghép còn chờ và còn hạn theo mã ghép, với khóa ghi (SELECT … FOR UPDATE). */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.ACTIVE_LINK_BY_PAIRING_CODE)

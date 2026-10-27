@@ -20,7 +20,7 @@ public final class PlanningQueryConstants {
 
     /** Chọn các cột của chuyến thành dòng phẳng {@code TripRow} (constructor expression). */
     public static final String TRIP_ROW = "select new com.wander.planning.application.query.TripRow("
-            + "t.id, t.ownerIdentityId, t.name, t.destination, t.startDate, t.endDate, t.budgetK, t.styles, t.pace, "
+            + "t.id, t.ownerIdentityId, t.name, t.destination, t.startDate, t.endDate, t.budgetK, t.styles, t.pace, t.datesTentative, t.kind, t.interests, "
             + "t.createdAt, t.updatedAt) "
             + "from TripEntity t ";
 
@@ -50,6 +50,15 @@ public final class PlanningQueryConstants {
     /** Mã các mục mà một người đã hoàn thành trong chuyến. */
     public static final String DONE_ITEM_IDS = "select i.id from ItemEntity i join i.completions c "
             + "where i.trip.id = :" + PARAM_TRIP + " and c.personId = :" + PARAM_PERSON;
+
+    /** Sở thích theo danh tính của chủ (BE-10). */
+    public static final String OWNER_INTEREST_PREFERENCES =
+            "select p.interests from OwnerPreferencesEntity p where p.ownerIdentityId = :" + PARAM_OWNER;
+
+    /** Ghi hoặc thay sở thích theo danh tính bằng một câu nguyên tử (SQL thuần vì cần ON CONFLICT). */
+    public static final String UPSERT_OWNER_INTERESTS = "INSERT INTO owner_preferences (owner_identity_id, interests, updated_at) "
+            + "VALUES (:owner, :interests, :now) ON CONFLICT (owner_identity_id) DO UPDATE "
+            + "SET interests = EXCLUDED.interests, updated_at = EXCLUDED.updated_at";
 
     /** Mã và tên mọi chuyến của chủ (để đặt tên không trùng). */
     public static final String TRIP_NAMES = "select t.id, t.name from TripEntity t where t.ownerIdentityId = :" + PARAM_OWNER;

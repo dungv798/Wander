@@ -5,13 +5,16 @@ import com.wander.identity.domain.model.IdentityModel.DeviceLink;
 import com.wander.identity.domain.model.IdentityModel.Identity;
 import com.wander.identity.domain.model.IdentityModel.RecoveryAttempt;
 import com.wander.identity.domain.model.IdentityModel.RecoveryCode;
+import com.wander.identity.domain.model.IdentityModel.SecurityEvent;
 import com.wander.identity.domain.model.IdentityModel.Session;
 import com.wander.identity.domain.model.IdentityModel.StepUpRequest;
 import com.wander.identity.domain.port.IdentityStore;
+import com.wander.identity.domain.vocabulary.EventKind;
 import com.wander.identity.infrastructure.persistence.constant.IdentityPersistenceConstants;
 import com.wander.identity.infrastructure.persistence.entity.CodeReplacementEntity;
 import com.wander.identity.infrastructure.persistence.entity.DeviceLinkEntity;
 import com.wander.identity.infrastructure.persistence.entity.IdentityEntity;
+import com.wander.identity.infrastructure.persistence.entity.IdentityEventEntity;
 import com.wander.identity.infrastructure.persistence.entity.RecoveryAttemptEntity;
 import com.wander.identity.infrastructure.persistence.entity.RecoveryCodeEntity;
 import com.wander.identity.infrastructure.persistence.entity.SessionEntity;
@@ -19,6 +22,7 @@ import com.wander.identity.infrastructure.persistence.entity.StepUpRequestEntity
 import com.wander.identity.infrastructure.persistence.mapper.IdentityMapper;
 import com.wander.identity.infrastructure.persistence.repository.CodeReplacementJpaRepository;
 import com.wander.identity.infrastructure.persistence.repository.DeviceLinkJpaRepository;
+import com.wander.identity.infrastructure.persistence.repository.IdentityEventJpaRepository;
 import com.wander.identity.infrastructure.persistence.repository.IdentityJpaRepository;
 import com.wander.identity.infrastructure.persistence.repository.RecoveryAttemptJpaRepository;
 import com.wander.identity.infrastructure.persistence.repository.RecoveryCodeJpaRepository;
@@ -29,6 +33,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -47,12 +52,13 @@ class JpaIdentityStore implements IdentityStore {
     private final CodeReplacementJpaRepository replacements;
     private final DeviceLinkJpaRepository links;
     private final StepUpJpaRepository stepUps;
+    private final IdentityEventJpaRepository events;
     private final IdentityMapper mapper;
 
     JpaIdentityStore(IdentityJpaRepository identities, SessionJpaRepository sessions,
                      RecoveryCodeJpaRepository codes, RecoveryAttemptJpaRepository attempts,
                      CodeReplacementJpaRepository replacements, DeviceLinkJpaRepository links,
-                     StepUpJpaRepository stepUps, IdentityMapper mapper) {
+                     StepUpJpaRepository stepUps, IdentityEventJpaRepository events, IdentityMapper mapper) {
         this.identities = identities;
         this.sessions = sessions;
         this.codes = codes;
@@ -60,6 +66,7 @@ class JpaIdentityStore implements IdentityStore {
         this.replacements = replacements;
         this.links = links;
         this.stepUps = stepUps;
+        this.events = events;
         this.mapper = mapper;
     }
 
@@ -103,8 +110,41 @@ class JpaIdentityStore implements IdentityStore {
     }
 
     @Override
+    public void addEvent(SecurityEvent event, int keepLatest) {
+        IdentityEventEntity entity = new IdentityEventEntity();
+        entity.setIdentityId(event.identityId());
+        entity.setKind(event.kind().code());
+        entity.setDeviceName(event.deviceName());
+        entity.setOccurredAt(event.occurredAt());
+        events.saveAndFlush(entity);
+        events.pruneOlderThan(event.identityId(), keepLatest);
+    }
+
+    @Override
+    public List<SecurityEvent> recentEvents(UUID identityId, int limit) {
+        return events.findByIdentityIdOrderByIdDesc(identityId, PageRequest.of(0, limit)).stream()
+                .map(e -> new SecurityEvent(e.getIdentityId(), EventKind.fromCode(e.getKind()).orElseThrow(), e.getDeviceName(), e.getOccurredAt()))
+                .toList();
+    }
+
+    @Override
+    public boolean hasUnseenAlert(UUID identityId) {
+        return events.hasUnseenAlert(identityId);
+    }
+
+    @Override
+    public void markEventsSeen(UUID identityId) {
+        events.markSeen(identityId);
+    }
+
+    @Override
     public void revokeSession(UUID sessionId, Instant now) {
         sessions.revoke(sessionId, now);
+    }
+
+    @Override
+    public void renameSession(UUID sessionId, String deviceName) {
+        sessions.rename(sessionId, deviceName);
     }
 
     @Override
@@ -193,6 +233,16 @@ class JpaIdentityStore implements IdentityStore {
     @Override
     public Optional<DeviceLink> findDeviceLink(UUID id) {
         return links.findById(id).map(e -> mapper.toDomain(e));
+    }
+
+    @Override
+    public Optional<DeviceLink> findActiveDeviceLink(String pairingCode, Instant now) {
+        return links.findActiveByPairingCode(pairingCode, now).stream().findFirst().map(e -> mapper.toDomain(e));
+    }
+
+    @Override
+    public Optional<StepUpRequest> findApprovableStepUpForUpdate(String approvalCode, UUID identityId, UUID notSessionId, Instant now) {
+        return stepUps.lockApprovable(approvalCode, identityId, notSessionId, now).stream().findFirst().map(e -> mapper.toDomain(e));
     }
 
     @Override

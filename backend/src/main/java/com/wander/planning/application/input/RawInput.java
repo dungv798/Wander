@@ -8,6 +8,8 @@ import com.wander.planning.domain.model.DayAssignment;
 import com.wander.planning.domain.rule.ItemText;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
+import com.wander.planning.domain.vocabulary.TripInterest;
+import com.wander.planning.domain.vocabulary.TripKind;
 import com.wander.planning.domain.vocabulary.TripPace;
 import com.wander.planning.domain.vocabulary.TripStyle;
 import com.wander.shared.kernel.constant.ErrorCodes;
@@ -119,6 +121,13 @@ public final class RawInput {
         return amountK(value, PlanningFields.BUDGET);
     }
 
+    /** Cờ ngày chưa chắc: null ⇒ false (chưa đặt); chỉ nhận boolean thật, chuỗi "true" hay số 1 là MALFORMED. */
+    public static boolean datesTentative(Object value) {
+        if (value == null) return false;
+        if (value instanceof Boolean flag) return flag;
+        throw WanderException.invalidValue(ErrorCodes.MALFORMED, PlanningFields.DATES_TENTATIVE);
+    }
+
     /** Kiểu chuyến (Q11): danh sách mã; null hoặc chuỗi rỗng = không có kiểu nào (như ngân sách và nhịp). */
     public static List<TripStyle> styles(Object value) {
         if (isMissing(value)) return List.of();
@@ -129,6 +138,33 @@ public final class RawInput {
             styles.add(TripStyle.fromCode(code).orElseThrow(RawInput::invalidStyle));
         }
         return styles;
+    }
+
+    /** "Ai đi" (ADR-014): mã hoặc null/chuỗi rỗng = chưa đặt; nhãn tiếng Việt hay sai kiểu là INVALID_KIND. */
+    public static TripKind kind(Object value) {
+        if (isMissing(value)) return null;
+        if (value instanceof String code) {
+            Optional<TripKind> kind = TripKind.fromCode(code);
+            if (kind.isPresent()) return kind.get();
+        }
+        throw WanderException.invalid(PlanningErrorCodes.INVALID_KIND, PlanningMessages.KIND_INVALID, PlanningFields.KIND);
+    }
+
+    /** Sở thích (ADR-014): danh sách mã; null hoặc chuỗi rỗng = không có; không phải danh sách hoặc mã lạ là INVALID_INTEREST. */
+    public static List<TripInterest> interests(Object value) {
+        if (isMissing(value)) return List.of();
+        if (!(value instanceof List<?> raw)) throw invalidInterest();
+        List<TripInterest> interests = new ArrayList<>();
+        for (Object element : raw) {
+            if (!(element instanceof String code)) throw invalidInterest();
+            interests.add(TripInterest.fromCode(code).orElseThrow(RawInput::invalidInterest));
+        }
+        return interests;
+    }
+
+    /** Lỗi sở thích không hợp lệ. */
+    private static WanderException invalidInterest() {
+        return WanderException.invalid(PlanningErrorCodes.INVALID_INTEREST, PlanningMessages.INTEREST_INVALID, PlanningFields.INTERESTS);
     }
 
     /** Nhịp chuyến (Q11): mã hoặc null/chuỗi rỗng = chưa đặt. */

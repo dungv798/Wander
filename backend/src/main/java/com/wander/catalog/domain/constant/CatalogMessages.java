@@ -109,6 +109,57 @@ public final class CatalogMessages {
     /** Buổi trong ngày không hợp lệ; tham số: mã buổi. */
     public static final String TIME_SLOT_INVALID = "Buổi không hợp lệ: %s";
 
+    /** Tên trường "mã lịch mẫu" trong lời báo lỗi. */
+    public static final String TEMPLATE_ID_LABEL = "mã lịch mẫu";
+
+    /** Tên trường "tên lịch mẫu" trong lời báo lỗi. */
+    public static final String TEMPLATE_TITLE_LABEL = "tên lịch mẫu";
+
+    /** Tên trường "mô tả lịch mẫu" trong lời báo lỗi. */
+    public static final String TEMPLATE_SUMMARY_LABEL = "mô tả lịch mẫu";
+
+    /** Tên trường "ghi chú của ngày trong lịch mẫu" trong lời báo lỗi. */
+    public static final String TEMPLATE_NOTE_LABEL = "ghi chú ngày của lịch mẫu";
+
+    /** Mã lịch mẫu sai dạng; tham số: mã. */
+    public static final String TEMPLATE_ID_INVALID = "Mã lịch mẫu phải là chữ thường, số và dấu gạch ngang: %s";
+
+    /** Thiếu trạng thái duyệt; tham số: mã lịch mẫu. */
+    public static final String TEMPLATE_STATUS_REQUIRED = "Lịch mẫu %s thiếu trạng thái duyệt";
+
+    /** Trạng thái duyệt lạ (không được coi là đã duyệt); tham số: mã lịch mẫu, trạng thái. */
+    public static final String TEMPLATE_STATUS_INVALID = "Lịch mẫu %s có trạng thái không hợp lệ: %s";
+
+    /** Lịch mẫu không có ngày nào; tham số: mã lịch mẫu. */
+    public static final String TEMPLATE_NEEDS_DAY = "Lịch mẫu %s phải có ít nhất một ngày";
+
+    /** Lịch mẫu quá nhiều ngày; tham số: mã lịch mẫu, số ngày, tối đa. */
+    public static final String TEMPLATE_TOO_MANY_DAYS = "Lịch mẫu %s có %d ngày, tối đa %d";
+
+    /** Lịch mẫu không có địa điểm nào; tham số: mã lịch mẫu. */
+    public static final String TEMPLATE_NEEDS_PLACE = "Lịch mẫu %s phải có ít nhất một địa điểm";
+
+    /** Địa điểm lặp lại trong cùng lịch mẫu; tham số: mã lịch mẫu, mã địa điểm. */
+    public static final String TEMPLATE_PLACE_DUPLICATED = "Lịch mẫu %s dùng địa điểm %s nhiều hơn một lần";
+
+    /** Ngày của lịch mẫu không có địa điểm lẫn ghi chú. */
+    public static final String TEMPLATE_DAY_EMPTY = "Mỗi ngày của lịch mẫu phải có địa điểm hoặc ghi chú giải thích";
+
+    /** Mã địa điểm trống trong lịch mẫu. */
+    public static final String TEMPLATE_PLACE_ID_BLANK = "Mã địa điểm trong lịch mẫu không được trống";
+
+    /** Lịch mẫu trỏ tới địa điểm không có trong điểm đến; tham số: mã lịch mẫu, mã địa điểm, mã điểm đến. */
+    public static final String TEMPLATE_PLACE_UNKNOWN = "Lịch mẫu %s dùng địa điểm %s không có trong điểm đến %s";
+
+    /** Tệp lịch mẫu trỏ tới điểm đến không có trong kho; tham số: mã điểm đến. */
+    public static final String TEMPLATE_DESTINATION_UNKNOWN = "Lịch mẫu trỏ tới điểm đến không có trong kho: %s";
+
+    /** Hai tệp lịch mẫu cho cùng một điểm đến; tham số: mã điểm đến. */
+    public static final String TEMPLATE_FILE_DUPLICATED = "Hai tệp lịch mẫu cho cùng điểm đến: %s";
+
+    /** Hai lịch mẫu cùng mã trong một điểm đến; tham số: mã điểm đến, mã lịch mẫu. */
+    public static final String TEMPLATE_ID_DUPLICATED = "Điểm đến %s có hai lịch mẫu cùng mã: %s";
+
     private CatalogMessages() {
     }
 }

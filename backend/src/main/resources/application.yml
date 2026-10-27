@@ -41,6 +41,10 @@ management:
         enabled: true
 
 wander:
+  security:
+    # Khóa (pepper) của HMAC-SHA-256 băm mã khôi phục (DR-018 B3). KHÔNG có giá trị mặc định: thiếu hoặc ngắn hơn 32 byte thì ứng dụng
+    # không khởi động. Cục bộ: toolsdev.ps1 tự sinh; trên AWS: Secrets Manager (RG-5). Đổi khóa làm mọi mã khôi phục hiện có vô hiệu.
+    recovery-pepper: ${WANDER_RECOVERY_PEPPER}
   web:
     # Thư mục giao diện đã build. Để trống thì chỉ chạy API (ví dụ khi giao diện nằm trên S3/CloudFront).
     dir: ${WANDER_WEB_DIR:}
@@ -53,6 +57,8 @@ wander:
     approval-per-hour: ${WANDER_LIMIT_APPROVAL:20}
     # Đọc kho địa điểm công khai (DR-008 Q-a), mỗi phút cho một địa chỉ.
     catalog-per-minute: ${WANDER_LIMIT_CATALOG:120}
+    # Số yêu cầu duyệt (ghép thiết bị theo địa chỉ, xin xác thực lại theo danh tính) mỗi 10 phút (DR-018 E1).
+    approval-requests-per-window: ${WANDER_LIMIT_APPROVAL_REQUESTS:3}
 
 logging:
   level:

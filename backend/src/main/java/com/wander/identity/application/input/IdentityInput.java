@@ -1,12 +1,18 @@
 package com.wander.identity.application.input;
 
+import com.wander.identity.domain.constant.IdentityConstants;
 import com.wander.identity.domain.constant.IdentityErrorCodes;
 import com.wander.identity.domain.constant.IdentityMessages;
 import com.wander.identity.domain.rule.Secrets;
+import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 
 /** Đọc và kiểm tra các trường đầu vào dạng thô của API Identity; dùng chung cho các service để không viết lại. */
 public final class IdentityInput {
+
+    private static final Pattern DEVICE_NAME_WHITESPACE = Pattern.compile(IdentityConstants.DEVICE_NAME_WHITESPACE_REGEX);
 
     private IdentityInput() {
     }
@@ -25,6 +31,55 @@ public final class IdentityInput {
             throw WanderException.invalid(IdentityErrorCodes.INVALID_SESSION_TOKEN, IdentityMessages.INVALID_SESSION_TOKEN, IdentityFields.SESSION_TOKEN);
         }
         return text;
+    }
+
+    /**
+     * Tên thiết bị tùy chọn. Đây là nhãn do thiết bị TỰ KHAI, CHƯA ĐƯỢC XÁC MINH: không dùng làm bằng chứng nhận diện.
+     * Chuẩn hóa NFC; ký tự điều khiển, định dạng/vô hình (RTL override, zero-width, BOM…), tách dòng, vùng riêng hoặc chưa gán
+     * ⇒ MALFORMED; dãy khoảng trắng gộp thành một dấu cách; không nêu, null hoặc rỗng sau chuẩn hóa ⇒ null (chưa đặt tên).
+     * Quá {@value IdentityConstants#MAX_DEVICE_NAME_LENGTH} ký tự (tính theo code point, khớp CHECK của DB) ⇒ TOO_LONG.
+     */
+    public static String deviceName(Object value) {
+        if (value == null) return null;
+        if (!(value instanceof String raw)) throw WanderException.invalidValue(ErrorCodes.MALFORMED, IdentityFields.DEVICE_NAME);
+        String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC);
+        if (normalized.codePoints().anyMatch(IdentityInput::isForbiddenInDeviceName)) {
+            throw WanderException.invalidValue(ErrorCodes.MALFORMED, IdentityFields.DEVICE_NAME);
+        }
+        String text = DEVICE_NAME_WHITESPACE.matcher(normalized).replaceAll(IdentityConstants.SINGLE_SPACE).strip();
+        if (text.isEmpty()) return null;
+        if (text.codePointCount(0, text.length()) > IdentityConstants.MAX_DEVICE_NAME_LENGTH) {
+            throw WanderException.invalidValue(ErrorCodes.TOO_LONG, IdentityFields.DEVICE_NAME);
+        }
+        return text;
+    }
+
+    /** Ký tự không được có trong tên thiết bị: điều khiển, định dạng/vô hình, tách dòng/đoạn, thay thế, vùng riêng, chưa gán. */
+    private static boolean isForbiddenInDeviceName(int codePoint) {
+        if (Character.isISOControl(codePoint)) return true;
+        return switch (Character.getType(codePoint)) {
+            case Character.FORMAT, Character.LINE_SEPARATOR, Character.PARAGRAPH_SEPARATOR, Character.SURROGATE,
+                    Character.PRIVATE_USE, Character.UNASSIGNED -> true;
+            default -> false;
+        };
+    }
+
+    /**
+     * Số khớp người duyệt chọn: bắt buộc (thiếu ⇒ REQUIRED), phải là số nguyên hai chữ số (chuỗi, số thập phân, boolean, danh
+     * sách hay ngoài khoảng ⇒ MALFORMED). Kiểm tra TRƯỚC khi đụng tới yêu cầu: dạng sai là lỗi của giao diện, không phải chọn sai.
+     */
+    public static int matchNumber(Object value) {
+        if (value == null) {
+            throw WanderException.invalid(ErrorCodes.REQUIRED, IdentityMessages.MATCH_NUMBER_REQUIRED, IdentityFields.NUMBER);
+        }
+        if (!(value instanceof Integer) && !(value instanceof Long)) {
+            throw WanderException.invalidValue(ErrorCodes.MALFORMED, IdentityFields.NUMBER);
+        }
+        long number = ((Number) value).longValue();
+        if (number < IdentityConstants.MATCH_NUMBER_MIN || number > IdentityConstants.MATCH_NUMBER_MAX) {
+            throw WanderException.invalidValue(ErrorCodes.MALFORMED, IdentityFields.NUMBER);
+        }
+        return (int) number;
     }
 
     /** Lỗi báo bí mật phiên đã thuộc về phiên hoặc yêu cầu khác. */

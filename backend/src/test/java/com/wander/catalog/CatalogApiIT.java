@@ -3,6 +3,8 @@ package com.wander.catalog;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wander.support.ApiTestSupport;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -34,6 +36,47 @@ class CatalogApiIT extends ApiTestSupport {
         assertThat(r.str("destinations.0.previews.0.url")).startsWith("/catalog/photos/");
         assertThat(call("GET", "/api/catalog/destinations?q=sa%20pa", u.token()).list("destinations")).isEmpty();
         assertThat(call("GET", "/api/catalog/destinations", u.token()).list("destinations")).isNotEmpty();
+    }
+
+    @Test
+    @DisplayName("BE-7 (N-2): lịch mẫu công khai; ba lịch Hà Giang đã được PO duyệt (DR-020), địa điểm có thật trong điểm đến, không giờ/giá")
+    void templatesArePublic() {
+        Res anonymous = call("GET", "/api/catalog/destinations/ha-giang/templates", null);
+        assertThat(anonymous.status()).as(String.valueOf(anonymous.body())).isEqualTo(200);
+        assertThat(call("GET", "/api/catalog/destinations/ha-giang/templates", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA").status())
+                .isEqualTo(200);
+
+        List<Object> templates = anonymous.list("templates");
+        assertThat(templates).hasSize(3);
+        assertThat(anonymous.str("templates.0.id")).isEqualTo("vong-cung-3-ngay");
+        assertThat(anonymous.str("templates.0.title")).isEqualTo("Vòng cung Đông Bắc 3 ngày");
+        assertThat(anonymous.str("templates.0.status")).isEqualTo("approved");
+        assertThat(anonymous.list("templates.0.days")).hasSize(3);
+        assertThat(anonymous.list("templates.1.days")).hasSize(2);
+        assertThat(anonymous.str("templates.2.days.1.note")).contains("Tây Côn Lĩnh");
+        assertThat(anonymous.at("templates.0.days.0.note")).as("ngày không có ghi chú trả null").isNull();
+
+        List<String> placeIds = new ArrayList<>();
+        for (Object place : call("GET", "/api/catalog/destinations/ha-giang", null).list("destination.places")) {
+            placeIds.add((String) ((Map<?, ?>) place).get("id"));
+        }
+        for (int t = 0; t < templates.size(); t++) {
+            Map<?, ?> template = (Map<?, ?>) templates.get(t);
+            assertThat(new HashSet<Object>(template.keySet())).as("chỉ có các trường biên tập, không giờ/giá/đánh giá")
+                    .containsExactlyInAnyOrder("id", "title", "summary", "status", "days");
+            for (Object day : (List<?>) template.get("days")) {
+                assertThat(new HashSet<Object>(((Map<?, ?>) day).keySet())).containsExactlyInAnyOrder("placeIds", "note");
+                for (Object id : (List<?>) ((Map<?, ?>) day).get("placeIds")) {
+                    assertThat(placeIds).as("địa điểm %s của lịch %d có trong kho", id, t).contains((String) id);
+                }
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("BE-7: điểm đến lạ ⇒ 404 cho lịch mẫu")
+    void templatesOfUnknownDestination() {
+        assertThat(call("GET", "/api/catalog/destinations/khong-co/templates", null).status()).isEqualTo(404);
     }
 
     @Test

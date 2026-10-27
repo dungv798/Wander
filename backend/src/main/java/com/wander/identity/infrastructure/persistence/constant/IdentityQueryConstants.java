@@ -1,5 +1,6 @@
 package com.wander.identity.infrastructure.persistence.constant;
 
+
 /** Câu JPQL của các repository Identity (tầng CHỨC NĂNG). Tên tham số {@code :x} khớp {@code @Param("x")} ở repository. */
 public final class IdentityQueryConstants {
 
@@ -7,8 +8,24 @@ public final class IdentityQueryConstants {
     private static final String VOID = "'" + IdentityPersistenceConstants.STATE_VOID + "'";
     private static final String APPROVED = "'" + IdentityPersistenceConstants.STATE_APPROVED + "'";
 
+    /** Xóa sự kiện cũ vượt quá số giữ lại của một danh tính (SQL thuần vì cần OFFSET). */
+    public static final String PRUNE_EVENTS = "DELETE FROM identity_events WHERE identity_id = :identity AND id IN ("
+            + "SELECT id FROM identity_events WHERE identity_id = :identity ORDER BY id DESC OFFSET :keep)";
+
+    /** Có sự kiện thêm thiết bị (mã `paired`/`recovered` của EventKind, có test canh) có mã lớn hơn mốc "đã xem" (chưa xem lần nào thì mọi sự kiện đó đều mới). */
+    public static final String HAS_UNSEEN_ALERT = "SELECT EXISTS (SELECT 1 FROM identity_events e JOIN identities i ON i.id = e.identity_id "
+            + "WHERE e.identity_id = :identity AND e.kind IN ('paired', 'recovered') "
+            + "AND (i.events_seen_id IS NULL OR e.id > i.events_seen_id))";
+
+    /** Ghi mốc "đã xem" của danh tính: mã sự kiện lớn nhất hiện có (0 nếu chưa có sự kiện nào). */
+    public static final String MARK_EVENTS_SEEN = "UPDATE identities SET events_seen_id = COALESCE("
+            + "(SELECT max(id) FROM identity_events WHERE identity_id = :identity), 0) WHERE id = :identity";
+
     /** Ghi thời điểm phiên được dùng gần nhất. */
     public static final String TOUCH_SESSION = "update SessionEntity s set s.lastSeenAt = :now where s.id = :id";
+
+    /** Đặt hoặc xóa tên thiết bị của phiên chưa bị thu hồi. */
+    public static final String RENAME_SESSION = "update SessionEntity s set s.deviceName = :name where s.id = :id and s.revokedAt is null";
 
     /** Thu hồi phiên chưa bị thu hồi. */
     public static final String REVOKE_SESSION = "update SessionEntity s set s.revokedAt = :now where s.id = :id and s.revokedAt is null";

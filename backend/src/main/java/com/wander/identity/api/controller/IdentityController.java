@@ -2,9 +2,11 @@ package com.wander.identity.api.controller;
 
 import com.wander.identity.api.constant.IdentityApiConstants;
 import com.wander.identity.application.input.IdentityFields;
+import com.wander.identity.application.input.IdentityInput;
 import com.wander.identity.application.service.DeviceLinkService;
 import com.wander.identity.application.service.IdentityService;
 import com.wander.identity.application.service.RecoveryService;
+import com.wander.identity.application.service.SecurityEventService;
 import com.wander.identity.application.view.IdentityViews;
 import com.wander.shared.kernel.security.AuthenticatedPrincipal;
 import com.wander.shared.web.ratelimit.RateLimits;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,15 +36,17 @@ public class IdentityController {
     private final IdentityService identities;
     private final RecoveryService recovery;
     private final DeviceLinkService deviceLinks;
+    private final SecurityEventService securityEvents;
     private final RateLimits limits;
     private final ClientAddress clientAddress;
 
     /** Nhận các service của Identity, bộ giới hạn tần suất và bộ lấy địa chỉ người gọi. */
     public IdentityController(IdentityService identities, RecoveryService recovery, DeviceLinkService deviceLinks,
-                              RateLimits limits, ClientAddress clientAddress) {
+                              SecurityEventService securityEvents, RateLimits limits, ClientAddress clientAddress) {
         this.identities = identities;
         this.recovery = recovery;
         this.deviceLinks = deviceLinks;
+        this.securityEvents = securityEvents;
         this.limits = limits;
         this.clientAddress = clientAddress;
     }
@@ -53,7 +58,8 @@ public class IdentityController {
     @ResponseStatus(HttpStatus.CREATED)
     public IdentityViews.CreatedIdentity createIdentity(JsonBody body, HttpServletRequest request) {
         limits.identity(clientAddress.of(request));
-        return identities.createIdentity(Boolean.TRUE.equals(body.get(IdentityFields.SKIP_RECOVERY_CODE)));
+        return identities.createIdentity(Boolean.TRUE.equals(body.get(IdentityFields.SKIP_RECOVERY_CODE)),
+                IdentityInput.deviceName(body.get(IdentityFields.DEVICE_NAME)));
     }
 
     /** Bước 1–2 khôi phục bằng mã. */
@@ -75,6 +81,7 @@ public class IdentityController {
     @ResponseStatus(HttpStatus.CREATED)
     public IdentityViews.DeviceLinkCreated createDeviceLink(JsonBody body, HttpServletRequest request) {
         limitRecoveryByAddress(request);
+        limits.pairingRequest(clientAddress.of(request));
         return deviceLinks.createLink(body.asMap());
     }
 
@@ -93,11 +100,43 @@ public class IdentityController {
         return Map.of(IdentityApiConstants.KEY_SESSIONS, identities.listActiveSessions(principal));
     }
 
+    /** Nhật ký sự kiện bảo mật gần đây và cờ "chưa xem" của danh tính. */
+    @GetMapping(IdentityApiConstants.EVENTS_PATH)
+    public IdentityViews.EventsView events(AuthenticatedPrincipal principal) {
+        return securityEvents.recent(principal.identityId());
+    }
+
+    /** Chủ đã mở màn Bảo mật: đánh dấu đã xem. */
+    @PostMapping(IdentityApiConstants.EVENTS_SEEN_PATH)
+    public IdentityViews.EventsView markEventsSeen(AuthenticatedPrincipal principal) {
+        return securityEvents.markSeen(principal.identityId());
+    }
+
+    /** Đổi hoặc xóa tên của chính thiết bị đang gọi; trả về phiên sau khi đổi. */
+    @PatchMapping(IdentityApiConstants.CURRENT_SESSION_PATH)
+    public IdentityViews.SessionView renameCurrentDevice(AuthenticatedPrincipal principal, JsonBody body) {
+        return identities.renameCurrentDevice(principal, body.asMap());
+    }
+
     /** Thu hồi một phiên của chính danh tính này. */
     @DeleteMapping(IdentityApiConstants.SESSION_BY_ID_PATH)
     public ResponseEntity<Void> revokeSession(AuthenticatedPrincipal principal, @PathVariable String id) {
         identities.revokeSession(principal, id);
         return ResponseEntity.noContent().build();
+    }
+
+    /** Máy duyệt xem trước yêu cầu ghép: tên máy tự khai, thời điểm, các lựa chọn số khớp (không đổi trạng thái). */
+    @PostMapping(IdentityApiConstants.DEVICE_LINK_PREVIEW_PATH)
+    public IdentityViews.LinkPreview previewDeviceLink(AuthenticatedPrincipal principal, JsonBody body) {
+        limitApprovalBySession(principal);
+        return deviceLinks.previewLink(body.asMap());
+    }
+
+    /** Máy duyệt từ chối chủ động yêu cầu ghép. */
+    @PostMapping(IdentityApiConstants.DEVICE_LINK_DENY_PATH)
+    public IdentityViews.Denied denyDeviceLink(AuthenticatedPrincipal principal, JsonBody body) {
+        limitApprovalBySession(principal);
+        return deviceLinks.denyLink(body.asMap());
     }
 
     /** Thiết bị đã có phiên duyệt yêu cầu ghép của thiết bị mới. */
@@ -132,7 +171,22 @@ public class IdentityController {
     @ResponseStatus(HttpStatus.CREATED)
     public IdentityViews.StepUpCreated requestStepUp(AuthenticatedPrincipal principal, JsonBody body) {
         limitApprovalBySession(principal);
+        limits.stepUpRequest(principal.identityId().toString());
         return recovery.requestStepUp(principal, body.asMap());
+    }
+
+    /** Máy duyệt xem trước yêu cầu xác thực lại: thao tác, tên máy đang xin, các lựa chọn số khớp. */
+    @PostMapping(IdentityApiConstants.STEP_UP_PREVIEW_PATH)
+    public IdentityViews.StepUpPreview previewStepUp(AuthenticatedPrincipal principal, JsonBody body) {
+        limitApprovalBySession(principal);
+        return recovery.previewStepUp(principal, body.asMap());
+    }
+
+    /** Máy duyệt từ chối chủ động yêu cầu xác thực lại. */
+    @PostMapping(IdentityApiConstants.STEP_UP_DENY_PATH)
+    public IdentityViews.Denied denyStepUp(AuthenticatedPrincipal principal, JsonBody body) {
+        limitApprovalBySession(principal);
+        return recovery.denyStepUp(principal, body.asMap());
     }
 
     /** Thiết bị khác phê duyệt yêu cầu xác thực lại. */

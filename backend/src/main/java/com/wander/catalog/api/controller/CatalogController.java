@@ -48,6 +48,13 @@ public class CatalogController {
         return Map.of(CatalogApiConstants.KEY_DESTINATION, queries.destination(id));
     }
 
+    /** Lịch mẫu của một điểm đến (N-2); điểm đến không có thì 404, chưa có lịch thì danh sách rỗng. */
+    @GetMapping(CatalogApiConstants.TEMPLATES_PATH)
+    public Map<String, Object> getTemplates(HttpServletRequest request, @PathVariable String id) {
+        limitByAddress(request);
+        return Map.of(CatalogApiConstants.KEY_TEMPLATES, queries.templates(id));
+    }
+
     /** Giới hạn tốc độ đọc kho địa điểm công khai theo địa chỉ người gọi; vượt ngưỡng thì 429. */
     private void limitByAddress(HttpServletRequest request) {
         limits.catalog(clientAddress.of(request));

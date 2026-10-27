@@ -24,6 +24,9 @@ public final class IdentityErrorCodes {
     /** Mã phê duyệt xác thực lại sai hoặc hết hạn. */
     public static final String INVALID_APPROVAL_CODE = "INVALID_APPROVAL_CODE";
 
+    /** Người duyệt chọn sai số khớp. */
+    public static final String MATCH_MISMATCH = "MATCH_MISMATCH";
+
     /** Lần thử khôi phục hoặc mã thay thế đã hết hạn. */
     public static final String ATTEMPT_EXPIRED = "ATTEMPT_EXPIRED";
 

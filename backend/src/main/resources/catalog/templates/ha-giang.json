@@ -1,7 +1,5 @@
 {
   "destinationId": "ha-giang",
-  "status": "approved",
-  "note": "Ba lịch do agent soạn từ các địa điểm có trong kho biên tập, PO duyệt ngày 27/10/2026 (DR-020). Không có giờ, giá hay đánh giá.",
   "templates": [
     {
       "id": "vong-cung-3-ngay",

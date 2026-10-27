@@ -42,6 +42,10 @@ public final class PlanningCommands {
     public record SetTaskDone(UUID ownerId, UUID tripId, UUID itemId, Object done) {
     }
 
+    /** Thay toàn bộ sở thích theo danh tính (BE-10); {@code input} là thân JSON thô có khóa {@code interests}. */
+    public record SetInterestPreferences(UUID ownerId, Map<String, Object> input) {
+    }
+
     /**
      * Lệnh "lịch": tùy chọn đổi khoảng ngày chuyến và gán ngày hàng loạt cho các mục, tất cả trong một giao dịch và một lần
      * tăng phiên bản. Gửi lại trạng thái cũ là cách Hoàn tác (kể cả Hoàn tác đổi khoảng ngày).

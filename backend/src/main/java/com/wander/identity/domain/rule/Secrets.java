@@ -40,16 +40,6 @@ public final class Secrets {
         return sha256Hex(token);
     }
 
-    /** Băm SHA-256 (hex) của mã khôi phục đã chuẩn hóa, có tiền tố để khác với băm bí mật phiên. */
-    public static String hashRecoveryCode(String normalized) {
-        return sha256Hex(IdentityConstants.RECOVERY_HASH_PREFIX + normalized);
-    }
-
-    /** Băm của mã khôi phục đang ở dạng hiển thị (có gạch ngang): chuẩn hóa rồi băm; dùng khi vừa phát hành mã. */
-    public static String hashDisplayedRecoveryCode(String displayedCode) {
-        return hashRecoveryCode(normalize(displayedCode, IdentityConstants.RECOVERY_CODE_SYMBOLS));
-    }
-
     /** Mã khôi phục hiển thị: 6 nhóm × 5 ký hiệu, ví dụ {@code 7K2QF-...}. */
     public static String newRecoveryCode() {
         String symbols = randomSymbols(IdentityConstants.RECOVERY_CODE_SYMBOLS);
