@@ -275,3 +275,12 @@ Tiến độ pha FE: xem `todo-fe.md`. Kiểm (đọc từ log `.logs/web-gates-
 | Trivy | **UNVERIFIED, chưa có kết quả quét.** `tools/quality.ps1 deps` ban đầu báo xanh giả: chế độ `fs` đọc 0 tệp (`Number of language-specific files num=0`, jar không được phân tích), nên đã đổi sang `rootfs`. Lần quét `rootfs` đầu hết thời gian mặc định 5 phút (exit 1, không phải kết quả); lần thứ hai (`--timeout 30m`) bị Claude Code dừng vì máy thiếu RAM. Chưa chạy lại; chạy khi máy rảnh: `powershell -File tools\quality.ps1 deps` | OPEN |
 | CI | `docs/ci/backend-ci.workflow.yml`, chưa bật, không secret/deploy/AWS | DONE |
 | Lệch so với ADR-013 | Không dùng Spotless; quét bí mật/phụ thuộc ngoài `check`; chưa khóa phiên bản phụ thuộc; chưa hook pre-push (xem ghi chú trong ADR-013) | DEFAULTED, chờ PO xác nhận |
+
+### Remote GitHub và đẩy mã (27/10/2026)
+| Mục | Quyết định / kết quả | Trạng thái |
+|---|---|---|
+| Remote | `origin` = `https://github.com/dungv798/Wander.git` (PO cung cấp); repo **private** (API không đăng nhập trả 404), ban đầu trống | DONE |
+| Đẩy mã | PO chọn "Em commit và push luôn" (27/10/2026): 6 commit theo chủ đề, push thường nhánh `main`, không ép, không viết lại lịch sử; `origin/main` = `caf8df1` khớp cục bộ. Đây là ngoại lệ một lần của DR-020 ("không commit") | APPROVED (lời PO) |
+| Ảnh chụp màn hình | `docs/ux/screenshots/` (≈378 MB, 981 tệp) đưa vào `.gitignore`, **không** vào lịch sử git: sinh lại được bằng `docs/ux/tools`, còn đã đẩy thì không gỡ được (cấm viết lại lịch sử). Hệ quả: các DR/tài liệu nhắc đường dẫn ảnh chỉ đúng trên máy PO | DEFAULTED (Tầng B) |
+| CI | Chưa bật: workflow vẫn ở `docs/ci/backend-ci.workflow.yml`. PO chọn chờ mã lên và chạy tay vài lần | APPROVED (lời PO) |
+| Trivy | Chưa chạy lại; PO chọn chờ đóng bớt ứng dụng. Lệnh: `powershell -File tools\quality.ps1 deps` | OPEN |
