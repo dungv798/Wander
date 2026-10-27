@@ -1,0 +1,675 @@
+{
+ "url": "http://127.0.0.1:4177/?fresh=1&intro=0",
+ "at": "2026-10-26T02:49:16.040Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.81
+   ],
+   "motion": {
+    "elements": 32,
+    "css": 31,
+    "transitions": 1,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 844,
+     "screens": 1,
+     "words": 207,
+     "img": 15,
+     "video": 0,
+     "canvas": 0,
+     "svg": 37,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 15,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "cao-nguyen-da-1.jpg",
+      "deo-ma-pi-leng-1.jpg",
+      "cot-co-lung-cu-1.jpg",
+      "song-nho-que-1.jpg",
+      "pho-co-dong-van-1.jpg",
+      "hoang-su-phi-1.jpg",
+      "cot-co-lung-cu-1.jpg",
+      "deo-ma-pi-leng-1.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 2,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Wander",
+     "words": 1,
+     "chars": 6,
+     "lines": 1,
+     "size": 42,
+     "vw": 10.8,
+     "font": "Baloo 2",
+     "weight": 800,
+     "tracking": -0.02,
+     "leading": 1,
+     "top": 20,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Wander",
+     "words": 1,
+     "lines": 1,
+     "size": 42,
+     "font": "Baloo 2"
+    },
+    "headings": [
+     {
+      "text": "Wander",
+      "words": 1,
+      "chars": 6,
+      "lines": 1,
+      "size": 42,
+      "vw": 10.8,
+      "font": "Baloo 2",
+      "weight": 800,
+      "tracking": -0.02,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 1,
+      "top": 20,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Bạn đang mê gì?",
+      "words": 4,
+      "chars": 15,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Baloo 2",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 692,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Nên đi tháng này",
+      "words": 4,
+      "chars": 16,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Baloo 2",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 996,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Khám phá ngay",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Baloo 2",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1287,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Hà Giang",
+      "words": 2,
+      "chars": 8,
+      "lines": 1,
+      "size": 34,
+      "vw": 8.7,
+      "font": "Baloo 2",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 1527,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Sắp ra mắt",
+      "words": 3,
+      "chars": 10,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Baloo 2",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1627,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 6,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 1,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Baloo 2",
+       "share": 0.67,
+       "mono": false
+      },
+      {
+       "family": "Be Vietnam Pro",
+       "share": 0.33,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      24,
+      34,
+      42
+     ],
+     "sizeCount": 11,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 42,
+      "vw": 10.8,
+      "font": "Baloo 2",
+      "text": "Wander"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.1,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#fff8d8",
+     "bodyBgHsl": {
+      "h": 49,
+      "s": 1,
+      "l": 0.92
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#fff8d8",
+       "top": 0,
+       "hsl": {
+        "h": 49,
+        "s": 1,
+        "l": 0.92
+       }
+      },
+      {
+       "color": "#0b1a2e",
+       "top": 1331,
+       "hsl": {
+        "h": 214,
+        "s": 0.61,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#7d3d00",
+       "share": 0.38
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.3
+      },
+      {
+       "color": "#14213a",
+       "share": 0.13
+      },
+      {
+       "color": "#45506a",
+       "share": 0.07
+      },
+      {
+       "color": "#12233d",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#ffe68a",
+      "hsl": {
+       "h": 47,
+       "s": 1,
+       "l": 0.77
+      },
+      "fg": "#7d3d00"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 24,
+     "height": 59,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Khám phá"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 16,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "span.pin.p1 → rgba(0, 0, 0, 0.08) 0px 1px 2px 0px",
+      "span.pin.p2 → rgba(0, 0, 0, 0.08) 0px 1px 2px 0px",
+      "figure.f1 → rgba(0, 0, 0, 0.08) 0px 1px 3px 0px",
+      "figure.f2.live → rgba(0, 0, 0, 0.08) 0px 1px 3px 0px"
+     ],
+     "gradients": 6,
+     "scrims": 3,
+     "gradientSamples": [
+      "section.sky → linear-gradient(rgb(143, 211, 251), rgb(255, 232, 114) 66%, rgb(255, 248, 216))",
+      "span.mc-in → linear-gradient(to top, rgba(6, 16, 32, 0.88), rgba(6, 16, 32, 0))",
+      "span.mc-in → linear-gradient(to top, rgba(6, 16, 32, 0.88), rgba(6, 16, 32, 0))",
+      "span.mc-in → linear-gradient(to top, rgba(6, 16, 32, 0.88), rgba(6, 16, 32, 0))"
+     ],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "div.ribbon 390px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 6,
+     "blurred": 1,
+     "roundedBoxes": 12,
+     "boxRadius": 24,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 28,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 740
+      },
+      {
+       "count": 5,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1043
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.13
+     },
+     {
+      "type": "img",
+      "ratio": 0.12
+     },
+     {
+      "type": "img",
+      "ratio": 0.1
+     },
+     {
+      "type": "img",
+      "ratio": 0.1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 73,
+     "floatingPill": true,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "baloo 2",
+     "be vietnam pro"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 844,
+    "margins": {
+     "left": 16,
+     "right": 13
+    },
+    "sections": [
+     {
+      "sel": "section.sky",
+      "tag": "section",
+      "top": 0,
+      "height": 500,
+      "words": 19,
+      "media": 4,
+      "middle": 0,
+      "heading": {
+       "text": "Wander",
+       "size": 42,
+       "tag": "h1"
+      },
+      "left": 24,
+      "right": 0,
+      "textLeft": 46,
+      "textRight": 94,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div#sec.sections.pad-x",
+      "tag": "div",
+      "top": 588,
+      "height": 1186,
+      "words": 39,
+      "media": 3,
+      "middle": 0,
+      "heading": {
+       "text": "Bạn đang mê gì?",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 0,
+      "textLeft": 16,
+      "textRight": -17,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Wander",
+      "size": 42,
+      "top": 20,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "1 nơi",
+      "side": "right",
+      "px": 11
+     }
+    ],
+    "edges": [
+     {
+      "x": 16,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#fff8d8",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 16,
+     "right": -2520
+    },
+    "hero": {
+     "text": "Wander",
+     "words": 1,
+     "chars": 6,
+     "lines": 1,
+     "size": 42,
+     "vw": 10.8,
+     "font": "Baloo 2",
+     "weight": 800,
+     "tracking": -0.02,
+     "leading": 1,
+     "top": 20,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 11,
+     "firstScreen": 5,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 11,
+     "radii": [
+      [
+       24,
+       8
+      ],
+      [
+       20,
+       1
+      ],
+      [
+       28,
+       1
+      ],
+      [
+       30,
+       1
+      ]
+     ],
+     "heavyBorders": 1,
+     "borderSamples": [
+      "#ffffff on #0b1a2e (17.48:1)"
+     ],
+     "heavyShadows": 1,
+     "softShadows": 10,
+     "shadowSamples": [
+      "rgba(18, 35, 61, 0.5) 0px 16px 34px -18px"
+     ],
+     "glass": 1
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 1,
+    "placeholders": [],
+    "type": {
+     "under13": 0.03,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      24,
+      34,
+      42
+     ]
+    },
+    "title": {
+     "text": "Wander",
+     "size": 42,
+     "top": 20
+    },
+    "colourShare": 0.27
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 390,
+   "message": "6 gradient fill(s): section.sky → linear-gradient(rgb(143, 211, 251), rgb(255, 232, 114) 66%, rgb(255, 248, 216)) | span.mc-in → linear-gradient(to top, rgba(6, 16, 32, 0.88), rgba(6, 16, 32, 0)) | span.mc-in → linear-gradient(to top, rgba(6, 16, 32, 0.88), rgba(6, 16, 32, 0))",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility."
+  },
+  {
+   "level": "WARN",
+   "id": "palette-cream",
+   "width": 390,
+   "message": "Yellow-cream background (page background #fff8d8, section #fff8d8).",
+   "fix": "Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream."
+  },
+  {
+   "level": "FAIL",
+   "id": "edge-text",
+   "width": 390,
+   "message": "1 text block(s) sit within 12px of the screen edge: \"1 nơi\" (11px from the right)",
+   "fix": "Keep text inside the page margin (16–20px). Only display type deliberately bled past the edge may touch it."
+  },
+  {
+   "level": "FAIL",
+   "id": "heavy-shadow",
+   "width": 390,
+   "message": "1 panel shadow(s) heavy enough to read as floating: rgba(18, 35, 61, 0.5) 0px 16px 34px -18px",
+   "fix": "Panels sit on the ground: separate them with a fill one step from the ground or a quiet 1px border. A shadow, if any, is under 8% black with a small blur. Real overlays (menus, dialogs, popovers) may float."
+  },
+  {
+   "level": "WARN",
+   "id": "colour-sprawl",
+   "width": 390,
+   "message": "27% of the first screen is strongly coloured.",
+   "fix": "Keep the screen neutral and spend colour on data and status: the studied screens sit near 3%, and only tinted styles reach 10–15%, as pale tints rather than saturated fills."
+  },
+  {
+   "level": "WARN",
+   "id": "app-title-size",
+   "width": 390,
+   "message": "The h1 is 42px (\"Wander\").",
+   "fix": "An app screen is not a landing page: the title is 18-32px (20-24px on a phone)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Wander\\.taste-skill\\inspect\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Wander\\.taste-skill\\inspect\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

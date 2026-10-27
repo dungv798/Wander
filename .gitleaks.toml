@@ -1,0 +1,21 @@
+# Cấu hình gitleaks của Wander (ADR-013, SEC-3). Dùng bộ luật mặc định và chỉ miễn những chỗ đã biết là không phải bí mật.
+title = "Wander"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Thư mục sinh ra hoặc chứa bản sao thư viện; tên khóa localStorage của FE/prototype (dương tính giả của generic-api-key)"
+regexTarget = "line"
+regexes = [
+    '''KEY\s*=\s*['"]wander[-.\w]*['"]''',
+]
+paths = [
+    '''(^|[\\/])node_modules[\\/]''',
+    '''(^|[\\/])build[\\/]''',
+    '''(^|[\\/])\.gradle[\\/]''',
+    '''(^|[\\/])\.logs[\\/]''',
+    '''(^|[\\/])dist[\\/]''',
+    '''(^|[\\/])\.git[\\/]''',
+    '''package-lock\.json$''',
+]

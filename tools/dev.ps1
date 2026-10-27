@@ -12,8 +12,8 @@
     backend-test    Chay toan bo test backend (JUnit, ArchUnit, Testcontainers PostgreSQL)
     backend-build   Build jar backend
     web-build       Cai dependency va build giao dien
-    e2e             Build tat ca, chay backend Java + giao dien, chay 4 kich ban trinh duyet that
-    run             Chay backend (cong 8787) phuc vu ca giao dien web/dist
+    e2e             Build tat ca, chay backend Java + giao dien, chay cac kich ban trinh duyet that (e2e/browser.test.ts)
+    run             Bat PostgreSQL roi chay backend (cong 8787) phuc vu ca giao dien web/dist (chay web-build truoc)
     verify          doctor + tools-check + backend-test + e2e
 #>
 param([Parameter(Position = 0)][string]$Command = 'help')

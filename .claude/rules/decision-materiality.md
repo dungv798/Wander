@@ -1,26 +1,17 @@
 # Decision materiality — what to ask the PO, what to just decide
 
-Why this rule exists: on 23/10/2026 the agents chose the whole tech stack (TypeScript/Node/SQLite) without asking, while filling reports with questions about decimal separators and currency symbols. The PO wants the opposite: **ask about what shapes the system, decide the small things yourself.** The project is also for **learning** (PO is a backend engineer: Java/Spring, DDD, CQRS at FPT), so material questions must teach, not just ask.
+Lesson from 23/10/2026: agents picked the whole stack without asking, then asked about decimal separators. Do the opposite: **ask about what shapes the system, decide the small things.** The PO is a backend engineer (Java/Spring, DDD, CQRS at FPT) doing this project to learn, so every material question must also teach.
 
-## Tiers
-
-| Tier | What | What you do |
+| Tier | What | Action |
 |---|---|---|
-| **A — Ask before acting** | Tech stack, framework or **new runtime dependency**; architecture style, module/bounded-context boundaries, aggregate boundaries; persistence strategy and schema changes that affect product semantics; auth/security mechanism; cloud services, anything that costs money or creates infrastructure; public API contract breaks; data retention/deletion; anything hard to reverse; any product question that is 🔶/❓ in the master plan and blocks the work | Stop that part. Ask the PO with `AskUserQuestion` (≤ 4 questions, most impactful first, recommended option first and labelled "(Recommended)"). Record it in `docs/architecture/open-decisions.md` (technical) or the report (product). Continue only with work that does not depend on the answer. |
-| **B — Decide and log** | Defaults inside an approved direction: validation limits, error codes, naming, copy text, UI micro-layout, test data, internal refactors, library *versions* within an approved stack | Pick a sensible default, write it in `docs/implementation/decisions.md` (§2) as `DEFAULTED`, mention it in one line of the final report. **Do not ask.** |
-| **C — Just do** | Formatting, file organisation inside a layer, comments, fixing your own bugs | Do it. Do not mention unless asked. |
+| **A — ask first** | Stack, framework, new runtime dependency; architecture style, module/aggregate boundaries; schema changes that change product meaning; auth/security mechanism; cloud services, cost, infrastructure; API breaking change; data retention/deletion; anything > 1 day to reverse; 🔶/❓ product items that block the work | Stop that part, ask with `AskUserQuestion` (≤ 4 questions, recommended option first with "(Recommended)"), keep doing work that does not depend on the answer |
+| **B — decide and log** | Defaults inside an approved direction: limits, error codes, naming, copy, UI micro-layout, test data, internal refactors, library versions within the approved stack, most Q18 details | Choose, add a `DEFAULTED` row to `docs/implementation/decisions.md` §2, mention it in one line. Do not ask |
+| **C — just do** | Formatting, file organisation inside a layer, comments, fixing your own bugs | Do it silently |
 
-Tie-breakers: if unsure between A and B, ask "would reversing this later cost more than a day, or change what the user sees/pays/risks?" Yes → A. A question is never Tier A just because the plan marks it ❓ — if a sensible default exists and reversal is cheap, it is B (Q18 details are typically B).
+Tie-breaker: "Would reversing this later cost more than a day, or change what the user sees, pays or risks?" Yes → A. A ❓ in the plan with a cheap, sensible default is B.
 
-## How to ask a Tier-A question (learning mode)
-For each question give, in Vietnamese:
-1. **Bối cảnh** — one sentence: what decision, why now.
-2. **Phương án** — 2–3 options; for each: how it works in one line, benefit, cost/risk, how hard to reverse, *what the PO would learn / how it maps to FPT work*.
-3. **Khuyến nghị** — one option with the reason, marked "khuyến nghị, không phải quyết định".
-Then call `AskUserQuestion`. When the PO answers: write/update an ADR in `docs/architecture/adr/` with status `APPROVED` (PO's words) and update `open-decisions.md`.
+**Asking a Tier-A question (learning mode, Vietnamese):** Bối cảnh (1 sentence) → Phương án (2–3; for each: how it works, benefit, cost/risk, reversibility, *học được gì / giống gì ở FPT*) → Khuyến nghị (marked "không phải quyết định") → `AskUserQuestion`.
+**After the answer:** technical → ADR in `docs/architecture/adr/` (`APPROVED`, PO's words) + update `open-decisions.md`; product → record in `docs/decisions/` (the plan itself changes only if the PO says so).
+**PO absent (scheduled/unattended):** do Tier B/C, park Tier A in `open-decisions.md`, list them first in the report.
 
-## Hard limits
-- Never mark something `APPROVED` unless the PO said so in this conversation or it is ✅ in the plan / an `APPROVED` ADR.
-- Never introduce a Tier-A item silently, including by "temporary" code. If you had to stub something, label it `PROPOSED` in code comments and in the report.
-- Batch questions: at most one `AskUserQuestion` call per task phase unless an answer creates a new Tier-A question.
-- When the PO is not present (scheduled/unattended run): do all Tier B/C work, leave Tier-A items in `open-decisions.md`, and list them at the top of the report.
+**Cuối MỖI phiên (PO, 26/10/2026):** liệt kê **toàn bộ** mục còn chờ PO duyệt (không chỉ mục mới), nhóm theo chủ đề, mỗi mục có phương án + khuyến nghị (không phải quyết định); hỏi bằng `AskUserQuestion` theo từng lượt ≤ 4 câu cho tới hết danh sách để PO chọn một lượt. Mục đã trả lời thì ghi DR/ADR, bỏ khỏi danh sách.

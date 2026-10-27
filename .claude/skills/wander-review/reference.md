@@ -10,9 +10,9 @@
 | Lát 1a scope, dependencies, blockers (§6, §9, §15.6) | product-analyst, skeptic-qa | architect for 1a→1b migration; security for D15 items |
 | Lát 1b permissions, links (Q6–Q9, Q12) | security-reviewer, product-analyst, skeptic-qa | architect for concurrency/data model |
 | Unresolved-question triage (Q11, P13) | product-analyst | skeptic-qa for hidden dependencies |
-| Architecture / system design / tech choice (AD-1…AD-11, ADR) | software-architect | security-reviewer for auth/exposure; prefer `/wander-architecture-decision` when the PO must choose |
+| Architecture / system design / tech choice (AD-1…AD-11, ADR) | software-architect | security-reviewer for auth/exposure; use `/wander-council` when the PO must choose |
 | Implemented code (backend/, web/) | code-reviewer, skeptic-qa | security-reviewer for identity/, shared/web; architect if a boundary moves |
-Minor wording or single-fact checks: use `/wander-decision-audit`, not this skill.
+Minor wording or single-fact checks: use `/wander-decision-audit`, not a multi-agent run. Used by `/wander-review`, `/wander-council`, `/wander-spec-review` and the autopilot `route-hint` (keep the table shape: 3 columns, agent names without the `wander-` prefix).
 
 ## Round-1 brief template (one per agent, self-contained: agents do not see this conversation)
 ```
@@ -21,7 +21,7 @@ Read only: docs/wander-master-plan.md sections <§ list> (IDs: <D…/Q…/R…/A
 Status tokens in play: <ID → token> (from the plan; verify).
 Your question: <specific to this specialist's role>.
 Constraints: read-only; do not decide OPEN items; stack is fixed by docs/architecture/adr/ADR-002 (anything outside it is Tier A); tier every open point per .claude/rules/decision-materiality.md and ask only Tier A; no delegation.
-Return the 9-section report from .claude/rules/review-output.md, in Vietnamese, ≤ 600 words.
+Return the planning/design report from your preloaded wander-kit skill (same 9 sections as .claude/rules/review-output.md), in Vietnamese, ≤ 600 words.
 ```
 Do not include your own conclusions or other agents' findings in round 1.
 

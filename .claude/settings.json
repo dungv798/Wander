@@ -8,7 +8,9 @@
     ],
     "deny": [
       "Read(./.env)",
-      "Read(./.env.*)"
+      "Read(./.env.*)",
+      "Edit(/docs/wander-master-plan.md)",
+      "Write(/docs/wander-master-plan.md)"
     ]
   },
   "hooks": {

@@ -1,4 +1,11 @@
+---
+paths:
+  - docs/autopilot/**
+  - docs/reviews/**
+---
 # Review output contract
+
+(Subagents get the same contract, shorter, from the preloaded `wander-kit` skill.)
 
 Write reports in Vietnamese (keep IDs, symbols and the classification tokens below in their original form). Be concise: target ≤ 600 words per specialist report, no transcripts.
 

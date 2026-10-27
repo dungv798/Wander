@@ -1,3 +1,8 @@
+---
+paths:
+  - docs/wander-master-plan.md
+  - docs/autopilot/**
+---
 # Wander product context (verified registry)
 
 Verified against `docs/wander-master-plan.md` **v0.4**, sha256 `2d1072592109115556cbc9f84b451a68e741b438cd8a1fbfb55ea05484d1fad0`. If the plan's version or hash differs, this registry may be stale: re-verify against the plan before relying on it, and tell the orchestrator.
@@ -26,21 +31,24 @@ This file is a **map**, not a copy. For content, read the plan section.
 ## Implementation map (outside the plan)
 | Topic | Where |
 |---|---|
-| Stack (APPROVED by PO 24/10/2026) | `docs/architecture/adr/ADR-002-java-spring-stack.md` |
+| Stack (APPROVED by PO 24/10/2026) | `docs/architecture/adr/ADR-002-java-spring-stack.md`; versions Java 21 + Boot 4.1 `ADR-004-java21-spring-boot-4.md` (APPROVED) |
 | Module/layer/CQRS layout (PROPOSED) | `docs/architecture/adr/ADR-003-modules-layers-cqrs.md`, overview `docs/architecture/README.md` |
-| Open technical decisions AD-1…AD-11 | `docs/architecture/open-decisions.md` |
+| Technical decisions AD-1…AD-11 (AD-11 APPROVED → ADR-004, rest OPEN) and parked questions | `docs/architecture/open-decisions.md` |
+| Product decision records made after the plan (if any) | `docs/decisions/` |
 | Implementation defaults, release gates RG-1…RG-7, progress | `docs/implementation/decisions.md` |
 | Backend code (Java) | `backend/` — `identity` and `planning` modules; tests in `backend/src/test/java` |
 | Front end (TypeScript) | `web/`; browser tests `e2e/` |
-| Legacy TypeScript server (reference only) | `legacy/ts-server/` |
+| Code conventions (load with the code) | `.claude/rules/backend.md`, `.claude/rules/frontend.md` |
+| Live status (git, tests, open AD, gates) | `node tools/wander-status.mjs` / `/wander-status` |
 
 ## Status registry
-- **APPROVED:** D1–D26 (D20–D26 = recovery principle and Q16 direction; Q16's detailed design is still pending the user's approval and Q16 stays OPEN). Stack ADR-002.
-- **OPEN:** Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15, **Q16, Q17, Q18**; technical AD-1…AD-11.
+- **APPROVED:** D1–D26 (D20–D26 = recovery principle and Q16 direction; Q16's detailed design is still pending the user's approval and Q16 stays OPEN). Stack ADR-002, versions ADR-004 (AD-11).
+- **OPEN:** Q6, Q7, Q8, Q9, Q10, Q12, Q13, Q15; technical: AD-5 only (deferred to 1b). Plan v0.4 itself still shows Q11/Q14/Q16/Q17/Q18 as ❓ (it is read-only).
+- **Decided after the plan (`docs/decisions/`, PO 24/10/2026):** Q16 design approved (DR-001), Q11 trip options = budget + trip style + pace, no head-count (DR-002), Q14 booking status in 1a (DR-003), Q17b no trip delete in 1a (DR-004). Q17 a/c and Q18 are Tier B defaults. Technical: ADR-003, 005–008 and AD-1…AD-4, AD-6…AD-11 resolved or defaulted (see `open-decisions.md`).
 - **Resolved into decisions:** Q1→D15, Q2→D16, Q3→D17, Q4→D18, Q5→D19 (details still open in Q16–Q18).
 - **PROPOSED:** P1, P2, P4–P6, P8–P12, P14, P15; P7 and P13 are partly superseded (manual Rest approved by D16; automatic Rest and Task/"tạo nhanh" still proposed); P3 superseded by D17–D18. ADR-003.
 - **UNVERIFIED assumptions:** G1–G7.
-- **Blockers before a Lát 1a spec (§15.6):** Q16 design approved by the user; Q11; user confirmation of P13; P2/P5 worth review. Q17/Q18 can close during spec review (most Q18 details are Tier B: default and log).
+- **Blockers before a Lát 1a spec (§15.6):** Q16 design approved ✔ (DR-001); Q11 decided (DR-002); user confirmation of P13 still pending (DEFAULTED); P2/P5 worth review. Q17/Q18 can close during spec review (most Q18 details are Tier B: default and log).
 
 ## Reading traps
 - §7.1/§9.1 rows may mix ✅ (scope) with ❓ (details) in one cell. Classify each claim separately.

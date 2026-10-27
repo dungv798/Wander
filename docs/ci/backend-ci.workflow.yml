@@ -1,0 +1,71 @@
+# Workflow CI cho backend Wander — VIẾT SẴN, CHƯA BẬT (ADR-013, AD-18 phương án B).
+# Tệp này cố ý KHÔNG nằm trong .github/workflows nên GitHub không chạy nó. Để bật: PO tạo remote, rồi chép tệp này vào
+# .github/workflows/backend-ci.yml. Không có secret, không deploy, không dùng thông tin đăng nhập AWS.
+name: backend-ci
+
+on:
+  pull_request:
+    paths: ["backend/**", ".gitleaks.toml", "tools/quality.ps1"]
+  push:
+    branches: [main]
+    paths: ["backend/**", ".gitleaks.toml", "tools/quality.ps1"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: check (test + ArchUnit + Checkstyle + JaCoCo)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v4
+      # Testcontainers cần Docker; runner ubuntu có sẵn.
+      - run: ./gradlew check --console=plain
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-reports
+          path: |
+            backend/build/reports/jacoco
+            backend/build/reports/checkstyle
+            backend/build/test-results/test
+
+  secrets:
+    name: gitleaks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: >
+          docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.21.2
+          detect --source=/repo --no-git --redact --no-banner --config=/repo/.gitleaks.toml --exit-code 1
+
+  dependencies:
+    name: trivy (HIGH/CRITICAL)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew bootJar --console=plain
+        working-directory: backend
+      - run: >
+          docker run --rm -v "$PWD/backend/build/libs:/scan:ro" aquasec/trivy:0.58.1
+          rootfs --timeout 30m --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --no-progress /scan

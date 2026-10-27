@@ -62,7 +62,8 @@ function preflightChecks() {
   const plan = L.planInfo();
   if (!plan) { add('plan_present', 'FAIL', `${PLAN} not found`); return checks; }
   add('plan_present', 'PASS', `${PLAN} sha256=${plan.sha.slice(0, 12)}…`);
-  add('plan_version', plan.version === 'v0.3' ? 'PASS' : 'WARN', `plan version ${plan.version}; registry in ${L.RULE_CONTEXT} is verified for v0.3`);
+  const regVersion = ((L.exists(L.RULE_CONTEXT) ? L.readText(L.RULE_CONTEXT) : '').match(/Verified against .*?\*\*(v[\d.]+)\*\*/) || [])[1] || 'unknown';
+  add('plan_version', plan.version === regVersion ? 'PASS' : 'WARN', `plan version ${plan.version}; registry in ${L.RULE_CONTEXT} is verified for ${regVersion}`);
   const reg = L.registryHash();
   add('registry_hash', reg === plan.sha ? 'PASS' : 'WARN', reg === plan.sha ? 'plan hash equals registry hash' : `plan hash differs from registry (${reg ? reg.slice(0, 12) : 'none'}…): registry may be STALE; re-verify before relying on it`);
   const must = ['CLAUDE.md', '.claude/rules/planning-safety.md', '.claude/rules/review-output.md', L.RULE_CONTEXT, '.claude/skills/wander-review/reference.md', '.claude/skills/wander-autopilot/SKILL.md', L.GUARD_REL, '.claude/settings.json', ...ALLOWED_AGENTS.map((a) => `.claude/agents/${a}.md`)];

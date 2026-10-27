@@ -1,14 +1,19 @@
 # Wander — project context
 
-Wander is a Vietnamese-language trip-planning app (personal project: built for fun and **for learning** — the Product Owner is a backend engineer practising the stack he uses at FPT; monetization deferred). **Status: implementation of Lát 1a in progress, authorized by the Product Owner** (default-first; ask only on Tier-A decisions). Q16 (detailed auth/recovery design) and G7 stay OPEN/UNVERIFIED: **do not ship to real users until the PO approves the Q16 design (release gate RG-1).**
+Wander is a Vietnamese-language trip-planning app (personal project: built for fun and **for learning** — the Product Owner is a backend engineer practising the stack he uses at FPT; monetization deferred). **Status: implementation of Lát 1a in progress, authorized by the Product Owner** (default-first; ask only on Tier-A decisions). Q16 (detailed auth/recovery design) was approved by the PO on 24/10/2026 (`docs/decisions/DR-001`; RG-1 closed for design) but **G7 stays UNVERIFIED (RG-2): do not ship to real users while RG-2, RG-5, RG-6, RG-7 are open.**
 
 ## Stack (APPROVED, ADR-002, 24/10/2026)
 Java 21 · Spring Boot 4 · **Clean Architecture + DDD + CQRS** · modular monolith (`identity`, `planning`) · JPA/Hibernate · PostgreSQL (Flyway) · AWS (target; nothing deployed) · front end React + **TypeScript** (Vite).
 - Map, request lifecycle, feature recipe, "learn from the code": `docs/architecture/README.md`.
 - Layout rules enforced by `backend/src/test/java/com/wander/ArchitectureTest.java` (ArchUnit).
-- Open technical decisions for the PO: `docs/architecture/open-decisions.md` (AD-1…AD-11). Defaults, gates, progress: `docs/implementation/decisions.md`.
+- Chuẩn mã FE (PO 26/10/2026: SOLID, comment trước mỗi hàm, không hard-code, tệp const, cấu trúc theo tính năng, thành phần dùng lại): `docs/architecture/frontend-standards.md`; bộ màu thương hiệu duy nhất: `docs/ux/prototype/tokens.css`.
+- Versions: Java 21 + Spring Boot 4.1 (ADR-004, APPROVED). Open technical decisions for the PO: `docs/architecture/open-decisions.md` (AD-1…AD-10). Defaults, gates, progress: `docs/implementation/decisions.md`.
+- Setup and run guide for humans: `README.md` (install, run, dev mode, tests, env vars, troubleshooting).
 - Run/verify on Windows: `powershell -ExecutionPolicy Bypass -File tools\dev.ps1 <doctor|backend-test|e2e|verify|run>`; logs in `.logs/`. Never claim a test result you did not read from a log.
-- `legacy/ts-server/` is the old TypeScript server, kept only as an API-contract reference (AD-10). Do not extend it.
+- The old TypeScript server was removed (ADR-007, AD-10); the API contract lives in `web/src/api.ts` and the Java `*IT` tests. Old copy: `git show b6bd606:legacy/ts-server/<file>`.
+
+## Design first (PO, 25/10/2026) — `.claude/rules/design-first.md`
+**Cổng DG-1 ĐÃ ĐÓNG (PO duyệt 25/10/2026: `DR-010`; A1/A2/B1 ở `DR-011`): backend mới làm theo `docs/ux/data-needs.md` §2, dừng đúng chỗ khi gặp câu Tầng A còn mở (A3, B2, B3, B4, E1, Q-d, Q6–Q9, Q12).** Kỹ năng bắt buộc theo từng giai đoạn (`spec-driven-development`, `planning-and-task-breakdown`, `ui-ux-pro-max`, agent UX/UI, `wander-skeptic-qa`, `systematic-debugging`, `test-driven-development`), gọi bằng công cụ Skill và ghi "Công cụ đã dùng" cuối mỗi báo cáo. Điều phối: `/wander-design`. Đặc tả: `docs/ux/design-spec.md`.
 
 ## What to ask vs decide — `.claude/rules/decision-materiality.md`
 - **Tier A (ask the PO first, with options + recommendation, explained so he learns):** stack/framework/new runtime dependency, architecture & module/aggregate boundaries, schema changes that change product meaning, auth/security mechanism, AWS services/cost/infrastructure, API breaking changes, data retention, anything hard to reverse, blocking 🔶/❓ product items.
@@ -36,16 +41,18 @@ Java 21 · Spring Boot 4 · **Clean Architecture + DDD + CQRS** · modular monol
 - **D20–D26 (Q16 direction):** no recovery without accepted evidence, permanent loss accepted; 1a evidence = self-kept recovery code + trusted device approval, no email/phone; one identity, many trips, one code; code single-use, regeneration needs a valid session; recovery completes only after a replacement code is confirmed; re-authentication before permanent trip delete / code regeneration / ownership transfer; show the code once at identity creation, skipping allowed with a warning.
 
 ## Still OPEN — do not decide (product)
-Q16 (detailed auth/recovery design), Q17 (Undo scope, trip-level soft delete, permanent delete), Q18 (small details — mostly Tier B, defaults logged), Q11, Q13, Q14, and 1b questions Q6–Q9, Q12. Proposals P1–P15 remain proposals unless the plan marks them ✅.
+**26/10/2026: PO answered most of the list below in `docs/decisions/DR-018-po-tra-loi-hang-loat-26-10.md` (Q6–Q9, Q12, Q13, A3, B2–B4, E1, F1–F4, G1–G5, N-1…N-4, Q-d). Next phase = real FE build before backend. Still open: DR-018 §5 (Q10, Q15, N-x sub-questions, phase order, DG-2 closing record).**
+Q13 and 1b questions Q6–Q9, Q12 (plus Q10, Q15 deferred). Resolved since the plan: Q16 (`DR-001`), Q11 (`DR-002`, package C), Q14 (`DR-003`), Q17b (`DR-004`); Q17 a/c and Q18 details are Tier B defaults in `docs/implementation/decisions.md` §2. Proposals P1–P15 remain proposals unless the plan marks them ✅.
 
-## Agents and skills (project-local)
-- Agents in `.claude/agents/` (read-only, no delegation): `wander-product-analyst`, `wander-software-architect` (stack-aware, system design, teaches), `wander-security-reviewer` (design + code), `wander-skeptic-qa`, `wander-code-reviewer` (Java/TS change review, uses code-review-graph).
-- Skills (invoke manually): `/wander-feature` (implement one story end to end), `/wander-architecture-decision` (prepare + ask a Tier-A technical decision, write the ADR), `/wander-review`, `/wander-decision-audit`, `/wander-spec-review`, `/wander-autopilot` (planning-only reviews; state in `docs/autopilot/`).
-- Rules: `.claude/rules/` (`decision-materiality.md`, `planning-safety.md`, `review-output.md`, `wander-product-context.md`). Guide: `docs/agent-system.md`.
+## Agents and skills (project-local) — guide: `docs/agent-system.md`
+- **Agents** (`.claude/agents/`, read-only, never delegate, contract preloaded from the `wander-kit` skill): `wander-software-architect` (design, system design, AD-x options, teaches), `wander-security-reviewer` (design + code), `wander-product-analyst` (scope, acceptance criteria), `wander-skeptic-qa` (challenges claims, edge cases, missing tests), `wander-code-reviewer` (Java/TS change review via code-review-graph).
+- **Skills** (type them): `/wander-status` (where are we, next step) · `/wander-council <AD-x|Q-x|câu hỏi>` (agents debate within a budget, PO decides, ADR written) · `/wander-feature <story>` (implement end to end) · `/wander-verify [cmd]` (real test runs, results from logs) · `/wander-review <target>` (analysis only) · `/wander-decision-audit <claim>` · `/wander-spec-review <file>` · `/wander-autopilot` (unattended planning runs, state in `docs/autopilot/`).
+- **Rules** (`.claude/rules/`): always — `planning-safety.md`, `decision-materiality.md`; loaded with matching files — `backend.md`, `frontend.md`, `wander-product-context.md` (plan section map), `review-output.md`.
+- **Budgets:** multi-agent ≤ 2 rounds and ≤ 6 dispatches; implementation ≤ 3 verify-fix cycles; off-scope questions are parked, not chased.
 
 ## Tooling for AI-assisted work
-- **RTK** (`rtk`, token-optimizing CLI proxy): installed with a global Claude Code hook (`rtk init -g`); shell commands are rewritten through it automatically. `rtk gain` shows savings.
-- **code-review-graph** (code knowledge graph over MCP, `.mcp.json`): before reviewing or changing code, prefer its review-context / impact tools over reading whole folders. Rebuild with `code-review-graph build` after large changes.
+- **RTK** (token-optimizing CLI proxy, global hook from `rtk init -g`, telemetry off): shell commands are rewritten through it automatically; `rtk gain` shows savings.
+- **code-review-graph** (MCP, `.mcp.json`; usage below). Rebuild with `code-review-graph build` after large changes. Re-running its `install` rewrites `.claude/settings.json` — see `docs/agent-system.md` before doing that.
 
 ## Evidence and uncertainty
 Cite `path` + section/ID (+ line numbers only if you read them in this session). Never invent citations, line numbers, metrics, or test results. Say `UNVERIFIED` when evidence is missing.

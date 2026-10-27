@@ -11,11 +11,11 @@ allowed-tools: Read, Grep, Glob, Agent
 Spec: **$ARGUMENTS**
 
 ## Run only when
-`$ARGUMENTS` is a path to an existing spec file. If missing or the file does not exist, say so and stop; do not invent a spec. (As of v0.3 no formal Lát 1a spec exists and the plan lists blockers in §15.6.) This skill never writes or edits the spec.
+`$ARGUMENTS` is a path to an existing spec file. If missing or the file does not exist, say so and stop; do not invent a spec. (The plan, v0.4, has no formal Lát 1a spec and lists blockers in §15.6; the implemented behaviour is documented in `docs/implementation/decisions.md` and `docs/architecture/`.) This skill never writes or edits the spec.
 
 ## Workflow (main session orchestrates; reuse `.claude/skills/wander-review/reference.md` for templates)
 1. **Read** the spec fully, and the plan sections it cites (map in `.claude/rules/wander-product-context.md`). Do not read unrelated plan sections.
-2. **Blocker gate (no agents needed).** Check the spec against plan §15.6: does it rely on an unresolved choice (Q16, Q11, P13, P2, P5…) as if decided? Does it choose an auth mechanism, UI design, database structure, or stack that the plan says must not be inferred? Each is a **Blocker** unless the plan marks it ✅ or the spec labels it explicitly as a proposal awaiting approval.
+2. **Blocker gate (no agents needed).** Check the spec against plan §15.6: does it rely on an unresolved choice (Q16, Q11, P13, P2, P5…) as if decided? Does it choose an auth mechanism, UI design or database structure that the plan says must not be inferred, or technology outside ADR-002/ADR-004 (Tier A)? Each is a **Blocker** unless the plan marks it ✅ or the spec labels it explicitly as a proposal awaiting approval.
 3. **Checklist** — evaluate and cite spec location + plan ID for each:
    - Traceability: every requirement maps to a ✅ item (D-, R-, A-/B- ID); nothing invented.
    - Acceptance criteria: observable, include negative cases (negative/malformed cost, empty vs 0 vs included, deleted item excluded from totals, restore to original day, order preserved across devices).
@@ -24,9 +24,10 @@ Spec: **$ARGUMENTS**
    - Testability: rules written so a test can assert them; Replay criteria (§10.5) reachable.
    - Scope boundaries: 1a does not depend on 1b (§9.2); deferred items stay deferred.
    - Unresolved assumptions and dependencies; migration implications 1a→1b.
-4. **Specialists (risk-based, optional).** If the spec touches identity/ownership, include `wander-security-reviewer`; if data model/ordering/cost/delete semantics, include `wander-software-architect`; always allow `wander-skeptic-qa` for edge cases. Dispatch in parallel with self-contained briefs (see reference.md); at most one targeted second round. For a small spec, skip agents and do the checklist yourself.
+   - Materiality: tag each open point Tier A/B (`.claude/rules/decision-materiality.md`). Tier B gets a suggested default, not a question.
+4. **Specialists (risk-based, optional).** If the spec touches identity/ownership, include `wander-security-reviewer`; if data model/ordering/cost/delete semantics, include `wander-software-architect`; always allow `wander-skeptic-qa` for edge cases. Dispatch in parallel with self-contained briefs (see reference.md) under the `/wander-council` budget: ≤ 2 rounds, ≤ 6 dispatches. For a small spec, skip agents and do the checklist yourself.
 5. **Report** in Vietnamese, with four separate lists:
-   **Blockers** · **Vấn đề quan trọng** · **Vấn đề nhỏ** · **Câu hỏi mở cho bạn**. Each item: location in spec, plan source (ID/§), token (`CONTRADICTION`, `OPEN`, …), why it matters, suggested fix marked as a recommendation.
+   **Blockers** · **Vấn đề quan trọng** · **Vấn đề nhỏ** · **Câu hỏi mở cho bạn** (Tier A only). Each item: location in spec, plan source (ID/§), token (`CONTRADICTION`, `OPEN`, …), why it matters, suggested fix marked as a recommendation.
    End with: "Không có file, spec, kế hoạch hay quyết định nào bị thay đổi."
 
 ## Limits
