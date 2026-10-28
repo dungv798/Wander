@@ -11,7 +11,7 @@ import type { MapLibre } from './maplibreLoader.ts';
 import { loadMapStyle } from './mapStyle.ts';
 import { MAP } from './map.const.ts';
 import { prefersReducedMotion, sameMarkers } from './mapUtil.ts';
-import type { FitOptions, Insets, MapMarker, MapMode, MapRoute, ProjectedMarker, Pt, TerrainMapOptions } from './map.types.ts';
+import type { FitOptions, Insets, MapMarker, MapMode, MapRoute, ProjectedMarker, Pt, GeoMapOptions } from './map.types.ts';
 
 const NO_INSET: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
 
@@ -23,12 +23,12 @@ interface FitRequest {
 
 /**
  * Bản đồ WebGL của Wander (ADR-015): nền MapLibre GL + OpenFreeMap + bóng núi từ ô độ cao; ghim ảnh, cụm, nhãn là phần tử HTML đè lên
- * (dùng chung `MapLayers` với bản đồ cũ), tuyến là lớp đường GeoJSON. Cùng giao diện công khai với `TerrainMap` nên các màn không đổi.
+ * qua `MapLayers`; tuyến là lớp đường GeoJSON. Các màn dùng cổng React `TerrainMapView`.
  * Tọa độ ghim (`p`) ở đây là [kinh độ, vĩ độ].
  */
 export class GeoMap {
   private readonly host: HTMLElement;
-  private readonly opt: Required<Pick<TerrainMapOptions, 'interactive' | 'towns' | 'credit'>> & TerrainMapOptions;
+  private readonly opt: Required<Pick<GeoMapOptions, 'interactive' | 'towns' | 'credit'>> & GeoMapOptions;
   private readonly mapEl: HTMLElement;
   private readonly layers: MapLayers;
   private readonly observer: ResizeObserver;
@@ -47,7 +47,7 @@ export class GeoMap {
   private pendingFit: FitRequest | null = null;
 
   /** Dựng bản đồ vào `host` (cần có kích thước); MapLibre và kiểu bản đồ tải bất đồng bộ, ghim/tuyến đặt trước sẽ hiện khi xong. */
-  constructor(host: HTMLElement, opt: TerrainMapOptions) {
+  constructor(host: HTMLElement, opt: GeoMapOptions) {
     this.host = host;
     this.opt = { interactive: true, towns: true, credit: true, ...opt };
     host.classList.add('tmroot');
@@ -58,7 +58,7 @@ export class GeoMap {
     if (!this.opt.interactive) host.classList.add('tm-static');
     this.mapEl = Object.assign(document.createElement('div'), { className: 'tm-gl' });
     host.replaceChildren(this.mapEl);
-    this.layers = new MapLayers(host, false);
+    this.layers = new MapLayers(host);
     this.observer = new ResizeObserver(() => this.onResize());
     this.observer.observe(host);
     void this.start();
@@ -246,7 +246,6 @@ export class GeoMap {
       selected: this.selected,
       project: this.project,
       size: { w: Math.max(1, r.width), h: Math.max(1, r.height) },
-      scale: gl.getZoom(),
       onCluster: (ids) => this.fitTo(ids, { padding: MAP.CLUSTER_FIT_PADDING, maxZoom: MAP.GL_MAX_ZOOM }),
       clusterLabel: (n) => `${n} ${COPY.map.cluster}`,
     });

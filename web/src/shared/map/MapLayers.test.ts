@@ -7,7 +7,7 @@ test('place dời nhãn theo neo mới khi kéo/zoom và giữ độ lệch đã
   const label = { style: { transform: '' } };
   const layers = Object.create(MapLayers.prototype) as MapLayers;
   Object.assign(layers, {
-    markerEls: new Map(), clusters: [], towns: [], segMids: [],
+    markerEls: new Map(), clusters: [], segMids: [],
     pinLabels: [{ el: label, p: [108, 12], offset: [-80, 22] }],
   });
   layers.place((): Pt => [200, 300], []);

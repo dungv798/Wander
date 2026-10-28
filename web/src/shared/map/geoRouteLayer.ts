@@ -1,6 +1,6 @@
 import type { GeoJSONSource, Map as MlMap } from 'maplibre-gl';
 import { MAP } from './map.const.ts';
-import { cssColorToRgb } from './mapSvg.ts';
+import { cssColorToRgb } from './mapUtil.ts';
 import type { Pt } from './map.types.ts';
 
 const RGB_MAX = 255;

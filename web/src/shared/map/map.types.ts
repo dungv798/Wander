@@ -1,54 +1,7 @@
-/** Kiểu dữ liệu của bản đồ địa hình. */
+/** Kiểu dữ liệu bản đồ MapLibre và cổng React dùng chung. */
 
-/** Một điểm: [x, y] (điểm ảnh bản đồ hoặc màn hình tùy ngữ cảnh). */
+/** Một điểm: [x, y] (kinh độ/vĩ độ hoặc điểm ảnh màn hình tùy ngữ cảnh). */
 export type Pt = readonly [number, number];
-
-/** Siêu dữ liệu ảnh nền (meta.json). */
-export interface MapMeta {
-  readonly dest: string;
-  readonly zoom: number;
-  readonly width: number;
-  readonly height: number;
-  /** Góc trên trái của ảnh nền trong hệ điểm ảnh zoom 12 toàn cầu. */
-  readonly origin: Pt;
-  readonly credit: string;
-}
-
-/** Đường (OSM) đã chiếu sang điểm ảnh ảnh nền. */
-export interface RoadVec {
-  readonly k: string;
-  readonly n: string;
-  readonly p: readonly Pt[];
-}
-
-/** Sông (OSM). */
-export interface RiverVec {
-  readonly n?: string;
-  readonly p: readonly Pt[];
-}
-
-/** Địa danh nền (thị trấn, thành phố). */
-export interface PlaceVec {
-  readonly k: string;
-  readonly n: string;
-  readonly p: Pt;
-}
-
-/** Vector nền (vectors.json). */
-export interface MapVectors {
-  readonly roads: readonly RoadVec[];
-  readonly rivers: readonly RiverVec[];
-  readonly places: readonly PlaceVec[];
-}
-
-/** Dữ liệu một điểm đến đã tải. */
-export interface MapData {
-  readonly dest: string;
-  /** Địa chỉ thư mục dữ liệu, kết thúc bằng `/`. */
-  readonly base: string;
-  readonly meta: MapMeta;
-  readonly vectors: MapVectors;
-}
 
 /** Ghim đầu vào: tọa độ địa lý + hiển thị. `kind: 'hub'` là mốc (không gộp cụm). */
 export interface MapMarker {
@@ -62,16 +15,9 @@ export interface MapMarker {
   readonly kind?: 'hub';
 }
 
-/** Ghim đã chiếu: kèm tọa độ điểm ảnh bản đồ. */
+/** Ghim kèm tọa độ [kinh độ, vĩ độ] để MapLibre chiếu lên màn hình. */
 export interface ProjectedMarker extends MapMarker {
   readonly p: Pt;
-}
-
-/** Camera: tâm (điểm ảnh bản đồ) và tỉ lệ (điểm ảnh màn hình / điểm ảnh bản đồ). */
-export interface Camera {
-  readonly cx: number;
-  readonly cy: number;
-  readonly s: number;
 }
 
 /** Kích thước khung hiển thị. */
@@ -103,13 +49,14 @@ export interface FitOptions {
   readonly animate?: boolean;
   /** Trần zoom MapLibre cho lần vừa khung này (cụm được phóng gần hơn ghim thường). */
   readonly maxZoom?: number;
+  /** Giữ tương thích API TerrainMapView; MapLibre dùng maxZoom thay cho hệ số camera cũ. */
   readonly maxZoomFactor?: number;
   /** Người dùng đã tự kéo/phóng và mọi điểm cần vừa khung đã nằm trong tầm nhìn thì giữ nguyên camera (đổi tab ngày không reset chỗ vừa zoom). */
   readonly keepIfVisible?: boolean;
 }
 
 /** Tùy chọn khởi tạo bản đồ. */
-export interface TerrainMapOptions {
+export interface GeoMapOptions {
   readonly dest: string;
   readonly interactive?: boolean;
   readonly towns?: boolean;

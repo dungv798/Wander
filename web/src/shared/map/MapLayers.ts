@@ -1,10 +1,8 @@
 import { MAP } from './map.const.ts';
-import { arcSegments, clusterPins, pinBox, placeLabels, townIsCrowded } from './mapGeometry.ts';
+import { clusterPins, pinBox, placeLabels } from './mapGeometry.ts';
 import type { Box } from './mapGeometry.ts';
-import { buildBaseSvg, buildRouteSvg, readRamp } from './mapSvg.ts';
-import type { MapData, MapMode, MapRoute, Pt, ProjectedMarker, Size } from './map.types.ts';
+import type { MapMode, Pt, ProjectedMarker, Size } from './map.types.ts';
 
-const SVG_NS = 'http://www.w3.org/2000/svg';
 const TRANSLATE_DIGITS = 1;
 
 /** Biến đổi tọa độ bản đồ sang màn hình (do camera cung cấp). */
@@ -17,7 +15,6 @@ export interface LayoutContext {
   readonly selected: string | null;
   readonly project: Project;
   readonly size: Size;
-  readonly scale: number;
   readonly onCluster: (ids: string[]) => void;
   readonly clusterLabel: (n: number) => string;
 }
@@ -27,35 +24,25 @@ function moveTo(el: HTMLElement, at: Pt): void {
   el.style.transform = `translate3d(${at[0].toFixed(TRANSLATE_DIGITS)}px, ${at[1].toFixed(TRANSLATE_DIGITS)}px, 0)`;
 }
 
-/** Lớp hiển thị của bản đồ: nền SVG, ghim, cụm, nhãn, tên thị trấn và tuyến. Chỉ thao tác DOM, không biết camera hay cử chỉ. */
+/** Lớp HTML đè trên MapLibre: ghim, cụm và nhãn; không quản lý nền hay cử chỉ. */
 export class MapLayers {
-  readonly svg: SVGSVGElement;
   private readonly labels: HTMLElement;
   private readonly pins: HTMLElement;
-  private routeGroup: SVGGElement | null = null;
   private readonly markerEls = new Map<string, HTMLButtonElement>();
   private clusters: { el: HTMLButtonElement; p: Pt }[] = [];
   /** Phần tử cụm đang có, theo khóa là danh sách mã ghim (đã sắp) trong cụm. */
   private clusterEls = new Map<string, HTMLButtonElement>();
   /** Đã bố trí ít nhất một lần: từ đó ghim/cụm mới chen vào không chạy lại hiệu ứng rơi. */
   private laidOut = false;
-  private towns: { el: HTMLElement; p: Pt }[] = [];
   private segMids: { index: number; p: Pt }[] = [];
   private pinLabels: { el: HTMLElement; p: Pt; offset: Pt }[] = [];
 
-  /**
-   * Dựng khung rỗng (lớp nhãn, lớp ghim, và SVG nền nếu `withSvg`) vào phần tử chứa.
-   * Bản đồ WebGL (`withSvg` false) tự có canvas nền: các lớp này chỉ được thêm vào sau canvas, không thay nội dung có sẵn.
-   */
-  constructor(host: HTMLElement, withSvg = true) {
-    this.svg = document.createElementNS(SVG_NS, 'svg');
-    this.svg.setAttribute('class', 'tm-svg');
-    this.svg.setAttribute('aria-hidden', 'true');
+  /** Thêm lớp nhãn và ghim phía trên canvas MapLibre, giữ nội dung nền có sẵn. */
+  constructor(host: HTMLElement) {
     this.labels = Object.assign(document.createElement('div'), { className: 'tm-labels' });
     this.labels.setAttribute('aria-hidden', 'true');
     this.pins = Object.assign(document.createElement('div'), { className: 'tm-pins' });
-    if (withSvg) host.replaceChildren(this.svg, this.labels, this.pins);
-    else host.append(this.labels, this.pins);
+    host.append(this.labels, this.pins);
   }
 
   /** Nhãn khoảng cách giữa các đoạn tuyến (bản đồ WebGL): `labels[i]` ở điểm giữa `mids[i]` (cùng hệ tọa độ với ghim). Nhãn rỗng thì bỏ. */
@@ -69,17 +56,6 @@ export class MapLayers {
       label.dataset['i'] = String(i + 1);
       this.labels.appendChild(label);
       this.segMids.push({ index: i + 1, p });
-    });
-  }
-
-  /** Dựng nền (ảnh độ cao, bóng núi, sông, đường) và tên thị trấn từ dữ liệu đã tải. */
-  mountBase(data: MapData, uid: string, host: HTMLElement, showTowns: boolean): void {
-    this.svg.innerHTML = buildBaseSvg(data, uid, readRamp(host));
-    this.routeGroup = this.svg.querySelector<SVGGElement>('.tm-route');
-    this.towns = (showTowns ? data.vectors.places.filter((p) => p.k === 'city' || p.k === 'town') : []).map((p) => {
-      const el = Object.assign(document.createElement('span'), { className: 'tm-town', textContent: p.n });
-      this.labels.appendChild(el);
-      return { el, p: p.p };
     });
   }
 
@@ -133,26 +109,6 @@ export class MapLayers {
     this.markerEls.forEach((el, k) => el.classList.toggle('is-sel', k === id));
   }
 
-  /** Vẽ tuyến (cung nối các ghim theo thứ tự id) cùng nhãn km của từng đoạn. */
-  drawRoute(route: MapRoute | null, markers: readonly ProjectedMarker[], reduced: boolean): void {
-    this.labels.querySelectorAll('.tm-seg-label').forEach((n) => n.remove());
-    this.segMids = [];
-    if (!this.routeGroup) return;
-    this.routeGroup.innerHTML = '';
-    if (!route) return;
-    const have = route.ids.map((id, k) => ({ p: markers.find((m) => m.id === id)?.p, k })).filter((x): x is { p: Pt; k: number } => Boolean(x.p));
-    const { segs, all } = arcSegments(have.map((x) => x.p));
-    this.routeGroup.innerHTML = buildRouteSvg(segs, all, have.length, reduced);
-    this.segMids = segs.map((s) => ({ index: s.index, p: s.mid }));
-    have.forEach((x, i) => {
-      const text = i ? route.labels[x.k - 1] : '';
-      if (!text) return;
-      const label = Object.assign(document.createElement('span'), { className: 'tm-seg-label', textContent: text });
-      label.dataset['i'] = String(i);
-      this.labels.appendChild(label);
-    });
-  }
-
   /** Dời mọi phần tử HTML theo camera (gọi mỗi khung hình khi bay/kéo). */
   place(project: Project, markers: readonly ProjectedMarker[]): void {
     markers.forEach((m) => {
@@ -160,7 +116,6 @@ export class MapLayers {
       if (el) moveTo(el, project(m.p));
     });
     this.clusters.forEach((c) => moveTo(c.el, project(c.p)));
-    this.towns.forEach((t) => moveTo(t.el, project(t.p)));
     this.pinLabels.forEach((label) => {
       const at = project(label.p);
       moveTo(label.el, [at[0] + label.offset[0], at[1] + label.offset[1]]);
@@ -171,15 +126,14 @@ export class MapLayers {
     });
   }
 
-  /** Sau khi camera dừng: gộp cụm (chế độ duyệt), đặt nhãn không chồng, ẩn/hiện tên thị trấn. */
+  /** Sau khi camera dừng: gộp cụm (chế độ duyệt) và đặt nhãn không chồng. */
   layout(ctx: LayoutContext): void {
     this.place(ctx.project, ctx.markers);
     const shown = this.rebuildClusters(ctx);
     this.place(ctx.project, ctx.markers);
     const pinBoxes: Box[] = ctx.markers.filter((m) => shown.get(m.id)).map((m) => pinBox(ctx.project(m.p), MAP.PIN_HALF));
     this.clusters.forEach((c) => pinBoxes.push(pinBox(ctx.project(c.p), MAP.CLUSTER_HALF)));
-    const labelBoxes = this.placePinLabels(ctx, shown, pinBoxes);
-    this.towns.forEach((t) => t.el.classList.toggle('is-on', ctx.scale >= MAP.TOWN_MIN_SCALE && !townIsCrowded(ctx.project(t.p), [...pinBoxes, ...labelBoxes])));
+    this.placePinLabels(ctx, shown, pinBoxes);
   }
 
   /** Gộp các ghim gần nhau thành cụm; trả bảng ghim nào đang hiện (false = đã vào cụm). */

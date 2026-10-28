@@ -28,7 +28,7 @@ interface TerrainMapViewProps {
 const NO_ROUTE_LABELS: readonly string[] = [];
 
 /**
- * Vùng bản đồ địa hình dùng trong React. Bản đồ là đối tượng mệnh lệnh (`TerrainMap`) sống theo vòng đời của phần tử:
+ * Vùng bản đồ địa hình dùng trong React. Bản đồ là đối tượng mệnh lệnh (`GeoMap`) sống theo vòng đời của phần tử:
  * tạo khi phần tử vào DOM, hủy khi rời; các thuộc tính (ghim, tuyến, chế độ, vừa khung) được đẩy vào bằng effect.
  */
 export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, towns = true, credit = true, onPin, className }: TerrainMapViewProps) {
