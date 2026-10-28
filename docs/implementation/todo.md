@@ -134,3 +134,13 @@ Nguyên nhân đã tái hiện (đọc từ ảnh/số đo, 25/10): (1) cuộn: 
 - [x] **Xóa mềm cả chuyến + Hoàn tác** (PO 28/10/2026): V12, `DELETE/restore/deleted`, giao diện. *Còn:* xóa vĩnh viễn chuyến cần xác thực lại (D25).
 
 - [x] **Lát 1b (6 mô-đun, BE + FE):** xong 28/10/2026, `check` xanh + e2e cộng tác. *Còn:* M2 thông báo người bị gỡ; nút sửa hạng mục checklist trên giao diện; rà soát độc lập đang chờ kết quả.
+
+## 28/10/2026 — phản hồi PO: dữ liệu, bản đồ, giao diện (DR-023)
+- [x] Pipeline catalog + 11 điểm đến mới (107 địa điểm tổng, 213 ảnh); xem decisions.md cuối tệp
+- [x] ADR-015 MapLibre + GeoMap; sửa reset camera, hiệu ứng rơi, thẻ chạm trái/phải
+- [ ] Bổ sung nội dung cho điểm đến dưới 10 nơi (Tà Xùa 2, Hội An 5, Vĩnh Hy 6, Phú Yên 7, Quy Nhơn 7, Nha Trang 8) — cần PO/biên tập
+- [ ] PO duyệt nội dung biên tập nháp của 11 điểm đến
+- [ ] Màn chọn điểm đến + bản đồ Việt Nam bay tới điểm nhập (thêm lat/lon vào DestinationSummary; điểm đến hiện tại thay DEFAULT_DESTINATION_ID)
+- [ ] Giao diện kiểu Roameo: PO chọn font (Nunito/Plus Jakarta Sans/Lexend đều có tiếng Việt) và icon (Fluent Emoji MIT, 3D PNG) trước; ghi DR
+- [ ] Gỡ TerrainMap*, build-map.mjs, web/public/map/ha-giang sau khi bản đồ mới ổn định
+- [ ] Xóa web/spike/ (bộ đo tạm) khi không còn cần
