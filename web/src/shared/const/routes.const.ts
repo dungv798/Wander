@@ -13,6 +13,7 @@ export const VIEW = {
   SETTINGS: 'settings',
   TODAY: 'today',
   EXPORT: 'export',
+  JOIN: 'join',
 } as const;
 
 /** Một tên màn hợp lệ. */
@@ -25,4 +26,4 @@ export const DEFAULT_DESTINATION_ID = 'ha-giang';
 export const HIDE_TABBAR_ON_PHONE: readonly ViewName[] = [VIEW.ONBOARD, VIEW.DECK, VIEW.DEST, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT];
 
 /** Màn không có thanh điều hướng ở mọi cỡ. */
-export const HIDE_TABBAR_ALWAYS: readonly ViewName[] = [VIEW.ONBOARD, VIEW.EXPIRED];
+export const HIDE_TABBAR_ALWAYS: readonly ViewName[] = [VIEW.ONBOARD, VIEW.EXPIRED, VIEW.JOIN];

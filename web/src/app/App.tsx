@@ -11,7 +11,7 @@ import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useRepo
 import { SettingsScreen } from '../features/settings/index.ts';
 import { OnboardScreen, OnboardingProvider, useOnboarding } from '../features/onboarding/index.ts';
 import { TemplatesSection } from '../features/templates/index.ts';
-import { CreateTripSheet, ExportScreen, TodayScreen, TripScreen, TripsProvider, TripsScreen, useTrips } from '../features/trips/index.ts';
+import { CreateTripSheet, ExportScreen, JoinScreen, TodayScreen, TripScreen, TripsProvider, TripsScreen, useTrips } from '../features/trips/index.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
 
@@ -86,6 +86,7 @@ function Shell() {
         {route.view === VIEW.TODAY ? <TodayScreen tripId={route.id} /> : null}
         {route.view === VIEW.EXPORT && route.id ? <ExportScreen tripId={route.id} /> : null}
         {route.view === VIEW.RECOVER ? <RecoverScreen /> : null}
+        {route.view === VIEW.JOIN && route.id ? <JoinScreen code={route.id} /> : null}
         {route.view === VIEW.TRIP && route.id ? <TripScreen tripId={route.id} sub={route.sub} /> : null}
       </ScreenHost>
       {hideBar ? null : <TabBar current={route.view} wide={wide} pickedCount={pickedCount} />}

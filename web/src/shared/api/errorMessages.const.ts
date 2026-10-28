@@ -4,7 +4,7 @@
 export type ErrorAction = 'retry' | 'security' | 'trips' | 'recover' | 'reload' | 'close';
 
 /** Nhóm lỗi có chung lời nhắc. */
-export type ErrorKind = 'invalid' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'trashFull' | 'tooLarge' | 'network' | 'internal';
+export type ErrorKind = 'invalid' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'trashFull' | 'invite' | 'denied' | 'rule' | 'tooLarge' | 'network' | 'internal';
 
 /** Lời nhắc của một nhóm lỗi. */
 export interface ErrorInfo {
@@ -23,6 +23,9 @@ export const ERROR_INFO: Readonly<Record<ErrorKind, ErrorInfo>> = {
   conflict: { title: 'Chuyến đi đã thay đổi', text: 'Có thay đổi mới hơn ở nơi khác nên Wander không ghi đè. Tải lại để xem bản mới nhất.', action: 'reload' },
   notFound: { title: 'Không tìm thấy', text: 'Mục này có thể đã bị xóa, hoặc chuyến đi không còn ở máy này.', action: 'trips' },
   inTrash: { title: 'Mục đã được xử lý', text: 'Mục này đã nằm trong Đã xóa gần đây hoặc đã được khôi phục. Danh sách sẽ được đồng bộ lại.', action: 'reload' },
+  invite: { title: 'Liên kết mời không dùng được', text: 'Liên kết đã hết hạn, bị thu hồi hoặc sai. Hãy xin người tổ chức một liên kết mới.', action: 'close' },
+  denied: { title: 'Bạn chưa có quyền làm việc này', text: 'Chỉ Organizer làm được, hoặc mục này không phải do bạn thêm. Bạn có thể đề nghị xóa thay vì tự xóa.', action: 'close' },
+  rule: { title: 'Việc này chưa làm được', text: 'Trạng thái đã đổi hoặc đã đạt giới hạn. Tải lại để xem bản mới nhất rồi thử lại.', action: 'close' },
   trashFull: { title: 'Đã xóa gần đây đã đầy', text: 'Hãy xóa vĩnh viễn bớt mục ở Đã xóa gần đây rồi thử lại.', action: 'close' },
   tooLarge: { title: 'Dữ liệu quá lớn', text: 'Dữ liệu gửi đi quá lớn. Rút gọn nội dung rồi thử lại.', action: 'close' },
   network: { title: 'Không kết nối được', text: 'Kiểm tra mạng rồi thử lại. Việc bạn vừa làm chưa được lưu.', action: 'retry' },
@@ -42,6 +45,9 @@ export const CODE_KIND: ReadonlyMap<string, ErrorKind> = new Map(
       ['notFound', ['NOT_FOUND']],
       ['inTrash', ['ITEM_DELETED', 'ALREADY_DELETED', 'NOT_DELETED', 'NOT_IN_TRASH']],
       ['trashFull', ['TRASH_FULL']],
+      ['invite', ['INVALID_INVITE']],
+      ['denied', ['NOT_ORGANIZER', 'NOT_YOUR_ITEM']],
+      ['rule', ['TRIP_FULL', 'ORGANIZER_CANNOT_LEAVE', 'REQUEST_EXISTS', 'ALREADY_DECIDED', 'TOO_MANY_REQUESTS', 'CHECKLIST_FULL', 'OWN_ITEM_DELETE_DIRECTLY', 'ORGANIZER_DELETES_DIRECTLY']],
       ['tooLarge', ['BODY_TOO_LARGE']],
       ['network', ['NETWORK']],
       ['invalid', ['REQUIRED', 'TOO_LONG', 'TOO_LARGE', 'NEGATIVE', 'MALFORMED', 'INVALID_DATE', 'OUT_OF_RANGE', 'START_REQUIRED', 'END_REQUIRED', 'END_BEFORE_START', 'TOO_MANY', 'DATES_ORPHAN_ITEMS', 'DAY_OUT_OF_RANGE', 'INVALID_JSON']],

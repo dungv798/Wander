@@ -10,6 +10,11 @@ export const LIMITS = {
   MAX_MONEY_THOUSAND: 1_000_000_000,
   MAX_MONEY_DIGITS: 10,
   MAX_DISPLAY_NAME: 40,
+  /** Lý do đề nghị xóa (khớp backend). */
+  MAX_REQUEST_REASON: 200,
+  /** Nhóm và tên hạng mục checklist (khớp backend). */
+  MAX_CHECKLIST_GROUP: 60,
+  MAX_CHECKLIST_TITLE: 120,
   /** Số mục tối đa trong "Đã xóa gần đây" của một chuyến (giữ đến khi xóa tay nên cần trần; khớp backend khi có). */
   MAX_TRASH: 500,
   /** Số lần thử hậu tố " - n" khi tên chuyến trùng (DR-006). */

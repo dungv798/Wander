@@ -14,6 +14,7 @@ import { ITEM_KINDS } from '../model/trip.const.ts';
 import type { TrashEntry } from '../model/trip.types.ts';
 import { agoText, isDuplicateRestore } from '../model/tripTrash.ts';
 import { itemName } from '../model/tripView.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 interface RowProps {
@@ -26,7 +27,8 @@ interface RowProps {
 
 /** Một mục đã xóa: ảnh/biểu tượng, loại, tên, "Bạn xóa … trước" và hai nút Khôi phục / Xóa vĩnh viễn. */
 function TrashRow({ entry, now, onRestore, onPurge }: RowProps) {
-  const { cat } = useTripView();
+  const { cat, trip } = useTripView();
+  const perms = permissionsOf(trip);
   const item = entry.item;
   const place = cat.place(item.placeId);
   const kind = ITEM_KINDS[item.type];
@@ -43,12 +45,16 @@ function TrashRow({ entry, now, onRestore, onPurge }: RowProps) {
         <h3>{name}</h3>
         <p className="note">{fill(T.trash.deletedAt, { when: agoText(entry.deletedAt, now) })}</p>
         <div className="acts">
-          <Button kind="ghost" aria-label={fill(T.trash.restoreAria, { name })} onClick={() => onRestore(entry)}>
-            {T.trash.restore}
-          </Button>
-          <Button kind="danger" aria-label={fill(T.trash.purgeAria, { name })} onClick={() => onPurge(entry)}>
-            {T.trash.purge}
-          </Button>
+          {perms.canChange(item) ? (
+            <Button kind="ghost" aria-label={fill(T.trash.restoreAria, { name })} onClick={() => onRestore(entry)}>
+              {T.trash.restore}
+            </Button>
+          ) : null}
+          {perms.purge ? (
+            <Button kind="danger" aria-label={fill(T.trash.purgeAria, { name })} onClick={() => onPurge(entry)}>
+              {T.trash.purge}
+            </Button>
+          ) : null}
         </div>
       </div>
     </li>

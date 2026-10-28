@@ -17,6 +17,8 @@ import { parseItemForm, parseMoneyField } from '../model/tripForms.ts';
 import type { ItemForm } from '../model/tripForms.ts';
 import { isPlain } from '../model/tripMath.ts';
 import { itemName } from '../model/tripView.ts';
+import { COLLAB_COPY } from '../../collab/index.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
 
@@ -103,8 +105,9 @@ function DeleteItemButton({ item, onDone }: { readonly item: TripItem; readonly 
 export function ItemEditorSheet({ itemId, preset, onClose }: { readonly itemId: string | null; readonly preset: ItemKind | null; readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
-  const { trip, cat, days, tab } = useTripView();
+  const { trip, cat, days, tab, setOverlay } = useTripView();
   const item = itemId ? trip.items.find((i) => i.id === itemId) : undefined;
+  const mayChange = !item || permissionsOf(trip).canChange(item);
   const defaultDay = tab === 'ov' ? '' : (days[Number(tab) - 1] ?? '');
   const [f, setF] = useState<ItemForm>(() => initialForm(item, preset, defaultDay));
   const [error, setError] = useState('');
@@ -144,9 +147,10 @@ export function ItemEditorSheet({ itemId, preset, onClose }: { readonly itemId: 
         {isPlain(f.type) ? null : <PricedFields f={f} set={set} />}
         {error ? <WarnBox>{error}</WarnBox> : null}
         <div className="stack">
-          <Button block onClick={save}>{T.editor.save}</Button>
+          {mayChange ? <Button block onClick={save}>{T.editor.save}</Button> : <WarnBox>{COLLAB_COPY.requests.notYours}</WarnBox>}
           <Button kind="ghost" block onClick={onClose}>{T.editor.cancel}</Button>
-          {item ? <DeleteItemButton item={item} onDone={onClose} /> : null}
+          {item && mayChange ? <DeleteItemButton item={item} onDone={onClose} /> : null}
+          {item && !mayChange ? <Button kind="ghost" block icon="flag" onClick={() => setOverlay({ kind: 'requestDelete', itemId: item.id })}>{COLLAB_COPY.requests.ask}</Button> : null}
         </div>
       </div>
     </Sheet>

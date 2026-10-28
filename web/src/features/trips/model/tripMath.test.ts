@@ -5,7 +5,7 @@ import type { TripItem } from './trip.types.ts';
 
 /** Tạo một mục mẫu, ghi đè các trường cần thử. */
 function item(over: Partial<TripItem>): TripItem {
-  return { id: 'x', placeId: null, type: 'food', title: 't', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: null, done: false, ...over };
+  return { id: 'x', placeId: null, type: 'food', title: 't', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: null, done: false, addedBy: null, doneBy: [], ...over };
 }
 
 test('ngày của chuyến gồm hai đầu', () => {

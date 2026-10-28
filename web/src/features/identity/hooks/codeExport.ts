@@ -12,16 +12,6 @@ export function codeFileText(code: RecoveryCode, now: Date = new Date()): string
   return [C.code.fileTitle, code.format(), fill(C.code.fileCreated, { when: now.toLocaleString('vi-VN') }), C.code.fileKeep].join(SECTION_BREAK) + LINE_BREAK;
 }
 
-/** Sao chép chữ vào bộ nhớ tạm; trả false khi trình duyệt chặn (người dùng chép tay). */
-export async function copyText(text: string): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 /** Tải mã về thành tệp .txt; trả false khi không tạo được tệp. */
 export function downloadCode(code: RecoveryCode): boolean {
   try {

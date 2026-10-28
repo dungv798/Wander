@@ -11,19 +11,19 @@ export const S0: TripsState = { trips: [] };
 
 /** Mục từ địa điểm trong kho: chưa có ngày, loại suy ra từ loại địa điểm, chưa biết giá. */
 function placeItem(place: PlaceRef, id: IdSource): TripItem {
-  return { id: id(), placeId: place.id, type: PLACE_KIND[place.category] ?? 'sightseeing', title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false };
+  return { id: id(), placeId: place.id, type: PLACE_KIND[place.category] ?? 'sightseeing', title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, addedBy: null, doneBy: [] };
 }
 
 /** Mục tự do (Nghỉ/Việc cần làm không có đặt chỗ). */
 export function freeItem(type: ItemKind, title: string, id: IdSource): TripItem {
   const plain = type === 'rest' || type === 'task';
-  return { id: id(), placeId: null, type, title, day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: plain ? null : 'pending', done: false };
+  return { id: id(), placeId: null, type, title, day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: plain ? null : 'pending', done: false, addedBy: null, doneBy: [] };
 }
 
 /** Thêm chuyến vào kho với các địa điểm đã chọn (mục chưa có ngày). */
 export function createTrip(s: TripsState, n: NewTrip, places: readonly PlaceRef[], id: IdSource, now = 1): { state: TripsState; trip: Trip } {
   const trip: Trip = {
-    id: id(), name: n.name, destinationId: n.destinationId, startDate: n.startDate, endDate: n.endDate, datesTentative: n.datesTentative ?? false, kind: n.kind ?? null,
+    id: id(), role: 'organizer', memberCount: 1, selfMemberId: null, name: n.name, destinationId: n.destinationId, startDate: n.startDate, endDate: n.endDate, datesTentative: n.datesTentative ?? false, kind: n.kind ?? null,
     interests: n.interests ?? [], styles: n.styles ?? [], pace: n.pace ?? null, budgetK: n.budgetK ?? null, items: places.map((p) => placeItem(p, id)), trash: [], createdAt: now,
   };
   return { state: { trips: [...s.trips, trip] }, trip };

@@ -2,6 +2,8 @@ import { Button } from '../../../shared/ui/Button.tsx';
 import { usePlaceSheet } from '../../discover/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { useTrashItem } from '../hooks/useTrashItem.ts';
+import { COLLAB_COPY } from '../../collab/index.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { ItemMeta } from './ItemMeta.tsx';
 
@@ -35,11 +37,28 @@ export function ItemInfoSlot({ tripId, itemId, onEdit }: SlotProps & { readonly 
 }
 
 /** Thanh nút cuối tờ chi tiết khi mở từ chuyến đi: "Chọn ngày" và "Xóa khỏi chuyến đi" (xóa mềm, có Hoàn tác). */
-export function ItemCtaSlot({ tripId, itemId, name, onPickDay }: SlotProps & { readonly name: string; readonly onPickDay: () => void }) {
+export function ItemCtaSlot({ tripId, itemId, name, onPickDay, onRequestDelete }: SlotProps & { readonly name: string; readonly onPickDay: () => void; readonly onRequestDelete: () => void }) {
   const place = usePlaceSheet();
   const { trip } = useTrips();
   const trash = useTrashItem();
-  const exists = trip(tripId)?.items.some((i) => i.id === itemId);
+  const current = trip(tripId);
+  const item = current?.items.find((i) => i.id === itemId);
+  const mayChange = !!current && !!item && permissionsOf(current).canChange(item);
+  if (item && !mayChange) {
+    return (
+      <Button
+        kind="ghost"
+        icon="flag"
+        onClick={() => {
+          place.close();
+          onRequestDelete();
+        }}
+      >
+        {COLLAB_COPY.requests.ask}
+      </Button>
+    );
+  }
+  const exists = !!item;
   return (
     <>
     <Button

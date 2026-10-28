@@ -63,6 +63,8 @@ export function toItem(raw: unknown): TripItem | null {
     referenceK: wholeOrNull(raw['referenceK']),
     booking: bookingOf(raw['booking']),
     done: raw['done'] === true,
+    addedBy: strOrNull(raw['addedBy']),
+    doneBy: Array.isArray(raw['doneBy']) ? raw['doneBy'].filter((x): x is string => typeof x === 'string') : [],
   };
 }
 
@@ -89,6 +91,9 @@ export function toTrip(view: unknown, items: readonly TripItem[], trash: readonl
   if (typeof id !== 'string' || typeof name !== 'string' || typeof destination !== 'string' || typeof startDate !== 'string' || typeof endDate !== 'string') return null;
   return {
     id,
+    role: view['role'] === 'organizer' ? 'organizer' : 'member',
+    memberCount: typeof view['memberCount'] === 'number' && view['memberCount'] >= 1 ? view['memberCount'] : 1,
+    selfMemberId: strOrNull(view['selfMemberId']),
     name,
     destinationId: destination,
     startDate,

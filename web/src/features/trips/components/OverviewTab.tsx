@@ -8,7 +8,10 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { TRIP_PACES, kindLabel } from '../model/trip.const.ts';
 import { dayItems, placeCount, roadKm, unassignedItems } from '../model/tripMath.ts';
 import { coordOf } from '../model/tripView.ts';
+import { COLLAB_COPY, collabGateway, useLoaded } from '../../collab/index.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
+import { ChecklistSection } from './ChecklistSection.tsx';
 import { CostBox } from './CostBox.tsx';
 import { ItemRow } from './ItemRow.tsx';
 import { money } from './ItemMeta.tsx';
@@ -34,7 +37,7 @@ function NextStep() {
         <div>
           <h3>{fill(T.view.nextTitleUnassigned, { n: un.length })}</h3>
           <p className="note">{T.view.nextTextUnassigned}</p>
-          <Button icon="sparkles" onClick={() => setOverlay({ kind: 'plan' })}>{T.view.autoPlan}</Button>
+          {permissionsOf(trip).schedule ? <Button icon="sparkles" onClick={() => setOverlay({ kind: 'plan' })}>{T.view.autoPlan}</Button> : null}
         </div>
       </div>
     );
@@ -149,9 +152,24 @@ function TrashLink() {
   );
 }
 
-/** Nút "Xóa chuyến đi" (xóa mềm, có Hoàn tác) ở cuối tab Tổng quan. */
+/** Lối vào "Người đi cùng" và "Đề nghị xóa" (Lát 1b) ở cuối tab Tổng quan. */
+function CollabLinks() {
+  const { trip, setOverlay } = useTripView();
+  const requests = useLoaded(() => collabGateway.requests(trip.id), [trip.id, trip.items.length, trip.trash.length]);
+  const pending = requests.data?.filter((r) => r.status === 'pending').length ?? 0;
+  const organizer = permissionsOf(trip).organizer;
+  return (
+    <>
+      <Button kind="ghost" block icon="users" onClick={() => setOverlay({ kind: 'people' })}>{fill(COLLAB_COPY.people.open, { n: trip.memberCount })}</Button>
+      {organizer || requests.data?.length ? <Button kind="ghost" block icon="flag" onClick={() => setOverlay({ kind: 'requests' })}>{fill(organizer ? COLLAB_COPY.requests.open : COLLAB_COPY.requests.openMine, { n: pending })}</Button> : null}
+    </>
+  );
+}
+
+/** Nút "Xóa chuyến đi" (xóa mềm, có Hoàn tác) ở cuối tab Tổng quan; chỉ Organizer. */
 function DeleteTripLink() {
-  const { setOverlay } = useTripView();
+  const { trip, setOverlay } = useTripView();
+  if (!permissionsOf(trip).manageTrip) return null;
   return (
     <Button kind="ghost" block icon="trash" onClick={() => setOverlay({ kind: 'deleteTrip' })}>
       {T.deleteTrip.open}
@@ -168,6 +186,8 @@ export function OverviewTab() {
       <TripOptions />
       <CostBox />
       <UnassignedSection />
+      <ChecklistSection />
+      <CollabLinks />
       <TrashLink />
       <DeleteTripLink />
     </>

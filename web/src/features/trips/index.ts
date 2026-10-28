@@ -8,3 +8,4 @@ export { CreateTripSheet } from './components/CreateTripSheet.tsx';
 export type { Trip, TripItem } from './model/trip.types.ts';
 export { useCreateFromTemplate } from './hooks/useCreateFromTemplate.ts';
 export type { TemplateTripSpec } from './hooks/useCreateFromTemplate.ts';
+export { JoinScreen } from './components/JoinScreen.tsx';

@@ -13,13 +13,15 @@ export interface Route {
 }
 
 const VIEWS_WITH_DEST: readonly ViewName[] = [VIEW.DEST, VIEW.DECK];
-const VIEWS_WITH_ID: readonly ViewName[] = [VIEW.DEST, VIEW.DECK, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT];
+const VIEWS_WITH_ID: readonly ViewName[] = [VIEW.DEST, VIEW.DECK, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT, VIEW.JOIN];
 /** Màn có mã chuyến đi tùy chọn: `#/today` (chuyến đang diễn ra) hoặc `#/today/<mã>`. */
 const VIEWS_OPTIONAL_ID: readonly ViewName[] = [VIEW.TODAY];
 const KNOWN: readonly ViewName[] = Object.values(VIEW);
 const HOME: Route = { view: VIEW.EXPLORE, id: null, sub: null };
 /** Mã hợp lệ: chữ thường, số, gạch ngang (đi vào đường dẫn tải dữ liệu nên phải chặt). */
 const ID_PATTERN = /^[a-z0-9-]{1,64}$/;
+/** Mã liên kết mời: 256 bit base64url (43 ký tự, có chữ hoa và gạch dưới) nên có mẫu riêng. */
+const INVITE_CODE_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 
 /** Phân tích `location.hash` (dạng `#/dest/ha-giang`, `#/trip/<mã>/2`) thành tuyến; địa chỉ lạ về Khám phá. */
 export function parseHash(hash: string): Route {
@@ -29,6 +31,7 @@ export function parseHash(hash: string): Route {
   if (!VIEWS_WITH_ID.includes(view)) return { view, id: null, sub: null };
   const id = parts[1] ?? (VIEWS_WITH_DEST.includes(view) ? DEFAULT_DESTINATION_ID : null);
   if (!id && VIEWS_OPTIONAL_ID.includes(view)) return { view, id: null, sub: null };
+  if (view === VIEW.JOIN) return id && INVITE_CODE_PATTERN.test(id) ? { view, id, sub: null } : HOME;
   if (!id || !ID_PATTERN.test(id)) return HOME;
   const sub = parts[2] ?? null;
   return { view, id, sub: sub && ID_PATTERN.test(sub) ? sub : null };

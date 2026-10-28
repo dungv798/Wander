@@ -34,3 +34,14 @@ test('màn chuyến đi mang mã chuyến và tab; bộ thẻ thêm vào chuyế
   assert.equal(toHash('deck', 'ha-giang', 'abc'), '#/deck/ha-giang/abc');
   assert.equal(toHash('trips'), '#/trips');
 });
+
+test('liên kết mời #/join/<mã>: mã 43 ký tự base64url (có chữ hoa, gạch dưới) được giữ; mã sai dạng về Khám phá', () => {
+  const code = `Ab_${'x'.repeat(39)}-`;
+  assert.equal(code.length, 43);
+  assert.deepEqual(parseHash(`#/join/${code}`), { view: 'join', id: code, sub: null });
+  assert.equal(parseHash('#/join/ngan').view, 'explore');
+  assert.equal(parseHash(`#/join/${code}x`).view, 'explore');
+  assert.equal(parseHash('#/join').view, 'explore');
+  assert.equal(parseHash(`#/dest/${code}`).view, 'explore', 'chữ hoa vẫn bị cấm ở mã điểm đến');
+  assert.equal(toHash('join', code), `#/join/${code}`);
+});

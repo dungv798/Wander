@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mergeLoaded, sortTrips } from './tripOrder.ts';
 import type { Trip } from './trip.types.ts';
 
-const trip = (id: string, startDate: string, createdAt: number, name = id): Trip => ({ id, name, destinationId: 'd', startDate, endDate: startDate, datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items: [], trash: [], createdAt });
+const trip = (id: string, startDate: string, createdAt: number, name = id): Trip => ({ id, name, role: 'organizer', memberCount: 1, selfMemberId: null, destinationId: 'd', startDate, endDate: startDate, datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items: [], trash: [], createdAt });
 
 test('sắp xếp như máy chủ: ngày đi mới nhất trước, bằng nhau thì tạo sau trước', () => {
   const list = [trip('a', '2026-11-01', 1), trip('b', '2026-12-01', 1), trip('c', '2026-11-01', 2)];

@@ -28,7 +28,12 @@ export interface TripItem {
   /** Giá tham khảo khi đã bao gồm (R4). */
   readonly referenceK: number | null;
   readonly booking: BookingStatus | null;
+  /** Việc cần làm: bản thân người đang xem đã xong chưa (theo từng người, D10). */
   readonly done: boolean;
+  /** Mã thành viên đã thêm mục (null = Organizer/dữ liệu cũ); dùng cho quyền sửa/xóa mục của mình (H3). */
+  readonly addedBy: string | null;
+  /** Mã những thành viên đã xong (việc cần làm): "Xong 1/2 người". */
+  readonly doneBy: readonly string[];
 }
 
 /** Một mục đã xóa mềm (D19): giữ đến khi xóa vĩnh viễn, nhớ ngày và vị trí cũ để khôi phục về đúng chỗ. */
@@ -46,6 +51,12 @@ export interface TrashEntry {
 /** Một chuyến đi. */
 export interface Trip {
   readonly id: string;
+  /** Vai của người đang xem (Q6): Organizer là chủ chuyến, Thành viên vào bằng liên kết. */
+  readonly role: 'organizer' | 'member';
+  /** Số thành viên kể cả Organizer. */
+  readonly memberCount: number;
+  /** Mã thành viên của chính người đang xem (null nếu chưa biết). */
+  readonly selfMemberId: string | null;
   readonly name: string;
   readonly destinationId: string;
   readonly startDate: string;

@@ -19,6 +19,8 @@ interface InputProps extends BaseProps {
   /** Ô nhập mã (khôi phục/ghép): tắt gợi ý tự động, gõ chữ hoa, không gạch chân chính tả. */
   readonly code?: boolean;
   readonly disabled?: boolean;
+  /** Chỉ đọc nhưng vẫn chọn/chép được (ví dụ liên kết mời vừa tạo). */
+  readonly readOnly?: boolean;
 }
 
 interface TextareaProps extends BaseProps {
@@ -48,7 +50,7 @@ export function Field(props: InputProps | TextareaProps | SelectProps) {
   let control: ReactNode;
   if (props.as === 'textarea') control = <textarea id={id} rows={props.rows} maxLength={props.maxLength} value={props.value} onChange={on} aria-describedby={describedBy} />;
   else if (props.as === 'select') control = <select id={id} value={props.value} onChange={on} aria-describedby={describedBy}>{props.children}</select>;
-  else control = <input id={id} type={props.type ?? 'text'} inputMode={props.inputMode} placeholder={props.placeholder} maxLength={props.maxLength} value={props.value} onChange={on} aria-describedby={describedBy} disabled={props.disabled} {...(props.code ? CODE_INPUT : {})} />;
+  else control = <input id={id} type={props.type ?? 'text'} inputMode={props.inputMode} placeholder={props.placeholder} maxLength={props.maxLength} value={props.value} onChange={on} aria-describedby={describedBy} disabled={props.disabled} readOnly={props.readOnly} {...(props.code ? CODE_INPUT : {})} />;
   return (
     <label className="field" htmlFor={id} hidden={props.hidden}>
       {props.label}

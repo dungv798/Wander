@@ -9,6 +9,7 @@ import { ITEM_KINDS } from '../model/trip.const.ts';
 import type { TripItem } from '../model/trip.types.ts';
 import { dayItems } from '../model/tripMath.ts';
 import { itemName } from '../model/tripView.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { ItemMeta } from './ItemMeta.tsx';
 
@@ -95,7 +96,7 @@ export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
             </span>
             <h3>{name}</h3>
             {snippet ? <p className="snip">{snippet}</p> : null}
-            <ItemMeta item={item} />
+            <ItemMeta item={item} people={trip.memberCount} />
           </div>
         </button>
         {isTask ? (
@@ -114,7 +115,7 @@ export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
         ) : null}
         {sort ? <MoveButtons item={item} name={name} sort={sort} /> : null}
       </div>
-      {assignable ? <AssignRow item={item} /> : null}
+      {assignable && permissionsOf(trip).canChange(item) ? <AssignRow item={item} /> : null}
     </>
   );
 }

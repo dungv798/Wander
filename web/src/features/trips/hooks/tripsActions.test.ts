@@ -5,11 +5,11 @@ import type { TripsGateway } from '../api/TripsGateway.ts';
 import type { Trip, TripItem, TripsState } from '../model/trip.types.ts';
 import { createTripsActions } from './tripsActions.ts';
 
-const item = (id: string, day: string | null, position: number | null, over: Partial<TripItem> = {}): TripItem => ({ id, placeId: null, type: 'food', title: id, day, position, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, ...over });
+const item = (id: string, day: string | null, position: number | null, over: Partial<TripItem> = {}): TripItem => ({ id, placeId: null, type: 'food', title: id, day, position, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, addedBy: null, doneBy: [], ...over });
 const D1 = '2026-11-01';
 const D2 = '2026-11-02';
 const D3 = '2026-11-03';
-const trip = (items: TripItem[], over: Partial<Trip> = {}): Trip => ({ id: 't', name: 'A', destinationId: 'ha-giang', startDate: D1, endDate: D3, datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash: [], createdAt: 1, ...over });
+const trip = (items: TripItem[], over: Partial<Trip> = {}): Trip => ({ id: 't', name: 'A', role: 'organizer', memberCount: 1, selfMemberId: null, destinationId: 'ha-giang', startDate: D1, endDate: D3, datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash: [], createdAt: 1, ...over });
 
 /** Cổng giả: ghi lại lời gọi; `load` trả các chuyến đã đặt sẵn theo thứ tự (cái cuối lặp lại). */
 function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { readonly actions: ReturnType<typeof createTripsActions>; readonly calls: string[]; readonly store: PersistentStore<TripsState> } {

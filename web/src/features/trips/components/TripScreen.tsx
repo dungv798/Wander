@@ -17,6 +17,7 @@ import { useTrips } from '../hooks/TripsProvider.tsx';
 import type { Trip } from '../model/trip.types.ts';
 import { tripDays } from '../model/tripMath.ts';
 import { catalogOf, countText, itemName } from '../model/tripView.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { DayTab } from './DayTab.tsx';
 import { ItemCtaSlot, ItemInfoSlot } from './ItemInfoSlot.tsx';
@@ -94,7 +95,7 @@ function TripHead({ trip, dest, days, tab, onTab }: { readonly trip: Trip; reado
 }
 
 /** Khung bản đồ ở đầu màn chuyến đi kèm nút quay lại và nút sửa chuyến. */
-function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonly tripId: string; readonly onEdit: () => void }) {
+function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonly tripId: string; readonly onEdit: (() => void) | null }) {
   return (
     <section className="mapbox">
       <TripMap coveredBottom={covered} />
@@ -103,7 +104,7 @@ function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonl
         <div className="r">
           <IconButton icon="sun" label={T.today.open} onClick={() => navigate(VIEW.TODAY, tripId)} />
           <IconButton icon="share-2" label={T.export.open} onClick={() => navigate(VIEW.EXPORT, tripId)} />
-          <IconButton icon="pencil" label={T.view.edit} onClick={onEdit} />
+          {onEdit ? <IconButton icon="pencil" label={T.view.edit} onClick={onEdit} /> : null}
         </div>
       </div>
     </section>
@@ -131,7 +132,7 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
     (itemId: string) => {
       const item = trip.items.find((i) => i.id === itemId);
       if (!item) return;
-      if (item.placeId && cat.place(item.placeId)) place.open(item.placeId, { extra: <ItemInfoSlot tripId={trip.id} itemId={itemId} onEdit={() => setOverlay({ kind: 'editor', itemId, preset: null })} />, cta: <ItemCtaSlot tripId={trip.id} itemId={itemId} name={itemName(item, cat)} onPickDay={() => setOverlay({ kind: 'pickDay', itemId })} /> });
+      if (item.placeId && cat.place(item.placeId)) place.open(item.placeId, { extra: <ItemInfoSlot tripId={trip.id} itemId={itemId} onEdit={() => setOverlay({ kind: 'editor', itemId, preset: null })} />, cta: <ItemCtaSlot tripId={trip.id} itemId={itemId} name={itemName(item, cat)} onPickDay={() => setOverlay({ kind: 'pickDay', itemId })} onRequestDelete={() => setOverlay({ kind: 'requestDelete', itemId })} /> });
       else setOverlay({ kind: 'editor', itemId, preset: null });
     },
     [trip, cat, place],
@@ -143,7 +144,7 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
 
   return (
     <TripViewProvider value={value}>
-      <MapBox covered={drawer ? 0 : covered} tripId={trip.id} onEdit={() => setOverlay({ kind: 'editTrip' })} />
+      <MapBox covered={drawer ? 0 : covered} tripId={trip.id} onEdit={permissionsOf(trip).manageTrip ? () => setOverlay({ kind: 'editTrip' }) : null} />
       <section className="sheetbody" ref={sheetRef}>
         <div className="sheet-head pad-x" ref={headRef}>
           <TripHead trip={trip} dest={dest} days={days} tab={tab} onTab={setTab} />

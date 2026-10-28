@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { editTrip, randomId, uniqueName } from './tripState.ts';
 import type { Trip, TripItem } from './trip.types.ts';
 
-const item = (id: string, day: string | null, position: number | null): TripItem => ({ id, placeId: null, type: 'food', title: id, day, position, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false });
-const trip = (name: string, items: TripItem[] = [], over: Partial<Trip> = {}): Trip => ({ id: name, name, destinationId: 'd', startDate: '2026-10-31', endDate: '2026-11-02', datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash: [], createdAt: 1, ...over });
+const item = (id: string, day: string | null, position: number | null): TripItem => ({ id, placeId: null, type: 'food', title: id, day, position, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, addedBy: null, doneBy: [] });
+const trip = (name: string, items: TripItem[] = [], over: Partial<Trip> = {}): Trip => ({ id: name, name, role: 'organizer', memberCount: 1, selfMemberId: null, destinationId: 'd', startDate: '2026-10-31', endDate: '2026-11-02', datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash: [], createdAt: 1, ...over });
 
 test('tên trùng thêm hậu tố - 2, - 3 (DR-006)', () => {
   assert.equal(uniqueName([trip('X')], 'X'), 'X - 2');

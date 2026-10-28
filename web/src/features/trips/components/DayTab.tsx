@@ -8,6 +8,7 @@ import { Icon } from '../../../shared/ui/Icon.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { dayItems, roadKm, summarizeCosts, unassignedItems } from '../model/tripMath.ts';
 import { coordOf } from '../model/tripView.ts';
+import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { ItemRow } from './ItemRow.tsx';
 import { money } from './ItemMeta.tsx';
@@ -34,7 +35,7 @@ export function DayTab({ index }: { readonly index: number }) {
   const dayCost = cs.byDayK[day] ?? 0;
   const dayUnknown = cs.unknownByDay[day] ?? 0;
   const sort = sorting && items.length > 1;
-  const hasUnassigned = unassignedItems(trip).length > 0;
+  const hasUnassigned = permissionsOf(trip).schedule && unassignedItems(trip).length > 0;
   return (
     <section className="daysec">
       <div className="dayhead">
@@ -48,7 +49,7 @@ export function DayTab({ index }: { readonly index: number }) {
           {dayCost || dayUnknown ? <><br />{dayUnknown ? fill(T.view.dayCostUnknown, { money: money(dayCost), n: dayUnknown }) : money(dayCost)}</> : null}
         </span>
       </div>
-      {items.length > 1 ? (
+      {items.length > 1 && permissionsOf(trip).schedule ? (
         <div className="dayact">
           <ChipToggle pressed={sort} icon="arrow-up" onClick={() => setSorting(!sorting)}>
             {sort ? T.view.sortDone : T.view.sort}

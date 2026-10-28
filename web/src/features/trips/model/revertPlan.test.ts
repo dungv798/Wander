@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { revertPlan } from './revertPlan.ts';
 import type { Trip, TripItem } from './trip.types.ts';
 
-const item = (id: string, day: string | null, position: number | null): TripItem => ({ id, placeId: null, type: 'food', title: id, day, position, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false });
-const trip = (items: TripItem[], over: Partial<Trip> = {}, trash: Trip['trash'] = []): Trip => ({ id: 't', name: 'A', destinationId: 'd', startDate: '2026-11-01', endDate: '2026-11-03', datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash, createdAt: 1, ...over });
+const item = (id: string, day: string | null, position: number | null): TripItem => ({ id, placeId: null, type: 'food', title: id, day, position, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, addedBy: null, doneBy: [] });
+const trip = (items: TripItem[], over: Partial<Trip> = {}, trash: Trip['trash'] = []): Trip => ({ id: 't', name: 'A', role: 'organizer', memberCount: 1, selfMemberId: null, destinationId: 'd', startDate: '2026-11-01', endDate: '2026-11-03', datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash, createdAt: 1, ...over });
 const entry = (i: TripItem): Trip['trash'][number] => ({ id: i.id, item: i, deletedAt: 5, day: i.day, position: i.position });
 const D1 = '2026-11-01';
 const D2 = '2026-11-02';

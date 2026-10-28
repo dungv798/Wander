@@ -11,7 +11,10 @@ export type Overlay =
   | { readonly kind: 'addToDay' }
   | { readonly kind: 'pickDay'; readonly itemId: string }
   | { readonly kind: 'trash' }
-  | { readonly kind: 'deleteTrip' };
+  | { readonly kind: 'deleteTrip' }
+  | { readonly kind: 'people' }
+  | { readonly kind: 'requests' }
+  | { readonly kind: 'requestDelete'; readonly itemId: string };
 
 /** Mọi thứ các thành phần con của màn chuyến đi cần: dữ liệu chuyến + điểm đến, tab, tờ phủ, chế độ sắp xếp và các hành động chung. */
 export interface TripViewValue {

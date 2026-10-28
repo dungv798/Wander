@@ -4,6 +4,7 @@ import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import type { Trip } from '../model/trip.types.ts';
 import { countText } from '../model/tripView.ts';
+import { COLLAB_COPY } from '../../collab/index.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 /** "31/10 – 02/11", kèm "· chưa chắc" khi ngày mới là dự kiến. */
@@ -26,6 +27,7 @@ export function TripCard({ trip, cover }: { readonly trip: Trip; readonly cover:
             <Icon name="calendar-event" size="s" /> {dateRangeText(trip)}
           </span>
           <span>{countText(trip)}</span>
+          {trip.role === 'member' ? <span className="chip tint">{COLLAB_COPY.roles.member}</span> : null}
         </div>
       </div>
     </button>

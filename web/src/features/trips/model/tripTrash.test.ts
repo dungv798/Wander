@@ -4,7 +4,7 @@ import { LIMITS } from '../../../shared/const/limits.const.ts';
 import { agoText, isDuplicateRestore, trashFull } from './tripTrash.ts';
 import type { TrashEntry, Trip, TripItem } from './trip.types.ts';
 
-const item = (id: string, placeId: string | null): TripItem => ({ id, placeId, type: 'sightseeing', title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false });
+const item = (id: string, placeId: string | null): TripItem => ({ id, placeId, type: 'sightseeing', title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, addedBy: null, doneBy: [] });
 const entry = (id: string, placeId: string | null): TrashEntry => ({ id, item: item(id, placeId), deletedAt: 1, day: null, position: null });
 
 test('thùng rác đầy thì báo đầy (không tự xóa vĩnh viễn mục cũ, D19)', () => {

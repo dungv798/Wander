@@ -163,3 +163,10 @@
 #screen[data-view="explore"] > .hero-w { max-width: none; width: 100%; margin-inline: 0; }
 #screen[data-view="explore"] .wsec { padding-inline: 40px; }
 @media (max-width: 1100px) { .monthrow { grid-template-columns: repeat(3, minmax(0, 1fr)); } .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } .hero-in { padding-inline: 24px; } #screen[data-view="explore"] .wsec { padding-inline: 24px; } }
+
+/* Checklist chuẩn bị (Lát 1b): hàng gồm ô tích của chính mình, tên + tiến độ chung, nút xóa của Organizer. */
+.chklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chk { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.chk .taskchk { position: static; margin: 0; }
+.chk-tx { display: grid; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.chk-tx .done { text-decoration: line-through; color: var(--muted); }

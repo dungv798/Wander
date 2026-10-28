@@ -458,7 +458,23 @@ PO chọn "Làm xóa mềm chuyến + Hoàn tác" (AskUserQuestion). Phạm vi: 
 | Lưu giữ | Chuyến đã xóa được giữ vô thời hạn cho tới khi có xóa vĩnh viễn (cần xác thực lại, chưa làm) | Mở |
 
 ### Lát 1b: bản đồ khả năng và nền tảng (PO duyệt 28/10/2026, DR-021)
-PO duyệt bản đồ 6 mô-đun (`membership` → `access` → `completion` → `proposals` → `checklist` → `collab-ui`) và trả lời H1–H4 (APPROVED, lời PO): danh tính ẩn danh đầy đủ cho thành viên; **thêm mục trực tiếp, chỉ đề nghị xóa chờ duyệt** (lệch R10 của kế hoạch gốc, ghi ở DR-021, kế hoạch gốc không sửa); thành viên xóa/khôi phục mục của mình, xóa mục người khác là đề nghị; một Organizer duy nhất (không chuyển quyền). **DEFAULTED (H5, Tầng B):** tối đa 10 thành viên/chuyến, 1 liên kết mời đang bật, tên hiển thị ≤ 40 ký tự (trùng thì hậu tố). Đặc tả mô-đun đầu `docs/implementation/SPEC-membership.md` đã viết, **chờ PO duyệt** (câu mở M1, M2); chưa có mã 1b.
+PO duyệt bản đồ 6 mô-đun (`membership` → `access` → `completion` → `proposals` → `checklist` → `collab-ui`) và trả lời H1–H4 (APPROVED, lời PO): danh tính ẩn danh đầy đủ cho thành viên; **thêm mục trực tiếp, chỉ đề nghị xóa chờ duyệt** (lệch R10 của kế hoạch gốc, ghi ở DR-021, kế hoạch gốc không sửa); thành viên xóa/khôi phục mục của mình, xóa mục người khác là đề nghị; một Organizer duy nhất (không chuyển quyền). **DEFAULTED (H5, Tầng B):** tối đa 10 thành viên/chuyến, 1 liên kết mời đang bật, tên hiển thị ≤ 40 ký tự (trùng thì hậu tố). Đặc tả mô-đun đầu `docs/implementation/SPEC-membership.md`; PO 28/10/2026 chọn "làm theo khuyến nghị và làm full flow".
+
+**Hoàn tất 28/10/2026 (BE + FE):** cả 6 mô-đun đã có mã; `./gradlew check` xanh (294 test, 0 lỗi) và e2e cộng tác (`web/e2e/collab.e2e.test.ts`, 3 kịch bản) chạy trên trình duyệt thật + backend thật.
+
+| Mặc định (Tầng B, sau rà soát bảo mật) | Quyết định |
+|---|---|
+| M1 | Organizer chỉ thấy thành viên đã vào (không thấy liên kết chưa dùng) — theo khuyến nghị |
+| M2 | Thông báo cho người bị gỡ: **CHƯA làm** (theo khuyến nghị: báo một lần, lưu vết có hạn) — việc sau |
+| Quyền 403/404 | Thành viên gọi route chỉ-Organizer ⇒ 403 `NOT_ORGANIZER`; người ngoài ⇒ 404; sửa/xóa mục người khác ⇒ 403 `NOT_YOUR_ITEM` |
+| Liên kết mời | Gỡ thành viên thu hồi luôn liên kết đang bật; mã 256 bit chỉ lưu băm; mã nằm sau dấu # của địa chỉ nên không tới máy chủ web; giao diện gỡ mã khỏi địa chỉ ngay khi vào xong và không lưu ở đâu |
+| Tên | Tên Organizer mặc định "Organizer" (không dùng tên thiết bị); "Organizer" là tên dành riêng; tên là nhãn tự khai, giao diện nói rõ "chưa được xác minh"; huy hiệu vai lấy từ `role` của máy chủ, không dựa vào tên |
+| Dữ liệu người rời/bị gỡ | Mục họ đã thêm ở lại lịch; tên hiển thị giữ ẩn danh hóa ở đề nghị cũ |
+| Checklist | Xóa hạng mục là xóa cứng (không qua "đã xóa gần đây"); giao diện xóa hai chạm; sửa hạng mục có API nhưng **chưa có nút sửa trên giao diện** (xóa rồi thêm lại) |
+| Rà soát độc lập 28/10 | `wander-code-reviewer` + `wander-skeptic-qa`: 0 BLOCKER. Đã sửa: nút "Thêm từ chưa xếp ngày" (lệnh lịch, chỉ Organizer) và "Chọn ngày/Xóa" ở tờ chi tiết địa điểm theo quyền (mục người khác chỉ có "Đề nghị xóa"); tên mục của đề nghị đã duyệt lấy cả từ thùng rác; không mất tên hạng mục vừa gõ khi lệnh lỗi; chống bấm đúp; đổi tên làm mới danh sách; số thành viên làm mới khi mở tờ; danh sách nạp lại khi quay lại tab; lỗi nạp có "Thử lại"; thiếu `role` thì coi là thành viên (đóng an toàn); giới hạn vào `LIMITS` |
+| Còn mở (Tầng A, chờ PO) | (1) Đề nghị xóa đang chờ trên mục đã bị Organizer xóa thẳng: tự đóng hay giữ chờ (khuyến nghị: tự đóng). (2) Thành viên bị gỡ khi đang xem chuyến: đẩy về danh sách kèm thông báo hay giữ chỉ xem (khuyến nghị: đẩy về). (3) M2 thông báo người bị gỡ; thông báo Organizer về đề nghị mới |
+| Còn lại (Tầng B, nhỏ) | Mã sai dạng ở `#/join/` vẫn nằm trên thanh địa chỉ; "Tạo liên kết mới" chưa hỏi lại; chưa có nút sửa hạng mục checklist; chưa có test đơn vị cho các tờ (chỉ e2e) |
+| Giao diện | Quyền chỉ để ẩn nút (máy chủ vẫn quyết định). Thành viên không thấy: Sửa chuyến, Xếp giúp tôi, Sắp xếp, Xóa chuyến, Xóa vĩnh viễn; mục của người khác chỉ xem + "Đề nghị xóa" |
 
 ### BE-10 Sở thích theo danh tính và BE-11 Nhật ký sự kiện bảo mật (27/10/2026)
 Làm qua `/wander-feature`. Kết quả đọc từ `.logs/be11-check.log` + JUnit XML: **241 test / 32 lớp PASSED, 0 lỗi**. Test API đỏ trước (`.logs/be10-red.log`; BE-11 `.logs/be11-red.log`). Khảo sát FE-10c cho thấy giao diện danh tính dựa vào "Hoạt động gần đây" mà backend chưa có ⇒ làm hai lát backend này trước.

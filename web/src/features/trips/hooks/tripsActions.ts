@@ -37,6 +37,8 @@ export interface TripsActions {
   readonly deleteTrip: (tripId: string) => Promise<void>;
   /** Khôi phục chuyến đã xóa mềm và đưa lại vào kho. */
   readonly restoreTrip: (tripId: string) => Promise<void>;
+  /** Đọc lại một chuyến từ máy chủ (sau việc ghi ngoài kho, ví dụ duyệt đề nghị xóa), không làm danh sách nháy "đang tải". */
+  readonly refreshTrip: (tripId: string) => Promise<void>;
   /** Hoàn tác: đưa chuyến trở lại `before` bằng các lệnh ngược trên máy chủ. */
   readonly revert: (before: Trip) => Promise<void>;
   /** Chuyến hiện tại theo mã (đọc thẳng kho, không qua render); dùng để so sánh khi Hoàn tác. */
@@ -142,7 +144,7 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
 }
 
 /** Thao tác cấp mục: thêm/sửa, gán ngày, đổi chỗ, tích xong, kế hoạch ngày, thùng rác. */
-function itemActions(ctx: Ctx): Omit<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip' | 'current' | 'idle'> {
+function itemActions(ctx: Ctx): Omit<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip' | 'refreshTrip' | 'current' | 'idle'> {
   const { gateway, need, run } = ctx;
   /** Phần của `ItemPatch` mà API sửa mục nhận: bỏ `done`/`position` (có lệnh riêng) và tiêu đề rỗng (mục từ kho giữ tiêu đề đã lưu; backend bắt buộc tiêu đề). */
   const toChange = (patch: ItemPatch): ItemChange => {
@@ -239,5 +241,5 @@ export function createTripsActions({ gateway, store }: TripsActionDeps): TripsAc
     return job;
   };
   const ctx: Ctx = { gateway, current, need, run, after, refresh, addEach };
-  return { current, idle, ...tripActions(ctx, store), ...itemActions(ctx) };
+  return { current, idle, refreshTrip: async (tripId) => void (await refresh(tripId)), ...tripActions(ctx, store), ...itemActions(ctx) };
 }
