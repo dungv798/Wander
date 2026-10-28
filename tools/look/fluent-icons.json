@@ -1,0 +1,23 @@
+[
+  {"use":"discover.const.ts CATEGORY_ICON.canh: cảnh quan (SVG trees)","emoji":"","fluentName":"National park","file":"assets/National park/3D/national_park_3d.png"},
+  {"use":"discover.const.ts CATEGORY_ICON.van: văn hóa (SVG columns)","emoji":"","fluentName":"Classical building","file":"assets/Classical building/3D/classical_building_3d.png"},
+  {"use":"discover.const.ts CATEGORY_ICON.am; trip.const.ts food (SVG tools-kitchen-2)","emoji":"","fluentName":"Fork and knife","file":"assets/Fork and knife/3D/fork_and_knife_3d.png"},
+  {"use":"discover.const.ts CATEGORY_ICON.leo: leo núi (SVG mountain)","emoji":"","fluentName":"Mountain","file":"assets/Mountain/3D/mountain_3d.png"},
+  {"use":"discover.const.ts CATEGORY_ICON.luu; trip.const.ts lodging (SVG bed)","emoji":"","fluentName":"Bed","file":"assets/Bed/3D/bed_3d.png"},
+  {"use":"discover.const.ts CATEGORY_ICON.cho; trip.const.ts shopping (SVG building-store)","emoji":"","fluentName":"Convenience store","file":"assets/Convenience store/3D/convenience_store_3d.png"},
+  {"use":"discover.const.ts VERDICT_STYLE.must: nên ghé (SVG rosette-discount-check)","emoji":"","fluentName":"Glowing star","file":"assets/Glowing star/3D/glowing_star_3d.png"},
+  {"use":"discover.const.ts VERDICT_STYLE.worth: đáng đi (SVG heart)","emoji":"","fluentName":"Orange heart","file":"assets/Orange heart/3D/orange_heart_3d.png"},
+  {"use":"discover.const.ts VERDICT_STYLE.ifconv; PlaceBody thời lượng (SVG clock)","emoji":"","fluentName":"Stopwatch","file":"assets/Stopwatch/3D/stopwatch_3d.png"},
+  {"use":"discover.const.ts SLOTS.sang (SVG sunrise)","emoji":"","fluentName":"Sunrise","file":"assets/Sunrise/3D/sunrise_3d.png"},
+  {"use":"discover.const.ts SLOTS.trua; PlaceBody buổi (SVG sun)","emoji":"","fluentName":"Sun","file":"assets/Sun/3D/sun_3d.png"},
+  {"use":"discover.const.ts SLOTS.chieu (SVG sunset-2)","emoji":"","fluentName":"Sunset","file":"assets/Sunset/3D/sunset_3d.png"},
+  {"use":"discover.const.ts SLOTS.toi; trip.const.ts rest (SVG moon-stars)","emoji":"","fluentName":"Crescent moon","file":"assets/Crescent moon/3D/crescent_moon_3d.png"},
+  {"use":"trip.const.ts sightseeing; onboarding.const.ts; PlaceBody vị trí (SVG map-pin)","emoji":"","fluentName":"Round pushpin","file":"assets/Round pushpin/3D/round_pushpin_3d.png"},
+  {"use":"trip.const.ts transport; PlaceBody khoảng cách (SVG route)","emoji":"","fluentName":"World map","file":"assets/World map/3D/world_map_3d.png"},
+  {"use":"trip.const.ts car_rental; PlaceBody đi xe (SVG motorbike)","emoji":"","fluentName":"Motorcycle","file":"assets/Motorcycle/3D/motorcycle_3d.png"},
+  {"use":"trip.const.ts task: việc cần làm (SVG list-check)","emoji":"","fluentName":"Memo","file":"assets/Memo/3D/memo_3d.png"},
+  {"use":"PlaceBody mùa nên đi; catalog guide (SVG calendar-event)","emoji":"","fluentName":"Calendar","file":"assets/Calendar/3D/calendar_3d.png"},
+  {"use":"catalog guide chuẩn bị mang gì (SVG backpack)", "emoji":"","fluentName":"Backpack","file":"assets/Backpack/3D/backpack_3d.png"},
+  {"use":"shared/ui/art/Art.tsx máy bay ở trang chủ/onboarding", "emoji":"","fluentName":"Airplane","file":"assets/Airplane/3D/airplane_3d.png"},
+  {"use":"shared/ui/art/Art.tsx la bàn ở trang chủ", "emoji":"","fluentName":"Compass","file":"assets/Compass/3D/compass_3d.png"}
+]

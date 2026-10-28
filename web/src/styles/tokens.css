@@ -9,6 +9,16 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
+  /* Thử kính: chữ mực cố định; nền trắng 88% giữ tương phản cả trên ảnh đen. */
+  --look-glass-bg: rgba(255, 255, 255, 0.88);
+  --look-glass-fallback: #fffbed;
+  --look-glass-ink: #14213a;
+  --look-glass-edge: rgba(255, 255, 255, 0.95);
+  --look-glass-highlight: linear-gradient(160deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 55%);
+  --look-glass-shadow: 0 6px 18px -8px rgba(20, 33, 58, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --look-glass-blur: 14px;
+  --look-glass-border: 1px;
+  --look-focus-width: 3px;
   --destination-map-height: 38dvh;
   /* ---- Nền và chữ ---- */
   --bg: #fff8d8;             /* bơ nhạt: nền trang */
