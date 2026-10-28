@@ -6,7 +6,7 @@ import { attachMapControls } from './MapControls.ts';
 import { MapLayers } from './MapLayers.ts';
 import { TerrainData } from './TerrainData.ts';
 import { MAP } from './map.const.ts';
-import { fitCamera, toScreen, zoomCamera } from './mapGeometry.ts';
+import { allVisible, fitCamera, toScreen, zoomCamera } from './mapGeometry.ts';
 import type { FitOptions, Insets, MapData, MapMarker, MapMode, MapRoute, ProjectedMarker, Pt, TerrainMapOptions } from './map.types.ts';
 
 let sequence = 0;
@@ -208,6 +208,7 @@ export class TerrainMap {
       return;
     }
     const pts = this.markers.filter((m) => !ids || ids.includes(m.id)).map((m) => m.p);
+    if (o.keepIfVisible && this.touchedByUser && allVisible(pts, this.camera.cam, this.camera.size, this.camera.inset, MAP.KEEP_VISIBLE_MARGIN)) return;
     const cam = fitCamera(pts, this.camera.size, this.camera.inset, this.camera.minScale, o);
     if (!cam) this.fitAll(o.animate !== false);
     else this.camera.flyTo(cam, o.animate !== false, prefersReducedMotion());

@@ -35,18 +35,40 @@ export class MapLayers {
   private routeGroup: SVGGElement | null = null;
   private readonly markerEls = new Map<string, HTMLButtonElement>();
   private clusters: { el: HTMLButtonElement; p: Pt }[] = [];
+  /** Phần tử cụm đang có, theo khóa là danh sách mã ghim (đã sắp) trong cụm. */
+  private clusterEls = new Map<string, HTMLButtonElement>();
+  /** Đã bố trí ít nhất một lần: từ đó ghim/cụm mới chen vào không chạy lại hiệu ứng rơi. */
+  private laidOut = false;
   private towns: { el: HTMLElement; p: Pt }[] = [];
   private segMids: { index: number; p: Pt }[] = [];
 
-  /** Dựng khung rỗng (SVG nền, lớp nhãn, lớp ghim) vào phần tử chứa. */
-  constructor(host: HTMLElement) {
+  /**
+   * Dựng khung rỗng (lớp nhãn, lớp ghim, và SVG nền nếu `withSvg`) vào phần tử chứa.
+   * Bản đồ WebGL (`withSvg` false) tự có canvas nền: các lớp này chỉ được thêm vào sau canvas, không thay nội dung có sẵn.
+   */
+  constructor(host: HTMLElement, withSvg = true) {
     this.svg = document.createElementNS(SVG_NS, 'svg');
     this.svg.setAttribute('class', 'tm-svg');
     this.svg.setAttribute('aria-hidden', 'true');
     this.labels = Object.assign(document.createElement('div'), { className: 'tm-labels' });
     this.labels.setAttribute('aria-hidden', 'true');
     this.pins = Object.assign(document.createElement('div'), { className: 'tm-pins' });
-    host.replaceChildren(this.svg, this.labels, this.pins);
+    if (withSvg) host.replaceChildren(this.svg, this.labels, this.pins);
+    else host.append(this.labels, this.pins);
+  }
+
+  /** Nhãn khoảng cách giữa các đoạn tuyến (bản đồ WebGL): `labels[i]` ở điểm giữa `mids[i]` (cùng hệ tọa độ với ghim). Nhãn rỗng thì bỏ. */
+  setSegmentLabels(labels: readonly string[], mids: readonly Pt[]): void {
+    this.labels.querySelectorAll('.tm-seg-label').forEach((n) => n.remove());
+    this.segMids = [];
+    mids.forEach((p, i) => {
+      const text = labels[i];
+      if (!text) return;
+      const label = Object.assign(document.createElement('span'), { className: 'tm-seg-label', textContent: text });
+      label.dataset['i'] = String(i + 1);
+      this.labels.appendChild(label);
+      this.segMids.push({ index: i + 1, p });
+    });
   }
 
   /** Dựng nền (ảnh độ cao, bóng núi, sông, đường) và tên thị trấn từ dữ liệu đã tải. */
@@ -65,6 +87,7 @@ export class MapLayers {
     const keep = new Set(markers.map((m) => m.id));
     markers.forEach((m, i) => {
       let el = this.markerEls.get(m.id);
+      const isNew = !el;
       if (!el) {
         el = Object.assign(document.createElement('button'), { type: 'button' });
         el.dataset['id'] = m.id;
@@ -81,7 +104,12 @@ export class MapLayers {
       // bản đồ chỉ để xem (không có onPin): ghim là hình trang trí, không phải nút bàn phím
       el.tabIndex = onPin ? 0 : -1;
       el.toggleAttribute('aria-hidden', !onPin);
-      el.replaceChildren(this.pinBody(m));
+      const sig = [m.thumb ?? '', m.num ?? '', m.kind ?? ''].join('|');
+      if (isNew || el.dataset['sig'] !== sig) {
+        el.dataset['sig'] = sig;
+        // chỉ ghim mới mới "rơi"; ghim đã có mà đổi số/ảnh thì thay thân tại chỗ, không chạy lại hiệu ứng
+        el.replaceChildren(this.pinBody(m, isNew));
+      }
     });
     this.markerEls.forEach((el, id) => {
       if (keep.has(id)) return;
@@ -90,9 +118,9 @@ export class MapLayers {
     });
   }
 
-  /** Thân ghim: ảnh tròn (nếu có) và số thứ tự hoặc chấm mốc. */
-  private pinBody(m: ProjectedMarker): HTMLElement {
-    const body = Object.assign(document.createElement('span'), { className: 'tm-pin-body' });
+  /** Thân ghim: ảnh tròn (nếu có) và số thứ tự hoặc chấm mốc. `animate` false thì bỏ hiệu ứng rơi (ghim đã có trên bản đồ). */
+  private pinBody(m: ProjectedMarker, animate: boolean): HTMLElement {
+    const body = Object.assign(document.createElement('span'), { className: animate ? 'tm-pin-body' : 'tm-pin-body is-still' });
     if (m.thumb) body.appendChild(Object.assign(document.createElement('img'), { alt: '', src: m.thumb }));
     if (m.num != null) body.appendChild(Object.assign(document.createElement('b'), { textContent: String(m.num) }));
     else if (m.kind === 'hub') body.appendChild(Object.assign(document.createElement('i'), { className: 'tm-hub-dot' }));
@@ -151,26 +179,39 @@ export class MapLayers {
 
   /** Gộp các ghim gần nhau thành cụm; trả bảng ghim nào đang hiện (false = đã vào cụm). */
   private rebuildClusters(ctx: LayoutContext): Map<string, boolean> {
-    this.clusters.forEach((c) => c.el.remove());
+    const previous = this.clusterEls;
+    this.clusterEls = new Map();
     this.clusters = [];
     const shown = new Map(ctx.markers.map((m) => [m.id, true]));
     if (ctx.mode === 'browse') {
       const pins = ctx.markers.filter((m) => m.kind !== 'hub').map((m) => ({ id: m.id, p: m.p, s: ctx.project(m.p) }));
       for (const g of clusterPins(pins)) {
         g.ids.forEach((id) => shown.set(id, false));
-        const el = Object.assign(document.createElement('button'), { type: 'button', className: 'tm-cluster' });
-        el.setAttribute('aria-label', ctx.clusterLabel(g.ids.length));
-        el.appendChild(Object.assign(document.createElement('b'), { textContent: String(g.ids.length) }));
-        el.addEventListener('click', (e) => {
-          e.stopPropagation();
-          ctx.onCluster(g.ids);
-        });
-        this.pins.appendChild(el);
+        // cụm có cùng nhóm ghim thì giữ phần tử cũ (không nhấp nháy mỗi lần zoom dừng)
+        const key = [...g.ids].sort().join(',');
+        const el = previous.get(key) ?? this.buildCluster(g.ids, ctx);
+        previous.delete(key);
+        this.clusterEls.set(key, el);
         this.clusters.push({ el, p: g.p });
       }
     }
+    previous.forEach((el) => el.remove());
+    this.laidOut = true;
     this.markerEls.forEach((el, id) => el.classList.toggle('is-hidden', shown.get(id) === false));
     return shown;
+  }
+
+  /** Dựng một ghim cụm (số ghim bên trong); chỉ lần bố trí đầu tiên mới có hiệu ứng rơi, các lần sau hiện thẳng. */
+  private buildCluster(ids: readonly string[], ctx: LayoutContext): HTMLButtonElement {
+    const el = Object.assign(document.createElement('button'), { type: 'button', className: this.laidOut ? 'tm-cluster is-still' : 'tm-cluster' });
+    el.setAttribute('aria-label', ctx.clusterLabel(ids.length));
+    el.appendChild(Object.assign(document.createElement('b'), { textContent: String(ids.length) }));
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      ctx.onCluster([...ids]);
+    });
+    this.pins.appendChild(el);
+    return el;
   }
 
   /** Đặt nhãn tên cho các ghim đang hiện (ghim đang chọn trước, ghim mờ sau); trả các hộp nhãn đã đặt. */

@@ -159,36 +159,37 @@ test('lỗi tải kho: có thông báo, nút Thử lại hoạt động, không 
   await ctx.close();
 });
 
-test('bản đồ địa hình: ghim ảnh thật, gộp cụm, mở rộng toàn màn, phóng bằng nút, chạm ghim mở chi tiết', async () => {
+test('bản đồ: ghim ảnh thật, gộp cụm, mở rộng toàn màn, phóng bằng nút, chạm ghim mở chi tiết', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/');
-  await page.locator('.mapcard[data-ready="1"] .tm-pin').first().waitFor({ timeout: 15000 });
+  const shown = '.tm-pin:not(.is-hidden), .tm-cluster';
+  await page.locator(`.mapcard[data-ready="1"] ${shown}`).first().waitFor({ timeout: 45000 });
   assert.ok((await page.locator('.mapcard .tm-pin img').count()) >= 5, 'ghim là ảnh thật của kho biên tập');
-  assert.match((await page.locator('.mapcard .tm-credit').textContent()) ?? '', /OpenStreetMap/, 'ghi công dữ liệu bản đồ');
+  assert.match((await page.locator('.mapcard .maplibregl-ctrl-attrib').textContent()) ?? '', /OpenStreetMap/, 'ghi công dữ liệu bản đồ');
   assert.ok((await page.locator('.mapcard .tm-cluster').count()) >= 1, 'các ghim sát nhau được gộp cụm');
   await page.getByRole('button', { name: /Mở rộng/ }).click();
   const dialog = page.getByRole('dialog', { name: 'Bản đồ Hà Giang' });
-  await dialog.locator('.mapbig[data-ready="1"] .tm-pin').first().waitFor({ timeout: 15000 });
-  const viewBoxWidth = (): Promise<number> => dialog.locator('.tm-svg').evaluate((el) => Number(el.getAttribute('viewBox')?.split(' ')[2]));
-  const before = await viewBoxWidth();
+  await dialog.locator(`.mapbig[data-ready="1"] ${shown}`).first().waitFor({ timeout: 45000 });
+  const zoomOf = (): Promise<number> => dialog.locator('.mapbig').evaluate((el) => Number((el as HTMLElement).dataset['zoom']));
+  const before = await zoomOf();
   await dialog.getByRole('button', { name: 'Phóng to', exact: true }).click();
-  await page.waitForFunction((w) => Number(document.querySelector('.mapbig .tm-svg')?.getAttribute('viewBox')?.split(' ')[2]) < w, before, { timeout: 5000 });
-  await dialog.getByRole('button', { name: 'Cột cờ Lũng Cú' }).or(dialog.locator('.tm-pin').first()).first().click();
+  await page.waitForFunction((z) => Number((document.querySelector('.mapbig') as HTMLElement | null)?.dataset['zoom']) > z, before, { timeout: 15000 });
+  await dialog.locator('.tm-pin:not(.is-hidden)').first().click();
   await page.getByRole('dialog', { name: /./ }).first().waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-test('lỗi tải dữ liệu bản đồ: có thông báo và nút Thử lại, các phần khác vẫn dùng được', async () => {
+test('lỗi tải kiểu bản đồ: có thông báo và nút Thử lại, các phần khác vẫn dùng được', async () => {
   const { ctx } = await phone();
   const page = await ctx.newPage();
-  await page.route('**/map/ha-giang/vectors.json', (r) => r.abort());
+  await page.route('**/styles/liberty', (r) => r.abort());
   await page.goto(`${baseUrl}/#/dest/ha-giang`);
-  await page.locator('.mapcard .tm-err').waitFor({ timeout: 15000 });
+  await page.locator('.mapcard .tm-err').waitFor({ timeout: 30000 });
   assert.equal(await page.locator('.dhero h1').textContent(), 'Hà Giang', 'trang vẫn dựng được khi bản đồ lỗi');
-  await page.unroute('**/map/ha-giang/vectors.json');
+  await page.unroute('**/styles/liberty');
   await page.locator('.mapcard .tm-err button').click();
-  await page.locator('.mapcard[data-ready="1"] .tm-pin').first().waitFor({ timeout: 15000 });
+  await page.locator('.mapcard[data-ready="1"] .tm-pin:not(.is-hidden), .mapcard[data-ready="1"] .tm-cluster').first().waitFor({ timeout: 45000 });
   await ctx.close();
 });
 

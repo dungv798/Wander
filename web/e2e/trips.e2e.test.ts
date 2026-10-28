@@ -215,8 +215,8 @@ test('sửa ngày chuyến làm mất ngày: báo số mục, bấm Lưu lần h
   await dialog.getByRole('alert').getByText(/chuyển về “Chưa có ngày”/).waitFor();
   await dialog.getByRole('button', { name: 'Lưu thay đổi' }).click();
   await dialog.waitFor({ state: 'detached' });
-  const after = await storedTrips(page);
-  assert.equal(after.trips[0]?.items.filter((i) => i.day === null).length, 3 + 2 + 2, 'ngày 2 và 3 trở về chưa có ngày');
+  const unscheduled = (): Promise<number | undefined> => settle(async () => (await storedTrips(page)).trips[0]?.items.filter((i) => i.day === null).length, (n) => n === 3 + 2 + 2);
+  assert.equal(await unscheduled(), 3 + 2 + 2, 'ngày 2 và 3 trở về chưa có ngày');
   await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();
   assert.equal(await settle(async () => (await storedTrips(page)).trips[0]?.items.filter((i) => i.day === null).length, (n) => n === 3), 3);
   assert.deepEqual(errors, []);
@@ -254,7 +254,7 @@ test('thêm địa điểm vào chuyến từ bộ thẻ: không hiện lại n�
 test('bản đồ chuyến: tab ngày vẽ tuyến có nhãn km và ghim đánh số', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
-  await page.locator('.tmroot[data-ready="1"] .tm-seg').first().waitFor({ state: 'attached', timeout: 15000 });
+  await page.locator('.tmroot[data-ready="1"][data-route="1"]').waitFor({ state: 'attached', timeout: 30000 });
   assert.ok((await page.locator('.tm-seg-label').count()) >= 1);
   assert.ok((await page.locator('.tm-pin-body b').count()) >= 2);
   assert.deepEqual(errors, []);

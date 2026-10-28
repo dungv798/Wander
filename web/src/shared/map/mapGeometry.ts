@@ -25,6 +25,20 @@ export function toScreen(cam: Camera, size: Size, p: Pt): Pt {
   return [(p[0] - cam.cx) * cam.s + size.w / HALF, (p[1] - cam.cy) * cam.s + size.h / HALF];
 }
 
+/**
+ * Mọi điểm đều nằm trong vùng nhìn thấy thật sự (khung trừ phần bị che, trừ thêm `margin` px mỗi cạnh)?
+ * Danh sách rỗng trả false: không có gì để giữ lại nên người gọi cứ vừa khung như thường.
+ */
+export function allVisible(points: readonly Pt[], cam: Camera, size: Size, inset: Insets, margin: number): boolean {
+  if (!points.length) return false;
+  const [left, top] = [inset.left + margin, inset.top + margin];
+  const [right, bottom] = [size.w - inset.right - margin, size.h - inset.bottom - margin];
+  return points.every((p) => {
+    const [x, y] = toScreen(cam, size, p);
+    return x >= left && x <= right && y >= top && y <= bottom;
+  });
+}
+
 /** Camera vừa khung một tập điểm (tính cả phần khung bị che); không có điểm thì trả null để gọi vừa khung toàn vùng. */
 export function fitCamera(points: readonly Pt[], size: Size, inset: Insets, minScale: number, o: FitOptions = {}): Camera | null {
   if (!points.length) return null;

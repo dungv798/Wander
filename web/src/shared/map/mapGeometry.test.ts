@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { TerrainData } from './TerrainData.ts';
-import { arcSegments, clampCamera, clusterPins, fitCamera, mapEase, pinBox, placeLabels, toScreen, townIsCrowded, zoomCamera } from './mapGeometry.ts';
+import { allVisible, arcSegments, clampCamera, clusterPins, fitCamera, mapEase, pinBox, placeLabels, toScreen, townIsCrowded, zoomCamera } from './mapGeometry.ts';
 
 const SIZE = { w: 400, h: 600 };
 const NO_INSET = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -47,6 +47,16 @@ test('phóng quanh điểm giữa màn hình không đổi tâm; quanh góc thì
 
 test('toScreen đưa tâm camera về giữa khung', () => {
   assert.deepEqual(toScreen({ cx: 10, cy: 20, s: 2 }, SIZE, [10, 20]), [200, 300]);
+});
+
+test('allVisible: mọi điểm trong vùng nhìn thấy (đã trừ phần bị che) thì true; một điểm ngoài hoặc dưới tờ che thì false', () => {
+  const cam = { cx: 0, cy: 0, s: 1 };
+  const inset = { ...NO_INSET, bottom: 200 };
+  assert.equal(allVisible([[0, 0], [100, -100]], cam, SIZE, NO_INSET, 0), true);
+  assert.equal(allVisible([[0, 0], [250, 0]], cam, SIZE, NO_INSET, 0), false, 'lệch ngoài mép phải (khung rộng 400, nửa rộng 200)');
+  assert.equal(allVisible([[0, 250]], cam, SIZE, inset, 0), false, 'nằm dưới tờ che 200px (nhìn thấy tới y=400 trên màn hình)');
+  assert.equal(allVisible([[0, 0]], cam, SIZE, NO_INSET, 500), false, 'lề lớn hơn khung thì không điểm nào "thấy đủ"');
+  assert.equal(allVisible([], cam, SIZE, NO_INSET, 0), false, 'không có điểm thì không có gì để giữ');
 });
 
 test('cung tuyến: n điểm → n-1 đoạn, đường liền mạch bắt đầu bằng M', () => {

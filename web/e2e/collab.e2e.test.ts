@@ -158,7 +158,7 @@ test('thành viên bị Organizer gỡ: quay lại ứng dụng thì được b�
   await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange'))); // như khi người dùng quay lại tab
   await page.getByText('Bạn không còn trong chuyến đi này.').waitFor();
   await page.waitForURL(/#\/trips/);
-  assert.equal(await page.locator('.tcard').count(), 0);
+  await page.waitForFunction(() => document.querySelectorAll('.tcard').length === 0, null, { timeout: 10000 }); // danh sách làm mới sau khi chuyển màn
   assert.deepEqual(errors, []);
   await ctx.close();
 });

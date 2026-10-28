@@ -153,6 +153,7 @@ export const COPY = {
     retry: 'Thử lại',
     zoomIn: 'Phóng to',
     zoomOut: 'Thu nhỏ',
+    attribution: 'Nguồn bản đồ',
     cluster: 'nơi gần nhau, chạm để phóng to',
     credit: 'Độ cao: AWS Terrain Tiles · Đường, sông: © OpenStreetMap',
     cardTitle: 'Bản đồ {dest}, chạm ghim để xem địa điểm',

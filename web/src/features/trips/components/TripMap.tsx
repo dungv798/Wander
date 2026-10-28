@@ -51,7 +51,7 @@ export function TripMap({ coveredBottom }: TripMapProps) {
   }, [inDay, cat]);
 
   const fitKey = dayIndex < 0 ? '' : inDay.map((i) => i.id).join(',');
-  const fit = useMemo<MapFit>(() => ({ ids: dayIndex < 0 ? null : fitKey.split(',').filter(Boolean), options: { animate: true } }), [dayIndex, fitKey]);
+  const fit = useMemo<MapFit>(() => ({ ids: dayIndex < 0 ? null : fitKey.split(',').filter(Boolean), options: { animate: true, keepIfVisible: true } }), [dayIndex, fitKey]);
   const insets = useMemo(() => (coveredBottom ? { bottom: coveredBottom, top: TOP_INSET } : {}), [coveredBottom]);
 
   return <TerrainMapView className="tmap" dest={cat.dest.id} label={T.view.mapLabel} markers={markers} route={route} mode={dayIndex < 0 ? 'browse' : 'route'} insets={insets} fit={fit} onPin={openItem} />;

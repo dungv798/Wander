@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { TerrainMap } from './TerrainMap.ts';
+import { GeoMap } from './GeoMap.ts';
 import type { FitOptions, Insets, MapMarker, MapMode, MapRoute } from './map.types.ts';
 
 /** Yêu cầu vừa khung: các ghim (null = tất cả) và tùy chọn. Người gọi nên `useMemo` để không vừa khung lại mỗi lần render. */
@@ -32,7 +32,7 @@ const NO_ROUTE_LABELS: readonly string[] = [];
  * tạo khi phần tử vào DOM, hủy khi rời; các thuộc tính (ghim, tuyến, chế độ, vừa khung) được đẩy vào bằng effect.
  */
 export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, towns = true, credit = true, onPin, className }: TerrainMapViewProps) {
-  const [map, setMap] = useState<TerrainMap | null>(null);
+  const [map, setMap] = useState<GeoMap | null>(null);
   const onPinRef = useRef(onPin);
   useEffect(() => {
     onPinRef.current = onPin;
@@ -42,7 +42,7 @@ export function TerrainMapView({ dest, label, markers, route = null, mode = 'bro
     /** Tạo bản đồ khi phần tử vào DOM; trả hàm hủy khi phần tử rời (ref callback có dọn dẹp của React 19). */
     (el: HTMLDivElement | null) => {
       if (!el) return undefined;
-      const m = new TerrainMap(el, { dest, label, interactive, towns, credit, onPin: (id) => onPinRef.current?.(id) });
+      const m = new GeoMap(el, { dest, label, interactive, towns, credit, onPin: (id) => onPinRef.current?.(id) });
       setMap(m);
       return () => {
         m.destroy();
