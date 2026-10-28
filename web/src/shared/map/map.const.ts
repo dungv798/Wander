@@ -57,6 +57,8 @@ export const MAP = {
   GL_MAX_ZOOM: 17,
   /** Phóng tối đa khi vừa khung ghim (một ghim đơn lẻ không bị phóng sát). */
   GL_FIT_MAX_ZOOM: 14,
+  /** Số chữ số thập phân của điểm kiểm mức zoom. */
+  ZOOM_DIGITS: 2,
   /** Bề rộng nét tuyến và viền sáng quanh nó (px). */
   ROUTE_WIDTH: 4.5,
   ROUTE_HALO_WIDTH: 9,

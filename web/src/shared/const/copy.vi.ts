@@ -150,6 +150,7 @@ export const COPY = {
   map: {
     name: 'Bản đồ địa hình',
     loadError: 'Không tải được bản đồ.',
+    degraded: 'Một phần nền bản đồ chưa tải được. Bạn vẫn có thể xem ghim và tuyến.',
     retry: 'Thử lại',
     zoomIn: 'Phóng to',
     zoomOut: 'Thu nhỏ',

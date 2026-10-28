@@ -41,6 +41,7 @@ export class MapLayers {
   private laidOut = false;
   private towns: { el: HTMLElement; p: Pt }[] = [];
   private segMids: { index: number; p: Pt }[] = [];
+  private pinLabels: { el: HTMLElement; p: Pt; offset: Pt }[] = [];
 
   /**
    * Dựng khung rỗng (lớp nhãn, lớp ghim, và SVG nền nếu `withSvg`) vào phần tử chứa.
@@ -160,6 +161,10 @@ export class MapLayers {
     });
     this.clusters.forEach((c) => moveTo(c.el, project(c.p)));
     this.towns.forEach((t) => moveTo(t.el, project(t.p)));
+    this.pinLabels.forEach((label) => {
+      const at = project(label.p);
+      moveTo(label.el, [at[0] + label.offset[0], at[1] + label.offset[1]]);
+    });
     this.segMids.forEach((m) => {
       const el = this.labels.querySelector<HTMLElement>(`.tm-seg-label[data-i="${m.index}"]`);
       if (el) moveTo(el, project(m.p));
@@ -217,6 +222,7 @@ export class MapLayers {
   /** Đặt nhãn tên cho các ghim đang hiện (ghim đang chọn trước, ghim mờ sau); trả các hộp nhãn đã đặt. */
   private placePinLabels(ctx: LayoutContext, shown: Map<string, boolean>, pinBoxes: readonly Box[]): Box[] {
     this.labels.querySelectorAll('.tm-pin-label').forEach((n) => n.remove());
+    this.pinLabels = [];
     const order = ctx.markers
       .filter((m) => shown.get(m.id) && m.label && (!m.muted || m.id === ctx.selected))
       .sort((a, b) => Number(b.id === ctx.selected) - Number(a.id === ctx.selected) || Number(Boolean(a.muted)) - Number(Boolean(b.muted)));
@@ -228,7 +234,11 @@ export class MapLayers {
     const { placed, boxes } = placeLabels(els.map((e) => ({ id: e.m.id, at: ctx.project(e.m.p), w: e.w, h: e.h })), pinBoxes, ctx.size);
     els.forEach((e) => {
       const at = placed.get(e.m.id);
-      if (at) moveTo(e.el, at);
+      if (at) {
+        const anchor = ctx.project(e.m.p);
+        this.pinLabels.push({ el: e.el, p: e.m.p, offset: [at[0] - anchor[0], at[1] - anchor[1]] });
+        moveTo(e.el, at);
+      }
       else e.el.remove();
     });
     return boxes;

@@ -101,6 +101,8 @@ export interface MapRoute {
 export interface FitOptions {
   readonly padding?: number;
   readonly animate?: boolean;
+  /** Trần zoom MapLibre cho lần vừa khung này (cụm được phóng gần hơn ghim thường). */
+  readonly maxZoom?: number;
   readonly maxZoomFactor?: number;
   /** Người dùng đã tự kéo/phóng và mọi điểm cần vừa khung đã nằm trong tầm nhìn thì giữ nguyên camera (đổi tab ngày không reset chỗ vừa zoom). */
   readonly keepIfVisible?: boolean;

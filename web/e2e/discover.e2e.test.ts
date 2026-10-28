@@ -174,6 +174,7 @@ test('bản đồ: ghim ảnh thật, gộp cụm, mở rộng toàn màn, phón
   const before = await zoomOf();
   await dialog.getByRole('button', { name: 'Phóng to', exact: true }).click();
   await page.waitForFunction((z) => Number((document.querySelector('.mapbig') as HTMLElement | null)?.dataset['zoom']) > z, before, { timeout: 15000 });
+  assert.equal(await page.locator('.tm-degraded').count(), 0, 'nền bản đồ tải bình thường thì không hiện cảnh báo "một phần nền chưa tải được"');
   await dialog.locator('.tm-pin:not(.is-hidden)').first().click();
   await page.getByRole('dialog', { name: /./ }).first().waitFor();
   assert.deepEqual(errors, []);

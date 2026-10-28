@@ -3,6 +3,8 @@ import { COPY } from '../const/copy.vi.ts';
 import { HALF } from '../const/math.const.ts';
 import { MapLayers } from './MapLayers.ts';
 import { routeArcs } from './geoRoute.ts';
+import { showBasemapError } from './geoMapErrors.ts';
+import { fitMaxZoom, needsInsetRefit } from './geoMapPolicy.ts';
 import { addRouteLayers, setRouteLines } from './geoRouteLayer.ts';
 import { loadMapLibre } from './maplibreLoader.ts';
 import type { MapLibre } from './maplibreLoader.ts';
@@ -12,8 +14,6 @@ import { prefersReducedMotion, sameMarkers } from './mapUtil.ts';
 import type { FitOptions, Insets, MapMarker, MapMode, MapRoute, ProjectedMarker, Pt, TerrainMapOptions } from './map.types.ts';
 
 const NO_INSET: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
-const NO_LABELS: readonly string[] = [];
-const ZOOM_DIGITS = 2;
 
 /** Camera đang chờ bản đồ tải xong: vừa khung các ghim (null = tất cả). */
 interface FitRequest {
@@ -76,7 +76,13 @@ export class GeoMap {
 
   /** Đặt vùng nhìn thấy thật sự (ví dụ trừ phần tờ dưới che) để vừa khung căn giữa đúng. */
   setInsets(inset: Partial<Insets>): void {
-    if (!this.dead) this.inset = { ...NO_INSET, ...inset };
+    if (this.dead) return;
+    const before = this.inset;
+    this.inset = { ...NO_INSET, ...inset };
+    const fit = this.lastFit;
+    if (!this.ready || !fit) return;
+    const pts = this.markers.filter((m) => !fit.ids || fit.ids.includes(m.id)).map((m) => m.p);
+    if (needsInsetRefit(before, this.inset, this.touchedByUser, this.allInView(pts))) this.fitTo(fit.ids, { ...fit.o, animate: false, keepIfVisible: false });
   }
 
   /** Đặt danh sách ghim (hiện khi bản đồ đã tải). */
@@ -94,7 +100,7 @@ export class GeoMap {
   }
 
   /** Vẽ tuyến nối các ghim theo thứ tự id; nhãn khoảng cách tùy chọn theo từng đoạn. */
-  setRoute(ids: readonly string[] | null, labels: readonly string[] = NO_LABELS): void {
+  setRoute(ids: readonly string[] | null, labels: readonly string[] = []): void {
     if (this.dead) return;
     this.route = ids && ids.length > 1 ? { ids, labels } : null;
     if (this.ready) this.drawRoute();
@@ -177,6 +183,12 @@ export class GeoMap {
       if ((e as { originalEvent?: Event }).originalEvent) this.markTouched();
     });
     map.on('load', () => this.onLoad(map));
+    map.on('error', (event) => {
+      if (!this.dead) showBasemapError(map, this.host, event);
+    });
+    map.on('style.load', () => {
+      if (this.ready && !this.dead) this.drawRoute();
+    });
     return map;
   }
 
@@ -226,7 +238,7 @@ export class GeoMap {
   private layout(): void {
     const gl = this.gl;
     if (!this.ready || !gl) return;
-    this.host.dataset['zoom'] = gl.getZoom().toFixed(ZOOM_DIGITS); // điểm kiểm cho e2e: mức zoom hiện tại
+    this.host.dataset['zoom'] = gl.getZoom().toFixed(MAP.ZOOM_DIGITS); // điểm kiểm cho e2e: mức zoom hiện tại
     const r = this.host.getBoundingClientRect();
     this.layers.layout({
       markers: this.markers,
@@ -235,7 +247,7 @@ export class GeoMap {
       project: this.project,
       size: { w: Math.max(1, r.width), h: Math.max(1, r.height) },
       scale: gl.getZoom(),
-      onCluster: (ids) => this.fitTo(ids, { padding: MAP.CLUSTER_FIT_PADDING }),
+      onCluster: (ids) => this.fitTo(ids, { padding: MAP.CLUSTER_FIT_PADDING, maxZoom: MAP.GL_MAX_ZOOM }),
       clusterLabel: (n) => `${n} ${COPY.map.cluster}`,
     });
   }
@@ -264,14 +276,13 @@ export class GeoMap {
 
   /** Bay (hoặc nhảy, khi giảm chuyển động) tới khung vừa các điểm. */
   private fitPoints(pts: readonly Pt[], o: FitOptions): void {
-    const ml = this.ml;
-    const gl = this.gl;
+    const { ml, gl } = this;
     const first = pts[0];
     if (!ml || !gl || !first) return;
     const bounds: LngLatBounds = new ml.LngLatBounds([first[0], first[1]], [first[0], first[1]]);
     pts.forEach((p) => bounds.extend([p[0], p[1]]));
     const animate = o.animate !== false && !prefersReducedMotion();
-    gl.fitBounds(bounds, { padding: this.fitPadding(o.padding ?? MAP.FIT_PADDING), maxZoom: MAP.GL_FIT_MAX_ZOOM, duration: animate ? MAP.FLY_MS : 0, essential: true });
+    gl.fitBounds(bounds, { padding: this.fitPadding(o.padding ?? MAP.FIT_PADDING), maxZoom: fitMaxZoom(o), duration: animate ? MAP.FLY_MS : 0, essential: true });
   }
 
   /** Cho thấy cả nước (khi chưa có ghim nào). */
