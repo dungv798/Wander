@@ -62,4 +62,43 @@ public final class PlanningApiConstants {
 
     private PlanningApiConstants() {
     }
+
+    /** Liên kết mời của một chuyến. */
+    public static final String INVITES_PATH = TRIP_PATH + "/invites";
+
+    /** Liên kết mời đang dùng (để thu hồi). */
+    public static final String INVITE_ACTIVE_PATH = INVITES_PATH + "/active";
+
+    /** Thành viên của một chuyến. */
+    public static final String MEMBERS_PATH = TRIP_PATH + "/members";
+
+    /** Một thành viên theo mã. */
+    public static final String MEMBER_PATH = MEMBERS_PATH + "/{memberId}";
+
+    /** Chính người gọi trong chuyến. */
+    public static final String MEMBER_ME_PATH = MEMBERS_PATH + "/me";
+
+    /** Gốc API liên kết mời không gắn với một chuyến cụ thể. */
+    public static final String INVITES_BASE_PATH = "/api/invites";
+
+    /** Xem trước liên kết (công khai, có hạn mức). */
+    public static final String INVITE_PREVIEW_PATH = "/preview";
+
+    /** Vào chuyến bằng liên kết (cần phiên). */
+    public static final String INVITE_JOIN_PATH = "/join";
+
+    /** Khóa JSON của liên kết mời. */
+    public static final String KEY_INVITE = "invite";
+
+    /** Khóa JSON của một thành viên. */
+    public static final String KEY_MEMBER = "member";
+
+    /** Khóa JSON của danh sách thành viên. */
+    public static final String KEY_MEMBERS = "members";
+
+    /** Khóa JSON mã chuyến vừa vào. */
+    public static final String KEY_TRIP_ID = "tripId";
+
+    /** Tên đoạn đường dẫn "me" dùng cho thành viên hiện tại. */
+    public static final String ME = "me";
 }

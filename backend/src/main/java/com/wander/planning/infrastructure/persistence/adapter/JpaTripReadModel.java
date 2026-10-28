@@ -1,6 +1,9 @@
 package com.wander.planning.infrastructure.persistence.adapter;
 
+import com.wander.planning.application.query.InvitePreviewRow;
+import com.wander.planning.application.query.InviteRow;
 import com.wander.planning.application.query.ItemRow;
+import com.wander.planning.application.query.MemberRow;
 import com.wander.planning.application.query.TripReadModel;
 import com.wander.planning.application.query.TripRow;
 import com.wander.planning.infrastructure.persistence.constant.PlanningQueryConstants;
@@ -40,6 +43,25 @@ public class JpaTripReadModel implements TripReadModel {
         return em.createQuery(PlanningQueryConstants.OWNER_INTEREST_PREFERENCES, String.class)
                 .setParameter(PlanningQueryConstants.PARAM_OWNER, ownerId)
                 .getResultStream().findFirst().orElse("");
+    }
+
+    @Override
+    public List<MemberRow> members(UUID tripId) {
+        return em.createQuery(PlanningQueryConstants.MEMBERS_OF_TRIP, MemberRow.class)
+                .setParameter(PlanningQueryConstants.PARAM_TRIP, tripId).getResultList();
+    }
+
+    @Override
+    public Optional<InviteRow> unrevokedInvite(UUID tripId) {
+        return em.createQuery(PlanningQueryConstants.UNREVOKED_INVITE_OF_TRIP, InviteRow.class)
+                .setParameter(PlanningQueryConstants.PARAM_TRIP, tripId).getResultStream().findFirst();
+    }
+
+    @Override
+    public Optional<InvitePreviewRow> previewInvite(String codeHash, java.time.Instant now) {
+        return em.createQuery(PlanningQueryConstants.INVITE_PREVIEW, InvitePreviewRow.class)
+                .setParameter(PlanningQueryConstants.PARAM_CODE_HASH, codeHash)
+                .setParameter(PlanningQueryConstants.PARAM_NOW, now).getResultStream().findFirst();
     }
 
     @Override

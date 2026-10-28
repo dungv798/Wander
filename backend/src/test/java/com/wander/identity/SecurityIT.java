@@ -36,7 +36,8 @@ class SecurityIT extends ApiTestSupport {
             "GET /api/device-links/{id}",
             "GET /api/catalog/destinations",
             "GET /api/catalog/destinations/{id}",
-            "GET /api/catalog/destinations/{id}/templates");
+            "GET /api/catalog/destinations/{id}/templates",
+            "POST /api/invites/preview");
 
     private static final String WELL_FORMED_UNKNOWN_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
@@ -72,7 +73,7 @@ class SecurityIT extends ApiTestSupport {
     }
 
     @Test
-    @DisplayName("kiểm kê route: đúng 8 điểm cuối công khai, mọi /api còn lại trả 401 UNAUTHENTICATED khi thiếu hoặc sai phiên")
+    @DisplayName("kiểm kê route: đúng 9 điểm cuối công khai, mọi /api còn lại trả 401 UNAUTHENTICATED khi thiếu hoặc sai phiên")
     void routeInventory() {
         List<Route> routes = apiRoutes();
         assertThat(routes.size()).as("kiểm kê không được rỗng (tránh test đạt vì không kiểm gì)").isGreaterThan(20);

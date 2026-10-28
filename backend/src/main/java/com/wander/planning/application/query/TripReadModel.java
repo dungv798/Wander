@@ -17,6 +17,15 @@ public interface TripReadModel {
     /** Chuyến của chủ, mới nhất trước (ngày đi giảm dần, rồi thời điểm tạo giảm dần). */
     List<TripRow> listTrips(UUID ownerId);
 
+    /** Mọi thành viên của chuyến, theo thứ tự vào. */
+    List<MemberRow> members(UUID tripId);
+
+    /** Liên kết mời chưa thu hồi của chuyến, nếu có. */
+    Optional<InviteRow> unrevokedInvite(UUID tripId);
+
+    /** Xem trước liên kết mời còn dùng được tại {@code now}; mã sai/hết hạn/thu hồi/chuyến đã xóa đều trả trống. */
+    Optional<InvitePreviewRow> previewInvite(String codeHash, java.time.Instant now);
+
     /** Chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
     List<TripRow> listDeletedTrips(UUID ownerId);
 

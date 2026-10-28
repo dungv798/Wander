@@ -15,26 +15,37 @@ public final class PlanningQueryConstants {
     /** Tham số: mã mục. */
     public static final String PARAM_ITEM_ID = "id";
 
+    /** Tham số: băm mã liên kết mời. */
+    public static final String PARAM_CODE_HASH = "codeHash";
+
     /** Tham số: mã người hoàn thành. */
     public static final String PARAM_PERSON = "person";
 
     /** Chọn các cột của chuyến thành dòng phẳng {@code TripRow} (constructor expression). */
     public static final String TRIP_ROW = "select new com.wander.planning.application.query.TripRow("
             + "t.id, t.ownerIdentityId, t.name, t.destination, t.startDate, t.endDate, t.budgetK, t.styles, t.pace, t.datesTentative, t.kind, t.interests, "
-            + "t.createdAt, t.updatedAt, t.deletedAt) "
+            + "t.createdAt, t.updatedAt, t.deletedAt, "
+            + "(select m.role from TripMemberEntity m where m.trip = t and m.identityId = :" + PARAM_OWNER + "), "
+            + "(select count(m2) from TripMemberEntity m2 where m2.trip = t)) "
             + "from TripEntity t ";
 
     /** Chọn các cột của mục thành dòng phẳng {@code ItemRow} (constructor expression). */
     public static final String ITEM_ROW = "select new com.wander.planning.application.query.ItemRow("
             + "i.id, i.trip.id, i.dayDate, i.position, i.type, i.title, i.timeOfDay, i.durationMin, i.note, "
-            + "i.costK, i.included, i.referenceK, i.bookingStatus, i.placeId, i.deletedAt, i.createdAt) from ItemEntity i ";
+            + "i.costK, i.included, i.referenceK, i.bookingStatus, i.placeId, i.deletedAt, i.createdAt, i.addedByMemberId) from ItemEntity i ";
 
-    /** Điều kiện: chuyến CÒN HIỆN theo mã và chủ (chuyến đã xóa mềm coi như không có). */
-    public static final String WHERE_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is null";
+    /** Điều kiện: người này là thành viên của chuyến (mọi vai). */
+    public static final String IS_MEMBER = "exists (select 1 from TripMemberEntity mm where mm.trip = t and mm.identityId = :" + PARAM_OWNER + ")";
+
+    /** Điều kiện: chuyến CÒN HIỆN theo mã mà người gọi là thành viên (người ngoài và chuyến đã xóa mềm coi như không có). */
+    public static final String WHERE_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and " + IS_MEMBER + " and t.deletedAt is null";
+
+    /** Điều kiện chuyến ĐÃ XÓA MỀM theo mã của đúng chủ (chỉ Organizer thấy chuyến đã xóa). */
+    public static final String WHERE_DELETED_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null";
 
     /** Điều kiện và thứ tự: mọi chuyến của chủ, mới nhất trước. */
     public static final String WHERE_OWNER_NEWEST_FIRST =
-            "where t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is null order by t.startDate desc, t.createdAt desc";
+            "where " + IS_MEMBER + " and t.deletedAt is null order by t.startDate desc, t.createdAt desc";
 
     /** Điều kiện và thứ tự: chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
     public static final String WHERE_OWNER_DELETED_RECENT_FIRST =
@@ -69,11 +80,31 @@ public final class PlanningQueryConstants {
 
     /** Nạp chuyến của chủ kèm mọi mục trong một truy vấn (tránh N+1). */
     public static final String TRIP_WITH_ITEMS = "select distinct t from TripEntity t left join fetch t.items "
-            + "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is null";
+            + "where t.id = :" + PARAM_TRIP_ID + " and t.deletedAt is null and exists (select 1 from TripMemberEntity mm where mm.trip = t and mm.identityId = :" + PARAM_OWNER + ")";
 
     /** Nạp chuyến ĐÃ XÓA MỀM của chủ kèm mục (để khôi phục). */
     public static final String TRIP_WITH_ITEMS_DELETED = "select distinct t from TripEntity t left join fetch t.items "
             + "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null";
+
+    /** Chuyến còn hiện có liên kết mời với băm mã này (kể cả liên kết hết hạn/thu hồi: domain quyết định). */
+    public static final String TRIP_BY_INVITE_HASH = "select distinct t from TripEntity t left join fetch t.items where t.deletedAt is null "
+            + "and exists (select 1 from TripInviteEntity i where i.trip = t and i.codeHash = :" + PARAM_CODE_HASH + ")";
+
+    /** Mọi thành viên của chuyến, theo thứ tự vào. */
+    public static final String MEMBERS_OF_TRIP = "select new com.wander.planning.application.query.MemberRow(m.id, m.identityId, m.role, m.displayName, m.joinedAt) "
+            + "from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP + " order by m.joinedAt, m.id";
+
+    /** Liên kết mời chưa thu hồi của chuyến (tối đa một). */
+    public static final String UNREVOKED_INVITE_OF_TRIP = "select new com.wander.planning.application.query.InviteRow(i.id, i.createdAt, i.expiresAt, i.revokedAt) "
+            + "from TripInviteEntity i where i.trip.id = :" + PARAM_TRIP + " and i.revokedAt is null";
+
+    /** Tham số: thời điểm hiện tại. */
+    public static final String PARAM_NOW = "now";
+
+    /** Xem trước liên kết mời còn dùng được: tên chuyến và số thành viên. */
+    public static final String INVITE_PREVIEW = "select new com.wander.planning.application.query.InvitePreviewRow(t.name, (select count(m) from TripMemberEntity m where m.trip = t)) "
+            + "from TripEntity t where t.deletedAt is null and exists (select 1 from TripInviteEntity i where i.trip = t and i.codeHash = :" + PARAM_CODE_HASH
+            + " and i.revokedAt is null and i.expiresAt > :" + PARAM_NOW + ")";
 
     private PlanningQueryConstants() {
     }

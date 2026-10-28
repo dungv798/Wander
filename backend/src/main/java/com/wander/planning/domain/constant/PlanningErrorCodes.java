@@ -68,4 +68,19 @@ public final class PlanningErrorCodes {
 
     private PlanningErrorCodes() {
     }
+
+    /** Liên kết mời sai, hết hạn, đã thu hồi hoặc chuyến đã xóa: MỘT lỗi chung, không lộ loại. */
+    public static final String INVALID_INVITE = "INVALID_INVITE";
+
+    /** Chuyến đã đủ số thành viên tối đa. */
+    public static final String TRIP_FULL = "TRIP_FULL";
+
+    /** Việc này chỉ Organizer làm được. */
+    public static final String NOT_ORGANIZER = "NOT_ORGANIZER";
+
+    /** Thành viên chỉ sửa/xóa được mục do chính mình thêm. */
+    public static final String NOT_YOUR_ITEM = "NOT_YOUR_ITEM";
+
+    /** Organizer không rời hay bị gỡ khỏi chuyến của mình (muốn bỏ thì xóa chuyến). */
+    public static final String ORGANIZER_CANNOT_LEAVE = "ORGANIZER_CANNOT_LEAVE";
 }

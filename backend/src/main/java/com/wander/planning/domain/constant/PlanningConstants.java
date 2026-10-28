@@ -137,4 +137,31 @@ public final class PlanningConstants {
 
     private PlanningConstants() {
     }
+
+    /** Số thành viên tối đa của một chuyến, kể cả Organizer (H5, Tầng B). */
+    public static final int MAX_MEMBERS = 10;
+
+    /** Liên kết mời hết hạn sau bấy nhiêu ngày kể từ lúc tạo (Q7). */
+    public static final long INVITE_TTL_DAYS = 7;
+
+    /** Tên hiển thị tối đa (tính theo code point). */
+    public static final int MAX_DISPLAY_NAME = 40;
+
+    /** Tên hiển thị mặc định (và tên dành riêng) của Organizer: trung tính, KHÔNG lấy tên thiết bị. */
+    public static final String ORGANIZER_DISPLAY_NAME = "Organizer";
+
+    /** Số byte ngẫu nhiên của mã mời (256 bit → 43 ký tự base64url). */
+    public static final int INVITE_CODE_BYTES = 32;
+
+    /** Mã mời đúng dạng: 43 ký tự base64url. */
+    public static final String INVITE_CODE_REGEX = "[A-Za-z0-9_-]{43}";
+
+    /** Thuật toán băm mã mời. */
+    public static final String INVITE_HASH_ALGORITHM = "SHA-256";
+
+    /** Tiền tố miền của băm mã mời. */
+    public static final String INVITE_HASH_PREFIX = "wander.invite.v1:";
+
+    /** Độ dài cột vai thành viên. */
+    public static final int ROLE_COLUMN_LENGTH = 16;
 }

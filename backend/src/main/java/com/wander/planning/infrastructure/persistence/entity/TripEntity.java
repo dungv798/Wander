@@ -74,6 +74,12 @@ public class TripEntity {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemEntity> items = new ArrayList<>();
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripMemberEntity> members = new ArrayList<>();
+
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripInviteEntity> invites = new ArrayList<>();
+
     protected TripEntity() {
     }
 
@@ -112,4 +118,6 @@ public class TripEntity {
     public void setDeletedAt(Instant v) { this.deletedAt = v; }
     public long getVersion() { return version; }
     public List<ItemEntity> getItems() { return items; }
+    public List<TripMemberEntity> getMembers() { return members; }
+    public List<TripInviteEntity> getInvites() { return invites; }
 }

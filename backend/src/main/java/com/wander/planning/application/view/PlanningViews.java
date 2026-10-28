@@ -17,7 +17,8 @@ public final class PlanningViews {
 
     public record TripView(String id, String name, String destination, String startDate, String endDate,
                            Long budgetK, String budgetFormatted, List<Choice> styles, Choice pace,
-                           boolean datesTentative, Choice kind, List<Choice> interests, String createdAt, String updatedAt) {
+                           boolean datesTentative, Choice kind, List<Choice> interests, String createdAt, String updatedAt,
+                       String role, int memberCount) {
     }
 
     /**
@@ -36,7 +37,23 @@ public final class PlanningViews {
     public record ItemView(String id, String tripId, String placeId, String day, int position, String type, String typeLabel,
                            String title, String timeOfDay, Integer durationMin, String note, Long costK,
                            String costFormatted, boolean included, Long referenceK, String referenceFormatted,
-                           String booking, String bookingLabel, boolean done, String deletedAt) {
+                           String booking, String bookingLabel, boolean done, String deletedAt, String addedBy) {
+    }
+
+    /** Một thành viên của chuyến. KHÔNG có mã danh tính hay tên thiết bị; {@code self} đánh dấu chính người gọi. */
+    public record MemberView(String id, String displayName, String role, String joinedAt, boolean self) {
+    }
+
+    /** Trạng thái liên kết mời (không có mã). */
+    public record InviteView(String id, String createdAt, String expiresAt, boolean active) {
+    }
+
+    /** Liên kết mới tạo: mã chỉ hiện đúng lần này. */
+    public record CreatedInviteView(String id, String code, String expiresAt) {
+    }
+
+    /** Xem trước liên kết mời. */
+    public record InvitePreviewView(String tripName, long memberCount) {
     }
 
     /** Chuyến trong "Chuyến đã xóa gần đây": chuyến và thời điểm xóa (ISO-8601). */

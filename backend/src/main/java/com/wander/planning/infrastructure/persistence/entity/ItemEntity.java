@@ -82,6 +82,10 @@ public class ItemEntity {
     @CollectionTable(name = "item_completions", joinColumns = @JoinColumn(name = "item_id"))
     private Set<Completion> completions = new HashSet<>();
 
+    /** Mã thành viên đã thêm mục (NULL = Organizer/dữ liệu cũ). */
+    @Column(name = "added_by_member_id")
+    private UUID addedByMemberId;
+
     protected ItemEntity() {
     }
 
@@ -121,6 +125,8 @@ public class ItemEntity {
     }
 
     public UUID getId() { return id; }
+    public UUID getAddedByMemberId() { return addedByMemberId; }
+    public void setAddedByMemberId(UUID v) { this.addedByMemberId = v; }
     public TripEntity getTrip() { return trip; }
     public LocalDate getDayDate() { return dayDate; }
     public void setDayDate(LocalDate v) { this.dayDate = v; }

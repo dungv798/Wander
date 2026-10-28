@@ -11,11 +11,14 @@ import java.util.UUID;
  */
 public interface TripRepository {
 
-    /** Chuyến theo mã của đúng chủ, kèm mọi mục; chuyến của người khác coi như không có. */
-    Optional<Trip> findOwned(UUID tripId, UUID ownerId);
+    /** Chuyến CÒN HIỆN theo mã mà người này là thành viên (mọi vai), kèm mọi mục; người ngoài và chuyến đã xóa coi như không có (404, INV-6). */
+    Optional<Trip> findAccessible(UUID tripId, UUID identityId);
 
     /** Chuyến ĐÃ XÓA MỀM của đúng chủ (để khôi phục); {@link #findOwned} không trả chuyến đã xóa. */
     Optional<Trip> findOwnedDeleted(UUID tripId, UUID ownerId);
+
+    /** Chuyến còn hiện mà liên kết mời (theo băm mã) thuộc về — kể cả liên kết hết hạn/đã thu hồi, domain tự quyết có dùng được không. */
+    Optional<Trip> findByInviteHash(String codeHash);
 
     /** Lưu chuyến (thêm mới hoặc cập nhật); phiên bản lệch thì ném lỗi khóa lạc quan. */
     void save(Trip trip);

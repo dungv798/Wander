@@ -41,11 +41,13 @@ public final class Item {
     private Instant updatedAt;
     /** Hoàn thành theo cặp (việc × người), đề xuất P5. Ở Lát 1a người duy nhất là chủ chuyến. */
     private final Map<UUID, Instant> completions;
+    /** Mã THÀNH VIÊN đã thêm mục (null = Organizer/dữ liệu cũ); dùng cho quyền sửa/xóa mục của mình (H3). */
+    private final UUID addedByMemberId;
 
     /** Dựng lại từ dữ liệu đã lưu (không chuẩn hóa lại: cơ sở dữ liệu có ràng buộc CHECK tương ứng). */
     public Item(UUID id, LocalDate day, int position, ItemType type, String title, LocalTime timeOfDay,
                 Integer durationMin, String note, ItemCost cost, BookingStatus booking, String placeId, Instant deletedAt,
-                Instant createdAt, Instant updatedAt, Map<UUID, Instant> completions) {
+                Instant createdAt, Instant updatedAt, Map<UUID, Instant> completions, UUID addedByMemberId) {
         this.id = id;
         this.day = day;
         this.position = position;
@@ -61,13 +63,19 @@ public final class Item {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.completions = new LinkedHashMap<>(completions);
+        this.addedByMemberId = addedByMemberId;
+    }
+
+    /** Mã thành viên đã thêm mục; null nếu do Organizer thêm hoặc là dữ liệu cũ. */
+    public UUID addedByMemberId() {
+        return addedByMemberId;
     }
 
     /** Tạo mục mới ở vị trí 0 của ngày {@code day} (null = chưa có ngày) từ các trường đã kiểm tra; Trip sẽ đánh số lại vị trí. */
-    static Item create(LocalDate day, ItemDetails details, Instant now) {
+    static Item create(LocalDate day, ItemDetails details, UUID addedByMemberId, Instant now) {
         return new Item(UUID.randomUUID(), day, 0, details.type(), details.title(), details.timeOfDay(),
                 checkDuration(details.durationMin()), details.note(), details.cost(),
-                bookingFor(details.type(), details.booking()), details.placeId(), null, now, now, Map.of());
+                bookingFor(details.type(), details.booking()), details.placeId(), null, now, now, Map.of(), addedByMemberId);
     }
 
     /**

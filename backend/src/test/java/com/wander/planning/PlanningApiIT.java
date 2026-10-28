@@ -381,7 +381,7 @@ class PlanningApiIT extends ApiTestSupport {
         assertThat(call("PUT", base + "/done", u.token(), Map.of("done", true)).status()).isEqualTo(200);
         call("DELETE", base, u.token());
         assertThat(call("DELETE", base + "/permanent", u.token()).status()).isEqualTo(204);
-        assertThat(jdbc.sql("SELECT count(*) FROM item_completions").query(Long.class).single()).isZero();
+        assertThat(jdbc.sql("SELECT count(*) FROM item_completions WHERE item_id = ?::uuid").param(task).query(Long.class).single()).isZero();
     }
 
     @Test

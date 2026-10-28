@@ -83,4 +83,10 @@ public final class PlanningFields {
 
     private PlanningFields() {
     }
+
+    /** Tên hiển thị của thành viên. */
+    public static final String DISPLAY_NAME = "displayName";
+
+    /** Mã liên kết mời. */
+    public static final String INVITE_CODE = "code";
 }

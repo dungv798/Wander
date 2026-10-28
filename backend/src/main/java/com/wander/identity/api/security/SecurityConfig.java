@@ -55,7 +55,8 @@ public class SecurityConfig {
             publicRoute(HttpMethod.POST, IdentityApiConstants.PUBLIC_RECOVERY_COMPLETE_PATTERN),
             publicRoute(HttpMethod.POST, IdentityApiConstants.PUBLIC_DEVICE_LINKS_PATTERN),
             publicRoute(HttpMethod.GET, IdentityApiConstants.PUBLIC_DEVICE_LINK_STATUS_PATTERN),
-            publicRoute(HttpMethod.GET, IdentityApiConstants.PUBLIC_CATALOG_PATTERN));
+            publicRoute(HttpMethod.GET, IdentityApiConstants.PUBLIC_CATALOG_PATTERN),
+            publicRoute(HttpMethod.POST, IdentityApiConstants.PUBLIC_INVITE_PREVIEW_PATTERN));
 
     /** Bộ khớp đường dẫn công khai theo phương thức HTTP và mẫu đường dẫn. */
     private static RequestMatcher publicRoute(HttpMethod method, String pattern) {

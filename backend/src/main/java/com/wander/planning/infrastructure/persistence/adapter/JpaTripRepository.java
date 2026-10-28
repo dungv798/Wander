@@ -2,10 +2,14 @@ package com.wander.planning.infrastructure.persistence.adapter;
 
 import com.wander.planning.domain.model.Item;
 import com.wander.planning.domain.model.Trip;
+import com.wander.planning.domain.model.TripInvite;
+import com.wander.planning.domain.model.TripMember;
 import com.wander.planning.domain.port.TripRepository;
 import com.wander.planning.infrastructure.persistence.constant.PlanningQueryConstants;
 import com.wander.planning.infrastructure.persistence.entity.ItemEntity;
 import com.wander.planning.infrastructure.persistence.entity.TripEntity;
+import com.wander.planning.infrastructure.persistence.entity.TripInviteEntity;
+import com.wander.planning.infrastructure.persistence.entity.TripMemberEntity;
 import com.wander.planning.infrastructure.persistence.mapper.TripMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
@@ -40,7 +44,14 @@ public class JpaTripRepository implements TripRepository {
     }
 
     @Override
-    public Optional<Trip> findOwned(UUID tripId, UUID ownerId) {
+    public Optional<Trip> findByInviteHash(String codeHash) {
+        return em.createQuery(PlanningQueryConstants.TRIP_BY_INVITE_HASH, TripEntity.class)
+                .setParameter(PlanningQueryConstants.PARAM_CODE_HASH, codeHash)
+                .getResultList().stream().findFirst().map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<Trip> findAccessible(UUID tripId, UUID ownerId) {
         List<TripEntity> found = em.createQuery(PlanningQueryConstants.TRIP_WITH_ITEMS, TripEntity.class)
                 .setParameter(PlanningQueryConstants.PARAM_TRIP_ID, tripId)
                 .setParameter(PlanningQueryConstants.PARAM_OWNER, ownerId)
@@ -103,6 +114,50 @@ public class JpaTripRepository implements TripRepository {
             copyItem(item, itemEntity);
         }
         entity.getItems().removeIf(itemEntity -> !keep.contains(itemEntity.getId())); // orphanRemoval ⇒ DELETE (xóa vĩnh viễn)
+        copyMembers(trip, entity);
+        copyInvites(trip, entity);
+    }
+
+    /** Đồng bộ thành viên: thêm mới, cập nhật tên, xóa người đã bị gỡ/rời (orphanRemoval). */
+    private void copyMembers(Trip trip, TripEntity entity) {
+        Map<UUID, TripMemberEntity> existing = entity.getMembers().stream().collect(Collectors.toMap(TripMemberEntity::getId, Function.identity()));
+        Set<UUID> keep = new HashSet<>();
+        for (TripMember member : trip.circle().members()) {
+            keep.add(member.id());
+            TripMemberEntity row = existing.get(member.id());
+            if (row == null) {
+                row = new TripMemberEntity(member.id(), entity);
+                row.setIdentityId(member.identityId());
+                row.setRole(member.role().code());
+                row.setJoinedAt(member.joinedAt());
+                entity.getMembers().add(row);
+            }
+            row.setDisplayName(member.displayName());
+        }
+        entity.getMembers().removeIf(row -> !keep.contains(row.getId()));
+    }
+
+    /** Đồng bộ liên kết mời: thêm mới và đánh dấu thu hồi. Thu hồi được flush TRƯỚC khi chèn liên kết mới để không vi phạm chỉ mục duy nhất một liên kết chưa thu hồi. */
+    private void copyInvites(Trip trip, TripEntity entity) {
+        Map<UUID, TripInviteEntity> existing = entity.getInvites().stream().collect(Collectors.toMap(TripInviteEntity::getId, Function.identity()));
+        boolean revoking = false;
+        for (TripInvite invite : trip.circle().invites()) {
+            TripInviteEntity row = existing.get(invite.id());
+            if (row != null && row.getRevokedAt() == null && invite.revokedAt() != null) {
+                row.setRevokedAt(invite.revokedAt());
+                revoking = true;
+            }
+        }
+        if (revoking) em.flush();
+        for (TripInvite invite : trip.circle().invites()) {
+            if (existing.containsKey(invite.id())) continue;
+            TripInviteEntity row = new TripInviteEntity(invite.id(), entity);
+            row.setCodeHash(invite.codeHash());
+            row.setCreatedAt(invite.createdAt());
+            row.setExpiresAt(invite.expiresAt());
+            row.setRevokedAt(invite.revokedAt());
+            entity.getInvites().add(row);
+        }
     }
 
     /** Chép trạng thái một mục và tập hoàn thành vào entity; chỉ đụng tập hoàn thành khi thật sự khác. */

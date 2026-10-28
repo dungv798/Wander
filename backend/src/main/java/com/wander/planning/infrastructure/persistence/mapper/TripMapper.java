@@ -6,9 +6,12 @@ import com.wander.planning.domain.model.DateRange;
 import com.wander.planning.domain.model.Item;
 import com.wander.planning.domain.model.ItemCost;
 import com.wander.planning.domain.model.Trip;
+import com.wander.planning.domain.model.TripInvite;
+import com.wander.planning.domain.model.TripMember;
 import com.wander.planning.domain.model.TripOptions;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
+import com.wander.planning.domain.vocabulary.MemberRole;
 import com.wander.planning.domain.vocabulary.TripInterest;
 import com.wander.planning.domain.vocabulary.TripKind;
 import com.wander.planning.domain.vocabulary.TripPace;
@@ -16,8 +19,11 @@ import com.wander.planning.domain.vocabulary.TripStyle;
 import com.wander.planning.infrastructure.persistence.adapter.JpaTripRepository;
 import com.wander.planning.infrastructure.persistence.entity.ItemEntity;
 import com.wander.planning.infrastructure.persistence.entity.TripEntity;
+import com.wander.planning.infrastructure.persistence.entity.TripInviteEntity;
+import com.wander.planning.infrastructure.persistence.entity.TripMemberEntity;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +52,8 @@ public interface TripMapper {
 
     /** Chuyến domain từ entity (dựng qua constructor nên mọi bất biến được kiểm tra). */
     @Mapping(target = "ownerId", source = "ownerIdentityId")
+    @Mapping(target = "members", expression = "java(members(e.getMembers()))")
+    @Mapping(target = "invites", expression = "java(invites(e.getInvites()))")
     @Mapping(target = "range", expression = "java(new DateRange(e.getStartDate(), e.getEndDate()))")
     @Mapping(target = "options", expression = "java(new TripOptions(e.getBudgetK(), styles(e.getStyles()), pace(e.getPace()), e.isDatesTentative(), kind(e.getKind()), interests(e.getInterests())))")
     Trip toDomain(TripEntity e);
@@ -134,7 +142,23 @@ public interface TripMapper {
     @Mapping(target = "ownerIdentityId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "items", ignore = true)
+    @Mapping(target = "members", ignore = true)
+    @Mapping(target = "invites", ignore = true)
     void update(Trip trip, @MappingTarget TripEntity e);
+
+    /** Thành viên domain từ các dòng đã lưu (thứ tự vào chuyến). */
+    default List<TripMember> members(List<TripMemberEntity> stored) {
+        return stored.stream()
+                .map(m -> new TripMember(m.getId(), m.getIdentityId(), MemberRole.fromCode(m.getRole())
+                        .orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_MEMBER_ROLE.formatted(m.getRole()))), m.getDisplayName(), m.getJoinedAt()))
+                .sorted(Comparator.comparing(TripMember::joinedAt).thenComparing(TripMember::id))
+                .toList();
+    }
+
+    /** Liên kết mời domain từ các dòng đã lưu. */
+    default List<TripInvite> invites(List<TripInviteEntity> stored) {
+        return stored.stream().map(i -> new TripInvite(i.getId(), i.getCodeHash(), i.getCreatedAt(), i.getExpiresAt(), i.getRevokedAt())).toList();
+    }
 
     /** Ghi trạng thái mục domain vào entity đang được theo dõi (không đụng ngày tạo và tập hoàn thành). */
     @Mapping(target = "dayDate", expression = "java(item.day())")
@@ -153,5 +177,6 @@ public interface TripMapper {
     @Mapping(target = "updatedAt", expression = "java(item.updatedAt())")
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "completions", ignore = true)
+    @Mapping(target = "addedByMemberId", expression = "java(item.addedByMemberId())")
     void update(Item item, @MappingTarget ItemEntity ie);
 }

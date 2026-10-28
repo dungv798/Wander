@@ -6,13 +6,11 @@ import com.wander.identity.domain.constant.IdentityMessages;
 import com.wander.identity.domain.rule.Secrets;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
-import java.text.Normalizer;
-import java.util.regex.Pattern;
+import com.wander.shared.kernel.util.Labels;
 
 /** Đọc và kiểm tra các trường đầu vào dạng thô của API Identity; dùng chung cho các service để không viết lại. */
 public final class IdentityInput {
 
-    private static final Pattern DEVICE_NAME_WHITESPACE = Pattern.compile(IdentityConstants.DEVICE_NAME_WHITESPACE_REGEX);
 
     private IdentityInput() {
     }
@@ -42,27 +40,11 @@ public final class IdentityInput {
     public static String deviceName(Object value) {
         if (value == null) return null;
         if (!(value instanceof String raw)) throw WanderException.invalidValue(ErrorCodes.MALFORMED, IdentityFields.DEVICE_NAME);
-        String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC);
-        if (normalized.codePoints().anyMatch(IdentityInput::isForbiddenInDeviceName)) {
-            throw WanderException.invalidValue(ErrorCodes.MALFORMED, IdentityFields.DEVICE_NAME);
-        }
-        String text = DEVICE_NAME_WHITESPACE.matcher(normalized).replaceAll(IdentityConstants.SINGLE_SPACE).strip();
+        String text = Labels.normalize(raw, IdentityConstants.MAX_DEVICE_NAME_LENGTH, IdentityFields.DEVICE_NAME);
         if (text.isEmpty()) return null;
-        if (text.codePointCount(0, text.length()) > IdentityConstants.MAX_DEVICE_NAME_LENGTH) {
-            throw WanderException.invalidValue(ErrorCodes.TOO_LONG, IdentityFields.DEVICE_NAME);
-        }
         return text;
     }
 
-    /** Ký tự không được có trong tên thiết bị: điều khiển, định dạng/vô hình, tách dòng/đoạn, thay thế, vùng riêng, chưa gán. */
-    private static boolean isForbiddenInDeviceName(int codePoint) {
-        if (Character.isISOControl(codePoint)) return true;
-        return switch (Character.getType(codePoint)) {
-            case Character.FORMAT, Character.LINE_SEPARATOR, Character.PARAGRAPH_SEPARATOR, Character.SURROGATE,
-                    Character.PRIVATE_USE, Character.UNASSIGNED -> true;
-            default -> false;
-        };
-    }
 
     /**
      * Số khớp người duyệt chọn: bắt buộc (thiếu ⇒ REQUIRED), phải là số nguyên hai chữ số (chuỗi, số thập phân, boolean, danh

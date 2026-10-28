@@ -23,6 +23,12 @@ public final class CommonConstants {
     /** Mẫu ISO-8601 UTC luôn có mili-giây, ví dụ 2026-10-24T01:02:03.000Z. */
     public static final String ISO_INSTANT_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
+    /** Mọi chuỗi khoảng trắng (kể cả khoảng trắng Unicode) trong nhãn tự khai. */
+    public static final String LABEL_WHITESPACE_REGEX = "[\\p{Zs}\\s]+";
+
+    /** Một dấu cách. */
+    public static final String SINGLE_SPACE = " ";
+
     private CommonConstants() {
     }
 }

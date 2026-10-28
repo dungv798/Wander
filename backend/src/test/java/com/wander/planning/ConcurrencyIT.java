@@ -51,8 +51,8 @@ class ConcurrencyIT extends ApiTestSupport {
         UUID tripId = UUID.fromString(newTrip(u.token()));
         TransactionTemplate tx = new TransactionTemplate(transactionManager);
 
-        Trip first = tx.execute(s -> trips.findOwned(tripId, owner).orElseThrow());
-        Trip second = tx.execute(s -> trips.findOwned(tripId, owner).orElseThrow());
+        Trip first = tx.execute(s -> trips.findAccessible(tripId, owner).orElseThrow());
+        Trip second = tx.execute(s -> trips.findAccessible(tripId, owner).orElseThrow());
         assertThat(first.version()).isEqualTo(second.version());
 
         first.changeDetails("Bản của thiết bị A", first.destination(), first.range(), Instant.now());

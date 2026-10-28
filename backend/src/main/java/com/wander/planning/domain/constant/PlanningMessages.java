@@ -95,4 +95,25 @@ public final class PlanningMessages {
 
     private PlanningMessages() {
     }
+
+    /** Vai lạ trong dữ liệu (lỗi dữ liệu, không phải lỗi người dùng). */
+    public static final String UNKNOWN_MEMBER_ROLE = "Unknown member role in database: %s";
+
+    /** Liên kết mời không dùng được (một thông báo chung). */
+    public static final String INVALID_INVITE = "Liên kết mời không hợp lệ hoặc đã hết hạn.";
+
+    /** Chuyến đã đủ người. */
+    public static final String TRIP_FULL = "Chuyến đi đã đủ số người tối đa.";
+
+    /** Chỉ Organizer. */
+    public static final String NOT_ORGANIZER = "Chỉ Organizer của chuyến làm được việc này.";
+
+    /** Chỉ sửa được mục của mình. */
+    public static final String NOT_YOUR_ITEM = "Bạn chỉ sửa hay xóa được mục do chính bạn thêm.";
+
+    /** Organizer không rời chuyến. */
+    public static final String ORGANIZER_CANNOT_LEAVE = "Organizer không rời hay bị gỡ khỏi chuyến của mình.";
+
+    /** Tên hiển thị trống. */
+    public static final String DISPLAY_NAME_REQUIRED = "Hãy nhập tên hiển thị.";
 }

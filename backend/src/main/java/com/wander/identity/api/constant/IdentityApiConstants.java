@@ -113,4 +113,7 @@ public final class IdentityApiConstants {
 
     private IdentityApiConstants() {
     }
+
+    /** Xem trước liên kết mời chuyến đi: công khai, có hạn mức theo địa chỉ (module planning, lặp lại như PUBLIC_CATALOG_PATTERN). */
+    public static final String PUBLIC_INVITE_PREVIEW_PATTERN = BASE_PATH + "/invites/preview";
 }

@@ -6,6 +6,7 @@ import com.wander.planning.domain.constant.PlanningFields;
 import com.wander.planning.domain.constant.PlanningMessages;
 import com.wander.planning.domain.rule.ItemText;
 import com.wander.planning.domain.vocabulary.ItemType;
+import com.wander.planning.domain.vocabulary.MemberRole;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.util.Patch;
@@ -17,6 +18,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -51,10 +53,13 @@ public final class Trip {
     private Instant deletedAt;
     private final long version;
     private final List<Item> items;
+    /** Vòng người: thành viên (đúng một Organizer, tối đa MAX_MEMBERS, tên không trùng) và liên kết mời (tối đa một chưa thu hồi). */
+    private final TripCircle circle;
 
     /** Dựng lại chuyến từ dữ liệu đã lưu (không chuẩn hóa lại). */
     public Trip(UUID id, UUID ownerId, String name, String destination, DateRange range, TripOptions options,
-                Instant createdAt, Instant updatedAt, Instant deletedAt, long version, List<Item> items) {
+                Instant createdAt, Instant updatedAt, Instant deletedAt, long version, List<Item> items,
+                List<TripMember> members, List<TripInvite> invites) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
@@ -66,6 +71,7 @@ public final class Trip {
         this.deletedAt = deletedAt;
         this.version = version;
         this.items = new ArrayList<>(items);
+        this.circle = new TripCircle(members, invites);
     }
 
     /** A-1: tạo chuyến với tên, điểm đến và khoảng ngày hợp lệ. */
@@ -75,10 +81,12 @@ public final class Trip {
 
     /** A-1 kèm tùy chọn chuyến đi (Q11). */
     public static Trip plan(UUID ownerId, String name, String destination, DateRange range, TripOptions options, Instant now) {
+        UUID tripOwner = ownerId;
+        TripMember organizer = new TripMember(UUID.randomUUID(), tripOwner, MemberRole.ORGANIZER, PlanningConstants.ORGANIZER_DISPLAY_NAME, now);
         return new Trip(UUID.randomUUID(), ownerId,
                 ItemText.required(name, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME),
                 ItemText.required(destination, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION),
-                range, options, now, now, null, 0, List.of());
+                range, options, now, now, null, 0, List.of(), List.of(organizer), List.of());
     }
 
     /** Chuyến đã bị xóa mềm (nằm trong "Chuyến đã xóa gần đây")? */
@@ -103,6 +111,40 @@ public final class Trip {
         if (!isDeleted()) throw WanderException.conflict(PlanningErrorCodes.NOT_DELETED, PlanningMessages.TRIP_NOT_DELETED);
         this.deletedAt = null;
         this.updatedAt = now;
+    }
+
+    // ---- thành viên và liên kết mời (Lát 1b, DR-021): quy tắc ở {@link TripCircle} ----
+
+    /** Vòng người của chuyến: thành viên và liên kết mời cùng các quy tắc (tạo/thu hồi liên kết, vào, gỡ, rời, đổi tên). */
+    public TripCircle circle() {
+        return circle;
+    }
+
+    /** Vai của một danh tính trong chuyến; người ngoài thì trống. */
+    public Optional<MemberRole> roleOf(UUID identityId) {
+        return circle.roleOf(identityId);
+    }
+
+    /** Thành viên của danh tính này; người ngoài ⇒ 404 (không lộ chuyến tồn tại, INV-6). */
+    public TripMember requireMember(UUID identityId) {
+        return circle.requireMember(identityId);
+    }
+
+    /** Chỉ Organizer: người ngoài ⇒ 404, thành viên thường ⇒ 403 NOT_ORGANIZER. */
+    public void requireOrganizer(UUID identityId) {
+        circle.requireOrganizer(identityId);
+    }
+
+    /** Quyền sửa/xóa/khôi phục một mục (H3): Organizer mọi mục; thành viên chỉ mục do mình thêm (403 NOT_YOUR_ITEM); người ngoài 404. */
+    public void requireMayChange(UUID identityId, Item item) {
+        circle.requireMayChange(identityId, item.addedByMemberId());
+    }
+
+    /** Vào chuyến bằng liên kết; chuyến đã xóa mềm không nhận ai (INVALID_INVITE). */
+    public TripMember joinWithInvite(UUID identityId, String rawDisplayName, String codeHash, Instant now) {
+        TripMember member = circle.joinWithInvite(identityId, rawDisplayName, codeHash, now, isDeleted());
+        this.updatedAt = now;
+        return member;
     }
 
     /** Q11: đổi tùy chọn chuyến đi (ngân sách, kiểu, nhịp). Không có lịch sử chỉnh sửa (D19). */
@@ -136,8 +178,13 @@ public final class Trip {
 
     /** A-3: thêm mục vào ngày đã chọn (null = "Chưa có ngày"), mặc định cuối ngày hoặc tại vị trí yêu cầu. */
     public Item addItem(LocalDate day, ItemDetails details, Integer requestedPosition, Instant now) {
+        return addItem(day, details, requestedPosition, null, now);
+    }
+
+    /** Như {@link #addItem(LocalDate, ItemDetails, Integer, Instant)} và ghi thành viên đã thêm (null = Organizer). */
+    public Item addItem(LocalDate day, ItemDetails details, Integer requestedPosition, UUID addedByMemberId, Instant now) {
         if (day != null) requireDayInRange(day);
-        Item item = Item.create(day, details, now);
+        Item item = Item.create(day, details, addedByMemberId, now);
         List<Item> live = liveItems(day);
         items.add(item);
         renumber(insertAt(live, item, requestedPosition == null ? live.size() : requestedPosition));

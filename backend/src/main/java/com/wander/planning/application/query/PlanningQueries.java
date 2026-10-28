@@ -3,8 +3,8 @@ package com.wander.planning.application.query;
 import com.wander.planning.application.view.PlanningViews.Budget;
 import com.wander.planning.application.view.PlanningViews.Choice;
 import com.wander.planning.application.view.PlanningViews.DayTotal;
-import com.wander.planning.application.view.PlanningViews.DeletedTrip;
 import com.wander.planning.application.view.PlanningViews.DayView;
+import com.wander.planning.application.view.PlanningViews.DeletedTrip;
 import com.wander.planning.application.view.PlanningViews.ItemView;
 import com.wander.planning.application.view.PlanningViews.PendingTask;
 import com.wander.planning.application.view.PlanningViews.Totals;
@@ -126,7 +126,7 @@ public class PlanningQueries {
                 : TripKind.fromCode(trip.kind()).map(found -> new Choice(found.code(), found.label())).orElse(new Choice(trip.kind(), trip.kind()));
         return new TripView(trip.id().toString(), trip.name(), trip.destination(), trip.startDate().toString(), trip.endDate().toString(),
                 trip.budgetK(), Vnd.fromThousandsOrNull(trip.budgetK()), styles, pace, trip.datesTentative(), kind, interestChoices(trip.interests()),
-                Timestamps.format(trip.createdAt()), Timestamps.format(trip.updatedAt()));
+                Timestamps.format(trip.createdAt()), Timestamps.format(trip.updatedAt()), trip.role(), (int) trip.memberCount());
     }
 
     /** Sở thích có nhãn từ chuỗi mã cách nhau bằng dấu phẩy; mã lạ trong dữ liệu hiện nguyên mã. */
@@ -146,7 +146,8 @@ public class PlanningQueries {
         return new ItemView(row.id().toString(), row.tripId().toString(), row.placeId(), day, row.position(), row.type(), typeLabel,
                 row.title(), row.timeOfDay() == null ? null : TIME_OF_DAY.format(row.timeOfDay()), row.durationMin(), row.note(),
                 row.costK(), Vnd.fromThousandsOrNull(row.costK()), row.included(), row.referenceK(),
-                Vnd.fromThousandsOrNull(row.referenceK()), row.bookingStatus(), bookingLabel, done, Timestamps.format(row.deletedAt()));
+                Vnd.fromThousandsOrNull(row.referenceK()), row.bookingStatus(), bookingLabel, done, Timestamps.format(row.deletedAt()),
+                row.addedByMemberId() == null ? null : row.addedByMemberId().toString());
     }
 
     /** Mọi mục của chuyến, mục còn hiện mang thứ hạng liền mạch trong ngày (xem {@link #withDenseLivePositions}). */

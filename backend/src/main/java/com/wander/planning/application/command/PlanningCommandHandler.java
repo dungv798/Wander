@@ -90,6 +90,7 @@ public class PlanningCommandHandler {
     /** Sửa tên, điểm đến, khoảng ngày và tùy chọn của chuyến; trường không nêu thì giữ nguyên. */
     public void updateTrip(PlanningCommands.UpdateTrip command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireOrganizer(command.ownerId());
         Map<String, Object> input = command.input();
         String name = valueOrCurrent(input, PlanningFields.NAME,
                 value -> uniqueTripName(command.ownerId(), trip.id(),
@@ -119,6 +120,7 @@ public class PlanningCommandHandler {
      */
     public void applySchedule(PlanningCommands.ApplySchedule command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireOrganizer(command.ownerId());
         Map<String, Object> input = command.input();
         boolean changesRange = input.containsKey(PlanningFields.START_DATE) || input.containsKey(PlanningFields.END_DATE);
         boolean hasAssignments = input.containsKey(PlanningFields.ASSIGNMENTS);
@@ -138,6 +140,7 @@ public class PlanningCommandHandler {
      */
     public UUID addItem(PlanningCommands.AddItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        UUID addedBy = trip.requireMember(command.ownerId()).id();
         Map<String, Object> input = command.input();
         LocalDate day = RawInput.dayOrNull(input.get(PlanningFields.DAY));
         if (day != null) trip.requireDayInRange(day);
@@ -145,7 +148,7 @@ public class PlanningCommandHandler {
                 RawInput.timeOfDay(input.get(PlanningFields.TIME_OF_DAY)), RawInput.durationMin(input.get(PlanningFields.DURATION_MIN)),
                 RawInput.note(input.get(PlanningFields.NOTE)), cost(input, ItemCost.UNKNOWN),
                 RawInput.booking(input.get(PlanningFields.BOOKING)), RawInput.placeId(input.get(PlanningFields.PLACE_ID)));
-        Item item = trip.addItem(day, details, RawInput.position(input.get(PlanningFields.POSITION)), Timestamps.now(clock));
+        Item item = trip.addItem(day, details, RawInput.position(input.get(PlanningFields.POSITION)), addedBy, Timestamps.now(clock));
         trips.save(trip);
         return item.id();
     }
@@ -153,6 +156,7 @@ public class PlanningCommandHandler {
     /** Sửa một mục chưa bị xóa; trường không nêu thì giữ nguyên, có thể đổi ngày và vị trí. */
     public void editItem(PlanningCommands.EditItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
         ItemDetails current = trip.editableItem(command.itemId()).details();
         Map<String, Object> input = command.input();
         // Thứ tự kiểm tra cố định theo hợp đồng API: loại, tiêu đề, giờ, thời lượng, ghi chú, chi phí, đặt chỗ, ngày.
@@ -176,6 +180,7 @@ public class PlanningCommandHandler {
     /** Sắp xếp lại các mục đang hiện trong một ngày theo thứ tự mới; trả ngày đã sắp xếp. */
     public LocalDate reorderDay(PlanningCommands.ReorderDay command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireOrganizer(command.ownerId());
         LocalDate day = RawInput.day(command.day());
         trip.requireDayInRange(day);
         trip.reorderDay(day, parseOrderedIds(command.orderedIds()));
@@ -186,6 +191,7 @@ public class PlanningCommandHandler {
     /** Xóa mềm một mục (vào "Đã xóa gần đây"). */
     public void softDeleteItem(PlanningCommands.SoftDeleteItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
         trip.softDelete(command.itemId(), Timestamps.now(clock));
         trips.save(trip);
     }
@@ -193,6 +199,7 @@ public class PlanningCommandHandler {
     /** Khôi phục một mục đã xóa mềm về đúng ngày và vị trí cũ. */
     public void restoreItem(PlanningCommands.RestoreItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
         trip.restore(command.itemId(), Timestamps.now(clock));
         trips.save(trip);
     }
@@ -200,6 +207,7 @@ public class PlanningCommandHandler {
     /** Xóa vĩnh viễn một mục đã nằm trong "Đã xóa gần đây". */
     public void purgeItem(PlanningCommands.PurgeItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireOrganizer(command.ownerId());
         trip.purge(command.itemId());
         trips.save(trip);
     }
@@ -207,6 +215,7 @@ public class PlanningCommandHandler {
     /** Đánh dấu hoặc bỏ đánh dấu hoàn thành một "Việc cần làm" cho chủ chuyến. */
     public void setTaskDone(PlanningCommands.SetTaskDone command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireMember(command.ownerId());
         Boolean done = command.done() instanceof Boolean flag ? flag : null;
         trip.setTaskDone(command.itemId(), command.ownerId(), done, Timestamps.now(clock));
         trips.save(trip);
@@ -214,10 +223,10 @@ public class PlanningCommandHandler {
 
     // ---- hỗ trợ ----
 
-    /** Nạp chuyến của đúng chủ; chuyến của người khác coi như không có (404). */
     /** Xóa mềm cả chuyến (PO 28/10/2026): chuyến rời danh sách, mục giữ nguyên để khôi phục. */
     public void deleteTrip(PlanningCommands.DeleteTrip command) {
         Trip trip = load(command.ownerId(), command.tripId());
+        trip.requireOrganizer(command.ownerId());
         trip.moveToTrash(Timestamps.now(clock));
         trips.save(trip);
     }
@@ -229,8 +238,9 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    private Trip load(UUID ownerId, UUID tripId) {
-        return trips.findOwned(tripId, ownerId).orElseThrow(WanderException::notFound);
+    /** Nạp chuyến mà người gọi là thành viên (mọi vai); người ngoài và chuyến đã xóa coi như không có (404). Quyền theo vai kiểm ở từng lệnh. */
+    private Trip load(UUID actorId, UUID tripId) {
+        return trips.findAccessible(tripId, actorId).orElseThrow(WanderException::notFound);
     }
 
     /**
