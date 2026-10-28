@@ -457,6 +457,9 @@ PO chọn "Làm xóa mềm chuyến + Hoàn tác" (AskUserQuestion). Phạm vi: 
 | Giao diện | Tab Tổng quan có "Xóa chuyến đi" (hộp xác nhận), thông báo sau xóa có "Hoàn tác"; màn Chuyến đi có "Chuyến đã xóa gần đây" liệt kê và khôi phục | DONE |
 | Lưu giữ | Chuyến đã xóa được giữ vô thời hạn cho tới khi có xóa vĩnh viễn (cần xác thực lại, chưa làm) | Mở |
 
+### Lát 1b: bản đồ khả năng và nền tảng (PO duyệt 28/10/2026, DR-021)
+PO duyệt bản đồ 6 mô-đun (`membership` → `access` → `completion` → `proposals` → `checklist` → `collab-ui`) và trả lời H1–H4 (APPROVED, lời PO): danh tính ẩn danh đầy đủ cho thành viên; **thêm mục trực tiếp, chỉ đề nghị xóa chờ duyệt** (lệch R10 của kế hoạch gốc, ghi ở DR-021, kế hoạch gốc không sửa); thành viên xóa/khôi phục mục của mình, xóa mục người khác là đề nghị; một Organizer duy nhất (không chuyển quyền). **DEFAULTED (H5, Tầng B):** tối đa 10 thành viên/chuyến, 1 liên kết mời đang bật, tên hiển thị ≤ 40 ký tự (trùng thì hậu tố). Đặc tả mô-đun đầu `docs/implementation/SPEC-membership.md` đã viết, **chờ PO duyệt** (câu mở M1, M2); chưa có mã 1b.
+
 ### BE-10 Sở thích theo danh tính và BE-11 Nhật ký sự kiện bảo mật (27/10/2026)
 Làm qua `/wander-feature`. Kết quả đọc từ `.logs/be11-check.log` + JUnit XML: **241 test / 32 lớp PASSED, 0 lỗi**. Test API đỏ trước (`.logs/be10-red.log`; BE-11 `.logs/be11-red.log`). Khảo sát FE-10c cho thấy giao diện danh tính dựa vào "Hoạt động gần đây" mà backend chưa có ⇒ làm hai lát backend này trước.
 | Lát | Quyết định / kết quả | Trạng thái |

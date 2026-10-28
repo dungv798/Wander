@@ -132,3 +132,5 @@ Nguyên nhân đã tái hiện (đọc từ ảnh/số đo, 25/10): (1) cuộn: 
 - [x] **Trần thùng rác 500 ở backend** (DR-020): `TRASH_FULL`.
 
 - [x] **Xóa mềm cả chuyến + Hoàn tác** (PO 28/10/2026): V12, `DELETE/restore/deleted`, giao diện. *Còn:* xóa vĩnh viễn chuyến cần xác thực lại (D25).
+
+- [ ] **Lát 1b — `membership`:** `SPEC-membership.md` chờ PO duyệt (M1, M2) → `planning-and-task-breakdown` → mã. Bản đồ + DR-021 đã duyệt 28/10/2026.
