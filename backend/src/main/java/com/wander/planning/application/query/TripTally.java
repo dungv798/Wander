@@ -22,7 +22,7 @@ record TripTally(Map<LocalDate, List<ItemView>> liveByDay, List<ItemView> unsche
                  int unknownCount) {
 
     /** Duyệt các dòng mục một lần: mục đã xóa mềm chỉ được đếm vào thùng rác, mục còn hiện được gom vào các tổng. */
-    static TripTally of(List<ItemRow> rows, Set<UUID> done) {
+    static TripTally of(List<ItemRow> rows, Set<UUID> done, java.util.Map<UUID, List<String>> doneBy) {
         Map<LocalDate, List<ItemView>> liveByDay = new HashMap<>();
         List<ItemView> unscheduled = new ArrayList<>();
         Map<LocalDate, Long> perDay = new HashMap<>();
@@ -38,7 +38,7 @@ record TripTally(Map<LocalDate, List<ItemView>> liveByDay, List<ItemView> unsche
                 continue;
             }
             if (hasUnknownPrice(row)) unknownCount++;
-            ItemView view = PlanningQueries.toView(row, done.contains(row.id()));
+            ItemView view = PlanningQueries.toView(row, done.contains(row.id()), doneBy.getOrDefault(row.id(), List.of()));
             long counted = new ItemCost(row.costK(), row.included(), row.referenceK()).countedK();
             if (row.day() == null) {
                 unscheduled.add(view);

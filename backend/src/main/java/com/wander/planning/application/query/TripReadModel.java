@@ -17,8 +17,20 @@ public interface TripReadModel {
     /** Chuyến của chủ, mới nhất trước (ngày đi giảm dần, rồi thời điểm tạo giảm dần). */
     List<TripRow> listTrips(UUID ownerId);
 
+    /** Vai của danh tính trong chuyến còn hiện; trống nếu không phải thành viên hoặc chuyến đã xóa. */
+    Optional<String> roleIn(UUID tripId, UUID identityId);
+
+    /** Mã thành viên của danh tính trong chuyến còn hiện. */
+    Optional<UUID> memberIdIn(UUID tripId, UUID identityId);
+
+    /** Hạng mục checklist của chuyến theo nhóm rồi vị trí. */
+    List<ChecklistRow> checklist(UUID tripId);
+
     /** Mọi thành viên của chuyến, theo thứ tự vào. */
     List<MemberRow> members(UUID tripId);
+
+    /** Mọi đề nghị xóa của chuyến, cũ trước. */
+    List<RequestRow> deletionRequests(UUID tripId);
 
     /** Liên kết mời chưa thu hồi của chuyến, nếu có. */
     Optional<InviteRow> unrevokedInvite(UUID tripId);
@@ -40,6 +52,9 @@ public interface TripReadModel {
 
     /** Sở thích theo danh tính dạng chuỗi mã cách nhau bằng dấu phẩy; chưa đặt thì chuỗi rỗng. */
     String interestPreferences(UUID ownerId);
+
+    /** Hoàn thành theo mục: mã mục → mã danh tính những người đã xong (chỉ dùng nội bộ để đổi sang mã thành viên). */
+    java.util.Map<UUID, List<UUID>> completions(UUID tripId);
 
     /** Mã các mục mà người này đã đánh dấu hoàn thành. */
     Set<UUID> doneItemIds(UUID tripId, UUID personId);

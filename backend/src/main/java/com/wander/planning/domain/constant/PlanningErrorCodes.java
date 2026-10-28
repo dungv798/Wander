@@ -83,4 +83,22 @@ public final class PlanningErrorCodes {
 
     /** Organizer không rời hay bị gỡ khỏi chuyến của mình (muốn bỏ thì xóa chuyến). */
     public static final String ORGANIZER_CANNOT_LEAVE = "ORGANIZER_CANNOT_LEAVE";
+
+    /** Mục của chính mình thì xóa thẳng, không cần đề nghị. */
+    public static final String OWN_ITEM_DELETE_DIRECTLY = "OWN_ITEM_DELETE_DIRECTLY";
+
+    /** Organizer xóa thẳng, không cần đề nghị. */
+    public static final String ORGANIZER_DELETES_DIRECTLY = "ORGANIZER_DELETES_DIRECTLY";
+
+    /** Mục này đã có đề nghị xóa đang chờ. */
+    public static final String REQUEST_EXISTS = "REQUEST_EXISTS";
+
+    /** Quá nhiều đề nghị đang chờ của cùng một thành viên. */
+    public static final String TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS";
+
+    /** Đề nghị đã được quyết định rồi. */
+    public static final String ALREADY_DECIDED = "ALREADY_DECIDED";
+
+    /** Checklist của chuyến đã đủ số hạng mục tối đa. */
+    public static final String CHECKLIST_FULL = "CHECKLIST_FULL";
 }

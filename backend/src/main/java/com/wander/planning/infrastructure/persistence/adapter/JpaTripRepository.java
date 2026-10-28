@@ -1,11 +1,13 @@
 package com.wander.planning.infrastructure.persistence.adapter;
 
+import com.wander.planning.domain.model.DeletionRequest;
 import com.wander.planning.domain.model.Item;
 import com.wander.planning.domain.model.Trip;
 import com.wander.planning.domain.model.TripInvite;
 import com.wander.planning.domain.model.TripMember;
 import com.wander.planning.domain.port.TripRepository;
 import com.wander.planning.infrastructure.persistence.constant.PlanningQueryConstants;
+import com.wander.planning.infrastructure.persistence.entity.DeletionRequestEntity;
 import com.wander.planning.infrastructure.persistence.entity.ItemEntity;
 import com.wander.planning.infrastructure.persistence.entity.TripEntity;
 import com.wander.planning.infrastructure.persistence.entity.TripInviteEntity;
@@ -116,6 +118,28 @@ public class JpaTripRepository implements TripRepository {
         entity.getItems().removeIf(itemEntity -> !keep.contains(itemEntity.getId())); // orphanRemoval ⇒ DELETE (xóa vĩnh viễn)
         copyMembers(trip, entity);
         copyInvites(trip, entity);
+        copyRequests(trip, entity);
+    }
+
+    /** Đồng bộ đề nghị xóa: thêm mới, cập nhật trạng thái, xóa đề nghị đã hủy/dọn (orphanRemoval). */
+    private void copyRequests(Trip trip, TripEntity entity) {
+        Map<UUID, DeletionRequestEntity> existing = entity.getDeletionRequests().stream().collect(Collectors.toMap(DeletionRequestEntity::getId, Function.identity()));
+        Set<UUID> keep = new HashSet<>();
+        for (DeletionRequest request : trip.circle().requests()) {
+            keep.add(request.id());
+            DeletionRequestEntity row = existing.get(request.id());
+            if (row == null) {
+                row = new DeletionRequestEntity(request.id(), entity);
+                row.setItemId(request.itemId());
+                row.setRequesterMemberId(request.requesterMemberId());
+                row.setReason(request.reason());
+                row.setRequestedAt(request.requestedAt());
+                entity.getDeletionRequests().add(row);
+            }
+            row.setStatus(request.status().code());
+            row.setDecidedAt(request.decidedAt());
+        }
+        entity.getDeletionRequests().removeIf(row -> !keep.contains(row.getId()));
     }
 
     /** Đồng bộ thành viên: thêm mới, cập nhật tên, xóa người đã bị gỡ/rời (orphanRemoval). */

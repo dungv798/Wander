@@ -59,7 +59,7 @@ public final class Trip {
     /** Dựng lại chuyến từ dữ liệu đã lưu (không chuẩn hóa lại). */
     public Trip(UUID id, UUID ownerId, String name, String destination, DateRange range, TripOptions options,
                 Instant createdAt, Instant updatedAt, Instant deletedAt, long version, List<Item> items,
-                List<TripMember> members, List<TripInvite> invites) {
+                List<TripMember> members, List<TripInvite> invites, List<DeletionRequest> requests) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
@@ -71,7 +71,7 @@ public final class Trip {
         this.deletedAt = deletedAt;
         this.version = version;
         this.items = new ArrayList<>(items);
-        this.circle = new TripCircle(members, invites);
+        this.circle = new TripCircle(members, invites, requests);
     }
 
     /** A-1: tạo chuyến với tên, điểm đến và khoảng ngày hợp lệ. */
@@ -86,7 +86,7 @@ public final class Trip {
         return new Trip(UUID.randomUUID(), ownerId,
                 ItemText.required(name, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME),
                 ItemText.required(destination, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION),
-                range, options, now, now, null, 0, List.of(), List.of(organizer), List.of());
+                range, options, now, now, null, 0, List.of(), List.of(organizer), List.of(), List.of());
     }
 
     /** Chuyến đã bị xóa mềm (nằm trong "Chuyến đã xóa gần đây")? */
@@ -286,6 +286,7 @@ public final class Trip {
             throw WanderException.conflict(PlanningErrorCodes.NOT_IN_TRASH, PlanningMessages.NOT_IN_TRASH);
         }
         items.remove(item);
+        circle.forgetItem(itemId);
     }
 
     /** A-10: chỉ "Việc cần làm" có ô tích; hoàn thành ghi theo người (P5). */

@@ -80,6 +80,9 @@ public class TripEntity {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TripInviteEntity> invites = new ArrayList<>();
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DeletionRequestEntity> deletionRequests = new ArrayList<>();
+
     protected TripEntity() {
     }
 
@@ -120,4 +123,5 @@ public class TripEntity {
     public List<ItemEntity> getItems() { return items; }
     public List<TripMemberEntity> getMembers() { return members; }
     public List<TripInviteEntity> getInvites() { return invites; }
+    public List<DeletionRequestEntity> getDeletionRequests() { return deletionRequests; }
 }

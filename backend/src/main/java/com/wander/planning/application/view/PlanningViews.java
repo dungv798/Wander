@@ -37,11 +37,16 @@ public final class PlanningViews {
     public record ItemView(String id, String tripId, String placeId, String day, int position, String type, String typeLabel,
                            String title, String timeOfDay, Integer durationMin, String note, Long costK,
                            String costFormatted, boolean included, Long referenceK, String referenceFormatted,
-                           String booking, String bookingLabel, boolean done, String deletedAt, String addedBy) {
+                           String booking, String bookingLabel, boolean done, String deletedAt, String addedBy, List<String> doneBy) {
     }
 
     /** Một thành viên của chuyến. KHÔNG có mã danh tính hay tên thiết bị; {@code self} đánh dấu chính người gọi. */
     public record MemberView(String id, String displayName, String role, String joinedAt, boolean self) {
+    }
+
+    /** Một đề nghị xóa. {@code requesterName} null nếu người đề nghị đã rời chuyến. KHÔNG có mã danh tính. */
+    public record DeletionRequestView(String id, String itemId, String requesterId, String requesterName, String reason, String status,
+                                      String requestedAt, String decidedAt) {
     }
 
     /** Trạng thái liên kết mời (không có mã). */
@@ -84,5 +89,9 @@ public final class PlanningViews {
     /** Chi tiết chuyến. {@code unscheduled} là các mục còn hiện chưa có ngày, theo thứ tự thủ công. */
     public record TripDetail(TripView trip, int dayCount, List<DayView> days, List<ItemView> unscheduled, Totals totals,
                              List<PendingTask> pendingTasks, int trashCount, Budget budget) {
+    }
+
+    /** Một hạng mục checklist: {@code done} là của CHÍNH người gọi, {@code doneBy} là mã thành viên của những người đã xong. */
+    public record ChecklistItemView(String id, String group, String title, int position, boolean done, List<String> doneBy) {
     }
 }

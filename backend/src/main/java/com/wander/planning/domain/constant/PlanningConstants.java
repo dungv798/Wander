@@ -164,4 +164,25 @@ public final class PlanningConstants {
 
     /** Độ dài cột vai thành viên. */
     public static final int ROLE_COLUMN_LENGTH = 16;
+
+    /** Số đề nghị xóa đang chờ tối đa của một thành viên. */
+    public static final int MAX_PENDING_REQUESTS = 20;
+
+    /** Số đề nghị đã quyết định được giữ lại mỗi chuyến (cũ hơn bị dọn). */
+    public static final int MAX_DECIDED_REQUESTS = 50;
+
+    /** Lý do đề nghị xóa tối đa (G4). */
+    public static final int MAX_REQUEST_REASON = 200;
+
+    /** Độ dài cột lý do đề nghị (đủ cho MAX_REQUEST_REASON ký tự dạng bất kỳ code point). */
+    public static final int REQUEST_REASON_COLUMN_LENGTH = 800;
+
+    /** Số hạng mục checklist tối đa của một chuyến. */
+    public static final int MAX_CHECKLIST_ITEMS = 100;
+
+    /** Tên hạng mục checklist tối đa. */
+    public static final int MAX_CHECKLIST_TITLE = 120;
+
+    /** Tên nhóm checklist tối đa (trống = không nhóm). */
+    public static final int MAX_CHECKLIST_GROUP = 60;
 }

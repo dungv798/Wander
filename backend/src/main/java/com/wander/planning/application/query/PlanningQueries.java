@@ -73,16 +73,17 @@ public class PlanningQueries {
         requireTrip(ownerId, tripId);
         ItemRow row = rankedItems(tripId).stream().filter(found -> found.id().equals(itemId)).findFirst()
                 .orElseThrow(WanderException::notFound);
-        return toView(row, read.doneItemIds(tripId, ownerId).contains(itemId));
+        return toView(row, read.doneItemIds(tripId, ownerId).contains(itemId), doneBy(tripId).getOrDefault(itemId, List.of()));
     }
 
     /** Các mục đang hiện (chưa xóa mềm) của một ngày, theo thứ tự thủ công. */
     public List<ItemView> dayItems(UUID ownerId, UUID tripId, LocalDate day) {
         requireTrip(ownerId, tripId);
         Set<UUID> done = read.doneItemIds(tripId, ownerId);
+        Map<UUID, List<String>> doneBy = doneBy(tripId);
         return rankedItems(tripId).stream()
                 .filter(row -> row.deletedAt() == null && day.equals(row.day()))
-                .map(row -> toView(row, done.contains(row.id())))
+                .map(row -> toView(row, done.contains(row.id()), doneBy.getOrDefault(row.id(), List.of())))
                 .toList();
     }
 
@@ -90,13 +91,14 @@ public class PlanningQueries {
     public List<ItemView> trash(UUID ownerId, UUID tripId) {
         requireTrip(ownerId, tripId);
         Set<UUID> done = read.doneItemIds(tripId, ownerId);
-        return read.trash(tripId).stream().map(row -> toView(row, done.contains(row.id()))).toList();
+        Map<UUID, List<String>> doneBy = doneBy(tripId);
+        return read.trash(tripId).stream().map(row -> toView(row, done.contains(row.id()), doneBy.getOrDefault(row.id(), List.of()))).toList();
     }
 
     /** A-11 xem lịch, A-13 tổng theo ngày/loại, A-16 việc cần làm chưa xong. */
     public TripDetail detail(UUID ownerId, UUID tripId) {
         TripRow trip = requireTrip(ownerId, tripId);
-        TripTally tally = TripTally.of(rankedItems(tripId), read.doneItemIds(tripId, ownerId));
+        TripTally tally = TripTally.of(rankedItems(tripId), read.doneItemIds(tripId, ownerId), doneBy(tripId));
         DateRange range = new DateRange(trip.startDate(), trip.endDate());
         List<DayView> days = dayViews(range, tally);
         Totals totals = new Totals(tally.extraK(), Vnd.fromThousands(tally.extraK()),
@@ -137,8 +139,24 @@ public class PlanningQueries {
                 .toList();
     }
 
+    /**
+     * Ai đã xong từng mục, tính bằng MÃ THÀNH VIÊN (không lộ mã danh tính), theo thứ tự vào chuyến. Người đã rời chuyến không còn trong danh sách.
+     */
+    private Map<UUID, List<String>> doneBy(UUID tripId) {
+        Map<UUID, Integer> order = new HashMap<>();
+        Map<UUID, String> memberOfIdentity = new HashMap<>();
+        for (MemberRow member : read.members(tripId)) {
+            order.put(member.identityId(), order.size());
+            memberOfIdentity.put(member.identityId(), member.id().toString());
+        }
+        Map<UUID, List<String>> result = new HashMap<>();
+        read.completions(tripId).forEach((item, persons) -> result.put(item, persons.stream().filter(order::containsKey)
+                .sorted(java.util.Comparator.comparing(order::get)).map(memberOfIdentity::get).toList()));
+        return result;
+    }
+
     /** Dạng hiển thị của mục: nhãn loại và đặt chỗ, giờ dạng HH:mm, tiền đầy đủ, trạng thái hoàn thành. */
-    static ItemView toView(ItemRow row, boolean done) {
+    static ItemView toView(ItemRow row, boolean done, List<String> doneBy) {
         String typeLabel = ItemType.fromCode(row.type()).map(ItemType::label).orElse(row.type());
         String bookingLabel = row.bookingStatus() == null ? null
                 : BookingStatus.fromCode(row.bookingStatus()).map(BookingStatus::label).orElse(row.bookingStatus());
@@ -147,7 +165,7 @@ public class PlanningQueries {
                 row.title(), row.timeOfDay() == null ? null : TIME_OF_DAY.format(row.timeOfDay()), row.durationMin(), row.note(),
                 row.costK(), Vnd.fromThousandsOrNull(row.costK()), row.included(), row.referenceK(),
                 Vnd.fromThousandsOrNull(row.referenceK()), row.bookingStatus(), bookingLabel, done, Timestamps.format(row.deletedAt()),
-                row.addedByMemberId() == null ? null : row.addedByMemberId().toString());
+                row.addedByMemberId() == null ? null : row.addedByMemberId().toString(), doneBy);
     }
 
     /** Mọi mục của chuyến, mục còn hiện mang thứ hạng liền mạch trong ngày (xem {@link #withDenseLivePositions}). */

@@ -5,6 +5,7 @@ import com.wander.planning.domain.constant.PlanningErrorCodes;
 import com.wander.planning.domain.constant.PlanningFields;
 import com.wander.planning.domain.constant.PlanningMessages;
 import com.wander.planning.domain.vocabulary.MemberRole;
+import com.wander.planning.domain.vocabulary.RequestStatus;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.util.Labels;
@@ -24,11 +25,18 @@ public final class TripCircle {
 
     private final List<TripMember> members;
     private final List<TripInvite> invites;
+    private final List<DeletionRequest> requests;
 
     /** Dựng từ dữ liệu đã lưu. */
-    TripCircle(List<TripMember> members, List<TripInvite> invites) {
+    TripCircle(List<TripMember> members, List<TripInvite> invites, List<DeletionRequest> requests) {
         this.members = new ArrayList<>(members);
         this.invites = new ArrayList<>(invites);
+        this.requests = new ArrayList<>(requests);
+    }
+
+    /** Mọi đề nghị xóa (chờ và đã quyết định), cũ trước. */
+    public List<DeletionRequest> requests() {
+        return List.copyOf(requests);
     }
 
     /** Thành viên (kể cả Organizer), thứ tự vào chuyến. */
@@ -169,4 +177,68 @@ public final class TripCircle {
         return reserved || members.stream().anyMatch(m -> !m.id().equals(exceptMemberId) && m.displayName().equalsIgnoreCase(candidate));
     }
 
+
+    // ---- đề nghị xóa (H2/H3) ----
+
+    /**
+     * Thành viên đề nghị xóa mục của NGƯỜI KHÁC. Organizer và chủ mục xóa thẳng nên bị từ chối; mục phải còn hiện; mỗi mục tối đa một đề nghị
+     * chờ, mỗi thành viên tối đa MAX_PENDING_REQUESTS đề nghị chờ. Lý do tùy chọn, chuẩn hóa như nhãn tự khai.
+     */
+    public DeletionRequest submitDeletion(UUID identityId, Item item, String rawReason, Instant now) {
+        TripMember requester = requireMember(identityId);
+        if (requester.role() == MemberRole.ORGANIZER) {
+            throw WanderException.conflict(PlanningErrorCodes.ORGANIZER_DELETES_DIRECTLY, PlanningMessages.ORGANIZER_DELETES_DIRECTLY);
+        }
+        String reason = Labels.normalize(rawReason == null ? "" : rawReason, PlanningConstants.MAX_REQUEST_REASON, PlanningFields.REASON);
+        if (item.isDeleted()) throw WanderException.conflict(PlanningErrorCodes.ITEM_DELETED, PlanningMessages.ITEM_DELETED);
+        if (requester.id().equals(item.addedByMemberId())) {
+            throw WanderException.conflict(PlanningErrorCodes.OWN_ITEM_DELETE_DIRECTLY, PlanningMessages.OWN_ITEM_DELETE_DIRECTLY);
+        }
+        if (requests.stream().anyMatch(r -> r.isPending() && r.itemId().equals(item.id()))) {
+            throw WanderException.conflict(PlanningErrorCodes.REQUEST_EXISTS, PlanningMessages.REQUEST_EXISTS);
+        }
+        if (requests.stream().filter(r -> r.isPending() && r.requesterMemberId().equals(requester.id())).count() >= PlanningConstants.MAX_PENDING_REQUESTS) {
+            throw WanderException.conflict(PlanningErrorCodes.TOO_MANY_REQUESTS, PlanningMessages.TOO_MANY_REQUESTS);
+        }
+        DeletionRequest request = new DeletionRequest(UUID.randomUUID(), item.id(), requester.id(), reason, RequestStatus.PENDING, now, null);
+        requests.add(request);
+        return request;
+    }
+
+    /** Người đề nghị tự hủy khi còn chờ; đề nghị của người khác ⇒ 404, đã quyết định ⇒ ALREADY_DECIDED. */
+    public void cancelDeletion(UUID identityId, UUID requestId) {
+        TripMember requester = requireMember(identityId);
+        DeletionRequest request = requests.stream().filter(r -> r.id().equals(requestId) && r.requesterMemberId().equals(requester.id()))
+                .findFirst().orElseThrow(WanderException::notFound);
+        if (!request.isPending()) throw WanderException.conflict(PlanningErrorCodes.ALREADY_DECIDED, PlanningMessages.ALREADY_DECIDED);
+        requests.remove(request);
+    }
+
+    /** Organizer đồng ý hoặc từ chối một đề nghị đang chờ; trả đề nghị đã quyết định. Việc xóa mềm mục khi đồng ý do bộ xử lý lệnh làm trong cùng giao dịch. */
+    public DeletionRequest decideDeletion(UUID identityId, UUID requestId, boolean approve, Instant now) {
+        requireOrganizer(identityId);
+        DeletionRequest request = requests.stream().filter(r -> r.id().equals(requestId)).findFirst().orElseThrow(WanderException::notFound);
+        if (!request.isPending()) throw WanderException.conflict(PlanningErrorCodes.ALREADY_DECIDED, PlanningMessages.ALREADY_DECIDED);
+        DeletionRequest decided = request.decided(approve ? RequestStatus.APPROVED : RequestStatus.REJECTED, now);
+        requests.replaceAll(r -> r.id().equals(requestId) ? decided : r);
+        trimDecided();
+        return decided;
+    }
+
+    /** Giữ tối đa MAX_DECIDED_REQUESTS đề nghị đã quyết định (cũ nhất bị dọn) để dữ liệu không phình mãi. */
+    private void trimDecided() {
+        List<DeletionRequest> decided = requests.stream().filter(r -> !r.isPending()).sorted(java.util.Comparator.comparing(DeletionRequest::decidedAt)).toList();
+        int excess = decided.size() - PlanningConstants.MAX_DECIDED_REQUESTS;
+        for (int i = 0; i < excess; i++) requests.remove(decided.get(i));
+    }
+
+    /** Mục bị xóa vĩnh viễn: mọi đề nghị của mục đó không còn ý nghĩa. */
+    public void forgetItem(UUID itemId) {
+        requests.removeIf(r -> r.itemId().equals(itemId));
+    }
+
+    /** Thành viên rời hoặc bị gỡ: các đề nghị còn chờ của họ bị bỏ (đã quyết định thì giữ làm lịch sử). */
+    public void dropPendingOf(UUID memberId) {
+        requests.removeIf(r -> r.isPending() && r.requesterMemberId().equals(memberId));
+    }
 }

@@ -218,6 +218,12 @@ class MembershipApiIT extends ApiTestSupport {
         assertThat(call("PUT", "/api/trips/" + trip + "/items/" + task + "/done", guest.token(), Map.of("done", true)).status()).isEqualTo(200);
         assertThat(call("GET", "/api/trips/" + trip + "/items/" + task, guest.token()).str("item.done")).isEqualTo("true");
         assertThat(call("GET", "/api/trips/" + trip + "/items/" + task, org.token()).str("item.done")).isEqualTo("false");
+        String guestMemberId = call("GET", "/api/trips/" + trip + "/members", org.token()).str("members.1.id");
+        String organizerMemberId = call("GET", "/api/trips/" + trip + "/members", org.token()).str("members.0.id");
+        assertThat(call("GET", "/api/trips/" + trip + "/items/" + task, org.token()).list("item.doneBy")).containsExactly(guestMemberId);
+        assertThat(call("PUT", "/api/trips/" + trip + "/items/" + task + "/done", org.token(), Map.of("done", true)).status()).isEqualTo(200);
+        assertThat(call("GET", "/api/trips/" + trip + "/items/" + task, guest.token()).list("item.doneBy")).containsExactly(organizerMemberId, guestMemberId);
+        assertThat(String.valueOf(call("GET", "/api/trips/" + trip, guest.token()).body())).doesNotContain(guest.identityId()).doesNotContain(org.identityId());
     }
 
     @Test

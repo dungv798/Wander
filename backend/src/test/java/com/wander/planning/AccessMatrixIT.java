@@ -25,6 +25,8 @@ class AccessMatrixIT extends ApiTestSupport {
         /** Mọi thành viên. */ MEMBER,
         /** Thành viên nhưng chỉ với mục của mình (có thể 403 NOT_YOUR_ITEM). */ MEMBER_OWN_ITEM,
         /** Chỉ Organizer (thành viên thường 403). */ ORGANIZER,
+        /** Thành viên, tick checklist (mục lạ ⇒ 404 vì mục thuộc chuyến khác không tồn tại ở đây). */ MEMBER_CHECKLIST_ITEM,
+        /** Thành viên, nhưng chỉ với đề nghị CỦA MÌNH (đề nghị lạ ⇒ 404). */ MEMBER_OWN_REQUEST,
         /** Chỉ Organizer và chỉ với chuyến đã xóa mềm (chuyến còn hiện hoặc người khác: 404). */ ORGANIZER_DELETED_TRIP
     }
 
@@ -47,6 +49,16 @@ class AccessMatrixIT extends ApiTestSupport {
             Map.entry("GET /api/trips/{tripId}/invites", Policy.ORGANIZER),
             Map.entry("DELETE /api/trips/{tripId}/invites/active", Policy.ORGANIZER),
             Map.entry("GET /api/trips/{tripId}/members", Policy.MEMBER),
+            Map.entry("GET /api/trips/{tripId}/checklist", Policy.MEMBER),
+            Map.entry("POST /api/trips/{tripId}/checklist", Policy.ORGANIZER),
+            Map.entry("PATCH /api/trips/{tripId}/checklist/{itemId}", Policy.ORGANIZER),
+            Map.entry("DELETE /api/trips/{tripId}/checklist/{itemId}", Policy.ORGANIZER),
+            Map.entry("PUT /api/trips/{tripId}/checklist/{itemId}/done", Policy.MEMBER_CHECKLIST_ITEM),
+            Map.entry("GET /api/trips/{tripId}/deletion-requests", Policy.MEMBER),
+            Map.entry("POST /api/trips/{tripId}/deletion-requests", Policy.MEMBER),
+            Map.entry("DELETE /api/trips/{tripId}/deletion-requests/{requestId}", Policy.MEMBER_OWN_REQUEST),
+            Map.entry("POST /api/trips/{tripId}/deletion-requests/{requestId}/approve", Policy.ORGANIZER),
+            Map.entry("POST /api/trips/{tripId}/deletion-requests/{requestId}/reject", Policy.ORGANIZER),
             Map.entry("DELETE /api/trips/{tripId}/members/{memberId}", Policy.ORGANIZER),
             Map.entry("DELETE /api/trips/{tripId}/members/me", Policy.MEMBER),
             Map.entry("PATCH /api/trips/{tripId}/members/me", Policy.MEMBER)));
@@ -96,7 +108,7 @@ class AccessMatrixIT extends ApiTestSupport {
 
         for (Map.Entry<String, Policy> route : TRIP_ROUTES.entrySet()) {
             String[] parts = route.getKey().split(" ", 2);
-            String path = parts[1].replace("{tripId}", trip).replace("{itemId}", item).replace("{memberId}", memberId).replace("{day}", "2026-09-01");
+            String path = parts[1].replace("{tripId}", trip).replace("{itemId}", item).replace("{memberId}", memberId).replace("{day}", "2026-09-01").replace("{requestId}", java.util.UUID.randomUUID().toString());
             String label = route.getKey();
             assertThat(call(parts[0], path, null, Map.of()).status()).as(label + " không phiên").isEqualTo(401);
             assertThat(call(parts[0], path, outsider.token(), Map.of()).status()).as(label + " người ngoài").isEqualTo(404);
@@ -106,6 +118,8 @@ class AccessMatrixIT extends ApiTestSupport {
                 case ORGANIZER -> assertThat(asMember).as(label + " thành viên thường").isEqualTo(403);
                 case ORGANIZER_DELETED_TRIP -> assertThat(asMember).as(label + " thành viên thường").isEqualTo(404);
                 case MEMBER_OWN_ITEM -> assertThat(asMember).as(label + " thành viên, mục của Organizer").isEqualTo(403);
+                case MEMBER_CHECKLIST_ITEM -> assertThat(asMember).as(label + " thành viên, hạng mục lạ").isIn(400, 404);
+                case MEMBER_OWN_REQUEST -> assertThat(asMember).as(label + " thành viên, đề nghị lạ").isEqualTo(404);
                 case MEMBER -> assertThat(asMember).as(label + " thành viên").isNotIn(401, 403, 404, 500);
             }
         }

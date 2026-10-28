@@ -3,6 +3,7 @@ package com.wander.planning.infrastructure.persistence.mapper;
 import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.constant.PlanningMessages;
 import com.wander.planning.domain.model.DateRange;
+import com.wander.planning.domain.model.DeletionRequest;
 import com.wander.planning.domain.model.Item;
 import com.wander.planning.domain.model.ItemCost;
 import com.wander.planning.domain.model.Trip;
@@ -12,11 +13,13 @@ import com.wander.planning.domain.model.TripOptions;
 import com.wander.planning.domain.vocabulary.BookingStatus;
 import com.wander.planning.domain.vocabulary.ItemType;
 import com.wander.planning.domain.vocabulary.MemberRole;
+import com.wander.planning.domain.vocabulary.RequestStatus;
 import com.wander.planning.domain.vocabulary.TripInterest;
 import com.wander.planning.domain.vocabulary.TripKind;
 import com.wander.planning.domain.vocabulary.TripPace;
 import com.wander.planning.domain.vocabulary.TripStyle;
 import com.wander.planning.infrastructure.persistence.adapter.JpaTripRepository;
+import com.wander.planning.infrastructure.persistence.entity.DeletionRequestEntity;
 import com.wander.planning.infrastructure.persistence.entity.ItemEntity;
 import com.wander.planning.infrastructure.persistence.entity.TripEntity;
 import com.wander.planning.infrastructure.persistence.entity.TripInviteEntity;
@@ -54,6 +57,7 @@ public interface TripMapper {
     @Mapping(target = "ownerId", source = "ownerIdentityId")
     @Mapping(target = "members", expression = "java(members(e.getMembers()))")
     @Mapping(target = "invites", expression = "java(invites(e.getInvites()))")
+    @Mapping(target = "requests", expression = "java(requests(e.getDeletionRequests()))")
     @Mapping(target = "range", expression = "java(new DateRange(e.getStartDate(), e.getEndDate()))")
     @Mapping(target = "options", expression = "java(new TripOptions(e.getBudgetK(), styles(e.getStyles()), pace(e.getPace()), e.isDatesTentative(), kind(e.getKind()), interests(e.getInterests())))")
     Trip toDomain(TripEntity e);
@@ -144,7 +148,17 @@ public interface TripMapper {
     @Mapping(target = "items", ignore = true)
     @Mapping(target = "members", ignore = true)
     @Mapping(target = "invites", ignore = true)
+    @Mapping(target = "deletionRequests", ignore = true)
     void update(Trip trip, @MappingTarget TripEntity e);
+
+    /** Đề nghị xóa domain từ các dòng đã lưu, cũ trước. */
+    default List<DeletionRequest> requests(List<DeletionRequestEntity> stored) {
+        return stored.stream()
+                .map(r -> new DeletionRequest(r.getId(), r.getItemId(), r.getRequesterMemberId(), r.getReason(), RequestStatus.fromCode(r.getStatus())
+                        .orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_REQUEST_STATUS.formatted(r.getStatus()))), r.getRequestedAt(), r.getDecidedAt()))
+                .sorted(Comparator.comparing(DeletionRequest::requestedAt).thenComparing(DeletionRequest::id))
+                .toList();
+    }
 
     /** Thành viên domain từ các dòng đã lưu (thứ tự vào chuyến). */
     default List<TripMember> members(List<TripMemberEntity> stored) {

@@ -62,6 +62,9 @@ public final class PlanningQueryConstants {
     public static final String WHERE_TRIP_TRASH =
             "where i.trip.id = :" + PARAM_TRIP + " and i.deletedAt is not null order by i.deletedAt desc, i.id";
 
+    /** Mọi cặp (mục, người đã xong) của chuyến. */
+    public static final String COMPLETIONS_OF_TRIP = "select i.id, c.personId from ItemEntity i join i.completions c where i.trip.id = :" + PARAM_TRIP;
+
     /** Mã các mục mà một người đã hoàn thành trong chuyến. */
     public static final String DONE_ITEM_IDS = "select i.id from ItemEntity i join i.completions c "
             + "where i.trip.id = :" + PARAM_TRIP + " and c.personId = :" + PARAM_PERSON;
@@ -94,6 +97,10 @@ public final class PlanningQueryConstants {
     public static final String MEMBERS_OF_TRIP = "select new com.wander.planning.application.query.MemberRow(m.id, m.identityId, m.role, m.displayName, m.joinedAt) "
             + "from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP + " order by m.joinedAt, m.id";
 
+    /** Mọi đề nghị xóa của chuyến, cũ trước. */
+    public static final String REQUESTS_OF_TRIP = "select new com.wander.planning.application.query.RequestRow(r.id, r.itemId, r.requesterMemberId, r.reason, r.status, r.requestedAt, r.decidedAt) "
+            + "from DeletionRequestEntity r where r.trip.id = :" + PARAM_TRIP + " order by r.requestedAt, r.id";
+
     /** Liên kết mời chưa thu hồi của chuyến (tối đa một). */
     public static final String UNREVOKED_INVITE_OF_TRIP = "select new com.wander.planning.application.query.InviteRow(i.id, i.createdAt, i.expiresAt, i.revokedAt) "
             + "from TripInviteEntity i where i.trip.id = :" + PARAM_TRIP + " and i.revokedAt is null";
@@ -108,4 +115,21 @@ public final class PlanningQueryConstants {
 
     private PlanningQueryConstants() {
     }
+
+    /** Hạng mục checklist của chuyến theo nhóm rồi vị trí. */
+    public static final String CHECKLIST_OF_TRIP = "select c from ChecklistItemEntity c where c.tripId = :trip order by c.groupTitle, c.position, c.id";
+
+    /** Một hạng mục checklist của đúng chuyến. */
+    public static final String CHECKLIST_ITEM_OF_TRIP = "select c from ChecklistItemEntity c where c.tripId = :trip and c.id = :item";
+
+    /** Vị trí lớn nhất của checklist. */
+    public static final String CHECKLIST_MAX_POSITION = "select max(c.position) from ChecklistItemEntity c where c.tripId = :trip";
+
+    /** Quyền của một danh tính trong chuyến còn hiện (rỗng = không phải thành viên hoặc chuyến đã xóa). */
+    public static final String ROLE_IN_TRIP = "select m.role from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP
+            + " and m.identityId = :" + PARAM_OWNER + " and m.trip.deletedAt is null";
+
+    /** Mã thành viên của một danh tính trong chuyến còn hiện. */
+    public static final String MEMBER_ID_IN_TRIP = "select m.id from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP
+            + " and m.identityId = :" + PARAM_OWNER + " and m.trip.deletedAt is null";
 }

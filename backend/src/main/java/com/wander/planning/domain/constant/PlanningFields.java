@@ -89,4 +89,13 @@ public final class PlanningFields {
 
     /** Mã liên kết mời. */
     public static final String INVITE_CODE = "code";
+
+    /** Mã mục trong đề nghị xóa. */
+    public static final String REQUEST_ITEM_ID = "itemId";
+
+    /** Lý do đề nghị xóa. */
+    public static final String REASON = "reason";
+
+    /** Nhóm của hạng mục checklist. */
+    public static final String GROUP = "group";
 }

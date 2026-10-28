@@ -116,4 +116,31 @@ public final class PlanningMessages {
 
     /** Tên hiển thị trống. */
     public static final String DISPLAY_NAME_REQUIRED = "Hãy nhập tên hiển thị.";
+
+    /** Mục của mình thì xóa thẳng. */
+    public static final String OWN_ITEM_DELETE_DIRECTLY = "Mục do bạn thêm thì bạn xóa thẳng được, không cần đề nghị.";
+
+    /** Organizer xóa thẳng. */
+    public static final String ORGANIZER_DELETES_DIRECTLY = "Organizer xóa thẳng được, không cần đề nghị.";
+
+    /** Đã có đề nghị. */
+    public static final String REQUEST_EXISTS = "Mục này đã có đề nghị xóa đang chờ duyệt.";
+
+    /** Quá nhiều đề nghị chờ. */
+    public static final String TOO_MANY_REQUESTS = "Bạn đang có quá nhiều đề nghị xóa chờ duyệt.";
+
+    /** Đã quyết định. */
+    public static final String ALREADY_DECIDED = "Đề nghị này đã được xử lý.";
+
+    /** Trạng thái đề nghị lạ trong dữ liệu (lỗi dữ liệu). */
+    public static final String UNKNOWN_REQUEST_STATUS = "Unknown deletion request status in database: %s";
+
+    /** Thiếu mã mục trong đề nghị. */
+    public static final String ITEM_REQUIRED = "Hãy chọn mục cần đề nghị xóa.";
+
+    /** Checklist đầy. */
+    public static final String CHECKLIST_FULL = "Checklist đã đủ số hạng mục tối đa.";
+
+    /** Tên hạng mục trống. */
+    public static final String CHECKLIST_TITLE_REQUIRED = "Hãy nhập tên hạng mục.";
 }

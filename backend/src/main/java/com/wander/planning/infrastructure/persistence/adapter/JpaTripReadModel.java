@@ -1,12 +1,15 @@
 package com.wander.planning.infrastructure.persistence.adapter;
 
+import com.wander.planning.application.query.ChecklistRow;
 import com.wander.planning.application.query.InvitePreviewRow;
 import com.wander.planning.application.query.InviteRow;
 import com.wander.planning.application.query.ItemRow;
 import com.wander.planning.application.query.MemberRow;
+import com.wander.planning.application.query.RequestRow;
 import com.wander.planning.application.query.TripReadModel;
 import com.wander.planning.application.query.TripRow;
 import com.wander.planning.infrastructure.persistence.constant.PlanningQueryConstants;
+import com.wander.planning.infrastructure.persistence.entity.ChecklistItemEntity;
 import jakarta.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.List;
@@ -46,8 +49,45 @@ public class JpaTripReadModel implements TripReadModel {
     }
 
     @Override
+    public java.util.Map<UUID, List<UUID>> completions(UUID tripId) {
+        java.util.Map<UUID, List<UUID>> byItem = new java.util.LinkedHashMap<>();
+        for (Object[] row : em.createQuery(PlanningQueryConstants.COMPLETIONS_OF_TRIP, Object[].class)
+                .setParameter(PlanningQueryConstants.PARAM_TRIP, tripId).getResultList()) {
+            byItem.computeIfAbsent((UUID) row[0], k -> new java.util.ArrayList<>()).add((UUID) row[1]);
+        }
+        return byItem;
+    }
+
+    @Override
+    public List<ChecklistRow> checklist(UUID tripId) {
+        return em.createQuery(PlanningQueryConstants.CHECKLIST_OF_TRIP, ChecklistItemEntity.class)
+                .setParameter(PlanningQueryConstants.PARAM_TRIP, tripId).getResultStream()
+                .map(e -> new ChecklistRow(e.getId(), e.getGroupTitle(), e.getTitle(), e.getPosition(), e.getCompletions().stream()
+                        .sorted(java.util.Comparator.comparing(ChecklistItemEntity.Completion::getDoneAt)).map(ChecklistItemEntity.Completion::getPersonId).toList()))
+                .toList();
+    }
+
+    @Override
+    public Optional<String> roleIn(UUID tripId, UUID identityId) {
+        return em.createQuery(PlanningQueryConstants.ROLE_IN_TRIP, String.class).setParameter(PlanningQueryConstants.PARAM_TRIP, tripId)
+                .setParameter(PlanningQueryConstants.PARAM_OWNER, identityId).getResultStream().findFirst();
+    }
+
+    @Override
+    public Optional<UUID> memberIdIn(UUID tripId, UUID identityId) {
+        return em.createQuery(PlanningQueryConstants.MEMBER_ID_IN_TRIP, UUID.class).setParameter(PlanningQueryConstants.PARAM_TRIP, tripId)
+                .setParameter(PlanningQueryConstants.PARAM_OWNER, identityId).getResultStream().findFirst();
+    }
+
+    @Override
     public List<MemberRow> members(UUID tripId) {
         return em.createQuery(PlanningQueryConstants.MEMBERS_OF_TRIP, MemberRow.class)
+                .setParameter(PlanningQueryConstants.PARAM_TRIP, tripId).getResultList();
+    }
+
+    @Override
+    public List<RequestRow> deletionRequests(UUID tripId) {
+        return em.createQuery(PlanningQueryConstants.REQUESTS_OF_TRIP, RequestRow.class)
                 .setParameter(PlanningQueryConstants.PARAM_TRIP, tripId).getResultList();
     }
 

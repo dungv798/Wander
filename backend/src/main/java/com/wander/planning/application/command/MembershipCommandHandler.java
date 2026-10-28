@@ -63,13 +63,16 @@ public class MembershipCommandHandler {
     public void removeMember(MembershipCommands.RemoveMember command) {
         Trip trip = load(command.actor(), command.tripId());
         trip.circle().removeMember(command.actor(), command.memberId(), Timestamps.now(clock));
+        trip.circle().dropPendingOf(command.memberId());
         trips.save(trip);
     }
 
     /** Thành viên rời chuyến. */
     public void leave(MembershipCommands.Leave command) {
         Trip trip = load(command.actor(), command.tripId());
+        UUID memberId = trip.requireMember(command.actor()).id();
         trip.circle().leave(command.actor(), Timestamps.now(clock));
+        trip.circle().dropPendingOf(memberId);
         trips.save(trip);
     }
 

@@ -101,4 +101,31 @@ public final class PlanningApiConstants {
 
     /** Tên đoạn đường dẫn "me" dùng cho thành viên hiện tại. */
     public static final String ME = "me";
+
+    /** Đề nghị xóa của một chuyến. */
+    public static final String REQUESTS_PATH = TRIP_PATH + "/deletion-requests";
+
+    /** Một đề nghị theo mã. */
+    public static final String REQUEST_PATH = REQUESTS_PATH + "/{requestId}";
+
+    /** Đồng ý đề nghị. */
+    public static final String REQUEST_APPROVE_PATH = REQUEST_PATH + "/approve";
+
+    /** Từ chối đề nghị. */
+    public static final String REQUEST_REJECT_PATH = REQUEST_PATH + "/reject";
+
+    /** Khóa JSON của một đề nghị. */
+    public static final String KEY_REQUEST = "request";
+
+    /** Khóa JSON của danh sách đề nghị. */
+    public static final String KEY_REQUESTS = "requests";
+
+    /** Checklist chuẩn bị của một chuyến. */
+    public static final String CHECKLIST_PATH = TRIP_PATH + "/checklist";
+
+    /** Một hạng mục checklist. */
+    public static final String CHECKLIST_ITEM_PATH = CHECKLIST_PATH + "/{itemId}";
+
+    /** Dấu hoàn thành của chính mình trên một hạng mục checklist. */
+    public static final String CHECKLIST_DONE_PATH = CHECKLIST_ITEM_PATH + "/done";
 }
