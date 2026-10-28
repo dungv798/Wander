@@ -57,9 +57,10 @@ export const SWIPE = {
   FLING_MS: 320,
   FLING_DONE_MS: 300,
   RETURN_MS: 280,
-  /** Vùng chạm cạnh trái/phải của thẻ để đổi ảnh (tỉ lệ chiều rộng). */
-  EDGE_LEFT: 0.3,
-  EDGE_RIGHT: 0.7,
+  /** Chạm nửa trái của thẻ nhiều ảnh = ảnh trước, nửa phải = ảnh sau (ranh giới theo tỉ lệ chiều rộng; PO 28/10/2026, DR-023). */
+  PHOTO_SPLIT: 0.5,
+  /** Phần tử trong thẻ mà chạm vào thì mở chi tiết thay vì đổi ảnh (khối tên và thông tin). */
+  DETAIL_TAP_SELECTOR: '.card-info',
   /** Số thẻ dựng cùng lúc trong bộ bài. */
   VISIBLE_CARDS: 3,
   /** Số thẻ kế sau các thẻ đang hiện mà ảnh được tải trước. */

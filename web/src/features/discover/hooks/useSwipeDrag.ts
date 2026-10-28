@@ -11,9 +11,9 @@ const NO_DRAG_SELECTOR = '.more, .credit-btn, .credit-pill';
 interface SwipeHandlers {
   /** Quẹt đủ ngưỡng (hoặc bấm nút): bay thẻ rồi quyết định. */
   readonly onDecide: (dir: SwipeDir) => void;
-  /** Chạm cạnh trái/phải của thẻ nhiều ảnh: đổi ảnh. */
+  /** Chạm nửa trái/phải của thẻ nhiều ảnh: ảnh trước/sau. */
   readonly onShiftPhoto: (delta: number) => void;
-  /** Chạm giữa thẻ: mở chi tiết. */
+  /** Chạm khối tên-thông tin (hoặc thẻ chỉ một ảnh): mở chi tiết. */
   readonly onTap: () => void;
   /** Thẻ có nhiều ảnh (bật vùng chạm đổi ảnh ở hai cạnh). */
   readonly multiPhoto: boolean;
@@ -63,8 +63,11 @@ export function useSwipeDrag({ onDecide, onShiftPhoto, onTap, multiPhoto }: Swip
     if (d.moved || e.type !== 'pointerup') return;
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
-    if (multiPhoto && x < SWIPE.EDGE_LEFT) onShiftPhoto(-1);
-    else if (multiPhoto && x > SWIPE.EDGE_RIGHT) onShiftPhoto(1);
+    // con trỏ đã bị thẻ "bắt" nên e.target luôn là thẻ: xét vị trí chạm so với khung khối thông tin
+    const info = card.querySelector(SWIPE.DETAIL_TAP_SELECTOR)?.getBoundingClientRect();
+    const onInfo = Boolean(info && e.clientY >= info.top && e.clientY <= info.bottom);
+    // thẻ nhiều ảnh: nửa trái/phải đổi ảnh; chạm khối tên-thông tin (hoặc thẻ một ảnh) thì mở chi tiết
+    if (multiPhoto && !onInfo) onShiftPhoto(x < SWIPE.PHOTO_SPLIT ? -1 : 1);
     else onTap();
   };
 
