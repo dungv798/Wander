@@ -117,4 +117,31 @@ class DeletionRequestTest {
         trip.circle().dropPendingOf(guestMember.id());
         assertThat(trip.circle().requests()).isEmpty();
     }
+
+    @Test
+    @DisplayName("Organizer xóa thẳng mục đang có đề nghị chờ: đề nghị tự đóng thành 'đã đồng ý' (kết quả người đề nghị muốn), không còn treo")
+    void directDeleteSettlesPendingRequests() {
+        setUp();
+        DeletionRequest pending = trip.circle().submitDeletion(guest, organizersItem, "trùng", NOW);
+        Instant later = NOW.plusSeconds(60);
+        trip.softDelete(organizersItem.id(), later);
+        assertThat(trip.circle().requests()).singleElement().satisfies(r -> {
+            assertThat(r.id()).isEqualTo(pending.id());
+            assertThat(r.status()).isEqualTo(RequestStatus.APPROVED);
+            assertThat(r.decidedAt()).isEqualTo(later);
+        });
+    }
+
+    @Test
+    @DisplayName("xóa mềm một mục không đụng tới đề nghị của mục khác hay đề nghị đã quyết định")
+    void directDeleteLeavesOthersAlone() {
+        setUp();
+        DeletionRequest decided = trip.circle().submitDeletion(guest, organizersItem, null, NOW);
+        trip.circle().decideDeletion(organizer, decided.id(), false, NOW);
+        DeletionRequest other = trip.circle().submitDeletion(guest, trip.addItem(null, details("Khác"), null, null, NOW), null, NOW);
+        trip.softDelete(guestsItem.id(), NOW.plusSeconds(5));
+        assertThat(trip.circle().requests()).extracting(DeletionRequest::status)
+                .containsExactlyInAnyOrder(RequestStatus.REJECTED, RequestStatus.PENDING);
+        assertThat(trip.circle().requests()).extracting(DeletionRequest::id).contains(other.id());
+    }
 }

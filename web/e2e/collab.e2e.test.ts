@@ -144,3 +144,37 @@ test('Organizer tạo liên kết và thấy thành viên trong "Người đi c�
   assert.deepEqual(boss.errors, []);
   await boss.ctx.close();
 });
+
+test('thành viên bị Organizer gỡ: quay lại ứng dụng thì được báo và đưa về danh sách chuyến', async () => {
+  const owner = await createOwner();
+  const { tripId, code } = await tripWithInvite(owner.token);
+  const guest = await createOwner();
+  const joined = await api('POST', '/api/invites/join', guest.token, { code, displayName: 'Hoa' });
+  const memberId = (joined.body?.['member'] as { id: string }).id;
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, `#/trip/${tripId}/ov`, guest.token);
+  await page.locator('.thead h1').waitFor();
+  assert.equal((await api('DELETE', `/api/trips/${tripId}/members/${memberId}`, owner.token)).status, 204);
+  await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange'))); // như khi người dùng quay lại tab
+  await page.getByText('Bạn không còn trong chuyến đi này.').waitFor();
+  await page.waitForURL(/#\/trips/);
+  assert.equal(await page.locator('.tcard').count(), 0);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('Organizer xóa thẳng mục đang có đề nghị chờ: người đề nghị thấy "Đã đồng ý", không còn treo', async () => {
+  const owner = await createOwner();
+  const { tripId, itemId, code } = await tripWithInvite(owner.token);
+  const guest = await createOwner();
+  await api('POST', '/api/invites/join', guest.token, { code, displayName: 'Hoa' });
+  assert.equal((await api('POST', `/api/trips/${tripId}/deletion-requests`, guest.token, { itemId, reason: '' })).status, 201);
+  assert.equal((await api('DELETE', `/api/trips/${tripId}/items/${itemId}`, owner.token)).status, 200);
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, `#/trip/${tripId}/ov`, guest.token);
+  await page.getByRole('button', { name: /^Đề nghị của tôi/ }).click();
+  await page.getByText('Đã đồng ý').waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Hủy đề nghị' }).count(), 0);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});

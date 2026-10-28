@@ -258,6 +258,7 @@ public final class Trip {
             throw WanderException.conflict(PlanningErrorCodes.TRASH_FULL, PlanningMessages.TRASH_FULL);
         }
         item.markDeleted(now);
+        circle.settlePendingOf(itemId, now);
         return item;
     }
 

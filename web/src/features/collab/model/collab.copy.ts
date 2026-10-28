@@ -14,6 +14,7 @@ export const COLLAB_COPY = {
     removeText: 'Họ không còn xem được chuyến đi. Liên kết mời đang bật cũng bị thu hồi.',
     removeConfirm: 'Gỡ khỏi chuyến đi',
     removed: 'Đã gỡ «{name}»',
+    gone: 'Bạn không còn trong chuyến đi này.',
     cancel: 'Hủy',
     renameLabel: 'Tên hiển thị của bạn',
     renameSave: 'Lưu tên',

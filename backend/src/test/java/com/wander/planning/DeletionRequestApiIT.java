@@ -48,6 +48,16 @@ class DeletionRequestApiIT extends ApiTestSupport {
     }
 
     @Test
+    @DisplayName("Organizer xóa thẳng mục đang có đề nghị chờ ⇒ đề nghị tự thành approved, không còn treo")
+    void directDeleteSettlesRequest() {
+        Setup s = setup();
+        submit(s, s.orgItem(), null);
+        assertThat(call("DELETE", "/api/trips/" + s.trip() + "/items/" + s.orgItem(), s.org().token()).status()).isEqualTo(200);
+        assertThat(call("GET", "/api/trips/" + s.trip() + "/deletion-requests", s.org().token()).str("requests.0.status")).isEqualTo("approved");
+        assertThat(call("GET", "/api/trips/" + s.trip() + "/deletion-requests", s.guest().token()).str("requests.0.status")).isEqualTo("approved");
+    }
+
+    @Test
     @DisplayName("từ chối ⇒ mục còn nguyên, người đề nghị thấy rejected; thành viên khác không thấy hay xử lý đề nghị của người khác")
     void rejectAndVisibility() {
         Setup s = setup();

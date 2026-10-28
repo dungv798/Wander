@@ -20,6 +20,7 @@ import { catalogOf, countText, itemName } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { DayTab } from './DayTab.tsx';
+import { useGoneGuard } from '../hooks/useGoneGuard.ts';
 import { ItemCtaSlot, ItemInfoSlot } from './ItemInfoSlot.tsx';
 import { OverviewTab } from './OverviewTab.tsx';
 import { TripMap } from './TripMap.tsx';
@@ -173,6 +174,7 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
 /** Màn chuyến đi theo mã trong địa chỉ; không có chuyến thì báo rõ và cho đường về danh sách. */
 export function TripScreen({ tripId, sub }: { readonly tripId: string; readonly sub: string | null }) {
   const { trip: find } = useTrips();
+  useGoneGuard(tripId);
   const trip = find(tripId);
   if (!trip) {
     return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={() => navigate(VIEW.TRIPS)}>{T.view.backToList}</Button>} />;

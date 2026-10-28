@@ -232,6 +232,11 @@ public final class TripCircle {
         for (int i = 0; i < excess; i++) requests.remove(decided.get(i));
     }
 
+    /** Mục vừa bị xóa mềm (không qua duyệt): đề nghị xóa còn chờ của mục đó thành "đã đồng ý" vì điều người đề nghị muốn đã xảy ra. */
+    public void settlePendingOf(UUID itemId, Instant now) {
+        requests.replaceAll(r -> r.isPending() && r.itemId().equals(itemId) ? r.decided(RequestStatus.APPROVED, now) : r);
+    }
+
     /** Mục bị xóa vĩnh viễn: mọi đề nghị của mục đó không còn ý nghĩa. */
     public void forgetItem(UUID itemId) {
         requests.removeIf(r -> r.itemId().equals(itemId));
