@@ -56,6 +56,9 @@ class MembershipApiIT extends ApiTestSupport {
 
         Res members = call("GET", "/api/trips/" + trip + "/members", guest.token());
         assertThat(members.list("members")).hasSize(2);
+        assertThat(call("GET", "/api/trips/" + trip, guest.token()).str("trip.selfMemberId")).as("mã thành viên của chính mình")
+                .isEqualTo(joined.str("member.id"));
+        assertThat(call("GET", "/api/trips/" + trip, org.token()).str("trip.selfMemberId")).isNotEqualTo(joined.str("member.id"));
         assertThat(call("POST", "/api/invites/join", guest.token(), map("code", code, "displayName", "Khác")).status()).as("vào lại = idempotent").isEqualTo(201);
         assertThat(call("GET", "/api/trips/" + trip + "/members", guest.token()).list("members")).hasSize(2);
     }

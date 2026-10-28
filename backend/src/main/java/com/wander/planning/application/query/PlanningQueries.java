@@ -128,7 +128,8 @@ public class PlanningQueries {
                 : TripKind.fromCode(trip.kind()).map(found -> new Choice(found.code(), found.label())).orElse(new Choice(trip.kind(), trip.kind()));
         return new TripView(trip.id().toString(), trip.name(), trip.destination(), trip.startDate().toString(), trip.endDate().toString(),
                 trip.budgetK(), Vnd.fromThousandsOrNull(trip.budgetK()), styles, pace, trip.datesTentative(), kind, interestChoices(trip.interests()),
-                Timestamps.format(trip.createdAt()), Timestamps.format(trip.updatedAt()), trip.role(), (int) trip.memberCount());
+                Timestamps.format(trip.createdAt()), Timestamps.format(trip.updatedAt()), trip.role(), (int) trip.memberCount(),
+                trip.selfMemberId() == null ? null : trip.selfMemberId().toString());
     }
 
     /** Sở thích có nhãn từ chuỗi mã cách nhau bằng dấu phẩy; mã lạ trong dữ liệu hiện nguyên mã. */

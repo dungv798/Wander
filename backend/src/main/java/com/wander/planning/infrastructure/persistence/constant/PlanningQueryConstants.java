@@ -26,7 +26,8 @@ public final class PlanningQueryConstants {
             + "t.id, t.ownerIdentityId, t.name, t.destination, t.startDate, t.endDate, t.budgetK, t.styles, t.pace, t.datesTentative, t.kind, t.interests, "
             + "t.createdAt, t.updatedAt, t.deletedAt, "
             + "(select m.role from TripMemberEntity m where m.trip = t and m.identityId = :" + PARAM_OWNER + "), "
-            + "(select count(m2) from TripMemberEntity m2 where m2.trip = t)) "
+            + "(select count(m2) from TripMemberEntity m2 where m2.trip = t), "
+            + "(select m3.id from TripMemberEntity m3 where m3.trip = t and m3.identityId = :" + PARAM_OWNER + ")) "
             + "from TripEntity t ";
 
     /** Chọn các cột của mục thành dòng phẳng {@code ItemRow} (constructor expression). */
