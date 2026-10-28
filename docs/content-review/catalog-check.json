@@ -1,0 +1,3383 @@
+{
+  "scope": "12 JSON; 11 điểm đến nháp; Hà Giang chỉ đối chiếu số lượng, không xét duyệt lại",
+  "sourceIntegrity": "PASS",
+  "inputs": {
+    "backend/src/main/resources/catalog/da-lat.json": "dcfb543dfaf76ca5d26d72ef97e64538b1dda8c4f0ad47668b0bf3a0ba5f66d0",
+    "backend/src/main/resources/catalog/da-nang.json": "9db48f5b6eadececc2e12f9f47255c4eab89abab8bd83216b045412f15c9f212",
+    "backend/src/main/resources/catalog/ha-giang.json": "a544d2a5e721974ab3e2746a3a9d22bcff6aaa5ddf820773bdded07aa66ea518",
+    "backend/src/main/resources/catalog/ha-noi.json": "4a8d9bc6c7b4d630bdeb973cb32dcbe823c28e498defb189749d4b1590047de6",
+    "backend/src/main/resources/catalog/ho-chi-minh.json": "941f74b0b6a519160649f47e8538788a24aee3f2e685167ef430d064a1373a20",
+    "backend/src/main/resources/catalog/hoi-an.json": "cf7aaec0429fe3a12824fb34fb77198acef392df82f90f0e6802f17c23e211fb",
+    "backend/src/main/resources/catalog/hue.json": "8c1a0b79510fcc6de776ffa31c97fd000ee6e08a9f096c3c267e0959199f66b5",
+    "backend/src/main/resources/catalog/nha-trang.json": "016f05c92ebd9a93787bbc5833536c6de932b5c25eae8d7496e6209bdb211757",
+    "backend/src/main/resources/catalog/phu-yen.json": "452b1185b2625b049b67fd63c6fce093afabee352c059d35bef5231a0a1b9d52",
+    "backend/src/main/resources/catalog/quy-nhon.json": "1e6cb2626b46f912505ac12a4275cc81b33cc782575325930d32eb322a2b95e7",
+    "backend/src/main/resources/catalog/ta-xua.json": "9de6248feb03603399c53d9a9a913699aecaad1f44ea624973d767774d46a85b",
+    "backend/src/main/resources/catalog/vinh-hy.json": "330e0d4b8e851c66b069e7dcf23c8ebf1fee2eb890111efd6f61b6bf46545301",
+    "tools/catalog/seeds/da-lat.mjs": "32a84b3d9f565761ac1c1482d0370336db80628e838bac309240793fe1d7ef0b",
+    "tools/catalog/seeds/da-nang.mjs": "378019c6b0f479a451d662e9eecac116bff593a4a1e492a50bbf104cd26f6fe5",
+    "tools/catalog/seeds/ha-noi.mjs": "0f7802a006f0ad2e489fc7ad911652542ebbad88cfa06893fce37c315e1d950a",
+    "tools/catalog/seeds/ho-chi-minh.mjs": "83a15c551e101168f161128bf95b0d28c579eaf462bf796eb5f2bd847d2fa6e8",
+    "tools/catalog/seeds/hoi-an.mjs": "69ef49346df5101870d3523c46ca2d5beea0868656be218ba0622b52fb0a165e",
+    "tools/catalog/seeds/hue.mjs": "54aac0ed754b881d125e4364eba94be853947020d8e80d54436e997d450a54a6",
+    "tools/catalog/seeds/nha-trang.mjs": "06e1499b270ded0132b651cb5e47127787c6f277caad87a71b172dfa77c9b469",
+    "tools/catalog/seeds/phu-yen.mjs": "424a8a4e8ae2a39b1cf7b27578934babff6049bb281a79bce17bec38a36bc86c",
+    "tools/catalog/seeds/quy-nhon.mjs": "ea5b06c361dd9e346abd2773ac9684d47906dabd8d290b1c1229f2628cf82a0c",
+    "tools/catalog/seeds/ta-xua.mjs": "9873b466fbe8a660256a453ec46c74e17cd0e7dfcb0e15a5cef8021205611a68",
+    "tools/catalog/seeds/vinh-hy.mjs": "e9f0e7f227dee1e89e18117fdfd38cedd627d75ece44c6c445f891f393015340",
+    "tools/catalog/seeds/_lib.mjs": "d27a85daa822696a28eb8f43a22ccaccc29ea0e45c9651ef52d70d0fd0172580",
+    "tools/catalog/build-catalog.mjs": "a67b7f20b926f8901ad65ea690531c1d553d9d168e6c5761b02eed5cf714d3f9"
+  },
+  "totals": {
+    "destinations": 12,
+    "draftDestinations": 11,
+    "draftPlaces": 98,
+    "draftPhotos": 186,
+    "emptySummaries": 0,
+    "missingCoordinates": 0,
+    "photoIssues": 1,
+    "overlappingPlaces": 50
+  },
+  "crossDestinationDuplicateIds": [],
+  "sharedPhotos": [],
+  "repeatedTips": [
+    [
+      "da-lat/cho-da-lat",
+      "da-nang/cho-han",
+      "ha-noi/bat-trang",
+      "ho-chi-minh/cho-ben-thanh",
+      "ho-chi-minh/cho-lon",
+      "hue/cho-dong-ba"
+    ],
+    [
+      "da-nang/cau-quay-song-han",
+      "da-nang/ngu-hanh-son",
+      "da-nang/son-tra",
+      "da-nang/bai-bien-my-khe",
+      "da-nang/deo-hai-van",
+      "ha-noi/ho-hoan-kiem",
+      "ha-noi/ho-tay",
+      "ha-noi/cau-long-bien",
+      "ho-chi-minh/pho-di-bo-nguyen-hue",
+      "ho-chi-minh/thao-cam-vien",
+      "ho-chi-minh/landmark-81",
+      "ho-chi-minh/rung-ngap-man-can-gio",
+      "hue/cau-truong-tien",
+      "hue/song-huong",
+      "hue/lang-co",
+      "nha-trang/hon-tam",
+      "nha-trang/binh-ba",
+      "nha-trang/hon-tre",
+      "phu-yen/vinh-xuan-dai",
+      "phu-yen/dam-o-loan",
+      "phu-yen/deo-ca",
+      "quy-nhon/dam-thi-nai",
+      "ta-xua/bac-yen",
+      "vinh-hy/vinh-vinh-hy",
+      "vinh-hy/ca-na"
+    ],
+    [
+      "da-nang/chua-linh-ung",
+      "da-nang/nha-tho-da-nang",
+      "da-nang/thanh-dien-hai",
+      "ha-noi/den-ngoc-son",
+      "ha-noi/van-mieu-quoc-tu-giam",
+      "ha-noi/hoang-thanh-thang-long",
+      "ha-noi/chua-mot-cot",
+      "ha-noi/nha-tho-lon-ha-noi",
+      "ha-noi/nha-hat-lon-ha-noi",
+      "ha-noi/chua-tran-quoc",
+      "ha-noi/nha-tu-hoa-lo",
+      "ho-chi-minh/nha-tho-duc-ba",
+      "ho-chi-minh/buu-dien-trung-tam",
+      "ho-chi-minh/dinh-doc-lap",
+      "ho-chi-minh/nha-hat-thanh-pho",
+      "ho-chi-minh/bao-tang-chung-tich-chien-tranh",
+      "ho-chi-minh/dia-dao-cu-chi",
+      "ho-chi-minh/chua-ngoc-hoang",
+      "hoi-an/chua-cau-hoi-an",
+      "hoi-an/thanh-dia-my-son",
+      "hoi-an/bao-tang-sa-huynh",
+      "hue/chua-thien-mu",
+      "hue/lang-khai-dinh",
+      "hue/lang-minh-mang",
+      "hue/lang-tu-duc",
+      "hue/dan-nam-giao",
+      "hue/cung-an-dinh",
+      "nha-trang/nha-tho-nui",
+      "nha-trang/chua-long-son",
+      "nha-trang/bao-tang-yersin",
+      "nha-trang/chua-ba-thap-tram-huong",
+      "phu-yen/thap-nhan",
+      "phu-yen/nha-tho-mang-lang",
+      "quy-nhon/thap-doi",
+      "quy-nhon/thap-banh-it",
+      "quy-nhon/bao-tang-quang-trung",
+      "quy-nhon/thap-duong-long",
+      "quy-nhon/thap-canh-tien",
+      "quy-nhon/thanh-do-ban",
+      "vinh-hy/thap-po-klong-garai",
+      "vinh-hy/thap-hoa-lai",
+      "vinh-hy/thap-po-rome"
+    ],
+    [
+      "hue/vuon-quoc-gia-bach-ma",
+      "vinh-hy/vuon-quoc-gia-nui-chua"
+    ]
+  ],
+  "destinations": [
+    {
+      "id": "da-lat",
+      "name": "Đà Lạt",
+      "placeCount": 14,
+      "photoCount": 31,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "ho-xuan-huong",
+          "name": "Hồ Xuân Hương",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Trung tâm của thành phố, gần như ai tới Đà Lạt cũng đi dạo ở đây."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "quang-truong-lam-vien",
+          "name": "Quảng trường Lâm Viên",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "cho-da-lat",
+          "name": "Chợ Đà Lạt",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "nha-tho-con-ga",
+          "name": "Nhà thờ Con Gà",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Nhà thờ chính tòa Đà Lạt là một nhà thờ Công giáo ở Việt Nam. Đây là nhà thờ chính tòa của vị giám mục Giáo phận Đà Lạt, cũng là nhà thờ lớn nhất Đà Lạt, một trong những công trình kiến trúc tiêu biểu và cổ xưa nhất của thành phố này do người Pháp để lại. Nhà thờ nằm tại số 13 đường Trần Phú, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng, Việt Nam. Nhà thờ chính tòa Đà Lạt cách Thành phố Hồ Chí Minh 300 km.",
+          "defaultedFields": []
+        },
+        {
+          "id": "ga-da-lat",
+          "name": "Ga Đà Lạt",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Một trong những công trình kiến trúc nổi bật nhất của thành phố."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "biet-thu-hang-nga",
+          "name": "Ngôi nhà quái dị (Crazy House)",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 3.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Biệt thự Hằng Nga hay Ngôi nhà quái dị là một nhà nghỉ tại phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng, nằm ở số 3 Huỳnh Thúc Kháng trong khuôn viên rộng gần 4.000 m². Ngôi nhà này nổi tiếng vì có phong cách kiến trúc đặc biệt. Từ khi khai trương vào năm 1990, tòa nhà này đã được công nhận kiến trúc độc đáo, đã được nêu bật trong các sách hướng dẫn du lịch và được xếp vào nhóm 10 tòa nhà kỳ lạ nhất theo bình chọn của Nhân dân Nhật báo của Trung Quốc.",
+          "defaultedFields": []
+        },
+        {
+          "id": "thac-prenn",
+          "name": "Thác Prenn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 7.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Nước thường nhiều nhất vào mùa mưa; sáng ít đông."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "thac-datanla",
+          "name": "Thác Datanla",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "thien-vien-truc-lam",
+          "name": "Thiền viện Trúc Lâm",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Thiền viện Trúc Lâm Đà Lạt là thiền viện thuộc thiền phái Trúc Lâm Yên Tử. Thiền viện cách trung tâm tỉnh Lâm Đồng 5 km, nằm trên núi Phụng Hoàng, phía trên Hồ Tuyền Lâm. Đây không chỉ là thiền viện lớn nhất Lâm Đồng mà còn là điểm tham quan và chiêm bái của nhiều du khách trong và ngoài nước.",
+          "defaultedFields": []
+        },
+        {
+          "id": "ho-tuyen-lam",
+          "name": "Hồ Tuyền Lâm",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 5.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Hồ Tuyền Lâm là một hồ nước thuộc phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng. Đây là hồ nước ngọt rộng nhất khu vực Ðà Lạt, với diện tích khoảng 320 ha, nằm cách trung tâm tỉnh Lâm Đồng 7 km và cách thác Ðatanla 2 km. Hồ nằm gần núi Phụng Hoàng, đây được xem là khu phức hợp tập trung nhiều cảnh quan đẹp và dịch vụ du lịch phong phú. Hồ Tuyền Lâm là một trong 21 khu du lịch quốc gia Việt Nam.",
+          "defaultedFields": []
+        },
+        {
+          "id": "linh-phuoc",
+          "name": "Chùa Linh Phước",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "lang-biang",
+          "name": "Núi Lang Biang",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 12,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Núi Langbiang là một cụm núi cao tại tỉnh Lâm Đồng, nằm cách phường Xuân Hương – Đà Lạt 12 km thuộc địa phận phường Lang Biang – Đà Lạt. Hai núi cao nhất tại đây là núi Bà cao 2.167 m và núi Ông cao 2.124 m so với mặt nước biển. Ngoài ra trong khu du lịch còn có ngọn đồi Ra-đa cao 1.929 m, ngọn đồi này cũng là một địa điểm quen thuộc đối với du khách. Nhìn từ trung tâm phường Xuân Hương – Đà Lạt có thể thấy núi Bà nằm bên trái, núi Ông nằm bên phải.",
+          "defaultedFields": []
+        },
+        {
+          "id": "thung-lung-tinh-yeu",
+          "name": "Thung lũng Tình Yêu",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Thung Lũng Tình Yêu là một trong những thắng cảnh thơ mộng nhất tại Đà Lạt, cách trung tâm thành phố khoảng 5 km về phía bắc. Địa chỉ: số 3–7 đường Mai Anh Đào, phường Lâm Viên – Đà Lạt, tỉnh Lâm Đồng. Đó là nơi đập Đa Thiện quy tụ những dòng suối nhỏ chảy từ đồi núi cao, thành hồ Đa Thiện trong vắt uốn quanh thung lũng rợp bóng thông xanh. Vào những năm 30, toàn quyền Đông Dương và các cặp tình nhân người Pháp thường chọn khung cảnh này cho những buổi hẹn hò, rồi đặt tên là Vallée d'Amour.",
+          "defaultedFields": []
+        },
+        {
+          "id": "thac-pongour",
+          "name": "Thác Pongour",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 34.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            7,
+            8,
+            9,
+            10
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Mùa mưa nước nhiều và thác hùng vĩ nhất; đi sáng để tránh mưa chiều."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        }
+      ]
+    },
+    {
+      "id": "da-nang",
+      "name": "Đà Nẵng",
+      "placeCount": 11,
+      "photoCount": 21,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "bao-tang-cham",
+          "name": "Bảo tàng Điêu khắc Chăm"
+        },
+        {
+          "id": "lang-da-non-nuoc",
+          "name": "Làng đá mỹ nghệ Non Nước"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "cau-rong",
+          "name": "Cầu Rồng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Cầu Rồng là cây cầu thứ 6 và là cây cầu mới nhất bắc qua sông Hàn. Vì cây cầu có hình dáng giống một con rồng nên được gọi là Cầu Rồng Cầu Rồng dài 666 m và rộng 37,5 m với 6 làn xe chạy. Cầu được khởi công xây dựng vào ngày 19/7/2009 và chính thức thông xe ngày 29 tháng 3 năm 2013, kinh phí xây cầu gần 1,5 nghìn tỷ đồng. Cầu được thiết kế bởi Ammann & Whitney Consulting Engineers với tập đoàn Louis Berger.",
+          "defaultedFields": [
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cau-quay-song-han",
+          "name": "Cầu Sông Hàn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 3.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Cầu Sông Hàn là một trong những cây cầu bắc qua sông Hàn ở Đà Nẵng, miền Trung Việt Nam. Đây là cây cầu xoay đầu tiên do kỹ sư, công nhân Việt Nam tự thiết kế và thi công và là cây cầu quay duy nhất còn có khả năng xoay được ở Việt Nam hiện nay. Cầu là vạch nối liền hai trục đường chính của Đà Nẵng là đường Lê Duẩn ở bờ Tây và đường Phạm Văn Đồng ở bờ Đông.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "ba-na",
+          "name": "Bà Nà",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 23.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Điểm đến nổi bật nhất vùng ngoại thành, hợp đi trọn một ngày."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "difficulty"
+          ]
+        },
+        {
+          "id": "ngu-hanh-son",
+          "name": "Ngũ Hành Sơn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 8.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips"
+          ]
+        },
+        {
+          "id": "son-tra",
+          "name": "Sơn Trà",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 10.5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "bai-bien-my-khe",
+          "name": "Bãi biển Mỹ Khê",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-linh-ung",
+          "name": "Chùa Linh Ứng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 9.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "deo-hai-van",
+          "name": "Đèo Hải Vân",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 16.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Một trong những cung đường đèo đẹp nhất vùng."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-tho-da-nang",
+          "name": "Nhà thờ chính tòa Đà Nẵng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thanh-dien-hai",
+          "name": "Thành Điện Hải",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 3.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cho-han",
+          "name": "Chợ Hàn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.8,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ha-giang",
+      "name": "Hà Giang",
+      "placeCount": 9,
+      "photoCount": 27,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "cot-co-lung-cu",
+          "name": "Cột cờ Lũng Cú",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 10.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Điểm cực Bắc, gần như ai lên Hà Giang cũng ghé."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "deo-ma-pi-leng",
+          "name": "Đèo Mã Pì Lèng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 6.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 4,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Cảnh đẹp nhất cung đèo, đáng dừng chân chụp ảnh."
+            },
+            {
+              "field": "slotReason",
+              "text": "Bình minh và chiều muộn cho màu ánh sáng đẹp nhất. Giữa trưa nắng gắt, ảnh phẳng."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "song-nho-que",
+          "name": "Sông Nho Quế",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 23.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 4,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "dinh-vuong",
+          "name": "Dinh thự họ Vương",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 10.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "pho-co-dong-van",
+          "name": "Phố cổ Đồng Văn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "cao-nguyen-da",
+          "name": "Cao nguyên đá Đồng Văn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "hoang-su-phi",
+          "name": "Ruộng bậc thang Hoàng Su Phì",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 32.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 4,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "cong-troi-quan-ba",
+          "name": "Cổng trời Quản Bạ",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 25.5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "tay-con-linh",
+          "name": "Tây Côn Lĩnh",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 18.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Tây Côn Lĩnh là một đỉnh núi trên khối núi thượng nguồn sông Chảy ở phía tây bắc tỉnh Tuyên Quang, dãy núi Tây Côn Lĩnh trải dải trên các xã Thàng Tín, Lao Chải, Hoàng Su Phì, Thanh Thủy, Tân Tiến, Cao Bồ, Nậm Dịch, Thượng Sơn, Tân Quang, Thông Nguyên, cách phường Hà Giang 1 18 km. Với độ cao 2.431 m, đây là đỉnh núi cao nhất vùng Đông Bắc, thường được gọi là \"nóc nhà Đông Bắc\". Trên đỉnh núi có mốc trắc địa. Dưới chân núi là rừng nguyên sinh á nhiệt…",
+          "defaultedFields": []
+        }
+      ]
+    },
+    {
+      "id": "ha-noi",
+      "name": "Hà Nội",
+      "placeCount": 13,
+      "photoCount": 24,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        10,
+        11,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "pho-co-ha-noi",
+          "name": "Phố cổ Hà Nội"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "ho-hoan-kiem",
+          "name": "Hồ Hoàn Kiếm",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Trái tim của Hà Nội, điểm bắt đầu của hầu hết chuyến đi."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "den-ngoc-son",
+          "name": "Đền Ngọc Sơn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "van-mieu-quoc-tu-giam",
+          "name": "Văn Miếu – Quốc Tử Giám",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "lang-chu-tich-ho-chi-minh",
+          "name": "Lăng Chủ tịch Hồ Chí Minh",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "hoang-thanh-thang-long",
+          "name": "Hoàng thành Thăng Long",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Hoàng thành Thăng Long là quần thể di tích gắn với lịch sử kinh thành Thăng Long - Đông Kinh và tỉnh thành Hà Nội bắt đầu từ thời kì tiền Thăng Long qua thời Đinh - Tiền Lê, phát triển mạnh dưới thời Lý, Trần, Lê và thành Hà Nội dưới triều Nguyễn. Đây là công trình kiến trúc các triều vua xây dựng trong nhiều giai đoạn lịch sử và trở thành một trong những di tích quan trọng bậc nhất trong hệ thống các di tích Việt Nam.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-mot-cot",
+          "name": "Chùa Một Cột",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Chùa Một Cột có tên ban đầu là Liên Hoa Đài tức là Đài Hoa Sen với lối kiến trúc độc đáo: một điện thờ đặt trên một cột trụ duy nhất. Liên Hoa Đài là công trình nổi tiếng nhất nằm trong quần thể kiến trúc Chùa Diên Hựu, có nghĩa là ngôi chùa \"Phúc lành dài lâu\". Công trình Chùa Diên Hựu nguyên bản được xây vào thời vua Lý Thái Tông mùa đông năm 1049 và hoàn thiện vào năm 1105 thời vua Lý Nhân Tông nay đã không còn.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-tho-lon-ha-noi",
+          "name": "Nhà thờ Lớn Hà Nội",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-hat-lon-ha-noi",
+          "name": "Nhà hát Lớn Hà Nội",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "ho-tay",
+          "name": "Hồ Tây",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Hồ lớn nhất nội thành, nhiều quán cà phê, chùa và đường đạp xe."
+            }
+          ],
+          "absoluteSummary": "Hồ Tây là hồ tự nhiên lớn nhất thành phố Hà Nội, hiện thuộc địa phận phường Tây Hồ. Đây là một hồ móng ngựa và là vết tích của dòng chảy cũ của sông Hồng. Hồ có diện tích hơn 500 ha với chu vi là khoảng 14,8 km.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-tran-quoc",
+          "name": "Chùa Trấn Quốc",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.8,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Ngôi chùa cổ nhất Hà Nội, nằm trên một bán đảo nhỏ ở Hồ Tây."
+            }
+          ],
+          "absoluteSummary": "Chùa Trấn Quốc nằm trên một hòn đảo phía Đông Hồ Tây. Chùa có lịch sử gần 1500 năm và được coi là lâu đời nhất ở Thăng Long - Hà Nội. Dưới thời nhà Lý và nhà Trần, chùa Trấn Quốc là trung tâm Phật giáo của kinh thành Thăng Long. Kiến trúc chùa có sự kết hợp hài hoà giữa tính uy nghiêm, cổ kính với cảnh quan thanh nhã giữa nền tĩnh lặng của một hồ nước mênh mang.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cau-long-bien",
+          "name": "Cầu Long Biên",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-tu-hoa-lo",
+          "name": "Nhà tù Hỏa Lò",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "bat-trang",
+          "name": "Bát Tràng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 9.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ho-chi-minh",
+      "name": "TP. Hồ Chí Minh",
+      "placeCount": 13,
+      "photoCount": 28,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "nha-tho-duc-ba",
+          "name": "Nhà thờ Đức Bà",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "buu-dien-trung-tam",
+          "name": "Bưu điện Sài Gòn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Đẹp và miễn phí để vào, nằm cạnh Nhà thờ Đức Bà."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "dinh-doc-lap",
+          "name": "Dinh Độc Lập",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Dinh Độc Lập là một tòa dinh thự tại Thành phố Hồ Chí Minh, từng là nơi ở và làm việc của Tổng thống Việt Nam Cộng hòa trước Sự kiện 30 tháng 4 năm 1975. Hiện nay, Dinh Độc Lập đã được Chính phủ Việt Nam xếp hạng là di tích quốc gia đặc biệt. Cơ quan quản lý di tích văn hóa Dinh Độc Lập có tên là Hội trường Thống Nhất thuộc Văn phòng Chính phủ.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cho-ben-thanh",
+          "name": "Chợ Bến Thành",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "pho-di-bo-nguyen-hue",
+          "name": "Phố đi bộ Nguyễn Huệ",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-hat-thanh-pho",
+          "name": "Nhà hát Thành phố Hồ Chí Minh",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "bao-tang-chung-tich-chien-tranh",
+          "name": "Bảo tàng Chứng tích chiến tranh",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "dia-dao-cu-chi",
+          "name": "Địa đạo Củ Chi",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 36.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cho-lon",
+          "name": "Chợ Lớn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 5.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất."
+            }
+          ],
+          "absoluteSummary": "Chợ Lớn là một khu vực đông Hoa kiều sinh sống nằm ven kênh Tàu Hủ trải dài trên địa bàn Quận 5 và Quận 6 cũ, về phía nam tới Quận 8 cũ, về phía bắc tới Quận 10 và Quận 11 cũ ở Thành phố Hồ Chí Minh, Việt Nam. Khu phố Chợ Lớn đã có Hoa kiều sinh sống từ lâu và được coi là phố người Hoa lớn nhất thế giới tính theo diện tích. Khu vực này trước kia lập thành một thành phố riêng biệt với Sài Gòn, gọi là thành phố Chợ Lớn. Trong những năm 1930-1950 do quá trình đô thị hóa, Sài Gòn và Chợ Lớn đã sáp nhập với nhau.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thao-cam-vien",
+          "name": "Thảo Cầm Viên Sài Gòn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Thảo Cầm Viên Sài Gòn, hay còn được gọi ở địa phương là Sở Thú, là công viên bảo tồn động vật - thực vật rộng hơn 20 ha ở Thành phố Hồ Chí Minh, Việt Nam. Khuôn viên này hiện tọa lạc gần hạ lưu kênh Nhiêu Lộc – Thị Nghè với hai cổng nằm ở số 2 đường Nguyễn Bỉnh Khiêm và số 1 đường Nguyễn Thị Minh Khai, phường Sài Gòn, Thành phố Hồ Chí Minh. Theo các dữ liệu lịch sử được tổng hợp, Thảo Cầm Viên Sài Gòn là một trong những vườn thú lâu đời nhất còn tồn tại trên thế giới.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "landmark-81",
+          "name": "Landmark 81",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 3.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Tòa nhà cao nhất Việt Nam với đài quan sát toàn cảnh."
+            }
+          ],
+          "absoluteSummary": "Vincom Landmark 81, hay đơn giản là Landmark 81 hoặc còn được gọi là The Landmark 81, là tòa nhà chọc trời siêu cao ở Thành phố Hồ Chí Minh thuộc tổ hợp dự án Vinhomes Central Park trị giá 1,4 tỷ USD do Công ty Cổ phần Đầu tư xây dựng Tân Liên Phát thuộc Vingroup làm chủ đầu tư. Landmark 81 là tòa nhà cao nhất Việt Nam, tòa nhà cao thứ hai Đông Nam Á, và là tòa nhà cao thứ 17 trên thế giới.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-ngoc-hoang",
+          "name": "Chùa Ngọc Hoàng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "rung-ngap-man-can-gio",
+          "name": "Rừng ngập mặn Cần Giờ",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 35.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hoi-an",
+      "name": "Hội An",
+      "placeCount": 5,
+      "photoCount": 11,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "hoi-quan-phuc-kien",
+          "name": "Hội quán Phúc Kiến"
+        },
+        {
+          "id": "nha-co-tan-ky",
+          "name": "Nhà cổ Tấn Ký"
+        },
+        {
+          "id": "nha-co-phung-hung",
+          "name": "Nhà cổ Phùng Hưng"
+        },
+        {
+          "id": "rung-dua-bay-mau",
+          "name": "Rừng dừa Bảy Mẫu"
+        },
+        {
+          "id": "lang-gom-thanh-ha",
+          "name": "Làng gốm Thanh Hà"
+        },
+        {
+          "id": "bai-bien-an-bang",
+          "name": "Bãi biển An Bàng"
+        },
+        {
+          "id": "lang-rau-tra-que",
+          "name": "Làng rau Trà Quế"
+        },
+        {
+          "id": "chua-ong-hoi-an",
+          "name": "Miếu Quan Công"
+        },
+        {
+          "id": "bai-bien-cua-dai",
+          "name": "Bãi biển Cửa Đại"
+        },
+        {
+          "id": "hoi-quan-quang-dong",
+          "name": "Hội quán Quảng Đông"
+        },
+        {
+          "id": "chua-phuoc-lam",
+          "name": "Chùa Phước Lâm"
+        },
+        {
+          "id": "cho-hoi-an",
+          "name": "Chợ Hội An"
+        },
+        {
+          "id": "hoi-quan-trieu-chau",
+          "name": "Hội quán Triều Châu"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "pho-co-hoi-an",
+          "name": "Phố cổ Hội An",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Khu phố cổ với nhà gỗ, đèn lồng và các con hẻm nhỏ ven sông Hoài, đẹp nhất lúc chiều tối."
+            },
+            {
+              "field": "verdictReason",
+              "text": "Lý do chính nhiều người tới Hội An, nên dành ít nhất nửa ngày."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-cau-hoi-an",
+          "name": "Chùa Cầu",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Nằm ngay trong phố cổ, cảnh quen thuộc nhất của thành phố."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cu-lao-cham",
+          "name": "Cù lao Chàm",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 21.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thanh-dia-my-son",
+          "name": "Thánh địa Mỹ Sơn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 26.8,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Di tích Chăm quan trọng nhất miền Trung, cách Hội An khoảng một giờ."
+            }
+          ],
+          "absoluteSummary": "Thánh địa Mỹ Sơn thuộc xã Thu Bồn, thành phố Đà Nẵng, cách trung tâm thành phố khoảng 40 km và gần thành cổ Trà Kiệu, bao gồm nhiều đền đài Chăm Pa, trong một thung lũng đường kính khoảng 2 km, bao quanh bởi đồi núi. Đây từng là nơi tổ chức cúng tế của vương triều Chăm Pa. Thánh địa Mỹ Sơn được coi là một trong những trung tâm đền đài chính của Ấn Độ giáo ở khu vực Đông Nam Á và là di sản duy nhất của thể loại này tại Việt Nam.",
+          "defaultedFields": [
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "bao-tang-sa-huynh",
+          "name": "Bảo tàng Văn hóa Sa Huỳnh (Hội An)",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hue",
+      "name": "Huế",
+      "placeCount": 12,
+      "photoCount": 24,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "doi-vong-canh",
+          "name": "Đồi Vọng Cảnh"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "hoang-thanh-hue",
+          "name": "Đại Nội Huế",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [
+            "hoang-thanh-hue-1.jpg: tác giả chung chung"
+          ],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-thien-mu",
+          "name": "Chùa Thiên Mụ",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "lang-khai-dinh",
+          "name": "Lăng Khải Định",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 7.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Một trong những lăng ấn tượng nhất, nhiều chi tiết trang trí."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "lang-minh-mang",
+          "name": "Lăng Minh Mạng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 8.8,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "lang-tu-duc",
+          "name": "Lăng Tự Đức",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Đẹp nhất trong các lăng, yên tĩnh và nhiều bóng cây."
+            }
+          ],
+          "absoluteSummary": "Lăng Tự Đức là một quần thể Di tích công trình kiến trúc, trong đó có nơi chôn cất Tự Đức, tọa lạc trong một thung lũng hẹp thuộc làng Dương Xuân Thượng, tổng Cư Chánh, nay là tổ dân phố Thượng Ba, phường Thủy Xuân, thành phố Huế. Lúc mới xây dựng, Tự Đức đặt tên là Khiêm Cung. Sau khi Tự Đức băng hà, lăng được đổi tên thành Khiêm Lăng. Lăng Tự Đức có kiến trúc cầu kỳ, phong cảnh sơn thủy, hữu tình và là một trong những lăng tẩm đẹp nhất của hoàng gia nhà Nguyễn.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cau-truong-tien",
+          "name": "Cầu Trường Tiền",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "song-huong",
+          "name": "Sông Hương",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 10.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "dan-nam-giao",
+          "name": "Đàn Nam Giao (triều Nguyễn)",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Đàn Nam Giao triều Nguyễn là nơi các vua nhà Nguyễn tổ chức lễ tế trời đất vào mùa xuân hàng năm, thuộc địa phận phường Trường An, quận Thuận Hóa, thành phố Huế. Đây là đàn Nam Giao duy nhất còn hiện hữu ở Việt Nam, cũng là đàn tế duy nhất còn tồn tại trong số nhiều đàn tế cổ ở Huế.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cho-dong-ba",
+          "name": "Chợ Đông Ba",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Chợ lớn nhất Huế, bán đồ ăn, quà lưu niệm, nón lá."
+            },
+            {
+              "field": "slotReason",
+              "text": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "cung-an-dinh",
+          "name": "Cung An Định",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "lang-co",
+          "name": "Vịnh Lăng Cô",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 56.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "vuon-quoc-gia-bach-ma",
+          "name": "Vườn quốc gia Bạch Mã",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 41.5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nha-trang",
+      "name": "Nha Trang",
+      "placeCount": 8,
+      "photoCount": 15,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "bai-bien-nha-trang",
+          "name": "Bãi biển Nha Trang"
+        },
+        {
+          "id": "thap-ba-ponagar",
+          "name": "Tháp Bà Ponagar"
+        },
+        {
+          "id": "hon-chong",
+          "name": "Hòn Chồng"
+        },
+        {
+          "id": "vien-hai-duong-hoc",
+          "name": "Viện Hải dương học Nha Trang"
+        },
+        {
+          "id": "thanh-co-dien-khanh",
+          "name": "Thành cổ Diên Khánh"
+        },
+        {
+          "id": "hon-mun",
+          "name": "Hòn Mun"
+        },
+        {
+          "id": "hon-khoi",
+          "name": "Hòn Khói"
+        },
+        {
+          "id": "dao-diep-son",
+          "name": "Đảo Điệp Sơn"
+        },
+        {
+          "id": "cho-dam-nha-trang",
+          "name": "Chợ Đầm"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [
+        {
+          "id": "bai-bien-nha-trang",
+          "field": "verdictReason",
+          "text": "Ngay trung tâm, dễ tiếp cận và hợp mọi lứa tuổi."
+        },
+        {
+          "id": "thap-ba-ponagar",
+          "field": "verdictReason",
+          "text": "Di tích Chăm nổi bật nhất thành phố, gần trung tâm."
+        },
+        {
+          "id": "hon-mun",
+          "field": "verdictReason",
+          "text": "Điểm lặn nổi bật nhất vịnh, thường nằm trong tour đảo."
+        },
+        {
+          "id": "cho-dam-nha-trang",
+          "field": "hook",
+          "text": "Chợ lớn nhất Nha Trang, bán hải sản khô, đặc sản và đồ lưu niệm."
+        }
+      ],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "vinh-nha-trang",
+          "name": "Vịnh Nha Trang",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Biểu tượng của Nha Trang, hầu hết lịch trình đều có một buổi trên vịnh."
+            },
+            {
+              "field": "slotReason",
+              "text": "Tàu thường khởi hành buổi sáng; biển êm nhất lúc sáng."
+            }
+          ],
+          "absoluteSummary": "Vịnh Nha Trang là một vịnh ven bờ biển nằm ở phía Đông thành phố Nha Trang cũ, tỉnh Khánh Hòa, có tổng diện tích khoảng 24.965 ha. Là vịnh lớn thứ hai của tỉnh Khánh Hòa sau Vịnh Vân Phong, Vịnh Nha Trang bao gồm 3.780 ha diện tích các đảo, trong đó đảo lớn nhất là Hòn Tre và nhỏ nhất là Hòn Nọc. Khí hậu ở Vịnh Nha Trang phân thành hai mùa rõ rệt, mang đặc trưng của kiểu gió đất–biển, đồng thời chịu tác động của yếu tố địa hình trong khu vực và hệ thống gió mùa.",
+          "defaultedFields": [
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-tho-nui",
+          "name": "Nhà thờ Núi",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-long-son",
+          "name": "Chùa Long Sơn (Nha Trang)",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 2.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Chùa Long Sơn trước có tên là Đằng Long Tự, tọa lạc dưới chân đồi Trại Thủy, tại số 22 đường 23 tháng 10, phường Tây Nha Trang, tỉnh Khánh Hòa. Chùa khởi công xây dựng vào thế kỷ 19, đến năm 1940 trùng tu lại và trở thành ngôi chùa nổi tiếng nhất tỉnh với tượng phật Thích Ca ngoài trời lớn nhất Việt Nam.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "hon-tam",
+          "name": "Hòn Tằm",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 8.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Hòn Tằm là một hòn đảo rộng hơn 110 ha nằm trong vịnh Nha Trang, nằm cách 7 km về phía Đông Nam của thành phố. Đây được xem là một trong những hòn đảo có bãi biển đẹp nhất ở Nha Trang, đồng thời cũng là một điểm đến thu hút nhiều khách du lịch.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "binh-ba",
+          "name": "Đảo Bình Ba",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 44.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "bao-tang-yersin",
+          "name": "Bảo tàng Alexandre Yersin",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "chua-ba-thap-tram-huong",
+          "name": "Tháp Trầm Hương",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 0.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "hon-tre",
+          "name": "Hòn Tre (Khánh Hòa)",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 10.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Đảo lớn nhất vịnh, có khu nghỉ dưỡng và bãi biển."
+            }
+          ],
+          "absoluteSummary": "Đảo Hòn Tre là đảo lớn nhất nằm trong vịnh Nha Trang. Đảo có diện tích trên 32,50 km², cách thành phố Nha Trang 5 km về phía Đông và cách cảng Cầu Đá 3,5 km, cư dân chủ yếu là khách du lịch và ngư dân. Theo ước tính dân số thường trú trên đảo khoảng trên 1.500 người tập trung ở 2 thôn lớn là Bích Đầm và Vũng Ngán. Đảo có những bãi biển nhỏ, hoang sơ, thảm thực vật gồm rừng cây nhỏ.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phu-yen",
+      "name": "Phú Yên",
+      "placeCount": 7,
+      "photoCount": 11,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "bai-xep-phu-yen",
+          "name": "Bãi Xép"
+        },
+        {
+          "id": "nui-da-bia",
+          "name": "Núi Đá Bia"
+        },
+        {
+          "id": "thap-ba-phu-yen",
+          "name": "Hòn Yến"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "ganh-da-dia",
+          "name": "Gành Đá Đĩa",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 36.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Cảnh địa chất rất đặc biệt, điểm nổi bật nhất của Phú Yên."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "difficulty"
+          ]
+        },
+        {
+          "id": "mui-dien",
+          "name": "Mũi Điện",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 44.8,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Điểm cực Đông trên đất liền với ngọn hải đăng và cảnh biển rộng."
+            },
+            {
+              "field": "verdictReason",
+              "text": "Có thể đón bình minh sớm nhất cả nước, view biển rất đẹp."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "vinh-xuan-dai",
+          "name": "Vịnh Xuân Đài",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 41.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-nhan",
+          "name": "Tháp Nhạn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 22.2,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "nha-tho-mang-lang",
+          "name": "Nhà thờ Mằng Lăng",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 30.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "dam-o-loan",
+          "name": "Đầm Ô Loan",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 28.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "deo-ca",
+          "name": "Đèo Cả",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 30.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quy-nhon",
+      "name": "Quy Nhơn",
+      "placeCount": 7,
+      "photoCount": 12,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": {
+        "seed": "ky-co",
+        "catalog": "thap-doi"
+      },
+      "omittedSeedPlaces": [
+        {
+          "id": "ky-co",
+          "name": "Kỳ Co"
+        },
+        {
+          "id": "eo-gio",
+          "name": "Eo Gió"
+        },
+        {
+          "id": "ghenh-rang",
+          "name": "Ghềnh Ráng"
+        },
+        {
+          "id": "hon-kho",
+          "name": "Hòn Khô"
+        },
+        {
+          "id": "bai-xep",
+          "name": "Bãi Xép"
+        },
+        {
+          "id": "thien-vien-truc-lam-chanh-giac",
+          "name": "Thiền viện Trúc Lâm Chánh Giác"
+        },
+        {
+          "id": "bai-bien-quy-nhon",
+          "name": "Bãi biển Quy Nhơn"
+        },
+        {
+          "id": "cu-lao-xanh",
+          "name": "Cù lao Xanh"
+        },
+        {
+          "id": "chua-thap-thap",
+          "name": "Chùa Thập Tháp"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [
+        {
+          "id": "ky-co",
+          "field": "verdictReason",
+          "text": "Cảnh biển nổi bật nhất vùng, thường là điểm chính của chuyến đi."
+        }
+      ],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "thap-doi",
+          "name": "Tháp Đôi",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-banh-it",
+          "name": "Tháp Bánh Ít",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 14,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "bao-tang-quang-trung",
+          "name": "Bảo tàng Quang Trung",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 36.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "dam-thi-nai",
+          "name": "Đầm Thị Nại",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 5.7,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-duong-long",
+          "name": "Tháp Dương Long",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 30.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 3,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "hook",
+              "text": "Cụm ba tháp Chăm cao nhất Việt Nam, kiến trúc gạch đỏ."
+            }
+          ],
+          "absoluteSummary": "Tháp Dương Long là cụm di tích gồm ba tháp Chăm thẳng hàng trên một gò cao thuộc xã Bình An, tỉnh Gia Lai. Tháp Dương Long được xây dựng vào cuối thế kỷ 12. Đây là thời kỳ phát triển rực rỡ nhất của nền văn hóa Chăm Pa. Kiến trúc của ngôi tháp được các nhà nghiên cứu cho rằng xây theo kiến trúc Khmer từ ngôi đền Angkor Wat, sau khi Champa xăm chiếm đế chế Khmer.",
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-canh-tien",
+          "name": "Tháp Cánh Tiên",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 23.3,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thanh-do-ban",
+          "name": "Đồ Bàn",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 23.5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ta-xua",
+      "name": "Tà Xùa",
+      "placeCount": 2,
+      "photoCount": 2,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "hang-doi-bac-yen",
+          "name": "Hang Dơi"
+        },
+        {
+          "id": "moc-chau",
+          "name": "Mộc Châu"
+        },
+        {
+          "id": "thac-dai-yem",
+          "name": "Thác Dải Yếm"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "ta-xua",
+          "name": "Tà Xùa",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 4.5,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "slotReason",
+              "text": "Biển mây thường rõ nhất lúc rạng sáng."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": []
+        },
+        {
+          "id": "bac-yen",
+          "name": "Bắc Yên",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 5.8,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vinh-hy",
+      "name": "Vĩnh Hy",
+      "placeCount": 6,
+      "photoCount": 7,
+      "emptySummaries": 0,
+      "missingCoordinates": 0,
+      "invalidCoordinates": 0,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11
+      ],
+      "seasonOverlap": [],
+      "missingCover": false,
+      "coverSeedDifference": null,
+      "omittedSeedPlaces": [
+        {
+          "id": "doi-cat-nam-cuong",
+          "name": "Đồi cát Nam Cương"
+        },
+        {
+          "id": "lang-gom-bau-truc",
+          "name": "Bàu Trúc"
+        },
+        {
+          "id": "hang-rai",
+          "name": "Hang Rái"
+        },
+        {
+          "id": "bai-bien-ninh-chu",
+          "name": "Biển Ninh Chữ"
+        }
+      ],
+      "seedOnlyAbsoluteClaims": [
+        {
+          "id": "doi-cat-nam-cuong",
+          "field": "verdictReason",
+          "text": "Cảnh sa mạc thu nhỏ, đẹp nhất lúc bình minh và hoàng hôn."
+        }
+      ],
+      "duplicateIds": [],
+      "duplicateNames": [],
+      "duplicateCoordinates": [],
+      "duplicateSummaries": [],
+      "missingPhotoFields": 0,
+      "places": [
+        {
+          "id": "vinh-vinh-hy",
+          "name": "Vịnh Vĩnh Hy",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 1.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Cảnh biển nổi bật nhất của vùng, nơi chính của chuyến đi."
+            }
+          ],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-po-klong-garai",
+          "name": "Tháp Po Klong Garai",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 29.9,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [
+            {
+              "field": "verdictReason",
+              "text": "Di tích Chăm nổi bật nhất vùng và dễ đi."
+            }
+          ],
+          "absoluteSummary": "Tháp Po Klong Garai là tên gọi chung cho một cụm tháp Chăm hùng vĩ và đẹp nhất còn lại ở Việt Nam, phụng thờ vua Po Klong Garai. Tháp Pô Klong Garai là một tổng thể gồm ba tháp: tháp chính, tháp lửa, tháp cổng. Công trình này có trình độ kiến trúc, nghệ thuật, điêu khắc đạt đến đỉnh cao. Di tích kiến trúc nghệ thuật này được Bộ Văn hóa xếp hạng di tích di tích quốc gia năm 1979 và được Thủ tướng Chính phủ xếp hạng di tích quốc gia đặc biệt.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "vuon-quoc-gia-nui-chua",
+          "name": "Vườn quốc gia Núi Chúa",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 5.1,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 2,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips"
+          ]
+        },
+        {
+          "id": "ca-na",
+          "name": "Cà Ná",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 52.4,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-hoa-lai",
+          "name": "Tháp Hòa Lai",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 18,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": "Tháp Hòa Lai là một trong những cụm tháp cổ Chăm Pa, gồm có ba tháp hiện nằm ở thôn Ba Tháp, xã Thuận Bắc, tỉnh Khánh Hòa. Được đánh giá là một trong những di tích cổ nhất và đẹp nhất còn tồn tại.",
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        },
+        {
+          "id": "thap-po-rome",
+          "name": "Tháp Po Rome",
+          "coordinateMissing": false,
+          "coordinateInvalid": false,
+          "distanceKm": 42.6,
+          "far": false,
+          "emptySummary": false,
+          "missingDescriptionSource": false,
+          "overlapMonths": [
+            9,
+            10,
+            11
+          ],
+          "invalidMonths": [],
+          "photoCount": 1,
+          "photoIssues": [],
+          "absoluteClaims": [],
+          "absoluteSummary": null,
+          "defaultedFields": [
+            "slots",
+            "slotReason",
+            "tips",
+            "difficulty"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Không tra mạng trong script; nguồn từng trường tọa độ không được JSON lưu lại.",
+    "Ngưỡng xa: 60 km, riêng Tà Xùa 90 km theo builder/seed; không chứng minh ghim đúng.",
+    "Trùng tọa độ làm tròn 5 chữ số chỉ là tín hiệu rà soát.",
+    "Không kiểm ảnh bằng mắt, không xác nhận giấy phép đang có trên Commons.",
+    "Exit 0 nghĩa là kiểm tra chạy xong; không phải nội dung đã đạt duyệt."
+  ]
+}
