@@ -19,6 +19,7 @@ async function open(ctx: BrowserContext, hash: string): Promise<Page> {
   await page.goto(`${baseUrl}/#/`);
   await page.evaluate(() => {
     localStorage.clear();
+    localStorage.setItem('wander.web.destination.v1', 'ha-giang');
     localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'); // bỏ qua giới thiệu lần đầu (có test riêng)
   });
   await page.reload(); // kho "đã xem giới thiệu" đọc lúc khởi tạo nên phải nạp lại
@@ -51,18 +52,17 @@ async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
   return { ctx, errors };
 }
 
-test('trang chủ: hero, tìm kiếm, các khối gợi cảm hứng; tìm không có kết quả thì có nút xóa', async () => {
+test('trang chủ mở màn chọn điểm đến và tìm không khớp', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/');
   await page.locator('h1.logo').waitFor();
-  assert.equal(await page.locator('.mood').count(), 3, 'ba loại địa điểm trong kho');
-  await page.fill('input[type=search]', 'zzz');
-  await page.getByRole('status').getByText('Chưa có điểm đến nào khớp «zzz»').waitFor();
-  await page.getByRole('button', { name: 'Xóa tìm kiếm' }).click();
-  await page.locator('.mood').first().waitFor();
-  await page.fill('input[type=search]', 'ha gi');
-  await page.locator('.dcard').waitFor();
-  assert.equal(await page.locator('.soon span').count(), 0, 'không điểm đến "sắp ra mắt" nào khớp "ha gi"');
+  assert.equal(await page.locator('.mood').count(), 3);
+  await page.getByRole('button', { name: 'Tìm điểm đến', exact: true }).click();
+  await page.getByRole('searchbox').fill('zzz');
+  await page.getByRole('status').getByText('Chưa có điểm đến này', { exact: true }).waitFor();
+  await page.getByRole('searchbox').fill('ha gi');
+  await page.locator('.destination-picker-list button', { hasText: 'Hà Giang' }).click();
+  await page.locator('.dcard h3', { hasText: 'Hà Giang' }).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });

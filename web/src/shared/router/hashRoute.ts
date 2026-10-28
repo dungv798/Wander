@@ -26,7 +26,7 @@ const INVITE_CODE_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 /** Phân tích `location.hash` (dạng `#/dest/ha-giang`, `#/trip/<mã>/2`) thành tuyến; địa chỉ lạ về Khám phá. */
 export function parseHash(hash: string): Route {
   const parts = hash.replace(/^#\/?/, '').split('?')[0]?.split('/').filter(Boolean) ?? [];
-  const view = KNOWN.find((v) => v === parts[0]);
+  const view = parts[0] === 'd' ? VIEW.DEST : KNOWN.find((v) => v === parts[0]);
   if (!view) return HOME;
   if (!VIEWS_WITH_ID.includes(view)) return { view, id: null, sub: null };
   const id = parts[1] ?? (VIEWS_WITH_DEST.includes(view) ? DEFAULT_DESTINATION_ID : null);

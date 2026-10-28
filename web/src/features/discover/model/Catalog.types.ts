@@ -109,6 +109,8 @@ export interface Preview {
 
 /** Tóm tắt điểm đến cho danh sách và tìm kiếm. */
 export interface DestinationSummary {
+  readonly lat: number | null;
+  readonly lon: number | null;
   readonly id: string;
   readonly name: string;
   readonly region: string;

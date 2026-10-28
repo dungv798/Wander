@@ -50,3 +50,6 @@ export const DEFAULT_FOCAL = '50% 50%';
 
 /** Cỡ tối đa của đoạn "Về nơi này" khi thu gọn (số dòng do CSS `.clamp`). */
 export const ABOUT_MIN_LENGTH = 1;
+
+/** Số ảnh lấy từ catalog cho từng khối trang chủ. */
+export const HOME_PREVIEW = { HERO: 3, WALL: 6, HIGHLIGHTS: 3, LIVE: 3, RIGHT: 2 } as const;

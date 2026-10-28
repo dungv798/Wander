@@ -44,6 +44,7 @@ async function open(ctx: BrowserContext, hash: string, opts: { trips?: boolean; 
   await page.goto(`${baseUrl}/#/`);
   await page.evaluate(() => {
     localStorage.clear();
+    localStorage.setItem('wander.web.destination.v1', 'ha-giang');
     localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
   });
   const seeded = opts.trips ? await seedTrips(page) : null;

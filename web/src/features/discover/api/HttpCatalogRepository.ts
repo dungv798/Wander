@@ -12,7 +12,9 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 
 /** Tóm tắt hợp lệ tối thiểu: có mã, tên và vùng dạng chuỗi (đủ để danh sách và thẻ render mà không sập). */
 function isSummary(v: unknown): v is DestinationSummary {
-  return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string' && typeof v['region'] === 'string';
+  return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string' && typeof v['region'] === 'string'
+    && (v['lat'] === null || (typeof v['lat'] === 'number' && Number.isFinite(v['lat'])))
+    && (v['lon'] === null || (typeof v['lon'] === 'number' && Number.isFinite(v['lon'])));
 }
 
 /** Điểm đến đầy đủ hợp lệ tối thiểu: mã, tên là chuỗi; địa điểm, cẩm nang, mốc tham chiếu là mảng (màn hình lặp qua chúng khi render). */

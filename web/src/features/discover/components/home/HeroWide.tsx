@@ -4,21 +4,18 @@ import { VIEW } from '../../../../shared/const/routes.const.ts';
 import { cssVars } from '../../../../shared/lib/cssVars.ts';
 import { Button } from '../../../../shared/ui/Button.tsx';
 import { Icon } from '../../../../shared/ui/Icon.tsx';
-import { HOME_PLACES } from '../../model/discover.const.ts';
+import { HOME_PREVIEW } from '../../model/discover.const.ts';
 import type { DestinationDetail } from '../../model/Catalog.types.ts';
-import { firstPhotoUrl, placeById, placesInSeason } from '../../model/destinationQueries.ts';
+import { firstPhotoUrl, placesInSeason } from '../../model/destinationQueries.ts';
 import { SearchBox } from './SearchBox.tsx';
 
 interface HeroWideProps {
   readonly dest: DestinationDetail;
-  readonly query: string;
-  readonly onQuery: (q: string) => void;
 }
 
-const HERO_IDS = [HOME_PLACES.PASS, HOME_PLACES.COVER, HOME_PLACES.RIVER] as const;
 
 /** Hero trang chủ màn rộng: ảnh thật chuyển mờ, câu mời và ô tìm kiếm. Dòng "mùa đẹp" chỉ hiện khi kho có nơi đúng tháng này. */
-export function HeroWide({ dest, query, onQuery }: HeroWideProps) {
+export function HeroWide({ dest }: HeroWideProps) {
   const month = new Date().getMonth() + 1;
   const inSeason = placesInSeason(dest, month);
   const eyebrow = inSeason.length
@@ -27,9 +24,9 @@ export function HeroWide({ dest, query, onQuery }: HeroWideProps) {
   return (
     <section className="hero-w">
       <div className="hero-ph" aria-hidden="true">
-        {HERO_IDS.map((id, i) => (
-          <figure key={id} className="hs" style={cssVars({ i })}>
-            <img alt="" src={firstPhotoUrl(placeById(dest, id))} fetchPriority={i ? undefined : 'high'} />
+        {dest.places.slice(0, HOME_PREVIEW.HERO).map((place, i) => (
+          <figure key={place.id} className="hs" style={cssVars({ i })}>
+            <img alt="" src={firstPhotoUrl(place)} fetchPriority={i ? undefined : 'high'} />
           </figure>
         ))}
       </div>
@@ -49,7 +46,7 @@ export function HeroWide({ dest, query, onQuery }: HeroWideProps) {
           <Button icon="hand-finger" onClick={() => navigate(VIEW.DECK, dest.id)}>
             {fill(COPY.home.startSwipeIn, { dest: dest.name })}
           </Button>
-          <SearchBox value={query} onChange={onQuery} className="hero-search" />
+          <SearchBox className="hero-search" />
         </div>
       </div>
     </section>

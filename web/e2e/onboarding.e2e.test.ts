@@ -47,6 +47,7 @@ async function open(ctx: BrowserContext, url: string, seen = false): Promise<Pag
   await page.goto(`${baseUrl}/#/deck/ha-giang`);
   await page.evaluate(([key, done]) => {
     localStorage.clear();
+    localStorage.setItem('wander.web.destination.v1', 'ha-giang');
     if (done) localStorage.setItem(key as string, '{"done":true}');
   }, [ONBOARDING_KEY, seen] as const);
   await page.goto(`${baseUrl}${url}`);

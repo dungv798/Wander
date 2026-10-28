@@ -1,0 +1,85 @@
+.destination-picker {
+  min-height: 100%;
+  background: var(--bg);
+  padding: var(--s-4);
+}
+
+.destination-picker-header {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+
+.destination-picker-header h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+}
+
+.destination-picker-search input {
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--border-ctrl);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+}
+
+.destination-picker-map {
+  height: var(--destination-map-height);
+  margin-top: var(--s-4);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.destination-picker-hint {
+  margin-block: var(--s-4);
+  color: var(--muted);
+}
+
+.destination-picker-list {
+  display: grid;
+  gap: var(--s-3);
+  list-style: none;
+  padding: 0;
+}
+
+.destination-picker-list button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--tap);
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-1);
+  text-align: left;
+}
+
+.destination-picker-list img {
+  width: var(--s-8);
+  height: var(--s-8);
+  object-fit: cover;
+  border-radius: var(--r-sm);
+}
+
+.destination-picker-list span span {
+  display: block;
+  color: var(--muted);
+  margin-top: var(--s-1);
+}
+
+.destination-picker-list small {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.destination-picker :focus-visible {
+  outline: var(--s-1) solid var(--focus);
+  outline-offset: var(--s-1);
+}

@@ -44,6 +44,7 @@ async function open(ctx: BrowserContext, hash: string, seed = false): Promise<Pa
   await page.goto(`${baseUrl}/#/`);
   await page.evaluate(() => {
     localStorage.clear();
+    localStorage.setItem('wander.web.destination.v1', 'ha-giang');
     localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'); // bỏ qua giới thiệu lần đầu (có test riêng)
   });
   await page.reload(); // kho "đã xem giới thiệu" đọc lúc khởi tạo nên phải nạp lại

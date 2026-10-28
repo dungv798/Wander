@@ -1,5 +1,12 @@
 /** Chữ hiển thị (tiếng Việt), gom theo nhóm; sẵn sàng cho i18n. KHÔNG viết chữ cứng trong thành phần: lấy từ đây (chuẩn FE §8). */
 export const COPY = {
+  destinations: {
+    title: 'Bạn muốn đi đâu?',
+    map: 'Bản đồ điểm đến Việt Nam',
+    search: 'Nhập tên điểm đến hoặc vùng',
+    empty: 'Chưa có điểm đến này',
+    hint: 'Chọn điểm đến để bắt đầu khám phá',
+  },
   brand: { name: 'Wander', ariaHome: 'Wander, về Khám phá' },
   nav: {
     label: 'Điều hướng chính',

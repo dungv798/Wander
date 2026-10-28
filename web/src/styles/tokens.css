@@ -9,6 +9,7 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
+  --destination-map-height: 38dvh;
   /* ---- Nền và chữ ---- */
   --bg: #fff8d8;             /* bơ nhạt: nền trang */
   --surface: #ffffff;        /* thẻ, tờ phủ, ô nhập */

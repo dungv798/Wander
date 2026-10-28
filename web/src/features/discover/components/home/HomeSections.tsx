@@ -9,9 +9,9 @@ import { Icon } from '../../../../shared/ui/Icon.tsx';
 import { SectionHead } from '../../../../shared/ui/SectionHead.tsx';
 import { usePlaceSheet } from '../../hooks/PlaceSheetProvider.tsx';
 import { useDiscover } from '../../hooks/DiscoverProvider.tsx';
-import { CATEGORY_ICON, COMING_SOON, HOME_PLACES } from '../../model/discover.const.ts';
-import type { DestinationDetail, PlaceView } from '../../model/Catalog.types.ts';
-import { destBestMonths, firstPhotoUrl, groupByCategory, placeById, placesInSeason } from '../../model/destinationQueries.ts';
+import { CATEGORY_ICON, COMING_SOON, HOME_PREVIEW } from '../../model/discover.const.ts';
+import type { DestinationDetail } from '../../model/Catalog.types.ts';
+import { destBestMonths, firstPhotoUrl, groupByCategory, placesInSeason } from '../../model/destinationQueries.ts';
 import { pickedOf } from '../../model/discoverState.ts';
 
 interface SectionProps {
@@ -102,7 +102,7 @@ export function MonthSection({ dest }: SectionProps) {
 /** Tường ảnh "Những nơi làm người ta muốn đi" (chỉ màn rộng). */
 export function WallSection({ dest }: SectionProps) {
   const { open } = usePlaceSheet();
-  const wall = HOME_PLACES.WALL.map((id) => placeById(dest, id)).filter((p): p is PlaceView => p !== null);
+  const wall = dest.places.slice(0, HOME_PREVIEW.WALL);
   return (
     <section className="stack rv">
       <SectionHead title={COPY.home.wall} />
@@ -147,7 +147,7 @@ export function DestinationCardSection({ dest }: SectionProps) {
 /** Hàng "Nổi bật" khi đang tìm kiếm: mở nhanh chi tiết các nơi tiêu biểu. */
 export function FeaturedSection({ dest }: SectionProps) {
   const { open } = usePlaceSheet();
-  const list = HOME_PLACES.HIGHLIGHTS.map((id) => placeById(dest, id)).filter((p): p is PlaceView => p !== null);
+  const list = dest.places.slice(0, HOME_PREVIEW.HIGHLIGHTS);
   return (
     <section className="stack rv">
       <SectionHead title={fill(COPY.home.featured, { dest: dest.name })} />

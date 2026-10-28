@@ -1,0 +1,28 @@
+import { DEFAULT_DESTINATION_ID } from '../../../shared/const/routes.const.ts';
+import { normalizeSearch } from '../../../shared/lib/text.ts';
+import { DESTINATION_STORAGE_KEY } from './destination.const.ts';
+
+interface SearchableDestination { readonly id: string; readonly name: string; readonly region: string }
+type DestinationStorage = Pick<Storage, 'getItem' | 'setItem'>;
+
+/** So khớp tên hoặc vùng không dấu, giữ nguyên thứ tự biên tập. */
+export function filterDestinations<T extends SearchableDestination>(destinations: readonly T[], query: string): T[] {
+  const normalized = normalizeSearch(query);
+  return destinations.filter((destination) => normalizeSearch(destination.name).includes(normalized) || normalizeSearch(destination.region).includes(normalized));
+}
+
+/** Chỉ chấp nhận mã có trong catalog; chưa chọn thì dùng mã mặc định nếu catalog có, không thì mục đầu; catalog rỗng dùng mã dự phòng. */
+export function resolveDestination(saved: unknown, destinations: readonly { readonly id: string }[]): string {
+  const has = (id: unknown): string | undefined => destinations.find((destination) => destination.id === id)?.id;
+  return has(saved) ?? has(DEFAULT_DESTINATION_ID) ?? destinations[0]?.id ?? DEFAULT_DESTINATION_ID;
+}
+
+/** Đọc lựa chọn, kể cả trình duyệt chặn quyền truy cập localStorage. */
+export function readDestination(storage?: DestinationStorage): string | null {
+  try { return (storage ?? window.localStorage).getItem(DESTINATION_STORAGE_KEY); } catch { return null; }
+}
+
+/** Ghi lựa chọn theo cơ chế cố gắng, không chặn đổi màn khi hết dung lượng. */
+export function writeDestination(storage: DestinationStorage | undefined, id: string): void {
+  try { (storage ?? window.localStorage).setItem(DESTINATION_STORAGE_KEY, id); } catch { /* Vẫn dùng được trong phiên hiện tại. */ }
+}

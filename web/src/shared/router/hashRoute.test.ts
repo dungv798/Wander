@@ -1,5 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+test('liên kết d và màn chọn tiếp tục phân tích đúng', () => {
+  assert.deepEqual(parseHash('#/d/da-lat'), { view: 'dest', id: 'da-lat', sub: null });
+  assert.equal(parseHash('#/d/../x').view, 'explore');
+  assert.deepEqual(parseHash('#/destinations'), { view: 'destinations', id: null, sub: null });
+});
 import { parseHash, toHash } from './hashRoute.ts';
 
 test('địa chỉ trống hoặc lạ về Khám phá', () => {

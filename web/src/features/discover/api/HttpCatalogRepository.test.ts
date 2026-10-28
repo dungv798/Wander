@@ -7,7 +7,7 @@ import { HttpCatalogRepository } from './HttpCatalogRepository.ts';
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
 const validDestination = (id = 'ha-giang'): Record<string, unknown> => ({ id, name: 'Hà Giang', places: [], guide: [], references: [] });
-const validSummary = (id = 'ha-giang'): Record<string, unknown> => ({ id, name: 'Hà Giang', region: 'Đông Bắc' });
+const validSummary = (id = 'ha-giang'): Record<string, unknown> => ({ id, name: 'Hà Giang', region: 'Đông Bắc', lat: 23, lon: 105 });
 const isInternal = (e: unknown): boolean => e instanceof ApiError && e.code === 'INTERNAL';
 
 /** Kho dựng trên fetch giả; trả thêm danh sách lời gọi (URL và tín hiệu hủy). */
@@ -49,6 +49,10 @@ test('mã lạ: 404 của máy chủ thành ApiError NOT_FOUND để giao diện
 });
 
 test('thân sai hình dạng thành INTERNAL, không để lọt giá trị hỏng vào giao diện (render sẽ sập nếu thiếu mảng)', async () => {
+  for (const coordinates of [{ lat: '23', lon: 105 }, { lat: 23 }, { lat: {}, lon: 105 }]) {
+    const invalid = Object.assign(validSummary(), { lat: undefined, lon: undefined }, coordinates);
+    await assert.rejects(repo(() => json({ destinations: [invalid] })).repository.searchDestinations(''), isInternal);
+  }
   await assert.rejects(repo(() => json({})).repository.searchDestinations('x'), isInternal);
   await assert.rejects(repo(() => json({ destinations: 'x' })).repository.searchDestinations('x'), isInternal);
   await assert.rejects(repo(() => json({ destinations: [validSummary(), { id: 1, name: 'x' }] })).repository.searchDestinations('x'), isInternal);
