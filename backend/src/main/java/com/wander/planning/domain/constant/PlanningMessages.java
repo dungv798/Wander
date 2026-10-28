@@ -48,6 +48,12 @@ public final class PlanningMessages {
     /** Mục đã bị xóa nên không sửa được. */
     public static final String ITEM_DELETED_EDIT = "Mục đã bị xóa. Hãy khôi phục trước khi sửa.";
 
+    /** Chuyến đã bị xóa rồi. */
+    public static final String TRIP_DELETED = "Chuyến đi đã bị xóa.";
+
+    /** Chuyến chưa bị xóa nên không khôi phục được. */
+    public static final String TRIP_NOT_DELETED = "Chuyến đi chưa bị xóa.";
+
     /** "Đã xóa gần đây" của chuyến đã đầy (DR-020). */
     public static final String TRASH_FULL = "Đã xóa gần đây đã đầy. Hãy xóa vĩnh viễn bớt mục rồi thử lại.";
 

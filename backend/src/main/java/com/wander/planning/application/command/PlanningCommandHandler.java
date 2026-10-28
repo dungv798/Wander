@@ -215,6 +215,20 @@ public class PlanningCommandHandler {
     // ---- hỗ trợ ----
 
     /** Nạp chuyến của đúng chủ; chuyến của người khác coi như không có (404). */
+    /** Xóa mềm cả chuyến (PO 28/10/2026): chuyến rời danh sách, mục giữ nguyên để khôi phục. */
+    public void deleteTrip(PlanningCommands.DeleteTrip command) {
+        Trip trip = load(command.ownerId(), command.tripId());
+        trip.moveToTrash(Timestamps.now(clock));
+        trips.save(trip);
+    }
+
+    /** Khôi phục chuyến từ "Chuyến đã xóa gần đây". */
+    public void restoreTrip(PlanningCommands.RestoreTrip command) {
+        Trip trip = trips.findOwnedDeleted(command.tripId(), command.ownerId()).orElseThrow(WanderException::notFound);
+        trip.recoverFromTrash(Timestamps.now(clock));
+        trips.save(trip);
+    }
+
     private Trip load(UUID ownerId, UUID tripId) {
         return trips.findOwned(tripId, ownerId).orElseThrow(WanderException::notFound);
     }

@@ -47,12 +47,14 @@ public final class Trip {
     private TripOptions options;
     private final Instant createdAt;
     private Instant updatedAt;
+    /** Thời điểm xóa mềm chuyến (PO 28/10/2026); null = chuyến còn hiện. Chuyến đã xóa vẫn giữ nguyên mục để khôi phục. */
+    private Instant deletedAt;
     private final long version;
     private final List<Item> items;
 
     /** Dựng lại chuyến từ dữ liệu đã lưu (không chuẩn hóa lại). */
     public Trip(UUID id, UUID ownerId, String name, String destination, DateRange range, TripOptions options,
-                Instant createdAt, Instant updatedAt, long version, List<Item> items) {
+                Instant createdAt, Instant updatedAt, Instant deletedAt, long version, List<Item> items) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
@@ -61,6 +63,7 @@ public final class Trip {
         this.options = options;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
         this.version = version;
         this.items = new ArrayList<>(items);
     }
@@ -75,7 +78,31 @@ public final class Trip {
         return new Trip(UUID.randomUUID(), ownerId,
                 ItemText.required(name, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME),
                 ItemText.required(destination, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION),
-                range, options, now, now, 0, List.of());
+                range, options, now, now, null, 0, List.of());
+    }
+
+    /** Chuyến đã bị xóa mềm (nằm trong "Chuyến đã xóa gần đây")? */
+    public boolean isDeleted() {
+        return deletedAt != null;
+    }
+
+    /** Thời điểm xóa mềm; null nếu chuyến còn hiện. */
+    public Instant deletedAt() {
+        return deletedAt;
+    }
+
+    /** Xóa mềm cả chuyến (D19): chuyến rời danh sách, mục giữ nguyên để khôi phục. Xóa hai lần là xung đột. */
+    public void moveToTrash(Instant now) {
+        if (isDeleted()) throw WanderException.conflict(PlanningErrorCodes.ALREADY_DELETED, PlanningMessages.TRIP_DELETED);
+        this.deletedAt = now;
+        this.updatedAt = now;
+    }
+
+    /** Khôi phục chuyến từ "Chuyến đã xóa gần đây" về đúng như cũ; chuyến chưa xóa thì xung đột. */
+    public void recoverFromTrash(Instant now) {
+        if (!isDeleted()) throw WanderException.conflict(PlanningErrorCodes.NOT_DELETED, PlanningMessages.TRIP_NOT_DELETED);
+        this.deletedAt = null;
+        this.updatedAt = now;
     }
 
     /** Q11: đổi tùy chọn chuyến đi (ngân sách, kiểu, nhịp). Không có lịch sử chỉnh sửa (D19). */

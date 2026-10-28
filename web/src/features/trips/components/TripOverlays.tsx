@@ -1,4 +1,5 @@
 import type { Overlay } from '../hooks/TripViewContext.tsx';
+import { DeleteTripSheet } from './DeleteTripSheet.tsx';
 import { EditTripSheet } from './EditTripSheet.tsx';
 import { ItemEditorSheet } from './ItemEditorSheet.tsx';
 import { TrashSheet } from './TrashSheet.tsx';
@@ -20,6 +21,8 @@ export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay |
       return <AddToDaySheet onClose={onClose} />;
     case 'trash':
       return <TrashSheet onClose={onClose} />;
+    case 'deleteTrip':
+      return <DeleteTripSheet onClose={onClose} />;
     case 'pickDay':
       return <PickDaySheet itemId={overlay.itemId} onClose={onClose} />;
   }

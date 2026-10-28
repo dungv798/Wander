@@ -7,6 +7,7 @@ import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { useDestination } from '../../discover/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
+import { DeletedTripsSheet } from './DeletedTripsSheet.tsx';
 import { CreateTripSheet } from './CreateTripSheet.tsx';
 import { TripCard } from './TripCard.tsx';
 import { TripWizard } from './TripWizard.tsx';
@@ -23,7 +24,7 @@ function useCoverOf(destId: string): (placeId: string | null) => string | null {
 /** Màn "Chuyến đi": danh sách chuyến của bạn, nút tạo mới (nhanh hoặc theo bước), hoặc trạng thái rỗng dẫn tới Khám phá. */
 export function TripsScreen({ destId }: { readonly destId: string }) {
   const { state, status, reload } = useTrips();
-  const [sheet, setSheet] = useState<'create' | 'wizard' | null>(null);
+  const [sheet, setSheet] = useState<'create' | 'wizard' | 'deleted' | null>(null);
   const coverOf = useCoverOf(destId);
   const { state: dest } = useDestination(destId);
   const fallbackCover = dest.status === 'ready' ? dest.data.coverUrl : '';
@@ -68,10 +69,12 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
       )}
       <div className="stack pad-x spaced-lg">
         {state.trips.length ? <Button kind="ghost" block icon="sun" onClick={() => navigate(VIEW.TODAY)}>{T.today.open}</Button> : null}
+        <Button kind="ghost" block icon="trash" onClick={() => setSheet('deleted')}>{T.deletedTrips.open}</Button>
         <Button kind="ghost" block onClick={() => navigate(VIEW.SETTINGS)}>{T.list.settings}</Button>
       </div>
       {sheet === 'create' ? <CreateTripSheet destId={destId} picked={[]} onClose={() => setSheet(null)} /> : null}
       {sheet === 'wizard' ? <TripWizard destId={destId} onClose={() => setSheet(null)} /> : null}
+      {sheet === 'deleted' ? <DeletedTripsSheet onClose={() => setSheet(null)} /> : null}
     </>
   );
 }

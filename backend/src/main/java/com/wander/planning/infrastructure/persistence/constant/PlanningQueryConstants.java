@@ -21,7 +21,7 @@ public final class PlanningQueryConstants {
     /** Chọn các cột của chuyến thành dòng phẳng {@code TripRow} (constructor expression). */
     public static final String TRIP_ROW = "select new com.wander.planning.application.query.TripRow("
             + "t.id, t.ownerIdentityId, t.name, t.destination, t.startDate, t.endDate, t.budgetK, t.styles, t.pace, t.datesTentative, t.kind, t.interests, "
-            + "t.createdAt, t.updatedAt) "
+            + "t.createdAt, t.updatedAt, t.deletedAt) "
             + "from TripEntity t ";
 
     /** Chọn các cột của mục thành dòng phẳng {@code ItemRow} (constructor expression). */
@@ -29,12 +29,16 @@ public final class PlanningQueryConstants {
             + "i.id, i.trip.id, i.dayDate, i.position, i.type, i.title, i.timeOfDay, i.durationMin, i.note, "
             + "i.costK, i.included, i.referenceK, i.bookingStatus, i.placeId, i.deletedAt, i.createdAt) from ItemEntity i ";
 
-    /** Điều kiện: chuyến theo mã và chủ. */
-    public static final String WHERE_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER;
+    /** Điều kiện: chuyến CÒN HIỆN theo mã và chủ (chuyến đã xóa mềm coi như không có). */
+    public static final String WHERE_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is null";
 
     /** Điều kiện và thứ tự: mọi chuyến của chủ, mới nhất trước. */
     public static final String WHERE_OWNER_NEWEST_FIRST =
-            "where t.ownerIdentityId = :" + PARAM_OWNER + " order by t.startDate desc, t.createdAt desc";
+            "where t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is null order by t.startDate desc, t.createdAt desc";
+
+    /** Điều kiện và thứ tự: chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
+    public static final String WHERE_OWNER_DELETED_RECENT_FIRST =
+            "where t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null order by t.deletedAt desc, t.id";
 
     /** Điều kiện và thứ tự: mọi mục của chuyến, theo ngày rồi vị trí thủ công. */
     public static final String WHERE_TRIP_ITEMS_IN_ORDER =
@@ -65,7 +69,11 @@ public final class PlanningQueryConstants {
 
     /** Nạp chuyến của chủ kèm mọi mục trong một truy vấn (tránh N+1). */
     public static final String TRIP_WITH_ITEMS = "select distinct t from TripEntity t left join fetch t.items "
-            + "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER;
+            + "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is null";
+
+    /** Nạp chuyến ĐÃ XÓA MỀM của chủ kèm mục (để khôi phục). */
+    public static final String TRIP_WITH_ITEMS_DELETED = "select distinct t from TripEntity t left join fetch t.items "
+            + "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null";
 
     private PlanningQueryConstants() {
     }

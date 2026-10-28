@@ -17,6 +17,9 @@ public interface TripReadModel {
     /** Chuyến của chủ, mới nhất trước (ngày đi giảm dần, rồi thời điểm tạo giảm dần). */
     List<TripRow> listTrips(UUID ownerId);
 
+    /** Chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
+    List<TripRow> listDeletedTrips(UUID ownerId);
+
     /** Mọi mục (kể cả đã xóa mềm), theo ngày rồi thứ tự thủ công. */
     List<ItemRow> items(UUID tripId);
 

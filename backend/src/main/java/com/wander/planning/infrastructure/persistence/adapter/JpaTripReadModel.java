@@ -43,6 +43,13 @@ public class JpaTripReadModel implements TripReadModel {
     }
 
     @Override
+    public List<TripRow> listDeletedTrips(UUID ownerId) {
+        return em.createQuery(PlanningQueryConstants.TRIP_ROW + PlanningQueryConstants.WHERE_OWNER_DELETED_RECENT_FIRST, TripRow.class)
+                .setParameter(PlanningQueryConstants.PARAM_OWNER, ownerId)
+                .getResultList();
+    }
+
+    @Override
     public List<TripRow> listTrips(UUID ownerId) {
         return em.createQuery(PlanningQueryConstants.TRIP_ROW + PlanningQueryConstants.WHERE_OWNER_NEWEST_FIRST, TripRow.class)
                 .setParameter(PlanningQueryConstants.PARAM_OWNER, ownerId)

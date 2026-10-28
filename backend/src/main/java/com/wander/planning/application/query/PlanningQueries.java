@@ -3,6 +3,7 @@ package com.wander.planning.application.query;
 import com.wander.planning.application.view.PlanningViews.Budget;
 import com.wander.planning.application.view.PlanningViews.Choice;
 import com.wander.planning.application.view.PlanningViews.DayTotal;
+import com.wander.planning.application.view.PlanningViews.DeletedTrip;
 import com.wander.planning.application.view.PlanningViews.DayView;
 import com.wander.planning.application.view.PlanningViews.ItemView;
 import com.wander.planning.application.view.PlanningViews.PendingTask;
@@ -50,6 +51,11 @@ public class PlanningQueries {
     /** Các chuyến của chủ, mới nhất trước. */
     public List<TripView> listTrips(UUID ownerId) {
         return read.listTrips(ownerId).stream().map(PlanningQueries::toView).toList();
+    }
+
+    /** Chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
+    public List<DeletedTrip> deletedTrips(UUID ownerId) {
+        return read.listDeletedTrips(ownerId).stream().map(row -> new DeletedTrip(toView(row), row.deletedAt().toString())).toList();
     }
 
     /** Sở thích theo danh tính (BE-10): mã + nhãn theo thứ tự cố định; chưa đặt thì rỗng. */

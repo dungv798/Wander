@@ -149,6 +149,16 @@ function TrashLink() {
   );
 }
 
+/** Nút "Xóa chuyến đi" (xóa mềm, có Hoàn tác) ở cuối tab Tổng quan. */
+function DeleteTripLink() {
+  const { setOverlay } = useTripView();
+  return (
+    <Button kind="ghost" block icon="trash" onClick={() => setOverlay({ kind: 'deleteTrip' })}>
+      {T.deleteTrip.open}
+    </Button>
+  );
+}
+
 /** Tab "Tổng quan": việc kế tiếp, số liệu, tuyến theo ngày, tùy chọn chuyến, chi phí, các mục chưa có ngày. */
 export function OverviewTab() {
   return (
@@ -159,6 +169,7 @@ export function OverviewTab() {
       <CostBox />
       <UnassignedSection />
       <TrashLink />
+      <DeleteTripLink />
     </>
   );
 }

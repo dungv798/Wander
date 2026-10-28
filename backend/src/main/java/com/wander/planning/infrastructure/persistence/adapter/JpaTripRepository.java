@@ -49,6 +49,14 @@ public class JpaTripRepository implements TripRepository {
     }
 
     @Override
+    public Optional<Trip> findOwnedDeleted(UUID tripId, UUID ownerId) {
+        return em.createQuery(PlanningQueryConstants.TRIP_WITH_ITEMS_DELETED, TripEntity.class)
+                .setParameter(PlanningQueryConstants.PARAM_TRIP_ID, tripId)
+                .setParameter(PlanningQueryConstants.PARAM_OWNER, ownerId)
+                .getResultList().stream().findFirst().map(mapper::toDomain);
+    }
+
+    @Override
     public Map<UUID, String> tripNamesOf(UUID ownerId) {
         Map<UUID, String> names = new HashMap<>();
         for (Object[] row : em.createQuery(PlanningQueryConstants.TRIP_NAMES, Object[].class)

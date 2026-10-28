@@ -130,6 +130,7 @@ public interface TripMapper {
     @Mapping(target = "interests", expression = "java(interestCodes(trip.options().interests()))")
     @Mapping(target = "datesTentative", expression = "java(trip.options().datesTentative())")
     @Mapping(target = "updatedAt", expression = "java(trip.updatedAt())")
+    @Mapping(target = "deletedAt", expression = "java(trip.deletedAt())")
     @Mapping(target = "ownerIdentityId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "items", ignore = true)

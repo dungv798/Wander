@@ -93,3 +93,16 @@ test('xóa mềm, khôi phục, xóa vĩnh viễn, đánh dấu xong, xếp lạ
     { url: '/api/trips/t1/schedule', method: 'POST', body: { startDate: '2026-11-02', assignments: [{ itemId: 'a', day: null }, { itemId: 'b', day: '2026-11-02', position: 0 }] } },
   ]);
 });
+
+test('xóa mềm và khôi phục cả chuyến: đúng đường dẫn; danh sách chuyến đã xóa ánh xạ tên, ngày và thời điểm xóa', async () => {
+  const g = gateway((c) => {
+    if (c.method === 'DELETE') return new Response(null, { status: 204 });
+    if (c.url === '/api/trips/deleted') return json({ trips: [{ trip: VIEW, deletedAt: '2026-10-28T01:00:00Z' }, { trip: null, deletedAt: 'x' }] });
+    return json({ trip: VIEW });
+  });
+  await g.gw.deleteTrip('t1');
+  await g.gw.restoreTrip('t1');
+  assert.deepEqual(g.calls.map((c) => `${c.method} ${c.url}`), ['DELETE /api/trips/t1', 'POST /api/trips/t1/restore']);
+  assert.deepEqual(await g.gw.loadDeleted(), [{ id: 't1', name: 'A', destinationId: 'ha-giang', startDate: '2026-11-01', endDate: '2026-11-02', deletedAt: Date.parse('2026-10-28T01:00:00Z') }]);
+  await assert.rejects(gateway(() => json({ nope: 1 })).gw.loadDeleted(), (e: unknown) => e instanceof ApiError && e.code === 'INTERNAL');
+});

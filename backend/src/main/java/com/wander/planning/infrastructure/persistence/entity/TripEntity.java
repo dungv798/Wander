@@ -63,6 +63,10 @@ public class TripEntity {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
+    /** Thời điểm xóa mềm chuyến; null = còn hiện. */
+    @Column(name = "deleted_at")
+    private Instant deletedAt;
+
     /** Khóa lạc quan: hai lệnh đồng thời trên cùng chuyến ⇒ lệnh sau nhận 409 thay vì ghi đè âm thầm. */
     @Version
     private long version;
@@ -104,6 +108,8 @@ public class TripEntity {
     public void setCreatedAt(Instant v) { this.createdAt = v; }
     public Instant getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Instant v) { this.updatedAt = v; }
+    public Instant getDeletedAt() { return deletedAt; }
+    public void setDeletedAt(Instant v) { this.deletedAt = v; }
     public long getVersion() { return version; }
     public List<ItemEntity> getItems() { return items; }
 }

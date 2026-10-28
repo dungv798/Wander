@@ -2,7 +2,7 @@ import { ApiError } from '../../../shared/api/ApiError.ts';
 import type { ApiClient } from '../../../shared/api/ApiClient.ts';
 import { CLIENT_ERROR, HTTP } from '../../../shared/api/http.const.ts';
 import type { Trip } from '../model/trip.types.ts';
-import type { ItemChange, ItemInput, NewTripInput, ScheduleChange, TripPatch, TripsGateway } from './TripsGateway.ts';
+import type { DeletedTrip, ItemChange, ItemInput, NewTripInput, ScheduleChange, TripPatch, TripsGateway } from './TripsGateway.ts';
 import { detailItems, toTrash, toTrip } from './tripMapper.ts';
 import { TRIPS_API as P } from './tripsApi.const.ts';
 
@@ -124,6 +124,29 @@ export class HttpTripsGateway implements TripsGateway {
   /** Sắp xếp lại các mục đang hiện của một ngày. */
   async reorderDay(tripId: string, day: string, orderedIds: readonly string[]): Promise<void> {
     await this.client.send('POST', this.path(tripId, `${P.DAYS}/${encodeURIComponent(day)}${P.REORDER}`), { orderedIds });
+  }
+
+  /** Xóa mềm cả chuyến. */
+  async deleteTrip(tripId: string): Promise<void> {
+    await this.client.send('DELETE', this.path(tripId));
+  }
+
+  /** Khôi phục một chuyến đã xóa mềm. */
+  async restoreTrip(tripId: string): Promise<void> {
+    await this.client.send('POST', this.path(tripId, P.RESTORE));
+  }
+
+  /** Các chuyến đã xóa mềm (phần tóm tắt); phần tử hỏng bị bỏ, thân sai dạng là lỗi nội bộ. */
+  async loadDeleted(): Promise<DeletedTrip[]> {
+    const body = await this.client.get<unknown>(`${P.TRIPS}${P.DELETED}`);
+    const list: unknown = isRecord(body) ? body[P.KEY_TRIPS] : undefined;
+    if (!Array.isArray(list)) throw new ApiError(CLIENT_ERROR.INTERNAL);
+    return list.flatMap((entry) => {
+      const view = isRecord(entry) ? toTrip(entry[P.KEY_TRIP], [], []) : null;
+      const stamp = isRecord(entry) ? entry[P.KEY_DELETED_AT] : undefined;
+      const at = typeof stamp === 'string' ? Date.parse(stamp) : Number.NaN;
+      return view && !Number.isNaN(at) ? [{ id: view.id, name: view.name, destinationId: view.destinationId, startDate: view.startDate, endDate: view.endDate, deletedAt: at }] : [];
+    });
   }
 
   /** Lệnh lịch nguyên tử (đổi khoảng ngày và/hoặc gán ngày hàng loạt). */

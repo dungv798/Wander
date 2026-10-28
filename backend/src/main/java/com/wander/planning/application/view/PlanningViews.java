@@ -39,6 +39,10 @@ public final class PlanningViews {
                            String booking, String bookingLabel, boolean done, String deletedAt) {
     }
 
+    /** Chuyến trong "Chuyến đã xóa gần đây": chuyến và thời điểm xóa (ISO-8601). */
+    public record DeletedTrip(TripView trip, String deletedAt) {
+    }
+
     public record DayView(String date, int index, int weekday, String weekdayLabel, List<ItemView> items) {
     }
 

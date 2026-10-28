@@ -33,6 +33,7 @@ function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { read
     setDone: (id, itemId, d) => log('setDone', id, itemId, d),
     reorderDay: (id, day, ids) => log('reorderDay', id, day, ids),
     schedule: (id, c) => log('schedule', id, c),
+    deleteTrip: () => Promise.resolve(), restoreTrip: () => Promise.resolve(), loadDeleted: () => Promise.resolve([]),
   };
   const store = new PersistentStore<TripsState>('x', { trips: initial }, () => null, null);
   return { actions: createTripsActions({ gateway, store }), calls, store };
@@ -138,6 +139,7 @@ function live(t: Trip): { readonly actions: ReturnType<typeof createTripsActions
       return new Promise((r) => setTimeout(r, 5));
     },
     schedule: noop,
+    deleteTrip: noop, restoreTrip: noop, loadDeleted: () => Promise.resolve([]),
   };
   const store = new PersistentStore<TripsState>('x', { trips: [t] }, () => null, null);
   return { actions: createTripsActions({ gateway, store }), calls, server };
@@ -178,9 +180,29 @@ test('đọc lại lỗi SAU khi thao tác đã thành công thì lỗi được
     loadAll: () => Promise.resolve([t]), load: () => (fail ? Promise.reject(new Error('mạng rớt khi đọc lại')) : Promise.resolve(t)), create: () => Promise.resolve('t'),
     update: () => Promise.resolve(), addItem: () => Promise.resolve('n'), editItem: () => Promise.resolve(), trash: () => Promise.reject(new Error('xóa lỗi')), restore: () => Promise.resolve(),
     purge: () => Promise.resolve(), setDone: () => Promise.resolve(), reorderDay: () => Promise.resolve(), schedule: () => Promise.resolve(),
+    deleteTrip: () => Promise.resolve(), restoreTrip: () => Promise.resolve(), loadDeleted: () => Promise.resolve([]),
   } as TripsGateway;
   const actions = createTripsActions({ gateway, store: new PersistentStore<TripsState>('x', { trips: [t] }, () => null, null) });
   fail = true;
   await assert.rejects(actions.toggleDone('t', 'a'), /mạng rớt khi đọc lại/);
   await assert.rejects(actions.trashItem('t', 'a'), /xóa lỗi/);
+});
+
+test('xóa mềm chuyến: gọi API rồi gỡ khỏi kho (KHÔNG đọc lại vì chuyến đã 404); khôi phục đọc lại và đưa về kho đúng thứ tự', async () => {
+  const a = trip([item('a', D1, 0)]);
+  const calls: string[] = [];
+  const gateway = {
+    loadAll: () => Promise.resolve([a]), load: () => { calls.push('load'); return Promise.resolve(a); }, create: () => Promise.resolve('t'), update: () => Promise.resolve(),
+    addItem: () => Promise.resolve('n'), editItem: () => Promise.resolve(), trash: () => Promise.resolve(), restore: () => Promise.resolve(), purge: () => Promise.resolve(),
+    setDone: () => Promise.resolve(), reorderDay: () => Promise.resolve(), schedule: () => Promise.resolve(),
+    deleteTrip: () => { calls.push('deleteTrip'); return Promise.resolve(); }, restoreTrip: () => { calls.push('restoreTrip'); return Promise.resolve(); },
+  } as unknown as TripsGateway;
+  const store = new PersistentStore<TripsState>('x', { trips: [a] }, () => null, null);
+  const actions = createTripsActions({ gateway, store });
+  await actions.deleteTrip('t');
+  assert.deepEqual(calls, ['deleteTrip']);
+  assert.equal(store.getSnapshot().trips.length, 0);
+  await actions.restoreTrip('t');
+  assert.deepEqual(calls, ['deleteTrip', 'restoreTrip', 'load']);
+  assert.equal(store.getSnapshot().trips.length, 1);
 });

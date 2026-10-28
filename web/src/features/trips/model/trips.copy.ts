@@ -1,5 +1,25 @@
 /** Chữ hiển thị của tính năng "Chuyến đi" (tiếng Việt). Chuẩn FE §8: chữ nằm ở tệp `*.copy.ts`, không viết cứng trong thành phần. */
 export const TRIPS_COPY = {
+  deleteTrip: {
+    open: 'Xóa chuyến đi',
+    title: 'Xóa chuyến đi',
+    heading: 'Xóa «{name}»?',
+    text: 'Chuyến đi vào “Chuyến đã xóa gần đây” cùng mọi mục của nó; bạn khôi phục lại được từ danh sách chuyến đi.',
+    confirm: 'Xóa chuyến đi',
+    cancel: 'Giữ lại',
+    done: 'Đã xóa chuyến «{name}»',
+  },
+  deletedTrips: {
+    open: 'Chuyến đã xóa gần đây',
+    title: 'Chuyến đã xóa gần đây',
+    loading: 'Đang tải…',
+    emptyTitle: 'Chưa có chuyến nào bị xóa',
+    emptyText: 'Chuyến bạn xóa sẽ nằm ở đây để khôi phục.',
+    deletedAt: 'Đã xóa {when}',
+    restore: 'Khôi phục',
+    restored: 'Đã khôi phục chuyến «{name}»',
+    close: 'Đóng',
+  },
   list: {
     settings: 'Cài đặt và giới thiệu',
     security: 'Bảo mật và mã khôi phục',

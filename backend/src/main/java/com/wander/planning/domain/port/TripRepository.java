@@ -14,6 +14,9 @@ public interface TripRepository {
     /** Chuyến theo mã của đúng chủ, kèm mọi mục; chuyến của người khác coi như không có. */
     Optional<Trip> findOwned(UUID tripId, UUID ownerId);
 
+    /** Chuyến ĐÃ XÓA MỀM của đúng chủ (để khôi phục); {@link #findOwned} không trả chuyến đã xóa. */
+    Optional<Trip> findOwnedDeleted(UUID tripId, UUID ownerId);
+
     /** Lưu chuyến (thêm mới hoặc cập nhật); phiên bản lệch thì ném lỗi khóa lạc quan. */
     void save(Trip trip);
 

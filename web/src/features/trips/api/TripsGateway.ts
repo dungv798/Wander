@@ -50,6 +50,17 @@ export interface ScheduleChange {
   readonly assignments?: readonly DayAssignment[];
 }
 
+/** Một chuyến trong "Chuyến đã xóa gần đây" (chỉ phần tóm tắt, chưa nạp mục). */
+export interface DeletedTrip {
+  readonly id: string;
+  readonly name: string;
+  readonly destinationId: string;
+  readonly startDate: string;
+  readonly endDate: string;
+  /** Thời điểm xóa, mili giây từ epoch. */
+  readonly deletedAt: number;
+}
+
 /** Cổng tới API chuyến đi của chủ danh tính. Mọi thất bại là `ApiError` có mã của backend. */
 export interface TripsGateway {
   /** Mọi chuyến của chủ kèm mục đang hiện và thùng rác. */
@@ -72,4 +83,10 @@ export interface TripsGateway {
   /** Sắp xếp lại các mục đang hiện của một ngày theo thứ tự `orderedIds`. */
   reorderDay(tripId: string, day: string, orderedIds: readonly string[]): Promise<void>;
   schedule(tripId: string, change: ScheduleChange): Promise<void>;
+  /** Xóa mềm cả chuyến (vào "Chuyến đã xóa gần đây"). */
+  deleteTrip(tripId: string): Promise<void>;
+  /** Khôi phục một chuyến đã xóa mềm. */
+  restoreTrip(tripId: string): Promise<void>;
+  /** Các chuyến đã xóa mềm, xóa gần nhất trước. */
+  loadDeleted(): Promise<DeletedTrip[]>;
 }

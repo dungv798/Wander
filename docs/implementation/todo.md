@@ -130,3 +130,5 @@ Nguyên nhân đã tái hiện (đọc từ ảnh/số đo, 25/10): (1) cuộn: 
 - [x] **Checkpoint FE+BE** (27→28/10/2026): `verify` đầy đủ PASS; `wander-code-reviewer` + `wander-skeptic-qa` đã rà FE-10b và các lỗi đã sửa (xem `decisions.md` mục "Đêm 27→28/10"). Còn mở: quyết định Tầng A "xóa chuyến" và các mục (b)–(e) ở đó.
 - [x] **Màn "Bạn mê gì?"** (PO duyệt 27/10): mục ở Cài đặt nối `PUT /api/preferences/interests`.
 - [x] **Trần thùng rác 500 ở backend** (DR-020): `TRASH_FULL`.
+
+- [x] **Xóa mềm cả chuyến + Hoàn tác** (PO 28/10/2026): V12, `DELETE/restore/deleted`, giao diện. *Còn:* xóa vĩnh viễn chuyến cần xác thực lại (D25).

@@ -48,6 +48,27 @@ public class TripController {
         return Map.of(PlanningApiConstants.KEY_TRIPS, queries.listTrips(principal.identityId()));
     }
 
+    /** Chuyến đã xóa mềm ("Chuyến đã xóa gần đây"), xóa gần nhất trước. */
+    @GetMapping(PlanningApiConstants.DELETED_TRIPS_PATH)
+    public Map<String, Object> deletedTrips(AuthenticatedPrincipal principal) {
+        return Map.of(PlanningApiConstants.KEY_TRIPS, queries.deletedTrips(principal.identityId()));
+    }
+
+    /** Xóa mềm cả chuyến. */
+    @DeleteMapping(PlanningApiConstants.TRIP_PATH)
+    public ResponseEntity<Void> deleteTrip(AuthenticatedPrincipal principal, @PathVariable String tripId) {
+        commands.deleteTrip(new PlanningCommands.DeleteTrip(principal.identityId(), parseId(tripId)));
+        return ResponseEntity.noContent().build();
+    }
+
+    /** Khôi phục chuyến đã xóa mềm. */
+    @PostMapping(PlanningApiConstants.TRIP_RESTORE_PATH)
+    public Map<String, Object> restoreTrip(AuthenticatedPrincipal principal, @PathVariable String tripId) {
+        UUID trip = parseId(tripId);
+        commands.restoreTrip(new PlanningCommands.RestoreTrip(principal.identityId(), trip));
+        return tripResponse(principal, trip);
+    }
+
     /** Tạo chuyến mới. */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

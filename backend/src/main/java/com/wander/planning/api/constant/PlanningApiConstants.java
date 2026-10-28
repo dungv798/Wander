@@ -33,6 +33,12 @@ public final class PlanningApiConstants {
     /** Các mục trong "Đã xóa gần đây". */
     public static final String TRASH_PATH = TRIP_PATH + "/trash";
 
+    /** Danh sách chuyến đã xóa mềm. */
+    public static final String DELETED_TRIPS_PATH = "/deleted";
+
+    /** Khôi phục một chuyến đã xóa mềm. */
+    public static final String TRIP_RESTORE_PATH = TRIP_PATH + "/restore";
+
     /** Khóa JSON của danh sách chuyến. */
     public static final String KEY_TRIPS = "trips";
 

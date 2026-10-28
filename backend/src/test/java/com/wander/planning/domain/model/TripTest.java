@@ -369,4 +369,22 @@ class TripTest {
         t.softDelete(last.id(), NOW);
         assertThat(titles(t, D2)).isEmpty();
     }
+
+    @Test
+    @DisplayName("xóa mềm chuyến: ghi thời điểm xóa, không xóa hai lần; khôi phục đưa về như cũ và không khôi phục chuyến chưa xóa")
+    void tripSoftDeleteAndRestore() {
+        Trip t = trip();
+        Item a = t.addItem(D2, details("A"), null, NOW);
+        assertThat(t.isDeleted()).isFalse();
+        t.moveToTrash(NOW.plusSeconds(5));
+        assertThat(t.isDeleted()).isTrue();
+        assertThat(t.deletedAt()).isEqualTo(NOW.plusSeconds(5));
+        assertThatThrownBy(() -> t.moveToTrash(NOW)).isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("ALREADY_DELETED"));
+        t.recoverFromTrash(NOW.plusSeconds(9));
+        assertThat(t.isDeleted()).isFalse();
+        assertThat(t.deletedAt()).isNull();
+        assertThat(titles(t, D2)).containsExactly("A");
+        assertThat(a.isDeleted()).isFalse();
+        assertThatThrownBy(() -> t.recoverFromTrash(NOW)).isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("NOT_DELETED"));
+    }
 }

@@ -15,6 +15,13 @@ public final class PlanningCommands {
     private PlanningCommands() {
     }
 
+    public record DeleteTrip(UUID ownerId, UUID tripId) {
+    }
+
+    /** Khôi phục một chuyến đã xóa mềm. */
+    public record RestoreTrip(UUID ownerId, UUID tripId) {
+    }
+
     public record CreateTrip(UUID ownerId, Map<String, Object> input) {
     }
 

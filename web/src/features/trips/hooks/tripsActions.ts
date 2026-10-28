@@ -33,6 +33,10 @@ export interface TripsActions {
   readonly restoreItem: (tripId: string, entryId: string) => Promise<{ readonly dayLost: boolean } | null>;
   /** Xóa vĩnh viễn một mục khỏi thùng rác (không hoàn tác được). */
   readonly purgeItem: (tripId: string, entryId: string) => Promise<void>;
+  /** Xóa mềm cả chuyến: gỡ khỏi kho (chuyến đã xóa không còn đọc được nên không đọc lại). */
+  readonly deleteTrip: (tripId: string) => Promise<void>;
+  /** Khôi phục chuyến đã xóa mềm và đưa lại vào kho. */
+  readonly restoreTrip: (tripId: string) => Promise<void>;
   /** Hoàn tác: đưa chuyến trở lại `before` bằng các lệnh ngược trên máy chủ. */
   readonly revert: (before: Trip) => Promise<void>;
   /** Chuyến hiện tại theo mã (đọc thẳng kho, không qua render); dùng để so sánh khi Hoàn tác. */
@@ -72,6 +76,10 @@ interface Ctx {
   readonly need: (id: string) => Trip;
   /** Chạy `work` NỐI TIẾP các việc trước của cùng chuyến rồi đọc lại chuyến; đầu vào phải tính BÊN TRONG `work` (từ kho đã đọc lại sau việc trước). */
   readonly run: <T>(tripId: string, work: () => Promise<T>) => Promise<T>;
+  /** Như `run` nhưng KHÔNG đọc lại chuyến sau đó (dùng khi chuyến không còn đọc được, ví dụ vừa xóa mềm). */
+  readonly after: <T>(tripId: string, work: () => Promise<T>) => Promise<T>;
+  /** Đọc lại một chuyến từ máy chủ vào kho. */
+  readonly refresh: (tripId: string) => Promise<Trip>;
   readonly addEach: (tripId: string, places: readonly PlaceRef[]) => Promise<void>;
 }
 
@@ -81,7 +89,7 @@ function sameTrip(a: Trip, b: Trip): boolean {
 }
 
 /** Thao tác cấp chuyến: tạo, thêm địa điểm, sửa tên/ngày, hoàn tác. */
-function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert'> {
+function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip'> {
   const { gateway, current, need, run, addEach } = ctx;
   return {
     create: async (n, places) => {
@@ -90,6 +98,14 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
       return need(id);
     },
     addPlaces: (tripId, places) => run(tripId, () => addEach(tripId, places)),
+    deleteTrip: (tripId) => ctx.after(tripId, async () => {
+      await gateway.deleteTrip(tripId);
+      store.update((s) => ({ trips: s.trips.filter((t) => t.id !== tripId) }));
+    }),
+    restoreTrip: (tripId) => ctx.after(tripId, async () => {
+      await gateway.restoreTrip(tripId);
+      await ctx.refresh(tripId);
+    }),
     editTrip: (tripId, e) =>
       run(tripId, async () => {
         const trip = current(tripId);
@@ -126,7 +142,7 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
 }
 
 /** Thao tác cấp mục: thêm/sửa, gán ngày, đổi chỗ, tích xong, kế hoạch ngày, thùng rác. */
-function itemActions(ctx: Ctx): Omit<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'current' | 'idle'> {
+function itemActions(ctx: Ctx): Omit<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip' | 'current' | 'idle'> {
   const { gateway, need, run } = ctx;
   /** Phần của `ItemPatch` mà API sửa mục nhận: bỏ `done`/`position` (có lệnh riêng) và tiêu đề rỗng (mục từ kho giữ tiêu đề đã lưu; backend bắt buộc tiêu đề). */
   const toChange = (patch: ItemPatch): ItemChange => {
@@ -216,6 +232,12 @@ export function createTripsActions({ gateway, store }: TripsActionDeps): TripsAc
     for (const place of places) await gateway.addItem(tripId, placeInput(place));
   };
   const idle = (tripId: string): Promise<void> => (tails.get(tripId) ?? Promise.resolve()).then(() => undefined);
-  const ctx: Ctx = { gateway, current, need, run, addEach };
+  /** Nối `work` vào hàng đợi của chuyến, không đọc lại. */
+  const after = <T,>(tripId: string, work: () => Promise<T>): Promise<T> => {
+    const job = (tails.get(tripId) ?? Promise.resolve()).then(work);
+    tails.set(tripId, job.catch(() => undefined));
+    return job;
+  };
+  const ctx: Ctx = { gateway, current, need, run, after, refresh, addEach };
   return { current, idle, ...tripActions(ctx, store), ...itemActions(ctx) };
 }
