@@ -1,0 +1,821 @@
+{
+  "id": "da-lat",
+  "name": "Đà Lạt",
+  "region": "Tây Nguyên",
+  "tagline": "Thành phố sương mù, đồi thông, hồ và thác",
+  "coverPlaceId": "ho-xuan-huong",
+  "references": [
+    {
+      "id": "trung-tam-da-lat",
+      "name": "Trung tâm Đà Lạt",
+      "lat": 11.9404,
+      "lon": 108.4583,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 11–3 mát, ít mưa; tháng 12–1 có hoa mai anh đào.",
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "notes": [
+        "Mùa khô từ khoảng tháng 11 đến tháng 4, trời se lạnh vào sáng sớm và tối.",
+        "Mùa mưa khoảng tháng 5–10, thường mưa chiều; mang áo mưa nhẹ."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Áo ấm mỏng, áo mưa, giày dễ đi bộ.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Áo khoác mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa"
+        },
+        {
+          "icon": "check",
+          "title": "Giày đi bộ"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "ho-xuan-huong",
+      "name": "Hồ Xuân Hương",
+      "category": "canh",
+      "area": "Trung tâm",
+      "hook": "Đi bộ quanh hồ giữa phố, thuê xe đạp đôi hoặc ngồi cà phê ven hồ lúc sáng sớm.",
+      "summary": "Hồ Xuân Hương là một hồ nước đẹp thuộc phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng. Hồ Xuân Hương là hồ nhân tạo, có chu vi chừng 5 km, rộng 25ha, có hình trăng lưỡi liềm kéo dài hơn 2 km đi qua nhiều địa danh du lịch của Đà Lạt như: Vườn hoa thành phố, Công viên Yersin, Đồi Cù, Quảng trường Lâm Viên. Xung quanh hồ có rừng thông và các bãi cỏ, vườn hoa. Đây là địa điểm du khách ưa thích đi dạo bộ hoặc xe ngựa khi đến tham quan Đà Lạt.",
+      "lat": 11.941845,
+      "lon": 108.446835,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Đường đi bộ quanh hồ",
+        "Xe đạp đôi, thuyền",
+        "Cà phê ven hồ"
+      ],
+      "verdict": "must",
+      "verdictReason": "Trung tâm của thành phố, gần như ai tới Đà Lạt cũng đi dạo ở đây.",
+      "bestSlots": [
+        "sang",
+        "toi"
+      ],
+      "slotReason": "Sáng sớm yên tĩnh, tối có đèn ven hồ; trưa dễ đông.",
+      "tips": [
+        "Đi sáng sớm để tránh đông.",
+        "Mang áo khoác mỏng cho buổi tối."
+      ],
+      "photos": [
+        {
+          "file": "ho-xuan-huong-1.jpg",
+          "author": "Diane Selwyn",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xuan_Huong_Lake_08.jpg"
+        },
+        {
+          "file": "ho-xuan-huong-2.jpg",
+          "author": "Trần Huy Phương",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_Xuan_Huong_-_Huy_Phuong_1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hồ Xuân Hương (hồ nước)"
+    },
+    {
+      "id": "quang-truong-lam-vien",
+      "name": "Quảng trường Lâm Viên",
+      "category": "canh",
+      "area": "Trung tâm",
+      "hook": "Quảng trường với khối kính hình nụ hoa lớn, nhìn ra hồ Xuân Hương.",
+      "summary": "Quảng trường Lâm Viên là quảng trường nằm ở đường Trần Quốc Toản, đối diện hồ Xuân Hương, phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng. Quảng trường có tên gọi khác là Trung tâm Đà Lạt, được đặt tên Lâm Viên dựa trên vị trí địa lý của thành phố, nằm trên cao nguyên Lâm Viên, cũng như vùng đất từng gọi là tỉnh Lâm Viên. Quảng trường Lâm Viên, khu vực nổi tiếng được nhiều người dân gọi trìu mến: trái tim của xứ sở ngàn hoa, một trong những địa điểm thu hút khách du lịch khắp nơi tới thăm thành phố.",
+      "lat": 11.939083333333,
+      "lon": 108.44505555556,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "30–60 phút",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Khối kính nụ hoa",
+        "View hồ Xuân Hương",
+        "Phố đi bộ gần chợ"
+      ],
+      "verdict": "ifconv",
+      "verdictReason": "Nằm ngay cạnh hồ Xuân Hương nên tiện ghé khi đi dạo.",
+      "bestSlots": [
+        "chieu",
+        "toi"
+      ],
+      "slotReason": "Chiều tối có nhiều người dạo chơi, không khí náo nhiệt.",
+      "tips": [
+        "Kết hợp đi bộ sang chợ Đà Lạt.",
+        "Tối khá đông cuối tuần."
+      ],
+      "photos": [
+        {
+          "file": "quang-truong-lam-vien-1.jpg",
+          "author": "EA",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A2m_Vi%C3%AAn_%C4%90%C3%A0_L%E1%BA%A1t.JPG"
+        },
+        {
+          "file": "quang-truong-lam-vien-2.jpg",
+          "author": "Damian Vo",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A2m_Vi%C3%AAn_square_(August_7,_2018)_(29079784067).jpg"
+        }
+      ],
+      "wikipediaTitle": "Quảng trường Lâm Viên"
+    },
+    {
+      "id": "cho-da-lat",
+      "name": "Chợ Đà Lạt",
+      "category": "cho",
+      "area": "Trung tâm",
+      "hook": "Chợ trung tâm có rau củ, trái cây, đồ len và quà đặc sản; ăn vặt ở các quầy phía ngoài.",
+      "summary": "Chợ Đà Lạt là một trung tâm thương mại của thành phố Đà Lạt tọa lạc trên trục đường chính là đường Nguyễn Thị Minh Khai và được xem là \"con tim của thành phố Đà Lạt\". Không chỉ là một ngôi chợ với các hoạt động mua bán, chợ còn là điểm thu hút khách tham khi đến thành phố Đà Lạt. Năm 2011, Chợ Đà Lạt mới được xây dựng và hoàn thành vào năm 2018-2019.",
+      "lat": 11.94295278,
+      "lon": 108.43682222,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Rau củ, dâu tây, atiso",
+        "Đồ len, quà lưu niệm",
+        "Ăn vặt buổi tối"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Nơi mua quà và thử món ăn vặt địa phương, rất gần các điểm trung tâm.",
+      "bestSlots": [
+        "sang",
+        "toi"
+      ],
+      "slotReason": "Sáng chợ nhộn nhịp hàng tươi; tối có khu ăn uống quanh chợ.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "cho-da-lat-1.jpg",
+          "author": "Roy Kim",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dalat_market,_Vietnam.jpg"
+        },
+        {
+          "file": "cho-da-lat-2.jpg",
+          "author": "DHN",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BB%A3_%C4%90%C3%A0_L%E1%BA%A1t_to%C3%A0n_c%E1%BA%A3nh.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chợ Đà Lạt"
+    },
+    {
+      "id": "nha-tho-con-ga",
+      "name": "Nhà thờ Con Gà",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Nhà thờ đá cổ có tháp chuông gắn con gà trên đỉnh, giữa phố đồi.",
+      "summary": "Nhà thờ chính tòa Đà Lạt là một nhà thờ Công giáo ở Việt Nam. Đây là nhà thờ chính tòa của vị giám mục Giáo phận Đà Lạt, cũng là nhà thờ lớn nhất Đà Lạt, một trong những công trình kiến trúc tiêu biểu và cổ xưa nhất của thành phố này do người Pháp để lại. Nhà thờ nằm tại số 13 đường Trần Phú, phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng, Việt Nam. Nhà thờ chính tòa Đà Lạt cách Thành phố Hồ Chí Minh 300 km.",
+      "lat": 11.93640278,
+      "lon": 108.43763889,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Tháp chuông",
+        "Kính màu",
+        "Phố cổ xung quanh"
+      ],
+      "verdict": "ifconv",
+      "verdictReason": "Kiến trúc đẹp, nằm gần trung tâm nên tiện đi ngang.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng sáng và chiều dễ chụp ảnh mặt tiền.",
+      "tips": [
+        "Ăn mặc lịch sự nếu vào bên trong.",
+        "Hỏi giờ tham quan tại chỗ."
+      ],
+      "photos": [
+        {
+          "file": "nha-tho-con-ga-1.jpg",
+          "author": "qiv",
+          "license": "CC BY-SA 2.5",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Da_Lat_(1).jpg"
+        },
+        {
+          "file": "nha-tho-con-ga-2.jpg",
+          "author": "qiv",
+          "license": "CC BY-SA 2.5",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Da_Lat_(2).jpg"
+        },
+        {
+          "file": "nha-tho-con-ga-3.jpg",
+          "author": "Diane Selwyn ( talk )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Da_Lat_05.JPG"
+        }
+      ],
+      "wikipediaTitle": "Nhà thờ chính tòa Đà Lạt"
+    },
+    {
+      "id": "ga-da-lat",
+      "name": "Ga Đà Lạt",
+      "category": "van",
+      "area": "Phía Đông",
+      "hook": "Nhà ga kiến trúc Pháp rất đẹp, còn đoàn tàu cổ chạy tuyến du lịch ngắn.",
+      "summary": "Ga Đà Lạt là nhà ga tàu hỏa của phường Xuân Hương - Đà Lạt. Nhà ga được người Pháp xây dựng từ năm 1932 đến 1938 thì hoàn thành, là nhà ga đầu mối trên tuyến đường sắt Tháp Chàm – Đà Lạt dài 84 km. Nhà ga có phong cách kiến trúc độc đáo, có ba mái hình chóp, là cách điệu ba đỉnh núi Langbiang hoặc nhà rông Tây Nguyên. Nhà ga đã được Bộ Văn hóa - Thông tin Việt Nam công nhận là di tích lịch sử văn hóa quốc gia.",
+      "lat": 11.94222222,
+      "lon": 108.45555556,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Mặt tiền kiểu Pháp",
+        "Đầu máy hơi nước cổ",
+        "Sân ga"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Một trong những công trình kiến trúc nổi bật nhất của thành phố.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng đẹp để chụp mái ngói và đoàn tàu.",
+      "tips": [
+        "Hỏi giờ tàu du lịch tại ga.",
+        "Đặt chỗ sớm vào cuối tuần."
+      ],
+      "photos": [
+        {
+          "file": "ga-da-lat-1.jpg",
+          "author": "Diane Selwyn",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Da_Lat_train_station_37.jpg"
+        }
+      ],
+      "wikipediaTitle": "Ga Đà Lạt"
+    },
+    {
+      "id": "biet-thu-hang-nga",
+      "name": "Ngôi nhà quái dị (Crazy House)",
+      "category": "van",
+      "area": "Phía Nam",
+      "hook": "Công trình lạ mắt như hang động, cây và nấm khổng lồ, đi lòng vòng trong những cầu thang nhỏ.",
+      "summary": "Biệt thự Hằng Nga hay Ngôi nhà quái dị là một nhà nghỉ tại phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng, nằm ở số 3 Huỳnh Thúc Kháng trong khuôn viên rộng gần 4.000 m². Ngôi nhà này nổi tiếng vì có phong cách kiến trúc đặc biệt. Từ khi khai trương vào năm 1990, tòa nhà này đã được công nhận kiến trúc độc đáo, đã được nêu bật trong các sách hướng dẫn du lịch và được xếp vào nhóm 10 tòa nhà kỳ lạ nhất theo bình chọn của Nhân dân Nhật báo của Trung Quốc.",
+      "lat": 11.93473333,
+      "lon": 108.43063611,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Cầu thang và hành lang uốn lượn",
+        "Phòng nghỉ theo chủ đề",
+        "Góc nhìn từ trên cao"
+      ],
+      "verdict": "must",
+      "verdictReason": "Rất khác lạ, nhiều góc chụp ảnh và là điểm nổi tiếng của thành phố.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Sáng sớm ít người; chiều muộn dễ đông.",
+      "tips": [
+        "Bậc thang hẹp, cẩn thận khi trời ướt.",
+        "Đi sớm để tránh xếp hàng."
+      ],
+      "photos": [
+        {
+          "file": "biet-thu-hang-nga-1.jpg",
+          "author": "Tom Ravenscroft",
+          "license": "CC BY 1.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_Nga_guesthouse_02.jpg"
+        },
+        {
+          "file": "biet-thu-hang-nga-2.jpg",
+          "author": "Diane Selwyn",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crazy_House_-_loi_vao.JPG"
+        },
+        {
+          "file": "biet-thu-hang-nga-3.jpg",
+          "author": "Michael Karavanov",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crazy_House_in_Da_Lat_-_panoramio.jpg"
+        }
+      ],
+      "wikipediaTitle": "Biệt thự Hằng Nga"
+    },
+    {
+      "id": "thac-prenn",
+      "name": "Thác Prenn",
+      "category": "canh",
+      "area": "Phía Nam",
+      "hook": "Thác nhỏ ngay bên đèo Prenn, có lối đi xuống chân thác giữa rừng thông.",
+      "summary": "Thác Prenn là một thác nước ở phường Xuân Hương – Đà Lạt thuộc tỉnh Lâm Đồng, Việt Nam. Thác Prenn nằm cạnh quốc lộ 20, ở cửa ngõ vào TP.Đà Lạt là một trong những KDL sinh thái về rừng, suối. Thác ở chân đèo Prenn cách trung tâm Đà Lạt khoảng 10 km. Thác nằm trong khu rừng nguyên sinh còn sót lại.",
+      "lat": 11.8766486,
+      "lon": 108.4702494,
+      "bestMonths": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Tháng 6–12",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Thác giữa rừng thông",
+        "Lối đi dạo",
+        "Chụp ảnh chân thác"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Dễ đi, vào được trong một buổi cùng các điểm phía Nam.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Nước thường nhiều nhất vào mùa mưa; sáng ít đông.",
+      "tips": [
+        "Đường có thể trơn khi mưa.",
+        "Mang giày đế bám."
+      ],
+      "photos": [
+        {
+          "file": "thac-prenn-1.jpg",
+          "author": "Prenn",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1c_Prenn,_062015.jpg"
+        },
+        {
+          "file": "thac-prenn-2.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1c_prenn.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thác Prenn"
+    },
+    {
+      "id": "thac-datanla",
+      "name": "Thác Datanla",
+      "category": "canh",
+      "area": "Phía Nam",
+      "hook": "Thác trong rừng với trò máng trượt xuống thung lũng, có thể đi bộ xuống chân thác.",
+      "summary": "Đatanla hay Datanla là thác ở phường Xuân Hương – Đà Lạt, tỉnh Lâm Đồng, Việt Nam. Thác nằm trong khu du lịch Đatanla, cách thác Prenn 8 km và trung tâm phường 10 km và là điểm tham quan, phiêu lưu mạo hiểm. Tên gọi \"Đatanla\" hay \"Đatania\" theo tiếng K'Ho ghép lại từ \"Đạh-Tam-N'ha\" có nghĩa là \"dưới lá có nước\", và có liên quan đến cuộc xung đột Chăm - Lạch - Chil hồi thế kỷ XV - XVII. Nhiều văn liệu khi sao chép tên đã viết nhầm thành \"Thác Dalanta\".",
+      "lat": 11.901416,
+      "lon": 108.445408,
+      "bestMonths": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Tháng 6–12",
+      "duration": "1,5–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Đường xuống chân thác",
+        "Máng trượt (tùy chọn)",
+        "Rừng thông xung quanh"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Vừa có cảnh đẹp vừa có trò chơi, hợp đi nhóm bạn hoặc gia đình.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Sáng thoáng, chiều dễ có mưa vào mùa mưa.",
+      "tips": [
+        "Mang áo mưa vào mùa mưa.",
+        "Hỏi giá vé và trò chơi tại quầy."
+      ],
+      "photos": [
+        {
+          "file": "thac-datanla-1.jpg",
+          "author": "thalling55",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1c_Datanla.jpg"
+        },
+        {
+          "file": "thac-datanla-2.jpg",
+          "author": "Du Tran",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Datanla_Waterfall_1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thác Datanla"
+    },
+    {
+      "id": "thien-vien-truc-lam",
+      "name": "Thiền viện Trúc Lâm",
+      "category": "van",
+      "area": "Phía Nam",
+      "hook": "Thiền viện yên tĩnh trên đồi, nhìn ra hồ Tuyền Lâm với vườn hoa và lối đi dạo.",
+      "summary": "Thiền viện Trúc Lâm Đà Lạt là thiền viện thuộc thiền phái Trúc Lâm Yên Tử. Thiền viện cách trung tâm tỉnh Lâm Đồng 5 km, nằm trên núi Phụng Hoàng, phía trên Hồ Tuyền Lâm. Đây không chỉ là thiền viện lớn nhất Lâm Đồng mà còn là điểm tham quan và chiêm bái của nhiều du khách trong và ngoài nước.",
+      "lat": 11.93071389,
+      "lon": 108.45953056,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Vườn hoa",
+        "View hồ Tuyền Lâm",
+        "Lối đi giữa rừng thông"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Không gian yên tĩnh, cảnh đẹp, hợp đi cùng hồ Tuyền Lâm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Sáng có không khí tĩnh và mát; chiều ánh sáng đẹp.",
+      "tips": [
+        "Ăn mặc kín đáo, đi nhẹ nói khẽ.",
+        "Kiểm tra giờ mở cửa trước."
+      ],
+      "photos": [
+        {
+          "file": "thien-vien-truc-lam-1.jpg",
+          "author": "The original uploader was Liftold at Vietnamese Wikipedia .",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zen_Monastery_Truc_Lam_Da_Lat.JPG"
+        },
+        {
+          "file": "thien-vien-truc-lam-2.jpg",
+          "author": "Nguyễn Thanh Quang 05:43, 20 April 2007 (UTC)",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThienVienTrucLamDaLat_main_hall.JPG"
+        },
+        {
+          "file": "thien-vien-truc-lam-3.jpg",
+          "author": "Nguyễn Thanh Quang 05:47, 20 April 2007 (UTC)",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThienVienTrucLamDaLat_main_building.JPG"
+        }
+      ],
+      "wikipediaTitle": "Thiền viện Trúc Lâm Đà Lạt"
+    },
+    {
+      "id": "ho-tuyen-lam",
+      "name": "Hồ Tuyền Lâm",
+      "category": "canh",
+      "area": "Phía Nam",
+      "hook": "Hồ lớn giữa rừng thông, có thể đi thuyền hoặc ngồi nghỉ ven hồ.",
+      "summary": "Hồ Tuyền Lâm là một hồ nước thuộc phường Xuân Hương - Đà Lạt, tỉnh Lâm Đồng. Đây là hồ nước ngọt rộng nhất khu vực Ðà Lạt, với diện tích khoảng 320 ha, nằm cách trung tâm tỉnh Lâm Đồng 7 km và cách thác Ðatanla 2 km. Hồ nằm gần núi Phụng Hoàng, đây được xem là khu phức hợp tập trung nhiều cảnh quan đẹp và dịch vụ du lịch phong phú. Hồ Tuyền Lâm là một trong 21 khu du lịch quốc gia Việt Nam.",
+      "lat": 11.89968889,
+      "lon": 108.43231111,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Mặt hồ rộng",
+        "Rừng thông bao quanh",
+        "Đi thuyền hoặc cáp treo"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Cảnh rộng, yên tĩnh hơn khu trung tâm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Sáng mặt hồ yên; chiều ánh sáng ấm.",
+      "tips": [
+        "Thường đi chung với Thiền viện Trúc Lâm.",
+        "Mang áo khoác mỏng."
+      ],
+      "photos": [
+        {
+          "file": "ho-tuyen-lam-1.jpg",
+          "author": "Diane Selwyn",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tuyen_Lam_Lake_01.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hồ Tuyền Lâm"
+    },
+    {
+      "id": "linh-phuoc",
+      "name": "Chùa Linh Phước",
+      "category": "van",
+      "area": "Phía Đông",
+      "hook": "Ngôi chùa trang trí bằng hàng triệu mảnh sành, có rồng dài và tượng Phật lớn.",
+      "summary": "Chùa Linh Phước tọa lạc tại số 120 Tự Phước, phường Xuân Trường – Đà Lạt thuộc địa bàn Trại Mát, cách trung tâm 8 km, trên quốc lộ 20. Chùa còn được gọi là Chùa Ve Chai vì trong sân chùa có con rồng dài 49 m được làm bằng 12.000 vỏ chai lọ. Chùa Linh Phước là một công trình kiến trúc khảm sành đặc sắc của thành phố Đà Lạt.",
+      "lat": 11.94428333,
+      "lon": 108.4995,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Rồng mảnh sành",
+        "Tháp chuông",
+        "Chánh điện"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Khác biệt về kiến trúc và dễ đi trong lộ trình phía Đông.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng sáng và chiều tôn màu mảnh sành.",
+      "tips": [
+        "Ăn mặc lịch sự.",
+        "Đi nhẹ nói khẽ."
+      ],
+      "photos": [
+        {
+          "file": "linh-phuoc-1.jpg",
+          "author": "Diane Selwyn",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Linh_Phuoc_Pagoda_01.jpg"
+        },
+        {
+          "file": "linh-phuoc-2.jpg",
+          "author": "calflier001",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:BUDDIST_TEMPLE_TRAIMAT_VIETNAM_JAN_2012_(6818228324).jpg"
+        },
+        {
+          "file": "linh-phuoc-3.jpg",
+          "author": "calflier001",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:BUDDIST_TEMPLE_TRAIMAT_VIETNAM_JAN_2012_(6818230776).jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Linh Phước"
+    },
+    {
+      "id": "lang-biang",
+      "name": "Núi Lang Biang",
+      "category": "leo",
+      "area": "Phía Bắc",
+      "hook": "Đỉnh núi cao nhìn xuống cả thị trấn Lạc Dương; có thể lên bằng xe jeep hoặc đi bộ.",
+      "summary": "Núi Langbiang là một cụm núi cao tại tỉnh Lâm Đồng, nằm cách phường Xuân Hương – Đà Lạt 12 km thuộc địa phận phường Lang Biang – Đà Lạt. Hai núi cao nhất tại đây là núi Bà cao 2.167 m và núi Ông cao 2.124 m so với mặt nước biển. Ngoài ra trong khu du lịch còn có ngọn đồi Ra-đa cao 1.929 m, ngọn đồi này cũng là một địa điểm quen thuộc đối với du khách. Nhìn từ trung tâm phường Xuân Hương – Đà Lạt có thể thấy núi Bà nằm bên trái, núi Ông nằm bên phải.",
+      "lat": 12.0472,
+      "lon": 108.441,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 11–4",
+      "duration": "3–4 giờ",
+      "difficulty": "Vừa",
+      "highlights": [
+        "Toàn cảnh thung lũng",
+        "Đường lên đỉnh",
+        "Chụp ảnh bình minh"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Có view rộng và hơi vận động, phù hợp ai muốn đi bộ nhẹ.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Sáng sớm trời quang, nhìn xa; chiều dễ có sương và mưa.",
+      "tips": [
+        "Mang nước và giày đi bộ.",
+        "Hỏi thời tiết trước khi lên."
+      ],
+      "photos": [
+        {
+          "file": "lang-biang-1.jpg",
+          "author": "Liftold ( thảo luận )",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%89nh_Langbiang.JPG"
+        },
+        {
+          "file": "lang-biang-2.jpg",
+          "author": "Liangu",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lang_biang_au_mois_d%27ao%C3%BBt.jpg"
+        },
+        {
+          "file": "lang-biang-3.jpg",
+          "author": "Tilamdong",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langbiang_Mountain.JPG"
+        }
+      ],
+      "wikipediaTitle": "Núi Langbiang"
+    },
+    {
+      "id": "thung-lung-tinh-yeu",
+      "name": "Thung lũng Tình Yêu",
+      "category": "canh",
+      "area": "Phía Bắc",
+      "hook": "Khu cảnh quan có vườn hoa, hồ và đồi thông, nhiều chỗ chụp ảnh.",
+      "summary": "Thung Lũng Tình Yêu là một trong những thắng cảnh thơ mộng nhất tại Đà Lạt, cách trung tâm thành phố khoảng 5 km về phía bắc. Địa chỉ: số 3–7 đường Mai Anh Đào, phường Lâm Viên – Đà Lạt, tỉnh Lâm Đồng. Đó là nơi đập Đa Thiện quy tụ những dòng suối nhỏ chảy từ đồi núi cao, thành hồ Đa Thiện trong vắt uốn quanh thung lũng rợp bóng thông xanh. Vào những năm 30, toàn quyền Đông Dương và các cặp tình nhân người Pháp thường chọn khung cảnh này cho những buổi hẹn hò, rồi đặt tên là Vallée d'Amour.",
+      "lat": 11.98084722,
+      "lon": 108.45038889,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "bestLabel": "Tháng 11–3",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Vườn hoa",
+        "Hồ Đa Thiện",
+        "Đồi thông"
+      ],
+      "verdict": "ifconv",
+      "verdictReason": "Nhiều góc đẹp nhưng khá thương mại, tùy sở thích.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng sáng và chiều lên ảnh đẹp.",
+      "tips": [
+        "Cuối tuần thường đông.",
+        "Hỏi giá vé tại cổng."
+      ],
+      "photos": [
+        {
+          "file": "thung-lung-tinh-yeu-1.jpg",
+          "author": "Thienlt1993",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:TLTY2.jpg"
+        },
+        {
+          "file": "thung-lung-tinh-yeu-2.jpg",
+          "author": "Ho Tuan KIet",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thung_L%C5%A9ng_T%C3%ACnh_Y%C3%AAu.JPG"
+        }
+      ],
+      "wikipediaTitle": "Thung lũng Tình Yêu"
+    },
+    {
+      "id": "thac-pongour",
+      "name": "Thác Pongour",
+      "category": "canh",
+      "area": "Đức Trọng",
+      "hook": "Thác nhiều tầng rộng, nước đổ xuống thành những bậc đá lớn; thường được gọi là \"Nayagara của Tây Nguyên\".",
+      "summary": "Thác Pongour, là thác trên sông Đa Nhim tại vùng đất xã Đức Trọng, tỉnh Lâm Đồng, Việt Nam. Thác nằm cách Đà Lạt chừng 50 km về hướng Nam. Thác còn được du khách gọi là thác Bảy Tầng. Thác đổ từ độ cao gần 40 mét, trải rộng hơn 100 mét, qua hệ thống đá bậc thang 7 tầng.",
+      "lat": 11.68837,
+      "lon": 108.266485,
+      "bestMonths": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 7–11",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [
+        "Thác nhiều tầng",
+        "Bậc đá lớn",
+        "Rừng quanh thác"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Cảnh thác đẹp và rộng, nằm trên đường đi về phía Phan Rang hoặc Nha Trang.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Mùa mưa nước nhiều và thác hùng vĩ nhất; đi sáng để tránh mưa chiều.",
+      "tips": [
+        "Đường từ trung tâm khá xa, nên đi riêng một buổi.",
+        "Đá trơn, mang giày bám tốt."
+      ],
+      "photos": [
+        {
+          "file": "thac-pongour-1.jpg",
+          "author": "Original uploader was Tú My at vi.wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThacPongour.jpg"
+        },
+        {
+          "file": "thac-pongour-2.jpg",
+          "author": "Arian Zwegers",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pongour_Falls_(6226122698).jpg"
+        }
+      ],
+      "wikipediaTitle": "Thác Pongour"
+    }
+  ]
+}

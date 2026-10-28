@@ -1,0 +1,355 @@
+{
+  "id": "vinh-hy",
+  "name": "Vĩnh Hy",
+  "region": "Nam Trung Bộ",
+  "tagline": "Vịnh biển xanh, đồi cát và làng Chăm vùng nắng gió",
+  "coverPlaceId": "vinh-vinh-hy",
+  "references": [
+    {
+      "id": "vinh-hy",
+      "name": "Vịnh Vĩnh Hy",
+      "lat": 11.7,
+      "lon": 109.2,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 1–8 nắng nhiều, biển trong; tháng 9–11 có mưa.",
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11
+      ],
+      "notes": [
+        "Khu vực khô nóng, ít mưa; tháng 1 đến tháng 8 thời tiết hợp đi biển.",
+        "Tháng 9–11 có mưa; vẫn nắng nhiều so với nơi khác."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Mũ nón, kem chống nắng, đồ bơi, nhiều nước.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Mũ nón, kính râm"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Đồ bơi"
+        },
+        {
+          "icon": "check",
+          "title": "Nước uống"
+        },
+        {
+          "icon": "check",
+          "title": "Giày bám tốt"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "vinh-vinh-hy",
+      "name": "Vịnh Vĩnh Hy",
+      "category": "canh",
+      "area": "Vĩnh Hải",
+      "hook": "Vịnh nhỏ nước xanh trong giữa núi, đi cano hoặc lặn ngắm san hô.",
+      "summary": "Vịnh Vĩnh Hy, tên khác là Vũng Găng, là một vịnh nhỏ nằm ở xã Vĩnh Hải, tỉnh Khánh Hòa, Việt Nam.",
+      "lat": 11.71666667,
+      "lon": 109.20277778,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "4–6 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Cảnh biển nổi bật nhất của vùng, nơi chính của chuyến đi.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "vinh-vinh-hy-1.jpg",
+          "author": "Karel Bilek",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vinh_hy_bay.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vịnh Vĩnh Hy"
+    },
+    {
+      "id": "thap-po-klong-garai",
+      "name": "Tháp Po Klong Garai",
+      "category": "van",
+      "area": "Phan Rang – Tháp Chàm",
+      "hook": "Cụm tháp Chăm cổ trên đồi nhìn xuống thành phố, còn tổ chức lễ hội.",
+      "summary": "Tháp Po Klong Garai là tên gọi chung cho một cụm tháp Chăm hùng vĩ và đẹp nhất còn lại ở Việt Nam, phụng thờ vua Po Klong Garai. Tháp Pô Klong Garai là một tổng thể gồm ba tháp: tháp chính, tháp lửa, tháp cổng. Công trình này có trình độ kiến trúc, nghệ thuật, điêu khắc đạt đến đỉnh cao. Di tích kiến trúc nghệ thuật này được Bộ Văn hóa xếp hạng di tích di tích quốc gia năm 1979 và được Thủ tướng Chính phủ xếp hạng di tích quốc gia đặc biệt.",
+      "lat": 11.601831,
+      "lon": 108.9442935,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Di tích Chăm nổi bật nhất vùng và dễ đi.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-po-klong-garai-1.jpg",
+          "author": "Vinnie Cartabiano",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:-i---i-_(39930272721).jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Po Klong Garai"
+    },
+    {
+      "id": "vuon-quoc-gia-nui-chua",
+      "name": "Vườn quốc gia Núi Chúa",
+      "category": "leo",
+      "area": "Thanh Hải",
+      "hook": "Vườn quốc gia có rừng khô và các đường đi bộ ra biển.",
+      "summary": "Vườn quốc gia Núi Chúa là một vườn quốc gia tại tỉnh Khánh Hòa, Việt Nam được thành lập vào năm 2003 theo Quyết định số 134/2003/QĐ-TTg của Thủ tướng Chính phủ Cộng hòa Xã hội Chủ nghĩa Việt Nam ngày 9 tháng 7 năm 2003. Ngày 14 tháng 4 năm 2021, vườn quốc gia này đã được UNESCO công nhận là Khu dự trữ sinh quyển thế giới với diện tích là 106.600 hecta cùng với Khu dự trữ sinh quyển Kon Hà Nừng.",
+      "lat": 11.70027778,
+      "lon": 109.15277778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "4–6 giờ",
+      "difficulty": "Vừa",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích đi bộ ngắm hệ sinh thái khô nóng.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Mang đủ nước và giày bám tốt.",
+        "Xem dự báo thời tiết, tránh đi khi mưa lớn."
+      ],
+      "photos": [
+        {
+          "file": "vuon-quoc-gia-nui-chua-1.jpg",
+          "author": "Suriya Vij",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Turtle_Nesting_Beach,_Nui_Chua_National_Park.jpg"
+        },
+        {
+          "file": "vuon-quoc-gia-nui-chua-2.jpg",
+          "author": "Dotrihieu",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coastal_view_from_Nui_Chua_National_Park.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vườn quốc gia Núi Chúa"
+    },
+    {
+      "id": "ca-na",
+      "name": "Cà Ná",
+      "category": "canh",
+      "area": "Thuận Nam",
+      "hook": "Bãi biển có đá lớn và đồi cạnh quốc lộ, nổi tiếng với hoàng hôn.",
+      "summary": "Cà Ná là một xã thuộc tỉnh Khánh Hòa, Việt Nam.",
+      "lat": 11.33802879,
+      "lon": 108.89135214,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai đi dọc đường biển và muốn dừng chụp ảnh.",
+      "bestSlots": [
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ca-na-1.jpg",
+          "author": "Petertan at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Na_beach,_Ninh_Thuan.JPG"
+        }
+      ],
+      "wikipediaTitle": "Cà Ná"
+    },
+    {
+      "id": "thap-hoa-lai",
+      "name": "Tháp Hòa Lai",
+      "category": "van",
+      "area": "Bác Ái",
+      "hook": "Cụm tháp Chăm gạch đỏ cổ giữa vùng đất khô, vẫn còn nguyên nhiều chi tiết.",
+      "summary": "Tháp Hòa Lai là một trong những cụm tháp cổ Chăm Pa, gồm có ba tháp hiện nằm ở thôn Ba Tháp, xã Thuận Bắc, tỉnh Khánh Hòa. Được đánh giá là một trong những di tích cổ nhất và đẹp nhất còn tồn tại.",
+      "lat": 11.676378,
+      "lon": 109.036053,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích kiến trúc Chăm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-hoa-lai-1.jpg",
+          "author": "Original uploader was Dongson*vmvn at vi.wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_H%C3%B2a_Lai,_Ninh_Thu%E1%BA%ADn.JPG"
+        }
+      ],
+      "wikipediaTitle": "Tháp Hòa Lai"
+    },
+    {
+      "id": "thap-po-rome",
+      "name": "Tháp Po Rome",
+      "category": "van",
+      "area": "Ninh Phước",
+      "hook": "Tháp Chăm cuối cùng được xây trên vùng này, nằm trên đồi nhỏ.",
+      "summary": "Po Rome hay còn gọi là tháp Hậu Sanh là một ngôi tháp Chăm Pa hiện đang còn tồn tại tại làng Hậu Sanh, xã Phước Hữu, tỉnh Khánh Hòa.",
+      "lat": 11.50144,
+      "lon": 108.865706,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích lịch sử Chăm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-po-rome-1.jpg",
+          "author": "Dongson*vmvn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_Po_Rome,_Ninh_Thu%E1%BA%ADn.JPG"
+        }
+      ],
+      "wikipediaTitle": "Tháp Po Rome"
+    }
+  ]
+}

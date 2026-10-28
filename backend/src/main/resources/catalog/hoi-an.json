@@ -1,0 +1,337 @@
+{
+  "id": "hoi-an",
+  "name": "Hội An",
+  "region": "Trung Bộ",
+  "tagline": "Phố cổ đèn lồng, nhà cổ và làng nghề ven sông Hoài",
+  "coverPlaceId": "pho-co-hoi-an",
+  "references": [
+    {
+      "id": "trung-tam-hoi-an",
+      "name": "Phố cổ Hội An",
+      "lat": 15.8801,
+      "lon": 108.338,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 2–4 dễ chịu, ít mưa; tháng 10–11 có thể ngập vì mưa lũ.",
+      "bestMonths": [
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        "Khoảng tháng 2 đến tháng 4 trời mát và nắng nhẹ, hợp đi dạo phố cổ.",
+        "Tháng 10–11 mưa nhiều, phố cổ có thể ngập nhẹ; kiểm tra tình hình trước khi đi."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Giày dễ đi, áo mưa mỏng, mũ nón.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Giày dễ đi bộ"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Mũ nón"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Tiền mặt nhỏ"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "pho-co-hoi-an",
+      "name": "Phố cổ Hội An",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Khu phố cổ với nhà gỗ, đèn lồng và các con hẻm nhỏ ven sông Hoài, đẹp nhất lúc chiều tối.",
+      "summary": "Đô thị cổ Hội An là một đô thị cổ nằm ở hạ lưu sông Thu Bồn, thuộc vùng đồng bằng ven biển thành phố Đà Nẵng, Việt Nam, cách trung tâm thành phố khoảng 30 km về phía Nam. Nhờ những yếu tố địa lý và khí hậu thuận lợi, Hội An từng là một thương cảng quốc tế sầm uất, nơi gặp gỡ của những thuyền buôn Nhật Bản, Trung Quốc và phương Tây trong suốt thế kỷ XVII và XVIII. Trước thời kỳ này, nơi đây cũng từng có những dấu tích của thương cảng Chăm Pa hay được nhắc đến cùng con đường tơ lụa trên biển.",
+      "lat": 15.88333333,
+      "lon": 108.33333333,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "3–4 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Lý do chính nhiều người tới Hội An, nên dành ít nhất nửa ngày.",
+      "bestSlots": [
+        "chieu",
+        "toi"
+      ],
+      "slotReason": "Chiều tối đèn lồng lên, nhưng sáng sớm lại vắng và dễ chụp ảnh.",
+      "tips": [
+        "Hỏi giá vé tham quan tại quầy.",
+        "Mang tiền mặt nhỏ."
+      ],
+      "photos": [
+        {
+          "file": "pho-co-hoi-an-1.jpg",
+          "author": "Ryan Milani",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boat_by_the_water_-_Hoi_An_(16922189291).jpg"
+        },
+        {
+          "file": "pho-co-hoi-an-2.jpg",
+          "author": "xiquinhosilva",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:10511-Hoi-An_(37158496013).jpg"
+        },
+        {
+          "file": "pho-co-hoi-an-3.jpg",
+          "author": "xiquinhosilva",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:10519-Hoi-An_(37621340030).jpg"
+        }
+      ],
+      "wikipediaTitle": "Phố cổ Hội An"
+    },
+    {
+      "id": "chua-cau-hoi-an",
+      "name": "Chùa Cầu",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Cây cầu mái ngói bắc qua con lạch nhỏ, biểu tượng của Hội An.",
+      "summary": "Chùa Cầu là một cây cầu cổ trong khu phố cổ Hội An, thành phố Đà Nẵng, Việt Nam. Cầu còn có tên gọi Cầu Nhật Bản hay Lai Viễn Kiều.",
+      "lat": 15.86944444,
+      "lon": 108.32416667,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Nằm ngay trong phố cổ, cảnh quen thuộc nhất của thành phố.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-cau-hoi-an-1.jpg",
+          "author": "User dalbera on Flickr",
+          "license": "CC BY 1.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cau_Nhat_Ban.jpg"
+        },
+        {
+          "file": "chua-cau-hoi-an-2.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_H%E1%BB%99i_An_-_Japanese_Covered_Bridge_(Ch%C3%B9a_C%E1%BA%A7u)_after_renovation_-_img_11.jpg"
+        },
+        {
+          "file": "chua-cau-hoi-an-3.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_H%E1%BB%99i_An_-_Japanese_Covered_Bridge_(Ch%C3%B9a_C%E1%BA%A7u)_after_renovation_-_interior_-_img_03.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Cầu"
+    },
+    {
+      "id": "cu-lao-cham",
+      "name": "Cù lao Chàm",
+      "category": "canh",
+      "area": "Cù Lao Chàm",
+      "hook": "Cụm đảo nhỏ với biển trong, lặn ngắm san hô và làng chài.",
+      "summary": "Cù lao Chàm là một cụm đảo thuộc xã đảo Tân Hiệp, thành phố Đà Nẵng, Việt Nam.",
+      "lat": 15.95111111,
+      "lon": 108.52305556,
+      "bestMonths": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 3–8",
+      "duration": "1 ngày",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Một chuyến đi ngày hoặc ở lại qua đêm, nhiều người ưa vì yên tĩnh.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Biển động thì tàu có thể không chạy.",
+        "Mang thuốc say sóng."
+      ],
+      "photos": [
+        {
+          "file": "cu-lao-cham-1.jpg",
+          "author": "Robert Quan",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cham_island_homestay.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cù lao Chàm"
+    },
+    {
+      "id": "thanh-dia-my-son",
+      "name": "Thánh địa Mỹ Sơn",
+      "category": "van",
+      "area": "Duy Xuyên",
+      "hook": "Quần thể đền tháp Chăm trong thung lũng, di sản văn hóa thế giới.",
+      "summary": "Thánh địa Mỹ Sơn thuộc xã Thu Bồn, thành phố Đà Nẵng, cách trung tâm thành phố khoảng 40 km và gần thành cổ Trà Kiệu, bao gồm nhiều đền đài Chăm Pa, trong một thung lũng đường kính khoảng 2 km, bao quanh bởi đồi núi. Đây từng là nơi tổ chức cúng tế của vương triều Chăm Pa. Thánh địa Mỹ Sơn được coi là một trong những trung tâm đền đài chính của Ấn Độ giáo ở khu vực Đông Nam Á và là di sản duy nhất của thể loại này tại Việt Nam.",
+      "lat": 15.76666667,
+      "lon": 108.11666667,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Di tích Chăm quan trọng nhất miền Trung, cách Hội An khoảng một giờ.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Đi sáng sớm để tránh nắng gắt và tour đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thanh-dia-my-son-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_-_M%E1%BB%B9_S%C6%A1n_Group_B,_C_and_D_-_img_23.jpg"
+        },
+        {
+          "file": "thanh-dia-my-son-2.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_-_M%E1%BB%B9_S%C6%A1n_Sanctuary_Temple_E7_-_img_01.jpg"
+        },
+        {
+          "file": "thanh-dia-my-son-3.jpg",
+          "author": "Andre Hospers",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%B9_S%C6%A1n_Vietnam_Temple.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thánh địa Mỹ Sơn"
+    },
+    {
+      "id": "bao-tang-sa-huynh",
+      "name": "Bảo tàng Văn hóa Sa Huỳnh (Hội An)",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Bảo tàng nhỏ về văn hóa Sa Huỳnh với những hiện vật khảo cổ.",
+      "summary": "Bảo tàng Văn hoá Sa Huỳnh nằm tại số 149 đường Trần Phú, phường Hội An, thành phố Đà Nẵng, trưng bày các hiện vật về đời sống, sinh hoạt của các cư dân Sa Huỳnh xưa.",
+      "lat": 15.877005,
+      "lon": 108.326415,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ngày mưa, tìm hiểu lịch sử vùng đất.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "bao-tang-sa-huynh-1.jpg",
+          "author": "librarianidol",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sa_Huynh_Museum,_Hoi_An.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Văn hóa Sa Huỳnh (Hội An)"
+    }
+  ]
+}

@@ -1,0 +1,623 @@
+{
+  "id": "da-nang",
+  "name": "Đà Nẵng",
+  "region": "Trung Bộ",
+  "tagline": "Thành phố ven biển, cầu bên sông Hàn và núi Ngũ Hành",
+  "coverPlaceId": "cau-rong",
+  "references": [
+    {
+      "id": "trung-tam-da-nang",
+      "name": "Trung tâm Đà Nẵng",
+      "lat": 16.0544,
+      "lon": 108.2022,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 2–5 nắng đẹp, biển trong; tháng 9–12 mưa và dễ có bão.",
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        "Khoảng tháng 2 đến tháng 5 thời tiết dễ chịu, ít mưa, hợp tắm biển.",
+        "Tháng 6–8 nắng nóng; tháng 9–12 mưa nhiều và có thể có bão."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Đồ bơi, mũ nón, áo mưa mỏng, giày đi bộ.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Đồ bơi"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Mũ nón"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Giày đi bộ"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "cau-rong",
+      "name": "Cầu Rồng",
+      "category": "canh",
+      "area": "Trung tâm",
+      "hook": "Cầu hình rồng bắc qua sông Hàn; tối cuối tuần rồng phun lửa và nước.",
+      "summary": "Cầu Rồng là cây cầu thứ 6 và là cây cầu mới nhất bắc qua sông Hàn. Vì cây cầu có hình dáng giống một con rồng nên được gọi là Cầu Rồng Cầu Rồng dài 666 m và rộng 37,5 m với 6 làn xe chạy. Cầu được khởi công xây dựng vào ngày 19/7/2009 và chính thức thông xe ngày 29 tháng 3 năm 2013, kinh phí xây cầu gần 1,5 nghìn tỷ đồng. Cầu được thiết kế bởi Ammann & Whitney Consulting Engineers với tập đoàn Louis Berger.",
+      "lat": 16.06111111,
+      "lon": 108.22666667,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Biểu tượng hiện đại của thành phố, nằm ngay trung tâm.",
+      "bestSlots": [
+        "toi"
+      ],
+      "slotReason": "Buổi tối cầu lên đèn, cuối tuần có biểu diễn rồng phun lửa.",
+      "tips": [
+        "Hỏi lịch biểu diễn trước khi đi.",
+        "Đến sớm để có chỗ đứng đẹp."
+      ],
+      "photos": [
+        {
+          "file": "cau-rong-1.jpg",
+          "author": "Somerset999",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dragon_Bridge,_Da_Nang_during_day_-_20230819_(cropped).jpg"
+        },
+        {
+          "file": "cau-rong-2.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BA%A7u_R%E1%BB%93ng.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cầu Rồng"
+    },
+    {
+      "id": "cau-quay-song-han",
+      "name": "Cầu Sông Hàn",
+      "category": "canh",
+      "area": "Trung tâm",
+      "hook": "Cầu quay bắc qua sông Hàn, ban đêm lên đèn rực rỡ.",
+      "summary": "Cầu Sông Hàn là một trong những cây cầu bắc qua sông Hàn ở Đà Nẵng, miền Trung Việt Nam. Đây là cây cầu xoay đầu tiên do kỹ sư, công nhân Việt Nam tự thiết kế và thi công và là cây cầu quay duy nhất còn có khả năng xoay được ở Việt Nam hiện nay. Cầu là vạch nối liền hai trục đường chính của Đà Nẵng là đường Lê Duẩn ở bờ Tây và đường Phạm Văn Đồng ở bờ Đông.",
+      "lat": 16.072146,
+      "lon": 108.226802,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Đi dạo ven sông Hàn rất tiện kết hợp với Cầu Rồng.",
+      "bestSlots": [
+        "toi"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "cau-quay-song-han-1.jpg",
+          "author": "Gene Bromberg",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Han_River_Bridge_Apr08.jpg"
+        },
+        {
+          "file": "cau-quay-song-han-2.jpg",
+          "author": "Gary Todd from Xinzheng, China",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Han_River,_Da_Nang,_Vietnam_(15428173695).jpg"
+        }
+      ],
+      "wikipediaTitle": "Cầu Sông Hàn"
+    },
+    {
+      "id": "ba-na",
+      "name": "Bà Nà",
+      "category": "canh",
+      "area": "Hòa Vang",
+      "hook": "Khu du lịch trên núi với khí hậu mát, cáp treo dài và các công trình kiến trúc nổi tiếng.",
+      "summary": "Bà Nà là khu bảo tồn thiên nhiên đồng thời là quần thể du lịch nghỉ dưỡng tọa lạc trên đỉnh Núi Chúa thuộc dãy Trường Sơn, nằm trên địa bàn xã Bà Nà, thành phố Đà Nẵng, cách trung tâm thành phố khoảng 25–30 km về phía Tây Nam. Đỉnh núi có độ cao 1.487 m so với mực nước biển. Với khí hậu mát mẻ quanh năm và cảnh quan thiên nhiên hùng vĩ, Bà Nà từ lâu đã được mệnh danh là \"Đà Lạt của miền Trung\".",
+      "lat": 15.99555556,
+      "lon": 107.99416667,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "1 ngày",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Điểm đến nổi bật nhất vùng ngoại thành, hợp đi trọn một ngày.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Đi sớm tránh đông và có tầm nhìn tốt; chiều dễ có mây che.",
+      "tips": [
+        "Đi sớm, mang áo khoác mỏng vì trên núi mát.",
+        "Xem giá vé và giờ cáp treo tại quầy."
+      ],
+      "photos": [
+        {
+          "file": "ba-na-1.jpg",
+          "author": "xiquinhosilva",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:84105-Da-Nang_(48951154208).jpg"
+        },
+        {
+          "file": "ba-na-2.jpg",
+          "author": "xiquinhosilva",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:84113-Da-Nang_(48719931078).jpg"
+        },
+        {
+          "file": "ba-na-3.jpg",
+          "author": "xiquinhosilva",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:84114-Da-Nang_(48951696801).jpg"
+        }
+      ],
+      "wikipediaTitle": "Bà Nà"
+    },
+    {
+      "id": "ngu-hanh-son",
+      "name": "Ngũ Hành Sơn",
+      "category": "canh",
+      "area": "Ngũ Hành Sơn",
+      "hook": "Cụm núi đá vôi có hang động, chùa và các điểm nhìn ra biển.",
+      "summary": "Ngũ Hành Sơn là một danh thắng gồm 6 ngọn núi đá vôi nhô lên trên một bãi cát ven biển, trên một diện tích khoảng 2 km² nằm cách trung tâm thành phố Đà Nẵng, Việt Nam khoảng 8 km về phía Đông Nam, ngay trên tuyến đường Đà Nẵng - Hội An; nay thuộcphường Ngũ Hành Sơn, thành phố Đà Nẵng. Ngũ Hành Sơn gồm các ngọn núi: Mộc Sơn, Thủy Sơn, Thổ Sơn, Kim Sơn và Hỏa Sơn. Ngày 22 tháng 3 năm 1990, khu danh thắng này đã được Bộ Văn hóa ra quyết định công nhận là Di tích Lịch sử Văn hóa cấp Quốc gia.",
+      "lat": 16,
+      "lon": 108.26,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Vừa",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Gần trung tâm, kết hợp tham quan hang động và chùa trong một buổi.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ngu-hanh-son-1.jpg",
+          "author": "Viethavvh at vi.wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ngu_hanh_son_toan_canh.jpg"
+        },
+        {
+          "file": "ngu-hanh-son-2.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marble_Mountains_View_3.JPG"
+        }
+      ],
+      "wikipediaTitle": "Ngũ Hành Sơn"
+    },
+    {
+      "id": "son-tra",
+      "name": "Sơn Trà",
+      "category": "canh",
+      "area": "Sơn Trà",
+      "hook": "Bán đảo xanh với đường lên đèo, biển trong và các điểm ngắm toàn cảnh.",
+      "summary": "Núi Sơn Trà, hoặc gọi là núi Khỉ, là một ngọn núi và bán đảo thuộc phường Sơn Trà, thành phố Đà Nẵng, Việt Nam, phía tây giáp vịnh Đà Nẵng, phía đông bắc và phía đông nam giáp biển Đông, phía tây nam do phù sa sông Hàn bồi đắp mà nối với đất liền hình thành bán đảo Sơn Trà, là điểm cuối cùng của dãy núi Trường Sơn Bắc. Bến cảng Tiên Sa thuộc cảng Đà Nẵng nằm ở chân núi phía tây, sát gần bãi biển Tiên Sa. Địa điểm này là khu bảo tồn thiên nhiên nổi tiếng và thắng cảnh du lịch nằm gần thành phố.",
+      "lat": 16.116,
+      "lon": 108.277,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "3–4 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Có cảnh thiên nhiên rộng, hợp đi xe máy hoặc ô tô.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "son-tra-1.jpg",
+          "author": "Phó Nháy ( talk )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ban_dao_Son_Tra.jpg"
+        }
+      ],
+      "wikipediaTitle": "Sơn Trà"
+    },
+    {
+      "id": "bai-bien-my-khe",
+      "name": "Bãi biển Mỹ Khê",
+      "category": "canh",
+      "area": "Sơn Trà",
+      "hook": "Bãi cát dài, sóng vừa, tắm biển và ăn hải sản ven đường.",
+      "summary": "Mỹ Khê là một bãi biển trung tâm ở Đà Nẵng, Việt Nam.",
+      "lat": 16.0704,
+      "lon": 108.2461,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Bãi tắm chính của thành phố, dễ đi và nhiều dịch vụ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "bai-bien-my-khe-1.jpg",
+          "author": "Viethavvh at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bai_bien_My_Khe.jpg"
+        },
+        {
+          "file": "bai-bien-my-khe-2.jpg",
+          "author": ". Ray in Manila",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:My_Khe_Beach,_Da_Nang,_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bãi biển Mỹ Khê"
+    },
+    {
+      "id": "chua-linh-ung",
+      "name": "Chùa Linh Ứng",
+      "category": "van",
+      "area": "Sơn Trà",
+      "hook": "Chùa có tượng Quan Âm cao nhìn ra biển, nằm trên bán đảo Sơn Trà.",
+      "summary": "Chùa Linh Ứng – Bãi Bụt, Sơn Trà, Đà Nẵng là một trong ba ngôi chùa cùng mang tên Linh Ứng ở Đà Nẵng. Do cố ý vì mục đích kinh doanh hay vì một lý do nào đó mà 2 ngôi chùa mới xây sau này đều cùng tên với ngôi chùa cổ.Không rõ là do vô tình hay do chữ duyên mà cả ba ngôi chùa đều được tọa lạc trên những vị thế đắc địa của thành phố Đà Nẵng, tạo thành một \"tam giác\" linh thiêng trong thành phố. Đó là chùa Linh Ứng Non Nước, nằm trên hòn Thủy sơn của một trong 5 ngọn núi Ngũ Hành Sơn.",
+      "lat": 16.099,
+      "lon": 108.277,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "View đẹp, kết hợp tốt với chuyến đi Sơn Trà.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-linh-ung-1.jpg",
+          "author": "CEphoto, Uwe Aranas",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Son-Tra-Peninsula_Da-Nang_Vietnam_Linh-Ung-Pagoda-01.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Linh Ứng"
+    },
+    {
+      "id": "deo-hai-van",
+      "name": "Đèo Hải Vân",
+      "category": "canh",
+      "area": "Phía Bắc",
+      "hook": "Đèo nổi tiếng giữa Đà Nẵng và Huế, cung đường ven biển rất đẹp.",
+      "summary": "Đèo Hải Vân còn có tên là đèo Ải Vân hay đèo Mây, cao 500 m so với mực nước biển, dài 20 km, cắt ngang dãy dãy núi Bạch Mã nằm trên quốc lộ 1 ở ranh giới thành phố Huế và thành phố Đà Nẵng, Việt Nam.",
+      "lat": 16.1875,
+      "lon": 108.13083333,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Một trong những cung đường đèo đẹp nhất vùng.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Sáng sớm trời quang, ít sương mù.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "deo-hai-van-1.jpg",
+          "author": "Viethavvh at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Haivan2.jpg"
+        },
+        {
+          "file": "deo-hai-van-2.jpg",
+          "author": "Vyacheslav Argenberg",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hai_Van_Pass_under_fog,_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đèo Hải Vân"
+    },
+    {
+      "id": "nha-tho-da-nang",
+      "name": "Nhà thờ chính tòa Đà Nẵng",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Nhà thờ màu hồng nhạt, quen gọi là nhà thờ Con Gà, giữa trung tâm.",
+      "summary": "Nhà thờ chính tòa Đà Nẵng, tiếng Anh: Da Nang Cathedral, tiếng Pháp: Cathédrale de Đà Nẵng), thường được gọi tắt là Nhà thờ con gà Đà Nẵng, Nhà Thờ Lớn Đà Nẵng, hoặc Nhà Thờ Tourane, là nhà thờ chính tòa củagiáo phận Đà Nẵng toạ lạc tại số 156 Trần Phú, P. Hải Châu, Thành Phố Đà Nẵng, Việt Nam. Nhà thờ không chỉ là biểu tượng của Công giáo ở Đà Nẵng, mà còn là một trong những công trình kiến trúc độc đáo của Thành phố Đà Nẵng và điểm đến nổi tiếng với du khách.",
+      "lat": 16.0666845,
+      "lon": 108.2231498,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Dễ ghé khi đi dạo quanh trung tâm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "nha-tho-da-nang-1.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_Tet_DN_1.JPG"
+        },
+        {
+          "file": "nha-tho-da-nang-2.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_Tet_DN_2.JPG"
+        }
+      ],
+      "wikipediaTitle": "Nhà thờ chính tòa Đà Nẵng"
+    },
+    {
+      "id": "thanh-dien-hai",
+      "name": "Thành Điện Hải",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Di tích thành cũ ở trung tâm, gắn với lịch sử chống Pháp.",
+      "summary": "Thành Điện Hải là một di tích quốc gia đặc biệt tọa lạc tại thành phố Đà Nẵng, Việt Nam. Tòa thành được xây dựng lần đầu vào năm Gia Long thứ 12 với mục đích kiểm soát tàu thuyền và trấn giữ Đà Nẵng. Đến năm Minh Mạng thứ 4, thành được di dời và xây dựng lại theo kiến trúc kiểu Vauban. Đây là thành lũy có vai trò vô cùng quan trọng góp phần đánh bại cuộc tấn công của thực dân Pháp vào Đà Nẵng những năm 1858–1860.",
+      "lat": 16.076345,
+      "lon": 108.221783,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp người thích lịch sử.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thanh-dien-hai-1.jpg",
+          "author": "Botminh24",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Hai_Citadel_South_Gate.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thành Điện Hải"
+    },
+    {
+      "id": "cho-han",
+      "name": "Chợ Hàn",
+      "category": "cho",
+      "area": "Trung tâm",
+      "hook": "Chợ lớn ven sông Hàn bán đồ ăn, quà biển và đồ lưu niệm.",
+      "summary": "Chợ Hàn là một ngôi chợ tại trung tâm thành phố Đà Nẵng. Chợ tọa lạc trên địa bàn phường Hải Châu, tiếp giáp với bốn tuyến đường Trần Phú, Bạch Đằng, Hùng Vương, Nguyễn Thái Học và cách cầu Sông Hàn không xa. Chợ Hàn được hình thành từ năm 1940. Vào năm 1989, chợ được khởi công xây mới với hai tầng khang trang trên mặt bằng diện tích 28.000 m².",
+      "lat": 16.06833333,
+      "lon": 108.22416667,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Mua quà và thử món địa phương, tiện cạnh sông Hàn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "cho-han-1.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cho_Han_Entrance.JPG"
+        },
+        {
+          "file": "cho-han-2.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cho_Han_Da_Nang.JPG"
+        },
+        {
+          "file": "cho-han-3.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cho_Han_Rau_Qua.JPG"
+        }
+      ],
+      "wikipediaTitle": "Chợ Hàn"
+    }
+  ]
+}

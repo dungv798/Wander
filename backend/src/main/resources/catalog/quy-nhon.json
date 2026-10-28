@@ -1,0 +1,444 @@
+{
+  "id": "quy-nhon",
+  "name": "Quy Nhơn",
+  "region": "Nam Trung Bộ",
+  "tagline": "Biển Kỳ Co, Eo Gió, tháp Chăm và những bãi đá",
+  "coverPlaceId": "thap-doi",
+  "references": [
+    {
+      "id": "trung-tam-quy-nhon",
+      "name": "Trung tâm Quy Nhơn",
+      "lat": 13.7765,
+      "lon": 109.2237,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 1–8 nắng đẹp, biển trong; tháng 9–12 mưa nhiều và biển động.",
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        "Khoảng tháng 1 đến tháng 8 trời nắng, biển êm, hợp đi đảo và tắm biển.",
+        "Tháng 9–12 mưa nhiều, biển động, tàu ra đảo có thể bị hoãn."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Đồ bơi, kem chống nắng, mũ nón, áo mưa mỏng.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Đồ bơi"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Mũ nón, kính râm"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Dép đi biển"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "thap-doi",
+      "name": "Tháp Đôi",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Cụm tháp Chăm đôi giữa phố, kiến trúc gạch đỏ đặc trưng.",
+      "summary": "Tháp Đôi hay còn có tên là Tháp Hưng Thạnh còn trong tiếng J'rai gọi là SRI BANOI là khu tháp của Chăm Pa gồm có hai tháp là tháp phía bắc và tháp phía nam cạnh nhau hiện nằm ở phường Quy Nhơn, tỉnh Gia Lai, Việt Nam.",
+      "lat": 13.7862534,
+      "lon": 109.2110825,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Dễ ghé, nằm ngay thành phố, hiểu thêm văn hóa Chăm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-doi-1.jpg",
+          "author": "Minh Khiem",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_%C4%90%C3%B4i,_Quy_Nh%C6%A1n_-_43083336701.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Đôi"
+    },
+    {
+      "id": "thap-banh-it",
+      "name": "Tháp Bánh Ít",
+      "category": "van",
+      "area": "Tuy Phước",
+      "hook": "Cụm tháp Chăm cổ trên đồi nhỏ, nhìn ra cánh đồng.",
+      "summary": "Tháp Bánh Ít còn có tên gọi là tháp Bạc còn trong tiếng J'rai là YANG MTIAN là một cụm các tháp cổ Chăm Pa, hiện nay nằm trên một ngọn đồi tại thôn Đại Lộc, xã Tuy Phước Bắc, tỉnh Gia Lai. Kiến trúc tháp thuộc phong cách chuyển tiếp từ phong cách Mỹ Sơn A1 sang phong cách Bình Định.",
+      "lat": 13.8684295,
+      "lon": 109.1351822,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích kiến trúc Chăm, cách trung tâm khoảng nửa giờ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-banh-it-1.jpg",
+          "author": "Dongson*vmvn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%A5m_th%C3%A1p_B%C3%A1nh_%C3%8Dt,_Tuy_Ph%C6%B0%E1%BB%9Bc,_B%C3%ACnh_%C4%90%E1%BB%8Bnh.JPG"
+        },
+        {
+          "file": "thap-banh-it-2.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040323_Thap_Banh_It_complex,_Nhon_Hoa,_Binh_Dinh_Vietnam_001.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Bánh Ít"
+    },
+    {
+      "id": "bao-tang-quang-trung",
+      "name": "Bảo tàng Quang Trung",
+      "category": "van",
+      "area": "Tây Sơn",
+      "hook": "Bảo tàng về vua Quang Trung và phong trào Tây Sơn.",
+      "summary": "Bảo tàng Quang Trung là một bảo tàng nằm ở Khối 1, xã Tây Sơn, tỉnh Gia Lai, Việt Nam, đối diện sông Côn, bao quanh bởi đường tỉnh lộ 636, Quốc lộ 19B, đường Ngọc Hân Công chúa, đường Nguyễn Nhạc, đường Đống Đa. Bảo tàng được xây dựng trên nền nhà cũ của anh em Nhà Tây Sơn, vùng đất quê hương của Tây Sơn tam kiệt, vị trí bao quanh Đền thờ Tây Sơn tam kiệt hay Điện Tây Sơn. Ngày nay, tên của bảo tàng được đặt theo Tây Sơn Thái Tổ, Hoàng đế Quang Trung.",
+      "lat": 13.920583333333333,
+      "lon": 108.92083333333333,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai muốn tìm hiểu lịch sử địa phương.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "bao-tang-quang-trung-1.jpg",
+          "author": "Original uploader was Liftold at vi.wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3o_T%C3%A0ng_Quang_Trung.JPG"
+        },
+        {
+          "file": "bao-tang-quang-trung-2.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bi%E1%BB%83u_di%E1%BB%85n_v%C3%B5_thu%E1%BA%ADt.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Quang Trung"
+    },
+    {
+      "id": "dam-thi-nai",
+      "name": "Đầm Thị Nại",
+      "category": "canh",
+      "area": "Phía Nam",
+      "hook": "Đầm lớn phía nam thành phố, có cầu vượt biển và làng chài.",
+      "summary": "Đầm Thị Nại là một đầm nước mặn nằm trên nằm ở phía Đông Nam tỉnh Gia Lai, Việt Nam.",
+      "lat": 13.825,
+      "lon": 109.24166666666666,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích ngắm cảnh đầm phá lúc chiều.",
+      "bestSlots": [
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "dam-thi-nai-1.jpg",
+          "author": "Lê Thy ( thảo luận )",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:DamThiNai.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đầm Thị Nại"
+    },
+    {
+      "id": "thap-duong-long",
+      "name": "Tháp Dương Long",
+      "category": "van",
+      "area": "Tây Sơn",
+      "hook": "Cụm ba tháp Chăm cao nhất Việt Nam, kiến trúc gạch đỏ.",
+      "summary": "Tháp Dương Long là cụm di tích gồm ba tháp Chăm thẳng hàng trên một gò cao thuộc xã Bình An, tỉnh Gia Lai. Tháp Dương Long được xây dựng vào cuối thế kỷ 12. Đây là thời kỳ phát triển rực rỡ nhất của nền văn hóa Chăm Pa. Kiến trúc của ngôi tháp được các nhà nghiên cứu cho rằng xây theo kiến trúc Khmer từ ngôi đền Angkor Wat, sau khi Champa xăm chiếm đế chế Khmer.",
+      "lat": 13.924992,
+      "lon": 108.9903885,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Di tích Chăm ấn tượng, cách trung tâm khoảng một giờ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-duong-long-1.jpg",
+          "author": "Uranus2808",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:DuongLong_ChamTemple_TaySon.jpg"
+        },
+        {
+          "file": "thap-duong-long-2.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Duong_Long_Cham_tower_temples,_Hindu_trinity,_Binh_Dinh_Vietnam_024.jpg"
+        },
+        {
+          "file": "thap-duong-long-3.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Duong_Long_Cham_tower_temples,_Hindu_trinity,_Binh_Dinh_Vietnam_043.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Dương Long"
+    },
+    {
+      "id": "thap-canh-tien",
+      "name": "Tháp Cánh Tiên",
+      "category": "van",
+      "area": "An Nhơn",
+      "hook": "Tháp Chăm cổ trên đồi, nhìn xuống cánh đồng.",
+      "summary": "Tháp Cánh Tiên còn có tên gọi là tháp Đồng là một ngôi tháp nằm ở chính giữa thành Đồ Bàn xưa, nay thuộc phường An Nhơn, tỉnh Gia Lai.",
+      "lat": 13.928807,
+      "lon": 109.07534,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích kiến trúc Chăm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-canh-tien-1.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Canh_Tien_Cham_Hindu_temple,_Binh_Dinh_Vietnam_048.jpg"
+        },
+        {
+          "file": "thap-canh-tien-2.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Canh_Tien_Cham_Hindu_temple,_Binh_Dinh_Vietnam_075.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Cánh Tiên"
+    },
+    {
+      "id": "thanh-do-ban",
+      "name": "Đồ Bàn",
+      "category": "van",
+      "area": "An Nhơn",
+      "hook": "Thành cổ của Chăm Pa, còn cổng thành và tường gạch.",
+      "summary": "Thành Đồ Bàn hay Vijaya, còn gọi là thành cổ Chà Bàn là kinh đô của người Chăm thuộc Chăm Pa, nay thuộc địa phận phường An Nhơn, tỉnh Gia Lai và cách phường Quy Nhơn 27 km về hướng Tây Bắc. Trong thời kỳ Chăm Pa có quốc hiệu là Chiêm Thành. Vijaya đồng thời cũng là tên gọi một trong các tiểu quốc của Chăm Pa, tiểu quốc Vijaya.",
+      "lat": 13.92638889,
+      "lon": 109.07083333,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích lịch sử.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thanh-do-ban-1.jpg",
+          "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_C%C3%A1nh_Ti%C3%AAn_trong_th%C3%A0nh_Vijaya.JPG"
+        }
+      ],
+      "wikipediaTitle": "Đồ Bàn"
+    }
+  ]
+}

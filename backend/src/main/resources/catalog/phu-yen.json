@@ -1,0 +1,420 @@
+{
+  "id": "phu-yen",
+  "name": "Phú Yên",
+  "region": "Nam Trung Bộ",
+  "tagline": "Gành Đá Đĩa, Mũi Điện và những vịnh biển yên bình",
+  "coverPlaceId": "ganh-da-dia",
+  "references": [
+    {
+      "id": "trung-tam-tuy-hoa",
+      "name": "Tuy Hòa",
+      "lat": 13.0882,
+      "lon": 109.0929,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 1–8 nắng đẹp; tháng 9–12 mưa nhiều và có thể có bão.",
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        "Khoảng tháng 1 đến tháng 8 trời nắng, biển đẹp.",
+        "Tháng 9–12 mưa nhiều, biển động; theo dõi dự báo khi ra đảo."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Mũ nón, kem chống nắng, giày bám, áo mưa mỏng.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Mũ nón, kính râm"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Giày bám tốt"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Đồ bơi"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "ganh-da-dia",
+      "name": "Gành Đá Đĩa",
+      "category": "canh",
+      "area": "An Ninh Đông",
+      "hook": "Vách đá bazan xếp thành những cột lục giác như chồng đĩa sát biển.",
+      "summary": "Gành Đá Đĩa hay Ghềnh Đá Đĩa là một danh thắng thiên nhiên tại xã Tuy An Đông, tỉnh Đắk Lắk, Việt Nam. Địa điểm này là một đoạn bờ biển có các cột đá bazan hình lăng trụ, trông giống như những chiếc đĩa xếp chồng lên nhau.",
+      "lat": 13.354066,
+      "lon": 109.293787,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Cảnh địa chất rất đặc biệt, điểm nổi bật nhất của Phú Yên.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Sáng sớm hoặc chiều muộn ít nắng và đông; đá có thể trơn khi sóng lớn.",
+      "tips": [
+        "Đá trơn, mang giày bám tốt.",
+        "Tránh đi khi sóng lớn."
+      ],
+      "photos": [
+        {
+          "file": "ganh-da-dia-1.jpg",
+          "author": "Đông Hồ",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%C3%A0nh_%C4%90%C3%A1_%C4%90%C4%A9a.jpg"
+        },
+        {
+          "file": "ganh-da-dia-2.jpg",
+          "author": "Đông Hồ",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%C3%A0nh_%C4%90%C3%A1_%C4%90%C4%A9a_-_Ph%C3%BA_Y%C3%AAn.jpg"
+        }
+      ],
+      "wikipediaTitle": "Gành Đá Đĩa"
+    },
+    {
+      "id": "mui-dien",
+      "name": "Mũi Điện",
+      "category": "canh",
+      "area": "Hòa Xuân Nam",
+      "hook": "Điểm cực Đông trên đất liền với ngọn hải đăng và cảnh biển rộng.",
+      "summary": "Mũi Điện là một mũi đất nhô ra biển từ một nhánh của dãy Trường Sơn, hướng thẳng ra bãi Môn, thuộc địa phận xã Hòa Xuân, tỉnh Đắk Lắk, Việt Nam.",
+      "lat": 12.896538,
+      "lon": 109.456988,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Vừa",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Có thể đón bình minh sớm nhất cả nước, view biển rất đẹp.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Bình minh là thời điểm nhiều người đến.",
+      "tips": [
+        "Đường lên khá dốc, nên mang nước.",
+        "Khởi hành sớm nếu muốn đón bình minh."
+      ],
+      "photos": [
+        {
+          "file": "mui-dien-1.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Cape_2.jpg"
+        },
+        {
+          "file": "mui-dien-2.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Cape_3.jpg"
+        },
+        {
+          "file": "mui-dien-3.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Cape_Lighthouse.jpg"
+        }
+      ],
+      "wikipediaTitle": "Mũi Điện"
+    },
+    {
+      "id": "vinh-xuan-dai",
+      "name": "Vịnh Xuân Đài",
+      "category": "canh",
+      "area": "Sông Cầu",
+      "hook": "Vịnh lớn với nhiều đảo nhỏ, đầm và các làng chài.",
+      "summary": "Vịnh Xuân Đài là một vịnh nhỏ nằm dưới chân dốc Găng thuộc địa phận của phường Xuân Đài và Sông Cầu, tỉnh Đắk Lắk, Việt Nam.",
+      "lat": 13.42805556,
+      "lon": 109.24944444,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "3–4 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Cảnh biển yên bình, hợp ai thích nơi ít khách.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "vinh-xuan-dai-1.jpg",
+          "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xuan_Dai_Bay,_Phu_Yen,_Vietnam.JPG"
+        },
+        {
+          "file": "vinh-xuan-dai-2.jpg",
+          "author": "Quangpraha",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_Xu%C3%A2n_%C4%90%C3%A0i.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vịnh Xuân Đài"
+    },
+    {
+      "id": "thap-nhan",
+      "name": "Tháp Nhạn",
+      "category": "van",
+      "area": "Tuy Hòa",
+      "hook": "Tháp Chăm cổ trên đồi nhỏ cạnh sông Đà Rằng, nhìn xuống thành phố.",
+      "summary": "Tháp Nhạn, trong tiếng Ê-Đê và Jarai gọi là Yang Kơ Hmeng, là một tháp Chăm nằm trên núi Nhạn thuộc phường Tuy Hòa, tỉnh Đắk Lắk. Tháp được người Chăm sinh sống ở lưu vực châu thổ sông Ba xây dựng nên vào khoảng thế kỉ 12. Tháp có hình tứ giác với 4 tầng, càng lên cao càng thu nhỏ lại so với tầng dưới, nhưng vẫn theo phong cách tầng dưới. Tháp cao khoảng 23,5m.",
+      "lat": 13.07777778,
+      "lon": 109.29722222,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "45–60 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Nằm ngay thành phố, tiện ghé và có view đẹp lúc chiều.",
+      "bestSlots": [
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "thap-nhan-1.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thap_Nhan_Hindu_temple,_Tuy_Hoa,_Phu_Yen_province,_Vietnam_23.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Nhạn"
+    },
+    {
+      "id": "nha-tho-mang-lang",
+      "name": "Nhà thờ Mằng Lăng",
+      "category": "van",
+      "area": "Tuy Hòa",
+      "hook": "Nhà thờ cổ với kiến trúc Gothic ở ngoại ô thành phố.",
+      "summary": "Nhà thờ Mằng Lăng là một nhà thờ Công giáo nằm trên địa phận xã Tuy An Đông, tỉnh Đắk Lắk. Đây là nhà thờ thuộc Giáo xứ Mằng Lăng, là nơi sinh của Chân phước Anrê Phú Yên, một trong những vị tử đạo bổn mạng của giáo lý viên và những người trẻ Công giáo. Nhà thờ hiện nay cũng là nơi hành hương vào dịp lễ kỷ niệm Chân phước Anrê Phú Yên và thánh lễ cầu cho giới trẻ Công giáo Việt Nam.",
+      "lat": 13.3342,
+      "lon": 109.226,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích kiến trúc.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "nha-tho-mang-lang-1.jpg",
+          "author": "Đông Hồ",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nh%C3%A0_th%E1%BB%9D_M%E1%BA%B1ng_L%C4%83ng_-_Ph%C3%BA_Y%C3%AAn.jpg"
+        }
+      ],
+      "wikipediaTitle": "Nhà thờ Mằng Lăng"
+    },
+    {
+      "id": "dam-o-loan",
+      "name": "Đầm Ô Loan",
+      "category": "canh",
+      "area": "Tuy An",
+      "hook": "Đầm nước lợ rộng, nổi tiếng với hải sản và cảnh chiều.",
+      "summary": "Đầm Ô Loan là một đầm ở Đắk Lắk, đây là một thắng cảnh cấp quốc gia của Việt Nam, một danh lam tiêu biểu của tỉnh.",
+      "lat": 13.278719,
+      "lon": 109.270135,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1,5–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Cảnh đẹp lúc chiều và có món hải sản địa phương.",
+      "bestSlots": [
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "dam-o-loan-1.jpg",
+          "author": "Linhcandng ( thảo luận )",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BA%A7m_%C3%94_Loan,_An_Hi%E1%BB%87p,_Tuy_An,_Ph%C3%BA_Y%C3%AAn.jpeg"
+        }
+      ],
+      "wikipediaTitle": "Đầm Ô Loan"
+    },
+    {
+      "id": "deo-ca",
+      "name": "Đèo Cả",
+      "category": "canh",
+      "area": "Đông Hòa",
+      "hook": "Đèo ven biển nối Phú Yên và Khánh Hòa, cung đường nhìn xuống biển.",
+      "summary": "Đèo Cả là 1 trong những ngọn đèo lớn và hiểm trở tại miền Trung Việt Nam. Đèo cao 333 m, dài 12 km, cắt ngang qua dãy núi Đại Lãnh ở chỗ giáp ranh giữa hai xã Hoà Xuân, tỉnh Đắk Lắk và xã Đại Lãnh, tỉnh Khánh Hòa trên Quốc lộ 1. Đỉnh đèo nằm ở thôn Vũng Rô, xã Hòa Xuân, tỉnh Đắk Lắk. Đèo còn có tên gọi khác là Đèo Cục Kịch, là tên dân gian trước đây khi đèo mới mở chỉ trải lớp đá, đi lại gập ghềnh và có đến 98 vòng cua rộng hẹp gấp khúc.",
+      "lat": 12.87916667,
+      "lon": 109.27777778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "30–60 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai đi đường dài qua Phú Yên.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "deo-ca-1.jpg",
+          "author": "DHN",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A8o_C%E1%BA%A3.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đèo Cả"
+    }
+  ]
+}

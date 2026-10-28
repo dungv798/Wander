@@ -1,0 +1,163 @@
+{
+  "id": "ta-xua",
+  "name": "Tà Xùa",
+  "region": "Tây Bắc",
+  "tagline": "Săn mây trên sống lưng khủng long và những đỉnh núi Tây Bắc",
+  "coverPlaceId": "ta-xua",
+  "references": [
+    {
+      "id": "ta-xua",
+      "name": "Tà Xùa",
+      "lat": 21.3,
+      "lon": 104.4,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 10–4 dễ gặp biển mây; tháng 5–9 mưa nhiều, đường trơn.",
+      "bestMonths": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "notes": [
+        "Mùa săn mây từ khoảng tháng 10 đến tháng 4, nhiều nhất vào sáng sớm.",
+        "Mùa mưa khoảng tháng 5–9, đường lên núi trơn và có nguy cơ sạt lở."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Áo ấm, áo mưa, giày bám tốt, đèn pin.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Áo ấm dày"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa"
+        },
+        {
+          "icon": "check",
+          "title": "Giày bám tốt"
+        },
+        {
+          "icon": "check",
+          "title": "Đèn pin"
+        },
+        {
+          "icon": "check",
+          "title": "Thuốc cá nhân"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "ta-xua",
+      "name": "Tà Xùa",
+      "category": "leo",
+      "area": "Bắc Yên",
+      "hook": "Dãy núi cao nổi tiếng với biển mây sáng sớm và đoạn sống lưng khủng long.",
+      "summary": "Tà Xùa là một xã thuộc tỉnh Sơn La, Việt Nam.",
+      "lat": 21.27557962,
+      "lon": 104.43496132,
+      "bestMonths": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 10–4",
+      "duration": "1–2 ngày",
+      "difficulty": "Khó",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Lý do chính của chuyến đi, cảnh mây rất nổi tiếng với dân phượt.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Biển mây thường rõ nhất lúc rạng sáng.",
+      "tips": [
+        "Khởi hành rất sớm, mang áo ấm và đèn pin.",
+        "Đường lên dốc và trơn khi mưa, không nên đi một mình."
+      ],
+      "photos": [
+        {
+          "file": "ta-xua-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%E1%BB%91ng_l%C6%B0ng_kh%E1%BB%A7ng_long_T%C3%A0_X%C3%B9a.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tà Xùa"
+    },
+    {
+      "id": "bac-yen",
+      "name": "Bắc Yên",
+      "category": "canh",
+      "area": "Bắc Yên",
+      "hook": "Huyện miền núi là điểm xuất phát lên Tà Xùa, có chợ và quán ăn.",
+      "summary": "Bắc Yên là một huyện miền núi cũ thuộc tỉnh Sơn La, Việt Nam.",
+      "lat": 21.25,
+      "lon": 104.417,
+      "bestMonths": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 10–4",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Điểm nghỉ chân trước khi lên núi.",
+      "bestSlots": [
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "bac-yen-1.jpg",
+          "author": "Linh Pham linharex",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Man_alone_in_T%E1%BA%A3_X%C3%B9a_03-03-2017.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bắc Yên (huyện)"
+    }
+  ]
+}

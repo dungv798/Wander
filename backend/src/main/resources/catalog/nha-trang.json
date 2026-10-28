@@ -1,0 +1,484 @@
+{
+  "id": "nha-trang",
+  "name": "Nha Trang",
+  "region": "Nam Trung Bộ",
+  "tagline": "Biển xanh, đảo và những tháp Chăm cổ",
+  "coverPlaceId": "vinh-nha-trang",
+  "references": [
+    {
+      "id": "trung-tam-nha-trang",
+      "name": "Trung tâm Nha Trang",
+      "lat": 12.2388,
+      "lon": 109.1967,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 1–8 nắng nhiều, biển đẹp; tháng 10–12 dễ có mưa và bão.",
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        "Mùa khô nắng đẹp kéo dài khoảng tháng 1 đến tháng 8; biển êm hợp đi đảo.",
+        "Khoảng tháng 9–12 mưa nhiều và biển động, tàu ra đảo có thể bị hoãn; theo dõi dự báo."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Đồ bơi, kem chống nắng, áo mưa mỏng.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Đồ bơi"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Mũ nón, kính râm"
+        },
+        {
+          "icon": "check",
+          "title": "Áo mưa mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Thuốc say sóng"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "vinh-nha-trang",
+      "name": "Vịnh Nha Trang",
+      "category": "canh",
+      "area": "Vịnh Nha Trang",
+      "hook": "Đi tàu qua các đảo trong vịnh, tắm biển và lặn ngắm san hô.",
+      "summary": "Vịnh Nha Trang là một vịnh ven bờ biển nằm ở phía Đông thành phố Nha Trang cũ, tỉnh Khánh Hòa, có tổng diện tích khoảng 24.965 ha. Là vịnh lớn thứ hai của tỉnh Khánh Hòa sau Vịnh Vân Phong, Vịnh Nha Trang bao gồm 3.780 ha diện tích các đảo, trong đó đảo lớn nhất là Hòn Tre và nhỏ nhất là Hòn Nọc. Khí hậu ở Vịnh Nha Trang phân thành hai mùa rõ rệt, mang đặc trưng của kiểu gió đất–biển, đồng thời chịu tác động của yếu tố địa hình trong khu vực và hệ thống gió mùa.",
+      "lat": 12.25,
+      "lon": 109.23333333,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "1 ngày",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Biểu tượng của Nha Trang, hầu hết lịch trình đều có một buổi trên vịnh.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Tàu thường khởi hành buổi sáng; biển êm nhất lúc sáng.",
+      "tips": [
+        "Đặt tour có giá và lịch trình rõ ràng.",
+        "Mang thuốc say sóng nếu dễ say."
+      ],
+      "photos": [
+        {
+          "file": "vinh-nha-trang-1.jpg",
+          "author": "bvi4092",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arriving_in_Nha_Trang_-_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vịnh Nha Trang"
+    },
+    {
+      "id": "nha-tho-nui",
+      "name": "Nhà thờ Núi",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Nhà thờ đá trên đồi nhỏ giữa phố, kiến trúc Gothic nổi bật.",
+      "summary": "Nhà thờ Núi là một nhà thờ Công giáo ở số 1 đường Thái Nguyên, phường Nha Trang, tỉnh Khánh Hòa. Nhà thờ này còn có nhiều tên gọi bình dân như: Nhà thờ Nha Trang; Nhà thờ Đá; Nhà thờ Ngã Sáu; nhưng phổ biến hơn cả là tên gọi Nhà thờ Núi. Đây là nhà thờ chính tòa của Giáo phận Nha Trang. Nhà thờ Núi Nha Trang cách Hà Nội 1.288 km và cách Thành phố Hồ Chí Minh 438 km.",
+      "lat": 12.24694444,
+      "lon": 109.18777778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Nằm ngay trung tâm, tiện đi ngang.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "nha-tho-nui-1.jpg",
+          "author": "Vinhtantran",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christ_the_King_Cathedral_Nha_Trang.JPG"
+        },
+        {
+          "file": "nha-tho-nui-2.jpg",
+          "author": "Baoothersks",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Entrance_of_Nha_Trang_Cathedral.jpg"
+        }
+      ],
+      "wikipediaTitle": "Nhà thờ Núi Nha Trang"
+    },
+    {
+      "id": "chua-long-son",
+      "name": "Chùa Long Sơn (Nha Trang)",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Ngôi chùa có tượng Phật trắng lớn trên đồi, nhìn xuống thành phố.",
+      "summary": "Chùa Long Sơn trước có tên là Đằng Long Tự, tọa lạc dưới chân đồi Trại Thủy, tại số 22 đường 23 tháng 10, phường Tây Nha Trang, tỉnh Khánh Hòa. Chùa khởi công xây dựng vào thế kỷ 19, đến năm 1940 trùng tu lại và trở thành ngôi chùa nổi tiếng nhất tỉnh với tượng phật Thích Ca ngoài trời lớn nhất Việt Nam.",
+      "lat": 12.251601,
+      "lon": 109.180765,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "View rộng thành phố và dễ đi trong ngày.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-long-son-1.jpg",
+          "author": "https://www.flickr.com/photos/pruzicka/",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chua_Long_Son,_Nha_Trang.jpg"
+        },
+        {
+          "file": "chua-long-son-2.jpg",
+          "author": "Phương Huy",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_Long_S%C6%A1n_(ch%C3%B9a_Ph%E1%BA%ADt_tr%E1%BA%AFng),_Nha_Trang,_ng%C3%A0y_27_th%C3%A1ng_5_n%C4%83m_2015_(1).jpg"
+        },
+        {
+          "file": "chua-long-son-3.jpg",
+          "author": "Phương Huy",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_Long_S%C6%A1n_(ch%C3%B9a_Ph%E1%BA%ADt_Tr%E1%BA%AFng),_Nha_Trang,_ng%C3%A0y_27_th%C3%A1ng_5_n%C4%83m_2015_(10).jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Long Sơn (Nha Trang)"
+    },
+    {
+      "id": "hon-tam",
+      "name": "Hòn Tằm",
+      "category": "canh",
+      "area": "Vịnh Nha Trang",
+      "hook": "Đảo có bãi tắm, các trò chơi biển và dịch vụ nghỉ.",
+      "summary": "Hòn Tằm là một hòn đảo rộng hơn 110 ha nằm trong vịnh Nha Trang, nằm cách 7 km về phía Đông Nam của thành phố. Đây được xem là một trong những hòn đảo có bãi biển đẹp nhất ở Nha Trang, đồng thời cũng là một điểm đến thu hút nhiều khách du lịch.",
+      "lat": 12.175833333333,
+      "lon": 109.24388888889,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "4–6 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Phù hợp ai muốn nghỉ ngơi và chơi nước trên đảo.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "hon-tam-1.jpg",
+          "author": "Phanmin",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khu_ngh%E1%BB%89_d%C6%B0%E1%BB%A1ng_tr%C3%AAn_%C4%91%E1%BA%A3o_H%C3%B2n_T%E1%BA%B1m.jpg"
+        },
+        {
+          "file": "hon-tam-2.jpg",
+          "author": "MerPerle",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:TO%C3%80N_C%E1%BA%A2NH_KHU_T%E1%BA%AEM_B%C3%99N.jpg"
+        },
+        {
+          "file": "hon-tam-3.jpg",
+          "author": "sonpano",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Inexpensive_Placid_-_panoramio.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hòn Tằm"
+    },
+    {
+      "id": "binh-ba",
+      "name": "Đảo Bình Ba",
+      "category": "canh",
+      "area": "Cam Ranh",
+      "hook": "Đảo nhỏ nổi tiếng với tôm hùm và hải sản, biển còn khá hoang sơ.",
+      "summary": "Bình Ba là một đảo nhỏ diện tích trên 3 km², năm trong địa phận thuộc xã Nam Cam Ranh, tỉnh Khánh Hòa, Việt Nam. Đảo nằm trong vịnh Cam Ranh, cách phường Nha Trang khoảng 60 km về phía nam, cách cảng Ba Ngòi 15 km về phía đông. Đảo Bình Ba là một trong Tứ Bình. Ngư dân địa phương cho rằng \"Bình\" trong tên gọi có thể là \"bình yên\" mà cũng có thể là \"Bình Định\" - là một cách để người dân ghi nhớ tổ tiên từ Bình Định đến đây lập nghiệp giai đoạn khoảng cuối thế kỷ XVII, đầu thế kỷ XVIII.",
+      "lat": 11.837678,
+      "lon": 109.240193,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "1–2 ngày",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Hợp ai muốn đi xa hơn các đảo tour chính, có thể ở lại qua đêm.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "binh-ba-1.jpg",
+          "author": "Violetbonmua",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%ACnh_Ba_Island.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đảo Bình Ba"
+    },
+    {
+      "id": "bao-tang-yersin",
+      "name": "Bảo tàng Alexandre Yersin",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Bảo tàng nhỏ về bác sĩ Yersin và những nghiên cứu y học ở Nha Trang.",
+      "summary": "Bảo tàng Alexandre Yersin là một bảo tàng ở phường Nha Trang, Việt Nam. Đây nơi lưu trữ nhiều kỷ vật của bác sĩ Alexandre Yersin, một bác sĩ y khoa, nhà vi khuẩn học, và nhà thám hiểm người Pháp gốc Thụy Sĩ. Bảo tàng được thành lập năm 1997, nằm trong khuôn viên Viện Pasteur Nha Trang.",
+      "lat": 12.2515,
+      "lon": 109.196,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Ngắn gọn, hợp ngày mưa.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "bao-tang-yersin-1.jpg",
+          "author": "Walej",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yersin_Museum_(Nha_Trang).jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Alexandre Yersin"
+    },
+    {
+      "id": "chua-ba-thap-tram-huong",
+      "name": "Tháp Trầm Hương",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Tòa tháp hình búp sen nổi bật bên đường biển, một trong những biểu tượng của thành phố.",
+      "summary": "Tháp Trầm Hương là một công trình kiến trúc biểu tượng của Nha Trang, Khánh Hòa. Tòa tháp nằm tại quảng trường Hai tháng Tư dọc theo đường Trần Phú và gần Trung tâm Văn hóa Khánh Hòa. Tháp Trầm Hương là nơi trưng bày hình ảnh và sản vật địa phương và quảng bá du lịch cho Nha Trang.",
+      "lat": 12.24048,
+      "lon": 109.196797,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "20–30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Dễ ghé khi đi dạo đường biển.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-ba-thap-tram-huong-1.jpg",
+          "author": "Lưu Ly",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thap_Tram_Huong.JPG"
+        },
+        {
+          "file": "chua-ba-thap-tram-huong-2.jpg",
+          "author": "Phương Huy",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nha_Trang_n%C4%83m_2013_(qu%E1%BA%A3ng_tr%C6%B0%E1%BB%9Dng_trung_t%C3%A2m,_th%C3%A1p_tr%E1%BA%A7m_h%C6%B0%C6%A1ng).jpg"
+        },
+        {
+          "file": "chua-ba-thap-tram-huong-3.jpg",
+          "author": "The Erica Chang",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tr%E1%BA%A7m_H%C6%B0%C6%A1ng_tower_-_panoramio.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tháp Trầm Hương"
+    },
+    {
+      "id": "hon-tre",
+      "name": "Hòn Tre (Khánh Hòa)",
+      "category": "canh",
+      "area": "Vịnh Nha Trang",
+      "hook": "Đảo lớn nhất vịnh, có khu nghỉ dưỡng và bãi biển.",
+      "summary": "Đảo Hòn Tre là đảo lớn nhất nằm trong vịnh Nha Trang. Đảo có diện tích trên 32,50 km², cách thành phố Nha Trang 5 km về phía Đông và cách cảng Cầu Đá 3,5 km, cư dân chủ yếu là khách du lịch và ngư dân. Theo ước tính dân số thường trú trên đảo khoảng trên 1.500 người tập trung ở 2 thôn lớn là Bích Đầm và Vũng Ngán. Đảo có những bãi biển nhỏ, hoang sơ, thảm thực vật gồm rừng cây nhỏ.",
+      "lat": 12.209722222222,
+      "lon": 109.28472222222,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 1–8",
+      "duration": "4–6 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai muốn nghỉ ngơi ở đảo.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "hon-tre-1.jpg",
+          "author": "Liftold",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Picture_146.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hòn Tre (Khánh Hòa)"
+    }
+  ]
+}

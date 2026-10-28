@@ -1,0 +1,726 @@
+{
+  "id": "ho-chi-minh",
+  "name": "TP. Hồ Chí Minh",
+  "region": "Nam Bộ",
+  "tagline": "Thành phố náo nhiệt với di tích, chợ và ẩm thực",
+  "coverPlaceId": "nha-tho-duc-ba",
+  "references": [
+    {
+      "id": "trung-tam-sai-gon",
+      "name": "Trung tâm Sài Gòn",
+      "lat": 10.7769,
+      "lon": 106.7009,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 12–4 khô ráo, mát hơn; tháng 5–11 mưa chiều.",
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "notes": [
+        "Mùa khô khoảng tháng 12 đến tháng 4, ít mưa và dễ đi bộ.",
+        "Mùa mưa tháng 5–11, thường mưa vào chiều; mang áo mưa."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Áo mưa, mũ nón, giày dễ đi, sạc dự phòng.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Áo mưa mỏng"
+        },
+        {
+          "icon": "check",
+          "title": "Mũ nón"
+        },
+        {
+          "icon": "check",
+          "title": "Giày dễ đi bộ"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "nha-tho-duc-ba",
+      "name": "Nhà thờ Đức Bà",
+      "category": "van",
+      "area": "Quận 1",
+      "hook": "Nhà thờ gạch đỏ nổi bật giữa trung tâm, đối diện Bưu điện Trung tâm.",
+      "summary": "Nhà thờ Chánh tòa Đức Bà Sài Gòn, thường được gọi tắt là Nhà thờ Đức Bà, là nhà thờ chính tòa của Tổng giáo phận Sài Gòn. Nhà thờ không chỉ là biểu tượng của Công giáo ở Việt Nam, mà còn là một trong những công trình kiến trúc độc đáo của Thành phố Hồ Chí Minh và điểm đến nổi tiếng với du khách. Tên gọi ban đầu của nhà thờ là Nhà thờ Sài Gòn, tên gọi Nhà thờ Đức Bà bắt đầu được sử dụng từ năm 1959 bằng việc đặt Tượng Đức Bà Hòa Bình trước khuôn viên.",
+      "lat": 10.779722,
+      "lon": 106.699167,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Biểu tượng kiến trúc của thành phố, dễ ghé khi đi dạo trung tâm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "nha-tho-duc-ba-1.jpg",
+          "author": "Diego Delso",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora,_Ciudad_Ho_Chi_Minh,_Vietnam,_2013-08-14,_DD_03.JPG"
+        },
+        {
+          "file": "nha-tho-duc-ba-2.jpg",
+          "author": "源義信",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2023-12-10_Notre-Dame_Cathedral_Basilica_of_Saigon_(Nh%C3%A0_th%E1%BB%9D_ch%C3%ADnh_t%C3%B2a_%C4%90%E1%BB%A9c_B%C3%A0_S%C3%A0i_G%C3%B2n)_01.jpg"
+        },
+        {
+          "file": "nha-tho-duc-ba-3.jpg",
+          "author": "源義信",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2023-12-10_Notre-Dame_Cathedral_Basilica_of_Saigon_(Nh%C3%A0_th%E1%BB%9D_ch%C3%ADnh_t%C3%B2a_%C4%90%E1%BB%A9c_B%C3%A0_S%C3%A0i_G%C3%B2n)_02.jpg"
+        }
+      ],
+      "wikipediaTitle": "Nhà thờ chính tòa Đức Bà Sài Gòn"
+    },
+    {
+      "id": "buu-dien-trung-tam",
+      "name": "Bưu điện Sài Gòn",
+      "category": "van",
+      "area": "Quận 1",
+      "hook": "Bưu điện kiến trúc Pháp cổ với mái vòm và nội thất đẹp, vẫn đang hoạt động.",
+      "summary": "Bưu điện Trung tâm Sài Gòn, còn gọi là Tòa nhà Bưu điện Thành phố Hồ Chí Minh, là một trong những công trình kiến trúc tiêu biểu tại Thành phố Hồ Chí Minh, tọa lạc tại số 2, Công trường Công xã Paris, phường Sài Gòn. Đây là tòa nhà được người Pháp xây dựng trong khoảng năm 1886–1891 với phong cách chiết trung theo đồ án thiết kế của kiến trúc sư Marie-Alfred Foulhoux. Đây là công trình kiến trúc mang phong cách phương Tây kết hợp với nét trang trí phương Đông.",
+      "lat": 10.779884,
+      "lon": 106.699943,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Đẹp và miễn phí để vào, nằm cạnh Nhà thờ Đức Bà.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "buu-dien-trung-tam-1.jpg",
+          "author": "Yesvn123",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saigon_Central_Post_Office_2022.jpg"
+        },
+        {
+          "file": "buu-dien-trung-tam-2.jpg",
+          "author": "Steffen Schmitz ( more photos )",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_City,_Central_Post_Office,_2020-01_CN-01.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bưu điện Sài Gòn"
+    },
+    {
+      "id": "dinh-doc-lap",
+      "name": "Dinh Độc Lập",
+      "category": "van",
+      "area": "Quận 1",
+      "hook": "Dinh thự lịch sử với phòng làm việc, hầm và nhiều hiện vật.",
+      "summary": "Dinh Độc Lập là một tòa dinh thự tại Thành phố Hồ Chí Minh, từng là nơi ở và làm việc của Tổng thống Việt Nam Cộng hòa trước Sự kiện 30 tháng 4 năm 1975. Hiện nay, Dinh Độc Lập đã được Chính phủ Việt Nam xếp hạng là di tích quốc gia đặc biệt. Cơ quan quản lý di tích văn hóa Dinh Độc Lập có tên là Hội trường Thống Nhất thuộc Văn phòng Chính phủ.",
+      "lat": 10.777108,
+      "lon": 106.695441,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "1,5–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Điểm lịch sử quan trọng của thành phố.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "dinh-doc-lap-1.jpg",
+          "author": "Yesvn123",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_%C4%90%E1%BB%99c_L%E1%BA%ADp_v%C3%A0o_n%C3%A0m_2024.jpg"
+        },
+        {
+          "file": "dinh-doc-lap-2.jpg",
+          "author": "Balon Greyjoy",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:20190923_Independence_Palace-10.jpg"
+        }
+      ],
+      "wikipediaTitle": "Dinh Độc Lập"
+    },
+    {
+      "id": "cho-ben-thanh",
+      "name": "Chợ Bến Thành",
+      "category": "cho",
+      "area": "Quận 1",
+      "hook": "Chợ lớn trung tâm bán đồ lưu niệm, đồ ăn và hàng thủ công.",
+      "summary": "Chợ Bến Thành là một ngôi chợ nằm tại phường Bến Thành, Thành phố Hồ Chí Minh. Chợ được khởi công xây dựng từ năm 1912, hình ảnh đồng hồ ở cửa nam của ngôi chợ này được xem là biểu tượng không chính thức của Thành phố Hồ Chí Minh. Chợ nằm giữa các đường Phan Bội Châu - Phan Chu Trinh - Lê Thánh Tôn - Công trường Quách Thị Trang tại phường Bến Thành với diện tích 13.056 m².",
+      "lat": 10.77252069,
+      "lon": 106.69801918,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Mua quà và thử món ăn vặt, nổi tiếng với du khách.",
+      "bestSlots": [
+        "sang",
+        "toi"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "cho-ben-thanh-1.jpg",
+          "author": "Riza",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ben_Thanh_market_2.jpg"
+        },
+        {
+          "file": "cho-ben-thanh-2.jpg",
+          "author": "MrTMan from Jyväskylä, Finland",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ben_Thanh_market_in_Vietnam_(340932410).jpg"
+        },
+        {
+          "file": "cho-ben-thanh-3.jpg",
+          "author": "Jim 陳",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ben_Thanh_Market_(37214722264).jpg"
+        }
+      ],
+      "wikipediaTitle": "Chợ Bến Thành"
+    },
+    {
+      "id": "pho-di-bo-nguyen-hue",
+      "name": "Phố đi bộ Nguyễn Huệ",
+      "category": "canh",
+      "area": "Quận 1",
+      "hook": "Phố đi bộ rộng giữa trung tâm, nhiều hoạt động buổi tối và cuối tuần.",
+      "summary": "Đường Nguyễn Huệ là một tuyến đường tại phường Sài Gòn, trung tâm Thành phố Hồ Chí Minh, chạy từ Trụ sở Ủy ban nhân dân Thành phố đến Bến Bạch Đằng, bờ sông Sài Gòn. Hiện nay chính giữa con đường này là một quảng trường đi bộ rộng 27 m được đưa vào sử dụng từ năm 2015, là quảng trường đi bộ đầu tiên của Việt Nam.",
+      "lat": 10.774112,
+      "lon": 106.703619,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Dạo chơi buổi tối, tiện nối các điểm trung tâm.",
+      "bestSlots": [
+        "chieu",
+        "toi"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "pho-di-bo-nguyen-hue-1.jpg",
+          "author": "flowcomm",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_City,_Saigon,_Vietnam_(49579818542).jpg"
+        },
+        {
+          "file": "pho-di-bo-nguyen-hue-2.jpg",
+          "author": "Steffen Schmitz ( more photos )",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_City,_Nguyen_Hue_Street,_2020-01_CN-02.jpg"
+        },
+        {
+          "file": "pho-di-bo-nguyen-hue-3.jpg",
+          "author": "Ondrej Pospisil",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nguyen_Hue_Pedestrian_Street_(31273496852).jpg"
+        }
+      ],
+      "wikipediaTitle": "Đường Nguyễn Huệ, Thành phố Hồ Chí Minh"
+    },
+    {
+      "id": "nha-hat-thanh-pho",
+      "name": "Nhà hát Thành phố Hồ Chí Minh",
+      "category": "van",
+      "area": "Quận 1",
+      "hook": "Nhà hát kiến trúc Pháp cổ giữa trung tâm, thường tổ chức biểu diễn.",
+      "summary": "Nhà hát Sài Gòn, thường được gọi ngắn gọn là Nhà hát Thành phố, là một nhà hát có mặt tiền hướng ra Công trường Lam Sơn và đường Đồng Khởi, phường Sài Gòn, Thành phố Hồ Chí Minh. được quản lý trực tiếp bởi Trung tâm Tổ chức Biểu diễn và Điện ảnh Thành phố - đơn vị trực thuộc Sở Văn hóa và Thể thao Thành phố Hồ Chí Minh.",
+      "lat": 10.7767525,
+      "lon": 106.7032824,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "20–30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Đi ngang khi dạo trung tâm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "nha-hat-thanh-pho-1.jpg",
+          "author": "Diego Delso",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%93pera,_Ciudad_Ho_Chi_Minh,_Vietnam,_2013-08-14,_DD_02.JPG"
+        },
+        {
+          "file": "nha-hat-thanh-pho-2.jpg",
+          "author": "Bahnfrend",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Municipal_Theatre_of_Ho_Chi_Minh_City,_2023_(01).jpg"
+        }
+      ],
+      "wikipediaTitle": "Nhà hát Thành phố Hồ Chí Minh"
+    },
+    {
+      "id": "bao-tang-chung-tich-chien-tranh",
+      "name": "Bảo tàng Chứng tích chiến tranh",
+      "category": "van",
+      "area": "Quận 3",
+      "hook": "Bảo tàng trưng bày hiện vật và tư liệu về chiến tranh Việt Nam.",
+      "summary": "Bảo tàng Chứng tích Chiến tranh là một bảo tàng vì hòa bình ở số 28 đường Võ Văn Tần, phường Xuân Hòa, Thành phố Hồ Chí Minh. Bảo tàng Chứng tích Chiến tranh trực thuộc Sở Văn hóa và Thể thao Thành phố Hồ Chí Minh, là thành viên của hệ thống Bảo tàng vì hòa bình thế giới và Hội đồng các bảo tàng thế giới.",
+      "lat": 10.7795,
+      "lon": 106.692,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1,5–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Hiểu thêm lịch sử, có nội dung nặng nề.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "bao-tang-chung-tich-chien-tranh-1.jpg",
+          "author": "Prenn",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:War_Remnants_Museum,_HCMC,_front.JPG"
+        },
+        {
+          "file": "bao-tang-chung-tich-chien-tranh-2.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:War_Remnants_Museum.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Chứng tích chiến tranh"
+    },
+    {
+      "id": "dia-dao-cu-chi",
+      "name": "Địa đạo Củ Chi",
+      "category": "van",
+      "area": "Củ Chi",
+      "hook": "Hệ thống địa đạo thời chiến cách trung tâm khoảng 60 km.",
+      "summary": "Địa đạo Củ Chi là một hệ thống phòng thủ trong lòng đất ở xã An Nhơn Tây, cách trung tâm Thành phố Hồ Chí Minh 69 km về hướng Tây-Bắc. Hệ thống này được quân kháng chiến Việt Minh và Mặt trận Dân tộc Giải phóng miền Nam Việt Nam đào trong thời kỳ Chiến tranh Đông Dương và Chiến tranh Việt Nam. Hệ thống địa đạo bao gồm bệnh xá, nhiều phòng ở, nhà bếp, kho chứa, phòng làm việc, hệ thống đường ngầm dưới lòng đất, dài khoảng 250 km và có các hệ thống thông hơi tại vị trí các bụi cây.",
+      "lat": 11.061,
+      "lon": 106.526,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "3–4 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Một chuyến nửa ngày ngoài trung tâm, hiểu thêm lịch sử.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "dia-dao-cu-chi-1.jpg",
+          "author": "Phương Huy ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:W_C%E1%BB%A7_Chi_%C4%90%E1%BB%8Ba_%C4%91%E1%BA%A1o_C%E1%BB%A7_Chi_ng%E1%BB%A5y_trang.JPG"
+        }
+      ],
+      "wikipediaTitle": "Địa đạo Củ Chi"
+    },
+    {
+      "id": "cho-lon",
+      "name": "Chợ Lớn",
+      "category": "cho",
+      "area": "Quận 5",
+      "hook": "Khu người Hoa với chợ Bình Tây, chùa và quán ăn.",
+      "summary": "Chợ Lớn là một khu vực đông Hoa kiều sinh sống nằm ven kênh Tàu Hủ trải dài trên địa bàn Quận 5 và Quận 6 cũ, về phía nam tới Quận 8 cũ, về phía bắc tới Quận 10 và Quận 11 cũ ở Thành phố Hồ Chí Minh, Việt Nam. Khu phố Chợ Lớn đã có Hoa kiều sinh sống từ lâu và được coi là phố người Hoa lớn nhất thế giới tính theo diện tích. Khu vực này trước kia lập thành một thành phố riêng biệt với Sài Gòn, gọi là thành phố Chợ Lớn. Trong những năm 1930-1950 do quá trình đô thị hóa, Sài Gòn và Chợ Lớn đã sáp nhập với nhau.",
+      "lat": 10.7507102,
+      "lon": 106.659162,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Hợp ai thích khám phá phố chợ và ẩm thực.",
+      "bestSlots": [
+        "sang",
+        "toi"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "cho-lon-1.jpg",
+          "author": "Lerdsuwa",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:HCMC_Binh_Tay.jpg"
+        },
+        {
+          "file": "cho-lon-2.jpg",
+          "author": "Bgabel",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vn-hcm-cho-binh-tay-27-07-07.JPG"
+        },
+        {
+          "file": "cho-lon-3.jpg",
+          "author": "Gary Todd from Xinzheng, China",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ong_Bon_Pagoda_(10018316653).jpg"
+        }
+      ],
+      "wikipediaTitle": "Chợ Lớn"
+    },
+    {
+      "id": "thao-cam-vien",
+      "name": "Thảo Cầm Viên Sài Gòn",
+      "category": "canh",
+      "area": "Quận 1",
+      "hook": "Vườn thú và vườn thực vật lâu đời giữa thành phố.",
+      "summary": "Thảo Cầm Viên Sài Gòn, hay còn được gọi ở địa phương là Sở Thú, là công viên bảo tồn động vật - thực vật rộng hơn 20 ha ở Thành phố Hồ Chí Minh, Việt Nam. Khuôn viên này hiện tọa lạc gần hạ lưu kênh Nhiêu Lộc – Thị Nghè với hai cổng nằm ở số 2 đường Nguyễn Bỉnh Khiêm và số 1 đường Nguyễn Thị Minh Khai, phường Sài Gòn, Thành phố Hồ Chí Minh. Theo các dữ liệu lịch sử được tổng hợp, Thảo Cầm Viên Sài Gòn là một trong những vườn thú lâu đời nhất còn tồn tại trên thế giới.",
+      "lat": 10.78805556,
+      "lon": 106.70472222,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp đi cùng gia đình.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "thao-cam-vien-1.jpg",
+          "author": "Hoangvantoanajc",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%93_n%C6%B0%E1%BB%9Bc_%E1%BB%9F_Th%E1%BA%A3o_C%E1%BA%A7m_Vi%C3%AAn.JPG"
+        },
+        {
+          "file": "thao-cam-vien-2.jpg",
+          "author": "trungydang",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thao_cam_vien_,_Phuong_Da_kao,_quan_1,_tphcmvn_-_panoramio.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thảo Cầm Viên Sài Gòn"
+    },
+    {
+      "id": "landmark-81",
+      "name": "Landmark 81",
+      "category": "canh",
+      "area": "Bình Thạnh",
+      "hook": "Tòa nhà cao nhất Việt Nam với đài quan sát toàn cảnh.",
+      "summary": "Vincom Landmark 81, hay đơn giản là Landmark 81 hoặc còn được gọi là The Landmark 81, là tòa nhà chọc trời siêu cao ở Thành phố Hồ Chí Minh thuộc tổ hợp dự án Vinhomes Central Park trị giá 1,4 tỷ USD do Công ty Cổ phần Đầu tư xây dựng Tân Liên Phát thuộc Vingroup làm chủ đầu tư. Landmark 81 là tòa nhà cao nhất Việt Nam, tòa nhà cao thứ hai Đông Nam Á, và là tòa nhà cao thứ 17 trên thế giới.",
+      "lat": 10.795025,
+      "lon": 106.721909,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Ngắm thành phố từ trên cao lúc hoàng hôn.",
+      "bestSlots": [
+        "chieu",
+        "toi"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "landmark-81-1.jpg",
+          "author": "Xuanphuocle",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:11-01-2025_Line_1_Ho_Chi_Minh_City_metro_for_Ben_Thanh_Station_32.jpg"
+        }
+      ],
+      "wikipediaTitle": "Landmark 81"
+    },
+    {
+      "id": "chua-ngoc-hoang",
+      "name": "Chùa Ngọc Hoàng",
+      "category": "van",
+      "area": "Quận 1",
+      "hook": "Ngôi chùa cổ của người Hoa với nhiều tượng gỗ và khói hương.",
+      "summary": "Chùa Ngọc Hoàng hay Chùa Phước Hải là tên thường gọi của Điện Ngọc Hoàng, tên chữ là Phước Hải Tự; hiện tọa lạc tại số 73 đường Mai Thị Lựu, phường Tân Định, Thành phố Hồ Chí Minh, Việt Nam.",
+      "lat": 10.791666666667,
+      "lon": 106.69777777778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích không khí chùa cổ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-ngoc-hoang-1.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ph%C6%B0%E1%BB%9Bc_H%E1%BA%A3i_T%E1%BB%B1.jpg"
+        },
+        {
+          "file": "chua-ngoc-hoang-2.jpg",
+          "author": "Kevin Decherf from France",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jade_Emperor_Pagoda_(40283855775).jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Ngọc Hoàng"
+    },
+    {
+      "id": "rung-ngap-man-can-gio",
+      "name": "Rừng ngập mặn Cần Giờ",
+      "category": "canh",
+      "area": "Cần Giờ",
+      "hook": "Rừng ngập mặn rộng, đi thuyền, xem khỉ và hệ sinh thái.",
+      "summary": "Khu dự trữ sinh quyển Cần Giờ còn gọi là Rừng Sác là một quần thể gồm các loài động, thực vật rừng trên cạn và thủy sinh, được hình thành trên vùng châu thổ rộng lớn của các cửa sông Đồng Nai, sông Sài Gòn và sông Vàm Cỏ. UNESCO đã công nhận đây là khu dự trữ sinh quyển thế giới vào ngày 21/1/2000 với hệ động thực vật đa dạng độc đáo điển hình của vùng ngập mặn.",
+      "lat": 10.50113889,
+      "lon": 106.86758333,
+      "bestMonths": [
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 12–4",
+      "duration": "5–6 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Một chuyến nửa ngày ra khỏi trung tâm.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "rung-ngap-man-can-gio-1.jpg",
+          "author": "Tho nau",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lo_ren_river.jpg"
+        },
+        {
+          "file": "rung-ngap-man-can-gio-2.jpg",
+          "author": "Tho nau",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mangrove_in_Can_Gio_forest.jpg"
+        }
+      ],
+      "wikipediaTitle": "Khu dự trữ sinh quyển rừng ngập mặn Cần Giờ"
+    }
+  ]
+}

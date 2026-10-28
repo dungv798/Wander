@@ -1,0 +1,668 @@
+{
+  "id": "hue",
+  "name": "Huế",
+  "region": "Trung Bộ",
+  "tagline": "Cố đô với Đại Nội, lăng tẩm và sông Hương",
+  "coverPlaceId": "hoang-thanh-hue",
+  "references": [
+    {
+      "id": "trung-tam-hue",
+      "name": "Trung tâm Huế",
+      "lat": 16.4637,
+      "lon": 107.5909,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Tháng 1–4 mát và ít mưa; tháng 9–12 mưa nhiều, dễ có lũ.",
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "rainyMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        "Khoảng tháng 1 đến tháng 4 thời tiết dễ chịu, thích hợp đi bộ tham quan.",
+        "Tháng 5–8 nóng; tháng 9–12 mưa nhiều và có thể có lũ."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Áo mưa, mũ nón, giày dễ đi.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Áo mưa"
+        },
+        {
+          "icon": "check",
+          "title": "Mũ nón"
+        },
+        {
+          "icon": "check",
+          "title": "Giày dễ đi bộ"
+        },
+        {
+          "icon": "check",
+          "title": "Nước uống"
+        },
+        {
+          "icon": "check",
+          "title": "Kem chống nắng"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "hoang-thanh-hue",
+      "name": "Đại Nội Huế",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Hoàng thành triều Nguyễn với cổng Ngọ Môn, điện Thái Hòa và nhiều cung điện.",
+      "summary": "Kinh thành Huế, Đại nội Huế, Hoàng thành Huế hay Cố đô Huế là một tòa thành ở cố đô Huế, nơi đóng đô của triều đại nhà Nguyễn trong suốt 143 năm từ 1802 đến khi thoái vị vào năm 1945. Hiện nay, Kinh thành Huế là một trong số các di tích thuộc cụm Quần thể di tích Cố đô Huế được UNESCO công nhận là Di sản Văn hoá Thế giới. Kinh thành Huế được vua Gia Long tiến hành khảo sát từ năm 1803, khởi công xây dựng từ 1805 và hoàn chỉnh vào năm 1832 dưới triều vua Minh Mạng.",
+      "lat": 16.46972222,
+      "lon": 107.57777778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 1–4",
+      "duration": "3–4 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Di sản trung tâm của Huế, nên dành nửa ngày.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Sáng mát và ít đông; trưa nắng gắt, đi bộ nhiều.",
+      "tips": [
+        "Mang mũ nón, nước uống.",
+        "Hỏi giờ mở cửa và giá vé tại cổng."
+      ],
+      "photos": [
+        {
+          "file": "hoang-thanh-hue-1.jpg",
+          "author": "Wikimedia Commons",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ngomon2.jpg"
+        },
+        {
+          "file": "hoang-thanh-hue-2.jpg",
+          "author": "Dieulefils, P. (18..-18..?). Photographe Rigal (18..-18..?). Photographe",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:18_photogr._d%27Annam_et_du_Tonkin,_par_P._Dieulefils,_photogr._%C3%A0_Hanoi,_et_Rigal,_dont_les_portraits_du_jeune_roi_d%27Annam,_Tam-tha%C3%AF,_et_du_d%C3%A9funt_roi,_Dong-Khanh,_don_Camille_Paris_en_1892_-_btv1b531743452_(14_of_18).jpg"
+        }
+      ],
+      "wikipediaTitle": "Kinh thành Huế"
+    },
+    {
+      "id": "chua-thien-mu",
+      "name": "Chùa Thiên Mụ",
+      "category": "van",
+      "area": "Ven sông Hương",
+      "hook": "Ngôi chùa cổ bên sông Hương với tháp bảy tầng, biểu tượng của Huế.",
+      "summary": "Chùa Thiên Mụ hay còn gọi là chùa Linh Mụ là một ngôi chùa cổ nằm trên đồi Hà Khê, tả ngạn sông Hương, cách trung tâm thành phố Huế khoảng 5 km về phía tây. Chùa Thiên Mụ chính thức khởi lập năm Tân Sửu, đời chúa Tiên Nguyễn Hoàng - vị chúa Nguyễn đầu tiên ở Đàng Trong.",
+      "lat": 16.453,
+      "lon": 107.58,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Cảnh đẹp ven sông, đi thuyền hoặc xe đều tiện.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-thien-mu-1.jpg",
+          "author": "RThiele",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:225Park_der_Thien_Mu_Pagode.jpg"
+        },
+        {
+          "file": "chua-thien-mu-2.jpg",
+          "author": "Unknown author Unknown author",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Annam_-_Hu%C3%A9_-_Pagode_de_Confucius_La_Tour,_les_Pagodons_de_la_Cloche_du_G%C3%A9nie_et_du_Tam-Tam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Thiên Mụ"
+    },
+    {
+      "id": "lang-khai-dinh",
+      "name": "Lăng Khải Định",
+      "category": "van",
+      "area": "Phía Nam",
+      "hook": "Lăng có kiến trúc kết hợp Đông Tây, nội thất khảm sành sứ.",
+      "summary": "Lăng Khải Định, còn gọi là Ứng Lăng là lăng tẩm của Hoàng đế Khải Định, vị Hoàng đế thứ 12 Triều Nguyễn. Lăng tọa lạc tại núi Châu Chữ, phường Thủy Xuân, thành phố Huế. Công trình kiến trúc này nằm trong quần thể di tích cố đô Huế, di sản thế giới đã được UNESCO công nhận từ năm 1993.",
+      "lat": 16.39888889,
+      "lon": 107.59027778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 1–4",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Một trong những lăng ấn tượng nhất, nhiều chi tiết trang trí.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "lang-khai-dinh-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh_-_NKS.jpg"
+        },
+        {
+          "file": "lang-khai-dinh-2.jpg",
+          "author": "dronepicr",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Emperor_Khai_Dinh_in_Hue_(39543600561).jpg"
+        }
+      ],
+      "wikipediaTitle": "Lăng Khải Định"
+    },
+    {
+      "id": "lang-minh-mang",
+      "name": "Lăng Minh Mạng",
+      "category": "van",
+      "area": "Phía Nam",
+      "hook": "Lăng rộng với hồ, đình và sân đền theo trục đối xứng.",
+      "summary": "Lăng Minh Mạng có tên chữ là Hiếu lăng, do hoàng đế Thiệu Trị thời nhà Nguyễn cho xây dựng, nằm trên núi Cẩm Kê, ấp An Bằng, phường Long Hồ, quận Phú Xuân, thành phố Huế, gần ngã ba Bằng Lãng là nơi hội lưu của hai dòng Hữu Trạch và Tả Trạch hợp thành sông Hương, cách trung tâm thành phố Huế 12 km. Lăng Minh Mạng được xây dựng từ năm 1840 đến năm 1843 thì hoàn thành, huy động tới mười nghìn thợ và lính.",
+      "lat": 16.38777778,
+      "lon": 107.56777778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 1–4",
+      "duration": "1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Không gian rộng, nhiều cây xanh, hợp đi dạo.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "lang-minh-mang-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_Minh_M%E1%BA%A1ng_-_Minh_L%C3%A2u_(2024)_-_img_02.jpg"
+        },
+        {
+          "file": "lang-minh-mang-2.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_Minh_M%E1%BA%A1ng_-_Mausoleum_of_Emperor_Minh_M%E1%BA%A1ng_(2024)_-_img_05.jpg"
+        }
+      ],
+      "wikipediaTitle": "Lăng Minh Mạng"
+    },
+    {
+      "id": "lang-tu-duc",
+      "name": "Lăng Tự Đức",
+      "category": "van",
+      "area": "Phía Nam",
+      "hook": "Lăng như một khu vườn với hồ và đình tạ, nơi vua Tự Đức từng nghỉ ngơi.",
+      "summary": "Lăng Tự Đức là một quần thể Di tích công trình kiến trúc, trong đó có nơi chôn cất Tự Đức, tọa lạc trong một thung lũng hẹp thuộc làng Dương Xuân Thượng, tổng Cư Chánh, nay là tổ dân phố Thượng Ba, phường Thủy Xuân, thành phố Huế. Lúc mới xây dựng, Tự Đức đặt tên là Khiêm Cung. Sau khi Tự Đức băng hà, lăng được đổi tên thành Khiêm Lăng. Lăng Tự Đức có kiến trúc cầu kỳ, phong cảnh sơn thủy, hữu tình và là một trong những lăng tẩm đẹp nhất của hoàng gia nhà Nguyễn.",
+      "lat": 16.43277778,
+      "lon": 107.56527778,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 1–4",
+      "duration": "1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "must",
+      "verdictReason": "Đẹp nhất trong các lăng, yên tĩnh và nhiều bóng cây.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "lang-tu-duc-1.jpg",
+          "author": "Unknown author Unknown author",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Annam_-_Hu%C3%A9_-_Pavillons_sur_le_bassin_fleuri_au_Tombeau_de_Tu-Duc.jpg"
+        },
+        {
+          "file": "lang-tu-duc-2.jpg",
+          "author": "Esmée Winnubst",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:4.4_Hue-32_(35792236574).jpg"
+        },
+        {
+          "file": "lang-tu-duc-3.jpg",
+          "author": "Esmée Winnubst",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:4.4_Hue-33_(35792226214).jpg"
+        }
+      ],
+      "wikipediaTitle": "Lăng Tự Đức"
+    },
+    {
+      "id": "cau-truong-tien",
+      "name": "Cầu Trường Tiền",
+      "category": "canh",
+      "area": "Trung tâm",
+      "hook": "Cây cầu sắt bắc qua sông Hương, tối lên đèn đổi màu.",
+      "summary": "Cầu Trường Tiền hay cầu Tràng Tiền là chiếc cầu dài 402,60 m, gồm 6 nhịp dầm thép hình vành lược, khẩu độ mỗi nhịp 67 m. Khổ cầu 6 m, được thiết kế theo kiến trúc Gothic, bắc qua sông Hương, thuộc đoạn Quốc lộ 1 cũ cho đến khi cầu Phú Xuân thay thế vai trò. Đầu cầu phía bắc thuộc phường Phú Xuân; đầu cầu phía nam thuộc phường Thuận Hóa, thành phố Huế, Việt Nam.",
+      "lat": 16.46888889,
+      "lon": 107.58861111,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–60 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Đi dạo ven sông buổi tối rất dễ chịu.",
+      "bestSlots": [
+        "toi"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "cau-truong-tien-1.jpg",
+          "author": "ntt",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hue,_le_pont_Trang_Tien.jpg"
+        },
+        {
+          "file": "cau-truong-tien-2.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024-07_C%E1%BA%A7u_Tr%C6%B0%E1%BB%9Dng_Ti%E1%BB%81n_-_Truong_Tien_Bridge_-_Hu%E1%BA%BF_-_img_09.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cầu Trường Tiền"
+    },
+    {
+      "id": "song-huong",
+      "name": "Sông Hương",
+      "category": "canh",
+      "area": "Trung tâm",
+      "hook": "Dòng sông chảy qua trung tâm, đi thuyền rồng nghe ca Huế.",
+      "summary": "Sông Hương là con sông nổi tiếng chảy qua trung tâm thành phố Huế, miền Trung Việt Nam. Sông Hương không chỉ là biểu tượng văn hóa, lịch sử và du lịch của xứ Huế mà còn là nguồn cảm hứng thơ ca, âm nhạc nghệ thuật cho nhiều thế hệ nghệ sĩ.",
+      "lat": 16.55,
+      "lon": 107.63333333333,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Trải nghiệm đặc trưng của Huế, thường vào buổi chiều tối.",
+      "bestSlots": [
+        "chieu",
+        "toi"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "song-huong-1.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%C3%B4ng_H%C6%B0%C6%A1ng_(Hu%E1%BA%BF).jpg"
+        },
+        {
+          "file": "song-huong-2.jpg",
+          "author": "Contributeur2019",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:1_Hu%C3%A9,_Vi%C3%AAt_Nam._Bateau_dragon_touristique,_pr%C3%A8s_de_la_Pagode_de_la_dame_c%C3%A9leste_(29_mars_2015).jpg"
+        },
+        {
+          "file": "song-huong-3.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024-07_C%E1%BA%A7u_Tr%C6%B0%E1%BB%9Dng_Ti%E1%BB%81n_-_Truong_Tien_Bridge_-_Hu%E1%BA%BF_-_img_03.jpg"
+        }
+      ],
+      "wikipediaTitle": "Sông Hương"
+    },
+    {
+      "id": "dan-nam-giao",
+      "name": "Đàn Nam Giao (triều Nguyễn)",
+      "category": "van",
+      "area": "Phía Nam",
+      "hook": "Đàn tế trời của triều Nguyễn, khuôn viên rộng và vắng.",
+      "summary": "Đàn Nam Giao triều Nguyễn là nơi các vua nhà Nguyễn tổ chức lễ tế trời đất vào mùa xuân hàng năm, thuộc địa phận phường Trường An, quận Thuận Hóa, thành phố Huế. Đây là đàn Nam Giao duy nhất còn hiện hữu ở Việt Nam, cũng là đàn tế duy nhất còn tồn tại trong số nhiều đàn tế cổ ở Huế.",
+      "lat": 16.4377,
+      "lon": 107.5826,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 1–4",
+      "duration": "45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp người thích lịch sử và nơi yên tĩnh.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "dan-nam-giao-1.jpg",
+          "author": "Lưu Ly at vi.wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dan_Nam_Giao_Hue.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đàn Nam Giao (triều Nguyễn)"
+    },
+    {
+      "id": "cho-dong-ba",
+      "name": "Chợ Đông Ba",
+      "category": "cho",
+      "area": "Trung tâm",
+      "hook": "Chợ lớn nhất Huế, bán đồ ăn, quà lưu niệm, nón lá.",
+      "summary": "Chợ Đông Ba là một ngôi chợ tại thành phố Huế, Việt Nam. Đây là ngôi chợ truyền thống lâu đời, có lịch sử hơn 100 năm xây dựng và phát triển, được xem là một trong những biểu tượng của vùng đất cố đô Huế.",
+      "lat": 16.472622,
+      "lon": 107.588501,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Mua quà và thử món ăn vặt, nằm ngay trung tâm.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "cho-dong-ba-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dong_Ba_Market_(Hue)_-_Ch%E1%BB%A3_%C4%90%C3%B4ng_Ba_Hu%E1%BA%BF_(July_2024)_-_img_03.jpg"
+        },
+        {
+          "file": "cho-dong-ba-2.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dong_Ba_Market_(Hue)_-_Ch%E1%BB%A3_%C4%90%C3%B4ng_Ba_Hu%E1%BA%BF_(July_2024)_-_img_02.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chợ Đông Ba"
+    },
+    {
+      "id": "cung-an-dinh",
+      "name": "Cung An Định",
+      "category": "van",
+      "area": "Trung tâm",
+      "hook": "Cung điện nhỏ kiểu Á Âu với nhiều chi tiết trang trí.",
+      "summary": "Cung An Định tọa lạc bên bờ sông An Cựu, xưa thuộc phường Đệ Bát, thị xã Huế là cung điện riêng của vua Khải Định từ khi còn là thái tử đến khi làm vua, sau này được Bảo Đại thừa kế và từng sống ở đây sau khi thoái vị.",
+      "lat": 16.456475,
+      "lon": 107.598424,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích kiến trúc, tiện đi thêm ở trung tâm.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "cung-an-dinh-1.jpg",
+          "author": "Lưu Ly",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:AnDinhResidence5.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cung An Định"
+    },
+    {
+      "id": "lang-co",
+      "name": "Vịnh Lăng Cô",
+      "category": "canh",
+      "area": "Phú Lộc",
+      "hook": "Vịnh biển và đầm phá ở chân đèo Hải Vân, bãi cát dài.",
+      "summary": "Lăng Cô một địa danh tại thành phố Huế, Việt Nam. Nơi đây là một địa điểm du lịch nổi tiếng của thành phố Huế với bãi tắm đẹp của vịnh Lăng Cô. Xã Chân Mây – Lăng Cô được đặt tên một phần theo địa danh này. Trước ngày 1 tháng 7 năm 2025, Lăng Cô là một thị trấn thuộc huyện Phú Lộc.",
+      "lat": 16.251,
+      "lon": 108.073,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Cảnh biển đẹp, tiện khi đi đường Huế – Đà Nẵng.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "lang-co-1.jpg",
+          "author": "Vincent Guth",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ngC%C3%B4.jpg"
+        },
+        {
+          "file": "lang-co-2.jpg",
+          "author": "Genghiskhanviet",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langco_in_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vịnh Lăng Cô"
+    },
+    {
+      "id": "vuon-quoc-gia-bach-ma",
+      "name": "Vườn quốc gia Bạch Mã",
+      "category": "leo",
+      "area": "Phú Lộc",
+      "hook": "Rừng núi cao mát với thác và đường mòn đi bộ.",
+      "summary": "Vườn quốc gia Bạch Mã là một vườn quốc gia thuộc thành phố Huế, cách trung tâm thành phố Huế 40 km. Được thành lập theo quyết định số 214-CT ngày 15 tháng 7 năm 1991 của Chủ tịch Hội đồng Bộ trưởng Việt Nam.",
+      "lat": 16.2,
+      "lon": 107.86666667,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "bestLabel": "Tháng 2–7",
+      "duration": "1 ngày",
+      "difficulty": "Vừa",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Hợp ai thích đi bộ nhẹ trong rừng, mát hơn vùng đồng bằng.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Mang đủ nước và giày bám tốt.",
+        "Xem dự báo thời tiết, tránh đi khi mưa lớn."
+      ],
+      "photos": [
+        {
+          "file": "vuon-quoc-gia-bach-ma-1.jpg",
+          "author": "Andre Hospers",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bach_Ma_Natinal_Park_Franse_villa_(42091).jpg"
+        },
+        {
+          "file": "vuon-quoc-gia-bach-ma-2.jpg",
+          "author": "Andre Hospers",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bach_Ma_Natinal_Park_Franse_villa.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vườn quốc gia Bạch Mã"
+    }
+  ]
+}
