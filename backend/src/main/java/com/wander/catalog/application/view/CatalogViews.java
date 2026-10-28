@@ -13,7 +13,7 @@ public final class CatalogViews {
     }
 
     public record DestinationSummary(String id, String name, String region, String tagline, int placeCount, String coverUrl, List<Integer> bestMonths,
-                                     List<Preview> previews) {
+                                     List<Preview> previews, Double lat, Double lon) {
     }
 
     public record PhotoView(String url, String author, String license, String sourceUrl) {

@@ -17,6 +17,21 @@ import org.junit.jupiter.api.Test;
 class CatalogApiIT extends ApiTestSupport {
 
     @Test
+    @DisplayName("cả 12 điểm đến đều có tâm trong biên Việt Nam")
+    void destinationCentersAreInVietnam() {
+        Res response = call("GET", "/api/catalog/destinations", null);
+        assertThat(response.status()).isEqualTo(200);
+        assertThat(response.list("destinations")).hasSize(12);
+        for (Object value : response.list("destinations")) {
+            Map<?, ?> destination = (Map<?, ?>) value;
+            assertThat(destination.get("lat")).isInstanceOf(Number.class);
+            assertThat(destination.get("lon")).isInstanceOf(Number.class);
+            assertThat(((Number) destination.get("lat")).doubleValue()).isBetween(8.0, 24.0);
+            assertThat(((Number) destination.get("lon")).doubleValue()).isBetween(102.0, 110.0);
+        }
+    }
+
+    @Test
     @DisplayName("công khai: không có phiên vẫn tìm được Hà Giang không dấu; phiên hỏng gửi kèm cũng không làm hỏng")
     void searchIsPublic() {
         Res anonymous = call("GET", "/api/catalog/destinations", null);

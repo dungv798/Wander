@@ -3,6 +3,7 @@ package com.wander.catalog.application.query;
 import com.wander.catalog.application.view.CatalogViews;
 import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.model.Destination;
+import com.wander.catalog.domain.model.GeoPoint;
 import com.wander.catalog.domain.model.GuideSection;
 import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.model.Place;
@@ -12,6 +13,7 @@ import com.wander.catalog.domain.port.PlaceCatalog;
 import com.wander.catalog.domain.vocabulary.TimeSlot;
 import com.wander.shared.kernel.error.WanderException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 
@@ -53,15 +55,18 @@ public class CatalogQueries {
                 .toList();
     }
 
-    /** Tóm tắt một điểm đến cho màn Khám phá: tháng đẹp, ảnh bìa và vài địa điểm xem trước. */
+    /** Tóm tắt điểm đến; JSON chưa có tâm riêng nên lấy trung bình các địa điểm có tọa độ, thiếu hết trả null. */
     private static CatalogViews.DestinationSummary toSummary(Destination destination) {
         List<Integer> bestMonths = destination.guide().stream()
                 .filter(section -> section.layout() == GuideSection.Layout.MONTHS)
                 .findFirst().map(GuideSection::bestMonths).orElse(List.of());
         List<CatalogViews.Preview> previews = destination.places().stream().limit(CatalogConstants.PREVIEW_PLACE_COUNT)
                 .map(place -> new CatalogViews.Preview(place.id(), place.name(), photoUrl(place.photos().getFirst()))).toList();
+        List<GeoPoint> locations = destination.places().stream().map(Place::location).filter(Objects::nonNull).toList();
+        Double lat = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lat).average().orElseThrow();
+        Double lon = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lon).average().orElseThrow();
         return new CatalogViews.DestinationSummary(destination.id(), destination.name(), destination.region(), destination.tagline(),
-                destination.places().size(), coverUrl(destination), bestMonths, previews);
+                destination.places().size(), coverUrl(destination), bestMonths, previews, lat, lon);
     }
 
     /** Đường dẫn công khai của ảnh bìa điểm đến (ảnh đầu của địa điểm bìa). */
