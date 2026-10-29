@@ -16,3 +16,9 @@ backend/.gradle/
 
 # Ảnh chụp màn hình sinh bởi docs/ux/tools (≈378 MB, sinh lại được); không đưa vào lịch sử git (quyết định 27/10/2026)
 docs/ux/screenshots/
+
+# Ảnh cắt từ mẫu UI-sample-2 (ảnh chụp app bên thứ ba, PO dặn không commit; sinh lại được bằng docs/design/inspect-samples.mjs)
+docs/design/crops/*.png
+docs/design/crops/*.jpg
+docs/design/glass-trial/*.png
+docs/design/glass-trial/*.jpg
