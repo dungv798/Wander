@@ -66,6 +66,8 @@ test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi g
   await page.waitForFunction((zoom) => Number(document.querySelector('.destination-picker-map')?.getAttribute('data-zoom')) > zoom + 1, before, { timeout: 15000 });
   await page.screenshot({ path: path.resolve(import.meta.dirname, '../../.logs/shot-destination-da-lat.png') });
   await page.locator('.destination-picker-list button', { hasText: 'Đà Lạt' }).click();
+  await page.waitForURL(/#\/deck\/da-lat$/); // chọn xong đi thẳng tới bộ thẻ quẹt của điểm đến, không về trang chủ
+  await page.evaluate(() => { location.hash = '#/'; });
   await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();
   await page.reload();
   await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();

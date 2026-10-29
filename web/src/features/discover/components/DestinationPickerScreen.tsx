@@ -32,10 +32,10 @@ export default function DestinationPickerScreen() {
     const timer = window.setTimeout(() => setSettled(query), DESTINATION_SEARCH_DEBOUNCE_MS);
     return () => window.clearTimeout(timer);
   }, [query]);
-  /** Lưu mã hợp lệ trước khi trở về trang chủ. */
+  /** Lưu mã hợp lệ rồi đi thẳng tới bộ thẻ quẹt của điểm đến vừa chọn. */
   function choose(id: string): void {
     select(id);
-    navigate(VIEW.EXPLORE);
+    navigate(VIEW.DECK, id);
   }
   /** Mũi tên đi giữa ô tìm và các dòng; Escape trở về trang chủ. */
   function onKey(event: KeyboardEvent, index: number): void {
