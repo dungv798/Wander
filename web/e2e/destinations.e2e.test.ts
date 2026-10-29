@@ -72,9 +72,9 @@ test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi g
   await page.locator('.destination-picker-list button', { hasText: 'Đà Lạt' }).click();
   await page.waitForURL(/#\/deck\/da-lat$/); // chọn xong đi thẳng tới bộ thẻ quẹt của điểm đến, không về trang chủ
   await page.evaluate(() => { location.hash = '#/'; });
-  await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();
+  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
   await page.reload();
-  await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();
+  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
   assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
   await ctx.close();
 });
@@ -99,12 +99,13 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
   await page.route('**/catalog/photos/**', async (route) => { await photosPending; await route.continue(); });
   try {
     await page.goto(`${baseUrl}/#/`, { waitUntil: 'domcontentloaded' });
-    await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();
+    await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
     assert.ok(details.includes('/api/catalog/destinations/da-lat'));
     assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false, 'không gọi API mặc định trước catalog');
     const catalogReady = page.waitForResponse((response) => new URL(response.url()).pathname === '/api/catalog/destinations');
     releaseCatalog();
     await catalogReady;
+    await page.evaluate(() => { location.hash = '#/dest/da-lat'; }); // bản đồ nằm ở màn điểm đến, không còn ở trang chủ
     await page.locator('.mapcard').scrollIntoViewIfNeeded(); // thẻ bản đồ nằm dưới màn hình, chỉ nạp khi cuộn tới
     await waitForNativeMap(page, '.mapcard');
     await page.getByRole('button', { name: /Mở rộng/ }).click();

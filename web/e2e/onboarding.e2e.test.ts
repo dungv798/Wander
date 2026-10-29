@@ -72,10 +72,10 @@ test('lần đầu vào Khám phá: chuyển sang giới thiệu 3 cảnh, đi h
   await page.getByRole('heading', { name: 'Quẹt phải là mê, quẹt trái là thôi' }).waitFor();
   await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
   await page.getByRole('button', { name: 'Bắt đầu khám phá' }).click();
-  await page.locator('.hero-w, .sky').first().waitFor();
+  await page.locator('.home-hero').first().waitFor();
   assert.match(page.url(), /#\/$/);
   await page.reload();
-  await page.locator('.hero-w, .sky').first().waitFor();
+  await page.locator('.home-hero').first().waitFor();
   assert.doesNotMatch(page.url(), /onboard/);
   assert.equal(await page.evaluate((k) => localStorage.getItem(k), ONBOARDING_KEY), '{"done":true}');
   assert.deepEqual(errors, []);
@@ -86,7 +86,7 @@ test('Bỏ qua ở cảnh đầu cũng nhớ đã xem; liên kết sâu không b
   const { ctx, errors } = await phone();
   const page = await open(ctx, '/#/');
   await page.getByRole('button', { name: 'Bỏ qua' }).click();
-  await page.locator('.hero-w, .sky').first().waitFor();
+  await page.locator('.home-hero').first().waitFor();
   assert.equal(await page.evaluate((k) => localStorage.getItem(k), ONBOARDING_KEY), '{"done":true}');
   const deep = await ctx.newPage();
   await deep.goto(`${baseUrl}/#/deck/ha-giang`);

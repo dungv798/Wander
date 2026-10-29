@@ -171,7 +171,7 @@ test('hết phiên nhánh B (đã bỏ qua mã, lần cuối chỉ có một thi
   await page.getByRole('heading', { name: 'Không khôi phục được' }).waitFor();
   assert.equal(await page.getByRole('button', { name: 'Mở trên máy này' }).count(), 0);
   await page.getByRole('button', { name: 'Về Khám phá' }).click();
-  await page.locator('.hero-w, .sky').first().waitFor();
+  await page.locator('.home-hero').first().waitFor();
   // PO 27/10: sau nhánh B được bắt đầu danh tính mới, có cảnh báo rõ chuyến cũ mất vĩnh viễn
   await page.goto(`${baseUrl}/#/trips`);
   await page.getByRole('button', { name: 'Tạo chuyến đi' }).first().click();

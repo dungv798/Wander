@@ -17,7 +17,8 @@ const MIN_CONTRAST = 4.5;
 function token(name) {
   const value = CSS.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1];
   assert.ok(value, name);
-  return value;
+  const alias = value.match(/^var\(--([\w-]+)\)$/);
+  return alias ? token(alias[1]) : value;
 }
 
 /** Màu hex của token thành ba kênh để kiểm nền fallback và màu chữ. */
@@ -55,4 +56,23 @@ for (const name of ['glass-fallback', 'cta-g1', 'cta-2']) {
   const contrast = ratio(hex(token(name === 'glass-fallback' ? 'ink-fixed' : 'on-cta')), hex(token(name)));
   assert.ok(contrast >= MIN_CONTRAST, name);
   console.log(`PASS ${name}: ${contrast.toFixed(2)}:1 >= ${MIN_CONTRAST}:1`);
+}
+
+// Nền trung tính, điểm nhấn và viền mang thông tin của LOOK V2.
+for (const [fg, bg, minimum] of [
+  ...['bg', 'surface', 'surface-2', 'glass-fallback', 'scene-top'].flatMap(bg => ['ink', 'muted'].map(fg => [fg, bg, MIN_CONTRAST])),
+  ['ink-fixed', 'brand-soft', MIN_CONTRAST], ['on-sun', 'sun', MIN_CONTRAST],
+  ['border-ctrl', 'bg', 3], ['border-ctrl', 'surface', 3], ['border-ctrl', 'surface-2', 3],
+  ['ink-fixed', 'brand-soft', 3], ['on-cta', 'cta-2', 3],
+]) {
+  const contrast = ratio(hex(token(fg)), hex(token(bg)));
+  assert.ok(contrast >= minimum, `${fg}/${bg}: ${contrast}`);
+  console.log(`PASS ${fg}/${bg}: ${contrast.toFixed(2)}:1 >= ${minimum}:1`);
+}
+// Đệm chữ sáng và đệm glyph tối phải giữ tương phản ngay cả trên nền cực trị.
+for (const level of [0, CHANNEL_MAX]) {
+  const light = [CHANNEL_MAX, CHANNEL_MAX, CHANNEL_MAX].map(value => value * .90 + level * .10);
+  const contrast = ratio(hex(token('ink-fixed')), light);
+  assert.ok(contrast >= MIN_CONTRAST);
+  console.log(`PASS đệm chữ trên nền ${level}: ${contrast.toFixed(2)}:1`);
 }

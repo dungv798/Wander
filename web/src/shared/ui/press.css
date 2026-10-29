@@ -1,0 +1,15 @@
+/* Phản hồi chung cho nút và thẻ có ngữ nghĩa tương tác, không tác động thẻ chỉ đọc.
+   scale riêng giữ nguyên transform định vị của điều khiển nổi và thẻ quẹt. */
+:root:not([data-look='classic']) :is(button, a[href], [role='button'], summary) {
+  transition: scale var(--dur-press) var(--ease-out), filter var(--dur-press) var(--ease-out);
+}
+:root:not([data-look='classic']) :is(button, a[href], [role='button'], summary):not(:disabled):not([aria-disabled='true']):active {
+  scale: var(--glass-pressed-scale);
+  filter: brightness(var(--glass-pressed-brightness));
+}
+/* Gỡ scale cũ để tránh nhân đôi mức co của nút kính. */
+:root:not([data-look='classic']) :is(.btn, .pill, .fchip, .tab, .iconbtn, .mini, .dcard, .tcard, .tile, .resume, .dchip, .opt, .round):active { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-look='classic']) :is(button, a[href], [role='button'], summary) { transition: none; }
+  :root:not([data-look='classic']) :is(button, a[href], [role='button'], summary):active { scale: none; }
+}

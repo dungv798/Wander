@@ -42,6 +42,12 @@ export const COPY = {
     comingText: 'Giao diện chuyến đi sẽ có ở lát tiếp theo của pha dựng giao diện.',
   },
   home: {
+    exploreAction: 'Bắt đầu khám phá',
+    exploreDestination: 'Khám phá {dest}',
+    seeAll: 'Xem tất cả',
+    continueTitle: 'Tiếp tục',
+    continueTrip: 'Mở chuyến đi',
+    todayTrip: 'Lịch trình hôm nay',
     tagline: 'Quẹt nơi mê, đi cho đã.',
     hooks: ['Quẹt nơi mê, đi cho đã.', '{dest} đang gọi tên bạn.', 'Chọn nơi mê. Wander gợi ý lịch giúp bạn.', 'Quẹt một cái, thêm một chỗ muốn đến.'],
     heroTitleA: 'Quẹt nơi mê,',

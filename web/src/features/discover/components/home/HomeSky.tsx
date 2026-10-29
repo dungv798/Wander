@@ -1,91 +1,32 @@
-import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
-import { cssVars } from '../../../../shared/lib/cssVars.ts';
-import { Compass, Plane, Sun } from '../../../../shared/ui/art/Art.tsx';
-import { Icon } from '../../../../shared/ui/Icon.tsx';
-import { HOME_PLACES, HOME_PREVIEW } from '../../model/discover.const.ts';
+﻿import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
+import { VIEW } from '../../../../shared/const/routes.const.ts';
+import { navigate } from '../../../../shared/router/hashRoute.ts';
+import { Button } from '../../../../shared/ui/Button.tsx';
+import { useHeroImages } from '../../hooks/useHeroImages.ts';
 import type { DestinationDetail } from '../../model/Catalog.types.ts';
-import { firstPhotoUrl, placeById } from '../../model/destinationQueries.ts';
+import { HOME } from '../../model/home.const.ts';
+import { heroImages } from '../../model/homeSelection.ts';
+import { SearchBox } from './SearchBox.tsx';
 
-interface HomeSkyProps {
-  readonly dest: DestinationDetail;
-}
-
-/** Câu mời đổi luân phiên dưới logo; trình đọc màn hình chỉ đọc câu đầu, các câu sau chỉ trang trí. */
-function HookRotator({ dest }: HomeSkyProps) {
-  /** Thay tên điểm đến hiện tại vào câu mời dùng chung. */
-  const say = (h: string): string => fill(h, { dest: dest.name });
-  const hooks = COPY.home.hooks;
+/** Hero ảnh thật dùng cùng cấu trúc ở mọi cỡ màn; liên kết phủ ảnh không lồng các điều khiển. */
+export function HomeSky({ dest }: { readonly dest: DestinationDetail }) {
+  const images = heroImages(dest);
+  const { index, setPaused } = useHeroImages(images.length);
   return (
-    <div className="tagline" role="img" aria-label={say(hooks[0])}>
-      {hooks.map((h, k) => (
-        <span key={h} aria-hidden="true" style={cssVars({ n: k })}>
-          {say(h)}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-/** Thẻ giữa của quạt: ảnh các nơi chạy luân phiên, tên đổi theo ảnh, dấu "thích" nảy lên như vừa quẹt phải. */
-function LiveCard({ dest }: HomeSkyProps) {
-  const ids = dest.places.slice(0, HOME_PREVIEW.LIVE).map((place) => place.id);
-  return (
-    <figure className="f2 live">
-      {ids.map((id, k) => (
-        <img key={id} alt="" src={firstPhotoUrl(placeById(dest, id))} style={cssVars({ n: k })} />
-      ))}
-      <i />
-      {ids.map((id, k) => (
-        <span key={id} style={cssVars({ n: k })}>
-          {placeById(dest, id)?.name}
-        </span>
-      ))}
-      <em className="live-ok" aria-hidden="true">
-        <Icon name="check" />
-      </em>
-    </figure>
-  );
-}
-
-/** Một ảnh nghiêng của quạt (thẻ trái/phải). */
-function FanCard({ dest, id, cls }: HomeSkyProps & { readonly id: string; readonly cls: string }) {
-  const p = placeById(dest, id);
-  return (
-    <figure className={cls}>
-      <img alt="" src={firstPhotoUrl(p)} />
-      <i />
-      <span>{p?.name}</span>
-    </figure>
-  );
-}
-
-/** Hero trang chủ điện thoại: trời có mặt trời, mây trôi, máy bay lướt, quạt ảnh, ghim nổi, la bàn (v6, PO 26/10/2026). */
-export function HomeSky({ dest }: HomeSkyProps) {
-  const left = dest.places[0]?.id ?? '';
-  const right = dest.places[HOME_PREVIEW.RIGHT]?.id ?? left;
-  return (
-    <section className="sky">
-      <div className="sky-sun">
-        <Sun />
+    <section className="home-hero" onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={() => setPaused(false)}>
+      <div className="home-hero-photos" aria-hidden="true">
+        {images.map((src, i) => <img key={src} className={i === index ? 'is-active' : ''} src={src} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />)}
       </div>
-      <div className="cloud c1" />
-      <div className="cloud c2" />
-      <div className="cloud c3" />
-      <h1 className="logo">{COPY.brand.name}</h1>
-      <HookRotator dest={dest} />
-      {HOME_PLACES.PINS.map((pin, index) => ({ ...pin, id: dest.places[index]?.id ?? left })).map((x) => (
-        <span key={x.id} className={`pin ${x.cls}`}>
-          <Icon name="map-pin" size="s" />
-          {placeById(dest, x.id)?.name}
-        </span>
-      ))}
-      <Plane />
-      <div className="fan">
-        <FanCard dest={dest} id={left} cls="f1" />
-        <LiveCard dest={dest} />
-        <FanCard dest={dest} id={right} cls="f3" />
+      <a className="home-hero-link" href={`#/${VIEW.DECK}/${dest.id}`} aria-label={fill(COPY.home.exploreDestination, { dest: dest.name })} />
+      <div className="home-hero-content">
+        <p className="home-hero-brand">{COPY.brand.name}</p>
+        <h1>{dest.name}</h1>
+        <p className="home-hero-tagline">{dest.tagline}</p>
+        <div className="home-hero-actions">
+          <SearchBox />
+          <Button icon="hand-finger" onClick={() => navigate(VIEW.DECK, dest.id)}>{COPY.home.exploreAction}</Button>
+        </div>
       </div>
-      <Compass />
     </section>
   );
 }

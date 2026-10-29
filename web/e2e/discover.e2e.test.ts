@@ -56,8 +56,8 @@ async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
 test('trang chủ mở màn chọn điểm đến và tìm không khớp', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/');
-  await page.locator('h1.logo').waitFor();
-  assert.equal(await page.locator('.mood').count(), 3);
+  await page.locator('.home-hero h1').waitFor();
+  assert.ok(await page.locator('.mood').count() > 0 && await page.locator('.mood').count() <= 5);
   await page.getByRole('button', { name: 'Tìm điểm đến', exact: true }).click();
   await page.getByRole('searchbox').fill('zzz');
   await page.getByRole('status').getByText('Chưa có điểm đến này', { exact: true }).waitFor();
@@ -65,7 +65,12 @@ test('trang chủ mở màn chọn điểm đến và tìm không khớp', async
   await page.locator('.destination-picker-list button', { hasText: 'Hà Giang' }).click();
   await page.waitForURL(/#\/deck\/ha-giang$/); // chọn xong đi thẳng tới bộ thẻ quẹt
   await page.evaluate(() => { location.hash = '#/'; });
-  await page.locator('.dcard h3', { hasText: 'Hà Giang' }).waitFor();
+  await page.locator('.home-hero h1', { hasText: 'Hà Giang' }).waitFor();
+  await page.locator('.home-hero-link').click();
+  await page.waitForURL(/#\/deck\/ha-giang$/);
+  await page.evaluate(() => { location.hash = '#/'; });
+  await page.getByRole('button', { name: 'Bắt đầu khám phá', exact: true }).click();
+  await page.waitForURL(/#\/deck\/ha-giang$/);
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -166,7 +171,7 @@ test('lỗi tải kho: có thông báo, nút Thử lại hoạt động, không 
 
 test('bản đồ: ghim ảnh thật, gộp cụm, mở rộng toàn màn, phóng bằng nút, chạm ghim mở chi tiết', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '#/');
+  const page = await open(ctx, '#/dest/ha-giang'); // bản đồ nằm ở màn điểm đến, không còn ở trang chủ (docs/design/home-audit.md)
   await waitForNativeMap(page, '.mapcard');
   await page.waitForFunction(() => Number(document.querySelector<HTMLElement>('.mapcard')?.dataset['thumbnails']) >= 5, undefined, { timeout: 45000 });
   assert.equal(await page.locator('.tm-pin, .tm-cluster, .tm-pin-label').count(), 0, 'ghim/cụm/nhãn được vẽ native');
@@ -236,7 +241,7 @@ test('lỗi tải kiểu bản đồ: có thông báo và nút Thử lại, các
 
 test('bản đồ native: bàn phím mở chi tiết qua danh sách ghim thay thế canvas', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '#/');
+  const page = await open(ctx, '#/dest/ha-giang');
   await waitForNativeMap(page, '.mapcard');
   const button = page.locator('.mapcard .tm-accessible button').first();
   const name = await button.textContent();

@@ -1,4 +1,10 @@
 /* Look mặc định theo §3/6; giữ các luồng và bố cục responsive hiện có. */
+/* V2 chỉ đổi vật liệu nền; không thay kích thước/bố cục trang chủ. */
+:root:not([data-look='classic']) :is(.sky, .xcard) { background: linear-gradient(var(--scene-top), var(--bg)); }
+:root:not([data-look='classic']) :is(.ribbon, .next, .next .ib, .devrow .ib, .tl) { background: var(--surface-2); color: var(--ink); }
+:root:not([data-look='classic']) .app::before,
+:root:not([data-look='classic']) .app::after { display: none; }
+:root:not([data-look='classic']) :is(.field input, .field select, .destination-picker-search input, .opt .rd) { border-color: var(--border-ctrl); }
 :root:not([data-look='classic']) body { font: var(--text-body); }
 :root:not([data-look='classic']) :is(h1, h2, h3, h4, button, .note, .meta, .stat, .facts li) { overflow-wrap: break-word; }
 :root:not([data-look='classic']) :is(.pagehead h1, .bar h1, .deckbar h1, .thead h1, .destination-picker-header h1, .panel h2) {
@@ -32,7 +38,7 @@
 }
 :root .ic.fluent-icon.l { width: var(--fluent-md); height: var(--fluent-md); }
 :root .ic.fluent-icon.xl { width: var(--fluent-lg); height: var(--fluent-lg); }
-:root:not([data-look='classic']) :is(.catbadge, .facts .ib) { background: var(--surface-2); }
+:root:not([data-look='classic']) :is(.catbadge, .facts .ib) { background: var(--surface-2); color: var(--ink-fixed); }
 
 :root:not([data-look='classic']) :is(.btn, .pill, .search) { min-height: var(--float-height); }
 :root:not([data-look='classic']) .search { padding: var(--s-3) var(--s-4); text-align: left; }
