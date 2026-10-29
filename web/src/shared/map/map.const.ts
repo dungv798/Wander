@@ -1,5 +1,27 @@
-/** Hằng số bản đồ MapLibre và lớp ghim HTML (đơn vị px trừ khi ghi khác). */
+/** Hằng số bản đồ MapLibre và lớp ghim native (đơn vị px trừ khi ghi khác). */
 export const MAP = {
+  THUMB_PX: 96,
+  PIN_PX: 44,
+  PIN_RADIUS: 22,
+  HUB_RADIUS: 13,
+  PIN_BORDER: 3,
+  SELECT_BORDER: 6,
+  MUTED_OPACITY: 0.8,
+  MUTED_SCALE: 0.62,
+  LABEL_SIZE: 12.5,
+  NUMBER_SIZE: 17,
+  LABEL_OFFSET: 2,
+  TEXT_HALO: 2,
+  CIRCLE_RADIANS: Math.PI * 2,
+  RGB_MAX: 255,
+  COORD_DIGITS: 1,
+  PIN_SOURCES: ['wander-pins-clustered', 'wander-pins-plain'],
+  PIN_LAYER_PREFIX: 'wander-pins-',
+  CLUSTER_LAYER: 'wander-clusters',
+  CLUSTER_TEXT_LAYER: 'wander-clusters-count',
+  FONT: ['Noto Sans Regular'],
+  EMPTY_IMAGE: 'wander-empty-pin',
+  IMAGE_CHANNELS: 4,
   FIT_PADDING: 36,
   FLY_MS: 750,
   /** Hai ghim gần hơn mức này thì gộp thành cụm (chế độ duyệt). */

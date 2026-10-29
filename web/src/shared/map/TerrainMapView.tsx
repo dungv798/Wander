@@ -34,6 +34,7 @@ const NO_ROUTE_LABELS: readonly string[] = [];
 export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, towns = true, credit = true, onPin, className }: TerrainMapViewProps) {
   const [map, setMap] = useState<GeoMap | null>(null);
   const onPinRef = useRef(onPin);
+  const hasPinAction = Boolean(onPin);
   useEffect(() => {
     onPinRef.current = onPin;
   });
@@ -42,14 +43,14 @@ export function TerrainMapView({ dest, label, markers, route = null, mode = 'bro
     /** Tạo bản đồ khi phần tử vào DOM; trả hàm hủy khi phần tử rời (ref callback có dọn dẹp của React 19). */
     (el: HTMLDivElement | null) => {
       if (!el) return undefined;
-      const m = new GeoMap(el, { dest, label, interactive, towns, credit, onPin: (id) => onPinRef.current?.(id) });
+      const m = new GeoMap(el, { dest, label, interactive, towns, credit, ...(hasPinAction ? { onPin: (id: string) => onPinRef.current?.(id) } : {}) });
       setMap(m);
       return () => {
         m.destroy();
         setMap(null);
       };
     },
-    [dest, label, interactive, towns, credit],
+    [dest, label, interactive, towns, credit, hasPinAction],
   );
 
   useEffect(() => {

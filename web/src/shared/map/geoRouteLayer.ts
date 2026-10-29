@@ -4,7 +4,7 @@ import { cssColorToRgb } from './mapUtil.ts';
 import type { Pt } from './map.types.ts';
 
 const RGB_MAX = 255;
-const EMPTY_LINES = { type: 'FeatureCollection', features: [] } as const;
+const EMPTY_LINES = { type: 'FeatureCollection' as const, features: [] };
 
 /** Màu CSS của một token (`--map-route`…) thành chuỗi `rgb(...)` mà MapLibre đọc được. */
 function tokenColor(host: HTMLElement, token: string): string {

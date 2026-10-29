@@ -257,7 +257,12 @@ test('bản đồ chuyến: tab ngày vẽ tuyến có nhãn km và ghim đánh 
   const page = await open(ctx, '#/trip/mau-ha-giang/1', true);
   await page.locator('.tmroot[data-ready="1"][data-route="1"]').waitFor({ state: 'attached', timeout: 30000 });
   assert.ok((await page.locator('.tm-seg-label').count()) >= 1);
-  assert.ok((await page.locator('.tm-pin-body b').count()) >= 2);
+  assert.ok(Number(await page.locator('.tmap').getAttribute('data-numbered')) >= 2);
+  assert.equal(await page.locator('.tmap').getAttribute('data-clusters'), '0', 'tab ngày không gộp cụm');
+  const pin = page.locator('.tmap .tm-accessible button').first();
+  await pin.focus();
+  await page.keyboard.press('Enter');
+  await page.getByRole('dialog').waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });

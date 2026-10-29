@@ -7,6 +7,7 @@ import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
+import { tapNativeFeature, waitForNativeMap } from './mapChecks.ts';
 
 const FIRST_PLACE = 'Cột cờ Lũng Cú';
 let server: ViteDevServer;
@@ -164,21 +165,30 @@ test('lỗi tải kho: có thông báo, nút Thử lại hoạt động, không 
 test('bản đồ: ghim ảnh thật, gộp cụm, mở rộng toàn màn, phóng bằng nút, chạm ghim mở chi tiết', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/');
-  const shown = '.tm-pin:not(.is-hidden), .tm-cluster';
-  await page.locator(`.mapcard[data-ready="1"] ${shown}`).first().waitFor({ timeout: 45000 });
-  assert.ok((await page.locator('.mapcard .tm-pin img').count()) >= 5, 'ghim là ảnh thật của kho biên tập');
+  await waitForNativeMap(page, '.mapcard');
+  await page.waitForFunction(() => Number(document.querySelector<HTMLElement>('.mapcard')?.dataset['thumbnails']) >= 5, undefined, { timeout: 45000 });
+  assert.equal(await page.locator('.tm-pin, .tm-cluster, .tm-pin-label').count(), 0, 'ghim/cụm/nhãn được vẽ native');
   assert.match((await page.locator('.mapcard .maplibregl-ctrl-attrib').textContent()) ?? '', /OpenStreetMap/, 'ghi công dữ liệu bản đồ');
-  assert.ok((await page.locator('.mapcard .tm-cluster').count()) >= 1, 'các ghim sát nhau được gộp cụm');
+  assert.ok(Number(await page.locator('.mapcard').getAttribute('data-clusters')) >= 1, 'các ghim sát nhau được gộp cụm native');
   await page.getByRole('button', { name: /Mở rộng/ }).click();
   const dialog = page.getByRole('dialog', { name: 'Bản đồ Hà Giang' });
-  await dialog.locator(`.mapbig[data-ready="1"] ${shown}`).first().waitFor({ timeout: 45000 });
+  await waitForNativeMap(page, '.mapbig');
   const zoomOf = (): Promise<number> => dialog.locator('.mapbig').evaluate((el) => Number((el as HTMLElement).dataset['zoom']));
   const before = await zoomOf();
-  await dialog.getByRole('button', { name: 'Phóng to', exact: true }).click();
-  await page.waitForFunction((z) => Number((document.querySelector('.mapbig') as HTMLElement | null)?.dataset['zoom']) > z, before, { timeout: 15000 });
+  await tapNativeFeature(page, '.mapbig', true);
+  await page.waitForFunction((z) => Number(document.querySelector<HTMLElement>('.mapbig')?.dataset['zoom']) > z, before, { timeout: 15000 });
+  const afterCluster = await zoomOf();
+  assert.ok(afterCluster <= 17, 'zoom tách cụm không vượt trần đã duyệt');
+  const atMaxZoom = afterCluster === 17;
+  await dialog.getByRole('button', { name: atMaxZoom ? 'Thu nhỏ' : 'Phóng to', exact: true }).click();
+  await page.waitForFunction(({ zoom, out }) => {
+    const current = Number(document.querySelector<HTMLElement>('.mapbig')?.dataset['zoom']);
+    return out ? current < zoom : current > zoom;
+  }, { zoom: afterCluster, out: atMaxZoom }, { timeout: 15000 });
   assert.equal(await page.locator('.tm-degraded').count(), 0, 'nền bản đồ tải bình thường thì không hiện cảnh báo "một phần nền chưa tải được"');
-  await dialog.locator('.tm-pin:not(.is-hidden)').first().click();
-  await page.getByRole('dialog', { name: /./ }).first().waitFor();
+  const id = await tapNativeFeature(page, '.mapbig', false);
+  const name = await page.locator(`.mapcard .tm-accessible button[data-id="${id}"]`).textContent();
+  await page.getByRole('dialog', { name: name ?? '' }).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -192,7 +202,22 @@ test('lỗi tải kiểu bản đồ: có thông báo và nút Thử lại, các
   assert.equal(await page.locator('.dhero h1').textContent(), 'Hà Giang', 'trang vẫn dựng được khi bản đồ lỗi');
   await page.unroute('**/styles/liberty');
   await page.locator('.mapcard .tm-err button').click();
-  await page.locator('.mapcard[data-ready="1"] .tm-pin:not(.is-hidden), .mapcard[data-ready="1"] .tm-cluster').first().waitFor({ timeout: 45000 });
+  await waitForNativeMap(page, '.mapcard');
+  await ctx.close();
+});
+
+test('bản đồ native: bàn phím mở chi tiết qua danh sách ghim thay thế canvas', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/');
+  await waitForNativeMap(page, '.mapcard');
+  const button = page.locator('.mapcard .tm-accessible button').first();
+  const name = await button.textContent();
+  await button.focus();
+  assert.equal(await button.evaluate((element) => element === document.activeElement), true);
+  assert.ok((await button.boundingBox())?.height, 'danh sách hiện ra khi nhận focus');
+  await page.keyboard.press('Enter');
+  await page.getByRole('dialog', { name: name ?? '' }).waitFor();
+  assert.deepEqual(errors, []);
   await ctx.close();
 });
 

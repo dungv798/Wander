@@ -64,6 +64,9 @@ test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi g
   await page.screenshot({ path: path.resolve(import.meta.dirname, '../../.logs/shot-destination-country.png') });
   await page.getByRole('searchbox').fill('đà lạt');
   await page.waitForFunction((zoom) => Number(document.querySelector('.destination-picker-map')?.getAttribute('data-zoom')) > zoom + 1, before, { timeout: 15000 });
+  await page.waitForFunction(() => document.querySelector<HTMLElement>('.destination-picker-map')?.dataset['pins'] === '1', undefined, { timeout: 15000 });
+  assert.equal(await map.getAttribute('data-clusters'), '0', 'mốc điểm đến không bị gộp cụm');
+  assert.equal(await map.locator('.tm-accessible button').textContent(), 'Đà Lạt');
   await page.screenshot({ path: path.resolve(import.meta.dirname, '../../.logs/shot-destination-da-lat.png') });
   await page.locator('.destination-picker-list button', { hasText: 'Đà Lạt' }).click();
   await page.waitForURL(/#\/deck\/da-lat$/); // chọn xong đi thẳng tới bộ thẻ quẹt của điểm đến, không về trang chủ

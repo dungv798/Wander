@@ -22,7 +22,7 @@ interface FitRequest {
 }
 
 /**
- * Bản đồ WebGL của Wander (ADR-015): nền MapLibre GL + OpenFreeMap + bóng núi từ ô độ cao; ghim ảnh, cụm, nhãn là phần tử HTML đè lên
+ * Bản đồ WebGL của Wander (ADR-015): nền MapLibre GL + OpenFreeMap + bóng núi từ ô độ cao; ghim ảnh, cụm, nhãn là lớp native
  * qua `MapLayers`; tuyến là lớp đường GeoJSON. Các màn dùng cổng React `TerrainMapView`.
  * Tọa độ ghim (`p`) ở đây là [kinh độ, vĩ độ].
  */
@@ -68,6 +68,7 @@ export class GeoMap {
   destroy(): void {
     this.dead = true;
     this.observer.disconnect();
+    this.layers.destroy();
     this.gl?.remove();
     this.gl = null;
     this.host.classList.remove('tmroot', 'tm-static');
@@ -96,7 +97,7 @@ export class GeoMap {
   setMode(mode: MapMode): void {
     if (this.dead || mode === this.mode) return;
     this.mode = mode;
-    if (this.ready) this.layout();
+    if (this.ready) this.applyMarkers();
   }
 
   /** Vẽ tuyến nối các ghim theo thứ tự id; nhãn khoảng cách tùy chọn theo từng đoạn. */
@@ -157,7 +158,7 @@ export class GeoMap {
     this.host.appendChild(box);
   }
 
-  /** Dựng đối tượng MapLibre với kiểu đã chỉnh: không xoay, chỉ nhìn từ trên xuống; gắn sự kiện kéo ghim/cụm theo camera. */
+  /** Dựng MapLibre không xoay; nhãn khoảng cách tuyến là phần HTML duy nhất cần theo camera. */
   private createMap(ml: MapLibre, style: Awaited<ReturnType<typeof loadMapStyle>>): MlMap {
     const map = new ml.Map({
       container: this.mapEl,
@@ -176,7 +177,7 @@ export class GeoMap {
       map.touchZoomRotate.disableRotation();
       map.addControl(new ml.NavigationControl({ showCompass: false, visualizePitch: false }), 'bottom-right');
     }
-    map.on('move', () => this.layers.place(this.project, this.markers));
+    map.on('move', () => this.layers.place(this.project));
     map.on('moveend', () => this.layout());
     map.on('dragstart', () => this.markTouched());
     map.on('zoomstart', (e) => {
@@ -187,7 +188,10 @@ export class GeoMap {
       if (!this.dead) showBasemapError(map, this.host, event);
     });
     map.on('style.load', () => {
-      if (this.ready && !this.dead) this.drawRoute();
+      if (this.ready && !this.dead) {
+        this.layers.restore();
+        this.applyMarkers();
+      }
     });
     return map;
   }
@@ -201,6 +205,7 @@ export class GeoMap {
   private onLoad(map: MlMap): void {
     if (this.dead) return;
     addRouteLayers(map, this.host);
+    this.layers.attach(map, () => this.markTouched());
     this.ready = true;
     this.host.dataset['ready'] = '1';
     this.applyMarkers();
@@ -218,7 +223,7 @@ export class GeoMap {
   /** Chiếu ghim đầu vào (giữ [kinh độ, vĩ độ] làm `p`) rồi đồng bộ phần tử ghim, tuyến và bố cục. */
   private applyMarkers(): void {
     this.markers = this.raw.map((m) => ({ ...m, p: [m.lon, m.lat] as Pt }));
-    this.layers.syncMarkers(this.markers, this.selected, this.opt.onPin);
+    this.layers.syncMarkers(this.markers, this.mode, this.selected, this.opt.onPin);
     this.drawRoute();
     this.layout();
   }
@@ -231,24 +236,15 @@ export class GeoMap {
     setRouteLines(this.gl, lines);
     this.host.dataset['route'] = lines.length ? '1' : '0';
     this.layers.setSegmentLabels(have.slice(1).map((x) => route?.labels[x.k - 1] ?? ''), mids);
-    this.layers.place(this.project, this.markers);
+    this.layers.place(this.project);
   }
 
-  /** Sau khi camera dừng: gộp cụm (chế độ duyệt) và đặt nhãn không chồng. */
+  /** Sau khi camera dừng chỉ ghi điểm kiểm; worker và renderer native tự gộp cụm/đặt nhãn. */
   private layout(): void {
     const gl = this.gl;
     if (!this.ready || !gl) return;
     this.host.dataset['zoom'] = gl.getZoom().toFixed(MAP.ZOOM_DIGITS); // điểm kiểm cho e2e: mức zoom hiện tại
-    const r = this.host.getBoundingClientRect();
-    this.layers.layout({
-      markers: this.markers,
-      mode: this.mode,
-      selected: this.selected,
-      project: this.project,
-      size: { w: Math.max(1, r.width), h: Math.max(1, r.height) },
-      onCluster: (ids) => this.fitTo(ids, { padding: MAP.CLUSTER_FIT_PADDING, maxZoom: MAP.GL_MAX_ZOOM }),
-      clusterLabel: (n) => `${n} ${COPY.map.cluster}`,
-    });
+    this.layers.snapshot();
   }
 
   /** Mọi điểm đều nằm trong vùng nhìn thấy thật sự (khung trừ phần bị che và lề)? Rỗng trả false. */
@@ -296,7 +292,7 @@ export class GeoMap {
     this.gl.resize();
     if (!this.touchedByUser && this.lastFit) this.fitTo(this.lastFit.ids, { ...this.lastFit.o, animate: false });
     else {
-      this.layers.place(this.project, this.markers);
+      this.layers.place(this.project);
       this.layout();
     }
   }
