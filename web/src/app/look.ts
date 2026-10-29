@@ -1,36 +1,27 @@
 import { LOOK } from '../shared/const/look.const.ts';
-import type { TrialLook } from '../shared/const/look.const.ts';
 
-/** Chỉ chấp nhận ba bộ chữ đã có tệp cục bộ, bỏ qua giá trị URL/kho lạ. */
-export function isTrialLook(value: string | null): value is TrialLook {
-  return LOOK.VALUES.some((look) => look === value);
-}
-
-/** Đọc lựa chọn đúng một lần lúc nạp ứng dụng; URL ngoài hash được ưu tiên. Kho bị chặn vẫn dùng được URL. */
-export function readTrialLook(location: Pick<Location, 'search' | 'hash'>, storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> | null): TrialLook | null {
+/** URL ngoài hash được ưu tiên; cờ thử cũ và giá trị lạ không bật giao diện cũ. */
+export function readClassicLook(location: Pick<Location, 'search' | 'hash'>, storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> | null): boolean {
   const query = new URLSearchParams(location.search);
   const hashQuery = new URLSearchParams(location.hash.split('?')[1] ?? '');
   const requested = query.get(LOOK.PARAM) ?? hashQuery.get(LOOK.PARAM);
   try {
     if (requested === LOOK.OFF) storage?.removeItem(LOOK.STORAGE);
-    if (isTrialLook(requested)) storage?.setItem(LOOK.STORAGE, requested);
-    if (requested === LOOK.OFF) return null;
-    if (isTrialLook(requested)) return requested;
-    const saved = storage?.getItem(LOOK.STORAGE) ?? null;
-    return isTrialLook(saved) ? saved : null;
+    if (requested === LOOK.CLASSIC) storage?.setItem(LOOK.STORAGE, LOOK.CLASSIC);
+    if (requested !== null) return requested === LOOK.CLASSIC;
+    return storage?.getItem(LOOK.STORAGE) === LOOK.CLASSIC;
   } catch {
-    return isTrialLook(requested) ? requested : null;
+    return requested === LOOK.CLASSIC;
   }
 }
 
-/** CSS/font thử chỉ tải khi bật; lỗi tải giữ giao diện mặc định, không chặn ứng dụng. */
-export async function initializeTrialLook(): Promise<void> {
+/** Đặt chế độ trước lần render đầu; chỉ tải CSS và font cũ khi PO chọn classic. */
+export function initializeLook(): void {
   let storage: Storage | null = null;
-  try { storage = window.localStorage; } catch { /* Trình duyệt có thể chặn kho cục bộ. */ }
-  const look = readTrialLook(window.location, storage);
-  if (!look) return;
-  try {
-    await import('../styles/look.css');
-    document.documentElement.dataset.look = look;
-  } catch { /* Thử nghiệm không được làm hỏng khởi động mặc định. */ }
+  try { storage = window.localStorage; } catch { /* URL vẫn hoạt động khi kho bị chặn. */ }
+  if (!readClassicLook(window.location, storage)) return;
+  document.documentElement.dataset.look = LOOK.CLASSIC;
+  void import('../styles/classic.css').catch(() => {
+    delete document.documentElement.dataset.look;
+  });
 }

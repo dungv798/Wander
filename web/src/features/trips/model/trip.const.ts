@@ -7,7 +7,7 @@ export const ITEM_KINDS: Readonly<Record<ItemKind, { readonly label: string; rea
   food: { label: 'Ăn uống', icon: 'tools-kitchen-2', cat: 'cat-am', plain: false },
   transport: { label: 'Di chuyển', icon: 'route', cat: 'cat-leo', plain: false },
   lodging: { label: 'Lưu trú', icon: 'bed', cat: 'cat-luu', plain: false },
-  car_rental: { label: 'Thuê xe', icon: 'motorbike', cat: 'cat-leo', plain: false },
+  car_rental: { label: 'Thuê xe', icon: 'key', cat: 'cat-leo', plain: false },
   shopping: { label: 'Mua sắm', icon: 'building-store', cat: 'cat-cho', plain: false },
   tour: { label: 'Tour/Combo', icon: 'users', cat: 'cat-van', plain: false },
   rest: { label: 'Nghỉ', icon: 'moon-stars', cat: 'cat-luu', plain: true },

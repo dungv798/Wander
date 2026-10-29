@@ -62,6 +62,8 @@ test('trang chủ mở màn chọn điểm đến và tìm không khớp', async
   await page.getByRole('status').getByText('Chưa có điểm đến này', { exact: true }).waitFor();
   await page.getByRole('searchbox').fill('ha gi');
   await page.locator('.destination-picker-list button', { hasText: 'Hà Giang' }).click();
+  await page.waitForURL(/#\/deck\/ha-giang$/); // chọn xong đi thẳng tới bộ thẻ quẹt
+  await page.evaluate(() => { location.hash = '#/'; });
   await page.locator('.dcard h3', { hasText: 'Hà Giang' }).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();

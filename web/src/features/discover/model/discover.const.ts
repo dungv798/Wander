@@ -18,7 +18,7 @@ export const VERDICT_LABEL = { must: 'Nên ghé', worth: 'Đáng đi', ifconv: '
 export const VERDICT_STYLE = {
   must: { cls: '', icon: 'rosette-discount-check' },
   worth: { cls: 'mid', icon: 'heart' },
-  ifconv: { cls: 'low', icon: 'clock' },
+  ifconv: { cls: 'low', icon: 'info-circle' },
 } as const;
 
 /** Buổi trong ngày: mã, biểu tượng. Nhãn ở `COPY.slots`. */

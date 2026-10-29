@@ -61,7 +61,7 @@ function DestPeek({ dest }: { readonly dest: DestinationDetail }) {
           <button key={p.id} className={`mini cat-${p.category}`} type="button" onClick={() => open(p.id)}>
             <img alt="" src={firstPhotoUrl(p)} loading="lazy" />
             <span className="catbadge">
-              <Icon name={CATEGORY_ICON[p.category]} />
+              <Icon semantic name={CATEGORY_ICON[p.category]} />
             </span>
             <span className="in">
               <h3>{p.name}</h3>

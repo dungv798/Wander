@@ -40,11 +40,11 @@ function Brand() {
 /** Thanh điều hướng chính: thanh tab nổi ở điện thoại, thanh bên ở màn rộng. */
 export function TabBar({ current, wide, pickedCount }: TabBarProps) {
   return (
-    <nav id="tabbar" aria-label={COPY.nav.label}>
+    <nav id="tabbar" className="g-tab" aria-label={COPY.nav.label}>
       {wide ? <Brand /> : null}
       {TABS.map((t) => (
         <button key={t.view} className="tab" type="button" aria-current={current === t.view ? 'page' : undefined} onClick={() => navigate(t.view)}>
-          <Icon name={t.icon} />
+          <Icon semantic name={t.icon} />
           <span>{t.label}</span>
           {t.view === VIEW.PICKED && pickedCount > 0 ? <span className="dot">{pickedCount}</span> : null}
         </button>

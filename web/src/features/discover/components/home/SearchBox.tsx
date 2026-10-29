@@ -10,7 +10,7 @@ interface SearchBoxProps {
 /** Nút tìm có nhãn truy cập, mở màn chọn điểm đến toàn màn bằng chuột hoặc bàn phím. */
 export function SearchBox({ className }: SearchBoxProps) {
   return (
-    <button type="button" onClick={() => navigate(VIEW.DESTINATIONS)} aria-label={COPY.home.searchLabel} className={['search', className].filter(Boolean).join(' ')}>
+    <button type="button" onClick={() => navigate(VIEW.DESTINATIONS)} aria-label={COPY.home.searchLabel} className={['search', 'g-search', className].filter(Boolean).join(' ')}>
       <Icon name="compass" />
       <span>{COPY.destinations.title}</span>
     </button>

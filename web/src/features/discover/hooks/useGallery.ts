@@ -12,11 +12,19 @@ export function useGallery(count: number) {
   const reduced = usePrefersReducedMotion();
   const mouse = useRef({ down: false, startX: 0, startLeft: 0 });
 
+  /** Bước ảnh lấy từ bố cục thật, hỗ trợ cả thumbnail mới và ảnh toàn chiều rộng classic. */
+  const step = useCallback((): number => {
+    const g = ref.current;
+    const first = g?.children[0] as HTMLElement | undefined;
+    const second = g?.children[1] as HTMLElement | undefined;
+    return Math.max(1, first && second ? second.offsetLeft - first.offsetLeft : g?.clientWidth ?? 1);
+  }, []);
+
   /** Chỉ số ảnh hiện tại suy từ vị trí cuộn. */
   const read = useCallback((): number => {
     const g = ref.current;
-    return g ? Math.round(g.scrollLeft / Math.max(1, g.clientWidth)) : 0;
-  }, []);
+    return g ? Math.min(count - 1, Math.max(0, Math.round(g.scrollLeft / step()))) : 0;
+  }, [count, step]);
 
   useEffect(() => {
     const g = ref.current;
@@ -32,9 +40,9 @@ export function useGallery(count: number) {
       const g = ref.current;
       if (!g) return;
       const next = Math.max(0, Math.min(count - 1, read() + delta));
-      g.scrollTo({ left: next * g.clientWidth, behavior: reduced ? 'auto' : 'smooth' });
+      g.scrollTo({ left: next * step(), behavior: reduced ? 'auto' : 'smooth' });
     },
-    [count, read, reduced],
+    [count, read, reduced, step],
   );
 
   const onPointerDown = (e: PointerEvent<HTMLDivElement>): void => {
@@ -53,7 +61,7 @@ export function useGallery(count: number) {
     if (!mouse.current.down || !g) return;
     mouse.current.down = false;
     g.style.scrollSnapType = '';
-    g.scrollTo({ left: read() * g.clientWidth, behavior: 'auto' });
+    g.scrollTo({ left: read() * step(), behavior: 'auto' });
   };
 
   return { ref, index, go, pointer: { onPointerDown, onPointerMove, onPointerUp: end, onPointerCancel: end } };

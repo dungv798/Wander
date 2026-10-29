@@ -30,7 +30,7 @@ function CardInfo({ place, front, onCredit }: { readonly place: PlaceView; reado
     <div className="card-info">
       <div className="card-top">
         <span className="chip card-cat">
-          <Icon name={CATEGORY_ICON[place.category]} size="s" />
+          <Icon semantic name={CATEGORY_ICON[place.category]} size="s" />
           {place.categoryName}
         </span>
         {front ? (

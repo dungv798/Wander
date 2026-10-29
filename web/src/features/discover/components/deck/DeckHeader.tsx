@@ -41,7 +41,7 @@ export function DeckFilters({ dest }: { readonly dest: DestinationDetail }) {
       </button>
       {categoriesOf(dest).map((c) => (
         <button key={c} className={`fchip cat-${c}`} type="button" aria-pressed={state.cat === c} onClick={() => actions.setCategory(c)}>
-          <Icon name={CATEGORY_ICON[c]} size="s" />
+          <Icon semantic name={CATEGORY_ICON[c]} size="s" />
           {names.get(c)}
         </button>
       ))}

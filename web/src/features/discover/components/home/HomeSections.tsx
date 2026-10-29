@@ -60,7 +60,7 @@ export function MoodSection({ dest }: SectionProps) {
             <img alt="" src={firstPhotoUrl(list[0])} loading="lazy" />
             <span className="mood-in">
               <span className="mood-ic">
-                <Icon name={CATEGORY_ICON[cat]} />
+                <Icon semantic name={CATEGORY_ICON[cat]} />
               </span>
               <b>{list[0]?.categoryName}</b>
               <span>{fill(COPY.common.placeCountShort, { n: list.length })}</span>
@@ -156,7 +156,7 @@ export function FeaturedSection({ dest }: SectionProps) {
           <button key={p.id} className={`mini cat-${p.category}`} type="button" onClick={() => open(p.id)}>
             <img alt="" src={firstPhotoUrl(p)} />
             <span className="catbadge">
-              <Icon name={CATEGORY_ICON[p.category]} />
+              <Icon semantic name={CATEGORY_ICON[p.category]} />
             </span>
             <span className="in">
               <h3>{p.name}</h3>

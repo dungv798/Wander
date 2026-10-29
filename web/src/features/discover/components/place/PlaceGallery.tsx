@@ -52,7 +52,7 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
       ) : null}
       <IconButton className="close" icon="x" label={COPY.common.close} onClick={onClose} />
       <span className="chip cat">
-        <Icon name={CATEGORY_ICON[place.category]} size="s" />
+        <Icon semantic name={CATEGORY_ICON[place.category]} size="s" />
         {place.categoryName}
       </span>
       <button className="credit-btn" type="button" aria-label={COPY.place.photoCredit} onClick={credit.toggle}>

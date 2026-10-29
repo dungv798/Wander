@@ -9,16 +9,39 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
-  /* Thử kính: chữ mực cố định; nền trắng 88% giữ tương phản cả trên ảnh đen. */
-  --look-glass-bg: rgba(255, 255, 255, 0.88);
-  --look-glass-fallback: #fffbed;
-  --look-glass-ink: #14213a;
-  --look-glass-edge: rgba(255, 255, 255, 0.95);
-  --look-glass-highlight: linear-gradient(160deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 55%);
-  --look-glass-shadow: 0 6px 18px -8px rgba(20, 33, 58, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --look-glass-blur: 14px;
-  --look-glass-border: 1px;
-  --look-focus-width: 3px;
+  /* Kính CSS: năm vật liệu dùng chung, chỉ pha các màu Nắng vàng. */
+  --glass-rgb: 255 251 235; --glass-sheet-rgb: 255 253 245;
+  --glass-fab-alpha: .78; --glass-tab-alpha: .88; --glass-chip-alpha: .82;
+  --glass-search-alpha: .88; --glass-sheet-alpha: .92;
+  --glass-fab-blur: 14px; --glass-tab-blur: 20px; --glass-chip-blur: 10px;
+  --glass-search-blur: 14px; --glass-sheet-blur: 24px;
+  --glass-saturation: 1.18; --glass-brightness: 1.03;
+  --glass-border: 1px; --glass-edge: rgb(20 33 58 / .16);
+  --glass-highlight: linear-gradient(145deg, rgb(255 255 255 / .32), transparent 36%, transparent 68%, rgb(255 255 255 / .08));
+  --glass-shadow: 0 6px 16px rgb(20 33 58 / .13), inset 0 1px 0 rgb(255 255 255 / .95), inset 0 -1px 0 rgb(20 33 58 / .06);
+  --glass-tab-shadow: 0 4px 14px rgb(20 33 58 / .10), inset 0 1px 0 rgb(255 255 255 / .95);
+  --glass-pressed-scale: .97; --focus-width: 3px;
+  --nav-pill-height: 64px; --float-height: 48px;
+  --safe-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  --sheet-radius: 32px; --sheet-inset: 8px;
+  --handle-width: 48px; --handle-height: 4px;
+  --gallery-tile-width: 126px; --gallery-tile-height: 188px;
+  --fluent-sm: 24px; --fluent-md: 32px; --fluent-lg: 40px;
+  /* Chữ quy đổi từ ảnh 390 px; rem cho phép tăng chữ và đủ chiều cao dấu Việt. */
+  --text-screen: 700 1.375rem / 1.75rem var(--font-display);
+  --text-place: 700 1.3125rem / 1.6875rem var(--font-display);
+  --text-section: 700 1.125rem / 1.5rem var(--font-display);
+  --text-card: 700 .875rem / 1.1875rem var(--font-display);
+  --text-body: 400 .875rem / 1.3125rem var(--font-body);
+  --text-secondary: 400 .75rem / 1.125rem var(--font-body);
+  --text-button: 700 .875rem / 1.25rem var(--font-body);
+  --text-tab: 700 .6875rem / .875rem var(--font-body);
+  --text-day: 700 .75rem / 1rem var(--font-body);
+  --text-eyebrow: 700 .5625rem / .75rem var(--font-body);
+  --text-stat: 700 1.25rem / 1.5625rem var(--font-display);
+  --text-money: 700 1.25rem / 1.75rem var(--font-display);
+  --tracking-screen: -.35px; --tracking-place: -.3px; --tracking-section: -.2px;
+  --tracking-card: -.1px; --tracking-eyebrow: .7px;
   --destination-map-height: 38dvh;
   /* ---- Nền và chữ ---- */
   --bg: #fff8d8;             /* bơ nhạt: nền trang */
@@ -119,10 +142,10 @@
   --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
 
   /* ---- Chữ ---- */
-  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Baloo 2", "Be Vietnam Pro", system-ui, sans-serif;
+  --font-body: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Nunito', system-ui, sans-serif;
+  --font-display: var(--font-body);
   --fs-xs: 12px; --fs-sm: 14px; --fs-md: 16px; --fs-lg: 18px; --fs-xl: 22px; --fs-2xl: 28px; --fs-3xl: 36px; --fs-hero: 42px;
-  --lh-body: 1.55; --lh-tight: 1.25; /* tiêu đề Baloo 2: dòng cao đủ cho dấu tiếng Việt (Ệ, Ầ) */
+  --lh-body: 1.55; --lh-tight: 1.25; /* Dòng cao đủ cho dấu tiếng Việt (Ệ, Ầ). */
 
   /* ---- Biểu tượng và vùng chạm ---- */
   --icon-s: 16px; --icon-m: 20px; --icon-l: 26px; --icon-xl: 30px;

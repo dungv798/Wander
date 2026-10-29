@@ -1,0 +1,65 @@
+/* Năm bề mặt; selector ngoài shared/map chỉ tô vật liệu của điều khiển hiện có. */
+:root:not([data-look='classic']) :is(.g-fab, .iconbtn, #screen .deckbar .iconbtn, .gnav, .round.small, .float .btn.ghost, .maplibregl-ctrl-group) {
+  --g-alpha: var(--glass-fab-alpha);
+  --g-blur: var(--glass-fab-blur);
+}
+:root:not([data-look='classic']) #tabbar {
+  --g-alpha: var(--glass-tab-alpha);
+  --g-blur: var(--glass-tab-blur);
+  --g-shadow: var(--glass-tab-shadow);
+}
+:root:not([data-look='classic']) :is(.g-chip, #screen .filters .fchip) {
+  --g-alpha: var(--glass-chip-alpha);
+  --g-blur: var(--glass-chip-blur);
+}
+:root:not([data-look='classic']) :is(.g-search, .search, .destination-picker-search input) {
+  --g-alpha: var(--glass-search-alpha);
+  --g-blur: var(--glass-search-blur);
+}
+:root:not([data-look='classic']) :is(.g-sheet, .panel, #screen .sheetbody, .bar, .cta-bar) {
+  --g-rgb: var(--glass-sheet-rgb);
+  --g-alpha: var(--glass-sheet-alpha);
+  --g-blur: var(--glass-sheet-blur);
+}
+
+/* Nền đặc là mặc định; nâng cấp blur chỉ khi engine hỗ trợ. Highlight nằm dưới chữ. */
+:root:not([data-look='classic']) :is(.g-fab, .iconbtn, #screen .deckbar .iconbtn, .gnav, .round.small, .float .btn.ghost, .maplibregl-ctrl-group, #tabbar, .g-chip, #screen .filters .fchip, .g-search, .search, .destination-picker-search input, .g-sheet, .panel, #screen .sheetbody, .bar, .cta-bar) {
+  color: var(--ink-fixed);
+  background: var(--glass-highlight), var(--surface);
+  border: var(--glass-border) solid var(--glass-edge);
+  box-shadow: var(--g-shadow, var(--glass-shadow));
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root:not([data-look='classic']) :is(.g-fab, .iconbtn, #screen .deckbar .iconbtn, .gnav, .round.small, .float .btn.ghost, .maplibregl-ctrl-group, #tabbar, .g-chip, #screen .filters .fchip, .g-search, .search, .destination-picker-search input, .g-sheet, .panel, #screen .sheetbody, .bar, .cta-bar) {
+    background: var(--glass-highlight), rgb(var(--g-rgb, var(--glass-rgb)) / var(--g-alpha));
+    -webkit-backdrop-filter: blur(var(--g-blur)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+    backdrop-filter: blur(var(--g-blur)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+  }
+}
+:root:not([data-look='classic']) :is(.g-fab, .iconbtn, .gnav, .round.small, .g-chip, .fchip, .search) {
+  min-width: var(--tap);
+  min-height: var(--tap);
+}
+:root:not([data-look='classic']) :is(.g-chip, #screen .filters .fchip)[aria-pressed='true'] {
+  background: var(--brand-soft);
+  color: var(--ink-fixed);
+  border-color: var(--brand-ink);
+}
+:root:not([data-look='classic']) :is(.g-fab, .iconbtn, .gnav, .round.small, .g-chip, .search):active { transform: scale(var(--glass-pressed-scale)); }
+:root:not([data-look='classic']) :is(button, input, a):focus-visible {
+  outline: var(--focus-width) solid var(--ink-fixed);
+  outline-offset: var(--s-1);
+}
+:root:not([data-look='classic']) .sheet { -webkit-backdrop-filter: none; backdrop-filter: none; }
+@media (prefers-reduced-transparency: reduce) {
+  :root:not([data-look='classic']) :is(.g-fab, .iconbtn, #screen .deckbar .iconbtn, .gnav, .round.small, .float .btn.ghost, .maplibregl-ctrl-group, #tabbar, .g-chip, #screen .filters .fchip, .g-search, .search, .destination-picker-search input, .g-sheet, .panel, #screen .sheetbody, .bar, .cta-bar) {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-look='classic']) :is(.g-fab, .iconbtn, .gnav, .round.small, .g-chip, .fchip, .search, #tabbar, .panel, .sheetbody, .bar, .cta-bar) { transition: none; animation: none; }
+  :root:not([data-look='classic']) :is(.g-fab, .iconbtn, .gnav, .round.small, .g-chip, .fchip, .search):active { transform: none; }
+}

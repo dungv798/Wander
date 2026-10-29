@@ -1,8 +1,7 @@
-/** Thử nghiệm riêng cho PO; không thay bộ nhận diện mặc định. */
+/** Look mới là mặc định; chỉ giữ chế độ cũ để PO đối chiếu. */
 export const LOOK = {
   PARAM: 'look',
   STORAGE: 'wander.web.look.v1',
   OFF: 'off',
-  VALUES: ['nunito', 'jakarta', 'lexend'],
+  CLASSIC: 'classic',
 } as const;
-export type TrialLook = (typeof LOOK.VALUES)[number];

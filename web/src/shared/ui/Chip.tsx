@@ -17,7 +17,7 @@ export function Chip({ tone, icon, className, children }: ChipProps) {
   const cls = ['chip', tone, className].filter(Boolean).join(' ');
   return (
     <span className={cls}>
-      {icon ? <Icon name={icon} size="s" /> : null}
+      {icon ? <Icon semantic name={icon} size="s" /> : null}
       {children}
     </span>
   );

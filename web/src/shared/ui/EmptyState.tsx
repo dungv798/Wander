@@ -21,7 +21,7 @@ export function EmptyState({ title, text, icon, role, actions, className, pageTi
     <div className={['empty', 'pad-x', className].filter(Boolean).join(' ')} role={role}>
       {icon ? (
         <span className="ib">
-          <Icon name={icon} size="l" />
+          <Icon semantic name={icon} size="l" />
         </span>
       ) : null}
       <Heading className="h2">{title}</Heading>

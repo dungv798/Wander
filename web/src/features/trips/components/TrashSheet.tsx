@@ -36,10 +36,10 @@ function TrashRow({ entry, now, onRestore, onPurge }: RowProps) {
   const photo = place?.photos[0]?.url;
   return (
     <li className={`trashrow irow ${place ? `cat-${place.category}` : kind.cat}`}>
-      <div className={photo ? 'im' : 'im ktile'}>{photo ? <img alt="" src={photo} /> : <Icon name={kind.icon} size="l" />}</div>
+      <div className={photo ? 'im' : 'im ktile'}>{photo ? <img alt="" src={photo} /> : <Icon semantic name={kind.icon} size="l" />}</div>
       <div className="tx">
         <span className="kind">
-          <Icon name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
+          <Icon semantic name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
           {place ? place.categoryName : kind.label}
         </span>
         <h3>{name}</h3>

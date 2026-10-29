@@ -46,7 +46,7 @@ function TodayItem({ trip, item, cat }: { readonly trip: Trip; readonly item: Tr
       <span className="tdtime">{item.timeOfDay ?? T.today.noTime}</span>
       <span className="tdbody">
         <b>
-          <Icon name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
+          <Icon semantic name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
           {name}
         </b>
         <span className="note">{place ? `${place.categoryName} · ${place.area}` : kind.label}</span>

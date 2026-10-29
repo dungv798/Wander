@@ -86,12 +86,12 @@ export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
       <div className={sort ? 'swipe sorting' : 'swipe'} data-item={item.id} data-tab={tab}>
         <button className={rowCls} type="button" onClick={() => openItem(item.id)} data-day-index={dayIdx}>
           <div className={photo ? 'im' : 'im ktile'}>
-            {photo ? <img alt="" src={photo} /> : <Icon name={kind.icon} size="l" />}
+            {photo ? <img alt="" src={photo} /> : <Icon semantic name={kind.icon} size="l" />}
             {num ? <b>{num}</b> : null}
           </div>
           <div className="tx">
             <span className="kind">
-              <Icon name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
+              <Icon semantic name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
               {place ? `${place.categoryName} · ${place.area}` : kind.label}
             </span>
             <h3>{name}</h3>

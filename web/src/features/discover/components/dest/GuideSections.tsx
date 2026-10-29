@@ -58,7 +58,7 @@ function Cards({ items }: { readonly items: readonly GuideItemView[] }) {
         const icon = toIconName(it.icon);
         return (
           <div key={it.title} className="food">
-            {icon ? <Icon name={icon} size="l" /> : null}
+            {icon ? <Icon semantic name={icon} size="l" /> : null}
             <b>{it.title}</b>
             <p>{it.text}</p>
           </div>
@@ -79,7 +79,7 @@ function PlaceRows({ dest, section }: { readonly dest: DestinationDetail; readon
         return (
           <button key={p.id} className={`grow cat-${p.category}`} type="button" onClick={() => open(p.id)}>
             <span className="catbadge">
-              <Icon name={CATEGORY_ICON[p.category]} />
+              <Icon semantic name={CATEGORY_ICON[p.category]} />
             </span>
             <span>
               <b>{p.name}</b>
@@ -101,7 +101,7 @@ function InfoRows({ section }: { readonly section: GuideSectionView }) {
         const icon = toIconName(it.icon);
         return (
           <div key={it.title} className={`grow cat-${section.category}`}>
-            <span className="ib">{icon ? <Icon name={icon} /> : null}</span>
+            <span className="ib">{icon ? <Icon semantic name={icon} /> : null}</span>
             <span>
               <b>{it.title}</b>
               <span className="d">{it.text}</span>
@@ -147,7 +147,7 @@ export function GuideSections({ dest }: { readonly dest: DestinationDetail }) {
           return (
             <div key={g.id} className={`gblock cat-${g.category}${open ? ' open' : ''}`}>
               <button className="ghead" type="button" aria-expanded={open} onClick={() => actions.toggleGuide(g.id)}>
-                <span className="ib">{icon ? <Icon name={icon} /> : null}</span>
+                <span className="ib">{icon ? <Icon semantic name={icon} /> : null}</span>
                 <span>
                   <b>{g.title}</b>
                   <span className="sum">{g.summary}</span>

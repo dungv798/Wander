@@ -56,7 +56,7 @@ function PickedContent({ dest, onSave }: { readonly dest: DestinationDetail; rea
               </span>
             </button>
             <span className="catbadge">
-              <Icon name={CATEGORY_ICON[p.category]} />
+              <Icon semantic name={CATEGORY_ICON[p.category]} />
             </span>
             <button className="x" type="button" aria-label={fill(COPY.picked.unpick, { name: p.name })} onClick={() => actions.unpick(p.id)}>
               <Icon name="x" size="s" />

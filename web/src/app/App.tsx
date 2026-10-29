@@ -14,9 +14,9 @@ import { TemplatesSection } from '../features/templates/index.ts';
 import { CreateTripSheet, ExportScreen, JoinScreen, TodayScreen, TripScreen, TripsProvider, TripsScreen, useTrips } from '../features/trips/index.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
-import { initializeTrialLook } from './look.ts';
+import { initializeLook } from './look.ts';
 
-void initializeTrialLook();
+void initializeLook();
 
 const DestinationPickerScreen = lazy(() => import('../features/discover/components/DestinationPickerScreen.tsx'));
 

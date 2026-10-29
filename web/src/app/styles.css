@@ -14,3 +14,6 @@
 @import '../features/trips/trip.css';
 @import '../features/identity/identity.css';
 @import '../features/templates/templates.css';
+
+@import '../styles/appearance.css';
+@import '../styles/glass.css';

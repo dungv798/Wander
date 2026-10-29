@@ -13,7 +13,7 @@ export function EditorialRate({ place }: { readonly place: PlaceView }) {
   return (
     <div className={`rate ${v.cls}`.trim()}>
       <span className="ib">
-        <Icon name={v.icon} size="l" />
+        <Icon semantic name={v.icon} size="l" />
       </span>
       <span>
         <b>{place.verdictLabel}</b>
@@ -41,7 +41,7 @@ export function QuickFacts({ place }: { readonly place: PlaceView }) {
       {facts.map((f) => (
         <li key={f.label}>
           <span className="ib">
-            <Icon name={f.icon} />
+            <Icon semantic name={f.icon} />
           </span>
           <b>{f.value}</b>
           <span>{f.label}</span>
@@ -76,7 +76,7 @@ export function TimeOfDay({ place }: { readonly place: PlaceView }) {
   return (
     <div>
       <h4>
-        <Icon name="sun" />
+        <Icon semantic name="sun" />
         {COPY.place.whenToGo}
       </h4>
       <div className="tod">
@@ -84,7 +84,7 @@ export function TimeOfDay({ place }: { readonly place: PlaceView }) {
           const on = place.bestSlots.includes(s.code);
           return (
             <div key={s.code} className={on ? 'on' : undefined}>
-              <Icon name={s.icon} size="l" />
+              <Icon semantic name={s.icon} size="l" />
               {COPY.slots[s.code]}
               {on ? <small>{COPY.place.shouldGo}</small> : null}
             </div>
@@ -102,7 +102,7 @@ export function SeasonMonths({ place }: { readonly place: PlaceView }) {
   return (
     <div>
       <h4>
-        <Icon name="calendar-event" />
+        <Icon semantic name="calendar-event" />
         {COPY.place.bestSeason}
       </h4>
       <div className="months">
