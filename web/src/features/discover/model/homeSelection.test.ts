@@ -4,11 +4,17 @@ import type { Trip } from '../../trips/index.ts';
 import type { DestinationDetail } from './Catalog.types.ts';
 import { heroImages, homeTrip, resumeKind } from './homeSelection.ts';
 
-test('ảnh hero giữ cover đầu tiên, bỏ URL rỗng/trùng và giới hạn bốn ảnh', () => {
+test('ảnh hero không có tuyển chọn dùng ảnh bìa, không tự đưa ảnh chưa chấm vào', () => {
   const dest = { coverUrl: 'cover', places: ['cover', '', 'a', 'b', 'c', 'd'].map(url => ({ photos: [{ url }] })) } as unknown as DestinationDetail;
-  assert.deepEqual(heroImages(dest), ['cover', 'a', 'b', 'c']);
+  assert.deepEqual(heroImages(dest), ['cover']);
   assert.deepEqual(heroImages({ coverUrl: '', places: [] } as unknown as DestinationDetail), []);
   assert.deepEqual(heroImages({ coverUrl: 'cover', places: [] } as unknown as DestinationDetail), ['cover']);
+});
+
+test('ảnh đã chọn chỉ hiện khi còn trong catalog và giữ thứ tự xếp hạng', () => {
+  const dest = { id: 'da-lat', coverUrl: 'cover', places: [{ photos: [{ url: '/catalog/photos/ho-xuan-huong-2.jpg' }, { url: '/catalog/photos/ho-tuyen-lam-1.jpg' }] }] } as unknown as DestinationDetail;
+  assert.deepEqual(heroImages(dest), ['/catalog/photos/ho-tuyen-lam-1.jpg', '/catalog/photos/ho-xuan-huong-2.jpg']);
+  assert.deepEqual(heroImages({ ...dest, places: [] }), ['cover']);
 });
 
 test('khối tiếp tục ưu tiên chuyến, chọn dở chỉ khi không có chuyến, trống thì ẩn', () => {

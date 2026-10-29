@@ -105,7 +105,8 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
     const catalogReady = page.waitForResponse((response) => new URL(response.url()).pathname === '/api/catalog/destinations');
     releaseCatalog();
     await catalogReady;
-    await page.evaluate(() => { location.hash = '#/dest/da-lat'; }); // bản đồ nằm ở màn điểm đến, không còn ở trang chủ
+    assert.equal(await page.locator('.home-map .mapcard').count(), 0, 'chưa khởi tạo bản đồ trước khi cuộn');
+    await page.evaluate(() => { location.hash = '#/dest/da-lat'; }); // bản đồ riêng ở màn điểm đến; thẻ bản đồ trang chủ có bài riêng
     await page.locator('.mapcard').scrollIntoViewIfNeeded(); // thẻ bản đồ nằm dưới màn hình, chỉ nạp khi cuộn tới
     await waitForNativeMap(page, '.mapcard');
     await page.getByRole('button', { name: /Mở rộng/ }).click();
@@ -114,10 +115,15 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
     await page.waitForFunction(() => document.querySelector<HTMLElement>('.mapbig')?.dataset['ready'] === '1', undefined, { timeout: 45000 });
     assert.equal(await page.locator('.mapbig').getAttribute('data-thumbnails'), '0');
     releasePhotos();
-    await page.waitForFunction(() => {
-      const map = document.querySelector<HTMLElement>('.mapbig');
-      return Number(map?.dataset['pins']) > 0 && Number(map?.dataset['renderedImages']) === Number(map?.dataset['pins']);
-    }, undefined, { timeout: 45000 });
+    try {
+      await page.waitForFunction(() => {
+        const map = document.querySelector<HTMLElement>('.mapbig');
+        return Number(map?.dataset['pins']) > 0 && Number(map?.dataset['renderedImages']) === Number(map?.dataset['pins']);
+      }, undefined, { timeout: 45000 });
+    } catch (error) {
+      const state = await page.evaluate(() => { const map = document.querySelector<HTMLElement>('.mapbig'); return map ? JSON.stringify({ ...map.dataset, features: undefined }) : 'không có .mapbig'; }).catch(() => 'không đọc được');
+      throw new Error(`Ghim bản đồ mở rộng chưa hiện ảnh sau khi nhả ảnh: ${state}`, { cause: error });
+    }
     assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false);
     assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
     assert.deepEqual(errors, []);
@@ -126,4 +132,43 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
     releasePhotos();
     await ctx.close();
   }
+});
+
+test('trang chủ: thẻ bản đồ nhỏ chỉ khởi tạo khi cuộn tới, mở rộng và đóng được', async () => {
+  const { ctx, errors } = await phone();
+  const page = await ctx.newPage();
+  await page.addInitScript(() => {
+    localStorage.setItem('wander.web.destination.v1', 'da-lat');
+    localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
+  });
+  await page.goto(`${baseUrl}/#/`);
+  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+  assert.equal(await page.locator('.home-map .mapcard').count(), 0, 'chưa khởi tạo bản đồ trước khi cuộn');
+  await page.locator('.home-map').scrollIntoViewIfNeeded();
+  await waitForNativeMap(page, '.home-map .mapcard');
+  await page.locator('#screen').evaluate(el => { el.scrollTop = el.scrollHeight; });
+  await page.waitForFunction(() => {
+    const map = document.querySelector<HTMLElement>('.home-map .mapcard');
+    const canvas = map?.querySelector('canvas');
+    const screen = document.querySelector('#screen')?.getBoundingClientRect();
+    const tab = document.querySelector('#tabbar')?.getBoundingClientRect();
+    if (!map || !canvas || !screen || !tab) return false;
+    const rect = map.getBoundingClientRect();
+    let opacity = 1;
+    for (let ancestor: HTMLElement | null = map; ancestor; ancestor = ancestor.parentElement) {
+      const style = getComputedStyle(ancestor);
+      if (style.visibility !== 'visible' || style.display === 'none') return false;
+      opacity *= Number(style.opacity);
+    }
+    return map.dataset['ready'] === '1' && canvas.width > 0 && canvas.height > 0
+      && canvas.clientWidth > 0 && canvas.clientHeight > 0 && opacity === 1
+      && rect.top >= Math.max(0, screen.top) && rect.bottom <= Math.min(innerHeight, screen.bottom, tab.top)
+      && rect.left >= screen.left && rect.right <= screen.right;
+  }, undefined, { timeout: 15000 });
+  await page.getByRole('button', { name: /Mở rộng/ }).click();
+  await page.getByRole('dialog', { name: 'Bản đồ Đà Lạt' }).waitFor();
+  await page.keyboard.press('Escape');
+  await page.getByRole('dialog', { name: 'Bản đồ Đà Lạt' }).waitFor({ state: 'detached' });
+  assert.deepEqual(errors, []);
+  await ctx.close();
 });

@@ -1,10 +1,15 @@
 import type { Trip } from '../../trips/index.ts';
 import type { DestinationDetail } from './Catalog.types.ts';
-import { HOME } from './home.const.ts';
+import { HERO_PHOTOS } from './heroPhotos.const.ts';
 
-/** Lấy ảnh bìa trước, sau đó ảnh nổi bật không trùng URL; kho ít ảnh thì giữ đúng số ảnh thật. */
+/** Chỉ lấy ảnh đã chấm và còn trong catalog; không có ảnh đạt thì giữ ảnh bìa. */
 export function heroImages(dest: DestinationDetail): readonly string[] {
-  return [...new Set([dest.coverUrl, ...dest.places.map(p => p.photos[0]?.url ?? '')])].filter(Boolean).slice(0, HOME.HERO_IMAGES);
+  const photos = dest.places.flatMap(p => p.photos);
+  const selected = (HERO_PHOTOS[dest.id] ?? []).flatMap(file => {
+    const photo = photos.find(p => p.url.endsWith(`/${file}`));
+    return photo ? [photo.url] : [];
+  });
+  return selected.length ? selected : dest.coverUrl ? [dest.coverUrl] : [];
 }
 
 /** Ưu tiên chuyến đang diễn ra, rồi chuyến sắp đi gần nhất, cuối cùng bản đang làm mới nhất. */

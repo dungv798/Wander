@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import http from 'node:http';
+import { chromium } from 'playwright-core';
+const root=process.cwd(),out=path.join(root,'docs/design/glass-trial');
+const allowed=['/docs/design/','/docs/ux/prototype/tokens.css','/web/src/styles/fonts.css','/web/public/fonts/','/web/public/fonts-trial/','/web/public/look/icons/','/backend/src/main/resources/catalog/photos/'];
+const server=http.createServer((req,res)=>{const p=decodeURIComponent(req.url.split('?')[0]);const file=path.resolve(root,'.'+p);if(!allowed.some(a=>p.startsWith(a))||!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}const mime={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.png':'image/png','.jpg':'image/jpeg','.woff2':'font/woff2'};res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'text/plain'});fs.createReadStream(file).pipe(res);});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+if(process.argv.includes('--serve')){console.log(`Mở http://127.0.0.1:${server.address().port}/docs/design/glass-trial/index.html ; Ctrl+C để dừng.`);await new Promise(()=>{});}
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const page=await browser.newPage({viewport:{width:820,height:940},deviceScaleFactor:1});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+const url=`http://127.0.0.1:${server.address().port}/docs/design/glass-trial/index.html`;
+await page.goto(url);await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));});
+const round=process.argv[2]||'1';
+await page.locator('.panels').screenshot({path:path.join(out,`comparison-v${round}.png`)});
+await page.locator('.material-board').screenshot({path:path.join(out,`materials-v${round}.png`)});
+await page.setViewportSize({width:1100,height:900});
+await page.locator('.icon-board').screenshot({path:path.join(out,'fluent-21.png')});
+const surfaces=await page.locator('.material-board .glass').evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {type:e.className,x:r.x,y:r.y,w:r.width,h:r.height,backdrop:s.backdropFilter,background:s.backgroundColor};}));
+await page.locator('.material-board').scrollIntoViewIfNeeded();
+// Chụp nền thực dưới chữ sau khi ẩn chữ để đo tương phản theo từng pixel, không đo màu CSS chưa compositing.
+await page.addStyleTag({content:'.material-board *{color:transparent!important;text-shadow:none!important}.material-board img{visibility:hidden!important}'});
+const background=await page.locator('.material-board').screenshot();
+const contrast=await page.evaluate(async(src)=>{const im=new Image();im.src=src;await im.decode();const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);const linear=v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;};const lum=(r,g,b)=>.2126*linear(r)+.7152*linear(g)+.0722*linear(b);const ink=lum(20,33,58);const b=document.querySelector('.material-board').getBoundingClientRect();return [...document.querySelectorAll('.material-board .glass')].map(e=>{const r=e.getBoundingClientRect();const x=Math.round(r.x-b.x+14),y=Math.round(r.y-b.y+14),w=Math.max(1,Math.floor(r.width-28)),h=Math.max(1,Math.floor(r.height-28));const px=g.getImageData(x,y,w,h).data;let min=99;for(let i=0;i<px.length;i+=4)min=Math.min(min,(lum(px[i],px[i+1],px[i+2])+.05)/(ink+.05));return {type:e.className,minContrast:Number(min.toFixed(2)),pass:min>=4.5};});},'data:image/png;base64,'+background.toString('base64'));
+await page.reload();await page.emulateMedia({reducedMotion:'reduce'});await page.locator('.g-fab').first().dispatchEvent('pointerdown');
+await page.evaluate(()=>document.body.classList.add('fallback'));
+await page.locator('.material-board').screenshot({path:path.join(out,'fallback.png')});
+const fallback=await page.locator('.material-board .g-sheet').evaluate(e=>({background:getComputedStyle(e).backgroundColor,filter:getComputedStyle(e).backdropFilter,reducedMotion:matchMedia('(prefers-reduced-motion:reduce)').matches}));
+fs.mkdirSync(path.join(out,'.logs'),{recursive:true});
+const result={command:`node docs/design/glass-trial/capture.mjs ${round}`,browser:browser.version(),errors,surfaces,contrast,fallback,icons:await page.locator('.icon-cell').count(),screenshots:[`comparison-v${round}.png`,`materials-v${round}.png`,'fluent-21.png','fallback.png'],limitations:['Không chạy Safari/Firefox hay đo GPU thiết bị thật','Chỉ đo nội thất các bề mặt trong material board, không chứng nhận toàn UI']};
+fs.writeFileSync(path.join(out,'.logs',`capture-v${round}.json`),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result));
+await browser.close();await new Promise(r=>server.close(r));
+if(errors.length||contrast.some(c=>!c.pass)||result.icons!==21)process.exitCode=1;

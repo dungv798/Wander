@@ -42,6 +42,7 @@ export const COPY = {
     comingText: 'Giao diện chuyến đi sẽ có ở lát tiếp theo của pha dựng giao diện.',
   },
   home: {
+    mapTitle: 'Quanh đây có gì?',
     exploreAction: 'Bắt đầu khám phá',
     exploreDestination: 'Khám phá {dest}',
     seeAll: 'Xem tất cả',

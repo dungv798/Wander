@@ -41,14 +41,14 @@ function FullMapSheet({ dest, onClose }: { readonly dest: DestinationDetail; rea
 }
 
 /** Khối "<Điểm đến> trên bản đồ": bản đồ nhỏ tĩnh (chạm ghim xem chi tiết) và nút "Mở rộng" để kéo, phóng toàn màn. */
-export function DestMapSection({ dest }: { readonly dest: DestinationDetail }) {
+export function DestMapSection({ dest, title }: { readonly dest: DestinationDetail; readonly title?: string }) {
   const place = usePlaceSheet();
   const [expanded, setExpanded] = useState(false);
   const markers = useMemo(() => placeMarkers(dest.places), [dest]);
   return (
     <section className="stack rv">
       <SectionHead
-        title={fill(COPY.map.sectionTitle, { dest: dest.name })}
+        title={title ?? fill(COPY.map.sectionTitle, { dest: dest.name })}
         right={
           <button className="linkbtn" type="button" onClick={() => setExpanded(true)}>
             <Icon name="map-pin" size="s" />

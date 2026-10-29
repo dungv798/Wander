@@ -91,7 +91,20 @@
   pointer-events: none;
 }
 /* Chữ tối cần đệm sáng trên ảnh bất kỳ; vỏ kính vẫn trong ở mép ngoài. */
-:root:not([data-look='classic']) :is(.dhero .pill, .deckbar .pill, .mapfull .pill, .mapcard .pill, .home-hero .search) { background: var(--glass-highlight), var(--glass-label-surface); }
+:root:not([data-look='classic']) :is(.dhero .pill, .deckbar .pill, .mapfull .pill, .mapcard .pill) { background: var(--glass-highlight), var(--glass-label-surface); }
+/* Một viên kính liên tục; chỉ vùng chọn có màu Nắng vàng xuyên nền. */
+:root:not([data-look='classic']) .home-hero .search {
+  position: absolute;
+  background: var(--home-search-surface);
+  -webkit-backdrop-filter: blur(var(--glass-search-blur)) saturate(var(--home-search-saturation));
+  backdrop-filter: blur(var(--glass-search-blur)) saturate(var(--home-search-saturation));
+  text-shadow: var(--home-search-shadow);
+}
+:root:not([data-look='classic']) #tabbar .tab { border: 0; box-shadow: none; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; text-decoration: none; }
+:root:not([data-look='classic']) #tabbar .tab::before { display: none; }
+:root:not([data-look='classic']) #tabbar .tab[aria-current='page'] { background: var(--glass-sun-selection); border: 0; text-decoration: none; }
+/* Đệm chỉ sau nhãn và glyph; phần thân và mép điều khiển vẫn nhìn xuyên ảnh. */
+:root:not([data-look='classic']) #tabbar .tab :is(span, .ic) { color: var(--ink-fixed); background: var(--glass-label-surface); border-radius: var(--r-sm); }
 :root:not([data-look='classic']) :is(.maplibregl-ctrl-group button, .destination-picker-search input) { border-color: var(--border-ctrl); }
 :root:not([data-look='classic']) .maplibregl-ctrl-group button { color: var(--ink-fixed); background: var(--glass-highlight), var(--glass-label-surface); }
 /* Tiêu đề là dải kính liên tục, bỏ khung hộp và bóng nặng quanh cả hàng. */
