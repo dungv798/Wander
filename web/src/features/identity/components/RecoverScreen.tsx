@@ -3,7 +3,7 @@ import { ApiError } from '../../../shared/api/ApiError.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { PairingCode } from '../../../shared/domain/PairingCode.ts';
 import { RecoveryCode } from '../../../shared/domain/RecoveryCode.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle, WarnBox } from '../../../shared/ui/Controls.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
@@ -186,7 +186,7 @@ export function RecoverScreen() {
     <>
       <div className="pagehead pad-x">
         <div>
-          <IconButton icon="chevron-left" label={C.recover.back} onClick={() => navigate(VIEW.EXPLORE)} />
+          <IconButton icon="chevron-left" label={C.recover.back} onClick={goBack} />
         </div>
         <p className="note">{C.recover.eyebrow}</p>
         <h1>{C.recover.title}</h1>

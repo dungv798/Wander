@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { VIEW } from '../../../shared/const/routes.const.ts';
+import { COPY } from '../../../shared/const/copy.vi.ts';
 import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
@@ -11,27 +12,25 @@ import { DeletedTripsSheet } from './DeletedTripsSheet.tsx';
 import { CreateTripSheet } from './CreateTripSheet.tsx';
 import { TripCard } from './TripCard.tsx';
 import { TripWizard } from './TripWizard.tsx';
+import type { Trip } from '../model/trip.types.ts';
 
 /** Ảnh bìa của chuyến: ảnh nơi đầu tiên có trong kho, hoặc ảnh bìa điểm đến. */
-function useCoverOf(destId: string): (placeId: string | null) => string | null {
-  const { state } = useDestination(destId);
-  return (placeId) => {
-    if (state.status !== 'ready') return null;
-    return state.data.places.find((p) => p.id === placeId)?.photos[0]?.url ?? null;
-  };
+function DestinationTripCard({ trip }: { readonly trip: Trip }) {
+  const { state } = useDestination(trip.destinationId);
+  const dest = state.status === 'ready' ? state.data : null;
+  const cover = trip.items.flatMap(item => dest?.places.find(place => place.id === item.placeId)?.photos[0]?.url ?? []).find(Boolean) ?? dest?.coverUrl ?? '';
+  return <TripCard trip={trip} cover={cover} />;
 }
 
 /** Màn "Chuyến đi": danh sách chuyến của bạn, nút tạo mới (nhanh hoặc theo bước), hoặc trạng thái rỗng dẫn tới Khám phá. */
 export function TripsScreen({ destId }: { readonly destId: string }) {
   const { state, status, reload } = useTrips();
   const [sheet, setSheet] = useState<'create' | 'wizard' | 'deleted' | null>(null);
-  const coverOf = useCoverOf(destId);
-  const { state: dest } = useDestination(destId);
-  const fallbackCover = dest.status === 'ready' ? dest.data.coverUrl : '';
   return (
     <>
       <div className="pagehead pad-x">
         <div className="headrow">
+          <IconButton icon="chevron-left" label={COPY.nav.explore} onClick={() => navigate(VIEW.EXPLORE)} />
           <div>
             <p className="note">{T.list.owner}</p>
             <h1>{T.list.title}</h1>
@@ -49,7 +48,7 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
       ) : state.trips.length ? (
         <div className="stack pad-x spaced-lg">
           {state.trips.map((t) => (
-            <TripCard key={t.id} trip={t} cover={t.items.map((i) => coverOf(i.placeId)).find(Boolean) ?? fallbackCover} />
+            <DestinationTripCard key={t.id} trip={t} />
           ))}
           <Button kind="ghost" block icon="plus" onClick={() => setSheet('create')}>{T.list.createNew}</Button>
           <Button kind="ghost" block icon="route" onClick={() => setSheet('wizard')}>{T.list.stepwise}</Button>

@@ -5,14 +5,31 @@
 .home-hero-photos img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity var(--dur-scene) var(--ease-out); }
 .home-hero-photos img.is-active { opacity: 1; }
 .home-hero-photos::after { content: ""; background: var(--home-hero-scrim); }
+.home-destination-switch { position: absolute; top: var(--s-4); right: var(--gutter); pointer-events: auto; }
+:root #screen .home-hero .home-destination-switch { position: absolute; color: var(--white); background: var(--home-search-surface); text-shadow: var(--home-search-shadow); }
+.destination-rail { display: flex; gap: var(--s-3); padding-bottom: var(--s-2); }
+.destination-card { position: relative; flex: 0 0 calc(var(--s-8) * 2); height: calc(var(--s-8) + var(--s-7)); padding: 0; border: 0; border-radius: var(--r-md); overflow: hidden; color: var(--on-photo); background: var(--photo-bg); text-align: left; scroll-snap-align: start; }
+.destination-card img { width: 100%; height: 100%; object-fit: cover; }
+.destination-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--hero-bottom-scrim), transparent); }
+.destination-card > span { position: absolute; z-index: 1; inset: auto var(--s-3) var(--s-3); display: grid; font: var(--text-body); }
+.national-hero { height: 100%; min-height: var(--home-hero-height); }
+.national-hero .destination-rail { height: 100%; gap: var(--s-1); padding: 0; margin: 0; }
+.national-hero .destination-card { flex-basis: calc(var(--s-8) * 4); height: 100%; border-radius: 0; }
+.national-hero .destination-card::after { background: var(--home-hero-scrim); }
+.national-heading { position: absolute; z-index: 2; inset: var(--s-4) var(--gutter) auto; pointer-events: none; }
+.national-heading h1 { font: var(--text-screen); }
+.national-heading .search { pointer-events: auto; top: calc(var(--s-8) * 2); left: 0; right: 0; }
+.national-heading p { font: var(--text-secondary); }
 .home-hero-link { z-index: 1; }
 .home-hero-link:focus-visible { outline: var(--focus-width) solid var(--white); outline-offset: calc(-1 * var(--s-2)); }
 .home-hero-content { position: relative; z-index: 2; pointer-events: none; display: flex; flex-direction: column; justify-content: end; align-items: start; gap: var(--s-2); height: 100%; max-width: calc(var(--s-8) * 18); margin: auto; padding: var(--s-6) var(--gutter); }
 .home-hero-brand { position: absolute; top: var(--s-4); left: var(--gutter); padding: var(--s-1) var(--s-2); border-radius: var(--r-sm); background: var(--glass-photo-scrim); font: var(--text-section); }
 .home-hero h1 { font: 800 var(--fs-hero)/var(--lh-tight) var(--font-display); }
+.home-hero.national-hero h1 { font: var(--text-screen); }
 .home-hero-tagline { max-width: 36ch; font: var(--text-body); }
 .home-hero-actions { pointer-events: auto; display: grid; gap: var(--s-3); width: 100%; margin-top: var(--s-3); }
 .home-hero .search { position: absolute; top: calc(var(--s-8) + var(--s-4)); left: var(--gutter); right: var(--gutter); margin: 0; width: auto; min-height: var(--tap); }
+.home-hero.national-hero .search { top: var(--s-8); left: 0; right: 0; }
 .home-hero .btn { width: 100%; }
 .home-body { display: grid; gap: var(--s-3); width: 100%; max-width: calc(var(--s-8) * 18); margin-inline: auto; padding-block: var(--s-3) var(--s-4); }
 .home-map { min-height: var(--home-map-section-height); }
@@ -25,7 +42,7 @@
 .home-body .resume img { width: var(--s-8); height: var(--s-8); object-fit: cover; border-radius: var(--r-sm); }
 .home-body .resume span span { font: var(--text-secondary); color: var(--muted); }
 .home-body .moods { display: flex; gap: var(--s-3); padding-block: 0 var(--s-2); }
-.home-body .mood { position: relative; flex: 0 0 calc(var(--s-8) * 2 + var(--s-4)); height: calc(var(--s-8) * 2 + var(--s-6)); padding: 0; border: 0; overflow: hidden; border-radius: var(--r-md); background: var(--photo-bg); color: var(--on-photo); text-align: left; scroll-snap-align: start; }
+.home-body .mood { position: relative; flex: 0 0 calc(var(--s-8) + var(--s-7)); height: calc(var(--s-8) + var(--s-7)); padding: 0; border: 0; overflow: hidden; border-radius: var(--r-md); background: var(--photo-bg); color: var(--on-photo); text-align: left; scroll-snap-align: start; }
 .home-body .mood img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .home-body .mood::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--scrim), transparent); }
 .home-body .mood-in { position: absolute; z-index: 1; inset: auto var(--s-3) var(--s-3); display: grid; gap: var(--s-1); }

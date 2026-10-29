@@ -1,6 +1,6 @@
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../../shared/const/routes.const.ts';
-import { navigate } from '../../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../../shared/router/hashRoute.ts';
 import { Icon } from '../../../../shared/ui/Icon.tsx';
 import { IconButton } from '../../../../shared/ui/IconButton.tsx';
 import { useDiscover } from '../../hooks/DiscoverProvider.tsx';
@@ -17,7 +17,7 @@ export function DeckBar({ dest, adding }: { readonly dest: DestinationDetail; re
   const picked = pickedOf(state, dest.places).length;
   return (
     <div className="deckbar pad-x">
-      <IconButton icon="chevron-left" label={COPY.common.back} onClick={() => (adding ? adding.onDone() : navigate(VIEW.DEST, dest.id))} />
+      <IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} />
       <div className="mid">
         <h1>{adding ? adding.title : dest.name}</h1>
         <p className="note">{adding ? COPY.deck.addingNote : fill(COPY.deck.seen, { seen, total: dest.places.length })}</p>

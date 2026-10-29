@@ -5,26 +5,25 @@ import { useIsWide } from '../shared/hooks/useMediaQuery.ts';
 import { navigate, replaceRoute, useRoute } from '../shared/router/hashRoute.ts';
 import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
-import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, HomeScreen, PickedScreen, PlaceSheetProvider, useDiscover, useDestination, pickedOf } from '../features/discover/index.ts';
+import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, HomeScreen, PickedScreen, PlaceSheetProvider, useDiscover } from '../features/discover/index.ts';
 import type { AddingMode, PlaceView } from '../features/discover/index.ts';
 import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
 import { SettingsScreen } from '../features/settings/index.ts';
 import { OnboardScreen, OnboardingProvider, useOnboarding } from '../features/onboarding/index.ts';
-import { TemplatesSection } from '../features/templates/index.ts';
 import { CreateTripSheet, ExportScreen, JoinScreen, TodayScreen, TripScreen, TripsProvider, TripsScreen, useTrips } from '../features/trips/index.ts';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
 import { initializeLook } from './look.ts';
+import { RouteEscape } from './RouteEscape.tsx';
 
 void initializeLook();
 
 const DestinationPickerScreen = lazy(() => import('../features/discover/components/DestinationPickerScreen.tsx'));
 
 /** Số nơi đã quẹt phải, để hiện trên tab "Đã chọn". */
-function usePickedCount(destId: string): number {
+function usePickedCount(): number {
   const { state } = useDiscover();
-  const { state: destination } = useDestination(destId);
-  return destination.status === 'ready' ? pickedOf(state, destination.data.places).length : 0;
+  return Object.values(state.decisions).filter(decision => decision === 'like').length;
 }
 
 /** Chế độ "thêm địa điểm vào chuyến" của bộ thẻ khi địa chỉ có mã chuyến; null nếu không có chuyến đó. */
@@ -74,7 +73,7 @@ function Shell() {
   useExpiredGate(route.view);
   const wide = useIsWide();
   const { destId: currentDestId, destinations, select } = useCurrentDestination();
-  const pickedCount = usePickedCount(currentDestId);
+  const pickedCount = usePickedCount();
   const [create, setCreate] = useState<readonly PlaceView[] | null>(null);
   const hideBar = HIDE_TABBAR_ALWAYS.includes(route.view) || (!wide && HIDE_TABBAR_ON_PHONE.includes(route.view));
   useEffect(() => {
@@ -84,9 +83,10 @@ function Shell() {
   return (
     <div className="app">
       <ScreenHost view={route.view} routeKey={`${route.view}|${route.id ?? ''}`} noBar={hideBar}>
+        <RouteEscape view={route.view} />
         {route.view === VIEW.ONBOARD ? <OnboardScreen /> : null}
         {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<p role="status">{COPY.common.loading}</p>}><DestinationPickerScreen /></Suspense> : null}
-        {route.view === VIEW.EXPLORE ? <HomeScreen key={currentDestId} destId={currentDestId} extra={<TemplatesSection destId={currentDestId} />} /> : null}
+        {route.view === VIEW.EXPLORE ? <HomeScreen key={currentDestId} destId={currentDestId} /> : null}
         {route.view === VIEW.DEST ? <DestScreen destId={destId} onCreate={() => setCreate([])} /> : null}
         {route.view === VIEW.DECK ? <DeckRoute key={destId} destId={destId} tripId={route.sub} /> : null}
         {route.view === VIEW.PICKED ? <PickedScreen key={currentDestId} destId={currentDestId} onSave={setCreate} /> : null}

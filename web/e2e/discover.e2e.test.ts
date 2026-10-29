@@ -118,6 +118,16 @@ test('chi tiết địa điểm: hộp thoại có nhãn, Esc đóng và trả f
   await page.keyboard.press('Escape');
   await dialog.waitFor({ state: 'detached' });
   assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('aria-label')), 'Xem chi tiết', 'focus về nút đã mở');
+  assert.match(page.url(), /#\/deck\/ha-giang$/, 'Escape chỉ đóng chi tiết, giữ màn nền');
+  for (const close of ['button', 'browser-back']) {
+    await infoBtn.click();
+    await dialog.waitFor();
+    if (close === 'button') await dialog.getByRole('button', { name: 'Đóng', exact: true }).click();
+    else await page.evaluate(() => history.back());
+    await dialog.waitFor({ state: 'detached' });
+    assert.match(page.url(), /#\/deck\/ha-giang$/, `${close} giữ màn nền`);
+    assert.equal(await infoBtn.evaluate(el => document.activeElement === el), true, `${close} trả focus về nút đã mở`);
+  }
   assert.deepEqual(errors, []);
   await ctx.close();
 });

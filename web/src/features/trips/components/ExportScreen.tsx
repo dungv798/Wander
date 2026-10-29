@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
-import { VIEW } from '../../../shared/const/routes.const.ts';
 import { dayMonth } from '../../../shared/lib/dates.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle, WarnBox } from '../../../shared/ui/Controls.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
@@ -133,7 +132,7 @@ export function ExportScreen({ tripId }: { readonly tripId: string }) {
   const trip = find(tripId);
   const [kind, setKind] = useState<ExportKind>('image');
   if (!trip) {
-    return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={() => navigate(VIEW.TRIPS)}>{T.view.backToList}</Button>} />;
+    return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={goBack}>{T.view.backToList}</Button>} />;
   }
   return (
     <DestinationGate destId={trip.destinationId}>
@@ -144,7 +143,7 @@ export function ExportScreen({ tripId }: { readonly tripId: string }) {
           <>
             <div className="pagehead pad-x">
               <div>
-                <IconButton icon="chevron-left" label={T.export.back} onClick={() => navigate(VIEW.TRIP, trip.id, 'ov')} />
+                <IconButton icon="chevron-left" label={T.export.back} onClick={goBack} />
               </div>
               <p className="note">{trip.name}</p>
               <h1>{T.export.title}</h1>

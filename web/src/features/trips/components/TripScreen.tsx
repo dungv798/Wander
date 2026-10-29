@@ -3,7 +3,7 @@ import { MEDIA } from '../../../shared/const/app.const.ts';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { useMediaQuery } from '../../../shared/hooks/useMediaQuery.ts';
-import { navigate, replaceRoute } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate, replaceRoute } from '../../../shared/router/hashRoute.ts';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
@@ -101,7 +101,7 @@ function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonl
     <section className="mapbox">
       <TripMap coveredBottom={covered} />
       <div className="top">
-        <IconButton icon="chevron-left" label={T.view.back} onClick={() => navigate(VIEW.TRIPS)} />
+        <IconButton icon="chevron-left" label={T.view.back} onClick={goBack} />
         <div className="r">
           <IconButton icon="sun" label={T.today.open} onClick={() => navigate(VIEW.TODAY, tripId)} />
           <IconButton icon="share-2" label={T.export.open} onClick={() => navigate(VIEW.EXPORT, tripId)} />
@@ -177,7 +177,7 @@ export function TripScreen({ tripId, sub }: { readonly tripId: string; readonly 
   useGoneGuard(tripId);
   const trip = find(tripId);
   if (!trip) {
-    return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={() => navigate(VIEW.TRIPS)}>{T.view.backToList}</Button>} />;
+    return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={goBack}>{T.view.backToList}</Button>} />;
   }
   return <DestinationGate destId={trip.destinationId}>{(dest) => <TripContent key={trip.id} trip={trip} dest={dest} sub={sub} />}</DestinationGate>;
 }

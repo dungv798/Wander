@@ -1,6 +1,8 @@
 import { useSyncExternalStore } from 'react';
 import { DEFAULT_DESTINATION_ID, VIEW } from '../const/routes.const.ts';
 import type { ViewName } from '../const/routes.const.ts';
+import { parentRoute, routeDepth, withRouteDepth } from './backNavigation.ts';
+import { isOverlayEntry, withoutOverlay } from './overlayHistory.ts';
 
 /**
  * Một tuyến đã phân tích: tên màn, mã tham số chính (mã điểm đến ở `dest`/`deck`, mã chuyến ở `trip`) và tham số phụ
@@ -22,6 +24,7 @@ const HOME: Route = { view: VIEW.EXPLORE, id: null, sub: null };
 const ID_PATTERN = /^[a-z0-9-]{1,64}$/;
 /** Mã liên kết mời: 256 bit base64url (43 ký tự, có chữ hoa và gạch dưới) nên có mẫu riêng. */
 const INVITE_CODE_PATTERN = /^[A-Za-z0-9_-]{43}$/;
+let latestDepth = 0;
 
 /** Phân tích `location.hash` (dạng `#/dest/ha-giang`, `#/trip/<mã>/2`) thành tuyến; địa chỉ lạ về Khám phá. */
 export function parseHash(hash: string): Route {
@@ -47,19 +50,38 @@ export function toHash(view: ViewName, id?: string | null, sub?: string | null):
 /** Chuyển màn bằng cách đổi hash (nút Back của trình duyệt hoạt động đúng). */
 export function navigate(view: ViewName, id?: string | null, sub?: string | null): void {
   const next = toHash(view, id, sub);
-  if (location.hash !== next) location.hash = next;
+  if (location.hash === next) return;
+  const state = withRouteDepth(withoutOverlay(history.state), routeDepth(history.state) + 1);
+  if (isOverlayEntry(history.state, location.hash)) history.replaceState(state, '', next);
+  else history.pushState(state, '', next);
+  window.dispatchEvent(new HashChangeEvent('hashchange'));
 }
 
 /** Thay hash không thêm mục vào lịch sử (đổi tab ngày không làm đầy nút Back). */
 export function replaceRoute(view: ViewName, id?: string | null, sub?: string | null): void {
-  history.replaceState(null, '', toHash(view, id, sub));
+  history.replaceState(withoutOverlay(history.state), '', toHash(view, id, sub));
   window.dispatchEvent(new HashChangeEvent('hashchange'));
+}
+
+/** Về đúng mục trước trong ứng dụng; mở liên kết trực tiếp thì thay bằng màn cha, tránh vòng lặp Back. */
+export function goBack(): void {
+  if (isOverlayEntry(history.state, location.hash) || routeDepth(history.state) > 0) { history.back(); return; }
+  const route = parseHash(location.hash);
+  const parent = parentRoute(route.view, route.id);
+  replaceRoute(parent.view, parent.id);
 }
 
 /** Đăng ký nghe đổi hash. */
 function subscribe(onChange: () => void): () => void {
-  window.addEventListener('hashchange', onChange);
-  return () => window.removeEventListener('hashchange', onChange);
+  if (history.state === null) history.replaceState(withRouteDepth(null, latestDepth), '');
+  /** Đánh dấu cả liên kết hash gốc; mục Back/Forward đã có state được giữ nguyên. */
+  const changed = (event: HashChangeEvent): void => {
+    if (event.oldURL && history.state === null) history.replaceState(withRouteDepth(null, latestDepth + 1), '');
+    latestDepth = routeDepth(history.state);
+    onChange();
+  };
+  window.addEventListener('hashchange', changed);
+  return () => window.removeEventListener('hashchange', changed);
 }
 
 /** Tuyến hiện tại; render lại khi hash đổi. */

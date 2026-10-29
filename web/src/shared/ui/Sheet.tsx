@@ -39,13 +39,15 @@ export function Sheet({ label, onClose, asDrawer = false, full = false, children
     document.body.classList.toggle(DRAWER_BODY_CLASS, drawer);
     return () => {
       document.body.classList.remove(DRAWER_BODY_CLASS);
-      if (!drawer) opener?.focus?.();
+      opener?.focus?.();
     };
   }, [drawer]);
 
   /** Esc đóng; Tab xoay vòng trong hộp thoại (không áp dụng cho ngăn kéo). */
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
     if (e.key === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
       onClose();
       return;
     }

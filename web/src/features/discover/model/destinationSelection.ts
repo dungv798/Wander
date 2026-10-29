@@ -5,6 +5,12 @@ import { DESTINATION_ID_PATTERN, DESTINATION_STORAGE_KEY } from './destination.c
 interface SearchableDestination { readonly id: string; readonly name: string; readonly region: string }
 type DestinationStorage = Pick<Storage, 'getItem' | 'setItem'>;
 
+/** Phân biệt lựa chọn thật với mã dự phòng kỹ thuật; catalog đang tải vẫn giữ mã đúng dạng. */
+export function selectedDestination(saved: unknown, destinations?: readonly { readonly id: string }[]): string | null {
+  if (typeof saved !== 'string' || !DESTINATION_ID_PATTERN.test(saved)) return null;
+  return destinations === undefined || destinations.some(destination => destination.id === saved) ? saved : null;
+}
+
 /** So khớp tên hoặc vùng không dấu, giữ nguyên thứ tự biên tập. */
 export function filterDestinations<T extends SearchableDestination>(destinations: readonly T[], query: string): T[] {
   const normalized = normalizeSearch(query);

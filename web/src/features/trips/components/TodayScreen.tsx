@@ -4,7 +4,7 @@ import { IS_DEV } from '../../../shared/const/env.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { useNow } from '../../../shared/hooks/useNow.ts';
 import { dayLabel, todayLocal } from '../../../shared/lib/dates.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
@@ -99,7 +99,7 @@ function TodayFor({ trip }: { readonly trip: Trip }) {
         <>
           <div className="pagehead pad-x">
             <div>
-              <IconButton icon="chevron-left" label={T.today.back} onClick={() => navigate(VIEW.TRIP, trip.id, 'ov')} />
+              <IconButton icon="chevron-left" label={T.today.back} onClick={goBack} />
             </div>
             <p className="note">{fill(T.today.eyebrow, { trip: trip.name })}</p>
             <h1>{T.today.title}</h1>
@@ -127,7 +127,7 @@ export function TodayScreen({ tripId }: { readonly tripId: string | null }) {
   const now = useNow(MINUTE_MS);
   const trip = tripId ? find(tripId) : pickTodayTrip(state.trips, todayLocal(new Date(now)));
   if (!trip) {
-    return <EmptyState pageTitle role="status" title={T.today.noTrip.title} text={T.today.noTrip.text} actions={<Button onClick={() => navigate(VIEW.TRIPS)}>{T.today.noTrip.action}</Button>} />;
+    return <EmptyState pageTitle role="status" title={T.today.noTrip.title} text={T.today.noTrip.text} actions={<Button onClick={goBack}>{T.today.noTrip.action}</Button>} />;
   }
   return <TodayFor key={trip.id} trip={trip} />;
 }

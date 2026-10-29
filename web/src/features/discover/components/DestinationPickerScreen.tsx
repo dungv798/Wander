@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
 import { TerrainMapView } from '../../../shared/map/TerrainMapView.tsx';
 import type { MapFit } from '../../../shared/map/TerrainMapView.tsx';
 import type { MapMarker } from '../../../shared/map/map.types.ts';
@@ -26,9 +26,6 @@ export default function DestinationPickerScreen() {
     ? [{ id: target.id, lat: target.lat, lon: target.lon, label: target.name, kind: 'hub' }] : [], [target]);
   const fit = useMemo<MapFit>(() => ({ ids: markers.map((marker) => marker.id), options: { maxZoom: DESTINATION_SEARCH_ZOOM } }), [markers]);
   useEffect(() => {
-    input.current?.focus();
-  }, []);
-  useEffect(() => {
     const timer = window.setTimeout(() => setSettled(query), DESTINATION_SEARCH_DEBOUNCE_MS);
     return () => window.clearTimeout(timer);
   }, [query]);
@@ -39,7 +36,7 @@ export default function DestinationPickerScreen() {
   }
   /** Mũi tên đi giữa ô tìm và các dòng; Escape trở về trang chủ. */
   function onKey(event: KeyboardEvent, index: number): void {
-    if (event.key === 'Escape') navigate(VIEW.EXPLORE);
+    if (event.key === 'Escape') { event.preventDefault(); goBack(); }
     if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
     event.preventDefault();
     const next = event.key === 'ArrowDown' ? Math.min(index + 1, matches.length - 1) : index - 1;
@@ -49,7 +46,7 @@ export default function DestinationPickerScreen() {
   return (
     <section className="destination-picker">
       <header className="destination-picker-header">
-        <IconButton icon="arrow-back-up" label={COPY.common.back} onClick={() => navigate(VIEW.EXPLORE)} />
+        <IconButton icon="arrow-back-up" label={COPY.common.back} onClick={goBack} />
         <h1>{COPY.destinations.title}</h1>
       </header>
       <label className="destination-picker-search">

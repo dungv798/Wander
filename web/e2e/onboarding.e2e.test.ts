@@ -100,7 +100,7 @@ test('Bỏ qua ở cảnh đầu cũng nhớ đã xem; liên kết sâu không b
 
 test('Lịch mẫu (đã được PO duyệt 27/10: không còn nhãn nháp), xem theo ngày, dùng lịch này tạo chuyến có các nơi xếp đúng ngày và thứ tự', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '/#/', true);
+  const page = await open(ctx, '/#/dest/ha-giang', true);
   await page.locator('.tplcard').first().waitFor();
   assert.equal(await page.locator('.tplcard .chip', { hasText: 'Bản nháp' }).count(), 0, 'lịch đã duyệt không còn nhãn Bản nháp');
   await page.locator('.tplcard').first().click();
@@ -130,7 +130,7 @@ test('Lịch mẫu (đã được PO duyệt 27/10: không còn nhãn nháp), xe
 
 test('Lịch mẫu có ngày chuyển tiếp (không địa điểm mới) vẫn tạo chuyến đủ số ngày', async () => {
   const { ctx, errors } = await phone();
-  const page = await open(ctx, '/#/', true);
+  const page = await open(ctx, '/#/dest/ha-giang', true);
   await page.locator('.tplcard', { hasText: 'Tây Côn Lĩnh' }).click();
   const dialog = page.getByRole('dialog');
   await dialog.getByText('Ngày dành cho chặng trước, chưa có nơi mới.').waitFor();

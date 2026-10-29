@@ -10,7 +10,7 @@ const selected = analysis.rows.filter(r => analysis.selection[r.destination].inc
 const extremes = [selected[0], selected.at(-1)];
 // Phạm vi hero chỉ đo ảnh thật; phép quét nền bỏ bóng chữ không chứng minh được halo của nhãn kính.
 const heroOnly = process.argv.includes('--hero-only');
-const outputDir = '.logs/home-v3/fix';
+const outputDir = '.logs/ux-polish';
 fs.mkdirSync(outputDir, { recursive: true });
 const server = await createServer({ root: path.resolve('web'), server: { port: 0 }, logLevel: 'error' });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
@@ -31,6 +31,7 @@ try {
   for (const item of heroOnly ? extremes : [...extremes, { file: 'white' }, { file: 'black' }]) {
     await page.evaluate(async file => {
       const img = document.querySelector('.home-hero img.is-active');
+      img.style.visibility = '';
       if (file === 'white' || file === 'black') {
         img.style.visibility = 'hidden';
         document.querySelector('.home-hero-photos').style.background = file;
@@ -40,7 +41,7 @@ try {
       tab.style.top = '140px'; tab.style.bottom = 'auto';
     }, item.file);
     const boxes = await page.evaluate(() => {
-      const selectors = ['.home-hero h1', '.home-hero-tagline', '.home-hero-brand', '.home-hero .search span', '#tabbar .tab span:not(.dot)'];
+      const selectors = ['.home-hero h1', '.home-hero-tagline', '.home-hero-brand', '.home-hero .search span', '.home-hero .search svg', '#tabbar .tab span:not(.dot)'];
       return selectors.flatMap(selector => [...document.querySelectorAll(selector)].map(el => {
         const rect = el.getBoundingClientRect(), color = getComputedStyle(el).color;
         el.style.color = 'transparent'; el.style.textShadow = 'none';

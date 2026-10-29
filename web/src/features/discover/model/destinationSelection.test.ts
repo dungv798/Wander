@@ -1,8 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { filterDestinations, resolveDestination, readDestination, writeDestination } from './destinationSelection.ts';
+import { filterDestinations, resolveDestination, selectedDestination, readDestination, writeDestination } from './destinationSelection.ts';
 
 const destinations = [{ id: 'da-lat', name: 'Đà Lạt', region: 'Tây Nguyên' }, { id: 'ha-giang', name: 'Hà Giang', region: 'Đông Bắc' }];
+test('chưa chọn và mã hỏng giữ chế độ Việt Nam; mã dự phòng không trở thành lựa chọn thật', () => {
+  for (const value of [null, '', '../da-lat', {}, 12]) assert.equal(selectedDestination(value), null);
+  assert.equal(selectedDestination('da-lat'), 'da-lat');
+  assert.equal(selectedDestination('da-lat', destinations), 'da-lat');
+  assert.equal(selectedDestination('ma-la', destinations), null);
+  assert.equal(selectedDestination('da-lat', []), null);
+  assert.equal(selectedDestination(null, destinations), null);
+  assert.equal(resolveDestination(null, destinations), 'ha-giang', 'route/API cũ vẫn có dự phòng kỹ thuật');
+});
 test('mã lưu hợp lệ được dùng ngay khi catalog chưa tải; chỉ xác thực tồn tại khi đã tải', () => {
   assert.equal(resolveDestination('da-lat', undefined), 'da-lat');
   assert.equal(resolveDestination('da-lat', destinations), 'da-lat');

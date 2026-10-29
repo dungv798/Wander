@@ -2,6 +2,8 @@ import type { ReactNode } from 'react';
 import { ApiError } from '../../../shared/api/ApiError.ts';
 import { COPY } from '../../../shared/const/copy.vi.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
+import { IconButton } from '../../../shared/ui/IconButton.tsx';
+import { goBack } from '../../../shared/router/hashRoute.ts';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { ScreenSkeleton } from '../../../shared/ui/Skeleton.tsx';
 import { useDestination } from '../hooks/useDestination.ts';
@@ -27,7 +29,7 @@ export function DestinationGate({ destId, inDeck = false, children }: Destinatio
         role="alert"
         title={notFound ? COPY.state.notFoundTitle : COPY.state.loadErrorTitle}
         text={notFound ? COPY.state.notFoundText : COPY.state.loadErrorText}
-        actions={<Button onClick={retry}>{COPY.common.retry}</Button>}
+        actions={<><IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} /><Button onClick={retry}>{COPY.common.retry}</Button></>}
       />
     );
   }

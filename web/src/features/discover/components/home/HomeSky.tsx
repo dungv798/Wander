@@ -20,6 +20,7 @@ export function HomeSky({ dest }: { readonly dest: DestinationDetail }) {
       <a className="home-hero-link" href={`#/${VIEW.DECK}/${dest.id}`} aria-label={fill(COPY.home.exploreDestination, { dest: dest.name })} />
       <div className="home-hero-content">
         <p className="home-hero-brand">{COPY.brand.name}</p>
+        <button className="pill home-destination-switch" type="button" aria-label={fill(COPY.home.changeDestination, { dest: dest.name })} onClick={() => navigate(VIEW.DESTINATIONS)}>{dest.name}<span aria-hidden="true">{COPY.home.destinationChevron}</span></button>
         <h1>{dest.name}</h1>
         <p className="home-hero-tagline">{dest.tagline}</p>
         <div className="home-hero-actions">

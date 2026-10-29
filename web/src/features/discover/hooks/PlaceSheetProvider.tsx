@@ -1,6 +1,7 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useRoute } from '../../../shared/router/hashRoute.ts';
+import { isOverlayEntry, withOverlay } from '../../../shared/router/overlayHistory.ts';
 
 /**
  * Nội dung thêm của tờ chi tiết do màn gọi truyền vào (ví dụ chuyến đi: tóm tắt mục + nút "Chọn ngày"). Tính năng khám phá
@@ -32,16 +33,31 @@ export function PlaceSheetProvider({ children }: { readonly children: ReactNode 
   const route = useRoute();
   const routeKey = `${route.view}|${route.id ?? ''}|${route.sub ?? ''}`;
   const [opened, setOpened] = useState<{ id: string; key: string; slot: PlaceSlot | null } | null>(null);
+  const closing = useRef(false);
+  useEffect(() => {
+    /** Back đóng tờ phủ trên cùng URL trước khi người dùng rời màn nền. */
+    const popped = (): void => { closing.current = false; setOpened(null); };
+    window.addEventListener('popstate', popped);
+    return () => window.removeEventListener('popstate', popped);
+  }, []);
   if (opened && opened.key !== routeKey) setOpened(null); // quên hẳn khi rời màn, để quay lại không tự mở lại
   const placeId = opened && opened.key === routeKey ? opened.id : null;
   const open = useCallback(
     /** Mở chi tiết địa điểm theo mã, gắn với màn hiện tại. */
-    (id: string, slot?: PlaceSlot) => setOpened({ id, key: routeKey, slot: slot ?? null }),
+    (id: string, slot?: PlaceSlot) => {
+      closing.current = false;
+      if (!isOverlayEntry(history.state, location.hash)) history.pushState(withOverlay(history.state, location.hash), '');
+      setOpened({ id, key: routeKey, slot: slot ?? null });
+    },
     [routeKey],
   );
   const close = useCallback(
     /** Đóng chi tiết. */
-    () => setOpened(null),
+    () => {
+      if (closing.current) return;
+      if (isOverlayEntry(history.state, location.hash)) { closing.current = true; history.back(); }
+      else setOpened(null);
+    },
     [],
   );
   const value = useMemo(() => ({ placeId, slot: opened?.slot ?? null, open, close }), [placeId, opened, open, close]);

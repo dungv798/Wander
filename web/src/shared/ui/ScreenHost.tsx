@@ -14,6 +14,25 @@ interface ScreenApi {
 
 const ScreenContext = createContext<ScreenApi | null>(null);
 
+/** Ghi cách tương tác để ô nhập không tự hiện vòng focus khi chạm; Tab khôi phục chỉ báo bàn phím. */
+function useFocusModality(): void {
+  useEffect(() => {
+    /** Chạm/chuột không cần vòng focus nhưng vẫn giữ focus cho công nghệ hỗ trợ. */
+    const pointer = (): void => { document.body.dataset.inputModality = 'pointer'; };
+    /** Phím điều hướng kích hoạt lại chỉ báo, kể cả khi đang ở ô nhập. */
+    const keyboard = (event: KeyboardEvent): void => {
+      if (event.key === 'Tab' || event.key.startsWith('Arrow') || event.key === 'Home' || event.key === 'End') document.body.dataset.inputModality = 'keyboard';
+    };
+    window.addEventListener('pointerdown', pointer, true);
+    window.addEventListener('keydown', keyboard, true);
+    return () => {
+      window.removeEventListener('pointerdown', pointer, true);
+      window.removeEventListener('keydown', keyboard, true);
+      delete document.body.dataset.inputModality;
+    };
+  }, []);
+}
+
 interface ScreenHostProps {
   /** Tên màn, đặt vào `data-view` (CSS dùng để định kiểu). */
   readonly view: string;
@@ -28,6 +47,7 @@ interface ScreenHostProps {
  * để màn con chỉ khai báo mong muốn qua `useScreenFlag` thay vì chạm DOM của nơi khác.
  */
 export function ScreenHost({ view, routeKey, noBar, children }: ScreenHostProps) {
+  useFocusModality();
   const ref = useRef<HTMLElement | null>(null);
 
   const setFlag = useCallback(

@@ -71,7 +71,10 @@
   border: var(--glass-border) solid var(--glass-edge);
 }
 :root:not([data-look='classic']) :is(#screen, .panel) .round.r .ic { color: var(--on-cta); background: transparent; box-shadow: none; filter: none; }
-:root:not([data-look='classic']) :is(button, input, a):focus-visible { outline: var(--focus-width) solid var(--ink-fixed); outline-offset: var(--s-1); }
+:root :focus:not(:focus-visible) { outline: none; }
+:root :is(button, input, a, select, textarea, [tabindex]):focus-visible { outline: var(--focus-width) solid var(--focus); outline-offset: var(--s-1); }
+:root :is(h1, h2, [role='dialog'])[tabindex='-1']:focus { outline: none; }
+:root body[data-input-modality='pointer'] :focus-visible { outline: none; }
 :root:not([data-look='classic']) .sheet { -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 /* Mép kính độc lập: mask bỏ lòng, không che chữ và không bắt sự kiện.
@@ -95,11 +98,13 @@
 /* Một viên kính liên tục; chỉ vùng chọn có màu Nắng vàng xuyên nền. */
 :root:not([data-look='classic']) .home-hero .search {
   position: absolute;
-  background: var(--home-search-surface);
+  color: var(--white);
+  background: var(--home-search-reflection), var(--home-search-surface);
   -webkit-backdrop-filter: blur(var(--glass-search-blur)) saturate(var(--home-search-saturation));
   backdrop-filter: blur(var(--glass-search-blur)) saturate(var(--home-search-saturation));
   text-shadow: var(--home-search-shadow);
 }
+:root:not([data-look='classic']) .home-hero .search .ic { color: var(--white); }
 :root:not([data-look='classic']) #tabbar .tab { border: 0; box-shadow: none; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; text-decoration: none; }
 :root:not([data-look='classic']) #tabbar .tab::before { display: none; }
 :root:not([data-look='classic']) #tabbar .tab[aria-current='page'] { background: var(--glass-sun-selection); border: 0; text-decoration: none; }
@@ -108,7 +113,10 @@
 :root:not([data-look='classic']) :is(.maplibregl-ctrl-group button, .destination-picker-search input) { border-color: var(--border-ctrl); }
 :root:not([data-look='classic']) .maplibregl-ctrl-group button { color: var(--ink-fixed); background: var(--glass-highlight), var(--glass-label-surface); }
 /* Tiêu đề là dải kính liên tục, bỏ khung hộp và bóng nặng quanh cả hàng. */
-:root:not([data-look='classic']) :is(.deckbar, .pagehead, .destination-picker-header) { border: 0; box-shadow: none; }
+:root:not([data-look='classic']) #screen :is(.deckbar, .pagehead, .destination-picker-header) { border: 0; box-shadow: none; }
+:root:not([data-look='classic']) #screen .sheetbody { border: 0; box-shadow: var(--header-shadow); }
+:root .route-close { position: absolute; z-index: var(--z-sticky); top: var(--s-4); left: var(--s-4); }
+:root #screen[data-view='onboard'] .route-close { left: auto; right: var(--s-4); top: calc(var(--tap) + var(--s-4)); }
 :root:not([data-look='classic']) #screen.immersive .deckbar { background: var(--glass-photo-scrim); }
 :root:not([data-look='classic']) .card .credit-btn { position: relative; }
 

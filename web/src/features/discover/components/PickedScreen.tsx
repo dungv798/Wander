@@ -5,6 +5,8 @@ import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { useDiscover } from '../hooks/DiscoverProvider.tsx';
+import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
+import { useResource } from '../../../shared/hooks/useResource.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import { CATEGORY_ICON } from '../model/discover.const.ts';
 import type { DestinationDetail, PlaceView } from '../model/Catalog.types.ts';
@@ -25,11 +27,12 @@ function PickedHead({ dest }: { readonly dest: DestinationDetail }) {
 }
 
 /** Lưới các nơi đã quẹt phải: chạm để xem chi tiết, nút ✕ để bỏ chọn, thanh dưới để lưu thành chuyến đi. */
-function PickedContent({ dest, onSave }: { readonly dest: DestinationDetail; readonly onSave: (picked: readonly PlaceView[]) => void }) {
+function PickedContent({ dest, onSave, showEmpty }: { readonly dest: DestinationDetail; readonly onSave: (picked: readonly PlaceView[]) => void; readonly showEmpty: boolean }) {
   const { state, actions } = useDiscover();
   const sheet = usePlaceSheet();
   const picked = useMemo(() => pickedOf(state, dest.places), [state, dest.places]);
   if (!picked.length) {
+    if (!showEmpty) return null;
     return (
       <>
         <PickedHead dest={dest} />
@@ -75,5 +78,13 @@ function PickedContent({ dest, onSave }: { readonly dest: DestinationDetail; rea
 
 /** Màn "Đã chọn": những nơi đã quẹt phải, chưa lưu thành chuyến đi (lưu trên máy). */
 export function PickedScreen({ destId, onSave }: { readonly destId: string; readonly onSave: (picked: readonly PlaceView[]) => void }) {
-  return <DestinationGate destId={destId}>{(dest) => <PickedContent dest={dest} onSave={onSave} />}</DestinationGate>;
+  const { destinations, select } = useCurrentDestination();
+  const { catalog, state } = useDiscover();
+  const { state: loaded } = useResource(signal => Promise.all(destinations.map(destination => catalog.destination(destination.id, signal))), [catalog, destinations]);
+  const others = loaded.status === 'ready' ? loaded.data.filter(destination => destination.id !== destId && pickedOf(state, destination.places).length > 0) : [];
+  return <>
+    {loaded.status === 'error' ? <p role="alert" className="pad-x">{COPY.state.loadErrorText}</p> : null}
+    <DestinationGate destId={destId}>{(dest) => <PickedContent dest={dest} onSave={onSave} showEmpty={!others.length} />}</DestinationGate>
+    {others.map(dest => <DestinationGate key={dest.id} destId={dest.id}>{detail => <PickedContent dest={detail} onSave={picked => { select(dest.id); onSave(picked); }} showEmpty={false} />}</DestinationGate>)}
+  </>;
 }

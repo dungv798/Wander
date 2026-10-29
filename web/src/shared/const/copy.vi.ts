@@ -42,6 +42,11 @@ export const COPY = {
     comingText: 'Giao diện chuyến đi sẽ có ở lát tiếp theo của pha dựng giao diện.',
   },
   home: {
+    vietnam: 'Khám phá Việt Nam',
+    otherDestinations: 'Điểm đến khác',
+    changeDestination: 'Đổi điểm đến: {dest}',
+    destinationChevron: '▾',
+    pickedDestinations: 'Điểm đến có nơi đã chọn',
     mapTitle: 'Quanh đây có gì?',
     exploreAction: 'Bắt đầu khám phá',
     exploreDestination: 'Khám phá {dest}',

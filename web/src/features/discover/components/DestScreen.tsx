@@ -3,10 +3,11 @@ import { VIEW } from '../../../shared/const/routes.const.ts';
 import { useCountUp } from '../../../shared/hooks/useCountUp.ts';
 import { useReveal } from '../../../shared/hooks/useReveal.ts';
 import { monthRangeLabel } from '../../../shared/lib/text.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
+import { TemplatesSection } from '../../templates/index.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import { COVER_FOCAL, DEFAULT_FOCAL, CATEGORY_ICON } from '../model/discover.const.ts';
 import type { DestinationDetail } from '../model/Catalog.types.ts';
@@ -83,7 +84,7 @@ function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; rea
       <section className="dhero">
         <img alt="" src={dest.coverUrl} style={{ objectPosition: focal }} />
         <div className="top">
-          <IconButton icon="chevron-left" label={COPY.common.back} onClick={() => navigate(VIEW.EXPLORE)} />
+          <IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} />
         </div>
         <div className="in">
           <p className="dhero-region">
@@ -108,6 +109,7 @@ function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; rea
         <DestPeek dest={dest} />
         <h2 className="h2">{fill(COPY.dest.guideTitle, { dest: dest.name })}</h2>
         <GuideSections dest={dest} />
+        <TemplatesSection destId={dest.id} />
       </div>
     </>
   );

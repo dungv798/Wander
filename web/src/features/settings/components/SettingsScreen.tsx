@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { VIEW } from '../../../shared/const/routes.const.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
@@ -61,7 +61,7 @@ export function SettingsScreen() {
     <>
       <div className="pagehead pad-x">
         <div>
-          <IconButton icon="chevron-left" label={T.back} onClick={() => navigate(VIEW.TRIPS)} />
+          <IconButton icon="chevron-left" label={T.back} onClick={goBack} />
         </div>
         <p className="note">{T.eyebrow}</p>
         <h1>{T.title}</h1>

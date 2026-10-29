@@ -74,6 +74,7 @@ export function PlaceSheet({ dest, inDeck }: { readonly dest: DestinationDetail;
   const { placeId, close } = usePlaceSheet();
   if (!placeId) return null;
   const place = placeById(dest, placeId);
+  if (!place) return null;
   return (
     <Sheet label={place?.name ?? COPY.place.about} onClose={close} asDrawer={inDeck}>
       <PlaceContent key={placeId} dest={dest} placeId={placeId} inDeck={inDeck} />

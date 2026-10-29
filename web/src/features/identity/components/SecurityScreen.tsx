@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { VIEW } from '../../../shared/const/routes.const.ts';
-import { navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
@@ -8,12 +8,12 @@ import { useIdentity } from '../hooks/identityContext.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
 import { ActivitySection, CodeSection, DevicesSection, PairSection } from './SecuritySections.tsx';
 
-/** Đầu trang Bảo mật: nút quay lại (về danh sách chuyến đi), tiêu đề và lời dẫn. */
+/** Đầu trang Bảo mật: quay lại màn trước, hoặc Khám phá khi mở URL trực tiếp. */
 function SecurityHead() {
   return (
     <div className="pagehead pad-x">
       <div>
-        <IconButton icon="chevron-left" label={C.security.back} onClick={() => navigate(VIEW.TRIPS)} />
+        <IconButton icon="chevron-left" label={C.security.back} onClick={goBack} />
       </div>
       <p className="note">{C.security.eyebrow}</p>
       <h1>{C.security.title}</h1>

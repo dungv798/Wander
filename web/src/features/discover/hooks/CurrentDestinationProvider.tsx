@@ -1,12 +1,13 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useResource } from '../../../shared/hooks/useResource.ts';
-import { readDestination, resolveDestination, writeDestination } from '../model/destinationSelection.ts';
+import { readDestination, resolveDestination, selectedDestination, writeDestination } from '../model/destinationSelection.ts';
 import type { DestinationSummary } from '../model/Catalog.types.ts';
 import { useDiscover } from './DiscoverProvider.tsx';
 
 interface CurrentDestinationValue {
   readonly destId: string;
+  readonly selectedId: string | null;
   readonly destinations: readonly DestinationSummary[];
   readonly status: 'loading' | 'error' | 'ready';
   readonly retry: () => void;
@@ -23,16 +24,15 @@ export function CurrentDestinationProvider({ children }: { readonly children: Re
   const destinations = state.status === 'ready' ? state.data : NO_DESTINATIONS;
   const loadedDestinations = state.status === 'ready' ? state.data : undefined;
   const destId = resolveDestination(saved, loadedDestinations);
-  useEffect(() => {
-    if (state.status === 'ready') writeDestination(undefined, destId);
-  }, [state.status, destId]);
+  const selectedId = selectedDestination(saved, loadedDestinations);
   /** Chỉ chọn mã hợp lệ; lưu ngay trước khi chuyển màn hoặc tải lại. */
   function select(id: string): void {
-    const valid = resolveDestination(id, loadedDestinations);
+    const valid = selectedDestination(id, loadedDestinations);
+    if (!valid) return;
     setSaved(valid);
     writeDestination(undefined, valid);
   }
-  return <CurrentDestinationContext.Provider value={{ destId, destinations, status: state.status, retry, select }}>{children}</CurrentDestinationContext.Provider>;
+  return <CurrentDestinationContext.Provider value={{ destId, selectedId, destinations, status: state.status, retry, select }}>{children}</CurrentDestinationContext.Provider>;
 }
 
 /** Đọc điểm đến hiện tại từ kho chung của ứng dụng. */
