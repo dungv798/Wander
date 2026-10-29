@@ -9,6 +9,8 @@ import { Sheet } from '../../../../shared/ui/Sheet.tsx';
 import { usePlaceSheet } from '../../hooks/PlaceSheetProvider.tsx';
 import type { DestinationDetail } from '../../model/Catalog.types.ts';
 import { placeMarkers } from '../../model/mapMarkers.ts';
+import { mapPhotoOrigin } from '../../model/mapPhotoOrigin.ts';
+import { firstPhotoUrl } from '../../model/destinationQueries.ts';
 
 const CARD_INSETS = { bottom: 26 };
 const CARD_FIT: MapFit = { ids: null, options: { animate: false, padding: 30 } };
@@ -29,8 +31,7 @@ function FullMapSheet({ dest, onClose }: { readonly dest: DestinationDetail; rea
           markers={markers}
           fit={FULL_FIT}
           onPin={(id) => {
-            onClose();
-            place.open(id);
+            place.open(id, { photoOrigin: mapPhotoOrigin(id, firstPhotoUrl(dest.places.find((p) => p.id === id)), '.mapbig') });
           }}
         />
         <IconButton className="close" icon="x" label={COPY.map.closeMap} onClick={onClose} />
@@ -56,7 +57,7 @@ export function DestMapSection({ dest, title }: { readonly dest: DestinationDeta
           </button>
         }
       />
-      <TerrainMapView className="mapcard" dest={dest.id} label={fill(COPY.map.cardTitle, { dest: dest.name })} markers={markers} insets={CARD_INSETS} fit={CARD_FIT} interactive={false} towns={false} onPin={place.open} />
+      <TerrainMapView className="mapcard" dest={dest.id} label={fill(COPY.map.cardTitle, { dest: dest.name })} markers={markers} insets={CARD_INSETS} fit={CARD_FIT} interactive={false} towns={false} onPin={(id) => place.open(id, { photoOrigin: mapPhotoOrigin(id, firstPhotoUrl(dest.places.find((p) => p.id === id)), '.mapcard') })} />
       {expanded ? <FullMapSheet dest={dest} onClose={() => setExpanded(false)} /> : null}
     </section>
   );

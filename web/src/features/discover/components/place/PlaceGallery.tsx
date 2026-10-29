@@ -1,3 +1,4 @@
+import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
@@ -8,6 +9,7 @@ import { useGallery } from '../../hooks/useGallery.ts';
 import { CreditPill } from '../CreditPill.tsx';
 import { CATEGORY_ICON } from '../../model/discover.const.ts';
 import type { PlaceView } from '../../model/Catalog.types.ts';
+import { usePlaceSheet } from '../../hooks/PlaceSheetProvider.tsx';
 
 interface PlaceGalleryProps {
   readonly place: PlaceView;
@@ -18,6 +20,10 @@ interface PlaceGalleryProps {
 
 /** Thư viện ảnh đầu tờ chi tiết: cuộn/kéo/nút/phím, số ảnh, chấm, nhãn loại, nút đóng và nút nguồn ảnh (ghi công bắt buộc). */
 export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps): ReactNode {
+  const { openingPhoto } = usePlaceSheet();
+  const photos = [...place.photos];
+  const start = photos.findIndex((photo) => photo.url === openingPhoto);
+  if (start > 0) photos.unshift(...photos.splice(start, 1));
   const n = place.photos.length;
   const { ref, index, go, pointer } = useGallery(n);
   const credit = useCreditPill(index);
@@ -30,8 +36,8 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
     <div className={`gal cat-${place.category}`}>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- vùng cuộn ngang phải focus được bằng bàn phím (WCAG 2.1.1) */}
       <div ref={ref} className="gallery" tabIndex={0} aria-label={fill(COPY.place.photosOf, { name: place.name })} {...pointer}>
-        {place.photos.map((p) => (
-          <img key={p.url} alt={place.name} src={p.url} />
+        {photos.map((p) => (
+          <RevealImage key={p.url} alt={place.name} src={p.url} />
         ))}
       </div>
       {n > 1 ? (
@@ -44,7 +50,7 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
           </button>
           <span className="gcount" aria-live="polite">{`${index + 1} / ${n}`}</span>
           <div className="dots">
-            {place.photos.map((p, k) => (
+            {photos.map((p, k) => (
               <i key={p.url} className={k === index ? 'on' : undefined} />
             ))}
           </div>
@@ -58,7 +64,7 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
       <button className="credit-btn" type="button" aria-label={COPY.place.photoCredit} onClick={credit.toggle}>
         <Icon name="info-circle" />
       </button>
-      {credit.open ? <CreditPill photo={place.photos[index]} /> : null}
+      {credit.open ? <CreditPill photo={photos[index]} /> : null}
     </div>
   );
 }

@@ -80,9 +80,49 @@ test('lưu các nơi đã chọn thành chuyến: nơi đó nằm ở "Chưa có
   await page.getByRole('button', { name: 'Xem đã chọn (2)' }).waitFor();
   await page.getByRole('button', { name: 'Xem đã chọn (2)' }).click();
   await page.getByRole('button', { name: /Lưu 2 địa điểm thành chuyến đi/ }).click();
-  await page.getByRole('button', { name: 'Xác nhận' }).click();
+  const dialog = page.getByRole('dialog');
+  assert.equal(await dialog.getByRole('group', { name: /Phong cách/ }).isVisible(), false);
+  await dialog.getByText('Gợi ý cuối tuần tới', { exact: true }).waitFor();
+  const start = await dialog.getByLabel(/^Ngày đi/).inputValue();
+  const end = await dialog.getByLabel(/^Ngày về/).inputValue();
+  await dialog.getByText('Tuỳ chọn thêm', { exact: true }).click();
+  assert.equal(await dialog.getByRole('group', { name: /Phong cách/ }).isVisible(), true);
+  await dialog.getByText('Tuỳ chọn thêm', { exact: true }).click();
+  for (const height of [844, 500]) {
+    await page.setViewportSize({ width: 390, height });
+    const cta = dialog.getByRole('button', { name: 'Xác nhận', exact: true });
+    await page.waitForFunction(() => (document.querySelector('[role="dialog"]')?.getBoundingClientRect().bottom ?? Infinity) <= innerHeight);
+    const box = await cta.boundingBox();
+    assert.ok(box && box.y >= 0 && box.y + box.height <= height);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await dialog.getByRole('button', { name: 'Tạo từng bước' }).click();
+  await dialog.getByRole('button', { name: 'Tiếp', exact: true }).click();
+  assert.equal(await dialog.getByLabel(/^Ngày đi/).inputValue(), start);
+  assert.equal(await dialog.getByLabel(/^Ngày về/).inputValue(), end);
+  await dialog.getByRole('button', { name: 'Quay lại', exact: true }).click();
+  await dialog.getByRole('button', { name: 'Quay lại', exact: true }).click();
+  assert.equal(await dialog.getByLabel(/^Ngày đi/).inputValue(), start);
+  await dialog.getByRole('button', { name: 'Tạo từng bước' }).click();
+  for (let step = 0; step < 5; step += 1) await dialog.getByRole('button', { name: 'Tiếp', exact: true }).click();
+  await dialog.getByText('Hãy xem lại khoảng ngày trước khi tạo chuyến.', { exact: true }).waitFor();
+  assert.match(await dialog.locator('.wzsum').innerText(), /Ngày/);
+  assert.match(await dialog.innerText(), /Nơi đã chọn:/);
+  await dialog.getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
   await page.locator('.thead h1').waitFor();
+  const toast = page.locator('.toast');
+  await toast.waitFor();
+  const target = page.getByRole('button', { name: 'Xếp giúp tôi', exact: true });
+  const a = await toast.boundingBox();
+  const b = await target.boundingBox();
+  assert.ok(a && b && (a.y + a.height <= b.y || b.y + b.height <= a.y));
+  await page.getByRole('button', { name: 'Mời bạn', exact: true }).click();
+  assert.equal(await toast.count(), 0);
+  await page.getByRole('dialog', { name: 'Người đi cùng' }).waitFor();
+  await page.getByRole('button', { name: 'Đóng', exact: true }).click();
+  await page.getByRole('button', { name: 'Chuẩn bị', exact: true }).click();
+  await page.getByLabel('Hạng mục', { exact: true }).waitFor();
   const stored = await storedTrips(page);
   assert.equal(stored.trips[0]?.items.length, 2);
   assert.ok(stored.trips[0]?.items.every((i) => i.day === null && i.placeId));
@@ -130,7 +170,7 @@ test('chi phí theo D17/D18: trống là chưa biết, 0 là biết bằng khôn
   const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
   const box = page.locator('.costbox');
   await box.waitFor();
-  assert.match((await box.locator('.bigmoney b').textContent()) ?? '', /^750\.000\s₫$/);
+  assert.match((await box.locator('.bigmoney b').textContent()) ?? '', /^Đã biết 750\.000\s₫, 4 mục chưa biết giá$/);
   assert.match((await box.textContent()) ?? '', /Chưa tính 4 mục chưa biết giá/);
   assert.match((await box.textContent()) ?? '', /1 mục đã bao gồm, không cộng vào tổng/);
   assert.match((await box.textContent()) ?? '', /còn lại 2\.250\.000\s₫/);
@@ -308,7 +348,7 @@ test('tổng tiền vượt 1.000.000.000 nghìn đồng không làm sập màn 
   }
   await page.reload();
   await page.locator('.costbox .bigmoney b').waitFor();
-  assert.match((await page.locator('.costbox .bigmoney b').textContent()) ?? '', /^1\.800\.000\.720\.000/);
+  assert.match((await page.locator('.costbox .bigmoney b').textContent()) ?? '', /^Đã biết 1\.800\.000\.720\.000/);
   assert.equal(await page.getByRole('alert').count(), 0);
   assert.deepEqual(errors, []);
   await ctx.close();
@@ -447,6 +487,31 @@ test('xóa mềm cả chuyến: xác nhận, rời danh sách (máy chủ); Hoà
   await dialog.getByRole('button', { name: 'Khôi phục' }).click();
   await page.locator('.thead h1').waitFor();
   assert.equal((await storedTrips(page)).trips.length, 1);
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('Hôm nay → cả chuyến → danh sách: ba vòng và URL trực tiếp có lối về rõ', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.locator('.thead h1').waitFor();
+  const tripHash = new URL(page.url()).hash;
+  for (let round = 0; round < 3; round += 1) {
+    await page.getByRole('button', { name: 'Hôm nay', exact: true }).click();
+    await page.getByRole('button', { name: 'Xem cả chuyến', exact: true }).click();
+    await page.getByRole('button', { name: 'Về Chuyến đi', exact: true }).click();
+    await page.waitForURL(/#\/trips$/);
+    await page.goto(baseUrl + '/' + tripHash);
+    await page.locator('.thead h1').waitFor();
+  }
+  await page.getByRole('button', { name: 'Hôm nay', exact: true }).click();
+  await page.getByRole('button', { name: 'Xem cả chuyến', exact: true }).click();
+  await page.goBack();
+  await page.waitForURL(/#\/trips$/);
+  await page.goto(baseUrl + '/' + tripHash);
+  await page.reload();
+  await page.getByRole('button', { name: 'Về Chuyến đi', exact: true }).click();
+  await page.waitForURL(/#\/trips$/);
   assert.deepEqual(errors, []);
   await ctx.close();
 });

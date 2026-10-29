@@ -3,6 +3,9 @@ export type Snap = 'peek' | 'half' | 'full';
 
 /** Thứ tự nấc từ thấp lên cao. */
 export const SNAP_ORDER: readonly Snap[] = ['peek', 'half', 'full'];
+/** Gợi ý nhẹ, chỉ lưu dấu đã dùng cử chỉ; không lưu dữ liệu chuyến đi. */
+export const SHEET_HINT = { KEY: 'wander.web.sheet-dragged.v1', TEXT: 'Kéo lên xem lịch', VALUE: '1', CLASS: 'sheet-drag-hint' } as const;
+export const SHEET_ROUTE_PARTS = 3;
 
 /** Hằng số của tờ kéo (px trừ khi ghi khác). Chuyển từ docs/ux/prototype/app/sheet.js. */
 export const SHEET = {

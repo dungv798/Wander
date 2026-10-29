@@ -149,6 +149,33 @@ test('đã chọn: lưu trên máy qua tải lại, bỏ chọn, rỗng', async 
   await ctx.close();
 });
 
+test('chi tiết dùng ảnh đang xem mở đầu và giảm chuyển động bỏ shared-element', async () => {
+  for (const reducedMotion of ['no-preference', 'reduce'] as const) {
+    const { ctx } = await phone();
+    const page = await open(ctx, '#/deck/ha-giang');
+    await page.emulateMedia({ reducedMotion });
+    const card = page.locator('.card.front');
+    await card.waitFor();
+    const box = await card.boundingBox();
+    assert.ok(box);
+    await page.mouse.click(box.x + box.width * 0.8, box.y + box.height * 0.2);
+    const photo = await card.locator('img.ph').getAttribute('src');
+    const opener = page.getByRole('button', { name: 'Xem chi tiết' });
+    await opener.click();
+    const gallery = page.locator('.panel .gallery');
+    await gallery.waitFor();
+    assert.equal(await gallery.locator('img').first().getAttribute('src'), photo);
+    assert.equal(await gallery.locator('img').count(), 3);
+    if (reducedMotion === 'reduce') {
+      assert.equal(await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length), 0);
+    }
+    await page.keyboard.press('Escape');
+    await gallery.waitFor({ state: 'detached' });
+    assert.equal(await opener.evaluate((el) => el === document.activeElement), true);
+    await ctx.close();
+  }
+});
+
 test('cẩm nang: khối mở/đóng đúng aria-expanded, danh sách mang gì đánh dấu được', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/dest/ha-giang');

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { budgetStatus, dayItems, roadKm, summarizeCosts, tripDays, unassignedItems } from './tripMath.ts';
+import { budgetStatus, costSummaryText, dayItems, roadKm, summarizeCosts, tripDays, unassignedItems } from './tripMath.ts';
 import type { TripItem } from './trip.types.ts';
 
 /** Tạo một mục mẫu, ghi đè các trường cần thử. */
@@ -62,3 +62,20 @@ test('tổng có thể vượt trần của từng mục (1.000.000.000 nghìn �
   const s = summarizeCosts({ items: [item({ costK: 900_000_000 }), item({ costK: 900_000_000 })] });
   assert.equal(s.totalK, 1_800_000_000);
 });
+
+for (const fixture of [
+  { prices: [null, null], known: 0, expected: 'Chưa có chi phí đã nhập' },
+  { prices: [0, null], known: 1, expected: 'Đã biết 0 ₫, 1 mục chưa biết giá' },
+  { prices: [120, null], known: 1, expected: 'Đã biết 120.000 ₫, 1 mục chưa biết giá' },
+]) {
+  test('chi phí hiển thị đúng độ đầy đủ: ' + fixture.expected, () => {
+    const items = fixture.prices.map((costK) => item({ costK, day: '2026-10-31' }));
+    items.push(item({ included: true, costK: 900, day: '2026-10-31' }));
+    const costs = summarizeCosts({ items });
+    assert.equal(costs.knownCount, fixture.known);
+    assert.equal(costs.includedCount, 1);
+    assert.equal(costs.totalK, fixture.prices[0] ?? 0);
+    assert.equal(costSummaryText(costs).replaceAll('\u00a0', ' '), fixture.expected);
+    assert.equal(costSummaryText(summarizeCosts({ items: dayItems({ items }, '2026-10-31') })), costSummaryText(costs));
+  });
+}

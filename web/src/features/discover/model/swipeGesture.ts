@@ -1,4 +1,5 @@
 import { SWIPE } from '../../../shared/const/app.const.ts';
+import { MOTION } from '../../../shared/ui/motion.const.ts';
 
 /** Hướng quẹt: phải = chọn, trái = bỏ qua. */
 export type SwipeDir = 'r' | 'l';
@@ -27,7 +28,7 @@ export function paintDrag(card: HTMLElement, dx: number, dy: number): void {
 
 /** Đưa thẻ về chỗ cũ có chuyển động mượt khi người dùng thả mà chưa đủ ngưỡng. */
 export function resetDrag(card: HTMLElement): void {
-  card.style.transition = `transform ${SWIPE.RETURN_MS}ms cubic-bezier(.2,.8,.2,1)`;
+  card.style.transition = window.matchMedia(MOTION.REDUCED_QUERY).matches ? 'none' : `transform ${MOTION.DURATION_MS}ms ${MOTION.EASING}`;
   card.style.transform = '';
   const r = card.querySelector<HTMLElement>(STAMP_R);
   const l = card.querySelector<HTMLElement>(STAMP_L);
@@ -54,11 +55,15 @@ export function fling(card: HTMLElement, dir: SwipeDir, reduced: boolean, done: 
   }
   PENDING.set(card, once);
   const sign = dir === 'r' ? 1 : -1;
-  card.style.transition = `transform ${SWIPE.FLING_MS}ms ease-out, opacity ${SWIPE.FLING_MS}ms`;
+  card.style.transition = `transform ${MOTION.DURATION_MS}ms ${MOTION.EASING}, opacity ${MOTION.DURATION_MS}ms ${MOTION.EASING}`;
+  if (dir === 'r') {
+    const tick = card.querySelector<HTMLElement>(STAMP_R);
+    if (tick) tick.style.opacity = '1';
+  }
   card.style.transform = `translate(${sign * SWIPE.FLING_PX}px,${SWIPE.FLING_UP_PX}px) rotate(${sign * SWIPE.FLING_ROTATE_DEG}deg)`;
   card.style.opacity = '0';
   card.parentElement?.style.setProperty(PROGRESS_VAR, '1');
-  window.setTimeout(once, SWIPE.FLING_DONE_MS);
+  window.setTimeout(once, MOTION.DURATION_MS);
 }
 
 /** Chạy ngay các quyết định của thẻ đang bay trong `root` (gọi khi màn bị gỡ để không mất lượt chọn người dùng vừa quẹt, ví dụ bấm "Lưu" ngay sau khi quẹt). */

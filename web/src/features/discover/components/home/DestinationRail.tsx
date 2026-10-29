@@ -1,3 +1,4 @@
+import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../../shared/const/routes.const.ts';
 import { navigate } from '../../../../shared/router/hashRoute.ts';
@@ -18,7 +19,7 @@ export function DestinationRail({ national = false }: { readonly national?: bool
       {status === 'error' ? <button type="button" className="btn" onClick={retry}>{COPY.common.retry}</button> : null}
       <div className="hscroll destination-rail">
         {list.map(destination => <button className="destination-card" key={destination.id} type="button" onClick={() => { select(destination.id); navigate(national ? VIEW.DECK : VIEW.EXPLORE, national ? destination.id : undefined); }}>
-          <img src={HERO_PHOTOS[destination.id]?.[0] ? `/catalog/photos/${HERO_PHOTOS[destination.id]?.[0]}` : destination.coverUrl} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
+          <RevealImage src={HERO_PHOTOS[destination.id]?.[0] ? `/catalog/photos/${HERO_PHOTOS[destination.id]?.[0]}` : destination.coverUrl} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
           <span><b>{destination.name}</b><small>{fill(COPY.common.placeCountShort, { n: destination.placeCount })}</small></span>
         </button>)}
       </div>

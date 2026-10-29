@@ -17,6 +17,8 @@ import { DEFAULT_START_WEEKDAY, DEFAULT_TRIP_DAYS } from '../model/trip.const.ts
 import { parseDates, parseMoneyField, parseTripName } from '../model/tripForms.ts';
 import { uniqueName } from '../model/tripState.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
+import { TripWizard } from './TripWizard.tsx';
+import { TripFormActions, TripFormLayout } from './TripFormLayout.tsx';
 import { TripFields } from './TripFields.tsx';
 import type { TripFormValues } from './TripFields.tsx';
 
@@ -42,11 +44,12 @@ function defaultValues(): TripFormValues {
 }
 
 /** Ba lựa chọn khi có nơi đã chọn: tạo chuyến mới, thêm vào chuyến sẵn có, hoặc để lại. */
-function ModeOption({ mode, current, title, children, onPick }: { readonly mode: Mode; readonly current: Mode; readonly title: string; readonly children: React.ReactNode; readonly onPick: (m: Mode) => void }) {
+function ModeOption({ mode, current, title, children, onPick }: { readonly mode: Mode; readonly current: Mode; readonly title: string; readonly children?: React.ReactNode; readonly onPick: (m: Mode) => void }) {
   const on = mode === current;
   return (
     <div
       className={on ? 'opt on' : 'opt'}
+      style={{ background: 'var(--surface)', boxShadow: 'none', textDecoration: 'none' }}
       role="radio"
       aria-checked={on}
       tabIndex={0}
@@ -71,8 +74,9 @@ function PickedModes({ mode, onMode, form, trips, tripId, onTrip }: { readonly m
   return (
     <div className="stack" role="radiogroup" aria-label={T.create.modeGroup}>
       <ModeOption mode="new" current={mode} title={T.create.modeNew} onPick={onMode}>
-        <div className="more-f">{form}</div>
+
       </ModeOption>
+      {mode === 'new' ? <div className="stack">{form}</div> : null}
       {trips.length ? (
         <ModeOption mode="add" current={mode} title={T.create.modeAdd} onPick={onMode}>
           <div className="more-f">
@@ -109,6 +113,11 @@ function useFinish(picked: readonly PlaceRef[], onClose: () => void): { readonly
   };
 }
 
+/** Tên và lời dẫn giải thích các nơi chưa được tự gán ngày sau khi lưu. */
+function CreateHeading({ heading, hasPicked, destName }: { readonly heading: string; readonly hasPicked: boolean; readonly destName: string }) {
+  return <div><h2>{heading}</h2><p className="note spaced">{hasPicked ? T.create.subtitleSave : fill(T.create.subtitleEmpty, { dest: destName })}</p></div>;
+}
+
 /**
  * Tờ "Tạo chuyến đi" / "Lưu N địa điểm thành chuyến đi?". Có nơi đã chọn thì có ba cách: chuyến mới, thêm vào chuyến sẵn có, giữ lại.
  * Chuyến mới nhận các nơi ở mục "Chưa có ngày". Lưu xong gỡ các nơi đó khỏi "Đã chọn" và mở chuyến. Chưa có danh tính ẩn danh thì hỏi lưu lần đầu trước (F2).
@@ -118,13 +127,18 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
   const requireIdentity = useRequireIdentity();
   const { state: destState } = useDestination(destId);
   const destName = destState.status === 'ready' ? destState.data.name : '';
+  const [wizard, setWizard] = useState(false);
+  const [suggested, setSuggested] = useState(true);
   const [mode, setMode] = useState<Mode>('new');
   const [v, setV] = useState<TripFormValues>(defaultValues);
   const [tripId, setTripId] = useState(state.trips[0]?.id ?? '');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const report = useReportError();
-  const set = (p: Partial<TripFormValues>): void => setV((cur) => ({ ...cur, ...p }));
+  const set = (p: Partial<TripFormValues>): void => {
+    if ('start' in p || 'end' in p || 'tentative' in p) setSuggested(false);
+    setV((cur) => ({ ...cur, ...p }));
+  };
   const hasPicked = picked.length > 0;
   const defaultName = uniqueName(state.trips, destName);
 
@@ -158,21 +172,16 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
   };
 
   const heading = hasPicked ? fill(T.create.titleSave, { n: picked.length }) : T.create.title;
-  const form = <TripFields v={v} set={set} budgetHint={budgetHint(v.budget)} namePlaceholder={defaultName} />;
+  const form = <TripFields suggestedDates={suggested} v={v} set={set} budgetHint={budgetHint(v.budget)} namePlaceholder={defaultName} />;
+  if (wizard) return <TripWizard destId={destId} picked={picked} values={v} onValues={set} suggestedDates={suggested} onBackToForm={() => setWizard(false)} onClose={onClose} />;
   return (
     <Sheet label={heading} onClose={onClose}>
-      <div className="pp">
-        <div>
-          <h2>{heading}</h2>
-          <p className="note spaced">{hasPicked ? T.create.subtitleSave : fill(T.create.subtitleEmpty, { dest: destName })}</p>
-        </div>
+      <TripFormLayout actions={<TripFormActions label={hasPicked ? T.create.confirm : T.create.submit} busy={busy} onSubmit={submit} onClose={onClose} />}>
+        <CreateHeading heading={heading} hasPicked={hasPicked} destName={destName} />
         {hasPicked ? <PickedModes mode={mode} onMode={setMode} form={form} trips={state.trips} tripId={tripId} onTrip={setTripId} /> : form}
         {error ? <WarnBox>{error}</WarnBox> : null}
-        <div className="stack">
-          <Button block disabled={busy} onClick={submit}>{hasPicked ? T.create.confirm : T.create.submit}</Button>
-          <Button kind="ghost" block onClick={onClose}>{T.create.cancel}</Button>
-        </div>
-      </div>
+        {mode === 'new' ? <Button kind="ghost" block onClick={() => setWizard(true)}>{T.list.stepwise}</Button> : null}
+      </TripFormLayout>
     </Sheet>
   );
 }

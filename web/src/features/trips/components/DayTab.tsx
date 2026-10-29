@@ -6,12 +6,11 @@ import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle } from '../../../shared/ui/Controls.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
-import { dayItems, roadKm, summarizeCosts, unassignedItems } from '../model/tripMath.ts';
+import { costSummaryText, dayItems, roadKm, summarizeCosts, unassignedItems } from '../model/tripMath.ts';
 import { coordOf } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { ItemRow } from './ItemRow.tsx';
-import { money } from './ItemMeta.tsx';
 
 /** Dòng "≈ 1,5 giờ · 25 km · ước tính" giữa hai mục liền nhau có tọa độ. */
 function TravelLine({ km }: { readonly km: number }) {
@@ -30,10 +29,8 @@ export function DayTab({ index }: { readonly index: number }) {
   if (!day) return null;
   const coord = coordOf(cat);
   const items = dayItems(trip, day);
-  const cs = summarizeCosts(trip);
+  const cs = summarizeCosts({ items });
   const road = roadKm(items, coord);
-  const dayCost = cs.byDayK[day] ?? 0;
-  const dayUnknown = cs.unknownByDay[day] ?? 0;
   const sort = sorting && items.length > 1;
   const hasUnassigned = permissionsOf(trip).schedule && unassignedItems(trip).length > 0;
   return (
@@ -46,7 +43,7 @@ export function DayTab({ index }: { readonly index: number }) {
         <span className="s">
           {dayLabel(day)}
           {road > 0 ? <><br />{fill(T.view.dayRoad, { time: formatTravelTime(minutesForKm(road)) })}</> : null}
-          {dayCost || dayUnknown ? <><br />{dayUnknown ? fill(T.view.dayCostUnknown, { money: money(dayCost), n: dayUnknown }) : money(dayCost)}</> : null}
+          <br />{costSummaryText(cs)}
         </span>
       </div>
       {items.length > 1 && permissionsOf(trip).schedule ? (

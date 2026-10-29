@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { LIMITS } from '../../../shared/const/limits.const.ts';
 import { addDays, dayMonth, fullDate, nextWeekday, todayLocal } from '../../../shared/lib/dates.ts';
-import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle, CheckRow, WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
@@ -16,6 +15,10 @@ import type { WizardStep } from '../model/trip.const.ts';
 import { parseDates, parseMoneyField, parseTripName } from '../model/tripForms.ts';
 import { uniqueName } from '../model/tripState.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
+import type { TripFormValues } from './TripFields.tsx';
+import type { PlaceRef } from '../model/tripState.ts';
+import { useDiscover } from '../../discover/index.ts';
+import { TripFormActions, TripFormLayout } from './TripFormLayout.tsx';
 import { money } from './ItemMeta.tsx';
 
 const PERCENT = 100;
@@ -116,7 +119,7 @@ function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; reado
     <>
       <ul className="wzsum">
         <li><b>{T.wizard.summaryDest}</b> {dest?.name}</li>
-        <li><b>{T.wizard.summaryDates}</b> {d.tentative ? fill(T.wizard.tentativeSummary, { n: d.days, start: dayMonth(d.start) }) : `${dayMonth(d.start)} – ${dayMonth(d.end)}`}</li>
+        <li><b>{T.wizard.summaryDates}</b> {d.tentative ? fill(T.wizard.tentativeSummary, { n: d.days, start: dayMonth(d.start) }) : `${fullDate(d.start)} – ${fullDate(d.end)}`}</li>
         <li><b>{T.wizard.summaryKind}</b> {d.kind ? kindLabel(d.kind) : T.wizard.notChosen}</li>
         <li><b>{T.wizard.summaryInterests}</b> {d.interests.length ? d.interests.map((k) => names.get(k) ?? k).join(', ') : T.wizard.notChosen}</li>
         <li><b>{T.wizard.summaryBudget}</b> {budget.ok && budget.value !== null ? money(budget.value) : T.wizard.notSet}</li>
@@ -130,17 +133,26 @@ function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; reado
  * Trình tạo chuyến theo 6 bước (Đi đâu → Khi nào → Ai đi → Sở thích → Ngân sách → Xem lại). "Ai đi" là kiểu chuyến, chưa phải thành viên;
  * kiểu chuyến và sở thích LƯU vào chuyến (DR-018 F2). Mỗi bước kiểm lỗi trước khi sang bước sau; tiêu đề bước nhận focus để đọc màn hình.
  */
-export function TripWizard({ destId, onClose }: { readonly destId: string; readonly onClose: () => void }) {
+export function TripWizard({ destId, onClose, picked = [], values, onValues, onBackToForm, suggestedDates = true }: { readonly destId: string; readonly onClose: () => void; readonly picked?: readonly (PlaceRef & { readonly name: string })[]; readonly values?: TripFormValues; readonly onValues?: (p: Partial<TripFormValues>) => void; readonly onBackToForm?: () => void; readonly suggestedDates?: boolean }) {
   const { state } = useTrips();
-  const { busy, create } = useCreateTripFlow(onClose);
+  const discover = useDiscover();
+  const { busy, create } = useCreateTripFlow(() => {
+    discover.actions.clearPicked(picked.map((p) => p.id));
+    onClose();
+  });
   const requireIdentity = useRequireIdentity();
   const { state: destState } = useDestination(destId);
   const dest = destState.status === 'ready' ? destState.data : null;
+  const [suggested, setSuggested] = useState(suggestedDates);
   const [step, setStep] = useState(0);
-  const [d, setD] = useState<Draft>(initialDraft);
+  const [d, setD] = useState<Draft>(() => ({ ...initialDraft(), ...values }));
   const [error, setError] = useState('');
   const headingRef = useRef<HTMLHeadingElement | null>(null);
-  const set = (p: Partial<Draft>): void => setD((cur) => ({ ...cur, ...p }));
+  const set = (p: Partial<Draft>): void => {
+    if ('start' in p || 'end' in p || 'tentative' in p) setSuggested(false);
+    setD((cur) => ({ ...cur, ...p }));
+    onValues?.(p);
+  };
   const name: WizardStep = WIZARD_STEPS[step] ?? 'where';
   const last = step === WIZARD_STEPS.length - 1;
   const defaultName = uniqueName(state.trips, dest?.name ?? '');
@@ -160,13 +172,13 @@ export function TripWizard({ destId, onClose }: { readonly destId: string; reado
     if (!tripName.ok) return setError(tripName.error);
     if (!dates.ok) return setError(dates.error);
     if (!bud.ok) return setError(bud.error);
-    requireIdentity(() => create({ name: tripName.value, destinationId: destId, ...dates.value, kind: d.kind, interests: d.interests, budgetK: bud.value }));
+    requireIdentity(() => create({ name: tripName.value, destinationId: destId, ...dates.value, kind: d.kind, interests: d.interests, styles: values?.styles, pace: values?.pace, budgetK: bud.value }, picked));
   };
 
   const label = T.wizard.steps[name];
   return (
     <Sheet label={label} onClose={onClose}>
-      <div className="pp">
+      <TripFormLayout actions={<TripFormActions label={last ? T.wizard.create : T.wizard.next} busy={busy} onSubmit={next} onClose={onClose} onBack={step > 0 ? () => go(step - 1) : onBackToForm} />}>
         <div>
           <div className="obar" role="progressbar" aria-valuemin={1} aria-valuemax={WIZARD_STEPS.length} aria-valuenow={step + 1} aria-label={fill(T.wizard.progress, { n: step + 1, total: WIZARD_STEPS.length })}>
             <i style={{ width: `${Math.round(((step + 1) / WIZARD_STEPS.length) * PERCENT)}%` }} />
@@ -174,14 +186,12 @@ export function TripWizard({ destId, onClose }: { readonly destId: string; reado
           <p className="note spaced">{fill(T.wizard.stepOf, { n: step + 1, total: WIZARD_STEPS.length })}</p>
           <h2 ref={headingRef} tabIndex={-1}>{label}</h2>
         </div>
+        {(name === 'when' && suggested) ? <p className="note">{T.create.suggestedDates}</p> : null}
+        {picked.length ? <p className="note">{fill(T.create.pickedSummary, { names: picked.map((p) => p.name).join(', ') })}</p> : null}
+        {last ? <p className="note">{T.create.reviewDates}</p> : null}
         <StepBody step={name} d={d} set={set} dest={dest} defaultName={defaultName} />
         {error ? <WarnBox>{error}</WarnBox> : null}
-        <div className="stack">
-          <Button block disabled={busy} onClick={next}>{last ? T.wizard.create : T.wizard.next}</Button>
-          {step > 0 ? <Button kind="ghost" block onClick={() => go(step - 1)}>{T.wizard.back}</Button> : null}
-          <Button kind="ghost" block onClick={onClose}>{T.create.cancel}</Button>
-        </div>
-      </div>
+      </TripFormLayout>
     </Sheet>
   );
 }

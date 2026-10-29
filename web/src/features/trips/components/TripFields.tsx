@@ -18,6 +18,7 @@ export interface TripFormValues {
 }
 
 interface TripFieldsProps {
+  readonly suggestedDates?: boolean;
   readonly v: TripFormValues;
   readonly set: (p: Partial<TripFormValues>) => void;
   readonly budgetHint: string;
@@ -26,7 +27,7 @@ interface TripFieldsProps {
 }
 
 /** Các ô của biểu mẫu tạo chuyến: tên, ngày đi/về (hoặc số ngày dự kiến khi chưa chắc), phong cách (tối đa 5), nhịp, ngân sách. */
-export function TripFields({ v, set, budgetHint, namePlaceholder }: TripFieldsProps) {
+export function TripFields({ v, set, budgetHint, namePlaceholder, suggestedDates = false }: TripFieldsProps) {
   const toggleStyle = (code: string): void => {
     const has = v.styles.includes(code);
     if (!has && v.styles.length >= LIMITS.MAX_STYLES) return;
@@ -35,12 +36,16 @@ export function TripFields({ v, set, budgetHint, namePlaceholder }: TripFieldsPr
   return (
     <>
       <Field label={T.create.name} value={v.name} onChange={(x) => set({ name: x })} maxLength={LIMITS.MAX_TRIP_NAME} placeholder={namePlaceholder} />
+      {suggestedDates ? <p className="note">{T.create.suggestedDates}</p> : null}
       <div className="two">
         <Field label={T.create.start} type="date" value={v.start} onChange={(x) => set({ start: x })} hint={fullDate(v.start)} />
         <Field label={T.create.end} type="date" value={v.end} onChange={(x) => set({ end: x })} hidden={v.tentative} hint={fullDate(v.end)} />
       </div>
       <CheckRow checked={v.tentative} onChange={(x) => set({ tentative: x })}>{T.create.tentative}</CheckRow>
       <Field label={T.create.tentativeDays} inputMode="numeric" value={v.days} onChange={(x) => set({ days: x })} hidden={!v.tentative} />
+      <details>
+        <summary>{T.create.more}</summary>
+        <div className="stack spaced">
       <div className="optgroup">
         <span>{T.create.styles}</span>
         <div className="chips" role="group" aria-label={T.create.styles}>
@@ -58,6 +63,8 @@ export function TripFields({ v, set, budgetHint, namePlaceholder }: TripFieldsPr
         </div>
       </div>
       <Field label={T.create.budget} inputMode="numeric" value={v.budget} onChange={(x) => set({ budget: x })} placeholder={T.create.budgetPlaceholder} hint={budgetHint} />
+        </div>
+      </details>
     </>
   );
 }

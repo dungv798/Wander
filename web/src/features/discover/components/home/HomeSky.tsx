@@ -1,4 +1,5 @@
-﻿import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
+import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
+import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../../shared/const/routes.const.ts';
 import { navigate } from '../../../../shared/router/hashRoute.ts';
 import { Button } from '../../../../shared/ui/Button.tsx';
@@ -15,7 +16,7 @@ export function HomeSky({ dest }: { readonly dest: DestinationDetail }) {
   return (
     <section className="home-hero" onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={() => setPaused(false)}>
       <div className="home-hero-photos" aria-hidden="true">
-        {images.map((src, i) => <img key={src} className={i === index ? 'is-active' : ''} src={src} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />)}
+        {images.map((src, i) => <RevealImage key={src} className={i === index ? 'is-active' : ''} src={src} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />)}
       </div>
       <a className="home-hero-link" href={`#/${VIEW.DECK}/${dest.id}`} aria-label={fill(COPY.home.exploreDestination, { dest: dest.name })} />
       <div className="home-hero-content">

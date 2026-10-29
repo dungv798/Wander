@@ -1,3 +1,7 @@
+import { formatVnd } from '../../../shared/domain/Money.ts';
+import { FORMAT } from '../../../shared/const/format.const.ts';
+import { fill } from '../../../shared/const/copy.vi.ts';
+import { TRIPS_COPY as T } from './trips.copy.ts';
 import { DateRange } from '../../../shared/domain/DateRange.ts';
 import { ROAD_FACTOR, airKm } from '../../../shared/lib/geo.ts';
 import type { GeoPoint } from '../../../shared/lib/geo.ts';
@@ -32,6 +36,7 @@ export function unassignedItems(t: Pick<Trip, 'items'>): TripItem[] {
 export interface CostSummary {
   /** "Tổng phải trả thêm": chỉ cộng mục đã biết giá và KHÔNG "đã bao gồm". */
   readonly totalK: number;
+  readonly knownCount: number;
   /** Số mục có giá nhưng chưa biết giá (ô trống), không tính mục "đã bao gồm". */
   readonly unknownCount: number;
   readonly includedCount: number;
@@ -46,6 +51,7 @@ export interface CostSummary {
 /** Tính chi phí theo quy tắc: trống = chưa biết; 0 = biết bằng không; "đã bao gồm" không cộng; Nghỉ/Việc cần làm không có giá. */
 export function summarizeCosts(t: Pick<Trip, 'items'>): CostSummary {
   let totalK = 0;
+  let knownCount = 0;
   let unknownCount = 0;
   let includedCount = 0;
   let booked = 0;
@@ -66,11 +72,12 @@ export function summarizeCosts(t: Pick<Trip, 'items'>): CostSummary {
       if (i.day) unknownByDay[i.day] = (unknownByDay[i.day] ?? 0) + 1;
       continue;
     }
+    knownCount += 1;
     totalK += i.costK;
     byKind[i.type] = (byKind[i.type] ?? 0) + i.costK;
     if (i.day) byDayK[i.day] = (byDayK[i.day] ?? 0) + i.costK;
   }
-  return { totalK, unknownCount, includedCount, booked, bookable, byKind, byDayK, unknownByDay };
+  return { totalK, knownCount, unknownCount, includedCount, booked, bookable, byKind, byDayK, unknownByDay };
 }
 
 /** So sánh ngân sách với "tổng phải trả thêm". */
@@ -108,4 +115,11 @@ export function roadKm(items: readonly TripItem[], coordOf: (placeId: string) =>
 /** Số mục là địa điểm trong kho. */
 export function placeCount(t: Pick<Trip, 'items'>): number {
   return t.items.filter((i) => i.placeId !== null).length;
+}
+
+/** Diễn đạt độ đầy đủ của giá; số 0 chỉ hiện khi có giá đã nhập, không tính mục đã bao gồm. */
+export function costSummaryText(costs: Pick<CostSummary, 'knownCount' | 'totalK' | 'unknownCount'>): string {
+  if (!costs.knownCount) return T.cost.noneKnown;
+  const amount = formatVnd(costs.totalK * FORMAT.VND_PER_THOUSAND);
+  return fill(costs.unknownCount ? T.cost.partial : T.cost.known, { money: amount, n: costs.unknownCount });
 }

@@ -103,8 +103,10 @@ export function useDeck(dest: DestinationDetail, adding?: AddingMode) {
 
   useEffect(() => {
     if (drawerOk && sheet.placeId) {
-      if (front) sheet.open(front.id, adding ? NO_DECIDE : undefined);
-      else sheet.close();
+      queueMicrotask(() => {
+        if (front) sheet.open(front.id, adding ? NO_DECIDE : undefined);
+        else sheet.close();
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ đồng bộ khi thẻ trên cùng đổi
   }, [front?.id]);

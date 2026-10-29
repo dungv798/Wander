@@ -179,14 +179,19 @@ function DeleteTripLink() {
 
 /** Tab "Tổng quan": việc kế tiếp, số liệu, tuyến theo ngày, tùy chọn chuyến, chi phí, các mục chưa có ngày. */
 export function OverviewTab() {
+  const { setOverlay } = useTripView();
   return (
     <>
+      <div className="two">
+        <Button kind="ghost" icon="check" onClick={() => document.getElementById('trip-preparation')?.scrollIntoView({ block: 'start' })}>{T.create.prepare}</Button>
+        <Button kind="ghost" icon="users" onClick={() => setOverlay({ kind: 'people' })}>{T.create.invite}</Button>
+      </div>
       <NextStep />
       <StatsAndRoutes />
       <TripOptions />
       <CostBox />
       <UnassignedSection />
-      <ChecklistSection />
+      <div id="trip-preparation"><ChecklistSection /></div>
       <CollabLinks />
       <TrashLink />
       <DeleteTripLink />

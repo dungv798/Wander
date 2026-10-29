@@ -133,6 +133,10 @@ test('Organizer tạo liên kết và thấy thành viên trong "Người đi c�
   await page.getByText('Đã thêm hạng mục').waitFor();
   await page.getByRole('button', { name: /^Người đi cùng \(2\)/ }).click();
   await page.locator('.evlist li', { hasText: 'Minh' }).waitFor();
+  const self = page.locator('.evlist li').filter({ hasText: 'Người tổ chức' });
+  assert.equal((await self.innerText()).match(/Bạn/g)?.length, 1);
+  await page.getByText('Bạn quản lý lịch và lời mời', { exact: true }).waitFor();
+  assert.equal(await page.getByRole('dialog').getByText('Organizer', { exact: true }).count(), 0);
   await page.getByRole('button', { name: 'Tạo liên kết mời' }).or(page.getByRole('button', { name: 'Tạo liên kết mới' })).click();
   await page.getByText('Đã tạo liên kết mời').waitFor();
   assert.match(await page.locator('input[readonly]').inputValue(), /#\/join\/[A-Za-z0-9_-]{43}$/);

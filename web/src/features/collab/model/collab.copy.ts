@@ -1,9 +1,10 @@
 /** Chữ của tính năng cộng tác (Lát 1b). Tên hiển thị của người khác là nhãn TỰ KHAI, chưa xác minh. */
 export const COLLAB_COPY = {
-  roles: { organizer: 'Organizer', member: 'Thành viên', you: 'Bạn' },
+  roles: { organizer: 'Người tổ chức', member: 'Thành viên', you: 'Bạn' },
   people: {
     open: 'Người đi cùng ({n})',
     title: 'Người đi cùng',
+    organizerNote: 'Bạn quản lý lịch và lời mời',
     namesNote: 'Tên do từng người tự đặt, chưa được xác minh.',
     loading: 'Đang tải…',
     loadFail: 'Chưa tải được. Kiểm tra mạng rồi thử lại.',
@@ -21,7 +22,7 @@ export const COLLAB_COPY = {
     renamed: 'Đã đổi tên hiển thị',
     leave: 'Rời chuyến đi',
     leaveTitle: 'Rời chuyến đi này?',
-    leaveText: 'Bạn không còn xem được chuyến đi. Muốn vào lại cần Organizer gửi liên kết mới. Các mục bạn đã thêm vẫn ở lại trên lịch.',
+    leaveText: 'Bạn không còn xem được chuyến đi. Muốn vào lại cần người tổ chức gửi liên kết mới. Các mục bạn đã thêm vẫn ở lại trên lịch.',
     leaveConfirm: 'Rời chuyến đi',
     left: 'Bạn đã rời chuyến đi',
     close: 'Đóng',
@@ -76,8 +77,8 @@ export const COLLAB_COPY = {
     pending: 'Chờ duyệt',
     itemGone: 'mục đã xóa',
     sheetTitle: 'Đề nghị xóa «{item}»',
-    notYours: 'Mục này do người khác thêm nên bạn chỉ xem được. Muốn bỏ nó khỏi chuyến đi, hãy đề nghị Organizer xóa.',
-    sheetText: 'Mục này do người khác thêm nên cần Organizer đồng ý. Mục vẫn nằm trên lịch cho tới khi được duyệt.',
+    notYours: 'Mục này do người khác thêm nên bạn chỉ xem được. Muốn bỏ nó khỏi chuyến đi, hãy đề nghị người tổ chức xóa.',
+    sheetText: 'Mục này do người khác thêm nên cần người tổ chức đồng ý. Mục vẫn nằm trên lịch cho tới khi được duyệt.',
     reasonLabel: 'Lý do (không bắt buộc)',
     send: 'Gửi đề nghị',
     sent: 'Đã gửi đề nghị xóa',

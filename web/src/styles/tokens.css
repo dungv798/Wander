@@ -9,6 +9,10 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
+  --z-photo-flight: 10000;
+  --dur-photo: 240ms;
+  --ease-photo: cubic-bezier(.2, .8, .2, 1);
+  --sheet-cta-clearance: 150px;
   /* Kính trung tính: màu cảnh đến từ ảnh/bản đồ phía sau. */
   --glass-rgb: 255 255 255; --glass-sheet-rgb: 255 255 255;
   --glass-fab-alpha: .08; --glass-tab-alpha: .12; --glass-chip-alpha: .10;

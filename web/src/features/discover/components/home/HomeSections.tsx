@@ -1,4 +1,5 @@
-﻿import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
+import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
+import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../../shared/const/routes.const.ts';
 import { todayLocal } from '../../../../shared/lib/dates.ts';
 import { navigate } from '../../../../shared/router/hashRoute.ts';
@@ -30,7 +31,7 @@ export function ResumeSection({ dest }: SectionProps) {
     <section className="stack home-resume">
       <h2 className="h2">{trip ? COPY.home.continueTitle : COPY.home.resumeTitle}</h2>
       <button className="resume glass-control" type="button" onClick={() => trip ? navigate(ongoing ? VIEW.TODAY : VIEW.TRIP, trip.id) : navigate(VIEW.PICKED)}>
-        {trip ? null : <img alt="" src={firstPhotoUrl(picked[0])} width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />}
+        {trip ? null : <RevealImage alt="" src={firstPhotoUrl(picked[0])} width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />}
         <span>
           <b>{trip ? trip.name : fill(COPY.home.resumeCount, { n: picked.length })}</b>
           <span>{trip ? ongoing ? COPY.home.todayTrip : COPY.home.continueTrip : fill(COPY.home.resumeSub, { dest: dest.name })}</span>
@@ -51,7 +52,7 @@ export function MoodSection({ dest }: SectionProps) {
       <div className="hscroll moods">
         {list.map(([cat, places]) => (
           <button key={cat} className="mood" type="button" onClick={() => { actions.setCategory(cat); navigate(VIEW.DECK, dest.id); }}>
-            <img alt="" src={firstPhotoUrl(places[0])} width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
+            <RevealImage alt="" src={firstPhotoUrl(places[0])} width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
             <span className="mood-in">
               <b>{places[0]?.categoryName}</b>
               <span>{fill(COPY.common.placeCountShort, { n: places.length })}</span>

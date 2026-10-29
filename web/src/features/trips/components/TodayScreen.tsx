@@ -4,7 +4,7 @@ import { IS_DEV } from '../../../shared/const/env.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { useNow } from '../../../shared/hooks/useNow.ts';
 import { dayLabel, todayLocal } from '../../../shared/lib/dates.ts';
-import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate, replaceRoute } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
@@ -20,7 +20,7 @@ import type { TodayState } from '../model/todayView.ts';
 import { catalogOf, itemName } from '../model/tripView.ts';
 import type { TripCatalog } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
-import { money } from './ItemMeta.tsx';
+import { costSummaryText, summarizeCosts } from '../model/tripMath.ts';
 
 const MINUTE_MS = 60_000;
 
@@ -34,7 +34,7 @@ function MapLink({ name, lat, lon }: { readonly name: string; readonly lat: numb
   );
 }
 
-/** Một mục của hôm nay: giờ (hoặc "Cả ngày"), tên, loại; việc cần làm tích xong được; địa điểm có liên kết mở bản đồ. */
+/** Một mục của hôm nay: giờ (hoặc "Chưa đặt giờ"), tên, loại; việc cần làm tích xong được; địa điểm có liên kết mở bản đồ. */
 function TodayItem({ trip, item, cat }: { readonly trip: Trip; readonly item: TripItem; readonly cat: TripCatalog }) {
   const { actions } = useTrips();
   const fire = useFire();
@@ -63,9 +63,14 @@ function TodayItem({ trip, item, cat }: { readonly trip: Trip; readonly item: Tr
 
 /** Nội dung theo từng trạng thái của "Hôm nay" (S17). */
 function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: TripCatalog; readonly view: TodayState }) {
-  const all = <Button kind="ghost" block onClick={() => navigate(VIEW.TRIP, trip.id, 'ov')}>{T.today.allTrip}</Button>;
+  /** Mở cả chuyến với danh sách là lối về, kể cả khi Hôm nay được mở bằng URL trực tiếp. */
+  const openTrip = (): void => {
+    replaceRoute(VIEW.TRIPS);
+    navigate(VIEW.TRIP, trip.id, 'ov');
+  };
+  const all = <Button kind="ghost" block onClick={openTrip}>{T.today.allTrip}</Button>;
   if (view.kind === 'tentative') {
-    return <EmptyState role="status" title={T.today.tentative.title} text={T.today.tentative.text} actions={<Button onClick={() => navigate(VIEW.TRIP, trip.id, 'ov')}>{T.today.tentative.action}</Button>} />;
+    return <EmptyState role="status" title={T.today.tentative.title} text={T.today.tentative.text} actions={<Button onClick={openTrip}>{T.today.tentative.action}</Button>} />;
   }
   if (view.kind === 'before') return <EmptyState role="status" title={T.today.before.title} text={fill(T.today.before.text, { n: view.daysLeft, trip: trip.name })} actions={all} />;
   if (view.kind === 'after') return <EmptyState role="status" title={T.today.after.title} text={fill(T.today.after.text, { trip: trip.name })} actions={all} />;
@@ -75,7 +80,7 @@ function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: Tri
       <h2 className="h2">{fill(T.today.day, { n: view.dayNumber, date: dayLabel(view.day) })}</h2>
       <div className="chips" role="group" aria-label={T.today.title}>
         <span className="chip tint cat-canh">{fill(T.today.stats.places, { n: view.items.filter((i) => i.placeId).length })}</span>
-        <span className="chip tint cat-am">{fill(T.today.stats.cost, { money: money(view.totalK) })}</span>
+        <span className="chip tint cat-am">{costSummaryText(summarizeCosts({ items: view.items }))}</span>
         {view.unknownCount ? <span className="chip tint cat-luu">{fill(T.today.stats.unknown, { n: view.unknownCount })}</span> : null}
       </div>
       <ul className="todaylist">

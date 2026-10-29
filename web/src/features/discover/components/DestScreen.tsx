@@ -1,3 +1,4 @@
+import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { useCountUp } from '../../../shared/hooks/useCountUp.ts';
@@ -59,8 +60,8 @@ function DestPeek({ dest }: { readonly dest: DestinationDetail }) {
       <h2 className="h2">{COPY.dest.peek}</h2>
       <div className="hscroll peek">
         {dest.places.map((p) => (
-          <button key={p.id} className={`mini cat-${p.category}`} type="button" onClick={() => open(p.id)}>
-            <img alt="" src={firstPhotoUrl(p)} loading="lazy" />
+          <button key={p.id} data-place-photo={p.id} className={`mini cat-${p.category}`} type="button" onClick={() => open(p.id)}>
+            <RevealImage alt="" src={firstPhotoUrl(p)} loading="lazy" />
             <span className="catbadge">
               <Icon semantic name={CATEGORY_ICON[p.category]} />
             </span>
@@ -82,7 +83,7 @@ function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; rea
   return (
     <>
       <section className="dhero">
-        <img alt="" src={dest.coverUrl} style={{ objectPosition: focal }} />
+        <RevealImage alt="" src={dest.coverUrl} style={{ objectPosition: focal }} />
         <div className="top">
           <IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} />
         </div>

@@ -3,7 +3,7 @@ import { Progress } from '../../../shared/ui/Controls.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { ITEM_KINDS, KIND_ORDER } from '../model/trip.const.ts';
-import { budgetStatus, summarizeCosts } from '../model/tripMath.ts';
+import { budgetStatus, costSummaryText, summarizeCosts } from '../model/tripMath.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
 
@@ -11,7 +11,7 @@ import { money } from './ItemMeta.tsx';
 export function CostBox() {
   const { trip } = useTripView();
   const cs = summarizeCosts(trip);
-  const bud = budgetStatus(trip.budgetK, cs.totalK);
+  const bud = cs.knownCount ? budgetStatus(trip.budgetK, cs.totalK) : null;
   const kinds = KIND_ORDER.filter((k) => (cs.byKind[k] ?? 0) > 0);
   return (
     <section className="daysec costbox">
@@ -20,7 +20,7 @@ export function CostBox() {
         <span className="s">{T.cost.sub}</span>
       </div>
       <div className="bigmoney">
-        <b>{money(cs.totalK)}</b>
+        <b>{costSummaryText(cs)}</b>
         <span>{T.cost.total}</span>
       </div>
       {cs.unknownCount ? (

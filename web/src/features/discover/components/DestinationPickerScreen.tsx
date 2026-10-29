@@ -1,3 +1,4 @@
+import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
@@ -59,7 +60,7 @@ export default function DestinationPickerScreen() {
         {matches.map((destination, index) => (
           <li key={destination.id}>
             <button ref={(element) => { rows.current[index] = element; }} type="button" onClick={() => choose(destination.id)} onKeyDown={(event) => onKey(event, index)}>
-              <img src={destination.coverUrl} alt="" loading="lazy" />
+              <RevealImage src={destination.coverUrl} alt="" loading="lazy" />
               <span><strong>{destination.name}</strong><span>{destination.region}</span></span>
               <small>{fill(COPY.common.placeCount, { n: destination.placeCount })}</small>
             </button>

@@ -1,3 +1,4 @@
+import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { useMemo } from 'react';
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
@@ -51,8 +52,8 @@ function PickedContent({ dest, onSave, showEmpty }: { readonly dest: Destination
       <div className="grid pad-x">
         {picked.map((p) => (
           <div key={p.id} className={`tile cat-${p.category}`}>
-            <button className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: p.name })} onClick={() => sheet.open(p.id)}>
-              <img alt="" src={firstPhotoUrl(p)} />
+            <button data-place-photo={p.id} className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: p.name })} onClick={() => sheet.open(p.id)}>
+              <RevealImage alt="" src={firstPhotoUrl(p)} />
               <span className="in">
                 <h3>{p.name}</h3>
                 <p>{p.area}</p>

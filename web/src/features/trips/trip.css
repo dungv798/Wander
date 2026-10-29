@@ -67,3 +67,14 @@
 /* Cột chữ của hàng mục co được ở màn hẹp (320 px): chip dài tự xuống dòng thay vì đẩy cả hàng ra ngoài mép. */
 .irow .tx { min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .mchip { max-width: 100%; }
+
+/* Thông báo nằm dưới hàng điều hướng bản đồ, trước nội dung và ngoài vùng CTA ở mọi nấc kéo. */
+body:has(#screen[data-view="trip"]) .toast {
+  top: calc(var(--s-8) + var(--s-2) + env(safe-area-inset-top, 0px));
+  bottom: auto;
+}
+
+/* Form trung tính: chỉ radio/chip đang chọn nhận màu nhấn của bộ token hiện có. */
+.panel:has([data-trip-form]) .fchip { box-shadow: none; text-decoration: none; }
+.panel:has([data-trip-form]) .opt { background: var(--surface); box-shadow: none; text-decoration: none; }
+.panel:has([data-trip-form]) summary { min-height: var(--tap); display: flex; align-items: center; }

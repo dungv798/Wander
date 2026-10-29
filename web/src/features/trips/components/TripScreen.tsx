@@ -3,7 +3,7 @@ import { MEDIA } from '../../../shared/const/app.const.ts';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { useMediaQuery } from '../../../shared/hooks/useMediaQuery.ts';
-import { goBack, navigate, replaceRoute } from '../../../shared/router/hashRoute.ts';
+import { navigate, replaceRoute } from '../../../shared/router/hashRoute.ts';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
@@ -15,11 +15,12 @@ import { TripViewProvider } from '../hooks/TripViewContext.tsx';
 import type { Overlay } from '../hooks/TripViewContext.tsx';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import type { Trip } from '../model/trip.types.ts';
-import { tripDays } from '../model/tripMath.ts';
+import { tripDays, unassignedItems } from '../model/tripMath.ts';
 import { catalogOf, countText, itemName } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { DayTab } from './DayTab.tsx';
+import { useTripToast } from '../hooks/useTripToast.ts';
 import { useGoneGuard } from '../hooks/useGoneGuard.ts';
 import { ItemCtaSlot, ItemInfoSlot } from './ItemInfoSlot.tsx';
 import { OverviewTab } from './OverviewTab.tsx';
@@ -101,7 +102,7 @@ function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonl
     <section className="mapbox">
       <TripMap coveredBottom={covered} />
       <div className="top">
-        <IconButton icon="chevron-left" label={T.view.back} onClick={goBack} />
+        <IconButton icon="chevron-left" label={T.view.backToList} onClick={() => navigate(VIEW.TRIPS)} />
         <div className="r">
           <IconButton icon="sun" label={T.today.open} onClick={() => navigate(VIEW.TODAY, tripId)} />
           <IconButton icon="share-2" label={T.export.open} onClick={() => navigate(VIEW.EXPORT, tripId)} />
@@ -114,6 +115,7 @@ function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonl
 
 /** Nội dung màn chuyến đi khi đã có chuyến và điểm đến: bản đồ, tờ kéo (đầu + thân), nút nổi, các tờ phủ. */
 function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: DestinationDetail; readonly sub: string | null }) {
+  useTripToast();
   const days = useMemo(() => tripDays(trip), [trip]);
   const tab = validTab(sub, days.length);
   const cat = useMemo(() => catalogOf(dest), [dest]);
@@ -125,7 +127,7 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
   const sheetRef = useRef<HTMLElement | null>(null);
   const headRef = useRef<HTMLDivElement | null>(null);
   const drawer = useMediaQuery(MEDIA.DRAWER);
-  useBottomSheet(sheetRef, headRef, !drawer, DEFAULT_SNAP, (_snap, visible) => setCovered(visible));
+  useBottomSheet(sheetRef, headRef, !drawer, unassignedItems(trip).length ? 'full' : DEFAULT_SNAP, (_snap, visible) => setCovered(visible));
 
   const setTab = useCallback((t: string) => replaceRoute(VIEW.TRIP, trip.id, t), [trip.id]);
   const openItem = useCallback(
@@ -177,7 +179,7 @@ export function TripScreen({ tripId, sub }: { readonly tripId: string; readonly 
   useGoneGuard(tripId);
   const trip = find(tripId);
   if (!trip) {
-    return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={goBack}>{T.view.backToList}</Button>} />;
+    return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={() => navigate(VIEW.TRIPS)}>{T.view.backToList}</Button>} />;
   }
   return <DestinationGate destId={trip.destinationId}>{(dest) => <TripContent key={trip.id} trip={trip} dest={dest} sub={sub} />}</DestinationGate>;
 }

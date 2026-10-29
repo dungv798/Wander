@@ -1,6 +1,7 @@
 import { MEDIA } from '../../const/app.const.ts';
-import { SHEET, SNAP_ORDER } from './bottomSheet.const.ts';
+import { SHEET, SHEET_HINT, SNAP_ORDER } from './bottomSheet.const.ts';
 import type { Snap } from './bottomSheet.const.ts';
+import { dismissSheetHint, rememberedSnap, rememberSnap, sheetMemoryKey, shouldShowSheetHint } from './sheetMemory.ts';
 
 /** Tùy chọn tờ kéo. */
 export interface BottomSheetOptions {
@@ -33,6 +34,8 @@ export class BottomSheet {
   private readonly observer: ResizeObserver;
   private readonly opt: BottomSheetOptions;
   private readonly abort = new AbortController();
+  private readonly memoryKey = sheetMemoryKey(location.hash);
+  private readonly hint = document.createElement('span');
 
   /** Gắn tờ vào phần tử `el` (trong khung `el.parentElement`) với vùng nắm kéo `handle`. */
   constructor(el: HTMLElement, handle: HTMLElement, opt: BottomSheetOptions) {
@@ -40,8 +43,12 @@ export class BottomSheet {
     this.handle = handle;
     this.frame = el.parentElement as HTMLElement;
     this.opt = opt;
-    this.snapName = opt.initial;
+    this.snapName = rememberedSnap(this.memoryKey, opt.initial);
     this.grab = handle.querySelector<HTMLElement>('.grab');
+    this.hint.className = SHEET_HINT.CLASS;
+    this.hint.textContent = SHEET_HINT.TEXT;
+    try { this.hint.hidden = !shouldShowSheetHint(localStorage); } catch { this.hint.hidden = false; }
+    handle.append(this.hint);
     const sig = { signal: this.abort.signal };
     handle.addEventListener('pointerdown', (e) => this.down(e), sig);
     handle.addEventListener('pointermove', (e) => this.move(e), sig);
@@ -89,6 +96,7 @@ export class BottomSheet {
   set(name: Snap, animate = true): void {
     const o = this.offsets();
     this.snapName = name in o ? name : 'half';
+    rememberSnap(this.memoryKey, this.snapName);
     this.el.classList.toggle('is-anim', animate && !window.matchMedia(MEDIA.REDUCED_MOTION).matches);
     this.el.style.setProperty('--sheet-top', `${SHEET.FULL_TOP}px`);
     this.el.style.setProperty(OFFSET_VAR, `${o[this.snapName]}px`);
@@ -102,6 +110,7 @@ export class BottomSheet {
   destroy(): void {
     this.abort.abort();
     this.observer.disconnect();
+    this.hint.remove();
   }
 
   /** Lên (+1) hoặc xuống (−1) một nấc. */
@@ -145,6 +154,8 @@ export class BottomSheet {
     }
     const o = this.offsets();
     const y = Number.parseFloat(this.el.style.getPropertyValue(OFFSET_VAR)) || 0;
+    this.hint.hidden = true;
+    try { dismissSheetHint(localStorage); } catch { /* Storage bị chặn: vẫn ẩn lời mời trong lần này. */ }
     const order: readonly Snap[] = ['full', 'half', 'peek'];
     if (Math.abs(d.v) > SHEET.VELOCITY_SNAP) {
       const i = order.indexOf(this.snapName);

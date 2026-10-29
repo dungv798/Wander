@@ -29,9 +29,8 @@ function MemberList({ members, canRemove, onRemove }: { readonly members: readon
       {members.map((m) => (
         <li key={m.id}>
           <span>
-            <Icon name="users" size="s" /> {m.displayName}{' '}
-            <b className="chip tint">{m.role === 'organizer' ? C.roles.organizer : m.self ? C.roles.you : C.roles.member}</b>
-            {m.self && m.role === 'organizer' ? <b className="chip">{C.roles.you}</b> : null}
+            <Icon name="users" size="s" /> {m.self ? C.roles.you : m.displayName}{' '}
+            <b className="chip tint">{m.role === 'organizer' ? C.roles.organizer : C.roles.member}</b>
           </span>
           {canRemove && m.role !== 'organizer' ? (
             <Button kind="ghost" aria-label={fill(C.people.removeAria, { name: m.displayName })} onClick={() => onRemove(m)}>{C.people.remove}</Button>
@@ -153,6 +152,7 @@ export function PeopleSheet({ onClose }: { readonly onClose: () => void }) {
       <div className="pp">
         <h2>{C.people.title}</h2>
         <p className="note">{C.people.namesNote}</p>
+        {perms.organizer ? <p className="note">{C.people.organizerNote}</p> : null}
         {members.data ? <MemberList members={members.data} canRemove={perms.manageTrip} onRemove={setRemoving} /> : members.error ? <WarnBox>{C.people.loadFail}<Button kind="ghost" onClick={members.reload}>{C.people.retry}</Button></WarnBox> : <p className="note">{C.people.loading}</p>}
         {removing ? (
           <section className="seccard">
