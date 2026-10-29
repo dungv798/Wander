@@ -2,7 +2,7 @@
 import { COPY } from '../const/copy.vi.ts';
 import { HALF } from '../const/math.const.ts';
 import { MAP } from './map.const.ts';
-import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, thumbnailCrop } from './nativeMarkers.ts';
+import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, renderedImageCount, thumbnailCrop } from './nativeMarkers.ts';
 import { addNativePinLayers, pinHitLayers } from './nativePinLayers.ts';
 import { prefersReducedMotion } from './mapUtil.ts';
 import type { MapMarker, MapMode, Pt } from './map.types.ts';
@@ -34,7 +34,7 @@ export class MapLayers {
     this.accessible = Object.assign(document.createElement('ul'), { className: 'tm-accessible' });
     this.accessible.setAttribute('aria-label', COPY.map.pinList);
     host.append(this.labels, this.accessible);
-    Object.assign(host.dataset, { pins: '0', clusters: '0', selected: '', features: '[]', thumbnails: '0', numbered: '0' });
+    Object.assign(host.dataset, { pins: '0', clusters: '0', selected: '', features: '[]', thumbnails: '0', numbered: '0', renderedImages: '0' });
   }
 
   /** Gắn lớp khi nền tải xong; query native ưu tiên ghim trước cụm trên cùng điểm chạm. */
@@ -166,6 +166,8 @@ export class MapLayers {
     const map = this.map;
     if (!map || this.dead || !pinHitLayers().every((layer) => map.getLayer(layer))) return;
     Object.assign(this.host.dataset, markerSnapshot(map.queryRenderedFeatures({ layers: pinHitLayers() }), (coordinates) => map.project(coordinates), this.selected));
+    const photos = MAP.PIN_SOURCES.map((_, index) => `${MAP.PIN_LAYER_PREFIX}${index}-photo`);
+    this.host.dataset['renderedImages'] = String(renderedImageCount(map.queryRenderedFeatures({ layers: photos }), (id) => map.hasImage(id)));
   }
 
   /** Giữ nguyên nhãn khoảng cách tuyến; bước native tuyến được giao riêng. */

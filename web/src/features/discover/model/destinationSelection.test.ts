@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import { filterDestinations, resolveDestination, readDestination, writeDestination } from './destinationSelection.ts';
 
 const destinations = [{ id: 'da-lat', name: 'Đà Lạt', region: 'Tây Nguyên' }, { id: 'ha-giang', name: 'Hà Giang', region: 'Đông Bắc' }];
+test('mã lưu hợp lệ được dùng ngay khi catalog chưa tải; chỉ xác thực tồn tại khi đã tải', () => {
+  assert.equal(resolveDestination('da-lat', undefined), 'da-lat');
+  assert.equal(resolveDestination('da-lat', destinations), 'da-lat');
+  assert.equal(resolveDestination('ma-la', undefined), 'ma-la');
+  assert.equal(resolveDestination('ma-la', destinations), 'ha-giang');
+  assert.equal(resolveDestination('da-lat', []), 'ha-giang', 'rỗng đã tải khác chưa tải');
+  assert.equal(resolveDestination(null, undefined), 'ha-giang', 'người mới giữ mặc định');
+  for (const invalid of ['', '../da-lat', 'Đà Lạt', 'a'.repeat(65), {}, 12]) {
+    assert.equal(resolveDestination(invalid, undefined), 'ha-giang');
+  }
+});
 test('lọc theo tên hoặc vùng, bỏ hoa thường và dấu, giữ thứ tự catalog', () => {
   assert.deepEqual(filterDestinations(destinations, ' ĐÀ LẠT '), [destinations[0]]);
   assert.deepEqual(filterDestinations(destinations, 'dong bac'), [destinations[1]]);

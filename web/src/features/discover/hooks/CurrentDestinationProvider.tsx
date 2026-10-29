@@ -21,13 +21,14 @@ export function CurrentDestinationProvider({ children }: { readonly children: Re
   const { state, retry } = useResource((signal) => catalog.searchDestinations('', signal), [catalog]);
   const [saved, setSaved] = useState(readDestination);
   const destinations = state.status === 'ready' ? state.data : NO_DESTINATIONS;
-  const destId = resolveDestination(saved, destinations);
+  const loadedDestinations = state.status === 'ready' ? state.data : undefined;
+  const destId = resolveDestination(saved, loadedDestinations);
   useEffect(() => {
     if (state.status === 'ready') writeDestination(undefined, destId);
   }, [state.status, destId]);
   /** Chỉ chọn mã hợp lệ; lưu ngay trước khi chuyển màn hoặc tải lại. */
   function select(id: string): void {
-    const valid = resolveDestination(id, destinations);
+    const valid = resolveDestination(id, loadedDestinations);
     setSaved(valid);
     writeDestination(undefined, valid);
   }

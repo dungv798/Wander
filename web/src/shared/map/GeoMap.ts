@@ -179,6 +179,7 @@ export class GeoMap {
     }
     map.on('move', () => this.layers.place(this.project));
     map.on('moveend', () => this.layout());
+    map.on('idle', () => this.layout()); // ghim chỉ truy vấn được sau khi vẽ xong: moveend có thể đến trước đó và không còn lần tính nào sau
     map.on('dragstart', () => this.markTouched());
     map.on('zoomstart', (e) => {
       if ((e as { originalEvent?: Event }).originalEvent) this.markTouched();

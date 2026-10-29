@@ -6,3 +6,5 @@ export const DESTINATION_STORAGE_KEY = 'wander.web.destination.v1';
 export const DESTINATION_SEARCH_ZOOM = 10;
 /** Mã nền toàn quốc cho bộ bản đồ dùng chung. */
 export const COUNTRY_MAP_ID = 'vietnam';
+/** Cùng dạng mã tuyến: chữ thường, số, gạch ngang; tối đa 64 ký tự. */
+export const DESTINATION_ID_PATTERN = /^[a-z0-9-]{1,64}$/;

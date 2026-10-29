@@ -20,7 +20,20 @@ export function markerFeatures(markers: readonly MapMarker[], mode: MapMode, clu
   return { type: 'FeatureCollection', features: markers
     .filter((marker) => (mode === 'browse' && marker.kind !== 'hub') === clustered)
     .map((marker) => ({ type: 'Feature', id: marker.id, geometry: { type: 'Point', coordinates: [marker.lon, marker.lat] },
-      properties: { id: marker.id, label: marker.label ?? '', num: marker.num == null ? '' : String(marker.num), muted: Boolean(marker.muted), hub: marker.kind === 'hub', image: markerThumbnail(marker) } })) };
+      properties: { id: marker.id, label: marker.label ?? '', num: marker.num == null ? '' : String(marker.num), muted: Boolean(marker.muted), hub: marker.kind === 'hub', image: markerThumbnail(marker) || MAP.EMPTY_IMAGE } })) };
+}
+
+/** Đếm ghim có symbol ảnh resolve đúng ID đã đăng ký; không đếm sprite rỗng, cụm hoặc bản sao tile. */
+export function renderedImageCount(features: readonly Pick<MapGeoJSONFeature, 'properties' | 'layer'>[], hasImage: (id: string) => boolean): number {
+  const ids = new Set<string>();
+  features.forEach((feature) => {
+    if (feature.layer.type !== 'symbol' || feature.properties['cluster']) return;
+    const resolved: unknown = feature.layer.layout?.['icon-image'];
+    if (resolved && typeof resolved === 'object' && 'available' in resolved && !resolved.available) return;
+    const name = typeof resolved === 'string' ? resolved : resolved && typeof resolved === 'object' && 'name' in resolved ? resolved.name : null;
+    if (typeof name === 'string' && name !== MAP.EMPTY_IMAGE && name === feature.properties['image'] && hasImage(name)) ids.add(String(feature.properties['id']));
+  });
+  return ids.size;
 }
 
 /** Tên đọc của nút thay thế canvas, giữ số thứ tự và mã khi thiếu nhãn. */

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { MapLayers } from './MapLayers.ts';
 import { MAP } from './map.const.ts';
 import type { Pt } from './map.types.ts';
+import { markerFeatures, markerThumbnail } from './nativeMarkers.ts';
 
 /** DOM tối thiểu để kiểm hành vi nút thay thế canvas bằng bàn phím/click mà không cần dependency. */
 class Element extends EventTarget {
@@ -106,4 +107,33 @@ test('cụm dùng zoom native kẹp 17, đánh dấu camera do người dùng; k
   await pending;
   assert.equal(calls.length, 1, 'nguồn đã đổi thì bỏ kết quả worker cũ');
   assert.equal(touched, 1);
+});
+
+test('URL có đường dẫn/truy vấn được addImage bằng đúng ID trong GeoJSON, bitmap 96 px hiển thị 44 px', async (t) => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, 'document');
+  const bitmap = { width: 96, height: 96 };
+  Object.defineProperty(globalThis, 'document', { configurable: true, value: {
+    createElement: () => ({ getContext: () => ({ beginPath() {}, arc() {}, clip() {}, drawImage() {}, getImageData: () => bitmap }) }),
+  } });
+  t.after(() => {
+    if (original) Object.defineProperty(globalThis, 'document', original);
+    else Reflect.deleteProperty(globalThis, 'document');
+  });
+  const marker = { id: 'lake', lat: 12, lon: 108, thumb: ' /catalog/photos/lake.jpg?size=96&crop=1 ' };
+  const feature = markerFeatures([marker], 'browse', true).features[0]!;
+  const registered: string[] = [];
+  const layers = Object.create(MapLayers.prototype) as MapLayers;
+  Object.assign(layers, { images: new Map(), loading: new Set(), host: { dataset: {} }, map: {
+    loadImage: async (url: string) => {
+      assert.equal(url, feature.properties?.['image']);
+      return { data: { width: 192, height: 96 } };
+    },
+    addImage: (id: string, image: unknown, options: unknown) => {
+      assert.equal(image, bitmap);
+      assert.deepEqual(options, { pixelRatio: 96 / 44 });
+      registered.push(id);
+    },
+  } });
+  await (layers as unknown as { loadThumbnail: (url: string) => Promise<void> }).loadThumbnail(markerThumbnail(marker));
+  assert.deepEqual(registered, [feature.properties?.['image']]);
 });

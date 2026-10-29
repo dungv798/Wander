@@ -13,7 +13,7 @@ export function pinHitLayers(): string[] {
   return [MAP.CLUSTER_LAYER, ...MAP.PIN_SOURCES.map((_, index) => `${MAP.PIN_LAYER_PREFIX}${index}-hit`)];
 }
 
-/** Dựng vòng ghim, ảnh, số và tên bằng lớp native; ảnh lỗi vẫn còn vòng ghim. */
+/** Dựng ghim native; giữ ID ảnh chưa tải làm phụ thuộc tile, không coalesce sang sprite rỗng làm mất ảnh đến muộn. */
 function addPinSourceLayers(map: MlMap, host: HTMLElement, source: string, index: number): void {
   const prefix = `${MAP.PIN_LAYER_PREFIX}${index}`;
   const filter: FilterSpecification = ['!', ['has', 'point_count']];
@@ -28,7 +28,7 @@ function addPinSourceLayers(map: MlMap, host: HTMLElement, source: string, index
     'circle-stroke-width': ['case', ['boolean', ['feature-state', 'selected'], false], MAP.SELECT_BORDER, MAP.PIN_BORDER],
   } });
   map.addLayer({ id: `${prefix}-photo`, type: 'symbol', source, filter, layout: {
-    'icon-image': ['coalesce', ['image', ['get', 'image']], ['image', MAP.EMPTY_IMAGE]], 'icon-size': ['case', ['get', 'muted'], MAP.MUTED_SCALE, 1],
+    'icon-image': ['image', ['get', 'image']], 'icon-size': ['case', ['get', 'muted'], MAP.MUTED_SCALE, 1],
     'icon-allow-overlap': true, 'icon-ignore-placement': true,
   }, paint: { 'icon-opacity': ['case', ['get', 'muted'], MAP.MUTED_OPACITY, 1] } });
   map.addLayer({ id: `${prefix}-number`, type: 'symbol', source, filter, layout: {

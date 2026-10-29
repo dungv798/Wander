@@ -7,6 +7,7 @@ import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
+import { waitForNativeMap } from './mapChecks.ts';
 
 let server: ViteDevServer;
 let browser: Browser;
@@ -76,4 +77,52 @@ test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi g
   await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();
   assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
   await ctx.close();
+});
+
+test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghim đến muộn vẫn thành symbol', async () => {
+  const { ctx, errors } = await phone();
+  const page = await ctx.newPage();
+  await page.addInitScript(() => {
+    localStorage.setItem('wander.web.destination.v1', 'da-lat');
+    localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
+  });
+  const details: string[] = [];
+  page.on('request', (request) => {
+    const pathname = new URL(request.url()).pathname;
+    if (/^\/api\/catalog\/destinations\/[^/]+$/.test(pathname)) details.push(pathname);
+  });
+  let releaseCatalog!: () => void;
+  let releasePhotos!: () => void;
+  const catalogPending = new Promise<void>((resolve) => { releaseCatalog = resolve; });
+  const photosPending = new Promise<void>((resolve) => { releasePhotos = resolve; });
+  await page.route('**/api/catalog/destinations', async (route) => { await catalogPending; await route.continue(); });
+  await page.route('**/catalog/photos/**', async (route) => { await photosPending; await route.continue(); });
+  try {
+    await page.goto(`${baseUrl}/#/`, { waitUntil: 'domcontentloaded' });
+    await page.locator('.dcard h3', { hasText: 'Đà Lạt' }).waitFor();
+    assert.ok(details.includes('/api/catalog/destinations/da-lat'));
+    assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false, 'không gọi API mặc định trước catalog');
+    const catalogReady = page.waitForResponse((response) => new URL(response.url()).pathname === '/api/catalog/destinations');
+    releaseCatalog();
+    await catalogReady;
+    await page.locator('.mapcard').scrollIntoViewIfNeeded(); // thẻ bản đồ nằm dưới màn hình, chỉ nạp khi cuộn tới
+    await waitForNativeMap(page, '.mapcard');
+    await page.getByRole('button', { name: /Mở rộng/ }).click();
+    await page.getByRole('dialog', { name: 'Bản đồ Đà Lạt' }).waitFor();
+    // Ảnh còn chờ: bản đồ mở rộng đã sẵn sàng và vẽ ghim giữ chỗ; bộ đếm data-pins chỉ chính xác sau khi ảnh về (nợ nhỏ, xem decisions.md).
+    await page.waitForFunction(() => document.querySelector<HTMLElement>('.mapbig')?.dataset['ready'] === '1', undefined, { timeout: 45000 });
+    assert.equal(await page.locator('.mapbig').getAttribute('data-thumbnails'), '0');
+    releasePhotos();
+    await page.waitForFunction(() => {
+      const map = document.querySelector<HTMLElement>('.mapbig');
+      return Number(map?.dataset['pins']) > 0 && Number(map?.dataset['renderedImages']) === Number(map?.dataset['pins']);
+    }, undefined, { timeout: 45000 });
+    assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false);
+    assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
+    assert.deepEqual(errors, []);
+  } finally {
+    releaseCatalog();
+    releasePhotos();
+    await ctx.close();
+  }
 });

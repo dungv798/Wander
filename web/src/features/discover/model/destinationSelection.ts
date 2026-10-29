@@ -1,6 +1,6 @@
 import { DEFAULT_DESTINATION_ID } from '../../../shared/const/routes.const.ts';
 import { normalizeSearch } from '../../../shared/lib/text.ts';
-import { DESTINATION_STORAGE_KEY } from './destination.const.ts';
+import { DESTINATION_ID_PATTERN, DESTINATION_STORAGE_KEY } from './destination.const.ts';
 
 interface SearchableDestination { readonly id: string; readonly name: string; readonly region: string }
 type DestinationStorage = Pick<Storage, 'getItem' | 'setItem'>;
@@ -11,8 +11,9 @@ export function filterDestinations<T extends SearchableDestination>(destinations
   return destinations.filter((destination) => normalizeSearch(destination.name).includes(normalized) || normalizeSearch(destination.region).includes(normalized));
 }
 
-/** Chỉ chấp nhận mã có trong catalog; chưa chọn thì dùng mã mặc định nếu catalog có, không thì mục đầu; catalog rỗng dùng mã dự phòng. */
-export function resolveDestination(saved: unknown, destinations: readonly { readonly id: string }[]): string {
+/** Catalog chưa tải (undefined): dùng mã lưu đúng dạng ngay; đã tải kể cả rỗng: xác thực tồn tại rồi mới dự phòng. */
+export function resolveDestination(saved: unknown, destinations: readonly { readonly id: string }[] | undefined): string {
+  if (destinations === undefined) return typeof saved === 'string' && DESTINATION_ID_PATTERN.test(saved) ? saved : DEFAULT_DESTINATION_ID;
   const has = (id: unknown): string | undefined => destinations.find((destination) => destination.id === id)?.id;
   return has(saved) ?? has(DEFAULT_DESTINATION_ID) ?? destinations[0]?.id ?? DEFAULT_DESTINATION_ID;
 }

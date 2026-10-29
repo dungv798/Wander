@@ -1,7 +1,8 @@
 ﻿import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { MapGeoJSONFeature } from 'maplibre-gl';
-import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, thumbnailCrop } from './nativeMarkers.ts';
+import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, renderedImageCount, thumbnailCrop } from './nativeMarkers.ts';
+import { MAP } from './map.const.ts';
 import type { MapMarker } from './map.types.ts';
 
 const markers: MapMarker[] = [
@@ -16,8 +17,18 @@ test('GeoJSON giữ ID, kinh/vĩ độ, số và trạng thái; hub không vào 
   assert.deepEqual(clustered.features[0]?.properties, { id: 'lake', label: 'Hồ Xuân Hương', num: '2', muted: true, hub: false, image: '/catalog/lake.jpg' });
   assert.deepEqual(markerFeatures(markers, 'browse', false).features.map((feature) => feature.id), ['hub']);
   assert.equal(markerFeatures(markers, 'route', true).features.length, 0);
+  assert.equal(markerFeatures(markers, 'browse', false).features[0]?.properties?.['image'], MAP.EMPTY_IMAGE);
   assert.deepEqual(markerFeatures(markers, 'route', false).features.map((feature) => feature.id), ['lake', 'hub']);
   assert.deepEqual(markerFeatures([], 'browse', true).features, []);
+});
+
+test('đếm ảnh resolve từ photo layer, không nhầm sprite rỗng hoặc URL chưa đăng ký là ảnh đang vẽ', () => {
+  const photo = { properties: { id: 'lake', image: '/lake.jpg' }, layer: { type: 'symbol', layout: { 'icon-image': { name: '/lake.jpg', available: true } } } };
+  const fallback = { ...photo, layer: { type: 'symbol', layout: { 'icon-image': { name: MAP.EMPTY_IMAGE, available: true } } } };
+  const features = [photo, photo, fallback] as unknown as Pick<MapGeoJSONFeature, 'properties' | 'layer'>[];
+  assert.equal(renderedImageCount(features, (id) => id === '/lake.jpg'), 1);
+  assert.equal(renderedImageCount([features[2]!], () => true), 0);
+  assert.equal(renderedImageCount(features, () => false), 0);
 });
 
 test('thumbnail lấy đúng ảnh catalog; thiếu ảnh không sáng tác URL và tên truy cập giữ số', () => {

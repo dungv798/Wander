@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateStyleMin } from '@maplibre/maplibre-gl-style-spec';
+import { createExpression, validateStyleMin } from '@maplibre/maplibre-gl-style-spec';
 import type { Map as MlMap, StyleSpecification } from 'maplibre-gl';
 import { addNativePinLayers, pinHitLayers } from './nativePinLayers.ts';
 import { MAP } from './map.const.ts';
+import { markerFeatures } from './nativeMarkers.ts';
 
 test('cấu hình lớp native hợp lệ với style-spec MapLibre đang cài, có hit 44 px và hub ngoài cụm', (t) => {
   for (const [name, value] of Object.entries({
@@ -35,6 +36,23 @@ test('cấu hình lớp native hợp lệ với style-spec MapLibre đang cài, 
   assert.equal(clustered.cluster, true);
   assert.equal(clustered.clusterMaxZoom, 16, 'cụm tách hết ở zoom tối đa 17');
   assert.equal(plain.cluster, false);
+  const photo = style.layers.find((layer) => layer.id === `${MAP.PIN_LAYER_PREFIX}0-photo`);
+  assert.ok(photo?.type === 'symbol');
+  assert.ok(style.layers.indexOf(photo) > style.layers.findIndex((layer) => layer.id === `${MAP.PIN_LAYER_PREFIX}0-circle`), 'ảnh nằm trên nền tròn');
+  assert.equal(photo.layout?.['icon-allow-overlap'], true);
+  const expression = createExpression(photo.layout?.['icon-image'], 'icon-image');
+  assert.equal(expression.result, 'success');
+  if (expression.result !== 'success') return;
+  for (const url of ['/catalog/photos/lang-biang-1.jpg', '/catalog/photos/thac-pongour.jpg?size=96&crop=1']) {
+    const feature = markerFeatures([{ id: 'pin', lat: 12, lon: 108, thumb: url }], 'browse', true).features[0]!;
+    const input = { type: 'Point' as const, properties: feature.properties! };
+    const waiting = expression.value.evaluate({ zoom: 12 }, input, {}, undefined, [MAP.EMPTY_IMAGE]);
+    assert.equal(waiting.name, url, 'ảnh chưa đến vẫn phải đăng ký phụ thuộc đúng ID, không chốt sprite rỗng');
+    assert.equal(waiting.available, false);
+    const loaded = expression.value.evaluate({ zoom: 12 }, input, {}, undefined, [MAP.EMPTY_IMAGE, url]);
+    assert.equal(loaded.name, url);
+    assert.equal(loaded.available, true);
+  }
   for (const id of pinHitLayers().slice(1)) {
     const layer = style.layers.find((candidate) => candidate.id === id);
     assert.ok(layer?.type === 'circle');
