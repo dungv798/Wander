@@ -212,7 +212,7 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Đánh dấu hoặc bỏ đánh dấu hoàn thành một "Việc cần làm" cho chủ chuyến. */
+    /** Tích/bỏ tích việc cần làm hoặc Đã ghé địa điểm cho chính thành viên đang gọi, không phụ thuộc người thêm mục. */
     public void setTaskDone(PlanningCommands.SetTaskDone command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMember(command.ownerId());

@@ -290,11 +290,11 @@ public final class Trip {
         circle.forgetItem(itemId);
     }
 
-    /** A-10: chỉ "Việc cần làm" có ô tích; hoàn thành ghi theo người (P5). */
+    /** A-10/DR-029: tích việc cần làm hoặc Đã ghé mục có địa điểm; lưu riêng từng người, mục đã xóa không được tích. */
     public Item setTaskDone(UUID itemId, UUID personId, Boolean done, Instant now) {
         Item item = item(itemId);
         if (item.isDeleted()) throw WanderException.conflict(PlanningErrorCodes.ITEM_DELETED, PlanningMessages.ITEM_DELETED);
-        if (item.type() != ItemType.TASK) {
+        if (item.type() != ItemType.TASK && (item.placeId() == null || item.type() == ItemType.REST)) {
             throw WanderException.invalid(PlanningErrorCodes.NOT_A_TASK, PlanningMessages.NOT_A_TASK, PlanningFields.TYPE);
         }
         if (done == null) throw WanderException.invalidValue(ErrorCodes.MALFORMED, PlanningFields.DONE);

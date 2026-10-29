@@ -13,12 +13,13 @@ import { Chip } from '../../../shared/ui/Chip.tsx';
 import { DestinationGate } from '../../discover/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import type { Trip } from '../model/trip.types.ts';
+import { isPlaceItem } from '../model/itemCompletion.ts';
 import { pickTodayTrip } from '../model/todayView.ts';
 import type { TodayState } from '../model/todayView.ts';
 import { catalogOf } from '../model/tripView.ts';
 import type { TripCatalog } from '../model/tripView.ts';
 import { TODAY_COPY as C } from '../today/today.copy.ts';
-import { todayState, nextStop, visitedCount } from '../today/todayState.ts';
+import { todayState, nextStop, visitedProgress } from '../today/todayState.ts';
 import { Preparation } from '../today/Preparation.tsx';
 import { NextCard, TodayItem } from '../today/TodayItems.tsx';
 import '../today/today.css';
@@ -38,9 +39,15 @@ function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: Tri
     return <EmptyState role="status" title={C.tentative.title} text={C.tentative.text} actions={<Button onClick={openTrip}>{C.tentative.action}</Button>} />;
   }
   if (view.kind === 'before') return <div className="stack pad-x spaced-lg"><EmptyState role="status" title={C.before.title} text={fill(C.before.text, { n: view.daysLeft, trip: trip.name })} /><Preparation tripId={trip.id} />{all}</div>;
-  if (view.kind === 'after') return <div className="stack pad-x spaced-lg"><EmptyState role="status" title={C.after.title} text={fill(C.after.text, { trip: trip.name })} /><p className="note">{visitedCount(trip.items) ? fill(C.visited, { n: visitedCount(trip.items) }) : C.visitedUnknown}</p><Button icon="share-2" block onClick={() => navigate(VIEW.EXPORT, trip.id)}>{C.export}</Button>{all}</div>;
+  if (view.kind === 'after') return <div className="stack pad-x spaced-lg"><EmptyState role="status" title={C.after.title} text={fill(C.after.text, { trip: trip.name })} /><VisitedSummary items={trip.items} /><Button icon="share-2" block onClick={() => navigate(VIEW.EXPORT, trip.id)}>{C.export}</Button>{all}</div>;
   if (view.kind === 'empty') return <EmptyState role="status" title={C.empty.title} text={fill(C.empty.text, { n: view.dayNumber })} actions={<><Button onClick={() => { replaceRoute(VIEW.TRIPS); navigate(VIEW.TRIP, trip.id, String(view.dayNumber)); }}>{C.add}</Button>{all}</>} />;
   return <TodayDay key={view.day} trip={trip} cat={cat} view={view} all={all} />;
+}
+
+/** Tóm tắt riêng của người xem từ mục còn hiện; không có địa điểm thì nêu rõ thay vì suy đoán. */
+function VisitedSummary({ items }: { readonly items: Trip['items'] }) {
+  const progress = visitedProgress(items);
+  return <p className="note" role="status">{C.personal}{': '}{progress.total ? fill(C.visited, { n: progress.visited, m: progress.total }) : C.noPlaces}</p>;
 }
 
 /** Tách điểm kế tiếp khỏi danh sách gọn; mở phần đã xong sau thao tác để người dùng thấy kết quả. */
@@ -50,8 +57,9 @@ function TodayDay({ trip, cat, view, all }: { readonly trip: Trip; readonly cat:
   return (
     <div className="stack pad-x spaced-lg">
       <h2 className="h2">{fill(C.day, { n: view.dayNumber, date: dayLabel(view.day) })}</h2>
+      <VisitedSummary items={view.items} />
       <div className="chips" role="group" aria-label={C.title}>
-        <Chip tone="tint">{fill(C.stats.places, { n: view.items.filter((i) => i.placeId).length })}</Chip>
+        <Chip tone="tint">{fill(C.stats.places, { n: view.items.filter(isPlaceItem).length })}</Chip>
         <Chip tone="tint">{costSummaryText(summarizeCosts({ items: view.items }))}</Chip>
         {view.unknownCount ? <Chip tone="tint">{fill(C.stats.unknown, { n: view.unknownCount })}</Chip> : null}
       </div>

@@ -66,8 +66,8 @@ public final class PlanningMessages {
     /** Chỉ xóa vĩnh viễn được mục đã nằm trong "Đã xóa gần đây". */
     public static final String NOT_IN_TRASH = "Chỉ xóa vĩnh viễn được mục đã nằm trong \"Đã xóa gần đây\".";
 
-    /** Chỉ mục "Việc cần làm" mới có ô tích. */
-    public static final String NOT_A_TASK = "Chỉ mục loại \"Việc cần làm\" mới có ô tích.";
+    /** Mục không phải việc cần làm hoặc địa điểm nên không nhận thao tác hoàn thành. */
+    public static final String NOT_A_TASK = "Chỉ việc cần làm và mục địa điểm mới có thể đánh dấu hoàn thành.";
 
     /** Loại mục này không có trạng thái đặt chỗ. */
     public static final String BOOKING_NOT_APPLICABLE = "Loại mục này không có trạng thái đặt chỗ.";

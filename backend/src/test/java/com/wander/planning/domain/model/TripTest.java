@@ -323,7 +323,7 @@ class TripTest {
     }
 
     @Test
-    @DisplayName("chỉ \"Việc cần làm\" có ô tích, ghi theo người")
+    @DisplayName("Việc cần làm ghi hoàn thành theo người; mục tự do không có liên kết địa điểm vẫn bị từ chối")
     void taskDone() {
         Trip t = trip();
         Item task = t.addItem(D2, new ItemDetails(ItemType.TASK, "In vé", null, null, null, ItemCost.UNKNOWN), null, NOW);
@@ -333,6 +333,75 @@ class TripTest {
         assertThat(task.isDoneBy(UUID.randomUUID())).isFalse();
         assertThatThrownBy(() -> t.setTaskDone(food.id(), owner, true, NOW))
                 .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("NOT_A_TASK"));
+    }
+
+    /** Địa điểm dùng cùng completion theo mục và người, không gộp các lượt ghé cùng nơi. */
+    @Test
+    @DisplayName("Đã ghé: mọi loại địa điểm có liên kết được tích riêng từng người và từng mục, bỏ tích được")
+    void placeVisitedPerPersonAndItem() {
+        Trip t = trip();
+        UUID other = UUID.randomUUID();
+        for (ItemType type : ItemType.values()) {
+            if (type == ItemType.REST || type == ItemType.TASK) continue;
+            Item place = t.addItem(D2, new ItemDetails(type, "Nơi", null, null, null,
+                    ItemCost.UNKNOWN, null, "mot-noi"), null, NOW);
+            Item repeat = t.addItem(D2, place.details(), null, NOW);
+            assertThat(place.completions()).isEmpty();
+            t.setTaskDone(place.id(), owner, true, NOW);
+            t.setTaskDone(place.id(), owner, true, NOW);
+            assertThat(place.completions()).hasSize(1);
+            assertThat(place.isDoneBy(other)).isFalse();
+            assertThat(repeat.isDoneBy(owner)).isFalse();
+            t.setTaskDone(place.id(), other, true, NOW);
+            t.setTaskDone(place.id(), owner, false, NOW);
+            assertThat(place.isDoneBy(owner)).isFalse();
+            assertThat(place.isDoneBy(other)).isTrue();
+        }
+    }
+
+    /** Không dùng thời gian hoặc ngày để suy ra dấu ghé; xóa mềm giữ dữ liệu để hoàn tác. */
+    @Test
+    @DisplayName("Đã ghé giữ qua đổi ngày, xóa mềm và khôi phục; mục xóa không nhận thao tác mới")
+    void visitedSurvivesScheduleAndTrash() {
+        Trip t = trip();
+        Item place = t.addItem(D1, new ItemDetails(ItemType.FOOD, "Quán", null, null, null,
+                ItemCost.UNKNOWN, null, "quan"), null, NOW);
+        t.assignDays(List.of(new DayAssignment(place.id(), D2, null)), NOW);
+        assertThat(place.completions()).isEmpty();
+        t.setTaskDone(place.id(), owner, true, NOW);
+        t.changeDetails("T", "D", DateRange.of(D1, D1), NOW);
+        assertThat(place.day()).isNull();
+        assertThat(place.isDoneBy(owner)).isTrue();
+        t.softDelete(place.id(), NOW);
+        for (boolean done : List.of(true, false)) {
+            assertThatThrownBy(() -> t.setTaskDone(place.id(), owner, done, NOW))
+                    .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("ITEM_DELETED"));
+        }
+        t.restore(place.id(), NOW);
+        assertThat(place.isDoneBy(owner)).isTrue();
+        t.softDelete(place.id(), NOW);
+        t.purge(place.id());
+        assertThatThrownBy(() -> t.setTaskDone(place.id(), owner, true, NOW))
+                .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("NOT_FOUND"));
+    }
+
+    /** Kiểu dữ liệu sai không được tạo completion; Nghỉ không trở thành địa điểm dù có liên kết. */
+    @Test
+    @DisplayName("Đã ghé từ chối done null, mục không có và mục Nghỉ, không ghi trạng thái khi lỗi")
+    void visitedRejectsInvalidTargetsAndInput() {
+        Trip t = trip();
+        Item place = t.addItem(D2, new ItemDetails(ItemType.SIGHTSEEING, "Nơi", null, null, null,
+                ItemCost.UNKNOWN, null, "noi"), null, NOW);
+        Item rest = t.addItem(D2, new ItemDetails(ItemType.REST, "Nghỉ", null, null, null,
+                ItemCost.UNKNOWN, null, "noi"), null, NOW);
+        assertThatThrownBy(() -> t.setTaskDone(place.id(), owner, null, NOW))
+                .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("MALFORMED"));
+        assertThatThrownBy(() -> t.setTaskDone(rest.id(), owner, true, NOW))
+                .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("NOT_A_TASK"));
+        assertThatThrownBy(() -> t.setTaskDone(UUID.randomUUID(), owner, true, NOW))
+                .isInstanceOfSatisfying(WanderException.class, e -> assertThat(e.code()).isEqualTo("NOT_FOUND"));
+        assertThat(place.completions()).isEmpty();
+        assertThat(rest.completions()).isEmpty();
     }
 
     @Test

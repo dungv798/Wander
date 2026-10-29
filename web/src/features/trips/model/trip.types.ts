@@ -28,11 +28,11 @@ export interface TripItem {
   /** Giá tham khảo khi đã bao gồm (R4). */
   readonly referenceK: number | null;
   readonly booking: BookingStatus | null;
-  /** Việc cần làm: bản thân người đang xem đã xong chưa (theo từng người, D10). */
+  /** Bản thân người đang xem đã xong việc/ghé mục địa điểm chưa (theo từng người, D10/DR-029). */
   readonly done: boolean;
   /** Mã thành viên đã thêm mục (null = Organizer/dữ liệu cũ); dùng cho quyền sửa/xóa mục của mình (H3). */
   readonly addedBy: string | null;
-  /** Mã những thành viên đã xong (việc cần làm): "Xong 1/2 người". */
+  /** Mã những thành viên hiện tại đã xong việc/ghé mục địa điểm; dùng cho tiến độ chung. */
   readonly doneBy: readonly string[];
 }
 

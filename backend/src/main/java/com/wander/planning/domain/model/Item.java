@@ -39,7 +39,7 @@ public final class Item {
     private Instant deletedAt;
     private final Instant createdAt;
     private Instant updatedAt;
-    /** Hoàn thành theo cặp (việc × người), đề xuất P5. Ở Lát 1a người duy nhất là chủ chuyến. */
+    /** Hoàn thành/Đã ghé theo cặp (mục × danh tính), dùng chung cho việc cần làm và địa điểm (DR-029). */
     private final Map<UUID, Instant> completions;
     /** Mã THÀNH VIÊN đã thêm mục (null = Organizer/dữ liệu cũ); dùng cho quyền sửa/xóa mục của mình (H3). */
     private final UUID addedByMemberId;
@@ -157,7 +157,7 @@ public final class Item {
         return deletedAt != null;
     }
 
-    /** Người này đã hoàn thành mục (việc cần làm) chưa. */
+    /** Người này đã hoàn thành việc cần làm hoặc ghé mục địa điểm chưa. */
     public boolean isDoneBy(UUID personId) {
         return completions.containsKey(personId);
     }

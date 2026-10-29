@@ -141,7 +141,7 @@ public class TripController {
         return ResponseEntity.noContent().build();
     }
 
-    /** Đánh dấu hoặc bỏ đánh dấu hoàn thành một việc cần làm. */
+    /** Tích/bỏ tích việc cần làm hoặc Đã ghé địa điểm cho người gọi; giữ hợp đồng completion hiện có. */
     @PutMapping(PlanningApiConstants.ITEM_DONE_PATH)
     public Map<String, Object> setTaskDone(AuthenticatedPrincipal principal, @PathVariable String tripId, @PathVariable String itemId,
                                            JsonBody body) {
