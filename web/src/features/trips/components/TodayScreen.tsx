@@ -8,58 +8,23 @@ import { goBack, navigate, replaceRoute } from '../../../shared/router/hashRoute
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
-import { Icon } from '../../../shared/ui/Icon.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
-import { CATEGORY_ICON, DestinationGate } from '../../discover/index.ts';
-import { useFire } from '../hooks/useFire.ts';
+import { Chip } from '../../../shared/ui/Chip.tsx';
+import { DestinationGate } from '../../discover/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
-import { ITEM_KINDS } from '../model/trip.const.ts';
-import type { Trip, TripItem } from '../model/trip.types.ts';
-import { pickTodayTrip, todayView } from '../model/todayView.ts';
+import type { Trip } from '../model/trip.types.ts';
+import { pickTodayTrip } from '../model/todayView.ts';
 import type { TodayState } from '../model/todayView.ts';
-import { catalogOf, itemName } from '../model/tripView.ts';
+import { catalogOf } from '../model/tripView.ts';
 import type { TripCatalog } from '../model/tripView.ts';
-import { TRIPS_COPY as T } from '../model/trips.copy.ts';
+import { TODAY_COPY as C } from '../today/today.copy.ts';
+import { todayState, nextStop, visitedCount } from '../today/todayState.ts';
+import { Preparation } from '../today/Preparation.tsx';
+import { NextCard, TodayItem } from '../today/TodayItems.tsx';
+import '../today/today.css';
 import { costSummaryText, summarizeCosts } from '../model/tripMath.ts';
 
 const MINUTE_MS = 60_000;
-
-/** Liên kết "Mở bản đồ" tới một địa điểm có tọa độ, mở ứng dụng bản đồ bên ngoài (người dùng chủ động bấm). Không có tọa độ thì không hiện. */
-function MapLink({ name, lat, lon }: { readonly name: string; readonly lat: number; readonly lon: number }) {
-  return (
-    <a className="btn ghost maplink" href={`https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`} target="_blank" rel="noopener noreferrer" aria-label={fill(T.today.mapAria, { name })}>
-      <Icon name="map-pin" size="s" />
-      {T.today.map}
-    </a>
-  );
-}
-
-/** Một mục của hôm nay: giờ (hoặc "Chưa đặt giờ"), tên, loại; việc cần làm tích xong được; địa điểm có liên kết mở bản đồ. */
-function TodayItem({ trip, item, cat }: { readonly trip: Trip; readonly item: TripItem; readonly cat: TripCatalog }) {
-  const { actions } = useTrips();
-  const fire = useFire();
-  const place = cat.place(item.placeId);
-  const name = itemName(item, cat);
-  const kind = ITEM_KINDS[item.type];
-  return (
-    <li className={`todayrow ${item.done ? 'done' : ''}`}>
-      <span className="tdtime">{item.timeOfDay ?? T.today.noTime}</span>
-      <span className="tdbody">
-        <b>
-          <Icon semantic name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
-          {name}
-        </b>
-        <span className="note">{place ? `${place.categoryName} · ${place.area}` : kind.label}</span>
-        {place && place.lat !== null && place.lon !== null ? <MapLink name={name} lat={place.lat} lon={place.lon} /> : null}
-      </span>
-      {item.type === 'task' ? (
-        <button className="taskchk" type="button" aria-pressed={item.done} aria-label={fill(T.view.taskToggle, { name })} onClick={() => fire(actions.toggleDone(trip.id, item.id))}>
-          <Icon name="check" />
-        </button>
-      ) : null}
-    </li>
-  );
-}
 
 /** Nội dung theo từng trạng thái của "Hôm nay" (S17). */
 function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: TripCatalog; readonly view: TodayState }) {
@@ -68,26 +33,36 @@ function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: Tri
     replaceRoute(VIEW.TRIPS);
     navigate(VIEW.TRIP, trip.id, 'ov');
   };
-  const all = <Button kind="ghost" block onClick={openTrip}>{T.today.allTrip}</Button>;
+  const all = <Button kind="ghost" block onClick={openTrip}>{C.allTrip}</Button>;
   if (view.kind === 'tentative') {
-    return <EmptyState role="status" title={T.today.tentative.title} text={T.today.tentative.text} actions={<Button onClick={openTrip}>{T.today.tentative.action}</Button>} />;
+    return <EmptyState role="status" title={C.tentative.title} text={C.tentative.text} actions={<Button onClick={openTrip}>{C.tentative.action}</Button>} />;
   }
-  if (view.kind === 'before') return <EmptyState role="status" title={T.today.before.title} text={fill(T.today.before.text, { n: view.daysLeft, trip: trip.name })} actions={all} />;
-  if (view.kind === 'after') return <EmptyState role="status" title={T.today.after.title} text={fill(T.today.after.text, { trip: trip.name })} actions={all} />;
-  if (view.kind === 'empty') return <EmptyState role="status" title={T.today.empty.title} text={fill(T.today.empty.text, { n: view.dayNumber })} actions={all} />;
+  if (view.kind === 'before') return <div className="stack pad-x spaced-lg"><EmptyState role="status" title={C.before.title} text={fill(C.before.text, { n: view.daysLeft, trip: trip.name })} /><Preparation tripId={trip.id} />{all}</div>;
+  if (view.kind === 'after') return <div className="stack pad-x spaced-lg"><EmptyState role="status" title={C.after.title} text={fill(C.after.text, { trip: trip.name })} /><p className="note">{visitedCount(trip.items) ? fill(C.visited, { n: visitedCount(trip.items) }) : C.visitedUnknown}</p><Button icon="share-2" block onClick={() => navigate(VIEW.EXPORT, trip.id)}>{C.export}</Button>{all}</div>;
+  if (view.kind === 'empty') return <EmptyState role="status" title={C.empty.title} text={fill(C.empty.text, { n: view.dayNumber })} actions={<><Button onClick={() => { replaceRoute(VIEW.TRIPS); navigate(VIEW.TRIP, trip.id, String(view.dayNumber)); }}>{C.add}</Button>{all}</>} />;
+  return <TodayDay key={view.day} trip={trip} cat={cat} view={view} all={all} />;
+}
+
+/** Tách điểm kế tiếp khỏi danh sách gọn; mở phần đã xong sau thao tác để người dùng thấy kết quả. */
+function TodayDay({ trip, cat, view, all }: { readonly trip: Trip; readonly cat: TripCatalog; readonly view: Extract<TodayState, { kind: 'day' }>; readonly all: React.ReactNode }) {
+  const selected = nextStop(view.items);
+  const [showDone, setShowDone] = useState(false);
   return (
     <div className="stack pad-x spaced-lg">
-      <h2 className="h2">{fill(T.today.day, { n: view.dayNumber, date: dayLabel(view.day) })}</h2>
-      <div className="chips" role="group" aria-label={T.today.title}>
-        <span className="chip tint cat-canh">{fill(T.today.stats.places, { n: view.items.filter((i) => i.placeId).length })}</span>
-        <span className="chip tint cat-am">{costSummaryText(summarizeCosts({ items: view.items }))}</span>
-        {view.unknownCount ? <span className="chip tint cat-luu">{fill(T.today.stats.unknown, { n: view.unknownCount })}</span> : null}
+      <h2 className="h2">{fill(C.day, { n: view.dayNumber, date: dayLabel(view.day) })}</h2>
+      <div className="chips" role="group" aria-label={C.title}>
+        <Chip tone="tint">{fill(C.stats.places, { n: view.items.filter((i) => i.placeId).length })}</Chip>
+        <Chip tone="tint">{costSummaryText(summarizeCosts({ items: view.items }))}</Chip>
+        {view.unknownCount ? <Chip tone="tint">{fill(C.stats.unknown, { n: view.unknownCount })}</Chip> : null}
       </div>
-      <ul className="todaylist">
-        {view.items.map((i) => (
-          <TodayItem key={i.id} trip={trip} item={i} cat={cat} />
+      {selected.next ? <NextCard trip={trip} cat={cat} item={selected.next} previous={selected.previous} onCompleted={() => setShowDone(true)} /> : <EmptyState role="status" title={C.allDone} text={C.allDoneText} />}
+      {selected.remaining.length ? <section><h3>{fill(C.remaining, { n: selected.remaining.length })}</h3><ul className="todaylist">
+        {selected.remaining.map((i) => (
+          <TodayItem key={i.id} trip={trip} item={i} cat={cat} onCompleted={() => setShowDone(true)} />
         ))}
-      </ul>
+      </ul></section> : null}
+      {selected.completed.length ? <details className="today-completed" open={showDone} onToggle={(event) => setShowDone(event.currentTarget.open)}><summary>{fill(C.completed, { n: selected.completed.length })}</summary><ul className="todaylist">{selected.completed.map((i) => <TodayItem key={i.id} trip={trip} item={i} cat={cat} />)}</ul></details> : null}
+      <Preparation tripId={trip.id} />
       {all}
     </div>
   );
@@ -97,26 +72,25 @@ function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: Tri
 function TodayFor({ trip }: { readonly trip: Trip }) {
   const now = useNow(MINUTE_MS);
   const [fake, setFake] = useState('');
-  const today = fake || todayLocal(new Date(now));
   return (
     <DestinationGate destId={trip.destinationId}>
       {(dest) => (
         <>
           <div className="pagehead pad-x">
             <div>
-              <IconButton icon="chevron-left" label={T.today.back} onClick={goBack} />
+              <IconButton icon="chevron-left" label={C.back} onClick={goBack} />
             </div>
-            <p className="note">{fill(T.today.eyebrow, { trip: trip.name })}</p>
-            <h1>{T.today.title}</h1>
+            <p className="note">{fill(C.eyebrow, { trip: trip.name })}</p>
+            <h1>{C.title}</h1>
           </div>
-          <TodayBody trip={trip} cat={catalogOf(dest)} view={todayView(trip, today)} />
+          <TodayBody trip={trip} cat={catalogOf(dest)} view={todayState(trip, new Date(now), fake)} />
           {IS_DEV ? (
             <div className="stack pad-x">
               <div className="protobox">
-                <b>{T.today.demo.title}</b>
-                <p className="note">{T.today.demo.note}</p>
-                <Field label={T.today.demo.label} type="date" value={fake} onChange={setFake} />
-                <Button kind="ghost" onClick={() => setFake('')}>{T.today.demo.reset}</Button>
+                <b>{C.demo.title}</b>
+                <p className="note">{C.demo.note}</p>
+                <Field label={C.demo.label} type="date" value={fake} onChange={setFake} />
+                <Button kind="ghost" onClick={() => setFake('')}>{C.demo.reset}</Button>
               </div>
             </div>
           ) : null}
@@ -132,7 +106,7 @@ export function TodayScreen({ tripId }: { readonly tripId: string | null }) {
   const now = useNow(MINUTE_MS);
   const trip = tripId ? find(tripId) : pickTodayTrip(state.trips, todayLocal(new Date(now)));
   if (!trip) {
-    return <EmptyState pageTitle role="status" title={T.today.noTrip.title} text={T.today.noTrip.text} actions={<Button onClick={goBack}>{T.today.noTrip.action}</Button>} />;
+    return <EmptyState pageTitle role="status" title={C.noTrip.title} text={C.noTrip.text} actions={<Button onClick={goBack}>{C.noTrip.action}</Button>} />;
   }
   return <TodayFor key={trip.id} trip={trip} />;
 }

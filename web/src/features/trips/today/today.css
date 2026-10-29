@@ -1,0 +1,15 @@
+#screen .today-next.panel.todayrow { display: block; width: 100%; max-height: none; overflow: hidden; border-radius: var(--r-lg); padding: 0; }
+.today-next figure { margin: 0; background: var(--surface-2); }
+.today-next figure > img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+.today-next figcaption { padding: var(--s-1) var(--s-3); color: var(--muted); font: var(--text-secondary); }
+.today-next-body { display: grid; gap: var(--s-2); padding: var(--s-4); }
+.today-next-body h3 { font: var(--text-place); overflow-wrap: anywhere; }
+.today-next-body .chip { justify-self: start; }
+.today-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+#screen .today-prepare.panel { width: 100%; max-height: none; overflow: visible; padding: var(--s-4); border-radius: var(--r-lg); }
+.today-prepare h2 { font: var(--text-section); margin-bottom: var(--s-2); }
+.today-checklist { margin: var(--s-3) 0 0; padding-left: var(--s-5); }
+.today-checklist label { display: flex; align-items: center; gap: var(--s-2); min-height: var(--tap); }
+.today-checklist input { width: var(--icon-m); height: var(--icon-m); }
+.today-completed summary { min-height: var(--tap); cursor: pointer; font: var(--text-button); }
+.today-completed .todaylist { margin-top: var(--s-2); }

@@ -103,22 +103,32 @@ test('Hôm nay: chưa có chuyến thì nói rõ; chuyến chưa chắc ngày kh
   await ctx.close();
 });
 
-test('Lưu hoặc gửi lịch trình: ba kiểu xem trước từ dữ liệu thật, tổng theo D17/D18, nói thẳng chưa tạo tệp, nút tạo tệp bị tắt', async () => {
+test('Lưu hoặc gửi lịch trình: PNG thật, PDF/Lịch sắp có, tổng D17/D18 và không xuất mục chưa có ngày', async () => {
   const { ctx, errors } = await phone();
+  // Đọc chữ thực sự được vẽ vào PNG vì bản xem trước hiện là ảnh, không còn bảng DOM.
+  await ctx.addInitScript(() => {
+    const drawn: string[] = [];
+    Object.assign(window, { exportDrawnText: drawn });
+    const original = CanvasRenderingContext2D.prototype.fillText;
+    CanvasRenderingContext2D.prototype.fillText = function (text, x, y, maxWidth) {
+      drawn.push(text);
+      if (maxWidth === undefined) original.call(this, text, x, y);
+      else original.call(this, text, x, y, maxWidth);
+    };
+  });
   const page = await open(ctx, '#/export/mau-ha-giang', { trips: true });
   await page.getByRole('heading', { name: 'Lưu hoặc gửi lịch trình' }).waitFor();
-  assert.equal(await page.locator('.expcard').count(), 3, 'kiểu Ảnh: một thẻ mỗi ngày');
-  await page.getByText(/3 mục “Chưa có ngày” sẽ không nằm trong bản xuất/).waitFor();
-  const create = page.getByRole('button', { name: 'Tạo tệp (chưa làm)' });
-  assert.equal(await create.isDisabled(), true);
-  await page.getByRole('button', { name: 'PDF' }).click();
-  await page.getByRole('columnheader', { name: 'Chi phí' }).waitFor();
-  assert.match((await page.locator('.exptable tfoot').textContent()) ?? '', /750\.000\s₫/);
-  await page.getByText('Đã bao gồm').first().waitFor();
-  await page.getByRole('button', { name: 'Lịch' }).click();
-  await page.getByText(/Múi giờ của thiết bị này/).waitFor();
-  await page.getByText('Cả ngày').first().waitFor();
-  await page.getByText(/chưa tạo được tệp Ảnh, PDF hay Lịch/).waitFor();
+  const create = page.getByRole('button', { name: 'Tạo ảnh PNG', exact: true });
+  await create.waitFor();
+  assert.equal(await create.isEnabled(), true);
+  assert.equal(await page.getByRole('button', { name: 'PDF · Sắp có', exact: true }).isDisabled(), true);
+  assert.equal(await page.getByRole('button', { name: 'Lịch · Sắp có', exact: true }).isDisabled(), true);
+  await page.locator('.png-export-image').first().waitFor();
+  const text = await page.evaluate(() => (window as Window & { exportDrawnText?: string[] }).exportDrawnText?.join('\n') ?? '');
+  assert.match(text, /750\.000\s₫/);
+  assert.match(text, /Đã bao gồm/);
+  for (const day of [1, 2, 3]) assert.match(text, new RegExp(`Ngày ${day} ·`));
+  assert.doesNotMatch(text, /Chưa xếp ngày|Phố cổ Đồng Văn|Hoàng Su Phì|Tây Côn Lĩnh/, 'ba mục chưa có ngày không nằm trong PNG');
   assert.deepEqual(errors, []);
   await ctx.close();
 });

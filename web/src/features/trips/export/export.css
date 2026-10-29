@@ -1,0 +1,2 @@
+.png-export { min-width: 0; }
+.png-export-image { display: block; width: 100%; height: auto; border: var(--focus-width) solid var(--line); border-radius: var(--s-3); }

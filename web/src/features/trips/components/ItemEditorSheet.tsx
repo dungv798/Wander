@@ -23,9 +23,9 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
 
 /** Biểu mẫu ban đầu: từ mục đang sửa, hoặc mục mới với ngày của tab đang xem. */
-function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaultDay: string): ItemForm {
+function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaultDay: string, initial?: Pick<ItemForm, 'title' | 'day'>): ItemForm {
   return {
-    title: item?.title ?? '', type: item?.type ?? preset ?? 'sightseeing', isPlace: Boolean(item?.placeId), day: item ? (item.day ?? '') : defaultDay, time: item?.timeOfDay ?? '',
+    title: item?.title ?? initial?.title ?? '', type: item?.type ?? preset ?? 'sightseeing', isPlace: Boolean(item?.placeId), day: item ? (item.day ?? '') : (initial?.day ?? defaultDay), time: item?.timeOfDay ?? '',
     duration: item?.durationMin == null ? '' : String(item.durationMin), note: item?.note ?? '', cost: item?.costK == null ? '' : String(item.costK), included: item?.included ?? false,
     reference: item?.referenceK == null ? '' : String(item.referenceK), booked: item?.booking === 'booked',
   };
@@ -102,14 +102,14 @@ function DeleteItemButton({ item, onDone }: { readonly item: TripItem; readonly 
 }
 
 /** Tờ thêm/sửa một mục: tên và loại (mục tự do), ngày, giờ, thời lượng, ghi chú, chi phí (D17/D18), đã bao gồm + giá tham khảo, đặt chỗ. Lưu có Hoàn tác. */
-export function ItemEditorSheet({ itemId, preset, onClose }: { readonly itemId: string | null; readonly preset: ItemKind | null; readonly onClose: () => void }) {
+export function ItemEditorSheet({ itemId, preset, initial, onClose }: { readonly itemId: string | null; readonly preset: ItemKind | null; readonly initial?: Pick<ItemForm, 'title' | 'day'>; readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
   const { trip, cat, days, tab, setOverlay } = useTripView();
   const item = itemId ? trip.items.find((i) => i.id === itemId) : undefined;
   const mayChange = !item || permissionsOf(trip).canChange(item);
   const defaultDay = tab === 'ov' ? '' : (days[Number(tab) - 1] ?? '');
-  const [f, setF] = useState<ItemForm>(() => initialForm(item, preset, defaultDay));
+  const [f, setF] = useState<ItemForm>(() => initialForm(item, preset, defaultDay, initial));
   const [error, setError] = useState('');
   const [confirmClear, setConfirmClear] = useState(false);
   const set = (p: Partial<ItemForm>): void => setF((cur) => ({ ...cur, ...p }));

@@ -1,4 +1,5 @@
 import type { Overlay } from '../hooks/TripViewContext.tsx';
+import type { MealGapEditor } from '../model/mealGaps.ts';
 import { DeleteTripSheet } from './DeleteTripSheet.tsx';
 import { EditTripSheet } from './EditTripSheet.tsx';
 import { ItemEditorSheet } from './ItemEditorSheet.tsx';
@@ -8,13 +9,13 @@ import { TrashSheet } from './TrashSheet.tsx';
 import { AddItemSheet, AddToDaySheet, AutoPlanSheet, PickDaySheet } from './TripSheets.tsx';
 
 /** Hiện đúng tờ phủ đang mở trên màn chuyến đi (mỗi lần một cái). `key` buộc dựng lại biểu mẫu khi đổi sang mục khác. */
-export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay | null; readonly onClose: () => void }) {
+export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay | MealGapEditor | null; readonly onClose: () => void }) {
   if (!overlay) return null;
   switch (overlay.kind) {
     case 'add':
       return <AddItemSheet onClose={onClose} />;
     case 'editor':
-      return <ItemEditorSheet key={`${overlay.itemId ?? 'new'}-${overlay.preset ?? ''}`} itemId={overlay.itemId} preset={overlay.preset} onClose={onClose} />;
+      return <ItemEditorSheet key={JSON.stringify(overlay)} itemId={overlay.itemId} preset={overlay.preset} initial={'initial' in overlay ? overlay.initial : undefined} onClose={onClose} />;
     case 'editTrip':
       return <EditTripSheet onClose={onClose} />;
     case 'plan':
