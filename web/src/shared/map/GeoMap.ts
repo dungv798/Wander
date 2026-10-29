@@ -138,7 +138,7 @@ export class GeoMap {
     this.host.querySelector('.tm-err')?.remove();
     this.host.dataset['ready'] = '0';
     try {
-      const [ml, style] = await Promise.all([loadMapLibre(), loadMapStyle()]);
+      const [ml, style] = await Promise.all([loadMapLibre(), loadMapStyle(this.host)]);
       if (this.dead) return;
       this.ml = ml;
       this.gl = this.createMap(ml, style);

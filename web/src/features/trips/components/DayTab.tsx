@@ -59,7 +59,7 @@ export function DayTab({ index }: { readonly index: number }) {
       {!items.length ? (
         <div className="emptyday">
           {T.view.emptyDay}
-          {hasUnassigned ? <Button icon="plus" onClick={() => setOverlay({ kind: 'addToDay' })}>{T.view.addFromUnassigned}</Button> : null}
+          {hasUnassigned ? <Button kind="ghost" icon="plus" onClick={() => setOverlay({ kind: 'addToDay' })}>{T.view.addFromUnassigned}</Button> : null}
         </div>
       ) : null}
       {items.map((item, k) => {

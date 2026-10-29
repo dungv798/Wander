@@ -12,7 +12,7 @@ interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 /** Nút tròn chỉ có biểu tượng (44×44 px), luôn có `aria-label`. */
 export function IconButton({ icon, label, className, ...rest }: IconButtonProps) {
   return (
-    <button type="button" className={['iconbtn', 'g-fab', className].filter(Boolean).join(' ')} aria-label={label} {...rest}>
+    <button type="button" className={['iconbtn', 'g-fab', 'glass-control', className].filter(Boolean).join(' ')} aria-label={label} {...rest}>
       <Icon name={icon} />
     </button>
   );

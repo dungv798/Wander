@@ -103,9 +103,11 @@ test('chi tiết địa điểm: hộp thoại có nhãn, Esc đóng và trả f
   await infoBtn.click();
   const dialog = page.getByRole('dialog', { name: FIRST_PLACE });
   await dialog.waitFor();
+  await assertSingleGalleryImage(page);
   assert.equal(await dialog.locator('.gcount').textContent(), '1 / 3');
   await dialog.getByRole('button', { name: 'Ảnh sau' }).click();
   await dialog.locator('.gcount', { hasText: '2 / 3' }).waitFor();
+  await assertSingleGalleryImage(page);
   assert.match((await dialog.locator('.rate').textContent()) ?? '', /Nên ghé/, 'nhãn biên tập, không có điểm sao');
   assert.equal(await dialog.locator('text=/★|sao/').count(), 0, 'không bịa số sao (G1)');
   await page.keyboard.press('Escape');
@@ -188,10 +190,36 @@ test('bản đồ: ghim ảnh thật, gộp cụm, mở rộng toàn màn, phón
   assert.equal(await page.locator('.tm-degraded').count(), 0, 'nền bản đồ tải bình thường thì không hiện cảnh báo "một phần nền chưa tải được"');
   const id = await tapNativeFeature(page, '.mapbig', false);
   const name = await page.locator(`.mapcard .tm-accessible button[data-id="${id}"]`).textContent();
-  await page.getByRole('dialog', { name: name ?? '' }).waitFor();
+  const placeDialog = page.getByRole('dialog', { name: name ?? '' });
+  await placeDialog.waitFor();
+  await assertSingleGalleryImage(page);
+  const photoCount = await placeDialog.locator('.gallery img').count();
+  if (photoCount > 1) {
+    await placeDialog.getByRole('button', { name: 'Ảnh sau' }).click();
+    await placeDialog.locator('.gcount', { hasText: `2 / ${photoCount}` }).waitFor();
+    await assertSingleGalleryImage(page);
+    await placeDialog.getByRole('button', { name: 'Ảnh trước' }).click();
+    await placeDialog.locator('.gcount', { hasText: `1 / ${photoCount}` }).waitFor();
+    await assertSingleGalleryImage(page);
+  }
   assert.deepEqual(errors, []);
   await ctx.close();
 });
+
+/** Chỉ một ảnh được giao với khung gallery, kể cả khi các ảnh khác vẫn còn trong DOM. */
+async function assertSingleGalleryImage(page: Page): Promise<void> {
+  await page.waitForFunction(() => {
+    const gallery = document.querySelector('.panel .gallery');
+    if (!gallery) return false;
+    const frame = gallery.getBoundingClientRect();
+    const visible = [...gallery.querySelectorAll('img')].filter((image) => {
+      const r = image.getBoundingClientRect();
+      return Math.min(frame.right, r.right) - Math.max(frame.left, r.left) > 1;
+    });
+    return visible.length === 1;
+  });
+  assert.equal(await page.locator('.panel .gallery').evaluate((el) => el.clientHeight > 0), true);
+}
 
 test('lỗi tải kiểu bản đồ: có thông báo và nút Thử lại, các phần khác vẫn dùng được', async () => {
   const { ctx } = await phone();

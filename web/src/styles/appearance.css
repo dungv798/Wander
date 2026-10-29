@@ -46,10 +46,9 @@
 :root:not([data-look='classic']) .thead .note { white-space: normal; overflow: visible; }
 :root:not([data-look='classic']) .grab::before { width: var(--handle-width); height: var(--handle-height); background: var(--muted); }
 :root:not([data-look='classic']) .grab { margin-block: 0; }
-:root:not([data-look='classic']) .gallery { gap: var(--s-2); padding: var(--s-4); border-radius: var(--sheet-radius); }
-:root:not([data-look='classic']) .gallery::after { content: ''; flex: 0 0 calc(100% - var(--gallery-tile-width) - var(--s-2)); }
-:root:not([data-look='classic']) .gallery img { flex: 0 0 var(--gallery-tile-width); width: var(--gallery-tile-width); height: var(--gallery-tile-height); aspect-ratio: auto; object-fit: contain; border-radius: var(--r-sm); background: var(--surface-2); }
-:root:not([data-look='classic']) .gal { padding-top: var(--s-7); }
+:root .gallery { gap: 0; padding: 0; height: var(--gallery-height); border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; }
+:root .gallery img { flex: 0 0 100%; min-width: 0; width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: contain; background: var(--photo-bg); }
+:root .gal { padding-top: 0; }
 :root:not([data-look='classic']) .gal .close { top: var(--s-2); right: var(--s-4); }
 :root:not([data-look='classic']) .gal .gcount { top: var(--s-2); right: calc(var(--s-4) + var(--tap) + var(--s-2)); }
 :root:not([data-look='classic']) .tcard .cov { height: calc(var(--s-8) + var(--s-5)); }
@@ -58,6 +57,31 @@
 :root:not([data-look='classic']) .cta-bar { padding: var(--s-3) var(--s-4) var(--safe-bottom); gap: var(--s-2); }
 :root:not([data-look='classic']) .bar { position: sticky; top: 0; z-index: var(--z-sticky); }
 :root:not([data-look='classic']) .float { bottom: var(--safe-bottom); }
+
+/* Nhịp 8/12/16 px thay khối trang trí và phần đệm rỗng; giữ vùng chạm 44 px. */
+:root:not([data-look='classic']) :is(.sections, .dbody, .tbody, .pp, .stack) { gap: var(--layout-section-gap); }
+:root:not([data-look='classic']) :is(.sections, .dbody) { padding-block: var(--s-4); }
+:root:not([data-look='classic']) .tbody { padding-top: var(--s-3); }
+:root:not([data-look='classic']) .pagehead { padding-block: var(--s-4) var(--s-3); }
+:root:not([data-look='classic']) .spaced-lg { margin-top: var(--s-4); }
+:root:not([data-look='classic']) .empty { margin-block: var(--s-5); }
+:root:not([data-look='classic']) :is(.next, .costbox, .emptyday, .seccard, .opt) { padding: var(--layout-card-padding); }
+:root:not([data-look='classic']) :is(.facts, .stats, .grid, .destination-picker-list) { gap: var(--s-2); }
+:root:not([data-look='classic']) .facts li { padding: var(--s-2); }
+:root:not([data-look='classic']) .dhero { height: var(--layout-destination-hero); }
+:root:not([data-look='classic']) .dhero .in { bottom: var(--s-6); }
+:root:not([data-look='classic']) .dcard { aspect-ratio: var(--layout-photo-card-ratio); }
+:root:not([data-look='classic']) .tile { aspect-ratio: var(--layout-tile-ratio); }
+:root:not([data-look='classic']) .destination-picker-hint { margin-block: var(--s-3); }
+:root:not([data-look='classic']) .destination-picker-list button { padding: var(--s-2); }
+:root:not([data-look='classic']) .irow { grid-template-columns: var(--layout-item-thumb) minmax(0, 1fr); gap: var(--s-3); padding: var(--s-2); }
+:root:not([data-look='classic']) .irow .im { min-height: var(--layout-item-thumb); }
+:root:not([data-look='classic']) #screen[data-view='trip'] .sheet-scroll { padding-bottom: calc(var(--hide, 0px) + var(--float-height) + var(--safe-bottom) + var(--s-4)); }
+@media (max-width: 767px) {
+  :root:not([data-look='classic']) .sky { height: var(--layout-hero-height); }
+  :root:not([data-look='classic']) .sky .fan { top: var(--layout-fan-top); transform: scale(var(--layout-fan-scale)); transform-origin: center top; }
+  :root:not([data-look='classic']) .sky .plane { width: calc(var(--s-8) * 2); top: var(--s-8); }
+}
 
 @media (max-width: 767px) {
   :root:not([data-look='classic']) #tabbar {

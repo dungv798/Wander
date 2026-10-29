@@ -37,7 +37,7 @@ function NextStep() {
         <div>
           <h3>{fill(T.view.nextTitleUnassigned, { n: un.length })}</h3>
           <p className="note">{T.view.nextTextUnassigned}</p>
-          {permissionsOf(trip).schedule ? <Button icon="sparkles" onClick={() => setOverlay({ kind: 'plan' })}>{T.view.autoPlan}</Button> : null}
+          {permissionsOf(trip).schedule ? <Button kind="ghost" icon="sparkles" onClick={() => setOverlay({ kind: 'plan' })}>{T.view.autoPlan}</Button> : null}
         </div>
       </div>
     );
@@ -49,7 +49,7 @@ function NextStep() {
         <div>
           <h3>{T.view.nextTitleEmpty}</h3>
           <p className="note">{T.view.nextTextEmpty}</p>
-          <Button icon="hand-finger" onClick={addMore}>{T.view.addPlaces}</Button>
+          <Button kind="ghost" icon="hand-finger" onClick={addMore}>{T.view.addPlaces}</Button>
         </div>
       </div>
     );

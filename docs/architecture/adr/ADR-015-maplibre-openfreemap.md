@@ -16,6 +16,8 @@ Giới hạn của phép đo: bộ đo tạm `web/spike/map-bench.*` không nạ
 Gói: `maplibre-gl@6.16.0` gom bằng Vite ≈ **281 KB gzip JS + 10 KB CSS** (bản 6 không còn `export default`; worker là tệp riêng `maplibre-gl-worker.mjs` ≈ 507 KB). Vượt ngân sách 170 KB ban đầu, nên **bắt buộc tải theo tuyến** (chỉ khi mở màn có bản đồ).
 
 ## Quyết định
+> **Ghi chú PO 29/10/2026 (DR-026 bước 4):** giữ MapLibre + nền OpenFreeMap Liberty; đổi sang nền sáng, nước xanh dịu và bỏ hillshade AWS/nguồn raster-dem cùng ghi công độ cao Mapzen, AWS Open Data. Nội dung về hillshade và phép đo 28/10 dưới đây là lịch sử trước thay đổi này; không dùng làm bằng chứng hiệu năng của style mới.
+
 1. Dùng **`maplibre-gl`** (BSD-3-Clause, ghim phiên bản chính xác) làm bản đồ; nền vector **OpenFreeMap** (`https://tiles.openfreemap.org/styles/liberty` làm gốc, chỉnh kiểu), bóng núi `hillshade` từ ô độ cao **AWS Terrain Tiles** (Terrarium, nguồn script cũ đã dùng).
 2. Giữ **cùng giao diện thành phần** `TerrainMapView` (dest, markers, route, mode, insets, fit, selected, onPin…) để các màn không đổi; bên trong thay bằng lớp `GeoMap` dùng MapLibre. Ghim ảnh, cụm, nhãn vẫn là phần tử HTML đè lên (tận dụng `MapLayers`, `clusterPins`, `placeLabels` đã có test); tuyến vẽ bằng lớp đường GeoJSON.
 3. Tải MapLibre bằng `import()` động; không để vào gói ban đầu.

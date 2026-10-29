@@ -57,6 +57,7 @@ function AddChecklist({ onAdd, busy }: { readonly onAdd: (group: string, title: 
       <Field label={C.checklist.groupLabel} value={group} onChange={setGroup} maxLength={LIMITS.MAX_CHECKLIST_GROUP} />
       <Field label={C.checklist.titleLabel} value={title} onChange={setTitle} maxLength={LIMITS.MAX_CHECKLIST_TITLE} />
       <Button
+        kind="ghost"
         block
         icon="plus"
         disabled={busy || !title.trim()}

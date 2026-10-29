@@ -40,14 +40,19 @@ function ratio(a, b) {
   return (values[0] + CONTRAST_OFFSET) / (values[1] + CONTRAST_OFFSET);
 }
 
-const foreground = hex(token('look-glass-ink'));
-const channels = token('look-glass-bg').match(/[\d.]+/g).map(Number);
+const foreground = hex(token('white'));
+const channels = token('glass-photo-scrim').match(/[\d.]+/g).map(Number);
 const alpha = channels.at(-1);
 const RGB_CHANNELS = 3;
-// Ảnh đen cho nền tối nhất; highlight trắng chỉ làm nền sáng hơn.
-const darkest = channels.slice(0, RGB_CHANNELS).map((value) => value * alpha);
-for (const [name, background] of [['ảnh đen + kính', darkest], ['fallback đặc', hex(token('look-glass-fallback'))]]) {
+// Chữ trắng/glyph có scrim tối riêng, không có highlight trắng phía trên scrim.
+for (const [name, level] of [['ảnh trắng + scrim', CHANNEL_MAX], ['ảnh đen + scrim', 0]]) {
+  const background = channels.slice(0, RGB_CHANNELS).map((value) => value * alpha + level * (1 - alpha));
   const contrast = ratio(foreground, background);
+  assert.ok(contrast >= MIN_CONTRAST, name);
+  console.log(`PASS ${name}: ${contrast.toFixed(2)}:1 >= ${MIN_CONTRAST}:1`);
+}
+for (const name of ['glass-fallback', 'cta-g1', 'cta-2']) {
+  const contrast = ratio(hex(token(name === 'glass-fallback' ? 'ink-fixed' : 'on-cta')), hex(token(name)));
   assert.ok(contrast >= MIN_CONTRAST, name);
   console.log(`PASS ${name}: ${contrast.toFixed(2)}:1 >= ${MIN_CONTRAST}:1`);
 }

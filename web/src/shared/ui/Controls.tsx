@@ -30,7 +30,7 @@ interface ChipToggleProps {
 /** Nút bật/tắt dạng viên thuốc (`aria-pressed`), dùng cho bộ lọc, sở thích, kiểu chuyến. */
 export function ChipToggle({ pressed, onClick, icon, className, children }: ChipToggleProps) {
   return (
-    <button className={['fchip', 'g-chip', className].filter(Boolean).join(' ')} type="button" aria-pressed={pressed} onClick={onClick}>
+    <button className={['fchip', 'g-chip', 'glass-control', className].filter(Boolean).join(' ')} type="button" aria-pressed={pressed} onClick={onClick}>
       {icon ? <Icon semantic name={icon} size="s" /> : null}
       {children}
     </button>

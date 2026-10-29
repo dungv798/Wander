@@ -14,7 +14,7 @@ interface ChipProps {
 
 /** Nhãn nhỏ (viên thuốc) cho loại, mùa, thời lượng… Chỉ để đọc, không phải nút. */
 export function Chip({ tone, icon, className, children }: ChipProps) {
-  const cls = ['chip', tone, className].filter(Boolean).join(' ');
+  const cls = ['chip', 'glass-control', tone, className].filter(Boolean).join(' ');
   return (
     <span className={cls}>
       {icon ? <Icon semantic name={icon} size="s" /> : null}
