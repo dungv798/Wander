@@ -65,9 +65,14 @@ public final class HttpConstants {
     /** Header chính sách nội dung. */
     public static final String HEADER_CONTENT_SECURITY_POLICY = "Content-Security-Policy";
 
-    /** CSP chặt: không script ngoài, không nhúng khung, chỉ cùng nguồn gốc. */
+    /**
+     * CSP chặt: không script ngoài, không nhúng khung, chỉ cùng nguồn gốc, TRỪ hai máy chủ bản đồ đã duyệt ở ADR-015
+     * (kiểu, ô vector, phông và biểu tượng ở tiles.openfreemap.org; ô độ cao ở s3.amazonaws.com) và worker/ảnh {@code blob:}
+     * mà MapLibre GL tạo ra. Không dùng ký tự đại diện.
+     */
     public static final String VALUE_CONTENT_SECURITY_POLICY = "default-src 'self'; script-src 'self'; style-src 'self'; "
-            + "img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+            + "img-src 'self' data: blob:; connect-src 'self' https://tiles.openfreemap.org https://s3.amazonaws.com; "
+            + "worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
     private HttpConstants() {
     }
