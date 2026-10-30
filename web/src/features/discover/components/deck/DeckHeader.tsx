@@ -9,6 +9,7 @@ import type { AddingMode } from '../../model/addingMode.ts';
 import type { DestinationDetail } from '../../model/Catalog.types.ts';
 import { categoriesOf } from '../../model/destinationQueries.ts';
 import { pickedOf } from '../../model/discoverState.ts';
+import { DISCOVER_COPY } from '../../model/discover.copy.ts';
 
 /** Thanh trên của bộ thẻ: quay lại, tên điểm đến + tiến độ, nút xem các nơi đã chọn. */
 export function DeckBar({ dest, adding }: { readonly dest: DestinationDetail; readonly adding?: AddingMode }) {
@@ -22,9 +23,9 @@ export function DeckBar({ dest, adding }: { readonly dest: DestinationDetail; re
         <h1>{adding ? adding.title : dest.name}</h1>
         <p className="note">{adding ? COPY.deck.addingNote : fill(COPY.deck.seen, { seen, total: dest.places.length })}</p>
       </div>
-      <button className="pill" type="button" onClick={() => (adding ? adding.onDone() : navigate(VIEW.PICKED))}>
+      <button className="pill" type="button" aria-label={adding ? COPY.deck.addingSave : fill(COPY.deck.viewPicked, { n: picked })} onClick={() => (adding ? adding.onDone() : navigate(VIEW.PICKED))}>
         <Icon name="check" size="s" />
-        {adding ? COPY.deck.addingSave : fill(COPY.deck.viewPicked, { n: picked })}
+        {adding ? COPY.deck.addingSave : fill(DISCOVER_COPY.picked, { n: picked })}
       </button>
     </div>
   );

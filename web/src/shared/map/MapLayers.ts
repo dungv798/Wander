@@ -4,6 +4,7 @@ import { HALF } from '../const/math.const.ts';
 import { MAP } from './map.const.ts';
 import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, renderedImageCount, thumbnailCrop } from './nativeMarkers.ts';
 import { addNativePinLayers, pinHitLayers } from './nativePinLayers.ts';
+import { nearestMapObject } from './routeSegments.ts';
 import { prefersReducedMotion } from './mapUtil.ts';
 import type { MapMarker, MapMode, Pt } from './map.types.ts';
 
@@ -24,6 +25,7 @@ export class MapLayers {
   private revision = 0;
   private onPin?: (id: string) => void;
   private onCluster?: () => void;
+  private markerOrder: readonly string[] = [];
   private segMids: { el: HTMLElement; p: Pt }[] = [];
 
   /** Giữ danh sách nút thay thế canvas trong vùng bản đồ; hiện khi bàn phím đi vào. */
@@ -34,21 +36,37 @@ export class MapLayers {
     this.accessible = Object.assign(document.createElement('ul'), { className: 'tm-accessible' });
     this.accessible.setAttribute('aria-label', COPY.map.pinList);
     host.append(this.labels, this.accessible);
+    this.accessible.addEventListener('keydown', (event) => {
+      const key = event.key;
+      if (key !== 'ArrowUp' && key !== 'ArrowDown') return;
+      const id = (event.target as HTMLElement).dataset['id'];
+      if (!id) return;
+      event.preventDefault();
+      const index = this.markerOrder.indexOf(id) + (key === 'ArrowDown' ? 1 : -1);
+      const button = this.buttons.get(this.markerOrder[Math.max(0, Math.min(index, this.markerOrder.length - 1))]!);
+      button?.focus(); button?.click();
+    });
     Object.assign(host.dataset, { pins: '0', clusters: '0', selected: '', features: '[]', thumbnails: '0', numbered: '0', renderedImages: '0' });
   }
 
   /** Gắn lớp khi nền tải xong; query native ưu tiên ghim trước cụm trên cùng điểm chạm. */
-  attach(map: MlMap, onCluster?: () => void): void {
+  attach(map: MlMap, onCluster?: () => void, onEmpty?: (point: { x: number; y: number }) => void): void {
     this.map = map;
     this.onCluster = onCluster;
     addNativePinLayers(map, this.host);
     map.on('click', (event) => {
       if (!pinHitLayers().every((layer) => map.getLayer(layer))) return;
       const features = map.queryRenderedFeatures(event.point, { layers: pinHitLayers() });
-      const pin = features.find((feature) => !feature.properties['cluster']);
+      const candidates = features.filter((feature) => !feature.properties['cluster'] && feature.geometry.type === 'Point').map((feature) => {
+        const at = map.project(feature.geometry.type === 'Point' ? feature.geometry.coordinates as [number, number] : [0, 0]);
+        return { id: String(feature.properties['id']), kind: 'pin' as const, line: [[at.x, at.y] as Pt] };
+      });
+      const nearest = nearestMapObject(candidates, [event.point.x, event.point.y]);
+      const pin = features.find((feature) => !feature.properties['cluster'] && String(feature.properties['id']) === nearest);
       if (pin) this.onPin?.(String(pin.properties['id']));
       else {
         const cluster = features[0];
+        if (!cluster) onEmpty?.(event.point);
         if (cluster?.geometry.type === 'Point') void this.expandCluster(Number(cluster.properties['cluster_id']), cluster.geometry.coordinates as [number, number]);
       }
     });
@@ -88,11 +106,12 @@ export class MapLayers {
 
   /** Nút giữ cùng phần tử khi đổi số/nhãn, tránh mất focus sau cập nhật dữ liệu. */
   private syncAccessible(markers: readonly MapMarker[]): void {
-    const keep = new Set(markers.map((marker) => marker.id));
+    this.markerOrder = markers.map((marker) => marker.id);
+    const keep = new Set(this.markerOrder);
     this.buttons.forEach((button, id) => {
       if (!keep.has(id)) { button.parentElement?.remove(); this.buttons.delete(id); }
     });
-    markers.forEach((marker) => {
+    markers.forEach((marker, index) => {
       let button = this.buttons.get(marker.id);
       if (!button) {
         button = Object.assign(document.createElement('button'), { type: 'button' });
@@ -103,6 +122,10 @@ export class MapLayers {
         this.accessible.appendChild(item);
         this.buttons.set(marker.id, button);
       }
+      const focused = document.activeElement === button;
+      const item = button.parentElement!;
+      if (this.accessible.children[index] !== item) this.accessible.insertBefore(item, this.accessible.children[index] ?? null);
+      if (focused) button.focus({ preventScroll: true });
       button.textContent = markerAccessibleName(marker);
       button.disabled = !this.onPin;
     });

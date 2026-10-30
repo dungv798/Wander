@@ -73,7 +73,8 @@ async function hasCode(token: string): Promise<boolean> {
 async function startSaving(page: Page): Promise<void> {
   await page.goto(`${baseUrl}/#/trips`);
   await page.getByRole('button', { name: 'Tạo chuyến đi' }).first().click();
-  await page.getByRole('button', { name: 'Tạo chuyến đi' }).last().click();
+  // Tờ tạo chuyến được tải lười: bấm nút trong hộp thoại, không dùng .last() (sẽ chọn nhầm nút của trang khi tờ chưa hiện)
+  await page.getByRole('dialog').getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
 }
 
 /** Nhập đúng các nhóm hệ thống hỏi ("Nhóm 3 (5 ký hiệu)") rồi bấm Xác nhận. */

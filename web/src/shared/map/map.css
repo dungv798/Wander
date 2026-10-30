@@ -26,3 +26,14 @@
 .tm-err.tm-degraded { inset: var(--s-3) var(--s-3) auto; padding: var(--s-3); gap: var(--s-2); border-radius: var(--r-sm); background: var(--glass); box-shadow: var(--sh-float); pointer-events: none; }
 .tm-degraded button { pointer-events: auto; }
 .tmroot:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+/* Thẻ nổi có kích thước ổn định, không phụ thuộc camera hoặc số dòng của tên địa điểm. */
+.tm-preview { position: absolute; top: calc(var(--s-8) + var(--s-2)); left: var(--s-3); right: var(--s-3); z-index: 3; box-sizing: border-box; max-width: calc(var(--s-8) * 6); height: calc(var(--s-8) * 3); padding: var(--s-3); border-radius: var(--r-md); background: var(--surface); color: var(--ink); box-shadow: var(--sh-float); touch-action: auto; }
+.tm-preview-body { display: flex; gap: var(--s-3); height: calc(var(--s-7) * 2); }
+.tm-preview-thumb { width: calc(var(--s-7) * 2); height: calc(var(--s-7) * 2); flex: none; overflow: hidden; border-radius: var(--r-sm); background: var(--map-low); }
+.tm-preview-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tm-preview-copy { min-width: 0; }
+.tm-preview h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; height: var(--s-7); overflow: hidden; margin: 0; font-size: inherit; }
+.tm-preview p { margin: 0; font: var(--text-secondary); }
+.tm-preview-actions { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
+.tm-preview-actions button { min-height: var(--tap); flex: 1; border: 0; border-radius: var(--r-sm); background: var(--brand-2); color: var(--on-brand-2); font: inherit; cursor: pointer; }
+.tm-preview-actions button:last-child { background: var(--bg); color: var(--ink); }

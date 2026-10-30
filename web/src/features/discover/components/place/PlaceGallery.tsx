@@ -7,7 +7,7 @@ import { IconButton } from '../../../../shared/ui/IconButton.tsx';
 import { useCreditPill } from '../../hooks/useCreditPill.ts';
 import { useGallery } from '../../hooks/useGallery.ts';
 import { CreditPill } from '../CreditPill.tsx';
-import { CATEGORY_ICON } from '../../model/discover.const.ts';
+import { PlaceHeroMeta } from './PlaceHeroMeta.tsx';
 import type { PlaceView } from '../../model/Catalog.types.ts';
 import { usePlaceSheet } from '../../hooks/PlaceSheetProvider.tsx';
 
@@ -40,6 +40,8 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
           <RevealImage key={p.url} alt={place.name} src={p.url} />
         ))}
       </div>
+      <div className="place-hero-scrim" aria-hidden="true" />
+      <PlaceHeroMeta place={place} />
       {n > 1 ? (
         <>
           <button className="gnav prev" type="button" aria-label={COPY.place.prevPhoto} disabled={index === 0} onClick={() => go(-1)}>
@@ -48,7 +50,6 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
           <button className="gnav next" type="button" aria-label={COPY.place.nextPhoto} disabled={index === n - 1} onClick={() => go(1)}>
             <Icon name="chevron-left" size="l" className="flip" />
           </button>
-          <span className="gcount" aria-live="polite">{`${index + 1} / ${n}`}</span>
           <div className="dots">
             {photos.map((p, k) => (
               <i key={p.url} className={k === index ? 'on' : undefined} />
@@ -56,11 +57,8 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
           </div>
         </>
       ) : null}
+      {n ? <span className="gcount" aria-live="polite">{`${index + 1} / ${n}`}</span> : null}
       <IconButton className="close" icon="x" label={COPY.common.close} onClick={onClose} />
-      <span className="chip cat">
-        <Icon semantic name={CATEGORY_ICON[place.category]} size="s" />
-        {place.categoryName}
-      </span>
       <button className="credit-btn" type="button" aria-label={COPY.place.photoCredit} onClick={credit.toggle}>
         <Icon name="info-circle" />
       </button>

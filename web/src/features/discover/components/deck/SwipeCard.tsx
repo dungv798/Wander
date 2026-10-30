@@ -2,6 +2,7 @@ import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import type { PointerEvent } from 'react';
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { Icon } from '../../../../shared/ui/Icon.tsx';
+import { Chip } from '../../../../shared/ui/Chip.tsx';
 import { useCreditPill } from '../../hooks/useCreditPill.ts';
 import { CATEGORY_ICON } from '../../model/discover.const.ts';
 import type { PlaceView } from '../../model/Catalog.types.ts';
@@ -30,10 +31,7 @@ function CardInfo({ place, front, onCredit }: { readonly place: PlaceView; reado
   return (
     <div className="card-info">
       <div className="card-top">
-        <span className="chip card-cat">
-          <Icon semantic name={CATEGORY_ICON[place.category]} size="s" />
-          {place.categoryName}
-        </span>
+        <Chip className="card-cat" icon={CATEGORY_ICON[place.category]}>{place.categoryName}</Chip>
         {front ? (
           <button className="credit-btn" type="button" aria-label={COPY.deck.creditAria} onClick={onCredit}>
             <Icon name="info-circle" />
@@ -43,17 +41,12 @@ function CardInfo({ place, front, onCredit }: { readonly place: PlaceView; reado
       <h2>{place.name}</h2>
       <p className="card-area">
         <Icon name="map-pin" size="s" />
-        {away ? `${place.area}${COPY.units.dot}${fill(COPY.deck.awayFromHub, { km: away.km })}` : place.area}
+        {place.area}
       </p>
       <ul className="card-facts">
-        <li>
-          <Icon name="calendar-event" size="s" />
-          {place.bestLabel}
-        </li>
-        <li>
-          <Icon name="clock" size="s" />
-          {place.duration}
-        </li>
+        <li><Chip tone="glass" icon="calendar-event">{place.bestLabel}</Chip></li>
+        <li><Chip tone="glass" icon="clock">{place.duration}</Chip></li>
+        {away ? <li><Chip tone="glass" icon="route">{fill(COPY.units.kmApprox, { km: away.km })}</Chip></li> : null}
       </ul>
     </div>
   );

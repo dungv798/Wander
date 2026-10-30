@@ -22,6 +22,9 @@ interface TerrainMapViewProps {
   readonly towns?: boolean;
   readonly credit?: boolean;
   readonly onPin?: (id: string) => void;
+  readonly onSegment?: (id: string) => void;
+  readonly onMapDismiss?: () => void;
+  readonly selectedSegment?: string | null;
   readonly className?: string;
 }
 
@@ -31,26 +34,31 @@ const NO_ROUTE_LABELS: readonly string[] = [];
  * Vùng bản đồ địa hình dùng trong React. Bản đồ là đối tượng mệnh lệnh (`GeoMap`) sống theo vòng đời của phần tử:
  * tạo khi phần tử vào DOM, hủy khi rời; các thuộc tính (ghim, tuyến, chế độ, vừa khung) được đẩy vào bằng effect.
  */
-export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, towns = true, credit = true, onPin, className }: TerrainMapViewProps) {
+export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, towns = true, credit = true, onPin, onSegment, onMapDismiss, selectedSegment = null, className }: TerrainMapViewProps) {
   const [map, setMap] = useState<GeoMap | null>(null);
   const onPinRef = useRef(onPin);
+  const onSegmentRef = useRef(onSegment);
+  const onDismissRef = useRef(onMapDismiss);
+  const hasSegmentAction = Boolean(onSegment);
   const hasPinAction = Boolean(onPin);
   useEffect(() => {
     onPinRef.current = onPin;
+    onSegmentRef.current = onSegment;
+    onDismissRef.current = onMapDismiss;
   });
 
   const attach = useCallback(
     /** Tạo bản đồ khi phần tử vào DOM; trả hàm hủy khi phần tử rời (ref callback có dọn dẹp của React 19). */
     (el: HTMLDivElement | null) => {
       if (!el) return undefined;
-      const m = new GeoMap(el, { dest, label, interactive, towns, credit, ...(hasPinAction ? { onPin: (id: string) => onPinRef.current?.(id) } : {}) });
+      const m = new GeoMap(el, { dest, label, interactive, towns, credit, onMapDismiss: () => onDismissRef.current?.(), ...(hasSegmentAction ? { onSegment: (id: string) => onSegmentRef.current?.(id) } : {}), ...(hasPinAction ? { onPin: (id: string) => onPinRef.current?.(id) } : {}) });
       setMap(m);
       return () => {
         m.destroy();
         setMap(null);
       };
     },
-    [dest, label, interactive, towns, credit, hasPinAction],
+    [dest, label, interactive, towns, credit, hasPinAction, hasSegmentAction],
   );
 
   useEffect(() => {
@@ -63,7 +71,7 @@ export function TerrainMapView({ dest, label, markers, route = null, mode = 'bro
     map?.setMarkers(markers);
   }, [map, markers]);
   useEffect(() => {
-    map?.setRoute(route ? route.ids : null, route?.labels ?? NO_ROUTE_LABELS);
+    map?.setRoute(route ? route.ids : null, route?.labels ?? NO_ROUTE_LABELS, route ?? undefined);
   }, [map, route]);
   useEffect(() => {
     map?.select(selected);
@@ -71,6 +79,10 @@ export function TerrainMapView({ dest, label, markers, route = null, mode = 'bro
   useEffect(() => {
     if (fit) map?.fitTo(fit.ids, fit.options);
   }, [map, fit]);
+
+  useEffect(() => {
+    map?.selectSegment(selectedSegment);
+  }, [map, selectedSegment]);
 
   return <div ref={attach} className={className} />;
 }

@@ -13,6 +13,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { ItemRow } from './ItemRow.tsx';
 import { mealGapEditor, mealGaps, mealGapStorageKey, readMealGapDismissals, saveMealGapDismissals } from '../model/mealGaps.ts';
 import type { MealGap } from '../model/mealGaps.ts';
+import { AddManyEntry } from './AddManyEntry.tsx';
 import { MEAL_GAPS_COPY as M } from '../model/mealGaps.copy.ts';
 
 /** Nhắc bỏ qua được theo chuyến/ngày; chỉ mở editor, không tạo mục trước xác nhận. */
@@ -77,6 +78,7 @@ export function DayTab({ index }: { readonly index: number }) {
           <br />{costSummaryText(cs)}
         </span>
       </div>
+      <AddManyEntry />
       <MealReminders key={`${trip.id}:${day}`} day={day} />
       {items.length > 1 && permissionsOf(trip).schedule ? (
         <div className="dayact">

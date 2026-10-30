@@ -41,6 +41,19 @@ export type MapMode = 'browse' | 'route';
 export interface MapRoute {
   readonly ids: readonly string[];
   readonly labels: readonly string[];
+  readonly segments?: readonly RouteSegment[];
+  /** Khóa tab ngày; mỗi khóa chỉ chạy hiệu ứng vẽ một lần trong vòng đời bản đồ. */
+  readonly viewKey?: string;
+}
+
+/** Đoạn ước tính nối đúng hai ghim, không đại diện tuyến đường thực tế. */
+export interface RouteSegment {
+  readonly id: string;
+  readonly order: number;
+  readonly from: string;
+  readonly to: string;
+  readonly day: number;
+  readonly km: number;
 }
 
 /** Tùy chọn vừa khung. */
@@ -63,4 +76,6 @@ export interface GeoMapOptions {
   readonly credit?: boolean;
   readonly label: string;
   readonly onPin?: (id: string) => void;
+  readonly onSegment?: (id: string) => void;
+  readonly onMapDismiss?: () => void;
 }

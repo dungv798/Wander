@@ -1,5 +1,20 @@
 /** Chữ hiển thị của tính năng "Chuyến đi" (tiếng Việt). Chuẩn FE §8: chữ nằm ở tệp `*.copy.ts`, không viết cứng trong thành phần. */
 export const TRIPS_COPY = {
+  addMany: {
+    open: 'Thêm nhiều nơi',
+    search: 'Tìm địa điểm',
+    categories: 'Lọc loại địa điểm',
+    all: 'Tất cả',
+    day: 'Ngày nhận địa điểm',
+    unassigned: 'Chưa xếp ngày',
+    submitDay: 'Thêm {n} nơi vào Ngày {m}',
+    submitUnassigned: 'Thêm {n} nơi vào Chưa xếp ngày',
+    added: 'Đã thêm {n} nơi',
+    partial: 'Đã thêm {n} nơi; còn {remaining} nơi chưa xác nhận. Thử lại sẽ kiểm tra các nơi đã thêm để tránh trùng.',
+    failed: 'Chưa xác nhận được kết quả. Hãy thử lại; các nơi đã thêm sẽ được kiểm tra trước khi gửi.',
+    empty: 'Không có địa điểm phù hợp chưa nằm trong chuyến.',
+    close: 'Đóng',
+  },
   deleteTrip: {
     open: 'Xóa chuyến đi',
     title: 'Xóa chuyến đi',

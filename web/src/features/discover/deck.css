@@ -85,5 +85,10 @@
 
 /* tên dài và màn thấp: thẻ vẫn gọn */
 .card h2 { overflow-wrap: anywhere; }
+:root:not([data-look='classic']) #screen .card h2 { font: 800 var(--fs-3xl) / var(--lh-tight) var(--font-display); }
+:root .card-info { gap: var(--s-2); padding-inline: var(--s-4); }
+:root .card-facts { gap: var(--s-2); }
+:root .card-facts li { display: block; padding: 0; background: none; border: 0; }
+:root .card-facts .chip { font: var(--text-secondary); padding: var(--s-1) var(--s-2); }
 @media (max-height: 680px) { .card-facts { display: none; } }
 

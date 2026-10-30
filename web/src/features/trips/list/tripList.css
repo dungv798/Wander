@@ -1,0 +1,13 @@
+.trip-list-search.search { margin: 0; }
+.trip-list-chips { display: flex; gap: var(--s-2); overflow-x: auto; padding-block: var(--s-1); }
+.trip-list-chips > button { flex: none; min-height: var(--tap); }
+.add-many { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.add-many-head { flex: none; padding: var(--s-4); display: grid; gap: var(--s-2); }
+.add-many-head h2 { margin: 0; }
+.add-many-list { overflow-y: auto; flex: 1; min-height: 0; padding-inline: var(--s-4); }
+.add-many-list fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.add-many-place { display: grid; grid-template-columns: var(--handle-width) minmax(0, 1fr); gap: var(--s-3); align-items: center; }
+.add-many-place img { width: var(--handle-width); height: var(--handle-width); object-fit: cover; border-radius: var(--r-sm); background: var(--surface-2); }
+.add-many-list .checkrow { min-height: var(--tap); }
+.add-many-footer { flex: none; display: grid; gap: var(--s-2); padding: var(--s-3) var(--s-4) var(--safe-bottom); border-radius: var(--r-lg) var(--r-lg) 0 0; }
+.add-many-footer select { min-height: var(--tap); width: 100%; background: var(--surface); color: var(--ink); border: var(--glass-border) solid var(--line); border-radius: var(--r-sm); padding-inline: var(--s-2); }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { PersistentStore } from '../../../shared/state/PersistentStore.ts';
-import type { TripsGateway } from '../api/TripsGateway.ts';
+import type { ItemInput, TripsGateway } from '../api/TripsGateway.ts';
 import type { Trip, TripItem, TripsState } from '../model/trip.types.ts';
 import { createTripsActions } from './tripsActions.ts';
 
@@ -12,8 +12,9 @@ const D3 = '2026-11-03';
 const trip = (items: TripItem[], over: Partial<Trip> = {}): Trip => ({ id: 't', name: 'A', role: 'organizer', memberCount: 1, selfMemberId: null, destinationId: 'ha-giang', startDate: D1, endDate: D3, datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash: [], createdAt: 1, ...over });
 
 /** Cổng giả: ghi lại lời gọi; `load` trả các chuyến đã đặt sẵn theo thứ tự (cái cuối lặp lại). */
-function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { readonly actions: ReturnType<typeof createTripsActions>; readonly calls: string[]; readonly store: PersistentStore<TripsState> } {
+function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { readonly actions: ReturnType<typeof createTripsActions>; readonly calls: string[]; readonly inputs: ItemInput[]; readonly store: PersistentStore<TripsState> } {
   const calls: string[] = [];
+  const inputs: ItemInput[] = [];
   let n = 0;
   let adds = 0;
   const log = (name: string, ...args: unknown[]): Promise<void> => {
@@ -25,7 +26,10 @@ function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { read
     load: () => Promise.resolve(loads[Math.min(n++, loads.length - 1)]!),
     create: (input) => log('create', input).then(() => 't'),
     update: (id, p) => log('update', id, p),
-    addItem: (id, input) => (++adds === failAddItemAt ? Promise.reject(new Error('lỗi mạng giả')) : log('addItem', id, input.placeId ?? input.title).then(() => 'new')),
+    addItem: (id, input) => {
+      inputs.push(input);
+      return ++adds === failAddItemAt ? Promise.reject(new Error('lỗi mạng giả')) : log('addItem', id, input.placeId ?? input.title).then(() => 'new');
+    },
     editItem: (id, itemId, c) => log('editItem', id, itemId, c),
     trash: (id, itemId) => log('trash', id, itemId),
     restore: (id, itemId) => log('restore', id, itemId),
@@ -36,7 +40,7 @@ function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { read
     deleteTrip: () => Promise.resolve(), restoreTrip: () => Promise.resolve(), loadDeleted: () => Promise.resolve([]),
   };
   const store = new PersistentStore<TripsState>('x', { trips: initial }, () => null, null);
-  return { actions: createTripsActions({ gateway, store }), calls, store };
+  return { actions: createTripsActions({ gateway, store }), calls, inputs, store };
 }
 
 test('tạo chuyến: máy chủ cấp mã, địa điểm được thêm lần lượt theo thứ tự, kho cập nhật bằng bản đọc lại', async () => {
@@ -53,6 +57,33 @@ test('tạo chuyến mà thêm địa điểm thứ hai lỗi: lỗi được n�
   const h = harness([trip([item('a', null, null)])], [], 2);
   await assert.rejects(h.actions.create({ name: 'A', destinationId: 'ha-giang', startDate: D1, endDate: D3 }, [{ id: 'p1', category: 'canh' }, { id: 'p2', category: 'am' }]), /lỗi mạng giả/);
   assert.equal(h.store.getSnapshot().trips.length, 1);
+});
+
+test('thêm nơi lỗi giữa chừng: thử lại đọc máy chủ, bỏ nơi đã thêm và mã đầu vào lặp', async () => {
+  const empty = trip([]);
+  const partial = trip([item('first', D2, 0, { placeId: 'p1' })]);
+  const h = harness([empty, partial, partial, partial], [empty], 2);
+  const places = [{ id: 'p1', category: 'canh' }, { id: 'p2', category: 'am' }, { id: 'p2', category: 'am' }];
+  await assert.rejects(h.actions.addPlaces('t', places, D2), /lỗi mạng giả/);
+  assert.equal(h.actions.current('t')?.items.length, 1);
+  await h.actions.addPlaces('t', places, D2);
+  assert.deepEqual(h.calls, ['addItem ["t","p1"]', 'addItem ["t","p2"]']);
+  assert.ok(h.inputs.every(input => input.day === D2));
+});
+
+test('hai lệnh thêm cùng nơi đang chờ: lệnh sau đọc lại và không gửi trùng', async () => {
+  const empty = trip([]);
+  const added = trip([item('first', D2, 0, { placeId: 'p1' })]);
+  const h = harness([empty, added, added, added], [empty]);
+  await Promise.all([h.actions.addPlaces('t', [{ id: 'p1', category: 'canh' }], D2), h.actions.addPlaces('t', [{ id: 'p1', category: 'canh' }], D2)]);
+  assert.equal(h.calls.length, 1);
+  assert.equal(h.inputs[0]?.day, D2);
+});
+
+test('thêm nơi không ghi khi ngày đã rơi khỏi chuyến', async () => {
+  const h = harness([trip([])], [trip([])]);
+  await assert.rejects(h.actions.addPlaces('t', [{ id: 'p1', category: 'canh' }], '2026-12-01'));
+  assert.deepEqual(h.calls, []);
 });
 
 test('đổi ngày một mục gửi PATCH day; đánh dấu xong gửi giá trị ngược với hiện tại', async () => {

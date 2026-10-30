@@ -2,6 +2,7 @@ import { VIEW } from '../../../shared/const/routes.const.ts';
 import { dayMonth } from '../../../shared/lib/dates.ts';
 import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
+import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import type { Trip } from '../model/trip.types.ts';
 import { countText } from '../model/tripView.ts';
 import { COLLAB_COPY } from '../../collab/index.ts';
@@ -18,7 +19,7 @@ export function TripCard({ trip, cover }: { readonly trip: Trip; readonly cover:
   return (
     <button className="tcard" type="button" onClick={() => navigate(VIEW.TRIP, trip.id, 'ov')}>
       <div className="cov">
-        {cover ? <img alt="" src={cover} /> : null}
+        {cover ? <RevealImage alt="" src={cover} loading="lazy" /> : null}
       </div>
       <div className="b">
         <h3>{trip.name}</h3>

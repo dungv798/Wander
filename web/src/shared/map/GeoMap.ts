@@ -2,10 +2,9 @@ import type { LngLatBounds, Map as MlMap, PaddingOptions } from 'maplibre-gl';
 import { COPY } from '../const/copy.vi.ts';
 import { HALF } from '../const/math.const.ts';
 import { MapLayers } from './MapLayers.ts';
-import { routeArcs } from './geoRoute.ts';
 import { showBasemapError } from './geoMapErrors.ts';
 import { fitMaxZoom, needsInsetRefit } from './geoMapPolicy.ts';
-import { addRouteLayers, setRouteLines } from './geoRouteLayer.ts';
+import type { NativeRoute } from './NativeRoute.ts';
 import { loadMapLibre } from './maplibreLoader.ts';
 import type { MapLibre } from './maplibreLoader.ts';
 import { loadMapStyle } from './mapStyle.ts';
@@ -31,6 +30,7 @@ export class GeoMap {
   private readonly opt: Required<Pick<GeoMapOptions, 'interactive' | 'towns' | 'credit'>> & GeoMapOptions;
   private readonly mapEl: HTMLElement;
   private readonly layers: MapLayers;
+  private nativeRoute: NativeRoute | null = null;
   private readonly observer: ResizeObserver;
   private ml: MapLibre | null = null;
   private gl: MlMap | null = null;
@@ -69,6 +69,7 @@ export class GeoMap {
     this.dead = true;
     this.observer.disconnect();
     this.layers.destroy();
+    this.nativeRoute?.destroy();
     this.gl?.remove();
     this.gl = null;
     this.host.classList.remove('tmroot', 'tm-static');
@@ -101,9 +102,9 @@ export class GeoMap {
   }
 
   /** Vẽ tuyến nối các ghim theo thứ tự id; nhãn khoảng cách tùy chọn theo từng đoạn. */
-  setRoute(ids: readonly string[] | null, labels: readonly string[] = []): void {
+  setRoute(ids: readonly string[] | null, labels: readonly string[] = [], detail?: MapRoute): void {
     if (this.dead) return;
-    this.route = ids && ids.length > 1 ? { ids, labels } : null;
+    this.route = ids && ids.length > 1 ? { ids, labels, ...detail } : null;
     if (this.ready) this.drawRoute();
   }
 
@@ -113,6 +114,9 @@ export class GeoMap {
     this.selected = id;
     this.layers.select(id);
   }
+
+  /** Điểm kiểm đoạn đang chọn dùng chung với thẻ React; không tạo thêm trạng thái chọn ghim. */
+  selectSegment(id: string | null): void { this.host.dataset['selectedSegment'] = id ?? ''; }
 
   /** Vừa khung mọi ghim; chưa có ghim nào thì cho thấy cả nước. */
   fitAll(animate = true): void {
@@ -138,8 +142,9 @@ export class GeoMap {
     this.host.querySelector('.tm-err')?.remove();
     this.host.dataset['ready'] = '0';
     try {
-      const [ml, style] = await Promise.all([loadMapLibre(), loadMapStyle(this.host)]);
+      const [ml, style, route] = await Promise.all([loadMapLibre(), loadMapStyle(this.host), import('./NativeRoute.ts')]);
       if (this.dead) return;
+      this.nativeRoute ??= new route.NativeRoute(this.host);
       this.ml = ml;
       this.gl = this.createMap(ml, style);
     } catch {
@@ -190,6 +195,7 @@ export class GeoMap {
     });
     map.on('style.load', () => {
       if (this.ready && !this.dead) {
+        this.nativeRoute?.attach(map);
         this.layers.restore();
         this.applyMarkers();
       }
@@ -205,8 +211,10 @@ export class GeoMap {
   /** Kiểu bản đồ đã tải: thêm lớp tuyến, hiện ghim đang chờ rồi vừa khung. */
   private onLoad(map: MlMap): void {
     if (this.dead) return;
-    addRouteLayers(map, this.host);
-    this.layers.attach(map, () => this.markTouched());
+    this.nativeRoute?.attach(map);
+    this.layers.attach(map, () => { this.markTouched(); this.opt.onMapDismiss?.(); }, (point) => {
+      if (!this.nativeRoute?.hit(point)) this.opt.onMapDismiss?.();
+    });
     this.ready = true;
     this.host.dataset['ready'] = '1';
     this.applyMarkers();
@@ -231,12 +239,9 @@ export class GeoMap {
 
   /** Cập nhật dữ liệu lớp tuyến và nhãn km theo ghim hiện có (ghim thiếu thì bỏ khỏi tuyến, nhãn giữ đúng đoạn). */
   private drawRoute(): void {
-    const route = this.route;
-    const have = route ? route.ids.map((id, k) => ({ m: this.markers.find((x) => x.id === id), k })).filter((x): x is { m: ProjectedMarker; k: number } => Boolean(x.m)) : [];
-    const { lines, mids } = routeArcs(have.map((x) => x.m.p));
-    setRouteLines(this.gl, lines);
-    this.host.dataset['route'] = lines.length ? '1' : '0';
-    this.layers.setSegmentLabels(have.slice(1).map((x) => route?.labels[x.k - 1] ?? ''), mids);
+    this.nativeRoute?.update(this.route, this.raw, this.opt.onSegment);
+    const { labels, mids } = this.nativeRoute?.labels() ?? { labels: [], mids: [] };
+    this.layers.setSegmentLabels(labels, mids);
     this.layers.place(this.project);
   }
 
@@ -246,6 +251,7 @@ export class GeoMap {
     if (!this.ready || !gl) return;
     this.host.dataset['zoom'] = gl.getZoom().toFixed(MAP.ZOOM_DIGITS); // điểm kiểm cho e2e: mức zoom hiện tại
     this.layers.snapshot();
+    this.nativeRoute?.snapshot();
   }
 
   /** Mọi điểm đều nằm trong vùng nhìn thấy thật sự (khung trừ phần bị che và lề)? Rỗng trả false. */

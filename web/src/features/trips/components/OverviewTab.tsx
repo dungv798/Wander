@@ -15,6 +15,7 @@ import { ChecklistSection } from './ChecklistSection.tsx';
 import { CostBox } from './CostBox.tsx';
 import { ItemRow } from './ItemRow.tsx';
 import { money } from './ItemMeta.tsx';
+import { AddManyEntry } from './AddManyEntry.tsx';
 
 /** Một ô số liệu (đếm lên từ 0 khi hiện). */
 function Stat({ value, label, cls, prefix = '' }: { readonly value: number; readonly label: string; readonly cls: string; readonly prefix?: string }) {
@@ -127,6 +128,7 @@ function UnassignedSection() {
         <span className="s">{fill(T.view.assigned, { a: assigned, t: trip.items.length })}</span>
       </div>
       <Progress label={T.view.assignedLabel} value={assigned} max={trip.items.length} />
+      <AddManyEntry />
       {un.length ? un.map((i) => <ItemRow key={i.id} item={i} num={null} assignable />) : <div className="emptyday">{trip.items.length ? T.view.allAssigned : T.view.noPlaces}</div>}
       <Button kind="ghost" block icon="plus" onClick={() => setOverlay({ kind: 'add' })}>{T.view.addItem}</Button>
     </section>

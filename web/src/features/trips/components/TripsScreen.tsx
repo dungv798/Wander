@@ -1,18 +1,26 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { COPY } from '../../../shared/const/copy.vi.ts';
 import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
-import { useDestination } from '../../discover/index.ts';
+import { useCurrentDestination, useDestination } from '../../discover/index.ts';
+import { todayLocal } from '../../../shared/lib/dates.ts';
+import { TripListControls } from '../list/TripListControls.tsx';
+import { countTripStatuses, selectTrips } from '../list/tripList.ts';
+import { DEFAULT_TRIP_LIST, useTripList } from '../list/useTripList.ts';
+import { TRIP_FILTER_MIN } from '../list/list.const.ts';
+import { LIST_COPY as L } from '../list/list.copy.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
-import { DeletedTripsSheet } from './DeletedTripsSheet.tsx';
-import { CreateTripSheet } from './CreateTripSheet.tsx';
+import { Sheet } from '../../../shared/ui/Sheet.tsx';
+import { ScreenSkeleton } from '../../../shared/ui/Skeleton.tsx';
+import { LazyCreateTripSheet as CreateTripSheet, LazyTripWizard as TripWizard, preloadCreateTrip, preloadTripWizard } from './LazyTripSheets.tsx';
 import { TripCard } from './TripCard.tsx';
-import { TripWizard } from './TripWizard.tsx';
 import type { Trip } from '../model/trip.types.ts';
+
+const DeletedTripsSheet = lazy(() => import('./DeletedTripsSheet.tsx').then(module => ({ default: module.DeletedTripsSheet })));
 
 /** Ảnh bìa của chuyến: ảnh nơi đầu tiên có trong kho, hoặc ảnh bìa điểm đến. */
 function DestinationTripCard({ trip }: { readonly trip: Trip }) {
@@ -26,6 +34,11 @@ function DestinationTripCard({ trip }: { readonly trip: Trip }) {
 export function TripsScreen({ destId }: { readonly destId: string }) {
   const { state, status, reload } = useTrips();
   const [sheet, setSheet] = useState<'create' | 'wizard' | 'deleted' | null>(null);
+  const { destinations } = useCurrentDestination();
+  const { options, searchOptions, setOptions } = useTripList();
+  const showFilters = state.trips.length >= TRIP_FILTER_MIN;
+  const today = todayLocal();
+  const visible = showFilters ? selectTrips(state.trips, searchOptions, today, Object.fromEntries(destinations.map(d => [d.id, d.name]))) : state.trips;
   return (
     <>
       <div className="pagehead pad-x">
@@ -38,6 +51,7 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
           <IconButton icon="shield" label={T.list.security} onClick={() => navigate(VIEW.SECURITY)} />
         </div>
       </div>
+      {showFilters ? <TripListControls options={options} counts={countTripStatuses(state.trips, today)} onChange={setOptions} /> : null}
       {status === 'loading' && !state.trips.length ? (
         <div className="waitbox pad-x" role="status">
           <span className="spin" aria-hidden="true" />
@@ -47,11 +61,10 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
         <EmptyState title={T.list.errorTitle} text={T.list.errorText} actions={<Button onClick={reload}>{T.list.retry}</Button>} />
       ) : state.trips.length ? (
         <div className="stack pad-x spaced-lg">
-          {state.trips.map((t) => (
-            <DestinationTripCard key={t.id} trip={t} />
-          ))}
-          <Button kind="ghost" block icon="plus" onClick={() => setSheet('create')}>{T.list.createNew}</Button>
-          <Button kind="ghost" block icon="route" onClick={() => setSheet('wizard')}>{T.list.stepwise}</Button>
+          {!visible.length ? <EmptyState title={L.emptyTitle} text={L.emptyText} actions={<Button onClick={() => setOptions(DEFAULT_TRIP_LIST)}>{L.clear}</Button>} /> : null}
+          {visible.map((t) => <DestinationTripCard key={t.id} trip={t} />)}
+          <Button kind="ghost" block icon="plus" onPointerEnter={preloadCreateTrip} onFocus={preloadCreateTrip} onPointerDown={preloadCreateTrip} onClick={() => setSheet('create')}>{T.list.createNew}</Button>
+          <Button kind="ghost" block icon="route" onPointerEnter={preloadTripWizard} onFocus={preloadTripWizard} onPointerDown={preloadTripWizard} onClick={() => setSheet('wizard')}>{T.list.stepwise}</Button>
         </div>
       ) : (
         <EmptyState
@@ -60,8 +73,8 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
           actions={
             <>
               <Button onClick={() => navigate(VIEW.EXPLORE)}>{T.list.explore}</Button>
-              <Button kind="ghost" icon="plus" onClick={() => setSheet('create')}>{T.list.createNew}</Button>
-              <Button kind="ghost" icon="route" onClick={() => setSheet('wizard')}>{T.list.stepwise}</Button>
+              <Button kind="ghost" icon="plus" onPointerEnter={preloadCreateTrip} onFocus={preloadCreateTrip} onPointerDown={preloadCreateTrip} onClick={() => setSheet('create')}>{T.list.createNew}</Button>
+              <Button kind="ghost" icon="route" onPointerEnter={preloadTripWizard} onFocus={preloadTripWizard} onPointerDown={preloadTripWizard} onClick={() => setSheet('wizard')}>{T.list.stepwise}</Button>
             </>
           }
         />
@@ -73,7 +86,7 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
       </div>
       {sheet === 'create' ? <CreateTripSheet destId={destId} picked={[]} onClose={() => setSheet(null)} /> : null}
       {sheet === 'wizard' ? <TripWizard destId={destId} onClose={() => setSheet(null)} /> : null}
-      {sheet === 'deleted' ? <DeletedTripsSheet onClose={() => setSheet(null)} /> : null}
+      {sheet === 'deleted' ? <Suspense fallback={<Sheet label={T.deletedTrips.title} onClose={() => setSheet(null)}><ScreenSkeleton /></Sheet>}><DeletedTripsSheet onClose={() => setSheet(null)} /></Suspense> : null}
     </>
   );
 }

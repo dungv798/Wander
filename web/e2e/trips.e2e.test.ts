@@ -57,7 +57,7 @@ test('tạo chuyến trống từ trang điểm đến: có trong danh sách và
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/dest/ha-giang');
   await page.getByRole('button', { name: 'Tạo chuyến đi' }).click();
-  await page.getByRole('button', { name: 'Tạo chuyến đi' }).last().click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
   await page.locator('.thead h1').waitFor();
   assert.equal(await page.locator('.thead h1').textContent(), 'Hà Giang');
@@ -302,6 +302,7 @@ test('bản đồ chuyến: tab ngày vẽ tuyến có nhãn km và ghim đánh 
   const pin = page.locator('.tmap .tm-accessible button').first();
   await pin.focus();
   await page.keyboard.press('Enter');
+  await page.locator('.tm-preview').getByRole('button', { name: 'Xem chi tiết', exact: true }).click(); // thẻ nhỏ xem trước rồi mới mở chi tiết
   await page.getByRole('dialog').waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();

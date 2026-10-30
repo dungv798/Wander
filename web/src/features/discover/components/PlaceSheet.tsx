@@ -7,9 +7,11 @@ import { useDiscover } from '../hooks/DiscoverProvider.tsx';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import type { DestinationDetail } from '../model/Catalog.types.ts';
 import { placeById } from '../model/destinationQueries.ts';
+import { DISCOVER_COPY } from '../model/discover.copy.ts';
 import { About, DataCredits, EditorialRate, Highlights, OsmLink, QuickFacts, SeasonMonths, Tips, TimeOfDay } from './place/PlaceBody.tsx';
 import { PlaceGallery } from './place/PlaceGallery.tsx';
 import { PlaceRouteMap } from './place/PlaceRouteMap.tsx';
+import '../place.css';
 
 /** Nội dung chi tiết một địa điểm: ảnh, nhãn biên tập, thông tin nhanh, buổi đi, mùa đẹp, mẹo, mô tả, ghi công. */
 function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDetail; readonly placeId: string; readonly inDeck: boolean }) {
@@ -35,36 +37,34 @@ function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDet
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- bắt phím mũi tên nổi lên từ phần tử đang focus bên trong tờ chi tiết
-    <div onKeyDown={onKeyDown}>
-      <PlaceGallery place={place} onClose={sheet.close} registerGo={(go) => (goRef.current = go)} />
-      <div className={`pp cat-${place.category}`}>
-        <div className="stack tight">
-          <h2>{place.name}</h2>
-          <p className="note inline">{`${place.area}, ${dest.name}`}</p>
+    <div className="place-content" onKeyDown={onKeyDown}>
+      <div className="place-scroll">
+        <PlaceGallery place={place} onClose={sheet.close} registerGo={(go) => (goRef.current = go)} />
+        <div className={`pp cat-${place.category}`}>
+          {slot?.extra}
+          <EditorialRate place={place} />
+          <About place={place} />
+          <QuickFacts place={place} />
+          <Highlights place={place} />
+          <TimeOfDay place={place} />
+          <SeasonMonths place={place} />
+          <details className="place-info-card"><summary>{COPY.place.howToGet}</summary><PlaceRouteMap dest={dest} place={place} /></details>
+          <Tips place={place} />
+          <DataCredits place={place} />
         </div>
-        {slot?.extra}
-        <EditorialRate place={place} />
-        <QuickFacts place={place} />
-        <Highlights place={place} />
-        <TimeOfDay place={place} />
-        <SeasonMonths place={place} />
-        <PlaceRouteMap dest={dest} place={place} />
-        <Tips place={place} />
-        <About place={place} />
-        <OsmLink place={place} />
-        <DataCredits place={place} />
       </div>
-      {slot?.cta ? <div className="cta-bar">{slot.cta}</div> : null}
-      {canDecide ? (
-        <div className="cta-bar">
+      <div className="cta-bar place-actions">
+        <OsmLink place={place} />
+        {slot?.cta}
+        {canDecide ? <>
           <Button kind="ghost" icon="x" onClick={() => decide('skip')}>
             {COPY.place.skipThis}
           </Button>
-          <Button icon="check" onClick={() => decide('like')}>
-            {COPY.place.pickThis}
+          <Button icon="check" aria-label={COPY.place.pickThis} onClick={() => decide('like')}>
+            {DISCOVER_COPY.pick}
           </Button>
-        </div>
-      ) : null}
+        </> : null}
+      </div>
     </div>
   );
 }

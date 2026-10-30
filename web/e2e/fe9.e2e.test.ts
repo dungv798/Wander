@@ -185,7 +185,7 @@ test('hết phiên nhánh B (đã bỏ qua mã, lần cuối chỉ có một thi
   // PO 27/10: sau nhánh B được bắt đầu danh tính mới, có cảnh báo rõ chuyến cũ mất vĩnh viễn
   await page.goto(`${baseUrl}/#/trips`);
   await page.getByRole('button', { name: 'Tạo chuyến đi' }).first().click();
-  await page.getByRole('button', { name: 'Tạo chuyến đi' }).last().click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
   await page.getByText(/chuyến đi cũ sẽ mất vĩnh viễn/).waitFor();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
   await page.locator('.thead h1').waitFor();

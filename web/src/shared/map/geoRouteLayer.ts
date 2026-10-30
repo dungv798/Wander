@@ -1,27 +1,56 @@
-import type { GeoJSONSource, Map as MlMap } from 'maplibre-gl';
+﻿import type { Feature, LineString } from 'geojson';
+import type { ExpressionSpecification, GeoJSONSource, Map as MlMap } from 'maplibre-gl';
 import { MAP } from './map.const.ts';
-import { cssColorToRgb } from './mapUtil.ts';
-import type { Pt } from './map.types.ts';
+import { pinColor } from './nativePinLayers.ts';
+import { ROUTE } from './route.const.ts';
+import { routeDayToken } from './routeSegments.ts';
+import type { RouteSegment } from './map.types.ts';
 
-const RGB_MAX = 255;
+export type SegmentFeature = Feature<LineString, RouteSegment>;
 const EMPTY_LINES = { type: 'FeatureCollection' as const, features: [] };
 
-/** Màu CSS của một token (`--map-route`…) thành chuỗi `rgb(...)` mà MapLibre đọc được. */
-function tokenColor(host: HTMLElement, token: string): string {
-  const [r, g, b] = cssColorToRgb(getComputedStyle(host).getPropertyValue(token).trim());
-  return `rgb(${Math.round(r * RGB_MAX)}, ${Math.round(g * RGB_MAX)}, ${Math.round(b * RGB_MAX)})`;
-}
-
-/** Thêm nguồn GeoJSON rỗng và hai lớp đường (viền sáng + nét màu) cho tuyến; màu lấy từ token `--map-*` của `host`. */
+/** Thêm tuyến ước tính, vùng chạm rộng và mũi tên canvas không cần tải sprite qua mạng. */
 export function addRouteLayers(map: MlMap, host: HTMLElement): void {
+  if (map.getSource(MAP.ROUTE_SOURCE_ID)) return;
   map.addSource(MAP.ROUTE_SOURCE_ID, { type: 'geojson', data: EMPTY_LINES });
+  map.addSource(ROUTE.HIT_LAYER, { type: 'geojson', data: EMPTY_LINES });
   const layout = { 'line-cap': 'round', 'line-join': 'round' } as const;
-  map.addLayer({ id: MAP.ROUTE_HALO_LAYER_ID, type: 'line', source: MAP.ROUTE_SOURCE_ID, layout, paint: { 'line-color': tokenColor(host, '--map-route-halo'), 'line-width': MAP.ROUTE_HALO_WIDTH, 'line-opacity': MAP.ROUTE_HALO_OPACITY } });
-  map.addLayer({ id: MAP.ROUTE_LINE_LAYER_ID, type: 'line', source: MAP.ROUTE_SOURCE_ID, layout, paint: { 'line-color': tokenColor(host, '--map-route'), 'line-width': MAP.ROUTE_WIDTH } });
+  map.addLayer({ id: MAP.ROUTE_HALO_LAYER_ID, type: 'line', source: MAP.ROUTE_SOURCE_ID, layout, paint: { 'line-color': pinColor(host, '--map-route-halo'), 'line-width': MAP.ROUTE_HALO_WIDTH, 'line-opacity': MAP.ROUTE_HALO_OPACITY } });
+  map.addLayer({ id: MAP.ROUTE_LINE_LAYER_ID, type: 'line', source: MAP.ROUTE_SOURCE_ID, layout, paint: {
+    'line-color': ['to-color', ['at', ['%', ['get', 'day'], ROUTE.TOKENS.length], ['literal', ROUTE.TOKENS.map((token) => pinColor(host, token))]]] as ExpressionSpecification,
+    'line-width': MAP.ROUTE_WIDTH, 'line-opacity': ROUTE.OPACITY, 'line-dasharray': [...ROUTE.DASH],
+  } });
+  map.addLayer({ id: ROUTE.HIT_LAYER, type: 'line', source: ROUTE.HIT_LAYER, layout, paint: { 'line-width': ROUTE.HIT_WIDTH, 'line-opacity': 0 } });
+  addRouteArrow(map, host);
 }
 
-/** Đặt các cung tuyến (mỗi cung là danh sách [kinh độ, vĩ độ]) vào lớp tuyến; rỗng thì xóa tuyến. */
-export function setRouteLines(map: MlMap | null, lines: readonly (readonly Pt[])[]): void {
-  const source = map?.getSource(MAP.ROUTE_SOURCE_ID) as GeoJSONSource | undefined;
-  source?.setData({ type: 'FeatureCollection', features: lines.map((coordinates) => ({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: coordinates.map((c) => [...c]) } })) });
+/** Vẽ chevron hướng sang phải; MapLibre tự quay theo tiếp tuyến của đường. */
+function addRouteArrow(map: MlMap, host: HTMLElement): void {
+  ROUTE.TOKENS.forEach((_, day) => {
+    const imageId = `${ROUTE.ARROW_IMAGE}-${day}`;
+    if (map.hasImage(imageId)) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = ROUTE.ARROW_PX;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.strokeStyle = pinColor(host, routeDayToken(day));
+    ctx.lineWidth = ROUTE.ARROW_STROKE;
+    ctx.beginPath();
+    ctx.moveTo(ROUTE.ARROW_START, ROUTE.ARROW_START);
+    ctx.lineTo(ROUTE.ARROW_END, ROUTE.ARROW_MIDDLE);
+    ctx.lineTo(ROUTE.ARROW_START, ROUTE.ARROW_END);
+    ctx.stroke();
+    map.addImage(imageId, ctx.getImageData(0, 0, ROUTE.ARROW_PX, ROUTE.ARROW_PX));
+  });
+  map.addLayer({ id: ROUTE.ARROW_LAYER, type: 'symbol', source: MAP.ROUTE_SOURCE_ID, layout: {
+    'symbol-placement': 'line', 'symbol-spacing': ROUTE.ARROW_SPACING, 'icon-image': ['concat', ROUTE.ARROW_IMAGE + '-', ['to-string', ['%', ['get', 'day'], ROUTE.TOKENS.length]]],
+    'icon-allow-overlap': true, 'icon-ignore-placement': true, 'icon-rotation-alignment': 'map', 'icon-keep-upright': false,
+  } });
+}
+
+/** Đồng bộ từng feature với metadata; nguồn hit luôn đầy đủ trong khi hiệu ứng đang vẽ. */
+export function setRouteLines(map: MlMap, features: readonly SegmentFeature[], hit = true): void {
+  const data = { type: 'FeatureCollection' as const, features: [...features] };
+  (map.getSource(MAP.ROUTE_SOURCE_ID) as GeoJSONSource | undefined)?.setData(data);
+  if (hit) (map.getSource(ROUTE.HIT_LAYER) as GeoJSONSource | undefined)?.setData(data);
 }

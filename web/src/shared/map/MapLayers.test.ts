@@ -14,6 +14,10 @@ class Element extends EventTarget {
   textContent = '';
   disabled = false;
   hidden = false;
+  focused = false;
+  focus() { this.focused = true; }
+  click() { this.dispatchEvent(new Event('click')); }
+  insertBefore(child: Element, before: Element | null) { child.remove(); const index = before ? this.children.indexOf(before) : this.children.length; this.children.splice(index, 0, child); child.parentElement = this; return child; }
   appendChild(child: Element) { this.children.push(child); child.parentElement = this; return child; }
   append(...children: Element[]) { children.forEach((child) => this.appendChild(child)); }
   setAttribute(key: string, value: string) { this.attrs.set(key, value); }
@@ -136,4 +140,26 @@ test('URL có đường dẫn/truy vấn được addImage bằng đúng ID tron
   } });
   await (layers as unknown as { loadThumbnail: (url: string) => Promise<void> }).loadThumbnail(markerThumbnail(marker));
   assert.deepEqual(registered, [feature.properties?.['image']]);
+});
+
+test('↑/↓ đi theo thứ tự mới, giữ nút và mở đúng ghim, không tự đổi thứ tự dữ liệu', () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, 'document');
+  Object.defineProperty(globalThis, 'document', { configurable: true, value: { createElement: () => new Element() } });
+  try {
+    const host = new Element(), layers = new MapLayers(host as unknown as HTMLElement);
+    Object.assign(layers, { map: { getSource: () => ({ setData() {} }), setFilter() {}, setFeatureState() {} } });
+    const opened: string[] = [];
+    const a = { id: 'a', label: 'Hồ', lat: 12, lon: 108 }, b = { id: 'b', label: 'Đồi', lat: 13, lon: 109 };
+    layers.syncMarkers([a, b], 'route', null, (id) => opened.push(id));
+    const list = host.children[1]!, buttonA = list.children[0]!.children[0]!;
+    layers.syncMarkers([b, a], 'route', null, (id) => opened.push(id));
+    assert.equal(list.children[1]!.children[0], buttonA);
+    const up = new Event('keydown', { cancelable: true });
+    Object.defineProperties(up, { key: { value: 'ArrowUp' }, target: { value: buttonA } });
+    list.dispatchEvent(up);
+    assert.equal(up.defaultPrevented, true);
+    assert.deepEqual(opened, ['b']);
+    assert.equal(list.children[0]!.children[0]!.focused, true);
+    assert.deepEqual(list.children.map((item) => item.children[0]!.dataset['id']), ['b', 'a']);
+  } finally { if (original) Object.defineProperty(globalThis, 'document', original); else Reflect.deleteProperty(globalThis, 'document'); }
 });

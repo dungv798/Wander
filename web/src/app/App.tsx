@@ -11,6 +11,7 @@ import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useRepo
 import { SettingsScreen } from '../features/settings/index.ts';
 import { OnboardScreen, OnboardingProvider, useOnboarding } from '../features/onboarding/index.ts';
 import { CreateTripSheet, ExportScreen, JoinScreen, TodayScreen, TripScreen, TripsProvider, TripsScreen, useTrips } from '../features/trips/index.ts';
+import { ScreenSkeleton } from '../shared/ui/Skeleton.tsx';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
 import { initializeLook } from './look.ts';
@@ -85,7 +86,7 @@ function Shell() {
       <ScreenHost view={route.view} routeKey={`${route.view}|${route.id ?? ''}`} noBar={hideBar}>
         <RouteEscape view={route.view} />
         {route.view === VIEW.ONBOARD ? <OnboardScreen /> : null}
-        {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<p role="status">{COPY.common.loading}</p>}><DestinationPickerScreen /></Suspense> : null}
+        {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<ScreenSkeleton />}><DestinationPickerScreen /></Suspense> : null}
         {route.view === VIEW.EXPLORE ? <HomeScreen key={currentDestId} destId={currentDestId} /> : null}
         {route.view === VIEW.DEST ? <DestScreen destId={destId} onCreate={() => setCreate([])} /> : null}
         {route.view === VIEW.DECK ? <DeckRoute key={destId} destId={destId} tripId={route.sub} /> : null}

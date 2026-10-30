@@ -8,12 +8,13 @@ import type { ItemKind, Trip, TripsState } from '../model/trip.types.ts';
 import { isPlain, tripDays } from '../model/tripMath.ts';
 import * as T from '../model/tripState.ts';
 import type { DayPlan, EditResult, ItemPatch, NewTrip, PlaceRef, TripEdit } from '../model/tripState.ts';
+import { missingPlaces, validAddDay } from '../model/addMany.ts';
 
 /** Các thao tác trên kho chuyến đi. Máy chủ là nguồn sự thật: mỗi thao tác gọi API rồi ĐỌC LẠI chuyến đó vào kho (không đoán kết quả). Thất bại ném `ApiError`. */
 export interface TripsActions {
   /** Tạo chuyến (mã do máy chủ cấp) và thêm lần lượt các địa điểm đã chọn; trả chuyến đã đọc lại. */
   readonly create: (n: NewTrip, places: readonly PlaceRef[]) => Promise<Trip>;
-  readonly addPlaces: (tripId: string, places: readonly PlaceRef[]) => Promise<void>;
+  readonly addPlaces: (tripId: string, places: readonly PlaceRef[], day?: string | null) => Promise<void>;
   readonly addItem: (tripId: string, item: ItemInput) => Promise<void>;
   readonly updateItem: (tripId: string, itemId: string, patch: ItemPatch) => Promise<void>;
   /** Gán ngày cho một mục (null = "Chưa có ngày"); xuống cuối ngày mới. */
@@ -82,7 +83,7 @@ interface Ctx {
   readonly after: <T>(tripId: string, work: () => Promise<T>) => Promise<T>;
   /** Đọc lại một chuyến từ máy chủ vào kho. */
   readonly refresh: (tripId: string) => Promise<Trip>;
-  readonly addEach: (tripId: string, places: readonly PlaceRef[]) => Promise<void>;
+  readonly addEach: (tripId: string, places: readonly PlaceRef[], day?: string | null) => Promise<void>;
 }
 
 /** Hai chuyến (đã đọc từ máy chủ) có giống hệt nhau không; so theo nội dung vì mỗi lần đọc là một đối tượng mới. */
@@ -99,7 +100,7 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
       await run(id, () => addEach(id, places));
       return need(id);
     },
-    addPlaces: (tripId, places) => run(tripId, () => addEach(tripId, places)),
+    addPlaces: (tripId, places, day = null) => run(tripId, () => addEach(tripId, places, day)),
     deleteTrip: (tripId) => ctx.after(tripId, async () => {
       await gateway.deleteTrip(tripId);
       store.update((s) => ({ trips: s.trips.filter((t) => t.id !== tripId) }));
@@ -229,9 +230,12 @@ export function createTripsActions({ gateway, store }: TripsActionDeps): TripsAc
     tails.set(tripId, job.catch(() => undefined));
     return job;
   };
-  /** Thêm lần lượt các địa điểm (tuần tự để giữ thứ tự thêm). */
-  const addEach = async (tripId: string, places: readonly PlaceRef[]): Promise<void> => {
-    for (const place of places) await gateway.addItem(tripId, placeInput(place));
+  /** Đọc máy chủ trước khi thử lại, bỏ mã đã thêm kể cả khi lần trước mất phản hồi; gán ngày ngay trong lệnh tạo mục. */
+  const addEach = async (tripId: string, places: readonly PlaceRef[], day: string | null = null): Promise<void> => {
+    if (!places.length) return;
+    const fresh = await refresh(tripId);
+    if (!validAddDay(fresh, day)) throw new ApiError(CONFLICT_CODE, CONFLICT_STATUS);
+    for (const place of missingPlaces(places, fresh)) await gateway.addItem(tripId, { ...placeInput(place), day });
   };
   const idle = (tripId: string): Promise<void> => (tails.get(tripId) ?? Promise.resolve()).then(() => undefined);
   /** Nối `work` vào hàng đợi của chuyến, không đọc lại. */
