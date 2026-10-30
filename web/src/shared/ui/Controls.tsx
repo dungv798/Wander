@@ -31,6 +31,7 @@ interface ChipToggleProps {
 export function ChipToggle({ pressed, onClick, icon, className, children }: ChipToggleProps) {
   return (
     <button className={['fchip', 'g-chip', 'glass-control', className].filter(Boolean).join(' ')} type="button" aria-pressed={pressed} onClick={onClick}>
+      <span className="selection-mark" aria-hidden="true"><Icon name="check" size="s" /></span>
       {icon ? <Icon semantic name={icon} size="s" /> : null}
       {children}
     </button>

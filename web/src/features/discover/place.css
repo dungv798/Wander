@@ -1,4 +1,4 @@
-/* Sheet chi tiết: chỉ nội dung cuộn; thanh hành động nằm ngoài vùng cuộn. */
+﻿/* Sheet chi tiết: chỉ nội dung cuộn; thanh hành động nằm ngoài vùng cuộn. */
 :root .panel:has(> .place-content) { overflow: hidden; }
 .place-content { display: flex; flex-direction: column; max-height: 94dvh; }
 .place-scroll { overflow: auto; min-height: 0; overscroll-behavior: contain; }
@@ -20,15 +20,79 @@
 
 /* Thẻ bên trong dùng nền đặc để giữ một lớp kính chính trên sheet. */
 .place-info-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-3); }
-.place-info-card summary { cursor: pointer; min-height: var(--tap); align-content: center; font: var(--text-button); }
-.place-info-card summary .ic { vertical-align: middle; margin-right: var(--s-2); }
-.place-info-card[open] summary { margin-bottom: var(--s-2); }
 .place-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .place-facts li { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-2); background: var(--surface); border-radius: var(--r-md); border: 1px solid var(--line); }
 .place-facts li > span:last-child { display: grid; min-width: 0; }
 .place-facts b { font: var(--text-card); }
 .place-facts small { font: var(--text-secondary); color: var(--muted); }
 .place-content .rate { padding: var(--s-3); gap: var(--s-2); }
-.place-content .body.clamp { -webkit-line-clamp: 3; line-clamp: 3; }
 .place-content .credits { overflow-wrap: anywhere; }
 @media (min-width: 1280px) { .drawer .place-content { height: 100%; max-height: 100%; } }
+/* Điều khiển chi tiết dùng kính trung tính, không khuếch đại màu ảnh/nước phía sau. */
+.place-content { --glass-saturation: .65; --glass-brightness: 1; }
+:root .place-content :is(.gnav, .close, .credit-btn, .glass-control, .place-more) {
+  background: var(--glass);
+  color: var(--ink);
+  text-shadow: none;
+  -webkit-backdrop-filter: blur(var(--glass-chip-blur)) saturate(.65);
+  backdrop-filter: blur(var(--glass-chip-blur)) saturate(.65);
+}
+:root .place-content :is(.gnav, .close, .credit-btn, .glass-control, .place-more)::before { background: none; }
+.place-disclosure > h4 { margin: 0; }
+.place-disclosure-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink);
+  font: var(--text-button);
+  text-align: left;
+  cursor: pointer;
+  transition: scale var(--dur-press) var(--ease-out);
+}
+.place-disclosure-title { flex: 1; }
+.place-disclosure-hint { flex: none; font: var(--text-secondary); color: var(--muted); }
+.place-chevron { flex: none; transition: transform var(--dur-med) var(--ease-out); }
+[data-open="true"] > h4 .place-chevron, .place-more[aria-expanded="true"] .place-chevron { transform: rotate(180deg); }
+.place-disclosure-grid { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--dur-med) var(--ease-out), opacity var(--dur-med) var(--ease-out); }
+.place-disclosure[data-open="true"] > .place-disclosure-grid { grid-template-rows: 1fr; opacity: 1; }
+.place-disclosure-clip { min-height: 0; overflow: hidden; }
+.place-disclosure-body { padding-top: var(--s-2); }
+
+.place-about { display: grid; grid-template-rows: minmax(3lh, 0fr); transition: grid-template-rows var(--dur-med) var(--ease-out); }
+.place-about[data-open="true"] { grid-template-rows: minmax(3lh, 1fr); }
+.place-about > div { min-height: 0; overflow: hidden; }
+:root .place-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding: var(--s-2) var(--s-3);
+  margin-top: var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font: var(--text-button);
+  text-decoration: none;
+  cursor: pointer;
+  transition: scale var(--dur-press) var(--ease-out);
+}
+.place-disclosure-toggle:active, .place-more:active { scale: var(--glass-pressed-scale); }
+.place-content :is(.place-disclosure-toggle, .place-more):focus-visible { outline: var(--focus-width) solid var(--ink); outline-offset: var(--s-1); }
+:root .place-content .minimap.tm-mini { height: calc(var(--s-8) * 4); }
+/* Khung cố định trước khi ảnh/WebGL tải xong: shimmer trung tính, không đẩy chữ xuống. */
+.place-content .gallery, .place-content .tmroot[data-ready="0"] {
+  background: linear-gradient(110deg, var(--surface-2) 25%, var(--surface) 45%, var(--surface-2) 65%);
+  background-size: 300% 100%;
+  animation: placeShimmer calc(var(--dur-scene) * 3) linear infinite;
+}
+.place-content .gallery:not(:has(img[data-image-ready="false"])) { animation: none; }
+@keyframes placeShimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .place-content :is(.place-chevron, .place-disclosure-grid, .place-about, .place-more, .place-disclosure-toggle) { transition: none; }
+  .place-content .gallery, .place-content .tmroot[data-ready="0"] { animation: none; }
+}

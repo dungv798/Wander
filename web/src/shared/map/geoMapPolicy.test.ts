@@ -13,7 +13,7 @@ test('đổi nấc tờ dưới: giữ camera đã kéo nếu ghim còn thấy, 
   assert.equal(needsInsetRefit(BEFORE, { ...BEFORE }, false, false), false);
 });
 
-test('vừa khung thường giữ zoom 14; cụm được lên 17 và không vượt giới hạn', () => {
+test('vừa khung mặc định dùng trần cấu hình; cụm lên 17 và không vượt giới hạn', () => {
   assert.equal(fitMaxZoom({}), MAP.GL_FIT_MAX_ZOOM);
   assert.equal(fitMaxZoom({ maxZoom: MAP.GL_MAX_ZOOM }), MAP.GL_MAX_ZOOM);
   assert.equal(fitMaxZoom({ maxZoom: 99 }), MAP.GL_MAX_ZOOM);

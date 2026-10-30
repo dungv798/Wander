@@ -72,6 +72,8 @@ export interface FitOptions {
 export interface GeoMapOptions {
   readonly dest: string;
   readonly interactive?: boolean;
+  /** Một ngón cuộn trang, hai ngón kéo/phóng bản đồ nhúng. */
+  readonly cooperativeGestures?: boolean;
   readonly towns?: boolean;
   readonly credit?: boolean;
   readonly label: string;

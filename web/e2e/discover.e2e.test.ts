@@ -6,6 +6,7 @@ import path from 'node:path';
 import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
+import { withAria } from './diag.ts';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { tapNativeFeature, waitForNativeMap } from './mapChecks.ts';
 
@@ -186,6 +187,7 @@ test('cẩm nang: khối mở/đóng đúng aria-expanded, danh sách mang gì �
   assert.equal(await head.getAttribute('aria-expanded'), 'false');
   await page.getByRole('button', { name: /^Chuẩn bị mang gì/ }).click();
   const pack = page.getByRole('button', { name: 'Áo mưa', exact: true });
+  await withAria(page, 'main', () => pack.waitFor({ timeout: 8000 }));
   assert.equal(await pack.getAttribute('aria-pressed'), 'false');
   await pack.click();
   assert.equal(await pack.getAttribute('aria-pressed'), 'true');

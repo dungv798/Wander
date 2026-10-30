@@ -94,7 +94,7 @@ export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
               <Icon semantic name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />
               {place ? `${place.categoryName} · ${place.area}` : kind.label}
             </span>
-            <h3>{name}</h3>
+            <h3 title={name}>{name}</h3>
             {snippet ? <p className="snip">{snippet}</p> : null}
             <ItemMeta item={item} people={trip.memberCount} />
           </div>

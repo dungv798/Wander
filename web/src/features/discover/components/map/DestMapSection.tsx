@@ -12,8 +12,8 @@ import { placeMarkers } from '../../model/mapMarkers.ts';
 import { mapPhotoOrigin } from '../../model/mapPhotoOrigin.ts';
 import { firstPhotoUrl } from '../../model/destinationQueries.ts';
 
-const CARD_INSETS = { bottom: 26 };
-const CARD_FIT: MapFit = { ids: null, options: { animate: false, padding: 30 } };
+const CARD_INSETS = { bottom: 0 };
+const CARD_FIT: MapFit = { ids: null, options: { animate: false, padding: 24 } };
 const FULL_FIT: MapFit = { ids: null, options: { animate: false, padding: 48 } };
 
 /** Bản đồ toàn màn có kéo, phóng, gộp cụm; chạm ghim thì đóng bản đồ và mở chi tiết nơi đó. */

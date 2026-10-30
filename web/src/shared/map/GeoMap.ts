@@ -1,9 +1,8 @@
 import type { LngLatBounds, Map as MlMap, PaddingOptions } from 'maplibre-gl';
 import { COPY } from '../const/copy.vi.ts';
-import { HALF } from '../const/math.const.ts';
 import { MapLayers } from './MapLayers.ts';
 import { showBasemapError } from './geoMapErrors.ts';
-import { fitMaxZoom, needsInsetRefit } from './geoMapPolicy.ts';
+import { fitMaxZoom, fitPadding, needsInsetRefit } from './geoMapPolicy.ts';
 import type { NativeRoute } from './NativeRoute.ts';
 import { loadMapLibre } from './maplibreLoader.ts';
 import type { MapLibre } from './maplibreLoader.ts';
@@ -56,6 +55,7 @@ export class GeoMap {
     host.setAttribute('role', 'region');
     host.setAttribute('aria-label', opt.label);
     if (!this.opt.interactive) host.classList.add('tm-static');
+    if (this.opt.cooperativeGestures) host.classList.add('tm-cooperative');
     this.mapEl = Object.assign(document.createElement('div'), { className: 'tm-gl' });
     host.replaceChildren(this.mapEl);
     this.layers = new MapLayers(host);
@@ -72,7 +72,7 @@ export class GeoMap {
     this.nativeRoute?.destroy();
     this.gl?.remove();
     this.gl = null;
-    this.host.classList.remove('tmroot', 'tm-static');
+    this.host.classList.remove('tmroot', 'tm-static', 'tm-cooperative');
     this.host.replaceChildren();
   }
 
@@ -170,13 +170,14 @@ export class GeoMap {
       style,
       bounds: MAP.VIETNAM_BOUNDS as unknown as [number, number, number, number],
       interactive: this.opt.interactive,
+      cooperativeGestures: this.opt.cooperativeGestures ?? false,
       attributionControl: this.opt.credit ? { compact: true } : false,
       dragRotate: false,
       pitchWithRotate: false,
       minZoom: MAP.GL_MIN_ZOOM,
       maxZoom: MAP.GL_MAX_ZOOM,
       renderWorldCopies: false,
-      locale: { 'NavigationControl.ZoomIn': COPY.map.zoomIn, 'NavigationControl.ZoomOut': COPY.map.zoomOut, 'AttributionControl.ToggleAttribution': COPY.map.attribution },
+      locale: { ...MAP.GESTURE_LOCALE, 'NavigationControl.ZoomIn': COPY.map.zoomIn, 'NavigationControl.ZoomOut': COPY.map.zoomOut, 'AttributionControl.ToggleAttribution': COPY.map.attribution },
     });
     if (this.opt.interactive) {
       map.touchZoomRotate.disableRotation();
@@ -249,6 +250,7 @@ export class GeoMap {
   private layout(): void {
     const gl = this.gl;
     if (!this.ready || !gl) return;
+    this.host.dataset['center'] = gl.getCenter().toArray().join(',');
     this.host.dataset['zoom'] = gl.getZoom().toFixed(MAP.ZOOM_DIGITS); // điểm kiểm cho e2e: mức zoom hiện tại
     this.layers.snapshot();
     this.nativeRoute?.snapshot();
@@ -271,9 +273,7 @@ export class GeoMap {
   /** Lề cho `fitBounds`: phần bị che cộng đệm, kẹp để không vượt quá nửa khung (tránh MapLibre tính ra kích thước âm). */
   private fitPadding(pad: number): PaddingOptions {
     const r = this.host.getBoundingClientRect();
-    const cap = (v: number, size: number): number => Math.max(0, Math.min(v, size / HALF - 1));
-    const credit = this.opt.credit ? MAP.CREDIT_BAND : 0; // thanh ghi công nằm đè đáy bản đồ, ghim không được lọt xuống dưới nó
-    return { top: cap(this.inset.top + pad, r.height), bottom: cap(this.inset.bottom + pad + credit, r.height), left: cap(this.inset.left + pad, r.width), right: cap(this.inset.right + pad, r.width) };
+    return fitPadding({ w: r.width, h: r.height }, this.inset, pad, this.opt.credit);
   }
 
   /** Bay (hoặc nhảy, khi giảm chuyển động) tới khung vừa các điểm. */
@@ -284,7 +284,7 @@ export class GeoMap {
     const bounds: LngLatBounds = new ml.LngLatBounds([first[0], first[1]], [first[0], first[1]]);
     pts.forEach((p) => bounds.extend([p[0], p[1]]));
     const animate = o.animate !== false && !prefersReducedMotion();
-    gl.fitBounds(bounds, { padding: this.fitPadding(o.padding ?? MAP.FIT_PADDING), maxZoom: fitMaxZoom(o), duration: animate ? MAP.FLY_MS : 0, essential: true });
+    gl.fitBounds(bounds, { padding: this.fitPadding(o.padding ?? MAP.FIT_PADDING), maxZoom: fitMaxZoom(o, pts), duration: animate ? MAP.FLY_MS : 0, essential: true });
   }
 
   /** Cho thấy cả nước (khi chưa có ghim nào). */

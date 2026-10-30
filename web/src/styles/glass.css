@@ -32,14 +32,13 @@
   }
 }
 
-/* Trạng thái chọn dùng mép và gạch chân, không đổ màu kín chip/tab. */
+/* Trạng thái chọn dùng cùng viền nhấn và nền Nắng vàng trong. */
 :root:not([data-look='classic']) :is(#screen, .panel, :where(#tabbar)) :is([aria-pressed='true'], [aria-selected='true'], [aria-current='page'], [aria-current='true'], .pack.on, .opt.on) {
   color: var(--ink-fixed);
   border-color: var(--glass-active-edge);
-  background: var(--glass-highlight), var(--brand-soft);
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: var(--s-1);
+  background: var(--control-selected);
+  font-weight: inherit;
+  text-decoration: none;
 }
 :root:not([data-look='classic']) :is(button.glass-control, button.pill, .round, .gnav, .credit-btn, :where(.tile) .x, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .tab, .search) { min-width: var(--tap); min-height: var(--tap); }
 :root:not([data-look='classic']) :is(.linkbtn, .ghead, .grow) { border-radius: var(--r-sm); }
@@ -120,6 +119,76 @@
 :root:not([data-look='classic']) #screen.immersive .deckbar { background: var(--glass-photo-scrim); }
 :root:not([data-look='classic']) .card .credit-btn { position: relative; }
 
+/* Hệ nút dùng chung: nền trung tính đủ đệm trên trời xanh/bản đồ, mép đều bốn phía.
+   Đặt sau các cầu nối cũ để trạng thái của màn không tự đổi vật liệu. */
+:root :is(button, a[class], a[role='button']) { text-decoration: none; }
+:root:not([data-look='classic']) :is(#screen, .panel, .toast) :is(.btn, .pill, .iconbtn, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .undo-control, .taskchk) {
+  color: var(--ink-fixed);
+  background: var(--control-surface);
+  border: var(--glass-border) solid var(--control-edge);
+  box-shadow: none;
+  text-shadow: none;
+  text-decoration: none;
+  min-height: var(--tap);
+  min-width: var(--tap);
+  font-weight: 700;
+  transition: opacity var(--control-motion) var(--ease-out), scale var(--control-motion) var(--ease-out);
+}
+:root:not([data-look='classic']) :is(#screen, .panel, .toast) :is(.btn, .pill, .iconbtn, .fchip, .dchip, .dtab)::before { display: none; }
+:root:not([data-look='classic']) :is(#screen, .panel) :is(.chip:not(.glass), .mchip) {
+  color: var(--ink-fixed);
+  background: var(--control-surface);
+  border: var(--glass-border) solid var(--control-edge);
+  box-shadow: none;
+  text-decoration: none;
+}
+:root:not([data-look='classic']) :is(#screen, .panel) :is(.fchip, .dchip, .dtab, .pack, .opt, .taskchk, .pill):is([aria-pressed='true'], [aria-selected='true'], .on) {
+  background: var(--control-selected);
+  border-color: var(--control-accent);
+  color: var(--ink-fixed);
+  font-weight: 700;
+  box-shadow: none;
+  text-decoration: none;
+}
+:root:not([data-look='classic']) :is(#screen, .panel) :is(.btn.g-primary, .round.r) {
+  background: var(--glass-cta-surface);
+  color: var(--on-cta);
+  border: var(--glass-border) solid var(--control-accent);
+  box-shadow: none;
+}
+/* Nút gợi ý và form thiết bị là hành động phụ dù mã cũ dùng primary. */
+:root:not([data-look='classic']) :is(#screen, .panel) :is(.next .btn.g-primary, #screen[data-view='settings'] .seccard:first-child .btn.g-primary) {
+  background: var(--control-surface);
+  color: var(--ink-fixed);
+  border-color: var(--control-edge);
+}
+:root .selection-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--control-check);
+  height: var(--control-check);
+  opacity: 0;
+  transition: opacity var(--control-motion) var(--ease-out);
+}
+:root [aria-pressed='true'] > .selection-mark { opacity: 1; }
+:root .selection-mark .ic { color: var(--control-accent); }
+:root:not([data-look='classic']) :is(#screen, .panel) :is(.fchip:not(:has(.selection-mark)), .pack)::after {
+  content: '✓';
+  content: '✓' / ''; /* văn bản thay thế rỗng: dấu check chỉ là trang trí, không vào tên truy cập */
+  width: var(--control-check);
+  flex: none;
+  opacity: 0;
+  color: var(--control-accent);
+  transition: opacity var(--control-motion) var(--ease-out);
+}
+:root:not([data-look='classic']) :is(#screen, .panel) :is(.fchip, .pack)[aria-pressed='true']::after { opacity: 1; }
+:root:not([data-look='classic']) :is(#screen, .panel) .btn.danger { color: var(--skip); border-color: var(--skip); }
+:root .undo-control { border-radius: var(--r-sm); }
+/* Nhãn thẻ cũng là nội dung nút: đệm đều thay vì phụ thuộc vùng ảnh may mắn tối. */
+:root #screen .home-body .mood-in { background: var(--glass-photo-scrim); border-radius: var(--r-sm); padding: var(--s-1); }
+:root:not([data-look='classic']) :is(#screen, .panel) button:disabled { opacity: 1; color: var(--muted); cursor: not-allowed; }
+
 @media (prefers-reduced-transparency: reduce) {
   :root { --glass-photo-scrim: var(--glass-photo-fallback); }
   :root:not([data-look='classic']) :is(.maplibregl-ctrl-group, .maplibregl-ctrl-group button, .deckbar, .pagehead, .destination-picker-header, .glass-control, .btn, .pill, .iconbtn, .round, .gnav, .credit-btn, :where(.tile) .x, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .ghead, .grow, .tab, .chip, .search, .destination-picker-search input, .destination-picker-list button, .daylist button, .taskchk, .obx-skip, .brand, .resume, :where(.simbar) .seg button, .toast button, #tabbar, .panel, #screen .sheetbody, .bar, .cta-bar) {
@@ -131,5 +200,6 @@
   :root:not([data-look='classic']) :is(.btn, .pill, .iconbtn, .round, .fchip, .dchip, .dtab, .tab, .search, .chip, .gnav, .credit-btn, #tabbar, .maplibregl-ctrl-group)::before { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
+  :root { --control-motion: 0ms; }
   :root:not([data-look='classic']) :is(.maplibregl-ctrl-group, .maplibregl-ctrl-group button, .deckbar, .pagehead, .destination-picker-header, .glass-control, .btn, .round, .gnav, .fchip, .tab, :where(#tabbar)) { transition: none; animation: none; }
 }

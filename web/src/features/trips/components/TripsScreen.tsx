@@ -19,14 +19,16 @@ import { ScreenSkeleton } from '../../../shared/ui/Skeleton.tsx';
 import { LazyCreateTripSheet as CreateTripSheet, LazyTripWizard as TripWizard, preloadCreateTrip, preloadTripWizard } from './LazyTripSheets.tsx';
 import { TripCard } from './TripCard.tsx';
 import type { Trip } from '../model/trip.types.ts';
+import { TRIP_COVERS } from '../model/tripCovers.const.ts';
 
 const DeletedTripsSheet = lazy(() => import('./DeletedTripsSheet.tsx').then(module => ({ default: module.DeletedTripsSheet })));
 
-/** Ảnh bìa của chuyến: ảnh nơi đầu tiên có trong kho, hoặc ảnh bìa điểm đến. */
+/** Ảnh bìa của điểm đến trong catalog; không tạo dữ liệu ảnh riêng cho chuyến. */
 function DestinationTripCard({ trip }: { readonly trip: Trip }) {
   const { state } = useDestination(trip.destinationId);
   const dest = state.status === 'ready' ? state.data : null;
-  const cover = trip.items.flatMap(item => dest?.places.find(place => place.id === item.placeId)?.photos[0]?.url ?? []).find(Boolean) ?? dest?.coverUrl ?? '';
+  const selected = TRIP_COVERS[trip.destinationId];
+  const cover = dest?.places.flatMap(place => place.photos).find(photo => selected && photo.url.endsWith(`/${selected}`))?.url ?? dest?.coverUrl ?? '';
   return <TripCard trip={trip} cover={cover} />;
 }
 

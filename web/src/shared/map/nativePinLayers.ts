@@ -35,7 +35,7 @@ function addPinSourceLayers(map: MlMap, host: HTMLElement, source: string, index
     'text-field': ['get', 'num'], 'text-font': [...MAP.FONT], 'text-size': MAP.NUMBER_SIZE, 'text-allow-overlap': true, 'text-ignore-placement': true,
   }, paint: { 'text-color': white, 'text-halo-color': color, 'text-halo-width': MAP.TEXT_HALO } });
   map.addLayer({ id: `${prefix}-label`, type: 'symbol', source, filter: ['all', filter, ['any', ['!', ['get', 'muted']], ['==', ['get', 'id'], '']]], layout: {
-    'text-field': ['get', 'label'], 'text-font': [...MAP.FONT], 'text-size': MAP.LABEL_SIZE, 'text-anchor': 'top', 'text-offset': [0, MAP.LABEL_OFFSET],
+    'text-field': ['get', 'label'], 'text-font': [...MAP.FONT], 'text-size': MAP.LABEL_SIZE, 'text-max-width': MAP.LABEL_MAX_WIDTH, 'text-anchor': 'top', 'text-offset': [0, MAP.LABEL_OFFSET],
   }, paint: { 'text-color': pinColor(host, '--map-label'), 'text-halo-color': white, 'text-halo-width': MAP.TEXT_HALO } });
 }
 

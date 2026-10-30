@@ -37,3 +37,6 @@
 .tm-preview-actions { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
 .tm-preview-actions button { min-height: var(--tap); flex: 1; border: 0; border-radius: var(--r-sm); background: var(--brand-2); color: var(--on-brand-2); font: inherit; cursor: pointer; }
 .tm-preview-actions button:last-child { background: var(--bg); color: var(--ink); }
+
+/* Một ngón cuộn trang; handler MapLibre nhận hai ngón trên bản đồ nhúng. */
+.tm-cooperative { touch-action: pan-x pan-y; }

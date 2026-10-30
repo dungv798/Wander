@@ -51,10 +51,10 @@ export function ItemMeta({ item, people = 1 }: { readonly item: TripItem; readon
           {T.row.unknownPrice}
         </span>
       ) : null}
-      {priced && item.booking === 'booked' ? (
-        <span className="mchip cat-canh tint">
-          <Icon name="ticket" size="s" />
-          {T.row.booked}
+      {priced && item.booking ? (
+        <span className={item.booking === 'booked' ? 'mchip trip-booking-chip cat-canh tint' : 'mchip trip-booking-chip'}>
+          <Icon name={item.booking === 'booked' ? 'check' : 'clock'} size="s" />
+          {item.booking === 'booked' ? T.row.booked : T.editor.pending}
         </span>
       ) : null}
     </div>

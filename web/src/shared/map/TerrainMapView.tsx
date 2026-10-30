@@ -19,6 +19,7 @@ interface TerrainMapViewProps {
   readonly fit?: MapFit | null;
   readonly selected?: string | null;
   readonly interactive?: boolean;
+  readonly cooperativeGestures?: boolean;
   readonly towns?: boolean;
   readonly credit?: boolean;
   readonly onPin?: (id: string) => void;
@@ -34,7 +35,7 @@ const NO_ROUTE_LABELS: readonly string[] = [];
  * Vùng bản đồ địa hình dùng trong React. Bản đồ là đối tượng mệnh lệnh (`GeoMap`) sống theo vòng đời của phần tử:
  * tạo khi phần tử vào DOM, hủy khi rời; các thuộc tính (ghim, tuyến, chế độ, vừa khung) được đẩy vào bằng effect.
  */
-export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, towns = true, credit = true, onPin, onSegment, onMapDismiss, selectedSegment = null, className }: TerrainMapViewProps) {
+export function TerrainMapView({ dest, label, markers, route = null, mode = 'browse', insets, fit = null, selected = null, interactive = true, cooperativeGestures = false, towns = true, credit = true, onPin, onSegment, onMapDismiss, selectedSegment = null, className }: TerrainMapViewProps) {
   const [map, setMap] = useState<GeoMap | null>(null);
   const onPinRef = useRef(onPin);
   const onSegmentRef = useRef(onSegment);
@@ -51,14 +52,14 @@ export function TerrainMapView({ dest, label, markers, route = null, mode = 'bro
     /** Tạo bản đồ khi phần tử vào DOM; trả hàm hủy khi phần tử rời (ref callback có dọn dẹp của React 19). */
     (el: HTMLDivElement | null) => {
       if (!el) return undefined;
-      const m = new GeoMap(el, { dest, label, interactive, towns, credit, onMapDismiss: () => onDismissRef.current?.(), ...(hasSegmentAction ? { onSegment: (id: string) => onSegmentRef.current?.(id) } : {}), ...(hasPinAction ? { onPin: (id: string) => onPinRef.current?.(id) } : {}) });
+      const m = new GeoMap(el, { dest, label, interactive, cooperativeGestures, towns, credit, onMapDismiss: () => onDismissRef.current?.(), ...(hasSegmentAction ? { onSegment: (id: string) => onSegmentRef.current?.(id) } : {}), ...(hasPinAction ? { onPin: (id: string) => onPinRef.current?.(id) } : {}) });
       setMap(m);
       return () => {
         m.destroy();
         setMap(null);
       };
     },
-    [dest, label, interactive, towns, credit, hasPinAction, hasSegmentAction],
+    [dest, label, interactive, cooperativeGestures, towns, credit, hasPinAction, hasSegmentAction],
   );
 
   useEffect(() => {

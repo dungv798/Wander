@@ -3,7 +3,7 @@ import { Icon } from './Icon.tsx';
 import type { IconName } from './icons/iconPaths.const.ts';
 
 /** Kiểu nút: thêm biến thể = thêm một dòng ở bảng (mở rộng, không sửa chỗ khác). */
-const KIND_CLASS = { primary: 'g-primary', ghost: 'ghost', danger: 'danger', sun: 'sun' } as const;
+const KIND_CLASS = { primary: 'g-primary', secondary: 'secondary', ghost: 'ghost', danger: 'danger', sun: 'sun' } as const;
 type ButtonKind = keyof typeof KIND_CLASS;
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'type'> {

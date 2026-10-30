@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { UI } from '../../../../shared/const/app.const.ts';
 import { formatTravelTime } from '../../../../shared/lib/geo.ts';
@@ -8,6 +8,7 @@ import { DISCOVER_COPY } from '../../model/discover.copy.ts';
 import { SLOTS, VERDICT_STYLE } from '../../model/discover.const.ts';
 import type { PlaceView } from '../../model/Catalog.types.ts';
 import { mainAway } from '../../model/destinationQueries.ts';
+import { PlaceDisclosure, PlaceMoreButton } from './PlaceDisclosure.tsx';
 
 /** Khối nhãn biên tập "Wander gợi ý" (thay điểm sao; KHÔNG phải đánh giá người dùng, DR-007). */
 export function EditorialRate({ place }: { readonly place: PlaceView }) {
@@ -69,11 +70,7 @@ export function Highlights({ place }: { readonly place: PlaceView }) {
 /** Bốn buổi trong ngày: buổi nên đi được tô và ghi "Nên đi", kèm lý do. */
 export function TimeOfDay({ place }: { readonly place: PlaceView }) {
   return (
-    <details className="place-info-card">
-      <summary>
-        <Icon semantic name="sun" />
-        {COPY.place.whenToGo}
-      </summary>
+    <PlaceDisclosure title={COPY.place.whenToGo} icon="sun">
       <div className="tod">
         {SLOTS.map((s) => {
           const on = place.bestSlots.includes(s.code);
@@ -87,7 +84,7 @@ export function TimeOfDay({ place }: { readonly place: PlaceView }) {
         })}
       </div>
       <p className="note spaced">{place.slotReason}</p>
-    </details>
+    </PlaceDisclosure>
   );
 }
 
@@ -95,11 +92,7 @@ export function TimeOfDay({ place }: { readonly place: PlaceView }) {
 export function SeasonMonths({ place }: { readonly place: PlaceView }) {
   const months = Array.from({ length: UI.MONTHS_IN_YEAR }, (_, i) => i + 1);
   return (
-    <details className="place-info-card">
-      <summary>
-        <Icon semantic name="calendar-event" />
-        {COPY.place.bestSeason}
-      </summary>
+    <PlaceDisclosure title={COPY.place.bestSeason} icon="calendar-event">
       <div className="months">
         {months.map((m) => (
           <i key={m} className={place.bestMonths.includes(m) ? 'best' : undefined}>
@@ -107,41 +100,36 @@ export function SeasonMonths({ place }: { readonly place: PlaceView }) {
           </i>
         ))}
       </div>
-    </details>
+    </PlaceDisclosure>
   );
 }
 
 /** Mẹo của Wander (bản nháp biên tập). */
 export function Tips({ place }: { readonly place: PlaceView }) {
   return (
-    <details className="place-info-card tipbox">
-      <summary>
-        <Icon name="bulb" />
-        {COPY.place.tips}
-      </summary>
+    <PlaceDisclosure title={COPY.place.tips} icon="bulb" className="tipbox">
       {place.tips.map((t) => (
         <p key={t}>
           <Icon name="check" size="s" />
           {t}
         </p>
       ))}
-    </details>
+    </PlaceDisclosure>
   );
 }
 
 /** Đoạn "Về nơi này" thu gọn ba dòng, bấm "Xem thêm" để mở hết (mô tả Wikipedia, CC BY-SA). */
 export function About({ place }: { readonly place: PlaceView }) {
   const [open, setOpen] = useState(false);
+  const id = useId();
   return (
     <div className="place-info-card">
       <h4>
         <Icon name="info-circle" />
         {COPY.place.about}
       </h4>
-      <p className={open ? 'body' : 'body clamp'}>{place.summary || COPY.place.noSummary}</p>
-      <button className="linkbtn" type="button" onClick={() => setOpen((o) => !o)}>
-        {open ? COPY.common.seeLess : COPY.common.seeMore}
-      </button>
+      <div className="place-about" data-open={open} id={id}><div><p className="body">{place.summary || COPY.place.noSummary}</p></div></div>
+      <PlaceMoreButton open={open} controls={id} onClick={() => setOpen(value => !value)} />
     </div>
   );
 }
@@ -149,8 +137,7 @@ export function About({ place }: { readonly place: PlaceView }) {
 /** Ghi công dữ liệu và ảnh (bắt buộc theo giấy phép): tác giả, giấy phép, liên kết gốc, bài Wikipedia. */
 export function DataCredits({ place }: { readonly place: PlaceView }) {
   return (
-    <details>
-      <summary>{COPY.place.dataTitle}</summary>
+    <PlaceDisclosure title={COPY.place.dataTitle} icon="info-circle">
       <div className="credits spaced">
         <span>{COPY.place.dataNote}</span>
         {place.photos.map((p, k) => (
@@ -170,7 +157,7 @@ export function DataCredits({ place }: { readonly place: PlaceView }) {
           </span>
         ) : null}
       </div>
-    </details>
+    </PlaceDisclosure>
   );
 }
 

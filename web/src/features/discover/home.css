@@ -32,7 +32,7 @@
 .home-hero.national-hero .search { top: var(--s-8); left: 0; right: 0; }
 .home-hero .btn { width: 100%; }
 .home-body { display: grid; gap: var(--s-3); width: 100%; max-width: calc(var(--s-8) * 18); margin-inline: auto; padding-block: var(--s-3) var(--s-4); }
-.home-map { min-height: var(--home-map-section-height); }
+.home-map { --home-map-height: 256px; --home-map-section-height: 304px; min-height: var(--home-map-section-height); }
 .home-map .mapcard { height: var(--home-map-height); border-radius: var(--r-lg); }
 .home-body .stack { gap: var(--s-2); }
 .home-body .sec-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
@@ -93,6 +93,6 @@
 .mapbig { position: absolute; inset: 0; }
 .mapfull .close { position: absolute; top: 14px; right: 14px; z-index: 5; }
 .panel.full:has(.mapfull) { background: var(--map-low); }
-.minimap.tm-mini { position: relative; height: 170px; border-radius: var(--r-lg); overflow: hidden; background: var(--map-low); }
+.minimap.tm-mini { position: relative; height: 256px; border-radius: var(--r-lg); overflow: hidden; background: var(--map-low); }
 
 .mapcard-s { height: 220px; margin-bottom: 4px; }

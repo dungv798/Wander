@@ -5,6 +5,7 @@
 .sheet-scroll { min-height: 0; }
 
 @media (max-width: 1279px) {
+  :root #screen[data-view='trip'] { overflow: clip; }
   #screen[data-view="trip"] { overflow: hidden; padding-bottom: 0; }
   #screen[data-view="trip"] .mapbox { position: absolute; inset: 0; height: auto; }
   #screen[data-view="trip"] .sheetbody { position: absolute; z-index: var(--z-raised); left: 0; right: 0; top: var(--sheet-top, 72px); bottom: 0; max-width: none; margin: 0; min-height: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-xl) var(--r-xl) 0 0; background: var(--bg); box-shadow: 0 -16px 40px -18px rgba(20, 33, 58, 0.45); transform: translateY(var(--sy, 0px)); will-change: transform; }
@@ -78,3 +79,51 @@ body:has(#screen[data-view="trip"]) .toast {
 .panel:has([data-trip-form]) .fchip { box-shadow: none; text-decoration: none; }
 .panel:has([data-trip-form]) .opt { background: var(--surface); box-shadow: none; text-decoration: none; }
 .panel:has([data-trip-form]) summary { min-height: var(--tap); display: flex; align-items: center; }
+/* Bề mặt lịch trình sát mép; selector riêng thắng inset của giao diện chung. */
+@media (max-width: 1279px) {
+  :root #screen[data-view='trip'] .sheetbody,
+  :root:not([data-look='classic']) #screen[data-view='trip'] > section.sheetbody {
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-inline: 0;
+    border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+    background: var(--glass-highlight), var(--glass);
+    backdrop-filter: blur(var(--glass-sheet-blur));
+    box-shadow: 0 calc(-1 * var(--s-2)) var(--s-5) calc(-1 * var(--s-3)) var(--glass-active-edge);
+  }
+}
+:root #screen[data-view='trip'] .grab::before { width: var(--handle-width); height: var(--handle-height); background: var(--muted); }
+#screen[data-view='trip'] .tbody { display: grid; gap: var(--s-4); min-width: 0; }
+#screen[data-view='trip'] .dayhead { gap: var(--s-3); align-items: start; }
+#screen[data-view='trip'] .dayhead h2 { font: var(--text-section); }
+#screen[data-view='trip'] .dayhead .s { font: var(--text-secondary); min-width: 0; overflow-wrap: anywhere; }
+#screen[data-view='trip'] .irow { gap: var(--s-3); padding-block: var(--s-3); }
+#screen[data-view='trip'] .irow h3 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#screen[data-view='trip'] .mrow { flex-wrap: wrap; gap: var(--s-1); }
+#screen[data-view='trip'] .mchip { font: var(--text-secondary); white-space: normal; overflow-wrap: anywhere; }
+#screen[data-view='trip'] .trip-booking-chip { border: var(--glass-border) solid var(--line); border-radius: var(--r-pill); padding: var(--s-1) var(--s-2); }
+#screen[data-view='trip'] .trip-cost { display: grid; gap: var(--s-3); min-width: 0; margin: 0; padding: var(--s-4); border: var(--glass-border) solid var(--line); border-radius: var(--r-lg); background: transparent; box-shadow: none; }
+#screen[data-view='trip'] .trip-cost .bigmoney b { font: var(--text-money); white-space: normal; overflow-wrap: anywhere; }
+.trip-cost .note { margin: 0; flex-wrap: wrap; }
+.trip-cost-empty { display: grid; justify-items: center; gap: var(--s-2); padding: var(--s-3); text-align: center; color: var(--muted); }
+.trip-cost-empty p { margin: 0; font: var(--text-body); }
+.trip-cost-groups { min-width: 0; }
+.trip-cost-groups details { border-top: var(--glass-border) solid var(--line); }
+.trip-cost-groups summary { min-height: var(--tap); cursor: pointer; font: var(--text-card); padding-block: var(--s-3); gap: var(--s-2); }
+.trip-cost-groups summary span { margin-left: auto; color: var(--muted); }
+.trip-cost-groups details[open] summary > .ic { rotate: 180deg; }
+.trip-cost-row { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, auto) auto; gap: var(--s-2); align-items: center; width: 100%; min-width: 0; min-height: var(--tap); padding: var(--s-3) 0; border: 0; border-top: var(--glass-border) solid var(--line); background: transparent; color: var(--ink); text-align: left; cursor: pointer; }
+.trip-cost-name { min-width: 0; display: grid; gap: var(--s-1); }
+.trip-cost-name b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-card); }
+.trip-cost-name small { color: var(--muted); font: var(--text-secondary); }
+.trip-cost-amount { min-width: 0; max-width: 100%; font: var(--text-secondary); font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; text-align: right; }
+.trip-editor { min-width: 0; }
+.trip-editor .field, .trip-editor .two > *, .trip-time-quick > * { min-width: 0; }
+.trip-editor :is(input, select, textarea) { min-width: 0; max-width: 100%; }
+.trip-time { min-width: 0; border: 0; padding: 0; margin: 0; display: grid; gap: var(--s-2); }
+.trip-time legend { font: var(--text-body); margin-bottom: var(--s-2); }
+.trip-time-quick { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-2); align-items: end; }
+.trip-booking .chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
+.trip-booking .fchip { width: 100%; min-width: 0; font-weight: 700; padding-inline: var(--s-2); }
+.trip-booking .fchip .ic { flex: none; }

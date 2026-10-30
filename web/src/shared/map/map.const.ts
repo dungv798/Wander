@@ -9,6 +9,7 @@ export const MAP = {
   MUTED_OPACITY: 0.8,
   MUTED_SCALE: 0.62,
   LABEL_SIZE: 12.5,
+  LABEL_MAX_WIDTH: 8,
   NUMBER_SIZE: 17,
   LABEL_OFFSET: 2,
   TEXT_HALO: 2,
@@ -22,7 +23,17 @@ export const MAP = {
   FONT: ['Noto Sans Regular'],
   EMPTY_IMAGE: 'wander-empty-pin',
   IMAGE_CHANNELS: 4,
-  FIT_PADDING: 36,
+  FIT_PADDING: 24,
+  FIT_LABEL_SPACE: 32,
+  FIT_LABEL_SIDE: 56,
+  FIT_SMALL_COUNT: 2,
+  FIT_NEAR_KM: 0.25,
+  FIT_LOCAL_KM: 2,
+  FIT_CITY_KM: 8,
+  FIT_NEAR_ZOOM: 17,
+  FIT_LOCAL_ZOOM: 16,
+  FIT_CITY_ZOOM: 15,
+  FIT_REGION_ZOOM: 14,
   FLY_MS: 750,
   /** Hai ghim gần hơn mức này thì gộp thành cụm (chế độ duyệt). */
   CLUSTER_PX: 34,
@@ -45,10 +56,15 @@ export const MAP = {
   /** Giới hạn zoom của MapLibre: xa nhất thấy cả nước, gần nhất thấy phố. */
   GL_MIN_ZOOM: 4,
   GL_MAX_ZOOM: 17,
-  /** Phóng tối đa khi vừa khung ghim (một ghim đơn lẻ không bị phóng sát). */
-  GL_FIT_MAX_ZOOM: 14,
+  /** Trần zoom ghim đơn; cặp ghim còn điều chỉnh theo khoảng cách trong geoMapPolicy. */
+  GL_FIT_MAX_ZOOM: 16,
   /** Số chữ số thập phân của điểm kiểm mức zoom. */
   ZOOM_DIGITS: 2,
+  GESTURE_LOCALE: {
+    'CooperativeGesturesHandler.WindowsHelpText': 'Giữ Ctrl và cuộn để thu phóng bản đồ',
+    'CooperativeGesturesHandler.MacHelpText': 'Giữ ⌘ và cuộn để thu phóng bản đồ',
+    'CooperativeGesturesHandler.MobileHelpText': 'Dùng hai ngón để di chuyển bản đồ',
+  },
   /** Bề rộng nét tuyến và viền sáng quanh nó (px). */
   ROUTE_WIDTH: 4.5,
   ROUTE_HALO_WIDTH: 9,

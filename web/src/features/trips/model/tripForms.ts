@@ -1,4 +1,5 @@
 import { LIMITS } from '../../../shared/const/limits.const.ts';
+import { normalizeTripTime } from './tripTime.ts';
 import { DateRange, DateRangeError } from '../../../shared/domain/DateRange.ts';
 import { Money, MoneyError } from '../../../shared/domain/Money.ts';
 import { addDays } from '../../../shared/lib/dates.ts';
@@ -94,6 +95,8 @@ export function parseItemForm(f: ItemForm): Parsed<ItemValues> {
     if (!/^\d+$/.test(durText) || Number(durText) > LIMITS.MAX_DURATION_MIN) return fail(COPY.errors.duration);
     durationMin = Number(durText);
   }
+  const time = normalizeTripTime(f.time);
+  if (time === null) return fail(COPY.editor.invalidTime);
   const plain = isPlain(f.type);
   let costK: number | null = null;
   let referenceK: number | null = null;
@@ -107,7 +110,7 @@ export function parseItemForm(f: ItemForm): Parsed<ItemValues> {
       referenceK = ref.value;
     }
   }
-  return ok({ patch: { title: f.isPlace ? '' : title, type: f.type, day: f.day || null, timeOfDay: f.time || null, durationMin, note: f.note.trim(), costK, included: !plain && f.included, referenceK, booking: plain ? null : f.booked ? 'booked' : 'pending' } });
+  return ok({ patch: { title: f.isPlace ? '' : title, type: f.type, day: f.day || null, timeOfDay: time || null, durationMin, note: f.note.trim(), costK, included: !plain && f.included, referenceK, booking: plain ? null : f.booked ? 'booked' : 'pending' } });
 }
 
 /** Kiểm tên chuyến (bắt buộc, ≤ 120 ký tự; vượt thì cắt). */

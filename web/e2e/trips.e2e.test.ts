@@ -170,7 +170,7 @@ test('chi phí theo D17/D18: trống là chưa biết, 0 là biết bằng khôn
   const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
   const box = page.locator('.costbox');
   await box.waitFor();
-  assert.match((await box.locator('.bigmoney b').textContent()) ?? '', /^Đã biết 750\.000\s₫, 4 mục chưa biết giá$/);
+  assert.match((await box.locator('.bigmoney b').textContent()) ?? '', /^750\.000\s₫$/);
   assert.match((await box.textContent()) ?? '', /Chưa tính 4 mục chưa biết giá/);
   assert.match((await box.textContent()) ?? '', /1 mục đã bao gồm, không cộng vào tổng/);
   assert.match((await box.textContent()) ?? '', /còn lại 2\.250\.000\s₫/);
@@ -349,7 +349,7 @@ test('tổng tiền vượt 1.000.000.000 nghìn đồng không làm sập màn 
   }
   await page.reload();
   await page.locator('.costbox .bigmoney b').waitFor();
-  assert.match((await page.locator('.costbox .bigmoney b').textContent()) ?? '', /^Đã biết 1\.800\.000\.720\.000/);
+  assert.match((await page.locator('.costbox .bigmoney b').textContent()) ?? '', /1\.800\.000\.720\.000/);
   assert.equal(await page.getByRole('alert').count(), 0);
   assert.deepEqual(errors, []);
   await ctx.close();

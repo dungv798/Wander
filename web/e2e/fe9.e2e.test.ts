@@ -5,6 +5,7 @@ import path from 'node:path';
 import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
+import { withAria } from './diag.ts';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { addDevice, api, createOwner, devicesOf, loginAs } from './backend.ts';
 import { seedIdentity, seedTrips, seededOf } from './seed.ts';
@@ -121,6 +122,7 @@ test('Lưu hoặc gửi lịch trình: PNG thật, PDF/Lịch sắp có, tổng 
   const create = page.getByRole('button', { name: 'Tạo ảnh PNG', exact: true });
   await create.waitFor();
   assert.equal(await create.isEnabled(), true);
+  await withAria(page, 'main', () => page.getByRole('button', { name: 'PDF · Sắp có', exact: true }).waitFor({ timeout: 8000 }));
   assert.equal(await page.getByRole('button', { name: 'PDF · Sắp có', exact: true }).isDisabled(), true);
   assert.equal(await page.getByRole('button', { name: 'Lịch · Sắp có', exact: true }).isDisabled(), true);
   await page.locator('.png-export-image').first().waitFor();

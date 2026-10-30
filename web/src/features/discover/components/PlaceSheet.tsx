@@ -11,6 +11,7 @@ import { DISCOVER_COPY } from '../model/discover.copy.ts';
 import { About, DataCredits, EditorialRate, Highlights, OsmLink, QuickFacts, SeasonMonths, Tips, TimeOfDay } from './place/PlaceBody.tsx';
 import { PlaceGallery } from './place/PlaceGallery.tsx';
 import { PlaceRouteMap } from './place/PlaceRouteMap.tsx';
+import { PlaceDisclosure } from './place/PlaceDisclosure.tsx';
 import '../place.css';
 
 /** Nội dung chi tiết một địa điểm: ảnh, nhãn biên tập, thông tin nhanh, buổi đi, mùa đẹp, mẹo, mô tả, ghi công. */
@@ -48,7 +49,7 @@ function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDet
           <Highlights place={place} />
           <TimeOfDay place={place} />
           <SeasonMonths place={place} />
-          <details className="place-info-card"><summary>{COPY.place.howToGet}</summary><PlaceRouteMap dest={dest} place={place} /></details>
+          <PlaceDisclosure title={COPY.place.howToGet} icon="route"><PlaceRouteMap dest={dest} place={place} /></PlaceDisclosure>
           <Tips place={place} />
           <DataCredits place={place} />
         </div>

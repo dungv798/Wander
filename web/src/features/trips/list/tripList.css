@@ -11,3 +11,15 @@
 .add-many-list .checkrow { min-height: var(--tap); }
 .add-many-footer { flex: none; display: grid; gap: var(--s-2); padding: var(--s-3) var(--s-4) var(--safe-bottom); border-radius: var(--r-lg) var(--r-lg) 0 0; }
 .add-many-footer select { min-height: var(--tap); width: 100%; background: var(--surface); color: var(--ink); border: var(--glass-border) solid var(--line); border-radius: var(--r-sm); padding-inline: var(--s-2); }
+/* Ảnh catalog phủ cả thẻ, chữ đọc được trên scrim chung của thương hiệu. */
+:root #screen .tcard.trip-photo-card { position: relative; display: grid; min-height: calc(var(--s-8) * 3); overflow: hidden; border-radius: var(--r-lg); background: var(--glass-photo-fallback); color: var(--white); text-align: left; isolation: isolate; }
+:root #screen .trip-photo-card .cov { position: absolute; inset: 0; height: 100%; z-index: -2; }
+:root #screen .trip-photo-card .cov img { width: 100%; height: 100%; object-fit: cover; }
+.trip-photo-card::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent, var(--hero-bottom-scrim)), var(--glass-photo-scrim); }
+:root #screen .trip-photo-card .b { display: grid; gap: var(--s-2); align-content: end; min-width: 0; padding: var(--s-4); }
+:root #screen .trip-photo-card h3 { font: var(--text-section); color: inherit; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+:root #screen .trip-photo-card .meta { display: grid; gap: var(--s-1); color: inherit; font: var(--text-secondary); }
+.trip-status { justify-self: start; padding: var(--s-1) var(--s-2); border-radius: var(--r-pill); border: var(--glass-border) solid var(--glass-edge); background: var(--glass-photo-scrim); font: var(--text-secondary); }
+@media (prefers-reduced-motion: no-preference) {
+  :root #screen .trip-photo-card:active { scale: var(--glass-pressed-scale); }
+}

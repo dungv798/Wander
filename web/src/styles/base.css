@@ -326,7 +326,7 @@ details summary { cursor: pointer; font-weight: 700; font-size: 15px; color: var
 .warnbox { background: var(--warn-bg); color: var(--warn-ink); border-radius: 16px; padding: 12px 14px; font-size: 14px; }
 .toast { position: fixed; left: 50%; bottom: calc(112px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); border-radius: 18px; padding: 12px 18px; font-size: 15px; z-index: 60; width: max-content; max-width: min(440px, calc(100vw - 32px)); display: flex; gap: 16px; align-items: center; box-shadow: var(--shadow-float); }
 .toast[hidden] { display: none; }
-.toast button { background: none; border: 0; color: inherit; font-weight: 700; text-decoration: underline; padding: 4px 8px; min-height: 44px; white-space: nowrap; flex: none; }
+.toast button { background: none; border: 0; color: inherit; font-weight: 700; text-decoration: none; padding: 4px 8px; min-height: 44px; white-space: nowrap; flex: none; }
 @media (prefers-reduced-motion: reduce) { .card, .panel, .irow, .ghead .chev { transition: none !important; animation: none !important; } }
 
 /* ===== Thanh tiến độ (trình tạo chuyến và onboarding) ===== */

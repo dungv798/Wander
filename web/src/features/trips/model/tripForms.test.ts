@@ -5,6 +5,14 @@ import type { ItemForm } from './tripForms.ts';
 
 const FORM: ItemForm = { title: 'Ăn trưa', type: 'food', isPlace: false, day: '2026-10-31', time: '12:30', duration: '60', note: ' ghi chú ', cost: '120', included: false, reference: '', booked: false };
 
+test('biểu mẫu lưu 1430 thành 14:30, xóa thành null và chặn giờ ngoài 24h', () => {
+  const quick = parseItemForm({ ...FORM, time: '1430' });
+  assert.equal(quick.ok && quick.value.patch.timeOfDay, '14:30');
+  const cleared = parseItemForm({ ...FORM, time: '' });
+  assert.equal(cleared.ok && cleared.value.patch.timeOfDay, null);
+  assert.equal(parseItemForm({ ...FORM, time: '2400' }).ok, false);
+});
+
 test('ô tiền: rỗng là chưa biết, 0 là biết bằng không, sai thì có lời nhắc kèm tên ô', () => {
   assert.deepEqual(parseMoneyField('', 'Chi phí'), { ok: true, value: null });
   assert.deepEqual(parseMoneyField('0', 'Chi phí'), { ok: true, value: 0 });

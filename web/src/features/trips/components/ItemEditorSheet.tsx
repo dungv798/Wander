@@ -21,6 +21,7 @@ import { COLLAB_COPY } from '../../collab/index.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
+import { TripTimeField } from './TripTimeField.tsx';
 
 /** Biểu mẫu ban đầu: từ mục đang sửa, hoặc mục mới với ngày của tab đang xem. */
 function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaultDay: string, initial?: Pick<ItemForm, 'title' | 'day'>): ItemForm {
@@ -57,7 +58,7 @@ function PricedFields({ f, set }: { readonly f: ItemForm; readonly set: (p: Part
       <Field label={T.editor.cost} inputMode="numeric" value={f.cost} onChange={(v) => set({ cost: v })} placeholder={T.editor.costPlaceholder} hint={moneyHint(f.cost, T.editor.costHintEmpty)} />
       <CheckRow checked={f.included} onChange={(v) => set({ included: v })}>{T.editor.included}</CheckRow>
       <Field label={T.editor.reference} inputMode="numeric" value={f.reference} onChange={(v) => set({ reference: v })} hidden={!f.included} hint={f.reference ? moneyHint(f.reference, '') : undefined} />
-      <div className="optgroup">
+      <div className="optgroup trip-booking">
         <span>{T.editor.booking}</span>
         <div className="chips" role="group" aria-label={T.editor.booking}>
           <ChipToggle pressed={!f.booked} onClick={() => set({ booked: false })}>{T.editor.pending}</ChipToggle>
@@ -127,7 +128,7 @@ export function ItemEditorSheet({ itemId, preset, initial, onClose }: { readonly
   const heading = titleOf(Boolean(item), f.isPlace, f.type);
   return (
     <Sheet label={heading} onClose={onClose}>
-      <div className="pp">
+      <div className="pp trip-editor">
         <div>
           <h2>{heading}</h2>
           {item?.placeId ? <p className="note spaced">{itemName(item, cat)}</p> : null}
@@ -139,12 +140,15 @@ export function ItemEditorSheet({ itemId, preset, initial, onClose }: { readonly
             <option key={d} value={d}>{fill(T.editor.dayOption, { n: q + 1, label: dayLabel(d) })}</option>
           ))}
         </Field>
-        <div className="two">
-          <Field label={T.editor.time} type="time" value={f.time} onChange={(v) => set({ time: v })} />
-          <Field label={T.editor.duration} inputMode="numeric" value={f.duration} onChange={(v) => set({ duration: v })} placeholder={T.editor.durationPlaceholder} />
-        </div>
-        <Field as="textarea" label={T.editor.note} rows={3} maxLength={LIMITS.MAX_ITEM_NOTE} value={f.note} onChange={(v) => set({ note: v })} />
+        <TripTimeField value={f.time} onChange={v => set({ time: v })} />
         {isPlain(f.type) ? null : <PricedFields f={f} set={set} />}
+        <details>
+          <summary>{T.create.more}</summary>
+          <div className="stack spaced">
+            <Field label={T.editor.duration} inputMode="numeric" value={f.duration} onChange={(v) => set({ duration: v })} placeholder={T.editor.durationPlaceholder} />
+            <Field as="textarea" label={T.editor.note} rows={3} maxLength={LIMITS.MAX_ITEM_NOTE} value={f.note} onChange={(v) => set({ note: v })} />
+          </div>
+        </details>
         {error ? <WarnBox>{error}</WarnBox> : null}
         <div className="stack">
           {mayChange ? <Button block onClick={save}>{T.editor.save}</Button> : <WarnBox>{COLLAB_COPY.requests.notYours}</WarnBox>}

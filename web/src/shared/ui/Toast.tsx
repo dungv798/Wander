@@ -51,6 +51,7 @@ export function ToastProvider({ children }: { readonly children: ReactNode }) {
           {toast.undo ? (
             <button
               type="button"
+              className="glass-control undo-control"
               onClick={() => {
                 dismiss(); // tắt trước: hàm hoàn tác có thể hiện thông báo mới và không được bị xóa ngay
                 toast.undo?.();
