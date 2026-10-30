@@ -1,5 +1,6 @@
 package com.wander.planning.infrastructure.persistence.entity;
 
+import com.wander.planning.domain.constant.CoverConstants;
 import com.wander.planning.domain.constant.PlanningConstants;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,6 +37,10 @@ public class TripEntity {
 
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
+
+    /** Bìa mã hóa loại:mã; null là tự động. */
+    @Column(length = CoverConstants.COLUMN_LENGTH)
+    private String cover;
 
     @Column(name = "budget_k")
     private Long budgetK;
@@ -101,6 +106,8 @@ public class TripEntity {
     public void setStartDate(LocalDate v) { this.startDate = v; }
     public LocalDate getEndDate() { return endDate; }
     public void setEndDate(LocalDate v) { this.endDate = v; }
+    public String getCover() { return cover; }
+    public void setCover(String value) { this.cover = value; }
     public Long getBudgetK() { return budgetK; }
     public void setBudgetK(Long v) { this.budgetK = v; }
     public String getStyles() { return styles; }

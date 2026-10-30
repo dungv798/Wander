@@ -2,6 +2,7 @@ package com.wander.planning.application.query;
 
 import com.wander.planning.application.view.PlanningViews.Budget;
 import com.wander.planning.application.view.PlanningViews.Choice;
+import com.wander.planning.application.view.PlanningViews.CoverView;
 import com.wander.planning.application.view.PlanningViews.DayTotal;
 import com.wander.planning.application.view.PlanningViews.DayView;
 import com.wander.planning.application.view.PlanningViews.DeletedTrip;
@@ -11,6 +12,7 @@ import com.wander.planning.application.view.PlanningViews.Totals;
 import com.wander.planning.application.view.PlanningViews.TripDetail;
 import com.wander.planning.application.view.PlanningViews.TripView;
 import com.wander.planning.application.view.PlanningViews.TypeTotal;
+import com.wander.planning.domain.constant.CoverConstants;
 import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.model.DateRange;
 import com.wander.planning.domain.rule.Vnd;
@@ -129,7 +131,14 @@ public class PlanningQueries {
         return new TripView(trip.id().toString(), trip.name(), trip.destination(), trip.startDate().toString(), trip.endDate().toString(),
                 trip.budgetK(), Vnd.fromThousandsOrNull(trip.budgetK()), styles, pace, trip.datesTentative(), kind, interestChoices(trip.interests()),
                 Timestamps.format(trip.createdAt()), Timestamps.format(trip.updatedAt()), trip.role(), (int) trip.memberCount(),
-                trip.selfMemberId() == null ? null : trip.selfMemberId().toString());
+                trip.selfMemberId() == null ? null : trip.selfMemberId().toString(), coverView(trip.cover()));
+    }
+
+    /** Giải mã cột bìa sang read model phẳng, không nạp aggregate. */
+    private static CoverView coverView(String stored) {
+        if (stored == null) return null;
+        String[] parts = stored.split(CoverConstants.SEPARATOR, 2);
+        return new CoverView(parts[0], parts[1]);
     }
 
     /** Sở thích có nhãn từ chuỗi mã cách nhau bằng dấu phẩy; mã lạ trong dữ liệu hiện nguyên mã. */

@@ -4,6 +4,7 @@ import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.constant.PlanningErrorCodes;
 import com.wander.planning.domain.constant.PlanningFields;
 import com.wander.planning.domain.constant.PlanningMessages;
+import com.wander.planning.domain.model.Cover;
 import com.wander.planning.domain.model.DayAssignment;
 import com.wander.planning.domain.rule.ItemText;
 import com.wander.planning.domain.vocabulary.BookingStatus;
@@ -34,6 +35,17 @@ import java.util.regex.Pattern;
  * nên nằm ở tầng application chứ không giao cho Jackson ép kiểu.
  */
 public final class RawInput {
+
+    /** Bìa tùy chọn: null là tự động; sai kiểu dùng chung INVALID_COVER với domain. */
+    public static Cover cover(Object raw) {
+        if (raw == null) return null;
+        if (raw instanceof Map<?, ?> value
+                && value.get(PlanningFields.KIND) instanceof String kind
+                && value.get(PlanningFields.REF) instanceof String ref) {
+            return new Cover(kind, ref);
+        }
+        throw WanderException.invalid(PlanningErrorCodes.INVALID_COVER, PlanningMessages.INVALID_COVER, PlanningFields.COVER);
+    }
 
     private static final Pattern ISO_DATE = Pattern.compile(PlanningConstants.ISO_DATE_REGEX);
     private static final Pattern TIME = Pattern.compile(PlanningConstants.TIME_OF_DAY_REGEX);

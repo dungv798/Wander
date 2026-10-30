@@ -326,8 +326,13 @@ test('Hoàn tác không ghi đè thao tác xen giữa: đổi chỗ sau khi lưu
   await page.getByRole('dialog').getByLabel(/Chi phí, nghìn đồng/).fill('999');
   await page.getByRole('dialog').getByRole('button', { name: 'Lưu', exact: true }).click();
   await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).waitFor();
+  const posOf = async (): Promise<number | null | undefined> => (await storedTrips(page)).trips[0]?.items.find((i) => i.id === 'a4')?.position;
+  const posBefore = await posOf();
   await page.getByRole('button', { name: 'Sắp xếp' }).click();
   await page.getByRole('button', { name: /Chuyển «Ăn trưa \(mẫu\)» lên/ }).click();
+  // Chờ thao tác xen giữa được ghi xong rồi mới Hoàn tác: nếu không, Hoàn tác có thể chạy trước và không thấy xung đột.
+  for (let tries = 0; tries < 50 && (await posOf()) === posBefore; tries += 1) await page.waitForTimeout(100);
+  assert.notEqual(await posOf(), posBefore, 'việc đổi chỗ đã được ghi');
   const costOf = async (): Promise<number | null | undefined> => (await storedTrips(page)).trips[0]?.items.find((i) => i.id === 'a4')?.costK;
   assert.equal(await costOf(), 999);
   await page.getByRole('status').getByRole('button', { name: 'Hoàn tác' }).click();

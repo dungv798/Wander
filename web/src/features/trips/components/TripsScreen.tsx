@@ -20,6 +20,7 @@ import { LazyCreateTripSheet as CreateTripSheet, LazyTripWizard as TripWizard, p
 import { TripCard } from './TripCard.tsx';
 import type { Trip } from '../model/trip.types.ts';
 import { TRIP_COVERS } from '../model/tripCovers.const.ts';
+import { coverUrl } from '../model/cover.ts';
 
 const DeletedTripsSheet = lazy(() => import('./DeletedTripsSheet.tsx').then(module => ({ default: module.DeletedTripsSheet })));
 
@@ -29,7 +30,7 @@ function DestinationTripCard({ trip }: { readonly trip: Trip }) {
   const dest = state.status === 'ready' ? state.data : null;
   const selected = TRIP_COVERS[trip.destinationId];
   const cover = dest?.places.flatMap(place => place.photos).find(photo => selected && photo.url.endsWith(`/${selected}`))?.url ?? dest?.coverUrl ?? '';
-  return <TripCard trip={trip} cover={cover} />;
+  return <TripCard trip={trip} cover={coverUrl(trip.cover, dest, cover)} />;
 }
 
 /** Màn "Chuyến đi": danh sách chuyến của bạn, nút tạo mới (nhanh hoặc theo bước), hoặc trạng thái rỗng dẫn tới Khám phá. */

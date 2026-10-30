@@ -27,6 +27,7 @@ import { OverviewTab } from './OverviewTab.tsx';
 import { TripMap } from './TripMap.tsx';
 import { TripOverlays } from './TripOverlays.tsx';
 import { dateRangeText } from './TripCard.tsx';
+import { coverUrl, gradientStyle } from '../model/cover.ts';
 
 const OVERVIEW = 'ov';
 const ANNOUNCE_DELAY_MS = 30;
@@ -81,11 +82,14 @@ function TripTabs({ days, tab, onTab }: { readonly days: readonly string[]; read
 /** Đầu tờ: tay nắm kéo, ảnh + tên + ngày + số mục, và các tab Tổng quan / Ngày n. */
 function TripHead({ trip, dest, days, tab, onTab }: { readonly trip: Trip; readonly dest: DestinationDetail; readonly days: readonly string[]; readonly tab: string; readonly onTab: (t: string) => void }) {
   const first = trip.items.map((i) => dest.places.find((p) => p.id === i.placeId)).find(Boolean);
+  const image = coverUrl(trip.cover, dest, first ? firstPhotoUrl(first) : dest.coverUrl);
   return (
     <>
       <button className="grab" type="button" aria-label={T.view.sheetHandle} aria-expanded="true" />
       <div className="thead">
-        <img alt="" src={first ? firstPhotoUrl(first) : dest.coverUrl} />
+        <div className="trip-head-cover" data-cover={gradientStyle(trip.cover) ? 'gradient' : 'photo'} style={gradientStyle(trip.cover)}>
+          {image ? <img alt="" src={image} /> : null}
+        </div>
         <div>
           <h1>{trip.name}</h1>
           <p className="note">{`${dateRangeText(trip)} · ${countText(trip)}`}</p>

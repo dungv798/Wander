@@ -22,7 +22,7 @@ function pick(source: object, names: Readonly<Record<string, string>>): Body {
 }
 
 /** Tên trường FE → tên trường API của chuyến. */
-const TRIP_FIELDS = { name: 'name', destinationId: 'destination', startDate: 'startDate', endDate: 'endDate', budgetK: 'budget', styles: 'styles', pace: 'pace', datesTentative: 'datesTentative', kind: 'kind', interests: 'interests' } as const;
+const TRIP_FIELDS = { name: 'name', destinationId: 'destination', startDate: 'startDate', endDate: 'endDate', budgetK: 'budget', styles: 'styles', pace: 'pace', datesTentative: 'datesTentative', kind: 'kind', interests: 'interests', cover: 'cover' } as const;
 /** Tên trường FE → tên trường API của mục. */
 const ITEM_FIELDS = { type: 'type', title: 'title', placeId: 'placeId', day: 'day', position: 'position', timeOfDay: 'timeOfDay', durationMin: 'durationMin', note: 'note', costK: 'cost', included: 'included', referenceK: 'referenceCost', booking: 'booking' } as const;
 

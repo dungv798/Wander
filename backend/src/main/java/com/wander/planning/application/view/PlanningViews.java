@@ -11,6 +11,10 @@ public final class PlanningViews {
     private PlanningViews() {
     }
 
+    /** Bìa trả dạng đối tượng; null ở TripView nghĩa là tự động. */
+    public record CoverView(String kind, String ref) {
+    }
+
     /** Một lựa chọn có mã và nhãn tiếng Việt (kiểu chuyến, nhịp). */
     public record Choice(String code, String label) {
     }
@@ -18,7 +22,7 @@ public final class PlanningViews {
     public record TripView(String id, String name, String destination, String startDate, String endDate,
                            Long budgetK, String budgetFormatted, List<Choice> styles, Choice pace,
                            boolean datesTentative, Choice kind, List<Choice> interests, String createdAt, String updatedAt,
-                       String role, int memberCount, String selfMemberId) {
+                       String role, int memberCount, String selfMemberId, CoverView cover) {
     }
 
     /**

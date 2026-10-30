@@ -2,6 +2,10 @@ package com.wander.planning.domain.constant;
 
 /** Tên các trường JSON của API Planning (hợp đồng, khớp {@code web/src/api.ts}); cũng dùng làm tên trường trong lỗi. */
 public final class PlanningFields {
+    /** Bìa chuyến, nullable là tự động. */
+    public static final String COVER = "cover";
+    /** Mã tham chiếu ảnh hoặc gradient. */
+    public static final String REF = "ref";
 
     /** Tên chuyến. */
     public static final String NAME = "name";

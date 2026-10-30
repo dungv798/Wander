@@ -10,6 +10,7 @@ import { itemName } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
+import { FORMAT } from '../../../shared/const/format.const.ts';
 
 /** Dòng chi phí co giãn: tên có tooltip, giá đầy đủ, chạm mở thẳng trình sửa mục. */
 function CostRow({ item }: { readonly item: TripItem }) {
@@ -51,7 +52,7 @@ export function CostBox() {
   return (
     <section className="daysec costbox trip-cost" aria-label={T.cost.title}>
       <div className="dayhead"><h2><Icon name="coin" />{T.cost.title}</h2></div>
-      <div className="bigmoney"><b>{cs.knownCount ? money(cs.totalK) : T.cost.notKnown}</b><span>{T.cost.total}</span></div>
+      <div className="bigmoney"><b>{cs.knownCount ? <>{money(cs.totalK).replace(FORMAT.CURRENCY_SYMBOL, '')}<span className="trip-money-currency">{FORMAT.CURRENCY_SYMBOL}</span></> : T.cost.notKnown}</b><span>{T.cost.total}</span></div>
       <p className="note">{progress}</p>
       <Progress label={progress} value={cs.knownCount} max={cs.bookable - cs.includedCount} />
       {cs.unknownCount ? <p className="note">{fill(T.cost.unknown, { n: cs.unknownCount })}</p> : null}

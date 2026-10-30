@@ -4,14 +4,17 @@ import { ApiError } from '../../../shared/api/ApiError.ts';
 import { revertPlan } from '../model/revertPlan.ts';
 import { sortTrips } from '../model/tripOrder.ts';
 import { PLACE_KIND } from '../model/trip.const.ts';
-import type { ItemKind, Trip, TripsState } from '../model/trip.types.ts';
+import type { ItemKind, Trip, TripCover, TripsState } from '../model/trip.types.ts';
 import { isPlain, tripDays } from '../model/tripMath.ts';
 import * as T from '../model/tripState.ts';
 import type { DayPlan, EditResult, ItemPatch, NewTrip, PlaceRef, TripEdit } from '../model/tripState.ts';
 import { missingPlaces, validAddDay } from '../model/addMany.ts';
+import { createCoverAction } from './coverActions.ts';
 
 /** Các thao tác trên kho chuyến đi. Máy chủ là nguồn sự thật: mỗi thao tác gọi API rồi ĐỌC LẠI chuyến đó vào kho (không đoán kết quả). Thất bại ném `ApiError`. */
 export interface TripsActions {
+  /** Đổi bìa lạc quan; lỗi mạng hoàn lại bìa trước khi ghi. */
+  readonly updateCover: (tripId: string, cover: TripCover | null) => Promise<void>;
   /** Tạo chuyến (mã do máy chủ cấp) và thêm lần lượt các địa điểm đã chọn; trả chuyến đã đọc lại. */
   readonly create: (n: NewTrip, places: readonly PlaceRef[]) => Promise<Trip>;
   readonly addPlaces: (tripId: string, places: readonly PlaceRef[], day?: string | null) => Promise<void>;
@@ -145,7 +148,7 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
 }
 
 /** Thao tác cấp mục: thêm/sửa, gán ngày, đổi chỗ, tích xong, kế hoạch ngày, thùng rác. */
-function itemActions(ctx: Ctx): Omit<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip' | 'refreshTrip' | 'current' | 'idle'> {
+function itemActions(ctx: Ctx): Omit<TripsActions, 'updateCover' | 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip' | 'refreshTrip' | 'current' | 'idle'> {
   const { gateway, need, run } = ctx;
   /** Phần của `ItemPatch` mà API sửa mục nhận: bỏ `done`/`position` (có lệnh riêng) và tiêu đề rỗng (mục từ kho giữ tiêu đề đã lưu; backend bắt buộc tiêu đề). */
   const toChange = (patch: ItemPatch): ItemChange => {
@@ -245,5 +248,5 @@ export function createTripsActions({ gateway, store }: TripsActionDeps): TripsAc
     return job;
   };
   const ctx: Ctx = { gateway, current, need, run, after, refresh, addEach };
-  return { current, idle, refreshTrip: async (tripId) => void (await refresh(tripId)), ...tripActions(ctx, store), ...itemActions(ctx) };
+  return { current, idle, updateCover: createCoverAction(gateway, store, after), refreshTrip: async (tripId) => void (await refresh(tripId)), ...tripActions(ctx, store), ...itemActions(ctx) };
 }

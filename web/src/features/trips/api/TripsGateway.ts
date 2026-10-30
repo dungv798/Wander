@@ -1,4 +1,4 @@
-import type { BookingStatus, ItemKind, Trip } from '../model/trip.types.ts';
+import type { BookingStatus, ItemKind, Trip, TripCover } from '../model/trip.types.ts';
 
 /** Thông tin tạo chuyến (mã `kind`, `styles`, `pace`, `interests` trùng backend; tiền theo nghìn đồng). */
 export interface NewTripInput {
@@ -15,7 +15,7 @@ export interface NewTripInput {
 }
 
 /** Sửa chuyến: trường không nêu thì giữ nguyên, nêu `null` thì xóa (chưa đặt). */
-export type TripPatch = Partial<Omit<NewTripInput, 'destinationId'>>;
+export type TripPatch = Partial<Omit<NewTripInput, 'destinationId'>> & { readonly cover?: TripCover | null };
 
 /** Dữ liệu một mục mới. `day` null = "Chưa có ngày"; `position` không nêu = cuối ngày. */
 export interface ItemInput {

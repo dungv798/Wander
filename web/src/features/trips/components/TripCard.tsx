@@ -11,6 +11,7 @@ import { fill } from '../../../shared/const/copy.vi.ts';
 import { todayLocal } from '../../../shared/lib/dates.ts';
 import { tripStatus } from '../list/tripList.ts';
 import { LIST_COPY } from '../list/list.copy.ts';
+import { gradientStyle } from '../model/cover.ts';
 
 /** "31/10 – 02/11", kèm "· chưa chắc" khi ngày mới là dự kiến. */
 export function dateRangeText(t: Pick<Trip, 'startDate' | 'endDate' | 'datesTentative'>): string {
@@ -23,7 +24,7 @@ export function TripCard({ trip, cover }: { readonly trip: Trip; readonly cover:
   const assigned = trip.items.filter(item => item.day !== null).length;
   return (
     <button className="tcard trip-photo-card" type="button" onClick={() => navigate(VIEW.TRIP, trip.id, 'ov')}>
-      <div className="cov">
+      <div className="cov" data-cover={gradientStyle(trip.cover) ? 'gradient' : 'photo'} style={gradientStyle(trip.cover)}>
         {cover ? <RevealImage alt="" src={cover} loading="lazy" /> : null}
       </div>
       <div className="b">

@@ -2,6 +2,8 @@ package com.wander.planning.domain.constant;
 
 /** Lời báo lỗi riêng của module planning (tiếng Việt cho người dùng). Lời dùng chung ở {@code ErrorMessages}. */
 public final class PlanningMessages {
+    /** Bìa không đúng hợp đồng mã có sẵn. */
+    public static final String INVALID_COVER = "Bìa không hợp lệ. Hãy chọn ảnh hoặc màu có sẵn.";
 
     /** Khoảng ngày của chuyến sai (thiếu, sai định dạng, ngược, quá dài). */
     public static final String TRIP_RANGE_INVALID = "Khoảng ngày của chuyến không hợp lệ.";

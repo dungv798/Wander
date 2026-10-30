@@ -15,6 +15,14 @@ const json = (body: unknown, status = 200): Response => new Response(JSON.string
 const VIEW = { id: 't1', name: 'A', destination: 'ha-giang', startDate: '2026-11-01', endDate: '2026-11-02', createdAt: '2026-10-27T01:00:00Z' };
 const ITEM = { id: 'i1', placeId: null, type: 'food', title: 'Phở', day: '2026-11-01', position: 0, costK: 50, included: false, referenceK: null, booking: 'pending', done: false };
 
+test('PATCH bìa cộng thêm: giữ đối tượng và null; không gửi khóa khi bỏ qua', async () => {
+  const g = gateway(() => json({ trip: VIEW }));
+  await g.gw.update('t1', { cover: { kind: 'gradient', ref: 'cover-1' } });
+  await g.gw.update('t1', { cover: null });
+  await g.gw.update('t1', { name: 'Tên mới' });
+  assert.deepEqual(g.calls.map(c => c.body), [{ cover: { kind: 'gradient', ref: 'cover-1' } }, { cover: null }, { name: 'Tên mới' }]);
+});
+
 /** Cổng dựng trên fetch giả; `handler` trả phản hồi cho từng lời gọi, `calls` để kiểm đường dẫn/thân. */
 function gateway(handler: (c: Call) => Response): { readonly gw: HttpTripsGateway; readonly calls: Call[] } {
   const calls: Call[] = [];

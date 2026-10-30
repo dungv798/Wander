@@ -7,6 +7,7 @@ export type Overlay =
   | { readonly kind: 'add' }
   | { readonly kind: 'editor'; readonly itemId: string | null; readonly preset: ItemKind | null }
   | { readonly kind: 'editTrip' }
+  | { readonly kind: 'cover' }
   | { readonly kind: 'plan' }
   | { readonly kind: 'addToDay' }
   | { readonly kind: 'pickDay'; readonly itemId: string }

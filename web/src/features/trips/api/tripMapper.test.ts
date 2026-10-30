@@ -14,6 +14,12 @@ const VIEW = {
   role: 'member', memberCount: 3, selfMemberId: 'm2',
 };
 
+test('đọc bìa máy chủ, dữ liệu cũ/sai về null', () => {
+  assert.equal(toTrip(VIEW, [], [])?.cover, null);
+  assert.deepEqual(toTrip({ ...VIEW, cover: { kind: 'photo', ref: 'ho-1' } }, [], [])?.cover, { kind: 'photo', ref: 'ho-1' });
+  assert.equal(toTrip({ ...VIEW, cover: { kind: 'gradient', ref: 'cover-7' } }, [], [])?.cover, null);
+});
+
 test('mục: giữ đủ trường, thứ hạng là số nguyên, booking null cho Nghỉ/Việc', () => {
   assert.deepEqual(toItem(ITEM), { id: 'i1', placeId: 'dinh-vuong', type: 'sightseeing', title: '', day: '2026-11-01', position: 2, timeOfDay: '10:00', durationMin: 60, note: 'ghi chú', costK: 30, included: false, referenceK: null, booking: 'booked', done: false, addedBy: 'm2', doneBy: ['m1', 'm2'] });
   assert.equal(toItem({ ...ITEM, type: 'rest', booking: null })?.booking, null);

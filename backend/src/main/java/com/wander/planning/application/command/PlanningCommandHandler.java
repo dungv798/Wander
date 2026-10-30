@@ -110,6 +110,7 @@ public class PlanningCommandHandler {
         Instant now = Timestamps.now(clock);
         trip.changeDetails(name, destination, range, now);
         trip.changeOptions(options, now);
+        if (input.containsKey(PlanningFields.COVER)) trip.changeCover(RawInput.cover(input.get(PlanningFields.COVER)), now);
         trips.save(trip);
     }
 

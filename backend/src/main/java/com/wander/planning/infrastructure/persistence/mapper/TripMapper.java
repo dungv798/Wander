@@ -1,7 +1,9 @@
 package com.wander.planning.infrastructure.persistence.mapper;
 
+import com.wander.planning.domain.constant.CoverConstants;
 import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.constant.PlanningMessages;
+import com.wander.planning.domain.model.Cover;
 import com.wander.planning.domain.model.DateRange;
 import com.wander.planning.domain.model.DeletionRequest;
 import com.wander.planning.domain.model.Item;
@@ -50,6 +52,18 @@ import org.mapstruct.ReportingPolicy;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR, imports = {DateRange.class, ItemCost.class, TripOptions.class})
 public interface TripMapper {
+
+    /** Dữ liệu cột thành bìa hợp lệ; null giữ mặc định cho chuyến cũ. */
+    default Cover decodeCover(String stored) {
+        if (stored == null) return null;
+        String[] parts = stored.split(CoverConstants.SEPARATOR, 2);
+        return new Cover(parts[0], parts.length == 2 ? parts[1] : null);
+    }
+
+    /** Bìa thành một cột loại:mã; slug không chứa dấu phân cách. */
+    default String encodeCover(Cover cover) {
+        return cover == null ? null : cover.kind() + CoverConstants.SEPARATOR + cover.ref();
+    }
 
     // ---- entity → domain ----
 
@@ -131,6 +145,7 @@ public interface TripMapper {
     // ---- domain → entity (cập nhật tại chỗ) ----
 
     /** Ghi trạng thái chuyến domain vào entity đang được theo dõi (không đụng chủ, ngày tạo, danh sách mục). */
+    @Mapping(target = "cover", expression = "java(encodeCover(trip.cover()))")
     @Mapping(target = "name", expression = "java(trip.name())")
     @Mapping(target = "destination", expression = "java(trip.destination())")
     @Mapping(target = "startDate", expression = "java(trip.range().start())")

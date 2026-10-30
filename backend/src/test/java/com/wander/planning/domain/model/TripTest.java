@@ -22,6 +22,23 @@ import org.junit.jupiter.api.Test;
 /** Test đơn vị của aggregate: không Spring, không DB — chạy trong mili-giây. */
 class TripTest {
 
+    /** Bìa mặc định tự động; cập nhật tên/ngày không làm mất bìa đã chọn. */
+    @Test
+    @DisplayName("đổi và xóa bìa; thay chi tiết vẫn giữ bìa cùng thời điểm cập nhật")
+    void changesCoverIndependently() {
+        Trip trip = trip();
+        assertThat(trip.cover()).isNull();
+        Cover cover = new Cover("gradient", "cover-1");
+        Instant changed = NOW.plusSeconds(1);
+        trip.changeCover(cover, changed);
+        assertThat(trip.cover()).isEqualTo(cover);
+        assertThat(trip.updatedAt()).isEqualTo(changed);
+        trip.changeDetails("Tên mới", trip.destination(), trip.range(), changed);
+        assertThat(trip.cover()).isEqualTo(cover);
+        trip.changeCover(null, changed);
+        assertThat(trip.cover()).isNull();
+    }
+
     private static final LocalDate D1 = LocalDate.parse("2026-08-29");
     private static final LocalDate D2 = LocalDate.parse("2026-08-30");
     private static final Instant NOW = Instant.parse("2026-10-24T00:00:00Z");

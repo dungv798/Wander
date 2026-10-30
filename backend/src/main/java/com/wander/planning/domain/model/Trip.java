@@ -47,6 +47,8 @@ public final class Trip {
     private DateRange range;
     /** Tùy chọn chuyến đi (Q11, DR-002): ngân sách, kiểu chuyến, nhịp. */
     private TripOptions options;
+    /** Bìa đã chọn; null là tự động theo điểm đến. */
+    private Cover cover;
     private final Instant createdAt;
     private Instant updatedAt;
     /** Thời điểm xóa mềm chuyến (PO 28/10/2026); null = chuyến còn hiện. Chuyến đã xóa vẫn giữ nguyên mục để khôi phục. */
@@ -59,13 +61,14 @@ public final class Trip {
     /** Dựng lại chuyến từ dữ liệu đã lưu (không chuẩn hóa lại). */
     public Trip(UUID id, UUID ownerId, String name, String destination, DateRange range, TripOptions options,
                 Instant createdAt, Instant updatedAt, Instant deletedAt, long version, List<Item> items,
-                List<TripMember> members, List<TripInvite> invites, List<DeletionRequest> requests) {
+                List<TripMember> members, List<TripInvite> invites, List<DeletionRequest> requests, Cover cover) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
         this.destination = destination;
         this.range = range;
         this.options = options;
+        this.cover = cover;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -86,7 +89,7 @@ public final class Trip {
         return new Trip(UUID.randomUUID(), ownerId,
                 ItemText.required(name, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME),
                 ItemText.required(destination, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION),
-                range, options, now, now, null, 0, List.of(), List.of(organizer), List.of(), List.of());
+                range, options, now, now, null, 0, List.of(), List.of(organizer), List.of(), List.of(), null);
     }
 
     /** Chuyến đã bị xóa mềm (nằm trong "Chuyến đã xóa gần đây")? */
@@ -145,6 +148,14 @@ public final class Trip {
         TripMember member = circle.joinWithInvite(identityId, rawDisplayName, codeHash, now, isDeleted());
         this.updatedAt = now;
         return member;
+    }
+    /** Bìa đã chọn; null để dùng ảnh mặc định của điểm đến. */
+    public Cover cover() { return cover; }
+
+    /** Đổi bìa hoặc về tự động; quyền Organizer được kiểm trước trong use case. */
+    public void changeCover(Cover newCover, Instant now) {
+        this.cover = newCover;
+        this.updatedAt = now;
     }
 
     /** Q11: đổi tùy chọn chuyến đi (ngân sách, kiểu, nhịp). Không có lịch sử chỉnh sửa (D19). */
@@ -368,31 +379,22 @@ public final class Trip {
 
     /** Mã chuyến. */
     public UUID id() { return id; }
-
     /** Mã danh tính chủ chuyến. */
     public UUID ownerId() { return ownerId; }
-
     /** Tên chuyến. */
     public String name() { return name; }
-
     /** Điểm đến. */
     public String destination() { return destination; }
-
     /** Khoảng ngày. */
     public DateRange range() { return range; }
-
     /** Tùy chọn chuyến. */
     public TripOptions options() { return options; }
-
     /** Thời điểm tạo. */
     public Instant createdAt() { return createdAt; }
-
     /** Thời điểm sửa gần nhất. */
     public Instant updatedAt() { return updatedAt; }
-
     /** Phiên bản của aggregate (khóa lạc quan). */
     public long version() { return version; }
-
     /** Mọi mục, kể cả đã xóa mềm (không sửa được). */
     public List<Item> items() { return Collections.unmodifiableList(items); }
 }

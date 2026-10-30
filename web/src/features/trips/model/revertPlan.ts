@@ -79,7 +79,8 @@ export function revertPlan(before: Trip, after: Trip): RevertStep[] {
     if (beforeLive.has(id)) continue;
     steps.push({ kind: before.trash.some((t) => t.id === id) ? 'trash' : 'discard', itemId: id });
   }
-  const patch: { name?: string; datesTentative?: boolean } = {};
+  const patch: { name?: string; datesTentative?: boolean; cover?: Trip['cover'] } = {};
+  if (JSON.stringify(before.cover ?? null) !== JSON.stringify(after.cover ?? null)) patch.cover = before.cover ?? null;
   if (before.name !== after.name) patch.name = before.name;
   if (before.datesTentative !== after.datesTentative) patch.datesTentative = before.datesTentative;
   if (Object.keys(patch).length) steps.push({ kind: 'patch', patch });

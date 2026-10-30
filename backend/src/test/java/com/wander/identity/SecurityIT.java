@@ -37,6 +37,7 @@ class SecurityIT extends ApiTestSupport {
             "GET /api/catalog/destinations",
             "GET /api/catalog/destinations/{id}",
             "GET /api/catalog/destinations/{id}/templates",
+            "GET /api/catalog/destinations/{id}/poi",
             "POST /api/invites/preview");
 
     private static final String WELL_FORMED_UNKNOWN_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";

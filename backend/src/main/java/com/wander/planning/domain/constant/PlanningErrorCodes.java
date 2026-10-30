@@ -2,6 +2,8 @@ package com.wander.planning.domain.constant;
 
 /** Mã lỗi riêng của module planning (hợp đồng API, khớp {@code web/src/api.ts}). Mã dùng chung ở {@code ErrorCodes}. */
 public final class PlanningErrorCodes {
+    /** Bìa sai loại hoặc mã (DR-031). */
+    public static final String INVALID_COVER = "INVALID_COVER";
 
     /** Ngày không phải ngày lịch hợp lệ. */
     public static final String INVALID_DATE = "INVALID_DATE";

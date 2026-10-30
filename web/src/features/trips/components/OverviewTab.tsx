@@ -16,6 +16,7 @@ import { CostBox } from './CostBox.tsx';
 import { ItemRow } from './ItemRow.tsx';
 import { money } from './ItemMeta.tsx';
 import { AddManyEntry } from './AddManyEntry.tsx';
+import { COVER_COPY } from '../model/cover.copy.ts';
 
 /** Một ô số liệu (đếm lên từ 0 khi hiện). */
 function Stat({ value, label, cls, prefix = '' }: { readonly value: number; readonly label: string; readonly cls: string; readonly prefix?: string }) {
@@ -181,9 +182,10 @@ function DeleteTripLink() {
 
 /** Tab "Tổng quan": việc kế tiếp, số liệu, tuyến theo ngày, tùy chọn chuyến, chi phí, các mục chưa có ngày. */
 export function OverviewTab() {
-  const { setOverlay } = useTripView();
+  const { trip, setOverlay } = useTripView();
   return (
     <>
+      {permissionsOf(trip).manageTrip ? <Button kind="ghost" icon="pencil" onClick={() => setOverlay({ kind: 'cover' })}>{COVER_COPY.title}</Button> : null}
       <div className="two">
         <Button kind="ghost" icon="check" onClick={() => document.getElementById('trip-preparation')?.scrollIntoView({ block: 'start' })}>{T.create.prepare}</Button>
         <Button kind="ghost" icon="users" onClick={() => setOverlay({ kind: 'people' })}>{T.create.invite}</Button>

@@ -48,8 +48,16 @@ export interface TrashEntry {
   readonly position: number | null;
 }
 
+/** Bìa lưu máy chủ: mã ảnh catalog hoặc một trong sáu mã gradient (DR-031). */
+export interface TripCover {
+  readonly kind: 'photo' | 'gradient';
+  readonly ref: string;
+}
+
 /** Một chuyến đi. */
 export interface Trip {
+  /** null/không có ở dữ liệu cũ là ảnh mặc định của điểm đến. */
+  readonly cover?: TripCover | null;
   readonly id: string;
   /** Vai của người đang xem (Q6): Organizer là chủ chuyến, Thành viên vào bằng liên kết. */
   readonly role: 'organizer' | 'member';

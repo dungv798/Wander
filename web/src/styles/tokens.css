@@ -9,6 +9,12 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
+  --cover-1: linear-gradient(135deg, var(--sun), var(--brand));
+  --cover-2: linear-gradient(135deg, var(--sky-soft), var(--sky));
+  --cover-3: linear-gradient(135deg, var(--brand), var(--ink));
+  --cover-4: linear-gradient(135deg, var(--sky), var(--sun));
+  --cover-5: linear-gradient(135deg, var(--surface), var(--sky-soft));
+  --cover-6: linear-gradient(135deg, var(--sky), var(--ink));
   --z-photo-flight: 10000;
   --dur-photo: 240ms;
   --ease-photo: cubic-bezier(.2, .8, .2, 1);

@@ -1,4 +1,5 @@
 import { KIND_ORDER } from '../model/trip.const.ts';
+import { parseCover } from '../model/cover.ts';
 import type { BookingStatus, ItemKind, TrashEntry, Trip, TripItem } from '../model/trip.types.ts';
 
 /** Có phải đối tượng thường (không null, không mảng). */
@@ -96,6 +97,7 @@ export function toTrip(view: unknown, items: readonly TripItem[], trash: readonl
     selfMemberId: strOrNull(view['selfMemberId']),
     name,
     destinationId: destination,
+    cover: parseCover(view['cover']),
     startDate,
     endDate,
     datesTentative: view['datesTentative'] === true,
