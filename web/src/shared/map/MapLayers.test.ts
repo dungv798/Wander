@@ -4,6 +4,7 @@ import { MapLayers } from './MapLayers.ts';
 import { MAP } from './map.const.ts';
 import type { Pt } from './map.types.ts';
 import { markerFeatures, markerThumbnail } from './nativeMarkers.ts';
+import { PIN_ENTRANCE } from './pinEntrance.const.ts';
 
 /** DOM tối thiểu để kiểm hành vi nút thay thế canvas bằng bàn phím/click mà không cần dependency. */
 class Element extends EventTarget {
@@ -23,6 +24,47 @@ class Element extends EventTarget {
   setAttribute(key: string, value: string) { this.attrs.set(key, value); }
   remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter((child) => child !== this); }
 }
+
+test('chỉ yêu cầu quay mới thêm dần native feature; đổi dữ liệu hủy frame và reduced-motion hiện đủ ngay', (t) => {
+  const names = ['document', 'window', 'location', 'requestAnimationFrame', 'cancelAnimationFrame'];
+  const originals = new Map(names.map(name => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
+  const frames = new Map<number, FrameRequestCallback>();
+  let serial = 0, reduced = false;
+  Object.defineProperties(globalThis, {
+    document: { configurable: true, value: { createElement: () => new Element() } },
+    window: { configurable: true, value: { matchMedia: () => ({ matches: reduced }) } },
+    location: { configurable: true, value: { search: '' } },
+    requestAnimationFrame: { configurable: true, value: (callback: FrameRequestCallback) => { frames.set(++serial, callback); return serial; } },
+    cancelAnimationFrame: { configurable: true, value: (id: number) => frames.delete(id) },
+  });
+  t.after(() => originals.forEach((descriptor, name) => { if (descriptor) Object.defineProperty(globalThis, name, descriptor); else Reflect.deleteProperty(globalThis, name); }));
+  const counts: number[] = [];
+  const host = new Element();
+  const layers = new MapLayers(host as unknown as HTMLElement);
+  Object.assign(layers, { map: { getSource: () => ({ setData: (data: { features: unknown[] }) => counts.push(data.features.length) }), setFilter: () => {}, setFeatureState: () => {} } });
+  const markers = [0, 1, 2, 3, 4].map(i => ({ id: String(i), lat: 12 + i, lon: 108 }));
+  layers.syncMarkers(markers, 'route', null);
+  host.dispatchEvent(new Event(PIN_ENTRANCE.event));
+  assert.equal(frames.size, 0, 'ghim thường không đăng ký hiệu ứng');
+  assert.equal(counts.at(-1), 5);
+  location.search = '?entrance=stagger';
+  layers.syncMarkers(markers, 'route', null);
+  host.dispatchEvent(new Event(PIN_ENTRANCE.event));
+  assert.equal(counts.at(-1), 0);
+  for (const [time, expected] of [[0, 1], [240, 2], [480, 3]]) {
+    const tick = [...frames.values()][0]!; frames.clear(); tick(time!);
+    assert.equal(counts.at(-1), expected);
+  }
+  layers.syncMarkers(markers.slice(0, 2), 'route', null);
+  assert.equal(frames.size, 0, 'thay dữ liệu hủy lượt quay cũ');
+  assert.equal(counts.at(-1), 2);
+  reduced = true;
+  counts.length = 0;
+  host.dispatchEvent(new Event(PIN_ENTRANCE.event));
+  assert.equal(frames.size, 0);
+  assert.deepEqual(counts, [0, 2], 'nguồn cụm trống ở mode route; nguồn ghim hiện đủ ngay, không chớp rỗng');
+  layers.destroy();
+});
 
 test('danh sách ghim có nút mang tên/số, giữ nút khi cập nhật và gọi cùng callback native', () => {
   const before = Object.getOwnPropertyDescriptor(globalThis, 'document');

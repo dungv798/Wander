@@ -48,6 +48,7 @@ test('ba điểm: mở editor đúng ngày/loại, chỉ thêm sau xác nhận v
     const page = await ctx.newPage();
     await seed(page);
     await page.getByRole('button', { name: 'Thêm bữa trưa', exact: true }).click();
+    await page.getByRole('complementary', { name: 'Chưa có bữa trưa' }).getByRole('button', { name: 'Tự nhập', exact: true }).click();
     const editor = page.getByRole('dialog', { name: 'Thêm mục tự do', exact: true });
     await editor.waitFor();
     assert.equal(await page.getByRole('dialog').count(), 1);

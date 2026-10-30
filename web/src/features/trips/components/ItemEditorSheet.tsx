@@ -24,10 +24,10 @@ import { money } from './ItemMeta.tsx';
 import { TripTimeField } from './TripTimeField.tsx';
 
 /** Biểu mẫu ban đầu: từ mục đang sửa, hoặc mục mới với ngày của tab đang xem. */
-function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaultDay: string, initial?: Pick<ItemForm, 'title' | 'day'>): ItemForm {
+function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaultDay: string, initial?: Pick<ItemForm, 'title' | 'day'> & Partial<Pick<ItemForm, 'note'>>): ItemForm {
   return {
     title: item?.title ?? initial?.title ?? '', type: item?.type ?? preset ?? 'sightseeing', isPlace: Boolean(item?.placeId), day: item ? (item.day ?? '') : (initial?.day ?? defaultDay), time: item?.timeOfDay ?? '',
-    duration: item?.durationMin == null ? '' : String(item.durationMin), note: item?.note ?? '', cost: item?.costK == null ? '' : String(item.costK), included: item?.included ?? false,
+    duration: item?.durationMin == null ? '' : String(item.durationMin), note: item?.note ?? initial?.note ?? '', cost: item?.costK == null ? '' : String(item.costK), included: item?.included ?? false,
     reference: item?.referenceK == null ? '' : String(item.referenceK), booked: item?.booking === 'booked',
   };
 }
@@ -103,7 +103,7 @@ function DeleteItemButton({ item, onDone }: { readonly item: TripItem; readonly 
 }
 
 /** Tờ thêm/sửa một mục: tên và loại (mục tự do), ngày, giờ, thời lượng, ghi chú, chi phí (D17/D18), đã bao gồm + giá tham khảo, đặt chỗ. Lưu có Hoàn tác. */
-export function ItemEditorSheet({ itemId, preset, initial, onClose }: { readonly itemId: string | null; readonly preset: ItemKind | null; readonly initial?: Pick<ItemForm, 'title' | 'day'>; readonly onClose: () => void }) {
+export function ItemEditorSheet({ itemId, preset, initial, onClose }: { readonly itemId: string | null; readonly preset: ItemKind | null; readonly initial?: Pick<ItemForm, 'title' | 'day'> & Partial<Pick<ItemForm, 'note'>>; readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
   const { trip, cat, days, tab, setOverlay } = useTripView();

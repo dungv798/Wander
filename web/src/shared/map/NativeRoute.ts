@@ -4,6 +4,7 @@ import { addRouteLayers, setRouteLines } from './geoRouteLayer.ts';
 import type { SegmentFeature } from './geoRouteLayer.ts';
 import { nearestMapObject, routeSegmentFeatures } from './routeSegments.ts';
 import { ROUTE } from './route.const.ts';
+import { drawProgress, drawRouteFeatures } from './routeDraw.ts';
 import { prefersReducedMotion } from './mapUtil.ts';
 import type { MapMarker, MapRoute, Pt } from './map.types.ts';
 
@@ -48,21 +49,16 @@ export class NativeRoute {
 
   /** Vẽ dần hình học trong thời lượng hữu hạn; hit source không đổi nên vẫn chạm được ngay. */
   private animate(features: SegmentFeature[]): void {
-    const start = performance.now();
+    let start: number | undefined;
     /** Cắt hình học ở tiến độ hiện tại; không giữ vòng lặp sau khi hoàn tất hoặc hủy bản đồ. */
     const tick = (now: number) => {
-      const progress = prefersReducedMotion() ? 1 : Math.min(1, (now - start) / ROUTE.DRAW_MS);
-      const visible = features.map((feature) => {
-        const coordinates = feature.geometry.coordinates;
-        const index = progress * (coordinates.length - 1);
-        const whole = Math.floor(index);
-        const a = coordinates[whole]!, b = coordinates[Math.min(whole + 1, coordinates.length - 1)]!;
-        return { ...feature, geometry: { ...feature.geometry, coordinates: [...coordinates.slice(0, whole + 1), [a[0]! + (b[0]! - a[0]!) * (index - whole), a[1]! + (b[1]! - a[1]!) * (index - whole)]] } };
-      });
-      if (this.map) setRouteLines(this.map, progress === 1 ? features : visible, false);
+      start ??= now;
+      const progress = drawProgress(now - start, ROUTE.DRAW_MS, prefersReducedMotion());
+      if (this.map) setRouteLines(this.map, drawRouteFeatures(features, progress), false);
       if (progress < 1) this.frame = requestAnimationFrame(tick);
     };
-    tick(start);
+    setRouteLines(this.map!, [], false);
+    this.frame = requestAnimationFrame(tick);
   }
 
   /** Nhãn lấy từ chính feature nên không bị lệch khi thiếu ghim hoặc có nhiều ngày. */

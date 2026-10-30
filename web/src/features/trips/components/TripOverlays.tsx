@@ -10,11 +10,14 @@ const CoverSheet = lazy(() => import('./CoverSheet.tsx').then(module => ({ defau
 const EditTripSheet = lazy(() => import('./EditTripSheet.tsx').then(module => ({ default: module.EditTripSheet })));
 const PeopleSheet = lazy(() => import('./PeopleSheet.tsx').then(module => ({ default: module.PeopleSheet })));
 const TrashSheet = lazy(() => import('./TrashSheet.tsx').then(module => ({ default: module.TrashSheet })));
+const MealSuggestSheet = lazy(() => import('./MealSuggestSheet.tsx').then(module => ({ default: module.MealSuggestSheet })));
 
 /** Hiện đúng tờ phủ đang mở trên màn chuyến đi (mỗi lần một cái). `key` buộc dựng lại biểu mẫu khi đổi sang mục khác. */
 export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay | MealGapEditor | null; readonly onClose: () => void }) {
   if (!overlay) return null;
   switch (overlay.kind) {
+    case 'mealSuggest':
+      return <Suspense fallback={null}><MealSuggestSheet key={`${overlay.day}:${overlay.gap}`} day={overlay.day} gap={overlay.gap} onClose={onClose} /></Suspense>;
     case 'cover':
       return <Suspense fallback={null}><CoverSheet onClose={onClose} /></Suspense>;
     case 'add':

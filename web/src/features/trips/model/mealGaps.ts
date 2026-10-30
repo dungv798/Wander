@@ -8,7 +8,7 @@ export interface MealGapEditor {
   readonly kind: 'editor';
   readonly itemId: null;
   readonly preset: 'food' | 'rest';
-  readonly initial: { readonly day: string; readonly title: string };
+  readonly initial: { readonly day: string; readonly title: string; readonly note?: string };
 }
 
 /** Gắn ngày và tên bữa/nghỉ vào bản nháp, không suy diễn giờ hay giá. */

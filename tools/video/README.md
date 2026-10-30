@@ -1,3 +1,5 @@
+> Current workflow: [README-v2.md](./README-v2.md). The workflow below is historical; photo credits remain applicable.
+
 ﻿# Quay hành trình Wander
 
 Công cụ dùng Chrome cài sẵn + `playwright-core`/Vite đã có trong repo. Không thêm dependency, không gọi backend/DB, không chứa bí mật thật.

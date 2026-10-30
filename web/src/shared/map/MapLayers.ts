@@ -2,6 +2,8 @@
 import { COPY } from '../const/copy.vi.ts';
 import { HALF } from '../const/math.const.ts';
 import { MAP } from './map.const.ts';
+import { entranceCount } from './pinEntrance.ts';
+import { PIN_ENTRANCE } from './pinEntrance.const.ts';
 import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, renderedImageCount, thumbnailCrop } from './nativeMarkers.ts';
 import { addNativePinLayers, pinHitLayers } from './nativePinLayers.ts';
 import { nearestMapObject } from './routeSegments.ts';
@@ -23,6 +25,8 @@ export class MapLayers {
   private selected: string | null = null;
   private dead = false;
   private revision = 0;
+  private entranceFrame = 0;
+  private replayEntrance?: () => void;
   private onPin?: (id: string) => void;
   private onCluster?: () => void;
   private markerOrder: readonly string[] = [];
@@ -76,6 +80,8 @@ export class MapLayers {
   /** Hủy kết quả tải ảnh đến muộn trước khi GeoMap giải phóng WebGL. */
   destroy(): void {
     this.dead = true;
+    if (this.entranceFrame) cancelAnimationFrame(this.entranceFrame);
+    if (this.replayEntrance) this.host.removeEventListener(PIN_ENTRANCE.event, this.replayEntrance);
     this.map = null;
     this.images.clear();
   }
@@ -97,11 +103,45 @@ export class MapLayers {
     if (!map) return;
     this.revision++;
     this.onPin = onPin;
-    MAP.PIN_SOURCES.forEach((source, index) => (map.getSource(source) as GeoJSONSource | undefined)?.setData(markerFeatures(markers, mode, index === 0)));
+    if (this.entranceFrame) cancelAnimationFrame(this.entranceFrame);
+    if (this.replayEntrance) this.host.removeEventListener(PIN_ENTRANCE.event, this.replayEntrance);
+    this.replayEntrance = () => this.enterMarkers(markers, mode);
+    if (new URLSearchParams(typeof location === 'undefined' ? '' : location.search).get(PIN_ENTRANCE.parameter) === PIN_ENTRANCE.value) {
+      this.host.addEventListener(PIN_ENTRANCE.event, this.replayEntrance);
+    }
+    this.writeMarkers(markers, mode);
     this.syncAccessible(markers);
     this.host.dataset['numbered'] = String(markers.filter((marker) => marker.num != null).length);
     markers.forEach((marker) => void this.loadThumbnail(markerThumbnail(marker)));
     this.select(selected);
+  }
+
+  /** Cập nhật nguồn native, không dùng DOM marker và không đổi điểm kiểm e2e. */
+  private writeMarkers(markers: readonly MapMarker[], mode: MapMode): void {
+    MAP.PIN_SOURCES.forEach((source, index) => (this.map?.getSource(source) as GeoJSONSource | undefined)?.setData(markerFeatures(markers, mode, index === 0)));
+  }
+
+  /** Thêm feature theo nhịp khi script yêu cầu; hủy khi dữ liệu đổi hoặc destroy. */
+  private enterMarkers(markers: readonly MapMarker[], mode: MapMode): void {
+    cancelAnimationFrame(this.entranceFrame);
+    if (prefersReducedMotion()) { this.writeMarkers(markers, mode); return; }
+    let start: number | undefined;
+    let previous = -1;
+    /** Chỉ ghi GeoJSON khi số ghim đổi, dừng hẳn sau ghim cuối. */
+    const tick = (now: number) => {
+      if (this.dead) return;
+      start ??= now;
+      const count = entranceCount(markers.length, now - start, true, prefersReducedMotion());
+      if (count !== previous) {
+        this.writeMarkers(markers.slice(0, count), mode);
+        this.host.dataset['entranceCount'] = String(count);
+      }
+      previous = count;
+      if (count < markers.length) this.entranceFrame = requestAnimationFrame(tick);
+    };
+    this.writeMarkers([], mode);
+    this.host.dataset['entranceCount'] = '0';
+    this.entranceFrame = requestAnimationFrame(tick);
   }
 
   /** Nút giữ cùng phần tử khi đổi số/nhãn, tránh mất focus sau cập nhật dữ liệu. */

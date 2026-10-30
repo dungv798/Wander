@@ -2,8 +2,8 @@
 
 /** Thu frame từ Chrome của app thật rồi mã hóa VP8 trong canvas trình duyệt; không tải binary. */
 export async function startCapture(browser, page) {
-  const encoder = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await encoder.setContent('<canvas width="390" height="844"></canvas>');
+  const encoder = await browser.newPage({ viewport: { width: 390, height: 607 } });
+  await encoder.setContent('<canvas width="390" height="607"></canvas>');
   await encoder.evaluate(() => {
     const canvas = document.querySelector('canvas');
     window.videoChunks = [];
@@ -12,21 +12,29 @@ export async function startCapture(browser, page) {
     window.recorder.start();
   });
   await page.bringToFront();
-  const cdp = await page.context().newCDPSession(page);
+  let cdp;
   let tail = Promise.resolve();
   let frames = 0;
-  cdp.on('Page.screencastFrame', frame => {
+  /** Đổi giữa các màn app đã làm nóng, không quay khoảng chờ điều hướng/tải ảnh. */
+  async function selectPage(target) {
+    if (cdp) { await cdp.send('Page.stopScreencast'); await tail; await cdp.detach(); }
+    await target.bringToFront();
+    cdp = await target.context().newCDPSession(target);
+    const session = cdp;
+    session.on('Page.screencastFrame', frame => {
     tail = tail.then(async () => {
       await encoder.evaluate(async data => {
         const image = new Image(); image.src = `data:image/jpeg;base64,${data}`; await image.decode();
-        document.querySelector('canvas').getContext('2d').drawImage(image, 0, 0, 390, 844);
+        document.querySelector('canvas').getContext('2d').drawImage(image, 0, 0, 390, 607);
       }, frame.data);
       frames++;
-      await cdp.send('Page.screencastFrameAck', { sessionId: frame.sessionId });
+      await session.send('Page.screencastFrameAck', { sessionId: frame.sessionId });
     });
-  });
-  await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 85, maxWidth: 390, maxHeight: 844, everyNthFrame: 1 });
-  return async file => {
+    });
+    await session.send('Page.startScreencast', { format: 'jpeg', quality: 85, maxWidth: 390, maxHeight: 607, everyNthFrame: 1 });
+  }
+  await selectPage(page);
+  const stop = async file => {
     await cdp.send('Page.stopScreencast'); await tail;
     const data = await encoder.evaluate(async () => {
       await new Promise(resolve => { window.recorder.onstop = resolve; window.recorder.stop(); });
@@ -37,4 +45,6 @@ export async function startCapture(browser, page) {
     await encoder.close();
     return { frames, bytes: fs.statSync(file).size, encoder: 'Chrome CDP screencast → MediaRecorder VP8' };
   };
+  stop.selectPage = selectPage;
+  return stop;
 }

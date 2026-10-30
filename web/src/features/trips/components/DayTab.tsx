@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, lazy, Suspense, useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { formatTravelTime, minutesForKm, roadKmBetween } from '../../../shared/lib/geo.ts';
 import { dayLabel } from '../../../shared/lib/dates.ts';
@@ -11,16 +11,19 @@ import { coordOf } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { ItemRow } from './ItemRow.tsx';
-import { mealGapEditor, mealGaps, mealGapStorageKey, readMealGapDismissals, saveMealGapDismissals } from '../model/mealGaps.ts';
+import { mealGaps, mealGapStorageKey, readMealGapDismissals, saveMealGapDismissals } from '../model/mealGaps.ts';
 import type { MealGap } from '../model/mealGaps.ts';
 import { AddManyEntry } from './AddManyEntry.tsx';
 import { MEAL_GAPS_COPY as M } from '../model/mealGaps.copy.ts';
 
+const MealSuggestEntry = lazy(() => import('./MealSuggestEntry.tsx').then(module => ({ default: module.MealSuggestEntry })));
+
 /** Nhắc bỏ qua được theo chuyến/ngày; chỉ mở editor, không tạo mục trước xác nhận. */
 function MealReminders({ day }: { readonly day: string }) {
-  const { trip, cat, setOverlay } = useTripView();
+  const { trip, cat } = useTripView();
   const key = mealGapStorageKey(trip.id, day);
   const [dismissed, setDismissed] = useState(() => readMealGapDismissals(key));
+  const [expanded, setExpanded] = useState<MealGap | null>(null);
   if (!permissionsOf(trip).schedule) return null;
   const gaps = mealGaps(trip.items, day, cat.place, dismissed);
   /** Đóng ngay và nhớ lựa chọn nếu localStorage khả dụng. */
@@ -36,7 +39,7 @@ function MealReminders({ day }: { readonly day: string }) {
         <h3>{M[gap].title}</h3>
         <p className="note">{M.note}</p>
         <div className="chips">
-          <Button kind="ghost" icon="plus" onClick={() => setOverlay(mealGapEditor(gap, day))}>{M[gap].action}</Button>
+          {expanded === gap ? <Suspense fallback={null}><MealSuggestEntry day={day} gap={gap} /></Suspense> : <Button kind="ghost" icon="plus" onClick={() => setExpanded(gap)}>{M[gap].action}</Button>}
           <Button kind="ghost" icon="x" aria-label={M[gap].dismiss} onClick={() => dismiss(gap)}>{M.close}</Button>
         </div>
       </div>

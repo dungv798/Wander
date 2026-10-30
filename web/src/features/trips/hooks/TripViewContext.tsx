@@ -1,9 +1,11 @@
 import { createContext, useContext } from 'react';
 import type { ItemKind, Trip } from '../model/trip.types.ts';
 import type { TripCatalog } from '../model/tripView.ts';
+import type { MealGap } from '../model/mealGaps.ts';
 
 /** Tờ phủ đang mở trên màn chuyến đi (chỉ một cái một lúc). */
 export type Overlay =
+  | { readonly kind: 'mealSuggest'; readonly day: string; readonly gap: MealGap }
   | { readonly kind: 'add' }
   | { readonly kind: 'editor'; readonly itemId: string | null; readonly preset: ItemKind | null }
   | { readonly kind: 'editTrip' }

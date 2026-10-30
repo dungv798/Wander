@@ -1,0 +1,10 @@
+.meal-suggest { display: flex; flex-direction: column; gap: var(--s-3); max-height: calc(100dvh - var(--s-7)); }
+.meal-suggest-header { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+.meal-suggest-results { overflow-y: auto; min-height: 0; display: grid; gap: var(--s-2); }
+.meal-poi { display: flex; align-items: flex-start; gap: var(--s-3); padding: var(--s-3); text-align: left; color: var(--ink); background: var(--glass); border: var(--glass-border) solid var(--line); border-radius: var(--r-md); cursor: pointer; }
+.meal-poi-body { display: grid; gap: var(--s-1); flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.meal-poi-icon { padding: var(--s-2); border-radius: var(--r-md); background: var(--surface-2); }
+.meal-distance { font: var(--text-secondary); }
+.meal-suggest-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); flex-shrink: 0; }
+.meal-attribution { display: grid; gap: var(--s-1); flex-shrink: 0; }
+.meal-skeleton { min-height: var(--tap); padding: var(--s-6); border-radius: var(--r-md); background: var(--surface-2); }

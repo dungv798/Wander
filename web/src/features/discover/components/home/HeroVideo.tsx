@@ -3,7 +3,7 @@ import { HERO_VIDEO } from '../../model/heroVideo.const.ts';
 import { useHeroVideo } from './useHeroVideo.ts';
 
 /** Giữ ảnh dưới video khi tải/lỗi; nhớ lựa chọn tạm dừng qua các lần chuyển tab. */
-function VideoPlayer() {
+function VideoPlayer({ onError }: { readonly onError: () => void }) {
   const video = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
   const [paused, setPaused] = useState(true);
@@ -28,7 +28,7 @@ function VideoPlayer() {
     else void element.play().catch(() => {});
   }
   return <>
-    <video ref={video} className={`home-hero-video${started ? ' is-playing' : ''}`} src={HERO_VIDEO.src} poster={HERO_VIDEO.poster} muted loop playsInline autoPlay preload="none" aria-hidden="true" onPlaying={() => { if (document.hidden) video.current?.pause(); else { setStarted(true); setPaused(false); } }} onPause={() => setPaused(true)} onError={() => { setStarted(false); setPaused(true); }} />
+    <video ref={video} className={`home-hero-video${started ? ' is-playing' : ''}`} src={HERO_VIDEO.src} poster={HERO_VIDEO.poster} muted loop playsInline autoPlay preload="none" aria-hidden="true" onPlaying={() => { if (document.hidden) video.current?.pause(); else { setStarted(true); setPaused(false); } }} onPause={() => setPaused(true)} onError={onError} />
     <button className="home-video-toggle" type="button" aria-label={paused ? HERO_VIDEO.play : HERO_VIDEO.pause} onClick={toggle}>{paused ? HERO_VIDEO.playSymbol : HERO_VIDEO.pauseSymbol}</button>
   </>;
 }
@@ -36,6 +36,7 @@ function VideoPlayer() {
 /** Bộ lọc và bộ phát chỉ tải sau load/idle; ảnh hero vẫn nằm sẵn dưới media. */
 export default function HeroVideo() {
   const { host, ready } = useHeroVideo();
-  return <div ref={host} className="home-video-host">{ready ? <VideoPlayer /> : null}</div>;
+  const [failed, setFailed] = useState(false);
+  return <div ref={host} className="home-video-host">{ready && !failed ? <VideoPlayer onError={() => setFailed(true)} /> : null}</div>;
 }
 
