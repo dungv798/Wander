@@ -52,52 +52,44 @@ try {
     style.textContent = '.tm-seg-label { visibility:hidden }';
     document.head.append(style);
   });
-  const stopCapture = await startCapture(browser, page);
-  // video.currentTime dùng timestamp của recorder để cắt setup bằng trình duyệt, không cần ffmpeg.
+  // Kịch bản v3: mở bằng bộ thẻ ảnh (cảnh đẹp nhất), vuốt hai thẻ, sang bản đồ có ghim đánh số và tuyến vẽ dần, kết bằng logo.
+  const stopCapture = await startCapture(browser, deckPage);
   const begin = Date.now();
   report.captureStarted = begin;
   await page.locator('.tmap').evaluate(el => {
     window.entranceSamples = [];
     new MutationObserver(() => window.entranceSamples.push({ at: performance.now(), submittedFeatures: Number(el.dataset.entranceCount) })).observe(el, { attributes: true, attributeFilter: ['data-entrance-count'] });
   });
-  const feature = await page.locator('.tmap').evaluate(el => {
-    const box = el.getBoundingClientRect();
-    const candidates = JSON.parse(el.dataset.features).filter(p => !p.cluster && p.x > 25 && p.x < box.width - 25 && p.y > 65 && p.y < 370);
-    return { x: box.x + candidates[0].x, y: box.y + candidates[0].y };
-  });
-  /** Đưa con trỏ tới mục tiêu với các bước đều, dùng thao tác app thật. */
-  async function move(x, y) { await page.mouse.move(x, y, { steps: 20 }); }
   /** Giữ mỗi nhịp đến mốc tính từ lúc bắt đầu quay. */
   async function until(ms) { await page.waitForTimeout(Math.max(0, ms - (Date.now() - begin))); }
-  await page.locator('.tmap').evaluate(el => el.dispatchEvent(new Event('wander:pin-entrance')));
-  report.steps.push({ at: 0, action: '5 ghim native xuất hiện lần lượt mỗi 240ms' });
-  await until(1500); await move(feature.x, feature.y); await page.mouse.click(feature.x, feature.y);
-  await page.locator('.tm-preview').waitFor();
-  report.steps.push({ at: Date.now() - begin, action: 'Chạm ghim → thẻ xem trước native' });
-  await until(3000);
-  await stopCapture.selectPage(deckPage);
-  const card = await deckPage.locator('.card.front').boundingBox();
-  await until(3500);
-  await deckPage.mouse.move(card.x + card.width * .3, card.y + card.height * .5);
-  await deckPage.mouse.down(); await deckPage.mouse.move(380, card.y + card.height * .45, { steps: 18 }); await deckPage.mouse.up();
-  await deckPage.getByRole('button', { name: 'Xem đã chọn (1)', exact: true }).waitFor();
-  report.steps.push({ at: Date.now() - begin, action: 'Vuốt phải chọn thẻ thật' });
-  await until(4500);
+  /** Vuốt phải thẻ trước mặt bằng thao tác chuột thật của app. */
+  async function swipe(target) {
+    const box = await target.locator('.card.front').boundingBox();
+    await target.mouse.move(box.x + box.width * .3, box.y + box.height * .5);
+    await target.mouse.down(); await target.mouse.move(380, box.y + box.height * .45, { steps: 14 }); await target.mouse.up();
+  }
+  await until(600); await swipe(deckPage);
+  report.steps.push({ at: Date.now() - begin, action: 'Vuốt phải chọn thẻ thứ nhất' });
+  await until(2500); await swipe(deckPage);
+  report.steps.push({ at: Date.now() - begin, action: 'Vuốt phải chọn thẻ thứ hai' });
+  await until(4300);
   await stopCapture.selectPage(page);
-  await page.evaluate(() => document.querySelector('#journey-opening')?.remove());
+  await page.locator('.tmap').evaluate(el => el.dispatchEvent(new Event('wander:pin-entrance')));
+  report.steps.push({ at: Date.now() - begin, action: 'Bản đồ: ghim ảnh xuất hiện lần lượt mỗi 240ms' });
+  await until(5600);
+  const tab = await page.getByRole('tab', { name: 'Ngày 1', exact: true }).boundingBox();
+  await page.mouse.move(tab.x + tab.width / 2, tab.y + tab.height / 2, { steps: 12 });
   await page.getByRole('tab', { name: 'Ngày 1', exact: true }).click();
   report.steps.push({ at: Date.now() - begin, action: 'Ngày 1: tuyến native vẽ dần từng đoạn trong 850ms' });
-  await until(6500);
-  // Ảnh xuất thật đã làm nóng; tránh thời gian điều hướng lấn mất cảnh cuối.
-  await page.evaluate(src => {
+  await until(7300);
+  await page.evaluate(() => document.querySelector('#journey-cursor')?.remove());
+  await page.evaluate(() => {
     const end = document.createElement('div'); end.id = 'journey-end';
-    const image = document.createElement('img'); image.src = src;
-    image.style.cssText = 'width:100vw;height:100vh;object-fit:contain';
-    end.append(image); document.body.append(end);
-  }, itinerary);
-  report.steps.push({ at: Date.now() - begin, action: 'Chia sẻ → ảnh PNG lịch trình thật' });
-  await until(7350);
-  await page.evaluate(() => { const end = document.querySelector('#journey-end'); const logo = document.createElement('strong'); logo.textContent = 'Wander'; const sub = document.createElement('small'); sub.textContent = 'Chạm một nơi. Mở một hành trình.'; end.replaceChildren(logo, sub); });
+    const logo = document.createElement('strong'); logo.textContent = 'Wander';
+    const sub = document.createElement('small'); sub.textContent = 'Chạm một nơi. Mở một hành trình.';
+    end.append(logo, sub); document.body.append(end);
+  });
+  report.steps.push({ at: Date.now() - begin, action: 'Logo Wander' });
   await until(8100);
   report.durationMs = Date.now() - begin;
   report.entranceSamples = await page.evaluate(() => window.entranceSamples);
@@ -109,6 +101,9 @@ try {
   report.recorded = true;
   fs.writeFileSync(path.join(OUT, 'record.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report));
+} catch (error) {
+  console.error('RECORD ERROR', error?.stack || error);
+  process.exitCode = 1;
 } finally {
   await browser?.close(); await server.close();
   fs.writeFileSync(path.join(OUT, 'record.json'), JSON.stringify(report, null, 2));
