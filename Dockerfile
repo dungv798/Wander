@@ -14,8 +14,9 @@ RUN sh ./gradlew --no-daemon bootJar --console=plain
 FROM eclipse-temurin:21-jre-alpine@sha256:82cf3d9ccbe1ed46252008d51b2f2329e6b9e8a2f4394c4bebefc3ea7f4b1372 AS runtime
 RUN addgroup -S wander && adduser -S wander -G wander
 WORKDIR /app
-COPY --from=backend-build --chown=wander:wander /src/backend/build/libs/wander-backend.jar /app/app.jar
-COPY --from=web-build --chown=wander:wander /src/web/dist /app/web
+# Tệp chạy thuộc root, người dùng wander chỉ đọc: nếu có RCE thì không ghi đè được jar hay giao diện.
+COPY --from=backend-build /src/backend/build/libs/wander-backend.jar /app/app.jar
+COPY --from=web-build /src/web/dist /app/web
 USER wander
 ENV SPRING_PROFILES_ACTIVE=free \
     WANDER_BIND_ADDRESS=0.0.0.0 \

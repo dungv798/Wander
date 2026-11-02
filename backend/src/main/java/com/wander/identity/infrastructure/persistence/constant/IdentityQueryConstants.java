@@ -7,6 +7,10 @@ public final class IdentityQueryConstants {
     /** Danh tính theo id, dùng để khóa các thay đổi mã khôi phục. */
     public static final String IDENTITY_BY_ID = "select i from IdentityEntity i where i.id = :id";
 
+    /** Ghi dấu vân tay khóa nếu nhãn chưa có, không lỗi khi hai instance cùng ghi. */
+    public static final String INSERT_KEY_CHECK_IF_ABSENT = "INSERT INTO recovery_key_checks (key_version, fingerprint, created_at) "
+            + "VALUES (:version, :fingerprint, :now) ON CONFLICT (key_version) DO NOTHING";
+
     /** Các nhãn khóa còn cần để xác minh mã đang hiệu lực hoặc mã chờ chưa hết hạn. */
     public static final String REQUIRED_RECOVERY_KEY_VERSIONS = "SELECT key_version FROM recovery_codes WHERE invalidated_at IS NULL "
             + "UNION SELECT key_version FROM recovery_attempts WHERE state = 'pending' AND expires_at > CURRENT_TIMESTAMP "

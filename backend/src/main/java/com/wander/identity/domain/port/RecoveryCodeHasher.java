@@ -25,6 +25,12 @@ public interface RecoveryCodeHasher {
     /** Băm bằng đúng nhãn đã lưu; không có khóa tương ứng thì không có kết quả. */
     Optional<String> hashWithVersion(String normalizedCode, String keyVersion);
 
+    /**
+     * Dấu vân tay của khóa ứng với nhãn (một phần HMAC của hằng số công khai, hex); không có khóa cho nhãn thì không có kết quả.
+     * Dùng để phát hiện đổi giá trị pepper mà giữ nhãn; không tiết lộ khóa.
+     */
+    Optional<String> keyFingerprint(String keyVersion);
+
     /** Kiểm tra bằng khóa đã lưu, so sánh digest với thời gian không phụ thuộc tiền tố khớp. */
     default boolean matches(String normalizedCode, String storedHash, String keyVersion) {
         return hashWithVersion(normalizedCode, keyVersion).map(candidate -> MessageDigest.isEqual(

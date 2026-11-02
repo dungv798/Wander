@@ -69,6 +69,10 @@ Chuyển v1 → v2:
 4. Không bỏ v1 nếu còn mã active hoặc pending chưa hết hạn tham chiếu v1; guard profile free sẽ từ chối startup. Mã recovery không tự hết hạn nên có thể phải giữ khóa cũ lâu dài.
 5. Cân nhắc cả retry attempt committed khi retire khóa, như mục tồn dư trong audit. Không xóa dữ liệu/attempt để ép retire khi chưa có chính sách retention được duyệt.
 
+**Quy tắc gỡ khóa cũ (PO 02/11/2026, DR-032):** gỡ khóa cũ **30 ngày sau lần xoay khóa đầu tiên**. Trước ngày đó vô hiệu các mã còn mang nhãn khóa cũ theo kiểu V9 (chấp nhận mất vĩnh viễn theo D20), rồi mới bỏ khóa cũ khỏi cấu hình. Chưa có người dùng thật nên chưa cần làm; ghi lại ngày xoay đầu tiên khi xảy ra.
+
+**Dấu vân tay khóa (V18, N4):** lần khởi động đầu tiên với một nhãn khóa, hệ thống lưu một phần HMAC của hằng số công khai ứng với nhãn đó (bảng `recovery_key_checks`, không chứa khóa). Từ lần sau, nếu giá trị pepper đổi mà nhãn giữ nguyên thì ứng dụng dừng khởi động với lời báo rõ thay vì làm mọi mã cũ vô hiệu im lặng. Pepper phải sinh ngẫu nhiên (ít nhất 32 byte từ nguồn ngẫu nhiên, không phải cụm chữ nhớ được): dấu vân tay là một phần HMAC của hằng số công khai, nên pepper yếu thì kẻ có bản sao DB dò được. Giới hạn: tin ở lần dùng đầu, nên không bắt được lỗi nếu pepper đã sai ngay từ lần khởi động đầu của một DB đã có mã; dấu vân tay chỉ chạy ở profile `free`.
+
 Kiểm metadata bằng truy vấn không chứa secret:
 
 ```sql

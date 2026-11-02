@@ -94,6 +94,15 @@ public final class IdentityConstants {
     /** Độ dài cột metadata nhãn khóa. */
     public static final int RECOVERY_KEY_VERSION_MAX_LENGTH = 32;
 
+    /** Độ dài tối đa của dấu vân tay khóa lưu trong DB (hex). */
+    public static final int RECOVERY_KEY_FINGERPRINT_MAX_LENGTH = 64;
+
+    /** Số ký tự hex đầu của HMAC được giữ làm dấu vân tay: đủ phân biệt khóa nhưng cắt ngắn để không thành oracle. */
+    public static final int RECOVERY_KEY_FINGERPRINT_HEX_LENGTH = 16;
+
+    /** Tiền tố của hằng số công khai được băm để lấy dấu vân tay khóa; khác không gian mã khôi phục. */
+    public static final String RECOVERY_KEY_CHECK_PREFIX = "wander-key-check:";
+
     /** Tiền tố của placeholder cấu hình chưa được giải quyết; khóa bắt đầu bằng tiền tố này bị coi là thiếu khóa. */
     public static final String PLACEHOLDER_PREFIX = "${";
 

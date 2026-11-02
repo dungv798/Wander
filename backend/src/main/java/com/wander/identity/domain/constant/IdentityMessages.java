@@ -82,6 +82,9 @@ public final class IdentityMessages {
     /** Cấu hình hai khóa không đầy đủ, trùng nhãn hoặc có nhãn không hợp lệ; không kèm giá trị secret. */
     public static final String RECOVERY_KEY_CONFIGURATION_INVALID = "Cấu hình phiên bản khóa khôi phục không hợp lệ; kiểm tra nhãn và cặp khóa trước đó";
 
+    /** Giá trị pepper bị đổi mà nhãn khóa giữ nguyên: dừng khởi động thay vì để mọi mã cũ vô hiệu im lặng. */
+    public static final String RECOVERY_KEY_FINGERPRINT_MISMATCH = "Giá trị khóa khôi phục (pepper) không khớp dấu vân tay đã lưu cho nhãn khóa này; không đổi giá trị mà giữ nhãn, hãy khôi phục khóa đúng hoặc dùng nhãn mới";
+
     /** Không chạy với cấu hình bỏ mất khóa mà dữ liệu còn tham chiếu, tránh làm người dùng mất khả năng khôi phục. */
     public static final String RECOVERY_KEY_STILL_REQUIRED = "Thiếu phiên bản khóa khôi phục còn được dữ liệu sử dụng; khôi phục cấu hình khóa trước khi deploy";
 

@@ -17,6 +17,7 @@
 **/.gradle
 **/coverage
 **/*.log
+**/.logs
 docs
 legacy
 tools

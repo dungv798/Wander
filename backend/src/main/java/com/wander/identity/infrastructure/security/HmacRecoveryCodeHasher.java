@@ -86,6 +86,12 @@ public class HmacRecoveryCodeHasher implements RecoveryCodeHasher {
         return Optional.ofNullable(keys.get(keyVersion)).map(key -> digest(normalizedCode, key));
     }
 
+    @Override
+    public Optional<String> keyFingerprint(String keyVersion) {
+        return Optional.ofNullable(keys.get(keyVersion)).map(key ->
+                digest(IdentityConstants.RECOVERY_KEY_CHECK_PREFIX + keyVersion, key).substring(0, IdentityConstants.RECOVERY_KEY_FINGERPRINT_HEX_LENGTH));
+    }
+
     /** Băm với khóa đã chọn; mỗi lần dùng Mac riêng vì Mac không an toàn khi chia sẻ giữa thread. */
     private static String digest(String normalizedCode, SecretKeySpec key) {
         try {
