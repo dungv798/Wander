@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
+import { safeHttpUrl } from '../../../shared/lib/safeUrl.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
@@ -50,7 +51,7 @@ export function CoverSheet({ onClose }: { readonly onClose: () => void }) {
             </button>
           ))}
         </div>
-        <details className="trip-cover-credits"><summary>{C.credits}</summary>{photos.map(photo => <a key={photo.ref} href={photo.sourceUrl} target="_blank" rel="noreferrer">{fill(C.credit, { author: photo.author, license: photo.license })}</a>)}</details>
+        <details className="trip-cover-credits"><summary>{C.credits}</summary>{photos.map(photo => <a key={photo.ref} href={safeHttpUrl(photo.sourceUrl)} target="_blank" rel="noopener noreferrer">{fill(C.credit, { author: photo.author, license: photo.license })}</a>)}</details>
         <Button block onClick={save}>{C.save}</Button>
         <Button kind="ghost" block onClick={onClose}>{C.cancel}</Button>
       </div>

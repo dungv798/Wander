@@ -9,6 +9,7 @@ import { SLOTS, VERDICT_STYLE } from '../../model/discover.const.ts';
 import type { PlaceView } from '../../model/Catalog.types.ts';
 import { mainAway } from '../../model/destinationQueries.ts';
 import { PlaceDisclosure, PlaceMoreButton } from './PlaceDisclosure.tsx';
+import { safeHttpUrl } from '../../../../shared/lib/safeUrl.ts';
 
 /** Khối nhãn biên tập "Wander gợi ý" (thay điểm sao; KHÔNG phải đánh giá người dùng, DR-007). */
 export function EditorialRate({ place }: { readonly place: PlaceView }) {
@@ -144,7 +145,7 @@ export function DataCredits({ place }: { readonly place: PlaceView }) {
           <span key={p.url}>
             {fill(COPY.place.photoN, { n: k + 1, author: p.author || COPY.place.unknownAuthor, license: p.license })}
             {' · '}
-            <a href={p.sourceUrl} target="_blank" rel="noopener noreferrer">
+            <a href={safeHttpUrl(p.sourceUrl)} target="_blank" rel="noopener noreferrer">
               {COPY.place.sourceLink}
             </a>
           </span>

@@ -1,5 +1,6 @@
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
 import type { PhotoView } from '../model/Catalog.types.ts';
+import { safeHttpUrl } from '../../../shared/lib/safeUrl.ts';
 
 const AUTHOR_MAX_LENGTH = 28;
 
@@ -11,7 +12,7 @@ export function CreditPill({ photo }: { readonly photo: PhotoView | undefined })
     <div className="credit-pill">
       {fill(COPY.place.photoCreditShort, { author, license: photo.license })}
       {' · '}
-      <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer">
+      <a href={safeHttpUrl(photo.sourceUrl)} target="_blank" rel="noopener noreferrer">
         {COPY.place.sourceOriginal}
       </a>
     </div>
