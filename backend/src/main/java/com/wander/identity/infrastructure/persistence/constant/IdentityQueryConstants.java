@@ -4,6 +4,14 @@ package com.wander.identity.infrastructure.persistence.constant;
 /** Câu JPQL của các repository Identity (tầng CHỨC NĂNG). Tên tham số {@code :x} khớp {@code @Param("x")} ở repository. */
 public final class IdentityQueryConstants {
 
+    /** Danh tính theo id, dùng để khóa các thay đổi mã khôi phục. */
+    public static final String IDENTITY_BY_ID = "select i from IdentityEntity i where i.id = :id";
+
+    /** Các nhãn khóa còn cần để xác minh mã đang hiệu lực hoặc mã chờ chưa hết hạn. */
+    public static final String REQUIRED_RECOVERY_KEY_VERSIONS = "SELECT key_version FROM recovery_codes WHERE invalidated_at IS NULL "
+            + "UNION SELECT key_version FROM recovery_attempts WHERE state = 'pending' AND expires_at > CURRENT_TIMESTAMP "
+            + "UNION SELECT key_version FROM code_replacements WHERE state = 'pending' AND expires_at > CURRENT_TIMESTAMP";
+
     private static final String PENDING = "'" + IdentityPersistenceConstants.STATE_PENDING + "'";
     private static final String VOID = "'" + IdentityPersistenceConstants.STATE_VOID + "'";
     private static final String APPROVED = "'" + IdentityPersistenceConstants.STATE_APPROVED + "'";

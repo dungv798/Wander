@@ -45,6 +45,9 @@ wander:
     # Khóa (pepper) của HMAC-SHA-256 băm mã khôi phục (DR-018 B3). KHÔNG có giá trị mặc định: thiếu hoặc ngắn hơn 32 byte thì ứng dụng
     # không khởi động. Cục bộ: toolsdev.ps1 tự sinh; trên AWS: Secrets Manager (RG-5). Đổi khóa làm mọi mã khôi phục hiện có vô hiệu.
     recovery-pepper: ${WANDER_RECOVERY_PEPPER}
+    recovery-key-version: ${WANDER_RECOVERY_KEY_VERSION:v1}
+    recovery-previous-key-version: ${WANDER_RECOVERY_PREVIOUS_KEY_VERSION:}
+    recovery-previous-pepper: ${WANDER_RECOVERY_PREVIOUS_PEPPER:}
   web:
     # Thư mục giao diện đã build. Để trống thì chỉ chạy API (ví dụ khi giao diện nằm trên S3/CloudFront).
     dir: ${WANDER_WEB_DIR:}
@@ -52,6 +55,7 @@ wander:
     # Sau CloudFront -> ALB đặt 2, chỉ khi ALB chỉ nhận lưu lượng từ CloudFront (ADR-006).
     trusted-proxy-hops: ${WANDER_TRUSTED_PROXY_HOPS:0}
   limits:
+    writes-per-minute: ${WANDER_LIMIT_WRITES:120}
     identity-per-hour: ${WANDER_LIMIT_IDENTITY:30}
     recovery-per-hour: ${WANDER_LIMIT_RECOVERY:30}
     approval-per-hour: ${WANDER_LIMIT_APPROVAL:20}

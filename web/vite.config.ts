@@ -5,6 +5,7 @@ import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
 const CATALOG_DIR = path.resolve(import.meta.dirname, '../backend/src/main/resources/catalog');
+const PHOTO_DIR = path.join(CATALOG_DIR, 'photos');
 const MIME_BY_EXT: Record<string, string> = { '.json': 'application/json; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 
 /**
@@ -15,10 +16,19 @@ function catalogDevServer(): Plugin {
   /** Gắn middleware phục vụ tệp từ kho biên tập. */
   const attach = (use: (fn: (req: { url?: string }, res: { statusCode: number; setHeader: (k: string, v: string) => void; end: (b?: Buffer | string) => void }, next: () => void) => void) => void): void => {
     use((req, res, next) => {
-      const url = decodeURIComponent((req.url ?? '').split('?')[0] ?? '');
-      let file: string | null = null;
-      if (url.startsWith('/catalog/photos/')) file = path.join(CATALOG_DIR, 'photos', url.slice('/catalog/photos/'.length));
-      if (!file || !file.startsWith(CATALOG_DIR) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
+      let url: string;
+      try {
+        url = decodeURIComponent((req.url ?? '').split('?')[0] ?? '');
+      } catch {
+        res.statusCode = 400;
+        res.end('Invalid URL');
+        return;
+      }
+      if (!url.startsWith('/catalog/photos/')) { next(); return; }
+      const file = path.resolve(PHOTO_DIR, url.slice('/catalog/photos/'.length));
+      if (!file.startsWith(PHOTO_DIR + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()
+        || !fs.realpathSync(file).startsWith(fs.realpathSync(PHOTO_DIR) + path.sep)
+        || !['.jpg', '.jpeg', '.png', '.webp'].includes(path.extname(file).toLowerCase())) {
         next();
         return;
       }
@@ -37,5 +47,5 @@ function catalogDevServer(): Plugin {
 // Giao diện gọi API cùng nguồn qua /api; khi phát triển, Vite chuyển tiếp tới backend Java (cổng 8787, xem README.md mục 3).
 export default defineConfig({
   plugins: [react(), catalogDevServer()],
-  server: { port: 5173, proxy: { '/api': 'http://127.0.0.1:8787' } },
+  server: { port: 5173, proxy: { '/api': process.env['WANDER_BASE_URL'] ?? 'http://127.0.0.1:8787' } },
 });

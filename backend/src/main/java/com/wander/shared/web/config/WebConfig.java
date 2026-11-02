@@ -129,6 +129,9 @@ public class WebConfig implements WebMvcConfigurer {
             }
             Resource found = resourcePath.isEmpty() ? null : super.getResource(resourcePath, location);
             if (found != null) return found;
+            String fileName = Path.of(resourcePath).getFileName().toString();
+            if (resourcePath.startsWith(HttpConstants.ASSETS_PATH_PREFIX.substring(1))
+                    || fileName.contains(StaticWebConstants.FILE_EXTENSION_SEPARATOR)) return null;
             Resource index = new FileSystemResource(root.resolve(StaticWebConstants.INDEX_FILE_NAME));
             return index.isReadable() ? index : null;
         }

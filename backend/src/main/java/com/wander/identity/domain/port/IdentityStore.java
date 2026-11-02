@@ -24,6 +24,9 @@ public interface IdentityStore {
     /** Lưu danh tính mới. */
     void addIdentity(Identity identity);
 
+    /** Khóa danh tính đến hết giao dịch, tuần tự hóa mọi thay đổi mã khôi phục theo cùng một thứ tự khóa. */
+    void lockIdentity(UUID identityId);
+
     /** Lưu phiên mới. */
     void addSession(Session session);
 
@@ -81,6 +84,9 @@ public interface IdentityStore {
 
     /** Lần thử theo mã nhận diện, khóa dòng. */
     Optional<RecoveryAttempt> findAttemptForUpdate(String attemptKey);
+
+    /** Đọc lần thử để xác định danh tính trước khi khóa; phải đọc lại có khóa trước khi thay đổi trạng thái. */
+    Optional<RecoveryAttempt> findAttempt(String attemptKey);
 
     /** Lưu lần thử (thêm mới hoặc cập nhật). */
     void saveAttempt(RecoveryAttempt attempt);

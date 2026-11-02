@@ -1,5 +1,6 @@
 package com.wander.identity.infrastructure.persistence.entity;
 
+import com.wander.identity.domain.constant.IdentityConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -28,6 +29,9 @@ public class CodeReplacementEntity {
     @Column(name = "replacement_hash", nullable = false)
     private String replacementHash;
 
+    @Column(name = "key_version", nullable = false, length = IdentityConstants.RECOVERY_KEY_VERSION_MAX_LENGTH)
+    private String keyVersion;
+
     @Column(name = "state", nullable = false)
     private String state;
 
@@ -46,6 +50,8 @@ public class CodeReplacementEntity {
     public UUID getOldCodeId() { return oldCodeId; }
     public void setOldCodeId(UUID v) { this.oldCodeId = v; }
     public String getReplacementHash() { return replacementHash; }
+    public String getKeyVersion() { return keyVersion; }
+    public void setKeyVersion(String v) { this.keyVersion = v; }
     public void setReplacementHash(String v) { this.replacementHash = v; }
     public String getState() { return state; }
     public void setState(String v) { this.state = v; }

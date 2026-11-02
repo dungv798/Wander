@@ -26,6 +26,9 @@ final class StaticWebConstants {
     /** Tên view chuyển tiếp nội bộ tới tệp vào của giao diện. */
     static final String INDEX_FORWARD_VIEW = "forward:/index.html";
 
+    /** Có dấu chấm trong tên cuối là yêu cầu tệp, không phải route SPA. */
+    static final String FILE_EXTENSION_SEPARATOR = ".";
+
     private StaticWebConstants() {
     }
 }

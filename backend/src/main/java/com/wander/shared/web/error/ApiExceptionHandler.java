@@ -6,6 +6,7 @@ import com.wander.shared.kernel.error.WanderException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -24,6 +25,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(WanderException.class)
     public ResponseEntity<ApiError> handleBusinessError(WanderException e) {
         return ResponseEntity.status(HttpStatuses.of(e.kind()))
+                .cacheControl(CacheControl.noStore())
                 .body(ApiError.of(e.code(), e.getMessage(), e.field(), e.details()));
     }
 
@@ -54,6 +56,6 @@ public class ApiExceptionHandler {
 
     /** Dựng phản hồi lỗi chuẩn từ mã HTTP, mã lỗi và lời báo. */
     private static ResponseEntity<ApiError> errorResponse(HttpStatus status, String code, String message) {
-        return ResponseEntity.status(status).body(ApiError.simple(code, message));
+        return ResponseEntity.status(status).cacheControl(CacheControl.noStore()).body(ApiError.simple(code, message));
     }
 }

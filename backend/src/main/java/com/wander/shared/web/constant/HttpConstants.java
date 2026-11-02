@@ -5,6 +5,12 @@ package com.wander.shared.web.constant;
  */
 public final class HttpConstants {
 
+    /** Mã đầu tiên của nhóm lỗi phía client; mọi lỗi không được cache như asset immutable. */
+    public static final int CLIENT_ERROR_STATUS_MIN = 400;
+
+    /** Mẫu đường dẫn cho interceptor API. */
+    public static final String ALL_API_PATHS = "/api/**";
+
     /** Tiền tố đường dẫn của API (có dấu gạch chéo đầu). */
     public static final String API_PATH_PREFIX = "/api/";
 

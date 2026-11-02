@@ -17,6 +17,9 @@ final class RateLimitConstants {
     /** Số lần đọc kho địa điểm công khai tối đa mỗi phút cho một địa chỉ (DR-008 Q-a; mặc định, đổi qua cấu hình). */
     static final int DEFAULT_CATALOG_PER_MINUTE = 120;
 
+    /** Ngân sách request ghi API mỗi phút cho một danh tính, dùng chung giữa các thiết bị. */
+    static final int DEFAULT_WRITES_PER_MINUTE = 120;
+
     /** Số yêu cầu duyệt (ghép thiết bị, xin xác thực lại) tối đa mỗi cửa sổ 10 phút (DR-018 E1). */
     static final int DEFAULT_APPROVAL_REQUESTS_PER_WINDOW = 3;
 
@@ -31,6 +34,9 @@ final class RateLimitConstants {
 
     /** Số khóa theo dõi tối đa trước khi dọn các cửa sổ đã hết hạn. */
     static final int MAX_TRACKED_KEYS = 10_000;
+
+    /** Khoảng cách tối thiểu giữa hai lần quét khi bảng khóa đã đầy. */
+    static final Duration PRUNE_INTERVAL = Duration.ofSeconds(1);
 
     private RateLimitConstants() {
     }

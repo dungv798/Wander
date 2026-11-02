@@ -59,7 +59,7 @@ public class IdentityService {
         String displayedCode = null;
         if (!skipRecoveryCode) {
             displayedCode = Secrets.newRecoveryCode();
-            store.addRecoveryCode(RecoveryCode.issue(identityId, hasher.hashDisplayed(displayedCode), now));
+            store.addRecoveryCode(RecoveryCode.issue(identityId, hasher.hashDisplayed(displayedCode), now, hasher.currentKeyVersion()));
             events.record(identityId, EventKind.CODE, null);
         }
         return new CreatedIdentity(identityId.toString(), token, displayedCode);

@@ -28,6 +28,9 @@ public class ResponseHeadersFilter extends OncePerRequestFilter {
             applyUiHeaders(response, path);
         }
         chain.doFilter(request, response);
+        if (response.getStatus() >= HttpConstants.CLIENT_ERROR_STATUS_MIN) {
+            response.setHeader(HttpConstants.HEADER_CACHE_CONTROL, HttpConstants.VALUE_CACHE_NO_STORE);
+        }
     }
 
     /** Header cho giao diện: chống nhúng khung, CSP chặt, cache lâu cho tệp có băm, còn lại phải xác nhận lại. */

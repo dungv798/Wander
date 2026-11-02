@@ -20,7 +20,7 @@ public final class RateLimits {
      */
     @ConfigurationProperties(ConfigConstants.LIMITS_PREFIX)
     public record Properties(Integer identityPerHour, Integer recoveryPerHour, Integer approvalPerHour, Integer catalogPerMinute,
-                             Integer approvalRequestsPerWindow) {
+                             Integer approvalRequestsPerWindow, Integer writesPerMinute) {
         public Properties {
             identityPerHour = identityPerHour == null ? RateLimitConstants.DEFAULT_IDENTITY_PER_HOUR : identityPerHour;
             recoveryPerHour = recoveryPerHour == null ? RateLimitConstants.DEFAULT_RECOVERY_PER_HOUR : recoveryPerHour;
@@ -28,6 +28,7 @@ public final class RateLimits {
             catalogPerMinute = catalogPerMinute == null ? RateLimitConstants.DEFAULT_CATALOG_PER_MINUTE : catalogPerMinute;
             approvalRequestsPerWindow = approvalRequestsPerWindow == null
                     ? RateLimitConstants.DEFAULT_APPROVAL_REQUESTS_PER_WINDOW : approvalRequestsPerWindow;
+            writesPerMinute = writesPerMinute == null ? RateLimitConstants.DEFAULT_WRITES_PER_MINUTE : writesPerMinute;
         }
     }
 
@@ -37,6 +38,7 @@ public final class RateLimits {
     private final FixedWindowRateLimiter catalog;
     private final FixedWindowRateLimiter pairingRequests;
     private final FixedWindowRateLimiter stepUpRequests;
+    private final FixedWindowRateLimiter writes;
 
     /** Tạo các bộ đếm theo cấu hình: ba bộ cửa sổ một giờ và một bộ cửa sổ một phút cho kho địa điểm. */
     public RateLimits(Properties props, Clock clock) {
@@ -46,6 +48,7 @@ public final class RateLimits {
         this.catalog = new FixedWindowRateLimiter(props.catalogPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock);
         this.pairingRequests = new FixedWindowRateLimiter(props.approvalRequestsPerWindow(), RateLimitConstants.APPROVAL_REQUEST_WINDOW, clock);
         this.stepUpRequests = new FixedWindowRateLimiter(props.approvalRequestsPerWindow(), RateLimitConstants.APPROVAL_REQUEST_WINDOW, clock);
+        this.writes = new FixedWindowRateLimiter(props.writesPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock);
     }
 
     /** Tạo danh tính, theo địa chỉ. */
@@ -76,6 +79,11 @@ public final class RateLimits {
     /** Đọc kho địa điểm công khai (chưa cần phiên), theo địa chỉ. */
     public void catalog(String clientAddress) {
         check(catalog, clientAddress);
+    }
+
+    /** Ghi API theo danh tính, không thể tăng ngân sách chỉ bằng việc ghép thêm thiết bị. */
+    public void write(String identityKey) {
+        check(writes, identityKey);
     }
 
     /** Tạo bộ đếm cho phép {@code maxPerHour} lần mỗi cửa sổ chuẩn. */

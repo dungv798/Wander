@@ -32,6 +32,7 @@ import tools.jackson.databind.json.JsonMapper;
         "wander.limits.approval-per-hour=100000",
         "wander.limits.catalog-per-minute=100000",
         "wander.limits.approval-requests-per-window=100000",
+        "wander.limits.writes-per-minute=100000",
         "wander.security.recovery-pepper=" + ApiTestSupport.TEST_RECOVERY_PEPPER})
 public abstract class ApiTestSupport {
 

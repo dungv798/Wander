@@ -1,5 +1,6 @@
 package com.wander.identity.infrastructure.persistence.entity;
 
+import com.wander.identity.domain.constant.IdentityConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,6 +23,9 @@ public class RecoveryCodeEntity {
     @Column(name = "code_hash", nullable = false)
     private String codeHash;
 
+    @Column(name = "key_version", nullable = false, length = IdentityConstants.RECOVERY_KEY_VERSION_MAX_LENGTH)
+    private String keyVersion;
+
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
@@ -36,6 +40,8 @@ public class RecoveryCodeEntity {
     public UUID getIdentityId() { return identityId; }
     public void setIdentityId(UUID v) { this.identityId = v; }
     public String getCodeHash() { return codeHash; }
+    public String getKeyVersion() { return keyVersion; }
+    public void setKeyVersion(String v) { this.keyVersion = v; }
     public void setCodeHash(String v) { this.codeHash = v; }
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant v) { this.createdAt = v; }

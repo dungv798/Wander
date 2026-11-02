@@ -28,6 +28,7 @@ import com.wander.identity.infrastructure.persistence.repository.RecoveryAttempt
 import com.wander.identity.infrastructure.persistence.repository.RecoveryCodeJpaRepository;
 import com.wander.identity.infrastructure.persistence.repository.SessionJpaRepository;
 import com.wander.identity.infrastructure.persistence.repository.StepUpJpaRepository;
+import jakarta.persistence.EntityManager;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
@@ -54,11 +55,12 @@ class JpaIdentityStore implements IdentityStore {
     private final StepUpJpaRepository stepUps;
     private final IdentityEventJpaRepository events;
     private final IdentityMapper mapper;
+    private final EntityManager entityManager;
 
     JpaIdentityStore(IdentityJpaRepository identities, SessionJpaRepository sessions,
                      RecoveryCodeJpaRepository codes, RecoveryAttemptJpaRepository attempts,
                      CodeReplacementJpaRepository replacements, DeviceLinkJpaRepository links,
-                     StepUpJpaRepository stepUps, IdentityEventJpaRepository events, IdentityMapper mapper) {
+                     StepUpJpaRepository stepUps, IdentityEventJpaRepository events, IdentityMapper mapper, EntityManager entityManager) {
         this.identities = identities;
         this.sessions = sessions;
         this.codes = codes;
@@ -68,6 +70,7 @@ class JpaIdentityStore implements IdentityStore {
         this.stepUps = stepUps;
         this.events = events;
         this.mapper = mapper;
+        this.entityManager = entityManager;
     }
 
     // ---- danh tính, phiên ----
@@ -162,6 +165,13 @@ class JpaIdentityStore implements IdentityStore {
     }
 
     @Override
+    public void lockIdentity(UUID identityId) {
+        identities.lockById(identityId);
+        // Chỉ gọi trước khi ghi: bỏ snapshot đọc trước lúc chờ khóa, giữ khóa DB đến hết giao dịch.
+        entityManager.clear();
+    }
+
+    @Override
     public void invalidateRecoveryCode(RecoveryCode invalidated) {
         // Flush ngay: Hibernate mặc định chạy INSERT trước UPDATE khi flush, sẽ vi phạm chỉ mục
         // "một mã hợp lệ cho mỗi danh tính" nếu mã mới được chèn trước khi mã cũ bị vô hiệu.
@@ -188,6 +198,11 @@ class JpaIdentityStore implements IdentityStore {
     @Override
     public Optional<RecoveryAttempt> findAttemptForUpdate(String attemptKey) {
         return attempts.lockByAttemptKey(attemptKey).map(e -> mapper.toDomain(e));
+    }
+
+    @Override
+    public Optional<RecoveryAttempt> findAttempt(String attemptKey) {
+        return attempts.findByAttemptKey(attemptKey).map(e -> mapper.toDomain(e));
     }
 
     @Override

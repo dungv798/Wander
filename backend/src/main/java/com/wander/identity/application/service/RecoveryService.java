@@ -76,7 +76,9 @@ public class RecoveryService {
         String normalized = Secrets.normalize(input.get(IdentityFields.CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null) throw invalidCode();
 
-        RecoveryCode oldCode = store.findActiveCodeByHash(hasher.hash(normalized)).orElseThrow(RecoveryService::invalidCode);
+        RecoveryCode oldCode = findActiveCode(normalized).orElseThrow(RecoveryService::invalidCode);
+        store.lockIdentity(oldCode.identityId());
+        oldCode = store.findCodeForUpdate(oldCode.id()).filter(RecoveryCode::isActive).orElseThrow(RecoveryService::invalidCode);
         String replacement = Secrets.newRecoveryCode();
         String replacementHash = hasher.hashDisplayed(replacement);
         Instant now = Timestamps.now(clock);
@@ -88,7 +90,7 @@ public class RecoveryService {
         } else {
             if (store.isTokenHashInUse(tokenHash)) throw IdentityInput.tokenInUse();
             store.saveAttempt(new RecoveryAttempt(UUID.randomUUID(), attemptKey, oldCode.identityId(), oldCode.id(), replacementHash,
-                    tokenHash, AttemptState.PENDING, now, expiresAt, deviceName));
+                    tokenHash, AttemptState.PENDING, now, expiresAt, deviceName, hasher.currentKeyVersion()));
         }
         return new RecoveryStarted(attemptKey, replacement, Timestamps.format(expiresAt));
     }
@@ -101,10 +103,10 @@ public class RecoveryService {
         String attemptKey = IdentityInput.attemptKey(input.get(IdentityFields.ATTEMPT_ID));
         String normalized = Secrets.normalize(input.get(IdentityFields.REPLACEMENT_CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null) throw invalidReplacement();
-        String replacementHash = hasher.hash(normalized);
-
+        RecoveryAttempt metadata = store.findAttempt(attemptKey).orElseThrow(RecoveryService::invalidCode);
+        store.lockIdentity(metadata.identityId());
         RecoveryAttempt attempt = store.findAttemptForUpdate(attemptKey).orElseThrow(RecoveryService::invalidCode);
-        if (!attempt.replacementHash().equals(replacementHash)) throw invalidReplacement();
+        if (!hasher.matches(normalized, attempt.replacementHash(), attempt.keyVersion())) throw invalidReplacement();
         if (attempt.state() == AttemptState.COMMITTED) return Committed.YES;
         if (attempt.state() != AttemptState.PENDING) throw invalidCode();
         Instant now = Timestamps.now(clock);
@@ -115,7 +117,7 @@ public class RecoveryService {
         RecoveryCode oldCode = store.findCodeForUpdate(attempt.oldCodeId()).filter(RecoveryCode::isActive)
                 .orElseThrow(() -> WanderException.conflict(IdentityErrorCodes.CODE_ALREADY_USED, IdentityMessages.CODE_ALREADY_USED));
         store.invalidateRecoveryCode(oldCode.invalidate(IdentityConstants.INVALIDATED_BY_RECOVERY, now));
-        store.addRecoveryCode(RecoveryCode.issue(attempt.identityId(), attempt.replacementHash(), now));
+        store.addRecoveryCode(RecoveryCode.issue(attempt.identityId(), attempt.replacementHash(), now, attempt.keyVersion()));
         store.addSession(Session.open(attempt.identityId(), attempt.sessionTokenHash(), attempt.deviceName(), now));
         store.saveAttempt(attempt.withState(AttemptState.COMMITTED));
         events.record(attempt.identityId(), EventKind.RECOVERED, attempt.deviceName());
@@ -129,6 +131,7 @@ public class RecoveryService {
      * Có mã hiện hành thì bắt buộc xác thực lại: trình mã hiện hành, hoặc phê duyệt từ thiết bị khác.
      */
     public ReplacementBegun beginReplacement(AuthenticatedPrincipal principal, Map<String, Object> input) {
+        store.lockIdentity(principal.identityId());
         Optional<RecoveryCode> current = store.findActiveCode(principal.identityId());
         current.ifPresent(code -> requireStepUpEvidence(principal, input, code));
         // Tại mọi thời điểm chỉ có một mã thay thế chờ.
@@ -139,12 +142,13 @@ public class RecoveryService {
         UUID id = UUID.randomUUID();
         store.saveReplacement(new CodeReplacement(id, principal.identityId(), principal.sessionId(),
                 current.map(RecoveryCode::id).orElse(null), hasher.hashDisplayed(replacement),
-                ReplacementState.PENDING, now, expiresAt));
+                ReplacementState.PENDING, now, expiresAt, hasher.currentKeyVersion()));
         return new ReplacementBegun(id.toString(), replacement, Timestamps.format(expiresAt));
     }
 
     /** Pha 2: chủ nhập lại mã thay thế; commit vô hiệu mã cũ và kích hoạt mã mới trong một giao dịch. */
     public Committed confirmReplacement(AuthenticatedPrincipal principal, Map<String, Object> input) {
+        store.lockIdentity(principal.identityId());
         String normalized = Secrets.normalize(input.get(IdentityFields.REPLACEMENT_CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null || !(input.get(IdentityFields.PENDING_ID) instanceof String pendingId)) throw invalidReplacement();
         CodeReplacement replacement = Ids.parse(pendingId)
@@ -154,13 +158,13 @@ public class RecoveryService {
         if (replacement.isExpired(now)) {
             throw WanderException.invalid(IdentityErrorCodes.ATTEMPT_EXPIRED, IdentityMessages.REPLACEMENT_EXPIRED, null);
         }
-        if (!replacement.replacementHash().equals(hasher.hash(normalized))) throw invalidReplacement();
+        if (!hasher.matches(normalized, replacement.replacementHash(), replacement.keyVersion())) throw invalidReplacement();
         Optional<RecoveryCode> current = store.findActiveCode(principal.identityId());
         if (!Objects.equals(current.map(RecoveryCode::id).orElse(null), replacement.oldCodeId())) {
             throw WanderException.conflict(IdentityErrorCodes.CODE_CHANGED, IdentityMessages.CODE_CHANGED);
         }
         current.ifPresent(code -> store.invalidateRecoveryCode(code.invalidate(IdentityConstants.INVALIDATED_BY_REPLACEMENT, now)));
-        store.addRecoveryCode(RecoveryCode.issue(principal.identityId(), replacement.replacementHash(), now));
+        store.addRecoveryCode(RecoveryCode.issue(principal.identityId(), replacement.replacementHash(), now, replacement.keyVersion()));
         store.saveReplacement(replacement.withState(ReplacementState.COMMITTED));
         events.record(principal.identityId(), EventKind.CODE, null);
         return Committed.YES;
@@ -251,7 +255,7 @@ public class RecoveryService {
     /** Mã người dùng trình phải khớp mã khôi phục hiện hành; không khớp thì ném lỗi {@code denied}. */
     private void requireMatchesCurrentCode(Object typedCode, RecoveryCode current, WanderException denied) {
         String normalized = Secrets.normalize(typedCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
-        if (normalized == null || !hasher.hash(normalized).equals(current.codeHash())) throw denied;
+        if (normalized == null || !hasher.matches(normalized, current.codeHash(), current.keyVersion())) throw denied;
     }
 
     /** Dùng (một lần) phê duyệt đã được duyệt cho đúng phiên và thao tác; không có thì ném STEP_UP_REQUIRED. */
@@ -265,13 +269,19 @@ public class RecoveryService {
     }
 
     /** Lần thử đã có được bắt đầu lại, nhưng chỉ cho chính bên đã tạo (cùng mã, cùng bí mật phiên) và khi còn chờ (MĐ-6). */
-    private static RecoveryAttempt restartedAttempt(RecoveryAttempt attempt, RecoveryCode oldCode, String tokenHash,
+    private RecoveryAttempt restartedAttempt(RecoveryAttempt attempt, RecoveryCode oldCode, String tokenHash,
                                                     String replacementHash, Instant expiresAt, String deviceName) {
         boolean sameOwner = attempt.state() == AttemptState.PENDING
                 && attempt.oldCodeId().equals(oldCode.id())
                 && attempt.sessionTokenHash().equals(tokenHash);
         if (!sameOwner) throw invalidCode();
-        return attempt.restart(replacementHash, expiresAt, deviceName);
+        return attempt.restart(replacementHash, expiresAt, deviceName, hasher.currentKeyVersion());
+    }
+
+    /** Tìm mã theo từng khóa còn hỗ trợ, kiểm cả metadata để không nhầm nhãn khóa. */
+    private Optional<RecoveryCode> findActiveCode(String normalized) {
+        return hasher.keyVersions().stream().flatMap(version -> hasher.hashWithVersion(normalized, version)
+                .flatMap(store::findActiveCodeByHash).filter(code -> version.equals(code.keyVersion())).stream()).findFirst();
     }
 
     /** Lỗi mã khôi phục sai hoặc đã được dùng. */

@@ -53,4 +53,29 @@ class HmacRecoveryCodeHasherTest {
         runner.withPropertyValues("wander.security.recovery-pepper=" + PEPPER)
                 .run(context -> assertThat(context).hasSingleBean(HmacRecoveryCodeHasher.class));
     }
+
+    @Test
+    @DisplayName("xoay khóa: mã mới dùng khóa hiện hành, mã cũ còn xác minh được bằng đúng nhãn")
+    void rotationKeepsPreviousKeyWithoutRelabeling() {
+        var old = new HmacRecoveryCodeHasher(PEPPER);
+        var rotated = new HmacRecoveryCodeHasher(PEPPER + "new", "v2", "v1", PEPPER);
+        assertThat(rotated.currentKeyVersion()).isEqualTo("v2");
+        assertThat(rotated.keyVersions()).containsExactly("v2", "v1");
+        assertThat(rotated.hash(CODE)).isNotEqualTo(old.hash(CODE));
+        assertThat(rotated.matches(CODE, old.hash(CODE), "v1")).isTrue();
+        assertThat(rotated.matches(CODE, old.hash(CODE), "v2")).isFalse();
+        assertThat(rotated.matches(CODE, old.hash(CODE), "retired")).isFalse();
+        assertThat(new HmacRecoveryCodeHasher(PEPPER + "new", "v2", "", "")
+                .matches(CODE, old.hash(CODE), "v1")).isFalse();
+    }
+
+    @Test
+    @DisplayName("cấu hình rotation thiếu cặp, trùng nhãn, nhãn hỏng hoặc khóa cũ ngắn đều fail-fast và không lộ secret")
+    void invalidRotationCannotStart() {
+        for (String[] settings : new String[][] {{"v2", "v1", ""}, {"v2", "", PEPPER}, {"v1", "v1", PEPPER},
+                {"bad label", "", ""}, {"v2", "v1", "short-previous-secret"}}) {
+            assertThatThrownBy(() -> new HmacRecoveryCodeHasher(PEPPER, settings[0], settings[1], settings[2]))
+                    .isInstanceOf(IllegalStateException.class).hasMessageNotContaining(PEPPER).hasMessageNotContaining("short-previous-secret");
+        }
+    }
 }

@@ -78,4 +78,15 @@ class StaticWebIT extends ApiTestSupport {
         assertThat(h.status()).isEqualTo(200);
         assertThat(h.str("status")).isEqualTo("UP");
     }
+
+    @Test
+    @DisplayName("asset thiếu trả 404 không cache, không bị SPA trả HTML với immutable")
+    void missingAssetsAreNotSpaRoutes() {
+        for (String path : new String[] {"/assets/missing.js", "/assets/no-extension", "/missing.css", "/catalog/photos/missing.jpg"}) {
+            Res missing = call("GET", path, null);
+            assertThat(missing.status()).as(path).isEqualTo(404);
+            assertThat(missing.raw().body()).as(path).doesNotContain("<title>Wander</title>");
+            assertThat(missing.raw().headers().firstValue("Cache-Control")).as(path).hasValue("no-store");
+        }
+    }
 }

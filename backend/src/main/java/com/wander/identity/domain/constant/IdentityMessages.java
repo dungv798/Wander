@@ -79,6 +79,12 @@ public final class IdentityMessages {
     /** Môi trường chạy không có HMAC-SHA-256. */
     public static final String RECOVERY_HMAC_UNAVAILABLE = "Môi trường chạy không có HMAC-SHA-256 để băm mã khôi phục";
 
+    /** Cấu hình hai khóa không đầy đủ, trùng nhãn hoặc có nhãn không hợp lệ; không kèm giá trị secret. */
+    public static final String RECOVERY_KEY_CONFIGURATION_INVALID = "Cấu hình phiên bản khóa khôi phục không hợp lệ; kiểm tra nhãn và cặp khóa trước đó";
+
+    /** Không chạy với cấu hình bỏ mất khóa mà dữ liệu còn tham chiếu, tránh làm người dùng mất khả năng khôi phục. */
+    public static final String RECOVERY_KEY_STILL_REQUIRED = "Thiếu phiên bản khóa khôi phục còn được dữ liệu sử dụng; khôi phục cấu hình khóa trước khi deploy";
+
     private IdentityMessages() {
     }
 }

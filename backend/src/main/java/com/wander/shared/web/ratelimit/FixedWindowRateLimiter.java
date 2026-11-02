@@ -16,6 +16,7 @@ public final class FixedWindowRateLimiter {
     private final long windowMs;
     private final Clock clock;
     private final Map<String, Window> hits = new ConcurrentHashMap<>();
+    private long nextPruneAt;
 
     /** Một cửa sổ đếm: thời điểm bắt đầu và số lần đã ghi nhận. */
     private record Window(long start, int count) {
@@ -29,11 +30,15 @@ public final class FixedWindowRateLimiter {
     }
 
     /** Ghi nhận một lần; trả về false nếu đã vượt giới hạn trong cửa sổ hiện tại. */
-    public boolean hit(String key) {
+    public synchronized boolean hit(String key) {
         long now = clock.millis();
-        if (hits.size() >= RateLimitConstants.MAX_TRACKED_KEYS) pruneExpired(now);
+        if (hits.size() >= RateLimitConstants.MAX_TRACKED_KEYS && now >= nextPruneAt) {
+            pruneExpired(now);
+            nextPruneAt = now + RateLimitConstants.PRUNE_INTERVAL.toMillis();
+        }
+        if (!hits.containsKey(key) && hits.size() >= RateLimitConstants.MAX_TRACKED_KEYS) return false;
         Window window = hits.compute(key, (k, old) ->
-                isExpired(old, now) ? new Window(now, 1) : new Window(old.start(), old.count() + 1));
+                isExpired(old, now) ? new Window(now, 1) : new Window(old.start(), Math.min(old.count(), max) + 1));
         return window.count() <= max;
     }
 

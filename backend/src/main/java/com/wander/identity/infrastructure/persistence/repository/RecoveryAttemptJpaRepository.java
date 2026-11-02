@@ -13,6 +13,9 @@ import org.springframework.data.repository.query.Param;
 /** Spring Data JPA repository của bảng lần thử khôi phục. */
 public interface RecoveryAttemptJpaRepository extends JpaRepository<RecoveryAttemptEntity, UUID> {
 
+    /** Đọc metadata trước khi khóa danh tính; không dùng kết quả này để commit. */
+    Optional<RecoveryAttemptEntity> findByAttemptKey(String attemptKey);
+
     /** Lần thử theo mã nhận diện với khóa ghi (SELECT … FOR UPDATE). */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.ATTEMPT_BY_KEY)

@@ -35,11 +35,11 @@ public final class IdentityModel {
 
     /** Mã khôi phục (chỉ băm). Tối đa một mã hợp lệ cho mỗi danh tính (D22, INV-13) — có ràng buộc ở cơ sở dữ liệu. */
     public record RecoveryCode(UUID id, UUID identityId, String codeHash, Instant createdAt, Instant invalidatedAt,
-                               String invalidatedReason) {
+                               String invalidatedReason, String keyVersion) {
 
         /** Phát hành mã mới còn hợp lệ cho danh tính. */
-        public static RecoveryCode issue(UUID identityId, String codeHash, Instant now) {
-            return new RecoveryCode(UUID.randomUUID(), identityId, codeHash, now, null, null);
+        public static RecoveryCode issue(UUID identityId, String codeHash, Instant now, String keyVersion) {
+            return new RecoveryCode(UUID.randomUUID(), identityId, codeHash, now, null, null, keyVersion);
         }
 
         /** Mã còn hợp lệ (chưa bị vô hiệu). */
@@ -49,7 +49,7 @@ public final class IdentityModel {
 
         /** Bản đã vô hiệu của mã này với lý do cho trước. */
         public RecoveryCode invalidate(String reason, Instant now) {
-            return new RecoveryCode(id, identityId, codeHash, createdAt, now, reason);
+            return new RecoveryCode(id, identityId, codeHash, createdAt, now, reason, keyVersion);
         }
     }
 
@@ -59,7 +59,7 @@ public final class IdentityModel {
     /** Lần thử khôi phục (KP-C, D24): mã cũ chỉ vô hiệu khi mã thay thế được xác nhận (commit). */
     public record RecoveryAttempt(UUID id, String attemptKey, UUID identityId, UUID oldCodeId, String replacementHash,
                                   String sessionTokenHash, AttemptState state, Instant createdAt, Instant expiresAt,
-                                  String deviceName) {
+                                  String deviceName, String keyVersion) {
 
         /** Đã quá hạn tại thời điểm {@code now}. */
         public boolean isExpired(Instant now) {
@@ -67,15 +67,15 @@ public final class IdentityModel {
         }
 
         /** Bản bắt đầu lại cùng lần thử với mã thay thế mới và hạn mới; tên thiết bị mới (nếu có) thay tên cũ, không nêu thì giữ tên cũ. */
-        public RecoveryAttempt restart(String newReplacementHash, Instant newExpiresAt, String newDeviceName) {
+        public RecoveryAttempt restart(String newReplacementHash, Instant newExpiresAt, String newDeviceName, String newKeyVersion) {
             return new RecoveryAttempt(id, attemptKey, identityId, oldCodeId, newReplacementHash, sessionTokenHash, state, createdAt, newExpiresAt,
-                    newDeviceName != null ? newDeviceName : deviceName);
+                    newDeviceName != null ? newDeviceName : deviceName, newKeyVersion);
         }
 
         /** Bản có trạng thái mới. */
         public RecoveryAttempt withState(AttemptState newState) {
             return new RecoveryAttempt(id, attemptKey, identityId, oldCodeId, replacementHash, sessionTokenHash, newState, createdAt, expiresAt,
-                    deviceName);
+                    deviceName, keyVersion);
         }
     }
 
@@ -84,7 +84,7 @@ public final class IdentityModel {
 
     /** Phát hành hoặc tái tạo mã từ một phiên hợp lệ, hai pha (D23, D25, MĐ-2). */
     public record CodeReplacement(UUID id, UUID identityId, UUID sessionId, UUID oldCodeId, String replacementHash,
-                                  ReplacementState state, Instant createdAt, Instant expiresAt) {
+                                  ReplacementState state, Instant createdAt, Instant expiresAt, String keyVersion) {
 
         /** Đã quá hạn tại thời điểm {@code now}. */
         public boolean isExpired(Instant now) {
@@ -93,7 +93,7 @@ public final class IdentityModel {
 
         /** Bản có trạng thái mới. */
         public CodeReplacement withState(ReplacementState newState) {
-            return new CodeReplacement(id, identityId, sessionId, oldCodeId, replacementHash, newState, createdAt, expiresAt);
+            return new CodeReplacement(id, identityId, sessionId, oldCodeId, replacementHash, newState, createdAt, expiresAt, keyVersion);
         }
     }
 

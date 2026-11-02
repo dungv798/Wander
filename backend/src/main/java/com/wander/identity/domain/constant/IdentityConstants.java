@@ -76,6 +76,24 @@ public final class IdentityConstants {
     /** Biểu thức cấu hình lấy khóa băm mã khôi phục; KHÔNG có giá trị mặc định (thiếu thì Spring không khởi động). */
     public static final String RECOVERY_PEPPER_EXPRESSION = "${wander.security.recovery-pepper}";
 
+    /** Phiên bản mặc định của khóa đã dùng trước khi có metadata xoay khóa. */
+    public static final String RECOVERY_LEGACY_KEY_VERSION = "v1";
+
+    /** Nhãn khóa hiện hành, không phải secret. */
+    public static final String RECOVERY_KEY_VERSION_EXPRESSION = "${wander.security.recovery-key-version:v1}";
+
+    /** Nhãn khóa cũ được giữ trong giai đoạn chuyển tiếp. */
+    public static final String RECOVERY_PREVIOUS_KEY_VERSION_EXPRESSION = "${wander.security.recovery-previous-key-version:}";
+
+    /** Khóa cũ, chỉ cấu hình khi còn mã hoặc lần thử tham chiếu nhãn cũ. */
+    public static final String RECOVERY_PREVIOUS_PEPPER_EXPRESSION = "${wander.security.recovery-previous-pepper:}";
+
+    /** Nhãn khóa an toàn để ghi metadata và kiểm tra khi khởi động. */
+    public static final String RECOVERY_KEY_VERSION_REGEX = "^[A-Za-z0-9_-]{1,32}$";
+
+    /** Độ dài cột metadata nhãn khóa. */
+    public static final int RECOVERY_KEY_VERSION_MAX_LENGTH = 32;
+
     /** Tiền tố của placeholder cấu hình chưa được giải quyết; khóa bắt đầu bằng tiền tố này bị coi là thiếu khóa. */
     public static final String PLACEHOLDER_PREFIX = "${";
 

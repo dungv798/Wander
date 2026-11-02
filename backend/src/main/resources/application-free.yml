@@ -1,0 +1,27 @@
+# Một JVM 512 MiB, một instance. Giữ mặc định local trong application.yml.
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 0
+      idle-timeout: 60000
+      keepalive-time: 0
+      connection-timeout: 30000
+server:
+  tomcat:
+    threads:
+      max: 20
+      min-spare: 2
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/json,application/javascript,text/javascript,text/css,text/html,text/plain,image/svg+xml
+management:
+  endpoint:
+    health:
+      show-details: never
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState
