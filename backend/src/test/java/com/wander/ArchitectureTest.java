@@ -81,7 +81,7 @@ class ArchitectureTest {
     @DisplayName("bounded context planning không phụ thuộc identity hay catalog")
     void planningIndependentOfOthers() {
         noClasses().that().resideInAPackage("com.wander.planning..")
-                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.catalog..")
+                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.catalog..", "com.wander.rating..")
                 .check(classes);
     }
 
@@ -89,7 +89,7 @@ class ArchitectureTest {
     @DisplayName("bounded context identity không phụ thuộc planning hay catalog")
     void identityIndependentOfOthers() {
         noClasses().that().resideInAPackage("com.wander.identity..")
-                .should().dependOnClassesThat().resideInAnyPackage("com.wander.planning..", "com.wander.catalog..")
+                .should().dependOnClassesThat().resideInAnyPackage("com.wander.planning..", "com.wander.catalog..", "com.wander.rating..")
                 .check(classes);
     }
 
@@ -97,7 +97,15 @@ class ArchitectureTest {
     @DisplayName("bounded context catalog (ADR-010) không phụ thuộc identity hay planning")
     void catalogIndependentOfOthers() {
         noClasses().that().resideInAPackage("com.wander.catalog..")
-                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.planning..")
+                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.planning..", "com.wander.rating..")
+                .check(classes);
+    }
+
+    @Test
+    @DisplayName("bounded context rating (DR-032) không phụ thuộc identity, planning hay catalog")
+    void ratingIndependentOfOthers() {
+        noClasses().that().resideInAPackage("com.wander.rating..")
+                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.planning..", "com.wander.catalog..")
                 .check(classes);
     }
 
@@ -105,7 +113,7 @@ class ArchitectureTest {
     @DisplayName("shared không phụ thuộc module nghiệp vụ nào")
     void sharedIsShared() {
         noClasses().that().resideInAPackage("com.wander.shared..")
-                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.planning..", "com.wander.catalog..")
+                .should().dependOnClassesThat().resideInAnyPackage("com.wander.identity..", "com.wander.planning..", "com.wander.catalog..", "com.wander.rating..")
                 .check(classes);
     }
 
@@ -139,7 +147,7 @@ class ArchitectureTest {
     @Test
     @DisplayName("ARC-6: không vòng phụ thuộc giữa các gói con (api, application, domain, infrastructure) của một module")
     void noCyclesInsideModules() {
-        for (String module : new String[] {"identity", "planning", "catalog"}) {
+        for (String module : new String[] {"identity", "planning", "catalog", "rating"}) {
             slices().matching("com.wander." + module + ".(*)..")
                     .should().beFreeOfCycles()
                     .check(classes);

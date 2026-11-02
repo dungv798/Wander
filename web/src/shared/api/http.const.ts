@@ -1,6 +1,7 @@
 /** Mã HTTP và tên tiêu đề dùng ở lớp gọi API (một nơi, không rải số/chuỗi ra mã). */
 export const HTTP = {
   NO_CONTENT: 204,
+  UNAUTHORIZED: 401,
   NOT_FOUND: 404,
 } as const;
 

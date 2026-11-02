@@ -1,0 +1,19 @@
+/* Thẻ đánh giá Wander trong tờ chi tiết địa điểm. Chỉ dùng token (styles/tokens.css). */
+.rating-card { display: grid; gap: var(--s-3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-4); }
+.rating-card h3 { font: var(--text-section); margin: 0; color: var(--ink); }
+.rating-summary { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin: 0; font: var(--text-body); color: var(--ink); }
+.rating-empty { margin: 0; font: var(--text-body); color: var(--muted); }
+.rating-stars { color: var(--brand-ink); letter-spacing: .08em; }
+.rating-mine-box { display: grid; gap: var(--s-2); }
+.rating-mine-box > b { font: var(--text-card); color: var(--ink); }
+.star-picker { display: flex; gap: var(--s-1); }
+.star-btn { min-width: var(--tap); min-height: var(--tap); border: 1px solid var(--border-ctrl); border-radius: var(--r-md); background: var(--surface); color: var(--muted); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.star-btn.on { background: var(--tint); color: var(--tint-ink); border-color: var(--brand); }
+.star-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+.rating-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.rating-comments h4 { font: var(--text-card); margin: 0 0 var(--s-2); color: var(--ink); }
+.rating-comments ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+.rating-comments li { display: grid; gap: var(--s-1); padding-top: var(--s-3); border-top: 1px solid var(--line); }
+.rating-comments p { margin: 0; font: var(--text-body); color: var(--ink); overflow-wrap: anywhere; }
+.rating-mine { font: var(--text-secondary); color: var(--like); }
+.rating-comments li .btn { justify-self: start; }

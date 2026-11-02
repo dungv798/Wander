@@ -7,6 +7,8 @@
 | Mã | Ý nghĩa (đọc từ tên mã) | Giao diện | Màn |
 |---|---|---|---|
 | `UNAUTHENTICATED`, `INVALID_SESSION_TOKEN` | không có/không hợp lệ phiên | **Phiên hết hạn**: giữ chữ đang gõ; nhánh A (đã có mã/thiết bị tin cậy) → "Mở trên máy này"; nhánh B (đã bỏ qua mã) → nói thẳng không khôi phục được | S19 |
+| `RATING_LIMIT_REACHED` | đã chấm đủ 1000 quán (rating Wander) | "Việc này chưa làm được" (nhóm rule): xóa bớt đánh giá cũ rồi thử lại | Chi tiết địa điểm |
+| `CANNOT_REPORT_OWN` | báo cáo lời bình của chính mình | giao diện không hiện nút này cho lời bình của mình; nếu gặp thì nhóm rule | Chi tiết địa điểm |
 | `STEP_UP_REQUIRED` | thao tác cần xác thực lại | "Cần xác thực lại" → Bảo mật / hộp xác thực lại | S12, S20 |
 | `INVALID_APPROVAL_CODE` | mã duyệt sai | thông báo chung "chưa đúng hoặc không còn hiệu lực" (không phân biệt sai/hết hạn) | S12 |
 | `RATE_LIMITED` | quá giới hạn tần suất | "Bạn thao tác hơi nhanh. Chờ một lúc rồi thử lại. Dữ liệu của bạn không mất." (không đếm) | S20 |

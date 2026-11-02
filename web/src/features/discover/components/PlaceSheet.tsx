@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { lazy, Suspense, useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 import { COPY } from '../../../shared/const/copy.vi.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
@@ -13,6 +13,9 @@ import { PlaceGallery } from './place/PlaceGallery.tsx';
 import { PlaceRouteMap } from './place/PlaceRouteMap.tsx';
 import { PlaceDisclosure } from './place/PlaceDisclosure.tsx';
 import '../place.css';
+
+/** Thẻ đánh giá tải lười: không tính vào JS ban đầu (ngân sách 170 KB). */
+const PlaceRatingCard = lazy(() => import('../../rating/index.ts').then((m) => ({ default: m.PlaceRatingCard })));
 
 /** Nội dung chi tiết một địa điểm: ảnh, nhãn biên tập, thông tin nhanh, buổi đi, mùa đẹp, mẹo, mô tả, ghi công. */
 function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDetail; readonly placeId: string; readonly inDeck: boolean }) {
@@ -44,6 +47,7 @@ function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDet
         <div className={`pp cat-${place.category}`}>
           {slot?.extra}
           <EditorialRate place={place} />
+          <Suspense fallback={null}><PlaceRatingCard key={place.id} placeId={place.id} /></Suspense>
           <About place={place} />
           <QuickFacts place={place} />
           <Highlights place={place} />

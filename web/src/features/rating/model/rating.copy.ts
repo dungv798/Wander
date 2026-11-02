@@ -1,0 +1,23 @@
+/** Chữ hiển thị của tính năng rating (tiếng Việt). */
+export const RATING_COPY = {
+  title: 'Đánh giá',
+  source: 'Wander',
+  people: '{n} người',
+  noneYet: 'Chưa có ai đánh giá. Hãy là người đầu tiên.',
+  yourRating: 'Bạn chấm',
+  starsGroup: 'Chọn số sao',
+  starLabel: '{n} sao',
+  commentLabel: 'Lời bình (không bắt buộc)',
+  commentHint: 'Tối đa {max} ký tự. Hiển thị ẩn danh cho người dùng Wander khác.',
+  save: 'Gửi đánh giá',
+  update: 'Cập nhật',
+  remove: 'Xóa đánh giá của tôi',
+  saved: 'Đã lưu đánh giá.',
+  removed: 'Đã xóa đánh giá.',
+  commentsTitle: 'Lời bình gần đây',
+  mine: 'Của bạn',
+  report: 'Báo cáo',
+  reported: 'Đã gửi báo cáo. Cảm ơn bạn.',
+  loading: 'Đang tải đánh giá…',
+  retry: 'Thử lại',
+} as const;
