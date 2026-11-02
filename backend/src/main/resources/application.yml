@@ -63,6 +63,8 @@ wander:
     catalog-per-minute: ${WANDER_LIMIT_CATALOG:120}
     # Số yêu cầu duyệt (ghép thiết bị theo địa chỉ, xin xác thực lại theo danh tính) mỗi 10 phút (DR-018 E1).
     approval-requests-per-window: ${WANDER_LIMIT_APPROVAL_REQUESTS:3}
+    # Thiết bị mới hỏi trạng thái yêu cầu ghép (máy mới hỏi mỗi giây), mỗi phút cho một địa chỉ.
+    link-poll-per-minute: ${WANDER_LIMIT_LINK_POLL:120}
 
 logging:
   level:

@@ -20,6 +20,12 @@ final class RateLimitConstants {
     /** Ngân sách request ghi API mỗi phút cho một danh tính, dùng chung giữa các thiết bị. */
     static final int DEFAULT_WRITES_PER_MINUTE = 120;
 
+    /**
+     * Số lần thiết bị mới hỏi trạng thái yêu cầu ghép tối đa mỗi phút cho một địa chỉ. Máy mới hỏi mỗi giây
+     * (60 lần/phút) nên cần trần riêng, không dùng chung hạn mức khôi phục theo giờ.
+     */
+    static final int DEFAULT_LINK_POLL_PER_MINUTE = 120;
+
     /** Số yêu cầu duyệt (ghép thiết bị, xin xác thực lại) tối đa mỗi cửa sổ 10 phút (DR-018 E1). */
     static final int DEFAULT_APPROVAL_REQUESTS_PER_WINDOW = 3;
 

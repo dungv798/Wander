@@ -2,9 +2,11 @@ package com.wander.identity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.wander.identity.infrastructure.persistence.repository.RecoveryCodeJpaRepository;
 import com.wander.identity.infrastructure.security.HmacRecoveryCodeHasher;
 import com.wander.support.ApiTestSupport;
 import org.junit.jupiter.api.DisplayName;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
@@ -18,9 +20,21 @@ class RecoveryKeyRotationIT extends ApiTestSupport {
     static final String OLD_PEPPER = "test-only-old-pepper-0123456789-abcdefghijklmnopqrstuv";
     private final HmacRecoveryCodeHasher oldHasher = new HmacRecoveryCodeHasher(OLD_PEPPER);
 
+    @Autowired
+    private RecoveryCodeJpaRepository codes;
+
     private String activeVersion(User user) {
         return jdbc.sql("SELECT key_version FROM recovery_codes WHERE identity_id = ?::uuid AND invalidated_at IS NULL")
                 .param(user.identityId()).query(String.class).single();
+    }
+
+    @Test
+    @DisplayName("câu SQL của guard khởi động trả đúng nhãn khóa còn cần (mã active, mã chờ) trên DB thật")
+    void requiredKeyVersionsQueryRunsOnRealDatabase() {
+        User user = newUser();
+        assertThat(codes.findRequiredKeyVersions()).contains("v2");
+        jdbc.sql("UPDATE recovery_codes SET key_version = 'v1' WHERE identity_id = ?::uuid").param(user.identityId()).update();
+        assertThat(codes.findRequiredKeyVersions()).contains("v1");
     }
 
     @Test

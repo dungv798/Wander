@@ -88,7 +88,7 @@ public class IdentityController {
     /** Thiết bị mới hỏi yêu cầu ghép đã được duyệt chưa. */
     @GetMapping(IdentityApiConstants.DEVICE_LINK_BY_ID_PATH)
     public IdentityViews.DeviceLinkStatus deviceLinkStatus(@PathVariable String id, HttpServletRequest request) {
-        limitRecoveryByAddress(request);
+        limits.linkPoll(clientAddress.of(request));
         return deviceLinks.getLinkStatus(id);
     }
 
