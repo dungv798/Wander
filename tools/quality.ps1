@@ -18,7 +18,7 @@ New-Item -ItemType Directory -Force $logs | Out-Null
 
 # Phiên bản ghim cho ảnh quét; đổi có chủ đích và ghi vào docs/implementation/decisions.md.
 $gitleaksImage = 'zricethezav/gitleaks:v8.21.2'
-$trivyImage = 'aquasec/trivy:0.58.1'
+$trivyImage = 'aquasec/trivy:0.76.1@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c'
 
 # Chạy một lệnh ngoài, ghi toàn bộ đầu ra vào log và trả mã thoát.
 function Invoke-Logged([string]$Name, [scriptblock]$Command) {

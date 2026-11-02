@@ -1,0 +1,26 @@
+# Secret và proxy hop nhập trên Render; không đưa credential vào Git.
+services:
+  - type: web
+    name: wander
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    autoDeployTrigger: 'off'
+    healthCheckPath: /actuator/health/readiness
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: free
+      - key: WANDER_DB_URL
+        sync: false
+      - key: WANDER_DB_USER
+        sync: false
+      - key: WANDER_DB_PASSWORD
+        sync: false
+      - key: WANDER_RECOVERY_PEPPER
+        sync: false
+      - key: WANDER_RECOVERY_KEY_VERSION
+        value: v1
+      - key: WANDER_TRUSTED_PROXY_HOPS
+        sync: false

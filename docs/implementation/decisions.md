@@ -1,5 +1,7 @@
 # Wander — quyết định triển khai, mặc định và release gate
 
+> **Ghi chú pre-deploy 30/10/2026 (Codex, theo yêu cầu PO deploy và rà kỹ cảnh báo Claude):** xem [audit an ninh và bằng chứng chạy](deployment-security-audit-2026-10-30.md), [runbook Render/Neon](free-deployment-runbook.md). Đã bổ sung version/hai khóa cho HMAC và pending recovery (V17), mutex theo identity + race test thật, trần RAM rate limiter và ngân sách ghi mặc định 120/phút/identity, lỗi asset 404/no-store, e2e production qua backend. Scanner Trivy đổi từ 0.58.1 sang 0.76.1 ghim digest đã kiểm chứng; đây là mặc định công cụ trong hướng đã duyệt. **Không đóng RG-2/5/6/7, không coi B2/F1 hay localStorage là đã khắc phục; cloud/proxy/TLS/backup thực tế vẫn cần xác minh.** ADR-006 giữ nguyên cho hướng AWS; bản demo miễn phí có hồ sơ riêng, chưa tạo resource.
+
 > Bắt đầu 23/10/2026 theo chỉ đạo của Product Owner: tự chủ triển khai, mặc định trước, chỉ hỏi khi quyết định ảnh hưởng đáng kể (Tầng A, `.claude/rules/decision-materiality.md`). Master plan vẫn là nguồn sự thật cho yêu cầu; file này ghi **lựa chọn kỹ thuật** và **mặc định** mà master plan để mở.
 > Cập nhật 24/10/2026: PO chọn stack Java (ADR-002). Backend được viết lại; hợp đồng API giữ nguyên.
 
