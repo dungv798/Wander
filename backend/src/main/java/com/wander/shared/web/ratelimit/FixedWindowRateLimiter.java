@@ -15,6 +15,7 @@ public final class FixedWindowRateLimiter {
     private final int max;
     private final long windowMs;
     private final Clock clock;
+    private final boolean sharedOverflow;
     private final Map<String, Window> hits = new ConcurrentHashMap<>();
     private long nextPruneAt;
 
@@ -22,11 +23,20 @@ public final class FixedWindowRateLimiter {
     private record Window(long start, int count) {
     }
 
-    /** Tạo bộ đếm cho phép tối đa {@code max} lần trong mỗi cửa sổ có độ dài {@code window}. */
+    /** Tạo bộ đếm đóng cửa với khóa mới khi bảng đầy: tối đa {@code max} lần trong mỗi cửa sổ {@code window}. */
     public FixedWindowRateLimiter(int max, Duration window, Clock clock) {
+        this(max, window, clock, false);
+    }
+
+    /**
+     * Tạo bộ đếm; {@code sharedOverflow} bật chính sách mềm cho kênh khôi phục: khi bảng đầy, khóa mới dùng chung một xô
+     * tràn có ngân sách {@link RateLimitConstants#OVERFLOW_BUDGET_FACTOR} lần {@code max}, thay vì bị từ chối ngay.
+     */
+    public FixedWindowRateLimiter(int max, Duration window, Clock clock, boolean sharedOverflow) {
         this.max = max;
         this.windowMs = window.toMillis();
         this.clock = clock;
+        this.sharedOverflow = sharedOverflow;
     }
 
     /** Ghi nhận một lần; trả về false nếu đã vượt giới hạn trong cửa sổ hiện tại. */
@@ -36,10 +46,17 @@ public final class FixedWindowRateLimiter {
             pruneExpired(now);
             nextPruneAt = now + RateLimitConstants.PRUNE_INTERVAL.toMillis();
         }
-        if (!hits.containsKey(key) && hits.size() >= RateLimitConstants.MAX_TRACKED_KEYS) return false;
-        Window window = hits.compute(key, (k, old) ->
-                isExpired(old, now) ? new Window(now, 1) : new Window(old.start(), Math.min(old.count(), max) + 1));
-        return window.count() <= max;
+        String slot = key;
+        int limit = max;
+        if (!hits.containsKey(key) && hits.size() >= RateLimitConstants.MAX_TRACKED_KEYS) {
+            if (!sharedOverflow) return false;
+            slot = RateLimitConstants.OVERFLOW_KEY;
+            limit = max * RateLimitConstants.OVERFLOW_BUDGET_FACTOR;
+        }
+        int cap = limit;
+        Window window = hits.compute(slot, (k, old) ->
+                isExpired(old, now) ? new Window(now, 1) : new Window(old.start(), Math.min(old.count(), cap) + 1));
+        return window.count() <= limit;
     }
 
     /** Số khóa đang được theo dõi (dùng cho test và theo dõi bộ nhớ). */

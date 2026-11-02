@@ -26,6 +26,18 @@ class ClientAddressTest {
     }
 
     @Test
+    @DisplayName("IPv6 gộp về /64: cùng một dải không sinh vô hạn khóa; IPv4 và IPv4 nhúng giữ nguyên")
+    void groupsIpv6IntoPrefix64() {
+        ClientAddress direct = new ClientAddress(0);
+        String a = direct.of(request("2001:db8:1:2:aaaa:bbbb:cccc:dddd"));
+        assertThat(a).isEqualTo("20010db800010002/64");
+        assertThat(direct.of(request("2001:db8:1:2::1"))).as("cùng /64").isEqualTo(a);
+        assertThat(direct.of(request("2001:db8:1:3::1"))).as("/64 khác").isNotEqualTo(a);
+        assertThat(direct.of(request("203.0.113.7"))).isEqualTo("203.0.113.7");
+        assertThat(direct.of(request("::ffff:203.0.113.7"))).as("IPv4 nhúng").isEqualTo("::ffff:203.0.113.7");
+    }
+
+    @Test
     @DisplayName("một proxy tin cậy: lấy mục ngoài cùng bên phải")
     void oneTrustedHop() {
         assertThat(new ClientAddress(1).of(request("10.0.0.5", "198.51.100.1, 203.0.113.7"))).isEqualTo("203.0.113.7");
@@ -63,7 +75,7 @@ class ClientAddressTest {
         assertThat(one.of(request("10.0.0.5", "999.1.1.1"))).isEqualTo("10.0.0.5");
         assertThat(one.of(request("10.0.0.5", "203.0.113.7:443"))).isEqualTo("10.0.0.5");
         assertThat(one.of(request("10.0.0.5", "[2001:db8::1]"))).isEqualTo("10.0.0.5");
-        assertThat(one.of(request("10.0.0.5", "1.1.1.1, 2001:db8::1"))).isEqualTo("2001:db8::1");
+        assertThat(one.of(request("10.0.0.5", "1.1.1.1, 2001:db8::1"))).as("IPv6 hợp lệ được chấp nhận, gộp về /64").isEqualTo("20010db800000000/64");
     }
 
     @Test

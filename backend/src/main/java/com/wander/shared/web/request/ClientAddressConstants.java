@@ -15,6 +15,18 @@ final class ClientAddressConstants {
     /** Giá trị lớn nhất của một nhóm IPv4. */
     static final int IPV4_GROUP_MAX = 255;
 
+    /** Dấu phân cách nhóm của IPv6 dạng chữ. */
+    static final String IPV6_SEPARATOR = ":";
+
+    /** Số byte của một địa chỉ IPv6. */
+    static final int IPV6_BYTE_COUNT = 16;
+
+    /** Số byte đầu giữ lại khi gộp IPv6 về tiền tố /64. */
+    static final int IPV6_PREFIX_BYTES = 8;
+
+    /** Hậu tố đánh dấu khóa đã gộp, để không trùng địa chỉ IPv4 hay IPv6 đầy đủ. */
+    static final String IPV6_PREFIX_SUFFIX = "/64";
+
     /** Lỗi lập trình: số proxy tin cậy âm. */
     static final String TRUSTED_HOPS_NEGATIVE_MESSAGE = "trustedHops phải >= 0";
 

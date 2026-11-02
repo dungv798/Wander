@@ -41,6 +41,12 @@ final class RateLimitConstants {
     /** Số khóa theo dõi tối đa trước khi dọn các cửa sổ đã hết hạn. */
     static final int MAX_TRACKED_KEYS = 10_000;
 
+    /** Khóa của xô tràn dùng chung khi bảng đầy (chỉ kênh khôi phục); không trùng được địa chỉ thật vì chứa dấu '#'. */
+    static final String OVERFLOW_KEY = "#overflow";
+
+    /** Ngân sách của xô tràn tính theo bội số của hạn mức một khóa. */
+    static final int OVERFLOW_BUDGET_FACTOR = 20;
+
     /** Khoảng cách tối thiểu giữa hai lần quét khi bảng khóa đã đầy. */
     static final Duration PRUNE_INTERVAL = Duration.ofSeconds(1);
 

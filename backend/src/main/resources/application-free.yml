@@ -25,3 +25,7 @@ management:
           include: livenessState
         readiness:
           include: readinessState
+  health:
+    # Endpoint tổng hợp /actuator/health là công khai; chỉ báo DB sẽ truy vấn Neon mỗi lần gọi và giữ DB thức (N5, rà an ninh 02/11/2026).
+    db:
+      enabled: false

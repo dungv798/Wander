@@ -45,13 +45,13 @@ public final class RateLimits {
     /** Tạo các bộ đếm theo cấu hình: ba bộ cửa sổ một giờ và một bộ cửa sổ một phút cho kho địa điểm. */
     public RateLimits(Properties props, Clock clock) {
         this.identity = newLimiter(props.identityPerHour(), clock);
-        this.recovery = newLimiter(props.recoveryPerHour(), clock);
+        this.recovery = new FixedWindowRateLimiter(props.recoveryPerHour(), RateLimitConstants.WINDOW, clock, true);
         this.approval = newLimiter(props.approvalPerHour(), clock);
         this.catalog = new FixedWindowRateLimiter(props.catalogPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock);
-        this.pairingRequests = new FixedWindowRateLimiter(props.approvalRequestsPerWindow(), RateLimitConstants.APPROVAL_REQUEST_WINDOW, clock);
+        this.pairingRequests = new FixedWindowRateLimiter(props.approvalRequestsPerWindow(), RateLimitConstants.APPROVAL_REQUEST_WINDOW, clock, true);
         this.stepUpRequests = new FixedWindowRateLimiter(props.approvalRequestsPerWindow(), RateLimitConstants.APPROVAL_REQUEST_WINDOW, clock);
         this.writes = new FixedWindowRateLimiter(props.writesPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock);
-        this.linkPolls = new FixedWindowRateLimiter(props.linkPollPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock);
+        this.linkPolls = new FixedWindowRateLimiter(props.linkPollPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock, true);
     }
 
     /** Tạo danh tính, theo địa chỉ. */

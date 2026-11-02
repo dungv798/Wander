@@ -11,6 +11,15 @@ public final class HttpConstants {
     /** Mẫu đường dẫn cho interceptor API. */
     public static final String ALL_API_PATHS = "/api/**";
 
+    /**
+     * Đường dẫn không tính vào ngân sách ghi theo danh tính vì đã có bộ đếm "duyệt" riêng theo từng phiên (20/giờ):
+     * ghép thiết bị, mã khôi phục, xác thực lại. Nhờ vậy kẻ giữ một phiên không làm cạn quyền duyệt/từ chối của chủ.
+     */
+    public static final String[] WRITE_BUDGET_EXEMPT_PATHS = {"/api/device-links/**", "/api/recovery-code/**", "/api/step-up/**"};
+
+    /** Tiền tố đường dẫn các phiên (thu hồi phiên là DELETE dưới tiền tố này). */
+    public static final String SESSIONS_PATH_PREFIX = "/api/sessions/";
+
     /** Tiền tố đường dẫn của API (có dấu gạch chéo đầu). */
     public static final String API_PATH_PREFIX = "/api/";
 

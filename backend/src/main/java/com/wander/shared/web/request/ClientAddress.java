@@ -3,8 +3,11 @@ package com.wander.shared.web.request;
 import com.wander.shared.kernel.constant.CommonConstants;
 import com.wander.shared.web.constant.HttpConstants;
 import jakarta.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,12 +42,33 @@ public final class ClientAddress {
 
     /** Địa chỉ người gọi đáng tin nhất của yêu cầu; không tin được thì dùng địa chỉ kết nối trực tiếp. */
     public String of(HttpServletRequest request) {
+        return groupIpv6Prefix(trustedAddress(request));
+    }
+
+    /** Địa chỉ đáng tin nhất trước khi gộp tiền tố IPv6. */
+    private String trustedAddress(HttpServletRequest request) {
         String direct = request.getRemoteAddr();
         if (trustedHops == 0) return direct;
         List<String> chain = forwardedChain(request);
         if (chain.size() < trustedHops) return direct;
         String candidate = chain.get(chain.size() - trustedHops);
         return isAddress(candidate) ? candidate : direct;
+    }
+
+    /**
+     * Gộp địa chỉ IPv6 về tiền tố /64 (một thuê bao thường được cấp cả dải /64 nên không thể coi từng địa chỉ là một người);
+     * IPv4, IPv4 nhúng trong IPv6 và chuỗi không phân tích được giữ nguyên.
+     */
+    static String groupIpv6Prefix(String address) {
+        if (!address.contains(ClientAddressConstants.IPV6_SEPARATOR) || !IPV6.matcher(address).matches()) return address;
+        try {
+            // Chuỗi đã khớp mẫu chỉ gồm hex, ':' và '.', nên getByName không tra DNS.
+            byte[] bytes = InetAddress.getByName(address).getAddress();
+            if (bytes.length != ClientAddressConstants.IPV6_BYTE_COUNT) return address;
+            return HexFormat.of().formatHex(bytes, 0, ClientAddressConstants.IPV6_PREFIX_BYTES) + ClientAddressConstants.IPV6_PREFIX_SUFFIX;
+        } catch (UnknownHostException e) {
+            return address;
+        }
     }
 
     /** Chuỗi có đúng dạng địa chỉ IPv4 (mỗi nhóm không quá 255) hoặc IPv6 dạng chữ hay không. */

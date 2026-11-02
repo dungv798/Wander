@@ -26,6 +26,19 @@ class FixedWindowRateLimiterTest {
     }
 
     @Test
+    @DisplayName("chính sách mềm: bảng đầy thì khóa mới dùng chung xô tràn có ngân sách lớn hơn, không chết cứng; khóa cũ giữ quota riêng")
+    void sharedOverflowKeepsNewKeysServedWithinBudget() {
+        var limiter = new FixedWindowRateLimiter(2, Duration.ofHours(1), Clock.fixed(Instant.EPOCH, ZoneOffset.UTC), true);
+        for (int i = 0; i < RateLimitConstants.MAX_TRACKED_KEYS; i++) assertThat(limiter.hit("key-" + i)).isTrue();
+        int budget = 2 * RateLimitConstants.OVERFLOW_BUDGET_FACTOR;
+        for (int i = 0; i < budget; i++) assertThat(limiter.hit("new-" + i)).as("lần %d của xô tràn", i + 1).isTrue();
+        assertThat(limiter.hit("new-last")).as("xô tràn hết ngân sách").isFalse();
+        assertThat(limiter.size()).isEqualTo(RateLimitConstants.MAX_TRACKED_KEYS + 1);
+        assertThat(limiter.hit("key-0")).isTrue();
+        assertThat(limiter.hit("key-0")).as("khóa cũ vẫn có quota riêng").isFalse();
+    }
+
+    @Test
     @DisplayName("request đồng thời chỉ được dùng đúng ngân sách, không mất lượt đếm")
     void concurrentRequestsDoNotBypassQuota() throws Exception {
         var limiter = new FixedWindowRateLimiter(7, Duration.ofHours(1), Clock.systemUTC());

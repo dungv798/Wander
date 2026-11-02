@@ -29,7 +29,7 @@ public class ApiWriteLimitConfig implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-                if (isReadOnly(request.getMethod())) return true;
+                if (isReadOnly(request.getMethod()) || isSessionRevocation(request)) return true;
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 if (authentication != null && authentication.isAuthenticated()
                         && authentication.getPrincipal() instanceof AuthenticatedPrincipal principal) {
@@ -37,7 +37,15 @@ public class ApiWriteLimitConfig implements WebMvcConfigurer {
                 }
                 return true;
             }
-        }).addPathPatterns(HttpConstants.ALL_API_PATHS);
+        }).addPathPatterns(HttpConstants.ALL_API_PATHS).excludePathPatterns(HttpConstants.WRITE_BUDGET_EXEMPT_PATHS);
+    }
+
+    /**
+     * Thu hồi phiên (DELETE /api/sessions/{id}) không tốn ngân sách ghi: đây là phản ứng phòng vệ của chủ, kẻ giữ một phiên
+     * không được dùng ngân sách chung để chặn chủ thu hồi phiên đó.
+     */
+    private static boolean isSessionRevocation(HttpServletRequest request) {
+        return HttpMethod.DELETE.matches(request.getMethod()) && request.getRequestURI().startsWith(HttpConstants.SESSIONS_PATH_PREFIX);
     }
 
     /** GET, HEAD và OPTIONS không bị đếm vào ngân sách thao tác ghi. */

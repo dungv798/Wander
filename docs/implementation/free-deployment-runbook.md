@@ -53,7 +53,7 @@ Lần đầu: Flyway tạo schema; `RecoveryKeyReadiness` kiểm các nhãn khó
 1. HTTPS, root HTML/CSP, asset 200, asset thiếu 404/no-store, API private thiếu Bearer 401/no-store.
 2. Catalog/ảnh/map/worker/font thật tải được dưới CSP; không wildcard hoặc `unsafe-inline` để né lỗi.
 3. Tạo identity/chuyến/ngày/mục; sửa/xóa/hoàn tác; ghép thiết bị; khôi phục mã hai pha; dữ liệu còn khi redeploy.
-4. Xác minh client IP từ hai mạng. Gửi X-Forwarded-For giả không đổi bucket của người thật. Không bật endpoint debug công khai chứa IP/header/token.
+4. Xác minh client IP từ hai mạng, **theo đúng thứ tự** (rà an ninh N6, 02/11/2026): (a) deploy với `WANDER_TRUSTED_PROXY_HOPS=0`; trong lúc đó mọi người dùng chung một bucket (30 danh tính và 30 khôi phục mỗi giờ cho cả hệ thống), nên chưa mời ai; (b) đo từ hai mạng khác nhau xem ứng dụng thấy địa chỉ nào và Render nối `X-Forwarded-For` thế nào; (c) chỉ đặt số hop **bằng đúng số proxy thật** (số nhỏ hơn thì chung bucket, an toàn hơn; số lớn hơn thì mục do client tự gửi được tin, kẻ tấn công né giới hạn hoặc đốt quota của người khác); (d) gửi X-Forwarded-For giả không đổi bucket của người thật. Số hop `2` trong `application.yml` chỉ dành cho CloudFront → ALB trên AWS, không sao chép sang Render. Không bật endpoint debug công khai chứa IP/header/token.
 5. Ghi startup, peak memory, restart/OOM, warm latency, bandwidth/build minutes và Neon CU-hours/storage. Không suy tốc độ CPU cloud từ bài đo local.
 6. Để idle tự nhiên và kiểm Neon có suspend; không dùng cron ping. Poll UI phải dừng đúng lúc. Sau cold start, mutation không bị retry mù gây ghi trùng.
 
