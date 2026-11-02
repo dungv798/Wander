@@ -1,0 +1,42 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Wander TVC encoder</title>
+<canvas id="c"></canvas>
+<script>
+/** Vẽ các khung PNG lên canvas theo nhịp `fps` và ghi bằng MediaRecorder; trả số khung và thời lượng đo được. */
+window.encodeFrames = async ({ base, total, fps, w, h, crop, bitrate, mime, uploadUrl, ahead }) => {
+  if (!MediaRecorder.isTypeSupported(mime)) throw new Error('Chrome không hỗ trợ ' + mime);
+  const canvas = document.getElementById('c');
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d', { alpha: false });
+  ctx.imageSmoothingQuality = 'high';
+  const stream = canvas.captureStream(0);
+  const track = stream.getVideoTracks()[0];
+  const recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: bitrate });
+  const chunks = [];
+  recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+  const name = i => base + 'f' + String(i).padStart(5, '0') + '.png';
+  const load = async i => createImageBitmap(await (await fetch(name(i))).blob());
+  const queue = new Map();
+  const ensure = i => { if (i < total && !queue.has(i)) queue.set(i, load(i)); };
+  for (let i = 0; i < ahead; i++) ensure(i);
+  const draw = bitmap => { ctx.drawImage(bitmap, crop[0], crop[1], crop[2], crop[3], 0, 0, w, h); };
+  draw(await queue.get(0));
+  recorder.start(1000);
+  const t0 = performance.now();
+  let late = 0;
+  for (let i = 0; i < total; i++) {
+    ensure(i + ahead);
+    const bitmap = await queue.get(i); queue.delete(i);
+    draw(bitmap); bitmap.close();
+    track.requestFrame();
+    const target = t0 + (i + 1) * 1000 / fps;
+    if (performance.now() > target + 5) late++;
+    while (performance.now() < target - 3) await new Promise(r => setTimeout(r, 1));
+  }
+  await new Promise(r => { recorder.onstop = r; recorder.stop(); });
+  const blob = new Blob(chunks, { type: 'video/webm' });
+  await fetch(uploadUrl, { method: 'POST', body: blob });
+  return { frames: total, fps, lateFrames: late, wallMs: Math.round(performance.now() - t0), bytes: blob.size };
+};
+</script>

@@ -1,0 +1,9 @@
+{
+  "name": "wander-tvc",
+  "private": true,
+  "description": "Công cụ dựng TVC Wander (không vào bundle của app).",
+  "type": "module",
+  "devDependencies": {
+    "three": "^0.170.0"
+  }
+}

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Wander TVC 3D</title>
+<script type="importmap">{ "imports": { "three": "/tools/tvc/node_modules/three/build/three.module.js" } }</script>
+<style>
+@font-face { font-family: 'Baloo 2'; font-weight: 600 800; src: url(/web/public/fonts/Baloo2-600-800-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+@font-face { font-family: 'Baloo 2'; font-weight: 600 800; src: url(/web/public/fonts/Baloo2-600-800-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 600; src: url(/web/public/fonts/BeVietnamPro-600-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 600; src: url(/web/public/fonts/BeVietnamPro-600-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 400; src: url(/web/public/fonts/BeVietnamPro-400-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+@font-face { font-family: 'Be Vietnam Pro'; font-weight: 400; src: url(/web/public/fonts/BeVietnamPro-400-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+:root { --ink: #14213a; --muted: #45506a; --sun: #ffc400; --brand: #d9680a; --sky: #0b58b8; --display: 'Baloo 2', 'Be Vietnam Pro', sans-serif; --body: 'Be Vietnam Pro', sans-serif; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: var(--body); }
+.bg { position: absolute; inset: 0; opacity: 0; }
+#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+.layer { position: absolute; inset: 0; opacity: 0; overflow: hidden; }
+.line { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; will-change: transform, opacity; }
+.h1 { font: 800 210px/1 var(--display); letter-spacing: -2px; }
+.h2 { font: 800 140px/1.02 var(--display); letter-spacing: -1px; }
+.sub { font: 600 66px/1.25 var(--body); }
+.light { color: #fff; text-shadow: 0 6px 40px rgb(0 0 0 / .55); }
+.row { position: absolute; left: 80px; right: 80px; height: 190px; display: flex; align-items: center; gap: 44px; opacity: 0; }
+.row .tick { flex: none; width: 124px; height: 124px; border-radius: 50%; background: var(--sun); display: grid; place-items: center; }
+.row .tick svg { width: 70px; height: 70px; }
+.row span { font: 800 66px/1.1 var(--display); color: #fff; white-space: nowrap; }
+.credit { position: absolute; left: 80px; right: 80px; bottom: 110px; text-align: center; font: 400 30px/1.4 var(--body); color: rgb(20 33 58 / .75); }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- Nền theo cảnh (CSS), WebGL trong suốt phía trên -->
+  <div class="bg" id="bg1" style="background: radial-gradient(ellipse 85% 55% at 50% 44%, #ffb347 0%, #d9680a 22%, #3a2a55 55%, #14213a 100%)"></div>
+  <div class="bg" id="bg2" style="background: radial-gradient(ellipse 80% 50% at 50% 55%, #ffe27a 0%, #ffd23f 28%, #ffb01f 62%, #e8870b 100%)"></div>
+  <div class="bg" id="bg3" style="background: radial-gradient(ellipse 80% 50% at 50% 55%, #bfe6ff 0%, #8fd3fb 38%, #3d8fe0 78%, #0b58b8 100%)"></div>
+  <canvas id="gl" width="1080" height="1920"></canvas>
+
+  <!-- Chữ phủ lên 3D -->
+  <div class="layer" id="t1">
+    <div style="position:absolute;left:0;right:0;bottom:0;height:980px;background:linear-gradient(to top, rgba(20,33,58,.94) 0%, rgba(20,33,58,.7) 55%, rgba(20,33,58,0) 100%)"></div>
+    <div class="line h1 light" data-in="0.4" style="top: 1130px">Đà Lạt</div>
+    <div class="line sub light" data-in="1.1" style="top: 1360px">có hàng trăm nơi đáng đi.</div>
+    <div class="line h2 light" data-in="2.0" style="top: 1500px; color: var(--sun)">Bắt đầu từ đâu?</div>
+  </div>
+  <div class="layer" id="t2">
+    <div class="line h2" data-in="5.3" style="top: 345px; font-size: 128px; color: var(--ink)">Quẹt phải</div>
+    <div class="line sub" data-in="5.8" style="top: 505px; color: #3b2600">để chọn nơi bạn thích.</div>
+  </div>
+  <div class="layer" id="t3">
+    <div class="line h2" data-in="10.3" style="top: 350px; font-size: 118px; color: #fff; text-shadow: 0 6px 40px rgb(8 40 100 / .5)">Thành lịch trình</div>
+    <div class="line sub" data-in="10.8" style="top: 500px; color: #eaf4ff">theo từng ngày, có tuyến đường.</div>
+  </div>
+
+  <!-- Cảnh 4 và 5 giữ bản 2D -->
+  <div class="layer" id="s4" style="background: linear-gradient(180deg, #14213a 0%, #0b2a5c 100%)">
+    <div class="line h2" data-in="14.8" style="top: 330px; color: var(--sun)">Nhẹ nhàng,<br>an tâm.</div>
+    <div class="row" data-in="15.6" style="top: 780px"><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#14213a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg></div><span>Không cần đăng ký</span></div>
+    <div class="row" data-in="16.5" style="top: 1010px"><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#14213a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg></div><span>Mở lại trên máy khác</span></div>
+    <div class="row" data-in="17.4" style="top: 1240px"><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#14213a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg></div><span>Hoàn tác khi lỡ tay</span></div>
+  </div>
+  <div class="layer" id="s5" style="background: linear-gradient(160deg, #ffc400 0%, #ff8a00 100%)">
+    <div class="layer" id="s5-rays" style="left: -420px; top: 160px; width: 1920px; height: 1920px; inset: auto; opacity: 1; background: repeating-conic-gradient(from 0deg, rgb(255 255 255 / .16) 0deg 9deg, rgb(255 255 255 / 0) 9deg 22deg); -webkit-mask-image: radial-gradient(circle, #000 0 30%, transparent 62%); mask-image: radial-gradient(circle, #000 0 30%, transparent 62%)"></div>
+    <svg id="s5-pin" viewBox="0 0 64 80" style="position: absolute; left: 440px; top: 470px; width: 200px; height: 250px; opacity: 0; transform-origin: 50% 100%"><path d="M32 2C16 2 4 14.5 4 30c0 21 28 48 28 48s28-27 28-48C60 14.5 48 2 32 2z" fill="#14213a"/><circle cx="32" cy="30" r="12" fill="#ffc400"/></svg>
+    <div class="line" data-in="19.8" style="top: 720px; font: 800 270px/1 var(--display); letter-spacing: -4px; color: var(--ink)">Wander</div>
+    <div class="line" data-in="20.6" style="top: 1060px; font: 800 92px/1.15 var(--display); color: var(--ink)">Chạm một nơi.</div>
+    <div class="line" data-in="21.2" style="top: 1190px; font: 800 92px/1.15 var(--display); color: var(--ink)">Mở một hành trình.</div>
+    <div class="credit">Ảnh: Diane Selwyn (Public domain), EA (CC BY-SA 4.0), Roy Kim (CC BY 2.0), qiv (CC BY-SA 2.5), Tom Ravenscroft (CC BY 1.0) · Wikimedia Commons.<br>Màn hình là ảnh chụp ứng dụng thật; thông tin hiển thị là dữ liệu minh họa.</div>
+  </div>
+  <div id="flash"></div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+
+const W = 1080, H = 1920, DURATION = 24.0;
+const E = { out: x => 1 - Math.pow(1 - x, 3), inOut: x => (x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2), back: x => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); } };
+const clamp = x => Math.max(0, Math.min(1, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, k) => a + (b - a) * k;
+const $ = id => document.getElementById(id);
+
+const renderer = new THREE.WebGLRenderer({ canvas: $('gl'), antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false); renderer.setClearColor(0x000000, 0);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(34, W / H, 0.1, 120);
+scene.add(new THREE.AmbientLight(0xffffff, 1.1));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(-3, 5, 6); scene.add(key);
+const rim = new THREE.DirectionalLight(0xffd27a, 1.6); rim.position.set(4, -2, -3); scene.add(rim);
+
+const loader = new THREE.TextureLoader();
+const load = async url => { const tx = await loader.loadAsync(url); tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8; tx.generateMipmaps = true; tx.minFilter = THREE.LinearMipmapLinearFilter; return tx; };
+const P = '/backend/src/main/resources/catalog/photos/';
+const A = '/tools/tvc/assets/';
+const photoNames = ['ho-xuan-huong-1', 'quang-truong-lam-vien-1', 'cho-da-lat-1', 'nha-tho-con-ga-1', 'ga-da-lat-1', 'thac-datanla-1', 'thung-lung-tinh-yeu-1'];
+const [photos, shots] = await Promise.all([
+  Promise.all(photoNames.map(n => load(P + n + '.jpg'))),
+  Promise.all(['deck-1', 'deck-swipe', 'deck-2', 'map-overview', 'map-day1'].map(n => load(A + n + '.png'))),
+]);
+const pinNames = ['nha-tho-con-ga-1', 'quang-truong-lam-vien-1', 'cho-da-lat-1', 'ga-da-lat-1', 'ho-xuan-huong-1'];
+const pinTex = pinNames.map(n => photos[photoNames.indexOf(n)] ?? null);
+
+const ROUND_VS = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+const ROUND_FS = `
+varying vec2 vUv; uniform sampler2D map; uniform sampler2D map2; uniform float mixer; uniform float slide; uniform vec2 size; uniform float radius; uniform float alpha; uniform vec2 uvScale; uniform vec2 uvOff; uniform float tint;
+float sdBox(vec2 p, vec2 b, float r){ vec2 q = abs(p) - b + r; return length(max(q, 0.)) + min(max(q.x, q.y), 0.) - r; }
+void main(){
+  vec2 p = (vUv - .5) * size; float d = sdBox(p, size * .5, radius);
+  float a = 1. - smoothstep(-0.006, 0.006, d);
+  vec2 uv = vUv * uvScale + uvOff;
+  vec4 c1 = texture2D(map, uv); vec4 c2 = texture2D(map2, uv);
+  vec3 col = mix(c1.rgb, c2.rgb, mixer);
+  col = mix(col, col * vec3(1.0, .93, .82), tint);
+  gl_FragColor = vec4(col, a * alpha);
+  #include <colorspace_fragment>
+}`;
+/** Thẻ bo góc phủ ảnh theo kiểu cover; `aspect` = rộng/cao của thẻ, `img` = rộng/cao của ảnh. */
+function card(tex, w, h, radius, img, tex2) {
+  const aspect = w / h;
+  const uvScale = new THREE.Vector2(1, 1), uvOff = new THREE.Vector2(0, 0);
+  if (img > aspect) { uvScale.x = aspect / img; uvOff.x = (1 - uvScale.x) / 2; } else { uvScale.y = img / aspect; uvOff.y = (1 - uvScale.y) / 2; }
+  const mat = new THREE.ShaderMaterial({ vertexShader: ROUND_VS, fragmentShader: ROUND_FS, transparent: true, depthWrite: false, uniforms: { map: { value: tex }, map2: { value: tex2 ?? tex }, mixer: { value: 0 }, slide: { value: 0 }, size: { value: new THREE.Vector2(w, h) }, radius: { value: radius }, alpha: { value: 1 }, uvScale: { value: uvScale }, uvOff: { value: uvOff }, tint: { value: 0 } } });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
+  mesh.userData.mat = mat; return mesh;
+}
+function shadowTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
+  const grd = g.createRadialGradient(128, 128, 10, 128, 128, 128); grd.addColorStop(0, 'rgba(10,15,40,.55)'); grd.addColorStop(1, 'rgba(10,15,40,0)');
+  g.fillStyle = grd; g.fillRect(0, 0, 256, 256); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const SHADOW = shadowTexture();
+
+/* ---------- Cảnh 1: hành lang ảnh ---------- */
+const corridor = new THREE.Group(); scene.add(corridor);
+const slots = [[-.95, .95, .26], [.9, .75, -.26], [-.8, .9, .22], [.95, 1.05, -.22], [-.1, .9, .1], [-.9, 1.0, .24], [.8, .8, -.2]];
+const cards = slots.map(([x, y, ry], i) => {
+  const g = new THREE.Group();
+  const c = card(photos[i], 1.95, 2.6, 0.16, 4 / 3);
+  const sh = new THREE.Mesh(new THREE.PlaneGeometry(2.7, 3.4), new THREE.MeshBasicMaterial({ map: SHADOW, transparent: true, depthWrite: false }));
+  sh.position.set(.18, -.3, -.05); g.add(sh, c);
+  g.position.set(x, y, -i * 4.0); g.rotation.y = ry; g.userData = { c, sh, z: -i * 4.0, x, y, ry };
+  corridor.add(g); return g;
+});
+
+/* ---------- Điện thoại 3D ---------- */
+const phone = new THREE.Group(); scene.add(phone);
+function roundedShape(w, h, r) { const s = new THREE.Shape(); const x = -w / 2, y = -h / 2; s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r); s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h); s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r); s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s; }
+const PW = 2.0, PH = PW * 844 / 390;
+const body = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedShape(PW + .16, PH + .16, .36), { depth: .14, bevelEnabled: true, bevelThickness: .04, bevelSize: .04, bevelSegments: 5, curveSegments: 24 }), new THREE.MeshStandardMaterial({ color: 0x0f1b30, metalness: .85, roughness: .28 }));
+body.position.z = -.07; phone.add(body);
+const screen = card(shots[0], PW, PH, .3, 390 / 844, shots[1]); screen.position.z = .165; phone.add(screen);
+const gloss = new THREE.Mesh(new THREE.PlaneGeometry(PW, PH), new THREE.ShaderMaterial({ transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, uniforms: { pos: { value: 0 }, op: { value: 1 } }, vertexShader: ROUND_VS, fragmentShader: 'varying vec2 vUv; uniform float pos; uniform float op; void main(){ float d = abs((vUv.x + vUv.y * .6) - pos); float a = smoothstep(.16, 0., d) * .22 * op; gl_FragColor = vec4(vec3(1.), a); }' }));
+gloss.position.z = .17; phone.add(gloss);
+const touch = new THREE.Mesh(new THREE.CircleGeometry(.16, 48), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false }));
+touch.position.z = .175; phone.add(touch);
+const phoneShadow = new THREE.Mesh(new THREE.PlaneGeometry(4.6, 6.4), new THREE.MeshBasicMaterial({ map: SHADOW, transparent: true, depthWrite: false })); phoneShadow.position.set(.35, -.55, -.4); phone.add(phoneShadow);
+
+/* ---------- Ghim ảnh nổi + tuyến sáng 3D ---------- */
+const pinGroup = new THREE.Group(); phone.add(pinGroup);
+function discTexture(i) { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'); g.font = '800 40px sans-serif'; g.fillStyle = '#7d3d00'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(String(i + 1), 32, 34); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+const PIN_POS = [new THREE.Vector3(-1.15, -.55, .8), new THREE.Vector3(-.55, .9, 1.1), new THREE.Vector3(.75, .5, 1.0), new THREE.Vector3(.95, -.95, 1.3), new THREE.Vector3(-.2, -1.7, .9)];
+const pins = PIN_POS.map((p, i) => {
+  const g = new THREE.Group(); g.position.copy(p);
+  const ring = new THREE.Mesh(new THREE.CircleGeometry(.52, 64), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true })); ring.position.z = -.01;
+  const photo = new THREE.Mesh(new THREE.CircleGeometry(.46, 64), new THREE.MeshBasicMaterial({ map: pinTex[i], transparent: true }));
+  photo.material.map.repeat.set(1, 1);
+  const badge = new THREE.Mesh(new THREE.CircleGeometry(.17, 32), new THREE.MeshBasicMaterial({ map: discTexture(i), transparent: true })); badge.position.set(.38, .38, .02);
+  const badgeBg = new THREE.Mesh(new THREE.CircleGeometry(.19, 32), new THREE.MeshBasicMaterial({ color: 0xffc400, transparent: true })); badgeBg.position.set(.38, .38, .01);
+  g.add(ring, photo, badgeBg, badge); g.userData = { mats: [ring.material, photo.material, badge.material, badgeBg.material] };
+  pinGroup.add(g); return g;
+});
+const curve = new THREE.CatmullRomCurve3(PIN_POS.map(p => p.clone().add(new THREE.Vector3(0, 0, -.05))), false, 'catmullrom', .5);
+const tubeGeo = new THREE.TubeGeometry(curve, 160, .05, 10, false);
+const tube = new THREE.Mesh(tubeGeo, new THREE.MeshBasicMaterial({ color: 0xffc400, transparent: true })); pinGroup.add(tube);
+const tubeIndexCount = tubeGeo.index.count;
+const glow = new THREE.Mesh(new THREE.TubeGeometry(curve, 160, .14, 10, false), new THREE.MeshBasicMaterial({ color: 0xffc400, transparent: true, opacity: .25, depthWrite: false })); pinGroup.add(glow);
+const glowIndexCount = glow.geometry.index.count;
+
+/* ---------- Hạt bụi sáng ---------- */
+const N = 160; const dust = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ size: .07, color: 0xfff1b8, transparent: true, opacity: .8, depthWrite: false, blending: THREE.AdditiveBlending }));
+const dpos = new Float32Array(N * 3); const seeds = [];
+for (let i = 0; i < N; i++) { seeds.push([Math.random(), Math.random(), Math.random()]); }
+dust.geometry.setAttribute('position', new THREE.BufferAttribute(dpos, 3)); scene.add(dust);
+
+/* ---------- Dựng theo thời gian ---------- */
+const SCENE_TEXT = [['t1', -1, 0.1, 4.6, 5.1], ['t2', 4.6, 5.2, 9.6, 10.1], ['t3', 9.6, 10.2, 14.0, 14.5]];
+const FLAT = [['s4', 14.0, 14.6, 18.7, 19.3], ['s5', 18.7, 19.3, 99, 100]];
+const sa = (t, a0, a1, b0, b1) => Math.min(E.inOut(seg(t, a0, a1)), 1 - E.inOut(seg(t, b0, b1)));
+
+function reveal(t) {
+  document.querySelectorAll('[data-in]').forEach(el => { const e = E.out(seg(t, Number(el.dataset.in), Number(el.dataset.in) + .7)); el.style.opacity = e; el.style.transform = `translateY(${(1 - e) * 60}px)`; });
+}
+
+function render(t) {
+  // nền theo cảnh
+  $('bg1').style.opacity = sa(t, -1, 0, 4.6, 5.4);
+  $('bg2').style.opacity = Math.min(E.inOut(seg(t, 4.2, 5.4)), 1 - E.inOut(seg(t, 9.4, 10.4)));
+  $('bg3').style.opacity = Math.min(E.inOut(seg(t, 9.4, 10.4)), 1 - E.inOut(seg(t, 14.0, 14.6)));
+  $('gl').style.opacity = 1 - E.inOut(seg(t, 14.0, 14.6));
+  for (const [id, a0, a1, b0, b1] of SCENE_TEXT) { const a = sa(t, a0, a1, b0, b1); $(id).style.opacity = a; $(id).style.display = a <= .001 ? 'none' : 'block'; }
+  for (const [id, a0, a1, b0, b1] of FLAT) { const a = sa(t, a0, a1, b0, b1); $(id).style.opacity = a; $(id).style.display = a <= .001 ? 'none' : 'block'; }
+  reveal(t);
+
+  // --- cảnh 1: máy quay bay xuyên hành lang ---
+  const fly = E.inOut(seg(t, 0, 5.0));
+  const camZ1 = lerp(9.5, -13.5, fly);
+  corridor.visible = t < 5.4;
+  cards.forEach(g => {
+    const d = camZ1 - g.userData.z;               // khoảng cách tới máy quay
+    const near = clamp((d - 1.2) / 1.6), far = clamp(1 - (d - 11) / 7);
+    const a = Math.min(near, far) * E.out(seg(t, 0, .8));
+    g.userData.c.userData.mat.uniforms.alpha.value = a; g.userData.sh.material.opacity = a * .9;
+    g.rotation.y = g.userData.ry * (1 - .55 * clamp(1 - Math.abs(d - 5) / 6));
+    g.position.y = g.userData.y + Math.sin(t * 1.2 + g.userData.z) * .06;
+  });
+
+  // --- máy quay chung ---
+  const toPhone = E.inOut(seg(t, 4.2, 5.6));
+  const phoneCam = new THREE.Vector3(Math.sin(t * .5) * .25, .1, 12.4);
+  const corrCam = new THREE.Vector3(Math.sin(t * .7) * .35, Math.sin(t * .5) * .12, camZ1);
+  camera.position.lerpVectors(corrCam, phoneCam, toPhone);
+  camera.lookAt(0, 0, camera.position.z - 10 * (1 - toPhone) - 0.0);
+  if (toPhone > 0) camera.lookAt(lerp(0, 0, 1), lerp(0, 0, 1), lerp(camera.position.z - 10, 0, toPhone));
+
+  // --- điện thoại ---
+  const phoneIn = E.back(seg(t, 4.5, 5.5));
+  const inScene = t > 4.3 && t < 14.4;
+  phone.visible = inScene;
+  const swing = E.inOut(seg(t, 10.0, 11.4));                   // sang góc nhìn bản đồ
+  phone.position.set(.22 * swing, lerp(-9, -1.2, phoneIn) + Math.sin(t * 1.3) * .05, 0);
+  phone.rotation.set(lerp(.6, 0, phoneIn) + .06 * swing, lerp(.7, -.12, phoneIn) + (-.2) * swing + Math.sin(t * .6) * .03, lerp(.12, 0, phoneIn));
+  phone.scale.setScalar(lerp(.7, .8, E.out(seg(t, 4.5, 6))) * lerp(1, 1.06, swing));
+  gloss.material.uniforms.pos.value = lerp(-.4, 1.6, seg(t, 5.2, 13.5));
+  const u = screen.userData.mat.uniforms;
+  // deck: 1 → swipe → 2 → map overview → map day 1
+  const sw = E.inOut(seg(t, 6.5, 7.2)), sw2 = E.inOut(seg(t, 7.8, 8.5)), toMap = E.inOut(seg(t, 10.2, 10.9)), toDay = E.inOut(seg(t, 12.0, 12.7));
+  if (t < 7.5) { u.map.value = shots[0]; u.map2.value = shots[1]; u.mixer.value = sw; }
+  else if (t < 10.5) { u.map.value = shots[1]; u.map2.value = shots[2]; u.mixer.value = sw2; }
+  else if (t < 12.3) { u.map.value = shots[2]; u.map2.value = shots[3]; u.mixer.value = toMap; }
+  else { u.map.value = shots[3]; u.map2.value = shots[4]; u.mixer.value = toDay; }
+  u.alpha.value = 1;
+  // ngón tay chạm trên màn hình (cảnh 2) và chạm "Ngày 1" (cảnh 3)
+  const tp = E.inOut(seg(t, 6.0, 7.1));
+  const tapDay = seg(t, 11.5, 12.1);
+  const swipeVis = Math.min(seg(t, 5.9, 6.2), 1 - seg(t, 7.1, 7.5));
+  const dayVis = Math.min(seg(t, 11.6, 11.9), 1 - seg(t, 12.3, 12.7));
+  touch.material.opacity = Math.max(swipeVis, dayVis) * .85;
+  if (t < 10) touch.position.set(lerp(-.4, .65, tp), lerp(-.1, -.05, tp), .18);
+  else touch.position.set(-.18, -.27, .18);
+  touch.scale.setScalar(1 - .2 * Math.sin(Math.PI * (t < 10 ? seg(t, 5.9, 6.2) : tapDay)));
+
+  // ghim ảnh nổi + tuyến sáng (cảnh 3)
+  pinGroup.visible = t > 10.6 && t < 14.5;
+  pins.forEach((g, i) => {
+    const k = E.back(seg(t, 10.9 + i * .28, 11.6 + i * .28));
+    g.scale.setScalar(Math.max(.001, k)); g.position.z = PIN_POS[i].z + Math.sin(t * 1.4 + i) * .08;
+    g.rotation.y = -phone.rotation.y * .6; g.userData.mats.forEach(m => { m.opacity = clamp(k); });
+  });
+  const draw = E.inOut(seg(t, 11.9, 13.9));
+  tubeGeo.setDrawRange(0, Math.floor(tubeIndexCount * draw / 3) * 3);
+  glow.geometry.setDrawRange(0, Math.floor(glowIndexCount * draw / 3) * 3);
+  tube.material.opacity = 1; glow.material.opacity = .22 + .1 * Math.sin(t * 5);
+
+  // bụi sáng
+  dust.visible = t < 14.5;
+  for (let i = 0; i < N; i++) { const [a, b, c] = seeds[i]; dpos[i * 3] = (a - .5) * 9 + Math.sin(t * .4 + c * 6) * .3; dpos[i * 3 + 1] = ((b * 12 + t * (.15 + c * .2)) % 12) - 6; dpos[i * 3 + 2] = camera.position.z - 3 - c * 12 + (t < 5 ? 0 : -6 + c * 6); }
+  dust.geometry.attributes.position.needsUpdate = true;
+  dust.material.opacity = .75 * (1 - seg(t, 13.8, 14.4));
+
+  // chớp sáng chuyển cảnh
+  $('flash').style.opacity = .55 * Math.max(Math.sin(Math.PI * seg(t, 4.55, 5.05)), Math.sin(Math.PI * seg(t, 9.95, 10.4)) * .6);
+
+  // cảnh 4-5 (2D)
+  document.querySelectorAll('#s4 .row').forEach(row => { const p = seg(t, Number(row.dataset.in), Number(row.dataset.in) + .7); row.querySelector('.tick').style.transform = `scale(${.6 + .4 * E.back(p)})`; });
+  const drop = seg(t, 19.4, 20.1), squash = Math.sin(Math.PI * seg(t, 20.1, 20.55)) * .12, pin = $('s5-pin');
+  pin.style.opacity = E.out(seg(t, 19.4, 19.65));
+  pin.style.transform = `translateY(${(1 - E.out(drop)) * -700}px) scale(${1 + squash}, ${1 - squash})`;
+  $('s5-rays').style.transform = `rotate(${t * 6}deg)`;
+
+  renderer.render(scene, camera);
+}
+window.render = render; window.DURATION = DURATION;
+window.ready = document.fonts.ready.then(() => true);
+render(0);
+</script>
+</body>
+</html>
