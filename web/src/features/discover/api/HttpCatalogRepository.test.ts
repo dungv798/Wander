@@ -48,6 +48,13 @@ test('mã lạ: 404 của máy chủ thành ApiError NOT_FOUND để giao diện
   await assert.rejects(r.repository.destination('khong-co'), (e: unknown) => e instanceof ApiError && e.code === 'NOT_FOUND' && e.status === 404);
 });
 
+test('API additive: thiếu moments trả [] và bản ghi hợp lệ giữ đầy đủ ghi công', async () => {
+  assert.deepEqual((await repo(() => json({ destination: validDestination() })).repository.destination('ha-giang')).moments, []);
+  const moment = { id: 'cho-1', theme: 'cho', themeLabel: 'Chợ & phố', caption: 'Phiên chợ', photo: { url: '/catalog/photos/test.jpg', author: 'Tác giả', license: 'CC BY-SA 2.0', sourceUrl: 'https://example.org' } };
+  const r = repo(() => json({ destination: { ...validDestination(), moments: [moment, null] } }));
+  assert.deepEqual((await r.repository.destination('ha-giang')).moments, [moment]);
+});
+
 test('thân sai hình dạng thành INTERNAL, không để lọt giá trị hỏng vào giao diện (render sẽ sập nếu thiếu mảng)', async () => {
   for (const coordinates of [{ lat: '23', lon: 105 }, { lat: 23 }, { lat: {}, lon: 105 }]) {
     const invalid = Object.assign(validSummary(), { lat: undefined, lon: undefined }, coordinates);

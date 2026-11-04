@@ -60,3 +60,14 @@ test('hoàn tác đưa bộ lọc về "Tất cả" để thẻ trả về luôn
   const s = undoLast({ ...decide(S0, 'a', 'like'), cat: 'van' });
   assert.equal(s.cat, 'all');
 });
+
+test('thẻ quẹt: nơi có ảnh thật đứng trước nơi chưa có ảnh, giữ thứ tự biên tập trong từng nhóm', () => {
+  const places = [
+    { id: 'a', category: 'canh' as const, photos: [] },
+    { id: 'b', category: 'canh' as const, photos: [{}] },
+    { id: 'c', category: 'canh' as const, photos: [] },
+    { id: 'd', category: 'canh' as const, photos: [{}] },
+  ];
+  const state = { ...S0, cat: 'all' as const };
+  assert.deepEqual(remainingIds(state, places).map((p) => p.id), ['b', 'd', 'a', 'c']);
+});

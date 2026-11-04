@@ -56,7 +56,7 @@ async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
 test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi giữ lựa chọn sau tải lại', async () => {
   const { ctx } = await phone();
   const page = await open(ctx, '#/');
-  await page.getByRole('button', { name: 'Tìm điểm đến', exact: true }).click();
+  await page.getByRole('button', { name: /^Đổi điểm đến/ }).click();
   const map = page.locator('.destination-picker-map');
   await page.locator('.destination-picker-list button').nth(11).waitFor();
   assert.equal(await page.locator('.destination-picker-list button').count(), 12);
@@ -72,9 +72,9 @@ test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi g
   await page.locator('.destination-picker-list button', { hasText: 'Đà Lạt' }).click();
   await page.waitForURL(/#\/deck\/da-lat$/); // chọn xong đi thẳng tới bộ thẻ quẹt của điểm đến, không về trang chủ
   await page.evaluate(() => { location.hash = '#/'; });
-  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
   await page.reload();
-  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
   assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
   await ctx.close();
 });
@@ -99,7 +99,7 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
   await page.route('**/catalog/photos/**', async (route) => { await photosPending; await route.continue(); });
   try {
     await page.goto(`${baseUrl}/#/`, { waitUntil: 'domcontentloaded' });
-    await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+    await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
     assert.ok(details.includes('/api/catalog/destinations/da-lat'));
     assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false, 'không gọi API mặc định trước catalog');
     const catalogReady = page.waitForResponse((response) => new URL(response.url()).pathname === '/api/catalog/destinations');
@@ -142,7 +142,7 @@ test('trang chủ: thẻ bản đồ nhỏ chỉ khởi tạo khi cuộn tới, 
     localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
   });
   await page.goto(`${baseUrl}/#/`);
-  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
   assert.equal(await page.locator('.home-map .mapcard').count(), 0, 'chưa khởi tạo bản đồ trước khi cuộn');
   await page.locator('.home-map').scrollIntoViewIfNeeded();
   await waitForNativeMap(page, '.home-map .mapcard');

@@ -81,6 +81,19 @@
   --text-secondary: 400 .75rem / 1.125rem var(--font-body);
   --text-button: 700 .875rem / 1.25rem var(--font-body);
   --text-tab: 700 .6875rem / .875rem var(--font-body);
+  /* Home: chữ trên nền đặc, dòng đủ thoáng cho dấu tiếng Việt. */
+  --text-home-title: 700 1.625rem / 2.125rem var(--font-display);
+  --text-home-card: 700 1.0625rem / 1.5rem var(--font-display);
+  --text-home-description: 400 .875rem / 1.375rem var(--font-body);
+  --text-home-invitation: 700 1.25rem / 1.75rem var(--font-display);
+  --text-home-nav: 700 .8125rem / 1.125rem var(--font-body);
+  --home-banner-height: 168px;
+  --home-selected-banner-height: 144px;
+  --home-photo-ratio: 4 / 3;
+  --home-banner-photo-width: 58%;
+  --home-banner-copy-width: 46%;
+  --home-card-width: 176px;
+  --moment-viewer-height: 60dvh;
   --text-day: 700 .75rem / 1rem var(--font-body);
   --text-eyebrow: 700 .5625rem / .75rem var(--font-body);
   --text-stat: 700 1.25rem / 1.5625rem var(--font-display);

@@ -1,4 +1,4 @@
-// Kiểm thử đầu-cuối của giới thiệu lần đầu (S14) và Lịch mẫu (N-2, bản nháp) trên trình duyệt thật, khung điện thoại.
+// Kiểm thử đầu-cuối của giới thiệu lần đầu 4 cảnh (S14, bản 02/11/2026) và Lịch mẫu (N-2) trên trình duyệt thật, khung điện thoại.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -55,38 +55,56 @@ async function open(ctx: BrowserContext, url: string, seen = false): Promise<Pag
   return page;
 }
 
-test('lần đầu vào Khám phá: chuyển sang giới thiệu 3 cảnh, đi hết, nhớ đã xem và không hiện lại', async () => {
+/** Hàng trong tờ lịch: tên các địa điểm/khoảng nghỉ theo thứ tự hiện có. */
+async function rowNames(page: Page): Promise<string[]> {
+  return page.locator('.ob-row .ob-tx strong').allTextContents();
+}
+
+/** Đợi cảnh bản đồ ổn định: bản đồ thật sẵn sàng hoặc đã chuyển sang sơ đồ thay thế. */
+async function mapSettled(page: Page): Promise<void> {
+  await page.waitForFunction(() => document.querySelector('.ob-map .tmroot[data-ready="1"]') !== null || document.querySelector('.ob-schematic') !== null, null, { timeout: 30_000 });
+}
+
+test('lần đầu vào Khám phá: giới thiệu 4 cảnh, đi hết bằng Tiếp/Quay lại, nhớ đã xem và không hiện lại', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '/#/');
-  await page.getByRole('heading', { name: 'Có một nơi đang đợi bạn' }).waitFor();
+  await page.getByRole('heading', { name: 'Wander' }).waitFor();
   assert.match(page.url(), /#\/onboard$/);
-  const bar = page.getByRole('progressbar');
-  assert.equal(await bar.getAttribute('aria-valuenow'), '1');
-  await page.getByText('Bản nháp nội dung').waitFor();
+  await page.getByText('Quẹt nơi mê, đi cho đã.').waitFor();
+  for (const name of ['Đà Lạt', 'Hà Giang', 'Tà Xùa']) await page.locator('.ob-fan b', { hasText: name }).waitFor();
+  assert.equal(await page.locator('.ob-fan').count(), 3, 'ba thẻ điểm đến');
+  assert.equal(await page.locator('.ob-dots button').count(), 4);
+  assert.equal(await page.locator('.ob-dots button.on').getAttribute('aria-current'), 'step');
+  assert.equal(await page.getByRole('button', { name: 'Bắt đầu khám phá' }).count(), 0, 'nút Bắt đầu khám phá chỉ hiện ở bước cuối');
   await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
-  await page.getByRole('heading', { name: 'Quẹt phải là mê, quẹt trái là thôi' }).waitFor();
+  await page.getByRole('heading', { name: /Thích nơi nào, quẹt chọn nơi đó\./ }).waitFor();
   assert.equal(await page.getByRole('heading', { level: 1 }).evaluate((el) => document.activeElement === el), true, 'tiêu đề mới nhận focus');
   await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
-  await page.getByRole('heading', { name: 'Rồi lịch tự thành hình' }).waitFor();
+  await page.getByRole('heading', { name: /Gợi ý xếp ngày, dễ chỉnh theo ý bạn\./ }).waitFor();
+  await page.locator('.ob-dots button').nth(3).click();
+  await page.getByRole('heading', { name: /Gửi một liên kết\. Cùng nhau chốt chuyến\./ }).waitFor();
+  await page.getByText('Minh họa · sắp có').waitFor();
+  await page.getByRole('button', { name: 'Bắt đầu khám phá' }).waitFor();
   await page.getByRole('button', { name: 'Quay lại' }).click();
-  await page.getByRole('heading', { name: 'Quẹt phải là mê, quẹt trái là thôi' }).waitFor();
-  await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
+  await page.getByRole('heading', { name: /Gợi ý xếp ngày/ }).waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Bắt đầu khám phá' }).count(), 0);
+  await page.locator('.ob-dots button').nth(3).click();
   await page.getByRole('button', { name: 'Bắt đầu khám phá' }).click();
-  await page.locator('.home-hero').first().waitFor();
+  await page.locator('.nh-head').first().waitFor();
   assert.match(page.url(), /#\/$/);
   await page.reload();
-  await page.locator('.home-hero').first().waitFor();
+  await page.locator('.nh-head').first().waitFor();
   assert.doesNotMatch(page.url(), /onboard/);
   assert.equal(await page.evaluate((k) => localStorage.getItem(k), ONBOARDING_KEY), '{"done":true}');
   assert.deepEqual(errors, []);
   await ctx.close();
 });
 
-test('Bỏ qua ở cảnh đầu cũng nhớ đã xem; liên kết sâu không bị chuyển sang giới thiệu', async () => {
+test('Bỏ qua cũng nhớ đã xem; liên kết sâu không bị chuyển sang giới thiệu', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '/#/');
   await page.getByRole('button', { name: 'Bỏ qua' }).click();
-  await page.locator('.home-hero').first().waitFor();
+  await page.locator('.nh-head').first().waitFor();
   assert.equal(await page.evaluate((k) => localStorage.getItem(k), ONBOARDING_KEY), '{"done":true}');
   const deep = await ctx.newPage();
   await deep.goto(`${baseUrl}/#/deck/ha-giang`);
@@ -96,6 +114,119 @@ test('Bỏ qua ở cảnh đầu cũng nhớ đã xem; liên kết sâu không b
   assert.match(deep.url(), /#\/deck\/ha-giang$/, 'liên kết sâu giữ nguyên');
   assert.deepEqual(errors, []);
   await ctx.close();
+});
+
+test('cảnh quẹt: demo tự chạy khi vào bằng Tiếp; chạm vào thẻ dừng demo; kéo thật chọn được; Xem lại chạy lại từ đầu', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '/#/');
+  await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: 'Đã chọn 0 nơi' }).waitFor();
+  await page.getByText('Kéo sang phải để chọn').waitFor();
+  await page.getByText('Nhả tay: nơi này được chọn').waitFor({ timeout: 20_000 });
+  await page.getByRole('status').filter({ hasText: 'Đã chọn 1 nơi' }).waitFor({ timeout: 10_000 });
+  await page.getByText('Kéo sang trái để bỏ qua').waitFor({ timeout: 20_000 });
+  await page.getByText('Nhả tay: nơi này được bỏ qua').waitFor({ timeout: 20_000 });
+  assert.equal(await page.getByRole('status').filter({ hasText: 'Đã chọn' }).textContent(), 'Đã chọn 1 nơi', 'bỏ qua không làm tăng số đã chọn');
+  await page.getByText('Hoặc bấm ✕ / ✓ — cùng tác dụng').waitFor({ timeout: 10_000 });
+  /* người xem chạm vào thẻ giữa lúc demo: demo dừng ngay, hiện Xem lại */
+  await page.getByRole('button', { name: 'Xem lại' }).click();
+  await page.getByRole('status').filter({ hasText: 'Đã chọn 0 nơi' }).waitFor();
+  const card = page.locator('.ob-card.is-top');
+  const box = (await card.boundingBox())!;
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height * 0.6);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 60, box.y + box.height * 0.6, { steps: 6 });
+  assert.equal(await page.getByText('Kéo sang phải để chọn').count(), 0, 'chú thích của demo biến mất khi người xem chạm');
+  await page.mouse.move(box.x + box.width / 2 + 170, box.y + box.height * 0.6, { steps: 8 });
+  await page.mouse.up();
+  await page.getByRole('status').filter({ hasText: 'Đã chọn 1 nơi' }).waitFor({ timeout: 5_000 });
+  await page.waitForTimeout(6_000);
+  assert.equal(await page.getByRole('status').filter({ hasText: 'Đã chọn' }).textContent(), 'Đã chọn 1 nơi', 'demo không giành lại điều khiển');
+  await page.getByRole('button', { name: 'Bỏ qua nơi này' }).click();
+  await page.waitForTimeout(800); // thẻ trước còn đang bay: app chủ ý không nhận lượt quẹt chồng
+  await page.getByRole('button', { name: 'Chọn nơi này' }).click();
+  await page.getByRole('status').filter({ hasText: 'Đã chọn 2 nơi' }).waitFor({ timeout: 5_000 });
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('cảnh bản đồ: lịch mẫu cố định đúng thứ tự, tab ngày bấm được, không phụ thuộc lựa chọn ở cảnh quẹt', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '/#/');
+  await page.locator('.ob-dots button').nth(2).click();
+  await page.getByText('Đà Lạt · 2 ngày thong thả').first().waitFor();
+  await mapSettled(page);
+  await page.getByRole('tab', { name: 'Ngày 1' }).click();
+  assert.deepEqual(await rowNames(page), ['Nhà thờ Con Gà', 'Quảng trường Lâm Viên', 'Hồ Xuân Hương', 'Chợ Đà Lạt']);
+  assert.equal(await page.locator('.ob-row .ob-th b').allTextContents().then((n) => n.join('')), '1234', 'số khớp thứ tự ghim');
+  await page.getByRole('tab', { name: 'Ngày 2' }).click();
+  const day2 = await rowNames(page);
+  assert.deepEqual(day2, ['Thiền viện Trúc Lâm', 'Ăn trưa, nghỉ ngơi', 'Thác Datanla', 'Hồ Tuyền Lâm']);
+  await page.getByText('Thứ tự ghé thăm · không phải tuyến đường').waitFor();
+  await page.getByRole('tab', { name: 'Tổng quan' }).click();
+  await page.locator('.ob-dayhead .ob-badge', { hasText: 'Lịch trình minh họa' }).waitFor();
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('cảnh chia sẻ: mời → sao chép → bạn vào → đề xuất; từ chối giữ lịch; chấp nhận thêm Ga Đà Lạt đúng một lần, kể cả khi xem lại', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '/#/');
+  await page.locator('.ob-dots button').nth(3).click();
+  await mapSettled(page);
+  /* người xem tự thao tác ngay: phần tự chạy dừng */
+  await page.getByRole('button', { name: 'Chia sẻ', exact: true }).click();
+  await page.locator('.ob-panel.invite.on').waitFor();
+  await page.getByRole('button', { name: 'Sao chép' }).click();
+  await page.getByRole('button', { name: 'Đã sao chép' }).waitFor();
+  await page.locator('.ob-panel.proposal.on').waitFor({ timeout: 15_000 });
+  await page.getByText('Mai đề xuất thêm vào Ngày 2 · Sáng').waitFor();
+  assert.equal(await page.locator('.ob-members .ob-av').count(), 3, 'Bạn, Mai, Bảo');
+  await page.getByRole('button', { name: 'Từ chối' }).click();
+  await page.getByText('Đã từ chối · lịch giữ nguyên').waitFor();
+  assert.equal((await rowNames(page)).includes('Ga Đà Lạt'), false);
+  /* xem lại rồi tự chạy thử: chấp nhận */
+  await page.getByRole('button', { name: 'Xem lại' }).click();
+  await page.getByRole('button', { name: 'Chấp nhận' }).click({ timeout: 40_000 });
+  await page.getByText('Đã thêm Ga Đà Lạt vào Ngày 2').waitFor();
+  const rows = await rowNames(page);
+  assert.equal(rows[0], 'Ga Đà Lạt');
+  assert.equal(rows.filter((n) => n === 'Ga Đà Lạt').length, 1);
+  assert.equal(await page.locator('.ob-row .ob-th b').allTextContents().then((n) => n.join('')), '1234');
+  await page.getByRole('button', { name: 'Xem lại' }).click();
+  await page.waitForTimeout(800);
+  assert.equal((await rowNames(page)).includes('Ga Đà Lạt'), false, 'xem lại trả về lịch gốc, không nhân đôi');
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('bản đồ nền không tải được: hiện sơ đồ minh họa, câu chuyện vẫn chạy, tab vẫn bấm được', async () => {
+  const { ctx, errors } = await phone();
+  await ctx.route(/openfreemap\.org/, (route) => route.abort());
+  const page = await open(ctx, '/#/');
+  await page.locator('.ob-dots button').nth(2).click();
+  await page.getByText('Chưa tải được bản đồ nền · đang hiện sơ đồ minh họa').waitFor({ timeout: 20_000 });
+  await page.locator('svg.ob-schematic').waitFor();
+  await page.getByRole('tab', { name: 'Ngày 1' }).click();
+  assert.equal((await rowNames(page)).length, 4);
+  assert.equal(await page.locator('svg.ob-schematic image').count() > 0, true, 'ghim ảnh vẫn hiện trên sơ đồ');
+  assert.deepEqual(errors.filter((e) => !/openfreemap|ERR_FAILED|Failed to load resource|Failed to fetch/i.test(e)), []);
+  await ctx.close();
+});
+
+test('giảm chuyển động: cảnh quẹt hiện hai trạng thái chọn / bỏ qua bằng hình và chữ, không chạy demo', async () => {
+  const browserCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, locale: 'vi-VN', reducedMotion: 'reduce' });
+  const errors: string[] = [];
+  browserCtx.on('page', (p) => p.on('pageerror', (e) => errors.push(e.message)));
+  const page = await open(browserCtx, '/#/');
+  await page.locator('.ob-dots button').nth(1).click();
+  await page.getByText('Quẹt trái hoặc bấm ✕').waitFor();
+  await page.getByText('Quẹt phải hoặc bấm ✓').waitFor();
+  await page.getByText('BỎ QUA', { exact: true }).waitFor();
+  await page.getByText('CHỌN', { exact: true }).waitFor();
+  assert.equal(await page.locator('.ob-card').count(), 0, 'không dựng bộ bài chuyển động');
+  assert.deepEqual(errors, []);
+  await browserCtx.close();
 });
 
 test('Lịch mẫu (đã được PO duyệt 27/10: không còn nhãn nháp), xem theo ngày, dùng lịch này tạo chuyến có các nơi xếp đúng ngày và thứ tự', async () => {

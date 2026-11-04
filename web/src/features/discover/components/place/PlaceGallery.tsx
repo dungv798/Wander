@@ -1,3 +1,4 @@
+import { PlacePlaceholder } from '../PlacePlaceholder.tsx';
 import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import { useEffect } from 'react';
 import type { ReactNode } from 'react';
@@ -36,9 +37,9 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
     <div className={`gal cat-${place.category}`}>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- vùng cuộn ngang phải focus được bằng bàn phím (WCAG 2.1.1) */}
       <div ref={ref} className="gallery" tabIndex={0} aria-label={fill(COPY.place.photosOf, { name: place.name })} {...pointer}>
-        {photos.map((p) => (
+        {photos.length ? photos.map((p) => (
           <RevealImage key={p.url} alt={place.name} src={p.url} />
-        ))}
+        )) : <PlacePlaceholder place={place} />}
       </div>
       <div className="place-hero-scrim" aria-hidden="true" />
       <PlaceHeroMeta place={place} />
@@ -59,10 +60,10 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
       ) : null}
       {n ? <span className="gcount" aria-live="polite">{`${index + 1} / ${n}`}</span> : null}
       <IconButton className="close" icon="x" label={COPY.common.close} onClick={onClose} />
-      <button className="credit-btn" type="button" aria-label={COPY.place.photoCredit} onClick={credit.toggle}>
+      {n ? <button className="credit-btn" type="button" aria-label={COPY.place.photoCredit} onClick={credit.toggle}>
         <Icon name="info-circle" />
-      </button>
-      {credit.open ? <CreditPill photo={photos[index]} /> : null}
+      </button> : null}
+      {n && credit.open ? <CreditPill photo={photos[index]} /> : null}
     </div>
   );
 }

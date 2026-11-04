@@ -1,3 +1,4 @@
+import { PlacePlaceholder } from '../PlacePlaceholder.tsx';
 import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import type { PointerEvent } from 'react';
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
@@ -68,7 +69,7 @@ export function SwipeCard({ place, depth, photoIndex, handlers }: SwipeCardProps
       aria-hidden={front ? undefined : true}
       {...(front ? handlers : {})}
     >
-      <RevealImage className="ph" alt="" src={photo?.url} />
+      {photo ? <RevealImage className="ph" alt="" src={photo.url} /> : <PlacePlaceholder place={place} className="ph" />}
       <div className="card-veil" aria-hidden="true" />
       {place.photos.length > 1 ? (
         <div className="segs" aria-hidden="true">

@@ -33,18 +33,45 @@ export function dateLabel(trip: Trip): string {
   return trip.startDate && trip.endDate ? `${dayLabel(trip.startDate)} – ${dayLabel(trip.endDate)}` : C.noDates;
 }
 
-/** Các mục theo thứ tự thủ công, mỗi mục có số, tên, giờ và giá độc lập. */
+/** Dòng phụ của một mục: chỉ giờ và giá ĐÃ CÓ; mục chưa có gì thì không in dòng phụ (không lặp "Chưa đặt giờ · Chưa biết giá"). */
+export function itemDetail(item: TripItem): string {
+  const cost = costCell(item);
+  const priced = cost.kind === 'known' || cost.kind === 'included' ? costLabel(item) : '';
+  return [item.timeOfDay ? timeLabel(item.timeOfDay) : '', priced].filter(Boolean).join(' · ');
+}
+
+/** Các mục theo thứ tự thủ công, mỗi mục có số, tên và (nếu có) giờ/giá đã biết. */
 function itemBlocks(items: readonly TripItem[], input: ExportInput, section: string): TextBlock[] {
   const catalog = catalogOf(input.destination);
-  return items.flatMap((item, i) => [
-    { text: `${i + 1}. ${itemName(item, catalog)}`, role: 'body' as const, maxLines: PNG.maxNameLines, keepNext: true, section },
-    { text: [timeLabel(item.timeOfDay), costLabel(item)].filter(Boolean).join(' · '), role: 'small' as const, section },
-  ]);
+  return items.flatMap((item, i) => {
+    const detail = itemDetail(item);
+    return [
+      { text: `${i + 1}. ${itemName(item, catalog)}`, role: 'body' as const, maxLines: PNG.maxNameLines, keepNext: Boolean(detail), section },
+      ...(detail ? [{ text: detail, role: 'small' as const, section }] : []),
+    ];
+  });
+}
+
+/** Kiểu tóm tắt: mỗi ngày một đoạn "A → B → C", không lặp thông tin phụ của từng mục. */
+function summaryBlocks(items: readonly TripItem[], input: ExportInput, section: string): TextBlock[] {
+  const catalog = catalogOf(input.destination);
+  return [{ text: items.map((i) => itemName(i, catalog)).join(' → '), role: 'body', section }];
+}
+
+/** Khối tổng chi phí đi liền nhau để không tách khỏi nhau khi chia ảnh. */
+function totalBlocks(trip: Trip, exported: readonly TripItem[]): TextBlock[] {
+  const sum = summarizeCosts({ ...trip, items: exported });
+  const notes: TextBlock[] = [];
+  if (sum.unknownCount) notes.push({ text: `${sum.unknownCount} ${C.unknownNote}`, role: 'small' });
+  if (sum.includedCount) notes.push({ text: C.includedNote, role: 'small' });
+  const lead: TextBlock = { text: sum.knownCount ? `${C.total}: ${formatVnd(sum.totalK * FORMAT.VND_PER_THOUSAND)}` : C.noKnown, role: 'body', keepNext: notes.length > 0 };
+  return [lead, ...notes.map((n, i) => ({ ...n, keepNext: i < notes.length - 1 }))];
 }
 
 /** Dựng nội dung thuần cho các ngày của chuyến (kể cả ngày trống); mục chưa có ngày không xuất, tổng chỉ tính mục xuất ra. */
 export function exportBlocks(input: ExportInput): TextBlock[] {
   const { trip } = input;
+  const style = input.style ?? 'days';
   const blocks: TextBlock[] = [
     { text: trip.name, role: 'title', maxLines: PNG.maxNameLines },
     { text: `${input.destination.name} · ${dateLabel(trip)}`, role: 'small' },
@@ -54,15 +81,13 @@ export function exportBlocks(input: ExportInput): TextBlock[] {
     const section = `${C.day} ${index + 1}${trip.datesTentative ? '' : ` · ${dayLabel(day)}`}`;
     blocks.push({ text: section, role: 'heading', keepNext: true });
     const items = dayItems(trip, day);
-    blocks.push(...(items.length ? itemBlocks(items, input, section) : [{ text: C.emptyDay, role: 'small' as const }]));
+    if (!items.length) blocks.push({ text: C.emptyDay, role: 'small' as const });
+    else blocks.push(...(style === 'summary' ? summaryBlocks(items, input, section) : itemBlocks(items, input, section)));
   }
   const exported = trip.items.filter(i => i.day && days.includes(i.day));
   const unassigned = trip.items.length - exported.length; // mục chưa có ngày không thuộc lịch: không xuất, chỉ ghi chú (đúng lời hứa của màn xem trước)
   if (!exported.length) blocks.push({ text: C.empty, role: 'body' });
   if (unassigned) blocks.push({ text: `${unassigned} ${C.undatedNote}`, role: 'small' });
-  const sum = summarizeCosts({ ...trip, items: exported });
-  blocks.push({ text: sum.knownCount ? `${C.total}: ${formatVnd(sum.totalK * FORMAT.VND_PER_THOUSAND)}` : C.noKnown, role: 'body' });
-  if (sum.unknownCount) blocks.push({ text: `${sum.unknownCount} ${C.unknownNote}`, role: 'small' });
-  blocks.push({ text: C.includedNote, role: 'small' });
+  blocks.push(...totalBlocks(trip, exported));
   return blocks;
 }

@@ -70,6 +70,7 @@ test('rating: chấm sao kèm lời bình, ghi ở backend thật, sửa và xó
     const card = page.locator('.rating-card');
     await card.waitFor();
     const before = await totalCount(viewer.token, placeIds);
+    await card.getByRole('button', { name: 'Xem tất cả và viết đánh giá' }).click();
     await card.getByRole('button', { name: '4 sao' }).click();
     assert.equal(await card.getByRole('button', { name: '4 sao' }).getAttribute('aria-pressed'), 'true');
     await card.locator('textarea').fill('Cà phê thơm');

@@ -1,1 +1,1 @@
-export const MEAL_SUGGEST = { radiusM: 1500, expandedRadiusM: 3000, limit: 12, noonMinutes: 720, minutesPerHour: 60, midpointDivisor: 2, skeletons: 3 } as const;
+export const MEAL_SUGGEST = { radiusM: 1500, expandedRadiusM: 3000, limit: 12, noonMinutes: 720, minutesPerHour: 60, midpointDivisor: 2, skeletons: 3, previewCount: 5, fewResults: 5, minAnchors: 2 } as const;

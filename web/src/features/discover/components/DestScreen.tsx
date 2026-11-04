@@ -16,6 +16,7 @@ import { categoriesOf, coverPlace, destBestMonths, firstPhotoUrl } from '../mode
 import { DestinationGate } from './DestinationGate.tsx';
 import { GuideSections } from './dest/GuideSections.tsx';
 import { DestMapSection } from './map/DestMapSection.tsx';
+import { MomentsSection } from './MomentsSection.tsx';
 
 /** Một số trong "Tóm tắt": đếm từ 0 lên khi hiện (giảm chuyển động thì hiện ngay). */
 function FactNumber({ value }: { readonly value: number }) {
@@ -108,6 +109,7 @@ function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; rea
         </div>
         <DestMapSection dest={dest} />
         <DestPeek dest={dest} />
+        <MomentsSection key={dest.id} dest={dest} />
         <h2 className="h2">{fill(COPY.dest.guideTitle, { dest: dest.name })}</h2>
         <GuideSections dest={dest} />
         <TemplatesSection destId={dest.id} />

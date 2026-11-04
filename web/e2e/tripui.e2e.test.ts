@@ -48,6 +48,8 @@ test('390px: chi phí đầy đủ không cuộn ngang; sheet sát hai mép và 
     await page.getByRole('tab', { name: 'Ngày 1', exact: true }).click();
     assert.equal(await sheet.getAttribute('data-snap'), snap);
     await page.getByRole('tab', { name: 'Tổng quan', exact: true }).click();
+    await page.getByRole('button', { name: 'Xem chi tiết' }).click();
+    await page.locator('.trip-cost-groups details').first().locator('summary').click();
     await page.locator('.trip-cost-row').first().waitFor();
     const row = page.locator('.trip-cost-row').first();
     await row.click();

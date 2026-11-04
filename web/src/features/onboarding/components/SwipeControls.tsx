@@ -1,0 +1,56 @@
+import { fill } from '../../../shared/const/copy.vi.ts';
+import { Icon } from '../../../shared/ui/Icon.tsx';
+import { onboardPhotoUrl } from '../model/onboardPhotos.ts';
+import type { PlaceView } from '../../discover/index.ts';
+import type { FlyingChip } from '../hooks/useSelectedTray.ts';
+import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
+import type { LitButton } from '../model/swipeDemo.ts';
+import type { SwipeKind } from '../model/swipeDeck.ts';
+
+interface SwipeControlsProps {
+  readonly lit: LitButton;
+  readonly hint: string;
+  readonly onAct: (kind: SwipeKind) => void;
+}
+
+/** Hai nút ✕ (bỏ qua) và ✓ (chọn) tương đương quẹt, cùng dòng gợi ý; nút được nhấn sáng đồng bộ với lượt demo. */
+export function SwipeControls({ lit, hint, onAct }: SwipeControlsProps) {
+  return (
+    <div className="ob-controls">
+      <div className="ob-swipebtns">
+        <button type="button" className={`ob-rb skip${lit === 'skip' || lit === 'both' ? ' lit' : ''}`} aria-label={T.swipe.skipAction} onClick={() => onAct('skip')}>
+          <Icon name="x" />
+        </button>
+        <button type="button" className={`ob-rb pick${lit === 'pick' || lit === 'both' ? ' lit' : ''}`} aria-label={T.swipe.pick} onClick={() => onAct('pick')}>
+          <Icon name="check" />
+        </button>
+      </div>
+      <p className="ob-hint">{hint}</p>
+    </div>
+  );
+}
+
+interface SelectedTrayViewProps {
+  readonly thumbs: readonly PlaceView[];
+  readonly chips: readonly FlyingChip[];
+  readonly onLanded: (id: number) => void;
+}
+
+/** Khay "đã chọn": ảnh thu nhỏ đã đáp xuống, bộ đếm, và các ảnh đang bay xuống từ thẻ vừa chọn. */
+export function SelectedTrayView({ thumbs, chips, onLanded }: SelectedTrayViewProps) {
+  return (
+    <>
+      <div className="ob-thumbs" role="list" aria-label={T.swipe.selectedList}>
+        {thumbs.map((p) => (
+          <i key={p.id} role="listitem" style={{ backgroundImage: `url(${onboardPhotoUrl(p)})` }} />
+        ))}
+      </div>
+      <p key={thumbs.length} className="ob-counter" role="status">
+        {fill(T.swipe.selected, { n: thumbs.length })}
+      </p>
+      {chips.map((c) => (
+        <i key={c.id} className="ob-chip" style={{ backgroundImage: `url(${onboardPhotoUrl(c.place)})`, '--fx': `${c.fx}px`, '--fy': `${c.fy}px`, '--tx': `${c.tx}px`, '--ty': `${c.ty}px` } as React.CSSProperties} onAnimationEnd={() => onLanded(c.id)} />
+      ))}
+    </>
+  );
+}

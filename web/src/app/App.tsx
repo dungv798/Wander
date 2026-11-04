@@ -86,7 +86,7 @@ function Shell() {
       <ScreenHost view={route.view} routeKey={`${route.view}|${route.id ?? ''}`} noBar={hideBar}>
         <RouteEscape view={route.view} />
         {route.view === VIEW.ONBOARD ? <OnboardScreen /> : null}
-        {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<ScreenSkeleton />}><DestinationPickerScreen /></Suspense> : null}
+        {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<ScreenSkeleton />}><DestinationPickerScreen initialScope={route.id} /></Suspense> : null}
         {route.view === VIEW.EXPLORE ? <HomeScreen key={currentDestId} destId={currentDestId} /> : null}
         {route.view === VIEW.DEST ? <DestScreen destId={destId} onCreate={() => setCreate([])} /> : null}
         {route.view === VIEW.DECK ? <DeckRoute key={destId} destId={destId} tripId={route.sub} /> : null}

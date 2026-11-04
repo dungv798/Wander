@@ -96,3 +96,12 @@
   .place-content :is(.place-chevron, .place-disclosure-grid, .place-about, .place-more, .place-disclosure-toggle) { transition: none; }
   .place-content .gallery, .place-content .tmroot[data-ready="0"] { animation: none; }
 }
+
+/* Ô giữ chỗ khi chưa có ảnh: dùng đúng khung ảnh, không làm ảnh vỡ */
+.img-ph { display: block; background: var(--surface-2); }
+.photo-ph { display: grid; place-content: center; justify-items: center; gap: var(--s-1); width: 100%; height: 100%; background: var(--surface-2); color: var(--muted); text-align: center; }
+.card .photo-ph.ph { position: absolute; inset: 0; }
+.gal .photo-ph { min-height: calc(var(--s-8) * 4); }
+
+/* Placeholder trong tờ chi tiết: nền tối như ảnh để tiêu đề trắng vẫn rõ; nội dung nằm phía trên tiêu đề */
+.gal .photo-ph { background: var(--photo-bg); color: var(--on-photo); place-content: start center; padding-top: calc(var(--tap) + var(--s-5)); }

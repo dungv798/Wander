@@ -35,6 +35,12 @@ export const MAP = {
   FIT_CITY_ZOOM: 15,
   FIT_REGION_ZOOM: 14,
   FLY_MS: 750,
+  /** Quá thời gian này mà bản đồ chưa sẵn sàng thì báo "chưa mở được" kèm lối thay thế (mạng chậm/chặn, không có WebGL). */
+  LOAD_TIMEOUT_MS: 15000,
+  /** Mức thu phóng của liên kết bản đồ ngoài. */
+  EXTERNAL_ZOOM: 13,
+  /** Tâm và mức thu phóng cho liên kết cả nước khi chưa có ghim. */
+  EXTERNAL_COUNTRY: '6/16.2/106.0',
   /** Hai ghim gần hơn mức này thì gộp thành cụm (chế độ duyệt). */
   CLUSTER_PX: 34,
   LABEL_GAP: 4,

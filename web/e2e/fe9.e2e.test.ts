@@ -128,7 +128,8 @@ test('Lưu hoặc gửi lịch trình: PNG thật, PDF/Lịch sắp có, tổng 
   await page.locator('.png-export-image').first().waitFor();
   const text = await page.evaluate(() => (window as Window & { exportDrawnText?: string[] }).exportDrawnText?.join('\n') ?? '');
   assert.match(text, /750\.000\s₫/);
-  assert.match(text, /Đã bao gồm/);
+  assert.match(text, /Hà Giang - mẫu/);
+  assert.doesNotMatch(text, /Chưa đặt giờ|Chưa biết giá;?\s*$/m, 'không in lặp trạng thái trống ở từng dòng');
   for (const day of [1, 2, 3]) assert.match(text, new RegExp(`Ngày ${day} ·`));
   assert.doesNotMatch(text, /Chưa xếp ngày|Phố cổ Đồng Văn|Hoàng Su Phì|Tây Côn Lĩnh/, 'ba mục chưa có ngày không nằm trong PNG');
   assert.deepEqual(errors, []);
@@ -150,7 +151,7 @@ test('Cài đặt: đổi tên thiết bị (kiểm rỗng, lưu ở máy chủ)
   assert.equal((await devicesOf(owner.token))[0]?.name, 'Điện thoại của Dũng');
   await page.goto(`${baseUrl}/#/settings`);
   await page.getByRole('button', { name: 'Xem lại giới thiệu' }).click();
-  await page.getByRole('heading', { name: 'Có một nơi đang đợi bạn' }).waitFor();
+  await page.getByRole('heading', { name: 'Wander' }).first().waitFor(); // cảnh đầu của giới thiệu bốn cảnh (logo Wander là h1)
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -183,7 +184,7 @@ test('hết phiên nhánh B (đã bỏ qua mã, lần cuối chỉ có một thi
   await page.getByRole('heading', { name: 'Không khôi phục được' }).waitFor();
   assert.equal(await page.getByRole('button', { name: 'Mở trên máy này' }).count(), 0);
   await page.getByRole('button', { name: 'Về Khám phá' }).click();
-  await page.locator('.home-hero').first().waitFor();
+  await page.locator('.nh-head').first().waitFor();
   // PO 27/10: sau nhánh B được bắt đầu danh tính mới, có cảnh báo rõ chuyến cũ mất vĩnh viễn
   await page.goto(`${baseUrl}/#/trips`);
   await page.getByRole('button', { name: 'Tạo chuyến đi' }).first().click();

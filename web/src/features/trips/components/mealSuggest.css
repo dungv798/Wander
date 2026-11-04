@@ -8,3 +8,7 @@
 .meal-suggest-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); flex-shrink: 0; }
 .meal-attribution { display: grid; gap: var(--s-1); flex-shrink: 0; }
 .meal-skeleton { min-height: var(--tap); padding: var(--s-6); border-radius: var(--r-md); background: var(--surface-2); }
+.meal-poi-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-2); }
+.meal-poi-row { display: grid; gap: var(--s-2); padding: var(--s-3); border: var(--glass-border) solid var(--line); border-radius: var(--r-md); background: var(--glass); }
+.meal-poi-row .meal-poi { padding: 0; border: 0; background: transparent; cursor: default; }
+.meal-poi-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }

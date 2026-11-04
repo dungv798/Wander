@@ -53,6 +53,7 @@ export function QuickFacts({ place }: { readonly place: PlaceView }) {
 
 /** Các điểm nổi bật dạng nhãn. */
 export function Highlights({ place }: { readonly place: PlaceView }) {
+  if (!place.highlights.length) return null;
   return (
     <div className="place-info-card">
       <h4>
@@ -129,8 +130,8 @@ export function About({ place }: { readonly place: PlaceView }) {
         <Icon name="info-circle" />
         {COPY.place.about}
       </h4>
-      <div className="place-about" data-open={open} id={id}><div><p className="body">{place.summary || COPY.place.noSummary}</p></div></div>
-      <PlaceMoreButton open={open} controls={id} onClick={() => setOpen(value => !value)} />
+      <div className="place-about" data-open={open || !place.summary} id={id}><div><p className="body">{place.summary || COPY.place.noSummary}</p></div></div>
+      {place.summary ? <PlaceMoreButton open={open} controls={id} onClick={() => setOpen(value => !value)} /> : null}
     </div>
   );
 }

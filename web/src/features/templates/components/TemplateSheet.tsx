@@ -112,6 +112,7 @@ export function TemplateSheet({ template, destId, onClose }: SheetProps) {
             {template.summary ? <p className="note spaced">{template.summary}</p> : null}
           </div>
           {template.status === 'draft' ? <WarnBox>{T.sheet.draftNote}</WarnBox> : null}
+          {template.status === 'reference' ? <WarnBox role="status">{T.sheet.referenceNote}</WarnBox> : null}
           <TemplateDays template={template} />
           <div className="stack">
             <Button block onClick={() => setUsing(true)}>{T.sheet.use}</Button>

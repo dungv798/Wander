@@ -3,10 +3,12 @@ export const TEMPLATES_COPY = {
   section: 'Lịch mẫu để bắt đầu',
   sectionNote: 'Gợi ý ghép sẵn từ các nơi có trong cẩm nang. Bạn chỉnh được mọi thứ.',
   draft: 'Bản nháp',
+  reference: 'Lịch trình tham khảo',
   card: '{days} ngày · {places} nơi',
   open: 'Xem lịch «{title}»',
   sheet: {
     draftNote: 'Bản nháp, chờ biên tập viên duyệt. Chỉ ghép các nơi có trong cẩm nang; chưa có giờ giấc hay giá.',
+    referenceNote: 'Lịch trình tham khảo: chỉ ghép các nơi có vị trí đã kiểm trong cẩm nang. Khoảng cách là ước tính chim bay; chưa có giờ mở cửa, giá hay thời gian đi đường đã xác minh.',
     day: 'Ngày {n}',
     emptyDay: 'Ngày dành cho chặng trước, chưa có nơi mới.',
     use: 'Dùng lịch này',

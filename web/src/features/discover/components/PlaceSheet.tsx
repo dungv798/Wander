@@ -17,7 +17,7 @@ import '../place.css';
 /** Thẻ đánh giá tải lười: không tính vào JS ban đầu (ngân sách 170 KB). */
 const PlaceRatingCard = lazy(() => import('../../rating/index.ts').then((m) => ({ default: m.PlaceRatingCard })));
 
-/** Nội dung chi tiết một địa điểm: ảnh, nhãn biên tập, thông tin nhanh, buổi đi, mùa đẹp, mẹo, mô tả, ghi công. */
+/** Nội dung chi tiết một địa điểm, thông tin thực dụng trước: ảnh, về nơi này, thông số, có gì, buổi/mùa/mẹo (gập), đường đi, rồi ý kiến biên tập, đánh giá và ghi công. */
 function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDetail; readonly placeId: string; readonly inDeck: boolean }) {
   const { state, actions } = useDiscover();
   const sheet = usePlaceSheet();
@@ -46,16 +46,17 @@ function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDet
         <PlaceGallery place={place} onClose={sheet.close} registerGo={(go) => (goRef.current = go)} />
         <div className={`pp cat-${place.category}`}>
           {slot?.extra}
-          <EditorialRate place={place} />
-          <Suspense fallback={null}><PlaceRatingCard key={place.id} placeId={place.id} /></Suspense>
           <About place={place} />
           <QuickFacts place={place} />
           <Highlights place={place} />
           <TimeOfDay place={place} />
           <SeasonMonths place={place} />
-          <PlaceDisclosure title={COPY.place.howToGet} icon="route"><PlaceRouteMap dest={dest} place={place} /></PlaceDisclosure>
           <Tips place={place} />
+          <PlaceDisclosure title={COPY.place.howToGet} icon="route"><PlaceRouteMap dest={dest} place={place} /></PlaceDisclosure>
+          <EditorialRate place={place} />
+          <Suspense fallback={null}><PlaceRatingCard key={place.id} placeId={place.id} /></Suspense>
           <DataCredits place={place} />
+
         </div>
       </div>
       <div className="cta-bar place-actions">

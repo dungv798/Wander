@@ -83,3 +83,8 @@
   outline: var(--s-1) solid var(--focus);
   outline-offset: var(--s-1);
 }
+
+.destination-scope { display: flex; gap: var(--s-2); margin-bottom: var(--s-3); }
+.destination-scope button { flex: 1; min-height: var(--tap); padding: 0 var(--s-3); border: 1px solid var(--border-ctrl); border-radius: var(--r-pill); background: var(--surface); color: var(--ink); font: inherit; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.destination-scope button[aria-selected="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.destination-picker-need { display: grid; gap: var(--s-3); margin-top: var(--s-4); }

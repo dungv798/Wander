@@ -86,3 +86,25 @@ test('ngày dài nhắc lại ngày ở ảnh sau và giữ tên với giờ/chi
     assert.ok(page.lines.every(line => line.y + LINE_HEIGHT[line.role] <= 1672));
   }
 });
+
+test('không in lặp "Chưa đặt giờ · Chưa biết giá" ở từng mục; mục có giờ/giá thì có dòng phụ', () => {
+  const items = [
+    { ...item, id: 'a', title: 'Chỉ tên', day: trip.startDate, position: 0 },
+    { ...item, id: 'b', title: 'Có giờ giá', day: trip.startDate, position: 1, timeOfDay: '12:30:00', costK: 120 },
+  ];
+  const text = exportBlocks({ trip: { ...trip, items }, destination }).map(b => b.text).join('\n');
+  assert.doesNotMatch(text, /Chưa đặt giờ/);
+  assert.doesNotMatch(text, /Chưa biết giá(?!;)/);
+  assert.match(text, /12:30 · 120\.000\s₫/);
+});
+
+test('kiểu tóm tắt: mỗi ngày một đoạn nối tên các nơi; tổng đi liền với ghi chú', () => {
+  const items = [
+    { ...item, id: 'a', title: 'A', day: trip.startDate, position: 0 },
+    { ...item, id: 'b', title: 'B', day: trip.startDate, position: 1 },
+  ];
+  const blocks = exportBlocks({ trip: { ...trip, items }, destination, style: 'summary' });
+  assert.ok(blocks.some(b => b.text === 'A → B'));
+  const total = blocks.findIndex(b => b.text.startsWith('Chưa có giá đã biết'));
+  assert.equal(blocks[total]?.keepNext, true);
+});

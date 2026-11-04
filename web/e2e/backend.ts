@@ -2,6 +2,15 @@
 import { randomBytes } from 'node:crypto';
 import type { Page } from 'playwright-core';
 
+/**
+ * Chặn ghi nhầm vào CSDL dev (DR-033, T-A): e2e chỉ chạy khi `tools\dev.ps1 e2e` đã dựng backend trên CSDL riêng `wander_e2e`
+ * và đặt `WANDER_E2E_DB=wander_e2e`. Chạy thẳng `npm run e2e` với backend dev sẽ bị từ chối ngay khi nạp tệp này.
+ */
+const E2E_DB_NAME = 'wander_e2e';
+if (process.env['WANDER_E2E_DB'] !== E2E_DB_NAME) {
+  throw new Error(`Từ chối chạy e2e: thiếu WANDER_E2E_DB=${E2E_DB_NAME}. Chạy bằng "powershell -ExecutionPolicy Bypass -File tools\\dev.ps1 e2e" (CSDL riêng ${E2E_DB_NAME}), không trỏ vào backend dev.`);
+}
+
 /** Địa chỉ backend thật; chạy bằng `tools\dev.ps1 run` hoặc jar với `PORT=8787`. */
 export const BACKEND = process.env['WANDER_BASE_URL'] ?? 'http://127.0.0.1:8787';
 /** Khóa localStorage giữ bí mật phiên của máy này (khớp `STORAGE.TOKEN` của ứng dụng). */

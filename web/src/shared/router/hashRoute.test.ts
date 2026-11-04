@@ -50,3 +50,9 @@ test('liên kết mời #/join/<mã>: mã 43 ký tự base64url (có chữ hoa, 
   assert.equal(parseHash(`#/dest/${code}`).view, 'explore', 'chữ hoa vẫn bị cấm ở mã điểm đến');
   assert.equal(toHash('join', code), `#/join/${code}`);
 });
+
+test('màn chọn điểm đến có thể mang phạm vi "places"; không có thì vẫn là màn chọn', () => {
+  assert.deepEqual(parseHash('#/destinations/places'), { view: 'destinations', id: 'places', sub: null });
+  assert.deepEqual(parseHash('#/destinations'), { view: 'destinations', id: null, sub: null });
+  assert.equal(toHash('destinations', 'places'), '#/destinations/places');
+});

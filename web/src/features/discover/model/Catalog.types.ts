@@ -20,6 +20,18 @@ export interface PhotoView {
   readonly sourceUrl: string;
 }
 
+/** Chủ đề đời sống được backend biên tập. */
+export type MomentTheme = 'cho' | 'mon-an' | 'nguoi' | 'le-hoi' | 'nghe';
+
+/** Ảnh không khí ở cấp điểm đến, kèm đầy đủ thông tin ghi công. */
+export interface MomentView {
+  readonly id: string;
+  readonly theme: MomentTheme;
+  readonly themeLabel: string;
+  readonly caption: string;
+  readonly photo: PhotoView;
+}
+
 /** "Cách bao xa" từ một mốc (ước tính đường núi, không phải chỉ đường). */
 export interface Away {
   readonly refId: string;
@@ -98,6 +110,7 @@ export interface DestinationDetail {
   readonly references: readonly ReferenceView[];
   readonly guide: readonly GuideSectionView[];
   readonly places: readonly PlaceView[];
+  readonly moments: readonly MomentView[];
 }
 
 /** Ảnh xem trước trong danh sách điểm đến. */

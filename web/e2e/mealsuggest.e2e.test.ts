@@ -70,11 +70,15 @@ test('quán theo khoảng cách, ghi công, chọn chỉ điền editor; Lưu m�
     const cards = await sheet.locator('.meal-poi').all();
     assert.ok(cards.length >= 3);
     const distances = await sheet.locator('[data-distance-m]').evaluateAll(nodes => nodes.map(n => Number(n.getAttribute('data-distance-m'))));
-    assert.deepEqual(distances, distances.slice().sort((a, b) => a - b));
+    const kinds = await sheet.locator('.meal-poi').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-kind')));
+    for (const kind of new Set(kinds)) {
+      const same = distances.filter((_, i) => kinds[i] === kind);
+      assert.deepEqual(same, same.slice().sort((a, b) => a - b), `cùng loại ${kind} xếp theo khoảng cách`);
+    }
     assert.ok(await sheet.getByText('Dữ liệu OpenStreetMap, chưa xác minh hiện trạng', { exact: true }).isVisible());
     assert.ok(await sheet.getByRole('link', { name: /OpenStreetMap contributors.*ODbL/ }).isVisible());
     const name = await cards[0]!.locator('strong').innerText();
-    await cards[0]!.click();
+    await sheet.getByRole('button', { name: /^Thêm .* vào / }).first().click();
     const editor = page.getByRole('dialog', { name: 'Thêm mục tự do', exact: true });
     await editor.waitFor();
     assert.equal(await editor.getByLabel('Tên', { exact: true }).inputValue(), name);

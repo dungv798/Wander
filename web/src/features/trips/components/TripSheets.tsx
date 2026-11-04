@@ -10,7 +10,10 @@ import { useTrips } from '../hooks/TripsProvider.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { useUndoable } from '../hooks/useUndoable.ts';
 import { ITEM_KINDS } from '../model/trip.const.ts';
-import { planDays } from '../model/planDays.ts';
+import { planPreview, withDayOverrides } from '../model/planDays.ts';
+import type { PlanDayPreview } from '../model/planDays.ts';
+import { parseVisitMinutes } from '../model/visitMinutes.ts';
+import { formatTravelMinutes, roundTravelMinutes } from '../../../shared/lib/geo.ts';
 import { unassignedItems } from '../model/tripMath.ts';
 import { coordOf, hubPoint, itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
@@ -127,14 +130,26 @@ export function AddToDaySheet({ onClose }: { readonly onClose: () => void }) {
   );
 }
 
-/** Tờ "Gợi ý xếp ngày": xem trước cách nhóm các nơi gần nhau vào từng ngày, rồi áp dụng (có Hoàn tác) hoặc tự xếp. */
+/** Dòng tóm tắt một ngày trong bản xem trước: số nơi, thời lượng đã biết, ghi chú thiếu thời lượng hoặc quá tải. */
+function dayNote(d: PlanDayPreview): string {
+  const parts: string[] = [fill(T.plan.dayCount, { n: d.itemIds.length })];
+  if (d.knownMinutes) parts.push(fill(T.plan.dayKnown, { time: formatTravelMinutes(roundTravelMinutes(d.knownMinutes)) }));
+  if (d.unknownCount) parts.push(fill(T.plan.dayUnknown, { n: d.unknownCount }));
+  if (d.overloaded) parts.push(T.plan.dayOverloaded);
+  return parts.join(' · ');
+}
+
+/** Tờ "Gợi ý xếp ngày": xem trước cách gom các nơi gần nhau, đổi ngày từng nơi nếu muốn, rồi áp dụng (có Hoàn tác) hoặc tự xếp. */
 export function AutoPlanSheet({ onClose }: { readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
   const { trip, cat, days } = useTripView();
+  const [overrides, setOverrides] = useState<Readonly<Record<string, string>>>({});
   const un = unassignedItems(trip);
   if (!un.length) return null;
-  const plan = planDays(trip, coordOf(cat), hubPoint(cat.dest));
+  const durationOf = (id: string): number | null => parseVisitMinutes(cat.place(id)?.duration);
+  const base = planPreview(trip, coordOf(cat), hubPoint(cat.dest), durationOf);
+  const plan = withDayOverrides(trip, base.plan, overrides);
   const apply = (): void => {
     undoable(trip.id, () => actions.applyPlan(trip.id, plan), fill(T.plan.done, { n: un.length }));
     onClose();
@@ -146,15 +161,22 @@ export function AutoPlanSheet({ onClose }: { readonly onClose: () => void }) {
           <h2>{T.plan.title}</h2>
           <p className="note spaced">{T.plan.note}</p>
         </div>
+        {base.emptyDays.length ? <p className="note plan-short" role="status"><Icon name="info-circle" size="s" />{fill(T.plan.short, { n: base.emptyDays.length })}</p> : null}
         <div className="plan">
           {days.map((d, k) => {
             const mine = un.filter((i) => plan[i.id]?.day === d).sort((a, b) => (plan[a.id]?.position ?? 0) - (plan[b.id]?.position ?? 0));
-            if (!mine.length) return null;
+            const summary = base.days.find((x) => x.day === d);
             return (
               <div key={d}>
                 <b>{fill(T.view.day, { n: k + 1 })}</b>
+                {mine.length ? <span className="note">{summary ? dayNote({ ...summary, itemIds: mine.map((i) => i.id) }) : ''}</span> : <span className="note">{T.plan.dayEmpty}</span>}
                 {mine.map((i, q) => (
-                  <span key={i.id}>{`${q + 1}. ${itemName(i, cat)}`}</span>
+                  <label key={i.id} className="plan-row">
+                    <span>{`${q + 1}. ${itemName(i, cat)}`}</span>
+                    <select aria-label={fill(T.plan.moveLabel, { name: itemName(i, cat) })} value={d} onChange={(e) => setOverrides((o) => ({ ...o, [i.id]: e.target.value }))}>
+                      {days.map((x, n) => <option key={x} value={x}>{fill(T.view.day, { n: n + 1 })}</option>)}
+                    </select>
+                  </label>
                 ))}
               </div>
             );

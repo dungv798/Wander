@@ -4,7 +4,8 @@ import { HERO_PHOTOS } from '../../discover/model/heroPhotos.const.ts';
 import { EXPORT_COPY as C } from './export.copy.ts';
 import { PNG } from './export.const.ts';
 import { exportBlocks, pngFilename } from './exportModel.ts';
-import { paginateBlocks, wrapText } from './textLayout.ts';
+import { fitPages } from './pageFit.ts';
+import { wrapText } from './textLayout.ts';
 import type { ExportInput, LayoutPage, PngFile, TextRole } from './Export.types.ts';
 
 const FONT_SIZE: Readonly<Record<TextRole, number>> = { title: PNG.titleSize, heading: PNG.headingSize, body: PNG.bodySize, small: PNG.smallSize };
@@ -55,16 +56,17 @@ interface PaintOptions {
   readonly style: CSSStyleDeclaration;
   readonly image: HTMLImageElement | null;
   readonly credit: readonly string[];
-  readonly footerTop: number;
 }
 
 /** Vẽ một phân đoạn bằng token ứng dụng; ghi công riêng không bị cắt và nhãn ảnh nhỏ ở chân. */
 async function paintPage(page: LayoutPage, index: number, count: number, options: PaintOptions): Promise<Blob> {
   const canvas = document.createElement('canvas');
-  canvas.width = PNG.width; canvas.height = PNG.height;
+  const height = page.height ?? PNG.maxHeight;
+  canvas.width = PNG.width; canvas.height = height;
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error(C.error);
-  const { family, style, image, credit, footerTop } = options;
+  const { family, style, image, credit } = options;
+  const footerTop = height - PNG.margin * PNG.edgeCount - (credit.length + 1) * PNG.smallLine;
   ctx.fillStyle = style.getPropertyValue('--surface').trim();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   if (!index && image) drawCover(ctx, image);
@@ -76,7 +78,7 @@ async function paintPage(page: LayoutPage, index: number, count: number, options
   setFont(ctx, 'small', family);
   ctx.fillStyle = style.getPropertyValue('--muted').trim();
   credit.forEach((text, i) => ctx.fillText(text, PNG.margin, footerTop + i * PNG.smallLine + PNG.smallSize));
-  ctx.fillText(`${C.brand} · ${C.page} ${index + 1}/${count}`, PNG.margin, PNG.height - PNG.margin);
+  ctx.fillText(count > 1 ? `${C.brand} · ${C.page} ${index + 1}/${count}` : C.brand, PNG.margin, height - PNG.margin);
   return toPng(canvas);
 }
 
@@ -96,14 +98,14 @@ export async function renderPng(input: ExportInput): Promise<PngFile[]> {
   const measure = (text: string, role: TextRole): number => { setFont(ctx, role, family); return ctx.measureText(text).width; };
   const creditText = image && photo ? `${C.photo}: ${photo.author} · ${photo.license}` : C.photoMissing;
   const credit = wrapText(creditText, PNG.width - PNG.margin * PNG.edgeCount, text => measure(text, 'small'));
-  const footerTop = PNG.height - PNG.margin * PNG.edgeCount - (credit.length + 1) * PNG.smallLine;
+  const footer = PNG.margin * PNG.edgeCount + (credit.length + 1) * PNG.smallLine;
   const top = (image ? PNG.coverHeight : 0) + PNG.margin;
-  const pages = paginateBlocks(blocks, measure, top, footerTop - PNG.gap, PNG.margin);
+  const pages = fitPages(blocks, measure, { top, nextTop: PNG.margin, footer });
   const files: PngFile[] = [];
   try {
     for (const [index, page] of pages.entries()) {
-      const blob = await paintPage(page, index, pages.length, { family, image, credit, footerTop, style: getComputedStyle(document.documentElement) });
-      files.push({ blob, url: URL.createObjectURL(blob), filename: pngFilename(input.trip.name, index, pages.length), width: PNG.width, height: PNG.height });
+      const blob = await paintPage(page, index, pages.length, { family, image, credit, style: getComputedStyle(document.documentElement) });
+      files.push({ blob, url: URL.createObjectURL(blob), filename: pngFilename(input.trip.name, index, pages.length), width: PNG.width, height: page.height ?? PNG.maxHeight });
     }
     return files;
   } catch (error) {

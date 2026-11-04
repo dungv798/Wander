@@ -11,6 +11,7 @@ import type { DestinationDetail } from '../../model/Catalog.types.ts';
 import { firstPhotoUrl, groupByCategory } from '../../model/destinationQueries.ts';
 import { pickedOf } from '../../model/discoverState.ts';
 import { HOME } from '../../model/home.const.ts';
+import { HOME_MOOD_PHOTOS } from '../../model/homePhotos.const.ts';
 import { homeTrip, resumeKind } from '../../model/homeSelection.ts';
 
 interface SectionProps {
@@ -52,7 +53,7 @@ export function MoodSection({ dest }: SectionProps) {
       <div className="hscroll moods">
         {list.map(([cat, places]) => (
           <button key={cat} className="mood" type="button" onClick={() => { actions.setCategory(cat); navigate(VIEW.DECK, dest.id); }}>
-            <RevealImage alt="" src={firstPhotoUrl(places[0])} width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
+            <RevealImage alt="" src={HOME_MOOD_PHOTOS[dest.id]?.[cat] ? `/catalog/photos/${HOME_MOOD_PHOTOS[dest.id]?.[cat]?.file}` : firstPhotoUrl(places[0])} style={{ objectPosition: HOME_MOOD_PHOTOS[dest.id]?.[cat]?.position }} width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
             <span className="mood-in">
               <b>{places[0]?.categoryName}</b>
               <span>{fill(COPY.common.placeCountShort, { n: places.length })}</span>

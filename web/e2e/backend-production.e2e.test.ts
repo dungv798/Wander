@@ -40,7 +40,7 @@ test('backend production: CSP thật, bản đồ và API cùng origin, asset th
     const response = await page.goto(`${BACKEND}/#/`);
     assert.equal(response?.status(), 200);
     assert.ok(response?.headers()['content-security-policy']?.includes("default-src 'self'"));
-    await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+    await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
     await page.locator('.home-map').scrollIntoViewIfNeeded();
     await waitForNativeMap(page, '.home-map .mapcard');
     assert.ok(!(await tileResponse instanceof Error), 'nền bản đồ tải được tile thật dưới CSP production');

@@ -8,7 +8,8 @@ import { loadMapLibre } from './maplibreLoader.ts';
 import type { MapLibre } from './maplibreLoader.ts';
 import { loadMapStyle } from './mapStyle.ts';
 import { MAP } from './map.const.ts';
-import { prefersReducedMotion, sameMarkers } from './mapUtil.ts';
+import { prefersReducedMotion, sameMarkers, webglAvailable } from './mapUtil.ts';
+import { clearMapStatus, showMapLoading, showMapUnavailable } from './mapStatus.ts';
 import type { FitOptions, Insets, MapMarker, MapMode, MapRoute, ProjectedMarker, Pt, GeoMapOptions } from './map.types.ts';
 
 const NO_INSET: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -44,6 +45,9 @@ export class GeoMap {
   private touchedByUser = false;
   private lastFit: FitRequest | null = null;
   private pendingFit: FitRequest | null = null;
+  private loadTimer: number | undefined;
+  /** Thử lại tải bản đồ (nút trong hộp lỗi). */
+  private readonly retry = (): void => void this.start();
 
   /** Dựng bản đồ vào `host` (cần có kích thước); MapLibre và kiểu bản đồ tải bất đồng bộ, ghim/tuyến đặt trước sẽ hiện khi xong. */
   constructor(host: HTMLElement, opt: GeoMapOptions) {
@@ -67,6 +71,7 @@ export class GeoMap {
   /** Giải phóng bản đồ MapLibre, bộ quan sát kích thước và dọn phần tử. */
   destroy(): void {
     this.dead = true;
+    window.clearTimeout(this.loadTimer);
     this.observer.disconnect();
     this.layers.destroy();
     this.nativeRoute?.destroy();
@@ -139,8 +144,10 @@ export class GeoMap {
 
   /** Tải MapLibre và kiểu bản đồ song song, dựng bản đồ; lỗi thì hiện thông báo kèm nút thử lại. */
   private async start(): Promise<void> {
-    this.host.querySelector('.tm-err')?.remove();
-    this.host.dataset['ready'] = '0';
+    showMapLoading(this.host);
+    if (!webglAvailable()) return showMapUnavailable(this.host, COPY.map.noWebgl, this.raw, this.retry);
+    window.clearTimeout(this.loadTimer);
+    this.loadTimer = window.setTimeout(() => { if (!this.ready && !this.dead) showMapUnavailable(this.host, COPY.map.unavailable, this.raw, this.retry); }, MAP.LOAD_TIMEOUT_MS);
     try {
       const [ml, style, route] = await Promise.all([loadMapLibre(), loadMapStyle(this.host), import('./NativeRoute.ts')]);
       if (this.dead) return;
@@ -148,19 +155,8 @@ export class GeoMap {
       this.ml = ml;
       this.gl = this.createMap(ml, style);
     } catch {
-      if (!this.dead) this.showLoadError();
+      if (!this.dead) showMapUnavailable(this.host, COPY.map.loadError, this.raw, this.retry);
     }
-  }
-
-  /** Hiện lỗi tải bản đồ với nút "Thử lại". */
-  private showLoadError(): void {
-    this.host.dataset['ready'] = 'err';
-    const box = Object.assign(document.createElement('div'), { className: 'tm-err' });
-    box.setAttribute('role', 'alert');
-    const retry = Object.assign(document.createElement('button'), { type: 'button', textContent: COPY.map.retry });
-    retry.addEventListener('click', () => void this.start());
-    box.append(Object.assign(document.createElement('span'), { textContent: COPY.map.loadError }), retry);
-    this.host.appendChild(box);
   }
 
   /** Dựng MapLibre không xoay; nhãn khoảng cách tuyến là phần HTML duy nhất cần theo camera. */
@@ -217,6 +213,8 @@ export class GeoMap {
       if (!this.nativeRoute?.hit(point)) this.opt.onMapDismiss?.();
     });
     this.ready = true;
+    window.clearTimeout(this.loadTimer);
+    clearMapStatus(this.host);
     this.host.dataset['ready'] = '1';
     this.applyMarkers();
     const f = this.pendingFit;

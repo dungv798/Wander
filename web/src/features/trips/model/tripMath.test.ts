@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { budgetStatus, costSummaryText, dayItems, roadKm, summarizeCosts, tripDays, unassignedItems } from './tripMath.ts';
+import { budgetStatus, costSummaryText, dayItems, roadKm, roadMinutes, summarizeCosts, tripDays, unassignedItems } from './tripMath.ts';
 import type { TripItem } from './trip.types.ts';
 
 /** Tạo một mục mẫu, ghi đè các trường cần thử. */
@@ -79,3 +79,13 @@ for (const fixture of [
     assert.equal(costSummaryText(summarizeCosts({ items: dayItems({ items }, '2026-10-31') })), costSummaryText(costs));
   });
 }
+
+test('tổng thời gian đi ngày = cộng các chặng hiển thị: ba chặng ngắn là 45 phút, không phải 15', () => {
+  // bốn điểm sát nhau (~0,3 km) ⇒ mỗi chặng hiển thị tối thiểu 15 phút ⇒ tổng 45
+  const coords: Record<string, { lat: number; lon: number }> = {
+    a: { lat: 11.94, lon: 108.44 }, b: { lat: 11.9425, lon: 108.44 }, c: { lat: 11.945, lon: 108.44 }, d: { lat: 11.9475, lon: 108.44 },
+  };
+  const items = ['a', 'b', 'c', 'd'].map((p) => item({ id: p, placeId: p }));
+  assert.equal(roadMinutes(items, (id) => coords[id] ?? null), 45);
+  assert.equal(roadMinutes([item({ placeId: 'a' })], (id) => coords[id] ?? null), 0);
+});

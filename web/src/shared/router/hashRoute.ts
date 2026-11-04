@@ -15,9 +15,9 @@ export interface Route {
 }
 
 const VIEWS_WITH_DEST: readonly ViewName[] = [VIEW.DEST, VIEW.DECK];
-const VIEWS_WITH_ID: readonly ViewName[] = [VIEW.DEST, VIEW.DECK, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT, VIEW.JOIN];
+const VIEWS_WITH_ID: readonly ViewName[] = [VIEW.DEST, VIEW.DECK, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT, VIEW.JOIN, VIEW.DESTINATIONS];
 /** Màn có mã chuyến đi tùy chọn: `#/today` (chuyến đang diễn ra) hoặc `#/today/<mã>`. */
-const VIEWS_OPTIONAL_ID: readonly ViewName[] = [VIEW.TODAY];
+const VIEWS_OPTIONAL_ID: readonly ViewName[] = [VIEW.TODAY, VIEW.DESTINATIONS];
 const KNOWN: readonly ViewName[] = Object.values(VIEW);
 const HOME: Route = { view: VIEW.EXPLORE, id: null, sub: null };
 /** Mã hợp lệ: chữ thường, số, gạch ngang (đi vào đường dẫn tải dữ liệu nên phải chặt). */

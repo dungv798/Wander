@@ -4,6 +4,7 @@ import { CLIENT_ERROR } from '../../../shared/api/http.const.ts';
 import type { DestinationDetail, DestinationSummary } from '../model/Catalog.types.ts';
 import { CATALOG_API } from './catalogApi.const.ts';
 import type { CatalogRepository } from './CatalogRepository.ts';
+import { parseMoments } from '../model/moments.ts';
 
 /** Có phải đối tượng thường (không null, không mảng). */
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -72,6 +73,6 @@ export class HttpCatalogRepository implements CatalogRepository {
     const body = await this.client.get<unknown>(`${CATALOG_API.DESTINATIONS}/${encodeURIComponent(id)}`);
     const detail = isRecord(body) ? body['destination'] : undefined;
     if (!isDetail(detail)) throw new ApiError(CLIENT_ERROR.INTERNAL);
-    return detail;
+    return { ...detail, moments: parseMoments(detail.moments) };
   }
 }

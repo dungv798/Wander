@@ -10,6 +10,10 @@ export type Overlay =
   | { readonly kind: 'editor'; readonly itemId: string | null; readonly preset: ItemKind | null }
   | { readonly kind: 'editTrip' }
   | { readonly kind: 'cover' }
+  | { readonly kind: 'costDetail' }
+  | { readonly kind: 'unassigned' }
+  | { readonly kind: 'checklist' }
+  | { readonly kind: 'costAdd' }
   | { readonly kind: 'plan' }
   | { readonly kind: 'addToDay' }
   | { readonly kind: 'pickDay'; readonly itemId: string }

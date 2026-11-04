@@ -38,9 +38,9 @@ export const SETTINGS_COPY = {
   },
   mistaken: {
     title: 'Chuyến đi tạo nhầm',
-    text: 'Bản này chưa có xóa cả chuyến đi. Từng mục thì xóa được và khôi phục ở “Đã xóa gần đây” trong chuyến đi.',
+    text: 'Mở chuyến đó, vào tab Tổng quan và chọn “Xóa chuyến đi”. Chuyến vào “Chuyến đã xóa gần đây” nên bạn khôi phục lại được; từng mục thì khôi phục ở “Đã xóa gần đây” trong chuyến.',
   },
-  intro: { title: 'Giới thiệu', text: 'Xem lại ba cảnh giới thiệu Wander.', replay: 'Xem lại giới thiệu' },
+  intro: { title: 'Giới thiệu', text: 'Xem lại phần giới thiệu Wander (bốn cảnh).', replay: 'Xem lại giới thiệu' },
   demo: {
     title: 'GIẢ LẬP',
     note: 'Chỉ có khi phát triển, để xem các màn chưa có máy chủ thật. Bản chạy thật không có phần này.',

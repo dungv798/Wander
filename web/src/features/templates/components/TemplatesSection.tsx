@@ -23,6 +23,7 @@ function TemplateCard({ template, onOpen }: { readonly template: TemplateView; r
         <b>{template.title}</b>
         <span className="note">{fill(T.card, { days: template.days.length, places: template.placeCount })}</span>
         {template.status === 'draft' ? <span className="chip tint cat-luu">{T.draft}</span> : null}
+        {template.status === 'reference' ? <span className="chip tint cat-van">{T.reference}</span> : null}
       </span>
     </button>
   );

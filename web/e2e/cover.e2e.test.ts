@@ -45,6 +45,7 @@ async function seed(token: string): Promise<string> {
 /** Chỉ dùng locator trong đúng dialog, chờ phần tử trước khi kiểm số lượng hay lấy danh sách. */
 async function choose(page: Page, label: string): Promise<void> {
   await page.locator('.sheet-scroll').evaluate(el => { el.scrollTop = 0; });
+  await page.getByText('Quản lý chuyến đi', { exact: true }).click();
   await page.getByRole('button', { name: 'Tuỳ chỉnh bìa', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Tuỳ chỉnh bìa' });
   await dialog.getByRole('button', { name: label, exact: true }).waitFor();

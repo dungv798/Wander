@@ -6,6 +6,10 @@ import { ItemEditorSheet } from './ItemEditorSheet.tsx';
 import { RequestDeleteSheet, RequestsSheet } from './RequestsSheet.tsx';
 import { AddItemSheet, AddToDaySheet, AutoPlanSheet, PickDaySheet } from './TripSheets.tsx';
 
+const CostDetailSheet = lazy(() => import('./CostSheets.tsx').then(module => ({ default: module.CostDetailSheet })));
+const CostAddSheet = lazy(() => import('./CostSheets.tsx').then(module => ({ default: module.CostAddSheet })));
+const UnassignedSheet = lazy(() => import('./OverviewSheets.tsx').then(module => ({ default: module.UnassignedSheet })));
+const ChecklistSheet = lazy(() => import('./OverviewSheets.tsx').then(module => ({ default: module.ChecklistSheet })));
 const CoverSheet = lazy(() => import('./CoverSheet.tsx').then(module => ({ default: module.CoverSheet })));
 const EditTripSheet = lazy(() => import('./EditTripSheet.tsx').then(module => ({ default: module.EditTripSheet })));
 const PeopleSheet = lazy(() => import('./PeopleSheet.tsx').then(module => ({ default: module.PeopleSheet })));
@@ -18,6 +22,14 @@ export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay |
   switch (overlay.kind) {
     case 'mealSuggest':
       return <Suspense fallback={null}><MealSuggestSheet key={`${overlay.day}:${overlay.gap}`} day={overlay.day} gap={overlay.gap} onClose={onClose} /></Suspense>;
+    case 'costDetail':
+      return <Suspense fallback={null}><CostDetailSheet onClose={onClose} /></Suspense>;
+    case 'costAdd':
+      return <Suspense fallback={null}><CostAddSheet onClose={onClose} /></Suspense>;
+    case 'unassigned':
+      return <Suspense fallback={null}><UnassignedSheet onClose={onClose} /></Suspense>;
+    case 'checklist':
+      return <Suspense fallback={null}><ChecklistSheet onClose={onClose} /></Suspense>;
     case 'cover':
       return <Suspense fallback={null}><CoverSheet onClose={onClose} /></Suspense>;
     case 'add':

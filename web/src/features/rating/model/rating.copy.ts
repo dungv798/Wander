@@ -20,4 +20,8 @@ export const RATING_COPY = {
   reported: 'Đã gửi báo cáo. Cảm ơn bạn.',
   loading: 'Đang tải đánh giá…',
   retry: 'Thử lại',
+  writeOrAll: 'Xem tất cả và viết đánh giá',
+  editMine: 'Sửa đánh giá của bạn',
+  collapse: 'Thu gọn',
+  mineSummary: 'Bạn đã chấm {n} sao.',
 } as const;

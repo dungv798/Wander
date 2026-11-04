@@ -36,7 +36,7 @@ function toTemplate(raw: unknown, byId: ReadonlyMap<string, PlaceView>): Templat
   const used = new Set<string>();
   const days = raw['days'].slice(0, MAX_TEMPLATE_DAYS).map((d) => toDay(d, byId, used));
   if (!used.size) return null;
-  const status: TemplateStatus = raw['status'] === 'approved' ? 'approved' : 'draft';
+  const status: TemplateStatus = raw['status'] === 'approved' || raw['status'] === 'reference' ? raw['status'] : 'draft';
   return { id, title, summary: text(raw['summary'], MAX_TEXT) ?? '', status, days, placeCount: used.size };
 }
 

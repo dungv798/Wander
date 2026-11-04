@@ -1,0 +1,13 @@
+/* Ảnh vuông giữ bố cục, chú thích 14px trên nền sáng. */
+.moment-card { flex: 0 0 var(--home-card-width); overflow: hidden; border: var(--glass-border) solid var(--line); border-radius: var(--r-md); background: var(--surface); color: var(--ink); scroll-snap-align: start; }
+.moment-photo { display: block; width: 100%; padding: 0; border: 0; aspect-ratio: 1; background: var(--photo-bg); }
+.moment-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.moment-copy { display: grid; justify-items: start; gap: var(--s-2); padding: var(--s-3); }
+.moment-copy p { margin: 0; font: var(--text-body); }
+.moment-copy .chip { font: var(--text-secondary); background: var(--surface-2); color: var(--muted); }
+.moment-filters .chip { flex-shrink: 0; min-height: var(--tap); background: var(--surface); color: var(--ink); }
+.moment-filters .chip[aria-pressed='true'] { background: var(--brand-ink); color: var(--on-photo); }
+.moment-viewer { padding: var(--s-4); }
+.moment-viewer > img { width: 100%; height: auto; max-height: var(--moment-viewer-height); object-fit: contain; }
+.moment-viewer .credit-pill { position: static; max-width: 100%; margin: 0; border-radius: var(--r-sm); overflow-wrap: anywhere; background: var(--surface-2); color: var(--ink); }
+.moment-viewer .credit-pill a { color: var(--brand-ink); }

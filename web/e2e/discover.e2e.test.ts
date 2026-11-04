@@ -57,20 +57,20 @@ async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
 test('trang chủ mở màn chọn điểm đến và tìm không khớp', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/');
-  await page.locator('.home-hero h1').waitFor();
+  await page.locator('.nh-title h1').waitFor();
   assert.ok(await page.locator('.mood').count() > 0 && await page.locator('.mood').count() <= 5);
-  await page.getByRole('button', { name: 'Tìm điểm đến', exact: true }).click();
+  await page.getByRole('button', { name: /^Đổi điểm đến/ }).click();
   await page.getByRole('searchbox').fill('zzz');
   await page.getByRole('status').getByText('Chưa có điểm đến này', { exact: true }).waitFor();
   await page.getByRole('searchbox').fill('ha gi');
   await page.locator('.destination-picker-list button', { hasText: 'Hà Giang' }).click();
   await page.waitForURL(/#\/deck\/ha-giang$/); // chọn xong đi thẳng tới bộ thẻ quẹt
   await page.evaluate(() => { location.hash = '#/'; });
-  await page.locator('.home-hero h1', { hasText: 'Hà Giang' }).waitFor();
-  await page.locator('.home-hero-link').click();
+  await page.locator('.nh-title h1', { hasText: 'Hà Giang' }).waitFor();
+  await page.locator('.nh-intro').click();
   await page.waitForURL(/#\/deck\/ha-giang$/);
   await page.evaluate(() => { location.hash = '#/'; });
-  await page.getByRole('button', { name: 'Bắt đầu khám phá', exact: true }).click();
+  await page.locator('.nh-intro').click();
   await page.waitForURL(/#\/deck\/ha-giang$/);
   assert.deepEqual(errors, []);
   await ctx.close();
@@ -255,6 +255,7 @@ async function assertSingleGalleryImage(page: Page): Promise<void> {
   await page.waitForFunction(() => {
     const gallery = document.querySelector('.panel .gallery');
     if (!gallery) return false;
+    if (!gallery.querySelector('img')) return Boolean(document.querySelector('.panel .photo-ph')); // nơi chưa có ảnh: ô giữ chỗ thay thư viện (DR-033)
     const frame = gallery.getBoundingClientRect();
     const visible = [...gallery.querySelectorAll('img')].filter((image) => {
       const r = image.getBoundingClientRect();
@@ -330,6 +331,6 @@ test('phím Alt+← không bị bộ thẻ nuốt; thẻ đang bay thì Hoàn t�
   await page.locator('.card.front').waitFor();
   await page.keyboard.press('Alt+ArrowLeft');
   await page.getByRole('button', { name: 'Xem đã chọn (0)' }).waitFor();
-  assert.equal(await page.getByText('Đã xem 0/9').count(), 1, 'Alt+← không quyết định thẻ nào');
+  assert.equal(await page.getByText(/^Đã xem 0\/\d+$/).count(), 1, 'Alt+← không quyết định thẻ nào');
   await ctx.close();
 });

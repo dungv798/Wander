@@ -186,7 +186,7 @@
 :root:not([data-look='classic']) :is(#screen, .panel) .btn.danger { color: var(--skip); border-color: var(--skip); }
 :root .undo-control { border-radius: var(--r-sm); }
 /* Nhãn thẻ cũng là nội dung nút: đệm đều thay vì phụ thuộc vùng ảnh may mắn tối. */
-:root #screen .home-body .mood-in { background: var(--glass-photo-scrim); border-radius: var(--r-sm); padding: var(--s-1); }
+:root #screen .home-body .mood-in { padding: var(--s-1); text-shadow: 0 1px 6px var(--glass-photo-scrim); }
 :root:not([data-look='classic']) :is(#screen, .panel) button:disabled { opacity: 1; color: var(--muted); cursor: not-allowed; }
 
 @media (prefers-reduced-transparency: reduce) {

@@ -67,6 +67,7 @@ export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
       </fieldset></div>
       <div className="add-many-footer glass-control">
         {error ? <WarnBox>{error}</WarnBox> : null}
+        <p className="add-many-count" role="status">{fill(T.addMany.selectedCount, { n: selected.length })}</p>
         <label><span className="sr">{T.addMany.day}</span><select value={day ?? ''} disabled={busy} onChange={e => setDay(e.target.value || null)}><option value="">{T.addMany.unassigned}</option>{days.map((value, index) => <option key={value} value={value}>{fill(T.view.day, { n: index + 1 })}</option>)}</select></label>
         <Button block disabled={busy || !selected.length || !validAddDay(trip, day)} onClick={() => void submit()}>{day ? fill(T.addMany.submitDay, { n: selected.length, m: days.indexOf(day) + 1 }) : fill(T.addMany.submitUnassigned, { n: selected.length })}</Button>
       </div>

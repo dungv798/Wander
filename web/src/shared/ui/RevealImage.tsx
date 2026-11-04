@@ -27,8 +27,9 @@ export function useImageReveal(src: string | undefined) {
   return ref;
 }
 
-/** Ảnh giữ kích thước nội tại từ lúc tải; lớp CSS hiện có tiếp tục quyết định khung và cách cắt. */
+/** Ảnh giữ kích thước nội tại từ lúc tải; lớp CSS hiện có tiếp tục quyết định khung và cách cắt. Thiếu nguồn thì hiện ô giữ chỗ trung tính thay vì ảnh vỡ. */
 export function RevealImage({ src, alt = '', width = IMAGE_SIZE.WIDTH, height = IMAGE_SIZE.HEIGHT, ...props }: ImgHTMLAttributes<HTMLImageElement>) {
   const ref = useImageReveal(src);
+  if (!src) return <span className={['img-ph', props.className].filter(Boolean).join(' ')} role={alt ? 'img' : undefined} aria-label={alt || undefined} aria-hidden={alt ? undefined : true} />;
   return <img {...props} alt={alt} ref={ref} src={src} width={width} height={height} />;
 }

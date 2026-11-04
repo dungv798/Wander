@@ -40,3 +40,10 @@
 
 /* Một ngón cuộn trang; handler MapLibre nhận hai ngón trên bản đồ nhúng. */
 .tm-cooperative { touch-action: pan-x pan-y; }
+
+/* Đang tải / không khả dụng: khung luôn có lời giải thích và lối thay thế */
+.tm-loading { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; padding: var(--s-4); text-align: center; color: var(--muted); font: var(--text-secondary); pointer-events: none; animation: tmPulse 1.6s ease-in-out infinite; }
+@keyframes tmPulse { 50% { opacity: .55; } }
+.tm-err small { color: var(--muted); font-weight: 500; }
+.tm-outside { display: inline-flex; align-items: center; min-height: var(--tap); color: var(--ink); text-decoration: underline; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .tm-loading { animation: none; } }

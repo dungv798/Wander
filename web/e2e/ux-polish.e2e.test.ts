@@ -33,12 +33,12 @@ async function open(destination: string | null = null, hash = '/'): Promise<Page
   return page;
 }
 
-test('chưa chọn: carousel 12 điểm đến, không tự lưu Hà Giang; chọn đi thẳng tới bộ thẻ', async () => {
+test('chưa chọn: lưới 12 điểm đến, không tự lưu Hà Giang; chọn đi thẳng tới bộ thẻ', async () => {
   const page = await open();
-  await page.locator('.national-hero .destination-card').nth(11).waitFor({ state: 'attached' });
-  assert.equal(await page.locator('.national-hero .destination-card').count(), 12);
+  await page.locator('.nh-card').nth(11).waitFor({ state: 'attached' });
+  assert.equal(await page.locator('.nh-card').count(), 12);
   assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), null);
-  await page.locator('.destination-card', { hasText: 'Hà Nội' }).click();
+  await page.locator('.nh-card', { hasText: 'Hà Nội' }).click();
   await page.waitForURL(/#\/deck\/ha-noi$/);
   await page.reload();
   assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'ha-noi');
@@ -47,16 +47,16 @@ test('chưa chọn: carousel 12 điểm đến, không tự lưu Hà Giang; ch�
 
 test('Điểm đến khác loại điểm hiện tại, đổi về trang chủ và giữ các nơi đã chọn/chuyến đi', async () => {
   const page = await open('ha-noi');
-  await page.locator('.home-destination-switch').waitFor();
-  await page.getByRole('button', { name: 'Bắt đầu khám phá', exact: true }).click();
+  await page.locator('.nh-title .pill').waitFor();
+  await page.locator('.nh-intro').click();
   await page.getByRole('button', { name: 'Chọn nơi này', exact: true }).click();
   await page.getByRole('button', { name: 'Quay lại', exact: true }).click();
-  await page.locator('.other-destinations .destination-card').first().waitFor();
-  assert.equal(await page.locator('.other-destinations .destination-card').count(), 6);
-  assert.equal(await page.locator('.other-destinations .destination-card', { hasText: 'Hà Nội' }).count(), 0);
+  await page.locator('.other-destinations .nh-card').first().waitFor();
+  assert.equal(await page.locator('.other-destinations .nh-card').count(), 6);
+  assert.equal(await page.locator('.other-destinations .nh-card', { hasText: 'Hà Nội' }).count(), 0);
   const decisions = await page.evaluate(() => JSON.parse(localStorage.getItem('wander.web.discover.v1') ?? '{}').decisions);
-  await page.locator('.other-destinations .destination-card', { hasText: 'Đà Lạt' }).click();
-  await page.locator('.home-hero h1', { hasText: 'Đà Lạt' }).waitFor();
+  await page.locator('.other-destinations .nh-card', { hasText: 'Đà Lạt' }).click();
+  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
   assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('wander.web.discover.v1') ?? '{}').decisions), decisions);
   await page.locator('#tabbar').getByRole('button', { name: /Đã chọn/ }).click();
   await page.locator('.pagehead .note', { hasText: 'Hà Nội' }).waitFor();
@@ -68,17 +68,17 @@ test('Điểm đến khác loại điểm hiện tại, đổi về trang chủ 
 
 test('Back/Escape giữ màn xuất phát; liên kết chuyến mở trực tiếp có lối về danh sách', async () => {
   const page = await open('ha-noi');
-  await page.locator('.home-destination-switch').click();
+  await page.locator('.nh-title .pill').click();
   await page.locator('.destination-picker-header').waitFor();
   await page.keyboard.press('Escape');
-  await page.locator('.home-hero h1').waitFor();
+  await page.locator('.nh-title h1').waitFor();
   await page.locator('#tabbar').getByRole('button', { name: /Chuyến đi/ }).click();
   await page.locator('.tcard').click();
   await page.waitForURL(/#\/trip\//);
   await page.keyboard.press('Escape');
   await page.waitForURL(/#\/trips$/);
   await page.goBack();
-  await page.locator('.home-hero h1').waitFor();
+  await page.locator('.nh-title h1').waitFor();
   await page.close();
   const direct = await open('ha-noi', '/trip/look-ha-giang');
   await direct.locator('.mapbox .top .iconbtn').first().click();

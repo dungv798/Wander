@@ -87,9 +87,11 @@ export function togglePack(s: DiscoverState, key: string): DiscoverState {
   return { ...s, pack: { ...s.pack, [key]: !s.pack[key] } };
 }
 
-/** Các thẻ còn lại để quẹt: chưa quyết và đúng bộ lọc loại. */
-export function remainingIds<P extends { id: string; category: CategoryCode }>(s: DiscoverState, places: readonly P[]): P[] {
-  return places.filter((p) => (s.cat === 'all' || p.category === s.cat) && !s.decisions[p.id]);
+/** Các thẻ còn lại để quẹt: chưa quyết và đúng bộ lọc loại; nơi có ảnh thật đứng trước nơi chưa có ảnh (giữ thứ tự biên tập trong từng nhóm). */
+export function remainingIds<P extends { id: string; category: CategoryCode; photos?: readonly unknown[] }>(s: DiscoverState, places: readonly P[]): P[] {
+  const left = places.filter((p) => (s.cat === 'all' || p.category === s.cat) && !s.decisions[p.id]);
+  const hasPhoto = (p: P): boolean => (p.photos?.length ?? 1) > 0;
+  return [...left.filter(hasPhoto), ...left.filter((p) => !hasPhoto(p))];
 }
 
 /** Các nơi đã chọn (thích), theo thứ tự của kho biên tập. */

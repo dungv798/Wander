@@ -148,3 +148,19 @@ body:has(#screen[data-view="trip"]) .toast {
 
 /* Chừa chiều cao CTA thực tế và safe-area, kể cả nấc tờ chưa mở hết và giao diện classic. */
 :root #screen[data-view='trip'] .sheetbody > div.sheet-scroll { padding-bottom: calc(var(--hide, 0px) + var(--sheet-cta-clearance) + var(--safe-bottom) + var(--s-6)); }
+
+/* Gợi ý xếp ngày: hàng nơi + chọn ngày, dòng báo thiếu nơi */
+.plan-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; }
+.plan-row > span { min-width: 0; overflow-wrap: anywhere; }
+.plan-row select { min-height: 44px; max-width: 45%; border-radius: 12px; border: 1px solid var(--border-ctrl); background: var(--surface); color: inherit; padding: 0 10px; font: inherit; }
+.plan-short { display: flex; gap: 8px; align-items: flex-start; }
+
+/* Thẻ chi phí gọn: vài dòng ngày; chi tiết ở tờ riêng */
+.cost-days { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-1); font: var(--text-secondary); color: var(--muted); }
+
+/* Tổng quan gọn: thẻ chưa xếp ngày, chuẩn bị, khu quản lý gập sẵn */
+.unassigned-preview { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-1); font: var(--text-secondary); }
+.unassigned-preview li { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.manage-menu { border-top: var(--glass-border) solid var(--line); padding-top: var(--s-2); }
+.manage-menu summary { min-height: var(--tap); display: flex; align-items: center; gap: var(--s-2); cursor: pointer; font: var(--text-card); }
+.manage-menu[open] summary > .ic { rotate: 180deg; }

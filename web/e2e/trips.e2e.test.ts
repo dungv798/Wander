@@ -9,6 +9,11 @@ import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { TOKEN_KEY, api } from './backend.ts';
 import { seedTrips, seededOf, storedTrips } from './seed.ts';
 
+/** Mở menu "Quản lý chuyến đi" nếu đang gập (menu giữ trạng thái giữa các lần mở tờ). */
+async function openManage(page: Page): Promise<void> {
+  if (!(await page.getByRole('button', { name: 'Xóa chuyến đi' }).isVisible())) await page.getByText('Quản lý chuyến đi', { exact: true }).click();
+}
+
 let server: ViteDevServer;
 let browser: Browser;
 let baseUrl = '';
@@ -113,7 +118,7 @@ test('lưu các nơi đã chọn thành chuyến: nơi đó nằm ở "Chưa có
   await page.locator('.thead h1').waitFor();
   const toast = page.locator('.toast');
   await toast.waitFor();
-  const target = page.getByRole('button', { name: 'Xếp giúp tôi', exact: true });
+  const target = page.getByRole('button', { name: /^Xếp \d+ nơi$/ });
   const a = await toast.boundingBox();
   const b = await target.boundingBox();
   assert.ok(a && b && (a.y + a.height <= b.y || b.y + b.height <= a.y));
@@ -171,10 +176,11 @@ test('chi phí theo D17/D18: trống là chưa biết, 0 là biết bằng khôn
   const box = page.locator('.costbox');
   await box.waitFor();
   assert.match((await box.locator('.bigmoney b').textContent()) ?? '', /^750\.000\s₫$/);
-  assert.match((await box.textContent()) ?? '', /Chưa tính 4 mục chưa biết giá/);
+  assert.match((await box.textContent()) ?? '', /còn 4 mục chưa nhập/);
   assert.match((await box.textContent()) ?? '', /1 mục đã bao gồm, không cộng vào tổng/);
   assert.match((await box.textContent()) ?? '', /còn lại 2\.250\.000\s₫/);
-  assert.match((await box.textContent()) ?? '', /Đã đặt 1\/\d+ mục có đặt chỗ/);
+  await box.getByRole('button', { name: 'Xem chi tiết' }).click();
+  assert.match((await page.getByRole('dialog').textContent()) ?? '', /Đã đặt 1\/\d+ mục có đặt chỗ/);
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -182,8 +188,10 @@ test('chi phí theo D17/D18: trống là chưa biết, 0 là biết bằng khôn
 test('xếp ngày bằng chip, thấy ở tab ngày; Hoàn tác bằng thông báo đưa mục về chưa có ngày', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await page.getByRole('button', { name: 'Xem danh sách' }).click();
   const row = page.locator('.swipe', { hasText: 'Phố cổ Đồng Văn' });
   await row.locator('xpath=following-sibling::div[contains(@class,"assign")][1]').getByRole('button', { name: 'Ngày 2' }).click();
+  await page.getByRole('button', { name: 'Đóng', exact: true }).click();
   await page.getByRole('tab', { name: 'Ngày 2' }).click();
   await page.locator('.irow', { hasText: 'Phố cổ Đồng Văn' }).waitFor();
   const stored = await storedTrips(page);
@@ -267,7 +275,7 @@ test('sửa ngày chuyến làm mất ngày: báo số mục, bấm Lưu lần h
 test('"Xếp giúp tôi": xem trước rồi áp dụng; mọi mục có ngày; Hoàn tác', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
-  await page.getByRole('button', { name: 'Xếp giúp tôi' }).click();
+  await page.getByRole('button', { name: /^Xếp \d+ nơi$/ }).click();
   await page.locator('.plan').waitFor();
   await page.getByRole('button', { name: 'Áp dụng gợi ý' }).click();
   await page.getByText('Mọi địa điểm đã có ngày', { exact: true }).first().waitFor();
@@ -473,10 +481,12 @@ test('xóa địa điểm từ tờ chi tiết của chuyến; khôi phục khi 
 test('xóa mềm cả chuyến: xác nhận, rời danh sách (máy chủ); Hoàn tác đưa về; "Chuyến đã xóa gần đây" khôi phục được', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trip/mau-ha-giang/ov', true);
+  await openManage(page);
   await page.getByRole('button', { name: 'Xóa chuyến đi' }).click();
   const dialog = page.getByRole('dialog');
   await dialog.getByRole('button', { name: 'Giữ lại' }).click();
   assert.equal((await storedTrips(page)).trips.length, 1, 'Giữ lại thì không xóa');
+  await openManage(page);
   await page.getByRole('button', { name: 'Xóa chuyến đi' }).click();
   await dialog.getByRole('button', { name: 'Xóa chuyến đi' }).click();
   await page.getByRole('heading', { name: 'Chuyến đi', exact: true }).waitFor();
@@ -486,6 +496,7 @@ test('xóa mềm cả chuyến: xác nhận, rời danh sách (máy chủ); Hoà
   await page.locator('.thead h1').waitFor();
   assert.equal((await storedTrips(page)).trips.length, 1);
   // xóa lần nữa rồi khôi phục từ danh sách đã xóa
+  await openManage(page);
   await page.getByRole('button', { name: 'Xóa chuyến đi' }).click();
   await dialog.getByRole('button', { name: 'Xóa chuyến đi' }).click();
   await page.getByRole('heading', { name: 'Chuyến đi', exact: true }).waitFor();

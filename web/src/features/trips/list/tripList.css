@@ -23,3 +23,7 @@
 @media (prefers-reduced-motion: no-preference) {
   :root #screen .trip-photo-card:active { scale: var(--glass-pressed-scale); }
 }
+:root .add-many-head .search.trip-list-search { min-height: var(--tap); padding-block: var(--s-2); }
+.add-many-count { margin: 0; font: var(--text-secondary); color: var(--muted); }
+.add-many-place b { overflow-wrap: anywhere; }
+.add-many-head .search.trip-list-search input { min-height: var(--tap); }

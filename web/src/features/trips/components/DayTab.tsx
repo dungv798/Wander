@@ -1,12 +1,12 @@
 import { Fragment, lazy, Suspense, useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
-import { formatTravelTime, minutesForKm, roadKmBetween } from '../../../shared/lib/geo.ts';
+import { formatTravelMinutes, formatTravelTime, minutesForKm, roadKmBetween } from '../../../shared/lib/geo.ts';
 import { dayLabel } from '../../../shared/lib/dates.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle } from '../../../shared/ui/Controls.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
-import { costSummaryText, dayItems, roadKm, summarizeCosts, unassignedItems } from '../model/tripMath.ts';
+import { costSummaryText, dayItems, roadKm, roadMinutes, summarizeCosts, unassignedItems } from '../model/tripMath.ts';
 import { coordOf } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
@@ -32,19 +32,42 @@ function MealReminders({ day }: { readonly day: string }) {
     setDismissed(next);
     saveMealGapDismissals(key, next);
   };
-  return gaps.map((gap) => (
-    <aside className="next" key={gap} aria-label={M[gap].title}>
+  const gap = gaps[0];
+  if (!gap) return null;
+  return (
+    <aside className="next meal-nudge" aria-label={M[gap].title}>
       <span className="ib"><Icon name={gap === 'rest' ? 'moon-stars' : 'tools-kitchen-2'} size="l" /></span>
       <div>
         <h3>{M[gap].title}</h3>
-        <p className="note">{M.note}</p>
+        <p className="note">{M[gap].reason} {M.note}</p>
         <div className="chips">
           {expanded === gap ? <Suspense fallback={null}><MealSuggestEntry day={day} gap={gap} /></Suspense> : <Button kind="ghost" icon="plus" onClick={() => setExpanded(gap)}>{M[gap].action}</Button>}
           <Button kind="ghost" icon="x" aria-label={M[gap].dismiss} onClick={() => dismiss(gap)}>{M.close}</Button>
         </div>
       </div>
     </aside>
-  ));
+  );
+}
+
+const MEAL_CHOICES: readonly MealGap[] = ['lunch', 'dinner', 'rest'];
+
+/** Lối "Thêm ăn uống / nghỉ" luôn có ở MỌI ngày (không phụ thuộc ngưỡng nhắc): chọn bữa trưa, bữa tối hoặc nghỉ rồi mở gợi ý/nhập tay. */
+function MealAddRow({ day }: { readonly day: string }) {
+  const { trip } = useTripView();
+  const [open, setOpen] = useState(false);
+  const [gap, setGap] = useState<MealGap | null>(null);
+  if (!permissionsOf(trip).schedule) return null;
+  return (
+    <div className="meal-add">
+      <Button kind="ghost" block icon="tools-kitchen-2" aria-expanded={open} onClick={() => { setOpen(!open); setGap(null); }}>{M.addEntry}</Button>
+      {open ? (
+        <div className="chips" role="group" aria-label={M.addLabel}>
+          {MEAL_CHOICES.map((g) => <ChipToggle key={g} pressed={gap === g} icon={g === 'rest' ? 'moon-stars' : 'tools-kitchen-2'} onClick={() => setGap(g)}>{M[g].short}</ChipToggle>)}
+        </div>
+      ) : null}
+      {open && gap ? <div className="chips"><Suspense fallback={null}><MealSuggestEntry day={day} gap={gap} /></Suspense></div> : null}
+    </div>
+  );
 }
 
 /** Dòng "≈ 1,5 giờ · 25 km · ước tính" giữa hai mục liền nhau có tọa độ. */
@@ -66,6 +89,7 @@ export function DayTab({ index }: { readonly index: number }) {
   const items = dayItems(trip, day);
   const cs = summarizeCosts({ items });
   const road = roadKm(items, coord);
+  const roadMin = roadMinutes(items, coord);
   const sort = sorting && items.length > 1;
   const hasUnassigned = permissionsOf(trip).schedule && unassignedItems(trip).length > 0;
   return (
@@ -77,12 +101,11 @@ export function DayTab({ index }: { readonly index: number }) {
         </h2>
         <span className="s">
           {dayLabel(day)}
-          {road > 0 ? <><br />{fill(T.view.dayRoad, { time: formatTravelTime(minutesForKm(road)) })}</> : null}
+          {road > 0 ? <><br />{fill(T.view.dayRoad, { time: formatTravelMinutes(roadMin) })}</> : null}
           <br />{costSummaryText(cs)}
         </span>
       </div>
       <AddManyEntry />
-      <MealReminders key={`${trip.id}:${day}`} day={day} />
       {items.length > 1 && permissionsOf(trip).schedule ? (
         <div className="dayact">
           <ChipToggle pressed={sort} icon="arrow-up" onClick={() => setSorting(!sorting)}>
@@ -107,7 +130,9 @@ export function DayTab({ index }: { readonly index: number }) {
           </Fragment>
         );
       })}
+      <MealReminders key={`${trip.id}:${day}`} day={day} />
       {items.length && hasUnassigned ? <Button kind="ghost" block icon="plus" onClick={() => setOverlay({ kind: 'addToDay' })}>{T.view.addFromUnassigned}</Button> : null}
+      <MealAddRow day={day} />
       <Button kind="ghost" block icon="plus" onClick={() => setOverlay({ kind: 'add' })}>{T.view.addItemToDay}</Button>
     </section>
   );

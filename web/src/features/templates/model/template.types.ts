@@ -1,7 +1,7 @@
 import type { PlaceView } from '../../discover/index.ts';
 
 /** Trạng thái duyệt nội dung: `draft` = bản nháp chờ PO duyệt (DR-018 N-2), `approved` = đã duyệt. */
-export type TemplateStatus = 'draft' | 'approved';
+export type TemplateStatus = 'draft' | 'approved' | 'reference';
 
 /** Một ngày của lịch mẫu: các địa điểm (theo thứ tự đi) và ghi chú biên tập tùy chọn. */
 export interface TemplateDay {

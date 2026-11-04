@@ -8,6 +8,8 @@ export const RATING = {
   EMPTY_STAR: '☆',
   AVERAGE_DIGITS: 1,
   LOCALE: 'vi-VN',
+  /** Số lời bình hiện sẵn; phần còn lại mở bằng "Xem tất cả". */
+  PREVIEW_COMMENTS: 2,
 } as const;
 
 /** Đường dẫn API rating của một quán. */

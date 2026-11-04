@@ -19,7 +19,8 @@ const ELEMENTS = [
 ];
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', 'scripts'] },
+  // spike/ là mã thử nghiệm không vào bản dựng (gồm bản vendor three.js): không lint (quy ước spike, ghi ở NOTES.md của từng spike).
+  { ignores: ['dist', 'node_modules', 'scripts', 'spike'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

@@ -35,6 +35,11 @@ export function wrapText(text: string, width: number, measure: (text: string) =>
   return visible;
 }
 
+/** Khoảng cách sau một khối: khối đi liền với khối kế (tên → giờ/giá) sát nhau hơn khoảng cách giữa các nhóm. */
+function gapAfter(block: Pick<TextBlock, 'keepNext'>): number {
+  return block.keepNext ? PNG.tightGap : PNG.gap;
+}
+
 /** Chia đoạn theo chiều cao thật; giữ tiêu đề ngày với khối kế và không bỏ dòng khi sang ảnh. */
 export function paginateBlocks(blocks: readonly TextBlock[], measure: MeasureText, top: number, bottom: number, nextTop: number): LayoutPage[] {
   const pages: { lines: { text: string; role: TextRole; y: number }[] }[] = [{ lines: [] }];
@@ -51,11 +56,11 @@ export function paginateBlocks(blocks: readonly TextBlock[], measure: MeasureTex
   }
   const wrapped = blocks.map(b => ({ ...b, lines: wrapText(b.text, PNG.width - PNG.margin * PNG.edgeCount, t => measure(t, b.role), b.maxLines) }));
   for (const [index, block] of wrapped.entries()) {
-    const height = block.lines.length * LINE_HEIGHT[block.role] + PNG.gap;
+    const height = block.lines.length * LINE_HEIGHT[block.role] + gapAfter(block);
     let reserve = 0;
     for (let next = index; wrapped[next]?.keepNext; next++) {
       const following = wrapped[next + 1];
-      if (following) reserve += following.lines.length * LINE_HEIGHT[following.role] + PNG.gap;
+      if (following) reserve += following.lines.length * LINE_HEIGHT[following.role] + gapAfter(following);
     }
     if (y + height + reserve > bottom && pages.at(-1)!.lines.length) nextPage(block.section);
     for (const text of block.lines) {
@@ -63,7 +68,7 @@ export function paginateBlocks(blocks: readonly TextBlock[], measure: MeasureTex
       pages.at(-1)!.lines.push({ text, role: block.role, y });
       y += LINE_HEIGHT[block.role];
     }
-    y += PNG.gap;
+    y += gapAfter(block);
   }
   return pages;
 }

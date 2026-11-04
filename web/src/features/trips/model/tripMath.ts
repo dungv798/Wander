@@ -3,7 +3,7 @@ import { FORMAT } from '../../../shared/const/format.const.ts';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { TRIPS_COPY as T } from './trips.copy.ts';
 import { DateRange } from '../../../shared/domain/DateRange.ts';
-import { ROAD_FACTOR, airKm } from '../../../shared/lib/geo.ts';
+import { ROAD_FACTOR, airKm, minutesForKm, sumRoundedMinutes } from '../../../shared/lib/geo.ts';
 import type { GeoPoint } from '../../../shared/lib/geo.ts';
 import { ITEM_KINDS } from './trip.const.ts';
 import type { ItemKind, Trip, TripItem } from './trip.types.ts';
@@ -110,6 +110,19 @@ export function roadKm(items: readonly TripItem[], coordOf: (placeId: string) =>
     last = p;
   }
   return sum;
+}
+
+/** Tổng thời gian đi (phút) = cộng các chặng ĐÃ làm tròn để hiển thị, nên luôn khớp với từng chặng trong ngày. */
+export function roadMinutes(items: readonly TripItem[], coordOf: (placeId: string) => GeoPoint | null): number {
+  const legs: number[] = [];
+  let last: GeoPoint | null = null;
+  for (const i of items) {
+    const p = i.placeId ? coordOf(i.placeId) : null;
+    if (!p) continue;
+    if (last) legs.push(minutesForKm(airKm(last, p) * ROAD_FACTOR));
+    last = p;
+  }
+  return sumRoundedMinutes(legs);
 }
 
 /** Số mục là địa điểm trong kho. */

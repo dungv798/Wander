@@ -83,6 +83,7 @@ test('khách vào bằng liên kết: thấy tên chuyến, vào được, mã b
   assert.equal(await page.getByRole('button', { name: 'Sửa chuyến đi' }).count(), 0);
 
   // mở mục của Organizer: chỉ xem được, có nút đề nghị xóa
+  await page.getByRole('button', { name: 'Xem danh sách' }).click();
   await page.locator('.irow', { hasText: 'Bún chả Organizer' }).first().click();
   await page.getByRole('button', { name: 'Đề nghị xóa khỏi chuyến đi' }).click();
   await page.getByLabel('Lý do (không bắt buộc)').fill('Trùng bữa');
@@ -128,9 +129,11 @@ test('Organizer tạo liên kết và thấy thành viên trong "Người đi c�
 
   const boss = await phone();
   const page = await open(boss.ctx, `#/trip/${tripId}/ov`, owner.token);
+  await page.getByRole('button', { name: 'Chuẩn bị', exact: true }).click();
   await page.getByLabel('Hạng mục').fill('Mang CCCD');
   await page.getByRole('button', { name: 'Thêm hạng mục' }).click();
   await page.getByText('Đã thêm hạng mục').waitFor();
+  await page.getByRole('button', { name: 'Đóng', exact: true }).click();
   await page.getByRole('button', { name: /^Người đi cùng \(2\)/ }).click();
   await page.locator('.evlist li', { hasText: 'Minh' }).waitFor();
   const self = page.locator('.evlist li').filter({ hasText: 'Người tổ chức' });
@@ -141,6 +144,7 @@ test('Organizer tạo liên kết và thấy thành viên trong "Người đi c�
   await page.getByText('Đã tạo liên kết mời').waitFor();
   assert.match(await page.locator('input[readonly]').inputValue(), /#\/join\/[A-Za-z0-9_-]{43}$/);
   await page.getByRole('button', { name: 'Đóng' }).click();
+  await page.getByRole('button', { name: 'Chuẩn bị', exact: true }).click();
   const tick = page.getByRole('button', { name: 'Tôi đã chuẩn bị: Mang CCCD' });
   await tick.evaluate((el) => el.scrollIntoView({ block: 'center' })); // nút nổi "+" che mép dưới khi cuộn tối thiểu
   await tick.click({ timeout: 8000 });

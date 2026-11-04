@@ -101,3 +101,11 @@
   :root:not([data-look='classic']) #screen[data-view='trip'] .sheetbody { left: var(--sheet-inset); right: var(--sheet-inset); border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; }
   :root:not([data-look='classic']) #screen[data-view='trip'] .sheet-head { padding-top: 0; }
 }
+
+/* Ô chọn dùng chung: hộp tự vẽ thay cho ô xanh mặc định của trình duyệt (cùng token với nút chọn khác) */
+.checkrow input[type='checkbox'] { appearance: none; display: grid; place-content: center; width: 26px; height: 26px; margin: 0; border: 2px solid var(--border-ctrl); border-radius: var(--r-sm); background: var(--surface); cursor: pointer; }
+.checkrow input[type='checkbox']::after { content: ""; width: 6px; height: 12px; margin-top: -2px; border: solid var(--on-brand-2); border-width: 0 3px 3px 0; rotate: 45deg; scale: 0; transition: scale var(--dur-fast, 120ms) ease; }
+.checkrow input[type='checkbox']:checked { background: var(--brand-2); border-color: var(--brand-2); }
+.checkrow input[type='checkbox']:checked::after { scale: 1; }
+.checkrow input[type='checkbox']:focus-visible { outline: var(--focus-width) solid var(--focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .checkrow input[type='checkbox']::after { transition: none; } }

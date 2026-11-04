@@ -7,16 +7,16 @@ import { useToast } from '../../../shared/ui/Toast.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { TRIP_PACES, kindLabel } from '../model/trip.const.ts';
 import { dayItems, placeCount, roadKm, unassignedItems } from '../model/tripMath.ts';
-import { coordOf } from '../model/tripView.ts';
+import { coordOf, itemName } from '../model/tripView.ts';
 import { COLLAB_COPY, collabGateway, useLoaded } from '../../collab/index.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
-import { ChecklistSection } from './ChecklistSection.tsx';
 import { CostBox } from './CostBox.tsx';
-import { ItemRow } from './ItemRow.tsx';
 import { money } from './ItemMeta.tsx';
-import { AddManyEntry } from './AddManyEntry.tsx';
 import { COVER_COPY } from '../model/cover.copy.ts';
+
+/** Số việc chưa xong hiện trong thẻ chuẩn bị. */
+const PREPARE_PREVIEW = 3;
 
 /** Một ô số liệu (đếm lên từ 0 khi hiện). */
 function Stat({ value, label, cls, prefix = '' }: { readonly value: number; readonly label: string; readonly cls: string; readonly prefix?: string }) {
@@ -30,20 +30,8 @@ function Stat({ value, label, cls, prefix = '' }: { readonly value: number; read
 
 /** Thẻ gợi ý việc kế tiếp: xếp ngày giúp, thêm địa điểm hoặc (khi đã xếp xong) nhắc việc tiếp theo. */
 function NextStep() {
-  const { trip, setOverlay, addMore } = useTripView();
-  const un = unassignedItems(trip);
-  if (un.length) {
-    return (
-      <div className="next">
-        <span className="ib"><Icon name="wand" size="l" /></span>
-        <div>
-          <h3>{fill(T.view.nextTitleUnassigned, { n: un.length })}</h3>
-          <p className="note">{T.view.nextTextUnassigned}</p>
-          {permissionsOf(trip).schedule ? <Button kind="ghost" icon="sparkles" onClick={() => setOverlay({ kind: 'plan' })}>{T.view.autoPlan}</Button> : null}
-        </div>
-      </div>
-    );
-  }
+  const { trip, addMore } = useTripView();
+  if (unassignedItems(trip).length) return null;
   if (!trip.items.length) {
     return (
       <div className="next">
@@ -117,21 +105,57 @@ function TripOptions() {
   );
 }
 
-/** Mục "Chưa có ngày": tiến độ xếp ngày, danh sách mục kèm hàng "Chọn ngày", nút thêm mục tự do. */
-function UnassignedSection() {
-  const { trip, setOverlay } = useTripView();
+/** Số nơi xem trước trong thẻ "Chưa xếp ngày"; phần còn lại mở trong tờ danh sách. */
+const UNASSIGNED_PREVIEW = 3;
+
+/** Thẻ "Chưa xếp ngày": số lượng, tối đa ba nơi xem trước và nút "Xếp N nơi"; không bung trình sửa hay dòng chọn ngày ở Tổng quan. */
+function UnassignedCard() {
+  const { trip, cat, setOverlay } = useTripView();
   const un = unassignedItems(trip);
-  const assigned = trip.items.length - un.length;
+  if (!un.length) return null;
+  const rest = un.length - UNASSIGNED_PREVIEW;
   return (
-    <section className="daysec">
+    <section className="daysec unassigned-card" aria-label={T.view.unassigned}>
       <div className="dayhead">
         <h2>{T.view.unassigned}</h2>
-        <span className="s">{fill(T.view.assigned, { a: assigned, t: trip.items.length })}</span>
+        <span className="s">{fill(T.view.unassignedCount, { n: un.length })}</span>
       </div>
-      <Progress label={T.view.assignedLabel} value={assigned} max={trip.items.length} />
-      <AddManyEntry />
-      {un.length ? un.map((i) => <ItemRow key={i.id} item={i} num={null} assignable />) : <div className="emptyday">{trip.items.length ? T.view.allAssigned : T.view.noPlaces}</div>}
-      <Button kind="ghost" block icon="plus" onClick={() => setOverlay({ kind: 'add' })}>{T.view.addItem}</Button>
+      <ul className="unassigned-preview">
+        {un.slice(0, UNASSIGNED_PREVIEW).map((i) => <li key={i.id}>{itemName(i, cat)}</li>)}
+        {rest > 0 ? <li className="note">{fill(T.view.unassignedMore, { n: rest })}</li> : null}
+      </ul>
+      <div className="two">
+        {permissionsOf(trip).schedule ? <Button icon="sparkles" onClick={() => setOverlay({ kind: 'plan' })}>{fill(T.view.arrange, { n: un.length })}</Button> : null}
+        <Button kind="ghost" icon="list-check" onClick={() => setOverlay({ kind: 'unassigned' })}>{T.view.unassignedOpen}</Button>
+      </div>
+    </section>
+  );
+}
+
+/** Thẻ "Chuẩn bị & nhóm": tiến độ checklist của mình, vài việc kế tiếp, một lối mời bạn; danh sách đầy đủ mở trong tờ riêng. */
+function PrepareCard() {
+  const { trip, setOverlay } = useTripView();
+  const list = useLoaded(() => collabGateway.checklist(trip.id), [trip.id]);
+  const requests = useLoaded(() => collabGateway.requests(trip.id), [trip.id, trip.items.length, trip.trash.length]);
+  const items = list.data ?? [];
+  const todo = items.filter((i) => !i.done);
+  const pending = requests.data?.filter((r) => r.status === 'pending').length ?? 0;
+  const organizer = permissionsOf(trip).organizer;
+  return (
+    <section className="seccard prepare-card" id="trip-preparation" aria-label={T.view.prepareTitle}>
+      <h2>{T.view.prepareTitle}</h2>
+      {items.length ? (
+        <>
+          <p className="note">{fill(T.view.prepareProgress, { done: items.length - todo.length, total: items.length })}</p>
+          <Progress label={T.view.prepareTitle} value={items.length - todo.length} max={items.length} />
+          <ul className="unassigned-preview">{todo.slice(0, PREPARE_PREVIEW).map((i) => <li key={i.id}>{i.title}</li>)}</ul>
+        </>
+      ) : <p className="note">{organizer ? T.view.prepareEmpty : T.view.prepareEmptyMember}</p>}
+      <div className="two">
+        {items.length || organizer ? <Button kind="ghost" icon="check" onClick={() => setOverlay({ kind: 'checklist' })}>{T.view.prepareOpen}</Button> : null}
+        <Button kind="ghost" icon="users" onClick={() => setOverlay({ kind: 'people' })}>{trip.memberCount > 1 ? fill(COLLAB_COPY.people.open, { n: trip.memberCount }) : T.create.invite}</Button>
+      </div>
+      {organizer || requests.data?.length ? <Button kind="ghost" block icon="flag" onClick={() => setOverlay({ kind: 'requests' })}>{fill(organizer ? COLLAB_COPY.requests.open : COLLAB_COPY.requests.openMine, { n: pending })}</Button> : null}
     </section>
   );
 }
@@ -155,20 +179,6 @@ function TrashLink() {
   );
 }
 
-/** Lối vào "Người đi cùng" và "Đề nghị xóa" (Lát 1b) ở cuối tab Tổng quan. */
-function CollabLinks() {
-  const { trip, setOverlay } = useTripView();
-  const requests = useLoaded(() => collabGateway.requests(trip.id), [trip.id, trip.items.length, trip.trash.length]);
-  const pending = requests.data?.filter((r) => r.status === 'pending').length ?? 0;
-  const organizer = permissionsOf(trip).organizer;
-  return (
-    <>
-      <Button kind="ghost" block icon="users" onClick={() => setOverlay({ kind: 'people' })}>{fill(COLLAB_COPY.people.open, { n: trip.memberCount })}</Button>
-      {organizer || requests.data?.length ? <Button kind="ghost" block icon="flag" onClick={() => setOverlay({ kind: 'requests' })}>{fill(organizer ? COLLAB_COPY.requests.open : COLLAB_COPY.requests.openMine, { n: pending })}</Button> : null}
-    </>
-  );
-}
-
 /** Nút "Xóa chuyến đi" (xóa mềm, có Hoàn tác) ở cuối tab Tổng quan; chỉ Organizer. */
 function DeleteTripLink() {
   const { trip, setOverlay } = useTripView();
@@ -180,26 +190,35 @@ function DeleteTripLink() {
   );
 }
 
-/** Tab "Tổng quan": việc kế tiếp, số liệu, tuyến theo ngày, tùy chọn chuyến, chi phí, các mục chưa có ngày. */
-export function OverviewTab() {
+/** Khu quản lý ít dùng, gập sẵn: tùy chỉnh bìa, đã xóa gần đây, xóa chuyến. */
+function ManageMenu() {
   const { trip, setOverlay } = useTripView();
   return (
     <>
-      {permissionsOf(trip).manageTrip ? <Button kind="ghost" icon="pencil" onClick={() => setOverlay({ kind: 'cover' })}>{COVER_COPY.title}</Button> : null}
-      <div className="two">
-        <Button kind="ghost" icon="check" onClick={() => document.getElementById('trip-preparation')?.scrollIntoView({ block: 'start' })}>{T.create.prepare}</Button>
-        <Button kind="ghost" icon="users" onClick={() => setOverlay({ kind: 'people' })}>{T.create.invite}</Button>
+      {trip.trash.length ? <TrashLink /> : null}
+    <details className="manage-menu">
+      <summary><Icon name="chevron-down" size="s" />{T.view.manage}</summary>
+      <div className="stack tight">
+        {permissionsOf(trip).manageTrip ? <Button kind="ghost" block icon="pencil" onClick={() => setOverlay({ kind: 'cover' })}>{COVER_COPY.title}</Button> : null}
+        {trip.trash.length ? null : <TrashLink />}
+        <DeleteTripLink />
       </div>
-      <NextStep />
-      <StatsAndRoutes />
-      <TripOptions />
-      <CostBox />
-      <UnassignedSection />
-      <div id="trip-preparation"><ChecklistSection /></div>
-      <CollabLinks />
-      <TrashLink />
-      <DeleteTripLink />
+    </details>
     </>
   );
 }
 
+/** Tab "Tổng quan" dạng bảng gọn: việc kế tiếp, tóm tắt chuyến + lịch từng ngày, chưa xếp ngày, chi phí, chuẩn bị/nhóm, rồi khu quản lý gập sẵn. */
+export function OverviewTab() {
+  return (
+    <>
+      <NextStep />
+      <StatsAndRoutes />
+      <TripOptions />
+      <UnassignedCard />
+      <CostBox />
+      <PrepareCard />
+      <ManageMenu />
+    </>
+  );
+}

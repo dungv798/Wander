@@ -5,9 +5,10 @@ import { safeHttpUrl } from '../../../shared/lib/safeUrl.ts';
 const AUTHOR_MAX_LENGTH = 28;
 
 /** Nhãn nguồn ảnh nổi trên ảnh khi chạm nút ⓘ: tác giả, giấy phép và liên kết ảnh gốc (ghi công bắt buộc theo giấy phép). */
-export function CreditPill({ photo }: { readonly photo: PhotoView | undefined }) {
+export function CreditPill({ photo, fullAuthor = false }: { readonly photo: PhotoView | undefined; readonly fullAuthor?: boolean }) {
   if (!photo) return null;
-  const author = (photo.author || COPY.place.unknownAuthor).slice(0, AUTHOR_MAX_LENGTH);
+  const name = photo.author || COPY.place.unknownAuthor;
+  const author = fullAuthor ? name : name.slice(0, AUTHOR_MAX_LENGTH);
   return (
     <div className="credit-pill">
       {fill(COPY.place.photoCreditShort, { author, license: photo.license })}
