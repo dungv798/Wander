@@ -817,5 +817,25 @@
       ],
       "wikipediaTitle": "Thác Pongour"
     }
+  ],
+  "moments": [
+    {
+      "id": "cho-1",
+      "theme": "cho",
+      "caption": "Khung cảnh chợ Đà Lạt",
+      "file": "da-lat-moment-cho-1.jpg",
+      "author": "Catricorn",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/146122358@N02/48503722822"
+    },
+    {
+      "id": "nguoi-3",
+      "theme": "nguoi",
+      "caption": "Khu chợ mới ở Đà Lạt",
+      "file": "da-lat-moment-nguoi-3.jpg",
+      "author": "tuey",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/21168473@N00/55061383"
+    }
   ]
 }

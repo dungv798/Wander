@@ -112,6 +112,24 @@
           "author": "Karel Bilek",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vinh_hy_bay.jpg"
+        },
+        {
+          "file": "vinh-vinh-hy-4.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A0ng_c%C3%A1_V%C4%A9nh_Hy.jpg"
+        },
+        {
+          "file": "vinh-vinh-hy-5.jpg",
+          "author": "Windrain",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_th%C3%A1ng_02-2022.jpg"
+        },
+        {
+          "file": "vinh-vinh-hy-6.jpg",
+          "author": "Phương Huy",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(29).jpg"
         }
       ],
       "wikipediaTitle": "Vịnh Vĩnh Hy"
@@ -160,6 +178,24 @@
           "author": "Vinnie Cartabiano",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:-i---i-_(39930272721).jpg"
+        },
+        {
+          "file": "thap-po-klong-garai-2.jpg",
+          "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_Po_Klaung_Garai,_Phan_Rang.JPG"
+        },
+        {
+          "file": "thap-po-klong-garai-3.jpg",
+          "author": "Dongson*vmvn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_Po_Klaung_Garai,_Phan_Rang,_Ninh_Thu%E1%BA%ADn.JPG"
+        },
+        {
+          "file": "thap-po-klong-garai-4.jpg",
+          "author": "Ms Sarah Welch",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Po_Klong_Garai,_Champa_Hindu_temples_complex_03.jpg"
         }
       ],
       "wikipediaTitle": "Tháp Po Klong Garai"
@@ -212,6 +248,110 @@
         }
       ],
       "wikipediaTitle": "Vườn quốc gia Núi Chúa"
+    },
+    {
+      "id": "hang-rai",
+      "name": "Hang Rái",
+      "category": "canh",
+      "area": "Thanh Hải",
+      "hook": "Khu bờ biển đá với bãi và hang nhỏ, có cừu và dê sống hoang.",
+      "summary": "",
+      "lat": 11.67799,
+      "lon": 109.1825,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "1–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích cảnh hoang sơ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "hang-rai-1.jpg",
+          "author": "Sketyl none",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%A0ng_R%C3%A1i_(37071594904).jpg"
+        },
+        {
+          "file": "hang-rai-2.jpg",
+          "author": "Sketyl none",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%A0ng_R%C3%A1i_(37780900851).jpg"
+        },
+        {
+          "file": "hang-rai-3.jpg",
+          "author": "P.T.Đ",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_R%C3%A1i_in_Ninh_Thuan_Province,_Vietnam.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "bai-bien-ninh-chu",
+      "name": "Biển Ninh Chữ",
+      "category": "canh",
+      "area": "Ninh Hải",
+      "hook": "Bãi biển dài và nhiều khu nghỉ dưỡng, nước trong.",
+      "summary": "Ninh Chử là một phường thuộc tỉnh Khánh Hòa, Việt Nam.",
+      "lat": 11.59083508,
+      "lon": 109.04378809,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Dễ đi, hợp nghỉ biển.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "bai-bien-ninh-chu-1.jpg",
+          "author": "Lam Tr Th",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ninh_Chu_Beach_(B%C3%A3i_bi%E1%BB%83n_ninh_ch%E1%BB%AF_Ninh_Thu%E1%BA%ADn_)_-_panoramio.jpg"
+        },
+        {
+          "file": "bai-bien-ninh-chu-2.jpg",
+          "author": "Phương Huy at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_bi%E1%BB%83n_Ninh_Ch%E1%BB%AF.JPG"
+        }
+      ],
+      "wikipediaTitle": "Ninh Chử"
     },
     {
       "id": "ca-na",

@@ -480,5 +480,43 @@
       ],
       "wikipediaTitle": "Hòn Tre (Khánh Hòa)"
     }
+  ],
+  "moments": [
+    {
+      "id": "cho-1",
+      "theme": "cho",
+      "caption": "Khung cảnh chợ Nha Trang",
+      "file": "nha-trang-moment-cho-1.jpg",
+      "author": "@felixtriller",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/21480682@N03/5058498520"
+    },
+    {
+      "id": "cho-2",
+      "theme": "cho",
+      "caption": "Người bán nước mía ở chợ Đầm, Nha Trang",
+      "file": "nha-trang-moment-cho-2.jpg",
+      "author": "tuey",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/21168473@N00/55104284"
+    },
+    {
+      "id": "mon-an-3",
+      "theme": "mon-an",
+      "caption": "Món nem ở Nha Trang",
+      "file": "nha-trang-moment-mon-an-3.jpg",
+      "author": "@felixtriller",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/21480682@N03/5058497054"
+    },
+    {
+      "id": "nghe-6",
+      "theme": "nghe",
+      "caption": "Làng chài ở Nha Trang",
+      "file": "nha-trang-moment-nghe-6.jpg",
+      "author": "Prince Roy",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/17352537@N00/13527896553"
+    }
   ]
 }

@@ -113,6 +113,36 @@
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%E1%BB%91ng_l%C6%B0ng_kh%E1%BB%A7ng_long_T%C3%A0_X%C3%B9a.jpg"
+        },
+        {
+          "file": "ta-xua-2.jpg",
+          "author": "Linh Pham linharex",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Man_alone_in_T%E1%BA%A3_X%C3%B9a_03-03-2017.jpg"
+        },
+        {
+          "file": "ta-xua-3.png",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tr%C3%AAn_m%C3%A2y_T%C3%A0_X%C3%B9a_-_NKS.png"
+        },
+        {
+          "file": "ta-xua-4.png",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A0_X%C3%B9a_in_morning_mist.png"
+        },
+        {
+          "file": "ta-xua-5.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:N%C3%BAi_non_T%C3%A0_X%C3%B9a_1_-NKS.jpg"
+        },
+        {
+          "file": "ta-xua-6.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%91c_%C4%91%E1%BB%89nh_n%C3%BAi_T%C3%A0_X%C3%B9a.jpg"
         }
       ],
       "wikipediaTitle": "Tà Xùa"
@@ -124,8 +154,8 @@
       "area": "Bắc Yên",
       "hook": "Huyện miền núi là điểm xuất phát lên Tà Xùa, có chợ và quán ăn.",
       "summary": "Bắc Yên là một huyện miền núi cũ thuộc tỉnh Sơn La, Việt Nam.",
-      "lat": 21.25,
-      "lon": 104.417,
+      "lat": 21.24611111,
+      "lon": 104.44138889,
       "bestMonths": [
         10,
         11,
@@ -158,6 +188,119 @@
         }
       ],
       "wikipediaTitle": "Bắc Yên (huyện)"
+    },
+    {
+      "id": "moc-chau",
+      "name": "Mộc Châu",
+      "category": "canh",
+      "area": "Mộc Châu",
+      "hook": "Cao nguyên với đồi chè, đồng hoa và khí hậu mát quanh năm.",
+      "summary": "Cao nguyên Mộc Châu thuộc thị xã Mộc Châu cũ, tỉnh Sơn La. Cao nguyên Mộc Châu có độ cao trung bình 1.050 m so với mực nước biển, mang đặc trưng của khí hậu cận ôn đới, đất đai màu mỡ phì nhiêu, thuận lợi cho phát triển cây chè, cây ăn quả và chăn nuôi bò sữa. Cao nguyên Mộc Châu cách Hà Nội khoảng 200 km theo quốc lộ 6. Người Thái, người Mông là các dân tộc thiểu số chiếm số đông ở Mộc Châu.",
+      "lat": 20.844986,
+      "lon": 104.637836,
+      "bestMonths": [
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 11–4",
+      "duration": "1 ngày",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Thường kết hợp đi cùng Tà Xùa trong một chuyến Tây Bắc.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "moc-chau-1.jpg",
+          "author": "Linh Pham linharex",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99c_Ch%C3%A2u_District,_Vietnam_(Unsplash).jpg"
+        },
+        {
+          "file": "moc-chau-2.png",
+          "author": "Bradstokes",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Between_Son_La_and_Moc_Chau.png"
+        }
+      ],
+      "wikipediaTitle": "Cao nguyên Mộc Châu"
+    },
+    {
+      "id": "thac-dai-yem",
+      "name": "Thác Dải Yếm",
+      "category": "canh",
+      "area": "Mộc Châu",
+      "hook": "Thác cao đổ xuống như dải lụa giữa rừng thông.",
+      "summary": "Thác Dải Yếm, còn gọi là thác Nàng, thác Bản Vặt, là thác trên suối Bó Sập tại phường Mộc Châu, tỉnh Sơn La. Tên gọi \"Dải Yếm\" liên quan đến truyền thuyết, kễ rằng thác là dải yếm của người con gái cứu chàng trai thoát khỏi dòng nước lũ.",
+      "lat": 20.820206,
+      "lon": 104.591076,
+      "bestMonths": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "bestLabel": "Tháng 5–10",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Một điểm cảnh đẹp ở Mộc Châu, dễ đi.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Thác Dải Yếm"
+    },
+    {
+      "id": "cay-co-don-ta-xua",
+      "name": "Cây cô đơn Tà Xùa",
+      "category": "canh",
+      "area": "Tà Xùa",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Tà Xùa.",
+      "summary": "",
+      "lat": 21.26531,
+      "lon": 104.53844,
+      "bestMonths": [
+        10,
+        11,
+        12,
+        1,
+        2,
+        3,
+        4
+      ],
+      "bestLabel": "Tháng 1–4, 10–12",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
     }
   ]
 }

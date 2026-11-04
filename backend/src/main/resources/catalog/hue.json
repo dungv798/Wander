@@ -664,5 +664,34 @@
       ],
       "wikipediaTitle": "Vườn quốc gia Bạch Mã"
     }
+  ],
+  "moments": [
+    {
+      "id": "cho-1",
+      "theme": "cho",
+      "caption": "Một khu chợ ở Huế",
+      "file": "hue-moment-cho-1.jpg",
+      "author": "Tormod Sandtorv",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/14585659@N07/3884181351"
+    },
+    {
+      "id": "mon-an-2",
+      "theme": "mon-an",
+      "caption": "Bún bò, món đường phố ở Huế",
+      "file": "hue-moment-mon-an-2.jpg",
+      "author": "jonolist",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/46635911@N00/726765337"
+    },
+    {
+      "id": "nguoi-3",
+      "theme": "nguoi",
+      "caption": "Người quét dọn ở Kinh thành Huế",
+      "file": "hue-moment-nguoi-3.jpg",
+      "author": "Vu Pham in Vietnam",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/36668777@N07/3380583752"
+    }
   ]
 }

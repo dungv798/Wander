@@ -121,6 +121,18 @@
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:10519-Hoi-An_(37621340030).jpg"
+        },
+        {
+          "file": "pho-co-hoi-an-4.jpg",
+          "author": "Alexkom000",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024-12-20_Hoi_An_Old_Town_at_night_2.jpg"
+        },
+        {
+          "file": "pho-co-hoi-an-5.jpg",
+          "author": "Steffen Schmitz ( more photos )",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Ancient_Town,_2020-01_CN-06.jpg"
         }
       ],
       "wikipediaTitle": "Phố cổ Hội An"
@@ -181,9 +193,272 @@
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_H%E1%BB%99i_An_-_Japanese_Covered_Bridge_(Ch%C3%B9a_C%E1%BA%A7u)_after_renovation_-_interior_-_img_03.jpg"
+        },
+        {
+          "file": "chua-cau-hoi-an-4.jpg",
+          "author": "Suicasmo",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_C%E1%BA%A7u_20190920-2.jpg"
+        },
+        {
+          "file": "chua-cau-hoi-an-5.jpg",
+          "author": "François Guerraz",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_C%E1%BA%A7u,_H%E1%BB%99i_An.jpg"
         }
       ],
       "wikipediaTitle": "Chùa Cầu"
+    },
+    {
+      "id": "hoi-quan-phuc-kien",
+      "name": "Hội quán Phúc Kiến",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Hội quán của người Hoa Phúc Kiến với cổng lớn và sân vườn nhiều chi tiết gỗ.",
+      "summary": "",
+      "lat": 15.87741,
+      "lon": 108.3306,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30–45 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Thấy rõ ảnh hưởng văn hóa Hoa trong phố cổ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "hoi-quan-phuc-kien-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An_2024_-_Fujian_Assembly_Hall_(H%E1%BB%99i_qu%C3%A1n_Ph%C3%BAc_Ki%E1%BA%BFn_,_%E6%9C%83%E5%AE%89%E7%A6%8F%E5%BB%BA%E6%9C%83%E9%A4%A8)_-_img_02.jpg"
+        },
+        {
+          "file": "hoi-quan-phuc-kien-2.jpg",
+          "author": "Liftold ( thảo luận )",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_Qu%C3%A1n_Ph%C3%BAc_Ki%E1%BA%BFn.JPG"
+        },
+        {
+          "file": "hoi-quan-phuc-kien-3.jpg",
+          "author": "AJ Oswald",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Ph%C3%BAc_Ki%E1%BA%BFn.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "nha-co-tan-ky",
+      "name": "Nhà cổ Tấn Ký",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Ngôi nhà gỗ hơn hai trăm năm tuổi, giữ nhiều đồ nội thất cổ.",
+      "summary": "",
+      "lat": 15.87646,
+      "lon": 108.32783,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Hiểu về nếp nhà phố cổ qua một ngôi nhà còn nguyên vẹn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "nha-co-tan-ky-1.jpg",
+          "author": "ChieuTimViet",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nh%C3%A0_c%E1%BB%95_T%E1%BA%A5n_K%C3%BD_H%E1%BB%99i_An_-_panoramio.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "nha-co-phung-hung",
+      "name": "Nhà cổ Phùng Hưng",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Nhà cổ có kiến trúc kết hợp Nhật, Hoa và Việt, nằm gần Chùa Cầu.",
+      "summary": "",
+      "lat": 15.87722,
+      "lon": 108.32579,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Tiện ghé khi đã đi dạo phố cổ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "rung-dua-bay-mau",
+      "name": "Rừng dừa Bảy Mẫu",
+      "category": "canh",
+      "area": "Cẩm Thanh",
+      "hook": "Rừng dừa nước, đi thuyền thúng len qua những kênh nhỏ.",
+      "summary": "Rừng dừa Bảy Mẫu là vùng rừng dừa nước gắn với hệ sinh thái đất ngập nước ở phường Hội An Đông, thành phố Đà Nẵng. Khu vực thường được khai thác du lịch bằng hoạt động tham quan trên thuyền thúng và các tuyến đường thủy nội địa trong mạng lưới kênh rạch, lạch nước ở hạ lưu.",
+      "lat": 15.875,
+      "lon": 108.37416666666665,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "1,5–2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Trải nghiệm khác phố cổ, kết hợp được cùng ngày.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "rung-dua-bay-mau-1.jpg",
+          "author": "Justin",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nypa_fruticans_353792454.jpg"
+        },
+        {
+          "file": "rung-dua-bay-mau-2.jpg",
+          "author": "Justin",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nypa_fruticans_353792455.jpg"
+        }
+      ],
+      "wikipediaTitle": "Rừng dừa Bảy Mẫu"
+    },
+    {
+      "id": "lang-gom-thanh-ha",
+      "name": "Làng gốm Thanh Hà",
+      "category": "cho",
+      "area": "Thanh Hà",
+      "hook": "Làng gốm cổ, có thể xem và tự tay nhào đất.",
+      "summary": "",
+      "lat": 15.87713,
+      "lon": 108.29899,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1–1,5 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp đi cùng trẻ nhỏ hoặc ai thích làm thủ công.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "lang-gom-thanh-ha-1.jpg",
+          "author": "LÊ TẤN LỘC",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ngh%E1%BB%87_nh%C3%A2n_l%C3%A0ng_g%E1%BB%91m_Thanh_H%C3%A0.JPG"
+        },
+        {
+          "file": "lang-gom-thanh-ha-2.jpg",
+          "author": "LÊ TẤN LỘC",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%E1%BA%A3n_ph%E1%BA%A9m_l%C3%A0ng_g%E1%BB%91m_Thanh_H%C3%A02.JPG"
+        }
+      ],
+      "wikipediaTitle": null
     },
     {
       "id": "cu-lao-cham",
@@ -281,9 +556,243 @@
           "author": "Andre Hospers",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%B9_S%C6%A1n_Vietnam_Temple.jpg"
+        },
+        {
+          "file": "thanh-dia-my-son-4.jpg",
+          "author": "Philip Nalangan",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:My_Son_Sanctuary_Vietnam_06.jpg"
+        },
+        {
+          "file": "thanh-dia-my-son-5.jpg",
+          "author": "shankar s. from Dubai, united arab emirates",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_far_view_of_the_ruins_at_My_Son_(30992152933).jpg"
         }
       ],
       "wikipediaTitle": "Thánh địa Mỹ Sơn"
+    },
+    {
+      "id": "lang-rau-tra-que",
+      "name": "Làng Trà Quế",
+      "category": "cho",
+      "area": "Trà Quế",
+      "hook": "Làng trồng rau thơm truyền thống, có lớp nấu ăn và đạp xe quanh làng.",
+      "summary": "Làng rau Trà Quế là một làng nghề trồng rau và rau thơm ở phường Hội An Tây, thành phố Đà Nẵng. Khu canh tác được nêu có diện tích 18 ha với 202 hộ và 326 lao động trực tiếp. Nghề trồng rau Trà Quế được đưa vào Danh mục di sản văn hóa phi vật thể quốc gia theo Quyết định số 784/QĐ-BVHTTDL của Bộ Văn hóa, Thể thao và Du lịch. Năm 2024, Trà Quế được Tổ chức Du lịch Thế giới công nhận trong chương trình tiếng Anh: Best Tourism Villages.",
+      "lat": 15.90361111,
+      "lon": 108.33416667,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "2 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích ẩm thực, lớp nấu ăn nhẹ.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "lang-rau-tra-que-1.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vegetables_in_Tr%C3%A0_Qu%E1%BA%BF_1.jpg"
+        },
+        {
+          "file": "lang-rau-tra-que-2.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vegetables_in_Tr%C3%A0_Qu%E1%BA%BF_2.jpg"
+        },
+        {
+          "file": "lang-rau-tra-que-3.jpg",
+          "author": "Trần Đức Bắc",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoian_-_excursi%C3%B3n_al_pueblo_Tra_Que.jpg"
+        }
+      ],
+      "wikipediaTitle": "Làng Trà Quế"
+    },
+    {
+      "id": "chua-ong-hoi-an",
+      "name": "Miếu Quan Công",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Miếu nhỏ nằm trong phố cổ, thờ Quan Công.",
+      "summary": "",
+      "lat": 15.87754,
+      "lon": 108.33139,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "20–30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Ghé nhanh khi đi dạo.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "chua-ong-hoi-an-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quan_C%C3%B4ng_Mi%E1%BA%BFu_(Ch%C3%B9a_%C3%94ng)_01.jpg"
+        },
+        {
+          "file": "chua-ong-hoi-an-2.jpg",
+          "author": "User thalling55 on Flickr",
+          "license": "CC BY 1.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mieu_Quan_Cong.jpg"
+        },
+        {
+          "file": "chua-ong-hoi-an-3.jpg",
+          "author": "Vuong Tri Binh",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chua_Ong_temple_of_Hoi_An_in_2015_01.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "bai-bien-cua-dai",
+      "name": "Bãi biển Cửa Đại",
+      "category": "canh",
+      "area": "Cửa Đại",
+      "hook": "Bãi cát dài nhìn ra cửa sông Thu Bồn, có nhiều quán ven biển.",
+      "summary": "",
+      "lat": 15.90318,
+      "lon": 108.35723,
+      "bestMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bestLabel": "Tháng 2–8",
+      "duration": "2–3 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp nghỉ biển, cách phố cổ khoảng vài km.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Mang nước, mũ nón và kem chống nắng.",
+        "Xem dự báo thời tiết trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "bai-bien-cua-dai-1.jpg",
+          "author": "AJ Oswald",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_bi%E1%BB%83n_C%E1%BB%ADa_%C4%90%E1%BA%A1i.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "hoi-quan-quang-dong",
+      "name": "Hội quán Quảng Đông",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Hội quán của người Hoa Quảng Đông với sân vườn và cổng trang trí rực rỡ.",
+      "summary": "",
+      "lat": 15.87736,
+      "lon": 108.32657,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "20–30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Tiện ghé khi đi dạo phố cổ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "hoi-quan-quang-dong-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Qu%E1%BA%A3ng_%C4%90%C3%B4ng_22_H%C3%A0ng_Bu%E1%BB%93m.jpg"
+        },
+        {
+          "file": "hoi-quan-quang-dong-2.jpg",
+          "author": "ssedro",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Qu%E1%BA%A3ng_%C4%90%C3%B4ng,_H%E1%BB%99i_An.jpg"
+        },
+        {
+          "file": "hoi-quan-quang-dong-3.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cantonese_Assembly_Hall_of_Hoi_An_(2024)_-_img_01.jpg"
+        }
+      ],
+      "wikipediaTitle": null
     },
     {
       "id": "bao-tang-sa-huynh",
@@ -332,6 +841,175 @@
         }
       ],
       "wikipediaTitle": "Bảo tàng Văn hóa Sa Huỳnh (Hội An)"
+    },
+    {
+      "id": "cho-hoi-an",
+      "name": "Chợ Hội An",
+      "category": "cho",
+      "area": "Phố cổ",
+      "hook": "Chợ ven sông Hoài, bán rau củ, hải sản và các món ăn địa phương.",
+      "summary": "",
+      "lat": 15.87708,
+      "lon": 108.33252,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "1 giờ",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Thử món ăn địa phương, hợp đi sáng sớm.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Buổi sáng chợ đông, hàng tươi và nhiều lựa chọn nhất.",
+      "tips": [
+        "Hỏi giá trước khi mua.",
+        "Giữ kỹ đồ cá nhân ở nơi đông người."
+      ],
+      "photos": [
+        {
+          "file": "cho-hoi-an-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BB%A3_H%E1%BB%99i_An_-_Hoi_An_Market_(2024)_-_img_01.jpg"
+        },
+        {
+          "file": "cho-hoi-an-2.jpg",
+          "author": "ShiraAki",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoian_market.jpg"
+        },
+        {
+          "file": "cho-hoi-an-3.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoi_An_Market.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "hoi-quan-trieu-chau",
+      "name": "Hội quán Triều Châu",
+      "category": "van",
+      "area": "Phố cổ",
+      "hook": "Hội quán của người Hoa Triều Châu với nhiều chi tiết chạm khắc gỗ.",
+      "summary": "",
+      "lat": 15.87791,
+      "lon": 108.33303,
+      "bestMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bestLabel": "Quanh năm",
+      "duration": "20–30 phút",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Hợp ai thích kiến trúc cổ.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Ăn mặc lịch sự khi vào nơi thờ tự.",
+        "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
+      ],
+      "photos": [
+        {
+          "file": "hoi-quan-trieu-chau-1.jpg",
+          "author": "Steffen Schmitz ( more photos )",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Trieu_Chau_Assembly_Hall,_2020-01_CN-02.jpg"
+        },
+        {
+          "file": "hoi-quan-trieu-chau-2.jpg",
+          "author": "Franzfoto",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoi_An_-_Trieu_Chau_Assembly_hall_1766_04.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    }
+  ],
+  "moments": [
+    {
+      "id": "cho-1",
+      "theme": "cho",
+      "caption": "Gian rau củ ở chợ Hội An",
+      "file": "hoi-an-moment-cho-1.jpg",
+      "author": "PiktourUK",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/69706441@N03/33391127275"
+    },
+    {
+      "id": "cho-2",
+      "theme": "cho",
+      "caption": "Chợ Hội An, Việt Nam",
+      "file": "hoi-an-moment-cho-2.jpg",
+      "author": "dane brian",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/12955651@N07/4166015655"
+    },
+    {
+      "id": "mon-an-3",
+      "theme": "mon-an",
+      "caption": "Người bán đồ ăn đường phố Hội An",
+      "file": "hoi-an-moment-mon-an-3.jpg",
+      "author": "PiktourUK",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/69706441@N03/32548205264"
+    },
+    {
+      "id": "mon-an-4",
+      "theme": "mon-an",
+      "caption": "Món ăn đường phố ở Hội An",
+      "file": "hoi-an-moment-mon-an-4.jpg",
+      "author": "joaquinuy",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/81989974@N00/2320892762"
+    },
+    {
+      "id": "nghe-5",
+      "theme": "nghe",
+      "caption": "Ngư dân lúc hoàng hôn ở Hội An",
+      "file": "hoi-an-moment-nghe-5.jpg",
+      "author": "chacrebleu",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/14156469@N04/3438254478"
+    },
+    {
+      "id": "nghe-6",
+      "theme": "nghe",
+      "caption": "Ngư dân ở Hội An",
+      "file": "hoi-an-moment-nghe-6.jpg",
+      "author": "lightwrite",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/77442936@N00/14361477040"
     }
   ]
 }

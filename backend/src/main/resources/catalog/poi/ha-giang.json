@@ -1,0 +1,3875 @@
+{
+  "destinationId": "ha-giang",
+  "center": [
+    23.28177778,
+    105.35989444
+  ],
+  "radiusM": 15000,
+  "snapshotAt": "2026-11-03T02:35:32.151Z",
+  "osmTimestamp": "2026-11-03T02:34:29Z",
+  "sourceBbox": "around:15000,23.28177778,105.35989444",
+  "notice": "Dữ liệu snapshot OSM chưa xác minh hiện trạng hoặc giờ hoạt động; không phải danh sách Discover đã duyệt.",
+  "statistics": {
+    "before": 83,
+    "named": 47,
+    "removedUnnamed": 36,
+    "mergedDuplicates": 0,
+    "after": 47,
+    "beforeByKind": {
+      "food": 47,
+      "cafe": 31,
+      "fast_food": 4,
+      "bar": 1,
+      "other": 0
+    },
+    "namedByKind": {
+      "food": 32,
+      "cafe": 11,
+      "fast_food": 3,
+      "bar": 1,
+      "other": 0
+    },
+    "afterByKind": {
+      "food": 32,
+      "cafe": 11,
+      "fast_food": 3,
+      "bar": 1,
+      "other": 0
+    }
+  },
+  "pois": [
+    {
+      "id": "poi-ha-giang-node-11176414937",
+      "osmType": "node",
+      "osmId": 11176414937,
+      "coordinateKind": "point",
+      "name": "Nha Hang",
+      "kind": "food",
+      "center": [
+        23.1637675,
+        105.4091183
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11176414937",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11176414937",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11176414937",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11176414937",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11176414937",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11176414937",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-11593135021",
+      "osmType": "node",
+      "osmId": 11593135021,
+      "coordinateKind": "point",
+      "name": "Foody House",
+      "kind": "food",
+      "center": [
+        23.2762065,
+        105.3405342
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11593135021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11593135021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11593135021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11593135021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11593135021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11593135021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-12291264301",
+      "osmType": "node",
+      "osmId": 12291264301,
+      "coordinateKind": "point",
+      "name": "Dung Hai",
+      "kind": "fast_food",
+      "center": [
+        23.1654168,
+        105.4082767
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291264301",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291264301",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291264301",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291264301",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291264301",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291264301",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-12291803901",
+      "osmType": "node",
+      "osmId": 12291803901,
+      "coordinateKind": "point",
+      "name": "Green Karst",
+      "kind": "food",
+      "center": [
+        23.2773871,
+        105.3592842
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291803901",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291803901",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291803901",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291803901",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291803901",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291803901",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-12291823801",
+      "osmType": "node",
+      "osmId": 12291823801,
+      "coordinateKind": "point",
+      "name": "Phiên !",
+      "kind": "bar",
+      "center": [
+        23.2785477,
+        105.3612244
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291823801",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291823801",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291823801",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291823801",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291823801",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12291823801",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-12321827672",
+      "osmType": "node",
+      "osmId": 12321827672,
+      "coordinateKind": "point",
+      "name": "Panorama restaurant and hostel",
+      "kind": "food",
+      "center": [
+        23.2269905,
+        105.4179202
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12321827672",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12321827672",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12321827672",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12321827672",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12321827672",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/12321827672",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-13332775195",
+      "osmType": "node",
+      "osmId": 13332775195,
+      "coordinateKind": "point",
+      "name": "Emoi Cafe",
+      "kind": "cafe",
+      "center": [
+        23.3017811,
+        105.3689987
+      ],
+      "address": null,
+      "openingHoursRaw": "Mo-Su 08:00-17:00",
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332775195",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-13332787426",
+      "osmType": "node",
+      "osmId": 13332787426,
+      "coordinateKind": "point",
+      "name": "Bếp nhà mế",
+      "kind": "food",
+      "center": [
+        23.2774028,
+        105.3622208
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332787426",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332787426",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332787426",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332787426",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332787426",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13332787426",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-13339448688",
+      "osmType": "node",
+      "osmId": 13339448688,
+      "coordinateKind": "point",
+      "name": "Little Bean",
+      "kind": "cafe",
+      "center": [
+        23.1653618,
+        105.4088977
+      ],
+      "address": null,
+      "openingHoursRaw": "Mo-Su 08:00-22:00",
+      "phone": "+84358255995",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13339448688",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-13519720340",
+      "osmType": "node",
+      "osmId": 13519720340,
+      "coordinateKind": "point",
+      "name": "Phúc Lộc Quán",
+      "kind": "food",
+      "center": [
+        23.1652066,
+        105.409838
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13519720340",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13519720340",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13519720340",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13519720340",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13519720340",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13519720340",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-14218758401",
+      "osmType": "node",
+      "osmId": 14218758401,
+      "coordinateKind": "point",
+      "name": "Ethnic house",
+      "kind": "food",
+      "center": [
+        23.278588,
+        105.3612035
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14218758401",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14218758401",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14218758401",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14218758401",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14218758401",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14218758401",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-14318165601",
+      "osmType": "node",
+      "osmId": 14318165601,
+      "coordinateKind": "point",
+      "name": "Restaurant & coffe hmong",
+      "kind": "food",
+      "center": [
+        23.2554119,
+        105.2626474
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14318165601",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14318165601",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14318165601",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14318165601",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14318165601",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/14318165601",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4223993902",
+      "osmType": "node",
+      "osmId": 4223993902,
+      "coordinateKind": "point",
+      "name": "Vegan Food in Đồng Văn - Good Vibes - the 27 club",
+      "kind": "food",
+      "center": [
+        23.2773185,
+        105.3602632
+      ],
+      "address": "10, 310000, 10 Trần Phú, Đồng Văn, Hà Giang",
+      "openingHoursRaw": "Mo-Su 06:00-07:35",
+      "phone": "+84 98 933 60 32",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4223993902",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4332478151",
+      "osmType": "node",
+      "osmId": 4332478151,
+      "coordinateKind": "point",
+      "name": "Pho Co Coffee",
+      "kind": "cafe",
+      "center": [
+        23.2793667,
+        105.3613218
+      ],
+      "address": "No.2, pho co street",
+      "openingHoursRaw": "Mo-Su 06:30-23:00",
+      "phone": "0988660121",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4332478151",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4523262996",
+      "osmType": "node",
+      "osmId": 4523262996,
+      "coordinateKind": "point",
+      "name": "Mr. Hung restaurant",
+      "kind": "food",
+      "center": [
+        23.2772731,
+        105.36019
+      ],
+      "address": null,
+      "openingHoursRaw": "Mo-Su 06:00-02:00",
+      "phone": "+841687540762",
+      "website": "http://mrhungtourism.com/",
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "website": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4523262996",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4759183922",
+      "osmType": "node",
+      "osmId": 4759183922,
+      "coordinateKind": "point",
+      "name": "Bà Hà - Bánh cuốn nóng",
+      "kind": "food",
+      "center": [
+        23.2790006,
+        105.3610492
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": "01685 087 770",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4759183922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4891810549",
+      "osmType": "node",
+      "osmId": 4891810549,
+      "coordinateKind": "point",
+      "name": "May Co Quan",
+      "kind": "food",
+      "center": [
+        23.1634915,
+        105.4082852
+      ],
+      "address": "Meo Vac",
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4891810549",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4915832521",
+      "osmType": "node",
+      "osmId": 4915832521,
+      "coordinateKind": "point",
+      "name": "no where",
+      "kind": "food",
+      "center": [
+        23.2774765,
+        105.3609174
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915832521",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915832521",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915832521",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915832521",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915832521",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915832521",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-4915836021",
+      "osmType": "node",
+      "osmId": 4915836021,
+      "coordinateKind": "point",
+      "name": "Green Karst",
+      "kind": "food",
+      "center": [
+        23.2775633,
+        105.3614094
+      ],
+      "address": "310000",
+      "openingHoursRaw": "Mo-Su 06:30-10:00",
+      "phone": "+84968098619",
+      "website": "https://greenkarst.com/",
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "website": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/4915836021",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-5164311557",
+      "osmType": "node",
+      "osmId": 5164311557,
+      "coordinateKind": "point",
+      "name": "Photutrang",
+      "kind": "cafe",
+      "center": [
+        23.163993,
+        105.409563
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5164311557",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5164311557",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5164311557",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5164311557",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5164311557",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5164311557",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-5255129822",
+      "osmType": "node",
+      "osmId": 5255129822,
+      "coordinateKind": "point",
+      "name": "Bò Thào Duoc",
+      "kind": "food",
+      "center": [
+        23.2788279,
+        105.3615177
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5255129822",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5255129822",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5255129822",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5255129822",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5255129822",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5255129822",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-5668392723",
+      "osmType": "node",
+      "osmId": 5668392723,
+      "coordinateKind": "point",
+      "name": "Quán cà phê vườn tốt nhất",
+      "kind": "cafe",
+      "center": [
+        23.1604767,
+        105.4035192
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5668392723",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5668392723",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5668392723",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5668392723",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5668392723",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5668392723",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-5711391322",
+      "osmType": "node",
+      "osmId": 5711391322,
+      "coordinateKind": "point",
+      "name": "Nam nguyen restorant",
+      "kind": "food",
+      "center": [
+        23.3595858,
+        105.3159957
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5711391322",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5711391322",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5711391322",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5711391322",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5711391322",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5711391322",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-5840877616",
+      "osmType": "node",
+      "osmId": 5840877616,
+      "coordinateKind": "point",
+      "name": "Mrs Tuyen",
+      "kind": "fast_food",
+      "center": [
+        23.1632057,
+        105.4091727
+      ],
+      "address": null,
+      "openingHoursRaw": "Mo-Su 06:00-20:00",
+      "phone": "0976610121",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5840877616",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-5915568185",
+      "osmType": "node",
+      "osmId": 5915568185,
+      "coordinateKind": "point",
+      "name": "Quyèt Hãng",
+      "kind": "fast_food",
+      "center": [
+        23.1638888,
+        105.4092557
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5915568185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5915568185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5915568185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5915568185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5915568185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/5915568185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6056212385",
+      "osmType": "node",
+      "osmId": 6056212385,
+      "coordinateKind": "point",
+      "name": "Hmong Coffee",
+      "kind": "cafe",
+      "center": [
+        23.2779789,
+        105.3604844
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6056212385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6056212385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6056212385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6056212385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6056212385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6056212385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6073738985",
+      "osmType": "node",
+      "osmId": 6073738985,
+      "coordinateKind": "point",
+      "name": "PumpKin",
+      "kind": "food",
+      "center": [
+        23.277591,
+        105.3613914
+      ],
+      "address": "310000",
+      "openingHoursRaw": "24/7",
+      "phone": "+84 94 696 99 96",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6073738985",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6121257886",
+      "osmType": "node",
+      "osmId": 6121257886,
+      "coordinateKind": "point",
+      "name": "Su Su",
+      "kind": "cafe",
+      "center": [
+        23.2915022,
+        105.290953
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6121257886",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6121257886",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6121257886",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6121257886",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6121257886",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6121257886",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6297510745",
+      "osmType": "node",
+      "osmId": 6297510745,
+      "coordinateKind": "point",
+      "name": "Cà Phê Nguyên",
+      "kind": "food",
+      "center": [
+        23.2793053,
+        105.3611828
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6297510745",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6297510745",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6297510745",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6297510745",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6297510745",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6297510745",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6298984712",
+      "osmType": "node",
+      "osmId": 6298984712,
+      "coordinateKind": "point",
+      "name": "Cafe Nguyên",
+      "kind": "food",
+      "center": [
+        23.2788253,
+        105.3613158
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6298984712",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6298984712",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6298984712",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6298984712",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6298984712",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6298984712",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6310552585",
+      "osmType": "node",
+      "osmId": 6310552585,
+      "coordinateKind": "point",
+      "name": "Roma italian restaurant",
+      "kind": "food",
+      "center": [
+        23.2775464,
+        105.3595577
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310552585",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310552585",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310552585",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310552585",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310552585",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310552585",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6310558385",
+      "osmType": "node",
+      "osmId": 6310558385,
+      "coordinateKind": "point",
+      "name": "Pumpkin vietnamese cuisine",
+      "kind": "food",
+      "center": [
+        23.2775535,
+        105.3613948
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310558385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310558385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310558385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310558385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310558385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6310558385",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6318735764",
+      "osmType": "node",
+      "osmId": 6318735764,
+      "coordinateKind": "point",
+      "name": "Bong Restaurant",
+      "kind": "food",
+      "center": [
+        23.277605,
+        105.3614282
+      ],
+      "address": null,
+      "openingHoursRaw": "24/7",
+      "phone": "+84 888 526 606",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6318735764",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6397451922",
+      "osmType": "node",
+      "osmId": 6397451922,
+      "coordinateKind": "point",
+      "name": "Bong",
+      "kind": "food",
+      "center": [
+        23.2772213,
+        105.3651015
+      ],
+      "address": "Dong Van, pho co",
+      "openingHoursRaw": null,
+      "phone": "+84888526606",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451922",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6397451927",
+      "osmType": "node",
+      "osmId": 6397451927,
+      "coordinateKind": "point",
+      "name": "Vannesa Music Coffee Shop",
+      "kind": "cafe",
+      "center": [
+        23.1633359,
+        105.4090171
+      ],
+      "address": null,
+      "openingHoursRaw": "06:00-23:00",
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6397451927",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6424704485",
+      "osmType": "node",
+      "osmId": 6424704485,
+      "coordinateKind": "point",
+      "name": "Hung",
+      "kind": "cafe",
+      "center": [
+        23.2622457,
+        105.2528538
+      ],
+      "address": "Đường cột cờ quốc gia",
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6424704485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6484971686",
+      "osmType": "node",
+      "osmId": 6484971686,
+      "coordinateKind": "point",
+      "name": "Nha Hang 116",
+      "kind": "food",
+      "center": [
+        23.2772279,
+        105.355506
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6484971686",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6484971686",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6484971686",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6484971686",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6484971686",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6484971686",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6512533685",
+      "osmType": "node",
+      "osmId": 6512533685,
+      "coordinateKind": "point",
+      "name": "Tach Ma Restaurant",
+      "kind": "cafe",
+      "center": [
+        23.2625084,
+        105.2523075
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533685",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533685",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533685",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533685",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533685",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533685",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-6512533885",
+      "osmType": "node",
+      "osmId": 6512533885,
+      "coordinateKind": "point",
+      "name": "very good pancakes and fried rice",
+      "kind": "food",
+      "center": [
+        23.2771274,
+        105.355436
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533885",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533885",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533885",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533885",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533885",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/6512533885",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-7057653186",
+      "osmType": "node",
+      "osmId": 7057653186,
+      "coordinateKind": "point",
+      "name": "Thanh Phương",
+      "kind": "food",
+      "center": [
+        23.1648624,
+        105.4081471
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7057653186",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7057653186",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7057653186",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7057653186",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7057653186",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7057653186",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-7185855485",
+      "osmType": "node",
+      "osmId": 7185855485,
+      "coordinateKind": "point",
+      "name": "Nhà Hàng Mă Gia Quán",
+      "kind": "food",
+      "center": [
+        23.2766856,
+        105.3603662
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7185855485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7185855485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7185855485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7185855485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7185855485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7185855485",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-7418418185",
+      "osmType": "node",
+      "osmId": 7418418185,
+      "coordinateKind": "point",
+      "name": "Nhà Ăn Bến Thuyền Tu Sản",
+      "kind": "food",
+      "center": [
+        23.230882,
+        105.4266205
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7418418185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7418418185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7418418185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7418418185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7418418185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7418418185",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-7961606702",
+      "osmType": "node",
+      "osmId": 7961606702,
+      "coordinateKind": "point",
+      "name": "Lẩu Thắng Cố",
+      "kind": "food",
+      "center": [
+        23.2789227,
+        105.3614764
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7961606702",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7961606702",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7961606702",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7961606702",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7961606702",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7961606702",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-7962462659",
+      "osmType": "node",
+      "osmId": 7962462659,
+      "coordinateKind": "point",
+      "name": "Núi Rồng",
+      "kind": "food",
+      "center": [
+        23.3606976,
+        105.3162999
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7962462659",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7962462659",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7962462659",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7962462659",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7962462659",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7962462659",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-node-7972604269",
+      "osmType": "node",
+      "osmId": 7972604269,
+      "coordinateKind": "point",
+      "name": "Tiến Nhị",
+      "kind": "food",
+      "center": [
+        23.2778873,
+        105.3613369
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7972604269",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7972604269",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7972604269",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7972604269",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7972604269",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/7972604269",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-way-1326081090",
+      "osmType": "way",
+      "osmId": 1326081090,
+      "coordinateKind": "center",
+      "name": "Cuc Bac Ethnic Cafe",
+      "kind": "cafe",
+      "center": [
+        23.3644459,
+        105.309532
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/1326081090",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/1326081090",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/1326081090",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/1326081090",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/1326081090",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/1326081090",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ha-giang-way-854829787",
+      "osmType": "way",
+      "osmId": 854829787,
+      "coordinateKind": "center",
+      "name": "Hoa Cương",
+      "kind": "food",
+      "center": [
+        23.278267,
+        105.3632349
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/854829787",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/854829787",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/854829787",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/854829787",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/854829787",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/way/854829787",
+          "snapshotAt": "2026-11-03T02:35:32.151Z",
+          "osmTimestamp": "2026-11-03T02:34:29Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    }
+  ]
+}

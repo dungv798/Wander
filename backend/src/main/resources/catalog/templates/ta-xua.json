@@ -1,0 +1,33 @@
+{
+  "destinationId": "ta-xua",
+  "templates": [
+    {
+      "id": "ta-xua-san-may-2-ngay",
+      "title": "Tà Xùa săn mây 2 ngày 1 đêm",
+      "summary": "Ngày đầu nghỉ chân và chuẩn bị ở Bắc Yên, rạng sáng ngày sau lên Tà Xùa. Thời tiết quyết định có mây hay không; chưa có thời gian leo hay giờ mở cửa đã xác minh.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["bac-yen"],
+          "note": "Xuất phát đến Bắc Yên, nghỉ qua đêm tại khu Bắc Yên hoặc Tà Xùa. Chuẩn bị áo ấm, đèn pin, giày bám tốt. Nhịp nhẹ."
+        },
+        {
+          "places": ["ta-xua"],
+          "note": "Khởi hành rất sớm từ nơi nghỉ; kết thúc quay lại Bắc Yên trong ngày. Đường lên dốc và trơn khi mưa, không nên đi một mình. Phương tiện và thời gian leo chưa xác minh; dựa vào dự báo trước khi đi."
+        }
+      ]
+    },
+    {
+      "id": "moc-chau-1-ngay",
+      "title": "Mộc Châu 1 ngày",
+      "summary": "Một ngày ở cao nguyên Mộc Châu và thác Dải Yếm, hai nơi cách nhau khoảng 6 km chim bay (ước tính). Mộc Châu cách Tà Xùa khoảng 50 km nên đi tách chuyến.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["moc-chau", "thac-dai-yem"],
+          "note": "Xuất phát và kết thúc ở thị trấn Mộc Châu. Phương tiện giả định: xe máy hoặc ô tô. Nhịp nhẹ, 2 điểm; giờ mở cửa và giá chưa xác minh."
+        }
+      ]
+    }
+  ]
+}

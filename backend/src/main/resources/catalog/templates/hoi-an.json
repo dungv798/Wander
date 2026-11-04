@@ -1,0 +1,49 @@
+{
+  "destinationId": "hoi-an",
+  "templates": [
+    {
+      "id": "pho-co-1-ngay",
+      "title": "Phố cổ Hội An 1 ngày thong thả",
+      "summary": "Một ngày đi bộ hoặc đạp xe quanh khu phố cổ: chùa Cầu, hai hội quán và chợ. Chưa có giờ mở cửa hay giá vé; hỏi tại chỗ.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["pho-co-hoi-an", "chua-cau-hoi-an", "hoi-quan-phuc-kien", "hoi-quan-quang-dong", "cho-hoi-an"],
+          "note": "Xuất phát và kết thúc ở khu phố cổ. Phương tiện giả định: đi bộ hoặc xe đạp (các nơi cách nhau khoảng 1 km đường chim bay, ước tính). Nhịp thong thả: 4–5 điểm, nghỉ giữa ngày do bạn chọn."
+        }
+      ]
+    },
+    {
+      "id": "hoi-an-2-ngay",
+      "title": "Hội An 2 ngày: phố cổ và làng quê",
+      "summary": "Ngày đầu ở phố cổ, ngày sau ra các làng quanh Hội An. Khoảng cách là ước tính chim bay, chưa phải thời gian đi đường.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["pho-co-hoi-an", "chua-cau-hoi-an", "hoi-quan-phuc-kien", "hoi-quan-trieu-chau", "cho-hoi-an"],
+          "note": "Xuất phát và kết thúc ở khu phố cổ, đi bộ hoặc xe đạp. Nhịp thong thả, 4–5 điểm."
+        },
+        {
+          "places": ["lang-rau-tra-que", "rung-dua-bay-mau"],
+          "note": "Xuất phát từ phố cổ, về lại phố cổ. Phương tiện giả định: xe đạp hoặc xe máy; Trà Quế cách phố cổ khoảng 3 km, rừng dừa khoảng 5 km (chim bay, ước tính). Nhịp nhẹ: 2 điểm."
+        }
+      ]
+    },
+    {
+      "id": "my-son-cu-lao-cham",
+      "title": "Mỹ Sơn và Cù Lao Chàm, mỗi nơi một ngày",
+      "summary": "Hai chuyến đi xa hơn, mỗi chuyến chiếm cả một ngày. Giờ xe, giờ tàu và thời tiết biển chưa được xác minh: kiểm tra trước khi đi.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["thanh-dia-my-son"],
+          "note": "Xuất phát và về lại Hội An. Mỹ Sơn cách phố cổ khoảng 26 km chim bay (ước tính); phương tiện giả định: xe máy hoặc ô tô. Một điểm trong ngày."
+        },
+        {
+          "places": ["cu-lao-cham"],
+          "note": "Xuất phát từ khu bến Cửa Đại, về lại Hội An trong ngày. Đi bằng tàu; lịch tàu và điều kiện biển chưa xác minh, có thể phải đổi ngày. Một điểm trong ngày."
+        }
+      ]
+    }
+  ]
+}

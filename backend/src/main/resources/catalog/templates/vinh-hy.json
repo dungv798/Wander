@@ -1,0 +1,33 @@
+{
+  "destinationId": "vinh-hy",
+  "templates": [
+    {
+      "id": "vinh-hy-ninh-chu-2-ngay",
+      "title": "Vĩnh Hy, Núi Chúa và Ninh Chữ 2 ngày",
+      "summary": "Ngày đầu ở vùng biển Vĩnh Hy và Núi Chúa, ngày sau xuống Ninh Chữ và tháp Po Klong Garai. Khoảng cách là chim bay (ước tính); chưa có giờ mở cửa hay giá.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["vinh-vinh-hy", "vuon-quoc-gia-nui-chua"],
+          "note": "Xuất phát từ khu Vĩnh Hy, kết thúc tại Vĩnh Hy hoặc quay về Phan Rang tùy nơi ở. Hai điểm cách nhau khoảng 6 km (ước tính); phương tiện giả định: xe máy hoặc ô tô. Nhịp vừa phải, 2 điểm."
+        },
+        {
+          "places": ["bai-bien-ninh-chu", "thap-po-klong-garai"],
+          "note": "Xuất phát từ Phan Rang hoặc Vĩnh Hy (Ninh Chữ cách Vĩnh Hy khoảng 22 km chim bay, ước tính). Hai điểm cách nhau khoảng 11 km. Nhịp nhẹ, 2 điểm."
+        }
+      ]
+    },
+    {
+      "id": "thap-cham-phan-rang",
+      "title": "Ba tháp Chăm quanh Phan Rang 1 ngày",
+      "summary": "Một ngày thăm ba cụm tháp Chăm quanh Phan Rang – Tháp Chàm. Các chặng khoảng 13–27 km chim bay (ước tính); thời gian đi đường chưa xác minh.",
+      "status": "reference",
+      "days": [
+        {
+          "places": ["thap-po-klong-garai", "thap-hoa-lai", "thap-po-rome"],
+          "note": "Xuất phát và kết thúc ở khu Phan Rang – Tháp Chàm. Phương tiện giả định: xe máy hoặc ô tô. Ngày có nhiều đoạn di chuyển, nhịp vừa phải; giờ mở cửa các tháp chưa xác minh."
+        }
+      ]
+    }
+  ]
+}

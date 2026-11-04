@@ -69,6 +69,41 @@
           ]
         }
       ]
+    },
+    {
+      "id": "vong-cung-4-ngay",
+      "title": "Vòng cung Đông Bắc 4 ngày thong thả",
+      "summary": "Chia vòng cung thành bốn ngày, mỗi ngày một cụm, từ Quản Bạ lên Đồng Văn rồi sang Mèo Vạc. Quãng đường giữa các cụm dài và đường núi: thời gian đi chưa xác minh.",
+      "status": "reference",
+      "days": [
+        {
+          "places": [
+            "cong-troi-quan-ba"
+          ],
+          "note": "Xuất phát từ thành phố Hà Giang (khoảng 45 km chim bay tới Quản Bạ, ước tính), nghỉ đêm ở Quản Bạ hoặc Yên Minh. Phương tiện giả định: xe máy hoặc ô tô. Ngày nhẹ để làm quen đường núi."
+        },
+        {
+          "places": [
+            "dinh-vuong",
+            "pho-co-dong-van"
+          ],
+          "note": "Xuất phát từ nơi nghỉ, kết thúc ở Đồng Văn. Hai điểm cách nhau khoảng 18 km chim bay (ước tính). Nhịp vừa phải, 2 điểm."
+        },
+        {
+          "places": [
+            "cao-nguyen-da",
+            "cot-co-lung-cu"
+          ],
+          "note": "Xuất phát và kết thúc ở Đồng Văn. Cột cờ Lũng Cú cách Đồng Văn khoảng 25 km chim bay (ước tính). Nhịp vừa phải, 2 điểm."
+        },
+        {
+          "places": [
+            "deo-ma-pi-leng",
+            "song-nho-que"
+          ],
+          "note": "Xuất phát từ Đồng Văn hoặc Mèo Vạc, kết thúc ở Mèo Vạc. Đoạn đèo hẹp, thời tiết thay đổi; thời gian đi và lịch thuyền sông Nho Quế chưa xác minh."
+        }
+      ]
     }
   ]
 }

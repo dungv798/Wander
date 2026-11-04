@@ -619,5 +619,25 @@
       ],
       "wikipediaTitle": "Chợ Hàn"
     }
+  ],
+  "moments": [
+    {
+      "id": "cho-1",
+      "theme": "cho",
+      "caption": "Chợ Con ở Đà Nẵng",
+      "file": "da-nang-moment-cho-1.jpg",
+      "author": "Christopher Crouzet",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/25338288@N05/15020501734"
+    },
+    {
+      "id": "mon-an-2",
+      "theme": "mon-an",
+      "caption": "Món ăn ở Đà Nẵng",
+      "file": "da-nang-moment-mon-an-2.jpg",
+      "author": "JingKe888",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://www.flickr.com/photos/96214671@N08/25977412085"
+    }
   ]
 }

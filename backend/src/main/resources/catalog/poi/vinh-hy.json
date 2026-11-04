@@ -1,0 +1,118 @@
+{
+  "destinationId": "vinh-hy",
+  "center": [
+    11.7,
+    109.2
+  ],
+  "radiusM": 15000,
+  "snapshotAt": "2026-11-03T02:29:59.701Z",
+  "osmTimestamp": "2026-11-03T02:28:24Z",
+  "sourceBbox": "around:15000,11.7,109.2",
+  "notice": "Dữ liệu snapshot OSM chưa xác minh hiện trạng hoặc giờ hoạt động; không phải danh sách Discover đã duyệt.",
+  "statistics": {
+    "before": 7,
+    "named": 1,
+    "removedUnnamed": 6,
+    "mergedDuplicates": 0,
+    "after": 1,
+    "beforeByKind": {
+      "food": 4,
+      "cafe": 3,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    },
+    "namedByKind": {
+      "food": 0,
+      "cafe": 1,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    },
+    "afterByKind": {
+      "food": 0,
+      "cafe": 1,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    }
+  },
+  "pois": [
+    {
+      "id": "poi-vinh-hy-node-10744549784",
+      "osmType": "node",
+      "osmId": 10744549784,
+      "coordinateKind": "point",
+      "name": "Coconut Street Cafe",
+      "kind": "cafe",
+      "center": [
+        11.7655882,
+        109.2132372
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/10744549784",
+          "snapshotAt": "2026-11-03T02:29:59.701Z",
+          "osmTimestamp": "2026-11-03T02:28:24Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/10744549784",
+          "snapshotAt": "2026-11-03T02:29:59.701Z",
+          "osmTimestamp": "2026-11-03T02:28:24Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/10744549784",
+          "snapshotAt": "2026-11-03T02:29:59.701Z",
+          "osmTimestamp": "2026-11-03T02:28:24Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/10744549784",
+          "snapshotAt": "2026-11-03T02:29:59.701Z",
+          "osmTimestamp": "2026-11-03T02:28:24Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/10744549784",
+          "snapshotAt": "2026-11-03T02:29:59.701Z",
+          "osmTimestamp": "2026-11-03T02:28:24Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/10744549784",
+          "snapshotAt": "2026-11-03T02:29:59.701Z",
+          "osmTimestamp": "2026-11-03T02:28:24Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    }
+  ]
+}

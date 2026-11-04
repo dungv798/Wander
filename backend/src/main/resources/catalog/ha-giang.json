@@ -557,6 +557,24 @@
           "author": "Benjamin Smith",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_2.jpg"
+        },
+        {
+          "file": "cao-nguyen-da-4.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_%C4%91%C3%A1_m%E1%BA%B7t_tr%C4%83ng_%C4%90%E1%BB%93ng_V%C4%83n_-_NKS.jpg"
+        },
+        {
+          "file": "cao-nguyen-da-5.jpg",
+          "author": "Hoangvantoanajc",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_nguy%C3%AAn_%C4%91%C3%A1.JPG"
+        },
+        {
+          "file": "cao-nguyen-da-6.jpg",
+          "author": "BacLuong at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:SaPhin_HaGiang_Vietnam.JPG"
         }
       ],
       "wikipediaTitle": "Cao nguyên đá Đồng Văn"
@@ -716,6 +734,391 @@
         }
       ],
       "wikipediaTitle": "Tây Côn Lĩnh"
+    },
+    {
+      "id": "nui-co-tien",
+      "name": "Núi Cô Tiên",
+      "category": "canh",
+      "area": "Quản Bạ",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Quản Bạ.",
+      "summary": "",
+      "lat": 23.059,
+      "lon": 104.99736,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [
+        {
+          "file": "nui-co-tien-1.jpg",
+          "author": "Sketyl none",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:N%C3%BAi_C%C3%B4_Ti%C3%AAn,_Qu%E1%BA%A3n_B%E1%BA%A1_(47742798901).jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "cot-moc-km0-ha-giang",
+      "name": "Cột mốc Km0 Hà Giang",
+      "category": "van",
+      "area": "Thành phố Hà Giang",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Thành phố Hà Giang.",
+      "summary": "",
+      "lat": 22.82733,
+      "lon": 104.98417,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [
+        {
+          "file": "cot-moc-km0-ha-giang-1.jpg",
+          "author": "HuangWending18072009",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milestone_0_in_Ha_Giang_Province.jpg"
+        },
+        {
+          "file": "cot-moc-km0-ha-giang-2.jpg",
+          "author": "Vuong Tri Binh",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ha_Giang_Km0_in_2014_02.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "cho-ha-giang",
+      "name": "Chợ Hà Giang",
+      "category": "cho",
+      "area": "Thành phố Hà Giang",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Thành phố Hà Giang.",
+      "summary": "",
+      "lat": 22.83251,
+      "lon": 104.98599,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "lang-van-hoa-lung-cam",
+      "name": "Làng văn hóa Lũng Cẩm",
+      "category": "van",
+      "area": "Lũng Cẩm",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Lũng Cẩm.",
+      "summary": "",
+      "lat": 23.22562,
+      "lon": 105.20356,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [
+        {
+          "file": "lang-van-hoa-lung-cam-1.jpg",
+          "author": "Vuong Tri Binh",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lungcam_cultural_tourist_village_farms_in_2014.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "rung-da-lung-tao",
+      "name": "Rừng đá Lũng Táo",
+      "category": "canh",
+      "area": "Sà Phìn – Lũng Táo",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Sà Phìn – Lũng Táo.",
+      "summary": "",
+      "lat": 23.28862,
+      "lon": 105.27593,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "hoang-mac-da-xa-phin",
+      "name": "Hoang mạc đá vôi Xà Phìn",
+      "category": "canh",
+      "area": "Sà Phìn – Lũng Táo",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Sà Phìn – Lũng Táo.",
+      "summary": "",
+      "lat": 23.26086,
+      "lon": 105.25697,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "phao-dai-don-cao",
+      "name": "Pháo đài Đồn Cao",
+      "category": "van",
+      "area": "Đồng Văn",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Đồng Văn.",
+      "summary": "",
+      "lat": 23.28024,
+      "lon": 105.36165,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "bao-tang-geopark-dong-van",
+      "name": "Bảo tàng Geopark (Đồng Văn)",
+      "category": "van",
+      "area": "Đồng Văn",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Đồng Văn.",
+      "summary": "",
+      "lat": 23.27584,
+      "lon": 105.34263,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "doc-tham-ma",
+      "name": "Dốc Thẩm Mã",
+      "category": "canh",
+      "area": "Phố Cáo – Phố Bảng",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Phố Cáo – Phố Bảng.",
+      "summary": "",
+      "lat": 23.16892,
+      "lon": 105.19415,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [
+        {
+          "file": "doc-tham-ma-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%E1%BB%91c_Th%E1%BA%A9m_M%C3%A3_2022_-_NKS.jpg"
+        },
+        {
+          "file": "doc-tham-ma-2.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tham_Ma_pass_-_Dong_Van.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "doc-chin-khoanh",
+      "name": "Dốc Chín Khoanh",
+      "category": "canh",
+      "area": "Phố Cáo – Phố Bảng",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Phố Cáo – Phố Bảng.",
+      "summary": "",
+      "lat": 23.20986,
+      "lon": 105.19517,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "cho-pho-bang",
+      "name": "Chợ Phó Bảng",
+      "category": "cho",
+      "area": "Phố Bảng",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Phố Bảng.",
+      "summary": "",
+      "lat": 23.25801,
+      "lon": 105.18423,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "vuon-quoc-gia-du-gia",
+      "name": "Vườn quốc gia Du Già",
+      "category": "canh",
+      "area": "Du Già",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Du Già.",
+      "summary": "",
+      "lat": 22.89931,
+      "lon": 105.14958,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "cho-meo-vac",
+      "name": "Chợ trung tâm Mèo Vạc",
+      "category": "cho",
+      "area": "Mèo Vạc",
+      "hook": "Địa điểm ghi trên OpenStreetMap, khu vực Mèo Vạc.",
+      "summary": "",
+      "lat": 23.1645,
+      "lon": 105.40874,
+      "bestMonths": [
+        9,
+        10,
+        11
+      ],
+      "bestLabel": "Tháng 9–11",
+      "duration": "Chưa rõ",
+      "difficulty": "Chưa rõ",
+      "highlights": [],
+      "verdict": "ifconv",
+      "verdictReason": "Thông tin tham khảo từ OpenStreetMap; Wander chưa đánh giá nơi này.",
+      "bestSlots": [],
+      "slotReason": "Chưa có thông tin buổi nên đi.",
+      "tips": [],
+      "photos": [
+        {
+          "file": "cho-meo-vac-1.jpg",
+          "author": "HuangWending18072009",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Meo_Vac_Center_Market.jpg"
+        }
+      ],
+      "wikipediaTitle": null
     }
   ]
 }

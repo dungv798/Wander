@@ -1,0 +1,476 @@
+{
+  "destinationId": "ta-xua",
+  "center": [
+    21.3,
+    104.4
+  ],
+  "radiusM": 15000,
+  "snapshotAt": "2026-11-03T02:18:40.850Z",
+  "osmTimestamp": "2026-11-03T02:17:18Z",
+  "sourceBbox": "around:15000,21.3,104.4",
+  "notice": "Dữ liệu snapshot OSM chưa xác minh hiện trạng hoặc giờ hoạt động; không phải danh sách Discover đã duyệt.",
+  "statistics": {
+    "before": 5,
+    "named": 5,
+    "removedUnnamed": 0,
+    "mergedDuplicates": 0,
+    "after": 5,
+    "beforeByKind": {
+      "food": 0,
+      "cafe": 5,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    },
+    "namedByKind": {
+      "food": 0,
+      "cafe": 5,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    },
+    "afterByKind": {
+      "food": 0,
+      "cafe": 5,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    }
+  },
+  "pois": [
+    {
+      "id": "poi-ta-xua-node-11736308140",
+      "osmType": "node",
+      "osmId": 11736308140,
+      "coordinateKind": "point",
+      "name": "Tiệm Cà Phê Mị Ơi",
+      "kind": "cafe",
+      "center": [
+        21.2881999,
+        104.4156393
+      ],
+      "address": "Bắc Yên, 36000, Sơn La, Đường tỉnh 112, Tà Xùa, Tà Xùa",
+      "openingHoursRaw": "24/7",
+      "phone": "84383484444",
+      "website": "https://www.facebook.com/tiemcaphemioi",
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "address": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "website": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/11736308140",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ta-xua-node-13176580891",
+      "osmType": "node",
+      "osmId": 13176580891,
+      "coordinateKind": "point",
+      "name": "Ta Sua's Stories - Coffee and Workshop",
+      "kind": "cafe",
+      "center": [
+        21.308588,
+        104.4301882
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": "+84 367094786",
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "phone": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176580891",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ta-xua-node-13176582623",
+      "osmType": "node",
+      "osmId": 13176582623,
+      "coordinateKind": "point",
+      "name": "RUONG Cafe Ta Xua",
+      "kind": "cafe",
+      "center": [
+        21.3050267,
+        104.4284743
+      ],
+      "address": null,
+      "openingHoursRaw": "24/7",
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "RAW",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "openingHoursRaw": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13176582623",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ta-xua-node-13724983001",
+      "osmType": "node",
+      "osmId": 13724983001,
+      "coordinateKind": "point",
+      "name": "Đỉnh Gió - Tà Xùa - Homestay, Cafe & More",
+      "kind": "cafe",
+      "center": [
+        21.2884796,
+        104.415625
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983001",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983001",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983001",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983001",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983001",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983001",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    },
+    {
+      "id": "poi-ta-xua-node-13724983101",
+      "osmType": "node",
+      "osmId": 13724983101,
+      "coordinateKind": "point",
+      "name": "Thào Coffee Tà Xùa",
+      "kind": "cafe",
+      "center": [
+        21.2778895,
+        104.4331195
+      ],
+      "address": null,
+      "openingHoursRaw": null,
+      "phone": null,
+      "website": null,
+      "wikidataId": null,
+      "openingHoursStatus": "UNKNOWN",
+      "verificationStatus": "SNAPSHOT_UNVERIFIED",
+      "provenance": {
+        "osmType": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983101",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "osmId": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983101",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "coordinateKind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983101",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "name": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983101",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "kind": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983101",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        },
+        "center": {
+          "sourceKind": "OSM",
+          "sourceUrl": "https://www.openstreetmap.org/node/13724983101",
+          "snapshotAt": "2026-11-03T02:18:40.850Z",
+          "osmTimestamp": "2026-11-03T02:17:18Z",
+          "license": "ODbL-1.0",
+          "licenseUrl": "https://www.openstreetmap.org/copyright",
+          "attribution": "© OpenStreetMap contributors"
+        }
+      },
+      "mergedFrom": []
+    }
+  ]
+}
