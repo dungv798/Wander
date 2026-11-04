@@ -1,0 +1,27 @@
+[
+ {
+  "theme": "cho",
+  "label": "Chợ & phố",
+  "candidates": []
+ },
+ {
+  "theme": "mon-an",
+  "label": "Món ăn",
+  "candidates": []
+ },
+ {
+  "theme": "nguoi",
+  "label": "Con người",
+  "candidates": []
+ },
+ {
+  "theme": "le-hoi",
+  "label": "Lễ hội & văn hóa",
+  "candidates": []
+ },
+ {
+  "theme": "nghe",
+  "label": "Nghề & đời sống",
+  "candidates": []
+ }
+]

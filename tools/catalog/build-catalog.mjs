@@ -44,6 +44,16 @@ function previousSources() {
 }
 const PREVIOUS = previousSources();
 
+/** Địa điểm của lần dựng trước theo mã (DR-033): ảnh đã tuyển và địa điểm đã có KHÔNG bị ghi đè hay làm mất khi dựng lại. */
+function previousPlaces() {
+  try {
+    return new Map(JSON.parse(fs.readFileSync(path.join(OUT_DIR, `${DEST}.json`), 'utf8')).places.map((p) => [p.id, p]));
+  } catch {
+    return new Map();
+  }
+}
+const OLD_PLACES = previousPlaces();
+
 /** Giá trị mặc định theo loại địa điểm cho trường biên tập không ghi trong seed (buổi nên đi, lý do, mẹo chung). */
 const DEFAULTS = {
   canh: { slots: ['sang', 'chieu'], slotReason: 'Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.', tips: ['Mang nước, mũ nón và kem chống nắng.', 'Xem dự báo thời tiết trước khi đi.'] },
@@ -222,10 +232,8 @@ async function photosFor(id, page, wd, lat, lon, keep) {
     const have = new Set(picks.map((p) => p.title));
     picks = picks.concat((await usableImages(await commonsCategory(wd.category))).filter((p) => !have.has(p.title)));
   }
-  if (picks.length < 2 && lat != null && lon != null) {
-    const have = new Set(picks.map((p) => p.title));
-    picks = picks.concat((await usableImages(await commonsNear(lat, lon))).filter((p) => !have.has(p.title)));
-  }
+  // Không tự gắn ảnh "gần tọa độ" (DR-033): ảnh chụp gần một điểm chưa chắc là ảnh của chính điểm đó. Ảnh theo tọa độ chỉ là ứng viên
+  // trong photo-pipeline.mjs, phải được xem và duyệt.
   picks = [...new Map(picks.map((pick) => [pick.source, pick])).values()]; // cùng một tệp Commons có thể đến từ nhiều nguồn
   // người biên tập đã xem từng ảnh: chỉ giữ các vị trí (từ 1) được duyệt; [] nghĩa là không ảnh nào đạt nên bỏ địa điểm
   if (keep) picks = keep.map((n) => picks[n - 1]).filter(Boolean);
@@ -304,7 +312,27 @@ async function resolvePage(seed, ref) {
     const coord = pageCoord(page, wd) ?? (await overpassCoord(label, ref));
     if (coord && km(coord, ref) <= radiusOf(ref)) return { page, wd, coord };
   }
-  return resolveViaWikidata(label.replace(/\s*\(.*\)/, ''), ref);
+  const viaWikidata = await resolveViaWikidata(label.replace(/\s*\(.*\)/, ''), ref);
+  if (viaWikidata) return viaWikidata;
+  // Tên OSM khác tên biên tập (thường là tiếng Anh hoặc không dấu): seed khai báo osmAliases theo mã địa điểm.
+  const names = [label.replace(/\s*\(.*\)/, ''), ...(ref.osmAliases?.[seed.id] ?? [])];
+  const osm = names.map((n) => osmProbeCoord(n, ref)).find(Boolean);
+  return osm ? { page: { title: label.replace(/\s*\(.*\)/, ''), extract: '', lat: null, lon: null, lead: null, images: [], qid: null, noWikipedia: true }, wd: { images: [], category: null }, coord: osm } : null;
+}
+
+/** Ứng viên OSM đã khảo sát (probe-osm-candidates.mjs, ODbL); nguồn tọa độ cho nơi không có bài Wikipedia (DR-033, D-A). Vị trí = OSM_UNVERIFIED. */
+const OSM_PROBE = (() => {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/research/osm-candidates', `${DEST}.json`), 'utf8')).places;
+  } catch {
+    return [];
+  }
+})();
+
+/** Tọa độ từ ứng viên OSM có tên giống `label` (giống đủ từ), gần mốc điểm đến nhất; null nếu không có. */
+function osmProbeCoord(label, ref) {
+  const hits = OSM_PROBE.filter((p) => similar(p.name, label, 0.75) && km(p, ref) <= radiusOf(ref)).sort((a, b) => km(a, ref) - km(b, ref));
+  return hits[0] ? { lat: hits[0].lat, lon: hits[0].lon, from: 'osm-probe' } : null;
 }
 
 /** Bán kính (km) quanh điểm đến mà địa điểm phải nằm trong: riêng từng điểm đến (seed.radiusKm) hoặc mặc định. */
@@ -352,9 +380,12 @@ async function buildPlace(seed, ref) {
   if (!found) return console.log(`  ✗ ${seed.id}: không tìm được bài Wikipedia khớp "${seed.wiki}" có tọa độ gần điểm đến`);
   const { page, wd, coord } = found;
   const { lat, lon } = coord;
-  const photos = await photosFor(seed.id, page, wd, lat, lon, seed.keepPhotos);
-  if (!photos.length) return console.log(`  ✗ ${seed.id}: bài "${page.title}" không có ảnh giấy phép mở`);
-  console.log(`  ✓ ${seed.id}: "${page.title}", ${photos.length} ảnh, tọa độ ${coord.from}`);
+  // Tách dựng địa điểm khỏi tìm ảnh (DR-033): ảnh đã có trong catalog được giữ nguyên; chưa có thì thử tìm; vẫn không có thì nhập địa điểm
+  // với photos rỗng (đã đủ tọa độ) và để pipeline ảnh (photo-pipeline.mjs) bổ sung sau.
+  const kept = OLD_PLACES.get(seed.id)?.photos ?? [];
+  const osmOnly = coord.from === 'osm-probe' || coord.from === 'osm';
+  const photos = kept.length ? kept : osmOnly ? [] : await photosFor(seed.id, page, wd, lat, lon, seed.keepPhotos);
+  console.log(`  ✓ ${seed.id}: "${page.title}", ${photos.length ? `${photos.length} ảnh${kept.length ? ' (giữ ảnh đã tuyển)' : ''}` : 'CHƯA có ảnh (pipeline ảnh sẽ bổ sung)'}, tọa độ ${coord.from}`);
   return {
     id: seed.id, name: seed.name ?? page.title, category: seed.cat, area: seed.area, hook: seed.hook, summary: seed.summary ?? clip(page.extract),
     lat, lon, bestMonths: seed.months, bestLabel: monthLabel(seed.months), duration: seed.duration, difficulty: seed.difficulty ?? DEFAULT_DIFFICULTY,
@@ -372,16 +403,26 @@ async function main() {
   const places = [];
   for (const s of seed.places) {
     try {
-      const p = await buildPlace(s, { dest: seed.name, radiusKm: seed.radiusKm, ...seed.references[0] });
+      const p = await buildPlace(s, { dest: seed.name, radiusKm: seed.radiusKm, osmAliases: seed.osmAliases, ...seed.references[0] });
       if (p) places.push(p);
     } catch (e) {
       console.log(`  ✗ ${s.id}: lỗi khi dựng (${String(e.message).slice(0, 90)})`);
     }
   }
+  // Địa điểm đã có ở lần dựng trước nhưng lần này không dựng lại được thì GIỮ NGUYÊN (không để dựng lại làm mất dữ liệu).
+  for (const [id, old] of OLD_PLACES) {
+    if (!places.some((p) => p.id === id)) {
+      places.push(old);
+      console.log(`  = ${id}: giữ bản đã có trong catalog (lần này không dựng lại được)`);
+    }
+  }
   if (!places.length) throw new Error('không dựng được địa điểm nào');
-  if (!places.some((p) => p.id === seed.coverPlaceId)) {
-    console.log(`  ! địa điểm bìa "${seed.coverPlaceId}" không dựng được, tạm dùng "${places[0].id}" (sửa coverPlaceId trong seed)`);
-    seed.coverPlaceId = places[0].id;
+  const coverOk = places.some((p) => p.id === seed.coverPlaceId && p.photos.length);
+  if (!coverOk) {
+    const fallback = places.find((p) => p.photos.length);
+    if (!fallback) throw new Error('không địa điểm nào có ảnh để làm bìa điểm đến');
+    console.log(`  ! địa điểm bìa "${seed.coverPlaceId}" không có ảnh, tạm dùng "${fallback.id}" (sửa coverPlaceId trong seed)`);
+    seed.coverPlaceId = fallback.id;
   }
   const guide = [
     { id: 'mua', layout: 'MONTHS', category: 'canh', icon: 'calendar-event', title: 'Mùa nên đi', summary: seed.season.summary, bestMonths: seed.season.best, rainyMonths: seed.season.rainy, notes: seed.season.notes, items: [] },

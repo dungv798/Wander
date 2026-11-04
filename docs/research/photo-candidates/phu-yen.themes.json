@@ -1,0 +1,67 @@
+[
+ {
+  "theme": "cho",
+  "label": "Chợ & phố",
+  "candidates": []
+ },
+ {
+  "theme": "mon-an",
+  "label": "Món ăn",
+  "candidates": []
+ },
+ {
+  "theme": "nguoi",
+  "label": "Con người",
+  "candidates": [
+   {
+    "id": "f816e645-471f-4bb3-b4fb-cc189b7a9575",
+    "theme": "nguoi",
+    "title": "Woman's costume, Cham Hroi, Phu Yen province, view 1 - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05155",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Woman%27s_costume%2C_Cham_Hroi%2C_Phu_Yen_province%2C_view_1_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05155.JPG",
+    "thumb": "https://api.openverse.org/v1/images/f816e645-471f-4bb3-b4fb-cc189b7a9575/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082010",
+    "width": 2425,
+    "height": 4871,
+    "source": "wikimedia"
+   },
+   {
+    "id": "4674e278-ed99-4d13-96b2-e822f8727f90",
+    "theme": "nguoi",
+    "title": "Woman's costume, Cham Hroi, Phu Yen province, view 2 - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05157",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Woman%27s_costume%2C_Cham_Hroi%2C_Phu_Yen_province%2C_view_2_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05157.JPG",
+    "thumb": "https://api.openverse.org/v1/images/4674e278-ed99-4d13-96b2-e822f8727f90/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082026",
+    "width": 3648,
+    "height": 5472,
+    "source": "wikimedia"
+   },
+   {
+    "id": "77163884-2821-454d-822c-473280ca2ec5",
+    "theme": "nguoi",
+    "title": "Royal Australian Air Force Members with Pacific Partnership 2022 Perform Dental Operation in Phu Yen 220622-N-AU520-2043",
+    "creator": "NavyMedicine",
+    "license": "CC PDM 1.0",
+    "url": "https://live.staticflickr.com/65535/52170305055_d4d7db6577_b.jpg",
+    "thumb": "https://api.openverse.org/v1/images/77163884-2821-454d-822c-473280ca2ec5/thumb/",
+    "landing": "https://www.flickr.com/photos/61270229@N05/52170305055",
+    "width": 1024,
+    "height": 682,
+    "source": "flickr"
+   }
+  ]
+ },
+ {
+  "theme": "le-hoi",
+  "label": "Lễ hội & văn hóa",
+  "candidates": []
+ },
+ {
+  "theme": "nghe",
+  "label": "Nghề & đời sống",
+  "candidates": []
+ }
+]

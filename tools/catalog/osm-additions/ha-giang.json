@@ -1,0 +1,15 @@
+[
+  { "id": "nui-co-tien", "osm": "nui Co Tien", "name": "Núi Cô Tiên", "cat": "canh", "area": "Quản Bạ" },
+  { "id": "cot-moc-km0-ha-giang", "osm": "Km0 Hà Giang", "name": "Cột mốc Km0 Hà Giang", "cat": "van", "area": "Thành phố Hà Giang" },
+  { "id": "cho-ha-giang", "osm": "Chợ Hà Giang", "name": "Chợ Hà Giang", "cat": "cho", "area": "Thành phố Hà Giang" },
+  { "id": "lang-van-hoa-lung-cam", "osm": "Lung Cam Cultural Village", "name": "Làng văn hóa Lũng Cẩm", "cat": "van", "area": "Lũng Cẩm" },
+  { "id": "rung-da-lung-tao", "osm": "Rừng đá Lũng Táo", "name": "Rừng đá Lũng Táo", "cat": "canh", "area": "Sà Phìn – Lũng Táo" },
+  { "id": "hoang-mac-da-xa-phin", "osm": "Hoang mạc Đá vôi Xà Phìn", "name": "Hoang mạc đá vôi Xà Phìn", "cat": "canh", "area": "Sà Phìn – Lũng Táo" },
+  { "id": "phao-dai-don-cao", "osm": "Pháo đài Đồn Cao", "name": "Pháo đài Đồn Cao", "cat": "van", "area": "Đồng Văn" },
+  { "id": "bao-tang-geopark-dong-van", "osm": "Geopark museum", "name": "Bảo tàng Geopark (Đồng Văn)", "cat": "van", "area": "Đồng Văn", "note": "Tên lấy nguyên từ OSM (Geopark museum), chưa đối chiếu tên chính thức." },
+  { "id": "doc-tham-ma", "osm": "Dốc Thẩm Mã", "name": "Dốc Thẩm Mã", "cat": "canh", "area": "Phố Cáo – Phố Bảng" },
+  { "id": "doc-chin-khoanh", "osm": "Dốc Chín Khoanh", "name": "Dốc Chín Khoanh", "cat": "canh", "area": "Phố Cáo – Phố Bảng" },
+  { "id": "cho-pho-bang", "osm": "Chợ Phó Bảng", "name": "Chợ Phó Bảng", "cat": "cho", "area": "Phố Bảng" },
+  { "id": "vuon-quoc-gia-du-gia", "osm": "Vườn quốc gia Du Già - Cao nguyên đá Đồng Văn", "name": "Vườn quốc gia Du Già", "cat": "canh", "area": "Du Già" },
+  { "id": "cho-meo-vac", "osm": "Chợ trung tâm huyện Mèo Vạc", "name": "Chợ trung tâm Mèo Vạc", "cat": "cho", "area": "Mèo Vạc" }
+]

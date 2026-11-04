@@ -4,9 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const EARTH_RADIUS_M = 6_371_000;
 const DEDUPE_RADIUS_M = 50;
-const DESTINATION_ID = 'da-lat';
-const DESTINATION_CENTER = [11.9404, 108.4583];
-const DESTINATION_RADIUS_M = 15_000;
+/** Cấu hình mặc định (Đà Lạt); điểm đến khác truyền `config` riêng (DR-033). Bán kính tối đa của backend là 15 km. */
+export const DEFAULT_POI_CONFIG = { destinationId: 'da-lat', center: [11.9404, 108.4583], radiusM: 15_000 };
 const KINDS = ['food', 'cafe', 'fast_food', 'bar', 'other'];
 const KIND_MAP = { restaurant: 'food', cafe: 'cafe', fast_food: 'fast_food', bar: 'bar', pub: 'bar' };
 const INPUT = new URL('../../docs/research/da-lat-poi-trial/pois.json', import.meta.url);
@@ -27,12 +26,12 @@ function normalizedName(name) {
 }
 
 /** Kiểm tra nguồn và tọa độ trước khi dựng tài nguyên; dữ liệu sai làm lệnh thất bại. */
-function requireSource(poi, seen) {
+function requireSource(poi, seen, config) {
   if (!/^(node|way|relation)\/[1-9]\d*$/u.test(poi.id) || seen.has(poi.id)) throw new Error(`Nguồn OSM sai hoặc lặp: ${poi.id}`);
   seen.add(poi.id);
   const coords = [poi.lat, poi.lon];
   if (!coords.every(Number.isFinite) || Math.abs(poi.lat) > 90 || Math.abs(poi.lon) > 180) throw new Error(`Tọa độ sai: ${poi.id}`);
-  if (distanceMeters(DESTINATION_CENTER, coords) > DESTINATION_RADIUS_M) throw new Error(`Ngoài bán kính điểm đến: ${poi.id}`);
+  if (distanceMeters(config.center, coords) > config.radiusM) throw new Error(`Ngoài bán kính điểm đến: ${poi.id}`);
   if (!['point', 'polygon-center'].includes(poi.coordinateKind)) throw new Error(`Kiểu tọa độ sai: ${poi.id}`);
 }
 
@@ -49,7 +48,7 @@ function sourceReference(poi) {
 }
 
 /** Dựng bản ghi từ nguồn được giữ; không gán ảnh, rating hoặc giờ tự suy diễn. */
-function toRecord(poi, merged, snapshot) {
+function toRecord(poi, merged, snapshot, config) {
   const ref = sourceReference(poi);
   const tags = poi.tags;
   const addressTags = Object.keys(tags).filter(key => key.startsWith('addr:') && tags[key]?.trim()).sort();
@@ -63,20 +62,20 @@ function toRecord(poi, merged, snapshot) {
   };
   const evidence = { sourceKind: 'OSM', sourceUrl: ref.sourceUrl, snapshotAt: snapshot.fetchedAt,
     osmTimestamp: snapshot.osmTimestamp, license: snapshot.license, licenseUrl: snapshot.licenseUrl, attribution: snapshot.attribution };
-  return { id: `poi-${DESTINATION_ID}-${ref.osmType}-${ref.osmId}`, ...facts,
+  return { id: `poi-${config.destinationId}-${ref.osmType}-${ref.osmId}`, ...facts,
     openingHoursStatus: raw === null ? 'UNKNOWN' : 'RAW', verificationStatus: 'SNAPSHOT_UNVERIFIED',
     provenance: Object.fromEntries(Object.entries(facts).filter(([, value]) => value !== null).map(([field]) => [field, { ...evidence }])),
     mergedFrom: merged.map(sourceReference) };
 }
 
 /** Dựng batch cố định từ snapshot; tie-break theo khóa nguồn, không phụ thuộc thứ tự đầu vào. */
-export function buildPoi(snapshot) {
+export function buildPoi(snapshot, config = DEFAULT_POI_CONFIG) {
   if (!snapshot.fetchedAt || !snapshot.osmTimestamp || snapshot.license !== 'ODbL-1.0' || !snapshot.attribution || !snapshot.licenseUrl) {
     throw new Error('Snapshot thiếu ngày hoặc giấy phép/ghi công');
   }
   const seen = new Set();
   const named = snapshot.pois.filter(poi => typeof poi.name === 'string' && poi.name.trim());
-  named.forEach(poi => requireSource(poi, seen));
+  named.forEach(poi => requireSource(poi, seen, config));
   named.sort((a, b) => Object.keys(b.tags).length - Object.keys(a.tags).length || a.id.localeCompare(b.id, 'en'));
   const retained = [];
   for (const poi of named) {
@@ -85,9 +84,9 @@ export function buildPoi(snapshot) {
     if (duplicate) duplicate.merged.push(poi);
     else retained.push({ poi, merged: [] });
   }
-  const pois = retained.map(({ poi, merged }) => toRecord(poi, merged, snapshot)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  const pois = retained.map(({ poi, merged }) => toRecord(poi, merged, snapshot, config)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
   return {
-    destinationId: DESTINATION_ID, center: DESTINATION_CENTER, radiusM: DESTINATION_RADIUS_M,
+    destinationId: config.destinationId, center: config.center, radiusM: config.radiusM,
     snapshotAt: snapshot.fetchedAt, osmTimestamp: snapshot.osmTimestamp, sourceBbox: snapshot.bbox,
     notice: 'Dữ liệu snapshot OSM chưa xác minh hiện trạng hoặc giờ hoạt động; không phải danh sách Discover đã duyệt.',
     statistics: { before: snapshot.pois.length, named: named.length, removedUnnamed: snapshot.pois.length - named.length,

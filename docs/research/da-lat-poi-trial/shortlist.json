@@ -1,0 +1,479 @@
+[
+  {
+    "title": "File:Đà Lạt th6n2022 (WoodStock Coffee, nội thất gỗ) (10).jpg",
+    "venue": "WoodStock Coffee",
+    "use": "Ảnh không gian đề xuất",
+    "reason": "Đã xem ảnh: không gian gỗ ấm, rõ bàn ghế, bố cục có chiều sâu. Ảnh dọc; cần kiểm crop nếu dùng thẻ ngang. Một số vùng sáng gắt.",
+    "osmCandidateIds": [
+      "node/5980607285"
+    ],
+    "locationStatus": "Tên OSM Wood stock gần giống; chưa xác minh là cùng cơ sở. Ảnh chụp năm 2022 theo tên tệp.",
+    "photo": {
+      "title": "File:Đà Lạt th6n2022 (WoodStock Coffee, nội thất gỗ) (10).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_(WoodStock_Coffee,_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97)_(10).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_%28WoodStock_Coffee%2C_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97%29_%2810%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "previewUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_%28WoodStock_Coffee%2C_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97%29_%2810%29.jpg/1280px-%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_%28WoodStock_Coffee%2C_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97%29_%2810%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 3024,
+      "height": 4032,
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "author": "Phương Huy",
+      "credit": "Own work",
+      "description": "WoodStock Coffee",
+      "query": "Category:WoodStock Coffee",
+      "linkedOsmId": null,
+      "matchStatus": "search-candidate-not-confirmed",
+      "technicalScore": 17.192768,
+      "rawMetadata": {
+        "DateTime": {
+          "value": "2022-11-27 11:51:29",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Đà Lạt th6n2022 (WoodStock Coffee, nội thất gỗ) (10)",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Decorative and applied arts of Vietnam|WoodStock Coffee",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "WoodStock Coffee",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2022-06-24 12:50:18",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ph%C6%B0%C6%A1ng_Huy\" title=\"User:Phương Huy\">Phương Huy</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "localFile": "photos/candidate-0f8cbcfd85fc.jpg"
+    },
+    "osmCandidates": [
+      {
+        "id": "node/5980607285",
+        "sourceUrl": "https://www.openstreetmap.org/node/5980607285",
+        "name": "Wood stock",
+        "category": "cafe",
+        "lat": 11.9466549,
+        "lon": 108.4405846,
+        "coordinateKind": "point",
+        "tags": {
+          "addr:housenumber": "80",
+          "addr:street": "Bùi Thị Xuân",
+          "amenity": "cafe",
+          "name": "Wood stock"
+        }
+      }
+    ]
+  },
+  {
+    "title": "File:Le Café de la Poste 04.jpg",
+    "venue": "Le Café de la Poste",
+    "use": "Ảnh bìa đề xuất",
+    "reason": "Đã xem ảnh: kiến trúc vàng, ô đỏ, cây xanh và trời xanh; ảnh ngang rõ nét, phù hợp thẻ du lịch.",
+    "osmCandidateIds": [],
+    "locationStatus": "Ảnh có danh mục riêng theo quán. Chưa tìm được bản ghi OSM khớp trong bbox; không tự gán tọa độ.",
+    "photo": {
+      "title": "File:Le Café de la Poste 04.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Le_Caf%C3%A9_de_la_Poste_04.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Le_Caf%C3%A9_de_la_Poste_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "previewUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Le_Caf%C3%A9_de_la_Poste_04.jpg/1280px-Le_Caf%C3%A9_de_la_Poste_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 3072,
+      "height": 2304,
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "author": "Diane Selwyn",
+      "credit": "Own work",
+      "description": "Le Café de la Poste, Da Lat",
+      "query": "Category:Le Café de la Poste",
+      "linkedOsmId": null,
+      "matchStatus": "search-candidate-not-confirmed",
+      "technicalScore": 47.077888,
+      "rawMetadata": {
+        "DateTime": {
+          "value": "2011-10-02 13:11:40",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Le Café de la Poste 04",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Taken with Canon PowerShot A570 IS|Self-published work|Le Café de la Poste",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Le Café de la Poste, Da Lat",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2011-07-17",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Diane_Selwyn&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Diane Selwyn (page does not exist)\">Diane Selwyn</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-3.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "localFile": "photos/candidate-d0ba26dd376b.jpg"
+    },
+    "osmCandidates": []
+  },
+  {
+    "title": "File:Morning Break (Unsplash).jpg",
+    "venue": "Là Việt Coffee",
+    "use": "Ảnh chi tiết đồ uống đề xuất",
+    "reason": "Đã xem ảnh: ánh sáng và màu tốt, ảnh ngang. Có giày làm đạo cụ nên không ưu tiên làm bìa quán; không cho thấy mặt tiền hoặc không gian.",
+    "osmCandidateIds": [
+      "node/4601279191"
+    ],
+    "locationStatus": "Mô tả Commons ghi La Viet Coffee, Thành phố Đà Lạt, Vietnam; OSM có La Viet Coffee. Ghép tên + mô tả là ứng viên, chưa kiểm chứng hiện trạng.",
+    "photo": {
+      "title": "File:Morning Break (Unsplash).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morning_Break_(Unsplash).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Morning_Break_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "previewUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Morning_Break_%28Unsplash%29.jpg/1280px-Morning_Break_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 5396,
+      "height": 3597,
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "author": "Bino Storyteller curiousbino",
+      "credit": "https://unsplash.com/photos/HvrB-BMq2wY archive copy at the Wayback Machine",
+      "description": "La Viet Coffee, Thành phố Đà Lạt, Vietnam",
+      "query": "\"La Viet\" coffee",
+      "linkedOsmId": null,
+      "matchStatus": "search-candidate-not-confirmed",
+      "technicalScore": 59.409412,
+      "rawMetadata": {
+        "DateTime": {
+          "value": "2017-08-16 12:23:14",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Morning Break (Unsplash)",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Newspapers of Vietnam|Images uploaded by Fæ|Red shoes|Images from Unsplash|Glass coffee cups|Files with coordinates missing SDC location of creation|Cups of espresso|Newspapers in art",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "11.956849",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "108.435165",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "La Viet Coffee, Thành phố Đà Lạt, Vietnam",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2017-03-02",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<p><a rel=\"nofollow\" class=\"external free\" href=\"https://unsplash.com/photos/HvrB-BMq2wY\">https://unsplash.com/photos/HvrB-BMq2wY</a>\n</p>\n<ul><li><bdi lang=\"en\" dir=\"ltr\" title=\"archived on 29 April 2017 at the Wayback Machine\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20170429021531/https%3A//unsplash.com/photos/HvrB-BMq2wY\">archive copy</a> at the <span lang=\"en\" dir=\"ltr\"><a href=\"https://en.wikipedia.org/wiki/Wayback_Machine\" class=\"extiw\" title=\"en:Wayback Machine\"><span lang=\"en\" dir=\"ltr\">Wayback Machine</span></a></span></bdi></li></ul>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Bino Storyteller <a rel=\"nofollow\" class=\"external text\" href=\"https://unsplash.com/@curiousbino\">curiousbino</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "localFile": "photos/candidate-16b0f6996166.jpg"
+    },
+    "osmCandidates": [
+      {
+        "id": "node/4601279191",
+        "sourceUrl": "https://www.openstreetmap.org/node/4601279191",
+        "name": "La Viet Coffee",
+        "category": "cafe",
+        "lat": 11.9569186,
+        "lon": 108.435107,
+        "coordinateKind": "point",
+        "tags": {
+          "addr:housenumber": "198",
+          "addr:street": "Nguyễn Công Trứ",
+          "amenity": "cafe",
+          "cuisine": "american;coffee_shop;vietnamese",
+          "internet_access": "wlan",
+          "name": "La Viet Coffee"
+        }
+      }
+    ]
+  },
+  {
+    "title": "File:Đà Lạt th6n2022 (WoodStock Coffee, nội thất gỗ) (7).jpg",
+    "venue": "WoodStock Coffee",
+    "use": "Ảnh chi tiết không gian đề xuất",
+    "reason": "Đã xem ảnh: tông gỗ/cây xanh, nhận diện được chỗ ngồi; có vai người ở mép phải và vùng cửa sáng gắt. Dùng bổ sung, ưu tiên ảnh (10).",
+    "osmCandidateIds": [
+      "node/5980607285"
+    ],
+    "locationStatus": "Chưa xác minh ứng viên OSM; ảnh năm 2022 không chứng minh quán vẫn hoạt động.",
+    "photo": {
+      "title": "File:Đà Lạt th6n2022 (WoodStock Coffee, nội thất gỗ) (7).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_(WoodStock_Coffee,_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97)_(7).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/13/%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_%28WoodStock_Coffee%2C_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97%29_%287%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "previewUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_%28WoodStock_Coffee%2C_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97%29_%287%29.jpg/1280px-%C4%90%C3%A0_L%E1%BA%A1t_th6n2022_%28WoodStock_Coffee%2C_n%E1%BB%99i_th%E1%BA%A5t_g%E1%BB%97%29_%287%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 3024,
+      "height": 4032,
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "author": "Phương Huy",
+      "credit": "Own work",
+      "description": "WoodStock Coffee",
+      "query": "Category:WoodStock Coffee",
+      "linkedOsmId": null,
+      "matchStatus": "search-candidate-not-confirmed",
+      "technicalScore": 17.192768,
+      "rawMetadata": {
+        "DateTime": {
+          "value": "2022-11-27 11:51:25",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Đà Lạt th6n2022 (WoodStock Coffee, nội thất gỗ) (7)",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Decorative and applied arts of Vietnam|WoodStock Coffee",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "WoodStock Coffee",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2022-06-24 12:46:21",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ph%C6%B0%C6%A1ng_Huy\" title=\"User:Phương Huy\">Phương Huy</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      },
+      "localFile": "photos/candidate-f65b424a5d75.jpg"
+    },
+    "osmCandidates": [
+      {
+        "id": "node/5980607285",
+        "sourceUrl": "https://www.openstreetmap.org/node/5980607285",
+        "name": "Wood stock",
+        "category": "cafe",
+        "lat": 11.9466549,
+        "lon": 108.4405846,
+        "coordinateKind": "point",
+        "tags": {
+          "addr:housenumber": "80",
+          "addr:street": "Bùi Thị Xuân",
+          "amenity": "cafe",
+          "name": "Wood stock"
+        }
+      }
+    ]
+  }
+]

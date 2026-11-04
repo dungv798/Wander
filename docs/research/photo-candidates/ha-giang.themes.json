@@ -1,0 +1,264 @@
+[
+ {
+  "theme": "cho",
+  "label": "Chợ & phố",
+  "candidates": [
+   {
+    "id": "5b5ad451-3872-4058-b3dd-e2e040152369",
+    "theme": "cho",
+    "title": "Ha Giang market- Dong Van market",
+    "creator": "Nghia Bui- Zonitrip",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Ha_Giang_market-_Dong_Van_market.jpg",
+    "thumb": "https://api.openverse.org/v1/images/5b5ad451-3872-4058-b3dd-e2e040152369/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=90018853",
+    "width": 4000,
+    "height": 3000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "d0905663-1a17-40b7-9489-4093c600ca94",
+    "theme": "cho",
+    "title": "Hmong market tents in rural Ha Giang province, 2014",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Hmong_market_tents_in_rural_Ha_Giang_province%2C_2014.jpg",
+    "thumb": "https://api.openverse.org/v1/images/d0905663-1a17-40b7-9489-4093c600ca94/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63511071",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "5fbd2fac-cb28-47f4-ac07-566857f0389a",
+    "theme": "cho",
+    "title": "Ha Giang Loop",
+    "creator": "kitmasterbloke",
+    "license": "CC BY 2.0",
+    "url": "https://live.staticflickr.com/65535/54454734141_54028f1cf4_b.jpg",
+    "thumb": "https://api.openverse.org/v1/images/5fbd2fac-cb28-47f4-ac07-566857f0389a/thumb/",
+    "landing": "https://www.flickr.com/photos/58415659@N00/54454734141",
+    "width": 743,
+    "height": 1024,
+    "source": "flickr"
+   },
+   {
+    "id": "59cb3d71-2e69-48a1-883b-76fa02bc7c7a",
+    "theme": "cho",
+    "title": "Rural market sellers in Ha Giang province in 2014",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Rural_market_sellers_in_Ha_Giang_province_in_2014.jpg",
+    "thumb": "https://api.openverse.org/v1/images/59cb3d71-2e69-48a1-883b-76fa02bc7c7a/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63512195",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "6b62e8a6-6ad3-4bdf-952d-3cb6a0f8fc3a",
+    "theme": "cho",
+    "title": "Brown rice market stand in rural Ha Giang",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Brown_rice_market_stand_in_rural_Ha_Giang.jpg",
+    "thumb": "https://api.openverse.org/v1/images/6b62e8a6-6ad3-4bdf-952d-3cb6a0f8fc3a/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63511068",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   }
+  ]
+ },
+ {
+  "theme": "mon-an",
+  "label": "Món ăn",
+  "candidates": [
+   {
+    "id": "35812093-12c5-432b-aad4-b36d227742da",
+    "theme": "mon-an",
+    "title": "Terraced fields in Mu Cang Chai, Ha Giang, Vietnam",
+    "creator": "cuongvnd",
+    "license": "CC BY 2.0",
+    "url": "https://live.staticflickr.com/8456/8047413495_f2e07876af_b.jpg",
+    "thumb": "https://api.openverse.org/v1/images/35812093-12c5-432b-aad4-b36d227742da/thumb/",
+    "landing": "https://www.flickr.com/photos/37223638@N08/8047413495",
+    "width": 730,
+    "height": 1024,
+    "source": "flickr"
+   },
+   {
+    "id": "2e8dca32-f382-4172-b938-9154bf546b51",
+    "theme": "mon-an",
+    "title": "Terraced fields in Mu Cang Chai, Ha Giang, Vietnam",
+    "creator": "cuongvnd",
+    "license": "CC BY 2.0",
+    "url": "https://live.staticflickr.com/8172/8050543567_d9e4998215_b.jpg",
+    "thumb": "https://api.openverse.org/v1/images/2e8dca32-f382-4172-b938-9154bf546b51/thumb/",
+    "landing": "https://www.flickr.com/photos/37223638@N08/8050543567",
+    "width": 801,
+    "height": 1024,
+    "source": "flickr"
+   },
+   {
+    "id": "3c20e2a4-05d9-4df8-8f8c-9ecbe67a836b",
+    "theme": "mon-an",
+    "title": "Restaurant serving Vietnamese (Kinh) food in Ha Giang in 2014",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Restaurant_serving_Vietnamese_%28Kinh%29_food_in_Ha_Giang_in_2014.jpg",
+    "thumb": "https://api.openverse.org/v1/images/3c20e2a4-05d9-4df8-8f8c-9ecbe67a836b/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63509992",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "4853b675-c3d5-4b49-9d75-e51c7d9ae904",
+    "theme": "mon-an",
+    "title": "Ha Giang local foods in Ha Giang City",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ha_Giang_local_foods_in_Ha_Giang_City.jpg",
+    "thumb": "https://api.openverse.org/v1/images/4853b675-c3d5-4b49-9d75-e51c7d9ae904/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63512194",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "e43f4f50-5033-490e-84df-a3d01ff7debc",
+    "theme": "mon-an",
+    "title": "Rural children in Ha Giang receiving food in 2014 02",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Rural_children_in_Ha_Giang_receiving_food_in_2014_02.jpg",
+    "thumb": "https://api.openverse.org/v1/images/e43f4f50-5033-490e-84df-a3d01ff7debc/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63512106",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "63349274-77b4-492b-831b-01869f8514c4",
+    "theme": "mon-an",
+    "title": "Rural children in Ha Giang receiving food in 2014 01",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Rural_children_in_Ha_Giang_receiving_food_in_2014_01.jpg",
+    "thumb": "https://api.openverse.org/v1/images/63349274-77b4-492b-831b-01869f8514c4/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63512107",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   }
+  ]
+ },
+ {
+  "theme": "nguoi",
+  "label": "Con người",
+  "candidates": [
+   {
+    "id": "dddeab68-3cd3-4ae3-a8be-2c80bc16ebc7",
+    "theme": "nguoi",
+    "title": "Tribal woman with a basket in Ha Giang",
+    "creator": "Vuong Tri Binh",
+    "license": "CC BY-SA 4.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Tribal_woman_with_a_basket_in_Ha_Giang.jpg",
+    "thumb": "https://api.openverse.org/v1/images/dddeab68-3cd3-4ae3-a8be-2c80bc16ebc7/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=63512140",
+    "width": 3552,
+    "height": 2000,
+    "source": "wikimedia"
+   },
+   {
+    "id": "b0ed6096-62ca-4188-93a7-f6b1e9550eda",
+    "theme": "nguoi",
+    "title": "Woman's costume, Black Lo Lo, Ha Giang province - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05139",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Woman%27s_costume%2C_Black_Lo_Lo%2C_Ha_Giang_province_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05139.JPG",
+    "thumb": "https://api.openverse.org/v1/images/b0ed6096-62ca-4188-93a7-f6b1e9550eda/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082014",
+    "width": 2982,
+    "height": 5021,
+    "source": "wikimedia"
+   },
+   {
+    "id": "4d0ca966-e6b9-44c5-8134-8df05ab8c7b4",
+    "theme": "nguoi",
+    "title": "Woman's costume, Pu Peo, Ha Giang province - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05144",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Woman%27s_costume%2C_Pu_Peo%2C_Ha_Giang_province_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05144.JPG",
+    "thumb": "https://api.openverse.org/v1/images/4d0ca966-e6b9-44c5-8134-8df05ab8c7b4/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082012",
+    "width": 2457,
+    "height": 5375,
+    "source": "wikimedia"
+   },
+   {
+    "id": "78ed621e-db28-45da-bc1e-5a532af2d419",
+    "theme": "nguoi",
+    "title": "Woman's costume, Mong (Mong Do), Ha Giang province - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05196",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Woman%27s_costume%2C_Mong_%28Mong_Do%29%2C_Ha_Giang_province_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05196.JPG",
+    "thumb": "https://api.openverse.org/v1/images/78ed621e-db28-45da-bc1e-5a532af2d419/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082659",
+    "width": 3648,
+    "height": 5472,
+    "source": "wikimedia"
+   },
+   {
+    "id": "55b6d285-8faa-4644-ab92-fa56b43767a1",
+    "theme": "nguoi",
+    "title": "Woman's costume, Lo Lo Hoa, Ha Giang province, view 2 - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05142",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Woman%27s_costume%2C_Lo_Lo_Hoa%2C_Ha_Giang_province%2C_view_2_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05142.JPG",
+    "thumb": "https://api.openverse.org/v1/images/55b6d285-8faa-4644-ab92-fa56b43767a1/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082027",
+    "width": 5472,
+    "height": 3648,
+    "source": "wikimedia"
+   },
+   {
+    "id": "101bfb5c-13e0-4273-93ef-de58087f0473",
+    "theme": "nguoi",
+    "title": "Woman's costume, Pa Then, Ha Giang province - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05182",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Woman%27s_costume%2C_Pa_Then%2C_Ha_Giang_province_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05182.JPG",
+    "thumb": "https://api.openverse.org/v1/images/101bfb5c-13e0-4273-93ef-de58087f0473/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082661",
+    "width": 2982,
+    "height": 5203,
+    "source": "wikimedia"
+   },
+   {
+    "id": "c95244bc-7fd9-4b41-943b-072b919c4b2c",
+    "theme": "nguoi",
+    "title": "Woman's costume, Lo Lo Hoa, Ha Giang province, view 1 - Vietnam National Museum of Fine Arts - Hanoi, Vietnam - DSC05141",
+    "creator": "Daderot",
+    "license": "CC CC0 1.0",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Woman%27s_costume%2C_Lo_Lo_Hoa%2C_Ha_Giang_province%2C_view_1_-_Vietnam_National_Museum_of_Fine_Arts_-_Hanoi%2C_Vietnam_-_DSC05141.JPG",
+    "thumb": "https://api.openverse.org/v1/images/c95244bc-7fd9-4b41-943b-072b919c4b2c/thumb/",
+    "landing": "https://commons.wikimedia.org/w/index.php?curid=40082018",
+    "width": 3111,
+    "height": 5429,
+    "source": "wikimedia"
+   }
+  ]
+ },
+ {
+  "theme": "le-hoi",
+  "label": "Lễ hội & văn hóa",
+  "candidates": []
+ },
+ {
+  "theme": "nghe",
+  "label": "Nghề & đời sống",
+  "candidates": []
+ }
+]

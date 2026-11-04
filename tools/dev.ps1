@@ -221,8 +221,25 @@ function Ensure-RecoveryPepper {
     $env:WANDER_RECOVERY_PEPPER = (Get-Content -Path $file -Raw).Trim()
 }
 
+# Ten co so du lieu RIENG cho e2e (DR-033, T-A): e2e KHONG BAO GIO ghi vao CSDL dev wander.
+$E2eDb = 'wander_e2e'
+
+# Tao lai CSDL e2e tu dau (Flyway dung schema khi backend khoi dong). Tu choi neu ten khong phai dung wander_e2e.
+function Reset-E2eDb {
+    if ($E2eDb -ne 'wander_e2e') { Write-Host "Tu choi: ten CSDL e2e phai la wander_e2e, nhan $E2eDb"; return 1 }
+    Push-Location $Root
+    docker compose exec -T postgres psql -U wander -d postgres -v ON_ERROR_STOP=1 -c "DROP DATABASE IF EXISTS $E2eDb WITH (FORCE)" | Out-Null
+    $drop = $LASTEXITCODE
+    docker compose exec -T postgres psql -U wander -d postgres -v ON_ERROR_STOP=1 -c "CREATE DATABASE $E2eDb" | Out-Null
+    $create = $LASTEXITCODE
+    Pop-Location
+    if (($drop -ne 0) -or ($create -ne 0)) { Write-Host "Khong tao duoc CSDL $E2eDb"; return 1 }
+    return 0
+}
+
 function E2E {
     if ((Db-Up) -ne 0) { return 1 }
+    if ((Reset-E2eDb) -ne 0) { return 1 }
     if ((Backend-Build) -ne 0) { return 1 }
     if ((Web-Build) -ne 0) { return 1 }
     $jar = Join-Path $Root 'backend\build\libs\wander-backend.jar'
@@ -234,6 +251,9 @@ function E2E {
     $env:WANDER_LIMIT_APPROVAL = '1000'
     $env:WANDER_LIMIT_APPROVAL_REQUESTS = '1000'
     $env:WANDER_LIMIT_CATALOG = '100000'
+    $env:WANDER_DB_URL = "jdbc:postgresql://localhost:5433/$E2eDb"
+    $env:WANDER_E2E_DB = $E2eDb # e2e/backend.ts chi chay khi bien nay dung wander_e2e
+    if ($env:WANDER_DB_URL -notmatch '/wander_e2e$') { Write-Host 'Tu choi chay e2e: WANDER_DB_URL khong tro toi wander_e2e.'; return 1 }
     Ensure-RecoveryPepper
     $out = Join-Path $Logs 'e2e-backend.out.log'
     $err = Join-Path $Logs 'e2e-backend.err.log'

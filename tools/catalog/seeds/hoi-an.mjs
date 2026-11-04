@@ -6,6 +6,7 @@ export default {
   references: [{ id: 'trung-tam-hoi-an', name: 'Phố cổ Hội An', lat: 15.8801, lon: 108.338, approximate: true }],
   season: { summary: 'Tháng 2–4 dễ chịu, ít mưa; tháng 10–11 có thể ngập vì mưa lũ.', best: m(2, 4), rainy: m(9, 12), notes: ['Khoảng tháng 2 đến tháng 4 trời mát và nắng nhẹ, hợp đi dạo phố cổ.', 'Tháng 10–11 mưa nhiều, phố cổ có thể ngập nhẹ; kiểm tra tình hình trước khi đi.'] },
   packing: { summary: 'Giày dễ đi, áo mưa mỏng, mũ nón.', items: ['Giày dễ đi bộ', 'Áo mưa mỏng', 'Mũ nón', 'Kem chống nắng', 'Tiền mặt nhỏ'] },
+  osmAliases: { 'nha-co-tan-ky': ['Tan Ky'], 'lang-gom-thanh-ha': ['Thanh Ha Pottery Village'], 'bai-bien-cua-dai': ['Cua Dai Beach'] },
   places: [
     p('pho-co-hoi-an', 'Phố cổ Hội An', 'van', 'Phố cổ', 'Khu phố cổ với nhà gỗ, đèn lồng và các con hẻm nhỏ ven sông Hoài, đẹp nhất lúc chiều tối.', 'must', 'Lý do chính nhiều người tới Hội An, nên dành ít nhất nửa ngày.', m(2, 8), '3–4 giờ', { slots: ['chieu', 'toi'], slotReason: 'Chiều tối đèn lồng lên, nhưng sáng sớm lại vắng và dễ chụp ảnh.', tips: ['Hỏi giá vé tham quan tại quầy.', 'Mang tiền mặt nhỏ.'] }),
     p('chua-cau-hoi-an', 'Chùa Cầu (Hội An)', 'van', 'Phố cổ', 'Cây cầu mái ngói bắc qua con lạch nhỏ, biểu tượng của Hội An.', 'must', 'Nằm ngay trong phố cổ, cảnh quen thuộc nhất của thành phố.', m(1, 12), '30 phút', { name: 'Chùa Cầu' }),
