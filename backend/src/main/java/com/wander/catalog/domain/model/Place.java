@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 
 /**
  * Một địa điểm trong bộ thẻ quẹt. Nội dung biên tập (hook, nhãn gợi ý, buổi nên đi, mẹo) là bản nháp cho tới khi
- * PO duyệt; quy tắc cứng ở đây chỉ bảo vệ chất lượng thẻ: phải có ít nhất một ảnh có ghi công (spec §3).
+ * PO duyệt. Ảnh KHÔNG bắt buộc (PO 03/11/2026, DR-033): địa điểm đủ căn cứ vẫn nhập được khi chưa có ảnh đã tuyển, giao diện
+ * dùng ô giữ chỗ theo loại; mỗi ảnh đã khai báo vẫn phải đủ ghi công và tệp phải tồn tại.
  */
 public record Place(
         String id,
@@ -59,7 +60,6 @@ public record Place(
         tips = ImmutableLists.copyOrEmpty(tips);
         bestSlots = bestSlots == null || bestSlots.isEmpty() ? Set.of() : Set.copyOf(bestSlots);
         photos = ImmutableLists.copyOrEmpty(photos);
-        CatalogValidation.require(!photos.isEmpty(), CatalogMessages.PLACE_NEEDS_PHOTO, id);
         CatalogValidation.require(photos.size() <= CatalogConstants.MAX_PHOTOS_PER_PLACE, CatalogMessages.PLACE_TOO_MANY_PHOTOS,
                 id, CatalogConstants.MAX_PHOTOS_PER_PLACE);
     }

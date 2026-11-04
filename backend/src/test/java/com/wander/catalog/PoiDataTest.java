@@ -34,7 +34,8 @@ class PoiDataTest {
         assertThat(batch.pois().stream().mapToLong(poi -> poi.mergedFrom().size()).sum()).isEqualTo(3);
         assertThat(batch.pois()).extracting(PoiRecord::verificationStatus).allSatisfy(status ->
                 assertThat(status.name()).isEqualTo("SNAPSHOT_UNVERIFIED"));
-        assertThat(catalog.destination("ha-giang")).isEmpty();
+        assertThat(catalog.destination("ha-giang")).as("Hà Giang có POI quanh Đồng Văn (DR-033)").isPresent();
+        assertThat(catalog.destination("khong-co")).isEmpty();
         assertThat(catalog.destination(null)).isEmpty();
     }
 

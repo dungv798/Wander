@@ -5,6 +5,7 @@ import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.model.Destination;
 import com.wander.catalog.domain.model.GeoPoint;
 import com.wander.catalog.domain.model.GuideSection;
+import com.wander.catalog.domain.model.Moment;
 import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.model.Place;
 import com.wander.catalog.domain.model.ReferencePoint;
@@ -43,7 +44,13 @@ public class CatalogQueries {
                 coverUrl(destination),
                 destination.references().stream().map(CatalogQueries::toReferenceView).toList(),
                 destination.guide().stream().map(CatalogQueries::toSectionView).toList(),
-                destination.places().stream().map(place -> toPlaceView(destination, place)).toList());
+                destination.places().stream().map(place -> toPlaceView(destination, place)).toList(),
+                destination.moments().stream().map(CatalogQueries::toMomentView).toList());
+    }
+
+    /** Dạng hiển thị của một khoảnh khắc (mã chủ đề viết thường như hợp đồng API). */
+    private static CatalogViews.MomentView toMomentView(Moment moment) {
+        return new CatalogViews.MomentView(moment.id(), moment.theme().code(), moment.theme().label(), moment.caption(), toPhotoView(moment.photo()));
     }
 
     /** Lịch mẫu của một điểm đến theo thứ tự biên tập; điểm đến không có trong kho thì ném lỗi không tìm thấy, chưa có lịch thì rỗng. */
@@ -60,7 +67,8 @@ public class CatalogQueries {
         List<Integer> bestMonths = destination.guide().stream()
                 .filter(section -> section.layout() == GuideSection.Layout.MONTHS)
                 .findFirst().map(GuideSection::bestMonths).orElse(List.of());
-        List<CatalogViews.Preview> previews = destination.places().stream().limit(CatalogConstants.PREVIEW_PLACE_COUNT)
+        // Xem trước chỉ lấy nơi có ảnh thật: nơi chưa có ảnh không giả bằng ảnh của nơi khác.
+        List<CatalogViews.Preview> previews = destination.places().stream().filter(place -> !place.photos().isEmpty()).limit(CatalogConstants.PREVIEW_PLACE_COUNT)
                 .map(place -> new CatalogViews.Preview(place.id(), place.name(), photoUrl(place.photos().getFirst()))).toList();
         List<GeoPoint> locations = destination.places().stream().map(Place::location).filter(Objects::nonNull).toList();
         Double lat = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lat).average().orElseThrow();

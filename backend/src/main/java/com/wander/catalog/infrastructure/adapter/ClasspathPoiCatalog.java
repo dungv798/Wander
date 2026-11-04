@@ -54,13 +54,13 @@ public class ClasspathPoiCatalog implements PoiCatalog {
         return Map.copyOf(loaded);
     }
 
-    /** Đọc và kiểm phạm vi với tâm điểm đến đã có; giữ tên tệp trong lỗi khởi động. */
+    /** Đọc và kiểm phạm vi: tâm phải trùng MỘT mốc tham chiếu của điểm đến (Hà Giang có hai mốc, DR-033); giữ tên tệp trong lỗi khởi động. */
     private static PoiCollection readBatch(JsonMapper mapper, Resource resource, PlaceCatalog destinations) {
         try (InputStream stream = resource.getInputStream()) {
             PoiFile file = mapper.readValue(stream, PoiFile.class);
             GeoPoint center = toLocation(file.center());
             var destination = destinations.destination(file.destinationId()).orElseThrow();
-            PoiValidation.require(destination.references().getFirst().location().equals(center), PoiConstants.CENTER);
+            PoiValidation.require(destination.references().stream().anyMatch(reference -> reference.location().equals(center)), PoiConstants.CENTER);
             List<PoiRecord> pois = file.pois().stream().map(entry -> toRecord(file.destinationId(), entry)).toList();
             requireSnapshot(file, pois);
             return new PoiCollection(file.destinationId(), center, file.radiusM(), pois);

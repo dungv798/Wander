@@ -55,9 +55,9 @@ class PoiApiIT extends ApiTestSupport {
 
     /** Không biến trạng thái chưa nhập POI thành lỗi tài nguyên. */
     @Test
-    @DisplayName("điểm đến không có POI trả danh sách rỗng kể cả mã chưa có")
+    @DisplayName("điểm đến không có POI trả danh sách rỗng kể cả mã chưa có (Hà Giang đã có POI từ DR-033)")
     void missingPoiIsEmpty() {
-        for (String id : List.of("ha-giang", "khong-co")) {
+        for (String id : List.of("vinh-hy-khong-co", "khong-co")) {
             Res result = call("GET", "/api/catalog/destinations/" + id + "/poi", null);
             assertThat(result.status()).isEqualTo(200);
             assertThat(result.list("poi")).isEmpty();

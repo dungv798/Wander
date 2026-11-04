@@ -36,6 +36,9 @@ public final class CatalogConstants {
     /** Số ảnh tối đa của một địa điểm. */
     public static final int MAX_PHOTOS_PER_PLACE = 8;
 
+    /** Số khoảnh khắc tối đa của một điểm đến (DR-034). */
+    public static final int MAX_MOMENTS_PER_DESTINATION = 24;
+
     /** Tháng nhỏ nhất. */
     public static final int MONTH_MIN = 1;
 

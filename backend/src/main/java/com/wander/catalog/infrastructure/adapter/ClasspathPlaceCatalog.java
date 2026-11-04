@@ -7,6 +7,7 @@ import com.wander.catalog.domain.model.GeoPoint;
 import com.wander.catalog.domain.model.GuideItem;
 import com.wander.catalog.domain.model.GuideSection;
 import com.wander.catalog.domain.model.ItineraryTemplate;
+import com.wander.catalog.domain.model.Moment;
 import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.model.Place;
 import com.wander.catalog.domain.model.ReferencePoint;
@@ -14,6 +15,7 @@ import com.wander.catalog.domain.model.TemplateDay;
 import com.wander.catalog.domain.port.PlaceCatalog;
 import com.wander.catalog.domain.rule.CatalogValidation;
 import com.wander.catalog.domain.rule.SearchText;
+import com.wander.catalog.domain.vocabulary.MomentTheme;
 import com.wander.catalog.domain.vocabulary.PlaceCategory;
 import com.wander.catalog.domain.vocabulary.TemplateStatus;
 import com.wander.catalog.domain.vocabulary.TimeSlot;
@@ -166,8 +168,9 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
             List<Place> places = source.places().stream().map(place -> toPlace(source.id(), place)).toList();
             Destination destination = new Destination(source.id(), source.name(), source.region(), source.tagline(), source.coverPlaceId(),
                     source.references().stream().map(ClasspathPlaceCatalog::toReference).toList(),
-                    source.guide().stream().map(ClasspathPlaceCatalog::toSection).toList(), places);
+                    source.guide().stream().map(ClasspathPlaceCatalog::toSection).toList(), places, toMoments(source.moments()));
             requirePhotoFilesExist(places);
+            requireMomentFilesExist(destination.moments());
             return destination;
         } catch (IOException | RuntimeException e) {
             throw new IllegalStateException(CatalogMessages.CATALOG_FILE_CORRUPT.formatted(fileName, e.getMessage()), e);
@@ -184,6 +187,25 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                 }
             }
         }
+    }
+
+    /** Mọi ảnh khoảnh khắc đều có tệp trong thư mục ảnh của classpath. */
+    private static void requireMomentFilesExist(List<Moment> moments) {
+        for (Moment moment : moments) {
+            String path = CatalogConstants.PHOTO_CLASSPATH_DIR + moment.photo().file();
+            if (!new ClassPathResource(path).exists()) {
+                throw new IllegalStateException(CatalogMessages.MOMENT_PHOTO_FILE_MISSING.formatted(path, moment.id()));
+            }
+        }
+    }
+
+    /** Dựng danh sách khoảnh khắc domain; chủ đề lạ là lỗi dữ liệu, thiếu danh sách thì rỗng. */
+    private static List<Moment> toMoments(List<MomentFile> sources) {
+        return ImmutableLists.copyOrEmpty(sources).stream().map(source -> {
+            MomentTheme theme = MomentTheme.fromCode(source.theme())
+                    .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.MOMENT_THEME_INVALID.formatted(source.theme())));
+            return new Moment(source.id(), theme, source.caption(), new Photo(source.file(), source.author(), source.license(), source.sourceUrl()));
+        }).toList();
     }
 
     /** Dựng địa điểm domain từ dòng dữ liệu; tọa độ chỉ có khi đủ cả vĩ độ lẫn kinh độ. */
@@ -234,7 +256,10 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
 
     // ---- hình dạng tệp JSON (chỉ dùng trong adapter) ----
     record DestinationFile(String id, String name, String region, String tagline, String coverPlaceId, List<ReferenceFile> references,
-                           List<SectionFile> guide, List<PlaceFile> places) {
+                           List<SectionFile> guide, List<PlaceFile> places, List<MomentFile> moments) {
+    }
+
+    record MomentFile(String id, String theme, String caption, String file, String author, String license, String sourceUrl) {
     }
 
     record TemplatesFile(String destinationId, List<TemplateEntry> templates) {

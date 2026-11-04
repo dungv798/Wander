@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wander.catalog.domain.rule.SearchText;
+import com.wander.catalog.domain.vocabulary.MomentTheme;
 import com.wander.catalog.domain.vocabulary.PlaceCategory;
 import com.wander.catalog.domain.vocabulary.TimeSlot;
 import com.wander.catalog.domain.vocabulary.Verdict;
@@ -24,9 +25,26 @@ class CatalogDomainTest {
     }
 
     @Test
-    @DisplayName("địa điểm phải có ít nhất một ảnh (spec §3: không có thẻ trống)")
-    void placeNeedsPhoto() {
-        assertThatThrownBy(() -> place("deo-ma-pi-leng", List.of())).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("ít nhất một ảnh");
+    @DisplayName("khoảnh khắc (DR-034): đủ chủ đề, chú thích, ảnh có ghi công; mã không trùng; dữ liệu cũ không có khoảnh khắc vẫn hợp lệ")
+    void momentsAreValidated() {
+        var ref = new ReferencePoint("hub", "TP Hà Giang", new GeoPoint(22.8, 105.0), true);
+        var a = place("aaa", List.of(photo()));
+        assertThatThrownBy(() -> new Moment("m1", null, "Chợ phiên", photo())).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("chủ đề");
+        assertThatThrownBy(() -> new Moment("m1", MomentTheme.MARKET, " ", photo())).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("chú thích");
+        assertThatThrownBy(() -> new Moment("m1", MomentTheme.MARKET, "Chợ phiên", null)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("ảnh");
+        var m1 = new Moment("m1", MomentTheme.MARKET, "Chợ phiên Đồng Văn", photo());
+        assertThatThrownBy(() -> new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "aaa", List.of(ref), List.of(), List.of(a), List.of(m1, m1)))
+                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Trùng");
+        assertThat(new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "aaa", List.of(ref), List.of(), List.of(a), List.of(m1)).moments()).hasSize(1);
+        assertThat(new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "aaa", List.of(ref), List.of(), List.of(a)).moments()).isEmpty();
+        assertThat(MomentTheme.fromCode("mon-an")).contains(MomentTheme.FOOD);
+        assertThat(MomentTheme.fromCode("la")).isEmpty();
+    }
+
+    @Test
+    @DisplayName("địa điểm được phép chưa có ảnh (DR-033); ảnh đã khai báo vẫn được giữ")
+    void placeMayHaveNoPhoto() {
+        assertThat(place("deo-ma-pi-leng", List.of()).photos()).isEmpty();
         assertThat(place("deo-ma-pi-leng", List.of(photo())).photos()).hasSize(1);
     }
 
@@ -61,6 +79,16 @@ class CatalogDomainTest {
                 List.of(new GuideItem("", "x", "", "khong-co")));
         assertThatThrownBy(() -> new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "aaa", List.of(ref), List.of(section), List.of(a, b))).hasMessageContaining("không có");
         assertThat(new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "bbb", List.of(ref), List.of(), List.of(a, b)).coverPlace().id()).isEqualTo("bbb");
+    }
+
+    @Test
+    @DisplayName("địa điểm bìa của điểm đến phải có ảnh; nơi khác được phép chưa có ảnh")
+    void coverPlaceNeedsPhoto() {
+        var ref = new ReferencePoint("hub", "TP Hà Giang", new GeoPoint(22.8, 105.0), true);
+        Place withPhoto = place("aaa", List.of(photo())), without = place("bbb", List.of());
+        assertThatThrownBy(() -> new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "bbb", List.of(ref), List.of(), List.of(withPhoto, without)))
+                .hasMessageContaining("phải có ít nhất một ảnh");
+        assertThat(new Destination("ha-giang", "Hà Giang", "Đông Bắc", "t", "aaa", List.of(ref), List.of(), List.of(withPhoto, without)).places()).hasSize(2);
     }
 
     @Test

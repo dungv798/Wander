@@ -4,12 +4,14 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Trạng thái duyệt nội dung của một lịch mẫu (DR-018 N-2): {@code draft} = bản nháp chờ PO duyệt, {@code approved} = PO đã duyệt.
+ * Trạng thái duyệt nội dung của một lịch mẫu (DR-018 N-2): {@code draft} = bản nháp chờ PO duyệt, {@code approved} = PO đã duyệt,
+ * {@code reference} = lịch trình tham khảo (DR-033): ghép từ nơi có vị trí đã kiểm, ghi rõ điểm xuất phát, phương tiện giả định và nhịp, không hứa giờ.
  * Mã lạ KHÔNG được coi là đã duyệt: {@link #fromCode} trả rỗng và adapter từ chối tệp.
  */
 public enum TemplateStatus implements CodedValue {
     DRAFT("draft", "Bản nháp"),
-    APPROVED("approved", "Đã duyệt");
+    APPROVED("approved", "Đã duyệt"),
+    REFERENCE("reference", "Lịch trình tham khảo");
 
     private final String code;
     private final String label;

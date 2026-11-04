@@ -19,6 +19,7 @@ public final class CatalogMessages {
     public static final String PLACE_ID_DUPLICATED = "Trùng mã địa điểm: %s";
     /** Ảnh bìa trỏ tới địa điểm không có; tham số: mã địa điểm. */
     public static final String COVER_PLACE_MISSING = "Ảnh bìa trỏ tới địa điểm không có: %s";
+    public static final String COVER_PLACE_NEEDS_PHOTO = "Địa điểm bìa %s phải có ít nhất một ảnh (trang chủ dùng làm bìa điểm đến)";
     /** Mã khối cẩm nang bị trùng; tham số: mã khối. */
     public static final String GUIDE_SECTION_ID_DUPLICATED = "Trùng mã khối cẩm nang: %s";
     /** Cẩm nang trỏ tới địa điểm không có; tham số: mã địa điểm. */
@@ -48,9 +49,23 @@ public final class CatalogMessages {
     /** Tháng ngoài 1..12 ở địa điểm; tham số: mã địa điểm. */
     public static final String MONTH_OUT_OF_RANGE_IN_PLACE = "Tháng ngoài 1..12 ở %s";
     /** Địa điểm chưa có ảnh; tham số: mã địa điểm. */
-    public static final String PLACE_NEEDS_PHOTO = "Địa điểm %s phải có ít nhất một ảnh";
     /** Địa điểm có quá nhiều ảnh; tham số: mã địa điểm, số ảnh tối đa. */
     public static final String PLACE_TOO_MANY_PHOTOS = "Địa điểm %s có quá %d ảnh";
+    /** Khoảnh khắc thiếu một trường; tham số: nhãn trường. */
+    public static final String MOMENT_FIELD_MISSING = "Khoảnh khắc thiếu %s";
+    /** Nhãn các trường của khoảnh khắc. */
+    public static final String LABEL_MOMENT_ID = "mã";
+    public static final String LABEL_MOMENT_THEME = "chủ đề";
+    public static final String LABEL_MOMENT_CAPTION = "chú thích";
+    public static final String LABEL_MOMENT_PHOTO = "ảnh";
+    /** Mã khoảnh khắc trùng trong một điểm đến; tham số: mã khoảnh khắc. */
+    public static final String MOMENT_ID_DUPLICATED = "Trùng mã khoảnh khắc %s";
+    /** Điểm đến có quá nhiều khoảnh khắc; tham số: mã điểm đến, số tối đa. */
+    public static final String DESTINATION_TOO_MANY_MOMENTS = "Điểm đến %s có quá %d khoảnh khắc";
+    /** Chủ đề khoảnh khắc lạ; tham số: mã chủ đề. */
+    public static final String MOMENT_THEME_INVALID = "Chủ đề khoảnh khắc không hợp lệ: %s";
+    /** Thiếu tệp ảnh của khoảnh khắc; tham số: đường dẫn, mã khoảnh khắc. */
+    public static final String MOMENT_PHOTO_FILE_MISSING = "Thiếu tệp ảnh %s của khoảnh khắc %s";
     /** Thiếu một trường văn bản; tham số: nhãn trường. */
     public static final String FIELD_REQUIRED = "Thiếu %s";
     /** Trường văn bản quá dài; tham số: nhãn trường, độ dài thực, độ dài tối đa. */

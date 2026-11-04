@@ -62,7 +62,7 @@ class CatalogApiIT extends ApiTestSupport {
                 .isEqualTo(200);
 
         List<Object> templates = anonymous.list("templates");
-        assertThat(templates).hasSize(3);
+        assertThat(templates).hasSize(4);
         assertThat(anonymous.str("templates.0.id")).isEqualTo("vong-cung-3-ngay");
         assertThat(anonymous.str("templates.0.title")).isEqualTo("Vòng cung Đông Bắc 3 ngày");
         assertThat(anonymous.str("templates.0.status")).isEqualTo("approved");
@@ -109,9 +109,11 @@ class CatalogApiIT extends ApiTestSupport {
         assertThat(places).hasSizeGreaterThanOrEqualTo(9);
         for (int i = 0; i < places.size(); i++) {
             String p = "destination.places." + i;
-            assertThat(r.list(p + ".photos")).as(p).isNotEmpty();
-            assertThat(r.str(p + ".photos.0.author")).isNotBlank();
-            assertThat(r.str(p + ".photos.0.license")).isNotBlank();
+            // DR-033: địa điểm được phép chưa có ảnh; ảnh đã khai báo vẫn phải đủ ghi công
+            if (!r.list(p + ".photos").isEmpty()) {
+                assertThat(r.str(p + ".photos.0.author")).isNotBlank();
+                assertThat(r.str(p + ".photos.0.license")).isNotBlank();
+            }
             assertThat(r.str(p + ".verdictLabel")).isIn("Nên ghé", "Đáng đi", "Chỉ ghé nếu tiện");
             assertThat(r.list(p + ".away")).as(p).isNotEmpty();
             assertThat(r.num(p + ".away.0.km")).isPositive();
@@ -119,6 +121,28 @@ class CatalogApiIT extends ApiTestSupport {
         }
         assertThat(call("GET", "/api/catalog/destinations/khong-co", u.token()).status()).isEqualTo(404);
         assertThat(call("GET", "/api/catalog/destinations/khong-co", u.token()).code()).isEqualTo("NOT_FOUND");
+    }
+
+    @Test
+    @DisplayName("khoảnh khắc (DR-034): điểm đến có ảnh đời sống trả chủ đề, chú thích và ghi công đủ; điểm đến chưa có thì mảng rỗng, không lỗi")
+    void destinationMoments() {
+        Res withMoments = call("GET", "/api/catalog/destinations/ha-noi", null);
+        assertThat(withMoments.status()).isEqualTo(200);
+        List<Object> moments = withMoments.list("destination.moments");
+        assertThat(moments).as("Hà Nội đã có khoảnh khắc được duyệt").isNotEmpty();
+        for (int i = 0; i < moments.size(); i++) {
+            String m = "destination.moments." + i;
+            assertThat(withMoments.str(m + ".theme")).isIn("cho", "mon-an", "nguoi", "le-hoi", "nghe");
+            assertThat(withMoments.str(m + ".themeLabel")).isNotBlank();
+            assertThat(withMoments.str(m + ".caption")).isNotBlank();
+            assertThat(withMoments.str(m + ".photo.url")).startsWith("/catalog/photos/");
+            assertThat(withMoments.str(m + ".photo.author")).isNotBlank();
+            assertThat(withMoments.str(m + ".photo.license")).isNotBlank();
+            assertThat(withMoments.str(m + ".photo.sourceUrl")).startsWith("https://");
+        }
+        Res without = call("GET", "/api/catalog/destinations/vinh-hy", null);
+        assertThat(without.status()).isEqualTo(200);
+        assertThat(without.list("destination.moments")).as("chưa có dữ liệu thì rỗng nhưng trường vẫn có").isEmpty();
     }
 
     @Test

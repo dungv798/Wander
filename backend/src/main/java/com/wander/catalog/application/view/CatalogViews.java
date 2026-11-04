@@ -50,8 +50,12 @@ public final class CatalogViews {
     public record ReferenceView(String id, String name, double lat, double lon, boolean approximate) {
     }
 
+    /** Khoảnh khắc đời sống của điểm đến (DR-034): ảnh minh họa không khí kèm chủ đề, chú thích và ghi công. */
+    public record MomentView(String id, String theme, String themeLabel, String caption, PhotoView photo) {
+    }
+
     public record DestinationDetail(
             String id, String name, String region, String tagline, String coverUrl, List<ReferenceView> references,
-            List<GuideSectionView> guide, List<PlaceView> places) {
+            List<GuideSectionView> guide, List<PlaceView> places, List<MomentView> moments) {
     }
 }

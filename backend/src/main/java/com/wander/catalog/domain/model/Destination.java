@@ -1,5 +1,6 @@
 package com.wander.catalog.domain.model;
 
+import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.constant.CatalogMessages;
 import com.wander.catalog.domain.rule.CatalogValidation;
 import com.wander.shared.kernel.util.ImmutableLists;
@@ -19,17 +20,28 @@ public record Destination(
         String coverPlaceId,
         List<ReferencePoint> references,
         List<GuideSection> guide,
-        List<Place> places) {
+        List<Place> places,
+        List<Moment> moments) {
+
+    /** Điểm đến chưa có thư viện khoảnh khắc (tương thích dữ liệu cũ). */
+    public Destination(String id, String name, String region, String tagline, String coverPlaceId, List<ReferencePoint> references,
+                       List<GuideSection> guide, List<Place> places) {
+        this(id, name, region, tagline, coverPlaceId, references, guide, places, List.of());
+    }
 
     public Destination {
         CatalogValidation.require(hasIdentity(id, name, region, tagline), CatalogMessages.DESTINATION_FIELDS_MISSING);
         references = ImmutableLists.copyOrEmpty(references);
         guide = ImmutableLists.copyOrEmpty(guide);
         places = ImmutableLists.copyOrEmpty(places);
+        moments = ImmutableLists.copyOrEmpty(moments);
+        validateMoments(id, moments);
         CatalogValidation.require(!references.isEmpty(), CatalogMessages.DESTINATION_NEEDS_REFERENCE, id);
         CatalogValidation.require(!places.isEmpty(), CatalogMessages.DESTINATION_NEEDS_PLACE, id);
         Set<String> placeIds = collectPlaceIds(id, places);
         CatalogValidation.require(placeIds.contains(coverPlaceId), CatalogMessages.COVER_PLACE_MISSING, coverPlaceId);
+        CatalogValidation.require(places.stream().anyMatch(place -> place.id().equals(coverPlaceId) && !place.photos().isEmpty()),
+                CatalogMessages.COVER_PLACE_NEEDS_PHOTO, coverPlaceId);
         validateGuide(guide, placeIds);
     }
 
@@ -56,6 +68,16 @@ public record Destination(
             CatalogValidation.require(ids.add(place.id()), CatalogMessages.PLACE_ID_DUPLICATED, place.id());
         }
         return ids;
+    }
+
+    /** Số khoảnh khắc trong giới hạn và mã không trùng. */
+    private static void validateMoments(String destinationId, List<Moment> moments) {
+        CatalogValidation.require(moments.size() <= CatalogConstants.MAX_MOMENTS_PER_DESTINATION,
+                CatalogMessages.DESTINATION_TOO_MANY_MOMENTS, destinationId, CatalogConstants.MAX_MOMENTS_PER_DESTINATION);
+        Set<String> ids = new HashSet<>();
+        for (Moment moment : moments) {
+            CatalogValidation.require(ids.add(moment.id()), CatalogMessages.MOMENT_ID_DUPLICATED, moment.id());
+        }
     }
 
     /** Mã khối cẩm nang không trùng và mọi dòng trỏ tới địa điểm đều trỏ vào địa điểm có trong điểm đến. */

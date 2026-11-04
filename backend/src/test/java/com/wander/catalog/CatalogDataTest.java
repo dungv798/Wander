@@ -25,7 +25,7 @@ class CatalogDataTest {
     private static final Set<String> OPEN_LICENSES = Set.of("CC BY 2.0", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 4.0", "CC0", "Public domain");
 
     @Test
-    @DisplayName("kho thật nạp được; mỗi địa điểm có tọa độ, ít nhất một ảnh, đủ ghi công, giấy phép mở")
+    @DisplayName("kho thật nạp được; mỗi địa điểm có tọa độ; ảnh đã khai báo đủ ghi công, giấy phép mở (địa điểm được phép chưa có ảnh, DR-033)")
     void realCatalogIsValid() {
         var catalog = new ClasspathPlaceCatalog(REAL);
         assertThat(catalog.searchDestinations("")).isNotEmpty();
@@ -33,7 +33,6 @@ class CatalogDataTest {
         assertThat(ha.places()).hasSizeGreaterThanOrEqualTo(9);
         for (Place p : ha.places()) {
             assertThat(p.location()).as("tọa độ của " + p.id()).isNotNull();
-            assertThat(p.photos()).as("ảnh của " + p.id()).isNotEmpty();
             p.photos().forEach(ph -> assertThat(OPEN_LICENSES).as("giấy phép ảnh " + ph.file()).contains(ph.license()));
         }
     }
@@ -43,11 +42,17 @@ class CatalogDataTest {
     void realTemplatesAreValid() {
         var catalog = new ClasspathPlaceCatalog(REAL, REAL_TEMPLATES);
         List<ItineraryTemplate> templates = catalog.templates("ha-giang");
-        assertThat(templates).extracting(ItineraryTemplate::id).containsExactly("vong-cung-3-ngay", "dong-van-cuoi-tuan", "tay-bac-leo-nui");
-        assertThat(templates).extracting(ItineraryTemplate::status).containsOnly(TemplateStatus.APPROVED);
+        assertThat(templates).extracting(ItineraryTemplate::id).containsExactly("vong-cung-3-ngay", "dong-van-cuoi-tuan", "tay-bac-leo-nui", "vong-cung-4-ngay");
+        assertThat(templates).extracting(ItineraryTemplate::status).containsExactly(TemplateStatus.APPROVED, TemplateStatus.APPROVED, TemplateStatus.APPROVED, TemplateStatus.REFERENCE);
         Set<String> placeIds = catalog.destination("ha-giang").orElseThrow().places().stream().map(Place::id).collect(java.util.stream.Collectors.toSet());
         for (ItineraryTemplate t : templates) {
             t.days().forEach(day -> assertThat(placeIds).containsAll(day.placeIds()));
+        }
+        for (String destination : List.of("hoi-an", "vinh-hy", "ta-xua")) {
+            var reference = catalog.templates(destination);
+            assertThat(reference).as("lịch trình tham khảo của " + destination).isNotEmpty().extracting(ItineraryTemplate::status).containsOnly(TemplateStatus.REFERENCE);
+            Set<String> ids = catalog.destination(destination).orElseThrow().places().stream().map(Place::id).collect(java.util.stream.Collectors.toSet());
+            reference.forEach(t -> t.days().forEach(day -> assertThat(ids).containsAll(day.placeIds())));
         }
         assertThat(catalog.templates("khong-co")).isEmpty();
         assertThat(catalog.templates(null)).isEmpty();
@@ -104,9 +109,9 @@ class CatalogDataTest {
         Path templates = Files.createDirectory(dir.resolve("templates"));
         String destinations = "file:" + dir + "/ha-giang.json";
 
-        Files.writeString(templates.resolve("a.json"), valid.replace("\"status\": \"approved\"", "\"status\": \"draft\""));
+        Files.writeString(templates.resolve("a.json"), valid.replace("\"status\": \"approved\"", "\"status\": \"draft\"").replace("\"status\": \"reference\"", "\"status\": \"draft\""));
         var catalog = new ClasspathPlaceCatalog(destinations, "file:" + templates + "/*.json");
-        assertThat(catalog.templates("ha-giang")).hasSize(3).extracting(ItineraryTemplate::status).containsOnly(TemplateStatus.DRAFT);
+        assertThat(catalog.templates("ha-giang")).hasSize(4).extracting(ItineraryTemplate::status).containsOnly(TemplateStatus.DRAFT);
 
         Files.writeString(templates.resolve("b.json"), valid);
         assertFails(destinations, templates, "ha-giang");
