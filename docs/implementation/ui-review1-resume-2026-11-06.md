@@ -1,0 +1,11 @@
+# Tiếp tục cùng vòng review 1/2 sau khi tiến trình bị dừng
+
+Tiếp tục các việc chưa hoàn thành trong `docs/implementation/ui-rollout-review-1-2026-11-06.md`; đây là khôi phục lượt đang làm, KHÔNG mở vòng review mới. Giữ toàn bộ code đã viết, không làm lại từ đầu. Phân công và quyền như cũ: Claude sửa web, Codex tuyển dữ liệu và review; không thêm agent, không commit/push/deploy, không sửa backend/tools/catalog hoặc master plan.
+
+Tiến trình trước đã dừng trong lúc chụp Trip; file status còn running nhưng Codex đã xác minh không còn process tương ứng. Lần này runner lưu PID/heartbeat để kiểm thật. Codex cũng đang khởi động lại backend review riêng `wander_e2e`; kiểm `.logs/claude-handoff/backend-ready.json` cùng HTTP health, không chỉ đọc chữ ready cũ. Bạn không tự reset DB/khởi động backend. Khi chưa sẵn sàng tiếp tục code và test frontend độc lập.
+
+**Chỉ đạo mới của PO trong lúc bạn đang làm:** mở rộng dữ liệu và ảnh chất lượng như bộ Hà Giang sang toàn Việt Nam; Codex đang dựng thêm 8 điểm đến (Sa Pa, Cao Bằng, Ninh Bình, Hạ Long, Phong Nha, Buôn Ma Thuột, Phú Quốc, Cần Thơ), sẽ chốt trước build cuối. Không hardcode 12 điểm đến hoặc suy số lượng từ docs cũ. PO còn yêu cầu **trekking**: dùng category `leo` đang có, có lối lọc/tìm rõ và đồng bộ chip/icon. QuickFacts/đường đi cho `leo` KHÔNG được suy ra thời gian xe máy lên đỉnh hay biến khoảng cách thẳng thành tuyến trekking. Giữ duration/difficulty/tips thực tế, thể hiện điểm tham chiếu khác tuyến/đầu cung, không bịa GPX, giờ/giấy phép/độ khó/thông tin còn thiếu.
+
+Kiểm kê đầy đủ dữ liệu đã có: **136 điểm Discover + 1.434 POI ăn/uống/cafe phụ trợ** (628 Đà Lạt, 47 Hà Giang, 753 Hội An, 5 Tà Xùa, 1 Vĩnh Hy) và 85 moments trước đợt mở rộng mới. Tập POI hỗ trợ meal suggestions đã có API/UI; phải giữ và kiểm thao tác thật, đừng bỏ tính năng vì chỉ đọc 136 điểm Discover. Xem `docs/research/catalog-inventory-2026-11-06.md` nếu cần.
+
+Còn phải hoàn thiện Trip/Day/Unassigned/Suggestion/Trips/Share/Member và các màn phụ theo brief, kiểm ảnh thực. Kết quả lỗi seed/screenshot vừa gặp cần sửa theo nguyên nhân, không ngồi chờ lệnh treo: mỗi bước chụp có deadline, lỗi thì đóng browser/server trong finally và báo nguyên nhân. Đọc logs test thật. Kết thúc viết `.logs/claude-handoff/review1-result.md` đối chiếu đủ 7 mục review và chỉ đạo trekking ở trên, nêu mọi phần còn thiếu.

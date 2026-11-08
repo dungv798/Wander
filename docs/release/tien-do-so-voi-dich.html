@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiến độ so với đích đến · Wander</title>
+<style>:root{color-scheme:light;--bg:#f4f2ec;--surface:#fffefa;--ink:#242c29;--muted:#515c56;--accent:#23634f;--soft:#e3eee7;--line:#b5bdb5;--warn:#845017;--warn-bg:#fff0d8;--bad:#9c3933;--bad-bg:#fce9e5;--focus:#986000}@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#18211e;--surface:#222e29;--ink:#f2f2e8;--muted:#bdccc2;--accent:#a0d9b9;--soft:#30493b;--line:#62766a;--warn:#f2c47e;--warn-bg:#44331f;--bad:#ffb4a7;--bad-bg:#492e2b;--focus:#f6ca71}}:root[data-theme="dark"]{color-scheme:dark;--bg:#18211e;--surface:#222e29;--ink:#f2f2e8;--muted:#bdccc2;--accent:#a0d9b9;--soft:#30493b;--line:#62766a;--warn:#f2c47e;--warn-bg:#44331f;--bad:#ffb4a7;--bad-bg:#492e2b;--focus:#f6ca71}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}h1{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.15;font-weight:650}h2,h3{font-weight:650}h2{font-size:1.5rem}h3{font-size:1.12rem}p{margin:.65rem 0}a{color:var(--accent);text-underline-offset:4px}button,.navlink{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}small,.source{color:var(--muted)}.source{display:block;font-size:.8rem;margin-top:14px;overflow-wrap:anywhere}.lead{font-size:1.13rem}.panel,.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));gap:16px}.grid>.panel{margin:0;min-width:0}.chip{display:inline-block;padding:3px 10px;border-radius:6px;background:var(--soft);color:var(--accent);font-size:.85rem;font-weight:600}.open{background:var(--warn-bg);color:var(--warn)}.blocked{background:var(--bad-bg);color:var(--bad)}.number{display:inline-grid;place-items:center;width:44px;height:44px;margin-right:10px;border-radius:50%;background:var(--soft);color:var(--accent)}.stephead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.stephead h2{flex:1;min-width:170px;margin:0;font-size:1.3rem}.codebox{border:1px solid var(--line);border-radius:9px;padding:14px;margin:14px 0}pre{font:.86rem/1.65 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 10px}code{font:.88em ui-monospace,Consolas,monospace;overflow-wrap:anywhere}.done{display:flex;align-items:center;gap:12px;min-height:44px;cursor:pointer}.done input{width:24px;height:24px;accent-color:var(--accent)}.hint{color:var(--warn)}.sticky{position:sticky;top:0;z-index:2;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 20px}.sticky>div{max-width:1032px;margin:auto}.sticky progress{height:10px;display:block}.status{min-height:1.6em;color:var(--muted);font-size:.9rem}progress{accent-color:var(--accent);width:100%;height:18px}table{border-collapse:collapse;table-layout:fixed;width:100%}td,th{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}ul,ol{padding-left:22px}li{margin:8px 0}.rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.rail .panel{margin:0;padding:16px}.metric{font-size:2rem;font-weight:650;color:var(--accent)}svg{width:100%;height:auto}svg rect{fill:var(--soft);stroke:var(--accent)}svg text{fill:var(--ink);font-family:system-ui,sans-serif}svg path{fill:none;stroke:var(--accent);stroke-width:3}.must{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.must .chip{flex-shrink:0}@media(max-width:500px){header,main,footer{padding:18px}.panel,.step{padding:16px}.must{align-items:flex-start}.must .chip{max-width:100px}td,th{padding:10px 5px;font-size:.85rem}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<header>
+<div class="top">
+<a class="navlink" href="huong-dan-release.html">Mở hướng dẫn release</a>
+<button id="theme" type="button">Đổi sáng / tối</button>
+</div>
+<p>WANDER / ĐỐI CHIẾU ĐÍCH GỐC</p>
+<h1>Tiến độ so với đích đến</h1>
+<p class="lead">Lõi tính năng Must 1a đã có theo hồ sơ triển khai; chưa Replay A-12/RG-4, chưa được mở cho người lạ.</p>
+<p id="notice" role="status" class="status">
+</p>
+</header>
+<main>
+<small class="source">Nguồn hiện trạng: docs/implementation/decisions.md §3, §3b, §6 và cập nhật cuối; docs/implementation/todo.md. “plan” bên dưới = docs/wander-master-plan.md. Không tự cập nhật khi mở lại.</small>
+<section class="panel">
+<h2>Đích ban đầu là gì?</h2>
+<div class="grid">
+<p>
+<span class="number">1</span>Làm vì thích — ưu tiên số một.</p>
+<p>
+<span class="number">2</span>Nâng kỹ năng sản phẩm và phần mềm.</p>
+<p>
+<span class="number">3</span>Kiếm tiền để sau.</p>
+<p>
+<span class="number">4</span>Dùng Claude Code hiệu quả, tránh phức tạp và tốn token vô ích.</p>
+</div>
+<p>Định hướng chưa có phép đo hoàn thành: không gán % từ lượng mã hoặc tính năng thêm.</p>
+<small class="source">Nguồn: plan §1, bốn dòng mục tiêu.</small>
+</section>
+<section class="panel">
+<h2>Đến đâu so với từng lát?</h2>
+<p>Đếm mục đích gốc <b>có bằng chứng hoàn tất</b>, không đếm code. Không có bằng chứng không đồng nghĩa chưa từng làm. Phần trăm tính từ phân số x/y ghi ngay dưới mỗi thanh.</p>
+<div class="grid">
+<article class="panel">
+<h3>Lát 0</h3>
+<div class="metric">50%</div>
+<progress value="2" max="4" aria-label="Lát 0: 2 trên 4 mục có bằng chứng">
+</progress>
+<p>Công thức: 2/4 × 100% = 50%.</p>
+<p>Phân tích file và thiết kế Q16 có bằng chứng. Phỏng vấn người đi cùng/dry replay: UNVERIFIED.</p>
+<small class="source">Nguồn: plan §6.1 (bốn nhóm việc), §2.1; decisions §3 RG-1</small>
+</article>
+<article class="panel">
+<h3>Lát 1a · toàn bộ story</h3>
+<div class="metric">78,9%</div>
+<progress value="15" max="19" aria-label="Lát 1a · toàn bộ story: 15 trên 19 mục có bằng chứng">
+</progress>
+<p>Công thức: 15/19 × 100% = 78,9% (làm tròn 1 chữ số).</p>
+<p>Có A-0…A-11, A-13, A-14, A-16. Chưa A-12, A-15, A-17, A-18.</p>
+<small class="source">Nguồn: plan §9.1; decisions §6</small>
+</article>
+<article class="panel">
+<h3>Lát 1a · riêng Must</h3>
+<div class="metric">92,3%</div>
+<progress value="12" max="13" aria-label="Lát 1a · riêng Must: 12 trên 13 mục có bằng chứng">
+</progress>
+<p>Công thức: 12/13 × 100% = 92,3% (làm tròn 1 chữ số).</p>
+<p>A-0…A-11 có tính năng; A-12 chưa Replay. Có tính năng không đồng nghĩa đã nghiệm thu dùng thật.</p>
+<small class="source">Nguồn: plan §9.1, §6.3; decisions §6</small>
+</article>
+<article class="panel">
+<h3>Lát 1b · đúng Must gốc</h3>
+<div class="metric">60%</div>
+<progress value="3" max="5" aria-label="Lát 1b · đúng Must gốc: 3 trên 5 mục có bằng chứng">
+</progress>
+<p>Công thức: 3/5 × 100% = 60%.</p>
+<p>Có vào link/tên, completion theo người, quyền. Hai nhóm đề xuất mục và duyệt/từ chối đã đổi thành thêm trực tiếp, chỉ đề nghị xóa; chưa tính hai nhóm này đạt đích gốc.</p>
+<small class="source">Nguồn: plan §6.3 (năm nhóm); decisions: Lát 1b DR-021; todo: Lát 1b</small>
+</article>
+<article class="panel">
+<h3>Nhánh prototype swipe</h3>
+<div class="metric">0%</div>
+<progress value="0" max="1" aria-label="Nhánh prototype swipe: 0 trên 1 mục có bằng chứng">
+</progress>
+<p>Công thức: 0/1 × 100% = 0%.</p>
+<p>Chưa có kết quả quan sát theo đích nhánh. Bộ thẻ có không thay nghiên cứu người dùng: UNVERIFIED.</p>
+<small class="source">Nguồn: plan §6.1: một điều kiện xong; decisions §6 Khám phá; todo</small>
+</article>
+<article class="panel">
+<h3>Lát 2</h3>
+<div class="metric">0%</div>
+<progress value="0" max="1" aria-label="Lát 2: 0 trên 1 mục có bằng chứng">
+</progress>
+<p>Công thức: 0/1 × 100% = 0%.</p>
+<p>Chưa có bằng chứng nhóm chọn xong ít nhất ba khung giờ bằng app: UNVERIFIED.</p>
+<small class="source">Nguồn: plan §6.1: một điều kiện xong; decisions §6; todo</small>
+</article>
+<article class="panel">
+<h3>Lát 3</h3>
+<div class="metric">0%</div>
+<progress value="0" max="1" aria-label="Lát 3: 0 trên 1 mục có bằng chứng">
+</progress>
+<p>Công thức: 0/1 × 100% = 0%.</p>
+<p>Catalog có dữ liệu; chưa có bằng chứng nghiệm thu gõ tên thấy gợi ý đủ dùng cho chuyến thật: UNVERIFIED.</p>
+<small class="source">Nguồn: plan §6.1: một điều kiện xong; decisions: catalog; todo</small>
+</article>
+</div>
+<p>Lát 4+: UNVERIFIED — đích mở theo nhu cầu, chưa có mẫu số nghiệm thu cố định; không gán %. Không cộng các phép đo khác mẫu số thành một % toàn sản phẩm.</p>
+<small class="source">Nguồn: plan §6.1.</small>
+</section>
+<section class="panel">
+<h2>Lộ trình nhìn nhanh</h2>
+<table>
+<thead>
+<tr>
+<th>Lát</th>
+<th>Trạng thái</th>
+<th>Còn thiếu / giới hạn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>
+<span class="chip open">Đang làm</span>
+</td>
+<td>Phân tích và Q16 có; nghiên cứu còn UNVERIFIED.</td>
+</tr>
+<tr>
+<td>1a</td>
+<td>
+<span class="chip open">Đang làm</span>
+</td>
+<td>Tính năng Must có; cần Replay thật.</td>
+</tr>
+<tr>
+<td>1b</td>
+<td>
+<span class="chip open">Đang làm</span>
+</td>
+<td>Sáu mô-đun có mã; lệch đề xuất gốc, còn nút sửa checklist.</td>
+</tr>
+<tr>
+<td>Prototype swipe</td>
+<td>
+<span class="chip open">Chưa làm</span>
+</td>
+<td>Kết quả quan sát UNVERIFIED, bộ thẻ đã có.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>
+<span class="chip open">Chưa làm</span>
+</td>
+<td>Chưa có bằng chứng nghiệm thu vote/chốt nhóm.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>
+<span class="chip open">Chưa làm</span>
+</td>
+<td>Chưa có bằng chứng nghiệm thu gợi ý khi gõ.</td>
+</tr>
+<tr>
+<td>4+</td>
+<td>
+<span class="chip open">Hoãn</span>
+</td>
+<td>Sổ chi tiêu, xuất bản, nội dung, chế độ trong chuyến.</td>
+</tr>
+</tbody>
+</table>
+<p>“Chưa làm” ở nhánh và các lát sau chỉ phần nghiệm thu đích; kết quả là UNVERIFIED nếu tài liệu chưa ghi. “Xong” dành cho tính năng có bằng chứng dưới đây.</p>
+<small class="source">Nguồn: plan §6.1; decisions §6 và cập nhật Lát 1b DR-021; todo.md: Lát 1b</small>
+</section>
+<section class="panel">
+<h2>Must 1a — từng dòng MoSCoW</h2>
+<div class="must">
+<span>Danh tính + server + đa thiết bị + xác thực/khôi phục</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Tạo chuyến</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Ngày và thứ tính tự động</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Thêm, sửa mục</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Giờ/thời lượng tùy chọn, thứ tự thủ công</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Nội dung tự do + loại</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Chi phí: nghìn đồng → VND; trống/0/đã bao gồm</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Xóa mềm, Hoàn tác, Đã xóa gần đây, xóa vĩnh viễn mục</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Nghỉ thủ công và Việc cần làm</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Xem lịch</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Xem tổng phải trả thêm</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>Replay test</span>
+<span class="chip open">Chưa làm</span>
+</div>
+<p>MoSCoW gộp nhiều story trong một nhóm; mẫu số Must ở hình trên vẫn là A-0…A-12.</p>
+<small class="source">Nguồn: plan §6.3; decisions §6: A-0…A-16; todo: FE-10a…d</small>
+</section>
+<section class="panel">
+<h2>Tất cả story gốc</h2>
+<div class="grid">
+<div class="must">
+<span>
+<b>A-0</b> · Danh tính và đa thiết bị (D15/Q16)<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-1</b> · Tạo chuyến<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-2</b> · Ngày và thứ<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-3</b> · Thêm mục tự do<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-4</b> · Chọn loại<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-5</b> · Giờ/thời lượng, thứ tự thủ công<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-6</b> · Chi phí (D17/D18)<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-7</b> · Sửa/chuyển ngày<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-8</b> · Xóa/Hoàn tác/khôi phục/xóa vĩnh viễn mục<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-9</b> · Nghỉ thủ công<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-10</b> · Việc cần làm<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-11</b> · Lịch theo ngày<small style="display:block">Must</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-12</b> · Replay chuyến thật<small style="display:block">Must</small>
+</span>
+<span class="chip open">Chưa làm</span>
+</div>
+<div class="must">
+<span>
+<b>A-13</b> · Tổng theo ngày/loại<small style="display:block">Should</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-14</b> · Trạng thái đặt chỗ<small style="display:block">Should</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-15</b> · Giờ ước chừng<small style="display:block">Should</small>
+</span>
+<span class="chip open">Chưa làm</span>
+</div>
+<div class="must">
+<span>
+<b>A-16</b> · Danh sách việc chưa xong<small style="display:block">Should</small>
+</span>
+<span class="chip ">Xong tính năng</span>
+</div>
+<div class="must">
+<span>
+<b>A-17</b> · Gợi ý nghỉ tự động<small style="display:block">Could</small>
+</span>
+<span class="chip open">Chưa làm</span>
+</div>
+<div class="must">
+<span>
+<b>A-18</b> · Nhắc theo giờ<small style="display:block">Could</small>
+</span>
+<span class="chip open">Chưa làm</span>
+</div>
+</div>
+<small class="source">Nguồn: plan §9.1: mười chín story; decisions §6: A-0, A-1…11/A-13/A-16, A-14 và các mục chưa làm</small>
+</section>
+<section class="panel">
+<h2>Replay mới là thử chuyến thật</h2>
+<p>PO nhập chuyến Hà Giang – Tà Xùa; phân loại từng dòng A (đủ), B (phải lách), C (mất trường), D (không biết đặt đâu).</p>
+<ul>
+<li>Ít nhất 90% dòng ở A/B; không mất ngày, tiêu đề hoặc chi phí số.</li>
+<li>So hai tổng gốc 12.130K và 13.047K; mọi chênh lệch phải giải thích được từng dòng.</li>
+<li>Thứ tự thủ công giống file; mở thiết bị khác thấy đủ dữ liệu.</li>
+<li>Tạo Nghỉ hoặc Việc cần làm trong không quá ba thao tác.</li>
+</ul>
+<p>§10.5 là tiêu chí đề xuất, cần chốt/chỉnh trước khi chạy; test tự động không thay Replay.</p>
+<small class="source">Nguồn: plan §10.5; decisions §3 RG-4</small>
+</section>
+<section class="panel">
+<h2>Cổng release</h2>
+<div class="rail">
+<article class="panel">
+<h3>RG-1</h3>
+<span class="chip ">Đóng thiết kế</span>
+<p>Q16 đã duyệt; chưa đủ để phát hành.</p>
+</article>
+<article class="panel">
+<h3>RG-2</h3>
+<span class="chip blocked">Mở</span>
+<p>G7 UNVERIFIED; B2/F1 vẫn là rủi ro chấp nhận.</p>
+</article>
+<article class="panel">
+<h3>RG-3</h3>
+<span class="chip open">Hoãn</span>
+<p>Bảng gate chưa cập nhật dù mã 1b đã có.</p>
+</article>
+<article class="panel">
+<h3>RG-4</h3>
+<span class="chip blocked">Mở</span>
+<p>Replay A-12 cần PO tham gia.</p>
+</article>
+<article class="panel">
+<h3>RG-5</h3>
+<span class="chip blocked">Mở</span>
+<p>Backup/restore, proxy và cloud chưa xác minh.</p>
+</article>
+<article class="panel">
+<h3>RG-6</h3>
+<span class="chip blocked">Mở</span>
+<p>localStorage còn rủi ro XSS.</p>
+</article>
+<article class="panel">
+<h3>RG-7</h3>
+<span class="chip blocked">Mở</span>
+<p>Chưa đủ bằng chứng thiết bị thật và truy cập.</p>
+</article>
+</div>
+<p>Vì sao chặn: chưa đủ bằng chứng an toàn, vận hành và dùng thật để mở cho người lạ. Demo người quen cần bộ bốn việc tối thiểu §3b, không tự đóng gate.</p>
+<small class="source">Nguồn: decisions §3, §3b; cập nhật Lát 1b; runbook §4–6</small>
+</section>
+<section class="panel">
+<h2>Ngoài kế hoạch gốc đã làm</h2>
+<div class="grid">
+<article>
+<h3>Catalog / Khám phá</h3>
+<p>Kho biên tập, cẩm nang, bộ thẻ, lịch mẫu; không thay nghiệm thu Lát 3.</p>
+</article>
+<article>
+<h3>Khoảnh khắc</h3>
+<p>API/công cụ ảnh có; dữ liệu đang nạp, phần ngoài còn cần kiểm.</p>
+</article>
+<article>
+<h3>Onboarding</h3>
+<p>Luồng giới thiệu trực quan; không cộng vào Must 1a.</p>
+</article>
+<article>
+<h3>MapLibre</h3>
+<p>GeoMap theo ADR-015; không tính là Replay hoặc RG-7 hoàn tất.</p>
+</article>
+</div>
+<small class="source">Nguồn: decisions §6 Khám phá; §4 Giới thiệu lần đầu; Phản hồi PO DR-023/ADR-015; Khoảnh khắc DR-034; todo: dữ liệu/bản đồ</small>
+</section>
+<section class="panel">
+<h2>Bằng chứng kiểm tra</h2>
+<p>Chụp số liệu lúc <b>17:31:35 8/11/2026 (Asia/Saigon, UTC+07:00)</b>. Đọc tệp đang có; không phải chạy lại test trong phiên viết tài liệu.</p>
+<div class="grid">
+<article>
+<h3>Backend JUnit XML</h3>
+<div class="metric">383 test</div>
+<p>62 suite · fail 0 · error 0 · skip 0.</p>
+<p>Cộng thuộc tính tests/failures/errors/skipped trên testsuite; không cộng số lịch sử từ decisions.</p>
+<small>gradlew check trong Docker JDK 21, 08/11/2026: BUILD SUCCESSFUL (Checkstyle + JaCoCo qua); log .logs/be-check-2-2026-11-08.log</small>
+<small class="source">Nguồn: backend/build/test-results/test/TEST-*.xml</small>
+</article>
+<article>
+<h3>Chuỗi kiểm web nền</h3>
+<p>
+<b>ci</b>: exit 0</p>
+<p>
+<b>typecheck</b>: exit 0</p>
+<p>
+<b>lint</b>: exit 0</p>
+<p>
+<b>test</b>: exit 0</p>
+<p>
+<b>build</b>: exit 0</p>
+<p>Có DONE.</p>
+<small class="source">Nguồn: .logs/prep-web.log</small>
+</article>
+<article>
+<h3>Docker / smoke nền</h3>
+<p>Lần 1 (.logs/prep-docker-build.log, prep-smoke.log): FAIL vì Docker Desktop chưa bật.</p>
+<p>Lần 2 (smoke nhàn rỗi, code cũ): khởi động 62,6 s, đỉnh ~474 MiB (audit 30/10 ghi ~352 MiB). Lượt cuối (code mới, kèm e2e đầy đủ): docker build và smoke PASS, khởi động 30,2 s, user wander, không OOM. Chưa có bài đo tải.</p>
+<p>Web unit test: 459/459 PASS; typecheck, lint, build PASS (08/11).</p>
+<p><b>e2e trình duyệt trong container smoke: 112/112 PASS</b>, 0 fail (.logs/deploy-container-e2e.log, lượt cuối 08/11). Bộ nhớ đỉnh container chạm đúng 512 MiB (cgroup tính cả bộ nhớ đệm tệp), không OOM; dư địa thật chưa đo.</p>
+<p>e2e.status: RUNNING từ 07/11 → <b>treo/không đáng tin</b>; không coi là PASS.</p>
+<small class="source">Nguồn: .logs/prep-final5-smoke.log; .logs/deploy-container-e2e.log; .logs/prep-web.log; .logs/e2e.status</small>
+</article>
+</div>
+<details>
+<summary class="navlink">Xem toàn bộ .logs/*.status đã đọc</summary>
+<table>
+<thead>
+<tr>
+<th>Tệp</th>
+<th>Nội dung</th>
+<th>mtime (UTC+07:00)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>b-fidelity-build-final.status</td>
+<td>PASS</td>
+<td>20:17:14 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-build.status</td>
+<td>PASS</td>
+<td>18:29:17 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-camera-regression.status</td>
+<td>PASS</td>
+<td>20:26:45 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-e2e-serial.status</td>
+<td>FAIL</td>
+<td>19:34:38 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-e2e.status</td>
+<td>INTERRUPTED_INVALID</td>
+<td>18:41:02 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-lint-final.status</td>
+<td>PASS</td>
+<td>20:22:30 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-lint.status</td>
+<td>PASS</td>
+<td>18:30:21 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-production-final.status</td>
+<td>PASS</td>
+<td>19:13:32 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-production-ux-final.status</td>
+<td>FAIL</td>
+<td>19:52:56 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-recheck.status</td>
+<td>FAIL</td>
+<td>19:51:15 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-screens-camera-final.status</td>
+<td>PASS</td>
+<td>20:26:30 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-screens-final.status</td>
+<td>FAIL</td>
+<td>18:37:38 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-screens-last.status</td>
+<td>PASS</td>
+<td>20:03:44 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-screens-production.status</td>
+<td>FAIL</td>
+<td>19:28:24 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-screens-spotlight-final.status</td>
+<td>PASS</td>
+<td>20:08:29 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-screens-verified.status</td>
+<td>PASS</td>
+<td>19:54:46 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-spotlight-verified.status</td>
+<td>PASS</td>
+<td>20:07:52 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-unit-final.status</td>
+<td>PASS</td>
+<td>20:16:04 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-user-journey-final.status</td>
+<td>PASS</td>
+<td>20:20:56 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-ux-verified.status</td>
+<td>PASS</td>
+<td>19:56:21 6/11/2026</td>
+</tr>
+<tr>
+<td>b-fidelity-whitespace.status</td>
+<td>PASS</td>
+<td>20:25:00 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-build-final.status</td>
+<td>PASS</td>
+<td>15:09:21 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-e2e-final.status</td>
+<td>FAIL</td>
+<td>14:43:17 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-e2e.status</td>
+<td>FAIL</td>
+<td>14:17:30 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-final-controls.status</td>
+<td>PASS</td>
+<td>15:04:52 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-focused.status</td>
+<td>FAIL</td>
+<td>14:00:32 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-lint-final.status</td>
+<td>PASS</td>
+<td>15:08:00 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-map-lint.status</td>
+<td>PASS</td>
+<td>15:10:11 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-map-regression.status</td>
+<td>PASS</td>
+<td>15:09:01 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-recheck.status</td>
+<td>FAIL</td>
+<td>14:57:49 6/11/2026</td>
+</tr>
+<tr>
+<td>b-parity-screens-map-final.status</td>
+<td>PASS</td>
+<td>15:09:54 6/11/2026</td>
+</tr>
+<tr>
+<td>backend-build.status</td>
+<td>PASS</td>
+<td>06:09:53 7/11/2026</td>
+</tr>
+<tr>
+<td>backend-test.status</td>
+<td>PASS</td>
+<td>21:47:40 7/11/2026</td>
+</tr>
+<tr>
+<td>codex-ui-focused.status</td>
+<td>PASS</td>
+<td>10:55:27 6/11/2026</td>
+</tr>
+<tr>
+<td>db-up.status</td>
+<td>PASS</td>
+<td>22:07:47 2/11/2026</td>
+</tr>
+<tr>
+<td>doctor.status</td>
+<td>FAIL</td>
+<td>19:50:17 7/11/2026</td>
+</tr>
+<tr>
+<td>e2e.status</td>
+<td>RUNNING</td>
+<td>22:16:57 7/11/2026</td>
+</tr>
+<tr>
+<td>help.status</td>
+<td>PASS</td>
+<td>22:45:19 6/11/2026</td>
+</tr>
+<tr>
+<td>install-tools.status</td>
+<td>PASS</td>
+<td>07:18:17 24/10/2026</td>
+</tr>
+<tr>
+<td>run.status</td>
+<td>RUNNING</td>
+<td>09:48:50 5/11/2026</td>
+</tr>
+<tr>
+<td>verify.status</td>
+<td>FAIL</td>
+<td>21:47:00 4/11/2026</td>
+</tr>
+<tr>
+<td>web-build.status</td>
+<td>PASS</td>
+<td>10:03:08 3/11/2026</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>PASS/FAIL cũ không chứng minh mã chưa commit hiện tại. Không tổng hợp các tệp thành “toàn bộ xanh”.</p>
+<small class="source">Nguồn: .logs/*.status: tên tệp là nguồn từng dòng; mtime từ filesystem</small>
+</section>
+<section class="panel">
+<h2>Nguồn chưa thống nhất</h2>
+<ul>
+<li>decisions §6 còn ghi 1b chưa làm; cập nhật DR-021 và todo ghi có mã. Dùng cập nhật mới cho tính năng, giữ RG-3 Hoãn đúng bảng gate.</li>
+<li>Luồng 1b gốc đề xuất/duyệt khác DR-021: thêm trực tiếp, chỉ đề nghị xóa. Chưa tính tương đương đích gốc.</li>
+<li>Hàng “chưa chắc ngày” còn OPEN, nhưng DR-018 và lát backend có datesTentative; ngày đi/về vẫn bắt buộc theo R5. Cần PO đối chiếu cách diễn giải còn mở.</li>
+<li>RG-5 còn mô tả AWS/client IP cũ; application.yml đã có hop mặc định 0. Demo theo render.yaml/runbook; gate chưa tự đóng.</li>
+</ul>
+<small class="source">Nguồn: decisions §2, §3, §6; Lát backend 4–6; Lát 1b DR-021; todo; application.yml; render.yaml</small>
+</section>
+<section class="panel">
+<h2>Còn chờ PO</h2>
+<h3>Rủi ro và an toàn</h3>
+<ul>
+<li>B2/F1 đã chấp nhận: nhắc lại khi xét RG-2; chưa khắc phục.</li>
+<li>RG-2: mô hình đe dọa, tiêu chí đo được, kết quả INV/NEG và kiểm với người dùng.</li>
+<li>RG-6: localStorage/XSS trước khi mở cho người lạ.</li>
+</ul>
+<h3>Nghiệm thu và vận hành</h3>
+<ul>
+<li>RG-4: PO chạy Replay A-12, chốt tiêu chí §10.5 và ghi thiếu sót.</li>
+<li>RG-5: giữ pepper, backup/restore, RPO/RTO/retention, proxy và TLS thật.</li>
+<li>RG-7: điện thoại thật, Safari/Firefox, trình đọc màn hình, mạng yếu.</li>
+</ul>
+<h3>Kiến trúc và phạm vi</h3>
+<ul>
+<li>AD-17: công cụ trace khi dựng quan sát AWS.</li>
+<li>AD-19: khung tích hợp ngoài và hàng đợi khi tới pha liên quan.</li>
+<li>“Chưa chắc ngày” so với R5: đối chiếu OPEN cũ với datesTentative đã duyệt; không tự quyết lại.</li>
+</ul>
+<small class="source">Nguồn: decisions §2, §3, §3b, Lát backend 4–6; docs/architecture/open-decisions.md AD-17/AD-19; plan §10.5</small>
+</section>
+</main>
+<footer>
+<p>Tệp offline; không tự cập nhật. Tính năng mở rộng tách riêng để không làm phồng % đích gốc.</p>
+</footer>
+<script>
+/* Hiện lỗi bộ nhớ mà không cản người đọc tiếp tục. */
+function notice(message){document.getElementById('notice').textContent=message;}
+/* Đổi giao diện và lưu nếu trình duyệt cho phép. */
+function toggleTheme(){const current=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const next=current==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('wander-release-theme',next);}catch{notice('Không lưu được giao diện; lựa chọn chỉ có hiệu lực lần mở này.');}}
+/* Nạp lựa chọn đã lưu; chỉ chấp nhận hai giá trị hợp lệ. */
+function restoreTheme(){try{const saved=localStorage.getItem('wander-release-theme');if(saved==='light'||saved==='dark')document.documentElement.dataset.theme=saved;}catch{notice('Trình duyệt chặn lưu cục bộ.');}}
+/* Bắt lỗi clipboard; vẫn chọn lệnh để sao chép thủ công được. */
+async function copyBlock(event){const box=event.currentTarget.parentElement;try{await navigator.clipboard.writeText(box.querySelector('pre').textContent);box.querySelector('.status').textContent='Đã sao chép.';}catch{box.querySelector('.status').textContent='Không truy cập được clipboard. Hãy chọn nội dung và nhấn Ctrl+C.';}}
+/* Đếm ô đã tích; rollback là bước đọc hiểu dự phòng. */
+function updateProgress(){const items=[...document.querySelectorAll('[data-step]')];const count=items.filter(item=>item.checked).length;const bar=document.getElementById('completion');if(bar){bar.max=items.length;bar.value=count;document.getElementById('completion-text').textContent=count+'/'+items.length+' bước đã đọc hoặc hoàn tất';}}
+/* Lưu ô tích; không ghi bất kỳ secret nào. */
+function saveStep(event){try{localStorage.setItem('wander-release-step-'+event.target.dataset.step,String(event.target.checked));}catch{notice('Không lưu được tiến độ; hãy tự ghi bước đã xong.');}updateProgress();}
+/* Nạp tiến độ với từng thao tác bộ nhớ được bắt lỗi. */
+function restoreSteps(){document.querySelectorAll('[data-step]').forEach(item=>{try{item.checked=localStorage.getItem('wander-release-step-'+item.dataset.step)==='true';}catch{notice('Không đọc được tiến độ đã lưu.');}item.addEventListener('change',saveStep);});updateProgress();}
+restoreTheme();restoreSteps();document.getElementById('theme').addEventListener('click',toggleTheme);document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',copyBlock));
+</script>
+</body>
+</html>

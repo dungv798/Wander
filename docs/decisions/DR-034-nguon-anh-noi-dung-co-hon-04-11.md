@@ -19,3 +19,14 @@ Cào hoặc tải ảnh từ Pinterest/Instagram/TikTok/Facebook về tự lưu:
 ## Việc kế tiếp
 - Codex (research, model rẻ): `docs/research/image-sources/TERMS.md` tóm tắt điều khoản nguồn 2 và 3 (UNVERIFIED cho tới khi đọc xong).
 - Claude: chạy pipeline ảnh mở rộng cho điểm đến yếu trước (Hà Giang, Tà Xùa, Nha Trang, Phú Yên, Quy Nhơn).
+
+## Cập nhật 05/11/2026 — cấp khóa
+- **Pexels:** PO báo trang đang hiển thị việc cấp khóa API mới tạm dừng, không xin được khóa ⇒ tạm gạt nguồn này (không phải quyết định bỏ hẳn; thử lại sau).
+- **Openverse:** không cần khóa để chạy (gọi ẩn danh, đã thử có lỗi 500 chập chờn, công cụ có thử lại); đăng ký là lệnh POST chứ không phải trang web. Không bắt buộc.
+- **Unsplash:** đường vào trang ứng dụng ở https://unsplash.com/oauth/applications (sau khi đăng nhập).
+
+## Quyết định 05/11/2026 — Unsplash: hotlink cho Khoảnh khắc và ảnh bìa (PO chọn, APPROVED)
+- **PO chọn** (AskUserQuestion): "Hotlink, chỉ cho Khoảnh khắc và ảnh bìa". Lý do kỹ thuật: điều khoản Unsplash bắt buộc dùng URL ảnh do API trả về (không lưu tệp), ghi tên nhiếp ảnh gia + liên kết gốc có `utm_source`.
+- **Đã làm:** `Photo` nhận đúng một nguồn (tệp cục bộ HOẶC URL ngoài trong danh sách cho phép `EXTERNAL_PHOTO_HOSTS` = `images.unsplash.com`); `Destination.coverPhoto` tùy chọn; chủ đề mới `hanh-trinh`; CSP `img-src` thêm `https://images.unsplash.com` (HttpConstants, ghi lý do tại chỗ); công cụ `tools/catalog/unsplash-moments.mjs`.
+- **Rủi ro chấp nhận có kiểm soát:** máy người xem gửi IP/Referer tới Unsplash; kết quả tìm kiếm Unsplash lẫn ảnh sai nơi (đã thấy Ninh Bình/Hạ Long trong kết quả Hội An, Huế) ⇒ chỉ nhận ảnh có nội dung tự nhận ra được địa danh, xem từng ảnh bằng contact sheet; không dùng chân dung cận mặt/ảnh trẻ em.
+- **Còn nợ:** (1) báo lượt dùng `download_location` cho vài ảnh bị 403 vì hết hạn mức giờ (Hội An 2–7 ảnh, Huế 1) ⇒ chạy lại sau 1 giờ; (2) chế độ Demo (50 lượt/giờ) chỉ đủ cho phát triển, chạy thật phải gửi đơn duyệt (RG-2 đã chặn việc mở cho người lạ); (3) **Secret Key đã bị dán vào chat ⇒ PO nên tạo lại (regenerate) ở trang ứng dụng Unsplash** (không dùng trong mã).

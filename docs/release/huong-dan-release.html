@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn release cho người mới · Wander</title>
+<style>:root{color-scheme:light;--bg:#f4f2ec;--surface:#fffefa;--ink:#242c29;--muted:#515c56;--accent:#23634f;--soft:#e3eee7;--line:#b5bdb5;--warn:#845017;--warn-bg:#fff0d8;--bad:#9c3933;--bad-bg:#fce9e5;--focus:#986000}@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#18211e;--surface:#222e29;--ink:#f2f2e8;--muted:#bdccc2;--accent:#a0d9b9;--soft:#30493b;--line:#62766a;--warn:#f2c47e;--warn-bg:#44331f;--bad:#ffb4a7;--bad-bg:#492e2b;--focus:#f6ca71}}:root[data-theme="dark"]{color-scheme:dark;--bg:#18211e;--surface:#222e29;--ink:#f2f2e8;--muted:#bdccc2;--accent:#a0d9b9;--soft:#30493b;--line:#62766a;--warn:#f2c47e;--warn-bg:#44331f;--bad:#ffb4a7;--bad-bg:#492e2b;--focus:#f6ca71}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}h1{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.15;font-weight:650}h2,h3{font-weight:650}h2{font-size:1.5rem}h3{font-size:1.12rem}p{margin:.65rem 0}a{color:var(--accent);text-underline-offset:4px}button,.navlink{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}small,.source{color:var(--muted)}.source{display:block;font-size:.8rem;margin-top:14px;overflow-wrap:anywhere}.lead{font-size:1.13rem}.panel,.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));gap:16px}.grid>.panel{margin:0;min-width:0}.chip{display:inline-block;padding:3px 10px;border-radius:6px;background:var(--soft);color:var(--accent);font-size:.85rem;font-weight:600}.open{background:var(--warn-bg);color:var(--warn)}.blocked{background:var(--bad-bg);color:var(--bad)}.number{display:inline-grid;place-items:center;width:44px;height:44px;margin-right:10px;border-radius:50%;background:var(--soft);color:var(--accent)}.stephead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.stephead h2{flex:1;min-width:170px;margin:0;font-size:1.3rem}.codebox{border:1px solid var(--line);border-radius:9px;padding:14px;margin:14px 0}pre{font:.86rem/1.65 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 10px}code{font:.88em ui-monospace,Consolas,monospace;overflow-wrap:anywhere}.done{display:flex;align-items:center;gap:12px;min-height:44px;cursor:pointer}.done input{width:24px;height:24px;accent-color:var(--accent)}.hint{color:var(--warn)}.sticky{position:sticky;top:0;z-index:2;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 20px}.sticky>div{max-width:1032px;margin:auto}.sticky progress{height:10px;display:block}.status{min-height:1.6em;color:var(--muted);font-size:.9rem}progress{accent-color:var(--accent);width:100%;height:18px}table{border-collapse:collapse;table-layout:fixed;width:100%}td,th{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}ul,ol{padding-left:22px}li{margin:8px 0}.rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.rail .panel{margin:0;padding:16px}.metric{font-size:2rem;font-weight:650;color:var(--accent)}svg{width:100%;height:auto}svg rect{fill:var(--soft);stroke:var(--accent)}svg text{fill:var(--ink);font-family:system-ui,sans-serif}svg path{fill:none;stroke:var(--accent);stroke-width:3}.must{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.must .chip{flex-shrink:0}@media(max-width:500px){header,main,footer{padding:18px}.panel,.step{padding:16px}.must{align-items:flex-start}.must .chip{max-width:100px}td,th{padding:10px 5px;font-size:.85rem}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<div class="sticky">
+<div>
+<span id="completion-text">0/14 bước</span>
+<progress id="completion" aria-label="Tiến độ hướng dẫn" max="14" value="0">
+</progress>
+</div>
+</div>
+<header>
+<div class="top">
+<a class="navlink" href="tien-do-so-voi-dich.html">Xem tiến độ so với đích</a>
+<button id="theme" type="button">Đổi sáng / tối</button>
+</div>
+<p>WANDER / SỔ TAY CHO PO</p>
+<h1>Hướng dẫn release cho người mới</h1>
+<p class="lead">Làm lần lượt từ bước 0; đánh dấu sau khi kiểm được kết quả.</p>
+<p id="notice" role="status" class="status">
+</p>
+</header>
+<main>
+<section class="panel">
+<h2>Một hình để hiểu hệ thống</h2>
+<svg viewBox="0 0 340 340" role="img" aria-labelledby="flow-title flow-desc">
+<title id="flow-title">Điện thoại → Render → Neon</title>
+<desc id="flow-desc">Điện thoại gọi HTTPS tới Render Docker Free, Render kết nối TLS tới PostgreSQL Neon.</desc>
+<rect x="40" y="8" width="260" height="76" rx="12"/>
+<text x="170" y="51" text-anchor="middle" font-size="20">Điện thoại</text>
+<path d="M170 84v37m-8-10 8 10 8-10"/>
+<rect x="40" y="122" width="260" height="86" rx="12"/>
+<text x="170" y="157" text-anchor="middle" font-size="20">Render</text>
+<text x="170" y="186" text-anchor="middle" font-size="16">Docker · Free · HTTPS</text>
+<path d="M170 208v37m-8-10 8 10 8-10"/>
+<rect x="40" y="246" width="260" height="84" rx="12"/>
+<text x="170" y="280" text-anchor="middle" font-size="20">Neon</text>
+<text x="170" y="308" text-anchor="middle" font-size="16">PostgreSQL · TLS</text>
+</svg>
+<small class="source">Nguồn: render.yaml; Dockerfile; runbook §2–3.</small>
+</section>
+<section class="panel">
+<h2>Release nghĩa là gì ở đây?</h2>
+<p>CHỈ là bản demo cho PO và người quen. KHÔNG mở cho người lạ khi RG-2/RG-5/RG-6/RG-7 còn mở.</p>
+<table>
+<thead>
+<tr>
+<th>Ai được dùng</th>
+<th>Điều kiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PO / người quen</td>
+<td>Được khi hoàn tất bộ 4 việc tối thiểu và smoke đạt.</td>
+</tr>
+<tr>
+<td>Người lạ</td>
+<td>
+<span class="chip blocked">Chưa được</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="grid">
+<p>
+<b>A / Giữ dữ liệu</b>
+<br>Sao lưu pepper + thử restore một lần.</p>
+<p>
+<b>B / Đúng người gọi</b>
+<br>Đo proxy hop rồi mới đặt.</p>
+<p>
+<b>C / Dùng thật</b>
+<br>Thử trên điện thoại thật.</p>
+<p>
+<b>D / Rà XSS</b>
+<br>Tài liệu đã ghi quét; commit mới cần đối chiếu lại.</p>
+</div>
+<small class="source">Nguồn: docs/implementation/decisions.md §3, §3b (DR-032). “runbook” bên dưới = docs/implementation/free-deployment-runbook.md; “audit” = deployment-security-audit-2026-10-30.md cùng thư mục.</small>
+</section>
+<section class="step" id="buoc-0">
+<div class="stephead">
+<span class="number">0</span>
+<h2>Cài công cụ</h2>
+<span class="chip">Máy bạn</span>
+</div>
+<p>Chuẩn bị đúng phiên bản và bật Docker Desktop.</p>
+<div class="codebox">
+<small>Lệnh PowerShell · root repo · thay placeholder nếu có</small>
+<pre>java -version
+node --version
+docker version
+git --version</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Java 21; Node 24; git; Docker Desktop phải đang chạy.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Sai phiên bản: sửa PATH rồi mở PowerShell mới. Docker lỗi: mở Desktop, chờ engine sẵn sàng.</p>
+<label class="done">
+<input type="checkbox" data-step="0">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: Dockerfile; runbook §1</small>
+</section>
+<section class="step" id="buoc-1">
+<div class="stephead">
+<span class="number">1</span>
+<h2>Kiểm local</h2>
+<span class="chip">Claude/Codex làm được</span>
+</div>
+<p>Chỉ đưa bản vượt kiểm tra lên cloud.</p>
+<div class="codebox">
+<small>Lệnh PowerShell · root repo · thay placeholder nếu có</small>
+<pre>npm --prefix web ci
+npm --prefix web run typecheck
+npm --prefix web run lint
+npm --prefix web test
+npm --prefix web run build
+Push-Location backend
+try { ./gradlew.bat check bootJar --console=plain } finally { Pop-Location }
+docker build -t wander:deploy-audit .
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy/smoke.ps1 -FullE2e</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Chạy lần lượt tại root repo, dừng ở lệnh lỗi. Smoke dùng container/DB riêng; không dùng dữ liệu local thật.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Đọc log bước hỏng; không lấy kết quả cũ thay cho commit mới.</p>
+<label class="done">
+<input type="checkbox" data-step="1">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §1</small>
+</section>
+<section class="step" id="buoc-2">
+<div class="stephead">
+<span class="number">2</span>
+<h2>Chốt commit sạch</h2>
+<span class="chip">Claude/Codex làm được</span>
+</div>
+<p>Ghim đúng mã đã kiểm để quay lại được.</p>
+<div class="codebox">
+<small>Lệnh PowerShell · root repo · thay placeholder nếu có</small>
+<pre>git status --short
+git diff --stat
+git rev-parse HEAD</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Hiện có hàng trăm thay đổi chưa commit. PO chọn phạm vi; Claude chỉ commit khi PO bảo. KHÔNG gom .mcp.json, .claude/settings.local.json hoặc thư mục nghiên cứu chưa theo dõi. Sau commit được duyệt: kiểm cây làm việc sạch, kiểm lại đúng commit, ghi SHA.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Còn chỉnh sửa khác: tách việc với Claude; không reset/clean để làm sạch.</p>
+<label class="done">
+<input type="checkbox" data-step="2">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: audit: Điều kiện cho bước cloud; runbook §3, §6</small>
+</section>
+<section class="step" id="buoc-3">
+<div class="stephead">
+<span class="number">3</span>
+<h2>Tạo tài khoản và DB Neon</h2>
+<span class="chip">Bạn tự làm trên web</span>
+</div>
+<p>Tách DB demo khỏi dữ liệu khác.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>Gói: Free
+Vùng: AWS Singapore
+Database: wander
+PostgreSQL: 17 nếu có
+Endpoint: direct (lượt đầu không dùng pooler)</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Tạo DB riêng, giữ hostname và role để nhập Render.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Không có đúng lựa chọn Free/vùng: dừng đối chiếu dashboard; không tự nâng gói.</p>
+<label class="done">
+<input type="checkbox" data-step="3">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §2</small>
+</section>
+<section class="step" id="buoc-4">
+<div class="stephead">
+<span class="number">4</span>
+<h2>Sinh và giữ pepper</h2>
+<span class="chip">Máy bạn</span>
+</div>
+<p>Giữ chìa khóa xác minh mọi mã khôi phục.</p>
+<div class="codebox">
+<small>Lệnh PowerShell · root repo · thay placeholder nếu có</small>
+<pre>powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy/new-pepper.ps1</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>LƯU BẢN SAO vào password manager TRƯỚC khi deploy. Script sinh 48 byte, đưa Base64 vào clipboard. Mất pepper = mất vĩnh viễn mọi mã khôi phục dùng khóa đó. Chỉ sinh cho DB mới; không thay khóa đang dùng.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Clipboard lỗi: sửa clipboard rồi chạy lại; không in pepper để chữa lỗi.</p>
+<label class="done">
+<input type="checkbox" data-step="4">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §2, §5; application.yml; tools/deploy/new-pepper.ps1</small>
+</section>
+<section class="step" id="buoc-5">
+<div class="stephead">
+<span class="number">5</span>
+<h2>Tạo service Render</h2>
+<span class="chip">Bạn tự làm trên web</span>
+</div>
+<p>Dùng cấu hình Docker đã chuẩn bị trong repo.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>Blueprint từ render.yaml
+Runtime: Docker · Plan: Free · Region: Singapore
+Auto deploy: OFF
+Health: /actuator/health/readiness</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Chọn repo và SHA đã kiểm; đối chiếu Free trước khi tạo. Nếu Blueprint yêu cầu biến hoặc tự deploy ngay, nhập bước 6 với hops=0, chưa mời ai. Image gồm web/JVM, profile free, /app/web, bind 0.0.0.0, PORT từ platform.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Readiness UP không chứng minh DB khỏe: vẫn smoke API riêng.</p>
+<label class="done">
+<input type="checkbox" data-step="5">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: render.yaml; Dockerfile; application-free.yml; audit: readiness</small>
+</section>
+<section class="step" id="buoc-6">
+<div class="stephead">
+<span class="number">6</span>
+<h2>Nhập biến môi trường</h2>
+<span class="chip">Bạn tự làm trên web</span>
+</div>
+<p>Nối service với DB và khóa qua runtime vars.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>SPRING_PROFILES_ACTIVE=free
+WANDER_RECOVERY_KEY_VERSION=v1
+WANDER_TRUSTED_PROXY_HOPS=0</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Dùng bảng dưới. Không dán secret vào chat, Git, build args hoặc VITE_*. Khóa v1 phải giữ đúng giá trị đã sao lưu.</p>
+<table>
+<thead>
+<tr>
+<th>Biến runtime</th>
+<th>Điền gì</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>WANDER_DB_URL</code>
+</td>
+<td>
+<code>jdbc:postgresql://&lt;direct-host&gt;:5432/wander?sslmode=verify-full&amp;sslfactory=org.postgresql.ssl.DefaultJavaSSLFactory</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>WANDER_DB_USER</code>
+</td>
+<td>
+<code>Role DB demo từ Neon</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>WANDER_DB_PASSWORD</code>
+</td>
+<td>
+<code>Secret của role; chỉ nhập Render</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>WANDER_RECOVERY_PEPPER</code>
+</td>
+<td>
+<code>Base64 đã sao lưu password manager</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>WANDER_RECOVERY_KEY_VERSION</code>
+</td>
+<td>
+<code>v1 cho DB mới</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>WANDER_TRUSTED_PROXY_HOPS</code>
+</td>
+<td>
+<code>0 ban đầu; chỉ đổi theo bước 9</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Giữ hostname Neon để xác minh TLS/SNI, không thay bằng IP. SPRING_PROFILES_ACTIVE=free đã có trong render.yaml.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> TLS lỗi: kiểm hostname và trust CA, không bỏ verify. Thiếu pepper/sai nhãn: sửa cấu hình, không lách guard.</p>
+<label class="done">
+<input type="checkbox" data-step="6">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: render.yaml; application.yml; runbook §2–5</small>
+</section>
+<section class="step" id="buoc-7">
+<div class="stephead">
+<span class="number">7</span>
+<h2>Deploy lần đầu, chưa mời ai</h2>
+<span class="chip">Bạn tự làm trên web</span>
+</div>
+<p>Đưa đúng commit lên demo ở cấu hình ban đầu.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>WANDER_TRUSTED_PROXY_HOPS=0</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Manual Deploy đúng SHA. Flyway tạo/nâng schema; guard khóa chạy trước readiness. Khi hops=0, cả hệ thống chung bucket: 30 danh tính và 30 khôi phục mỗi giờ.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Startup lỗi: đọc log đã che secret, kiểm DB/TLS/nhãn khóa. OOM: đo RAM, không tự nâng gói.</p>
+<label class="done">
+<input type="checkbox" data-step="7">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §3–4; application.yml</small>
+</section>
+<section class="step" id="buoc-8">
+<div class="stephead">
+<span class="number">8</span>
+<h2>Smoke sau deploy</h2>
+<span class="chip">Claude/Codex làm được</span>
+</div>
+<p>Thử luồng thật trên HTTPS và DB demo.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>1. HTTPS; root HTML/CSP; asset 200; asset thiếu 404/no-store; API private thiếu Bearer 401/no-store.
+2. Catalog, ảnh, map, worker, font tải được dưới CSP.
+3. Tạo identity/chuyến/ngày/mục; sửa/xóa/hoàn tác; ghép thiết bị; khôi phục mã hai pha; dữ liệu còn sau redeploy.</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Đây là checklist thao tác; ghi kết quả kèm SHA. Không thêm wildcard/unsafe-inline để né CSP.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Một mục hỏng: chưa mời ai; sửa đúng lỗi rồi kiểm lại.</p>
+<label class="done">
+<input type="checkbox" data-step="8">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §4 mục 1–3</small>
+</section>
+<section class="step" id="buoc-9">
+<div class="stephead">
+<span class="number">9</span>
+<h2>Đo proxy hop từ hai mạng</h2>
+<span class="chip">Claude/Codex làm được</span>
+</div>
+<p>Giới hạn tần suất phải nhận đúng người gọi.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>a. Giữ WANDER_TRUSTED_PROXY_HOPS=0, chưa mời ai.
+b. Đo từ hai mạng khác nhau: ứng dụng thấy IP nào, Render nối X-Forwarded-For ra sao.
+c. Chỉ đặt số hop bằng đúng số proxy thật đã đo.
+d. Gửi X-Forwarded-For giả: bucket người thật không đổi.</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>PO cung cấp hai mạng; Claude/Codex phân tích bằng chứng. Không có số cố định cho Render. Số 2 trong chú thích application.yml chỉ dành CloudFront → ALB. Không bật endpoint debug công khai chứa IP/header/token.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Chưa chứng minh được b hoặc d: giữ 0, chưa mời ai; không tăng số để thử.</p>
+<label class="done">
+<input type="checkbox" data-step="9">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §4 mục 4 a–d; application.yml</small>
+</section>
+<section class="step" id="buoc-10">
+<div class="stephead">
+<span class="number">10</span>
+<h2>Backup và thử restore</h2>
+<span class="chip">Máy bạn</span>
+</div>
+<p>Biết bản sao khôi phục được trước khi mời người khác.</p>
+<div class="codebox">
+<small>Lệnh PowerShell · root repo · thay placeholder nếu có</small>
+<pre>pg_dump -Fc -h &lt;direct-host&gt; -U &lt;role&gt; -d wander -f &lt;ngoai-repo&gt;/wander.dump
+pg_restore -h &lt;test-host&gt; -U &lt;test-role&gt; -d &lt;DB-test-rieng&gt; &lt;ngoai-repo&gt;/wander.dump</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Lệnh mẫu: thay placeholder; client tương thích PostgreSQL 17. Credential qua cơ chế an toàn, không password trong history. Mã hóa dump, giữ ngoài container/Git, pepper giữ riêng. Restore sang DB test một lần rồi kiểm dữ liệu; chốt RPO/RTO và retention với PO.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Restore hỏng: chưa tin backup. Không ghi đè DB thật khi chưa có quyết định cụ thể về mất dữ liệu.</p>
+<label class="done">
+<input type="checkbox" data-step="10">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: runbook §6</small>
+</section>
+<section class="step" id="buoc-11">
+<div class="stephead">
+<span class="number">11</span>
+<h2>Thử điện thoại thật (RG-7)</h2>
+<span class="chip">Máy bạn</span>
+</div>
+<p>Xác nhận luồng chính dùng được trên thiết bị cầm tay.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>Mở HTTPS trên điện thoại thật.
+Tạo/sửa chuyến và mục; kiểm ghép máy/khôi phục.
+Thử mạng yếu, cold start; ghi thiết bị/trình duyệt/lỗi.</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Thử thêm Safari/Firefox và trình đọc màn hình theo RG-7. Không retry mutation mù sau cold start gây ghi trùng. Giả lập 390px không thay thử thiết bị thật.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Có lỗi chặn luồng: dừng mời, ghi bước tái hiện để sửa.</p>
+<label class="done">
+<input type="checkbox" data-step="11">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: decisions.md §3 RG-7, §3b; runbook §4 mục 6</small>
+</section>
+<section class="step" id="buoc-12">
+<div class="stephead">
+<span class="number">12</span>
+<h2>Mời người quen, theo dõi Free</h2>
+<span class="chip">Bạn tự làm trên web</span>
+</div>
+<p>Giữ demo trong mức rủi ro PO chấp nhận.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>70% quota: cảnh báo nội bộ, theo dõi sát.
+90% quota: dừng mở rộng demo.
+Đo: startup, peak RAM, restart/OOM, warm latency; bandwidth/build minutes; Neon CU-hours/storage.</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Chỉ mời khi bộ 4 việc tối thiểu và smoke đạt. Xem quota thực trong dashboard; chủ tài khoản phải biết payment/overage. Để idle tự nhiên, kiểm Neon suspend; không cron ping. Free có cold start, không cam kết uptime.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Gần quota hoặc OOM: dừng mở rộng, điều tra; không tự tăng gói.</p>
+<label class="done">
+<input type="checkbox" data-step="12">
+<span>Đã xong bước này</span>
+</label>
+<small class="source">Nguồn: decisions.md §3b; runbook §4 mục 5–6, §7</small>
+</section>
+<section class="step" id="buoc-13">
+<div class="stephead">
+<span class="number">13</span>
+<h2>Biết cách rollback</h2>
+<span class="chip">Bạn tự làm trên web</span>
+</div>
+<p>Có đường quay lại khi bản mới lỗi.</p>
+<div class="codebox">
+<small>Phiếu thao tác / cấu hình · không chạy như lệnh shell</small>
+<pre>Trước migration: backup → kiểm commit → deploy → smoke → ghi SHA/image.
+Khi lỗi: kiểm schema tương thích → chọn SHA/image tốt → deploy → smoke.</pre>
+<button type="button" data-copy>Copy</button>
+<p class="status" role="status">
+</p>
+</div>
+<p>Bước dự phòng: tích khi đã đọc và hiểu; không cần rollback thử DB thật. Chỉ rollback app nếu schema tương thích. Không sửa migration đã áp dụng hoặc xóa Flyway history.</p>
+<p class="hint">
+<b>Nếu lỗi:</b> Schema không tương thích: dừng; restore DB cần PO quyết mức mất dữ liệu trước thao tác ghi đè.</p>
+<label class="done">
+<input type="checkbox" data-step="13">
+<span>Đã đọc cách rollback</span>
+</label>
+<small class="source">Nguồn: runbook §6</small>
+</section>
+<section class="panel">
+<h2>Đừng làm</h2>
+<ul>
+<li>Bỏ verify TLS.</li>
+<li>Đặt hops lớn hơn số proxy thực tế.</li>
+<li>Đổi pepper nhưng giữ nhãn v1.</li>
+<li>Nâng gói trả phí để chữa thiếu RAM khi chưa được PO duyệt.</li>
+<li>Cron ping Neon hoặc tạo Render Postgres Free cho dữ liệu cần giữ.</li>
+<li>Commit secret/.env hoặc đưa secret vào chat/VITE_*.</li>
+<li>Sửa migration đã áp dụng hoặc xóa Flyway history.</li>
+<li>Mở cho người lạ khi các gate vẫn mở.</li>
+</ul>
+<small class="source">Nguồn: runbook §2–7; decisions.md §3b.</small>
+</section>
+<section class="panel">
+<h2>Từ điển bỏ túi</h2>
+<dl>
+<dt>
+<b>Flyway</b>
+</dt>
+<dd>Chạy các bản thay đổi schema theo thứ tự.</dd>
+<dt>
+<b>Pepper</b>
+</dt>
+<dd>Khóa bí mật server dùng HMAC mã khôi phục; khác mật khẩu DB.</dd>
+<dt>
+<b>Readiness</b>
+</dt>
+<dd>Tín hiệu app sẵn nhận traffic; probe Free không truy vấn DB.</dd>
+<dt>
+<b>Proxy hop</b>
+</dt>
+<dd>Một proxy trung gian đáng tin giữa người gọi và app.</dd>
+<dt>
+<b>Neon</b>
+</dt>
+<dd>Nơi giữ PostgreSQL demo.</dd>
+<dt>
+<b>Render</b>
+</dt>
+<dd>Nơi chạy Docker của demo.</dd>
+<dt>
+<b>Docker image</b>
+</dt>
+<dd>Gói web, ứng dụng và runtime đã build.</dd>
+<dt>
+<b>Smoke test</b>
+</dt>
+<dd>Thử nhanh các luồng trọng yếu sau deploy.</dd>
+<dt>
+<b>Cold start</b>
+</dt>
+<dd>Lần đánh thức dịch vụ đang ngủ; cần kiểm hành vi thật.</dd>
+</dl>
+</section>
+<section class="panel">
+<h2>Chỗ nguồn dễ gây nhầm</h2>
+<p>Chú thích AWS trong application.yml nói hop 2 cho CloudFront → ALB; giá trị runtime mặc định vẫn là 0. Không sao chép 2 sang Render. RG-5 còn mô tả AWS cũ; demo theo render.yaml/runbook. application-free.yml tắt kiểm DB trong probe: readiness UP không chứng minh DB khỏe.</p>
+<small class="source">Nguồn: application.yml; application-free.yml; render.yaml; decisions.md §3; audit.</small>
+</section>
+</main>
+<footer>
+<p>Double-click để đọc offline. Dấu tích chỉ ghi nhớ cá nhân, không đóng cổng release. Không nhập secret vào trang này.</p>
+</footer>
+<script>
+/* Hiện lỗi bộ nhớ mà không cản người đọc tiếp tục. */
+function notice(message){document.getElementById('notice').textContent=message;}
+/* Đổi giao diện và lưu nếu trình duyệt cho phép. */
+function toggleTheme(){const current=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const next=current==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('wander-release-theme',next);}catch{notice('Không lưu được giao diện; lựa chọn chỉ có hiệu lực lần mở này.');}}
+/* Nạp lựa chọn đã lưu; chỉ chấp nhận hai giá trị hợp lệ. */
+function restoreTheme(){try{const saved=localStorage.getItem('wander-release-theme');if(saved==='light'||saved==='dark')document.documentElement.dataset.theme=saved;}catch{notice('Trình duyệt chặn lưu cục bộ.');}}
+/* Bắt lỗi clipboard; vẫn chọn lệnh để sao chép thủ công được. */
+async function copyBlock(event){const box=event.currentTarget.parentElement;try{await navigator.clipboard.writeText(box.querySelector('pre').textContent);box.querySelector('.status').textContent='Đã sao chép.';}catch{box.querySelector('.status').textContent='Không truy cập được clipboard. Hãy chọn nội dung và nhấn Ctrl+C.';}}
+/* Đếm ô đã tích; rollback là bước đọc hiểu dự phòng. */
+function updateProgress(){const items=[...document.querySelectorAll('[data-step]')];const count=items.filter(item=>item.checked).length;const bar=document.getElementById('completion');if(bar){bar.max=items.length;bar.value=count;document.getElementById('completion-text').textContent=count+'/'+items.length+' bước đã đọc hoặc hoàn tất';}}
+/* Lưu ô tích; không ghi bất kỳ secret nào. */
+function saveStep(event){try{localStorage.setItem('wander-release-step-'+event.target.dataset.step,String(event.target.checked));}catch{notice('Không lưu được tiến độ; hãy tự ghi bước đã xong.');}updateProgress();}
+/* Nạp tiến độ với từng thao tác bộ nhớ được bắt lỗi. */
+function restoreSteps(){document.querySelectorAll('[data-step]').forEach(item=>{try{item.checked=localStorage.getItem('wander-release-step-'+item.dataset.step)==='true';}catch{notice('Không đọc được tiến độ đã lưu.');}item.addEventListener('change',saveStep);});updateProgress();}
+restoreTheme();restoreSteps();document.getElementById('theme').addEventListener('click',toggleTheme);document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',copyBlock));
+</script>
+</body>
+</html>
