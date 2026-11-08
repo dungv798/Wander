@@ -56,10 +56,13 @@ async function phone(): Promise<{ ctx: BrowserContext; errors: string[] }> {
 test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi giữ lựa chọn sau tải lại', async () => {
   const { ctx } = await phone();
   const page = await open(ctx, '#/');
-  await page.getByRole('button', { name: /^Đổi điểm đến/ }).click();
+  await page.locator('.map-chrome .search').click();
   const map = page.locator('.destination-picker-map');
-  await page.locator('.destination-picker-list button').nth(11).waitFor();
-  assert.equal(await page.locator('.destination-picker-list button').count(), 12);
+  // Số điểm đến do danh mục backend quyết định (đang mở rộng), không hard-code.
+  const total = await page.evaluate(async () => ((await (await fetch('/api/catalog/destinations')).json()) as { destinations: unknown[] }).destinations.length);
+  assert.ok(total >= 12, 'kho danh mục có ít nhất 12 điểm đến');
+  await page.locator('.destination-picker-list button').nth(total - 1).waitFor();
+  assert.equal(await page.locator('.destination-picker-list button').count(), total);
   await page.waitForFunction(() => document.querySelector('.destination-picker-map')?.getAttribute('data-ready') === '1', undefined, { timeout: 30000 });
   const before = Number(await map.getAttribute('data-zoom'));
   await page.screenshot({ path: path.resolve(import.meta.dirname, '../../.logs/shot-destination-country.png') });
@@ -70,11 +73,11 @@ test('chọn điểm đến: bản đồ Việt Nam bay tới Đà Lạt rồi g
   assert.equal(await map.locator('.tm-accessible button').textContent(), 'Đà Lạt');
   await page.screenshot({ path: path.resolve(import.meta.dirname, '../../.logs/shot-destination-da-lat.png') });
   await page.locator('.destination-picker-list button', { hasText: 'Đà Lạt' }).click();
-  await page.waitForURL(/#\/deck\/da-lat$/); // chọn xong đi thẳng tới bộ thẻ quẹt của điểm đến, không về trang chủ
+  await page.waitForURL(/#\/dest\/da-lat$/);
   await page.evaluate(() => { location.hash = '#/'; });
-  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
+  await page.getByRole('heading', { name: 'Khám phá Việt Nam', exact: true }).waitFor();
   await page.reload();
-  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
+  await page.getByRole('heading', { name: 'Khám phá Việt Nam', exact: true }).waitFor();
   assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
   await ctx.close();
 });
@@ -96,33 +99,31 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
   const catalogPending = new Promise<void>((resolve) => { releaseCatalog = resolve; });
   const photosPending = new Promise<void>((resolve) => { releasePhotos = resolve; });
   await page.route('**/api/catalog/destinations', async (route) => { await catalogPending; await route.continue(); });
-  await page.route('**/catalog/photos/**', async (route) => { await photosPending; await route.continue(); });
+  await page.route(/\/(?:catalog\/photos|look\/icons|assets\/map-photos)\//, async (route) => { await photosPending; await route.continue(); });
   try {
+    const destinationRequest = page.waitForRequest(request => new URL(request.url()).pathname === '/api/catalog/destinations/da-lat');
     await page.goto(`${baseUrl}/#/`, { waitUntil: 'domcontentloaded' });
-    await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
+    await page.getByRole('heading', { name: 'Khám phá Việt Nam', exact: true }).waitFor();
+    await destinationRequest;
     assert.ok(details.includes('/api/catalog/destinations/da-lat'));
     assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false, 'không gọi API mặc định trước catalog');
     const catalogReady = page.waitForResponse((response) => new URL(response.url()).pathname === '/api/catalog/destinations');
     releaseCatalog();
     await catalogReady;
-    assert.equal(await page.locator('.home-map .mapcard').count(), 0, 'chưa khởi tạo bản đồ trước khi cuộn');
-    await page.evaluate(() => { location.hash = '#/dest/da-lat'; }); // bản đồ riêng ở màn điểm đến; thẻ bản đồ trang chủ có bài riêng
-    await page.locator('.mapcard').scrollIntoViewIfNeeded(); // thẻ bản đồ nằm dưới màn hình, chỉ nạp khi cuộn tới
-    await waitForNativeMap(page, '.mapcard');
-    await page.getByRole('button', { name: /Mở rộng/ }).click();
-    await page.getByRole('dialog', { name: 'Bản đồ Đà Lạt' }).waitFor();
-    // Ảnh còn chờ: bản đồ mở rộng đã sẵn sàng và vẽ ghim giữ chỗ; bộ đếm data-pins chỉ chính xác sau khi ảnh về (nợ nhỏ, xem decisions.md).
-    await page.waitForFunction(() => document.querySelector<HTMLElement>('.mapbig')?.dataset['ready'] === '1', undefined, { timeout: 45000 });
-    assert.equal(await page.locator('.mapbig').getAttribute('data-thumbnails'), '0');
+    assert.equal(await page.locator('.home-map, .mapcard, .mapbig').count(), 0, 'không còn bản đồ nhúng ở trang chủ');
+    await page.evaluate(() => { location.hash = '#/dest/da-lat'; }); // bản đồ CHÍNH của khung ứng dụng hiện các nơi của điểm đến
+    await page.waitForFunction(() => document.querySelector<HTMLElement>('.shell-map-view')?.dataset['ready'] === '1', undefined, { timeout: 45000 });
+    // Ảnh còn chờ: bản đồ chính đã sẵn sàng và vẽ ghim giữ chỗ; bộ đếm data-pins chỉ chính xác sau khi ảnh về (nợ nhỏ, xem decisions.md).
+    assert.equal(await page.locator('.shell-map-view').getAttribute('data-thumbnails'), '0');
     releasePhotos();
     try {
       await page.waitForFunction(() => {
-        const map = document.querySelector<HTMLElement>('.mapbig');
+        const map = document.querySelector<HTMLElement>('.shell-map-view');
         return Number(map?.dataset['pins']) > 0 && Number(map?.dataset['renderedImages']) === Number(map?.dataset['pins']);
       }, undefined, { timeout: 45000 });
     } catch (error) {
-      const state = await page.evaluate(() => { const map = document.querySelector<HTMLElement>('.mapbig'); return map ? JSON.stringify({ ...map.dataset, features: undefined }) : 'không có .mapbig'; }).catch(() => 'không đọc được');
-      throw new Error(`Ghim bản đồ mở rộng chưa hiện ảnh sau khi nhả ảnh: ${state}`, { cause: error });
+      const state = await page.evaluate(() => { const map = document.querySelector<HTMLElement>('.shell-map-view'); return map ? JSON.stringify({ ...map.dataset, features: undefined }) : 'không có .shell-map-view'; }).catch(() => 'không đọc được');
+      throw new Error(`Ghim bản đồ chính chưa hiện ảnh sau khi nhả ảnh: ${state}`, { cause: error });
     }
     assert.equal(details.includes('/api/catalog/destinations/ha-giang'), false);
     assert.equal(await page.evaluate(() => localStorage.getItem('wander.web.destination.v1')), 'da-lat');
@@ -134,7 +135,7 @@ test('Đà Lạt đã lưu: không tải Hà Giang khi catalog chậm; ảnh ghi
   }
 });
 
-test('trang chủ: thẻ bản đồ nhỏ chỉ khởi tạo khi cuộn tới, mở rộng và đóng được', async () => {
+test('trang chủ: không có bản đồ nhúng; đúng một canvas; nút Bản đồ thu tờ để dùng bản đồ chính và mở lại được', async () => {
   const { ctx, errors } = await phone();
   const page = await ctx.newPage();
   await page.addInitScript(() => {
@@ -142,33 +143,30 @@ test('trang chủ: thẻ bản đồ nhỏ chỉ khởi tạo khi cuộn tới, 
     localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
   });
   await page.goto(`${baseUrl}/#/`);
-  await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
-  assert.equal(await page.locator('.home-map .mapcard').count(), 0, 'chưa khởi tạo bản đồ trước khi cuộn');
-  await page.locator('.home-map').scrollIntoViewIfNeeded();
-  await waitForNativeMap(page, '.home-map .mapcard');
-  await page.locator('#screen').evaluate(el => { el.scrollTop = el.scrollHeight; });
-  await page.waitForFunction(() => {
-    const map = document.querySelector<HTMLElement>('.home-map .mapcard');
-    const canvas = map?.querySelector('canvas');
-    const screen = document.querySelector('#screen')?.getBoundingClientRect();
-    const tab = document.querySelector('#tabbar')?.getBoundingClientRect();
-    if (!map || !canvas || !screen || !tab) return false;
-    const rect = map.getBoundingClientRect();
-    let opacity = 1;
-    for (let ancestor: HTMLElement | null = map; ancestor; ancestor = ancestor.parentElement) {
-      const style = getComputedStyle(ancestor);
-      if (style.visibility !== 'visible' || style.display === 'none') return false;
-      opacity *= Number(style.opacity);
-    }
-    return map.dataset['ready'] === '1' && canvas.width > 0 && canvas.height > 0
-      && canvas.clientWidth > 0 && canvas.clientHeight > 0 && opacity === 1
-      && rect.top >= Math.max(0, screen.top) && rect.bottom <= Math.min(innerHeight, screen.bottom, tab.top)
-      && rect.left >= screen.left && rect.right <= screen.right;
-  }, undefined, { timeout: 15000 });
-  await page.getByRole('button', { name: /Mở rộng/ }).click();
-  await page.getByRole('dialog', { name: 'Bản đồ Đà Lạt' }).waitFor();
-  await page.keyboard.press('Escape');
-  await page.getByRole('dialog', { name: 'Bản đồ Đà Lạt' }).waitFor({ state: 'detached' });
+  await page.getByRole('heading', { name: 'Khám phá Việt Nam', exact: true }).waitFor();
+  assert.equal(await page.locator('.home-map, .mapcard, .mapbig, .map-section').count(), 0, 'trang chủ không nhúng bản đồ riêng');
+  await waitForNativeMap(page, '.shell-map-view');
+  assert.equal(await page.locator('canvas.maplibregl-canvas').count(), 1, 'toàn trang chỉ có một canvas bản đồ');
+  assert.equal(await page.locator('.app').getAttribute('data-sheet'), 'open');
+  await page.getByRole('button', { name: 'Thu bảng để xem bản đồ', exact: true }).click();
+  await page.locator('.app[data-sheet="peek"]').waitFor();
+  assert.equal(await page.locator('canvas.maplibregl-canvas').count(), 1, 'thu tờ không tạo thêm bản đồ');
+  await page.getByRole('button', { name: 'Mở lại bảng nội dung' }).click();
+  await page.locator('.app[data-sheet="open"]').waitFor();
   assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('Chuyến đi: bản đồ chính hiện ghim theo CHUYẾN của bạn, không phải điểm đến mặc định', async () => {
+  const { ctx } = await phone();
+  const page = await ctx.newPage();
+  await page.addInitScript(() => {
+    localStorage.setItem('wander.web.destination.v1', 'da-lat');
+    localStorage.setItem('wander.web.onboarding.v1', '{"done":true}');
+  });
+  await page.goto(`${baseUrl}/#/trips`);
+  await page.locator('.shell-map[data-scene]').waitFor();
+  // Chưa có chuyến nào: quay về cảnh cả nước (không dùng cảnh Đà Lạt đang chọn).
+  assert.equal(await page.locator('.shell-map').getAttribute('data-scene'), 'overview');
   await ctx.close();
 });

@@ -21,6 +21,44 @@ test.before(async () => {
 });
 test.after(async () => { await browser?.close(); await server?.close(); });
 
+interface ApiTripItem { readonly placeId: string | null; readonly day: string | null }
+
+/** TripDetail trả mục theo ngày và unscheduled; kiểm hợp đồng thật trước khi đếm hoặc tìm địa điểm. */
+function responseItems(body: unknown): readonly ApiTripItem[] {
+  const detail = body as { days: { items: ApiTripItem[] }[]; unscheduled: ApiTripItem[] };
+  assert.ok(Array.isArray(detail.days) && Array.isArray(detail.unscheduled));
+  return [...detail.days.flatMap(day => day.items), ...detail.unscheduled];
+}
+
+test('chi tiết → thêm vào chuyến cùng điểm đến → mở Chưa xếp, không trùng mục', async () => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  try {
+    const page = await ctx.newPage();
+    const tripId = await seeded(page);
+    const token = await page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').token as string, TOKEN_KEY);
+    const before = await api('GET', `/api/trips/${tripId}`, token);
+    assert.equal(before.status, 200);
+    const items = responseItems(before.body);
+    await page.goto(`${baseUrl}/#/dest/ha-giang`);
+    await page.locator('.place-row').first().waitFor();
+    const placeId = await page.locator('.place-row').evaluateAll((rows, ids) => rows.map(row => (row as HTMLElement).dataset['placeId']).find(id => id && !ids.includes(id)), items.map(item => item.placeId));
+    assert.ok(placeId);
+    await page.locator(`[data-place-id="${placeId}"] .pr-photo`).click();
+    await page.getByRole('button', { name: 'Chọn cho chuyến', exact: true }).click();
+    const form = page.getByRole('dialog').last();
+    await form.getByRole('radio', { name: /Thêm vào chuyến đi có sẵn/ }).click();
+    await form.getByLabel('Chọn chuyến đi', { exact: true }).selectOption(tripId);
+    await form.getByRole('button', { name: 'Xác nhận', exact: true }).click();
+    await page.waitForURL(new RegExp(`/trip/${tripId}/un$`));
+    await page.locator('.unassigned-tab .itinerary-stop').first().waitFor();
+    const after = await api('GET', `/api/trips/${tripId}`, token);
+    const updated = responseItems(after.body);
+    assert.equal(updated.length, items.length + 1);
+    assert.equal(updated.filter(item => item.placeId === placeId).length, 1);
+    assert.equal(updated.find(item => item.placeId === placeId)?.day, null);
+  } finally { await ctx.close(); }
+});
+
 /** Bỏ giới thiệu trước khi dựng chuyến qua backend; mỗi test có danh tính riêng. */
 async function seeded(page: Page): Promise<string> {
   await page.goto(`${baseUrl}/#/`);
@@ -45,7 +83,8 @@ test('390px: chi phí đầy đủ không cuộn ngang; sheet sát hai mép và 
     assert.equal(rect.x, 0);
     assert.equal(rect.x + rect.width, 390);
     const snap = await sheet.getAttribute('data-snap');
-    await page.getByRole('tab', { name: 'Ngày 1', exact: true }).click();
+    await page.getByRole('tab', { name: 'Lịch', exact: true }).click();
+    await page.getByRole('tab', { name: 'Ngày 1', exact: true }).waitFor();
     assert.equal(await sheet.getAttribute('data-snap'), snap);
     await page.getByRole('tab', { name: 'Tổng quan', exact: true }).click();
     await page.getByRole('button', { name: 'Xem chi tiết' }).click();
@@ -62,6 +101,7 @@ test('editor: Đã đặt giữ nguyên lưới; 1430 lưu HH:mm, hiện 14:30 v
   try {
     const page = await ctx.newPage();
     const tripId = await seeded(page);
+    await page.getByRole('tab', { name: 'Lịch', exact: true }).click();
     await page.getByRole('tab', { name: 'Ngày 1', exact: true }).click();
     const row = page.locator('.irow', { hasText: 'Ăn trưa (mẫu)' });
     await row.waitFor(); await row.click();

@@ -1,3 +1,4 @@
+import { TRIP_IMAGES } from '../model/tripImages.const.ts';
 import { useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
@@ -36,7 +37,7 @@ function TrashRow({ entry, now, onRestore, onPurge }: RowProps) {
   const photo = place?.photos[0]?.url;
   return (
     <li className={`trashrow irow ${place ? `cat-${place.category}` : kind.cat}`}>
-      <div className={photo ? 'im' : 'im ktile'}>{photo ? <img alt="" src={photo} /> : <Icon semantic name={kind.icon} size="l" />}</div>
+      <div className={photo ? 'im' : 'im ktile'}>{photo ? <img loading="lazy" decoding="async" width={TRIP_IMAGES.ITEM.width} height={TRIP_IMAGES.ITEM.height} alt="" src={photo} /> : <Icon semantic name={kind.icon} size="l" />}</div>
       <div className="tx">
         <span className="kind">
           <Icon semantic name={place ? CATEGORY_ICON[place.category] : kind.icon} size="s" />

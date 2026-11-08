@@ -32,7 +32,49 @@
 .thead .note { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dtabs { gap: 8px; border-bottom: 0; margin: 0 -16px; padding: 4px 16px 12px; }
 .dtab { min-height: var(--tap); padding: 8px 16px; border: 0; border-radius: var(--r-pill); background: var(--surface); color: var(--ink); box-shadow: var(--sh-1); }
-.dtab[aria-selected="true"] { background: var(--day-accent); color: var(--on-brand-2); box-shadow: var(--cta-glow); }
+
+/* Bìa chuyến: ảnh phủ, tên + ngày, nhóm Chia sẻ / Người đi cùng nằm ngay trên bìa. */
+.trip-cover-card { position: relative; isolation: isolate; display: grid; align-content: end; gap: var(--s-2); min-height: calc(var(--s-8) * 2 + var(--s-7)); padding: var(--s-4); border-radius: var(--r-lg); overflow: hidden; background: var(--photo-bg); color: var(--on-photo); }
+.trip-cover-card > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.trip-cover-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--hero-bottom-scrim), var(--trip-cover-top-scrim) 85%); }
+.trip-cover-card[data-cover="gradient"]::after { display: none; }
+.tcc-in { display: grid; gap: var(--s-1); text-shadow: var(--glass-photo-shadow); }
+.tcc-in h1 { margin: 0; font: 800 var(--fs-xl) / var(--lh-tight) var(--font-display); overflow-wrap: anywhere; }
+.tcc-in p { margin: 0; font: var(--text-secondary); }
+.tcc-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; background: var(--glass-label-surface); border: 1px solid var(--sheet-edge); border-radius: var(--r-md); }
+:root:not([data-look='classic']) .tcc-actions .btn { color: var(--ink); background: transparent; border: 0; border-radius: var(--r-md); box-shadow: none; backdrop-filter: none; text-shadow: none; padding-inline: var(--s-2); font: var(--text-secondary); font-weight: 700; }
+
+/* Hai tầng điều khiển: CHẾ ĐỘ (4 tab chia đều) ở trên; CHỌN NGÀY (chip nhẹ, chỉ ở Lịch) ở dưới, khác cấp về kích thước và chất liệu. */
+.trip-nav { display: grid; gap: var(--s-2); padding-block: var(--s-3) var(--s-2); }
+.tmodes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-1); padding: var(--s-1); border: var(--glass-border) solid var(--sheet-edge); border-radius: var(--r-md); background: var(--surface-2); }
+.tmode { min-height: var(--tap); padding: 0 var(--s-1); border: 0; border-radius: var(--r-sm); background: none; color: var(--muted); font: var(--text-secondary); white-space: nowrap; cursor: pointer; }
+.tmode[aria-selected="true"] { color: var(--ink); background: var(--btn-bg); box-shadow: var(--btn-shadow); font-weight: 800; }
+.tmode:focus-visible { outline: var(--focus-width) solid var(--focus); outline-offset: calc(-1 * var(--focus-width)); }
+.tdays { display: flex; gap: var(--s-2); overflow-x: auto; padding-bottom: var(--s-1); scrollbar-width: none; }
+.tdays::-webkit-scrollbar { display: none; }
+:root #screen .tdays .dtab { position: relative; flex: 1; display: grid; justify-items: center; gap: var(--s-1); padding: var(--s-2); min-width: max-content; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; font: var(--text-secondary); }
+:root #screen .tdays .dtab[aria-selected="true"]::after { content: ''; position: absolute; bottom: 0; left: var(--s-4); right: var(--s-4); height: var(--focus-width); background: var(--accent); border-radius: var(--r-pill); }
+.dtab small { font: var(--text-secondary); color: var(--muted); }
+
+/* Chân thẻ mục: Ngày / Giờ bấm đổi ngay, gắn dưới thẻ chứ không trôi nổi. */
+.itinerary-stop { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--sheet-inner-surface); }
+.itinerary-stop .swipe { border-radius: 0; box-shadow: none; background: transparent; }
+:root #screen .itinerary-stop .irow { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.irow-foot { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0 var(--s-2); border-top: 1px solid var(--line); }
+:root:not([data-look='classic']) #screen .irow-foot .foot-act { display: inline-flex; align-items: center; gap: var(--s-1); min-height: var(--tap); padding: 0 var(--s-2); border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; font: var(--text-secondary); font-weight: 700; }
+.day-tools { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+.day-tools .btn { font: var(--text-secondary); padding-inline: var(--s-3); }
+.day-tools .dayact { margin: 0; }
+.unassigned-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
+.unassigned-tools .btn { min-width: 0; padding-inline: var(--s-2); font: var(--text-secondary); font-weight: 700; }
+.itinerary-stop .assign { display: flex; flex-wrap: wrap; gap: var(--s-1); margin: 0; padding: var(--s-2); border-top: 1px solid var(--line); background: transparent; }
+.itinerary-stop .assign > span { font: var(--text-secondary); }
+:root:not([data-look='classic']) .itinerary-stop .assign .dchip { padding-inline: var(--s-2); font: var(--text-secondary); }
+#screen[data-view='trip'] .dayhead:has(.day-title-row) { display: grid; }
+.day-title-row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+.day-title-row .fchip { font: var(--text-secondary); }
+#screen[data-view='trip'] .dayhead h2 > i { width: var(--s-1); height: var(--s-4); border-radius: var(--r-pill); }
+:root:not([data-look='classic']) #screen[data-view='trip'] .grab { margin-block: calc(-1 * var(--s-3)); }
 .dchip { border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); box-shadow: var(--sh-1); }
 @media (hover: hover) { .dchip:hover { border-color: var(--day-accent); color: var(--day-accent); } }
 .irow .im b { background: var(--day-accent); color: var(--on-brand-2); }
@@ -69,11 +111,23 @@
 .irow .tx { min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .mchip { max-width: 100%; }
 
-/* Thông báo nằm dưới hàng điều hướng bản đồ, trước nội dung và ngoài vùng CTA ở mọi nấc kéo. */
+/* Thông báo nằm dưới hàng điều hướng bản đồ, trước nội dung và ngoài vùng CTA ở mọi nấc kéo (đặt ở đáy sẽ che nút Xếp / Thêm). */
 body:has(#screen[data-view="trip"]) .toast {
   top: calc(var(--s-8) + var(--s-2) + env(safe-area-inset-top, 0px));
   bottom: auto;
 }
+@media (min-width: 1280px) {
+  body:has(#screen[data-view='trip']) .toast { left: auto; right: var(--s-4); max-width: calc(var(--trip-drawer-width) - var(--s-6)); transform: none; animation: none; }
+}
+
+.trip-add { padding-bottom: var(--s-3); }
+.trip-add .btn { min-height: var(--tap); }
+.trip-cost .two .btn { white-space: nowrap; padding-inline: var(--s-2); }
+.unassigned-card .two { grid-template-columns: minmax(0, 1fr) max-content; gap: var(--s-2); }
+.unassigned-card .two .btn { white-space: nowrap; padding-inline: var(--s-3); min-height: var(--float-height); }
+.pending-selection { border: var(--glass-border) solid var(--brand-ink); background: var(--tint); }
+.pending-selection h2 { font: var(--text-card); margin-bottom: var(--s-4); }
+:root #screen[data-view='trip'] .sheetbody > div.sheet-scroll { margin-bottom: var(--hide, 0px); }
 
 /* Form trung tính: chỉ radio/chip đang chọn nhận màu nhấn của bộ token hiện có. */
 .panel:has([data-trip-form]) .fchip { box-shadow: none; text-decoration: none; }
@@ -88,9 +142,9 @@ body:has(#screen[data-view="trip"]) .toast {
     width: 100%;
     border-inline: 0;
     border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
-    background: var(--glass-highlight), var(--glass);
-    backdrop-filter: blur(var(--glass-sheet-blur));
-    box-shadow: 0 calc(-1 * var(--s-2)) var(--s-5) calc(-1 * var(--s-3)) var(--glass-active-edge);
+    background: var(--sheet-surface);
+    backdrop-filter: blur(var(--sheet-blur));
+    box-shadow: var(--sheet-shadow);
   }
 }
 :root #screen[data-view='trip'] .grab::before { width: var(--handle-width); height: var(--handle-height); background: var(--muted); }
@@ -98,8 +152,10 @@ body:has(#screen[data-view="trip"]) .toast {
 #screen[data-view='trip'] .dayhead { gap: var(--s-3); align-items: start; }
 #screen[data-view='trip'] .dayhead h2 { font: var(--text-section); }
 #screen[data-view='trip'] .dayhead .s { font: var(--text-secondary); min-width: 0; overflow-wrap: anywhere; }
-#screen[data-view='trip'] .irow { gap: var(--s-3); padding-block: var(--s-3); }
-#screen[data-view='trip'] .irow h3 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#screen[data-view='trip'] .irow { grid-template-columns: var(--s-8) minmax(0, 1fr); gap: var(--s-3); padding: var(--s-3); }
+#screen[data-view='trip'] .irow h3 { overflow: hidden; font: var(--text-card); white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }
+#screen[data-view='trip'] .irow .snip { display: none; }
+#screen[data-view='trip'] .irow .kind { font: var(--text-secondary); text-transform: none; }
 #screen[data-view='trip'] .mrow { flex-wrap: wrap; gap: var(--s-1); }
 #screen[data-view='trip'] .mchip { font: var(--text-secondary); white-space: normal; overflow-wrap: anywhere; }
 #screen[data-view='trip'] .trip-booking-chip { border: var(--glass-border) solid var(--line); border-radius: var(--r-pill); padding: var(--s-1) var(--s-2); }
@@ -141,19 +197,36 @@ body:has(#screen[data-view="trip"]) .toast {
 .trip-cover-auto small { font: var(--text-secondary); color: var(--muted); }
 .trip-cover-credits { display: flex; flex-wrap: wrap; gap: var(--s-2); font: var(--text-secondary); }
 .trip-cover-sheet { padding: var(--s-4); }
+.people-shortcuts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
+.people-shortcuts .btn { font: var(--text-secondary); padding-inline: var(--s-2); }
+.share-choice { justify-content: flex-start; text-align: left; padding-inline: var(--s-4); }
+.share-choice > span { display: grid; flex: 1; gap: var(--s-1); }
+.share-choice small { color: var(--muted); font: var(--text-secondary); }
+.mapbox .top { top: calc(var(--shell-chrome-top) + var(--shell-chrome-height) + var(--s-2)); }
+.mapbox .tm-preview { top: calc(var(--s-4) + var(--shell-chrome-height) + var(--s-3)); }
+@media (min-width: 1280px) {
+  .app #screen[data-view='trip'] { left: 0; top: 0; display: block; }
+  .app #screen[data-view='trip'] .mapbox { position: absolute; inset: 0; height: 100%; }
+  .app #screen[data-view='trip'] .sheetbody { position: absolute; top: calc(var(--shell-chrome-top) + var(--shell-chrome-height) + var(--shell-panel-gap)); left: var(--shell-panel-left); bottom: var(--shell-panel-gap); width: var(--shell-panel-width); height: auto; min-height: 0; padding: 0; border: 1px solid var(--sheet-edge); border-radius: var(--shell-sheet-radius); background: var(--sheet-surface); box-shadow: var(--shell-panel-shadow); }
+  .app #screen[data-view='trip'] .mapbox .top { left: calc(var(--shell-panel-left) + var(--shell-panel-width) + var(--shell-panel-gap)); }
+  .app #screen[data-view='trip'] .tm-preview { left: calc(var(--shell-panel-left) + var(--shell-panel-width) + var(--shell-panel-gap)); top: calc(var(--shell-chrome-top) + var(--shell-chrome-height) + var(--shell-panel-gap)); }
+  .app #screen[data-view='trip'] .sheet-head, .app #screen[data-view='trip'] .sheet-scroll > .pad-x { padding-inline: var(--s-4); }
+}
 
 /* Ký hiệu đồng có nét gạch trong glyph; giữ ký tự ₫ để sao chép/đọc màn hình nhưng cắt nét chân của glyph. */
 #screen[data-view='trip'] .bigmoney, #screen[data-view='trip'] .bigmoney b { text-decoration: none; border-bottom: 0; box-shadow: none; }
 #screen[data-view='trip'] .bigmoney .trip-money-currency { display: inline-block; font: inherit; color: inherit; line-height: 1; clip-path: inset(0 0 var(--s-1)); text-decoration: none; }
 
-/* Chừa chiều cao CTA thực tế và safe-area, kể cả nấc tờ chưa mở hết và giao diện classic. */
-:root #screen[data-view='trip'] .sheetbody > div.sheet-scroll { padding-bottom: calc(var(--hide, 0px) + var(--sheet-cta-clearance) + var(--safe-bottom) + var(--s-6)); }
+/* Nút thêm đã ở đầu tờ; phần khuất theo nấc kéo được trừ bằng margin của vùng cuộn. */
+:root #screen[data-view='trip'] .sheetbody > div.sheet-scroll { padding-bottom: calc(var(--safe-bottom) + var(--s-6)); }
 
 /* Gợi ý xếp ngày: hàng nơi + chọn ngày, dòng báo thiếu nơi */
 .plan-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; }
 .plan-row > span { min-width: 0; overflow-wrap: anywhere; }
 .plan-row select { min-height: 44px; max-width: 45%; border-radius: 12px; border: 1px solid var(--border-ctrl); background: var(--surface); color: inherit; padding: 0 10px; font: inherit; }
 .plan-short { display: flex; gap: 8px; align-items: flex-start; }
+.plan-manual { padding: var(--s-3); border: var(--glass-border) solid var(--line); border-radius: var(--r-md); background: var(--surface-2); }
+.plan-manual ul { margin: var(--s-2) 0 0; padding-left: var(--s-4); font: var(--text-body); }
 
 /* Thẻ chi phí gọn: vài dòng ngày; chi tiết ở tờ riêng */
 .cost-days { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-1); font: var(--text-secondary); color: var(--muted); }

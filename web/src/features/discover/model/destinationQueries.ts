@@ -15,7 +15,7 @@ export function placeById(d: DestinationDetail, id: string): PlaceView | null {
   return d.places.find((p) => p.id === id) ?? null;
 }
 
-/** Ảnh đầu của địa điểm (mọi địa điểm trong kho có ≥ 1 ảnh); chuỗi rỗng nếu thiếu. */
+/** Ảnh đầu của địa điểm; chuỗi rỗng nếu chưa có ảnh đã tuyển (DR-033). */
 export function firstPhotoUrl(p: PlaceView | null | undefined): string {
   return p?.photos[0]?.url ?? '';
 }

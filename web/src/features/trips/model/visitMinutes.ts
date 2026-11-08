@@ -15,7 +15,7 @@ function num(text: string): number | null {
  * Nhãn lạ hoặc rỗng trả null: bên gọi nói rõ là thiếu căn cứ thay vì tự gán thời lượng.
  */
 export function parseVisitMinutes(label: string | null | undefined): number | null {
-  const text = (label ?? '').trim().toLowerCase();
+  const text = (label ?? '').trim().toLowerCase().replace(/\s*\(tham khảo\)$/, '');
   if (!text) return null;
   if (text === 'cả ngày') return DAY_MINUTES;
   if (text === 'nửa ngày') return HALF_DAY_MINUTES;

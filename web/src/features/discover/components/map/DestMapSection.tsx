@@ -47,7 +47,7 @@ export function DestMapSection({ dest, title }: { readonly dest: DestinationDeta
   const [expanded, setExpanded] = useState(false);
   const markers = useMemo(() => placeMarkers(dest.places), [dest]);
   return (
-    <section className="stack rv">
+    <section className="stack rv map-section">
       <SectionHead
         title={title ?? fill(COPY.map.sectionTitle, { dest: dest.name })}
         right={

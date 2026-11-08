@@ -2,28 +2,27 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { createServer } from 'vite';
-import type { ViteDevServer } from 'vite';
+import { preview } from 'vite';
+import type { PreviewServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { storedTrips } from './seed.ts';
 
 const ONBOARDING_KEY = 'wander.web.onboarding.v1';
 
-let server: ViteDevServer;
+let server: PreviewServer;
 let browser: Browser;
 let baseUrl = '';
 
 test.before(async () => {
-  server = await createServer({ configFile: path.resolve(import.meta.dirname, '../vite.config.ts'), server: { port: 0 }, logLevel: 'error' });
-  await server.listen();
+  server = await preview({ root: path.resolve(import.meta.dirname, '..'), configFile: path.resolve(import.meta.dirname, '../vite.config.ts'), preview: { port: 0 }, logLevel: 'error' });
   baseUrl = (server.resolvedUrls?.local[0] ?? '').replace(/\/$/, '');
   browser = await chromium.launch({ channel: 'chrome', headless: true }).catch(() => chromium.launch({ channel: 'msedge', headless: true }));
 });
 
 test.after(async () => {
   await browser?.close();
-  await server?.close();
+  await new Promise<void>(resolve => server?.httpServer.close(() => resolve()));
 });
 
 /** Ngữ cảnh điện thoại 390×844 và danh sách lỗi console/trang. */
@@ -68,9 +67,9 @@ async function mapSettled(page: Page): Promise<void> {
 test('lần đầu vào Khám phá: giới thiệu 4 cảnh, đi hết bằng Tiếp/Quay lại, nhớ đã xem và không hiện lại', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '/#/');
-  await page.getByRole('heading', { name: 'Wander' }).waitFor();
+  await page.getByRole('heading', { name: 'Một nơi khiến bạn muốn lên đường.' }).waitFor();
   assert.match(page.url(), /#\/onboard$/);
-  await page.getByText('Quẹt nơi mê, đi cho đã.').waitFor();
+  await page.getByText('Từ bữa sáng ở chợ đến những cung đường trên mây. Tìm điều bạn muốn trải nghiệm trên bản đồ.').waitFor();
   for (const name of ['Đà Lạt', 'Hà Giang', 'Tà Xùa']) await page.locator('.ob-fan b', { hasText: name }).waitFor();
   assert.equal(await page.locator('.ob-fan').count(), 3, 'ba thẻ điểm đến');
   assert.equal(await page.locator('.ob-dots button').count(), 4);
@@ -80,13 +79,13 @@ test('lần đầu vào Khám phá: giới thiệu 4 cảnh, đi hết bằng Ti
   await page.getByRole('heading', { name: /Thích nơi nào, quẹt chọn nơi đó\./ }).waitFor();
   assert.equal(await page.getByRole('heading', { level: 1 }).evaluate((el) => document.activeElement === el), true, 'tiêu đề mới nhận focus');
   await page.getByRole('button', { name: 'Tiếp', exact: true }).click();
-  await page.getByRole('heading', { name: /Gợi ý xếp ngày, dễ chỉnh theo ý bạn\./ }).waitFor();
+  await page.getByRole('heading', { name: /Những nơi muốn đến, thành chuyến đi của bạn\./ }).waitFor();
   await page.locator('.ob-dots button').nth(3).click();
   await page.getByRole('heading', { name: /Gửi một liên kết\. Cùng nhau chốt chuyến\./ }).waitFor();
-  await page.getByText('Minh họa · sắp có').waitFor();
+  await page.getByText('Chuyến đi minh họa').waitFor();
   await page.getByRole('button', { name: 'Bắt đầu khám phá' }).waitFor();
   await page.getByRole('button', { name: 'Quay lại' }).click();
-  await page.getByRole('heading', { name: /Gợi ý xếp ngày/ }).waitFor();
+  await page.getByRole('heading', { name: /Những nơi muốn đến/ }).waitFor();
   assert.equal(await page.getByRole('button', { name: 'Bắt đầu khám phá' }).count(), 0);
   await page.locator('.ob-dots button').nth(3).click();
   await page.getByRole('button', { name: 'Bắt đầu khám phá' }).click();
@@ -180,14 +179,14 @@ test('cảnh chia sẻ: mời → sao chép → bạn vào → đề xuất; t�
   await page.getByRole('button', { name: 'Sao chép' }).click();
   await page.getByRole('button', { name: 'Đã sao chép' }).waitFor();
   await page.locator('.ob-panel.proposal.on').waitFor({ timeout: 15_000 });
-  await page.getByText('Mai đề xuất thêm vào Ngày 2 · Sáng').waitFor();
+  await page.getByText('Mai thêm một nơi muốn ghé').waitFor();
   assert.equal(await page.locator('.ob-members .ob-av').count(), 3, 'Bạn, Mai, Bảo');
-  await page.getByRole('button', { name: 'Từ chối' }).click();
-  await page.getByText('Đã từ chối · lịch giữ nguyên').waitFor();
+  await page.getByRole('button', { name: 'Để xếp sau' }).click();
+  await page.getByText('Giữ trong Chưa xếp ngày · lịch giữ nguyên').waitFor();
   assert.equal((await rowNames(page)).includes('Ga Đà Lạt'), false);
   /* xem lại rồi tự chạy thử: chấp nhận */
   await page.getByRole('button', { name: 'Xem lại' }).click();
-  await page.getByRole('button', { name: 'Chấp nhận' }).click({ timeout: 40_000 });
+  await page.getByRole('button', { name: 'Xếp vào Ngày 2' }).click({ timeout: 40_000 });
   await page.getByText('Đã thêm Ga Đà Lạt vào Ngày 2').waitFor();
   const rows = await rowNames(page);
   assert.equal(rows[0], 'Ga Đà Lạt');
@@ -245,8 +244,8 @@ test('Lịch mẫu (đã được PO duyệt 27/10: không còn nhãn nháp), xe
   await dialog.getByLabel('Tên chuyến đi').fill('Vòng cung của tôi');
   await dialog.getByRole('button', { name: 'Tạo chuyến đi' }).click();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
-  await page.locator('.thead h1').waitFor();
-  assert.equal(await page.locator('.thead h1').textContent(), 'Vòng cung của tôi');
+  await page.locator('.tcc-in h1').waitFor();
+  assert.equal(await page.locator('.tcc-in h1').textContent(), 'Vòng cung của tôi');
   const trip = (await storedTrips(page)).trips[0]!;
   const days = [...new Set(trip.items.map((i) => i.day))].sort() as string[];
   assert.equal(days.length, 3);
@@ -268,7 +267,7 @@ test('Lịch mẫu có ngày chuyển tiếp (không địa điểm mới) vẫn
   await dialog.getByRole('button', { name: 'Dùng lịch này' }).click();
   await dialog.getByRole('button', { name: 'Tạo chuyến đi' }).click();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
-  await page.locator('.thead h1').waitFor();
+  await page.locator('.tcc-in h1').waitFor();
   const trip = (await storedTrips(page)).trips[0]!;
   assert.equal(trip.items.length, 2);
   const span = (new Date(trip.endDate).getTime() - new Date(trip.startDate).getTime()) / 86_400_000;

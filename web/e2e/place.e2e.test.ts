@@ -49,7 +49,7 @@ async function openDetail() {
   const page = await ctx.newPage();
   await page.goto(`${baseUrl}/#/deck/da-lat`);
   await page.locator('.card.front').waitFor();
-  await page.locator('.actions .act').last().getByRole('button').click();
+  await page.getByRole('button', { name: 'Xem chi tiết', exact: true }).click();
   await page.locator('.place-content').waitFor();
   return { ctx, page, fixture };
 }
@@ -58,14 +58,14 @@ test('chi tiết: buổi đi mở/đóng và mô tả có trạng thái, điều
   const { ctx, page } = await openDetail();
   try {
     const toggle = page.getByRole('button', { name: /Nên đi buổi nào/ });
-    assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
-    await toggle.click();
     assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
     const body = page.locator(`[id="${await toggle.getAttribute('aria-controls')}"]`);
     assert.equal(await body.getAttribute('aria-hidden'), 'false');
     await toggle.click();
     assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
     assert.equal(await body.getAttribute('inert'), '');
+    await toggle.click();
+    assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
     const more = page.locator('.place-more');
     await more.click();
     assert.equal(await more.getAttribute('aria-expanded'), 'true');
@@ -104,6 +104,6 @@ test('chi tiết: kéo đổi tâm, zoom đổi mức và chạm ghim lân cận
     const box = await map.boundingBox();
     assert.ok(box && feature);
     await page.touchscreen.tap(box.x + feature.x, box.y + feature.y);
-    await page.locator('.place-hero-meta h2', { hasText: fixture.places[1].name }).waitFor();
+    await page.locator('.place-title', { hasText: fixture.places[1].name }).waitFor();
   } finally { await ctx.close(); }
 });

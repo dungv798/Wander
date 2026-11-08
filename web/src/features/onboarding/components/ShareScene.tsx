@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { Icon } from '../../../shared/ui/Icon.tsx';
+import { Button } from '../../../shared/ui/Button.tsx';
 import { placeById } from '../../discover/index.ts';
 import { onboardPhotoUrl } from '../model/onboardPhotos.ts';
 import { useMapHealth } from '../hooks/useMapHealth.ts';
@@ -15,7 +16,7 @@ import { InvitePanel, Members, ProposalPanel } from './SharePanels.tsx';
 import { ReplayButton } from './SwipeParts.tsx';
 import { TouchDot } from './TouchDot.tsx';
 
-/** Cảnh 4 (minh họa, sắp có): chia sẻ chính chuyến vừa xem — mời bằng liên kết, Mai/Bảo vào bằng tên hiển thị, Mai đề xuất, chủ chuyến chấp nhận hoặc từ chối; danh sách và ghim cập nhật cùng lúc. */
+/** Minh họa mời nhóm, thành viên thêm nơi muốn ghé và chủ chuyến xếp ngày; danh sách và ghim cập nhật cùng nhau, không ghi lên server. */
 export function ShareScene({ dest, reduced, auto, onInteract, onCue }: SceneProps) {
   const baseDays = useMemo(() => buildTrip((id) => placeById(dest, id)), [dest]);
   const proposal = useMemo(() => placeById(dest, PROPOSAL.placeId), [dest]);
@@ -49,13 +50,12 @@ export function ShareScene({ dest, reduced, auto, onInteract, onCue }: SceneProp
     <div ref={stage} className="ob-scene ob-share" data-focus={panelOpen ? 'panel' : undefined}>
       <PlanMap destId={ONBOARD_DESTINATION} markers={markers} route={route} focus={focus} hostRef={host} health={health}>
         <p className="ob-concept">{T.share.concept}</p>
-        <button ref={shareRef} type="button" className={`ob-sharebtn${cueShare ? ' cue' : ''}`} onClick={story.share}>
+        <Button ref={shareRef} kind="secondary" className={`ob-sharebtn${cueShare ? ' cue' : ''}`} onClick={story.share}>
           <Icon name="share-2" size="s" />
           {T.share.button}
-        </button>
+        </Button>
       </PlanMap>
-      <DaySheet days={state.days} tab={tab} rowsShown={Number.POSITIVE_INFINITY} hot={hot} onTab={(t) => { story.interrupt(); setTab(t); }} />
-      <Members ids={state.members} />
+      <DaySheet days={state.days} tab={tab} rowsShown={Number.POSITIVE_INFINITY} hot={hot} accessory={<Members ids={state.members} />} onTab={(t) => { story.interrupt(); setTab(t); }} />
       <InvitePanel open={state.shared} copied={state.copied} onCopy={story.copy} copyRef={copyRef} />
       <ProposalPanel open={state.proposed && !state.decided} place={proposal} onAccept={story.accept} onReject={story.reject} acceptRef={acceptRef} cue={cueAccept} />
       {story.toast ? <p className="ob-toast" role="status">{story.toast}</p> : null}

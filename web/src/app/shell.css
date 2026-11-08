@@ -1,0 +1,101 @@
+/* Khung ứng dụng: bản đồ bền sau các màn + tờ kính chứa nội dung. Chủ sở hữu: app/ShellMap + app/App.tsx.
+   Màn nằm trên bản đồ (`data-surface="sheet"`): Khám phá, Điểm đến, Đã chọn, Chuyến đi.
+   Điện thoại: tờ đáy, kéo thu (`data-sheet="peek"`) để xem bản đồ. Màn rộng: bảng nổi bên trái, bản đồ phủ phần còn lại. */
+
+.shell-map { position: absolute; inset: 0; z-index: 0; background: var(--map-low); }
+.shell-map[data-scene="hidden"] { visibility: hidden; pointer-events: none; }
+.shell-map-view { position: absolute; inset: 0; }
+/* Dải ghi công nằm dưới dock, luôn có liên kết nguồn nhưng không chen vào khoảng bản đồ phía trên. */
+.shell-map .maplibregl-ctrl-bottom-right, .shell-map .maplibregl-ctrl-bottom-left { top: auto; bottom: 0; max-width: 100%; }
+.shell-map .maplibregl-ctrl-attrib { margin-bottom: 0; font: 400 9px / 1.4 var(--font-body); }
+.map-chrome { position: absolute; z-index: var(--z-nav); top: calc(var(--s-4) + env(safe-area-inset-top, 0px)); left: var(--s-4); right: var(--s-4); min-height: var(--shell-chrome-height); display: flex; align-items: center; gap: var(--s-3); padding: var(--s-2) var(--s-4); border: 1px solid var(--sheet-edge); border-radius: var(--r-pill); background: var(--sheet-surface); box-shadow: var(--btn-shadow); backdrop-filter: blur(var(--sheet-blur)); }
+.map-chrome-brand { padding: 0; color: var(--ink); font: var(--text-screen); letter-spacing: var(--tracking-screen); text-transform: lowercase; }
+.map-chrome-brand > span { color: var(--accent); }
+.map-chrome-scope { display: none; }
+:root .map-chrome .search { position: static; display: flex; justify-content: flex-end; flex: 1; min-height: var(--tap); min-width: var(--tap); margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
+.map-chrome .search::before { content: none; }
+.map-chrome .search > span { display: none; }
+.app[data-surface="deck"] #screen { top: calc(var(--s-4) + var(--shell-chrome-height) + var(--s-3)); bottom: var(--s-8); }
+.app[data-surface="deck"] .shell-map .maplibregl-ctrl-bottom-right { top: auto; bottom: 0; }
+#tabbar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+:root:not([data-look='classic']) #tabbar .tab-create .ic { color: var(--accent); }
+
+.app[data-surface="sheet"] #screen {
+  z-index: var(--z-raised);
+  top: var(--shell-sheet-top);
+  left: 7px; right: 7px; bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+  border-radius: var(--shell-sheet-radius);
+  padding-bottom: var(--s-5);
+  background: var(--sheet-surface);
+  border: 1px solid var(--sheet-edge);
+  box-shadow: var(--sheet-shadow);
+  -webkit-backdrop-filter: blur(var(--sheet-blur)) saturate(1.1);
+  backdrop-filter: blur(var(--sheet-blur)) saturate(1.1);
+  transition: top var(--dur-med) var(--ease-out);
+}
+/* Thu lại: chỉ còn dải tiêu đề phía trên thanh tab; phần còn lại mờ dần để không lộ nửa nội dung sau thanh tab. */
+.app[data-surface="sheet"][data-sheet="peek"] #screen { top: calc(100% - var(--shell-peek-height)); overflow: hidden; -webkit-mask-image: linear-gradient(black var(--s-6), transparent var(--s-8)); mask-image: linear-gradient(black var(--s-6), transparent var(--s-8)); }
+
+/* Nút thu/mở tờ (chỉ điện thoại): nằm trên mép tờ, 44 px, không phụ thuộc hover. */
+.sheet-toggle {
+  position: absolute; z-index: var(--z-nav); left: 50%; translate: -50% 0; top: calc(var(--shell-sheet-top) - var(--tap) / 2);
+  display: inline-grid; place-items: center; width: var(--tap); height: var(--tap); padding: 0;
+  border: 0; border-radius: var(--r-pill); background: transparent; color: var(--ink); box-shadow: none;
+  transition: top var(--dur-med) var(--ease-out), transform var(--dur-press) var(--ease-out);
+}
+.sheet-toggle .ic { display: none; }
+.sheet-toggle::after { content: ''; position: absolute; top: calc(var(--tap) / 2 + var(--s-2)); width: var(--handle-width); height: var(--handle-height); border-radius: var(--r-pill); background: var(--control-hover-edge); }
+.app[data-sheet="peek"] .sheet-toggle { top: calc(100% - var(--shell-peek-height) - var(--tap) / 2); }
+.app[data-sheet="peek"] .sheet-toggle .ic { transform: rotate(180deg); }
+.sheet-toggle:active { transform: scale(var(--glass-pressed-scale)); }
+.app:not([data-surface="sheet"]) .sheet-toggle { display: none; }
+/* Điện thoại: chụm hai ngón để phóng; nút +/− chỉ để lại ở màn rộng cho khỏi chồng lên ghi công. */
+@media (max-width: 767px) { .shell-map .maplibregl-ctrl-group { display: none; } }
+@media (max-width: 767px) {
+  .app { --shell-chrome-height: 52px; }
+  .map-chrome { padding: 4px 10px 4px 16px; gap: 8px; }
+  .map-chrome-brand { margin-right: auto; }
+  .map-chrome-scope { display: inline-block; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: transparent; color: var(--muted); font: 400 11px / 1.5 var(--font-body); }
+  .map-chrome-scope .ic { display: none; }
+  :root .map-chrome .search { flex: 0 0 44px; }
+}
+
+@media (min-width: 768px) {
+  .app:has(.map-create) .maplibregl-ctrl-bottom-right .maplibregl-ctrl-group { margin-right: calc(var(--s-6) + 14px); margin-bottom: calc(72px + var(--s-6) + var(--s-4)); }
+  .app:has(#screen:is([data-view='dest'], [data-view='picked'], [data-view='trips'], [data-view='trip'])) { --shell-panel-width: var(--shell-detail-panel-width); }
+  .shell-map { top: 0; }
+  .map-chrome { left: var(--shell-panel-left); top: var(--shell-chrome-top); right: var(--shell-panel-gap); }
+  .map-chrome-brand { display: none; }
+  .map-chrome-scope { display: inline-flex; align-items: center; gap: var(--s-3); min-height: var(--tap); padding-right: var(--s-5); border-right: 1px solid var(--control-edge); font: var(--text-button); }
+  :root .map-chrome .search { justify-content: flex-start; padding-inline: var(--s-3); color: var(--muted); font: var(--text-body); }
+  .map-chrome .search > span { display: inline; }
+  .app[data-surface="deck"] #screen { top: calc(var(--shell-chrome-top) + var(--shell-chrome-height) + var(--shell-panel-gap)); bottom: var(--shell-panel-gap); }
+  .app[data-surface="deck"] #screen { left: var(--shell-panel-left); right: auto; width: var(--shell-panel-width); }
+  :root:not([data-look='classic']) #tabbar .tab { font: var(--text-tab); }
+  #tabbar .tab-create { margin-top: auto; }
+  .rail-profile { align-self: center; margin-top: auto; width: var(--tap); min-height: var(--tap); border: 1px solid var(--sheet-edge); border-radius: var(--r-pill); background: var(--control-surface); color: var(--muted); font: var(--text-button); }
+  :root:not([data-look='classic']) .map-create { position: absolute; right: var(--s-6); bottom: var(--s-6); z-index: var(--z-nav); display: grid; place-items: center; width: 72px; height: 72px; padding: 0; border: 1px solid var(--sheet-edge); border-radius: var(--r-pill); background: var(--sheet-surface); box-shadow: var(--shell-panel-shadow); backdrop-filter: blur(var(--sheet-blur)); }
+  .map-create .ic { width: 32px; height: 32px; color: var(--accent); }
+  :root:not([data-look='classic']) #tabbar .brand { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
+  .brand-mark { font: 800 32px / 1 var(--font-display); letter-spacing: -3px; }
+  .brand-mark > span { color: var(--accent); }
+  .sheet-toggle { display: none; }
+  /* Bảng nổi bên trái; `left` của #screen bị web.css ép `!important` nên dùng lề và bề rộng. */
+  .app[data-surface="sheet"] #screen,
+  .app[data-surface="sheet"][data-sheet="peek"] #screen {
+    top: calc(var(--shell-chrome-top) + var(--shell-chrome-height) + var(--shell-panel-gap)); bottom: auto; max-height: calc(100% - var(--shell-chrome-top) - var(--shell-chrome-height) - 2 * var(--shell-panel-gap)); right: auto; left: var(--shell-panel-left);
+    width: min(var(--shell-panel-width), 40vw); margin-left: 0;
+    border: 1px solid var(--sheet-edge); border-radius: var(--shell-sheet-radius);
+    box-shadow: var(--shell-panel-shadow);
+    overflow-y: auto; padding-bottom: var(--s-5);
+  }
+  /* Nội dung trong bảng không bị ép khung 1120/860 px của bố cục trang rộng cũ. */
+  .app[data-surface="sheet"] #screen > * { max-width: none; }
+  /* Bảng 440 px chỉ đủ hai cột thẻ điểm đến. */
+  .app[data-surface="sheet"] .nh-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4) var(--s-3); }
+  .app[data-surface="sheet"] .national-home { padding-inline: var(--s-5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app[data-surface="sheet"] #screen, .sheet-toggle, .sheet-toggle .ic { transition: none; }
+}

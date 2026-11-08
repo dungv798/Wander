@@ -43,6 +43,24 @@ test('một điểm đến: gọi theo mã đã mã hóa và lấy trường des
   assert.equal(r.urls[1], '/api/catalog/destinations/a%2Fb%3Fc');
 });
 
+test('venue mới được giữ và kiểm nguồn; legacy thiếu venue vẫn đọc được', async () => {
+  const venue = { kind: 'cafe', kindName: 'Quán cà phê', address: '39 Nguyễn Hữu Huân', website: 'https://cafegiang.vn/', sourceUrl: 'https://cafegiang.vn/', checkedAt: '2026-11-07' };
+  const destination = { ...validDestination(), places: [{ id: 'p', venue }] };
+  assert.deepEqual((await repo(() => json({ destination })).repository.destination('ha-giang')).places[0]?.venue, venue);
+  for (const invalid of [{ ...venue, website: 'javascript:alert(1)' }, { ...venue, sourceUrl: '' }]) {
+    await assert.rejects(repo(() => json({ destination: { ...destination, places: [{ id: 'p', venue: invalid }] } })).repository.destination('ha-giang'), isInternal);
+  }
+  assert.equal((await repo(() => json({ destination: { ...destination, places: [{ id: 'old' }] } })).repository.destination('ha-giang')).places[0]?.venue, undefined);
+});
+
+test('metadata chủ đề additive: giữ mã thật, từ chối mảng sai để không âm thầm giấu điểm đến', async () => {
+  const summary = { ...validSummary(), categories: ['am', 'cho'] };
+  assert.deepEqual(await repo(() => json({ destinations: [summary] })).repository.searchDestinations(''), [summary]);
+  for (const categories of ['am', ['unknown'], [null]]) {
+    await assert.rejects(repo(() => json({ destinations: [{ ...validSummary(), categories }] })).repository.searchDestinations(''), isInternal);
+  }
+});
+
 test('mã lạ: 404 của máy chủ thành ApiError NOT_FOUND để giao diện hiện đúng lời nhắc', async () => {
   const r = repo(() => json({ error: { code: 'NOT_FOUND', message: 'x' } }, 404));
   await assert.rejects(r.repository.destination('khong-co'), (e: unknown) => e instanceof ApiError && e.code === 'NOT_FOUND' && e.status === 404);

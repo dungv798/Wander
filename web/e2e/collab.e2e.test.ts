@@ -72,8 +72,8 @@ test('khách vào bằng liên kết: thấy tên chuyến, vào được, mã b
   assert.match(await page.locator('body').innerText(), /Đà Lạt cuối tuần/);
   await page.getByLabel('Tên hiển thị của bạn').fill('Lan');
   await page.getByRole('button', { name: 'Vào chuyến đi' }).click();
-  await page.locator('.thead h1').waitFor();
-  assert.equal(await page.locator('.thead h1').textContent(), 'Đà Lạt cuối tuần');
+  await page.locator('.tcc-in h1').waitFor();
+  assert.equal(await page.locator('.tcc-in h1').textContent(), 'Đà Lạt cuối tuần');
   assert.ok(!page.url().includes(code), 'mã mời không còn trên địa chỉ');
   const stored = await page.evaluate(() => JSON.stringify(Object.entries(localStorage)));
   assert.ok(!stored.includes(code), 'mã mời không được lưu vào localStorage');
@@ -161,7 +161,7 @@ test('thành viên bị Organizer gỡ: quay lại ứng dụng thì được b�
   const memberId = (joined.body?.['member'] as { id: string }).id;
   const { ctx, errors } = await phone();
   const page = await open(ctx, `#/trip/${tripId}/ov`, guest.token);
-  await page.locator('.thead h1').waitFor();
+  await page.locator('.tcc-in h1').waitFor();
   assert.equal((await api('DELETE', `/api/trips/${tripId}/members/${memberId}`, owner.token)).status, 204);
   await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange'))); // như khi người dùng quay lại tab
   await page.getByText('Bạn không còn trong chuyến đi này.').waitFor();

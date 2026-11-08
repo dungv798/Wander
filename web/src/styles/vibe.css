@@ -9,9 +9,8 @@
 @keyframes blobB { to { translate: -80px 60px; scale: 1.15; } }
 @media (prefers-reduced-motion: reduce) { .app::before, .app::after { animation: none; } }
 
-/* ---- nút chính: bóng kính, vệt sáng quét định kỳ ở nút nổi bật ---- */
-.btn:not(.ghost):not(.danger):not(.sun), .pill:not(.warn) { font-weight: 800; box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.55), inset 0 -3px 6px rgba(0, 0, 0, 0.08), var(--cta-glow); }
-.dcta .btn:not(.ghost)::after, .obx-cta::after, .tpl .btn::after { animation: shine 6s ease-out 2.2s infinite; }
+/* ---- nút chính (bảng màu B): kính trắng mát, chữ mực đậm, bóng mực mảnh; không bevel, không vệt sáng quét ---- */
+.btn:not(.ghost):not(.danger):not(.sun), .pill:not(.warn) { font-weight: 800; box-shadow: var(--btn-shadow); }
 .btn.ghost { box-shadow: var(--sh-1); }
 @media (prefers-reduced-motion: reduce) { .dcta .btn::after, .obx-cta::after, .tpl .btn::after { animation: none; } }
 

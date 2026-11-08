@@ -8,7 +8,7 @@ import { WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
-import { useDestination, useDiscover } from '../../discover/index.ts';
+import { useDestination } from '../../discover/index.ts';
 import { useRequireIdentity } from '../../identity/index.ts';
 import type { PlaceRef } from '../model/tripState.ts';
 import { useReportError } from '../../identity/index.ts';
@@ -21,6 +21,8 @@ import { LazyTripWizard as TripWizard } from './LazyTripSheets.tsx';
 import { TripFormActions, TripFormLayout } from './TripFormLayout.tsx';
 import { TripFields } from './TripFields.tsx';
 import type { TripFormValues } from './TripFields.tsx';
+import { TRIP_TAB } from '../model/tripTabs.ts';
+import { useCompatibleTrips } from '../hooks/useCompatibleTrips.ts';
 
 type Mode = 'new' | 'add' | 'keep';
 
@@ -49,7 +51,6 @@ function ModeOption({ mode, current, title, children, onPick }: { readonly mode:
   return (
     <div
       className={on ? 'opt on' : 'opt'}
-      style={{ background: 'var(--surface)', boxShadow: 'none', textDecoration: 'none' }}
       role="radio"
       aria-checked={on}
       tabIndex={0}
@@ -95,15 +96,13 @@ function PickedModes({ mode, onMode, form, trips, tripId, onTrip }: { readonly m
   );
 }
 
-/** Kết thúc tạo/lưu: bỏ các nơi đã lưu khỏi "Đã chọn", đóng tờ, mở chuyến và báo đã lưu. */
+/** Kết thúc tạo/lưu: giữ bộ sưu tập như B, đóng tờ, mở chuyến và báo đã lưu. */
 function useFinish(picked: readonly PlaceRef[], onClose: () => void): { readonly finish: (id: string, name: string) => void; readonly keep: () => void } {
-  const discover = useDiscover();
   const toast = useToast();
   return {
     finish: (id, name) => {
-      discover.actions.clearPicked(picked.map((p) => p.id));
       onClose();
-      navigate(VIEW.TRIP, id, 'ov');
+      navigate(VIEW.TRIP, id, picked.length ? TRIP_TAB.UNASSIGNED : TRIP_TAB.OVERVIEW);
       toast.show(fill(T.create.saved, { name }));
     },
     keep: () => {
@@ -120,7 +119,7 @@ function CreateHeading({ heading, hasPicked, destName }: { readonly heading: str
 
 /**
  * Tờ "Tạo chuyến đi" / "Lưu N địa điểm thành chuyến đi?". Có nơi đã chọn thì có ba cách: chuyến mới, thêm vào chuyến sẵn có, giữ lại.
- * Chuyến mới nhận các nơi ở mục "Chưa có ngày". Lưu xong gỡ các nơi đó khỏi "Đã chọn" và mở chuyến. Chưa có danh tính ẩn danh thì hỏi lưu lần đầu trước (F2).
+ * Chuyến mới nhận các nơi ở mục "Chưa có ngày". Lưu xong vẫn giữ bộ sưu tập và mở chuyến. Chưa có danh tính ẩn danh thì hỏi lưu lần đầu trước (F2).
  */
 export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProps) {
   const { state, actions } = useTrips();
@@ -131,7 +130,7 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
   const [suggested, setSuggested] = useState(true);
   const [mode, setMode] = useState<Mode>('new');
   const [v, setV] = useState<TripFormValues>(defaultValues);
-  const [tripId, setTripId] = useState(state.trips[0]?.id ?? '');
+  const { trips: compatibleTrips, tripId, select: setTripId } = useCompatibleTrips(destId);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const report = useReportError();
@@ -178,7 +177,7 @@ export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProp
     <Sheet label={heading} onClose={onClose}>
       <TripFormLayout actions={<TripFormActions label={hasPicked ? T.create.confirm : T.create.submit} busy={busy} onSubmit={submit} onClose={onClose} />}>
         <CreateHeading heading={heading} hasPicked={hasPicked} destName={destName} />
-        {hasPicked ? <PickedModes mode={mode} onMode={setMode} form={form} trips={state.trips} tripId={tripId} onTrip={setTripId} /> : form}
+        {hasPicked ? <PickedModes mode={mode} onMode={setMode} form={form} trips={compatibleTrips} tripId={tripId} onTrip={setTripId} /> : form}
         {error ? <WarnBox>{error}</WarnBox> : null}
         {mode === 'new' ? <Button kind="ghost" block onClick={() => setWizard(true)}>{T.list.stepwise}</Button> : null}
       </TripFormLayout>

@@ -9,20 +9,19 @@ import { useDiscover } from '../hooks/DiscoverProvider.tsx';
 import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
 import { useResource } from '../../../shared/hooks/useResource.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
-import { CATEGORY_ICON } from '../model/discover.const.ts';
 import type { DestinationDetail, PlaceView } from '../model/Catalog.types.ts';
 import { firstPhotoUrl } from '../model/destinationQueries.ts';
 import { pickedOf } from '../model/discoverState.ts';
 import { DestinationGate } from './DestinationGate.tsx';
-import { PickedMap } from './map/PickedMap.tsx';
+import { MapPeekButton } from './MapPeekButton.tsx';
+import { PlacePlaceholder } from './PlacePlaceholder.tsx';
 
 /** Đầu trang "Địa điểm đã chọn". */
 function PickedHead({ dest }: { readonly dest: DestinationDetail }) {
   return (
     <div className="pagehead pad-x">
-      <p className="note">{dest.name}</p>
-      <h1>{COPY.picked.title}</h1>
       <p className="note">{COPY.picked.subtitle}</p>
+      <div className="picked-headline"><h1>{COPY.picked.title}</h1><span>{dest.name}</span></div>
     </div>
   );
 }
@@ -48,31 +47,24 @@ function PickedContent({ dest, onSave, showEmpty }: { readonly dest: Destination
   return (
     <>
       <PickedHead dest={dest} />
-      <PickedMap dest={dest.id} picked={picked} />
-      <div className="grid pad-x">
+      <div className="picked-create pad-x"><Button block arrow onClick={() => onSave(picked)}>{fill(COPY.picked.saveAsTrip, { n: picked.length })}</Button></div>
+      <div className="picked-list pad-x">
         {picked.map((p) => (
-          <div key={p.id} className={`tile cat-${p.category}`}>
+          <div key={p.id} className={`tile picked-row cat-${p.category}`}>
             <button data-place-photo={p.id} className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: p.name })} onClick={() => sheet.open(p.id)}>
-              <RevealImage alt="" src={firstPhotoUrl(p)} />
+              {p.photos.length ? <RevealImage alt="" src={firstPhotoUrl(p)} /> : <PlacePlaceholder place={p} />}
               <span className="in">
                 <h3>{p.name}</h3>
                 <p>{p.area}</p>
               </span>
             </button>
-            <span className="catbadge">
-              <Icon semantic name={CATEGORY_ICON[p.category]} />
-            </span>
             <button className="x" type="button" aria-label={fill(COPY.picked.unpick, { name: p.name })} onClick={() => actions.unpick(p.id)}>
               <Icon name="x" size="s" />
             </button>
           </div>
         ))}
       </div>
-      <div className="stickybar pad-x">
-        <Button block icon="calendar-event" onClick={() => onSave(picked)}>
-          {fill(COPY.picked.saveAsTrip, { n: picked.length })}
-        </Button>
-      </div>
+      <div className="pad-x picked-map-peek"><MapPeekButton /></div>
     </>
   );
 }

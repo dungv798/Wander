@@ -41,6 +41,7 @@ export interface NewTrip {
 
 /** Địa điểm cần thêm vào chuyến (chỉ cần mã và loại địa điểm trong kho để suy ra loại mục). */
 export interface PlaceRef {
+  readonly venue?: { readonly kind: 'restaurant' | 'cafe' | 'bar' | 'lodging' } | null;
   readonly id: string;
   /** Tên hiển thị (nếu có): backend bắt buộc mục có tiêu đề, nên mục từ kho mang tên làm tiêu đề lưu kèm. */
   readonly name?: string;

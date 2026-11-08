@@ -1,5 +1,6 @@
 import type { RefObject } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
+import { Button } from '../../../shared/ui/Button.tsx';
 import { onboardPhotoUrl } from '../model/onboardPhotos.ts';
 import type { PlaceView } from '../../discover/index.ts';
 import { MEMBERS, PROPOSAL } from '../model/onboarding.const.ts';
@@ -19,9 +20,9 @@ export function InvitePanel({ open, copied, onCopy, copyRef }: InvitePanelProps)
       <b className="ob-ptitle">{T.share.invite}</b>
       <div className="ob-link">
         <span>{T.share.link}</span>
-        <button ref={copyRef} type="button" className={copied ? 'done' : undefined} tabIndex={open ? 0 : -1} onClick={onCopy}>
+        <Button ref={copyRef} kind="secondary" className={copied ? 'done' : undefined} tabIndex={open ? 0 : -1} onClick={onCopy}>
           {copied ? T.share.copied : T.share.copy}
-        </button>
+        </Button>
       </div>
       <small>{T.share.note}</small>
     </div>
@@ -38,7 +39,7 @@ interface ProposalPanelProps {
   readonly cue: boolean;
 }
 
-/** Đề xuất của một thành viên: địa điểm đề nghị thêm, lý do cùng hướng, và hai nút Chấp nhận / Từ chối của chủ chuyến. */
+/** Nơi thành viên muốn ghé đang chưa xếp ngày; chủ chuyến minh họa chọn ngày hoặc để lại sau, không hứa một luồng duyệt thêm địa điểm. */
 export function ProposalPanel({ open, place, onAccept, onReject, acceptRef, cue }: ProposalPanelProps) {
   const member = MEMBERS.find((m) => m.name === PROPOSAL.by);
   return (
@@ -56,12 +57,12 @@ export function ProposalPanel({ open, place, onAccept, onReject, acceptRef, cue 
         </span>
       </div>
       <div className="ob-btns">
-        <button type="button" className="no" tabIndex={open ? 0 : -1} onClick={onReject}>
+        <Button kind="ghost" className="no" tabIndex={open ? 0 : -1} onClick={onReject}>
           {T.share.reject}
-        </button>
-        <button ref={acceptRef} type="button" className={`ok${cue ? ' cue' : ''}`} tabIndex={open ? 0 : -1} onClick={onAccept}>
+        </Button>
+        <Button ref={acceptRef} className={`ok${cue ? ' cue' : ''}`} tabIndex={open ? 0 : -1} onClick={onAccept}>
           {T.share.accept}
-        </button>
+        </Button>
       </div>
     </div>
   );

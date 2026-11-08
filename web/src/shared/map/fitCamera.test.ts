@@ -24,3 +24,16 @@ test('lề khung 390×240 chừa >=24px, đủ tên dưới ghim, cộng inset v
   const tiny = fitPadding({ w: 20, h: 10 }, { top: 200, right: 300, bottom: 400, left: 500 });
   assert.ok(tiny.left + tiny.right < 20 && tiny.top + tiny.bottom < 10);
 });
+
+test('tờ đáy che 60% khung: lề đáy không bị kẹp ở nửa khung nên camera vừa khung trong phần bản đồ còn thấy', () => {
+  const phone = { w: 390, h: 844 };
+  const padding = fitPadding(phone, { top: 72, right: 0, bottom: 506, left: 0 }, 56, true);
+  assert.ok(padding.bottom > phone.h / 2, 'lề đáy phải vượt nửa khung để né tờ đáy');
+  assert.ok(padding.top + padding.bottom < phone.h, 'vẫn còn vùng nhìn dương');
+  assert.equal(padding.top, 128);
+});
+
+test('lề quá lớn co theo tỉ lệ, giữ nguyên thứ tự lớn nhỏ giữa hai lề đối diện', () => {
+  const p = fitPadding({ w: 100, h: 100 }, { top: 100, right: 0, bottom: 300, left: 0 }, 0);
+  assert.ok(p.top < p.bottom && p.top + p.bottom < 100);
+});

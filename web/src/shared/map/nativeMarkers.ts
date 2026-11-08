@@ -2,11 +2,12 @@ import type { FeatureCollection, Point } from 'geojson';
 import type { MapGeoJSONFeature } from 'maplibre-gl';
 import { HALF } from '../const/math.const.ts';
 import { MAP } from './map.const.ts';
+import { mapThumbnailUrl } from './mapThumbnailUrl.ts';
 import type { MapMarker, MapMode } from './map.types.ts';
 
 /** Chọn ảnh catalog đã cấp cho ghim; thiếu ảnh dùng vòng tròn dự phòng, không đoán URL backend. */
 export function markerThumbnail(marker: MapMarker): string {
-  return marker.thumb?.trim() ?? '';
+  return mapThumbnailUrl(marker.thumb?.trim() ?? '');
 }
 
 /** Cắt chính giữa ảnh ngang/dọc thành hình vuông 96 px, không kéo méo theo tỉ lệ nguồn. */
@@ -20,7 +21,7 @@ export function markerFeatures(markers: readonly MapMarker[], mode: MapMode, clu
   return { type: 'FeatureCollection', features: markers
     .filter((marker) => (mode === 'browse' && marker.kind !== 'hub') === clustered)
     .map((marker) => ({ type: 'Feature', id: marker.id, geometry: { type: 'Point', coordinates: [marker.lon, marker.lat] },
-      properties: { id: marker.id, label: marker.label ?? '', num: marker.num == null ? '' : String(marker.num), muted: Boolean(marker.muted), hub: marker.kind === 'hub', image: markerThumbnail(marker) || MAP.EMPTY_IMAGE } })) };
+      properties: { id: marker.id, label: marker.label ?? '', num: marker.num == null ? '' : String(marker.num), muted: Boolean(marker.muted), hub: marker.kind === 'hub', ...(marker.kind === 'sticker' ? { sticker: true } : {}), image: markerThumbnail(marker) || MAP.EMPTY_IMAGE } })) };
 }
 
 /** Đếm ghim có symbol ảnh resolve đúng ID đã đăng ký; không đếm sprite rỗng, cụm hoặc bản sao tile. */

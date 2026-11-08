@@ -5,6 +5,8 @@ interface BaseProps {
   readonly label: string;
   /** Gợi ý dưới ô (ví dụ "= 150.000 ₫"); không phải lỗi. */
   readonly hint?: string;
+  /** Lỗi cạnh đúng ô; được liên kết với điều khiển và thông báo cho trình đọc màn hình. */
+  readonly error?: string;
   readonly hidden?: boolean;
 }
 
@@ -44,20 +46,21 @@ const CODE_INPUT = { autoComplete: 'off', autoCapitalize: 'characters', spellChe
 /** Ô nhập có nhãn hiện sẵn (không chỉ placeholder), gợi ý và `aria-describedby`; gồm ô chữ/ngày/giờ, vùng chữ và danh sách chọn. */
 export function Field(props: InputProps | TextareaProps | SelectProps) {
   const id = useId();
+  const labelId = `${id}-label`;
   const hintId = `${id}-h`;
-  const describedBy = props.hint ? hintId : undefined;
+  const describedBy = props.hint || props.error ? hintId : undefined;
   const on = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => props.onChange(e.target.value);
   let control: ReactNode;
-  if (props.as === 'textarea') control = <textarea id={id} rows={props.rows} maxLength={props.maxLength} value={props.value} onChange={on} aria-describedby={describedBy} />;
-  else if (props.as === 'select') control = <select id={id} value={props.value} onChange={on} aria-describedby={describedBy}>{props.children}</select>;
-  else control = <input id={id} type={props.type ?? 'text'} inputMode={props.inputMode} placeholder={props.placeholder} maxLength={props.maxLength} value={props.value} onChange={on} aria-describedby={describedBy} disabled={props.disabled} readOnly={props.readOnly} {...(props.code ? CODE_INPUT : {})} />;
+  if (props.as === 'textarea') control = <textarea id={id} rows={props.rows} maxLength={props.maxLength} value={props.value} onChange={on} aria-labelledby={labelId} aria-describedby={describedBy} aria-invalid={Boolean(props.error) || undefined} />;
+  else if (props.as === 'select') control = <select id={id} value={props.value} onChange={on} aria-labelledby={labelId} aria-describedby={describedBy} aria-invalid={Boolean(props.error) || undefined}>{props.children}</select>;
+  else control = <input id={id} type={props.type ?? 'text'} inputMode={props.inputMode} placeholder={props.placeholder} maxLength={props.maxLength} value={props.value} onChange={on} aria-labelledby={labelId} aria-describedby={describedBy} aria-invalid={Boolean(props.error) || undefined} disabled={props.disabled} readOnly={props.readOnly} {...(props.code ? CODE_INPUT : {})} />;
   return (
     <label className="field" htmlFor={id} hidden={props.hidden}>
-      {props.label}
+      <span id={labelId}>{props.label}</span>
       {control}
-      {props.hint ? (
-        <small id={hintId} className="hint">
-          {props.hint}
+      {props.hint || props.error ? (
+        <small id={hintId} className={props.error ? 'field-error' : 'hint'} role={props.error ? 'alert' : undefined}>
+          {props.error || props.hint}
         </small>
       ) : null}
     </label>

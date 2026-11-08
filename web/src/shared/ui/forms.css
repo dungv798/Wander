@@ -1,0 +1,34 @@
+/* Cùng một hệ ô nhập trên tạo chuyến, sửa lịch, thành viên và danh tính. */
+:root:not([data-look='classic']) .field { gap: 7px; min-width: 0; color: var(--muted); font: 600 13px / 1.5 var(--font-body); }
+:root:not([data-look='classic']) .field :is(input, select, textarea) { width: 100%; min-width: 0; min-height: 48px; padding: 11px 13px; border: 1px solid var(--control-edge); border-radius: 14px; background: var(--sheet-inner-surface); color: var(--ink); box-shadow: var(--control-inner-light); font: 400 16px / 1.5 var(--font-body); transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
+:root:not([data-look='classic']) .field :is(input, select, textarea):focus { background: var(--btn-bg); border-color: var(--control-hover-edge); }
+:root:not([data-look='classic']) .field :is(input, textarea)::placeholder { color: var(--muted); opacity: .7; }
+:root .field .hint { color: var(--muted); font: 400 11px / 1.6 var(--font-body); }
+:root .field .field-error { color: var(--skip); font: 400 12px / 1.6 var(--font-body); }
+:root:not([data-look='classic']) .field [aria-invalid='true'] { border-color: var(--skip); }
+.field input:is([type='date'], [type='time']) { min-height: 48px; appearance: none; -webkit-appearance: none; }
+.field input::-webkit-date-and-time-value { text-align: left; }
+.two { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 12px; }
+.two:has(> .field[hidden]) { grid-template-columns: minmax(0, 1fr); }
+:root:not([data-look='classic']) .checkrow { min-height: 44px; gap: 10px; padding-block: 8px; font: 400 13px / 1.6 var(--font-body); border-bottom: 0; }
+:root:not([data-look='classic']) .checkrow input[type='checkbox'] { flex: none; width: 22px; height: 22px; border: 1px solid var(--control-hover-edge); border-radius: 7px; background: var(--sheet-inner-surface); }
+:root:not([data-look='classic']) .checkrow input[type='checkbox']:checked { background: var(--brand-ink); border-color: var(--brand-ink); }
+:root:not([data-look='classic']) .opt { border-radius: 16px; padding: 14px; border-color: var(--control-edge); background: var(--sheet-inner-surface); box-shadow: none; backdrop-filter: none; }
+:root:not([data-look='classic']) .opt.on { background: var(--pick-surface); border-color: var(--pick-edge); }
+.sheet:has([data-trip-form]) { padding: 12px; }
+.panel:has([data-trip-form]) { width: min(560px, 100%); max-height: calc(var(--form-viewport-height, 100dvh) - 24px); min-height: 0; border: 1px solid var(--sheet-edge); border-radius: 26px; }
+[data-trip-form] { display: flex; flex-direction: column; width: 100%; min-height: 0; max-height: calc(var(--form-viewport-height, 100dvh) - 24px); }
+.trip-form-content { flex: 1; overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 24px; gap: 18px; align-content: start; }
+.trip-form-content > div > h2 { margin: 0; padding-right: 24px; font: 700 24px / 1.3 var(--font-display); }
+.trip-form-content .note { font: 400 12px / 1.7 var(--font-body); }
+.trip-form-content details { padding-block: 4px; border-top: 1px solid var(--control-edge); }
+.trip-form-content details > summary { min-height: 44px; color: var(--ink); font: 700 13px / 1.5 var(--font-body); }
+.trip-form-actions { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; flex: none; padding: 14px 24px max(14px, env(safe-area-inset-bottom)); border-top: 1px solid var(--sheet-edge); background: var(--sheet-chrome); }
+.trip-form-actions > .btn:first-child { grid-column: 2; grid-row: 1; }
+.trip-form-actions > .btn:last-child { grid-column: 1; grid-row: 1; }
+.trip-form-actions:has(> .btn:nth-child(3)) { grid-template-columns: 1fr 1fr; }
+.trip-form-actions:has(> .btn:nth-child(3)) > .btn:first-child { grid-column: 1 / -1; }
+.trip-form-actions:has(> .btn:nth-child(3)) > .btn:not(:first-child) { grid-row: 2; grid-column: auto; }
+@media (max-width: 767px) { .trip-form-content { padding: 22px 18px; gap: 16px; } .trip-form-actions { padding-inline: 18px; } .trip-form-content > div > h2 { font-size: 22px; } }
+@media (max-width: 350px) { .field input:is([type='date'], [type='time']) { font-size: 14px; padding-inline: 8px; } }
+@media (prefers-reduced-motion: reduce) { .field :is(input, select, textarea) { transition: none; } }

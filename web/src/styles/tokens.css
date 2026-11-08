@@ -9,7 +9,7 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
-  --cover-1: linear-gradient(135deg, var(--sun), var(--brand));
+  --cover-1: linear-gradient(135deg, #e3f0e2, #7fb4a0);
   --cover-2: linear-gradient(135deg, var(--sky-soft), var(--sky));
   --cover-3: linear-gradient(135deg, var(--brand), var(--ink));
   --cover-4: linear-gradient(135deg, var(--sky), var(--sun));
@@ -23,38 +23,53 @@
   --glass-rgb: 255 255 255; --glass-sheet-rgb: 255 255 255;
   --glass-fab-alpha: .08; --glass-tab-alpha: .12; --glass-chip-alpha: .10;
   --glass-search-alpha: .08; --glass-sheet-alpha: .94;
-  --glass-sun-selection: rgb(255 196 0 / .18);
-  --control-surface: rgb(255 255 255 / .94);
-  --control-selected: linear-gradient(rgb(255 196 0 / .18), rgb(255 196 0 / .18)), var(--control-surface);
-  --control-edge: #69768a;
-  --control-accent: #875000;
-  --control-motion: 120ms;
+  --glass-sun-selection: rgb(245 121 50 / .12);
+  --control-surface: rgb(255 255 255 / .55);
+  --control-selected: linear-gradient(rgb(245 121 50 / .10), rgb(245 121 50 / .10)), var(--control-surface);
+  --control-edge: #dbe5e3;
+  --control-hover-edge: #c3d5d3;
+  --control-selected-edge: #e5baa0;
+  --control-inner-light: inset 0 1px 0 rgb(255 255 255 / .88);
+  --control-accent: #c2540f;
+  --control-motion: 160ms;
+  --control-pad-y: 10px;
   --control-check: 18px;
+  --pick-surface: #edf4ec; --pick-edge: #cbdcc9;
+  --swipe-scrim: rgb(12 42 33 / .93);
+  --swipe-pick: #c8dfb4; --swipe-pick-ink: #53754a;
+  --swipe-skip: #fff8ef; --swipe-skip-ink: #ae8566;
   --home-hero-height: 416px;
-  --hero-bottom-scrim: rgb(7 19 38 / .78);
-  --home-hero-scrim: linear-gradient(to bottom, rgb(7 19 38 / .72) 0%, rgb(7 19 38 / .72) 28%, rgb(7 19 38 / .64) 40%, rgb(7 19 38 / .68) 52%, var(--hero-bottom-scrim) 73%, rgb(7 19 38 / .84) 100%);
+  --hero-bottom-scrim: rgb(20 35 42/ .78);
+  --trip-cover-top-scrim: rgb(20 35 42/ .1);
+  --home-hero-scrim: linear-gradient(to bottom, rgb(20 35 42/ .72) 0%, rgb(20 35 42/ .72) 28%, rgb(20 35 42/ .64) 40%, rgb(20 35 42/ .68) 52%, var(--hero-bottom-scrim) 73%, rgb(20 35 42/ .84) 100%);
   --home-search-surface: rgb(255 255 255 / .08);
   --home-search-saturation: .8;
-  --home-search-shadow: 0 1px 2px rgb(7 19 38 / .55);
-  --home-search-scrim: linear-gradient(to bottom, rgb(7 19 38 / .72), rgb(7 19 38 / .72));
+  --home-search-shadow: 0 1px 2px rgb(20 35 42/ .55);
+  --home-search-scrim: linear-gradient(to bottom, rgb(20 35 42/ .72), rgb(20 35 42/ .72));
   --home-search-reflection: linear-gradient(125deg, rgb(255 255 255 / .08), transparent 35%, transparent 70%, rgb(255 255 255 / .03));
   --header-shadow: 0 4px 12px -10px rgb(20 33 58 / .12);
   --home-map-height: 200px;
   --home-map-section-height: 240px;
   --glass-control-alpha: .12;
-  --glass-photo-scrim: rgb(7 19 38 / .68);
-  --glass-photo-fallback: #071326;
-  --glass-photo-shadow: 0 1px 2px rgb(7 19 38 / .55);
+  --glass-photo-scrim: rgb(20 35 42/ .68);
+  --glass-photo-fallback: #14232a;
+  --glass-photo-shadow: 0 1px 2px rgb(20 35 42/ .55);
   --glass-glyph-halo: 0 0 0 4px var(--glass-photo-scrim);
   --glass-active-edge: var(--control-accent);
-  --glass-cta-surface: var(--sun);
+  /* Nút chính = kính trắng mát, chữ mực, viền/bóng mực mảnh (PO bác nút mực đặc, đồng/bevel). Cấp bậc bằng chữ đậm, vị trí, mũi tên; cam chỉ nhấn nhỏ. */
+  --btn-bg: rgb(255 255 255 / .94);
+  --btn-ink: var(--ink);
+  --btn-edge: rgb(255 255 255 / .96);
+  --btn-hover-bg: #ffffff;
+  --btn-shadow: 0 5px 14px rgb(16 42 62 / .05);
+  --glass-cta-surface: var(--btn-bg);
   --glass-fallback: #f8fafc;
   --glass-fab-blur: 28px; --glass-tab-blur: 32px; --glass-chip-blur: 24px;
   --glass-search-blur: 36px; --glass-sheet-blur: 32px;
   --glass-saturation: .8; --glass-brightness: 1;
   --glass-border: 1px; --glass-edge: rgb(255 255 255 / .72);
   --glass-highlight: linear-gradient(128deg, rgb(255 255 255 / .62), rgb(255 255 255 / .12) 22%, transparent 23%, transparent 62%, rgb(255 255 255 / .10));
-  --glass-rim: linear-gradient(155deg, rgb(255 255 255 / .98), rgb(255 255 255 / .18) 42%, rgb(18 35 61 / .40) 78%, rgb(255 255 255 / .72));
+  --glass-rim: linear-gradient(155deg, rgb(255 255 255 / .98), rgb(255 255 255 / .30) 42%, rgb(36 55 64 / .14) 78%, rgb(255 255 255 / .72));
   --glass-mask: linear-gradient(var(--white) 0 0);
   --glass-shadow: 0 2px 8px rgb(20 33 58 / .08);
   --glass-tab-shadow: var(--glass-shadow);
@@ -63,7 +78,26 @@
   --glass-pressed-scale: .97; --focus-width: 3px;
   --nav-pill-height: 64px; --float-height: 48px;
   --safe-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  --trip-drawer-width: 520px;
+  --place-dialog-width: 1040px;
+  --modal-backdrop-blur: 8px;
+  --onboarding-dot-size: 8px;
   --sheet-radius: 32px; --sheet-inset: 8px;
+  /* Bản đồ khung + tờ kính (bảng màu B): chất liệu tờ dùng chung cho mọi màn nằm trên bản đồ, hộp thoại chi tiết và thanh chân. */
+  --shell-sheet-top: 30%; --shell-peek-height: 140px; --shell-sheet-radius: 28px;
+  --shell-panel-width: 424px; --shell-panel-gap: 24px;
+  --shell-detail-panel-width: 480px;
+  --home-mobile-hero-height: 196px;
+  --shell-rail-width: 72px; --shell-rail-gap: 16px;
+  --shell-chrome-height: 60px; --shell-chrome-top: 24px;
+  --shell-panel-left: calc(var(--shell-rail-width) + 2 * var(--shell-rail-gap) + var(--s-1));
+  --sheet-surface: linear-gradient(140deg, rgb(255 255 255 / .94), rgb(240 248 242 / .84));
+  --sheet-chrome: rgb(244 250 245 / .91);
+  --sheet-inner-surface: rgb(255 255 255 / .55);
+  --shell-panel-shadow: 0 20px 45px rgb(36 61 76 / .10), inset 0 1px 1px var(--white);
+  --sheet-edge: rgb(255 255 255 / .95);
+  --sheet-shadow: 0 -10px 34px -18px rgb(36 55 64 / .38);
+  --sheet-blur: 26px;
   --handle-width: 48px; --handle-height: 4px;
   --gallery-height: 224px;
   --layout-section-gap: var(--s-3); --layout-card-padding: var(--s-3);
@@ -102,33 +136,38 @@
   --tracking-card: -.1px; --tracking-eyebrow: .7px;
   --destination-map-height: 24dvh;
   /* ---- Nền và chữ ---- */
-  --bg: #f7f9fc;             /* nền gần trắng mát, PO 29/10 */
+  /* BẢNG MÀU B (PO duyệt 05/11/2026, docs/design/liquid-review-2026-11-05/APPROVED-LOOK.md): mực xám xanh + kính trắng ngả xanh + cam nhấn NHỎ.
+     Không còn mảng cam/vàng lớn: nút chính đặc màu mực (chữ trắng 13:1), cam chỉ cho chấm, viền chọn, mũi tên, tuyến đường. */
+  --bg: #eaf2f3;             /* nền mát bảng B */
   --surface: #ffffff;        /* thẻ, tờ phủ, ô nhập */
-  --surface-2: #eef2f7;      /* nền phụ trung tính */
-  --ink: #14213a;
-  --muted: #45506a;
-  --line: #dce3ec;           /* viền trang trí; điều khiển dùng --border-ctrl */
-  --border-ctrl: #6b7a90;    /* viền ô nhập, track công tắc: ≥ 3:1 so với nền liền kề */
+  --surface-2: #e6eff2;      /* nền phụ */
+  --ink: #243740;            /* mực B */
+  --ink-b: #243740;
+  --muted-b: #637b84;        /* chữ phụ đúng màu B: chỉ cho chữ lớn/trang trí (4,47:1 trên trắng) */
+  --muted: #587079;          /* chữ phụ cỡ nhỏ: cùng họ B, đậm hơn để đạt ≥ 4,5:1 */
+  --line: #d3e0e5;           /* viền trang trí; điều khiển dùng --border-ctrl */
+  --border-ctrl: #6a838d;    /* viền ô nhập, track công tắc: ≥ 3:1 so với nền liền kề */
 
-  /* ---- Họ HỔ PHÁCH/CAM: hành động chính và nhấn (chữ trắng trên nút CTA phải ≥ 4,5:1) ---- */
-  --brand: #d9680a;          /* logo, biểu tượng lớn, viền nhấn (không làm nền chữ nhỏ) */
-  --brand-ink: #7d3d00;      /* chữ nhấn trên nền sáng */
-  --brand-soft: #ffe68a;
-  --tint: #ffeeb0; --tint-ink: #7d3d00;   /* nền nhạt + chữ cho chip loại/nhãn (đổi theo bộ màu) */     /* nền chọn/bật nhẹ */
-  --cta-1: #ff8a00;          /* nút chính: màu phẳng; gradient đi từ --cta-g1 sang --cta-2 */
-  --cta-2: #ff6a00;
-  --cta-g1: #ffb01f;
-  --cta-1-hover: #f07400;
-  --cta-2-hover: #f07400;
-  --on-cta: #2a1700;
-  --sun: #ffc400;            /* nhãn "Nên ghé", điểm nhấn ấm */
-  --on-sun: #12233d;
+  /* ---- Cam nhấn NHỎ (cam B #f57932) và mực: hành động chính là mực, cam chỉ là điểm nhấn ---- */
+  --accent: #f57932;         /* chấm, viền chọn, mũi tên, tuyến đường: không làm nền chữ nhỏ */
+  --brand: var(--accent);
+  --brand-ink: #a8400a;      /* chữ nhấn trên nền sáng (6,2:1) */
+  --brand-soft: #e1eef2;     /* nền chọn/bật nhẹ ngả xanh */
+  --tint: #e4eff3; --tint-ink: #243740;   /* nền nhạt + chữ cho chip loại/nhãn */
+  --cta-1: #243740;          /* nút chính: mực; gradient đi từ --cta-g1 sang --cta-2 */
+  --cta-2: #243740;
+  --cta-g1: #34505d;
+  --cta-1-hover: #1a2a31;
+  --cta-2-hover: #1a2a31;
+  --on-cta: #ffffff;
+  --sun: #f57932;            /* nhãn "Nên ghé": cam nhấn nhỏ */
+  --on-sun: #1b2a31;
 
-  /* ---- Họ TRỜI XANH: liên kết, thông tin, trạng thái "chờ duyệt" ---- */
-  --sky: #0b58b8;
-  --sky-soft: #d9eefc;
-  --sky-1: #8fd3fb;          /* bầu trời minh họa (màn mở đầu, khung quẹt) */
-  --sky-2: #ffe872;
+  /* ---- Họ XANH NƯỚC: liên kết, thông tin, trạng thái "chờ duyệt" ---- */
+  --sky: #2b6f86;
+  --sky-soft: #dcecf1;
+  --sky-1: #bfe3ee;          /* bầu trời minh họa (màn mở đầu, khung quẹt) */
+  --sky-2: #e8f4f2;
 
   /* ---- Trạng thái (chỉ dùng cho đúng ý nghĩa) ---- */
   --like: #0b7a47;           /* đã chọn, đã xong */
@@ -151,16 +190,16 @@
   /* ---- NGÀY trong chuyến: xoay vòng cam, trời, mực; chữ trắng trên nền ngày ---- */
   --day-1: var(--day-accent); --day-2: var(--day-accent); --day-3: var(--day-accent); --day-4: var(--day-accent); --day-5: var(--day-accent); --day-6: var(--day-accent); --day-7: var(--day-accent);
   --on-day: #ffffff;
-  --ink-fixed: #12233d;      /* chữ/viền luôn tối, không đổi theo giao diện (vòng focus trên ảnh) */
+  --ink-fixed: #1d2f37;     /* chữ/viền luôn tối, không đổi theo giao diện (vòng focus trên ảnh) */
   --white: #ffffff;
 
   /* ---- Phủ trên ảnh (thẻ ảnh luôn có lớp tối phía dưới để chữ trắng đọc được) ---- */
   --scrim: rgba(10, 14, 20, 0.88);   /* trung tính (Taste: scrim chỉ hợp lệ khi gần trung tính) */
   --on-photo: #ffffff;
-  --photo-bg: #0b1a2e;               /* nền tối đặt sau ảnh trong lúc ảnh tải */
+  --photo-bg: #14232a;              /* nền tối đặt sau ảnh trong lúc ảnh tải */
 
   /* Token bổ sung khi chuyển CSS prototype sang web/ (thay mã hex rải trong CSS). */
-  --navy-fixed: #0b1a2e;             /* chữ tối cố định trên nút sáng ở giao diện tối */
+  --navy-fixed: #14232a;            /* chữ tối cố định trên nút sáng ở giao diện tối */
   --map-fallback: #eef2f7;           /* nền bản đồ trong lúc ảnh địa hình tải */
   --tip-bg: #eef2f7; --tip-ink: var(--ink);   /* khung mẹo */
   --link-on-dark: #ffd9b8;           /* liên kết trên nền ảnh tối */
@@ -168,7 +207,7 @@
   --ok-ink: #1f7a45;                 /* chữ "xong" trên nền sáng */
   --glass: rgb(255 255 255 / .88);
   --chip-photo: rgba(7, 19, 38, 0.78);   /* nền chip nằm trên ảnh */
-  --backdrop: rgb(18 35 61 / .34);
+  --backdrop: rgb(37 62 70 / .22);
 
   /* ---- Nền cảnh dùng chung (màn quẹt, tờ phủ): trời nắng sang bơ ---- */
   --scene: linear-gradient(var(--surface-2), var(--bg) 40%);
@@ -191,7 +230,7 @@
   --tabbar-h: 112px;   /* chiều cao vùng thanh tab nổi + khoảng trống để nội dung không bị che */
 
   /* ---- Chuyển động: chọn theo quãng đường và ngữ cảnh, không một thời lượng cho mọi thứ ---- */
-  --dur-press: 90ms;    /* phản hồi chạm */
+  --dur-press: 140ms;   /* phản hồi chạm (khớp MOTION.PRESS_MS) */
   --dur-fast: 140ms;    /* đổi màu, bật/tắt nhỏ */
   --dur-med: 240ms;     /* mở tờ phủ, lật thẻ */
   --dur-slow: 360ms;    /* thẻ bay khỏi màn hình */
@@ -218,23 +257,25 @@
   --cta-grad: linear-gradient(90deg, var(--cta-g1), var(--cta-2));
   --cta-grad-hover: linear-gradient(90deg, var(--cta-g1), var(--cta-1-hover));
   --card-shadow: 0 18px 34px -20px rgba(20, 33, 58, 0.45);   /* bóng thẻ: đổ nhẹ, đổi theo bộ màu */
-  --cta-glow: 0 10px 24px -10px rgba(255, 106, 0, 0.55);   /* bóng màu dưới nút chính */
+  --cta-glow: 0 10px 22px -12px rgba(36, 55, 64, 0.55);   /* bóng mực dưới nút chính */
   --day-accent: var(--brand-2);    /* MỌI ngày dùng một màu nhấn; số ngày/nhãn mới là thứ phân biệt (PO 26/10: nhiều màu gây rối) */
   --day-muted: var(--border-ctrl); /* ngày không đang xem (bản đồ, danh sách) */
-  --ambient-a: #ffd36e; --ambient-b: #8fd3fb; --ambient-c: #ffb38a;   /* ba đốm sáng nền trôi chậm */
-  --sun-hi: #fff4b8;
+  --ambient-a: #cfe6ea; --ambient-b: #bfe3ee; --ambient-c: #dfeee0;   /* ba đốm sáng nền trôi chậm (xanh nước, xanh lá dịu) */
+  --sun-hi: #ffe2cf;
   --gem-like: linear-gradient(150deg, #3ee08b, #0b8f4e);   /* huy hiệu bóng kính: chọn */
   --gem-skip: linear-gradient(150deg, #ff7a7a, #d62839);   /* huy hiệu bóng kính: bỏ qua */
   --gem-grad: linear-gradient(150deg, var(--cta-g1), var(--cta-2));    /* ô biểu tượng bóng kính */
   --obj-hi: #ffffff; --obj-mid: #ffe6d6; --obj-lo: #ffb98a; --obj-edge: #f0a070; --obj-accent: #ff6a2a;   /* vật thể minh họa (máy bay, la bàn…) */
-  --map-land: #f1f4f8; --map-low: #eef2f7; --map-mid: #ffe7a6; --map-high: #f3c98b; --map-peak: #d99a6a;
-  --map-shade: 0.55;               /* độ đậm lớp bóng núi */
-  --map-water: #8fd3fb; --map-water-line: #5fb8ef; --map-road: #ffffff; --map-road-casing: #e0b46a;
-  --map-route: var(--brand-2); --map-route-halo: #ffffff; --map-pin: var(--brand-2); --map-pin-muted: var(--border-ctrl); --map-label: var(--ink-fixed);
+  /* Bản đồ hướng B đã duyệt: biển xanh trong, đất xanh/vàng nhạt, núi có relief rõ hơn (không xám). */
+  --map-land: #f9fce9; --map-low: #d3efbf; --map-mid: #d9e7c8; --map-high: #cadcb8; --map-peak: #b9cfa8;
+  --map-shade: 0.5;                /* độ đậm lớp bóng núi */
+  --map-water: #8cdbf5; --map-water-line: #c0e9f3; --map-road: #ffffff; --map-road-casing: #dfe7cd;
+  --map-main-road: #eee4c5; --map-boundary: #d9e2cf; --map-label: #809985;
+  --map-route: var(--accent); --map-route-halo: #ffffff; --map-pin: var(--ink); --map-pin-muted: var(--border-ctrl);
 
   /* ---- Tên cũ của mã prototype (alias, KHÔNG thêm tên mới ở đây; gỡ khi web thật dùng token chuẩn) ---- */
   --cta: var(--cta-1); --cta-hover: var(--cta-1-hover); --cta-g2: var(--cta-2);
-  --brand-2: #b84c00;        /* cam đậm: nút phụ, huy hiệu đếm (chữ trắng 5,9:1) */
+  --brand-2: #243740;        /* mực: nút chính, huy hiệu đếm, số ngày (chữ trắng 13:1); tên cũ giữ cho mã đang dùng */
   --on-brand-2: #ffffff;
   --shadow: var(--sh-2); --shadow-float: var(--sh-float);
   --d1: var(--day-1); --d2: var(--day-2); --d3: var(--day-3); --d4: var(--day-4); --d5: var(--day-5); --d6: var(--day-6); --d7: var(--day-7); --on-d: var(--on-day);
@@ -283,6 +324,8 @@
     --border-ctrl: #7f97b5;
     --cta-1-hover: #f07400; --cta-2-hover: #f07400;
     --brand-2: #ffa310; --on-brand-2: #0b1a2e;
+    --btn-bg: var(--cta-2); --btn-ink: var(--on-cta); --btn-edge: var(--control-accent); --btn-hover-bg: var(--cta-2-hover); --btn-shadow: var(--cta-glow);
+    --glass-sheet-rgb: 21 34 61; --sheet-surface: linear-gradient(140deg, rgb(30 47 82 / .96), rgb(21 34 61 / .92)); --sheet-chrome: rgb(21 34 61 / .94); --sheet-edge: rgb(255 255 255 / .14);
     color-scheme: dark;
   }
 }
@@ -310,6 +353,8 @@
   --border-ctrl: #7f97b5;
   --cta-1-hover: #f07400; --cta-2-hover: #f07400;
   --brand-2: #ffa310; --on-brand-2: #0b1a2e;
+  --btn-bg: var(--cta-2); --btn-ink: var(--on-cta); --btn-edge: var(--control-accent); --btn-hover-bg: var(--cta-2-hover); --btn-shadow: var(--cta-glow);
+  --glass-sheet-rgb: 21 34 61; --sheet-surface: linear-gradient(140deg, rgb(30 47 82 / .96), rgb(21 34 61 / .92)); --sheet-chrome: rgb(21 34 61 / .94); --sheet-edge: rgb(255 255 255 / .14);
   color-scheme: dark;
 }
 

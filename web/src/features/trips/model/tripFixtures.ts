@@ -1,5 +1,5 @@
 // Chỉ dùng trong test: dựng nhanh một `Trip` trong bộ nhớ (máy chủ mới là nơi thật sự lưu và đánh số thứ tự).
-import { PLACE_KIND } from './trip.const.ts';
+import { placeItemKind } from './placeItemKind.ts';
 import type { ItemKind, Trip, TripItem, TripsState } from './trip.types.ts';
 import { normalize } from './tripState.ts';
 import type { ItemPatch, NewTrip, PlaceRef } from './tripState.ts';
@@ -11,7 +11,8 @@ export const S0: TripsState = { trips: [] };
 
 /** Mục từ địa điểm trong kho: chưa có ngày, loại suy ra từ loại địa điểm, chưa biết giá. */
 function placeItem(place: PlaceRef, id: IdSource): TripItem {
-  return { id: id(), placeId: place.id, type: PLACE_KIND[place.category] ?? 'sightseeing', title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending', done: false, addedBy: null, doneBy: [] };
+  const type = placeItemKind(place);
+  return { id: id(), placeId: place.id, type, title: '', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: type === 'rest' ? null : 'pending', done: false, addedBy: null, doneBy: [] };
 }
 
 /** Mục tự do (Nghỉ/Việc cần làm không có đặt chỗ). */

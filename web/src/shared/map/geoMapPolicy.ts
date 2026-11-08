@@ -1,7 +1,9 @@
 import { MAP } from './map.const.ts';
 import { airKm } from '../lib/geo.ts';
-import { HALF } from '../const/math.const.ts';
 import type { FitOptions, Insets, Pt, Size } from './map.types.ts';
+
+/** Vùng nhìn thấy tối thiểu (px) mỗi trục sau khi trừ hai lề, để MapLibre không tính ra kích thước âm. */
+const MIN_VISIBLE_PX = 2;
 
 /** Chỉ vừa lại khi inset thực sự đổi và camera chưa do người dùng chỉnh hoặc ghim đã bị che. */
 export function needsInsetRefit(before: Insets, after: Insets, touched: boolean, visible: boolean): boolean {
@@ -22,15 +24,22 @@ export function fitMaxZoom(options: FitOptions, points: readonly Pt[] = []): num
 
 /** Lề px giữ ghim và tên khỏi mép/ghi công; khung đang co vẫn còn vùng nhìn dương. */
 export function fitPadding(size: Size, inset: Insets, pad: number = MAP.FIT_PADDING, credit = false): Insets {
-  /** Kẹp lề để inset lớn không làm kích thước camera âm. */
-  const cap = (value: number, length: number): number => Math.max(0, Math.min(value, length / HALF - 1));
   const side = Math.max(pad, MAP.FIT_LABEL_SIDE);
-  return {
-    top: cap(inset.top + pad, size.h),
-    bottom: cap(inset.bottom + pad + MAP.FIT_LABEL_SPACE + (credit ? MAP.CREDIT_BAND : 0), size.h),
-    left: cap(inset.left + side, size.w),
-    right: cap(inset.right + side, size.w),
-  };
+  const [top, bottom] = fitAxis(inset.top + pad, inset.bottom + pad + MAP.FIT_LABEL_SPACE + (credit ? MAP.CREDIT_BAND : 0), size.h);
+  const [left, right] = fitAxis(inset.left + side, inset.right + side, size.w);
+  return { top, bottom, left, right };
+}
+
+/**
+ * Hai lề đối diện trên một trục: giữ nguyên khi tổng còn chừa vùng nhìn dương, quá thì co theo tỉ lệ để tổng < chiều dài.
+ * (Trước kia mỗi lề bị kẹp ở nửa chiều dài nên tờ đáy che 60% khung làm camera vừa khung xuống dưới tờ.)
+ */
+function fitAxis(near: number, far: number, length: number): [number, number] {
+  const room = Math.max(0, length - MIN_VISIBLE_PX);
+  const total = near + far;
+  if (total <= room) return [Math.max(0, near), Math.max(0, far)];
+  const scale = room / total;
+  return [Math.floor(near * scale), Math.floor(far * scale)];
 }
 
 /** Nhận lỗi nguồn/ô nền; dữ liệu tuyến và ghim của ứng dụng không phải nguồn nền. */

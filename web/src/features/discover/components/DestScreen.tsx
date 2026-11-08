@@ -1,124 +1,90 @@
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
-import { useCountUp } from '../../../shared/hooks/useCountUp.ts';
 import { useReveal } from '../../../shared/hooks/useReveal.ts';
 import { monthRangeLabel } from '../../../shared/lib/text.ts';
-import { goBack, navigate } from '../../../shared/router/hashRoute.ts';
+import { goBack, navigate, useRoute } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { TemplatesSection } from '../../templates/index.ts';
-import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
-import { COVER_FOCAL, DEFAULT_FOCAL, CATEGORY_ICON } from '../model/discover.const.ts';
+import { useDiscover } from '../hooks/DiscoverProvider.tsx';
+import { COVER_FOCAL, DEFAULT_FOCAL } from '../model/discover.const.ts';
 import type { DestinationDetail } from '../model/Catalog.types.ts';
-import { categoriesOf, coverPlace, destBestMonths, firstPhotoUrl } from '../model/destinationQueries.ts';
+import { coverPlace, destBestMonths } from '../model/destinationQueries.ts';
+import { pickedOf } from '../model/discoverState.ts';
+import { DEST_COPY } from '../model/dest.copy.ts';
 import { DestinationGate } from './DestinationGate.tsx';
 import { GuideSections } from './dest/GuideSections.tsx';
-import { DestMapSection } from './map/DestMapSection.tsx';
+import { PlaceList } from './dest/PlaceList.tsx';
+import { MapPeekButton } from './MapPeekButton.tsx';
 import { MomentsSection } from './MomentsSection.tsx';
+import { DestinationCredits } from './dest/DestinationCredits.tsx';
+import { DestinationGuide } from './dest/DestinationGuide.tsx';
+import { discoveryFilters } from '../model/discoveryFilters.ts';
+import type { CategoryCode } from '../model/Catalog.types.ts';
 
-/** Một số trong "Tóm tắt": đếm từ 0 lên khi hiện (giảm chuyển động thì hiện ngay). */
-function FactNumber({ value }: { readonly value: number }) {
-  return <b>{useCountUp(value)}</b>;
-}
-
-/** Ba số nhanh của điểm đến, đều tính từ kho biên tập: số nơi, mùa đẹp chung, số loại trải nghiệm. */
-function DestFacts({ dest }: { readonly dest: DestinationDetail }) {
+/** Một dòng tóm tắt thật của điểm đến: số nơi và (nếu kho có) mùa đẹp chung. */
+function destMeta(dest: DestinationDetail): string {
   const months = monthRangeLabel(destBestMonths(dest), '');
-  return (
-    <ul className="dfacts" aria-label={COPY.dest.factsLabel}>
-      <li>
-        <span className="ib">
-          <Icon name="map-pin" />
-        </span>
-        <FactNumber value={dest.places.length} />
-        <span>{COPY.dest.factPlaces}</span>
-      </li>
-      <li>
-        <span className="ib">
-          <Icon name="calendar-event" />
-        </span>
-        <b>{months}</b>
-        <span>{COPY.dest.factBestMonths}</span>
-      </li>
-      <li>
-        <span className="ib">
-          <Icon name="sparkles" />
-        </span>
-        <FactNumber value={categoriesOf(dest).length} />
-        <span>{COPY.dest.factKinds}</span>
-      </li>
-    </ul>
-  );
+  return months ? fill(DEST_COPY.metaBest, { n: dest.places.length, months }) : fill(DEST_COPY.metaPlain, { n: dest.places.length });
 }
 
-/** Dải ảnh "Xem trước các nơi": nối phần ảnh bìa với nội dung bên dưới, chạm để xem chi tiết từng nơi. */
-function DestPeek({ dest }: { readonly dest: DestinationDetail }) {
-  const { open } = usePlaceSheet();
-  return (
-    <section className="stack rv">
-      <h2 className="h2">{COPY.dest.peek}</h2>
-      <div className="hscroll peek">
-        {dest.places.map((p) => (
-          <button key={p.id} data-place-photo={p.id} className={`mini cat-${p.category}`} type="button" onClick={() => open(p.id)}>
-            <RevealImage alt="" src={firstPhotoUrl(p)} loading="lazy" />
-            <span className="catbadge">
-              <Icon semantic name={CATEGORY_ICON[p.category]} />
-            </span>
-            <span className="in">
-              <h3>{p.name}</h3>
-              <p>{p.area}</p>
-            </span>
-          </button>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/** Trang điểm đến: ảnh bìa, số nhanh, hai nút chính, xem trước các nơi và cẩm nang. */
-function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; readonly onCreate: () => void }) {
-  const ref = useReveal<HTMLDivElement>();
+/**
+ * Đầu trang điểm đến gọn: dải ảnh bìa thấp (tên, câu giới thiệu, quay lại) rồi hàng hành động.
+ * Hành động chính duy nhất là "Quẹt khám phá"; "Đã chọn", "Tạo chuyến đi" và "Bản đồ" là hành động phụ cùng kích thước ≥ 44 px.
+ */
+function DestHead({ dest }: { readonly dest: DestinationDetail }) {
+  const { state, actions } = useDiscover();
+  const { sub } = useRoute();
+  const picked = pickedOf(state, dest.places).length;
   const focal = COVER_FOCAL[coverPlace(dest)?.id ?? ''] ?? DEFAULT_FOCAL;
   return (
     <>
-      <section className="dhero">
+      <header className="dest-head">
         <RevealImage alt="" src={dest.coverUrl} style={{ objectPosition: focal }} />
-        <div className="top">
-          <IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} />
-        </div>
-        <div className="in">
-          <p className="dhero-region">
-            <Icon name="map-pin" size="s" />
-            {dest.region}
-          </p>
+        <div className="dh-top"><IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} /></div>
+        <div className="dh-in">
+          <p className="dh-region"><Icon name="map-pin" size="s" />{dest.region}</p>
           <h1>{dest.name}</h1>
-          <p className="dhero-tag">{dest.tagline}</p>
+          <p className="dh-tag">{dest.tagline}</p>
         </div>
-      </section>
-      <div ref={ref} className="dbody pad-x">
-        <DestFacts dest={dest} />
-        <div className="dcta">
-          <Button icon="hand-finger" onClick={() => navigate(VIEW.DECK, dest.id)}>
-            {COPY.home.startSwipe}
-          </Button>
-          <Button kind="ghost" icon="plus" onClick={onCreate}>
-            {COPY.dest.createTrip}
-          </Button>
+        <DestinationGuide dest={dest} />
+      </header>
+      <div className="dest-actions pad-x">
+        <p className="dest-meta">{destMeta(dest)}</p>
+        <div className="da-main">
+          <Button arrow icon="heart" onClick={() => { actions.setCategory(discoveryFilters(dest.places).includes(sub as CategoryCode) ? sub as CategoryCode : 'all'); navigate(VIEW.DECK, dest.id); }}>{DEST_COPY.swipe}</Button>
+          <Button kind="ghost" icon="bookmarks" onClick={() => navigate(VIEW.PICKED)}>{fill(DEST_COPY.pickedCount, { n: picked })}</Button>
         </div>
-        <DestMapSection dest={dest} />
-        <DestPeek dest={dest} />
-        <MomentsSection key={dest.id} dest={dest} />
-        <h2 className="h2">{fill(COPY.dest.guideTitle, { dest: dest.name })}</h2>
-        <GuideSections dest={dest} />
-        <TemplatesSection destId={dest.id} />
       </div>
     </>
   );
 }
 
-/** Màn điểm đến (cẩm nang). Ẩn thanh điều hướng trên điện thoại để ảnh bìa chiếm trọn đầu trang. */
+/** Trang điểm đến: đầu trang gọn, hành động, lọc + danh sách nơi, khoảnh khắc, cẩm nang và lịch mẫu (bản đồ là bản đồ chính của khung ứng dụng). */
+function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; readonly onCreate: () => void }) {
+  const ref = useReveal<HTMLDivElement>();
+  return (
+    <>
+      <DestHead dest={dest} />
+      <div ref={ref} className="dbody pad-x">
+        <PlaceList dest={dest} />
+        <MomentsSection key={dest.id} dest={dest} />
+        <div className="da-sub">
+          <Button kind="ghost" icon="plus" onClick={onCreate}>{DEST_COPY.createTrip}</Button>
+          <MapPeekButton />
+        </div>
+        <h2 className="h2">{fill(COPY.dest.guideTitle, { dest: dest.name })}</h2>
+        <GuideSections dest={dest} />
+        <TemplatesSection destId={dest.id} />
+        <DestinationCredits dest={dest} />
+      </div>
+    </>
+  );
+}
+
+/** Màn điểm đến (cẩm nang). */
 export function DestScreen({ destId, onCreate }: { readonly destId: string; readonly onCreate: () => void }) {
   return <DestinationGate destId={destId}>{(dest) => <DestContent dest={dest} onCreate={onCreate} />}</DestinationGate>;
 }

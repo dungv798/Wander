@@ -1,6 +1,6 @@
 import { Fragment, lazy, Suspense, useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
-import { formatTravelMinutes, formatTravelTime, minutesForKm, roadKmBetween } from '../../../shared/lib/geo.ts';
+import { formatTravelDistance, formatTravelMinutes, formatTravelTime, minutesForKm, roadKmBetween } from '../../../shared/lib/geo.ts';
 import { dayLabel } from '../../../shared/lib/dates.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { ChipToggle } from '../../../shared/ui/Controls.tsx';
@@ -75,7 +75,7 @@ function TravelLine({ km }: { readonly km: number }) {
   return (
     <div className="travel">
       <Icon name="motorbike" size="s" />
-      <span>{fill(T.view.travel, { time: formatTravelTime(minutesForKm(km)), km: Math.round(km) })}</span>
+      <span>{fill(T.view.travel, { time: formatTravelTime(minutesForKm(km)), distance: formatTravelDistance(km) })}</span>
     </div>
   );
 }
@@ -95,24 +95,19 @@ export function DayTab({ index }: { readonly index: number }) {
   return (
     <section className="daysec">
       <div className="dayhead">
+        <div className="day-title-row">
         <h2>
           <i />
           {fill(T.view.day, { n: index + 1 })}
         </h2>
+        {items.length > 1 && permissionsOf(trip).schedule ? <ChipToggle pressed={sort} icon="arrow-up" onClick={() => setSorting(!sorting)}>{sort ? T.view.sortDone : T.view.sort}</ChipToggle> : null}
+        </div>
         <span className="s">
           {dayLabel(day)}
-          {road > 0 ? <><br />{fill(T.view.dayRoad, { time: formatTravelMinutes(roadMin) })}</> : null}
-          <br />{costSummaryText(cs)}
+          {road > 0 ? <> · {fill(T.view.dayRoad, { time: formatTravelMinutes(roadMin) })}</> : null}
+          {' · '}{costSummaryText(cs)}
         </span>
       </div>
-      <AddManyEntry />
-      {items.length > 1 && permissionsOf(trip).schedule ? (
-        <div className="dayact">
-          <ChipToggle pressed={sort} icon="arrow-up" onClick={() => setSorting(!sorting)}>
-            {sort ? T.view.sortDone : T.view.sort}
-          </ChipToggle>
-        </div>
-      ) : null}
       {!items.length ? (
         <div className="emptyday">
           {T.view.emptyDay}
@@ -130,6 +125,7 @@ export function DayTab({ index }: { readonly index: number }) {
           </Fragment>
         );
       })}
+      <div className="day-tools"><AddManyEntry /></div>
       <MealReminders key={`${trip.id}:${day}`} day={day} />
       {items.length && hasUnassigned ? <Button kind="ghost" block icon="plus" onClick={() => setOverlay({ kind: 'addToDay' })}>{T.view.addFromUnassigned}</Button> : null}
       <MealAddRow day={day} />

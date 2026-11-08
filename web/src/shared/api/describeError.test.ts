@@ -11,6 +11,22 @@ test('mã đã biết ra đúng lời nhắc và giữ mã để hiện nhỏ', 
   assert.match(e.text, /Dữ liệu của bạn không mất/);
 });
 
+test('lỗi bìa và giá tham khảo hướng dẫn sửa dữ liệu; số không khớp yêu cầu tạo lại thay vì báo lỗi máy chủ', () => {
+  const cover = describeError(new ApiError('INVALID_COVER'));
+  assert.match(cover.text, /chọn ảnh hoặc màu bìa có sẵn/);
+  const reference = describeError(new ApiError('REFERENCE_REQUIRES_INCLUDED'));
+  assert.match(reference.text, /Đã bao gồm/);
+  assert.match(reference.text, /xóa giá tham khảo/);
+  const mismatch = describeError(new ApiError('MATCH_MISMATCH'));
+  assert.match(mismatch.text, /đã bị từ chối/);
+  assert.match(mismatch.text, /tạo yêu cầu mới/);
+  for (const error of [cover, reference, mismatch]) {
+    assert.notEqual(error.title, ERROR_INFO.internal.title);
+    assert.equal(error.action, 'close');
+    assert.ok(CODE_KIND.has(error.code));
+  }
+});
+
 test('mã khôi phục/ghép sai đều ra MỘT thông báo chung, không phân biệt sai hay hết hạn (MĐ-8)', () => {
   const texts = ['INVALID_CODE', 'CODE_ALREADY_USED', 'ATTEMPT_EXPIRED', 'INVALID_PAIRING_CODE'].map((c) => describeError(new ApiError(c)).text);
   assert.equal(new Set(texts).size, 1);

@@ -1,6 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { airKm, formatTravelMinutes, formatTravelTime, minutesForKm, roundTravelMinutes, sumRoundedMinutes, travelEstimate } from './geo.ts';
+import { airKm, formatTravelDistance, formatTravelMinutes, formatTravelTime, minutesForKm, roundTravelMinutes, sumRoundedMinutes, travelEstimate } from './geo.ts';
+
+test('chặng dưới 1 km không thành 0 km, mốc 1 km và thời gian giữ cách làm tròn', () => {
+  for (const km of [0, 0.2, 0.99]) {
+    assert.equal(formatTravelDistance(km), 'dưới 1 km');
+    assert.equal(formatTravelTime(minutesForKm(km)), '15 phút');
+  }
+  assert.equal(formatTravelDistance(1), '1 km');
+  assert.equal(formatTravelDistance(1.6), '2 km');
+});
 
 test('khoảng cách chim bay TP Hà Giang → Đồng Văn chim bay khoảng 62 km', () => {
   const hg = { lat: 22.8233, lon: 104.9836 };

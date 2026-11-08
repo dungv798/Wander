@@ -2,9 +2,10 @@ import { ApiError } from '../../../shared/api/ApiError.ts';
 import type { ApiClient } from '../../../shared/api/ApiClient.ts';
 import { CLIENT_ERROR } from '../../../shared/api/http.const.ts';
 import type { DestinationDetail, DestinationSummary } from '../model/Catalog.types.ts';
-import { CATALOG_API } from './catalogApi.const.ts';
+import { CATALOG_API, CATALOG_CATEGORIES } from './catalogApi.const.ts';
 import type { CatalogRepository } from './CatalogRepository.ts';
 import { parseMoments } from '../model/moments.ts';
+import { isVenueView } from '../model/venue.ts';
 
 /** Có phải đối tượng thường (không null, không mảng). */
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -15,7 +16,8 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 function isSummary(v: unknown): v is DestinationSummary {
   return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string' && typeof v['region'] === 'string'
     && (v['lat'] === null || (typeof v['lat'] === 'number' && Number.isFinite(v['lat'])))
-    && (v['lon'] === null || (typeof v['lon'] === 'number' && Number.isFinite(v['lon'])));
+    && (v['lon'] === null || (typeof v['lon'] === 'number' && Number.isFinite(v['lon'])))
+    && (v['categories'] === undefined || (Array.isArray(v['categories']) && v['categories'].every(category => typeof category === 'string' && CATALOG_CATEGORIES.includes(category))));
 }
 
 /** Điểm đến đầy đủ hợp lệ tối thiểu: mã, tên là chuỗi; địa điểm, cẩm nang, mốc tham chiếu là mảng (màn hình lặp qua chúng khi render). */
@@ -73,6 +75,7 @@ export class HttpCatalogRepository implements CatalogRepository {
     const body = await this.client.get<unknown>(`${CATALOG_API.DESTINATIONS}/${encodeURIComponent(id)}`);
     const detail = isRecord(body) ? body['destination'] : undefined;
     if (!isDetail(detail)) throw new ApiError(CLIENT_ERROR.INTERNAL);
+    if (detail.places.some(place => place.venue != null && !isVenueView(place.venue))) throw new ApiError(CLIENT_ERROR.INTERNAL);
     return { ...detail, moments: parseMoments(detail.moments) };
   }
 }

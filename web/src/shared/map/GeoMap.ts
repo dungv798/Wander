@@ -3,6 +3,7 @@ import { COPY } from '../const/copy.vi.ts';
 import { MapLayers } from './MapLayers.ts';
 import { showBasemapError } from './geoMapErrors.ts';
 import { fitMaxZoom, fitPadding, needsInsetRefit } from './geoMapPolicy.ts';
+import { flyToBounds } from './flyToBounds.ts';
 import type { NativeRoute } from './NativeRoute.ts';
 import { loadMapLibre } from './maplibreLoader.ts';
 import type { MapLibre } from './maplibreLoader.ts';
@@ -86,6 +87,7 @@ export class GeoMap {
     if (this.dead) return;
     const before = this.inset;
     this.inset = { ...NO_INSET, ...inset };
+    for (const edge of ['top', 'right', 'bottom', 'left'] as const) { this.host.style.setProperty(`--map-content-${edge}`, `${this.inset[edge]}px`); }
     const fit = this.lastFit;
     if (!this.ready || !fit) return;
     const pts = this.markers.filter((m) => !fit.ids || fit.ids.includes(m.id)).map((m) => m.p);
@@ -136,7 +138,7 @@ export class GeoMap {
       this.pendingFit = this.lastFit;
       return;
     }
-    const pts = this.markers.filter((m) => !ids || ids.includes(m.id)).map((m) => m.p);
+    const pts = [...this.markers.filter((m) => !ids || ids.includes(m.id)).map((m) => m.p), ...(o.contextPoints ?? [])];
     if (o.keepIfVisible && this.touchedByUser && this.allInView(pts)) return;
     if (pts.length) this.fitPoints(pts, o);
     else this.fitCountry(o.animate !== false);
@@ -271,7 +273,7 @@ export class GeoMap {
   /** Lề cho `fitBounds`: phần bị che cộng đệm, kẹp để không vượt quá nửa khung (tránh MapLibre tính ra kích thước âm). */
   private fitPadding(pad: number): PaddingOptions {
     const r = this.host.getBoundingClientRect();
-    return fitPadding({ w: r.width, h: r.height }, this.inset, pad, this.opt.credit);
+    return fitPadding({ w: r.width, h: r.height }, this.inset, pad, this.opt.creditBand ?? this.opt.credit);
   }
 
   /** Bay (hoặc nhảy, khi giảm chuyển động) tới khung vừa các điểm. */
@@ -282,13 +284,13 @@ export class GeoMap {
     const bounds: LngLatBounds = new ml.LngLatBounds([first[0], first[1]], [first[0], first[1]]);
     pts.forEach((p) => bounds.extend([p[0], p[1]]));
     const animate = o.animate !== false && !prefersReducedMotion();
-    gl.fitBounds(bounds, { padding: this.fitPadding(o.padding ?? MAP.FIT_PADDING), maxZoom: fitMaxZoom(o, pts), duration: animate ? MAP.FLY_MS : 0, essential: true });
+    flyToBounds(gl, bounds, this.fitPadding(o.padding ?? MAP.FIT_PADDING), fitMaxZoom(o, pts), animate ? MAP.FLY_MS : 0);
   }
 
   /** Cho thấy cả nước (khi chưa có ghim nào). */
   private fitCountry(animate: boolean): void {
     const [west, south, east, north] = MAP.VIETNAM_BOUNDS;
-    this.gl?.fitBounds([[west, south], [east, north]], { padding: this.fitPadding(0), duration: animate && !prefersReducedMotion() ? MAP.FLY_MS : 0, essential: true });
+    this.gl?.fitBounds([[west, south], [east, north]], { padding: this.fitPadding(0), absolutePadding: true, duration: animate && !prefersReducedMotion() ? MAP.FLY_MS : 0, essential: true });
   }
 
   /** Đổi cỡ khung: báo MapLibre, đặt lại ghim; chưa ai kéo/phóng thì vừa khung lại theo cỡ mới. */

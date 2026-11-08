@@ -20,6 +20,7 @@ export type Overlay =
   | { readonly kind: 'trash' }
   | { readonly kind: 'deleteTrip' }
   | { readonly kind: 'people' }
+  | { readonly kind: 'share' }
   | { readonly kind: 'requests' }
   | { readonly kind: 'requestDelete'; readonly itemId: string };
 

@@ -20,3 +20,8 @@
 @import '../shared/ui/press.css';
 @import '../shared/ui/motion.css';
 @import '../features/discover/homeSurface.css';
+@import '../features/discover/destSurface.css';
+@import '../features/discover/picked.css';
+@import './shell.css';
+@import '../shared/ui/forms.css';
+@import '../features/onboarding/onboardingSurface.css';

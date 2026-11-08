@@ -1,6 +1,5 @@
 import type { DestinationDetail } from '../../discover/index.ts';
-// eslint-disable-next-line boundaries/dependencies -- Catalog chưa xuất danh sách hero qua index; chỉ đọc hằng số đã tuyển, không sao chép hay sửa tính năng khác.
-import { HERO_PHOTOS } from '../../discover/model/heroPhotos.const.ts';
+import { HERO_PHOTOS } from '../../discover/index.ts';
 import { EXPORT_COPY as C } from './export.copy.ts';
 import { PNG } from './export.const.ts';
 import { exportBlocks, pngFilename } from './exportModel.ts';

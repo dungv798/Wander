@@ -1,13 +1,13 @@
 import { PlacePlaceholder } from '../PlacePlaceholder.tsx';
 import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
+import { useState } from 'react';
 import type { PointerEvent } from 'react';
-import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
+import { COPY } from '../../../../shared/const/copy.vi.ts';
 import { Icon } from '../../../../shared/ui/Icon.tsx';
-import { Chip } from '../../../../shared/ui/Chip.tsx';
 import { useCreditPill } from '../../hooks/useCreditPill.ts';
-import { CATEGORY_ICON } from '../../model/discover.const.ts';
+import { DEST_COPY } from '../../model/dest.copy.ts';
 import type { PlaceView } from '../../model/Catalog.types.ts';
-import { mainAway, photoAt } from '../../model/destinationQueries.ts';
+import { photoAt } from '../../model/destinationQueries.ts';
 import { CreditPill } from '../CreditPill.tsx';
 
 interface FrontHandlers {
@@ -24,31 +24,19 @@ interface SwipeCardProps {
   readonly photoIndex: number;
   /** Bộ xử lý kéo; chỉ truyền cho thẻ trên cùng. */
   readonly handlers?: FrontHandlers;
+  readonly onInfo?: () => void;
+  readonly onPhoto?: (delta: number) => void;
 }
 
 /** Phần chữ nổi trên ảnh (gọn để ảnh là nhân vật chính): loại, nút nguồn ảnh (thẻ trên cùng), tên, khu vực kèm quãng đường, mùa đẹp và thời lượng. */
-function CardInfo({ place, front, onCredit }: { readonly place: PlaceView; readonly front: boolean; readonly onCredit: () => void }) {
-  const away = mainAway(place);
+function CardInfo({ place }: { readonly place: PlaceView }) {
   return (
     <div className="card-info">
       <div className="card-top">
-        <Chip className="card-cat" icon={CATEGORY_ICON[place.category]}>{place.categoryName}</Chip>
-        {front ? (
-          <button className="credit-btn" type="button" aria-label={COPY.deck.creditAria} onClick={onCredit}>
-            <Icon name="info-circle" />
-          </button>
-        ) : null}
+        <span className="card-kind">{place.id.startsWith('exp-') ? DEST_COPY.experience : place.categoryName} · {place.area}</span>
       </div>
       <h2>{place.name}</h2>
-      <p className="card-area">
-        <Icon name="map-pin" size="s" />
-        {place.area}
-      </p>
-      <ul className="card-facts">
-        <li><Chip tone="glass" icon="calendar-event">{place.bestLabel}</Chip></li>
-        <li><Chip tone="glass" icon="clock">{place.duration}</Chip></li>
-        {away ? <li><Chip tone="glass" icon="route">{fill(COPY.units.kmApprox, { km: away.km })}</Chip></li> : null}
-      </ul>
+      <p className="card-hook">{place.summary || place.hook}</p>
     </div>
   );
 }
@@ -57,10 +45,12 @@ function CardInfo({ place, front, onCredit }: { readonly place: PlaceView; reado
  * Thẻ quẹt toàn màn (v6, PO 26/10/2026): ảnh của địa điểm là nền; tên, thông tin và dấu THÍCH/BỎ QUA nổi đè lên ảnh.
  * Thẻ trên cùng nhận cử chỉ kéo; các thẻ phía sau chỉ trang trí (`aria-hidden`).
  */
-export function SwipeCard({ place, depth, photoIndex, handlers }: SwipeCardProps) {
+export function SwipeCard({ place, depth, photoIndex, handlers, onInfo, onPhoto }: SwipeCardProps) {
   const front = depth === 0;
   const credit = useCreditPill(photoIndex);
   const photo = photoAt(place, photoIndex);
+  const [shownSource, setShownSource] = useState(photo?.url);
+  const shown = place.photos.find(candidate => candidate.url === shownSource) ?? photo;
   return (
     <article
       className={`card cat-${place.category} ${front ? 'front' : `depth-${depth}`}`}
@@ -69,8 +59,10 @@ export function SwipeCard({ place, depth, photoIndex, handlers }: SwipeCardProps
       aria-hidden={front ? undefined : true}
       {...(front ? handlers : {})}
     >
-      {photo ? <RevealImage className="ph" alt="" src={photo.url} /> : <PlacePlaceholder place={place} className="ph" />}
+      <div className="card-photo">
+      {photo ? <RevealImage className="ph" alt="" src={photo.url} onVisible={setShownSource} /> : <PlacePlaceholder place={place} className="ph" />}
       <div className="card-veil" aria-hidden="true" />
+      {shown?.caption ? <span className="card-photo-caption">{shown.caption}</span> : null}
       {place.photos.length > 1 ? (
         <div className="segs" aria-hidden="true">
           {place.photos.map((p, k) => (
@@ -84,8 +76,15 @@ export function SwipeCard({ place, depth, photoIndex, handlers }: SwipeCardProps
       <span className="stamp l" aria-hidden="true">
         <Icon name="x" />
       </span>
-      <CardInfo place={place} front={front} onCredit={credit.toggle} />
-      {front && credit.open ? <CreditPill photo={photo} /> : null}
+      <CardInfo place={place} />
+      {front ? <button className="credit-btn" type="button" aria-label={COPY.deck.creditAria} onPointerDown={event => event.stopPropagation()} onClick={credit.toggle}><Icon name="info-circle" /></button> : null}
+      {front && place.photos.length > 1 ? <div className="card-photo-controls" onPointerDown={event => event.stopPropagation()}>
+        <button type="button" aria-label={COPY.place.prevPhoto} onClick={() => onPhoto?.(-1)}><Icon name="chevron-left" /></button>
+        <button type="button" aria-label={COPY.place.nextPhoto} onClick={() => onPhoto?.(1)}><Icon name="chevron-left" className="flip" /></button>
+      </div> : null}
+      {front && credit.open ? <CreditPill photo={shown} /> : null}
+      </div>
+      {front ? <button className="card-detail" type="button" aria-label={COPY.deck.infoAria} onPointerDown={event => event.stopPropagation()} onClick={onInfo}><Icon name="compass" size="s" />{DEST_COPY.detail}<Icon name="chevron-up" size="s" /></button> : null}
     </article>
   );
 }

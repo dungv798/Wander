@@ -1,4 +1,5 @@
 import type { CategoryCode } from './Catalog.types.ts';
+import { matchesDiscoveryFilter } from './discoveryFilters.ts';
 
 /** Quyết định của người dùng với một thẻ: thích hoặc bỏ qua. */
 export type Decision = 'like' | 'skip';
@@ -89,7 +90,7 @@ export function togglePack(s: DiscoverState, key: string): DiscoverState {
 
 /** Các thẻ còn lại để quẹt: chưa quyết và đúng bộ lọc loại; nơi có ảnh thật đứng trước nơi chưa có ảnh (giữ thứ tự biên tập trong từng nhóm). */
 export function remainingIds<P extends { id: string; category: CategoryCode; photos?: readonly unknown[] }>(s: DiscoverState, places: readonly P[]): P[] {
-  const left = places.filter((p) => (s.cat === 'all' || p.category === s.cat) && !s.decisions[p.id]);
+  const left = places.filter((p) => matchesDiscoveryFilter(p, s.cat) && !s.decisions[p.id]);
   const hasPhoto = (p: P): boolean => (p.photos?.length ?? 1) > 0;
   return [...left.filter(hasPhoto), ...left.filter((p) => !hasPhoto(p))];
 }

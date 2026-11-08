@@ -1,5 +1,5 @@
 import { fill } from '../../../shared/const/copy.vi.ts';
-import { Icon } from '../../../shared/ui/Icon.tsx';
+import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { onboardPhotoUrl } from '../model/onboardPhotos.ts';
 import type { PlaceView } from '../../discover/index.ts';
 import type { FlyingChip } from '../hooks/useSelectedTray.ts';
@@ -18,12 +18,8 @@ export function SwipeControls({ lit, hint, onAct }: SwipeControlsProps) {
   return (
     <div className="ob-controls">
       <div className="ob-swipebtns">
-        <button type="button" className={`ob-rb skip${lit === 'skip' || lit === 'both' ? ' lit' : ''}`} aria-label={T.swipe.skipAction} onClick={() => onAct('skip')}>
-          <Icon name="x" />
-        </button>
-        <button type="button" className={`ob-rb pick${lit === 'pick' || lit === 'both' ? ' lit' : ''}`} aria-label={T.swipe.pick} onClick={() => onAct('pick')}>
-          <Icon name="check" />
-        </button>
+        <IconButton icon="x" className={`ob-rb skip${lit === 'skip' || lit === 'both' ? ' lit' : ''}`} label={T.swipe.skipAction} onClick={() => onAct('skip')} />
+        <IconButton icon="check" className={`ob-rb pick${lit === 'pick' || lit === 'both' ? ' lit' : ''}`} label={T.swipe.pick} onClick={() => onAct('pick')} />
       </div>
       <p className="ob-hint">{hint}</p>
     </div>

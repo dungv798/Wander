@@ -1,0 +1,21 @@
+// Đo phản hồi mạng thật của ảnh Unsplash trên Home một điểm đến: mã HTTP, kích thước, thời gian; cuộn tới mục Khoảnh khắc.
+import path from 'node:path';
+import { chromium } from 'playwright-core';
+const BASE = 'http://localhost:8787';
+const dest = process.argv[2] ?? 'ha-noi';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, locale: 'vi-VN' });
+const page = await ctx.newPage();
+const net = [];
+page.on('response', async (r) => { if (r.url().includes('images.unsplash.com')) net.push({ s: r.status(), kb: Math.round((Number(r.headers()['content-length']) || 0) / 1024), u: r.url().slice(38, 70) }); });
+await page.goto(`${BASE}/`);
+await page.evaluate((d) => { localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'); localStorage.setItem('wander.web.destination.v1', d); }, dest);
+await page.goto(`${BASE}/#/`); await page.reload();
+await page.waitForTimeout(1500);
+const sec = page.getByText(/Khoảnh khắc ở/).first();
+await sec.scrollIntoViewIfNeeded();
+await page.waitForTimeout(6000);
+const imgs = await page.evaluate(() => [...document.images].filter((i) => i.src.includes('images.unsplash.com')).map((i) => ({ ok: i.complete && i.naturalWidth > 0, w: i.naturalWidth, lazy: i.loading })));
+console.log(dest, 'phản hồi mạng:', JSON.stringify(net.map((n) => n.s)), '| ảnh trên trang:', JSON.stringify(imgs));
+await page.screenshot({ path: path.resolve(`.tmp/walk/u-moments-${dest}.png`) });
+await browser.close();

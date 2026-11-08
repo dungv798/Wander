@@ -13,5 +13,5 @@ export const MEAL_GAPS_RULES = {
   lunchPlaces: 3, restPlaces: 4, minutesPerHour: 60,
   noonStart: 11 * 60, noonEnd: 14 * 60, eveningStart: 18 * 60,
   storagePrefix: 'wander.web.meal-gaps.v1',
-  foodCategories: ['am', 'food', 'cafe', 'coffee', 'restaurant', 'dining'],
+  foodCategories: ['am', 'food', 'restaurant', 'dining'],
 } as const;

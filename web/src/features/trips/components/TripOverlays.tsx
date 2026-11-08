@@ -13,6 +13,7 @@ const ChecklistSheet = lazy(() => import('./OverviewSheets.tsx').then(module => 
 const CoverSheet = lazy(() => import('./CoverSheet.tsx').then(module => ({ default: module.CoverSheet })));
 const EditTripSheet = lazy(() => import('./EditTripSheet.tsx').then(module => ({ default: module.EditTripSheet })));
 const PeopleSheet = lazy(() => import('./PeopleSheet.tsx').then(module => ({ default: module.PeopleSheet })));
+const ShareSheet = lazy(() => import('./ShareSheet.tsx').then(module => ({ default: module.ShareSheet })));
 const TrashSheet = lazy(() => import('./TrashSheet.tsx').then(module => ({ default: module.TrashSheet })));
 const MealSuggestSheet = lazy(() => import('./MealSuggestSheet.tsx').then(module => ({ default: module.MealSuggestSheet })));
 
@@ -48,6 +49,8 @@ export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay |
       return <DeleteTripSheet onClose={onClose} />;
     case 'people':
       return <Suspense fallback={null}><PeopleSheet onClose={onClose} /></Suspense>;
+    case 'share':
+      return <Suspense fallback={null}><ShareSheet onClose={onClose} /></Suspense>;
     case 'requests':
       return <RequestsSheet onClose={onClose} />;
     case 'requestDelete':

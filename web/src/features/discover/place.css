@@ -1,43 +1,91 @@
 ﻿/* Sheet chi tiết: chỉ nội dung cuộn; thanh hành động nằm ngoài vùng cuộn. */
-:root .panel:has(> .place-content) { overflow: hidden; }
-.place-content { display: flex; flex-direction: column; max-height: 94dvh; }
+:root:not([data-look='classic']) .panel:has(> .place-content) { overflow: hidden; border-radius: var(--shell-sheet-radius); background: var(--sheet-surface); border: 1px solid var(--sheet-edge); box-shadow: var(--shell-panel-shadow); backdrop-filter: blur(var(--sheet-blur)); }
+.place-content { display: flex; flex-direction: column; max-height: 96dvh; }
 .place-scroll { overflow: auto; min-height: 0; overscroll-behavior: contain; }
 .place-actions { flex: none; z-index: 3; }
 :root .place-actions { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
 .place-actions .btn { min-width: 0; padding-inline: var(--s-2); text-decoration: none; }
 .place-actions > .cta-bar { display: contents; }
+.place-action-title, .place-desktop-facts { display: none; }
+.pd-photo-caption { display: block; margin-bottom: 4px; color: var(--ink); font: var(--text-secondary); }
+:root .place-actions:has(> .btn[aria-pressed]) { grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
 
-/* Tên/loại/chip nằm trên ảnh, scrim chỉ ở đáy như hero trang chủ. */
-.place-hero-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, var(--scrim), transparent 72%); }
-.place-hero-meta { position: absolute; inset-inline: var(--s-4); bottom: var(--s-5); display: grid; gap: var(--s-2); color: var(--on-photo); pointer-events: none; text-shadow: var(--glass-photo-shadow); }
-.place-hero-meta p { font: var(--text-secondary); color: var(--on-photo); }
-:root .panel .place-content .place-hero-meta h2 { font: 800 var(--fs-2xl) / var(--lh-tight) var(--font-display); color: var(--on-photo); overflow-wrap: anywhere; }
-:root .place-hero-meta .chip { position: static; font-size: var(--fs-xs); padding: var(--s-1) var(--s-2); }
-:root .place-content .gal .credit-btn { bottom: auto; top: calc(var(--tap) + var(--s-3)); right: var(--s-4); }
-:root .place-content .gallery { height: calc(var(--gallery-height) + var(--s-8)); }
-:root .place-content .gallery img { object-fit: cover; }
-:root .place-content .pp { gap: var(--s-3); padding: var(--s-4); }
+/* MỘT template chi tiết cho mọi nơi: đầu trang (đường dẫn + đóng + tên + loại), ảnh theo tỷ lệ gốc + 4 thông số, rồi nội dung. */
+.pd-head { display: grid; gap: var(--s-2); padding: var(--s-4) var(--s-4) var(--s-2); }
+.pd-crumb { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); min-width: 0; }
+.pd-crumb p { display: flex; align-items: center; gap: var(--s-1); min-width: 0; margin: 0; font: var(--text-secondary); color: var(--muted); }
+.pd-crumb p > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pd-title { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); }
+:root .panel .place-content .pd-title h2 { margin: 0; font: 800 var(--fs-2xl) / var(--lh-tight) var(--font-display); color: var(--ink); overflow-wrap: anywhere; }
+.pd-cat { flex: none; display: inline-flex; align-items: center; gap: var(--s-1); padding: var(--s-1) var(--s-3); border-radius: var(--r-pill); border: var(--glass-border) solid var(--line); background: var(--tint); color: var(--tint-ink); font: var(--text-secondary); font-weight: 700; }
+.pd-media { display: grid; gap: var(--s-3); padding: var(--s-2) var(--s-4) var(--s-3); }
+.pd-photo-col { display: grid; align-content: start; gap: var(--s-2); min-width: 0; }
+/* Ảnh giữ đúng tỷ lệ gốc: chiều cao theo chiều rộng, không crop, không letterbox, không nền mờ lấp chỗ. */
+.pd-photo { position: relative; overflow: hidden; border-radius: var(--r-lg); background: var(--surface-2); }
+:root .panel .pd-photo .pd-original { position: absolute; left: var(--s-2); bottom: var(--s-2); padding-inline: var(--s-3); color: var(--ink); background: var(--glass-label-surface); font: var(--text-secondary); }
+.pd-photo img { display: block; width: 100%; height: auto; max-height: 70dvh; object-fit: contain; }
+.pd-photo:not(:has(img[data-image-ready="true"])) { min-height: calc(var(--s-8) * 2); background: linear-gradient(110deg, var(--surface-2) 25%, var(--surface) 45%, var(--surface-2) 65%); background-size: 300% 100%; animation: placeShimmer calc(var(--dur-scene) * 3) linear infinite; }
+.pd-photo:has(.photo-ph), .pd-photo:has(.pd-photo-failed) { animation: none; }
+.pd-photo .photo-ph { min-height: calc(var(--s-8) * 3); background: var(--surface-2); color: var(--muted); place-content: center; padding: var(--s-4); }
+.pd-photo-failed { display: grid; justify-items: center; gap: var(--s-2); padding: var(--s-5) var(--s-4); color: var(--muted); text-align: center; }
+/* Thanh ảnh nhẹ: Xem ảnh gốc ở trái, trước/số/sau ở phải. */
+.pd-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); flex-wrap: wrap; }
+:root #screen .pd-bar .pd-original, :root .panel .pd-bar .pd-original { padding-inline: var(--s-3); font: var(--text-secondary); font-weight: 700; }
+/* Một viên chứa trước / số / sau; các nút bên trong không viền riêng. */
+.pd-pager { display: inline-flex; align-items: center; justify-content: space-between; width: 100%; border: var(--glass-border) solid var(--sheet-edge); border-radius: var(--r-md); background: var(--control-surface); }
+.pd-pager > button { flex: none; }
+:root .panel .pd-pager .pd-nav { border: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root .panel .pd-pager .pd-nav:disabled { opacity: .4; }
+:root:not([data-look='classic']) .panel .pd-pager .pd-nav::before { display: none; }
+.pd-count { min-width: calc(var(--s-6) + var(--s-3)); text-align: center; font: var(--text-secondary); color: var(--muted); }
+.pd-credit { grid-column: 1 / -1; margin: 0; font: var(--text-secondary); color: var(--muted); overflow-wrap: anywhere; }
+.pd-credit a { color: var(--ink); text-decoration: underline; }
+.pd-hook { margin: 0; font: var(--text-body); color: var(--ink); }
+.place-source-link { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3); margin-top: var(--s-2); min-height: var(--tap); border: var(--glass-border) solid var(--control-edge); border-radius: var(--r-md); background: var(--control-surface); color: var(--ink); }
+.place-source-link > span { display: grid; flex: 1; gap: var(--s-1); }
+.place-source-link small { font: var(--text-secondary); color: var(--muted); }
+.place-source-link > .ic { flex: none; }
+/* Ảnh dọc đứng cạnh thông số; ảnh ngang nằm trên thông số. */
+.pd-media[data-orient="portrait"] { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; }
+.pd-media[data-orient="portrait"] .place-facts { grid-template-columns: minmax(0, 1fr); }
+:root .place-content .pp { gap: var(--s-3); padding: var(--s-2) var(--s-4) var(--s-4); }
 
 /* Thẻ bên trong dùng nền đặc để giữ một lớp kính chính trên sheet. */
-.place-info-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-3); }
-.place-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.place-facts li { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-2); background: var(--surface); border-radius: var(--r-md); border: 1px solid var(--line); }
+.place-info-card { background: transparent; border: 0; border-radius: 0; padding: var(--s-2) 0; }
+.place-content .place-info-card.tipbox { background: transparent; color: var(--ink); padding: var(--s-2) 0; }
+.place-facts { list-style: none; margin: 0; padding: var(--s-3); display: grid; gap: var(--s-3); grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--sheet-inner-surface); border: 1px solid var(--sheet-edge); border-radius: var(--r-lg); }
+.place-facts li { display: flex; align-items: center; gap: var(--s-2); padding: 0; background: transparent; border: 0; }
 .place-facts li > span:last-child { display: grid; min-width: 0; }
 .place-facts b { font: var(--text-card); }
 .place-facts small { font: var(--text-secondary); color: var(--muted); }
 .place-content .rate { padding: var(--s-3); gap: var(--s-2); }
 .place-content .credits { overflow-wrap: anywhere; }
 @media (min-width: 1280px) { .drawer .place-content { height: 100%; max-height: 100%; } }
-/* Điều khiển chi tiết dùng kính trung tính, không khuếch đại màu ảnh/nước phía sau. */
-.place-content { --glass-saturation: .65; --glass-brightness: 1; }
-:root .place-content :is(.gnav, .close, .credit-btn, .glass-control, .place-more) {
-  background: var(--glass);
-  color: var(--ink);
-  text-shadow: none;
-  -webkit-backdrop-filter: blur(var(--glass-chip-blur)) saturate(.65);
-  backdrop-filter: blur(var(--glass-chip-blur)) saturate(.65);
+@media (min-width: 1024px) {
+  :root:not([data-look='classic']) .panel:has(> .place-content) { width: min(var(--place-dialog-width), calc(100vw - var(--s-6) * 2)); max-height: calc(100dvh - var(--s-6) * 2); }
+  .place-content { max-height: calc(100dvh - var(--s-6) * 2); }
+  .pd-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: var(--s-6); padding: var(--s-4) var(--s-6) var(--s-6); align-items: start; }
+  .pd-layout .pd-media { position: sticky; top: 0; display: grid; grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .pd-media > .place-facts { display: none; }
+  .pd-photo img { max-height: none; }
+  .place-desktop-facts { display: block; }
+  :root .place-content .pd-layout > .pp { padding: 0; }
+  .pd-head { padding: var(--s-4) var(--s-6) 0; }
+  .pd-crumb { padding-bottom: var(--s-3); border-bottom: 1px solid var(--line); }
+  .place-action-title { display: block; flex: 1; font: var(--text-button); }
+  :root .place-actions { display: flex; align-items: center; justify-content: flex-end; padding-inline: var(--s-6); }
 }
-:root .place-content :is(.gnav, .close, .credit-btn, .glass-control, .place-more)::before { background: none; }
+@media (max-width: 767px) {
+  :root .sheet:has(.place-content) { padding: var(--s-2); align-items: center; }
+  :root .panel:has(> .place-content) { border-radius: var(--shell-sheet-radius); max-height: 96dvh; }
+  .pd-head { padding-block: var(--s-2); }
+  :root .panel .place-content .pd-title h2 { font: var(--text-screen); }
+  .pd-title { align-items: center; gap: var(--s-2); }
+  .pd-cat { padding-inline: var(--s-2); font: var(--text-eyebrow); }
+}
+/* Điều khiển chi tiết dùng đúng chất liệu kính của app (không tô riêng một lớp trắng). */
+.place-content { --glass-saturation: .65; --glass-brightness: 1; }
+:root .place-content .place-more { text-shadow: none; }
 .place-disclosure > h4 { margin: 0; }
 .place-disclosure-toggle {
   display: flex;
@@ -85,20 +133,21 @@
 .place-content :is(.place-disclosure-toggle, .place-more):focus-visible { outline: var(--focus-width) solid var(--ink); outline-offset: var(--s-1); }
 :root .place-content .minimap.tm-mini { height: calc(var(--s-8) * 4); }
 /* Khung cố định trước khi ảnh/WebGL tải xong: shimmer trung tính, không đẩy chữ xuống. */
-.place-content .gallery, .place-content .tmroot[data-ready="0"] {
+.place-content .tmroot[data-ready="0"] {
   background: linear-gradient(110deg, var(--surface-2) 25%, var(--surface) 45%, var(--surface-2) 65%);
   background-size: 300% 100%;
   animation: placeShimmer calc(var(--dur-scene) * 3) linear infinite;
 }
-.place-content .gallery:not(:has(img[data-image-ready="false"])) { animation: none; }
 @keyframes placeShimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
 @media (prefers-reduced-motion: reduce) {
   .place-content :is(.place-chevron, .place-disclosure-grid, .place-about, .place-more, .place-disclosure-toggle) { transition: none; }
-  .place-content .gallery, .place-content .tmroot[data-ready="0"] { animation: none; }
+  .place-content .tmroot[data-ready="0"], .pd-photo:not(:has(img[data-image-ready="true"])) { animation: none; }
 }
 
 /* Ô giữ chỗ khi chưa có ảnh: dùng đúng khung ảnh, không làm ảnh vỡ */
 .img-ph { display: block; background: var(--surface-2); }
+.place-venue-address { display: flex; align-items: start; gap: var(--s-2); color: var(--ink); overflow-wrap: anywhere; }
+.place-venue-address > .ic { flex: none; }
 .photo-ph { display: grid; place-content: center; justify-items: center; gap: var(--s-1); width: 100%; height: 100%; background: var(--surface-2); color: var(--muted); text-align: center; }
 .card .photo-ph.ph { position: absolute; inset: 0; }
 .gal .photo-ph { min-height: calc(var(--s-8) * 4); }

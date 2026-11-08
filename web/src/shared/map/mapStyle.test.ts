@@ -14,10 +14,12 @@ function baseStyle(): StyleSpecification {
     sources: {
       openmaptiles: { type: 'vector', tiles: ['https://example.test/{z}/{x}/{y}.pbf'], attribution: 'OSM / OpenFreeMap / OpenMapTiles' },
       dem: { type: 'raster-dem', tiles: ['https://example.test/{z}/{x}/{y}.png'], attribution: 'Độ cao: Mapzen, AWS Open Data' },
+      relief: { type: 'raster', tiles: ['https://example.test/relief/{z}/{x}/{y}.png'] },
     },
     terrain: { source: 'dem' },
     layers: [
       { id: 'background', type: 'background' },
+      { id: 'raster-relief', type: 'raster', source: 'relief' },
       { id: 'water', type: 'fill', source: 'openmaptiles', 'source-layer': 'water' },
       { id: 'park', type: 'fill', source: 'openmaptiles', 'source-layer': 'park' },
       { id: 'landcover', type: 'fill', source: 'openmaptiles', 'source-layer': 'landcover' },
@@ -68,7 +70,7 @@ test('giữ thứ tự, filter, zoom, casing/độ dày đường; màu và chi 
   assert.ok(minor?.type === 'line');
   assert.equal(minor.minzoom, 8);
   assert.deepEqual(minor.paint?.['line-opacity'], ['interpolate', ['linear'], ['zoom'], MAP.MINOR_ROAD_ZOOM, 0, MAP.MINOR_ROAD_ZOOM + MAP.DETAIL_FADE_ZOOMS, 1]);
-  assert.deepEqual(result.layers.map((layer) => layer.id), original.layers.filter((layer) => !['hillshade', 'contour', 'peak'].includes(layer.id)).map((layer) => layer.id));
+  assert.deepEqual(result.layers.map((layer) => layer.id), original.layers.filter((layer) => !['hillshade', 'contour', 'peak', 'raster-relief'].includes(layer.id)).map((layer) => layer.id));
   const water = result.layers.find((layer) => layer.id === 'water');
   assert.ok(water?.type === 'fill');
   assert.equal(water.paint?.['fill-color'], COLORS.water);
@@ -97,6 +99,30 @@ test('nhãn ưu tiên tiếng Việt rồi tên gốc, giữ format/ref và halo
   assert.equal(formatted.result, 'success');
   if (formatted.result === 'success') assert.equal(formatted.value.evaluate({ zoom: 14 }, { type: 'Point', properties: { 'name:vi': 'Đường mới', ref: 'QL20' } }).toString(), 'Đường mới · QL20');
   assert.deepEqual(poi.paint?.['text-opacity'], ['interpolate', ['linear'], ['zoom'], MAP.SMALL_LABEL_ZOOM, 0, MAP.SMALL_LABEL_ZOOM + MAP.DETAIL_FADE_ZOOMS, 1]);
+});
+
+test('nhãn song ngữ của Liberty chỉ hiển thị một tên sau khi ưu tiên tiếng Việt', () => {
+  const original = baseStyle();
+  original.layers.push({ id: 'bilingual', type: 'symbol', source: 'openmaptiles', 'source-layer': 'place', layout: { 'text-field': ['format', ['get', 'name:latin'], {}, ['concat', '\n', ['get', 'name:nonlatin']], {}] } });
+  const layer = restyleMap(original, COLORS).layers.find(layer => layer.id === 'bilingual');
+  assert.ok(layer?.type === 'symbol');
+  const expression = createExpression(layer.layout?.['text-field'], 'text-field');
+  assert.equal(expression.result, 'success');
+  if (expression.result === 'success') assert.equal(expression.value.evaluate({ zoom: 12 }, { type: 'Point', properties: { 'name:vi': 'Phú Ninh', 'name:latin': 'Phu Ninh', 'name:nonlatin': 'Phú Ninh', name: 'Phú Ninh' } }).toString(), 'Phú Ninh');
+});
+
+test('biểu thức case/concat thật của Liberty không lặp tên quốc gia và thành phố', () => {
+  const original = baseStyle();
+  // JSON nền Liberty đọc ngày 06/11/2026: label_city và label_country_1 dùng biểu thức này.
+  original.layers.push({ id: 'label_country_1', type: 'symbol', source: 'openmaptiles', 'source-layer': 'place', layout: { 'text-field': ['case', ['has', 'name:nonlatin'], ['concat', ['get', 'name:latin'], '\n', ['get', 'name:nonlatin']], ['coalesce', ['get', 'name_en'], ['get', 'name']]] } });
+  const layer = restyleMap(original, COLORS).layers.find(layer => layer.id === 'label_country_1');
+  assert.ok(layer?.type === 'symbol');
+  const expression = createExpression(layer.layout?.['text-field'], 'text-field');
+  assert.equal(expression.result, 'success');
+  if (expression.result === 'success') {
+    assert.equal(expression.value.evaluate({ zoom: 6 }, { type: 'Point', properties: { 'name:vi': 'Lào', 'name:latin': 'Laos', 'name:nonlatin': 'Lao', name: 'Laos' } }), 'Lào');
+    assert.equal(expression.value.evaluate({ zoom: 6 }, { type: 'Point', properties: { name_en: 'Laos', name: 'Lào' } }), 'Lào');
+  }
 });
 
 test('loader báo lỗi HTTP cho cơ chế thử lại hiện có, không yêu cầu tile/DEM', async (t) => {

@@ -4,17 +4,17 @@
 :root:not([data-look='classic']) :is(.ribbon, .next, .next .ib, .devrow .ib, .tl) { background: var(--surface-2); color: var(--ink); }
 :root:not([data-look='classic']) .app::before,
 :root:not([data-look='classic']) .app::after { display: none; }
-:root:not([data-look='classic']) :is(.field input, .field select, .destination-picker-search input, .opt .rd) { border-color: var(--border-ctrl); }
+:root:not([data-look='classic']) :is(.destination-picker-search input, .opt .rd) { border-color: var(--control-edge); }
 :root:not([data-look='classic']) body { font: var(--text-body); }
 :root:not([data-look='classic']) :is(h1, h2, h3, h4, button, .note, .meta, .stat, .facts li) { overflow-wrap: break-word; }
 :root:not([data-look='classic']) :is(.pagehead h1, .bar h1, .deckbar h1, .thead h1, .destination-picker-header h1, .panel h2) {
   font: var(--text-screen);
   letter-spacing: var(--tracking-screen);
 }
-:root:not([data-look='classic']) :is(.pp h2, .card h2, .dhero h1) { font: var(--text-place); letter-spacing: var(--tracking-place); }
+:root:not([data-look='classic']) :is(.pp h2, .dhero h1) { font: var(--text-place); letter-spacing: var(--tracking-place); }
 :root:not([data-look='classic']) :is(.h2, .h3, .pp h4, .ghead b, .sections h2, .dcard h3) { font: var(--text-section); letter-spacing: var(--tracking-section); }
 :root:not([data-look='classic']) :is(.tcard h3, .mini h3, .tile h3, .resume h3, .grow b, .next h3, .facts b, .destination-picker-list strong) { font: var(--text-card); letter-spacing: var(--tracking-card); }
-:root:not([data-look='classic']) :is(.pp .body, .pp .lead, .card-area, .field, .tcard .meta) { font: var(--text-body); }
+:root:not([data-look='classic']) :is(.pp .body, .pp .lead, .card-area, .tcard .meta) { font: var(--text-body); }
 :root:not([data-look='classic']) :is(.note, .card-facts, .facts li > span:last-child, .stat span, .destination-picker-list small) { font: var(--text-secondary); }
 :root:not([data-look='classic']) :is(.btn, .pill, .fchip, .search) { font: var(--text-button); letter-spacing: var(--tracking-card); }
 :root:not([data-look='classic']) .tab { font: var(--text-tab); }
@@ -44,7 +44,8 @@
 :root:not([data-look='classic']) .search { padding: var(--s-3) var(--s-4); text-align: left; }
 :root:not([data-look='classic']) :is(.sections, .stack) { gap: var(--s-4); }
 :root:not([data-look='classic']) .pp { padding: var(--s-4); gap: var(--s-4); }
-:root:not([data-look='classic']) :is(.panel, .sheetbody) { border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; }
+:root:not([data-look='classic']) .panel { border-radius: var(--sheet-radius); }
+:root:not([data-look='classic']) .sheetbody { border-radius: var(--sheet-radius) var(--sheet-radius) 0 0; }
 :root:not([data-look='classic']) :is(.tcard, .resume, .gblock, .tile, .seccard, .next) { border-radius: var(--r-md); box-shadow: var(--sh-1); }
 :root:not([data-look='classic']) :is(.stats, .facts) { gap: var(--s-3); }
 :root:not([data-look='classic']) .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }

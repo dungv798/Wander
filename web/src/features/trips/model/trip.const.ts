@@ -59,6 +59,8 @@ export type WizardStep = (typeof WIZARD_STEPS)[number];
 export const DEFAULT_START_WEEKDAY = 6;
 export const DEFAULT_TRIP_DAYS = 3;
 export const DAYS_IN_WEEK = 7;
+/** Hai ngày gần nhất trên thẻ; ngày còn lại dùng picker chung để thẻ không dài theo số ngày chuyến. */
+export const QUICK_ASSIGN_DAYS = 2;
 
 /** Nấc tờ kéo của màn chuyến đi. */
 export type SheetSnap = 'peek' | 'half' | 'full';

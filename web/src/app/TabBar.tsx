@@ -23,32 +23,33 @@ interface TabBarProps {
   readonly wide: boolean;
   /** Số nơi đã chọn (hiện chấm số ở tab "Đã chọn"); 0 = không hiện. */
   readonly pickedCount: number;
+  readonly onCreate: () => void;
 }
 
 /** Logo Wander (máy bay giấy) ở đầu thanh bên màn rộng; bấm về Khám phá. */
 function Brand() {
   return (
     <button className="brand" type="button" aria-label={COPY.brand.ariaHome} onClick={() => navigate(VIEW.EXPLORE)}>
-      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" aria-hidden="true">
-        <path d="M21.5 2.5L2.5 10l7 2.6L12 20.5z" />
-      </svg>
-      <span>{COPY.brand.name}</span>
+      <b className="brand-mark" aria-hidden="true">{COPY.brand.name.slice(0, 1).toLowerCase()}<span>·</span></b>
     </button>
   );
 }
 
 /** Thanh điều hướng chính: thanh tab nổi ở điện thoại, thanh bên ở màn rộng. */
-export function TabBar({ current, wide, pickedCount }: TabBarProps) {
+export function TabBar({ current, wide, pickedCount, onCreate }: TabBarProps) {
+  const active = current === VIEW.DEST || current === VIEW.DECK || current === VIEW.DESTINATIONS ? VIEW.EXPLORE : current === VIEW.TRIP || current === VIEW.TODAY || current === VIEW.EXPORT ? VIEW.TRIPS : current;
   return (
-    <nav id="tabbar" className="g-tab" aria-label={COPY.nav.label}>
+    <><nav id="tabbar" className="g-tab" aria-label={COPY.nav.label}>
       {wide ? <Brand /> : null}
       {TABS.map((t) => (
-        <button key={t.view} className="tab" type="button" aria-current={current === t.view ? 'page' : undefined} onClick={() => navigate(t.view)}>
+        <button key={t.view} className="tab" type="button" aria-current={active === t.view ? 'page' : undefined} onClick={() => navigate(t.view)}>
           <Icon semantic name={t.icon} />
           <span>{t.label}</span>
           {t.view === VIEW.PICKED && pickedCount > 0 ? <span className="dot">{pickedCount}</span> : null}
         </button>
       ))}
-    </nav>
+      {!wide ? <button className="tab tab-create" type="button" onClick={onCreate}><Icon name="plus" /><span>{COPY.nav.create}</span></button> : null}
+      {wide ? <button className="rail-profile" type="button" aria-label={COPY.nav.settings} onClick={() => navigate(VIEW.SETTINGS)}>{COPY.brand.name.slice(0, 1)}</button> : null}
+    </nav>{wide ? <button className="map-create glass-control" type="button" aria-label={COPY.nav.create} onClick={onCreate}><Icon name="plus" /></button> : null}</>
   );
 }

@@ -47,7 +47,7 @@ export class BottomSheet {
     this.grab = handle.querySelector<HTMLElement>('.grab');
     this.hint.className = SHEET_HINT.CLASS;
     this.hint.textContent = SHEET_HINT.TEXT;
-    try { this.hint.hidden = !shouldShowSheetHint(localStorage); } catch { this.hint.hidden = false; }
+    try { this.hint.hidden = !shouldShowSheetHint(); } catch { this.hint.hidden = false; }
     handle.append(this.hint);
     const sig = { signal: this.abort.signal };
     handle.addEventListener('pointerdown', (e) => this.down(e), sig);
@@ -155,7 +155,7 @@ export class BottomSheet {
     const o = this.offsets();
     const y = Number.parseFloat(this.el.style.getPropertyValue(OFFSET_VAR)) || 0;
     this.hint.hidden = true;
-    try { dismissSheetHint(localStorage); } catch { /* Storage bị chặn: vẫn ẩn lời mời trong lần này. */ }
+    try { dismissSheetHint(); } catch { /* Storage bị chặn: vẫn ẩn lời mời trong lần này. */ }
     const order: readonly Snap[] = ['full', 'half', 'peek'];
     if (Math.abs(d.v) > SHEET.VELOCITY_SNAP) {
       const i = order.indexOf(this.snapName);

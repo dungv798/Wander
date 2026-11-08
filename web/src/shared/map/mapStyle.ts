@@ -1,6 +1,7 @@
 ﻿import type { ExpressionSpecification, LayerSpecification, StyleSpecification } from 'maplibre-gl';
 import { MAP } from './map.const.ts';
 import { cssColorToRgb } from './mapUtil.ts';
+import { withVietnamLabels } from './vietnamLabels.ts';
 
 type Palette = Record<keyof typeof MAP.BASE_TOKENS, string>;
 const LABEL_FIELD: ExpressionSpecification = ['coalesce', ['get', 'name:vi'], ['get', 'name']];
@@ -36,6 +37,8 @@ function vietnameseName(value: unknown): unknown {
   }
   if (!Array.isArray(value)) return value;
   if (value[0] === 'literal') return value;
+  // Liberty dùng cả format lẫn case/concat để ghép hai ngôn ngữ; thay cả biểu thức để không lặp cùng tên tiếng Việt.
+  if ((value[0] === 'format' || value[0] === 'case') && JSON.stringify(value).includes('"name:nonlatin"')) return LABEL_FIELD;
   if (value[0] === 'get' && typeof value[1] === 'string' && /^name(?::|$)/.test(value[1])) return LABEL_FIELD;
   return value.map(vietnameseName);
 }
@@ -74,7 +77,7 @@ function restyleLayer(layer: LayerSpecification, colors: Palette): LayerSpecific
 /** Bỏ hoàn toàn DEM và lớp địa hình; giữ nguồn vector, ghi công và lớp native đã có. */
 export function restyleMap(style: StyleSpecification, colors: Palette): StyleSpecification {
   const sources = Object.fromEntries(Object.entries(style.sources).filter(([, source]) => source.type !== 'raster-dem'));
-  const layers = style.layers.filter((layer) => layer.type !== 'hillshade' && !RELIEF.test(layer.id) && !('source-layer' in layer && RELIEF.test(layer['source-layer'] ?? '')) && !('source' in layer && !sources[layer.source]));
+  const layers = style.layers.filter((layer) => layer.type !== 'hillshade' && layer.type !== 'raster' && !RELIEF.test(layer.id) && !('source-layer' in layer && RELIEF.test(layer['source-layer'] ?? '')) && !('source' in layer && !sources[layer.source]));
   const { terrain: _terrain, ...flatStyle } = style;
   return { ...flatStyle, sources, layers: layers.map((layer) => restyleLayer(layer, colors)) };
 }
@@ -83,5 +86,6 @@ export function restyleMap(style: StyleSpecification, colors: Palette): StyleSpe
 export async function loadMapStyle(host: HTMLElement = document.documentElement): Promise<StyleSpecification> {
   const res = await fetch(MAP.STYLE_URL);
   if (!res.ok) throw new Error(`style ${res.status}`);
-  return restyleMap((await res.json()) as StyleSpecification, readPalette(host));
+  const palette = readPalette(host);
+  return withVietnamLabels(restyleMap((await res.json()) as StyleSpecification, palette), palette.label, palette.halo);
 }

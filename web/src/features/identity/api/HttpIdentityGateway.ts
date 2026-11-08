@@ -138,8 +138,8 @@ export class HttpIdentityGateway implements IdentityGateway {
   }
 
   /** Trạng thái yêu cầu ghép của máy mới; giá trị lạ là lỗi nội bộ. */
-  async linkStatus(requestId: string): Promise<PairingStatus> {
-    const body = await this.client.get<unknown>(`${P.LINKS}/${encodeURIComponent(requestId)}`);
+  async linkStatus(requestId: string, signal?: AbortSignal): Promise<PairingStatus> {
+    const body = await this.client.get<unknown>(`${P.LINKS}/${encodeURIComponent(requestId)}`, signal);
     const status = text(body, 'status');
     if (status !== 'pending' && status !== 'approved' && status !== 'denied' && status !== 'expired') throw new ApiError(CLIENT_ERROR.INTERNAL);
     return status;

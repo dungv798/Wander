@@ -12,7 +12,7 @@ export interface MapMarker {
   readonly num?: number;
   readonly thumb?: string;
   readonly muted?: boolean;
-  readonly kind?: 'hub';
+  readonly kind?: 'hub' | 'sticker';
 }
 
 /** Ghim kèm tọa độ [kinh độ, vĩ độ] để MapLibre chiếu lên màn hình. */
@@ -58,6 +58,8 @@ export interface RouteSegment {
 
 /** Tùy chọn vừa khung. */
 export interface FitOptions {
+  /** Các điểm địa lý bổ sung cần thấy ở cảnh toàn quốc, không biến chúng thành ghim tương tác. */
+  readonly contextPoints?: readonly Pt[];
   readonly padding?: number;
   readonly animate?: boolean;
   /** Trần zoom MapLibre cho lần vừa khung này (cụm được phóng gần hơn ghim thường). */
@@ -76,6 +78,8 @@ export interface GeoMapOptions {
   readonly cooperativeGestures?: boolean;
   readonly towns?: boolean;
   readonly credit?: boolean;
+  /** Chừa dải ghi công ở đáy khi vừa khung (mặc định theo `credit`); tắt khi ghi công được đặt chỗ khác. */
+  readonly creditBand?: boolean;
   readonly label: string;
   readonly onPin?: (id: string) => void;
   readonly onSegment?: (id: string) => void;

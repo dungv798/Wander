@@ -15,4 +15,7 @@ test('đọc thời lượng tham quan từ nhãn catalog; không hiểu thì nu
   assert.equal(parseVisitMinutes('tùy hứng'), null);
   assert.equal(parseVisitMinutes(''), null);
   assert.equal(parseVisitMinutes(undefined), null);
+  assert.equal(parseVisitMinutes('2–3 giờ (tham khảo)'), 150);
+  assert.equal(parseVisitMinutes('Theo tuyến và lịch đoàn'), null);
+  assert.equal(parseVisitMinutes('Theo tuyến của Vườn'), null);
 });

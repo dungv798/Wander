@@ -11,11 +11,12 @@ html, body { margin: 0; height: 100%; }
 body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .hint-dev { display: none; }
 
-.btn, .pill, .chip.on, .dot, .next .ib { background: var(--cta); color: var(--on-cta); }
+.chip.on, .dot, .next .ib { background: var(--cta); color: var(--on-cta); }
+.btn, .pill { background: var(--btn-bg); color: var(--btn-ink); border: 1px solid var(--btn-edge); }
 
-/* hover chỉ ở máy có chuột; nút CTA phẳng nên hover đổi sang tông đậm hơn */
+/* hover chỉ ở máy có chuột; nút chính kính trắng nên hover chỉ sáng lên */
 @media (hover: hover) {
-  .btn:not(.ghost):not(.danger):not(.sun):hover, .pill:not(.warn):hover { background: var(--cta-hover); }
+  .btn:not(.ghost):not(.danger):not(.sun):hover, .pill:not(.warn):hover { background: var(--btn-hover-bg); }
   .btn.ghost:hover, .tab:hover:not([aria-current="page"]), .fchip:hover:not([aria-pressed="true"]), .pack:hover:not([aria-pressed="true"]) { background: var(--surface-2); }
   .dcard:hover, .mini:hover, .tcard:hover, .tile:hover { transform: translateY(-2px); }
   .dcard, .mini, .tcard, .tile { transition: transform .2s cubic-bezier(.2,.8,.2,1); }
@@ -151,7 +152,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 
 /* ===== Sửa lỗi truy cập tìm thấy bằng a11y-scan (25/10/2026) ===== */
 /* tháng đẹp: chữ trắng trên xanh --like chỉ 4,15:1 (sáng) và 2,14:1 (tối) */
-.months i.best { background: var(--brand-2); color: var(--on-brand-2); }
+.months i.best { background: var(--pick-surface); color: var(--ink); border: 1px solid var(--pick-edge); }
 /* nút xóa và nền vuốt: màu đỏ cố định, chữ trắng ≥ 4,5:1 ở cả hai giao diện (--skip sáng lên ở giao diện tối) */
 .btn.danger, .swbg.go-l { background: var(--skip); color: var(--on-skip); }
 .swbg.go-r { background: var(--like); } .swbg.go-day { background: var(--sky); }
@@ -229,10 +230,6 @@ img.imgfail { background: linear-gradient(135deg, var(--surface-2), var(--line))
 #screen.searching .sky { height: 150px; }
 @media (prefers-reduced-motion: no-preference) { .sky { transition: height .2s ease; } }
 #screen.searching .compass { display: none; }
-
-/* Nút chính: gradient ngang hổ phách -> cam; chữ mực tối (>= 4,5:1 ở cả hai đầu). Các thành phần dùng --cta khác (chấm, chip) giữ màu phẳng. */
-.btn:not(.ghost):not(.danger):not(.sun), .pill:not(.warn) { background-image: var(--cta-grad); }
-.btn:not(.ghost):not(.danger):not(.sun):hover, .pill:not(.warn):hover { background-image: var(--cta-grad-hover); }
 
 /* Onboarding: toàn khung, không thanh bên (DG-2 A2) */
 body:has(#screen[data-view="onboard"]) #tabbar { display: none !important; }

@@ -1,3 +1,4 @@
+import { PersistentStore } from '../../state/PersistentStore.ts';
 import { SHEET_HINT, SHEET_ROUTE_PARTS } from './bottomSheet.const.ts';
 import type { Snap } from './bottomSheet.const.ts';
 
@@ -15,11 +16,11 @@ export function rememberedSnap(key: string, fallback: Snap): Snap { return snaps
 export function rememberSnap(key: string, snap: Snap): void { snaps.set(key, snap); }
 
 /** Storage bị chặn vẫn hiện lời mời kéo và không làm hỏng màn lịch. */
-export function shouldShowSheetHint(storage: Pick<Storage, 'getItem'>): boolean {
-  try { return storage.getItem(SHEET_HINT.KEY) !== SHEET_HINT.VALUE; } catch { return true; }
+export function shouldShowSheetHint(storage?: Pick<Storage, 'getItem'>): boolean {
+  try { return PersistentStore.readRaw(SHEET_HINT.KEY, storage) !== SHEET_HINT.VALUE; } catch { return true; }
 }
 
 /** Ghi nhận cử chỉ thành công; chế độ riêng tư không cản việc kéo hoặc ẩn gợi ý. */
-export function dismissSheetHint(storage: Pick<Storage, 'setItem'>): void {
-  try { storage.setItem(SHEET_HINT.KEY, SHEET_HINT.VALUE); } catch { /* Vẫn ẩn trong DOM của lần mở hiện tại. */ }
+export function dismissSheetHint(storage?: Pick<Storage, 'setItem'>): void {
+  try { PersistentStore.writeRaw(SHEET_HINT.KEY, SHEET_HINT.VALUE, storage); } catch { /* Vẫn ẩn trong DOM của lần mở hiện tại. */ }
 }

@@ -31,12 +31,14 @@ async function tapSegment(page: Page) {
   assert.ok(box);
   const segments = JSON.parse(await map.getAttribute('data-segments') ?? '[]') as { id: string; from: string; km: number; points: { x: number; y: number }[] }[];
   const pins = JSON.parse(await map.getAttribute('data-features') ?? '[]') as { id: string; x: number; y: number }[];
-  const sheet = await page.locator('.sheetbody').boundingBox();
   for (const segment of segments) {
-    const point = segment.points.find((p) => p.x > 30 && p.x < box.width - 30 && p.y > 70 && box.y + p.y < (sheet?.y ?? 520) - 20 && pins.every((pin) => Math.hypot(pin.x - p.x, pin.y - p.y) > 35));
-    if (!point) continue;
-    await page.touchscreen.tap(box.x + point.x, box.y + point.y);
-    return segment;
+    for (const point of segment.points.filter(p => p.x > 30 && p.x < box.width - 30 && p.y > 80 && pins.every(pin => Math.hypot(pin.x - p.x, pin.y - p.y) > 35))) {
+      const x = box.x + point.x, y = box.y + point.y;
+      const exposed = await page.evaluate(({ x, y }) => document.elementFromPoint(x, y)?.classList.contains('maplibregl-canvas'), { x, y });
+      if (!exposed) continue;
+      await page.touchscreen.tap(x, y);
+      return segment;
+    }
   }
   throw new Error('Không có điểm chạm đoạn nằm trong vùng bản đồ nhìn thấy');
 }
@@ -46,16 +48,25 @@ test('tuyến chạm được: thẻ tên/km, đóng, ghim ưu tiên và chi ti�
   await server.listen();
   const browser = await chromium.launch({ channel: 'chrome', headless: true }).catch(() => chromium.launch({ channel: 'msedge', headless: true }));
   try {
-    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+    for (const width of [390, 1440]) {
+    const context = await browser.newContext({ viewport: { width, height: 844 }, isMobile: width === 390, hasTouch: true, reducedMotion: 'reduce' });
     const page = await context.newPage();
     const base = server.resolvedUrls!.local[0]!.replace(/\/$/, '');
     await page.route('https://tiles.openfreemap.org/styles/liberty', (route) => route.fulfill({ json: { version: 8, sources: {}, layers: [{ id: 'offline', type: 'background', paint: { 'background-color': 'rgb(240,240,240)' } }] } }));
     await page.goto(base);
     await page.evaluate(() => { localStorage.clear(); localStorage.setItem('wander.web.destination.v1', 'ha-giang'); localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'); });
     const id = await seedRoute(page);
+    await page.goto(`${base}/#/trip/${id}/un`);
+    await waitForNativeMap(page, '.tmap');
+    assert.ok(Number(await page.locator('.tmap').getAttribute('data-pins')) > 0, 'Chưa xếp phải có ghim trong vùng camera');
     await page.goto(`${base}/#/trip/${id}/1`);
     await waitForNativeMap(page, '.tmap');
     await page.waitForFunction(() => JSON.parse(document.querySelector<HTMLElement>('.tmap')?.dataset['segments'] ?? '[]').length === 2);
+    if (width === 390) {
+      await page.locator('.grab').press('ArrowDown');
+      await page.locator('.sheetbody[data-snap="peek"]').waitFor();
+      await waitForNativeMap(page, '.tmap');
+    }
     const segment = await tapSegment(page);
     const card = page.locator('.tm-preview');
     await card.waitFor();
@@ -73,16 +84,18 @@ test('tuyến chạm được: thẻ tên/km, đóng, ghim ưu tiên và chi ti�
     await card.getByRole('button', { name: 'Xem chi tiết' }).click();
     const detail = page.getByRole('dialog', { name, exact: true });
     await detail.waitFor();
-    const gallery = detail.locator('.gallery');
-    const images = gallery.locator('img');
-    assert.ok(await images.count() > 0);
-    const frame = await gallery.boundingBox();
+    const frame = detail.locator('.pd-photo');
+    const images = frame.locator('img');
+    assert.equal(await images.count(), 1, 'chi tiết hiển thị đúng một ảnh chính');
+    const box = await frame.boundingBox();
     const image = await images.first().boundingBox();
-    assert.ok(frame && image && Math.abs(frame.width - image.width) <= 1, 'mỗi khung gallery hiển thị một ảnh đầy chiều rộng');
-    if (await images.count() > 1) {
-      await detail.locator('.gnav.next').click();
-      await page.waitForFunction(() => document.querySelector('.gcount')?.textContent?.startsWith('2 /'));
+    assert.ok(box && image && Math.abs(box.width - image.width) <= 1, 'ảnh đầy chiều rộng khung của nó (đúng tỷ lệ gốc, không letterbox)');
+    const total = await detail.locator('.pd-count').count() ? Number((await detail.locator('.pd-count').textContent())?.split('/')[1]?.trim()) : 1;
+    if (total > 1) {
+      await detail.getByRole('button', { name: 'Ảnh sau' }).click();
+      await page.waitForFunction(() => document.querySelector('.pd-count')?.textContent?.startsWith('2 /'));
     }
     await context.close();
+    }
   } finally { await browser.close(); await server.close(); }
 });

@@ -1,8 +1,15 @@
 /** Câu mời và mô tả ngắn biên tập từ tagline catalog để đọc trọn trên thẻ nhỏ. */
 export const HOME_COPY = {
+  country: 'Việt Nam',
+  countryTitle: 'Khám phá Việt Nam',
+  topics: { all: 'Tất cả', am: 'Món ăn', van: 'Văn hóa', canh: 'Thiên nhiên', leo: 'Trekking' },
   invitation: 'Một nơi mới đang chờ bạn.',
   selectedInvitation: 'Tìm nơi mê.',
   change: 'Đổi điểm đến',
+  featuredEyebrow: 'Điểm đến gợi ý',
+  explore: 'Khám phá',
+  swipe: 'Quẹt khám phá',
+  mapButton: 'Bản đồ',
   hooks: {
     'da-lat': 'Đồi thông, hồ và thác',
     'da-nang': 'Biển xanh, sông Hàn',

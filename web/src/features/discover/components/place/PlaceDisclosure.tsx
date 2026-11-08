@@ -9,11 +9,12 @@ interface PlaceDisclosureProps {
   readonly icon: IconName;
   readonly children: ReactNode;
   readonly className?: string;
+  readonly defaultOpen?: boolean;
 }
 
 /** Giữ nội dung trong DOM để đóng/mở theo chiều cao thật, trả focus và trạng thái đúng cho bàn phím. */
-export function PlaceDisclosure({ title, icon, children, className = '' }: PlaceDisclosureProps) {
-  const [open, setOpen] = useState(false);
+export function PlaceDisclosure({ title, icon, children, className = '', defaultOpen = false }: PlaceDisclosureProps) {
+  const [open, setOpen] = useState(defaultOpen);
   const id = useId();
   return <section className={`place-info-card place-disclosure ${className}`} data-open={open}>
     <h4>

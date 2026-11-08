@@ -62,7 +62,7 @@ export function TripFields({ v, set, budgetHint, namePlaceholder, suggestedDates
           ))}
         </div>
       </div>
-      <Field label={T.create.budget} inputMode="numeric" value={v.budget} onChange={(x) => set({ budget: x })} placeholder={T.create.budgetPlaceholder} hint={budgetHint} />
+      <Field label={T.create.budget} inputMode="numeric" value={v.budget} onChange={(x) => set({ budget: x })} placeholder={T.create.budgetPlaceholder} error={budgetHint} />
         </div>
       </details>
     </>

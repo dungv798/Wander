@@ -24,7 +24,7 @@ export type ViewName = (typeof VIEW)[keyof typeof VIEW];
 export const DEFAULT_DESTINATION_ID = 'ha-giang';
 
 /** Màn ẩn thanh điều hướng trên điện thoại (khớp `renderTabs` của prototype). */
-export const HIDE_TABBAR_ON_PHONE: readonly ViewName[] = [VIEW.ONBOARD, VIEW.DECK, VIEW.DEST, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT];
+export const HIDE_TABBAR_ON_PHONE: readonly ViewName[] = [VIEW.ONBOARD, VIEW.DECK, VIEW.TODAY, VIEW.EXPORT];
 
 /** Màn không có thanh điều hướng ở mọi cỡ. */
 export const HIDE_TABBAR_ALWAYS: readonly ViewName[] = [VIEW.ONBOARD, VIEW.EXPIRED, VIEW.JOIN, VIEW.DESTINATIONS];

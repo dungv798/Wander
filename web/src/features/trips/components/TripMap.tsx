@@ -10,6 +10,10 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { dayItems } from '../model/tripMath.ts';
 import { coordOf, itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
+import { useMediaQuery } from '../../../shared/hooks/useMediaQuery.ts';
+import { MEDIA } from '../../../shared/const/app.const.ts';
+import { SHELL_MAP } from '../../discover/index.ts';
+import { modeOfTab } from '../model/tripTabs.ts';
 
 interface TripMapProps {
   /** Phần tờ kéo che bản đồ (px) để camera chừa chỗ; 0 khi tờ là cột bên (màn ≥ 1280 px). */
@@ -26,10 +30,11 @@ const MIN_ROUTE_POINTS = 2;
  */
 export function TripMap({ coveredBottom }: TripMapProps) {
   const { trip, cat, days, tab, openItem } = useTripView();
+  const wide = useMediaQuery(MEDIA.DRAWER);
   const [selection, setSelection] = useState<{ tab: string; pin?: string; segment?: string } | null>(null);
   /** Đóng đối tượng đang chọn mà không thay đổi dữ liệu chuyến. */
   const close = useCallback(() => setSelection(null), []);
-  const dayIndex = tab === 'ov' ? -1 : Number(tab) - 1;
+  const dayIndex = modeOfTab(tab) === 'schedule' ? Number(tab) - 1 : -1;
   const day = days[dayIndex];
   const inDay = useMemo(() => (day ? dayItems(trip, day).filter((i) => i.placeId && coordOf(cat)(i.placeId)) : []), [trip, cat, day]);
 
@@ -54,7 +59,7 @@ export function TripMap({ coveredBottom }: TripMapProps) {
 
   const fitKey = dayIndex < 0 ? '' : inDay.map((i) => i.id).join(',');
   const fit = useMemo<MapFit>(() => ({ ids: dayIndex < 0 ? null : fitKey.split(',').filter(Boolean), options: { animate: true, keepIfVisible: true } }), [dayIndex, fitKey]);
-  const insets = useMemo(() => (coveredBottom ? { bottom: coveredBottom, top: TOP_INSET } : {}), [coveredBottom]);
+  const insets = useMemo(() => wide ? { left: SHELL_MAP.PANEL_INSET_PX, top: SHELL_MAP.INSET_TOP_PX } : { bottom: coveredBottom, top: TOP_INSET }, [coveredBottom, wide]);
 
   const active = selection?.tab === tab ? selection : null;
   const segment = route?.segments.find((part) => part.id === active?.segment);

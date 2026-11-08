@@ -11,7 +11,7 @@ export const SHEET_ROUTE_PARTS = 3;
 export const SHEET = {
   /** Chiều cao nhìn thấy ở nấc thu gọn (đủ thấy tay nắm + tiêu đề + tab). */
   PEEK_VISIBLE: 168,
-  HALF_RATIO: 0.5,
+  HALF_RATIO: 0.75,
   /** Nấc đầy cách mép trên khung (chừa nút nổi trên bản đồ). */
   FULL_TOP: 72,
   /** Vận tốc (px/ms) đủ để nhảy sang nấc kế theo hướng vuốt. */

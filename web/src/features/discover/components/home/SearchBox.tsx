@@ -16,7 +16,7 @@ export function SearchBox({ className, scope = 'destinations', city }: SearchBox
   const label = places ? fill(COPY.destinations.placesSearch, { dest: city }) : COPY.home.searchDestinations;
   return (
     <button type="button" onClick={() => navigate(VIEW.DESTINATIONS, places ? 'places' : null)} aria-label={label} className={['search', 'g-search', className].filter(Boolean).join(' ')}>
-      <Icon name={places ? 'map-pin' : 'compass'} />
+      <Icon name="search" />
       <span>{label}</span>
     </button>
   );

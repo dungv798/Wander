@@ -1,3 +1,6 @@
+/* Bản đồ tuyến của hôm nay: khung thấp trong thân trang, cùng kiểu nền/ghim/ghi công với bản đồ chuyến. */
+.today-map { position: relative; height: calc(var(--s-8) * 3 + var(--s-3)); overflow: hidden; border-radius: var(--r-lg); background: var(--map-low); }
+.tmap-today { position: absolute; inset: 0; }
 #screen .today-next.panel.todayrow { display: block; width: 100%; max-height: none; overflow: hidden; border-radius: var(--r-lg); padding: 0; }
 .today-next figure { margin: 0; background: var(--surface-2); }
 .today-next figure > img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }

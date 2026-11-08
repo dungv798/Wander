@@ -74,7 +74,7 @@ export interface IdentityGateway {
   /** Máy mới xin ghép với một thiết bị tin cậy. */
   createLink(sessionToken: string, deviceName: string): Promise<LinkCreated>;
   /** Trạng thái yêu cầu ghép (máy mới hỏi lặp lại). */
-  linkStatus(requestId: string): Promise<PairingStatus>;
+  linkStatus(requestId: string, signal?: AbortSignal): Promise<PairingStatus>;
   /** Thiết bị duyệt nhập mã (ghép hoặc xác thực lại) và xem trước; mã không đúng ném `INVALID_PAIRING_CODE`/`INVALID_APPROVAL_CODE`. */
   preview(code: string): Promise<ApprovalPreview>;
   /** Trả lời yêu cầu bằng số khớp; chọn sai là từ chối vĩnh viễn yêu cầu đó. */

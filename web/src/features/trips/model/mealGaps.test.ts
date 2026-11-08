@@ -34,12 +34,19 @@ test('bữa trưa có dấu hoặc không dấu chỉ che nhắc trưa, bữa t�
     assert.deepEqual(mealGaps([...three, item({ title, type: 'food' }), item({ timeOfDay: '19:00' })], DAY, place), ['dinner', 'rest']);
   }
 });
-test('loại ăn/nghỉ, catalog food/cafe/am và từ khóa thông dụng tránh nhắc trùng', () => {
-  for (const title of ['Ăn', 'Cơm', 'Phở', 'Cà phê']) assert.deepEqual(mealGaps([...three, item({ title })], DAY, place), []);
-  for (const category of ['food', 'cafe', 'am']) assert.deepEqual(mealGaps([...three, item({ placeId: 'p' })], DAY, (id) => id ? { category, name: 'Quán' } : null), []);
+test('loại ăn/nghỉ, catalog food/am và từ khóa thông dụng tránh nhắc trùng', () => {
+  for (const title of ['Ăn', 'Cơm', 'Phở']) assert.deepEqual(mealGaps([...three, item({ title })], DAY, place), []);
+  for (const category of ['food', 'am']) assert.deepEqual(mealGaps([...three, item({ placeId: 'p' })], DAY, (id) => id ? { category, name: 'Quán' } : null), []);
   assert.deepEqual(mealGaps([...three, item(), item({ type: 'rest', title: 'Nghỉ' })], DAY, place), ['lunch']);
   assert.deepEqual(mealGaps([...three, item({ type: 'food', title: 'Bữa' })], DAY, place), []);
   assert.deepEqual(mealGaps([item({ type: 'food' }), item({ type: 'rest' })], DAY, place), []);
+});
+
+test('quán cà phê chỉ lấp nhắc nghỉ, không làm biến mất bữa trưa cần có', () => {
+  assert.deepEqual(mealGaps([...three, item({ title: 'Cà phê' })], DAY, place), ['lunch']);
+  for (const category of ['cafe', 'coffee']) assert.deepEqual(mealGaps([...three, item({ placeId: 'p' })], DAY, () => ({ category, name: 'Quán' })), ['lunch']);
+  assert.deepEqual(mealGaps([...three, item({ type: 'rest', placeId: 'p' })], DAY, () => ({ category: 'am', name: 'Giảng', venue: { kind: 'cafe' } })), ['lunch']);
+  assert.deepEqual(mealGaps([...three, item({ type: 'rest', placeId: 'p' })], DAY, () => ({ category: 'am', name: 'Quán bar', venue: { kind: 'bar' } })), ['lunch']);
 });
 test('đóng từng nhắc; không lẫn bữa, ngày khác hoặc mục chưa xếp ngày', () => {
   assert.deepEqual(mealGaps(three, DAY, place, ['lunch']), []);

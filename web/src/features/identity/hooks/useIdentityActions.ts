@@ -65,7 +65,7 @@ function pairingActions({ gateway, sessionKv, deviceName }: IdentityActionDeps):
         throw e;
       }
     },
-    pairingStatus: (request) => gateway.linkStatus(request.requestId),
+    pairingStatus: (request, signal) => gateway.linkStatus(request.requestId, signal),
     joinHere: async (request) => {
       sessionKv.update((s) => ({ ...s, recovered: true }));
       setToken(request.sessionToken);

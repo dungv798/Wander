@@ -1,3 +1,4 @@
+import { PersistentStore } from '../../../shared/state/PersistentStore.ts';
 import { DEFAULT_DESTINATION_ID } from '../../../shared/const/routes.const.ts';
 import { normalizeSearch } from '../../../shared/lib/text.ts';
 import { DESTINATION_ID_PATTERN, DESTINATION_STORAGE_KEY } from './destination.const.ts';
@@ -26,10 +27,10 @@ export function resolveDestination(saved: unknown, destinations: readonly { read
 
 /** Đọc lựa chọn, kể cả trình duyệt chặn quyền truy cập localStorage. */
 export function readDestination(storage?: DestinationStorage): string | null {
-  try { return (storage ?? window.localStorage).getItem(DESTINATION_STORAGE_KEY); } catch { return null; }
+  try { return PersistentStore.readRaw(DESTINATION_STORAGE_KEY, storage); } catch { return null; }
 }
 
 /** Ghi lựa chọn theo cơ chế cố gắng, không chặn đổi màn khi hết dung lượng. */
 export function writeDestination(storage: DestinationStorage | undefined, id: string): void {
-  try { (storage ?? window.localStorage).setItem(DESTINATION_STORAGE_KEY, id); } catch { /* Vẫn dùng được trong phiên hiện tại. */ }
+  try { PersistentStore.writeRaw(DESTINATION_STORAGE_KEY, id, storage); } catch { /* Vẫn dùng được trong phiên hiện tại. */ }
 }

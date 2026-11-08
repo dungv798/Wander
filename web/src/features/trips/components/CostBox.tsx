@@ -22,13 +22,14 @@ export function dayCostText(label: string, g: CostGroup): string {
 }
 
 /** Thẻ chi phí gọn: số đã ghi nhận, tiến độ nhập giá, ngân sách (nếu có), vài dòng ngày và lối vào chi tiết. Chi tiết từng khoản nằm trong tờ riêng. */
-export function CostBox() {
+export function CostBox({ allDays = false }: { readonly allDays?: boolean }) {
   const { trip, days, setOverlay } = useTripView();
   const cs = summarizeCosts(trip);
   const bud = cs.knownCount ? budgetStatus(trip.budgetK, cs.totalK) : null;
   const pricedTotal = cs.bookable - cs.includedCount;
   const dayGroups = groupCosts(trip.items, 'day', days).filter((g) => g.key);
-  const shown = dayGroups.slice(0, CARD_DAY_ROWS);
+  // Tổng quan chỉ hiện vài ngày đầu; chế độ Chi phí (`allDays`) hiện đủ mọi ngày.
+  const shown = allDays ? dayGroups : dayGroups.slice(0, CARD_DAY_ROWS);
   const empty = !cs.bookable;
   const progress = fill(T.cost.progress, { n: cs.knownCount, m: pricedTotal });
   return (

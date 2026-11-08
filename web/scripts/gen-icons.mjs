@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ICON_ADDITIONS } from './icon-additions.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const SOURCE = path.resolve(here, '../../docs/ux/prototype/index.html');
@@ -13,6 +14,7 @@ const icons = new Map();
 for (const m of html.matchAll(/<symbol id="i-([a-z0-9-]+)"[^>]*>([\s\S]*?)<\/symbol>/g)) {
   icons.set(m[1], m[2].replace(/\s+/g, ' ').trim());
 }
+for (const [name, geometry] of Object.entries(ICON_ADDITIONS)) icons.set(name, geometry);
 const names = [...icons.keys()].sort();
 
 let out = '/** Đường vẽ biểu tượng Tabler Icons (MIT), lưới 24 px, nét 2. TẠO TỰ ĐỘNG bởi scripts/gen-icons.mjs từ sprite của prototype; không sửa tay. */\n';

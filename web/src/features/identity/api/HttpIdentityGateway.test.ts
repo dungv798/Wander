@@ -139,3 +139,16 @@ test('xin phê duyệt xác thực lại: gửi thao tác tạo lại mã và tr
   assert.deepEqual(g.calls[0], { url: '/api/step-up/requests', method: 'POST', body: { operation: 'regenerate_code' } });
   assert.deepEqual([r.requestId, r.approvalCode, r.number], ['q', 'WXYZ-1234', 58]);
 });
+test('poll truyền AbortSignal tới fetch và giữ nguyên lỗi hủy', async () => {
+  const abort = new AbortController();
+  const reason = new DOMException('cancelled', 'AbortError');
+  const client = new ApiClient((_url, init) => {
+    assert.equal(init?.signal, abort.signal);
+    return new Promise((_resolve, reject) => {
+      init?.signal?.addEventListener('abort', () => reject(reason));
+    });
+  });
+  const pending = new HttpIdentityGateway(client, 'Máy này').linkStatus('request', abort.signal);
+  abort.abort();
+  await assert.rejects(pending, error => error === reason);
+});

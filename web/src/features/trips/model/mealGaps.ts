@@ -1,3 +1,4 @@
+import { PersistentStore } from '../../../shared/state/PersistentStore.ts';
 import { MEAL_GAPS_COPY as M, MEAL_GAPS_RULES as R } from './mealGaps.copy.ts';
 import type { TripItem } from './trip.types.ts';
 
@@ -16,7 +17,7 @@ export function mealGapEditor(gap: MealGap, day: string): MealGapEditor {
   return { kind: 'editor', itemId: null, preset: gap === 'rest' ? 'rest' : 'food', initial: { day, title: M[gap].suggestedTitle } };
 }
 type GapItem = Pick<TripItem, 'day' | 'type' | 'title' | 'placeId' | 'timeOfDay' | 'durationMin'>;
-type PlaceLookup = (id: string | null) => { readonly category: string; readonly name: string } | null;
+type PlaceLookup = (id: string | null) => { readonly category: string; readonly name: string; readonly venue?: { readonly kind: string } | null } | null;
 
 /** Bỏ dấu tiếng Việt, giữ ranh giới từ để không nhận nhầm “An” trong “Hoàng”. */
 function normalize(text: string): string {
@@ -32,9 +33,10 @@ function minutes(time: string | null): number | null {
 
 /** Nhận diện nhẹ theo loại, catalog hoặc tên; bữa rõ trưa/tối không che bữa còn lại. */
 function recognized(item: GapItem, place: PlaceLookup): readonly MealGap[] {
-  const p = place(item.placeId);
+  const p = item.placeId ? place(item.placeId) : null;
   const text = normalize(`${item.title} ${p?.name ?? ''}`);
-  const rest = item.type === 'rest' || /\bnghi\b/.test(text);
+  const cafe = p?.venue?.kind === 'cafe' || p?.venue?.kind === 'bar' || p?.category === 'cafe' || p?.category === 'coffee';
+  const rest = item.type === 'rest' || cafe || /\b(nghi|ca phe|coffee)\b/.test(text);
   const food = item.type === 'food' || R.foodCategories.some((c) => c === p?.category) || /\b(an|com|pho|ca phe|trua|toi)\b/.test(text);
   const result: MealGap[] = rest ? ['rest'] : [];
   if (!food || (rest && item.type !== 'food')) return result;
@@ -75,12 +77,12 @@ export function mealGapStorageKey(tripId: string, day: string): string {
 /** Đọc trạng thái đóng; lưu trữ hỏng hoặc bị chặn không cản xem lịch. */
 export function readMealGapDismissals(key: string): MealGap[] {
   try {
-    const saved: unknown = JSON.parse(localStorage.getItem(key) ?? '[]');
+    const saved: unknown = JSON.parse(PersistentStore.readRaw(key) ?? '[]');
     return Array.isArray(saved) ? saved.filter((v): v is MealGap => v === 'lunch' || v === 'dinner' || v === 'rest') : [];
   } catch { return []; }
 }
 
 /** Lưu lựa chọn đóng; vẫn cho đóng trong phiên nếu trình duyệt không cho ghi. */
 export function saveMealGapDismissals(key: string, gaps: readonly MealGap[]): void {
-  try { localStorage.setItem(key, JSON.stringify(gaps)); } catch { /* Nhắc nhẹ không chặn lịch. */ }
+  try { PersistentStore.writeRaw(key, JSON.stringify(gaps)); } catch { /* Nhắc nhẹ không chặn lịch. */ }
 }

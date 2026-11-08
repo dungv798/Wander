@@ -5,11 +5,12 @@ import { useRunScope } from '../../../shared/hooks/useRunScope.ts';
 import { cssVars } from '../../../shared/lib/cssVars.ts';
 import { useCurrentDestination } from '../../discover/index.ts';
 import { destinationPhoto } from '../model/onboardPhotos.ts';
-import { ART, DISCOVER_AUTO_MS, FAN_DESTINATIONS } from '../model/onboarding.const.ts';
+import { DISCOVER_AUTO_MS, FAN_DESTINATIONS } from '../model/onboarding.const.ts';
+import { Icon } from '../../../shared/ui/Icon.tsx';
 import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
 import type { SceneProps } from '../model/onboarding.types.ts';
 
-/** Cảnh 1: cụm ba thẻ điểm đến (Đà Lạt ở thẻ chính, Hà Giang, Tà Xùa) xòe lệch cùng máy bay, la bàn và ống nhòm; không bắt thao tác, tự sang cảnh quẹt sau ít giây. */
+/** Ba thẻ ảnh thật cùng gợi ý trải nghiệm; giữ thẻ Đà Lạt làm điểm nối sang cảnh quẹt, không bắt người xem thao tác. */
 export function DiscoverScene({ auto, reduced, onDone, onCue }: SceneProps) {
   const scope = useRunScope();
   const autoRef = useLatestRef(auto);
@@ -37,9 +38,9 @@ export function DiscoverScene({ auto, reduced, onDone, onCue }: SceneProps) {
         </figure>
         );
       })}
-      <img className="ob-obj plane" src={ART.PLANE} alt="" decoding="async" />
-      <img className="ob-obj binoculars" src={ART.BINOCULARS} alt="" decoding="async" />
-      <img className="ob-obj compass" src={ART.COMPASS} alt="" decoding="async" />
+      <p className="ob-experience ob-experience-food"><Icon name="tools-kitchen-2" />{T.experiences.food}</p>
+      <p className="ob-experience ob-experience-culture"><Icon name="users" />{T.experiences.culture}</p>
+      <p className="ob-experience ob-experience-trail"><Icon name="mountain" />{T.experiences.trail}</p>
     </div>
   );
 }

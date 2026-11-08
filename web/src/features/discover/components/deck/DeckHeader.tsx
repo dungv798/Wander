@@ -1,4 +1,5 @@
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
+import { useState } from 'react';
 import { VIEW } from '../../../../shared/const/routes.const.ts';
 import { goBack, navigate } from '../../../../shared/router/hashRoute.ts';
 import { Icon } from '../../../../shared/ui/Icon.tsx';
@@ -7,26 +8,27 @@ import { useDiscover } from '../../hooks/DiscoverProvider.tsx';
 import { CATEGORY_ICON } from '../../model/discover.const.ts';
 import type { AddingMode } from '../../model/addingMode.ts';
 import type { DestinationDetail } from '../../model/Catalog.types.ts';
-import { categoriesOf } from '../../model/destinationQueries.ts';
+import { discoveryFilters, DISCOVERY_FILTER_LABELS } from '../../model/discoveryFilters.ts';
 import { pickedOf } from '../../model/discoverState.ts';
-import { DISCOVER_COPY } from '../../model/discover.copy.ts';
+import { DEST_COPY } from '../../model/dest.copy.ts';
 
 /** Thanh trên của bộ thẻ: quay lại, tên điểm đến + tiến độ, nút xem các nơi đã chọn. */
-export function DeckBar({ dest, adding }: { readonly dest: DestinationDetail; readonly adding?: AddingMode }) {
+export function DeckBar({ dest, adding, remaining }: { readonly dest: DestinationDetail; readonly adding?: AddingMode; readonly remaining: number }) {
   const { state } = useDiscover();
-  const seen = dest.places.filter((p) => state.decisions[p.id]).length;
+  const [filterOpen, setFilterOpen] = useState(false);
   const picked = pickedOf(state, dest.places).length;
   return (
     <div className="deckbar pad-x">
       <IconButton icon="chevron-left" label={COPY.common.back} onClick={goBack} />
       <div className="mid">
-        <h1>{adding ? adding.title : dest.name}</h1>
-        <p className="note">{adding ? COPY.deck.addingNote : fill(COPY.deck.seen, { seen, total: dest.places.length })}</p>
+        <h1><button type="button" className="deck-filter-toggle" aria-label={COPY.deck.filterLabel} aria-expanded={filterOpen} onClick={() => setFilterOpen(open => !open)}>{adding ? adding.title : dest.name}<Icon name="chevron-down" size="s" /></button></h1>
+        <p className="note">{adding ? COPY.deck.addingNote : fill(DEST_COPY.remaining, { n: remaining })}</p>
       </div>
-      <button className="pill" type="button" aria-label={adding ? COPY.deck.addingSave : fill(COPY.deck.viewPicked, { n: picked })} onClick={() => (adding ? adding.onDone() : navigate(VIEW.PICKED))}>
-        <Icon name="check" size="s" />
-        {adding ? COPY.deck.addingSave : fill(DISCOVER_COPY.picked, { n: picked })}
+      <button className="pill" type="button" aria-label={adding ? COPY.deck.addingSave : fill(DEST_COPY.pickedCount, { n: picked })} onClick={() => (adding ? adding.onDone() : navigate(VIEW.PICKED))}>
+        <Icon name="bookmarks" size="s" />
+        {adding ? COPY.deck.addingSave : picked}
       </button>
+      {filterOpen ? <DeckFilters dest={dest} /> : null}
     </div>
   );
 }
@@ -34,16 +36,15 @@ export function DeckBar({ dest, adding }: { readonly dest: DestinationDetail; re
 /** Bộ lọc theo loại (chọn một loại hoặc tất cả); mỗi nút là công tắc `aria-pressed`. */
 export function DeckFilters({ dest }: { readonly dest: DestinationDetail }) {
   const { state, actions } = useDiscover();
-  const names = new Map(dest.places.map((p) => [p.category, p.categoryName]));
   return (
     <div className="filters pad-x" role="group" aria-label={COPY.deck.filterLabel}>
       <button className="fchip" type="button" aria-pressed={state.cat === 'all'} onClick={() => actions.setCategory('all')}>
         {COPY.deck.filterAll}
       </button>
-      {categoriesOf(dest).map((c) => (
+      {discoveryFilters(dest.places).filter(c => c !== 'all').map((c) => (
         <button key={c} className={`fchip cat-${c}`} type="button" aria-pressed={state.cat === c} onClick={() => actions.setCategory(c)}>
           <Icon semantic name={CATEGORY_ICON[c]} size="s" />
-          {names.get(c)}
+          {DISCOVERY_FILTER_LABELS[c]}
         </button>
       ))}
     </div>

@@ -1,4 +1,5 @@
 import { fill } from '../../../shared/const/copy.vi.ts';
+import type { ReactNode } from 'react';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { onboardPhotoUrl } from '../model/onboardPhotos.ts';
 import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
@@ -44,6 +45,7 @@ function TripRow({ item, hot, shown }: RowProps) {
 }
 
 interface DaySheetProps {
+  readonly accessory?: ReactNode;
   readonly days: readonly TripDay[];
   /** 0 = tổng quan, 1.. = số ngày. */
   readonly tab: number;
@@ -76,7 +78,7 @@ function Overview({ days }: { readonly days: readonly TripDay[] }) {
 }
 
 /** Tờ lịch dưới bản đồ: tab Tổng quan / Ngày 1 / Ngày 2, tiêu đề (kèm nhãn "Lịch trình minh họa") và danh sách đồng bộ với ghim. */
-export function DaySheet({ days, tab, rowsShown, hot, onTab }: DaySheetProps) {
+export function DaySheet({ days, tab, rowsShown, hot, onTab, accessory }: DaySheetProps) {
   const day = tab > 0 ? days[tab - 1] : undefined;
   return (
     <section className="ob-sheet">
@@ -93,7 +95,7 @@ export function DaySheet({ days, tab, rowsShown, hot, onTab }: DaySheetProps) {
           {day ? fill(T.trip.day, { n: day.index + 1 }) : T.trip.name}
           {day ? <small>{T.trip.themes[day.theme as keyof typeof T.trip.themes]}</small> : null}
         </span>
-        <span className="ob-badge">{day ? T.trip.sampleTimes : T.trip.sample}</span>
+        {accessory ?? <span className="ob-badge">{day ? T.trip.sampleTimes : T.trip.sample}</span>}
       </div>
       {day ? (
         <ul className={`ob-rows${hot >= 0 ? ' focus' : ''}`}>

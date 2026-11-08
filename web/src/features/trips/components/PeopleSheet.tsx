@@ -124,7 +124,7 @@ function SelfPanel({ tripId, current, onRenamed }: { readonly tripId: string; re
 
 /** Tờ "Người đi cùng": danh sách thành viên; Organizer thêm mời người và gỡ người; thành viên đổi tên/rời chuyến. */
 export function PeopleSheet({ onClose }: { readonly onClose: () => void }) {
-  const { trip } = useTripView();
+  const { trip, setOverlay } = useTripView();
   const perms = permissionsOf(trip);
   const toast = useToast();
   const report = useReportError();
@@ -153,6 +153,10 @@ export function PeopleSheet({ onClose }: { readonly onClose: () => void }) {
         <h2>{C.people.title}</h2>
         <p className="note">{C.people.namesNote}</p>
         {perms.organizer ? <p className="note">{C.people.organizerNote}</p> : null}
+        <div className="people-shortcuts">
+          <Button kind="ghost" icon="list-check" onClick={() => setOverlay({ kind: 'checklist' })}>{C.checklist.title}</Button>
+          <Button kind="ghost" icon="list-check" onClick={() => setOverlay({ kind: 'requests' })}>{C.requests.title}</Button>
+        </div>
         {members.data ? <MemberList members={members.data} canRemove={perms.manageTrip} onRemove={setRemoving} /> : members.error ? <WarnBox>{C.people.loadFail}<Button kind="ghost" onClick={members.reload}>{C.people.retry}</Button></WarnBox> : <p className="note">{C.people.loading}</p>}
         {removing ? (
           <section className="seccard">

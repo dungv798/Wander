@@ -37,7 +37,7 @@ export interface IdentityActions {
   /** Máy này xin ghép (máy mới); null nếu quá hạn mức yêu cầu. */
   readonly requestPairing: () => Promise<PairingRequest | null>;
   /** Trạng thái yêu cầu ghép của máy này. */
-  readonly pairingStatus: (request: PairingRequest) => Promise<PairingStatus>;
+  readonly pairingStatus: (request: PairingRequest, signal?: AbortSignal) => Promise<PairingStatus>;
   /** Yêu cầu ghép đã được duyệt: máy này trở thành thiết bị tin cậy. */
   readonly joinHere: (request: PairingRequest) => Promise<void>;
   /** Thiết bị duyệt nhập mã và xem trước yêu cầu (ghép hoặc xác thực lại). */

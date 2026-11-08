@@ -4,6 +4,7 @@ import { createExpression, validateStyleMin } from '@maplibre/maplibre-gl-style-
 import type { Map as MlMap, StyleSpecification } from 'maplibre-gl';
 import { addNativePinLayers, pinHitLayers } from './nativePinLayers.ts';
 import { MAP } from './map.const.ts';
+import { mapThumbnailUrl } from './mapThumbnailUrl.ts';
 import { markerFeatures } from './nativeMarkers.ts';
 
 test('cấu hình lớp native hợp lệ với style-spec MapLibre đang cài, có hit 44 px và hub ngoài cụm', (t) => {
@@ -44,13 +45,14 @@ test('cấu hình lớp native hợp lệ với style-spec MapLibre đang cài, 
   assert.equal(expression.result, 'success');
   if (expression.result !== 'success') return;
   for (const url of ['/catalog/photos/lang-biang-1.jpg', '/catalog/photos/thac-pongour.jpg?size=96&crop=1']) {
+    const sprite = mapThumbnailUrl(url);
     const feature = markerFeatures([{ id: 'pin', lat: 12, lon: 108, thumb: url }], 'browse', true).features[0]!;
     const input = { type: 'Point' as const, properties: feature.properties! };
     const waiting = expression.value.evaluate({ zoom: 12 }, input, {}, undefined, [MAP.EMPTY_IMAGE]);
-    assert.equal(waiting.name, url, 'ảnh chưa đến vẫn phải đăng ký phụ thuộc đúng ID, không chốt sprite rỗng');
+    assert.equal(waiting.name, sprite, 'ảnh chưa đến vẫn phải đăng ký phụ thuộc đúng ID, không chốt sprite rỗng');
     assert.equal(waiting.available, false);
-    const loaded = expression.value.evaluate({ zoom: 12 }, input, {}, undefined, [MAP.EMPTY_IMAGE, url]);
-    assert.equal(loaded.name, url);
+    const loaded = expression.value.evaluate({ zoom: 12 }, input, {}, undefined, [MAP.EMPTY_IMAGE, sprite]);
+    assert.equal(loaded.name, sprite);
     assert.equal(loaded.available, true);
   }
   for (const id of pinHitLayers().slice(1)) {

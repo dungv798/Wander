@@ -3,7 +3,7 @@ import type { ItemChange, ItemInput, TripsGateway } from '../api/TripsGateway.ts
 import { ApiError } from '../../../shared/api/ApiError.ts';
 import { revertPlan } from '../model/revertPlan.ts';
 import { sortTrips } from '../model/tripOrder.ts';
-import { PLACE_KIND } from '../model/trip.const.ts';
+import { placeItemKind } from '../model/placeItemKind.ts';
 import type { ItemKind, Trip, TripCover, TripsState } from '../model/trip.types.ts';
 import { isPlain, tripDays } from '../model/tripMath.ts';
 import * as T from '../model/tripState.ts';
@@ -65,7 +65,8 @@ const MISSING_TRIP = 'Không có chuyến trong kho:';
 
 /** Thông tin một mục mới từ địa điểm trong kho: chưa có ngày, loại suy ra từ loại địa điểm, chưa biết giá, chờ xác nhận. */
 export function placeInput(place: PlaceRef): ItemInput {
-  return { type: PLACE_KIND[place.category] ?? 'sightseeing', title: place.name ?? place.id, placeId: place.id, day: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: 'pending' };
+  const type = placeItemKind(place);
+  return { type, title: place.name ?? place.id, placeId: place.id, day: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: type === 'rest' ? null : 'pending' };
 }
 
 /** Mục tự do (hoặc Nghỉ, Việc cần làm) từ các trường của biểu mẫu; giá/đặt chỗ chỉ có ở loại có giá, mặc định chờ xác nhận. */

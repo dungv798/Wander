@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { COPY } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { usePrefersReducedMotion } from '../../../shared/hooks/useMediaQuery.ts';
 import { cssVars } from '../../../shared/lib/cssVars.ts';
 import { replaceRoute } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
+import { BrandMark } from '../../../shared/ui/BrandMark.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import type { DestinationDetail } from '../../discover/index.ts';
 import { useCardMorph } from '../hooks/useCardMorph.ts';
@@ -19,7 +19,6 @@ import { DiscoverScene } from './DiscoverScene.tsx';
 import { OnboardNav } from './OnboardNav.tsx';
 import { PlanScene } from './PlanScene.tsx';
 import { ShareScene } from './ShareScene.tsx';
-import { Sky } from './Sky.tsx';
 import { SwipeScene } from './SwipeScene.tsx';
 
 /** Chọn thành phần của cảnh theo chỉ số. */
@@ -30,32 +29,22 @@ function SceneView({ scene, ...props }: SceneProps & { readonly scene: number })
   return <DiscoverScene {...props} />;
 }
 
-/** Tiêu đề của cảnh (nhận tiêu điểm khi người xem đổi cảnh); cảnh đầu là logo kèm slogan. Mỗi cảnh một tiêu đề mới hiện dần để người xem thấy mình đã sang bước khác. */
+/** Dấu thương hiệu chung, tên bước và lợi ích của cảnh; đổi cảnh chuyển focus vào tiêu đề để bàn phím không lạc vị trí. */
 function SceneHeading({ scene, focus }: { readonly scene: number; readonly focus: boolean }) {
   const ref = useRef<HTMLHeadingElement | null>(null);
   useEffect(() => {
     if (focus) ref.current?.focus({ preventScroll: true });
   }, [focus, scene]);
-  if (scene === SCENE.DISCOVER) {
-    return (
-      <div className="ob-brand">
-        <h1 ref={ref} tabIndex={-1} className="ob-logo">
-          {COPY.brand.name}
-        </h1>
-        <p>{COPY.home.tagline}</p>
-      </div>
-    );
-  }
   return (
     <>
-      <span className="ob-logo small" aria-hidden="true">
-        {COPY.brand.name}
-      </span>
+      <BrandMark className="ob-wordmark" />
+      <p className="ob-eyebrow">{T.sceneNames[scene]}</p>
       <h1 key={scene} ref={ref} tabIndex={-1} className="ob-title">
         {(T.titles[scene] ?? []).map((line) => (
           <span key={line}>{`${line} `}</span>
         ))}
       </h1>
+      <p className="ob-description">{T.descriptions[scene]}</p>
     </>
   );
 }
@@ -87,7 +76,7 @@ function Stage({ flow, dest, reduced }: StageProps) {
   );
 }
 
-/** Câu chuyện giới thiệu bốn cảnh (S14): trời + mây trôi theo bước, tiêu đề, cảnh tự chạy có chuyển cảnh và dấu hiệu "sắp chuyển", Bỏ qua, điều hướng; nút "Bắt đầu khám phá" chỉ hiện ở bước cuối (bấm là sang trang chính). Xong hoặc bỏ qua thì nhớ "đã xem" và về Khám phá. */
+/** Giới thiệu bốn bước trên cùng hệ vật liệu B; có demo tự chạy, điều hướng và giảm chuyển động, hoàn tất hoặc bỏ qua sẽ nhớ đã xem. */
 export function OnboardStory({ dest }: { readonly dest: DestinationDetail }) {
   const { finish } = useOnboarding();
   const reduced = usePrefersReducedMotion();
@@ -100,12 +89,11 @@ export function OnboardStory({ dest }: { readonly dest: DestinationDetail }) {
   const finished = flow.scene === SCENE.SHARE && flow.cue?.ms === 0;
   return (
     <section className="ob" data-scene={flow.scene} style={cssVars({ sc: flow.scene })}>
-      <Sky />
       <header className="ob-top">
         <SceneHeading scene={flow.scene} focus={flow.moved} />
-        <button type="button" className="ob-skip" onClick={done}>
+        <Button kind="secondary" className="ob-skip" onClick={done}>
           {T.skip}
-        </button>
+        </Button>
       </header>
       <Stage flow={flow} dest={dest} reduced={reduced} />
       <footer className="ob-bottom">

@@ -17,7 +17,6 @@ import { uniqueName } from '../model/tripState.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import type { TripFormValues } from './TripFields.tsx';
 import type { PlaceRef } from '../model/tripState.ts';
-import { useDiscover } from '../../discover/index.ts';
 import { TripFormActions, TripFormLayout } from './TripFormLayout.tsx';
 import { money } from './ItemMeta.tsx';
 
@@ -135,11 +134,7 @@ function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; reado
  */
 export function TripWizard({ destId, onClose, picked = [], values, onValues, onBackToForm, suggestedDates = true }: { readonly destId: string; readonly onClose: () => void; readonly picked?: readonly (PlaceRef & { readonly name: string })[]; readonly values?: TripFormValues; readonly onValues?: (p: Partial<TripFormValues>) => void; readonly onBackToForm?: () => void; readonly suggestedDates?: boolean }) {
   const { state } = useTrips();
-  const discover = useDiscover();
-  const { busy, create } = useCreateTripFlow(() => {
-    discover.actions.clearPicked(picked.map((p) => p.id));
-    onClose();
-  });
+  const { busy, create } = useCreateTripFlow(onClose);
   const requireIdentity = useRequireIdentity();
   const { state: destState } = useDestination(destId);
   const dest = destState.status === 'ready' ? destState.data : null;

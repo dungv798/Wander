@@ -1,6 +1,9 @@
 /* Kích thước nội tại của RevealImage giữ khung; các khung crop hiện có tiếp tục ưu tiên. */
 img[data-image-ready] { object-fit: cover; }
 :root img[data-image-ready='false'] { opacity: 0; }
+.image-outgoing { position: absolute; inset: 0; pointer-events: none; background-position: center; background-repeat: no-repeat; background-size: cover; animation: imageCrossfade var(--dur-photo) var(--ease-photo) both; }
+.image-outgoing[data-fit='contain'] { background-size: contain; }
+@keyframes imageCrossfade { to { opacity: 0; } }
 .photo-flight { position: fixed; z-index: var(--z-photo-flight); pointer-events: none; object-fit: cover; transform-origin: top left; }
 ::view-transition { pointer-events: none; }
 ::view-transition-group(place-photo) { animation-duration: var(--dur-photo); animation-timing-function: var(--ease-photo); }
@@ -16,6 +19,7 @@ img[data-image-ready] { object-fit: cover; }
 .round:is(.r, .l) { transition: scale var(--dur-press) var(--ease-out); }
 .round:is(.r, .l):not(:disabled):active { scale: var(--glass-pressed-scale); transform: none; }
 @media (prefers-reduced-motion: reduce) {
+  .image-outgoing { display: none; animation: none; }
   .round:is(.r, .l) { transition: none; }
   .round:is(.r, .l):active { scale: none; transform: none; }
   #screen[data-view='trip'] .sheetbody.is-anim { transition: none; }

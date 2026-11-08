@@ -1,13 +1,12 @@
 import { useId, useState } from 'react';
 import { COPY, fill } from '../../../../shared/const/copy.vi.ts';
 import { UI } from '../../../../shared/const/app.const.ts';
-import { formatTravelTime } from '../../../../shared/lib/geo.ts';
 import { Icon } from '../../../../shared/ui/Icon.tsx';
 import { Chip } from '../../../../shared/ui/Chip.tsx';
 import { DISCOVER_COPY } from '../../model/discover.copy.ts';
 import { SLOTS, VERDICT_STYLE } from '../../model/discover.const.ts';
 import type { PlaceView } from '../../model/Catalog.types.ts';
-import { mainAway } from '../../model/destinationQueries.ts';
+import { placeFacts } from '../../model/placeFacts.ts';
 import { PlaceDisclosure, PlaceMoreButton } from './PlaceDisclosure.tsx';
 import { safeHttpUrl } from '../../../../shared/lib/safeUrl.ts';
 
@@ -30,17 +29,11 @@ export function EditorialRate({ place }: { readonly place: PlaceView }) {
 
 /** Các hàng icon và chữ gọn; giờ và mùa đã có khối riêng nên không lặp trong lưới. */
 export function QuickFacts({ place }: { readonly place: PlaceView }) {
-  const away = mainAway(place);
-  const facts = [
-    { icon: 'clock', value: place.duration, label: COPY.place.factDuration },
-    { icon: 'gauge', value: place.difficulty, label: COPY.place.factLevel },
-    { icon: 'route', value: away ? fill(COPY.units.kmApprox, { km: away.km }) : COPY.units.noValue, label: fill(COPY.place.factAway, { ref: away?.refName ?? '' }) },
-    { icon: 'motorbike', value: away ? formatTravelTime(away.minutes) : COPY.units.noValue, label: COPY.place.factMoto },
-  ] as const;
+  const facts = placeFacts(place);
   return (
     <ul className="place-facts">
       {facts.map((f) => (
-        <li key={f.label}>
+        <li key={f.icon}>
           <span className="ib">
             <Icon semantic name={f.icon} />
           </span>
@@ -72,7 +65,7 @@ export function Highlights({ place }: { readonly place: PlaceView }) {
 /** Bốn buổi trong ngày: buổi nên đi được tô và ghi "Nên đi", kèm lý do. */
 export function TimeOfDay({ place }: { readonly place: PlaceView }) {
   return (
-    <PlaceDisclosure title={COPY.place.whenToGo} icon="sun">
+    <PlaceDisclosure title={COPY.place.whenToGo} icon="sun" defaultOpen>
       <div className="tod">
         {SLOTS.map((s) => {
           const on = place.bestSlots.includes(s.code);

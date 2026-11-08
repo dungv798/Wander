@@ -1,205 +1,106 @@
-/* Một vật liệu cho điều khiển; selector cũ nối các nút riêng màn với glass-control. */
-:root:not([data-look='classic']) :is(.maplibregl-ctrl-group, .maplibregl-ctrl-group button, .deckbar, .pagehead, .destination-picker-header, .glass-control, .btn, .pill, .iconbtn, .round, .gnav, .credit-btn, :where(.tile) .x, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .ghead, .grow, .tab, .chip, .search, .destination-picker-search input, .destination-picker-list button, .daylist button, .taskchk, .obx-skip, .brand, .resume, :where(.simbar) .seg button, .toast button, :where(#tabbar)) {
-  --g-alpha: var(--glass-control-alpha);
-  --g-blur: var(--glass-fab-blur);
-  color: var(--ink-fixed);
-  background: var(--glass-highlight), var(--glass-fallback);
-  border: var(--glass-border) solid var(--glass-edge);
-  box-shadow: var(--glass-shadow);
-  text-shadow: none;
-  transition: scale var(--dur-press) var(--ease-out), filter var(--dur-press) var(--ease-out);
-}
-:root:not([data-look='classic']) #tabbar { --g-alpha: var(--glass-tab-alpha); --g-blur: var(--glass-tab-blur); box-shadow: var(--glass-tab-shadow); }
-:root:not([data-look='classic']) :is(.fchip, .chip, .dchip, .dtab) { --g-alpha: var(--glass-chip-alpha); --g-blur: var(--glass-chip-blur); }
-:root:not([data-look='classic']) :is(.search, .destination-picker-search input) { --g-alpha: var(--glass-search-alpha); --g-blur: var(--glass-search-blur); }
-
-/* Sheet gần đục để đọc nội dung dài; bề mặt điều khiển mới gần trong suốt. */
-:root:not([data-look='classic']) :is(.panel, #screen .sheetbody, .bar, .cta-bar) {
-  background: var(--glass-highlight), var(--surface);
-  border: var(--glass-border) solid var(--glass-edge);
-  box-shadow: var(--glass-shadow);
-}
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root:not([data-look='classic']) :is(.maplibregl-ctrl-group, .maplibregl-ctrl-group button, .deckbar, .pagehead, .destination-picker-header, .glass-control, .btn, .pill, .iconbtn, .round, .gnav, .credit-btn, :where(.tile) .x, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .ghead, .grow, .tab, .chip, .search, .destination-picker-search input, .destination-picker-list button, .daylist button, .taskchk, .obx-skip, .brand, .resume, :where(.simbar) .seg button, .toast button, :where(#tabbar)) {
-    background: var(--glass-highlight), rgb(var(--glass-rgb) / var(--g-alpha));
-    -webkit-backdrop-filter: blur(var(--g-blur)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
-    backdrop-filter: blur(var(--g-blur)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
-  }
-  :root:not([data-look='classic']) :is(.panel, #screen .sheetbody, .bar, .cta-bar) {
-    background: var(--glass-highlight), rgb(var(--glass-sheet-rgb) / var(--glass-sheet-alpha));
-    -webkit-backdrop-filter: blur(var(--glass-sheet-blur));
-    backdrop-filter: blur(var(--glass-sheet-blur));
-  }
-}
-
-/* Trạng thái chọn dùng cùng viền nhấn và nền Nắng vàng trong. */
-:root:not([data-look='classic']) :is(#screen, .panel, :where(#tabbar)) :is([aria-pressed='true'], [aria-selected='true'], [aria-current='page'], [aria-current='true'], .pack.on, .opt.on) {
-  color: var(--ink-fixed);
-  border-color: var(--glass-active-edge);
-  background: var(--control-selected);
-  font-weight: inherit;
-  text-decoration: none;
-}
-:root:not([data-look='classic']) :is(button.glass-control, button.pill, .round, .gnav, .credit-btn, :where(.tile) .x, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .tab, .search) { min-width: var(--tap); min-height: var(--tap); }
-:root:not([data-look='classic']) :is(.linkbtn, .ghead, .grow) { border-radius: var(--r-sm); }
-:root:not([data-look='classic']) .round { animation: none; }
-:root:not([data-look='classic']) .taskchk[aria-pressed='false'] .ic { visibility: hidden; }
-
-/* Chỉ đệm sau glyph trên ảnh được tối hóa; mặt ngoài nút vẫn xuyên nền.
-   Nhãn chữ trên ảnh dùng scrim chung để giữ tương phản trên ảnh trắng/đen. */
-:root:not([data-look='classic']) :is(.round, .gnav, .credit-btn, :where(.tile) .x, .dhero .iconbtn, .gal .close, .mapfull .close) .ic {
-  color: var(--white);
-  background: var(--glass-photo-scrim);
-  border-radius: var(--r-pill);
-  box-shadow: var(--glass-glyph-halo);
-  filter: drop-shadow(var(--glass-photo-shadow));
-}
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.gal .chip, .card .chip, .chip.glass, .dhero .chip, .gcount) {
-  color: var(--white);
-  background: var(--glass-photo-scrim);
-  text-shadow: var(--glass-photo-shadow);
-  border: var(--glass-border) solid var(--glass-edge);
-}
-
-/* Ngoại lệ CTA: Chọn trên bộ thẻ, Thêm địa điểm trên chuyến, Lưu trong form. */
-/* Cài đặt có hai form: lưu sở thích là chính; đổi tên thiết bị giữ kính phụ. */
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.btn.g-primary:not(:where(#screen[data-view='settings'] .seccard:first-child .btn)), .round.r) {
-  background: var(--glass-cta-surface);
-  color: var(--on-cta);
-  box-shadow: var(--glass-shadow);
-  border: var(--glass-border) solid var(--glass-edge);
-}
-:root:not([data-look='classic']) :is(#screen, .panel) .round.r .ic { color: var(--on-cta); background: transparent; box-shadow: none; filter: none; }
-:root :focus:not(:focus-visible) { outline: none; }
-:root :is(button, input, a, select, textarea, [tabindex]):focus-visible { outline: var(--focus-width) solid var(--focus); outline-offset: var(--s-1); }
-:root :is(h1, h2, [role='dialog'])[tabindex='-1']:focus { outline: none; }
-:root body[data-input-modality='pointer'] :focus-visible { outline: none; }
-:root:not([data-look='classic']) .sheet { -webkit-backdrop-filter: none; backdrop-filter: none; }
-
-/* Mép kính độc lập: mask bỏ lòng, không che chữ và không bắt sự kiện.
-   Nhóm nút định vị tuyệt đối giữ nguyên position từ màn đang dùng. */
-:root:not([data-look='classic']) :is(.btn, .pill, .round, .fchip, .dchip, .dtab, .tab, .search, .iconbtn:not(.close), .destination-picker-list button) { position: relative; }
-:root:not([data-look='classic']) :is(.btn, .pill, .iconbtn, .round, .fchip, .dchip, .dtab, .tab, .search, .gnav, .credit-btn, #tabbar, .maplibregl-ctrl-group)::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: var(--glass-border);
-  background: var(--glass-rim);
-  -webkit-mask: var(--glass-mask) content-box, var(--glass-mask);
-  mask: var(--glass-mask) content-box, var(--glass-mask);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-/* Chữ tối cần đệm sáng trên ảnh bất kỳ; vỏ kính vẫn trong ở mép ngoài. */
-:root:not([data-look='classic']) :is(.dhero .pill, .deckbar .pill, .mapfull .pill, .mapcard .pill) { background: var(--glass-highlight), var(--glass-label-surface); }
-/* Một viên kính liên tục; chỉ vùng chọn có màu Nắng vàng xuyên nền. */
-:root:not([data-look='classic']) .home-hero .search {
-  position: absolute;
-  color: var(--white);
-  background: var(--home-search-reflection), var(--home-search-surface);
-  -webkit-backdrop-filter: blur(var(--glass-search-blur)) saturate(var(--home-search-saturation));
-  backdrop-filter: blur(var(--glass-search-blur)) saturate(var(--home-search-saturation));
-  text-shadow: var(--home-search-shadow);
-}
-:root:not([data-look='classic']) .home-hero .search .ic { color: var(--white); }
-:root:not([data-look='classic']) #tabbar .tab { border: 0; box-shadow: none; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; text-decoration: none; }
-:root:not([data-look='classic']) #tabbar .tab::before { display: none; }
-:root:not([data-look='classic']) #tabbar .tab[aria-current='page'] { background: var(--glass-sun-selection); border: 0; text-decoration: none; }
-/* Đệm chỉ sau nhãn và glyph; phần thân và mép điều khiển vẫn nhìn xuyên ảnh. */
-:root:not([data-look='classic']) #tabbar .tab :is(span, .ic) { color: var(--ink-fixed); background: var(--glass-label-surface); border-radius: var(--r-sm); }
-:root:not([data-look='classic']) :is(.maplibregl-ctrl-group button, .destination-picker-search input) { border-color: var(--border-ctrl); }
-:root:not([data-look='classic']) .maplibregl-ctrl-group button { color: var(--ink-fixed); background: var(--glass-highlight), var(--glass-label-surface); }
-/* Tiêu đề là dải kính liên tục, bỏ khung hộp và bóng nặng quanh cả hàng. */
-:root:not([data-look='classic']) #screen :is(.deckbar, .pagehead, .destination-picker-header) { border: 0; box-shadow: none; }
-:root:not([data-look='classic']) #screen .sheetbody { border: 0; box-shadow: var(--header-shadow); }
-:root .route-close { position: absolute; z-index: var(--z-sticky); top: var(--s-4); left: var(--s-4); }
-:root #screen[data-view='onboard'] .route-close { left: auto; right: var(--s-4); top: calc(var(--tap) + var(--s-4)); }
-:root:not([data-look='classic']) #screen.immersive .deckbar { background: var(--glass-photo-scrim); }
-:root:not([data-look='classic']) .card .credit-btn { position: relative; }
-
-/* Hệ nút dùng chung: nền trung tính đủ đệm trên trời xanh/bản đồ, mép đều bốn phía.
-   Đặt sau các cầu nối cũ để trạng thái của màn không tự đổi vật liệu. */
-:root :is(button, a[class], a[role='button']) { text-decoration: none; }
-:root:not([data-look='classic']) :is(#screen, .panel, .toast) :is(.btn, .pill, .iconbtn, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .undo-control, .taskchk) {
-  color: var(--ink-fixed);
+/* Vật liệu B: một chủ sở hữu cho kính, nút và trạng thái. Các màn chỉ bố trí điều khiển.
+   Cầu nối không dùng ID trong :is() để các màn có thể bố trí nút mà không tranh specificity. */
+:root:not([data-look='classic']) :is(.glass-control, .btn, .pill, .iconbtn, .round, .gnav, .credit-btn, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .taskchk, .undo-control) {
+  color: var(--ink);
   background: var(--control-surface);
   border: var(--glass-border) solid var(--control-edge);
-  box-shadow: none;
+  box-shadow: var(--control-inner-light);
   text-shadow: none;
   text-decoration: none;
   min-height: var(--tap);
   min-width: var(--tap);
   font-weight: 700;
-  transition: opacity var(--control-motion) var(--ease-out), scale var(--control-motion) var(--ease-out);
+  -webkit-backdrop-filter: blur(var(--glass-chip-blur));
+  backdrop-filter: blur(var(--glass-chip-blur));
 }
-:root:not([data-look='classic']) :is(#screen, .panel, .toast) :is(.btn, .pill, .iconbtn, .fchip, .dchip, .dtab)::before { display: none; }
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.chip:not(.glass), .mchip) {
-  color: var(--ink-fixed);
+:root:not([data-look='classic']) :where(.btn, .pill, .iconbtn, .round, .fchip, .dchip, .dtab, .tab, .search, .gnav, .credit-btn)::before { content: none; }
+:root:not([data-look='classic']) .btn { padding-block: var(--control-pad-y); }
+:root:not([data-look='classic']) :is(.btn.g-primary, .round.r) {
+  color: var(--btn-ink);
+  background: var(--btn-bg);
+  border-color: var(--btn-edge);
+  box-shadow: var(--btn-shadow);
+  font-weight: 800;
+}
+:root:not([data-look='classic']) .btn .btn-arrow { color: var(--brand-ink); }
+:root:not([data-look='classic']) .btn.danger { color: var(--skip); border-color: var(--skip); background: var(--control-surface); }
+:root:not([data-look='classic']) :where(.next, #screen[data-view='settings'] .seccard:first-child) .btn.g-primary { background: var(--control-surface); border-color: var(--control-edge); }
+:root:not([data-look='classic']) :is(.fchip, .dchip, .dtab, .pack, .opt, .taskchk, .pill):is([aria-pressed='true'], [aria-selected='true'], .on) {
+  color: var(--ink);
+  background: var(--control-selected);
+  border-color: var(--control-selected-edge);
+  box-shadow: var(--control-inner-light);
+  text-decoration: none;
+}
+:root:not([data-look='classic']) .taskchk[aria-pressed='false'] .ic { visibility: hidden; }
+:root:not([data-look='classic']) :is(.linkbtn, .ghead, .grow) { border-radius: var(--r-sm); }
+:root:not([data-look='classic']) .round { animation: none; }
+:root:not([data-look='classic']) :is(.chip:not(.glass), .mchip) { color: var(--ink); background: var(--control-surface); border: var(--glass-border) solid var(--control-edge); box-shadow: none; text-decoration: none; }
+
+/* Một nền chung cho tờ chính và cửa sổ chi tiết. */
+:root:not([data-look='classic']) :where(.panel, #screen .sheetbody) {
+  background: var(--sheet-surface);
+  border: var(--glass-border) solid var(--sheet-edge);
+  box-shadow: var(--shell-panel-shadow);
+  -webkit-backdrop-filter: blur(var(--sheet-blur));
+  backdrop-filter: blur(var(--sheet-blur));
+}
+:root:not([data-look='classic']) :where(.deckbar, .pagehead, .destination-picker-header, .ghead, .grow, .bar, .cta-bar) {
+  color: var(--ink);
+  background: var(--sheet-chrome);
+  border: 0;
+  box-shadow: none;
+}
+:root:not([data-look='classic']) :where(.deckbar, .pagehead, .destination-picker-header) { background: transparent; }
+:root:not([data-look='classic']) .cta-bar { border-top: var(--glass-border) solid var(--sheet-edge); }
+:root:not([data-look='classic']) .sheet { -webkit-backdrop-filter: blur(var(--modal-backdrop-blur)); backdrop-filter: blur(var(--modal-backdrop-blur)); }
+:root:not([data-look='classic']) .search {
+  color: var(--ink);
   background: var(--control-surface);
   border: var(--glass-border) solid var(--control-edge);
   box-shadow: none;
-  text-decoration: none;
 }
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.fchip, .dchip, .dtab, .pack, .opt, .taskchk, .pill):is([aria-pressed='true'], [aria-selected='true'], .on) {
-  background: var(--control-selected);
-  border-color: var(--control-accent);
-  color: var(--ink-fixed);
-  font-weight: 700;
-  box-shadow: none;
-  text-decoration: none;
-}
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.btn.g-primary, .round.r) {
-  background: var(--glass-cta-surface);
-  color: var(--on-cta);
-  border: var(--glass-border) solid var(--control-accent);
-  box-shadow: none;
-}
-/* Nút gợi ý và form thiết bị là hành động phụ dù mã cũ dùng primary. */
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.next .btn.g-primary, #screen[data-view='settings'] .seccard:first-child .btn.g-primary) {
-  background: var(--control-surface);
-  color: var(--ink-fixed);
-  border-color: var(--control-edge);
-}
-:root .selection-mark {
-  display: inline-grid;
-  place-items: center;
-  flex: none;
-  width: var(--control-check);
-  height: var(--control-check);
-  opacity: 0;
-  transition: opacity var(--control-motion) var(--ease-out);
-}
+:root:not([data-look='classic']) .map-chrome .search { background: transparent; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+/* Tờ cha đã làm mờ nền: tránh thêm một lớp GPU cho mỗi nút con. */
+:root:not([data-look='classic']) :where(.panel, .sheetbody, .ob-panel) :is(.btn, .iconbtn, .fchip, .dchip, .dtab, .pill, .glass-control) { -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root:not([data-look='classic']) .maplibregl-ctrl-group { background: var(--sheet-surface); border: var(--glass-border) solid var(--sheet-edge); box-shadow: var(--btn-shadow); }
+:root:not([data-look='classic']) .maplibregl-ctrl-group button { color: var(--ink); border: 0; background-color: transparent; box-shadow: none; }
+:root:not([data-look='classic']) .maplibregl-ctrl-group button + button { border-top: var(--glass-border) solid var(--control-edge); }
+:root:not([data-look='classic']) #tabbar { background: var(--sheet-surface); border: var(--glass-border) solid var(--sheet-edge); box-shadow: var(--btn-shadow); -webkit-backdrop-filter: blur(var(--sheet-blur)); backdrop-filter: blur(var(--sheet-blur)); }
+:root:not([data-look='classic']) #tabbar .tab { background: transparent; border: 0; box-shadow: none; text-decoration: none; }
+:root:not([data-look='classic']) #tabbar .tab[aria-current='page'] { background: var(--control-surface); }
+:root:not([data-look='classic']) #tabbar .tab :is(span, .ic) { color: var(--muted); background: transparent; }
+:root:not([data-look='classic']) #tabbar .tab[aria-current='page'] :is(span, .ic) { color: var(--brand-ink); }
+
+/* Nhãn và nút trên ảnh luôn có đệm tương phản, không phụ thuộc màu ảnh. */
+:root:not([data-look='classic']) :where(.dhero .pill, .deckbar .pill, .mapfull .pill, .mapcard .pill, .dhero .iconbtn, .credit-btn, .gnav) { background: var(--glass-label-surface); color: var(--ink); }
+:root:not([data-look='classic']) :where(.gal .chip, .card .chip, .chip.glass, .dhero .chip, .gcount) { color: var(--white); background: var(--glass-photo-scrim); text-shadow: var(--glass-photo-shadow); }
+:root:not([data-look='classic']) .card .chip { min-height: 0; color: var(--white); background: var(--glass-photo-scrim); border-color: var(--glass-edge); backdrop-filter: none; }
+:root:not([data-look='classic']) .card .card-cat { color: var(--ink); background: var(--glass-label-surface); text-shadow: none; }
+:root:not([data-look='classic']) .home-hero .search { color: var(--white); background: var(--home-search-surface); text-shadow: var(--home-search-shadow); }
+:root:not([data-look='classic']) .home-hero .search .ic { color: var(--white); }
+:root:not([data-look='classic']) #screen.immersive .deckbar { background: transparent; }
+:root .route-close { position: absolute; z-index: var(--z-sticky); top: var(--s-4); left: var(--s-4); }
+:root #screen[data-view='onboard'] .route-close { left: auto; right: var(--s-4); top: calc(var(--tap) + var(--s-4)); }
+:root .selection-mark { display: inline-grid; place-items: center; flex: none; width: var(--control-check); height: var(--control-check); opacity: 0; transition: opacity var(--control-motion) var(--ease-out); }
 :root [aria-pressed='true'] > .selection-mark { opacity: 1; }
 :root .selection-mark .ic { color: var(--control-accent); }
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.fchip:not(:has(.selection-mark)), .pack)::after {
-  content: '✓';
-  content: '✓' / ''; /* văn bản thay thế rỗng: dấu check chỉ là trang trí, không vào tên truy cập */
-  width: var(--control-check);
-  flex: none;
-  opacity: 0;
-  color: var(--control-accent);
-  transition: opacity var(--control-motion) var(--ease-out);
-}
-:root:not([data-look='classic']) :is(#screen, .panel) :is(.fchip, .pack)[aria-pressed='true']::after { opacity: 1; }
-:root:not([data-look='classic']) :is(#screen, .panel) .btn.danger { color: var(--skip); border-color: var(--skip); }
 :root .undo-control { border-radius: var(--r-sm); }
-/* Nhãn thẻ cũng là nội dung nút: đệm đều thay vì phụ thuộc vùng ảnh may mắn tối. */
-:root #screen .home-body .mood-in { padding: var(--s-1); text-shadow: 0 1px 6px var(--glass-photo-scrim); }
-:root:not([data-look='classic']) :is(#screen, .panel) button:disabled { opacity: 1; color: var(--muted); cursor: not-allowed; }
 
+@media (hover: hover) and (pointer: fine) {
+  :root:not([data-look='classic']) :is(.btn, .pill, .iconbtn):not(:disabled):hover { border-color: var(--control-hover-edge); box-shadow: var(--btn-shadow); }
+  :root:not([data-look='classic']) .btn.g-primary:not(:disabled):hover { background: var(--btn-hover-bg); border-color: var(--btn-edge); }
+}
+:root :focus:not(:focus-visible) { outline: none; }
+:root :is(button, input, a, select, textarea, [tabindex]):focus-visible { outline: var(--focus-width) solid var(--focus); outline-offset: var(--s-1); }
+:root :is(h1, h2, [role='dialog'])[tabindex='-1']:focus { outline: none; }
+:root body[data-input-modality='pointer'] :focus-visible { outline: none; }
+:root:not([data-look='classic']) button:disabled { cursor: not-allowed; }
 @media (prefers-reduced-transparency: reduce) {
-  :root { --glass-photo-scrim: var(--glass-photo-fallback); }
-  :root:not([data-look='classic']) :is(.maplibregl-ctrl-group, .maplibregl-ctrl-group button, .deckbar, .pagehead, .destination-picker-header, .glass-control, .btn, .pill, .iconbtn, .round, .gnav, .credit-btn, :where(.tile) .x, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .ghead, .grow, .tab, .chip, .search, .destination-picker-search input, .destination-picker-list button, .daylist button, .taskchk, .obx-skip, .brand, .resume, :where(.simbar) .seg button, .toast button, #tabbar, .panel, #screen .sheetbody, .bar, .cta-bar) {
-    background: var(--glass-fallback);
-    color: var(--ink-fixed);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-  :root:not([data-look='classic']) :is(.btn, .pill, .iconbtn, .round, .fchip, .dchip, .dtab, .tab, .search, .chip, .gnav, .credit-btn, #tabbar, .maplibregl-ctrl-group)::before { display: none; }
+  :root { --glass-photo-scrim: var(--glass-photo-fallback); --control-surface: var(--glass-fallback); --sheet-surface: var(--glass-fallback); --sheet-chrome: var(--glass-fallback); --modal-backdrop-blur: 0px; }
+  :root:not([data-look='classic']) :is(.glass-control, .btn, .pill, .iconbtn, .panel, .sheetbody, #tabbar) { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root { --control-motion: 0ms; }
-  :root:not([data-look='classic']) :is(.maplibregl-ctrl-group, .maplibregl-ctrl-group button, .deckbar, .pagehead, .destination-picker-header, .glass-control, .btn, .round, .gnav, .fchip, .tab, :where(#tabbar)) { transition: none; animation: none; }
+  :root:not([data-look='classic']) :is(.btn, .pill, .iconbtn, .round, .fchip, .tab, .selection-mark) { transition: none; animation: none; }
 }

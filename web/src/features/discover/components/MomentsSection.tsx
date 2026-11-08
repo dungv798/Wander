@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { COPY, fill } from '../../../shared/const/copy.vi.ts';
+import { VIEW } from '../../../shared/const/routes.const.ts';
+import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { Chip } from '../../../shared/ui/Chip.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
@@ -39,6 +41,7 @@ export function MomentsSection({ dest }: { readonly dest: DestinationDetail }) {
         <RevealImage src={opened.photo.url} alt={opened.caption} loading="lazy" />
         <p>{opened.caption}</p>
         <CreditPill photo={opened.photo} fullAuthor />
+        <Button icon="hand-finger" arrow onClick={() => { setOpened(null); navigate(VIEW.DECK, dest.id); }}>{fill(MOMENTS_COPY.explore, { dest: dest.name })}</Button>
       </div>
     </Sheet> : null}
   </section>;

@@ -4,7 +4,7 @@ export const IDENTITY_COPY = {
     title: 'Lưu chuyến đi của bạn',
     text: 'Wander tạo một danh tính ẩn danh để bạn mở lại chuyến đi trên máy khác. Không cần email hay số điện thoại.',
     key: 'Bạn nhận một mã khôi phục, chỉ hiện một lần. Đó là chìa khóa lấy lại chuyến đi khi mất máy.',
-    create: 'Tạo danh tính và nhận mã',
+    create: 'Nhận mã khôi phục',
     later: 'Để sau, lưu chuyến đi luôn',
     skipNote: 'Chưa có mã khôi phục thì mất máy là mất chuyến đi và không lấy lại được. Bạn tạo mã lúc nào cũng được ở mục Bảo mật.',
     skipSaved: 'Đã lưu chuyến đi. Bạn chưa có mã khôi phục: tạo mã ở mục Bảo mật.',

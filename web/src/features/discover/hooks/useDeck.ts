@@ -12,6 +12,8 @@ import { useDiscover } from './DiscoverProvider.tsx';
 import { usePlaceSheet } from './PlaceSheetProvider.tsx';
 import type { PlaceSlot } from './PlaceSheetProvider.tsx';
 import { useSwipeDrag } from './useSwipeDrag.ts';
+import { matchesDiscoveryFilter } from '../model/discoveryFilters.ts';
+import { usePublishDeckSpotlight } from './DeckSpotlightProvider.tsx';
 
 /** Tờ chi tiết ở chế độ thêm vào chuyến: không có nút chọn/bỏ qua riêng (bộ thẻ đã có). */
 const NO_DECIDE: PlaceSlot = { noDecide: true };
@@ -55,9 +57,10 @@ export function useDeck(dest: DestinationDetail, adding?: AddingMode) {
   const deckRef = useRef<HTMLDivElement | null>(null);
   const [skippedHere, setSkippedHere] = useState<readonly string[]>([]);
   const left = adding
-    ? dest.places.filter((p) => (state.cat === 'all' || p.category === state.cat) && !adding.excludeIds.includes(p.id) && !skippedHere.includes(p.id))
+    ? dest.places.filter((p) => matchesDiscoveryFilter(p, state.cat) && !adding.excludeIds.includes(p.id) && !skippedHere.includes(p.id))
     : remainingIds(state, dest.places);
   const front = left[0];
+  usePublishDeckSpotlight(dest.id, front?.id ?? null);
   const frontPhoto = front ? photoAt(front, state.photo[front.id] ?? 0)?.url : undefined;
 
   useScreenFlag('immersive', Boolean(front));

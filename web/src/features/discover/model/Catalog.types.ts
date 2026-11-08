@@ -14,6 +14,8 @@ export type GuideLayout = 'months' | 'checklist' | 'cards' | 'places' | 'rows';
 
 /** Một ảnh kèm ghi công tác giả và giấy phép (bắt buộc hiển thị). */
 export interface PhotoView {
+  readonly authorUrl?: string;
+  readonly caption?: string;
   readonly url: string;
   readonly author: string;
   readonly license: string;
@@ -21,7 +23,7 @@ export interface PhotoView {
 }
 
 /** Chủ đề đời sống được backend biên tập. */
-export type MomentTheme = 'cho' | 'mon-an' | 'nguoi' | 'le-hoi' | 'nghe';
+export type MomentTheme = 'cho' | 'mon-an' | 'nguoi' | 'le-hoi' | 'nghe' | 'hanh-trinh';
 
 /** Ảnh không khí ở cấp điểm đến, kèm đầy đủ thông tin ghi công. */
 export interface MomentView {
@@ -43,6 +45,7 @@ export interface Away {
 
 /** Một địa điểm trong kho biên tập. */
 export interface PlaceView {
+  readonly venue?: VenueView | null;
   readonly id: string;
   readonly name: string;
   readonly category: CategoryCode;
@@ -66,6 +69,19 @@ export interface PlaceView {
   readonly photos: readonly PhotoView[];
   readonly away: readonly Away[];
   readonly wikipediaTitle: string | null;
+}
+
+/** Cơ sở có nguồn đối chiếu; không đồng nghĩa giá/giờ/phòng trống đã xác minh. */
+export interface VenueView {
+  readonly kind: 'restaurant' | 'cafe' | 'bar' | 'lodging';
+  readonly kindName: string;
+  readonly address: string;
+  readonly website: string;
+  readonly sourceUrl: string;
+  readonly checkedAt: string;
+  readonly phone?: string;
+  readonly serviceHours?: string;
+  readonly priceNote?: string;
 }
 
 /** Một mục trong khối cẩm nang (biểu tượng, tiêu đề, mô tả, tùy chọn trỏ tới địa điểm). */
@@ -107,6 +123,8 @@ export interface DestinationDetail {
   readonly region: string;
   readonly tagline: string;
   readonly coverUrl: string;
+  /** Ghi công bìa độc lập; API cũ hoặc dữ liệu thử có thể chưa trả. */
+  readonly coverPhoto?: PhotoView;
   readonly references: readonly ReferenceView[];
   readonly guide: readonly GuideSectionView[];
   readonly places: readonly PlaceView[];
@@ -122,6 +140,8 @@ export interface Preview {
 
 /** Tóm tắt điểm đến cho danh sách và tìm kiếm. */
 export interface DestinationSummary {
+  /** Loại trải nghiệm có thật; API cũ chưa có thì chỉ tải bù khi người xem lọc. */
+  readonly categories?: readonly CategoryCode[];
   readonly lat: number | null;
   readonly lon: number | null;
   readonly id: string;
@@ -130,6 +150,7 @@ export interface DestinationSummary {
   readonly tagline: string;
   readonly placeCount: number;
   readonly coverUrl: string;
+  readonly coverPhoto?: PhotoView;
   readonly bestMonths: readonly number[];
   readonly previews: readonly Preview[];
 }

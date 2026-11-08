@@ -18,6 +18,7 @@ export const FLUENT_ICONS: Readonly<Partial<Record<IconName, string>>> = {
   'calendar-event': 'calendar',
   backpack: 'backpack',
   compass: 'compass',
+  bookmarks: 'round_pushpin',
 };
 
 /** Khung PNG cố định, không lấy kích thước ảnh gốc làm kích thước bố cục. */

@@ -40,10 +40,8 @@
 /* phản hồi khi chạm/bấm */
 .btn, .pill, .fchip, .tab, .iconbtn, .mini, .dcard, .tcard, .tile, .resume, .pack, .dchip, .grow, .opt { transition: transform var(--m-fast) var(--ease-out), background-color var(--m-fast) linear, box-shadow var(--m-fast) linear; }
 .btn:active, .pill:active, .fchip:active, .tab:active, .iconbtn:active, .mini:active, .dcard:active, .tcard:active, .tile:active, .resume:active, .dchip:active, .opt:active { transform: scale(.96); }
-/* nút chính có vệt sáng khi rê chuột/focus (chỉ ở máy có chuột) */
+/* nút chính: không còn vệt sáng quét (bảng màu B bỏ hiệu ứng bóng loáng) */
 .btn:not(.ghost):not(.danger):not(.sun), .pill:not(.warn):not(.cta) { position: relative; overflow: hidden; }
-.btn:not(.ghost):not(.danger):not(.sun)::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent); transform: translateX(-120%) skewX(-18deg); pointer-events: none; }
-@media (hover: hover) { .btn:not(.ghost):not(.danger):not(.sun):hover::after { animation: shine .9s var(--ease-out); } }
 
 /* tờ phủ, toast, tab gạch chân */
 .sheet:not([hidden]) { animation: fadeIn var(--m-fast) linear; }
@@ -68,19 +66,21 @@
 /* ---------- U2: navbar trên cùng cho màn rộng (≥ 768); điện thoại giữ thanh tab nổi ở dưới ---------- */
 .brand, .navr { display: none; }
 @media (min-width: 768px) {
-  #screen, #screen.nobar { left: 0 !important; top: var(--nav-h); }
+  :root { --nav-h: 0px; }
+  #screen, #screen.nobar { left: calc(var(--shell-rail-width) + 2 * var(--shell-rail-gap)); top: var(--nav-h); }
   #tabbar, #tabbar[hidden] {
-    display: flex !important; flex-direction: row; align-items: center; gap: 6px; position: fixed; left: 0; right: 0; top: 0; bottom: auto; width: auto; height: var(--nav-h);
-    padding: 0 max(20px, calc((100vw - 1280px) / 2 + 20px)); border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; background: var(--glass);
+    display: flex; flex-direction: column; align-items: stretch; gap: var(--s-4); position: fixed; left: var(--shell-rail-gap); right: auto; top: var(--shell-chrome-top); bottom: var(--shell-rail-gap); width: var(--shell-rail-width); height: auto;
+    padding: var(--s-3) var(--s-1); border: 1px solid var(--sheet-edge); border-radius: var(--r-xl); box-shadow: var(--btn-shadow); background: var(--sheet-surface);
     -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); z-index: 25;
   }
   #tabbar::before { content: none; display: none; }
   body:has(#screen[data-view="onboard"]) #tabbar { display: none !important; }
   body:has(#screen[data-view="onboard"]) #screen { top: 0 !important; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; border: 0; background: none; padding: 0 12px 0 0; margin-right: 12px; font: 800 26px/1 var(--font-display); color: var(--brand-2); letter-spacing: -.01em; }
+  .brand { display: inline-flex; align-items: center; justify-content: center; min-height: var(--tap); border: 0; background: none; padding: 0; margin: 0 0 var(--s-4); color: var(--ink); }
+  .brand > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .brand svg { width: 30px; height: 30px; flex: none; }
   .tab, .tab .ic { transition: color var(--m-fast) linear, background-color var(--m-fast) linear; }
-  .tab { display: inline-flex; flex-direction: row; align-items: center; gap: 8px; padding: 0 16px; min-height: 44px; font-size: 15px; font-weight: 700; border-radius: 999px; white-space: nowrap; }
+  .tab { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s-1); padding: var(--s-2) var(--s-1); min-height: var(--nav-pill-height); font: var(--text-tab); border-radius: var(--r-lg); white-space: nowrap; }
   .tab .ic { width: 22px; height: 22px; }
   .tab:hover:not([aria-current="page"]) { background: var(--surface-2); color: var(--ink); }
   .tab[aria-current="page"] { background: var(--brand-soft); color: var(--brand-ink); }
@@ -93,8 +93,8 @@
   .sheet.drawer .panel { border-radius: 30px 0 0 0; }
 }
 @media (min-width: 1280px) {
-  #screen { left: 0 !important; }
-  #tabbar, #tabbar[hidden] { width: auto; padding-top: 0; padding-bottom: 0; }
+  #screen { left: calc(var(--shell-rail-width) + 2 * var(--shell-rail-gap)); }
+  #tabbar, #tabbar[hidden] { width: var(--shell-rail-width); }
 }
 
 /* ---------- U1: chuyến đi ở màn rộng: cột phải cố định, bản đồ lấp đủ khung; vùng cuộn là .sheetbody ---------- */

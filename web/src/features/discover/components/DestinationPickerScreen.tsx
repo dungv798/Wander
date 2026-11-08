@@ -41,10 +41,10 @@ export default function DestinationPickerScreen({ initialScope }: { readonly ini
     const timer = window.setTimeout(() => setSettled(query), DESTINATION_SEARCH_DEBOUNCE_MS);
     return () => window.clearTimeout(timer);
   }, [query]);
-  /** Lưu mã hợp lệ rồi đi thẳng tới bộ thẻ quẹt của điểm đến vừa chọn. */
+  /** Lưu điểm đến rồi mở trang khám phá của nơi đó; người dùng chọn danh sách/map hoặc quẹt theo flow B. */
   function choose(id: string): void {
     select(id);
-    navigate(VIEW.DECK, id);
+    navigate(VIEW.DEST, id);
   }
   /** Chọn thành phố từ tab Địa điểm: ở lại màn này và chuyển sang tìm bên trong thành phố đó, giữ truy vấn đang gõ. */
   function pickCity(id: string): void {

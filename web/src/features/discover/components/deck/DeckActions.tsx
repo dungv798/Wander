@@ -7,7 +7,6 @@ interface DeckActionsProps {
   readonly canUndo: boolean;
   readonly onUndo: () => void;
   readonly onSwipe: (dir: SwipeDir) => void;
-  readonly onInfo: () => void;
 }
 
 interface RoundProps {
@@ -25,20 +24,19 @@ function Round({ cls, icon, label, caption, disabled, onClick }: RoundProps) {
     <div className="act">
       <button className={`round ${cls}`} type="button" aria-label={label} disabled={disabled} onClick={onClick}>
         <Icon name={icon} />
+        {cls === 'l' || cls === 'r' ? <span>{caption}</span> : null}
       </button>
-      {caption}
     </div>
   );
 }
 
 /** Hàng nút dưới bộ thẻ: Hoàn tác, Bỏ qua, Chọn, Chi tiết (thay thế đầy đủ cho cử chỉ quẹt, a11y). */
-export function DeckActions({ canUndo, onUndo, onSwipe, onInfo }: DeckActionsProps) {
+export function DeckActions({ canUndo, onUndo, onSwipe }: DeckActionsProps) {
   return (
     <div className="actions">
       <Round cls="small" icon="arrow-back-up" label={COPY.deck.undo} caption={COPY.deck.undo} disabled={!canUndo} onClick={onUndo} />
       <Round cls="l" icon="x" label={COPY.deck.skip} caption={COPY.deck.skip} onClick={() => onSwipe('l')} />
       <Round cls="r" icon="check" label={COPY.deck.likeAria} caption={COPY.deck.like} onClick={() => onSwipe('r')} />
-      <Round cls="small" icon="chevron-up" label={COPY.deck.infoAria} caption={COPY.deck.info} onClick={onInfo} />
     </div>
   );
 }

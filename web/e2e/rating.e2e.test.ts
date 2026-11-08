@@ -48,7 +48,7 @@ async function openDetail(token: string | null) {
   const page = await ctx.newPage();
   await page.goto(`${baseUrl}/#/deck/da-lat`);
   await page.locator('.card.front').waitFor();
-  await page.locator('.actions .act').last().getByRole('button').click();
+  await page.getByRole('button', { name: 'Xem chi tiết', exact: true }).click();
   await page.locator('.place-content').waitFor();
   return { ctx, page, ratingCalls, placeIds: fixture.places.map((p: { id: string }) => p.id) as string[] };
 }
@@ -93,7 +93,7 @@ test('rating: báo cáo lời bình của người khác, lời bình biến m�
     for (const id of placeIds) await api('PUT', `/api/places/${id}/rating`, author.token, { stars: 2, comment });
     await page.reload();
     await page.locator('.card.front').waitFor();
-    await page.locator('.actions .act').last().getByRole('button').click();
+    await page.getByRole('button', { name: 'Xem chi tiết', exact: true }).click();
     const card = page.locator('.rating-card');
     await card.getByText(comment).waitFor();
     await card.getByRole('button', { name: 'Báo cáo' }).first().click();

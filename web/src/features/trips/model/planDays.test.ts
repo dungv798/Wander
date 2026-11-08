@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { planDays, planPreview, withDayOverrides } from './planDays.ts';
+import { planDays, planPreview, summarizePlan, withDayOverrides } from './planDays.ts';
 import { S0 as INITIAL_TRIPS_STATE, createTrip } from './tripFixtures.ts';
 
 const HUB = { lat: 11.94, lon: 108.44 };
@@ -17,6 +17,14 @@ function trip(places: string[], end = '2026-11-01') {
   return createTrip(INITIAL_TRIPS_STATE, { name: 'T', destinationId: 'd', startDate: '2026-10-31', endDate: end }, places.map((id) => ({ id, category: 'canh' })), ids, 1).trip;
 }
 const dayOf = (t: ReturnType<typeof trip>, p: string, plan: ReturnType<typeof planDays>) => plan[t.items.find((i) => i.placeId === p)!.id]?.day;
+
+test('khách sạn không bị tự xếp như chuyến ghé tham quan ngắn', () => {
+  const t0 = trip(['a']);
+  const t = { ...t0, items: t0.items.map(i => ({ ...i, type: 'lodging' as const })) };
+  const r = planPreview(t, coordOf, HUB, () => 30);
+  assert.deepEqual(r.plan, {});
+  assert.equal(r.deferred[0]?.reason, 'stay');
+});
 
 test('hai nơi sát nhau trong chuyến hai ngày nằm CÙNG ngày; ngày còn lại để trống và được báo', () => {
   const t = trip(['a', 'b']);
@@ -35,16 +43,18 @@ test('hai cụm xa nhau (hơn 20 km) tách sang hai ngày, không còn ngày tr�
 
 test('nơi chiếm cả ngày tự đứng một ngày; hết sức chứa thì sang ngày sau', () => {
   const t = trip(['a', 'b']);
-  const r = planPreview(t, coordOf, HUB, (id) => (id === 'a' ? 480 : 60));
+  const r = planPreview(t, coordOf, HUB, (id) => (id === 'a' ? 450 : 60));
   assert.equal(dayOf(t, 'a', r.plan), DAYS[0]);
   assert.equal(dayOf(t, 'b', r.plan), DAYS[1]);
 });
 
-test('quá nhiều cho số ngày: dồn vào ngày cuối và báo ngày quá tải, không bỏ mục', () => {
+test('quá nhiều cho số ngày: giữ phần dư ở Chưa có ngày, không ép quá tải hoặc làm mất mục', () => {
   const t = trip(['a', 'b', 'c'], '2026-10-31');
   const r = planPreview(t, coordOf, HUB, () => 200);
-  assert.equal(Object.keys(r.plan).length, 3);
-  assert.equal(r.days[0]?.overloaded, true);
+  assert.equal(Object.keys(r.plan).length, 1);
+  assert.equal(r.deferred.length, 2);
+  assert.equal(r.days[0]?.overloaded, false);
+  assert.equal(t.items.length, 3);
 });
 
 test('nơi thiếu thời lượng được đếm riêng, không tự gán thời lượng hiển thị', () => {
@@ -73,4 +83,36 @@ test('đổi ngày trong bản xem trước đánh số lại vị trí liên t�
   assert.equal(moved[t.items[1]!.id]?.day, DAYS[1]);
   assert.equal(moved[t.items[1]!.id]?.position, 0);
   assert.equal(moved[t.items[0]!.id]?.position, 0);
+});
+
+test('đổi ngày tính lại cả thời lượng, mục thiếu thời lượng và ngày trống', () => {
+  const t = trip(['a', 'b']);
+  const duration = (id: string) => id === 'a' ? 200 : null;
+  const base = planPreview(t, coordOf, HUB, duration);
+  const moved = withDayOverrides(t, base.plan, { [t.items[0]!.id]: DAYS[1]!, [t.items[1]!.id]: DAYS[1]! });
+  const result = summarizePlan(t, moved, duration);
+  assert.equal(result[0]?.empty, true);
+  assert.equal(result[0]?.knownMinutes, 0);
+  assert.equal(result[0]?.unknownCount, 0);
+  assert.equal(result[1]?.knownMinutes, 200);
+  assert.equal(result[1]?.unknownCount, 1);
+  assert.equal(result[1]?.itemIds.length, 2);
+});
+
+test('cung cần tự chốt không được tự xếp hoặc biến mất khỏi chuyến', () => {
+  const t = trip(['a', 'b']);
+  const manualId = t.items[0]!.id;
+  const before = structuredClone(t);
+  const result = planPreview(t, coordOf, HUB, () => null, new Set([manualId]));
+  assert.equal(result.plan[manualId], undefined);
+  assert.deepEqual(result.manualItemIds, [manualId]);
+  assert.equal(Object.keys(result.plan).length, 1);
+  assert.deepEqual(t, before);
+});
+
+test('mọi cung cần chốt tuyến: không tạo kế hoạch giả dù chuyến có ngày', () => {
+  const t = trip(['a']);
+  const result = planPreview(t, coordOf, HUB, () => null, new Set([t.items[0]!.id]));
+  assert.deepEqual(result.plan, {});
+  assert.equal(result.manualItemIds.length, 1);
 });

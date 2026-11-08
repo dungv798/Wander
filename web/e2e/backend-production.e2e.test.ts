@@ -40,12 +40,16 @@ test('backend production: CSP thật, bản đồ và API cùng origin, asset th
     const response = await page.goto(`${BACKEND}/#/`);
     assert.equal(response?.status(), 200);
     assert.ok(response?.headers()['content-security-policy']?.includes("default-src 'self'"));
-    await page.locator('.nh-title h1', { hasText: 'Đà Lạt' }).waitFor();
-    await page.locator('.home-map').scrollIntoViewIfNeeded();
-    await waitForNativeMap(page, '.home-map .mapcard');
+    await page.getByRole('heading', { name: 'Khám phá Việt Nam', exact: true }).waitFor();
+    await waitForNativeMap(page, '.shell-map-view'); // bản đồ chính của khung ứng dụng (không còn bản đồ nhúng ở trang chủ)
     assert.ok(!(await tileResponse instanceof Error), 'nền bản đồ tải được tile thật dưới CSP production');
     assert.equal(await page.locator('.tm-err, .tm-basemap-warning').count(), 0);
     assert.deepEqual(violations, []);
+    const catalog = await (await page.request.get(`${BACKEND}/api/catalog/destinations`)).json() as { destinations: { coverUrl: string }[] };
+    const localCovers = catalog.destinations.filter(destination => !/^https?:\/\//.test(destination.coverUrl)).length;
+    const detail = await (await page.request.get(`${BACKEND}/api/catalog/destinations/ha-giang`)).json() as { destination: { moments: { photo: { url: string } }[] } };
+    assert.ok(detail.destination.moments.some(moment => moment.photo.url.startsWith('https://images.unsplash.com/')), 'catalog có ảnh ngoài để kiểm đúng CSP của ghim ảnh');
+    await page.waitForFunction(minimum => Number(document.querySelector<HTMLElement>('.shell-map-view')?.dataset['thumbnails']) > minimum, localCovers, { timeout: 30000 });
     const owner = await createOwner({ withCode: true });
     await loginAs(page, owner.token);
     await page.goto(`${BACKEND}/#/security`);

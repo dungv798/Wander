@@ -1,4 +1,11 @@
 import { COPY } from '../const/copy.vi.ts';
+import { DISTANCE_COPY } from '../const/distance.copy.ts';
+import { fill } from '../const/copy.vi.ts';
+
+/** Quãng đường dưới một km giữ nhãn riêng để không làm tròn thành 0 km. */
+export function formatTravelDistance(km: number): string {
+  return km < 1 ? DISTANCE_COPY.underOne : fill(DISTANCE_COPY.kilometers, { km: Math.round(km) });
+}
 
 /** Tọa độ địa lý (độ). */
 export interface GeoPoint {

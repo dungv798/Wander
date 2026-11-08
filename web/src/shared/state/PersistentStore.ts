@@ -24,6 +24,16 @@ export type Sanitizer<T> = (raw: unknown) => T | null;
  * để ứng dụng không trắng trang vì một khóa localStorage sai. Có thay đổi từ tab khác thì nạp lại (không ghi đè lên nhau).
  */
 export class PersistentStore<T extends object> {
+  /** Đọc nguyên văn khóa cũ; chuỗi thuần và JSON đều giữ định dạng, kho bị chặn trả null. */
+  static readRaw(key: string, storage: Pick<KeyValueStorage, 'getItem'> | null = browserStorage()): string | null {
+    try { return storage?.getItem(key) ?? null; } catch { return null; }
+  }
+
+  /** Ghi nguyên văn cho khóa có sẵn; hết dung lượng không cản thao tác trong phiên. */
+  static writeRaw(key: string, value: string, storage: Pick<KeyValueStorage, 'setItem'> | null = browserStorage()): void {
+    try { storage?.setItem(key, value); } catch { /* Vẫn dùng trạng thái trong phiên hiện tại. */ }
+  }
+
   private state: T;
   private readonly listeners = new Set<() => void>();
   private readonly key: string;

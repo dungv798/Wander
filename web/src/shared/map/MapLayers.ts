@@ -2,6 +2,7 @@
 import { COPY } from '../const/copy.vi.ts';
 import { HALF } from '../const/math.const.ts';
 import { MAP } from './map.const.ts';
+import { loadThumbnailImage } from './loadThumbnailImage.ts';
 import { entranceCount } from './pinEntrance.ts';
 import { PIN_ENTRANCE } from './pinEntrance.const.ts';
 import { markerAccessibleName, markerFeatures, markerSnapshot, markerThumbnail, renderedImageCount, thumbnailCrop } from './nativeMarkers.ts';
@@ -50,7 +51,7 @@ export class MapLayers {
       const button = this.buttons.get(this.markerOrder[Math.max(0, Math.min(index, this.markerOrder.length - 1))]!);
       button?.focus(); button?.click();
     });
-    Object.assign(host.dataset, { pins: '0', clusters: '0', selected: '', features: '[]', thumbnails: '0', numbered: '0', renderedImages: '0' });
+    Object.assign(host.dataset, { pins: '0', clusters: '0', selected: '', features: '[]', thumbnails: '0', numbered: '0', renderedImages: '0', moving: '1' });
   }
 
   /** Gắn lớp khi nền tải xong; query native ưu tiên ghim trước cụm trên cùng điểm chạm. */
@@ -74,7 +75,8 @@ export class MapLayers {
         if (cluster?.geometry.type === 'Point') void this.expandCluster(Number(cluster.properties['cluster_id']), cluster.geometry.coordinates as [number, number]);
       }
     });
-    map.on('idle', () => this.snapshot());
+    map.on('movestart', () => { this.host.dataset['moving'] = '1'; });
+    map.on('idle', () => { this.host.dataset['moving'] = '0'; this.snapshot(); });
   }
 
   /** Hủy kết quả tải ảnh đến muộn trước khi GeoMap giải phóng WebGL. */
@@ -206,7 +208,7 @@ export class MapLayers {
     if (!map || !url || this.images.has(url) || this.loading.has(url)) return;
     this.loading.add(url);
     try {
-      const { data } = await map.loadImage(url);
+      const data = await loadThumbnailImage(map, url);
       if (this.dead || this.map !== map) return;
       const canvas = document.createElement('canvas');
       canvas.width = canvas.height = MAP.THUMB_PX;

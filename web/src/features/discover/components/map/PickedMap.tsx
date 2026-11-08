@@ -16,7 +16,7 @@ export function PickedMap({ dest, picked }: { readonly dest: string; readonly pi
   const place = usePlaceSheet();
   const markers = useMemo(() => numberedMarkers(picked), [picked]);
   return (
-    <div className="pad-x">
+    <div className="pad-x picked-map">
       <TerrainMapView className="mapcard mapcard-s" dest={dest} label={COPY.map.pickedTitle} markers={markers} insets={INSETS} fit={FIT} interactive={false} towns={false} onPin={(id) => place.open(id, { photoOrigin: mapPhotoOrigin(id, firstPhotoUrl(picked.find((p) => p.id === id)), '.mapcard-s') })} />
     </div>
   );

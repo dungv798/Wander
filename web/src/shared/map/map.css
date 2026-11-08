@@ -1,5 +1,6 @@
 /* Bản đồ MapLibre và lớp ghim native. Màu lấy từ token --map-* và token chung. */
 .tmroot { position: relative; overflow: hidden; isolation: isolate; background: var(--map-low); touch-action: none; user-select: none; -webkit-user-select: none; }
+.tmroot :is(.tm-err:not(.tm-degraded), .tm-loading) { inset: var(--map-content-top, 0px) var(--map-content-right, 0px) var(--map-content-bottom, 0px) var(--map-content-left, 0px); }
 .tm-static { touch-action: auto; }
 /* Nền WebGL phủ khung; nút +/− và ghi công theo token, ghim/nhãn dùng lớp native. */
 .tmroot .tm-gl, .tmroot .tm-gl.maplibregl-map { position: absolute; inset: 0; } /* thắng .maplibregl-map { position: relative } nạp sau */
@@ -7,6 +8,8 @@
 .tmroot .maplibregl-ctrl-group { border-radius: 22px; overflow: hidden; background: var(--glass); box-shadow: var(--sh-float); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .tmroot .maplibregl-ctrl-group button { width: 44px; height: 44px; }
 .tmroot .maplibregl-ctrl-attrib { font: 500 10px/1.4 var(--font-body); }
+.tmroot .maplibregl-ctrl-attrib::after { content: none; }
+.tmroot .maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button { min-height: 0; height: var(--fluent-sm); }
 /* Nhãn khoảng cách tuyến giữ HTML; ghim, cụm và tên do MapLibre vẽ. */
 .tm-labels { position: absolute; inset: 0; pointer-events: none; }
 .tm-seg-label { position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none; will-change: transform; }
@@ -21,7 +24,7 @@
 
 /* lỗi tải bản đồ: thông báo + nút thử lại */
 .tm-err { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: 10px; padding: 16px; text-align: center; background: var(--map-low); color: var(--ink); font-weight: 600; }
-.tm-err button { min-height: var(--tap); padding: 0 20px; border: 0; border-radius: var(--r-pill); background: var(--brand-2); color: var(--on-brand-2); font-weight: 700; }
+.tm-err button { min-height: var(--tap); padding: 0 20px; border: 1px solid var(--btn-edge); border-radius: var(--r-pill); background: var(--btn-bg); color: var(--ink); box-shadow: var(--btn-shadow); font-weight: 700; }
 /* Cảnh báo nền suy giảm chỉ chiếm nội dung, vẫn cho kéo bản đồ và chạm ghim bên dưới. */
 .tm-err.tm-degraded { inset: var(--s-3) var(--s-3) auto; padding: var(--s-3); gap: var(--s-2); border-radius: var(--r-sm); background: var(--glass); box-shadow: var(--sh-float); pointer-events: none; }
 .tm-degraded button { pointer-events: auto; }
@@ -35,8 +38,8 @@
 .tm-preview h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; height: var(--s-7); overflow: hidden; margin: 0; font-size: inherit; }
 .tm-preview p { margin: 0; font: var(--text-secondary); }
 .tm-preview-actions { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
-.tm-preview-actions button { min-height: var(--tap); flex: 1; border: 0; border-radius: var(--r-sm); background: var(--brand-2); color: var(--on-brand-2); font: inherit; cursor: pointer; }
-.tm-preview-actions button:last-child { background: var(--bg); color: var(--ink); }
+.tm-preview-actions button { min-height: var(--tap); flex: 1; border: 1px solid var(--btn-edge); border-radius: var(--r-pill); background: var(--btn-bg); color: var(--ink); box-shadow: var(--btn-shadow); font: var(--text-button); cursor: pointer; }
+.tm-preview-actions button:last-child { background: var(--control-surface); border-color: var(--control-edge); box-shadow: var(--control-inner-light); }
 
 /* Một ngón cuộn trang; handler MapLibre nhận hai ngón trên bản đồ nhúng. */
 .tm-cooperative { touch-action: pan-x pan-y; }

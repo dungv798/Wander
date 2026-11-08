@@ -1,0 +1,20 @@
+// Chụp Khoảnh khắc của một điểm đến (ảnh Unsplash hotlink) và màn xem lớn có ghi công. Cờ giới thiệu đặt TRƯỚC khi app chạy.
+import path from 'node:path';
+import { chromium } from 'playwright-core';
+const BASE = 'http://localhost:8787';
+const dest = process.argv[2] ?? 'ha-giang';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, locale: 'vi-VN' });
+await ctx.addInitScript((d) => { localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'); localStorage.setItem('wander.web.destination.v1', d); }, dest);
+const page = await ctx.newPage();
+await page.goto(`${BASE}/#/`);
+const head = page.getByText(/Khoảnh khắc ở/).first();
+await head.scrollIntoViewIfNeeded({ timeout: 20000 });
+await page.evaluate(() => window.scrollBy(0, 330));
+await page.waitForTimeout(5000);
+await page.screenshot({ path: path.resolve(`.tmp/walk/v-${dest}-khoanh-khac.png`) });
+await page.locator('.moment-card img, [class*=moment] img').first().click({ timeout: 5000 });
+await page.waitForTimeout(2500);
+await page.screenshot({ path: path.resolve(`.tmp/walk/v-${dest}-xem-lon.png`) });
+await browser.close();
+console.log('ok');

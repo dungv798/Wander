@@ -19,6 +19,6 @@ export function useBottomSheet(sheetRef: RefObject<HTMLElement | null>, handleRe
     const sheet = new BottomSheet(el, handle, { initial, onChange: (s, v) => cb.current(s, v) });
     return () => sheet.destroy();
     // chỉ dựng lại khi bật/tắt; nấc khởi tạo chỉ dùng lần đầu
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Hai ref giữ nguyên phần tử; initial chỉ dùng lúc dựng, onChange luôn lấy qua cb.
   }, [enabled]);
 }

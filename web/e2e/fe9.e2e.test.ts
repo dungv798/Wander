@@ -9,6 +9,8 @@ import { withAria } from './diag.ts';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { addDevice, api, createOwner, devicesOf, loginAs } from './backend.ts';
 import { seedIdentity, seedTrips, seededOf } from './seed.ts';
+import { waitForNativeMap } from './mapChecks.ts';
+import { ONBOARD_COPY } from '../src/features/onboarding/model/onboarding.copy.ts';
 
 let server: ViteDevServer;
 let browser: Browser;
@@ -74,6 +76,9 @@ test('Hôm nay: trước ngày đi báo còn mấy ngày; giả lập ngày 1 th
   await page.getByText(/Còn 3 ngày nữa/).waitFor();
   await page.getByLabel('Giả lập ngày').fill(await dayOf(page, 0));
   await page.getByRole('heading', { name: /Ngày 1 ·/ }).waitFor();
+  await waitForNativeMap(page, '.tmap-today');   // bản đồ tuyến THẬT của hôm nay (cùng kiểu/ghim/ghi công với bản đồ chuyến)
+  assert.equal(await page.locator('canvas.maplibregl-canvas').count(), 1, 'Hôm nay chỉ có một bản đồ, không giữ canvas ẩn của màn khác');
+  assert.match((await page.locator('.tmap-today .maplibregl-ctrl-attrib').textContent()) ?? '', /OpenStreetMap/, 'ghi công dữ liệu bản đồ');
   const links = page.locator('a.maplink');
   assert.ok((await links.count()) >= 1, 'địa điểm có tọa độ có liên kết mở bản đồ');
   assert.match((await links.first().getAttribute('href')) ?? '', /^https:\/\/www\.google\.com\/maps\/dir\/\?api=1&destination=[\d.]+,[\d.]+$/);
@@ -151,7 +156,7 @@ test('Cài đặt: đổi tên thiết bị (kiểm rỗng, lưu ở máy chủ)
   assert.equal((await devicesOf(owner.token))[0]?.name, 'Điện thoại của Dũng');
   await page.goto(`${baseUrl}/#/settings`);
   await page.getByRole('button', { name: 'Xem lại giới thiệu' }).click();
-  await page.getByRole('heading', { name: 'Wander' }).first().waitFor(); // cảnh đầu của giới thiệu bốn cảnh (logo Wander là h1)
+  await page.getByRole('heading', { name: ONBOARD_COPY.titles[0].join(' '), exact: true }).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });
@@ -191,7 +196,7 @@ test('hết phiên nhánh B (đã bỏ qua mã, lần cuối chỉ có một thi
   await page.getByRole('dialog').getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
   await page.getByText(/chuyến đi cũ sẽ mất vĩnh viễn/).waitFor();
   await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
-  await page.locator('.thead h1').waitFor();
+  await page.locator('.tcc-in h1').waitFor();
   assert.deepEqual(errors.filter((e) => !/status of 401/.test(e)), []); // 401 là phản hồi đúng khi máy bị thu hồi
   await ctx.close();
 });

@@ -1,19 +1,23 @@
-import { COPY } from '../../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../../shared/const/routes.const.ts';
 import { navigate } from '../../../../shared/router/hashRoute.ts';
-import { Icon } from '../../../../shared/ui/Icon.tsx';
+import { BrandMark } from '../../../../shared/ui/BrandMark.tsx';
 import { HOME_COPY } from '../../model/home.copy.ts';
 import { SearchBox } from './SearchBox.tsx';
 
-/** Chung thương hiệu và phân cấp tiêu đề cho hai trạng thái; tìm địa điểm khi đã có thành phố. */
+/**
+ * Đầu trang chủ gọn: dấu Wander + tên điểm đến (nếu đã chọn, kèm nút đổi) rồi thanh tìm.
+ * Chưa chọn điểm đến thì tiêu đề chỉ dành cho trình đọc màn hình (hero ngay dưới mới là tiêu điểm thị giác).
+ */
 export function HomeHeader({ city }: { readonly city?: string }) {
   return <>
     <header className="nh-head">
-      <p className="nh-brand"><Icon name="compass" /><span>{COPY.brand.name}</span></p>
-      <div className="nh-title">
-        <h1>{city ?? COPY.destinations.title}</h1>
-        {city ? <button className="pill" type="button" onClick={() => navigate(VIEW.DESTINATIONS)}>{HOME_COPY.change}</button> : null}
-      </div>
+      <BrandMark className="nh-brand" />
+      {city ? (
+        <div className="nh-title">
+          <h1>{city}</h1>
+          <button className="pill" type="button" onClick={() => navigate(VIEW.DESTINATIONS)}>{HOME_COPY.change}</button>
+        </div>
+      ) : <h1>{HOME_COPY.countryTitle}</h1>}
     </header>
     <SearchBox scope={city ? 'places' : 'destinations'} city={city} />
   </>;

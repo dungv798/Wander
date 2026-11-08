@@ -153,7 +153,6 @@ function PrepareCard() {
       ) : <p className="note">{organizer ? T.view.prepareEmpty : T.view.prepareEmptyMember}</p>}
       <div className="two">
         {items.length || organizer ? <Button kind="ghost" icon="check" onClick={() => setOverlay({ kind: 'checklist' })}>{T.view.prepareOpen}</Button> : null}
-        <Button kind="ghost" icon="users" onClick={() => setOverlay({ kind: 'people' })}>{trip.memberCount > 1 ? fill(COLLAB_COPY.people.open, { n: trip.memberCount }) : T.create.invite}</Button>
       </div>
       {organizer || requests.data?.length ? <Button kind="ghost" block icon="flag" onClick={() => setOverlay({ kind: 'requests' })}>{fill(organizer ? COLLAB_COPY.requests.open : COLLAB_COPY.requests.openMine, { n: pending })}</Button> : null}
     </section>

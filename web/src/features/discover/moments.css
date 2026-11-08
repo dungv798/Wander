@@ -6,7 +6,7 @@
 .moment-copy p { margin: 0; font: var(--text-body); }
 .moment-copy .chip { font: var(--text-secondary); background: var(--surface-2); color: var(--muted); }
 .moment-filters .chip { flex-shrink: 0; min-height: var(--tap); background: var(--surface); color: var(--ink); }
-.moment-filters .chip[aria-pressed='true'] { background: var(--brand-ink); color: var(--on-photo); }
+.moment-filters .chip[aria-pressed='true'] { background: var(--control-selected); color: var(--ink); border-color: var(--control-selected-edge); }
 .moment-viewer { padding: var(--s-4); }
 .moment-viewer > img { width: 100%; height: auto; max-height: var(--moment-viewer-height); object-fit: contain; }
 .moment-viewer .credit-pill { position: static; max-width: 100%; margin: 0; border-radius: var(--r-sm); overflow-wrap: anywhere; background: var(--surface-2); color: var(--ink); }

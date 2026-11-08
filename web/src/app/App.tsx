@@ -1,12 +1,13 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { COPY } from '../shared/const/copy.vi.ts';
 import { HIDE_TABBAR_ALWAYS, HIDE_TABBAR_ON_PHONE, VIEW } from '../shared/const/routes.const.ts';
 import { useIsWide } from '../shared/hooks/useMediaQuery.ts';
 import { navigate, replaceRoute, useRoute } from '../shared/router/hashRoute.ts';
 import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
-import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, HomeScreen, PickedScreen, PlaceSheetProvider, useDiscover } from '../features/discover/index.ts';
-import type { AddingMode, PlaceView } from '../features/discover/index.ts';
+import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, useDiscover } from '../features/discover/index.ts';
+import type { AddingMode, PlaceView, SheetMode } from '../features/discover/index.ts';
+import { Icon } from '../shared/ui/Icon.tsx';
 import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
 import { SettingsScreen } from '../features/settings/index.ts';
 import { OnboardScreen, OnboardingProvider, useOnboarding } from '../features/onboarding/index.ts';
@@ -16,6 +17,7 @@ import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
 import { initializeLook } from './look.ts';
 import { RouteEscape } from './RouteEscape.tsx';
+import { DeckSpotlightProvider } from '../features/discover/index.ts';
 
 void initializeLook();
 
@@ -77,17 +79,33 @@ function Shell() {
   const pickedCount = usePickedCount();
   const [create, setCreate] = useState<readonly PlaceView[] | null>(null);
   const hideBar = HIDE_TABBAR_ALWAYS.includes(route.view) || (!wide && HIDE_TABBAR_ON_PHONE.includes(route.view));
+  const onMap = SHELL_MAP.VISIBLE_VIEWS.includes(route.view);
+  const mapSheet = onMap && route.view !== VIEW.DECK;
+  // Bản đồ khung chỉ tồn tại ở các màn nằm trên nó (Khám phá/Điểm đến/Đã chọn/Chuyến đi): bộ thẻ, chuyến chi tiết, Hôm nay, cài đặt… không giữ canvas WebGL ẩn.
+  // Chế độ tờ chỉ có nghĩa trong màn đã đặt nó: đổi màn thì tờ tự mở lại (không cần effect).
+  const [sheetChoice, setSheetChoice] = useState<{ readonly view: string; readonly mode: SheetMode }>({ view: route.view, mode: 'open' });
+  const sheet: SheetMode = sheetChoice.view === route.view ? sheetChoice.mode : 'open';
+  const setSheet = useCallback((mode: SheetMode): void => setSheetChoice({ view: route.view, mode }), [route.view]);
   useEffect(() => {
     if ((route.view === VIEW.DEST || route.view === VIEW.DECK) && route.id && route.id !== currentDestId && destinations.some((destination) => destination.id === route.id)) select(route.id);
   }, [route.view, route.id, currentDestId, destinations, select]);
   const destId = route.id ?? currentDestId;
+  const sheetValue = useMemo(() => ({ mode: sheet, setMode: setSheet }), [sheet, setSheet]);
   return (
-    <div className="app">
+    <ShellSheetContext.Provider value={sheetValue}>
+    <div className="app" data-surface={mapSheet ? 'sheet' : onMap ? 'deck' : 'page'} data-sheet={sheet}>
+      {onMap ? <ShellMap view={route.view} sheet={sheet} /> : null}
+      {onMap || route.view === VIEW.TRIP ? <MapChrome /> : null}
+      {mapSheet ? (
+        <button className="sheet-toggle" type="button" aria-expanded={sheet === 'open'} aria-label={sheet === 'open' ? COPY.map.sheetCollapse : COPY.map.sheetExpand} onClick={() => setSheet(sheet === 'open' ? 'peek' : 'open')}>
+          <Icon name="chevron-down" />
+        </button>
+      ) : null}
       <ScreenHost view={route.view} routeKey={`${route.view}|${route.id ?? ''}`} noBar={hideBar}>
         <RouteEscape view={route.view} />
         {route.view === VIEW.ONBOARD ? <OnboardScreen /> : null}
         {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<ScreenSkeleton />}><DestinationPickerScreen initialScope={route.id} /></Suspense> : null}
-        {route.view === VIEW.EXPLORE ? <HomeScreen key={currentDestId} destId={currentDestId} /> : null}
+        {route.view === VIEW.EXPLORE ? <HomeScreen /> : null}
         {route.view === VIEW.DEST ? <DestScreen destId={destId} onCreate={() => setCreate([])} /> : null}
         {route.view === VIEW.DECK ? <DeckRoute key={destId} destId={destId} tripId={route.sub} /> : null}
         {route.view === VIEW.PICKED ? <PickedScreen key={currentDestId} destId={currentDestId} onSave={setCreate} /> : null}
@@ -101,9 +119,10 @@ function Shell() {
         {route.view === VIEW.JOIN && route.id ? <JoinScreen code={route.id} /> : null}
         {route.view === VIEW.TRIP && route.id ? <TripScreen tripId={route.id} sub={route.sub} /> : null}
       </ScreenHost>
-      {hideBar ? null : <TabBar current={route.view} wide={wide} pickedCount={pickedCount} />}
-      {create ? <CreateTripSheet destId={currentDestId} picked={create.map((p) => ({ id: p.id, category: p.category, name: p.name }))} onClose={() => setCreate(null)} /> : null}
+      {hideBar ? null : <TabBar current={route.view} wide={wide} pickedCount={pickedCount} onCreate={() => setCreate([])} />}
+      {create ? <CreateTripSheet destId={currentDestId} picked={create} onClose={() => setCreate(null)} /> : null}
     </div>
+    </ShellSheetContext.Provider>
   );
 }
 
@@ -113,17 +132,21 @@ export function App() {
     <ErrorBoundary>
       <DiscoverProvider>
         <CurrentDestinationProvider>
+          <DiscoveryTopicProvider>
           <OnboardingProvider>
             <ToastProvider>
               <IdentityProvider>
                 <TripsProvider>
                   <PlaceSheetProvider>
+                    <DeckSpotlightProvider>
                     <Shell />
+                    </DeckSpotlightProvider>
                   </PlaceSheetProvider>
                 </TripsProvider>
               </IdentityProvider>
             </ToastProvider>
           </OnboardingProvider>
+          </DiscoveryTopicProvider>
         </CurrentDestinationProvider>
       </DiscoverProvider>
     </ErrorBoundary>

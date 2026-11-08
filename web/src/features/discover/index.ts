@@ -6,6 +6,13 @@ export { PlaceSheetProvider, usePlaceSheet } from './hooks/PlaceSheetProvider.ts
 export type { PlaceSlot } from './hooks/PlaceSheetProvider.tsx';
 export { useDestination } from './hooks/useDestination.ts';
 export { HomeScreen } from './components/HomeScreen.tsx';
+export { ShellMap } from './components/ShellMap.tsx';
+export { MapChrome } from './components/MapChrome.tsx';
+export { DiscoveryTopicProvider } from './hooks/DiscoveryTopicProvider.tsx';
+export { DeckSpotlightProvider } from './hooks/DeckSpotlightProvider.tsx';
+export { ShellSheetContext } from './hooks/ShellSheetProvider.tsx';
+export type { SheetMode } from './hooks/ShellSheetProvider.tsx';
+export { SHELL_MAP } from './model/shellMap.const.ts';
 export { DestScreen } from './components/DestScreen.tsx';
 export { DeckScreen } from './components/DeckScreen.tsx';
 export type { AddingMode } from './model/addingMode.ts';
@@ -17,3 +24,4 @@ export { hubMarker, placeMarkers } from './model/mapMarkers.ts';
 export { pickedOf } from './model/discoverState.ts';
 export type { DestinationDetail, PlaceView, CategoryCode } from './model/Catalog.types.ts';
 export type { CatalogRepository } from './api/CatalogRepository.ts';
+export { HERO_PHOTOS } from './model/heroPhotos.const.ts';

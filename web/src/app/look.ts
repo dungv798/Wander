@@ -17,6 +17,8 @@ export function readClassicLook(location: Pick<Location, 'search' | 'hash'>, sto
 
 /** Đặt chế độ trước lần render đầu; chỉ tải CSS và font cũ khi PO chọn classic. */
 export function initializeLook(): void {
+  // Chạy trước React; giữ chuỗi classic và removeItem khi URL tắt chế độ cũ.
+  // PersistentStore chưa có cổng xóa khóa, nên giữ truy cập này để tương thích dữ liệu cũ.
   let storage: Storage | null = null;
   try { storage = window.localStorage; } catch { /* URL vẫn hoạt động khi kho bị chặn. */ }
   if (!readClassicLook(window.location, storage)) return;

@@ -22,6 +22,22 @@ function focusableIn(panel: HTMLElement): HTMLElement[] {
   return [...panel.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((el) => el.offsetParent !== null);
 }
 
+/** Xử lý bàn phím của đúng tờ chứa DOM đích; portal con có bẫy focus riêng. */
+function sheetKey(event: KeyboardEvent<HTMLDivElement>, panel: HTMLElement | null, drawer: boolean, onClose: () => void): void {
+  if (!(event.target instanceof Node) || !event.currentTarget.contains(event.target)) return;
+  if (event.key === 'Escape') {
+    event.preventDefault(); event.stopPropagation(); onClose();
+    return;
+  }
+  if (event.key !== 'Tab' || drawer || !panel) return;
+  const items = focusableIn(panel), first = items[0], last = items[items.length - 1];
+  if (!first || !last) return;
+  const active = document.activeElement;
+  if (!panel.contains(active)) { event.preventDefault(); first.focus(); }
+  else if (event.shiftKey && active === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && active === last) { event.preventDefault(); first.focus(); }
+}
+
 /**
  * Tờ phủ dưới/hộp thoại giữa/ngăn kéo phải. Có bẫy focus, Esc đóng, chạm nền đóng và trả focus về nơi mở (a11y, chuẩn FE §2).
  * Ngăn kéo không chặn nền nên không bẫy focus và không đóng khi chạm nền.
@@ -45,29 +61,7 @@ export function Sheet({ label, onClose, asDrawer = false, full = false, children
 
   /** Esc đóng; Tab xoay vòng trong hộp thoại (không áp dụng cho ngăn kéo). */
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      e.stopPropagation();
-      onClose();
-      return;
-    }
-    const panel = panelRef.current;
-    if (e.key !== 'Tab' || drawer || !panel) return;
-    const items = focusableIn(panel);
-    const first = items[0];
-    const last = items[items.length - 1];
-    if (!first || !last) return;
-    const active = document.activeElement;
-    if (!panel.contains(active)) {
-      e.preventDefault();
-      first.focus();
-    } else if (e.shiftKey && active === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && active === last) {
-      e.preventDefault();
-      first.focus();
-    }
+    sheetKey(e, panelRef.current, drawer, onClose);
   };
 
   return createPortal(

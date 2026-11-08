@@ -14,7 +14,7 @@ import { useAttemptLock, useIdentity } from '../hooks/identityContext.ts';
 import { RetryState } from './SecurityScreenContent.tsx';
 import { recoverySession } from '../hooks/issueSpecs.ts';
 import { useReportError } from '../hooks/useReportError.ts';
-import { IDENTITY } from '../model/identity.const.ts';
+import { startPairingPoll } from '../model/pairingPoll.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
 import type { PairingRequest } from '../model/identity.types.ts';
 
@@ -88,38 +88,26 @@ function usePairingPoll(request: PairingRequest | null, setRequest: (r: PairingR
   const { actions } = useIdentity();
   const toast = useToast();
   const [joined] = useState(() => ({ done: false }));
+  const report = useReportError();
   useEffect(() => {
     if (!request) return undefined;
-    let stopped = false;
-    const timer = window.setInterval(() => {
-      if (stopped) return;
-      if (Date.now() > request.expiresAt) {
-        stopped = true;
-        setRequest(null);
-        setOutcome('expired');
-        return;
-      }
-      actions.pairingStatus(request).then((status) => {
-        if (stopped) return;
-        if (status === 'approved' && !joined.done) {
-          stopped = true;
-          joined.done = true; // một lần duy nhất (StrictMode chạy effect hai lần)
-          void actions.joinHere(request).then(() => {
-            toast.show(C.recover.recovered);
-            navigate(VIEW.TRIPS);
-          });
-        } else if (status === 'denied' || status === 'expired') {
-          stopped = true;
-          setRequest(null);
-          setOutcome(status);
-        }
-      }).catch(() => undefined);
-    }, IDENTITY.POLL_MS);
-    return () => {
-      stopped = true;
-      window.clearInterval(timer);
-    };
-  }, [request, actions, toast, joined, setRequest, setOutcome]);
+    const stop = startPairingPoll({
+      expiresAt: request.expiresAt,
+      readStatus: (signal) => actions.pairingStatus(request, signal),
+      approved: async () => {
+        if (joined.done) return;
+        joined.done = true; // nhận phiên duy nhất, kể cả khi effect được dựng lại
+        await actions.joinHere(request);
+        // KHÔNG chặn theo `disposed` ở đây: nhận phiên đổi danh tính nên chính màn này bị gỡ, nhưng toast và điều hướng vẫn phải chạy.
+        toast.show(C.recover.recovered);
+        navigate(VIEW.TRIPS);
+      },
+      finish: (status) => { setRequest(null); setOutcome(status); },
+      report,
+      joinFailed: () => { joined.done = false; setRequest(null); },
+    });
+    return () => { stop(); };
+  }, [request, actions, toast, joined, report, setRequest, setOutcome]);
 }
 
 /**

@@ -18,7 +18,8 @@ export function TripFormLayout({ children, actions }: { readonly children: React
       sheet.style.height = String(viewport?.height ?? window.innerHeight) + 'px';
       sheet.style.top = String(viewport?.offsetTop ?? 0) + 'px';
       sheet.style.bottom = 'auto';
-      panel.style.height = '94%';
+      sheet.style.setProperty('--form-viewport-height', String(viewport?.height ?? window.innerHeight) + 'px');
+      panel.style.height = 'auto';
       panel.style.overflow = 'hidden';
     };
     sync();
@@ -34,9 +35,9 @@ export function TripFormLayout({ children, actions }: { readonly children: React
     };
   }, []);
   return (
-    <div ref={ref} data-trip-form style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      <div className="pp" style={{ flex: 1, overflowY: 'auto', minHeight: 0, alignContent: 'start' }}>{children}</div>
-      <div className="stack pad-x" style={{ flexShrink: 0, paddingBlock: 'var(--s-2)', paddingBottom: 'max(var(--s-2), env(safe-area-inset-bottom))', background: 'var(--surface)' }}>{actions}</div>
+    <div ref={ref} data-trip-form>
+      <div className="pp trip-form-content">{children}</div>
+      <div className="trip-form-actions">{actions}</div>
     </div>
   );
 }

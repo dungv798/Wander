@@ -96,7 +96,7 @@ test('lưu lần đầu "Để sau": chuyến đi vẫn được lưu, danh tín
   await page.getByRole('heading', { name: 'Lưu chuyến đi của bạn' }).waitFor();
   await page.getByText(/Chưa có mã khôi phục thì mất máy là mất chuyến đi/).waitFor();
   await page.getByRole('button', { name: LATER }).click();
-  await page.locator('.thead h1').waitFor();
+  await page.locator('.tcc-in h1').waitFor();
   await page.getByRole('status').getByText(/Bạn chưa có mã khôi phục/).waitFor();
   const token = await tokenOf(page);
   assert.ok(token, 'đã có bí mật phiên');
@@ -112,7 +112,7 @@ test('mã khôi phục: hiện một lần, nhập lại 2 nhóm, sai thì "chư
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trips');
   await startSaving(page);
-  await page.getByRole('button', { name: 'Tạo danh tính và nhận mã' }).click();
+  await page.getByRole('button', { name: 'Nhận mã khôi phục' }).click();
   await page.getByRole('heading', { name: 'Mã khôi phục của bạn' }).waitFor();
   const code = await page.locator('.codebox span').allTextContents();
   assert.equal(code.length, 6);
@@ -129,7 +129,7 @@ test('mã khôi phục: hiện một lần, nhập lại 2 nhóm, sai thì "chư
   await answerChallenge(page, code);
   await dialog.getByRole('heading', { name: 'Đã lưu mã khôi phục' }).waitFor();
   await page.getByRole('button', { name: 'Xong, tôi đã lưu mã' }).click();
-  await page.locator('.thead h1').waitFor();
+  await page.locator('.tcc-in h1').waitFor();
   assert.equal(await hasCode(token), true);
   const dump = await page.evaluate(() => JSON.stringify(Object.fromEntries(Object.entries(localStorage))));
   for (const group of code) assert.ok(!dump.includes(group), 'không nhóm mã nào nằm trong dữ liệu lưu');
@@ -141,7 +141,7 @@ test('hủy giữa chừng khi hiện mã: không tạo chuyến đi và mã ch�
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trips');
   await startSaving(page);
-  await page.getByRole('button', { name: 'Tạo danh tính và nhận mã' }).click();
+  await page.getByRole('button', { name: 'Nhận mã khôi phục' }).click();
   await page.getByRole('heading', { name: 'Mã khôi phục của bạn' }).waitFor();
   const token = (await tokenOf(page)) ?? '';
   await page.getByRole('button', { name: 'Hủy, chưa lưu chuyến đi' }).click();

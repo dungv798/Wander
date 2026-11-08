@@ -4,7 +4,7 @@
 export type ErrorAction = 'retry' | 'security' | 'trips' | 'recover' | 'reload' | 'close';
 
 /** Nhóm lỗi có chung lời nhắc. */
-export type ErrorKind = 'invalid' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'trashFull' | 'invite' | 'denied' | 'rule' | 'tooLarge' | 'network' | 'internal';
+export type ErrorKind = 'invalid' | 'cover' | 'referenceCost' | 'matchMismatch' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'trashFull' | 'invite' | 'denied' | 'rule' | 'tooLarge' | 'network' | 'internal';
 
 /** Lời nhắc của một nhóm lỗi. */
 export interface ErrorInfo {
@@ -16,6 +16,9 @@ export interface ErrorInfo {
 /** Lời nhắc theo nhóm. */
 export const ERROR_INFO: Readonly<Record<ErrorKind, ErrorInfo>> = {
   invalid: { title: 'Dữ liệu chưa hợp lệ', text: 'Kiểm tra lại các ô vừa nhập rồi thử lại. Nếu vẫn lỗi, hãy báo kèm mã bên dưới.', action: 'close' },
+  cover: { title: 'Bìa chưa hợp lệ', text: 'Hãy chọn ảnh hoặc màu bìa có sẵn rồi thử lại.', action: 'close' },
+  referenceCost: { title: 'Giá tham khảo chưa hợp lệ', text: 'Chỉ nhập giá tham khảo khi đã chọn “Đã bao gồm”. Hãy chọn ô này hoặc xóa giá tham khảo rồi thử lại.', action: 'close' },
+  matchMismatch: { title: 'Số đã chọn không khớp', text: 'Yêu cầu đã bị từ chối. Hãy tạo yêu cầu mới và kiểm tra số trên hai thiết bị trước khi xác nhận.', action: 'close' },
   expired: { title: 'Phiên đã hết', text: 'Wander cần bạn mở lại chuyến đi trên máy này.', action: 'recover' },
   stepUp: { title: 'Cần xác thực lại', text: 'Thao tác này cần xác thực lại bằng thiết bị tin cậy khác hoặc mã khôi phục.', action: 'security' },
   rate: { title: 'Bạn thao tác hơi nhanh', text: 'Chờ một lúc rồi thử lại. Dữ liệu của bạn không mất.', action: 'close' },
@@ -39,6 +42,9 @@ export const CODE_KIND: ReadonlyMap<string, ErrorKind> = new Map(
     [
       ['expired', ['UNAUTHENTICATED', 'INVALID_SESSION_TOKEN']],
       ['stepUp', ['STEP_UP_REQUIRED']],
+      ['cover', ['INVALID_COVER']],
+      ['referenceCost', ['REFERENCE_REQUIRES_INCLUDED']],
+      ['matchMismatch', ['MATCH_MISMATCH']],
       ['rate', ['RATE_LIMITED']],
       ['recovery', ['INVALID_CODE', 'CODE_ALREADY_USED', 'CODE_CHANGED', 'INVALID_ATTEMPT', 'ATTEMPT_EXPIRED', 'INVALID_PAIRING_CODE', 'INVALID_REPLACEMENT', 'INVALID_OPERATION', 'INVALID_APPROVAL_CODE']],
       ['conflict', ['CONCURRENT_MODIFICATION']],

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 import { COPY } from '../../../shared/const/copy.vi.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
@@ -7,29 +7,33 @@ import { useDiscover } from '../hooks/DiscoverProvider.tsx';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import type { DestinationDetail } from '../model/Catalog.types.ts';
 import { placeById } from '../model/destinationQueries.ts';
+import { DEST_COPY } from '../model/dest.copy.ts';
 import { DISCOVER_COPY } from '../model/discover.copy.ts';
-import { About, DataCredits, EditorialRate, Highlights, OsmLink, QuickFacts, SeasonMonths, Tips, TimeOfDay } from './place/PlaceBody.tsx';
-import { PlaceGallery } from './place/PlaceGallery.tsx';
-import { PlaceRouteMap } from './place/PlaceRouteMap.tsx';
-import { PlaceDisclosure } from './place/PlaceDisclosure.tsx';
+import { OsmLink } from './place/PlaceBody.tsx';
+import { PlaceHead } from './place/PlaceHead.tsx';
+import { PlaceMedia } from './place/PlaceMedia.tsx';
+import { PlaceInformation } from './place/PlaceInformation.tsx';
+import { PlaceTripAction } from './place/PlaceTripAction.tsx';
 import '../place.css';
-
-/** Thẻ đánh giá tải lười: không tính vào JS ban đầu (ngân sách 170 KB). */
-const PlaceRatingCard = lazy(() => import('../../rating/index.ts').then((m) => ({ default: m.PlaceRatingCard })));
 
 /** Nội dung chi tiết một địa điểm, thông tin thực dụng trước: ảnh, về nơi này, thông số, có gì, buổi/mùa/mẹo (gập), đường đi, rồi ý kiến biên tập, đánh giá và ghi công. */
 function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDetail; readonly placeId: string; readonly inDeck: boolean }) {
   const { state, actions } = useDiscover();
   const sheet = usePlaceSheet();
   const goRef = useRef<(delta: number) => void>(() => undefined);
+  /** Thanh ảnh đăng ký hàm chuyển ảnh để phím ←/→ của tờ dùng được. */
+  const registerGo = useCallback((go: (delta: number) => void): void => { goRef.current = go; }, []);
   const place = placeById(dest, placeId);
   if (!place) return null;
   const slot = sheet.slot;
   const canDecide = inDeck && !slot?.noDecide && !slot?.cta && !state.decisions[place.id];
+  /** Ngoài bộ thẻ (Điểm đến, Đã chọn, ghim bản đồ) mà không có hành động riêng của chuyến: nút "Chọn"/"Đã chọn" bật/tắt như thẻ ở danh sách. */
+  const canToggle = !inDeck && !slot?.noDecide && !slot?.cta;
+  const chosen = state.decisions[place.id] === 'like';
 
   /** ←/→ chuyển ảnh khi đang xem chi tiết (người dùng bàn phím). */
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
-    if ((e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('.tmroot')) return;
+    if ((e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, textarea, select, [contenteditable="true"], .tmroot')) return;
     e.preventDefault();
     goRef.current(e.key === 'ArrowRight' ? 1 : -1);
   };
@@ -43,25 +47,22 @@ function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDet
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- bắt phím mũi tên nổi lên từ phần tử đang focus bên trong tờ chi tiết
     <div className="place-content" onKeyDown={onKeyDown}>
       <div className="place-scroll">
-        <PlaceGallery place={place} onClose={sheet.close} registerGo={(go) => (goRef.current = go)} />
-        <div className={`pp cat-${place.category}`}>
-          {slot?.extra}
-          <About place={place} />
-          <QuickFacts place={place} />
-          <Highlights place={place} />
-          <TimeOfDay place={place} />
-          <SeasonMonths place={place} />
-          <Tips place={place} />
-          <PlaceDisclosure title={COPY.place.howToGet} icon="route"><PlaceRouteMap dest={dest} place={place} /></PlaceDisclosure>
-          <EditorialRate place={place} />
-          <Suspense fallback={null}><PlaceRatingCard key={place.id} placeId={place.id} /></Suspense>
-          <DataCredits place={place} />
-
+        <PlaceHead dest={dest} place={place} onClose={sheet.close} />
+        <div className="pd-layout">
+          <PlaceMedia place={place} registerGo={registerGo} />
+          <PlaceInformation dest={dest} place={place} extra={slot?.extra} mapLink={canToggle} />
         </div>
       </div>
       <div className="cta-bar place-actions">
-        <OsmLink place={place} />
+        <span className="place-action-title">{place.name}</span>
+        {canToggle ? null : <OsmLink place={place} />}
         {slot?.cta}
+        {canToggle ? (
+          <Button kind="ghost" icon={chosen ? 'check' : 'plus'} aria-pressed={chosen} onClick={() => (chosen ? actions.unpick(place.id) : actions.decide(place.id, 'like'))}>
+            {chosen ? DEST_COPY.chosen : DISCOVER_COPY.pick}
+          </Button>
+        ) : null}
+        {canToggle ? <PlaceTripAction destId={dest.id} place={place} /> : null}
         {canDecide ? <>
           <Button kind="ghost" icon="x" onClick={() => decide('skip')}>
             {COPY.place.skipThis}
@@ -82,7 +83,7 @@ export function PlaceSheet({ dest, inDeck }: { readonly dest: DestinationDetail;
   const place = placeById(dest, placeId);
   if (!place) return null;
   return (
-    <Sheet label={place?.name ?? COPY.place.about} onClose={close} asDrawer={inDeck}>
+    <Sheet label={place?.name ?? COPY.place.about} onClose={close}>
       <PlaceContent key={placeId} dest={dest} placeId={placeId} inDeck={inDeck} />
     </Sheet>
   );

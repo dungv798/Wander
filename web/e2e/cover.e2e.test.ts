@@ -71,30 +71,31 @@ test('Organizer đổi gradient, Hoàn tác, còn sau tải lại; thành viên 
   try {
     const page = await open(ctx, organizer.token, id);
     await choose(page, 'Nắng sớm');
-    await page.getByRole('tab', { name: 'Ngày 1', exact: true }).click();
+    await page.getByRole('tab', { name: 'Lịch', exact: true }).click();
+    await page.getByRole('tab', { name: 'Ngày 1', exact: true }).waitFor();
     assert.equal(await page.locator('.toast').getByRole('button', { name: 'Hoàn tác', exact: true }).isVisible(), true);
     await page.locator('.toast').getByRole('button', { name: 'Hoàn tác', exact: true }).click();
-    await page.waitForFunction(() => document.querySelector('.trip-head-cover')?.getAttribute('data-cover') === 'photo');
+    await page.waitForFunction(() => document.querySelector('.trip-cover-card')?.getAttribute('data-cover') === 'photo');
     await page.getByRole('tab', { name: 'Tổng quan', exact: true }).click();
     await choose(page, 'Nắng sớm');
     await page.reload();
-    await page.locator('.trip-head-cover[data-cover="gradient"]').waitFor();
+    await page.locator('.trip-cover-card[data-cover="gradient"]').waitFor();
     assert.deepEqual(((await api('GET', `/api/trips/${id}`, organizer.token)).body?.['trip'] as { cover: unknown }).cover, { kind: 'gradient', ref: 'cover-1' });
     const memberContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
     try {
       const guest = await open(memberContext, member.token, id);
-      await guest.locator('.trip-head-cover[data-cover="gradient"]').waitFor();
+      await guest.locator('.trip-cover-card[data-cover="gradient"]').waitFor();
       assert.equal(await guest.getByRole('button', { name: 'Tuỳ chỉnh bìa', exact: true }).count(), 0);
     } finally { await memberContext.close(); }
     await page.bringToFront();
     await choose(page, 'Tự động');
     await page.reload();
-    await page.locator('.trip-head-cover[data-cover="photo"] img').waitFor();
+    await page.locator('.trip-cover-card[data-cover="photo"] img').waitFor();
     assert.equal(((await api('GET', `/api/trips/${id}`, organizer.token)).body?.['trip'] as { cover: unknown }).cover, null);
   } finally { await ctx.close(); }
 });
 
-test('số tiền không có trang trí gạch chân; cuối nội dung và ghi chú Chi phí cuộn lên trên nút nổi', async () => {
+test('số tiền không có trang trí gạch chân; cuối nội dung và ghi chú Chi phí cuộn hết vào trong màn hình (không còn nút nổi che)', async () => {
   const organizer = await createOwner();
   const id = await seed(organizer.token);
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
@@ -109,11 +110,10 @@ test('số tiền không có trang trí gạch chân; cuối nội dung và ghi 
       const scroller = document.querySelector('.sheet-scroll');
       if (scroller) scroller.scrollTop = scroller.scrollHeight;
       const last = document.querySelector('.tbody > :last-child')?.getBoundingClientRect();
-      const button = document.querySelector('.float')?.getBoundingClientRect();
-      return last && button && last.bottom <= button.top;
+      return last && last.bottom <= window.innerHeight;
     });
-    const rects = await page.evaluate(() => ({ end: document.querySelector('.tbody > :last-child')!.getBoundingClientRect().bottom, note: document.querySelector('.trip-cost .note:last-of-type')!.getBoundingClientRect().bottom, button: document.querySelector('.float')!.getBoundingClientRect().top }));
-    assert.ok(rects.end <= rects.button, JSON.stringify(rects));
-    assert.ok(rects.note <= rects.button, JSON.stringify(rects));
+    const rects = await page.evaluate(() => ({ end: document.querySelector('.tbody > :last-child')!.getBoundingClientRect().bottom, note: document.querySelector('.trip-cost .note:last-of-type')!.getBoundingClientRect().bottom, height: window.innerHeight }));
+    assert.ok(rects.end <= rects.height, JSON.stringify(rects));
+    assert.ok(rects.note <= rects.height, JSON.stringify(rects));
   } finally { await ctx.close(); }
 });

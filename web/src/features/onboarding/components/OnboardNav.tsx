@@ -1,6 +1,7 @@
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { cssVars } from '../../../shared/lib/cssVars.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
+import { Button } from '../../../shared/ui/Button.tsx';
 import type { OnboardCue } from '../hooks/useOnboardFlow.ts';
 import { SCENES } from '../model/onboarding.const.ts';
 import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
@@ -23,19 +24,19 @@ export function OnboardNav({ scene, cue, onGo }: OnboardNavProps) {
   const last = scene === SCENES.length - 1;
   return (
     <nav className="ob-nav" aria-label={T.stepsLabel}>
-      <button type="button" className="ob-navbtn ob-back" disabled={scene === 0} onClick={() => onGo(scene - 1)}>
+      <Button kind="ghost" className="ob-navbtn ob-back" disabled={scene === 0} onClick={() => onGo(scene - 1)}>
         <Icon name="chevron-left" size="s" />
         {T.back}
-      </button>
+      </Button>
       <div className="ob-dots">
         {SCENES.map((kind, i) => (
           <button key={kind} type="button" className={dotClass(i === scene, cue)} style={i === scene && cue ? cssVars({ cue: cue.ms }) : undefined} aria-label={fill(T.stepLabel, { n: i + 1, name: T.sceneNames[i] ?? '' })} aria-current={i === scene ? 'step' : undefined} onClick={() => onGo(i)} />
         ))}
       </div>
-      <button type="button" className={`ob-navbtn ob-next${cue && cue.ms > 0 ? ' cue' : ''}`} style={last ? { visibility: 'hidden' } : undefined} disabled={last} onClick={() => onGo(scene + 1)}>
+      <Button kind="secondary" className={`ob-navbtn ob-next${cue && cue.ms > 0 ? ' cue' : ''}`} style={last ? { visibility: 'hidden' } : undefined} disabled={last} onClick={() => onGo(scene + 1)}>
         {T.next}
         <Icon name="chevron-left" size="s" className="flip" />
-      </button>
+      </Button>
     </nav>
   );
 }
