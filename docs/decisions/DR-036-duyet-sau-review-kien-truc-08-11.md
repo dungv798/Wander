@@ -18,3 +18,14 @@
 ## Còn mở (không quyết định thay PO)
 - RG-2, RG-4 (Replay test), RG-5, RG-6, RG-7; AD-17, AD-19; "chưa chắc ngày" so với R5.
 - Chưa có bài đo tải; đo heap thật khi có người dùng; lỗ hổng ArchUnit (xem báo cáo review) chưa thêm luật.
+
+## Bổ sung cùng ngày (PO trả lời sau khi commit)
+| Mã | Câu hỏi | Lựa chọn của PO | Hệ quả |
+|---|---|---|---|
+| DATA-1 | Commit dữ liệu catalog (~170 MiB: JSON, POI, 308 ảnh) | **Commit nguyên khối** | Đã commit `3502a01`; `.git` ~344 MiB; lịch sử không viết lại. |
+| DATA-2 | `docs/research` (~142 MiB) | **Chỉ commit phần nhỏ, ignore dữ liệu nặng** | Commit `480978d`; `.gitignore` các thư mục photo-fill, expansion, completion, photo-multisource và ảnh trong photo-candidates (vẫn còn trên đĩa). |
+| DATA-3 | `docs/design/liquid-review-2026-11-05` (418 MiB) và `web/spike` | **Ignore cả hai** | Đã vào `.gitignore`, không commit. |
+| PUSH-1 | Push `origin/main` | **Push ngay** | Push 6 commit (backend, web, tools, docs, data, research); không đẩy `.mcp.json`, `docs/UI-sample-2`, `tools/codex-mcp`, `tools/codex-skills`, `tools/claude-handoff`. |
+| DATE-1 | Công tắc "chưa chắc ngày" so với R5 | **Hoãn, giữ R5 hiện tại** | Chuyến vẫn luôn có ngày; quay lại sau phản hồi của nhóm thử. |
+| AD-17/19 | Công cụ trace; khung tích hợp ngoài, hàng đợi việc | **Giữ OPEN** | Chưa có nhu cầu thật; xét khi dựng quan sát AWS (T-14) hoặc N-1/N-3/N-4. |
+| NEXT-1 | Việc tiếp theo | **Chuẩn bị demo Render + Neon** | Theo `docs/release/huong-dan-release.html`; PO tự nhập secret, Claude không chạm credential. |
