@@ -1,8 +1,10 @@
 package com.wander.identity.domain.model;
 
+import com.wander.identity.domain.constant.IdentityConstants;
 import com.wander.identity.domain.rule.MatchChallenge;
 import com.wander.identity.domain.vocabulary.EventKind;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 /**
@@ -27,9 +29,16 @@ public final class IdentityModel {
             return new Session(UUID.randomUUID(), identityId, tokenHash, now, now, null, deviceName);
         }
 
-        /** Phiên còn hiệu lực (chưa bị thu hồi). */
-        public boolean isActive() {
-            return revokedAt == null;
+        /** Đã đủ lâu kể từ lần ghi {@code lastSeenAt} gần nhất để đáng ghi lại (giảm ghi DB mỗi yêu cầu). */
+        public boolean needsTouch(Instant now) {
+            return !lastSeenAt.plus(IdentityConstants.SESSION_TOUCH_INTERVAL_MINUTES, ChronoUnit.MINUTES).isAfter(now);
+        }
+
+        /** Phiên chưa bị thu hồi và chưa chạm hạn trượt hoặc hạn tuyệt đối tại thời điểm kiểm tra. */
+        public boolean isActive(Instant now) {
+            return revokedAt == null
+                    && lastSeenAt.plus(IdentityConstants.SESSION_IDLE_DAYS, ChronoUnit.DAYS).isAfter(now)
+                    && createdAt.plus(IdentityConstants.SESSION_ABSOLUTE_DAYS, ChronoUnit.DAYS).isAfter(now);
         }
     }
 

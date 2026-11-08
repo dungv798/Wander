@@ -9,6 +9,18 @@ import java.util.Set;
  */
 public final class IdentityConstants {
 
+    /** Số ngày không sử dụng tối đa của một phiên (hạn trượt). */
+    public static final int SESSION_IDLE_DAYS = 14;
+
+    /** Số ngày tồn tại tối đa của một phiên kể từ lúc tạo. */
+    public static final int SESSION_ABSOLUTE_DAYS = 90;
+
+    /**
+     * Khoảng tối thiểu giữa hai lần ghi {@code last_seen_at}: xác thực mỗi yêu cầu không còn kéo theo một lần ghi DB (tiết kiệm kết nối
+     * Neon). Rất nhỏ so với hạn trượt {@link #SESSION_IDLE_DAYS} nên hạn trượt không đổi về ý nghĩa.
+     */
+    public static final int SESSION_TOUCH_INTERVAL_MINUTES = 5;
+
     /** Bảng chữ Crockford base32 (không có I, L, O, U) để đọc và chép tay ít nhầm. */
     public static final String CODE_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 

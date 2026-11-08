@@ -6,7 +6,12 @@ spring:
       minimum-idle: 0
       idle-timeout: 60000
       keepalive-time: 0
-      connection-timeout: 30000
+      # Neon thức dậy mất vài giây; 15 s đủ cho cold start mà không giữ tới 17 thread chờ 30 s (rà kiến trúc 08/11/2026).
+      connection-timeout: 15000
+  jpa:
+    properties:
+      # Truy vấn không bao giờ treo vô hạn trên DB chia sẻ (mili giây).
+      jakarta.persistence.query.timeout: 15000
 server:
   tomcat:
     threads:

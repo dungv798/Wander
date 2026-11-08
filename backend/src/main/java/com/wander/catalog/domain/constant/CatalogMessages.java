@@ -5,6 +5,12 @@ package com.wander.catalog.domain.constant;
  * {@code %s} là chuỗi, {@code %d} là số nguyên.
  */
 public final class CatalogMessages {
+    /** Liên kết tác giả khoảnh khắc phải dùng https trên máy chủ Unsplash. */
+    public static final String MOMENT_AUTHOR_URL_INVALID = "Liên kết tác giả khoảnh khắc phải là địa chỉ https trên unsplash.com";
+    /** Giới hạn chú thích ảnh; tham số: số ký tự tối đa. */
+    public static final String PHOTO_CAPTION_TOO_LONG = "Chú thích ảnh không quá %d ký tự";
+    /** Liên kết ghi công tác giả không phải URL https an toàn. */
+    public static final String PHOTO_AUTHOR_URL_INVALID = "Liên kết tác giả phải là địa chỉ https hợp lệ";
 
     // ---- Điểm đến ----
     /** Điểm đến thiếu id, tên, vùng hoặc mô tả ngắn. */
@@ -51,6 +57,10 @@ public final class CatalogMessages {
     /** Địa điểm chưa có ảnh; tham số: mã địa điểm. */
     /** Địa điểm có quá nhiều ảnh; tham số: mã địa điểm, số ảnh tối đa. */
     public static final String PLACE_TOO_MANY_PHOTOS = "Địa điểm %s có quá %d ảnh";
+    /** Ảnh phải có đúng một nguồn. */
+    public static final String PHOTO_NEEDS_ONE_SOURCE = "Ảnh phải có đúng một nguồn: tệp cục bộ hoặc URL ngoài";
+    /** Máy chủ ảnh ngoài không được phép; tham số: URL. */
+    public static final String PHOTO_EXTERNAL_HOST_NOT_ALLOWED = "Máy chủ ảnh ngoài không được phép: %s";
     /** Khoảnh khắc thiếu một trường; tham số: nhãn trường. */
     public static final String MOMENT_FIELD_MISSING = "Khoảnh khắc thiếu %s";
     /** Nhãn các trường của khoảnh khắc. */
@@ -174,6 +184,29 @@ public final class CatalogMessages {
 
     /** Hai lịch mẫu cùng mã trong một điểm đến; tham số: mã điểm đến, mã lịch mẫu. */
     public static final String TEMPLATE_ID_DUPLICATED = "Điểm đến %s có hai lịch mẫu cùng mã: %s";
+
+    /** Nhãn địa chỉ của một cơ sở dịch vụ cụ thể. */
+    public static final String LABEL_VENUE_ADDRESS = "địa chỉ cơ sở";
+
+    /** Nhãn trường tùy chọn, chỉ nhận nội dung có nguồn của hồ sơ. */
+    public static final String LABEL_VENUE_PHONE = "số liên hệ";
+    public static final String LABEL_VENUE_HOURS = "giờ phục vụ";
+    public static final String LABEL_VENUE_PRICE_NOTE = "ghi chú mức giá";
+
+    /** Metadata dịch vụ phải có loại và ngày đối chiếu. */
+    public static final String VENUE_METADATA_INVALID = "Thông tin cơ sở thiếu loại hoặc ngày đối chiếu";
+
+    /** Không chấp nhận URL tùy ý hoặc liên kết chứa đăng nhập. */
+    public static final String VENUE_URL_INVALID = "Liên kết cơ sở phải là HTTPS hợp lệ";
+
+    /** Metadata dịch vụ phải khớp nhóm khám phá. */
+    public static final String VENUE_CATEGORY_INVALID = "Loại cơ sở không khớp loại địa điểm";
+
+    /** Mã dịch vụ lạ trong tệp catalog. */
+    public static final String VENUE_KIND_INVALID = "Loại cơ sở không hợp lệ: %s";
+
+    /** Thiếu ảnh bìa cục bộ; tham số: đường dẫn classpath và mã điểm đến. */
+    public static final String DESTINATION_PHOTO_FILE_MISSING = "Thiếu tệp ảnh %s của điểm đến %s";
 
     private CatalogMessages() {
     }

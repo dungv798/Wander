@@ -14,6 +14,26 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CatalogDomainTest {
+    @Test
+    void photographerProfileLinksAreOptionalAndSafe() {
+        assertThat(new Photo("a.jpg", "Author", "CC BY 4.0", "https://example.org/photo").authorUrl()).isEmpty();
+        assertThat(new Photo(null, "https://images.unsplash.com/photo-a", "Author", "Unsplash", "https://unsplash.com/photos/a", "", " https://unsplash.com/@author ").authorUrl())
+                .isEqualTo("https://unsplash.com/@author");
+        for (String invalid : List.of("javascript:alert(1)", "http://example.org/author", "https://user:pass@example.org/author", "https://")) {
+            assertThatThrownBy(() -> new Photo("a.jpg", null, "Author", "CC BY 4.0", "https://example.org/photo", "", invalid))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
+    }
+
+    @Test
+    void photoCaptionsAreOptionalAndBounded() {
+        assertThat(new Photo("test.jpg", "Tác giả", "CC BY 4.0", "https://example.org/photo").caption()).isEmpty();
+        assertThat(new Photo("test.jpg", null, "Tác giả", "CC BY 4.0", "https://example.org/photo", " Ảnh nguồn: 2006 ").caption())
+                .isEqualTo("Ảnh nguồn: 2006");
+        assertThatThrownBy(() -> new Photo("test.jpg", null, "Tác giả", "CC BY 4.0", "https://example.org/photo", "x".repeat(241)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
     private static Photo photo() {
         return new Photo("a-1.jpg", "Tác giả", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:A.jpg");
@@ -21,7 +41,21 @@ class CatalogDomainTest {
 
     private static Place place(String id, List<Photo> photos) {
         return new Place(id, "ha-giang", "Tên " + id, PlaceCategory.CANH, "Mèo Vạc", "Một câu điểm nhấn", "Giới thiệu", new GeoPoint(23.1, 105.3),
-                List.of(9, 10), "Tháng 9–10", "2 giờ", "Dễ", List.of("a", "b"), Verdict.MUST_SEE, "Lý do", Set.of(TimeSlot.MORNING), "Buổi sáng", List.of("mẹo"), photos, "Bài");
+                List.of(9, 10), "Tháng 9–10", "2 giờ", "Dễ", List.of("a", "b"), Verdict.MUST_SEE, "Lý do", Set.of(TimeSlot.MORNING), "Buổi sáng", List.of("mẹo"), photos, "Bài", null);
+    }
+
+    @Test
+    @DisplayName("ảnh ngoài (DR-034): đúng một nguồn, https và máy chủ trong danh sách cho phép; ghi công vẫn bắt buộc")
+    void externalPhotoRules() {
+        var ok = new Photo(null, "https://images.unsplash.com/photo-1?w=800", "Tác giả", "Giấy phép Unsplash", "https://unsplash.com/photos/abc?utm_source=wander");
+        assertThat(ok.isExternal()).isTrue();
+        assertThat(photo().isExternal()).isFalse();
+        assertThatThrownBy(() -> new Photo("a.jpg", "https://images.unsplash.com/photo-1", "T", "L", "https://x.org")).hasMessageContaining("đúng một nguồn");
+        assertThatThrownBy(() -> new Photo(null, null, "T", "L", "https://x.org")).hasMessageContaining("đúng một nguồn");
+        assertThatThrownBy(() -> new Photo(null, "https://evil.example/x.jpg", "T", "L", "https://x.org")).hasMessageContaining("không được phép");
+        assertThatThrownBy(() -> new Photo(null, "http://images.unsplash.com/x.jpg", "T", "L", "https://x.org")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Photo(null, "https://images.unsplash.com.evil.example/x.jpg", "T", "L", "https://x.org")).hasMessageContaining("không được phép");
+        assertThatThrownBy(() -> new Photo(null, "https://images.unsplash.com/x.jpg", "", "L", "https://x.org")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -63,7 +97,7 @@ class CatalogDomainTest {
     @Test
     @DisplayName("tháng ngoài 1..12 và mã không phải slug bị từ chối")
     void placeValidatesMonthsAndId() {
-        assertThatThrownBy(() -> new Place("ok-id", "ha-giang", "T", PlaceCategory.CANH, "K", "h", "", null, List.of(13), "m", "d", "Dễ", List.of(), Verdict.WORTH_IT, "r", Set.of(), "s", List.of(), List.of(photo()), "w"))
+        assertThatThrownBy(() -> new Place("ok-id", "ha-giang", "T", PlaceCategory.CANH, "K", "h", "", null, List.of(13), "m", "d", "Dễ", List.of(), Verdict.WORTH_IT, "r", Set.of(), "s", List.of(), List.of(photo()), "w", null))
                 .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("Tháng");
         assertThatThrownBy(() -> place("Có Dấu", List.of(photo()))).isInstanceOf(IllegalArgumentException.class);
     }

@@ -37,7 +37,8 @@ public record Place(
         String slotReason,
         List<String> tips,
         List<Photo> photos,
-        String wikipediaTitle) {
+        String wikipediaTitle,
+        VenueDetails venue) {
 
     private static final Pattern SLUG = Pattern.compile(CatalogConstants.SLUG_REGEX);
 
@@ -48,6 +49,7 @@ public record Place(
         area = CatalogValidation.requiredText(area, CatalogMessages.LABEL_AREA, CatalogConstants.AREA_MAX_LENGTH);
         hook = CatalogValidation.requiredText(hook, CatalogMessages.LABEL_HOOK, CatalogConstants.HOOK_MAX_LENGTH);
         CatalogValidation.require(category != null && verdict != null, CatalogMessages.PLACE_KIND_MISSING, id);
+        CatalogValidation.require(venue == null || venue.kind().category() == category, CatalogMessages.VENUE_CATEGORY_INVALID);
         bestLabel = CatalogValidation.requiredText(bestLabel, CatalogMessages.LABEL_BEST_LABEL, CatalogConstants.BEST_LABEL_MAX_LENGTH);
         duration = CatalogValidation.requiredText(duration, CatalogMessages.LABEL_DURATION, CatalogConstants.DURATION_MAX_LENGTH);
         difficulty = CatalogValidation.requiredText(difficulty, CatalogMessages.LABEL_DIFFICULTY, CatalogConstants.DIFFICULTY_MAX_LENGTH);

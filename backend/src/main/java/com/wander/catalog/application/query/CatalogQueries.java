@@ -10,10 +10,12 @@ import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.model.Place;
 import com.wander.catalog.domain.model.ReferencePoint;
 import com.wander.catalog.domain.model.TravelEstimate;
+import com.wander.catalog.domain.model.VenueDetails;
 import com.wander.catalog.domain.port.PlaceCatalog;
 import com.wander.catalog.domain.vocabulary.TimeSlot;
 import com.wander.shared.kernel.error.WanderException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
@@ -45,12 +47,13 @@ public class CatalogQueries {
                 destination.references().stream().map(CatalogQueries::toReferenceView).toList(),
                 destination.guide().stream().map(CatalogQueries::toSectionView).toList(),
                 destination.places().stream().map(place -> toPlaceView(destination, place)).toList(),
-                destination.moments().stream().map(CatalogQueries::toMomentView).toList());
+                destination.moments().stream().map(CatalogQueries::toMomentView).toList(), toPhotoView(coverPhoto(destination)));
     }
 
     /** Dạng hiển thị của một khoảnh khắc (mã chủ đề viết thường như hợp đồng API). */
     private static CatalogViews.MomentView toMomentView(Moment moment) {
-        return new CatalogViews.MomentView(moment.id(), moment.theme().code(), moment.theme().label(), moment.caption(), toPhotoView(moment.photo()));
+        return new CatalogViews.MomentView(moment.id(), moment.theme().code(), moment.theme().label(), moment.caption(),
+                toPhotoView(moment.photo()), moment.authorUrl());
     }
 
     /** Lịch mẫu của một điểm đến theo thứ tự biên tập; điểm đến không có trong kho thì ném lỗi không tìm thấy, chưa có lịch thì rỗng. */
@@ -74,17 +77,23 @@ public class CatalogQueries {
         Double lat = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lat).average().orElseThrow();
         Double lon = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lon).average().orElseThrow();
         return new CatalogViews.DestinationSummary(destination.id(), destination.name(), destination.region(), destination.tagline(),
-                destination.places().size(), coverUrl(destination), bestMonths, previews, lat, lon);
+                destination.places().size(), coverUrl(destination), bestMonths, previews, lat, lon, toPhotoView(coverPhoto(destination)),
+                destination.places().stream().map(place -> place.category().code()).distinct().sorted().toList());
     }
 
     /** Đường dẫn công khai của ảnh bìa điểm đến (ảnh đầu của địa điểm bìa). */
     private static String coverUrl(Destination destination) {
-        return photoUrl(destination.coverPlace().photos().getFirst());
+        return photoUrl(coverPhoto(destination));
+    }
+
+    /** Giữ nguyên ảnh bìa đã tuyển, đồng thời trả đủ ghi công thay vì chỉ đường dẫn ảnh. */
+    private static Photo coverPhoto(Destination destination) {
+        return destination.coverPhoto() != null ? destination.coverPhoto() : destination.coverPlace().photos().getFirst();
     }
 
     /** Đường dẫn công khai của một ảnh. */
     private static String photoUrl(Photo photo) {
-        return CatalogConstants.PHOTO_URL_PREFIX + photo.file();
+        return photo.isExternal() ? photo.externalUrl() : CatalogConstants.PHOTO_URL_PREFIX + photo.file();
     }
 
     /** Dạng hiển thị của mốc tham chiếu. */
@@ -97,7 +106,7 @@ public class CatalogQueries {
     private static CatalogViews.GuideSectionView toSectionView(GuideSection section) {
         List<CatalogViews.GuideItemView> items = section.items().stream()
                 .map(item -> new CatalogViews.GuideItemView(item.icon(), item.title(), item.text(), item.placeId())).toList();
-        return new CatalogViews.GuideSectionView(section.id(), section.layout().name().toLowerCase(), section.category().code(), section.icon(),
+        return new CatalogViews.GuideSectionView(section.id(), section.layout().name().toLowerCase(Locale.ROOT), section.category().code(), section.icon(),
                 section.title(), section.summary(), section.bestMonths(), section.rainyMonths(), section.notes(), items);
     }
 
@@ -112,7 +121,13 @@ public class CatalogQueries {
         return new CatalogViews.PlaceView(place.id(), place.name(), place.category().code(), place.category().label(), place.area(),
                 place.hook(), place.summary(), lat, lon, place.bestMonths(), place.bestLabel(), place.duration(), place.difficulty(),
                 place.highlights(), place.verdict().code(), place.verdict().label(), place.verdictReason(), slots, place.slotReason(),
-                place.tips(), place.photos().stream().map(CatalogQueries::toPhotoView).toList(), away, place.wikipediaTitle());
+                place.tips(), place.photos().stream().map(CatalogQueries::toPhotoView).toList(), away, place.wikipediaTitle(), toVenueView(place.venue()));
+    }
+
+    /** Dịch địa chỉ có nguồn sang read model, không để domain đi qua API. */
+    private static CatalogViews.VenueView toVenueView(VenueDetails venue) {
+        return venue == null ? null : new CatalogViews.VenueView(venue.kind().code(), venue.kind().label(), venue.address(),
+                venue.website(), venue.sourceUrl(), venue.checkedAt().toString(), venue.phone(), venue.serviceHours(), venue.priceNote());
     }
 
     /** Khoảng cách ước tính từ một mốc tham chiếu tới địa điểm. */
@@ -123,6 +138,6 @@ public class CatalogQueries {
 
     /** Dạng hiển thị của một ảnh kèm thông tin ghi công. */
     private static CatalogViews.PhotoView toPhotoView(Photo photo) {
-        return new CatalogViews.PhotoView(photoUrl(photo), photo.author(), photo.license(), photo.sourceUrl());
+        return new CatalogViews.PhotoView(photoUrl(photo), photo.author(), photo.license(), photo.sourceUrl(), photo.caption(), photo.authorUrl());
     }
 }

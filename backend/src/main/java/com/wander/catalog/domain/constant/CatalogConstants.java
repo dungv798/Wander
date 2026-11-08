@@ -1,5 +1,7 @@
 package com.wander.catalog.domain.constant;
 
+import java.util.Set;
+
 /**
  * Hằng số của module catalog (tầng CHỨC NĂNG): giới hạn nội dung biên tập, định dạng, đường dẫn ảnh, hệ số ước tính.
  * Lời báo lỗi nằm ở {@link CatalogMessages}.
@@ -17,6 +19,14 @@ public final class CatalogConstants {
 
     /** Độ dài tối đa của tên khu vực. */
     public static final int AREA_MAX_LENGTH = 80;
+
+    /** Địa chỉ dịch vụ đọc từ nguồn, không rút gọn thành một tâm vùng. */
+    public static final int VENUE_ADDRESS_MAX_LENGTH = 240;
+
+    /** Giới hạn thông tin liên hệ và lịch phục vụ được cơ sở hoặc nguồn hồ sơ công bố. */
+    public static final int VENUE_PHONE_MAX_LENGTH = 60;
+    public static final int VENUE_HOURS_MAX_LENGTH = 1000;
+    public static final int VENUE_PRICE_NOTE_MAX_LENGTH = 240;
 
     /** Độ dài tối đa của câu điểm nhấn. */
     public static final int HOOK_MAX_LENGTH = 240;
@@ -36,8 +46,17 @@ public final class CatalogConstants {
     /** Số ảnh tối đa của một địa điểm. */
     public static final int MAX_PHOTOS_PER_PLACE = 8;
 
+    /** Chú thích ảnh ghi rõ năm chụp hoặc ảnh khách sạn chứa nhà hàng. */
+    public static final int PHOTO_CAPTION_MAX_LENGTH = 240;
+
+    /** Máy chủ ảnh ngoài được phép hotlink (DR-034); phải khớp CSP img-src ở HttpConstants. */
+    public static final Set<String> EXTERNAL_PHOTO_HOSTS = Set.of("images.unsplash.com");
+
     /** Số khoảnh khắc tối đa của một điểm đến (DR-034). */
     public static final int MAX_MOMENTS_PER_DESTINATION = 24;
+
+    /** Máy chủ được phép cho liên kết hồ sơ tác giả của khoảnh khắc. */
+    public static final String MOMENT_AUTHOR_HOST = "unsplash.com";
 
     /** Tháng nhỏ nhất. */
     public static final int MONTH_MIN = 1;
@@ -56,6 +75,8 @@ public final class CatalogConstants {
 
     /** Liên kết nguồn ảnh phải bắt đầu bằng tiền tố này. */
     public static final String HTTPS_PREFIX = "https://";
+    /** Giao thức bắt buộc của liên kết ghi công. */
+    public static final String HTTPS_SCHEME = "https";
 
     /** Đường dẫn công khai của ảnh (ADR-010 mục 6). */
     public static final String PHOTO_URL_PREFIX = "/catalog/photos/";

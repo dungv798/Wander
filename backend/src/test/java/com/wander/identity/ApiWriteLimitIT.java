@@ -38,4 +38,22 @@ class ApiWriteLimitIT extends ApiTestSupport {
         Res revoke = call("DELETE", "/api/sessions/" + java.util.UUID.randomUUID(), user.token());
         assertThat(revoke.status()).as("phiên không tồn tại -> 404, quan trọng là không 429").isNotEqualTo(429);
     }
+
+    /** Thu hồi hàng loạt có cùng ngoại lệ phòng vệ khi ngân sách ghi đã cạn. */
+    @Test
+    @DisplayName("hết quota ghi vẫn đăng xuất mọi máy khác được và giữ phiên hiện tại")
+    void revokingOtherSessionsBypassesExhaustedWriteBudget() {
+        User user = newUser();
+        String second = newSessionToken();
+        Res link = call("POST", "/api/device-links", null, map("sessionToken", second));
+        assertThat(link.status()).isEqualTo(201);
+        assertThat(call("POST", "/api/device-links/approve", user.token(),
+                map("pairingCode", link.str("pairingCode"), "number", link.num("matchNumber"))).status()).isEqualTo(200);
+        assertThat(call("PATCH", "/api/sessions/current", user.token(), map("deviceName", "Máy chính")).status()).isEqualTo(200);
+        assertThat(call("PATCH", "/api/sessions/current", user.token(), map("deviceName", "Máy chính")).status()).isEqualTo(200);
+        assertThat(call("PATCH", "/api/sessions/current", user.token(), map("deviceName", "Máy chính")).status()).isEqualTo(429);
+        assertThat(call("DELETE", "/api/sessions/others", user.token()).status()).isEqualTo(204);
+        assertThat(call("GET", "/api/sessions", second).status()).isEqualTo(401);
+        assertThat(call("GET", "/api/sessions", user.token()).status()).isEqualTo(200);
+    }
 }

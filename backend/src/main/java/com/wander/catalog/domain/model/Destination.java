@@ -21,12 +21,19 @@ public record Destination(
         List<ReferencePoint> references,
         List<GuideSection> guide,
         List<Place> places,
-        List<Moment> moments) {
+        List<Moment> moments,
+        Photo coverPhoto) {
 
-    /** Điểm đến chưa có thư viện khoảnh khắc (tương thích dữ liệu cũ). */
+    /** Điểm đến chưa có thư viện khoảnh khắc và dùng ảnh bìa của địa điểm bìa (tương thích dữ liệu cũ). */
     public Destination(String id, String name, String region, String tagline, String coverPlaceId, List<ReferencePoint> references,
                        List<GuideSection> guide, List<Place> places) {
-        this(id, name, region, tagline, coverPlaceId, references, guide, places, List.of());
+        this(id, name, region, tagline, coverPlaceId, references, guide, places, List.of(), null);
+    }
+
+    /** Điểm đến có khoảnh khắc, ảnh bìa lấy từ địa điểm bìa. */
+    public Destination(String id, String name, String region, String tagline, String coverPlaceId, List<ReferencePoint> references,
+                       List<GuideSection> guide, List<Place> places, List<Moment> moments) {
+        this(id, name, region, tagline, coverPlaceId, references, guide, places, moments, null);
     }
 
     public Destination {

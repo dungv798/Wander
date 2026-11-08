@@ -20,6 +20,13 @@ public record FieldProvenance(String sourceKind, String sourceUrl, String snapsh
         PoiValidation.requireText(osmTimestamp, PoiConstants.PROVENANCE);
         requireTimestamp(snapshotAt);
         requireTimestamp(osmTimestamp);
+        // Đã kiểm bằng hằng số: dùng lại đúng một đối tượng thay vì hàng trăm nghìn bản sao do trình đọc JSON tạo ra (tiết kiệm heap).
+        sourceKind = PoiConstants.OSM;
+        license = PoiConstants.LICENSE;
+        licenseUrl = PoiConstants.LICENSE_URL;
+        attribution = PoiConstants.ATTRIBUTION;
+        snapshotAt = snapshotAt.intern();
+        osmTimestamp = osmTimestamp.intern();
     }
 
     /** Từ chối ngày snapshot sai bằng lỗi miền thay vì tự dùng thời gian hiện tại. */

@@ -51,6 +51,10 @@ tasks.withType<JavaCompile> {
 
 tasks.test {
     useJUnitPlatform()
+    // Kho POI cả nước lớn hơn bản thử một vùng. Giữ cache context có giới hạn để các cấu hình IT
+    // không giữ nhiều bản catalog/Hibernate trong heap mặc định 512 MB của test worker.
+    maxHeapSize = "1g"
+    systemProperty("spring.test.context.cache.maxSize", "2")
     // Kết quả từng test hiện ra log để đọc được khi chạy qua tools/dev.ps1
     testLogging {
         events("passed", "skipped", "failed")

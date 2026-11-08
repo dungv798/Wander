@@ -23,6 +23,7 @@ public final class ErrorMessages {
 
     /** Nội dung ghi log khi gặp lỗi không lường trước. */
     public static final String UNEXPECTED_ERROR_LOG = "Lỗi không mong đợi";
+    public static final String INTEGRITY_VIOLATION_LOG = "Vi phạm ràng buộc dữ liệu (trả 409): {}";
 
     /** Yêu cầu thiếu phiên hợp lệ. */
     public static final String SESSION_REQUIRED = "Cần phiên hợp lệ.";

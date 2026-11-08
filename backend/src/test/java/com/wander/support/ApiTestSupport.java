@@ -39,7 +39,9 @@ public abstract class ApiTestSupport {
     /** Khóa HMAC của mã khôi phục dùng trong test (chỉ cho test; khóa thật nằm ngoài mã nguồn). */
     public static final String TEST_RECOVERY_PEPPER = "test-only-pepper-0123456789-abcdefghijklmnopqrstuv";
 
-    static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine");
+    /** CSDL test là tạm thời; tmpfs tránh initdb/fsync chậm trên Docker Desktop, không đụng volume của app. */
+    static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine")
+            .withTmpFs(Map.of("/var/lib/postgresql/data", "rw"));
 
     static {
         POSTGRES.start();

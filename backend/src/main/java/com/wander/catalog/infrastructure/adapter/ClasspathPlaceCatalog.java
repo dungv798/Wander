@@ -12,6 +12,7 @@ import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.model.Place;
 import com.wander.catalog.domain.model.ReferencePoint;
 import com.wander.catalog.domain.model.TemplateDay;
+import com.wander.catalog.domain.model.VenueDetails;
 import com.wander.catalog.domain.port.PlaceCatalog;
 import com.wander.catalog.domain.rule.CatalogValidation;
 import com.wander.catalog.domain.rule.SearchText;
@@ -19,10 +20,12 @@ import com.wander.catalog.domain.vocabulary.MomentTheme;
 import com.wander.catalog.domain.vocabulary.PlaceCategory;
 import com.wander.catalog.domain.vocabulary.TemplateStatus;
 import com.wander.catalog.domain.vocabulary.TimeSlot;
+import com.wander.catalog.domain.vocabulary.VenueKind;
 import com.wander.catalog.domain.vocabulary.Verdict;
 import com.wander.shared.kernel.util.ImmutableLists;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -168,9 +171,10 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
             List<Place> places = source.places().stream().map(place -> toPlace(source.id(), place)).toList();
             Destination destination = new Destination(source.id(), source.name(), source.region(), source.tagline(), source.coverPlaceId(),
                     source.references().stream().map(ClasspathPlaceCatalog::toReference).toList(),
-                    source.guide().stream().map(ClasspathPlaceCatalog::toSection).toList(), places, toMoments(source.moments()));
+                    source.guide().stream().map(ClasspathPlaceCatalog::toSection).toList(), places, toMoments(source.moments()), toCoverPhoto(source.coverPhoto()));
             requirePhotoFilesExist(places);
             requireMomentFilesExist(destination.moments());
+            requireCoverPhotoFileExists(destination);
             return destination;
         } catch (IOException | RuntimeException e) {
             throw new IllegalStateException(CatalogMessages.CATALOG_FILE_CORRUPT.formatted(fileName, e.getMessage()), e);
@@ -181,10 +185,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
     private static void requirePhotoFilesExist(List<Place> places) {
         for (Place place : places) {
             for (Photo photo : place.photos()) {
-                String path = CatalogConstants.PHOTO_CLASSPATH_DIR + photo.file();
-                if (!new ClassPathResource(path).exists()) {
-                    throw new IllegalStateException(CatalogMessages.PHOTO_FILE_MISSING.formatted(path, place.id()));
-                }
+                requireClasspathPhoto(photo, place.id(), CatalogMessages.PHOTO_FILE_MISSING);
             }
         }
     }
@@ -192,10 +193,26 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
     /** Mọi ảnh khoảnh khắc đều có tệp trong thư mục ảnh của classpath. */
     private static void requireMomentFilesExist(List<Moment> moments) {
         for (Moment moment : moments) {
-            String path = CatalogConstants.PHOTO_CLASSPATH_DIR + moment.photo().file();
-            if (!new ClassPathResource(path).exists()) {
-                throw new IllegalStateException(CatalogMessages.MOMENT_PHOTO_FILE_MISSING.formatted(path, moment.id()));
-            }
+            requireClasspathPhoto(moment.photo(), moment.id(), CatalogMessages.MOMENT_PHOTO_FILE_MISSING);
+        }
+    }
+
+    /** Ảnh bìa riêng (tùy chọn) của điểm đến; thiếu thì null. */
+    private static Photo toCoverPhoto(PhotoFile source) {
+        return source == null ? null : new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), source.caption(), source.authorUrl());
+    }
+
+    /** Ảnh bìa riêng, nếu là tệp cục bộ, phải có trong thư mục ảnh của classpath. */
+    private static void requireCoverPhotoFileExists(Destination destination) {
+        requireClasspathPhoto(destination.coverPhoto(), destination.id(), CatalogMessages.DESTINATION_PHOTO_FILE_MISSING);
+    }
+
+    /** Ảnh cục bộ phải tồn tại dưới thư mục ảnh; bỏ qua ảnh ngoài và ảnh tùy chọn chưa khai báo. */
+    private static void requireClasspathPhoto(Photo photo, String objectId, String missingMessage) {
+        if (photo == null || photo.isExternal()) return;
+        String path = CatalogConstants.PHOTO_CLASSPATH_DIR + photo.file();
+        if (!new ClassPathResource(path).exists()) {
+            throw new IllegalStateException(missingMessage.formatted(path, objectId));
         }
     }
 
@@ -204,7 +221,8 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return ImmutableLists.copyOrEmpty(sources).stream().map(source -> {
             MomentTheme theme = MomentTheme.fromCode(source.theme())
                     .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.MOMENT_THEME_INVALID.formatted(source.theme())));
-            return new Moment(source.id(), theme, source.caption(), new Photo(source.file(), source.author(), source.license(), source.sourceUrl()));
+            return new Moment(source.id(), theme, source.caption(),
+                    new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), null, source.authorUrl()), source.authorUrl());
         }).toList();
     }
 
@@ -215,10 +233,19 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                 .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.VERDICT_INVALID.formatted(source.verdict())));
         GeoPoint location = source.lat() == null || source.lon() == null ? null : new GeoPoint(source.lat(), source.lon());
         List<Photo> photos = source.photos().stream()
-                .map(photo -> new Photo(photo.file(), photo.author(), photo.license(), photo.sourceUrl())).toList();
+                .map(photo -> new Photo(photo.file(), photo.url(), photo.author(), photo.license(), photo.sourceUrl(), photo.caption(), photo.authorUrl())).toList();
         return new Place(source.id(), destinationId, source.name(), category, source.area(), source.hook(), source.summary(), location,
                 source.bestMonths(), source.bestLabel(), source.duration(), source.difficulty(), source.highlights(), verdict,
-                source.verdictReason(), toTimeSlots(source.bestSlots()), source.slotReason(), source.tips(), photos, source.wikipediaTitle());
+                source.verdictReason(), toTimeSlots(source.bestSlots()), source.slotReason(), source.tips(), photos, source.wikipediaTitle(), toVenue(source.venue()));
+    }
+
+    /** Metadata mới là tùy chọn: tệp catalog cũ không cần được viết lại. */
+    private static VenueDetails toVenue(VenueFile source) {
+        if (source == null) return null;
+        VenueKind kind = VenueKind.fromCode(source.kind())
+                .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.VENUE_KIND_INVALID.formatted(source.kind())));
+        return new VenueDetails(kind, source.address(), source.website(), source.sourceUrl(), LocalDate.parse(source.checkedAt()),
+                source.phone(), source.serviceHours(), source.priceNote());
     }
 
     /** Tập buổi trong ngày từ danh sách mã; mã lạ thì ném lỗi dữ liệu. */
@@ -256,10 +283,10 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
 
     // ---- hình dạng tệp JSON (chỉ dùng trong adapter) ----
     record DestinationFile(String id, String name, String region, String tagline, String coverPlaceId, List<ReferenceFile> references,
-                           List<SectionFile> guide, List<PlaceFile> places, List<MomentFile> moments) {
+                           List<SectionFile> guide, List<PlaceFile> places, List<MomentFile> moments, PhotoFile coverPhoto) {
     }
 
-    record MomentFile(String id, String theme, String caption, String file, String author, String license, String sourceUrl) {
+    record MomentFile(String id, String theme, String caption, String file, String url, String author, String license, String sourceUrl, String authorUrl) {
     }
 
     record TemplatesFile(String destinationId, List<TemplateEntry> templates) {
@@ -283,9 +310,13 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
 
     record PlaceFile(String id, String name, String category, String area, String hook, String summary, Double lat, Double lon, List<Integer> bestMonths,
                      String bestLabel, String duration, String difficulty, List<String> highlights, String verdict, String verdictReason,
-                     List<String> bestSlots, String slotReason, List<String> tips, List<PhotoFile> photos, String wikipediaTitle) {
+                     List<String> bestSlots, String slotReason, List<String> tips, List<PhotoFile> photos, String wikipediaTitle, VenueFile venue) {
     }
 
-    record PhotoFile(String file, String author, String license, String sourceUrl) {
+    record VenueFile(String kind, String address, String website, String sourceUrl, String checkedAt,
+                     String phone, String serviceHours, String priceNote) {
+    }
+
+    record PhotoFile(String file, String url, String author, String license, String sourceUrl, String caption, String authorUrl) {
     }
 }

@@ -65,17 +65,20 @@ public class IdentityService {
         return new CreatedIdentity(identityId.toString(), token, displayedCode);
     }
 
-    /** Kiểm tra phiên ở mỗi yêu cầu: phiên đã thu hồi mất quyền ngay ở yêu cầu kế tiếp (INV-2). */
+    /** Kiểm tra hạn và thu hồi trước khi gia hạn trượt; mọi phiên không hợp lệ đều mất quyền như nhau. */
     public Optional<AuthenticatedPrincipal> authenticateSession(String token) {
-        Optional<Session> session = store.findSessionByTokenHash(Secrets.hashToken(token)).filter(Session::isActive);
-        session.ifPresent(found -> store.touchSession(found.id(), Timestamps.now(clock)));
+        Instant now = Timestamps.now(clock);
+        Optional<Session> session = store.findSessionByTokenHash(Secrets.hashToken(token)).filter(found -> found.isActive(now));
+        session.filter(found -> found.needsTouch(now)).ifPresent(found -> store.touchSession(found.id(), now));
         return session.map(found -> new AuthenticatedPrincipal(found.identityId(), found.id()));
     }
 
     /** Các phiên đang hoạt động của danh tính, đánh dấu phiên hiện tại. */
     @Transactional(readOnly = true)
     public List<SessionView> listActiveSessions(AuthenticatedPrincipal principal) {
+        Instant now = Timestamps.now(clock);
         return store.activeSessions(principal.identityId()).stream()
+                .filter(session -> session.isActive(now))
                 .map(session -> new SessionView(session.id().toString(), Timestamps.format(session.createdAt()),
                         Timestamps.format(session.lastSeenAt()), session.id().equals(principal.sessionId()), session.deviceName()))
                 .toList();
@@ -102,6 +105,17 @@ public class IdentityService {
         Session revoked = store.findActiveSession(id, principal.identityId()).orElseThrow(WanderException::notFound);
         store.revokeSession(id, Timestamps.now(clock));
         events.record(principal.identityId(), EventKind.REVOKED, revoked.deviceName());
+    }
+
+    /** Thu hồi mọi phiên khác của cùng danh tính, kể cả phiên đã hết hạn; giữ nguyên phiên đang gọi. */
+    public void revokeOtherSessions(AuthenticatedPrincipal principal) {
+        Instant now = Timestamps.now(clock);
+        for (Session session : store.activeSessions(principal.identityId())) {
+            if (!session.id().equals(principal.sessionId())) {
+                store.revokeSession(session.id(), now);
+                events.record(principal.identityId(), EventKind.REVOKED, session.deviceName());
+            }
+        }
     }
 
     /** Danh tính đã có mã khôi phục hợp lệ chưa, và mã được tạo lúc nào. */

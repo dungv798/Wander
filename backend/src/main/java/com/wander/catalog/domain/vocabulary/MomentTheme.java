@@ -12,7 +12,8 @@ public enum MomentTheme implements CodedValue {
     FOOD("mon-an", "Món ăn"),
     PEOPLE("nguoi", "Con người"),
     FESTIVAL("le-hoi", "Lễ hội & văn hóa"),
-    CRAFT("nghe", "Nghề & đời sống");
+    CRAFT("nghe", "Nghề & đời sống"),
+    JOURNEY("hanh-trinh", "Hành trình");
 
     private final String code;
     private final String label;

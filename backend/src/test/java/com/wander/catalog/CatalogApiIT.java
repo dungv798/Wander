@@ -15,19 +15,37 @@ import org.junit.jupiter.api.Test;
  * chi tiết đủ ghi công và khoảng cách ước tính, ảnh công khai.
  */
 class CatalogApiIT extends ApiTestSupport {
+    @Test
+    void contextualPhotoCaptionIsPublicAndPreserved() {
+        Res r = call("GET", "/api/catalog/destinations/ha-noi", null);
+        Map<?, ?> bar = r.list("destination.places").stream().map(p -> (Map<?, ?>) p)
+                .filter(p -> "rs-ha-noi-le-club-bar-sofitel-lege-501a8f22".equals(p.get("id"))).findFirst().orElseThrow();
+        Map<?, ?> photo = (Map<?, ?>) ((List<?>) bar.get("photos")).get(0);
+        assertThat(photo.get("caption")).isEqualTo("Ảnh khách sạn");
+        assertThat((String) photo.get("author")).isNotBlank();
+        assertThat((String) photo.get("sourceUrl")).startsWith("https://");
+    }
+
 
     @Test
-    @DisplayName("cả 12 điểm đến đều có tâm trong biên Việt Nam")
+    @DisplayName("20 điểm đến đại diện các vùng đều có tâm trong biên Việt Nam và ghi công bìa")
     void destinationCentersAreInVietnam() {
         Res response = call("GET", "/api/catalog/destinations", null);
         assertThat(response.status()).isEqualTo(200);
-        assertThat(response.list("destinations")).hasSize(12);
+        assertThat(response.list("destinations")).hasSize(20);
+        assertThat(response.list("destinations").stream().map(v -> (String) ((Map<?, ?>) v).get("id")))
+                .contains("sa-pa", "cao-bang", "ninh-binh", "ha-long", "phong-nha", "buon-ma-thuot", "phu-quoc", "can-tho");
         for (Object value : response.list("destinations")) {
             Map<?, ?> destination = (Map<?, ?>) value;
             assertThat(destination.get("lat")).isInstanceOf(Number.class);
             assertThat(destination.get("lon")).isInstanceOf(Number.class);
             assertThat(((Number) destination.get("lat")).doubleValue()).isBetween(8.0, 24.0);
             assertThat(((Number) destination.get("lon")).doubleValue()).isBetween(102.0, 110.0);
+            Map<?, ?> photo = (Map<?, ?>) destination.get("coverPhoto");
+            assertThat(photo.get("url")).isEqualTo(destination.get("coverUrl"));
+            assertThat((String) photo.get("author")).isNotBlank();
+            assertThat((String) photo.get("license")).isNotBlank();
+            assertThat((String) photo.get("sourceUrl")).startsWith("https://");
         }
     }
 
@@ -46,10 +64,17 @@ class CatalogApiIT extends ApiTestSupport {
         assertThat(r.list("destinations")).hasSize(1);
         assertThat(r.str("destinations.0.id")).isEqualTo("ha-giang");
         assertThat(r.num("destinations.0.placeCount")).isGreaterThanOrEqualTo(9);
-        assertThat(r.str("destinations.0.coverUrl")).startsWith("/catalog/photos/");
+        assertThat(r.str("destinations.0.coverUrl")).as("ảnh bìa: tệp cục bộ hoặc ảnh ngoài được phép (DR-034)").matches("/catalog/photos/.+|https://images[.]unsplash[.]com/.+");
         assertThat(r.list("destinations.0.previews")).hasSize(3);
+        Res detail = call("GET", "/api/catalog/destinations/ha-giang", u.token());
+        List<String> categories = detail.list("destination.places").stream()
+                .map(value -> (String) ((Map<?, ?>) value).get("category")).distinct().sorted().toList();
+        assertThat(r.list("destinations.0.categories")).containsExactlyElementsOf(categories);
         assertThat(r.str("destinations.0.previews.0.url")).startsWith("/catalog/photos/");
-        assertThat(call("GET", "/api/catalog/destinations?q=sa%20pa", u.token()).list("destinations")).isEmpty();
+        Res sapa = call("GET", "/api/catalog/destinations?q=sa%20pa", u.token());
+        assertThat(sapa.list("destinations")).hasSize(1);
+        assertThat(sapa.str("destinations.0.id")).isEqualTo("sa-pa");
+        assertThat(call("GET", "/api/catalog/destinations?q=khongtontaixyz", u.token()).list("destinations")).isEmpty();
         assertThat(call("GET", "/api/catalog/destinations", u.token()).list("destinations")).isNotEmpty();
     }
 
@@ -124,7 +149,7 @@ class CatalogApiIT extends ApiTestSupport {
     }
 
     @Test
-    @DisplayName("khoảnh khắc (DR-034): điểm đến có ảnh đời sống trả chủ đề, chú thích và ghi công đủ; điểm đến chưa có thì mảng rỗng, không lỗi")
+    @DisplayName("khoảnh khắc (DR-034): ảnh đời sống trả chủ đề, chú thích và ghi công đủ; Vĩnh Hy đã được bổ sung")
     void destinationMoments() {
         Res withMoments = call("GET", "/api/catalog/destinations/ha-noi", null);
         assertThat(withMoments.status()).isEqualTo(200);
@@ -132,24 +157,55 @@ class CatalogApiIT extends ApiTestSupport {
         assertThat(moments).as("Hà Nội đã có khoảnh khắc được duyệt").isNotEmpty();
         for (int i = 0; i < moments.size(); i++) {
             String m = "destination.moments." + i;
-            assertThat(withMoments.str(m + ".theme")).isIn("cho", "mon-an", "nguoi", "le-hoi", "nghe");
+            assertThat(withMoments.str(m + ".theme")).isIn("cho", "mon-an", "nguoi", "le-hoi", "nghe", "hanh-trinh");
             assertThat(withMoments.str(m + ".themeLabel")).isNotBlank();
             assertThat(withMoments.str(m + ".caption")).isNotBlank();
-            assertThat(withMoments.str(m + ".photo.url")).startsWith("/catalog/photos/");
+            assertThat(withMoments.str(m + ".photo.url")).matches("/catalog/photos/.+|https://images[.]unsplash[.]com/.+");
             assertThat(withMoments.str(m + ".photo.author")).isNotBlank();
             assertThat(withMoments.str(m + ".photo.license")).isNotBlank();
             assertThat(withMoments.str(m + ".photo.sourceUrl")).startsWith("https://");
         }
-        Res without = call("GET", "/api/catalog/destinations/vinh-hy", null);
-        assertThat(without.status()).isEqualTo(200);
-        assertThat(without.list("destination.moments")).as("chưa có dữ liệu thì rỗng nhưng trường vẫn có").isEmpty();
+        Res vinhHy = call("GET", "/api/catalog/destinations/vinh-hy", null);
+        assertThat(vinhHy.status()).isEqualTo(200);
+        assertThat(vinhHy.list("destination.moments")).as("Vĩnh Hy đã được tuyển thêm ảnh Commons").isNotEmpty();
+    }
+
+    @Test
+    @DisplayName("hồ sơ quán/chỗ ở additive: đủ địa chỉ và nguồn, dữ liệu cũ không bị gán thành doanh nghiệp")
+    void venuesHaveActionableMetadata() {
+        Res r = call("GET", "/api/catalog/destinations/ha-noi", null);
+        List<?> places = r.list("destination.places");
+        Map<?, ?> giang = places.stream().map(v -> (Map<?, ?>) v)
+                .filter(p -> "venue-ha-noi-giang".equals(p.get("id"))).findFirst().orElseThrow();
+        Map<?, ?> venue = (Map<?, ?>) giang.get("venue");
+        assertThat(venue.get("kind")).isEqualTo("cafe");
+        assertThat(venue.get("address")).isEqualTo("39 Nguyễn Hữu Huân, Hà Nội");
+        assertThat(venue.get("website")).isEqualTo("https://cafegiang.vn/");
+        assertThat(venue.get("checkedAt")).isEqualTo("2026-11-07");
+        assertThat(venue.containsKey("rating")).isFalse();
+        assertThat(venue.containsKey("price")).isFalse();
+        Map<?, ?> legacy = places.stream().map(v -> (Map<?, ?>) v)
+                .filter(p -> "exp-food-ha-noi-pho".equals(p.get("id"))).findFirst().orElseThrow();
+        assertThat(legacy.get("venue")).isNull();
+        Map<?, ?> hotel = places.stream().map(v -> (Map<?, ?>) v)
+                .filter(p -> "venue-ha-noi-metropole".equals(p.get("id"))).findFirst().orElseThrow();
+        assertThat(hotel.get("category")).isEqualTo("luu");
+        assertThat(((Map<?, ?>) hotel.get("venue")).get("kind")).isEqualTo("lodging");
+        var venues = places.stream().map(v -> (Map<?, ?>) v).map(p -> (Map<?, ?>) p.get("venue"))
+                .filter(java.util.Objects::nonNull).toList();
+        assertThat(venues.stream().anyMatch(v -> "bar".equals(v.get("kind")))).isTrue();
+        Map<?, ?> restaurant = venues.stream().filter(v -> ((String) v.get("sourceUrl")).endsWith("/mammom")
+                && v.get("priceNote") instanceof String text && !text.isBlank()).findFirst().orElseThrow();
+        assertThat((String) restaurant.get("phone")).isNotBlank();
+        assertThat((String) restaurant.get("serviceHours")).isNotBlank();
+        assertThat((String) restaurant.get("priceNote")).contains("Phân khúc Michelin");
     }
 
     @Test
     @DisplayName("ảnh phục vụ công khai (thẻ img không gửi được Bearer), có cache; tệp lạ và đường dẫn thoát đều không lộ gì")
     void photosArePublic() {
         User u = newUser();
-        String url = call("GET", "/api/catalog/destinations/ha-giang", u.token()).str("destination.coverUrl");
+        String url = call("GET", "/api/catalog/destinations/ha-giang", u.token()).str("destination.places.0.photos.0.url");
         Res photo = call("GET", url, null);
         assertThat(photo.status()).isEqualTo(200);
         assertThat(photo.raw().headers().firstValue("Content-Type").orElse("")).startsWith("image/jpeg");

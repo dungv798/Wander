@@ -125,24 +125,31 @@ public class IdentityController {
         return ResponseEntity.noContent().build();
     }
 
+    /** Đăng xuất mọi máy khác; dùng cùng ngoại lệ hạn mức ghi của thao tác thu hồi phiên. */
+    @DeleteMapping(IdentityApiConstants.OTHER_SESSIONS_PATH)
+    public ResponseEntity<Void> revokeOtherSessions(AuthenticatedPrincipal principal) {
+        identities.revokeOtherSessions(principal);
+        return ResponseEntity.noContent().build();
+    }
+
     /** Máy duyệt xem trước yêu cầu ghép: tên máy tự khai, thời điểm, các lựa chọn số khớp (không đổi trạng thái). */
     @PostMapping(IdentityApiConstants.DEVICE_LINK_PREVIEW_PATH)
     public IdentityViews.LinkPreview previewDeviceLink(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return deviceLinks.previewLink(body.asMap());
     }
 
     /** Máy duyệt từ chối chủ động yêu cầu ghép. */
     @PostMapping(IdentityApiConstants.DEVICE_LINK_DENY_PATH)
     public IdentityViews.Denied denyDeviceLink(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return deviceLinks.denyLink(body.asMap());
     }
 
     /** Thiết bị đã có phiên duyệt yêu cầu ghép của thiết bị mới. */
     @PostMapping(IdentityApiConstants.DEVICE_LINK_APPROVE_PATH)
     public IdentityViews.Approved approveDevice(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return deviceLinks.approveLink(principal, body.asMap());
     }
 
@@ -155,14 +162,14 @@ public class IdentityController {
     /** Pha 1 tạo hoặc tái tạo mã khôi phục. */
     @PostMapping(IdentityApiConstants.RECOVERY_CODE_BEGIN_PATH)
     public IdentityViews.ReplacementBegun beginReplacement(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return recovery.beginReplacement(principal, body.asMap());
     }
 
     /** Pha 2 xác nhận mã khôi phục mới. */
     @PostMapping(IdentityApiConstants.RECOVERY_CODE_CONFIRM_PATH)
     public IdentityViews.Committed confirmReplacement(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return recovery.confirmReplacement(principal, body.asMap());
     }
 
@@ -170,7 +177,7 @@ public class IdentityController {
     @PostMapping(IdentityApiConstants.STEP_UP_REQUESTS_PATH)
     @ResponseStatus(HttpStatus.CREATED)
     public IdentityViews.StepUpCreated requestStepUp(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         limits.stepUpRequest(principal.identityId().toString());
         return recovery.requestStepUp(principal, body.asMap());
     }
@@ -178,21 +185,21 @@ public class IdentityController {
     /** Máy duyệt xem trước yêu cầu xác thực lại: thao tác, tên máy đang xin, các lựa chọn số khớp. */
     @PostMapping(IdentityApiConstants.STEP_UP_PREVIEW_PATH)
     public IdentityViews.StepUpPreview previewStepUp(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return recovery.previewStepUp(principal, body.asMap());
     }
 
     /** Máy duyệt từ chối chủ động yêu cầu xác thực lại. */
     @PostMapping(IdentityApiConstants.STEP_UP_DENY_PATH)
     public IdentityViews.Denied denyStepUp(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return recovery.denyStepUp(principal, body.asMap());
     }
 
     /** Thiết bị khác phê duyệt yêu cầu xác thực lại. */
     @PostMapping(IdentityApiConstants.STEP_UP_APPROVE_PATH)
     public IdentityViews.Approved approveStepUp(AuthenticatedPrincipal principal, JsonBody body) {
-        limitApprovalBySession(principal);
+        limitApprovalByIdentity(principal);
         return recovery.approveStepUp(principal, body.asMap());
     }
 
@@ -201,8 +208,8 @@ public class IdentityController {
         limits.recovery(clientAddress.of(request));
     }
 
-    /** Giới hạn tần suất các thao tác duyệt/xác thực lại, theo phiên đang gọi. */
-    private void limitApprovalBySession(AuthenticatedPrincipal principal) {
-        limits.approval(principal.sessionId().toString());
+    /** Giới hạn tần suất các thao tác duyệt/xác thực lại, theo danh tính đang gọi. */
+    private void limitApprovalByIdentity(AuthenticatedPrincipal principal) {
+        limits.approval(principal.identityId().toString());
     }
 }

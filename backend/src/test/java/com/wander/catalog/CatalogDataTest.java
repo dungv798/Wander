@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import com.wander.catalog.domain.model.Destination;
 import com.wander.catalog.domain.model.ItineraryTemplate;
 import com.wander.catalog.domain.model.Place;
+import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.vocabulary.TemplateStatus;
 import com.wander.catalog.infrastructure.adapter.ClasspathPlaceCatalog;
 import java.io.IOException;
@@ -22,18 +23,38 @@ class CatalogDataTest {
 
     private static final String REAL = "classpath*:catalog/*.json";
     private static final String REAL_TEMPLATES = "classpath*:catalog/templates/*.json";
-    private static final Set<String> OPEN_LICENSES = Set.of("CC BY 2.0", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 4.0", "CC0", "Public domain");
+    private static final Set<String> OPEN_LICENSES = Set.of("CC BY 1.0", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 3.0 de", "CC BY-SA 4.0", "CC0", "Public domain");
 
+    /** Kiểm tra tọa độ địa điểm và giấy phép của mọi loại ảnh trong kho thật. */
     @Test
-    @DisplayName("kho thật nạp được; mỗi địa điểm có tọa độ; ảnh đã khai báo đủ ghi công, giấy phép mở (địa điểm được phép chưa có ảnh, DR-033)")
+    @DisplayName("kho thật nạp được; mỗi địa điểm có tọa độ; mọi ảnh đủ ghi công và giấy phép được duyệt (DR-033/034)")
     void realCatalogIsValid() {
         var catalog = new ClasspathPlaceCatalog(REAL);
         assertThat(catalog.searchDestinations("")).isNotEmpty();
         Destination ha = catalog.destination("ha-giang").orElseThrow();
         assertThat(ha.places()).hasSizeGreaterThanOrEqualTo(9);
-        for (Place p : ha.places()) {
-            assertThat(p.location()).as("tọa độ của " + p.id()).isNotNull();
-            p.photos().forEach(ph -> assertThat(OPEN_LICENSES).as("giấy phép ảnh " + ph.file()).contains(ph.license()));
+        for (Destination destination : catalog.searchDestinations("")) {
+            if (destination.coverPhoto() != null) {
+                assertPhotoLicense(destination.coverPhoto());
+            }
+            destination.moments().forEach(moment -> assertPhotoLicense(moment.photo()));
+            for (Place p : destination.places()) {
+                assertThat(p.location()).as("tọa độ của " + p.id()).isNotNull();
+                p.photos().forEach(CatalogDataTest::assertPhotoLicense);
+            }
+        }
+    }
+
+    /** Pexels đã được DR-034 chấp nhận nhưng không phải giấy phép CC; bắt buộc giữ đúng trang ảnh nguồn. */
+    private static void assertPhotoLicense(Photo photo) {
+        if (Set.of("Unsplash", "Giấy phép Unsplash").contains(photo.license())) {
+            assertThat(photo.externalUrl()).startsWith("https://images.unsplash.com/");
+            assertThat(photo.sourceUrl()).startsWith("https://unsplash.com/photos/").contains("utm_source=wander");
+            assertThat(photo.authorUrl()).startsWith("https://unsplash.com/@").contains("utm_source=wander");
+        } else if (Set.of("Pexels License", "Giấy phép Pexels").contains(photo.license())) {
+            assertThat(photo.sourceUrl()).as("nguồn Pexels của " + photo.file()).startsWith("https://www.pexels.com/photo/");
+        } else {
+            assertThat(OPEN_LICENSES).as("giấy phép ảnh " + photo.file()).contains(photo.license());
         }
     }
 
@@ -129,7 +150,8 @@ class CatalogDataTest {
         var catalog = new ClasspathPlaceCatalog(REAL);
         assertThat(catalog.searchDestinations("ha giang")).extracting(Destination::id).containsExactly("ha-giang");
         assertThat(catalog.searchDestinations("HÀ GIANG")).hasSize(1);
-        assertThat(catalog.searchDestinations("sa pa")).isEmpty();
+        assertThat(catalog.searchDestinations("sa pa")).extracting(Destination::id).containsExactly("sa-pa");
+        assertThat(catalog.searchDestinations("khongtontaixyz")).isEmpty();
         assertThat(catalog.destination("khong-co")).isEmpty();
         assertThat(catalog.destination(null)).isEmpty();
     }

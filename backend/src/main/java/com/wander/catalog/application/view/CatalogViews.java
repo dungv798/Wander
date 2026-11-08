@@ -13,10 +13,10 @@ public final class CatalogViews {
     }
 
     public record DestinationSummary(String id, String name, String region, String tagline, int placeCount, String coverUrl, List<Integer> bestMonths,
-                                     List<Preview> previews, Double lat, Double lon) {
+                                     List<Preview> previews, Double lat, Double lon, PhotoView coverPhoto, List<String> categories) {
     }
 
-    public record PhotoView(String url, String author, String license, String sourceUrl) {
+    public record PhotoView(String url, String author, String license, String sourceUrl, String caption, String authorUrl) {
     }
 
     /** Khoảng cách ước tính từ một mốc tham chiếu. {@code approximate} = tọa độ mốc chưa kiểm chứng. */
@@ -27,7 +27,11 @@ public final class CatalogViews {
             String id, String name, String category, String categoryName, String area, String hook, String summary,
             Double lat, Double lon, List<Integer> bestMonths, String bestLabel, String duration, String difficulty,
             List<String> highlights, String verdict, String verdictLabel, String verdictReason, List<String> bestSlots, String slotReason,
-            List<String> tips, List<PhotoView> photos, List<Away> away, String wikipediaTitle) {
+            List<String> tips, List<PhotoView> photos, List<Away> away, String wikipediaTitle, VenueView venue) {
+    }
+
+    public record VenueView(String kind, String kindName, String address, String website, String sourceUrl, String checkedAt,
+                            String phone, String serviceHours, String priceNote) {
     }
 
     public record GuideItemView(String icon, String title, String text, String placeId) {
@@ -51,11 +55,11 @@ public final class CatalogViews {
     }
 
     /** Khoảnh khắc đời sống của điểm đến (DR-034): ảnh minh họa không khí kèm chủ đề, chú thích và ghi công. */
-    public record MomentView(String id, String theme, String themeLabel, String caption, PhotoView photo) {
+    public record MomentView(String id, String theme, String themeLabel, String caption, PhotoView photo, String authorUrl) {
     }
 
     public record DestinationDetail(
             String id, String name, String region, String tagline, String coverUrl, List<ReferenceView> references,
-            List<GuideSectionView> guide, List<PlaceView> places, List<MomentView> moments) {
+            List<GuideSectionView> guide, List<PlaceView> places, List<MomentView> moments, PhotoView coverPhoto) {
     }
 }

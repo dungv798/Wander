@@ -45,6 +45,9 @@ public final class IdentityApiConstants {
     /** Phiên của chính thiết bị đang gọi (đổi tên thiết bị). */
     public static final String CURRENT_SESSION_PATH = SESSIONS_PATH + "/current";
 
+    /** Thu hồi mọi phiên khác của danh tính hiện tại. */
+    public static final String OTHER_SESSIONS_PATH = SESSIONS_PATH + "/others";
+
     /** Một phiên theo mã. */
     public static final String SESSION_BY_ID_PATH = SESSIONS_PATH + "/{id}";
 

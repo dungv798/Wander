@@ -224,6 +224,26 @@ class RecoveryApiIT extends ApiTestSupport {
         assertThat(start(u.recoveryCode(), newSessionToken(), attempt).r().status()).isEqualTo(400);
     }
 
+    /** So sánh toàn bộ thân lỗi khi bắt đầu khôi phục, kể cả mã đã tiêu thụ qua API thật. */
+    @Test
+    @DisplayName("INV-6: mã sai, không tồn tại và đã dùng trả cùng HTTP 400 và thân lỗi INVALID_CODE khi bắt đầu khôi phục")
+    void rejectInvalidUnknownAndUsedCodesUniformly() {
+        User user = newUser();
+        recoverFully(user.recoveryCode());
+
+        Res invalid = start("khong phai ma").r();
+        Res unknown = start(UNKNOWN_CODE).r();
+        Res used = start(user.recoveryCode()).r();
+        Map<String, Object> expectedBody = Map.of("error", Map.of(
+                "code", "INVALID_CODE", "message", "Mã không hợp lệ hoặc đã được dùng."));
+
+        for (Res rejection : List.of(invalid, unknown, used)) {
+            assertThat(rejection.status()).isEqualTo(400);
+            assertThat(rejection.code()).isEqualTo("INVALID_CODE");
+            assertThat(rejection.body()).isEqualTo(expectedBody);
+        }
+    }
+
     @Test
     @DisplayName("INV-6/MĐ-8: mọi lý do từ chối mã cho cùng một phản hồi; bí mật phiên phải đủ mạnh")
     void uniformRejection() {

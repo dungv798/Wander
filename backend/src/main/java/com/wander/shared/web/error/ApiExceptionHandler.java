@@ -5,6 +5,7 @@ import com.wander.shared.kernel.constant.ErrorMessages;
 import com.wander.shared.kernel.error.WanderException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,15 @@ public class ApiExceptionHandler {
     /** Hai thao tác sửa cùng một dữ liệu cùng lúc: báo 409 để người dùng tải lại. */
     @ExceptionHandler(OptimisticLockingFailureException.class)
     public ResponseEntity<ApiError> handleConcurrentModification(OptimisticLockingFailureException e) {
+        return errorResponse(HttpStatus.CONFLICT, ErrorCodes.CONCURRENT_MODIFICATION, ErrorMessages.CONCURRENT_MODIFICATION);
+    }
+
+    /**
+     * Hai yêu cầu cùng ghi một khóa duy nhất (ví dụ tên chuyến trùng, thử lại sau cold start): báo 409 thay vì 500; không lộ tên ràng buộc.
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiError> handleIntegrityViolation(DataIntegrityViolationException e) {
+        log.warn(ErrorMessages.INTEGRITY_VIOLATION_LOG, e.getMostSpecificCause().getClass().getSimpleName());
         return errorResponse(HttpStatus.CONFLICT, ErrorCodes.CONCURRENT_MODIFICATION, ErrorMessages.CONCURRENT_MODIFICATION);
     }
 
