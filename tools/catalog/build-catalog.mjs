@@ -15,6 +15,7 @@ const PHOTO_DIR = path.join(OUT_DIR, 'photos');
 const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) ?? `--${k}=${d}`).split('=')[1];
 const REFRESH = process.argv.includes('--refresh');
 const DEST = arg('dest', '');
+const APPEND_ONLY = process.argv.includes('--append-only');
 
 const UA = 'WanderCatalog/0.1 (learning project; contact binkuteqn289@gmail.com)';
 const VI = 'https://vi.wikipedia.org/w/api.php';
@@ -117,6 +118,7 @@ function clip(text) {
 
 /** Nhãn tháng nên đi từ danh sách tháng: "Tháng 9–11" nếu liền nhau, ngược lại "Tháng 12, 1–2". */
 function monthLabel(months) {
+  if (!months.length) return 'Xem thời tiết trước khi đi';
   const m = [...new Set(months)].sort((a, b) => a - b);
   if (m.length === 12) return 'Quanh năm';
   const runs = [];
@@ -201,7 +203,7 @@ async function commonsNear(lat, lon) {
 
 /** Ảnh đạt chuẩn (JPEG, đủ rộng, giấy phép mở) trong danh sách tên tệp, theo đúng thứ tự đầu vào. */
 async function usableImages(titles) {
-  const names = titles.map((t) => t.replace(/^(Tệp|File|Hình|Image):/i, 'File:')).filter((t) => !NOISE_FILE.test(t));
+  const names = titles.map((t) => t.replace(/^(Tập tin|Tệp|File|Hình|Image):/i, 'File:')).filter((t) => !NOISE_FILE.test(t));
   const found = [];
   for (let i = 0; i < names.length; i += 20) {
     const batch = names.slice(i, i + 20);
@@ -402,6 +404,11 @@ async function main() {
   console.log(`Dựng ${seed.name} (${seed.places.length} địa điểm trong seed)`);
   const places = [];
   for (const s of seed.places) {
+    if (APPEND_ONLY && OLD_PLACES.has(s.id)) {
+      places.push(OLD_PLACES.get(s.id));
+      console.log(`  = ${s.id}: giữ nguyên toàn bộ dữ liệu đã có`);
+      continue;
+    }
     try {
       const p = await buildPlace(s, { dest: seed.name, radiusKm: seed.radiusKm, osmAliases: seed.osmAliases, ...seed.references[0] });
       if (p) places.push(p);
@@ -429,11 +436,21 @@ async function main() {
     { id: 'chuanbi', layout: 'CHECKLIST', category: 'van', icon: 'backpack', title: 'Chuẩn bị mang gì', summary: seed.packing.summary, items: seed.packing.items.map((title) => ({ icon: 'check', title })) },
   ];
   const out = { id: seed.id, name: seed.name, region: seed.region, tagline: seed.tagline, coverPlaceId: seed.coverPlaceId, references: seed.references, guide, places };
-  fs.writeFileSync(path.join(OUT_DIR, `${seed.id}.json`), `${JSON.stringify(out, null, 2)}\n`);
+  const target = path.join(OUT_DIR, `${seed.id}.json`);
+  const previous = fs.existsSync(target) ? JSON.parse(fs.readFileSync(target, 'utf8')) : null;
+  // Dựng lại địa điểm không được xoá bộ khoảnh khắc/bìa đã tuyển. Chế độ bổ sung còn giữ mọi nội dung điểm đến cũ.
+  const result = APPEND_ONLY && previous ? { ...previous, places } : {
+    ...out,
+    ...(previous?.moments ? { moments: previous.moments } : {}),
+    ...(previous?.coverPhoto ? { coverPhoto: previous.coverPhoto } : {}),
+  };
+  fs.writeFileSync(target, `${JSON.stringify(result, null, 2)}\n`);
   console.log(`Xong: ${places.length}/${seed.places.length} địa điểm → catalog/${seed.id}.json`);
 }
 
-main().catch((e) => {
+export { buildPlace, getJson, getBytes, plain, usableImages, wikiPage };
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((e) => {
   console.error(e);
   process.exit(1);
 });

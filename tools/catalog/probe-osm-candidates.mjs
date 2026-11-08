@@ -13,7 +13,7 @@ const DEST = arg('dest', '');
 const OVERPASS = 'https://overpass-api.de/api/interpreter';
 const UA = 'WanderCatalog/0.1 (learning project; contact binkuteqn289@gmail.com)';
 /** Bán kính tìm quanh điểm tham chiếu (km) theo từng điểm đến: Hà Giang và Tà Xùa rộng vì địa hình thưa. */
-const RADIUS_KM = { 'hoi-an': 14, 'vinh-hy': 22, 'ta-xua': 30, 'ha-giang': 70 };
+const RADIUS_KM = { 'hoi-an': 14, 'vinh-hy': 22, 'ta-xua': 30, 'ha-giang': 70, 'sa-pa': 80 };
 const MIN_NAME = 3;
 const KM = 1000;
 

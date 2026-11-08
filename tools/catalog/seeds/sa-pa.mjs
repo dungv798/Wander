@@ -1,0 +1,8 @@
+import { destination, point as p } from './_national.mjs';
+const trekTips = ['Tọa độ là mốc ngọn núi, không phải đầu tuyến trekking.', 'Liên hệ đơn vị quản lý hoặc guide để xác nhận tuyến, đăng ký và lịch đoàn; không suy ra lối đi bộ từ tuyến xe trên bản đồ.'];
+export default destination({ id:'sa-pa', name:'Sa Pa', region:'Tây Bắc', tagline:'Bước qua ruộng bậc thang, bản làng và những đỉnh núi', lat:22.3357, lon:103.8426, coverPlaceId:'sapa-fansipan', best:[4,5,9,10], radiusKm:120, places:[
+ p('sapa-fansipan','Phan Xi Păng','leo','Hoàng Liên Sơn','Tìm hiểu cung trekking Fansipan; hành trình đi bộ có cách chuẩn bị khác với tham quan bằng cáp treo.','Theo tuyến và lịch đoàn',{name:'Fansipan · trekking',difficulty:'Khó',slots:['sang'],slotReason:'Giờ xuất phát phụ thuộc tuyến và lịch đoàn đã xác nhận.',tips:trekTips,highlights:['Trekking Hoàng Liên Sơn','Phân biệt với cáp treo']}),
+ p('sapa-lao-than','Lảo Thẩn','leo','Y Tý · Bát Xát','Chọn một hành trình đi bộ lên Lảo Thẩn, tìm những khoảng mây giữa núi Y Tý.','Theo tuyến và lịch đoàn',{name:'Lảo Thẩn',difficulty:'Cần thể lực',slots:['sang'],slotReason:'Đi theo lịch trình được guide xác nhận.',tips:trekTips,highlights:['Núi Y Tý','Cảnh núi và mây']}),
+ p('sapa-nui-ham-rong','Núi Hàm Rồng (Sa Pa)','leo','Trung tâm Sa Pa','Dành thời gian đi bộ giữa vườn và những bậc đá trên núi Hàm Rồng.','2–3 giờ (tham khảo)',{name:'Núi Hàm Rồng',difficulty:'Vừa'}),
+ p('sapa-ban-cat-cat','Bản Cát Cát','van','Cát Cát','Đi bộ tìm hiểu không gian bản làng, kiến trúc và đời sống quanh Sa Pa.','2–3 giờ (tham khảo)',{name:'Bản Cát Cát',tips:['Xin phép trước khi chụp người hoặc vào nhà.', 'Xác nhận thông tin vé và dịch vụ tại nguồn địa phương.']}),
+]});

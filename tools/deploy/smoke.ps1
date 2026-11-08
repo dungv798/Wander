@@ -14,6 +14,7 @@ $logDir = Join-Path $projectRoot '.logs'
 $dbEnvFile = Join-Path $logDir "$runId-db.env"
 $appEnvFile = Join-Path $logDir "$runId-app.env"
 $oldBaseUrl = $env:WANDER_BASE_URL
+$oldE2eDb = $env:WANDER_E2E_DB
 
 # Secret chỉ dùng cho lượt test này, không dùng lại credential của app local hay cloud.
 function New-TestSecret {
@@ -71,6 +72,8 @@ try {
     Write-Output ('Ready at {0}, cold startup {1:N1}s; temporary app capped at 512 MiB / 1 CPU' -f $base, $startupSeconds)
     if ($FullE2e) {
         $env:WANDER_BASE_URL = $base
+        # CSDL của smoke là Postgres tạm sinh mới mỗi lượt (không mount dữ liệu thật) nên thỏa chốt chống ghi nhầm CSDL dev của web/e2e/backend.ts.
+        $env:WANDER_E2E_DB = 'wander_e2e'
         Push-Location $projectRoot
         try {
             $ErrorActionPreference = 'Continue'
@@ -97,4 +100,5 @@ try {
     docker network rm $network *> $null
     Remove-Item -LiteralPath $dbEnvFile, $appEnvFile -Force -ErrorAction SilentlyContinue
     $env:WANDER_BASE_URL = $oldBaseUrl
+    $env:WANDER_E2E_DB = $oldE2eDb
 }

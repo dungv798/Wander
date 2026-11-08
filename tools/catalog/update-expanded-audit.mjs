@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const file=new URL('./curation-audit.mjs',import.meta.url);
+let text=fs.readFileSync(file,'utf8');
+const start=text.indexOf('const report=');
+const end=text.indexOf("if(process.argv.includes('--render'))");
+if(start<0||end<start)throw new Error('Unexpected audit layout');
+if(!text.includes('await import(\'./expanded-report.mjs\')'))text=text.slice(0,start)+"if(expanded){await import('./expanded-report.mjs');}else{\n"+text.slice(start,end)+"}\n"+text.slice(end);
+text=text.replace('id:now.id,name:now.name,oldPhotos:','id:now.id,name:now.name,places:now.places.length,oldPhotos:');
+text=text.replace('fs.writeFileSync(file,html);await page.goto','fs.writeFileSync(file,html.replace(\'05/11/2026\',date));await page.goto');
+fs.writeFileSync(file,text);
+console.log('Expanded audit writes a separate dated report; historic report retained.');
