@@ -72,6 +72,120 @@
           "title": "Thuốc cá nhân"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "coffee",
+          "title": "Ngồi lại với trà Shan tuyết",
+          "text": "Thử một loại trà Shan tuyết và nghe câu chuyện về việc hái, sao trà. Nếu muốn ghé nơi làm trà, liên hệ trước.",
+          "placeId": "exp-food-ta-xua-tra-shan-tuyet"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thịt gác bếp Tây Bắc",
+          "text": "Tìm hiểu cách chế biến thịt gác bếp, hỏi thành phần và cách dùng trước khi chọn.",
+          "placeId": "exp-food-ta-xua-thit-gac-bep"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Một khoảng trời, một chén trà",
+          "text": "Tìm hiểu trà Shan tuyết bên cạnh việc ngắm mây; liên hệ trước nếu muốn ghé nơi làm trà."
+        },
+        {
+          "icon": "route",
+          "title": "Đi vì văn hóa, không chỉ vì ảnh",
+          "text": "Tìm hiểu nghề thêu và đời sống người Mông; thời gian và khả năng đón khách cần được xác nhận riêng."
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cháo mắc nhung",
+          "text": "Cháo với quả mắc nhung trong các bữa ăn địa phương.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Lẩu gà đen Tà Xùa",
+          "text": "Lẩu gà đen là lựa chọn được các cơ sở lưu trú giới thiệu.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm lam Tà Xùa",
+          "text": "Cơm nấu trong ống, thường đi cùng các món nướng vùng cao.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Xôi ngũ sắc Tà Xùa",
+          "text": "Xôi nhiều màu trong các bữa cơm bản địa được bài viết ghi nhận.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "May Home Tà Xùa",
+          "text": "Chỗ ở có nhận nhóm tại khu Tà Xùa theo cẩm nang. Nguồn ghi nhận các nhóm nhỏ và đoàn lớn; sức chứa cụ thể, loại phòng và bữa ăn cần xác nhận theo ngày.",
+          "placeId": "rs-ta-xua-may-home-ta-xua-84b26ec8"
+        },
+        {
+          "icon": "bed",
+          "title": "Pơ Mu Homestay",
+          "text": "Pơ Mu Homestay: hướng nhìn mây vùng cao tại Tà Xùa. Hồ sơ nguồn giới thiệu hướng nhìn mây vùng cao; cửa kính lớn.",
+          "placeId": "rs-ta-xua-po-mu-homestay-ac407a34"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "A Phủ Restaurant",
+          "text": "A Phủ Restaurant. Hồ sơ nguồn giới thiệu món thịt heo địa phương; các món rau vùng cao.",
+          "placeId": "rs-ta-xua-a-phu-restaurant-837133e3"
+        }
+      ]
     }
   ],
   "places": [
@@ -301,6 +415,258 @@
       "tips": [],
       "photos": [],
       "wikipediaTitle": null
+    },
+    {
+      "id": "exp-food-ta-xua-tra-shan-tuyet",
+      "name": "Ngồi lại với trà Shan tuyết",
+      "category": "am",
+      "area": "Mốc khu vực Tà Xùa",
+      "hook": "Thử một loại trà Shan tuyết và nghe câu chuyện về việc hái, sao trà.",
+      "summary": "Thử một loại trà Shan tuyết và nghe câu chuyện về việc hái, sao trà. Nếu muốn ghé nơi làm trà, liên hệ trước. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 21.3,
+      "lon": 104.4,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-tra-shan-tuyet-1.jpg",
+          "author": "VuThiAnh",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Che_Shan_tuyet.JPG"
+        }
+      ],
+      "wikipediaTitle": "Chè Shan tuyết"
+    },
+    {
+      "id": "exp-food-ta-xua-thit-gac-bep",
+      "name": "Thịt gác bếp Tây Bắc",
+      "category": "am",
+      "area": "Mốc khu vực Tà Xùa",
+      "hook": "Tìm hiểu cách chế biến thịt gác bếp, hỏi thành phần và cách dùng trước khi chọn.",
+      "summary": "Tìm hiểu cách chế biến thịt gác bếp, hỏi thành phần và cách dùng trước khi chọn. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 21.3,
+      "lon": 104.4,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Tìm hiểu thêm: https://en.baosonla.org.vn/kinh-te/shan-tuyet-tea-a-fragrant-treasure-of-ta-xuas-cloudy-mountains-2RRolfJvR.html"
+      ],
+      "photos": [
+        {
+          "file": "dish-ta-xua-thit-gac-bep-2.jpg",
+          "author": "Phương Huy",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%E1%BB%85_h%E1%BB%99i_%E1%BA%A9m_th%E1%BB%B1c_C%E1%BB%ADa_Vi%E1%BB%87t_th4n2023_%C4%91%E1%BA%B7c_s%E1%BA%A3n_T%C3%A2y_B%E1%BA%AFc,_th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_m%E1%BA%AFc_kh%C3%A9n_(2).jpg"
+        },
+        {
+          "file": "dish-ta-xua-thit-gac-bep-3.jpg",
+          "author": "Cabokho",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thịt gác bếp"
+    },
+    {
+      "id": "rs-ta-xua-a-phu-restaurant-837133e3",
+      "name": "A Phủ Restaurant",
+      "category": "am",
+      "area": "Tà Xùa",
+      "hook": "A Phủ Restaurant.",
+      "summary": "A Phủ Restaurant. Hồ sơ nguồn giới thiệu món thịt heo địa phương; các món rau vùng cao.",
+      "lat": 21.279708,
+      "lon": 104.426847,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món thịt heo địa phương",
+        "Các món rau vùng cao"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món thịt heo địa phương và các món rau vùng cao.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu thực đơn và khẩu phần trước khi chọn món.",
+        "Ghim theo mục cẩm nang cập nhật 2026-10-25; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Ta%20Xua&oldid=5415919"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "km 13, Tà Xùa, Sơn La",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Ta%20Xua&oldid=5415919",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ta-xua-may-home-ta-xua-84b26ec8",
+      "name": "May Home Tà Xùa",
+      "category": "luu",
+      "area": "Tà Xùa",
+      "hook": "Chỗ ở có nhận nhóm tại khu Tà Xùa theo cẩm nang.",
+      "summary": "Chỗ ở có nhận nhóm tại khu Tà Xùa theo cẩm nang. Nguồn ghi nhận các nhóm nhỏ và đoàn lớn; sức chứa cụ thể, loại phòng và bữa ăn cần xác nhận theo ngày.",
+      "lat": 21.277713,
+      "lon": 104.430325,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Lưu trú theo nhóm",
+        "Khu Tà Xùa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn lưu trú theo nhóm và khu tà xùa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Liên hệ trước để chốt số người, phòng riêng hay tập thể và việc đặt bữa ăn.",
+        "Ghim theo mục cẩm nang cập nhật 2026-10-25; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Ta%20Xua&oldid=5415919"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Tà Xùa, Sơn La",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Ta%20Xua&oldid=5415919",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ta-xua-po-mu-homestay-ac407a34",
+      "name": "Pơ Mu Homestay",
+      "category": "luu",
+      "area": "Tà Xùa",
+      "hook": "Pơ Mu Homestay: hướng nhìn mây vùng cao tại Tà Xùa.",
+      "summary": "Pơ Mu Homestay: hướng nhìn mây vùng cao tại Tà Xùa. Hồ sơ nguồn giới thiệu hướng nhìn mây vùng cao; cửa kính lớn.",
+      "lat": 21.279623,
+      "lon": 104.42505,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hướng nhìn mây vùng cao",
+        "Cửa kính lớn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hướng nhìn mây vùng cao và cửa kính lớn.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Ghim theo mục cẩm nang cập nhật 2026-10-25; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Ta%20Xua&oldid=5415919"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Tà Xùa, Sơn La",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Ta%20Xua&oldid=5415919",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
-  ]
+  ],
+  "moments": [
+    {
+      "id": "unsplash-JItZdoJYlb4",
+      "theme": "nguoi",
+      "caption": "Hẹn nhau trên một đỉnh đồi Tà Xùa",
+      "url": "https://images.unsplash.com/photo-1768236872842-bc73e46d81aa?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Mnx8JTIyVCVDMyVBMCUyMFglQzMlQjlhJTIyfGVufDF8fHx8MTc5Mzg5MTY2OHww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Jamie Trinh",
+      "authorUrl": "https://unsplash.com/@jtrinh_artwork?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/people-gather-on-a-grassy-hill-with-mountains-behind-JItZdoJYlb4?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-DsJTg3Q-WDg",
+      "theme": "hanh-trinh",
+      "caption": "Chờ mây đi qua những nếp nhà Tà Xùa",
+      "url": "https://images.unsplash.com/photo-1771784970196-81ed951800dc?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8NHx8JTIyVCVDMyVBMCUyMFglQzMlQjlhJTIyfGVufDF8fHx8MTc5Mzg5MTY2OHww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Harry Le",
+      "authorUrl": "https://unsplash.com/@byharryle?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-village-nestled-among-misty-mountains-and-trees-DsJTg3Q-WDg?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "food-research-ta-xua",
+      "theme": "mon-an",
+      "caption": "Ngồi lại với trà Shan tuyết · một món muốn thử (ảnh minh họa)",
+      "file": "food-tra-shan-tuyet-1.jpg",
+      "author": "VuThiAnh",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Che_Shan_tuyet.JPG"
+    },
+    {
+      "id": "wave-pexels-40742657",
+      "theme": "hanh-trinh",
+      "caption": "Ngồi lại bên khung cửa nhìn xuống thung lũng Tà Xùa",
+      "file": "wave-pexels-40742657.jpg",
+      "author": "Cá Bảo",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/scenic-view-of-ta-xua-valley-and-river-40742657/"
+    },
+    {
+      "id": "wave-pexels-40549695",
+      "theme": "nguoi",
+      "caption": "Một khoảng nghỉ giữa cỏ và núi Tà Xùa",
+      "file": "wave-pexels-40549695.jpg",
+      "author": "Mochi Mochi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/young-woman-enjoying-nature-in-ta-xua-40549695/"
+    }
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1721124823439-ee9eda27dbb4?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MXx8JTIyVCVDMyVBMCUyMFglQzMlQjlhJTIyfGVufDF8fHx8MTc5Mzg5MTY2OHww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+    "author": "Huy Nguyen",
+    "authorUrl": "https://unsplash.com/@huynguyen_pch?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/a-view-of-a-valley-with-mountains-in-the-background-GwvxlZqyIaI?utm_source=wander&utm_medium=referral"
+  }
 }

@@ -68,6 +68,214 @@
           "title": "Kem chống nắng"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún bò Huế",
+          "text": "Nước dùng thơm sả, sợi bún và chút cay theo khẩu vị. Hỏi trước về thịt, chả và các món ăn kèm.",
+          "placeId": "exp-food-hue-bun-bo-hue"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh bèo",
+          "text": "Những chén bánh nhỏ với phần nhân và nước chấm. Có thể gọi một phần để thử trước khi chọn thêm món.",
+          "placeId": "exp-food-hue-banh-beo"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh bột lọc",
+          "text": "Lớp bột trong, dai, thường có nhân tôm thịt. Thử cùng các món bánh nhỏ khi khám phá ẩm thực Huế.",
+          "placeId": "exp-food-hue-banh-bot-loc"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm hến",
+          "text": "Thử vị cay, rau và các thành phần ăn kèm của một bữa cơm hến.",
+          "placeId": "exp-food-hue-com-hen"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh nậm",
+          "text": "Tìm những gói bánh mềm; hỏi phần nhân và nước chấm khi gọi.",
+          "placeId": "exp-food-hue-banh-nam"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Một buổi thử các món bánh",
+          "text": "Gọi phần nhỏ bánh bèo, bột lọc, rồi chọn món muốn quay lại."
+        },
+        {
+          "icon": "route",
+          "title": "Đi chậm giữa các di sản",
+          "text": "Giữ khoảng nghỉ giữa các điểm tham quan; không ghép quá nhiều lăng và Đại Nội vào một ngày."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Saigon Morin Hotel",
+          "text": "Một điểm nghỉ ở khu vực bờ sông Hương và cầu Trường Tiền.",
+          "placeId": "venue-hue-saigon-morin"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh canh Nam Phổ",
+          "text": "Bánh canh nước sánh, có tôm và cua trong phiên bản được nguồn giới thiệu.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh ép",
+          "text": "Bánh ép nóng, ăn với rau và nước chấm.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Nem lụi Huế",
+          "text": "Thịt xay nướng trên que, cuốn cùng rau và bánh tráng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm âm phủ",
+          "text": "Cơm với thịt, tôm, trứng và rau được thái nhỏ, bày riêng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chè bột lọc heo quay",
+          "text": "Chè có viên bột lọc bọc thịt heo quay, kết hợp vị mặn và ngọt.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh ram ít",
+          "text": "Một lớp bánh nếp mềm đặt trên phần bánh chiên giòn.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh ướt thịt nướng Huế",
+          "text": "Bánh ướt cuốn thịt nướng và rau, chấm nước sốt.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún thịt nướng Huế",
+          "text": "Bún trộn thịt nướng với rau, đồ chua và nước chấm.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Azerai La Residence, Hue",
+          "text": "Không gian giữ các chi tiết cửa kiểu Pháp, ban công và nội thất gợi những thập niên đầu thế kỷ 20. Tiện ích có bể bơi nước mặn, spa, quầy bar Le Gouverneur và nhà hàng Le Parfum.",
+          "placeId": "rs-hue-azerai-la-residence-hue-6765d6fa"
+        },
+        {
+          "icon": "bed",
+          "title": "Banyan Tree Lang Co Vietnam",
+          "text": "Banyan Tree Lang Co Vietnam: có lựa chọn villa tại HUE. Hồ sơ nguồn giới thiệu có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có hạng phòng hoặc villa với bể bơi riêng; vị trí gần hoặc sát bãi biển.",
+          "placeId": "rs-hue-banyan-tree-lang-co-viet-cade225f"
+        },
+        {
+          "icon": "bed",
+          "title": "Angsana Lang Co Vietnam",
+          "text": "Angsana Lang Co Vietnam: có hạng suite tại Hue. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-hue-angsana-lang-co-vietnam-4a5ed90b"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "MARKET PLACE · Angsana Lang Co Vietnam",
+          "text": "MARKET PLACE trong Angsana Lang Co Vietnam. Hồ sơ nguồn giới thiệu các món địa phương; có phục vụ bữa sáng; món việt; thực đơn quốc tế.",
+          "placeId": "rs-hue-market-place-angsana-lan-07372338"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "RICE BOWL · Angsana Lang Co Vietnam",
+          "text": "Nhà hàng với các món vùng Đông Nam Á trong Angsana Lăng Cô. Phòng ăn được chia thành những không gian nhỏ hơn để dùng bữa.",
+          "placeId": "rs-hue-rice-bowl-angsana-lang-c-6ac91557"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "MOOMBA · Angsana Lang Co Vietnam",
+          "text": "MOOMBA trong Angsana Lang Co Vietnam. Hồ sơ nguồn giới thiệu không gian gần biển; cocktail.",
+          "placeId": "rs-hue-moomba-angsana-lang-co-v-313b687f"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "THE WATER COURT · Banyan Tree Lang Co Vietnam",
+          "text": "THE WATER COURT trong Banyan Tree Lang Co Vietnam. Hồ sơ nguồn giới thiệu món việt; các món cá và hải sản.",
+          "placeId": "rs-hue-the-water-court-banyan-t-0ad28ef2"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "SAFFRON · Banyan Tree Lang Co Vietnam",
+          "text": "Nhà hàng Thái trong khu nghỉ Banyan Tree Lăng Cô. Không gian dùng các chi tiết trang trí Thái và hiện đại, cùng thực đơn truyền thống.",
+          "placeId": "rs-hue-saffron-banyan-tree-lang-90421f42"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "AZURA · Banyan Tree Lang Co Vietnam",
+          "text": "AZURA trong Banyan Tree Lang Co Vietnam. Hồ sơ nguồn giới thiệu ẩm thực ý; có khu ngồi ngoài trời; không gian gần biển.",
+          "placeId": "rs-hue-azura-banyan-tree-lang-c-268a3c44"
+        }
+      ]
     }
   ],
   "places": [
@@ -663,9 +871,849 @@
         }
       ],
       "wikipediaTitle": "Vườn quốc gia Bạch Mã"
+    },
+    {
+      "id": "exp-food-hue-bun-bo-hue",
+      "name": "Bún bò Huế",
+      "category": "am",
+      "area": "Mốc khu vực Huế",
+      "hook": "Nước dùng thơm sả, sợi bún và chút cay theo khẩu vị.",
+      "summary": "Nước dùng thơm sả, sợi bún và chút cay theo khẩu vị. Hỏi trước về thịt, chả và các món ăn kèm. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.4637,
+      "lon": 107.5909,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-bun-bo-hue-1.jpg",
+          "author": "Kham Tran - www.khamtran.com",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bun-Bo-Hue-from-Huong-Giang-2011.jpg"
+        },
+        {
+          "file": "food-bun-bo-hue-2.jpg",
+          "author": "Beelerb",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_%E1%BB%9F_%C4%90%C3%A0_N%E1%BA%B5ng.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bún bò Huế"
+    },
+    {
+      "id": "exp-food-hue-banh-beo",
+      "name": "Bánh bèo",
+      "category": "am",
+      "area": "Mốc khu vực Huế",
+      "hook": "Những chén bánh nhỏ với phần nhân và nước chấm.",
+      "summary": "Những chén bánh nhỏ với phần nhân và nước chấm. Có thể gọi một phần để thử trước khi chọn thêm món. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.4637,
+      "lon": 107.5909,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-beo-1.jpg",
+          "author": "Nha Nghi La from Ho Chi Minh, Viet Nam",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o_ch%C3%A9n.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh bèo"
+    },
+    {
+      "id": "exp-food-hue-banh-bot-loc",
+      "name": "Bánh bột lọc",
+      "category": "am",
+      "area": "Mốc khu vực Huế",
+      "hook": "Lớp bột trong, dai, thường có nhân tôm thịt.",
+      "summary": "Lớp bột trong, dai, thường có nhân tôm thịt. Thử cùng các món bánh nhỏ khi khám phá ẩm thực Huế. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.4637,
+      "lon": 107.5909,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-bot-loc-3.jpg",
+          "author": "Yun Huang Yong",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o,_b%E1%BB%99t_l%E1%BB%8Dc...jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh bột lọc"
+    },
+    {
+      "id": "hue-lang-gia-long",
+      "name": "Lăng Gia Long",
+      "category": "van",
+      "area": "Huế",
+      "hook": "Đi chậm giữa hồ, thông và kiến trúc lăng.",
+      "summary": "Thiên Thọ Lăng là quần thể lăng tẩm gắn với vua Gia Long và hoàng quyến. Cân nhắc điểm này nếu muốn dành thời gian cho cảnh quan và câu chuyện triều Nguyễn ngoài Đại Nội.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 16.36194444,
+      "lon": 107.59666667,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Di sản triều Nguyễn",
+        "Quần thể lăng tẩm",
+        "Đi bộ tham quan"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Chọn lối vào và điểm đón trả cụ thể trước khi xếp lịch; ghim là mốc quần thể.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/L%C4%83ng%20Gia%20Long",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-hue-lang-gia-long-1.jpg",
+          "author": "LÊ TẤN LỘC",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_vua_Gia_Long_3.JPG"
+        },
+        {
+          "file": "wave-hue-lang-gia-long-2.jpg",
+          "author": "BluesyPete",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tombe_de_Gia_Long.JPG"
+        }
+      ],
+      "wikipediaTitle": "Lăng Gia Long"
+    },
+    {
+      "id": "hue-chua-tu-hieu",
+      "name": "Chùa Từ Hiếu",
+      "category": "van",
+      "area": "Huế",
+      "hook": "Dành một khoảng lặng trong không gian chùa và rừng thông.",
+      "summary": "Một ngôi cổ tự gắn với đời sống văn hóa, lịch sử Huế. Có thể dành thời gian dạo sân chùa và tìm hiểu câu chuyện nơi đây trong sự yên tĩnh.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 16.438551,
+      "lon": 107.572989,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Cổ tự Huế",
+        "Không gian tĩnh",
+        "Văn hóa địa phương"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Quan sát hoạt động của chùa trước khi vào khu hành lễ; xin phép nếu muốn chụp người.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/Ch%C3%B9a%20T%E1%BB%AB%20Hi%E1%BA%BFu",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-hue-chua-tu-hieu-2.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%E1%BB%AB_Hi%E1%BA%BFu_Pagoda_03.jpg"
+        },
+        {
+          "file": "wave-hue-chua-tu-hieu-1.jpg",
+          "author": "Lưu Ly",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tu_Hieu_Pagoda.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Từ Hiếu"
+    },
+    {
+      "id": "exp-canh-hue-pha-tam-giang",
+      "name": "Phá Tam Giang",
+      "category": "canh",
+      "area": "Huế",
+      "hook": "Tìm hiểu nhịp sống ven phá và những bến thuyền.",
+      "summary": "Vùng mặt nước rộng trong hệ đầm phá Tam Giang – Cầu Hai gắn với đời sống đánh bắt. Trước khi xếp ngày, chọn một làng, bến thuyền hoặc trải nghiệm cụ thể; mốc vùng phá không phải bến xuất phát.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 16.63194444,
+      "lon": 107.47194444,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Đời sống ven phá",
+        "Mặt nước",
+        "Chọn bến trước khi đi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Xác nhận điểm hẹn, điều kiện thời tiết và cách di chuyển với người tổ chức nếu muốn đi thuyền.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/Ph%C3%A1%20Tam%20Giang",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-hue-pha-tam-giang-1.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_the_Tam_Giang_Lagoon.jpg"
+        }
+      ],
+      "wikipediaTitle": "Phá Tam Giang"
+    },
+    {
+      "id": "hue-dien-hon-chen",
+      "name": "Điện Hòn Chén",
+      "category": "van",
+      "area": "Huế",
+      "hook": "Tìm hiểu kiến trúc và tín ngưỡng bên sông Hương.",
+      "summary": "Huệ Nam Điện nằm trên núi Ngọc Trản, gắn với văn hóa tín ngưỡng của vùng Huế. Ghé tìm hiểu kiến trúc và câu chuyện địa phương; hoạt động lễ hội cần tra lịch riêng.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 16.421956,
+      "lon": 107.562969,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Kiến trúc tín ngưỡng",
+        "Núi Ngọc Trản",
+        "Văn hóa Huế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Xác nhận cách tiếp cận và lịch lễ hiện tại; không mặc định luôn có trình diễn hoặc lễ hội.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/%C4%90i%E1%BB%87n%20H%C3%B2n%20Ch%C3%A9n",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-hue-dien-hon-chen-1.jpg",
+          "author": "Lưu Ly ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90i%E1%BB%87n_H%C3%B2n_Ch%C3%A9n1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Điện Hòn Chén"
+    },
+    {
+      "id": "venue-hue-saigon-morin",
+      "name": "Saigon Morin Hotel",
+      "category": "luu",
+      "area": "Huế",
+      "hook": "Một điểm nghỉ ở khu vực bờ sông Hương và cầu Trường Tiền.",
+      "summary": "Một điểm nghỉ ở khu vực bờ sông Hương và cầu Trường Tiền. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 16.4666195,
+      "lon": 107.5902634,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 30 Lê Lợi, Huế",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/239566031"
+      ],
+      "photos": [
+        {
+          "file": "venue-hue-saigon-morin-1.jpg",
+          "author": "dronepicr",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hue_Hotel_Saigon_(24675543497).jpg"
+        },
+        {
+          "file": "venue-hue-saigon-morin-2.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_Saigon_Morin,_Hue_(2024)_03.jpg"
+        },
+        {
+          "file": "completion-c769c08b028bd3a3.jpg",
+          "author": "lightwrite",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/77442936@N00/14545207101"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "30 Lê Lợi, Huế",
+        "website": "https://morinhotel.com.vn/",
+        "sourceUrl": "https://morinhotel.com.vn/",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 234 3823526"
+      }
+    },
+    {
+      "id": "exp-food-hue-com-hen",
+      "name": "Cơm hến",
+      "category": "am",
+      "area": "Mốc khu vực Huế",
+      "hook": "Thử vị cay, rau và các thành phần ăn kèm của một bữa cơm hến.",
+      "summary": "Thử vị cay, rau và các thành phần ăn kèm của một bữa cơm hến. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.4637,
+      "lon": 107.5909,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Tìm hiểu thêm: https://vietnam.travel/things-to-do/how-eat-local-hue/"
+      ],
+      "photos": [
+        {
+          "file": "dish-hue-com-hen-1.jpg",
+          "author": "Lucas Jans from USA",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BA%BFn_tr%E1%BB%99n.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cơm hến"
+    },
+    {
+      "id": "exp-food-hue-banh-nam",
+      "name": "Bánh nậm",
+      "category": "am",
+      "area": "Mốc khu vực Huế",
+      "hook": "Tìm những gói bánh mềm; hỏi phần nhân và nước chấm khi gọi.",
+      "summary": "Tìm những gói bánh mềm; hỏi phần nhân và nước chấm khi gọi. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.4637,
+      "lon": 107.5909,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Tìm hiểu thêm: https://vietnam.travel/things-to-do/how-eat-local-hue/"
+      ],
+      "photos": [
+        {
+          "file": "dish-hue-banh-nam-1.jpg",
+          "author": "Christopher Crouzet",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_N%E1%BA%ADm.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh nậm"
+    },
+    {
+      "id": "rs-hue-banyan-tree-lang-co-viet-cade225f",
+      "name": "Banyan Tree Lang Co Vietnam",
+      "category": "luu",
+      "area": "Huế",
+      "hook": "Banyan Tree Lang Co Vietnam: có lựa chọn villa tại HUE.",
+      "summary": "Banyan Tree Lang Co Vietnam: có lựa chọn villa tại HUE. Hồ sơ nguồn giới thiệu có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có hạng phòng hoặc villa với bể bơi riêng; vị trí gần hoặc sát bãi biển.",
+      "lat": 16.338081,
+      "lon": 107.953822,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có hạng phòng hoặc villa với bể bơi riêng",
+        "Vị trí gần hoặc sát bãi biển",
+        "Có lựa chọn nhìn ra biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn villa và có nhà hàng hoặc không gian ăn uống.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695888.",
+        "Email liên hệ theo nguồn: reservations-langco@banyantree.com.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/hue/banyan-tree-lang-co-6828",
+        "Nguồn: https://all.accor.com/hotel/B1V7/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1634337211582-e75b7e019d5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTIzOTE3fDB8MXxhbGx8fHx8fHx8fHwxNzk0MDM5NzAyfA&ixlib=rb-4.1.0&q=80&w=1080",
+          "author": "We Do Creative Films",
+          "authorUrl": "https://unsplash.com/@wedocreativefilms?utm_source=wander&utm_medium=referral",
+          "license": "Unsplash",
+          "sourceUrl": "https://unsplash.com/photos/an-aerial-view-of-a-house-with-a-swimming-pool-AoYyfTvZUTI?utm_source=wander&utm_medium=referral",
+          "caption": "Khu nhà chính và hồ bơi"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Canh Duong village, Chan May Lang Co Commune, HUE, Vietnam",
+        "website": "https://all.accor.com/hotel/B1V7/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B1V7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695888",
+        "serviceHours": "Nhận phòng 15:00; Trả phòng 12:00",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-angsana-lang-co-vietnam-4a5ed90b",
+      "name": "Angsana Lang Co Vietnam",
+      "category": "luu",
+      "area": "Huế",
+      "hook": "Angsana Lang Co Vietnam: có hạng suite tại Hue.",
+      "summary": "Angsana Lang Co Vietnam: có hạng suite tại Hue. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 16.334281,
+      "lon": 107.955839,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có hạng phòng hoặc villa với bể bơi riêng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695800.",
+        "Email liên hệ theo nguồn: Reservations-Langco@angsana.com.",
+        "Nguồn: https://all.accor.com/hotel/B1W4/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Canh Duong village, Chan May Lang Co Commune, Hue, Vietnam",
+        "website": "https://all.accor.com/hotel/B1W4/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B1W4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695800",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-market-place-angsana-lan-07372338",
+      "name": "MARKET PLACE · Angsana Lang Co Vietnam",
+      "category": "am",
+      "area": "Huế",
+      "hook": "MARKET PLACE trong Angsana Lang Co Vietnam.",
+      "summary": "MARKET PLACE trong Angsana Lang Co Vietnam. Hồ sơ nguồn giới thiệu các món địa phương; có phục vụ bữa sáng; món việt; thực đơn quốc tế.",
+      "lat": 16.334281,
+      "lon": 107.955839,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Các món địa phương",
+        "Có phục vụ bữa sáng",
+        "Món Việt",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn các món địa phương và có phục vụ bữa sáng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695800.",
+        "Email liên hệ theo nguồn: Reservations-Langco@angsana.com.",
+        "Nguồn: https://all.accor.com/hotel/B1W4/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Canh Duong village, Chan May Lang Co Commune, Hue, Vietnam",
+        "website": "https://all.accor.com/hotel/B1W4/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1W4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695800",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-rice-bowl-angsana-lang-c-6ac91557",
+      "name": "RICE BOWL · Angsana Lang Co Vietnam",
+      "category": "am",
+      "area": "Huế",
+      "hook": "Nhà hàng với các món vùng Đông Nam Á trong Angsana Lăng Cô.",
+      "summary": "Nhà hàng với các món vùng Đông Nam Á trong Angsana Lăng Cô. Phòng ăn được chia thành những không gian nhỏ hơn để dùng bữa.",
+      "lat": 16.334281,
+      "lon": 107.955839,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Đông Nam Á",
+        "Không gian ăn nhỏ",
+        "Angsana Lăng Cô"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực đông nam á và không gian ăn nhỏ.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi thực đơn vùng miền đang phục vụ và đặt bàn theo số người.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695800.",
+        "Email liên hệ theo nguồn: Reservations-Langco@angsana.com.",
+        "Nguồn: https://all.accor.com/hotel/B1W4/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Canh Duong village, Chan May Lang Co Commune, Hue, Vietnam",
+        "website": "https://all.accor.com/hotel/B1W4/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1W4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695800",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-moomba-angsana-lang-co-v-313b687f",
+      "name": "MOOMBA · Angsana Lang Co Vietnam",
+      "category": "am",
+      "area": "Huế",
+      "hook": "MOOMBA trong Angsana Lang Co Vietnam.",
+      "summary": "MOOMBA trong Angsana Lang Co Vietnam. Hồ sơ nguồn giới thiệu không gian gần biển; cocktail.",
+      "lat": 16.334281,
+      "lon": 107.955839,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Không gian gần biển",
+        "Cocktail"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn không gian gần biển và cocktail.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695800.",
+        "Email liên hệ theo nguồn: Reservations-Langco@angsana.com.",
+        "Nguồn: https://all.accor.com/hotel/B1W4/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Canh Duong village, Chan May Lang Co Commune, Hue, Vietnam",
+        "website": "https://all.accor.com/hotel/B1W4/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1W4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695800",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-the-water-court-banyan-t-0ad28ef2",
+      "name": "THE WATER COURT · Banyan Tree Lang Co Vietnam",
+      "category": "am",
+      "area": "Huế",
+      "hook": "THE WATER COURT trong Banyan Tree Lang Co Vietnam.",
+      "summary": "THE WATER COURT trong Banyan Tree Lang Co Vietnam. Hồ sơ nguồn giới thiệu món việt; các món cá và hải sản.",
+      "lat": 16.338081,
+      "lon": 107.953822,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món Việt",
+        "Các món cá và hải sản"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món việt và các món cá và hải sản.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695888.",
+        "Email liên hệ theo nguồn: reservations-langco@banyantree.com.",
+        "Nguồn: https://all.accor.com/hotel/B1V7/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1634337211582-e75b7e019d5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTIzOTE3fDB8MXxhbGx8fHx8fHx8fHwxNzk0MDM5NzAyfA&ixlib=rb-4.1.0&q=80&w=1080",
+          "author": "We Do Creative Films",
+          "authorUrl": "https://unsplash.com/@wedocreativefilms?utm_source=wander&utm_medium=referral",
+          "license": "Unsplash",
+          "sourceUrl": "https://unsplash.com/photos/an-aerial-view-of-a-house-with-a-swimming-pool-AoYyfTvZUTI?utm_source=wander&utm_medium=referral",
+          "caption": "Ảnh khách sạn · Khu nhà chính và hồ bơi"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Canh Duong village, Chan May Lang Co Commune, HUE, Vietnam",
+        "website": "https://all.accor.com/hotel/B1V7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1V7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-saffron-banyan-tree-lang-90421f42",
+      "name": "SAFFRON · Banyan Tree Lang Co Vietnam",
+      "category": "am",
+      "area": "Huế",
+      "hook": "Nhà hàng Thái trong khu nghỉ Banyan Tree Lăng Cô.",
+      "summary": "Nhà hàng Thái trong khu nghỉ Banyan Tree Lăng Cô. Không gian dùng các chi tiết trang trí Thái và hiện đại, cùng thực đơn truyền thống.",
+      "lat": 16.338081,
+      "lon": 107.953822,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Thái",
+        "Banyan Tree",
+        "Bữa tối đặt chỗ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực thái và banyan tree.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Chọn độ cay và báo dị ứng trước khi xác nhận thực đơn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695888.",
+        "Email liên hệ theo nguồn: reservations-langco@banyantree.com.",
+        "Nguồn: https://all.accor.com/hotel/B1V7/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1634337211582-e75b7e019d5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTIzOTE3fDB8MXxhbGx8fHx8fHx8fHwxNzk0MDM5NzAyfA&ixlib=rb-4.1.0&q=80&w=1080",
+          "author": "We Do Creative Films",
+          "authorUrl": "https://unsplash.com/@wedocreativefilms?utm_source=wander&utm_medium=referral",
+          "license": "Unsplash",
+          "sourceUrl": "https://unsplash.com/photos/an-aerial-view-of-a-house-with-a-swimming-pool-AoYyfTvZUTI?utm_source=wander&utm_medium=referral",
+          "caption": "Ảnh khách sạn · Khu nhà chính và hồ bơi"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Canh Duong village, Chan May Lang Co Commune, HUE, Vietnam",
+        "website": "https://all.accor.com/hotel/B1V7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1V7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-azura-banyan-tree-lang-c-268a3c44",
+      "name": "AZURA · Banyan Tree Lang Co Vietnam",
+      "category": "am",
+      "area": "Huế",
+      "hook": "AZURA trong Banyan Tree Lang Co Vietnam.",
+      "summary": "AZURA trong Banyan Tree Lang Co Vietnam. Hồ sơ nguồn giới thiệu ẩm thực ý; có khu ngồi ngoài trời; không gian gần biển.",
+      "lat": 16.338081,
+      "lon": 107.953822,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Ý",
+        "Có khu ngồi ngoài trời",
+        "Không gian gần biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực ý và có khu ngồi ngoài trời.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842343695888.",
+        "Email liên hệ theo nguồn: reservations-langco@banyantree.com.",
+        "Nguồn: https://all.accor.com/hotel/B1V7/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "url": "https://images.unsplash.com/photo-1634337211582-e75b7e019d5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTIzOTE3fDB8MXxhbGx8fHx8fHx8fHwxNzk0MDM5NzAyfA&ixlib=rb-4.1.0&q=80&w=1080",
+          "author": "We Do Creative Films",
+          "authorUrl": "https://unsplash.com/@wedocreativefilms?utm_source=wander&utm_medium=referral",
+          "license": "Unsplash",
+          "sourceUrl": "https://unsplash.com/photos/an-aerial-view-of-a-house-with-a-swimming-pool-AoYyfTvZUTI?utm_source=wander&utm_medium=referral",
+          "caption": "Ảnh khách sạn · Khu nhà chính và hồ bơi"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Canh Duong village, Chan May Lang Co Commune, HUE, Vietnam",
+        "website": "https://all.accor.com/hotel/B1V7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1V7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842343695888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hue-azerai-la-residence-hue-6765d6fa",
+      "name": "Azerai La Residence, Hue",
+      "category": "luu",
+      "area": "Huế",
+      "hook": "Khách sạn Art Deco trong khu dinh thự cũ bên sông Hương.",
+      "summary": "Không gian giữ các chi tiết cửa kiểu Pháp, ban công và nội thất gợi những thập niên đầu thế kỷ 20. Tiện ích có bể bơi nước mặn, spa, quầy bar Le Gouverneur và nhà hàng Le Parfum.",
+      "lat": 16.4590916,
+      "lon": 107.5801536,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Kiến trúc Art Deco",
+        "Ven sông Hương",
+        "Bể bơi nước mặn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn kiến trúc art deco và ven sông hương.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Chọn hướng nhìn và hỏi phòng ở khối dinh thự hay phần mở rộng trước khi đặt.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/hue/azerai-la-residence-hue-6099",
+        "Nguồn: https://www.openstreetmap.org/way/240266283"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "5 Le Loi Street, Hue, Vietnam",
+        "website": "https://azerai.com/resorts/azerai-la-residence-hue/",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/hue/azerai-la-residence-hue-6099",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
   ],
   "moments": [
+    {
+      "id": "unsplash-U8SOCzoAoAs",
+      "theme": "le-hoi",
+      "caption": "Thuyền rồng trên sông",
+      "url": "https://images.unsplash.com/photo-1713685714933-21df445dd6a5?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Mjd8fEh1ZSUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODQ1Mzk3fDA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Olga Pro",
+      "authorUrl": "https://unsplash.com/@olgapro?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-boat-that-is-sitting-on-the-side-of-the-water-U8SOCzoAoAs?utm_source=wander&utm_medium=referral"
+    },
     {
       "id": "cho-1",
       "theme": "cho",
@@ -692,6 +1740,78 @@
       "author": "Vu Pham in Vietnam",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/36668777@N07/3380583752"
+    },
+    {
+      "id": "unsplash-r1JY7UkGMec",
+      "theme": "hanh-trinh",
+      "caption": "Cùng nhau bước qua những lớp thành xưa ở Huế",
+      "url": "https://images.unsplash.com/photo-1716795311009-c8858984acf5?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjZ8fEh1ZSUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODQ1Mzk3fDA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Tam Dang Ngoc",
+      "authorUrl": "https://unsplash.com/@ngtam?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-couple-of-people-standing-next-to-a-tall-building-r1JY7UkGMec?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-_yYy9lPu2tY",
+      "theme": "hanh-trinh",
+      "caption": "Chọn một chuyến thuyền rồng trên sông Hương",
+      "url": "https://images.unsplash.com/photo-1604971684445-0ac837a1c720?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MzB8fEh1ZSUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODQ1Mzk3fDA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Callum Parker",
+      "authorUrl": "https://unsplash.com/@callump1975?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/yellow-and-blue-dragon-on-brown-wooden-boat-_yYy9lPu2tY?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "commons-hue-20261105-17",
+      "theme": "mon-an",
+      "caption": "Dừng bên một quầy trái cây gần cầu Trường Tiền",
+      "file": "hue-moment-20261105-17.jpg",
+      "author": "Christophe95",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Food_stand_in_Hu%E1%BA%BF.jpg"
+    },
+    {
+      "id": "pexels-36776136",
+      "theme": "mon-an",
+      "caption": "Ghé một hàng ăn nhỏ trong buổi chợ Huế",
+      "file": "pexels-36776136.jpg",
+      "author": "nhavantuonglai",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/street-vendor-preparing-vietnamese-cuisine-in-hue-36776136/"
+    },
+    {
+      "id": "pexels-4619765",
+      "theme": "mon-an",
+      "caption": "Bún, rau thơm và chút cay trong một góc chợ Huế",
+      "file": "pexels-4619765.jpg",
+      "author": "Pew Nguyen",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/white-pasta-and-peppers-in-bowls-4619765/"
+    },
+    {
+      "id": "pexels-4619764",
+      "theme": "nghe",
+      "caption": "Dừng trước một quầy sợi và vải đầy màu sắc ở Huế",
+      "file": "pexels-4619764.jpg",
+      "author": "Pew Nguyen",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-black-and-white-striped-long-sleeve-shirt-sitting-in-front-of-her-store-4619764/"
+    },
+    {
+      "id": "food-research-hue",
+      "theme": "mon-an",
+      "caption": "Bún bò Huế · một món muốn thử (ảnh minh họa)",
+      "file": "food-bun-bo-hue-1.jpg",
+      "author": "Kham Tran - www.khamtran.com",
+      "license": "CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bun-Bo-Hue-from-Huong-Giang-2011.jpg"
     }
-  ]
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1664333039578-28ad613ee536?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8NHx8SHVlJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTd8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+    "author": "Phương Anh Nguyễn",
+    "authorUrl": "https://unsplash.com/@phuonganh1199?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/a-building-with-a-bridge-over-water-Wg5QlgFdrDQ?utm_source=wander&utm_medium=referral"
+  }
 }

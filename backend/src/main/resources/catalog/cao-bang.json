@@ -1,0 +1,520 @@
+{
+  "id": "cao-bang",
+  "name": "Cao Bằng",
+  "region": "Đông Bắc",
+  "tagline": "Thác nước, núi đá và những hành trình qua bản làng",
+  "coverPlaceId": "cao-bang-thac-ban-gioc",
+  "references": [
+    {
+      "id": "trung-tam-cao-bang",
+      "name": "Mốc tham chiếu Cao Bằng",
+      "lat": 22.666,
+      "lon": 106.261,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh cuốn Cao Bằng",
+          "text": "Một đĩa bánh vừa tráng để thử trong buổi dạo chợ. Cách ăn kèm và nước chấm có thể khác nhau giữa các vùng.",
+          "placeId": "exp-food-cao-bang-banh-cuon"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Phở chua",
+          "text": "Một cách thưởng thức phở khác với phở nước, với phần trộn và đồ ăn kèm riêng. Hỏi quán để chọn phần hợp khẩu vị.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Phở chua Cao Bằng",
+          "text": "Thử một cách ăn phở khác, hỏi phần sốt và các nguyên liệu trộn của quán.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Một buổi cho nghề địa phương",
+          "text": "Tìm hiểu nghề rèn Phúc Sen hoặc làng hương; xác nhận nơi có thể đón khách, đừng tự vào xưởng."
+        },
+        {
+          "icon": "route",
+          "title": "Đổi vị giữa hành trình núi",
+          "text": "Chừa một bữa cho bánh cuốn hoặc phở chua; chọn điểm dừng theo cung đường thực tế."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Mường Thanh Luxury Cao Bằng",
+          "text": "Lấy khu trung tâm Cao Bằng làm điểm nghỉ, chọn lịch đi thác riêng.",
+          "placeId": "venue-cao-bang-muong-thanh"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Vịt quay bảy vị",
+          "text": "Vịt quay trong danh mục đặc sản Cao Bằng; thành phần gia vị tùy cơ sở.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh áp chao",
+          "text": "Món bánh chiên của Cao Bằng; hỏi phần nhân trước khi gọi.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh trứng kiến",
+          "text": "Bánh đặc sản có trứng kiến; hỏi thời điểm có món và nguyên liệu.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh coóng phù",
+          "text": "Món bánh ngọt có trong danh mục ẩm thực Cao Bằng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Xôi trám",
+          "text": "Xôi kết hợp quả trám, một món trong ẩm thực địa phương.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh khảo",
+          "text": "Bánh làm quà trong danh mục đặc sản Cao Bằng.",
+          "placeId": null
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "cao-bang-thac-ban-gioc",
+      "name": "Thác Bản Giốc",
+      "category": "canh",
+      "area": "Trùng Khánh",
+      "hook": "Nghe tiếng nước đổ và ngắm những tầng thác Bản Giốc giữa núi đá.",
+      "summary": "Thác Bản Giốc, phần phía Trung Quốc gọi là thác Đức Thiên, là một nhóm thác nước nằm trên sông Quây Sơn tại biên giới giữa Việt Nam và Trung Quốc. Nếu nhìn từ phía dưới chân thác, phần thác bên trái và nửa phía tây của thác bên phải thuộc chủ quyền của Việt Nam tại xã Đàm Thủy, tỉnh Cao Bằng; nửa phía đông của thác bên phải thuộc chủ quyền của Trung Quốc tại thôn Đức Thiên, trấn Thạc Long, huyện Đại Tân, thành phố Sùng Tả của khu tự trị dân tộc Choang Quảng Tây.",
+      "lat": 22.855897,
+      "lon": 106.722501,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "cao-bang-thac-ban-gioc-1.jpg",
+          "author": "Lê Minh Phát",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bangioc9tam.jpg"
+        },
+        {
+          "file": "cao-bang-thac-ban-gioc-2.jpg",
+          "author": "jankgo",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ban_Gioc_-_Detian_Falls2.jpg"
+        },
+        {
+          "file": "pexels-6875004.jpg",
+          "author": "Quang Nguyen Vinh",
+          "license": "Giấy phép Pexels",
+          "sourceUrl": "https://www.pexels.com/photo/people-standing-knee-deep-in-water-and-looking-at-the-ban-gioc-waterfall-in-vietnam-6875004/"
+        }
+      ],
+      "wikipediaTitle": "Thác Bản Giốc"
+    },
+    {
+      "id": "cao-bang-pac-bo",
+      "name": "Pác Bó",
+      "category": "van",
+      "area": "Hà Quảng",
+      "hook": "Dành một buổi đi bộ tìm hiểu không gian lịch sử và cảnh quan ở Pác Bó.",
+      "summary": "Khu di tích Quốc gia đặc biệt Pác Bó là một khu di tích lịch sử cách mạng quốc gia - đặc biệt của Việt Nam, thuộc bản Pác Bó, xã Trường Hà, tỉnh Cao Bằng, cách phường Thục Phán 52 km về phía Bắc, là điểm đầu của đường Hồ Chí Minh. Khu di tích Quốc gia đặc biệt Pác Bó được Thủ tướng Chính phủ xếp hạng Di tích Quốc gia đặc biệt tại Quyết định số 548/QĐ-TTg ngày 10/5/2012.",
+      "lat": 22.981319,
+      "lon": 106.04978,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "cao-bang-pac-bo-1.jpg",
+          "author": "[Tycho] talk , http://shansov.net",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%91c_B%C3%B3.jpg"
+        },
+        {
+          "file": "cao-bang-pac-bo-2.jpg",
+          "author": "[Tycho] talk , http://shansov.net",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:P%C3%A1c_B%C3%B3.jpg"
+        }
+      ],
+      "wikipediaTitle": "Khu di tích Pác Bó"
+    },
+    {
+      "id": "cao-bang-dong-nguom-ngao",
+      "name": "Động Ngườm Ngao",
+      "category": "canh",
+      "area": "Trùng Khánh",
+      "hook": "Theo lối tham quan vào không gian thạch nhũ trong động Ngườm Ngao.",
+      "summary": "Động Ngườm Ngao hay Động Ngao là một hang động nằm ở bản Gun, xã Đàm Thủy, tỉnh Cao Bằng, Việt Nam. Động này toạ lạc trong lòng một quả núi, cách thác Bản Giốc 5 km. Động đã hình thành cách đây khoảng 300 năm, là một hang động trẻ so với nhiều hang khác ở Việt Nam. Nhiệt độ bên trong ổn định, dao động từ 18 đến 25 độ C, tạo điều kiện thuận lợi cho việc thăm thú các kỳ quan tự nhiên bên trong.",
+      "lat": 22.845328,
+      "lon": 106.70617,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "1–2 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Đi theo lối được phép tham quan và hướng dẫn tại điểm.",
+        "Giày bám tốt hữu ích ở đoạn ẩm, trơn."
+      ],
+      "photos": [
+        {
+          "file": "cao-bang-dong-nguom-ngao-1.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%99ng_Ng%C6%B0%E1%BB%9Dm_Ngao.jpg"
+        }
+      ],
+      "wikipediaTitle": "Động Ngườm Ngao"
+    },
+    {
+      "id": "cao-bang-ho-thang-hen",
+      "name": "Hồ Thang Hen",
+      "category": "canh",
+      "area": "Trà Lĩnh",
+      "hook": "Chậm lại bên hồ và những dãy núi đá của vùng Non nước Cao Bằng.",
+      "summary": "Hồ Thang Hen là một hồ nước ngọt tại xã Trà Lĩnh, tỉnh Cao Bằng, Việt Nam. Nó nằm ở độ cao trên 1000 mét so với mực nước biển, về phía bắc phường Thục Phán, cách cây số 34 trên đường từ phường Thục Phán về trung tâm xã Trà Lĩnh khoảng 5-7 km, Hồ nằm gần địa giới giữa xã Trà Lĩnh và xã Nguyễn Huệ. Tên của hồ theo nghĩa tiếng Tày là \"đuôi ong\", bởi vì từ trên cao nhìn xuống thì hồ có hình tựa như đuôi con ong. Hồ có chiều rộng chừng 100–300 m, chiều dài 500-1.000 m, tùy theo mực nước.",
+      "lat": 22.759391,
+      "lon": 106.294267,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "1–2 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Hồ Thang Hen"
+    },
+    {
+      "id": "cao-bang-deo-ma-phuc",
+      "name": "Đèo Mã Phục",
+      "category": "canh",
+      "area": "Cao Bằng",
+      "hook": "Dừng ngắm những nếp núi trên đường đi.",
+      "summary": "Đèo Mã Phục là đèo trên quốc lộ 3 ở vùng giáp ranh xã Nguyễn Huệ và Trà Lĩnh, tỉnh Cao Bằng, Việt Nam.",
+      "lat": 22.729622,
+      "lon": 106.335498,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Đèo Mã Phục"
+    },
+    {
+      "id": "cao-bang-phia-oac",
+      "name": "Phja Oắc",
+      "category": "leo",
+      "area": "Cao Bằng",
+      "hook": "Tìm hiểu cung đi bộ giữa rừng núi cao.",
+      "summary": "Phja Oắc hay Phia Oắc là đỉnh núi cao thứ hai tại tỉnh Cao Bằng và chỉ xếp sau núi Phja Dạ. Với độ cao 1.931m so với mực nước biển và nằm trên địa phận xã Thành Công, tỉnh Cao Bằng và nằm tại Vườn quốc gia Phja Oắc – Phja Đén.",
+      "lat": 22.615343,
+      "lon": 105.863595,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Tọa độ là mốc địa danh, không phải đầu tuyến đi bộ.",
+        "Chốt tuyến, thời lượng, giấy phép và lịch đoàn với guide trước khi xếp ngày."
+      ],
+      "photos": [
+        {
+          "file": "cao-bang-phia-oac-1.jpg",
+          "author": "Unknown author Unknown author",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%89nh_n%C3%BAi_Phja_O%E1%BA%AFc.jpg"
+        }
+      ],
+      "wikipediaTitle": "Phja Oắc"
+    },
+    {
+      "id": "exp-food-cao-bang-banh-cuon",
+      "name": "Bánh cuốn Cao Bằng",
+      "category": "am",
+      "area": "Mốc khu vực Cao Bằng",
+      "hook": "Một đĩa bánh vừa tráng để thử trong buổi dạo chợ.",
+      "summary": "Một đĩa bánh vừa tráng để thử trong buổi dạo chợ. Cách ăn kèm và nước chấm có thể khác nhau giữa các vùng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 22.666,
+      "lon": 106.261,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-cuon-1.jpg",
+          "author": "Lưu Ly",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
+        },
+        {
+          "file": "food-banh-cuon-2.jpg",
+          "author": "Casablanca1911 at vi.wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_cu%E1%BB%91n_Thanh_Tr%C3%AC.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh cuốn"
+    },
+    {
+      "id": "cao-bang-nui-mat-than",
+      "name": "Núi Mắt Thần",
+      "category": "canh",
+      "area": "Cao Bằng",
+      "hook": "Đi bộ ngắm thung lũng quanh ngọn núi có mắt.",
+      "summary": "",
+      "lat": 22.7782145,
+      "lon": 106.3112857,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/13162197540",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "venue-cao-bang-muong-thanh",
+      "name": "Mường Thanh Luxury Cao Bằng",
+      "category": "luu",
+      "area": "Cao Bằng",
+      "hook": "Lấy khu trung tâm Cao Bằng làm điểm nghỉ, chọn lịch đi thác riêng.",
+      "summary": "Lấy khu trung tâm Cao Bằng làm điểm nghỉ, chọn lịch đi thác riêng. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 22.6626747,
+      "lon": 106.2595775,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 42 Kim Đồng, Cao Bằng",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/1149062825"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "42 Kim Đồng, Cao Bằng",
+        "website": "https://luxurycaobang.muongthanh.com/",
+        "sourceUrl": "https://luxurycaobang.muongthanh.com/",
+        "checkedAt": "2026-11-07"
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-6875004",
+      "theme": "hanh-trinh",
+      "caption": "Gặp những người mê chụp ảnh bên thác Bản Giốc",
+      "file": "pexels-6875004.jpg",
+      "author": "Quang Nguyen Vinh",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-standing-knee-deep-in-water-and-looking-at-the-ban-gioc-waterfall-in-vietnam-6875004/"
+    },
+    {
+      "id": "food-research-cao-bang",
+      "theme": "mon-an",
+      "caption": "Bánh cuốn Cao Bằng · một món muốn thử (ảnh minh họa)",
+      "file": "food-banh-cuon-1.jpg",
+      "author": "Lưu Ly",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
+    },
+    {
+      "id": "wave-pexels-25186083",
+      "theme": "nguoi",
+      "caption": "Chậm lại bên dòng nước và nhịp sống Cao Bằng",
+      "file": "wave-pexels-25186083.jpg",
+      "author": "Vietnam Hidden Light",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-from-village-by-the-river-25186083/"
+    },
+    {
+      "id": "wave-pexels-22602392",
+      "theme": "hanh-trinh",
+      "caption": "Đi qua những ô ruộng bên dòng nước Cao Bằng",
+      "file": "wave-pexels-22602392.jpg",
+      "author": "Hao Hoang",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/lake-and-fields-in-countryside-22602392/"
+    }
+  ]
+}

@@ -72,6 +72,244 @@
           "title": "Thuốc say sóng"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Nem nướng Nha Trang",
+          "text": "Tự cuốn nem, rau và bánh tráng, rồi chấm theo cách của quán. Một bữa có thể cùng nhau thử và chia sẻ.",
+          "placeId": "exp-food-nha-trang-nem-nuong"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh căn Nha Trang",
+          "text": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng.",
+          "placeId": "exp-food-nha-trang-banh-can"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún chả cá",
+          "text": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển. Hỏi về loại cá và thành phần nếu bạn có dị ứng.",
+          "placeId": "exp-food-nha-trang-bun-cha-ca"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún sứa",
+          "text": "Tìm hiểu một bữa bún hải sản, hỏi nguyên liệu và cách dùng theo quán.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Một bữa tự cuốn",
+          "text": "Thử nem nướng cùng nhóm rồi dạo biển; chọn quán theo khu vực của lịch ngày."
+        },
+        {
+          "icon": "route",
+          "title": "Phố biển ngoài khung hình",
+          "text": "Kết hợp một điểm văn hóa với bữa bún chả cá, thay vì chỉ thêm các bãi tắm vào lịch."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Havana Nha Trang Hotel",
+          "text": "Điểm nghỉ trên trục đường biển Trần Phú.",
+          "placeId": "venue-nha-trang-havana"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bò né Nha Trang",
+          "text": "Bò chế biến trên chảo nóng; xem các món kèm trên thực đơn.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh canh chả cá Nha Trang",
+          "text": "Bánh canh nước với chả cá; chọn theo khẩu phần của quán.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Six Senses Ninh Van Bay",
+          "text": "Các villa nằm ven biển, trên sườn đồi hoặc giữa địa hình đá, có bể ngâm và không gian tắm ngoài trời theo mô tả nguồn. Khu nghỉ có spa và nhiều lựa chọn ăn uống trong cảnh quan bán đảo.",
+          "placeId": "rs-nha-trang-six-senses-ninh-van-bay-a75f0204"
+        },
+        {
+          "icon": "bed",
+          "title": "Mia Resort Nha Trang",
+          "text": "Các khối nhà thấp nằm giữa vườn dừa và cây hoa, với sân hiên nhìn ra cảnh quan biển. Khu nghỉ có spa và hai nhà hàng ven biển; nguồn cũng giới thiệu các hoạt động lặn và yoga.",
+          "placeId": "rs-nha-trang-mia-resort-nha-trang-44d648aa"
+        },
+        {
+          "icon": "bed",
+          "title": "An Lam Retreats Ninh Van Bay",
+          "text": "Mỗi villa có sân hiên, bể bơi riêng và không gian cây xanh. Khu nghỉ có spa, nhà hàng Sen phục vụ hải sản và món Việt, cùng Sen Deck nhìn ra vịnh.",
+          "placeId": "rs-nha-trang-an-lam-retreats-ninh-van-875678a0"
+        },
+        {
+          "icon": "bed",
+          "title": "The Morning Glow - Handwritten Collection",
+          "text": "The Morning Glow - Handwritten Collection: có hạng suite tại Nha Trang. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-nha-trang-the-morning-glow-handwri-6b8bb30c"
+        },
+        {
+          "icon": "bed",
+          "title": "ibis Styles Nha Trang",
+          "text": "ibis Styles Nha Trang: có hạng suite tại NHA TRANG. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-nha-trang-ibis-styles-nha-trang-6d5ef52c"
+        },
+        {
+          "icon": "bed",
+          "title": "Novotel Nha Trang",
+          "text": "Novotel Nha Trang: có hạng suite tại NHA TRANG. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-nha-trang-novotel-nha-trang-a6204e62"
+        },
+        {
+          "icon": "bed",
+          "title": "Mercure Nha Trang Beach",
+          "text": "Mercure Nha Trang Beach: có hạng suite tại NHA TRANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; bể bơi trong nhà; có nhà hàng hoặc không gian ăn uống.",
+          "placeId": "rs-nha-trang-mercure-nha-trang-beach-52edcd0a"
+        },
+        {
+          "icon": "bed",
+          "title": "Mövenpick Resort Cam Ranh",
+          "text": "Mövenpick Resort Cam Ranh: có hạng suite tại Cam Ranh. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-nha-trang-movenpick-resort-cam-ran-8555bebd"
+        },
+        {
+          "icon": "bed",
+          "title": "Nha Trang Lodge Hotel",
+          "text": "Cơ sở có phòng khách sạn, suite và căn hộ hai phòng ngủ theo trang giới thiệu. Khu bếp và phòng sinh hoạt thuộc hạng căn hộ; cần đối chiếu tiện nghi riêng của hạng đặt. Vị trí phù hợp lịch đi bộ dọc khu biển trung tâm Nha Trang.",
+          "placeId": "rs-nha-trang-nha-trang-lodge-hotel-792cdfa9"
+        },
+        {
+          "icon": "bed",
+          "title": "Sunrise Nha Trang Beach Hotel & Spa",
+          "text": "Sunrise Nha Trang Beach Hotel & Spa: có hạng suite tại Nha Trang. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; có lựa chọn nhìn ra biển.",
+          "placeId": "rs-nha-trang-sunrise-nha-trang-beach-684e871d"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "HANSEN RESTAURANT · The Morning Glow - Handwritten Collection",
+          "text": "HANSEN RESTAURANT trong The Morning Glow - Handwritten Collection. Hồ sơ nguồn giới thiệu có phục vụ bữa sáng; ẩm thực quảng đông; các món cá và hải sản.",
+          "placeId": "rs-nha-trang-hansen-restaurant-the-mo-590a964a"
+        },
+        {
+          "icon": "glass-cocktail",
+          "title": "THE JADE BAR · The Morning Glow - Handwritten Collection",
+          "text": "THE JADE BAR trong The Morning Glow - Handwritten Collection. Hồ sơ nguồn giới thiệu món việt; cocktail; cà phê.",
+          "placeId": "rs-nha-trang-the-jade-bar-the-morning-26712290"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "STREATS · ibis Styles Nha Trang",
+          "text": "STREATS trong ibis Styles Nha Trang. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; có phục vụ bữa sáng; món việt.",
+          "placeId": "rs-nha-trang-streats-ibis-styles-nha-4130f330"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "THE SQUARE · Novotel Nha Trang",
+          "text": "THE SQUARE trong Novotel Nha Trang. Hồ sơ nguồn giới thiệu có lựa chọn buffet; thực đơn quốc tế.",
+          "placeId": "rs-nha-trang-the-square-novotel-nha-t-c3977715"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "TATHIK · Mercure Nha Trang Beach",
+          "text": "TATHIK trong Mercure Nha Trang Beach. Hồ sơ nguồn giới thiệu ẩm thực âu; thực đơn quốc tế.",
+          "placeId": "rs-nha-trang-tathik-mercure-nha-trang-29471388"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Panorama Restaurant · Mövenpick Resort Cam Ranh",
+          "text": "Panorama Restaurant trong Mövenpick Resort Cam Ranh. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; món việt; không gian gần biển.",
+          "placeId": "rs-nha-trang-panorama-restaurant-move-bb34ba9a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chübeli Beer House · Mövenpick Resort Cam Ranh",
+          "text": "Chübeli Beer House trong Mövenpick Resort Cam Ranh. Hồ sơ nguồn giới thiệu ẩm thực âu; có thông tin về chương trình âm nhạc.",
+          "placeId": "rs-nha-trang-chubeli-beer-house-moven-1f291ebf"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Tropicana Beach Club · Mövenpick Resort Cam Ranh",
+          "text": "Địa chỉ ăn uống, giải trí trên bãi biển trong khu Mövenpick Cam Ranh. Nguồn giới thiệu các phần thịt, hải sản và chương trình biểu diễn buổi tối.",
+          "placeId": "rs-nha-trang-tropicana-beach-club-mov-170ce707"
+        },
+        {
+          "icon": "glass-cocktail",
+          "title": "LOBBY LOUNGE · Mövenpick Resort Cam Ranh",
+          "text": "LOBBY LOUNGE trong Mövenpick Resort Cam Ranh. Hồ sơ nguồn giới thiệu món việt; cà phê.",
+          "placeId": "rs-nha-trang-lobby-lounge-movenpick-r-1437c792"
+        },
+        {
+          "icon": "coffee",
+          "title": "Skylight Nha Trang",
+          "text": "Skylight Nha Trang. Hồ sơ nguồn giới thiệu thực đơn quốc tế; bít tết và món nướng; có khu ngồi ngoài trời; không gian nhìn ra thành phố.",
+          "placeId": "rs-nha-trang-skylight-nha-trang-ecbc1464"
+        },
+        {
+          "icon": "coffee",
+          "title": "Alpaca Coffee",
+          "text": "Alpaca Coffee. Hồ sơ nguồn giới thiệu ẩm thực ý; hương vị địa trung hải; có thông tin về lựa chọn từ thực vật.",
+          "placeId": "rs-nha-trang-alpaca-coffee-6b54772a"
+        }
+      ]
     }
   ],
   "places": [
@@ -479,6 +717,1189 @@
         }
       ],
       "wikipediaTitle": "Hòn Tre (Khánh Hòa)"
+    },
+    {
+      "id": "exp-food-nha-trang-nem-nuong",
+      "name": "Nem nướng Nha Trang",
+      "category": "am",
+      "area": "Mốc khu vực Nha Trang",
+      "hook": "Tự cuốn nem, rau và bánh tráng, rồi chấm theo cách của quán.",
+      "summary": "Tự cuốn nem, rau và bánh tráng, rồi chấm theo cách của quán. Một bữa có thể cùng nhau thử và chia sẻ. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 12.2388,
+      "lon": 109.1967,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-nem-nuong-2.jpg",
+          "author": "Index Librorum Permissorum",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nem_Nuong_2018-07-29.jpg"
+        },
+        {
+          "file": "food-nem-nuong-1.jpg",
+          "author": "Baoothersks",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nem_n%C6%B0%E1%BB%9Bng_by_Baoothersks.jpg"
+        }
+      ],
+      "wikipediaTitle": "Nem nướng"
+    },
+    {
+      "id": "exp-food-nha-trang-banh-can",
+      "name": "Bánh căn Nha Trang",
+      "category": "am",
+      "area": "Mốc khu vực Nha Trang",
+      "hook": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng..",
+      "summary": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 12.2388,
+      "lon": 109.1967,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-extra-0-1.jpg",
+          "author": "Saigon Time",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
+        },
+        {
+          "file": "food-extra-0-2.jpg",
+          "author": "VinhNguyen.1257",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_(Vietnamese_mini_pancake)_clay_cooking_pots.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh căn"
+    },
+    {
+      "id": "exp-food-nha-trang-bun-cha-ca",
+      "name": "Bún chả cá",
+      "category": "am",
+      "area": "Mốc khu vực Nha Trang",
+      "hook": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển.",
+      "summary": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển. Hỏi về loại cá và thành phần nếu bạn có dị ứng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 12.2388,
+      "lon": 109.1967,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-bun-cha-ca-1.jpg",
+          "author": "Phương Huy ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_c%C3%A1,_th%C3%A1ng_8_n%C4%83m_2018.JPG"
+        }
+      ],
+      "wikipediaTitle": "Bún chả cá"
+    },
+    {
+      "id": "nha-trang-thap-ba-ponagar",
+      "name": "Tháp Bà Po Nagar",
+      "category": "van",
+      "area": "Nha Trang",
+      "hook": "Khám phá kiến trúc Chăm nhìn xuống sông Cái.",
+      "summary": "Một quần thể tháp Chăm nhìn xuống khu vực sông Cái. Dành thời gian nhìn các chi tiết gạch và điêu khắc, đồng thời tôn trọng không gian tín ngưỡng đang được sử dụng.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 12.2653884,
+      "lon": 109.1951777,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Kiến trúc Chăm",
+        "Điêu khắc",
+        "Góc nhìn sông Cái"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Ăn mặc phù hợp khi vào khu thờ tự; hỏi lịch hoạt động văn hóa thay vì mặc định lúc nào cũng có.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/146780347",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "supp-nha-trang-thap-ba-ponagar-2.jpg",
+          "author": "RG72",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Templo_Po_Nagar_07.jpg"
+        },
+        {
+          "file": "supp-nha-trang-thap-ba-ponagar-3.jpg",
+          "author": "RG72",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Templo_Po_Nagar_14.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "nha-trang-hon-chong",
+      "name": "Hòn Chồng (Nha Trang)",
+      "category": "canh",
+      "area": "Nha Trang",
+      "hook": "Ngồi bên những khối đá và nhìn ra vịnh.",
+      "summary": "Những khối đá sát mặt nước tạo một góc nhìn khác ra vịnh Nha Trang. Có thể dừng ngắm cảnh và tìm hiểu câu chuyện gắn với dấu tay trên đá.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 12.2728399,
+      "lon": 109.2065606,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Đá ven biển",
+        "Ngắm vịnh",
+        "Đi bộ ngắn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Chú ý bề mặt đá trơn và sóng; chọn chỗ ngắm cảnh phù hợp điều kiện lúc đến.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/792392852",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "supp-nha-trang-hon-chong-3.jpg",
+          "author": "Vinhtantran",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hon_Chong_seen_from_the_hill.JPG"
+        },
+        {
+          "file": "supp-nha-trang-hon-chong-2.jpg",
+          "author": "Vinhtantran",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rock_with_hand_sign,_Hon_Chong.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "venue-nha-trang-havana",
+      "name": "Havana Nha Trang Hotel",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Điểm nghỉ trên trục đường biển Trần Phú.",
+      "summary": "Điểm nghỉ trên trục đường biển Trần Phú. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 12.2434932,
+      "lon": 109.1958235,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 38 Trần Phú, Nha Trang",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/650959856"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-49f5851ca06098fabb.jpg",
+          "author": "RG72",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotelo_Havana_Nha_Trang_5_(01).jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "38 Trần Phú, Nha Trang",
+        "website": "https://havanahotel.vn/en/lien-he",
+        "sourceUrl": "https://havanahotel.vn/en/lien-he",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-nha-trang-the-morning-glow-handwri-6b8bb30c",
+      "name": "The Morning Glow - Handwritten Collection",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "The Morning Glow - Handwritten Collection: có hạng suite tại Nha Trang.",
+      "summary": "The Morning Glow - Handwritten Collection: có hạng suite tại Nha Trang. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 12.28809,
+      "lon": 109.20534,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có khu trên tầng mái",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có lựa chọn nhìn ra biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có khu trên tầng mái.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +842582236868.",
+        "Email liên hệ theo nguồn: HC561-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/C561/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "62-65 Pham Van Dong Street,, Vinh Hai Ward, Khanh Hoa,, Nha Trang, Vietnam",
+        "website": "https://all.accor.com/hotel/C561/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/C561/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842582236868",
+        "serviceHours": "Nhận phòng 14:00; Trả phòng 12:00",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-hansen-restaurant-the-mo-590a964a",
+      "name": "HANSEN RESTAURANT · The Morning Glow - Handwritten Collection",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "HANSEN RESTAURANT trong The Morning Glow - Handwritten Collection.",
+      "summary": "HANSEN RESTAURANT trong The Morning Glow - Handwritten Collection. Hồ sơ nguồn giới thiệu có phục vụ bữa sáng; ẩm thực quảng đông; các món cá và hải sản.",
+      "lat": 12.28809,
+      "lon": 109.20534,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có phục vụ bữa sáng",
+        "Ẩm thực Quảng Đông",
+        "Các món cá và hải sản"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có phục vụ bữa sáng và ẩm thực quảng đông.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842582236868.",
+        "Email liên hệ theo nguồn: HC561-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/C561/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "62-65 Pham Van Dong Street,, Vinh Hai Ward, Khanh Hoa,, Nha Trang, Vietnam",
+        "website": "https://all.accor.com/hotel/C561/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/C561/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842582236868",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-ibis-styles-nha-trang-6d5ef52c",
+      "name": "ibis Styles Nha Trang",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "ibis Styles Nha Trang: có hạng suite tại NHA TRANG.",
+      "summary": "ibis Styles Nha Trang: có hạng suite tại NHA TRANG. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 12.237922,
+      "lon": 109.19504,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Vị trí gần hoặc sát bãi biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và thiết kế hoặc vị trí gắn với nhà hát.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842586274997.",
+        "Email liên hệ theo nguồn: h9578@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/9578/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "86 Hung Vuong Street, Loc Tho Ward, Khanh Hoa Province, NHA TRANG, Vietnam",
+        "website": "https://all.accor.com/hotel/9578/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/9578/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842586274997",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-streats-ibis-styles-nha-4130f330",
+      "name": "STREATS · ibis Styles Nha Trang",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "STREATS trong ibis Styles Nha Trang.",
+      "summary": "STREATS trong ibis Styles Nha Trang. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; có phục vụ bữa sáng; món việt.",
+      "lat": 12.237922,
+      "lon": 109.19504,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Có lựa chọn buffet",
+        "Có phục vụ bữa sáng",
+        "Món Việt",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và có lựa chọn buffet.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842586274997.",
+        "Email liên hệ theo nguồn: h9578@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/9578/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "86 Hung Vuong Street, Loc Tho Ward, Khanh Hoa Province, NHA TRANG, Vietnam",
+        "website": "https://all.accor.com/hotel/9578/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/9578/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842586274997",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-novotel-nha-trang-a6204e62",
+      "name": "Novotel Nha Trang",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Novotel Nha Trang: có hạng suite tại NHA TRANG.",
+      "summary": "Novotel Nha Trang: có hạng suite tại NHA TRANG. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 12.237973,
+      "lon": 109.196581,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Vị trí gần hoặc sát bãi biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và thiết kế hoặc vị trí gắn với nhà hát.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842586256900.",
+        "Email liên hệ theo nguồn: H6033-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/6033/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html",
+        "Nguồn: https://en.wikivoyage.org/wiki/Nha_Trang",
+        "Nguồn: https://www.openstreetmap.org/node/3448354850"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-a2b9d82fddf406dec6.jpg",
+          "author": "Ed Crystal",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=61965703"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "50 Tran Phu Street, NHA TRANG, Vietnam",
+        "website": "https://all.accor.com/hotel/6033/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/6033/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842586256900",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-the-square-novotel-nha-t-c3977715",
+      "name": "THE SQUARE · Novotel Nha Trang",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "THE SQUARE trong Novotel Nha Trang.",
+      "summary": "THE SQUARE trong Novotel Nha Trang. Hồ sơ nguồn giới thiệu có lựa chọn buffet; thực đơn quốc tế.",
+      "lat": 12.237973,
+      "lon": 109.196581,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn buffet",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn buffet và thực đơn quốc tế.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842586256900.",
+        "Email liên hệ theo nguồn: H6033-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/6033/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-a2b9d82fddf406dec6.jpg",
+          "author": "Ed Crystal",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=61965703",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "50 Tran Phu Street, NHA TRANG, Vietnam",
+        "website": "https://all.accor.com/hotel/6033/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/6033/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842586256900",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-mercure-nha-trang-beach-52edcd0a",
+      "name": "Mercure Nha Trang Beach",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Mercure Nha Trang Beach: có hạng suite tại NHA TRANG.",
+      "summary": "Mercure Nha Trang Beach: có hạng suite tại NHA TRANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; bể bơi trong nhà; có nhà hàng hoặc không gian ăn uống.",
+      "lat": 12.23026,
+      "lon": 109.19822,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Bể bơi trong nhà",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842583839777.",
+        "Email liên hệ theo nguồn: HC3J0@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/C3J0/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "88A Tran Phu street, True, NHA TRANG, Vietnam",
+        "website": "https://all.accor.com/hotel/C3J0/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/C3J0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842583839777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-tathik-mercure-nha-trang-29471388",
+      "name": "TATHIK · Mercure Nha Trang Beach",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "TATHIK trong Mercure Nha Trang Beach.",
+      "summary": "TATHIK trong Mercure Nha Trang Beach. Hồ sơ nguồn giới thiệu ẩm thực âu; thực đơn quốc tế.",
+      "lat": 12.23026,
+      "lon": 109.19822,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Âu",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực âu và thực đơn quốc tế.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842583839777.",
+        "Email liên hệ theo nguồn: HC3J0@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/C3J0/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "88A Tran Phu street, True, NHA TRANG, Vietnam",
+        "website": "https://all.accor.com/hotel/C3J0/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/C3J0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842583839777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-movenpick-resort-cam-ran-8555bebd",
+      "name": "Mövenpick Resort Cam Ranh",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Mövenpick Resort Cam Ranh: có hạng suite tại Cam Ranh.",
+      "summary": "Mövenpick Resort Cam Ranh: có hạng suite tại Cam Ranh. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 12.043886,
+      "lon": 109.209851,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có hạng phòng hoặc villa với bể bơi riêng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +841800577745.",
+        "Email liên hệ theo nguồn: resort.camranh@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Plot D 12 Abc, Cam Hai Dong, Cam Ranh, Cam Ranh, Vietnam",
+        "website": "https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+841800577745",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-panorama-restaurant-move-bb34ba9a",
+      "name": "Panorama Restaurant · Mövenpick Resort Cam Ranh",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "Panorama Restaurant trong Mövenpick Resort Cam Ranh.",
+      "summary": "Panorama Restaurant trong Mövenpick Resort Cam Ranh. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; món việt; không gian gần biển.",
+      "lat": 12.043886,
+      "lon": 109.209851,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Món Việt",
+        "Không gian gần biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và món việt.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +841800577745.",
+        "Email liên hệ theo nguồn: resort.camranh@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4G8/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Plot D 12 Abc, Cam Hai Dong, Cam Ranh, Cam Ranh, Vietnam",
+        "website": "https://all.accor.com/hotel/B4G8/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+841800577745",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-chubeli-beer-house-moven-1f291ebf",
+      "name": "Chübeli Beer House · Mövenpick Resort Cam Ranh",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "Chübeli Beer House trong Mövenpick Resort Cam Ranh.",
+      "summary": "Chübeli Beer House trong Mövenpick Resort Cam Ranh. Hồ sơ nguồn giới thiệu ẩm thực âu; có thông tin về chương trình âm nhạc.",
+      "lat": 12.043886,
+      "lon": 109.209851,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Âu",
+        "Có thông tin về chương trình âm nhạc"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực âu và có thông tin về chương trình âm nhạc.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +841800577745.",
+        "Email liên hệ theo nguồn: resort.camranh@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4G8/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Plot D 12 Abc, Cam Hai Dong, Cam Ranh, Cam Ranh, Vietnam",
+        "website": "https://all.accor.com/hotel/B4G8/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+841800577745",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-tropicana-beach-club-mov-170ce707",
+      "name": "Tropicana Beach Club · Mövenpick Resort Cam Ranh",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "Địa chỉ ăn uống, giải trí trên bãi biển trong khu Mövenpick Cam Ranh.",
+      "summary": "Địa chỉ ăn uống, giải trí trên bãi biển trong khu Mövenpick Cam Ranh. Nguồn giới thiệu các phần thịt, hải sản và chương trình biểu diễn buổi tối.",
+      "lat": 12.043886,
+      "lon": 109.209851,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Gần bãi biển",
+        "Thịt và hải sản",
+        "Âm nhạc buổi tối"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn gần bãi biển và thịt và hải sản.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận lịch biểu diễn và điều kiện đón khách không lưu trú.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +841800577745.",
+        "Email liên hệ theo nguồn: resort.camranh@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4G8/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Plot D 12 Abc, Cam Hai Dong, Cam Ranh, Cam Ranh, Vietnam",
+        "website": "https://all.accor.com/hotel/B4G8/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+841800577745",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-six-senses-ninh-van-bay-a75f0204",
+      "name": "Six Senses Ninh Van Bay",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Villa tách biệt ở vịnh Ninh Vân, tiếp cận bằng tàu.",
+      "summary": "Các villa nằm ven biển, trên sườn đồi hoặc giữa địa hình đá, có bể ngâm và không gian tắm ngoài trời theo mô tả nguồn. Khu nghỉ có spa và nhiều lựa chọn ăn uống trong cảnh quan bán đảo.",
+      "lat": 12.3593225,
+      "lon": 109.2776532,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Tiếp cận bằng tàu",
+        "Villa có bể ngâm",
+        "Cảnh quan vịnh Ninh Vân"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn tiếp cận bằng tàu và villa có bể ngâm.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đặt chuyến tàu nối và hỏi mức độ leo bậc của hạng villa trước khi đặt phòng.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/nha-trang/six-senses-ninh-van-bay-319",
+        "Nguồn: https://www.openstreetmap.org/node/2392342401"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Ninh Van Bay, Ninh Hoa, Nha Trang, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/nha-trang/six-senses-ninh-van-bay-319",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-mia-resort-nha-trang-44d648aa",
+      "name": "Mia Resort Nha Trang",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Phòng nghỉ mái phủ cây xanh trong vịnh nhỏ ven biển.",
+      "summary": "Các khối nhà thấp nằm giữa vườn dừa và cây hoa, với sân hiên nhìn ra cảnh quan biển. Khu nghỉ có spa và hai nhà hàng ven biển; nguồn cũng giới thiệu các hoạt động lặn và yoga.",
+      "lat": 12.1341995,
+      "lon": 109.2125537,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Kiến trúc thấp và vườn xanh",
+        "Không gian ven biển",
+        "Spa và hoạt động ngoài trời"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn kiến trúc thấp và vườn xanh và không gian ven biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lịch hoạt động, xe đưa đón và khoản nào đã gồm trong giá phòng tại thời điểm đặt.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/nha-trang/mia-resort-nha-trang-7143",
+        "Nguồn: https://www.openstreetmap.org/way/231784647"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Bai Dong, Cam Hai Dong, Nha Trang, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/nha-trang/mia-resort-nha-trang-7143",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-an-lam-retreats-ninh-van-875678a0",
+      "name": "An Lam Retreats Ninh Van Bay",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Villa gỗ giữa rừng và vịnh, cần đi tàu để đến khu nghỉ.",
+      "summary": "Mỗi villa có sân hiên, bể bơi riêng và không gian cây xanh. Khu nghỉ có spa, nhà hàng Sen phục vụ hải sản và món Việt, cùng Sen Deck nhìn ra vịnh.",
+      "lat": 12.3902579,
+      "lon": 109.2508378,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Villa gỗ có bể bơi riêng",
+        "Tiếp cận bằng tàu",
+        "Nhà hàng Sen"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn villa gỗ có bể bơi riêng và tiếp cận bằng tàu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Chốt giờ tàu và điều kiện nhận khách theo độ tuổi trước khi mua vé di chuyển.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/nha-trang/an-lam-retreats-ninh-van-bay-8480",
+        "Nguồn: https://www.openstreetmap.org/node/6622519423"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Hon Heo Peninsula, Ninh Hoa, Nha Trang, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/nha-trang/an-lam-retreats-ninh-van-bay-8480",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-the-jade-bar-the-morning-26712290",
+      "name": "THE JADE BAR · The Morning Glow - Handwritten Collection",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "THE JADE BAR trong The Morning Glow - Handwritten Collection.",
+      "summary": "THE JADE BAR trong The Morning Glow - Handwritten Collection. Hồ sơ nguồn giới thiệu món việt; cocktail; cà phê.",
+      "lat": 12.28809,
+      "lon": 109.20534,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món Việt",
+        "Cocktail",
+        "Cà phê"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món việt và cocktail.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842582236868.",
+        "Email liên hệ theo nguồn: HC561-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/C561/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "bar",
+        "address": "62-65 Pham Van Dong Street,, Vinh Hai Ward, Khanh Hoa,, Nha Trang, Vietnam",
+        "website": "https://all.accor.com/hotel/C561/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/C561/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842582236868",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-lobby-lounge-movenpick-r-1437c792",
+      "name": "LOBBY LOUNGE · Mövenpick Resort Cam Ranh",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "LOBBY LOUNGE trong Mövenpick Resort Cam Ranh.",
+      "summary": "LOBBY LOUNGE trong Mövenpick Resort Cam Ranh. Hồ sơ nguồn giới thiệu món việt; cà phê.",
+      "lat": 12.043886,
+      "lon": 109.209851,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món Việt",
+        "Cà phê"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món việt và cà phê.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +841800577745.",
+        "Email liên hệ theo nguồn: resort.camranh@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4G8/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "bar",
+        "address": "Plot D 12 Abc, Cam Hai Dong, Cam Ranh, Cam Ranh, Vietnam",
+        "website": "https://all.accor.com/hotel/B4G8/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B4G8/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+841800577745",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-skylight-nha-trang-ecbc1464",
+      "name": "Skylight Nha Trang",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "Skylight Nha Trang.",
+      "summary": "Skylight Nha Trang. Hồ sơ nguồn giới thiệu thực đơn quốc tế; bít tết và món nướng; có khu ngồi ngoài trời; không gian nhìn ra thành phố.",
+      "lat": 12.2431909,
+      "lon": 109.1961277,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Thực đơn quốc tế",
+        "Bít tết và món nướng",
+        "Có khu ngồi ngoài trời",
+        "Không gian nhìn ra thành phố",
+        "Vị trí trên tầng cao hoặc sân mái"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn thực đơn quốc tế và bít tết và món nướng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xem thực đơn đồ uống và hỏi điều kiện đặt chỗ nếu đi nhóm.",
+        "Số liên hệ theo hồ sơ nguồn: +842583528988.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Nha_Trang",
+        "Nguồn: https://skylightnhatrang.com/",
+        "Nguồn: https://www.openstreetmap.org/node/6400783887"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "38 Tran Phu",
+        "website": "https://skylightnhatrang.com/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Nha_Trang",
+        "checkedAt": "2026-11-07",
+        "phone": "+842583528988",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-alpaca-coffee-6b54772a",
+      "name": "Alpaca Coffee",
+      "category": "am",
+      "area": "Nha Trang",
+      "hook": "Alpaca Coffee.",
+      "summary": "Alpaca Coffee. Hồ sơ nguồn giới thiệu ẩm thực ý; hương vị địa trung hải; có thông tin về lựa chọn từ thực vật.",
+      "lat": 12.2386483,
+      "lon": 109.194931,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Ý",
+        "Hương vị Địa Trung Hải",
+        "Có thông tin về lựa chọn từ thực vật"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực ý và hương vị địa trung hải.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xem thực đơn đồ uống và hỏi điều kiện đặt chỗ nếu đi nhóm.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Nha_Trang",
+        "Nguồn: https://www.facebook.com/alpacanhatrang",
+        "Nguồn: https://www.openstreetmap.org/node/4595891989"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "60 Hùng Vương",
+        "website": "https://www.facebook.com/alpacanhatrang",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Nha_Trang",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-nha-trang-lodge-hotel-792cdfa9",
+      "name": "Nha Trang Lodge Hotel",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Khách sạn tại 42 Trần Phú, gần Tháp Trầm Hương và Quảng trường 2 Tháng 4.",
+      "summary": "Cơ sở có phòng khách sạn, suite và căn hộ hai phòng ngủ theo trang giới thiệu. Khu bếp và phòng sinh hoạt thuộc hạng căn hộ; cần đối chiếu tiện nghi riêng của hạng đặt. Vị trí phù hợp lịch đi bộ dọc khu biển trung tâm Nha Trang.",
+      "lat": 12.241677,
+      "lon": 109.1961575,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Đường Trần Phú",
+        "Gần Quảng trường 2 Tháng 4",
+        "Có hạng căn hộ hai phòng ngủ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn đường trần phú và gần quảng trường 2 tháng 4.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đặt đúng hạng phòng; số điện thoại trang khách sạn khác tổng đài của các trang đặt phòng trung gian.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Số liên hệ theo hồ sơ nguồn: 0832888665.",
+        "Email liên hệ theo nguồn: sales@nhatranglodgehotel.com.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Nha_Trang",
+        "Nguồn: https://www.openstreetmap.org/way/207742944",
+        "Nguồn: https://nhatranglodgehotel.com/en/contact",
+        "Nguồn: https://nhatranglodgehotel.com/en/home"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-adbd0cc21603dc299e.jpg",
+          "author": "Baoothersks",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lodge_Hotel_(142809).jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "42 Tran Phu St",
+        "website": "https://nhatranglodgehotel.com/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Nha_Trang",
+        "checkedAt": "2026-11-07",
+        "phone": "0832888665",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-nha-trang-sunrise-nha-trang-beach-684e871d",
+      "name": "Sunrise Nha Trang Beach Hotel & Spa",
+      "category": "luu",
+      "area": "Nha Trang",
+      "hook": "Sunrise Nha Trang Beach Hotel & Spa: có hạng suite tại Nha Trang.",
+      "summary": "Sunrise Nha Trang Beach Hotel & Spa: có hạng suite tại Nha Trang. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; có lựa chọn nhìn ra biển.",
+      "lat": 12.2506808,
+      "lon": 109.195841,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có khu trên tầng mái",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có lựa chọn nhìn ra biển",
+        "Spa hoặc dịch vụ thư giãn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có khu trên tầng mái.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842583820999.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Nha_Trang",
+        "Nguồn: https://sunrisenhatrang.com.vn/",
+        "Nguồn: https://www.openstreetmap.org/node/13976707801"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "12 Tran Phu St",
+        "website": "https://sunrisenhatrang.com.vn/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Nha_Trang",
+        "checkedAt": "2026-11-07",
+        "phone": "+842583820999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
   ],
   "moments": [
@@ -517,6 +1938,61 @@
       "author": "Prince Roy",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/17352537@N00/13527896553"
+    },
+    {
+      "id": "unsplash-8QzLXq2R6a0",
+      "theme": "hanh-trinh",
+      "caption": "Tìm dấu Chăm ở Tháp Bà Ponagar",
+      "url": "https://images.unsplash.com/photo-1617857995575-d102f16fd3e7?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Mnx8TmhhJTIwVHJhbmclMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg5MDQzMnww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "CreateTravel.tv",
+      "authorUrl": "https://unsplash.com/@greenmarketing?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/brown-concrete-building-under-blue-sky-during-daytime-8QzLXq2R6a0?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-3il07gRCne0",
+      "theme": "nghe",
+      "caption": "Nhịp làm muối lúc bình minh ở Hòn Khói, Khánh Hòa",
+      "url": "https://images.unsplash.com/photo-1676557060416-1418aefb165d?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8NXx8TmhhJTIwVHJhbmclMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg5MDQzM3ww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Quang Nguyen Vinh",
+      "authorUrl": "https://unsplash.com/@quangpraha?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-group-of-people-standing-on-top-of-a-body-of-water-3il07gRCne0?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-D6OpRQ2dDrs",
+      "theme": "hanh-trinh",
+      "caption": "Một buổi xuống nước giữa biển Nha Trang",
+      "url": "https://images.unsplash.com/photo-1713623593860-727c54dd8f1a?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjF8fE5oYSUyMFRyYW5nJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4OTA0MzN8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Tam Le",
+      "authorUrl": "https://unsplash.com/@tamese_le?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-group-of-people-floating-on-top-of-a-body-of-water-D6OpRQ2dDrs?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "pexels-21567735",
+      "theme": "cho",
+      "caption": "Một góc chợ rau trong buổi sớm Nha Trang",
+      "file": "pexels-21567735.jpg",
+      "author": "Hoài Vy",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-selling-vegetables-at-a-market-21567735/"
+    },
+    {
+      "id": "food-research-nha-trang",
+      "theme": "mon-an",
+      "caption": "Nem nướng Nha Trang · một món muốn thử (ảnh minh họa)",
+      "file": "food-nem-nuong-2.jpg",
+      "author": "Index Librorum Permissorum",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nem_Nuong_2018-07-29.jpg"
     }
-  ]
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1669783517838-36886de8bbb3?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Nnx8TmhhJTIwVHJhbmclMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg5MDQzM3ww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+    "author": "Tam Nguyen",
+    "authorUrl": "https://unsplash.com/@tatanguyen?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/a-sandy-beach-with-buildings-and-trees-UGPGhfBu_Sk?utm_source=wander&utm_medium=referral"
+  }
 }

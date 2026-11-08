@@ -1,0 +1,2040 @@
+{
+  "id": "phu-quoc",
+  "name": "Phú Quốc",
+  "region": "Biển đảo phía Nam",
+  "tagline": "Biển xanh, làng chài và những buổi chiều trên đảo",
+  "coverPlaceId": "phu-quoc-bai-sao",
+  "references": [
+    {
+      "id": "trung-tam-phu-quoc",
+      "name": "Mốc tham chiếu Phú Quốc",
+      "lat": 10.2176,
+      "lon": 103.9594,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún quậy",
+          "text": "Một tô bún hải sản với nước chấm tự pha theo khẩu vị. Hỏi về tôm, cá và mực trước khi gọi.",
+          "placeId": "exp-food-phu-quoc-bun-quay"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Gỏi cá trích",
+          "text": "Một món cá của đảo để cân nhắc theo khẩu vị. Hỏi kỹ cách chế biến và lựa chọn món chín nếu bạn không ăn cá sống.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún kèn",
+          "text": "Một cách thưởng thức bún với vị cá và nước cốt dừa ở Phú Quốc. Tìm hiểu thành phần tại quán trước khi gọi.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Tìm hiểu hương vị của đảo",
+          "text": "Cân nhắc trải nghiệm liên quan nước mắm, hồ tiêu hoặc một bữa bún quậy; xác nhận điểm đón khách trước."
+        },
+        {
+          "icon": "route",
+          "title": "Đi đảo theo điều kiện biển",
+          "text": "Chọn chuyến tàu và hoạt động sau khi có thông tin thời tiết, lịch vận hành và điều kiện của đoàn."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Cassia Cottage",
+          "text": "Một ý tưởng nghỉ giữa vườn cây và không gian ven biển.",
+          "placeId": "venue-phu-quoc-cassia-cottage"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Nhum nướng mỡ hành",
+          "text": "Nhum nướng với mỡ hành và lạc; hỏi giá theo con hoặc phần.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Ghẹ Hàm Ninh",
+          "text": "Ghẹ thường hấp, ăn với muối tiêu chanh.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Tôm mũ ni Phú Quốc",
+          "text": "Hải sản được giới thiệu trong danh mục món ăn trên đảo.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "New World Phu Quoc Resort",
+          "text": "Villa nằm trong vườn nhiệt đới, có khu ăn uống và bếp nhỏ theo mô tả nguồn. Khu nghỉ có bãi biển, spa, phòng tập và câu lạc bộ trẻ em; các nhà hàng phục vụ nhiều phong cách ẩm thực.",
+          "placeId": "rs-phu-quoc-new-world-phu-quoc-resor-0915798a"
+        },
+        {
+          "icon": "bed",
+          "title": "Salinda Resort Phu Quoc Island",
+          "text": "Phòng nghỉ có ban công và các hạng rộng hơn dành cho nhu cầu riêng. Khu nghỉ có Q’isense Spa cùng các lựa chọn món Việt, Ý và Ấn Độ; lịch nhà hàng và dịch vụ đi kèm cần kiểm tra theo ngày lưu trú.",
+          "placeId": "rs-phu-quoc-salinda-resort-phu-quoc-0e169217"
+        },
+        {
+          "icon": "bed",
+          "title": "Meliá Vinpearl Phu Quoc",
+          "text": "Villa có nhiều cấu hình phòng ngủ và được bố trí quanh cảnh quan hồ nước. Khu nghỉ có spa, yoga, hoạt động cho trẻ em và nhà hàng; dịch vụ trong quần thể Vinpearl cần kiểm tra điều kiện sử dụng riêng.",
+          "placeId": "rs-phu-quoc-melia-vinpearl-phu-quoc-33387aa4"
+        },
+        {
+          "icon": "bed",
+          "title": "JW Marriott Phu Quoc Emerald Bay Resort & Spa",
+          "text": "Bill Bensley xây dựng bối cảnh Lamarck University cho từng không gian; đây là ý tưởng thiết kế của khu nghỉ. Khuôn viên có Chanterelle Spa, nhiều nhà hàng và bể bơi tạo hình vỏ sò gần biển.",
+          "placeId": "rs-phu-quoc-jw-marriott-phu-quoc-eme-11fe052c"
+        },
+        {
+          "icon": "bed",
+          "title": "Premier Village Phu Quoc Resort - Managed by Accor",
+          "text": "Villa được bố trí ven biển hoặc trên sườn đồi, có bể bơi riêng theo mô tả nguồn. Khu nghỉ có bể bơi chung nối giữa hai bãi, Plumeria Spa, hoạt động trẻ em và nhà hàng hải sản Corallo.",
+          "placeId": "rs-phu-quoc-premier-village-phu-quoc-0fbd9ec2"
+        },
+        {
+          "icon": "bed",
+          "title": "Mövenpick Villas & Residences Phu Quoc",
+          "text": "Mövenpick Villas & Residences Phu Quoc: có lựa chọn villa tại Phu Quoc. Hồ sơ nguồn giới thiệu có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình; có hạng phòng hoặc villa với bể bơi riêng.",
+          "placeId": "rs-phu-quoc-movenpick-villas-residen-3c533061"
+        },
+        {
+          "icon": "bed",
+          "title": "Mövenpick Resort Waverly Phu Quoc",
+          "text": "Mövenpick Resort Waverly Phu Quoc: có hạng suite tại PHU QUOC. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-phu-quoc-movenpick-resort-waverly-a84c7dd3"
+        },
+        {
+          "icon": "bed",
+          "title": "La Veranda Resort Phu Quoc - MGallery Collection",
+          "text": "La Veranda Resort Phu Quoc - MGallery Collection: chỗ ở để cân nhắc tại PHU QUOC. Cơ sở công bố bể bơi, bãi đỗ xe, xe đưa đón, nhà hàng.",
+          "placeId": "rs-phu-quoc-la-veranda-resort-phu-qu-842f6ac7"
+        },
+        {
+          "icon": "bed",
+          "title": "Novotel Phu Quoc Resort",
+          "text": "Novotel Phu Quoc Resort: có hạng suite tại Phu Quoc Special Zone. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-phu-quoc-novotel-phu-quoc-resort-3eed21fa"
+        },
+        {
+          "icon": "bed",
+          "title": "Pullman Phu Quoc Beach Resort",
+          "text": "Pullman Phu Quoc Beach Resort: có hạng suite tại AN GIANG PROVINCE. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; có khu trên tầng mái.",
+          "placeId": "rs-phu-quoc-pullman-phu-quoc-beach-r-731170db"
+        },
+        {
+          "icon": "bed",
+          "title": "Premier Residences Phu Quoc Emerald Bay Managed by Accor",
+          "text": "Premier Residences Phu Quoc Emerald Bay Managed by Accor: có thông tin lưu trú cho gia đình tại Phu Quoc Special Zone. Hồ sơ nguồn giới thiệu có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-phu-quoc-premier-residences-phu-q-67a5a14d"
+        },
+        {
+          "icon": "bed",
+          "title": "Bamboo Cottages",
+          "text": "Bamboo Cottages: có nhà hàng hoặc không gian ăn uống tại Phú Quốc. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển; có lựa chọn nhìn ra biển.",
+          "placeId": "rs-phu-quoc-bamboo-cottages-9da5ee37"
+        },
+        {
+          "icon": "bed",
+          "title": "Mango Bay Resort",
+          "text": "Mango Bay Resort: có nhà hàng hoặc không gian ăn uống tại Phú Quốc. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển; có lựa chọn nhìn ra biển; spa hoặc dịch vụ thư giãn.",
+          "placeId": "rs-phu-quoc-mango-bay-resort-dc2277b3"
+        },
+        {
+          "icon": "bed",
+          "title": "Peppercorn Beach",
+          "text": "Peppercorn Beach: có hạng suite tại Phú Quốc. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; không gian có tác phẩm nghệ thuật; có nhà hàng hoặc không gian ăn uống.",
+          "placeId": "rs-phu-quoc-peppercorn-beach-38b3809c"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Aura Beach Club · Mövenpick Villas & Residences Phu Quoc",
+          "text": "Không gian ăn uống trên bãi Ông Lang trong khu Mövenpick. Nguồn giới thiệu tapas, đồ uống và âm nhạc dùng cùng buổi nghỉ bên biển.",
+          "placeId": "rs-phu-quoc-aura-beach-club-movenpic-983160ec"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "The Islander · Mövenpick Villas & Residences Phu Quoc",
+          "text": "The Islander trong Mövenpick Villas & Residences Phu Quoc. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; thực đơn quốc tế.",
+          "placeId": "rs-phu-quoc-the-islander-movenpick-v-e0a1992d"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "ALTITUDE 8 - SKY BISTRO · Mövenpick Resort Waverly Phu Quoc",
+          "text": "Bistro ở tầng tám trong Mövenpick Waverly Phú Quốc. Không gian có hướng nhìn rộng để chọn một bữa ăn trên tầng cao.",
+          "placeId": "rs-phu-quoc-altitude-8-sky-bistro-mo-f1e7492a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "LE JARDIN · La Veranda Resort Phu Quoc - MGallery Collection",
+          "text": "Nhà hàng ở bãi cỏ trước nhà chính La Veranda, dưới các hàng cọ. Không gian nhìn biển và hướng hoàng hôn, phục vụ các món ăn theo thực đơn cơ sở.",
+          "placeId": "rs-phu-quoc-le-jardin-la-veranda-res-7e297969"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "THE PEPPER TREE · La Veranda Resort Phu Quoc - MGallery Collection",
+          "text": "Nhà hàng nhìn biển trong La Veranda Phú Quốc. Thực đơn lấy cảm hứng các vùng quanh Thái Bình Dương, với khung cảnh hướng hoàng hôn.",
+          "placeId": "rs-phu-quoc-the-pepper-tree-la-veran-119a9a39"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "FOOD EXCHANGE · Novotel Phu Quoc Resort",
+          "text": "FOOD EXCHANGE trong Novotel Phu Quoc Resort. Hồ sơ nguồn giới thiệu ẩm thực âu; có khu ngồi ngoài trời.",
+          "placeId": "rs-phu-quoc-food-exchange-novotel-ph-c8528b76"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "PHU QUOC SEAFOOD RESTAURANT · Novotel Phu Quoc Resort",
+          "text": "Nhà hàng hải sản trong Novotel Phú Quốc. Nguồn cơ sở giới thiệu các lựa chọn đánh bắt quanh đảo trong phòng ăn thiết kế hiện đại.",
+          "placeId": "rs-phu-quoc-phu-quoc-seafood-restaur-3936e79c"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "SALT 'n' PEPPER · Pullman Phu Quoc Beach Resort",
+          "text": "SALT 'n' PEPPER trong Pullman Phu Quoc Beach Resort. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; có phòng ăn riêng.",
+          "placeId": "rs-phu-quoc-salt-n-pepper-pullman-ph-9adbee21"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "MAD COW WINE & GRILL · Pullman Phu Quoc Beach Resort",
+          "text": "MAD COW WINE & GRILL trong Pullman Phu Quoc Beach Resort. Hồ sơ nguồn giới thiệu bít tết và món nướng; vị trí trên tầng cao hoặc sân mái.",
+          "placeId": "rs-phu-quoc-mad-cow-wine-grill-pullm-9a08188d"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "SEA STARS · Pullman Phu Quoc Beach Resort",
+          "text": "SEA STARS trong Pullman Phu Quoc Beach Resort. Hồ sơ nguồn giới thiệu món việt; các món cá và hải sản; bếp mở; có khu ngồi ngoài trời.",
+          "placeId": "rs-phu-quoc-sea-stars-pullman-phu-qu-efd3978a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mercato Restaurant · Premier Residences Phu Quoc Emerald Bay Managed by Accor",
+          "text": "Mercato Restaurant trong Premier Residences Phu Quoc Emerald Bay Managed by Accor. Hồ sơ nguồn giới thiệu có lựa chọn buffet; có phục vụ bữa sáng; món việt; thực đơn quốc tế.",
+          "placeId": "rs-phu-quoc-mercato-restaurant-premi-af9b1f01"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Clubhouse Restaurant · Premier Residences Phu Quoc Emerald Bay Managed by Accor",
+          "text": "Clubhouse Restaurant trong Premier Residences Phu Quoc Emerald Bay Managed by Accor. Hồ sơ nguồn giới thiệu thực đơn quốc tế; các món cá và hải sản.",
+          "placeId": "rs-phu-quoc-clubhouse-restaurant-pre-d81b2591"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "CORALLO · Premier Village Phu Quoc Resort - Managed by Accor",
+          "text": "Nhà hàng trong Premier Village Phú Quốc với các món lấy cảm hứng nhiệt đới. Thực đơn phối hợp hải sản địa phương và nguyên liệu nhập khẩu.",
+          "placeId": "rs-phu-quoc-corallo-premier-village-d2430ef9"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "TheMARKET · Premier Village Phu Quoc Resort - Managed by Accor",
+          "text": "Nhà hàng món Việt trong Premier Village Phú Quốc. Không gian phục vụ theo phong cách thoải mái, dùng nguyên liệu theo thực đơn cơ sở.",
+          "placeId": "rs-phu-quoc-themarket-premier-villag-a79985ac"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "phu-quoc-bai-sao",
+      "name": "Bãi Sao",
+      "category": "canh",
+      "area": "Nam đảo",
+      "hook": "Dành một buổi đi dọc bãi cát và ngắm biển ở Bãi Sao.",
+      "summary": "Bãi Sao là một bãi biển nằm ở phía đông nam đảo Phú Quốc. Đây được xem là một trong những bãi biển đẹp nhất Việt Nam với nước biển trong xanh, lặng sóng; bãi tắm dài, thoải đều và độ dốc vừa phải; bãi cát trắng xốp, mịn màng. Vào năm 2015, Bãi Sao được chuyên trang du lịch CN Travel bình chọn là một trong 10 bãi biển hoang sơ và yên tĩnh nhất thế giới.",
+      "lat": 10.057298,
+      "lon": 104.036392,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "phu-quoc-bai-sao-1.jpg",
+          "author": "[//commons.wikimedia.org/wiki/User:Trantuonglam Trantuonglam]",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bai-sao-phu-quoc-tuonglamphotos.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bãi Sao"
+    },
+    {
+      "id": "phu-quoc-dinh-cau",
+      "name": "Dinh Cậu",
+      "category": "van",
+      "area": "Dương Đông",
+      "hook": "Đi bộ tìm hiểu điểm văn hóa ven biển gắn với đời sống người dân đảo.",
+      "summary": "Dinh Cậu là một di tích tọa lạc tại khu phố 2, đặc khu Phú Quốc, tỉnh An Giang, Việt Nam. Đây là một điểm đến, thu hút nhiều du khách.",
+      "lat": 10.217239,
+      "lon": 103.956414,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "45–60 phút (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "phu-quoc-dinh-cau-1.jpg",
+          "author": "Tonbi ko",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_Cau.JPG"
+        },
+        {
+          "file": "phu-quoc-dinh-cau-2.jpg",
+          "author": "Sketyl none",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_C%E1%BA%ADu_(37111073673).jpg"
+        },
+        {
+          "file": "phu-quoc-dinh-cau-3.jpg",
+          "author": "Hoangvantoanajc",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_C%E1%BA%ADu_Ph%C3%BA_Qu%E1%BB%91c.jpg"
+        }
+      ],
+      "wikipediaTitle": "Dinh Cậu"
+    },
+    {
+      "id": "phu-quoc-vuon-quoc-gia",
+      "name": "Vườn quốc gia Phú Quốc",
+      "category": "leo",
+      "area": "Bắc đảo",
+      "hook": "Tìm hiểu những tuyến khám phá rừng được đơn vị quản lý cho phép.",
+      "summary": "Vườn quốc gia Phú Quốc là một vườn quốc gia của Việt Nam nằm tại đảo Phú Quốc, tỉnh An Giang Vườn quốc gia Phú Quốc được thành lập theo Quyết định số 91/2001/QĐ-TTg ngày 8 tháng 6 năm 2001 của Thủ tướng Chính phủ Cộng hòa Xã hội Chủ nghĩa Việt Nam về việc chuyển hạng Khu bảo tồn thiên nhiên Phú Quốc thành Vườn quốc gia Phú Quốc.",
+      "lat": 10.325,
+      "lon": 103.95,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến của Vườn",
+      "difficulty": "Theo tuyến",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Liên hệ đơn vị quản lý để xác nhận khu vực và tuyến được mở.",
+        "Không dùng tâm Vườn làm vị trí đầu tuyến đi bộ."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Vườn quốc gia Phú Quốc"
+    },
+    {
+      "id": "phu-quoc-nha-tu-phu-quoc",
+      "name": "Nhà tù Phú Quốc",
+      "category": "van",
+      "area": "Phú Quốc",
+      "hook": "Dành thời gian tìm hiểu một di tích lịch sử.",
+      "summary": "Trại giam Tù binh Chiến tranh Phú Quốc, hay Trại giam Tù binh Cộng sản Phú Quốc là một trại giam nằm tại khu vực An Thới ở phía nam đặc khu Phú Quốc. Trong Chiến tranh Đông Dương, trại giam này có tên là Nhà lao Cây Dừa. Đây là trại giam tù binh trung tâm toàn Việt Nam Cộng hòa, từng giam giữ hơn 32.000 tù binh. Trại giam Tù binh Chiến tranh Phú Quốc có tất cả là 12 khu được đánh số từ khu 1 đến khu 12.",
+      "lat": 10.043948,
+      "lon": 104.018179,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "phu-quoc-nha-tu-phu-quoc-1.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tr%E1%BA%A1i_giam_Ph%C3%BA_Qu%E1%BB%91c.jpg"
+        }
+      ],
+      "wikipediaTitle": "Nhà tù Phú Quốc"
+    },
+    {
+      "id": "phu-quoc-hon-thom",
+      "name": "Hòn Thơm",
+      "category": "canh",
+      "area": "Phú Quốc",
+      "hook": "Tìm một hành trình ra đảo phía nam Phú Quốc.",
+      "summary": "Hòn Thơm, còn được gọi là Đảo Dứa, là hòn đảo lớn nhất thuộc quần đảo An Thới trong vịnh Thái Lan, nằm ở phía nam đảo Phú Quốc. Về hành chính, đảo này trực thuộc phường An Thới, đặc khu Phú Quốc, tỉnh An Giang, nằm cách cảng An Thới khoảng 6 km, cách phường Dương Đông khoảng 30 km. Hòn Thơm có chiều dài khoảng 3,5 km, rộng khoảng 1,2 km, diện tích hơn 3 km². Điểm nhấn của hòn đảo là phong cảnh hoang sơ, thơ mộng với màu nước trong xanh, nhiều ghềnh đá đẹp và lạ mắt.",
+      "lat": 9.956389,
+      "lon": 104.015833,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ref-phu-quoc-hon-thom-3.jpg",
+          "author": "Klientos",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%B2n_Th%C6%A1m_cable_car_pylon.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hòn Thơm"
+    },
+    {
+      "id": "phu-quoc-ganh-dau",
+      "name": "Gành Dầu",
+      "category": "canh",
+      "area": "Phú Quốc",
+      "hook": "Khám phá một góc Gành Dầu ở phía tây bắc đảo.",
+      "summary": "Gành Dầu là một địa danh của cụm dân cư nằm ở phía Tây Bắc đảo Phú Quốc, về mặt hành chính thuộc đặc khu Phú Quốc, tỉnh An Giang, Việt Nam.",
+      "lat": 10.3731,
+      "lon": 103.84756,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ref-phu-quoc-ganh-dau-3.jpg",
+          "author": "Tokeisan",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%81n_th%E1%BB%9D_Nguy%E1%BB%85n_Trung_Tr%E1%BB%B1c_%E1%BB%9F_Ph%C3%BA_Qu%E1%BB%91c.JPG"
+        }
+      ],
+      "wikipediaTitle": "Gành Dầu"
+    },
+    {
+      "id": "phu-quoc-bai-dai",
+      "name": "Bãi Đại",
+      "category": "canh",
+      "area": "Phú Quốc",
+      "hook": "Dành thời gian thư thả bên bờ biển.",
+      "summary": "",
+      "lat": 10.333333333333,
+      "lon": 103.85,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "phu-quoc-an-thoi",
+      "name": "Quần đảo An Thới",
+      "category": "canh",
+      "area": "Phú Quốc",
+      "hook": "Tìm hiểu các chuyến đi đảo và điều kiện biển.",
+      "summary": "Quần đảo An Thới là quần đảo trong vịnh Thái Lan, về mặt hành chính nằm dưới sự quản lý của đặc khu Phú Quốc, tỉnh An Giang, Việt Nam. Quần đảo có tọa độ khoảng 9°50′ vĩ bắc, 104°05′ kinh đông. Vùng biển nơi đây nước trong; có nơi biển sâu gần 30 m. Du khách viếng thăm có thể khám phá thiên nhiên, câu cá, lặn biển,...",
+      "lat": 9.956519,
+      "lon": 104.016914,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "phu-quoc-an-thoi-1.jpg",
+          "author": "Klientos",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%B2n_Th%C6%A1m_cable_car_pylon.jpg"
+        }
+      ],
+      "wikipediaTitle": "Quần đảo An Thới"
+    },
+    {
+      "id": "exp-food-phu-quoc-bun-quay",
+      "name": "Bún quậy",
+      "category": "am",
+      "area": "Mốc khu vực Phú Quốc",
+      "hook": "Một tô bún hải sản với nước chấm tự pha theo khẩu vị.",
+      "summary": "Một tô bún hải sản với nước chấm tự pha theo khẩu vị. Hỏi về tôm, cá và mực trước khi gọi. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 10.2176,
+      "lon": 103.9594,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-extra-4-3.jpg",
+          "author": "Phương Huy",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_qu%E1%BA%ADy_%E1%BB%9F_qu%C3%A1n_Qu%C3%AA_T%C3%B4i_ng%C3%A0y_15_th%C3%A1ng_10_n%C4%83m_2018_(1).jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "phu-quoc-suoi-tranh",
+      "name": "Suối Tranh",
+      "category": "canh",
+      "area": "Phú Quốc",
+      "hook": "Lên ý tưởng một buổi đi bộ giữa cây xanh.",
+      "summary": "Một ý tưởng đi bộ khám phá cảnh quan suối giữa cây xanh Phú Quốc. Lượng nước và khả năng tiếp cận phụ thuộc điều kiện thực tế; nên kiểm tra trước nếu đi chỉ để ngắm thác.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 10.1837812,
+      "lon": 104.0153429,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Suối và cây xanh",
+        "Đi bộ",
+        "Kiểm tra lượng nước"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Xác nhận tình trạng đường và thời tiết; giày bám tốt giúp di chuyển trên đoạn đá ẩm.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/357411250",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "supp-phu-quoc-suoi-tranh-2.jpg",
+          "author": "Sketyl none",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_(37732301196).jpg"
+        },
+        {
+          "file": "supp-phu-quoc-suoi-tranh-3.jpg",
+          "author": "Sketyl none",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_(37111056503).jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "venue-phu-quoc-cassia-cottage",
+      "name": "Cassia Cottage",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Một ý tưởng nghỉ giữa vườn cây và không gian ven biển.",
+      "summary": "Một ý tưởng nghỉ giữa vườn cây và không gian ven biển. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 10.1983547,
+      "lon": 103.9638641,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 100C/12 Trần Hưng Đạo, Phú Quốc",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/13437202908"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "100C/12 Trần Hưng Đạo, Phú Quốc",
+        "website": "https://cassiacottage.com/contact/",
+        "sourceUrl": "https://cassiacottage.com/contact/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-phu-quoc-movenpick-villas-residen-3c533061",
+      "name": "Mövenpick Villas & Residences Phu Quoc",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Mövenpick Villas & Residences Phu Quoc: có lựa chọn villa tại Phu Quoc.",
+      "summary": "Mövenpick Villas & Residences Phu Quoc: có lựa chọn villa tại Phu Quoc. Hồ sơ nguồn giới thiệu có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình; có hạng phòng hoặc villa với bể bơi riêng.",
+      "lat": 10.283008,
+      "lon": 103.924173,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có hạng phòng hoặc villa với bể bơi riêng",
+        "Vị trí gần hoặc sát bãi biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn villa và có nhà hàng hoặc không gian ăn uống.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +842972699999.",
+        "Email liên hệ theo nguồn: HB4V5@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Ong Lang Beach, Cua Duong Village, Phu Quoc District, Phu Quoc, Vietnam",
+        "website": "https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972699999",
+        "serviceHours": "Nhận phòng 15:00; Trả phòng 12:00",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-aura-beach-club-movenpic-983160ec",
+      "name": "Aura Beach Club · Mövenpick Villas & Residences Phu Quoc",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Không gian ăn uống trên bãi Ông Lang trong khu Mövenpick.",
+      "summary": "Không gian ăn uống trên bãi Ông Lang trong khu Mövenpick. Nguồn giới thiệu tapas, đồ uống và âm nhạc dùng cùng buổi nghỉ bên biển.",
+      "lat": 10.283008,
+      "lon": 103.924173,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Tapas",
+        "Bãi Ông Lang",
+        "Đồ uống"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn tapas và bãi ông lang.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận đặt chỗ, lịch âm nhạc và điều kiện sử dụng khu biển.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842972699999.",
+        "Email liên hệ theo nguồn: HB4V5@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "Nguồn: https://all.accor.com/hotel/B4V5/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Ong Lang Beach, Cua Duong Village, Phu Quoc District, Phu Quoc, Vietnam",
+        "website": "https://all.accor.com/hotel/B6Q0/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972699999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-the-islander-movenpick-v-e0a1992d",
+      "name": "The Islander · Mövenpick Villas & Residences Phu Quoc",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "The Islander trong Mövenpick Villas & Residences Phu Quoc.",
+      "summary": "The Islander trong Mövenpick Villas & Residences Phu Quoc. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; thực đơn quốc tế.",
+      "lat": 10.283008,
+      "lon": 103.924173,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và thực đơn quốc tế.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842972699999.",
+        "Email liên hệ theo nguồn: HB4V5@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "Nguồn: https://all.accor.com/hotel/B4V5/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Ong Lang Beach, Cua Duong Village, Phu Quoc District, Phu Quoc, Vietnam",
+        "website": "https://all.accor.com/hotel/B6Q0/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B6Q0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972699999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-movenpick-resort-waverly-a84c7dd3",
+      "name": "Mövenpick Resort Waverly Phu Quoc",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Mövenpick Resort Waverly Phu Quoc: có hạng suite tại PHU QUOC.",
+      "summary": "Mövenpick Resort Waverly Phu Quoc: có hạng suite tại PHU QUOC. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 10.283008,
+      "lon": 103.924173,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có hạng phòng hoặc villa với bể bơi riêng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842972699999.",
+        "Email liên hệ theo nguồn: HB4V5@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4V5/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Ong Lang Hamlet, Cua Duong Village, Phu Quoc District, PHU QUOC, Vietnam",
+        "website": "https://all.accor.com/hotel/B4V5/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B4V5/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972699999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-altitude-8-sky-bistro-mo-f1e7492a",
+      "name": "ALTITUDE 8 - SKY BISTRO · Mövenpick Resort Waverly Phu Quoc",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Bistro ở tầng tám trong Mövenpick Waverly Phú Quốc.",
+      "summary": "Bistro ở tầng tám trong Mövenpick Waverly Phú Quốc. Không gian có hướng nhìn rộng để chọn một bữa ăn trên tầng cao.",
+      "lat": 10.283008,
+      "lon": 103.924173,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Tầng tám",
+        "Tầm nhìn rộng",
+        "Bistro"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn tầng tám và tầm nhìn rộng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi thời điểm phục vụ, hướng bàn và thực đơn trước khi đặt chỗ.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842972699999.",
+        "Email liên hệ theo nguồn: HB4V5@movenpick.com.",
+        "Nguồn: https://all.accor.com/hotel/B4V5/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Ong Lang Hamlet, Cua Duong Village, Phu Quoc District, PHU QUOC, Vietnam",
+        "website": "https://all.accor.com/hotel/B4V5/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B4V5/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972699999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-la-veranda-resort-phu-qu-842f6ac7",
+      "name": "La Veranda Resort Phu Quoc - MGallery Collection",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "La Veranda Resort Phu Quoc - MGallery Collection: chỗ ở để cân nhắc tại PHU QUOC.",
+      "summary": "La Veranda Resort Phu Quoc - MGallery Collection: chỗ ở để cân nhắc tại PHU QUOC. Cơ sở công bố bể bơi, bãi đỗ xe, xe đưa đón, nhà hàng.",
+      "lat": 10.1931,
+      "lon": 103.96503,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bể bơi",
+        "Bãi đỗ xe",
+        "Xe đưa đón",
+        "Nhà hàng",
+        "Phòng tập"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bể bơi và bãi đỗ xe.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842973982988.",
+        "Email liên hệ theo nguồn: contact@laverandaresorts.com.",
+        "Nguồn: https://all.accor.com/hotel/6479/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-25d3e659e1a07cd6ee.jpg",
+          "author": "Nguyễn Thanh Quang",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=6605900",
+          "caption": "Ảnh nguồn: 2006"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Tran Hung Dao Street, Duong Dong Beach, PHU QUOC, Vietnam",
+        "website": "https://all.accor.com/hotel/6479/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/6479/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973982988",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-le-jardin-la-veranda-res-7e297969",
+      "name": "LE JARDIN · La Veranda Resort Phu Quoc - MGallery Collection",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Nhà hàng ở bãi cỏ trước nhà chính La Veranda, dưới các hàng cọ.",
+      "summary": "Nhà hàng ở bãi cỏ trước nhà chính La Veranda, dưới các hàng cọ. Không gian nhìn biển và hướng hoàng hôn, phục vụ các món ăn theo thực đơn cơ sở.",
+      "lat": 10.1931,
+      "lon": 103.96503,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Sân cỏ",
+        "Tầm nhìn biển",
+        "Hướng hoàng hôn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn sân cỏ và tầm nhìn biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi bàn ngoài trời và phương án khi mưa.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842973982988.",
+        "Email liên hệ theo nguồn: contact@laverandaresorts.com.",
+        "Nguồn: https://all.accor.com/hotel/6479/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-25d3e659e1a07cd6ee.jpg",
+          "author": "Nguyễn Thanh Quang",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=6605900",
+          "caption": "Ảnh khách sạn · Ảnh nguồn: 2006"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Tran Hung Dao Street, Duong Dong Beach, PHU QUOC, Vietnam",
+        "website": "https://all.accor.com/hotel/6479/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/6479/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973982988",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-the-pepper-tree-la-veran-119a9a39",
+      "name": "THE PEPPER TREE · La Veranda Resort Phu Quoc - MGallery Collection",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Nhà hàng nhìn biển trong La Veranda Phú Quốc.",
+      "summary": "Nhà hàng nhìn biển trong La Veranda Phú Quốc. Thực đơn lấy cảm hứng các vùng quanh Thái Bình Dương, với khung cảnh hướng hoàng hôn.",
+      "lat": 10.1931,
+      "lon": 103.96503,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Pacific Rim",
+        "Tầm nhìn biển",
+        "Hướng hoàng hôn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn pacific rim và tầm nhìn biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đặt bàn theo giờ bạn muốn ngắm cảnh và hỏi thực đơn đang phục vụ.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842973982988.",
+        "Email liên hệ theo nguồn: contact@laverandaresorts.com.",
+        "Nguồn: https://all.accor.com/hotel/6479/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-25d3e659e1a07cd6ee.jpg",
+          "author": "Nguyễn Thanh Quang",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=6605900",
+          "caption": "Ảnh khách sạn · Ảnh nguồn: 2006"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Tran Hung Dao Street, Duong Dong Beach, PHU QUOC, Vietnam",
+        "website": "https://all.accor.com/hotel/6479/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/6479/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973982988",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-novotel-phu-quoc-resort-3eed21fa",
+      "name": "Novotel Phu Quoc Resort",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Novotel Phu Quoc Resort: có hạng suite tại Phu Quoc Special Zone.",
+      "summary": "Novotel Phu Quoc Resort: có hạng suite tại Phu Quoc Special Zone. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 10.12892,
+      "lon": 103.982711,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có hạng phòng hoặc villa với bể bơi riêng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842976260999.",
+        "Email liên hệ theo nguồn: H9770@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/9770/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Sonasea Villas and Resort, Duong Bao Area, An Giang Province, Phu Quoc Special Zone, Vietnam",
+        "website": "https://all.accor.com/hotel/9770/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/9770/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842976260999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-food-exchange-novotel-ph-c8528b76",
+      "name": "FOOD EXCHANGE · Novotel Phu Quoc Resort",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "FOOD EXCHANGE trong Novotel Phu Quoc Resort.",
+      "summary": "FOOD EXCHANGE trong Novotel Phu Quoc Resort. Hồ sơ nguồn giới thiệu ẩm thực âu; có khu ngồi ngoài trời.",
+      "lat": 10.12892,
+      "lon": 103.982711,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Âu",
+        "Có khu ngồi ngoài trời"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực âu và có khu ngồi ngoài trời.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842976260999.",
+        "Email liên hệ theo nguồn: H9770@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/9770/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Sonasea Villas and Resort, Duong Bao Area, An Giang Province, Phu Quoc Special Zone, Vietnam",
+        "website": "https://all.accor.com/hotel/9770/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/9770/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842976260999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-phu-quoc-seafood-restaur-3936e79c",
+      "name": "PHU QUOC SEAFOOD RESTAURANT · Novotel Phu Quoc Resort",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Nhà hàng hải sản trong Novotel Phú Quốc.",
+      "summary": "Nhà hàng hải sản trong Novotel Phú Quốc. Nguồn cơ sở giới thiệu các lựa chọn đánh bắt quanh đảo trong phòng ăn thiết kế hiện đại.",
+      "lat": 10.12892,
+      "lon": 103.982711,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hải sản",
+        "Nguyên liệu quanh đảo",
+        "Novotel Phú Quốc"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hải sản và nguyên liệu quanh đảo.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi hải sản trong ngày và cách tính giá của từng phần.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842976260999.",
+        "Email liên hệ theo nguồn: H9770@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/9770/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Sonasea Villas and Resort, Duong Bao Area, An Giang Province, Phu Quoc Special Zone, Vietnam",
+        "website": "https://all.accor.com/hotel/9770/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/9770/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842976260999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-pullman-phu-quoc-beach-r-731170db",
+      "name": "Pullman Phu Quoc Beach Resort",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Pullman Phu Quoc Beach Resort: có hạng suite tại AN GIANG PROVINCE.",
+      "summary": "Pullman Phu Quoc Beach Resort: có hạng suite tại AN GIANG PROVINCE. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; có khu trên tầng mái.",
+      "lat": 10.120242,
+      "lon": 103.983464,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có khu trên tầng mái",
+        "Có nhà hàng hoặc không gian ăn uống"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842972679999.",
+        "Email liên hệ theo nguồn: HA248@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A248/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Group 6 Ban Quy Hamlet, Duong Bao Area, Phu Quoc Special Zone, AN GIANG PROVINCE, Vietnam",
+        "website": "https://all.accor.com/hotel/A248/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/A248/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972679999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-salt-n-pepper-pullman-ph-9adbee21",
+      "name": "SALT 'n' PEPPER · Pullman Phu Quoc Beach Resort",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "SALT 'n' PEPPER trong Pullman Phu Quoc Beach Resort.",
+      "summary": "SALT 'n' PEPPER trong Pullman Phu Quoc Beach Resort. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; có phòng ăn riêng.",
+      "lat": 10.120242,
+      "lon": 103.983464,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Có lựa chọn buffet",
+        "Có phòng ăn riêng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và có lựa chọn buffet.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842972679999.",
+        "Email liên hệ theo nguồn: HA248@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A248/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Group 6 Ban Quy Hamlet, Duong Bao Area, Phu Quoc Special Zone, AN GIANG PROVINCE, Vietnam",
+        "website": "https://all.accor.com/hotel/A248/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A248/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972679999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-mad-cow-wine-grill-pullm-9a08188d",
+      "name": "MAD COW WINE & GRILL · Pullman Phu Quoc Beach Resort",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "MAD COW WINE & GRILL trong Pullman Phu Quoc Beach Resort.",
+      "summary": "MAD COW WINE & GRILL trong Pullman Phu Quoc Beach Resort. Hồ sơ nguồn giới thiệu bít tết và món nướng; vị trí trên tầng cao hoặc sân mái.",
+      "lat": 10.120242,
+      "lon": 103.983464,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bít tết và món nướng",
+        "Vị trí trên tầng cao hoặc sân mái"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bít tết và món nướng và vị trí trên tầng cao hoặc sân mái.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842972679999.",
+        "Email liên hệ theo nguồn: HA248@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A248/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Group 6 Ban Quy Hamlet, Duong Bao Area, Phu Quoc Special Zone, AN GIANG PROVINCE, Vietnam",
+        "website": "https://all.accor.com/hotel/A248/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A248/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972679999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-sea-stars-pullman-phu-qu-efd3978a",
+      "name": "SEA STARS · Pullman Phu Quoc Beach Resort",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "SEA STARS trong Pullman Phu Quoc Beach Resort.",
+      "summary": "SEA STARS trong Pullman Phu Quoc Beach Resort. Hồ sơ nguồn giới thiệu món việt; các món cá và hải sản; bếp mở; có khu ngồi ngoài trời.",
+      "lat": 10.120242,
+      "lon": 103.983464,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món Việt",
+        "Các món cá và hải sản",
+        "Bếp mở",
+        "Có khu ngồi ngoài trời"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món việt và các món cá và hải sản.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842972679999.",
+        "Email liên hệ theo nguồn: HA248@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A248/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Group 6 Ban Quy Hamlet, Duong Bao Area, Phu Quoc Special Zone, AN GIANG PROVINCE, Vietnam",
+        "website": "https://all.accor.com/hotel/A248/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A248/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842972679999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-premier-residences-phu-q-67a5a14d",
+      "name": "Premier Residences Phu Quoc Emerald Bay Managed by Accor",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Premier Residences Phu Quoc Emerald Bay Managed by Accor: có thông tin lưu trú cho gia đình tại Phu Quoc Special Zone.",
+      "summary": "Premier Residences Phu Quoc Emerald Bay Managed by Accor: có thông tin lưu trú cho gia đình tại Phu Quoc Special Zone. Hồ sơ nguồn giới thiệu có thông tin lưu trú cho gia đình.",
+      "lat": 10.035024,
+      "lon": 104.027621,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có thông tin lưu trú cho gia đình",
+        "Bể bơi",
+        "Bãi đỗ xe",
+        "Nhà hàng",
+        "Có thông tin hỗ trợ tiếp cận bằng xe lăn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có thông tin lưu trú cho gia đình và bể bơi.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842973927777.",
+        "Email liên hệ theo nguồn: HB2Q9@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B2Q9/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Khem Beach, Phu Quoc Special Zone, An Giang, Phu Quoc Special Zone, Vietnam",
+        "website": "https://all.accor.com/hotel/B2Q9/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B2Q9/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973927777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-mercato-restaurant-premi-af9b1f01",
+      "name": "Mercato Restaurant · Premier Residences Phu Quoc Emerald Bay Managed by Accor",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Mercato Restaurant trong Premier Residences Phu Quoc Emerald Bay Managed by Accor.",
+      "summary": "Mercato Restaurant trong Premier Residences Phu Quoc Emerald Bay Managed by Accor. Hồ sơ nguồn giới thiệu có lựa chọn buffet; có phục vụ bữa sáng; món việt; thực đơn quốc tế.",
+      "lat": 10.035024,
+      "lon": 104.027621,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn buffet",
+        "Có phục vụ bữa sáng",
+        "Món Việt",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn buffet và có phục vụ bữa sáng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842973927777.",
+        "Email liên hệ theo nguồn: HB2Q9@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B2Q9/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Khem Beach, Phu Quoc Special Zone, An Giang, Phu Quoc Special Zone, Vietnam",
+        "website": "https://all.accor.com/hotel/B2Q9/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B2Q9/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973927777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-clubhouse-restaurant-pre-d81b2591",
+      "name": "Clubhouse Restaurant · Premier Residences Phu Quoc Emerald Bay Managed by Accor",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Clubhouse Restaurant trong Premier Residences Phu Quoc Emerald Bay Managed by Accor.",
+      "summary": "Clubhouse Restaurant trong Premier Residences Phu Quoc Emerald Bay Managed by Accor. Hồ sơ nguồn giới thiệu thực đơn quốc tế; các món cá và hải sản.",
+      "lat": 10.035024,
+      "lon": 104.027621,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Thực đơn quốc tế",
+        "Các món cá và hải sản"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn thực đơn quốc tế và các món cá và hải sản.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842973927777.",
+        "Email liên hệ theo nguồn: HB2Q9@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B2Q9/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Khem Beach, Phu Quoc Special Zone, An Giang, Phu Quoc Special Zone, Vietnam",
+        "website": "https://all.accor.com/hotel/B2Q9/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B2Q9/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973927777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-premier-village-phu-quoc-0fbd9ec2",
+      "name": "Premier Village Phu Quoc Resort - Managed by Accor",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Villa trên bán đảo ở phía nam Phú Quốc, có bãi biển ở hai phía.",
+      "summary": "Villa được bố trí ven biển hoặc trên sườn đồi, có bể bơi riêng theo mô tả nguồn. Khu nghỉ có bể bơi chung nối giữa hai bãi, Plumeria Spa, hoạt động trẻ em và nhà hàng hải sản Corallo.",
+      "lat": 10.005315,
+      "lon": 104.05185,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Villa có bể bơi riêng",
+        "Bán đảo hai mặt biển",
+        "Plumeria Spa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn villa có bể bơi riêng và bán đảo hai mặt biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Chọn rõ vị trí villa và hỏi độ dốc, bậc thang hoặc xe điện nếu có người khó đi lại.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/phu-quoc-island/premier-village-phu-quoc-16231",
+        "Nguồn: https://www.openstreetmap.org/way/689499246",
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842973546666.",
+        "Email liên hệ theo nguồn: HB2R4@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B2R4/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-3baa9f122ddd614268.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256474"
+        },
+        {
+          "file": "venue-fill-c86dbef047cf06c1b0.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187917197"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1678505200264-e832c9313f7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTIzOTE3fDB8MXxhbGx8fHx8fHx8fHwxNzk0MDM5NzAyfA&ixlib=rb-4.1.0&q=80&w=1080",
+          "author": "Ted Victor",
+          "authorUrl": "https://unsplash.com/@victoralki?utm_source=wander&utm_medium=referral",
+          "license": "Unsplash",
+          "sourceUrl": "https://unsplash.com/photos/a-view-of-a-tropical-island-with-palm-trees-tOCa0lSuS3M?utm_source=wander&utm_medium=referral",
+          "caption": "Biệt thự trong khu nghỉ dưỡng"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Ong Doi Cape, An Thoi Ward, Phu Quoc, Phu Quoc, Vietnam",
+        "website": "https://all.accor.com/hotel/B2R4/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B2R4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973546666",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-corallo-premier-village-d2430ef9",
+      "name": "CORALLO · Premier Village Phu Quoc Resort - Managed by Accor",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Nhà hàng trong Premier Village Phú Quốc với các món lấy cảm hứng nhiệt đới.",
+      "summary": "Nhà hàng trong Premier Village Phú Quốc với các món lấy cảm hứng nhiệt đới. Thực đơn phối hợp hải sản địa phương và nguyên liệu nhập khẩu.",
+      "lat": 10.005315,
+      "lon": 104.05185,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hải sản địa phương",
+        "Thực đơn nhiệt đới",
+        "Premier Village"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hải sản địa phương và thực đơn nhiệt đới.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận hình thức phục vụ và việc đón khách không lưu trú.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842973546666.",
+        "Email liên hệ theo nguồn: HB2R4@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B2R4/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-3baa9f122ddd614268.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256474",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Ong Doi Cape, An Thoi Ward, Phu Quoc, Phu Quoc, Vietnam",
+        "website": "https://all.accor.com/hotel/B2R4/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B2R4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973546666",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-themarket-premier-villag-a79985ac",
+      "name": "TheMARKET · Premier Village Phu Quoc Resort - Managed by Accor",
+      "category": "am",
+      "area": "Phú Quốc",
+      "hook": "Nhà hàng món Việt trong Premier Village Phú Quốc.",
+      "summary": "Nhà hàng món Việt trong Premier Village Phú Quốc. Không gian phục vụ theo phong cách thoải mái, dùng nguyên liệu theo thực đơn cơ sở.",
+      "lat": 10.005315,
+      "lon": 104.05185,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món Việt",
+        "Không gian thoải mái",
+        "Premier Village"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món việt và không gian thoải mái.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi thực đơn theo buổi và lối đến nhà hàng trong khu nghỉ.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842973546666.",
+        "Email liên hệ theo nguồn: HB2R4@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B2R4/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-3baa9f122ddd614268.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256474",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Ong Doi Cape, An Thoi Ward, Phu Quoc, Phu Quoc, Vietnam",
+        "website": "https://all.accor.com/hotel/B2R4/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B2R4/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842973546666",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-new-world-phu-quoc-resor-0915798a",
+      "name": "New World Phu Quoc Resort",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Khu nghỉ toàn villa có bể bơi riêng tại Bãi Khem.",
+      "summary": "Villa nằm trong vườn nhiệt đới, có khu ăn uống và bếp nhỏ theo mô tả nguồn. Khu nghỉ có bãi biển, spa, phòng tập và câu lạc bộ trẻ em; các nhà hàng phục vụ nhiều phong cách ẩm thực.",
+      "lat": 10.0389602,
+      "lon": 104.0273181,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Villa trong vườn",
+        "Bể bơi riêng",
+        "Bãi Khem"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn villa trong vườn và bể bơi riêng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu số phòng ngủ, sức chứa và quy định sử dụng bếp của hạng villa đặt.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/phu-quoc-island/new-world-phu-quoc-resort-16503",
+        "Nguồn: https://www.openstreetmap.org/way/1290225377"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-138319645d23b8dddc.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187255967"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Khem Beach, Phu Quoc Island, Vietnam",
+        "website": "https://phuquoc.newworldhotels.com/en/",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/phu-quoc-island/new-world-phu-quoc-resort-16503",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-salinda-resort-phu-quoc-0e169217",
+      "name": "Salinda Resort Phu Quoc Island",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Phòng, suite và villa tại khu Cửa Lấp trên đảo Phú Quốc.",
+      "summary": "Phòng nghỉ có ban công và các hạng rộng hơn dành cho nhu cầu riêng. Khu nghỉ có Q’isense Spa cùng các lựa chọn món Việt, Ý và Ấn Độ; lịch nhà hàng và dịch vụ đi kèm cần kiểm tra theo ngày lưu trú.",
+      "lat": 10.1834492,
+      "lon": 103.9680877,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Khu Cửa Lấp",
+        "Phòng, suite và villa",
+        "Q’isense Spa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn khu cửa lấp và phòng, suite và villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Dùng địa chỉ resort Phú Quốc khi đặt xe; văn phòng trên đường Cao Thắng ở TP.HCM là địa chỉ khác.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/phu-quoc-island/salinda-resort-phu-quoc-island-9405",
+        "Nguồn: https://salindaresort.com/",
+        "Nguồn: https://maps.app.goo.gl/R9SJitwH7V3x4kpeA",
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Cua Lap Hamlet, Duong To Commune, Phu Quoc Island, Vietnam",
+        "website": "https://salindaresort.com/",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/phu-quoc-island/salinda-resort-phu-quoc-island-9405",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-melia-vinpearl-phu-quoc-33387aa4",
+      "name": "Meliá Vinpearl Phu Quoc",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Quần thể villa có bể bơi riêng tại khu bắc đảo Phú Quốc.",
+      "summary": "Villa có nhiều cấu hình phòng ngủ và được bố trí quanh cảnh quan hồ nước. Khu nghỉ có spa, yoga, hoạt động cho trẻ em và nhà hàng; dịch vụ trong quần thể Vinpearl cần kiểm tra điều kiện sử dụng riêng.",
+      "lat": 10.3580429,
+      "lon": 103.8495207,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Villa nhiều phòng ngủ",
+        "Bể bơi riêng",
+        "Hoạt động gia đình"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn villa nhiều phòng ngủ và bể bơi riêng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Kiểm tra vé tham quan, xe đưa đón và bữa ăn nào thuộc đúng gói phòng.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/phu-quoc-island/melia-vinpearl-phu-quoc-16465",
+        "Nguồn: https://www.openstreetmap.org/way/1279616740"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Bai Dai Area, Ganh Dau Commune, Phu Quoc Island, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/phu-quoc-island/melia-vinpearl-phu-quoc-16465",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-jw-marriott-phu-quoc-eme-11fe052c",
+      "name": "JW Marriott Phu Quoc Emerald Bay Resort & Spa",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Khu nghỉ ở Bãi Khem với thiết kế theo câu chuyện trường đại học hư cấu.",
+      "summary": "Bill Bensley xây dựng bối cảnh Lamarck University cho từng không gian; đây là ý tưởng thiết kế của khu nghỉ. Khuôn viên có Chanterelle Spa, nhiều nhà hàng và bể bơi tạo hình vỏ sò gần biển.",
+      "lat": 10.0334818,
+      "lon": 104.0281698,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bãi Khem",
+        "Thiết kế theo chủ đề",
+        "Chanterelle Spa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bãi khem và thiết kế theo chủ đề.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Chọn khu nhà theo vị trí bãi biển và hỏi điều kiện dùng bữa tại nhà hàng Pink Pearl.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/phu-quoc-island/jw-marriott-phu-quoc-emerald-bay-resort-spa-16918",
+        "Nguồn: https://www.openstreetmap.org/node/6418157113"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-07d3db04405b74bd8d.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256229"
+        },
+        {
+          "file": "venue-fill-718d5b92ec8495d809.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nha-hang-pink-pearl.jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Eco-Tourism at Bai Khem, Phu Quoc Island, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/phu-quoc-island/jw-marriott-phu-quoc-emerald-bay-resort-spa-16918",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-bamboo-cottages-9da5ee37",
+      "name": "Bamboo Cottages",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Bamboo Cottages: có nhà hàng hoặc không gian ăn uống tại Phú Quốc.",
+      "summary": "Bamboo Cottages: có nhà hàng hoặc không gian ăn uống tại Phú Quốc. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển; có lựa chọn nhìn ra biển.",
+      "lat": 10.3074579,
+      "lon": 103.8644812,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Vị trí gần hoặc sát bãi biển",
+        "Có lựa chọn nhìn ra biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có nhà hàng hoặc không gian ăn uống và vị trí gần hoặc sát bãi biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381",
+        "Nguồn: https://bamboocottagesphuquoc.com/",
+        "Nguồn: https://www.openstreetmap.org/node/7043123585"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Vung Bau Beach",
+        "website": "https://bamboocottagesphuquoc.com/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-mango-bay-resort-dc2277b3",
+      "name": "Mango Bay Resort",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Mango Bay Resort: có nhà hàng hoặc không gian ăn uống tại Phú Quốc.",
+      "summary": "Mango Bay Resort: có nhà hàng hoặc không gian ăn uống tại Phú Quốc. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển; có lựa chọn nhìn ra biển; spa hoặc dịch vụ thư giãn.",
+      "lat": 10.2585086,
+      "lon": 103.9359637,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Vị trí gần hoặc sát bãi biển",
+        "Có lựa chọn nhìn ra biển",
+        "Spa hoặc dịch vụ thư giãn",
+        "Có phục vụ bữa sáng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có nhà hàng hoặc không gian ăn uống và vị trí gần hoặc sát bãi biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +84 773 981 693.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381",
+        "Nguồn: https://mangobayphuquoc.com/en/?utm_source=chatgpt.com",
+        "Nguồn: https://www.openstreetmap.org/node/3319583925"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Ong Lang Beach",
+        "website": "https://mangobayphuquoc.com/en/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 773 981 693",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-phu-quoc-peppercorn-beach-38b3809c",
+      "name": "Peppercorn Beach",
+      "category": "luu",
+      "area": "Phú Quốc",
+      "hook": "Peppercorn Beach: có hạng suite tại Phú Quốc.",
+      "summary": "Peppercorn Beach: có hạng suite tại Phú Quốc. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; không gian có tác phẩm nghệ thuật; có nhà hàng hoặc không gian ăn uống.",
+      "lat": 10.3755614,
+      "lon": 103.8543272,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Không gian có tác phẩm nghệ thuật",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +84 (0) 297 3989 567.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381",
+        "Nguồn: https://www.peppercornbeach.com/",
+        "Nguồn: https://www.openstreetmap.org/node/4068098714"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "To 8, Ap Chuong Vich, Ganh Dau",
+        "website": "https://www.peppercornbeach.com/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Phu%20Quoc&oldid=5414381",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 (0) 297 3989 567",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-29999414",
+      "theme": "nghe",
+      "caption": "Theo nhịp phơi cá cơm ở Phú Quốc",
+      "file": "pexels-29999414.jpg",
+      "author": "Văn Long Bùi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/traditional-anchovy-drying-in-phu-quoc-vietnam-29999414/"
+    },
+    {
+      "id": "food-research-phu-quoc",
+      "theme": "mon-an",
+      "caption": "Bún quậy · một món muốn thử (ảnh minh họa)",
+      "file": "food-extra-4-3.jpg",
+      "author": "Phương Huy",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_qu%E1%BA%ADy_%E1%BB%9F_qu%C3%A1n_Qu%C3%AA_T%C3%B4i_ng%C3%A0y_15_th%C3%A1ng_10_n%C4%83m_2018_(1).jpg"
+    },
+    {
+      "id": "wave-pexels-8407278",
+      "theme": "cho",
+      "caption": "Một buổi đi chợ giữa đời sống Phú Quốc",
+      "file": "wave-pexels-8407278.jpg",
+      "author": "Minh Tri",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/photograph-of-vendors-wearing-asian-conical-hats-8407278/"
+    }
+  ]
+}

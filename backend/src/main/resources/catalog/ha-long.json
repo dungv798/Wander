@@ -1,0 +1,919 @@
+{
+  "id": "ha-long",
+  "name": "Hạ Long",
+  "region": "Đông Bắc",
+  "tagline": "Ra vịnh, đi giữa hang đá và tìm nhịp sống bên biển",
+  "coverPlaceId": "ha-long-vinh-ha-long",
+  "references": [
+    {
+      "id": "trung-tam-ha-long",
+      "name": "Mốc tham chiếu Hạ Long",
+      "lat": 20.95,
+      "lon": 107.08,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chả mực Hạ Long",
+          "text": "Thử chả mực giòn thơm, ăn riêng hoặc cùng một bữa. Hỏi nguồn nguyên liệu và thành phần tại nơi bạn chọn.",
+          "placeId": "exp-food-ha-long-cha-muc"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh cuốn chả mực",
+          "text": "Kết hợp bánh cuốn với chả mực trong một bữa ở Hạ Long. Xác nhận món ăn kèm khi gọi.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thêm một góc nhìn từ mặt nước",
+          "text": "Nếu muốn chèo kayak, xác nhận tuyến, thiết bị và điều kiện thời tiết với đơn vị vận hành."
+        },
+        {
+          "icon": "route",
+          "title": "Đất mỏ và hương vị biển",
+          "text": "Kết hợp bảo tàng Quảng Ninh với một bữa chả mực, thay vì dành toàn bộ chuyến đi trên tàu."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Wyndham Legend Halong",
+          "text": "Một điểm nghỉ ở phía Bãi Cháy; chọn bến đi vịnh riêng theo tour.",
+          "placeId": "venue-ha-long-wyndham-legend"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún bề bề",
+          "text": "Bún nước với bề bề, một lựa chọn ăn sáng và trưa ở Hạ Long.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún cù kỳ",
+          "text": "Bún với phần thịt và càng cù kỳ được gỡ, đập vỏ trước.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Sữa chua trân châu Hạ Long",
+          "text": "Sữa chua ăn kèm trân châu, thường dùng làm món tráng miệng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Ốc xào Hạ Long",
+          "text": "Ốc xào với các kiểu sốt theo thực đơn; chọn loại và khẩu phần.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh gật gù",
+          "text": "Một món ăn vặt được giới thiệu trong cẩm nang Hạ Long.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Legacy Yen Tu Resort & Retreat - MGallery Collection",
+          "text": "Công trình mới sử dụng gạch thủ công, gỗ và đồ trang trí gợi kiến trúc Việt cổ. Phòng nhìn về rừng; nguồn giới thiệu không có TV nhằm giữ không khí tĩnh. Có thể kết hợp lưu trú với lịch đi cáp treo và tham quan núi Yên Tử.",
+          "placeId": "rs-ha-long-legacy-yen-tu-resort-ret-3f834823"
+        },
+        {
+          "icon": "bed",
+          "title": "Angsana Quan Lan Ha Long Bay",
+          "text": "Angsana Quan Lan Ha Long Bay: có hạng suite tại HA LONG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có quầy bar.",
+          "placeId": "rs-ha-long-angsana-quan-lan-ha-long-4f8a5285"
+        },
+        {
+          "icon": "bed",
+          "title": "Novotel Ha Long Bay",
+          "text": "Novotel Ha Long Bay: có hạng suite tại Quang Ninh. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có quầy bar.",
+          "placeId": "rs-ha-long-novotel-ha-long-bay-adb78c96"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "MARKET PLACE · Angsana Quan Lan Ha Long Bay",
+          "text": "Nhà hàng trong Angsana Quan Lạn lấy cảm hứng từ chợ Việt. Không gian có giỏ nguyên liệu và phục vụ theo nhiều khung bữa.",
+          "placeId": "rs-ha-long-market-place-angsana-qua-fdf1d834"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "THE SQUARE · Novotel Ha Long Bay",
+          "text": "THE SQUARE trong Novotel Ha Long Bay. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; món việt; thực đơn quốc tế.",
+          "placeId": "rs-ha-long-the-square-novotel-ha-lo-a2612389"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Tho Quang Restaurant · Legacy Yen Tu Resort & Retreat - MGallery Collection",
+          "text": "Nhà hàng trong Legacy Yên Tử, lấy cảm hứng ẩm thực cung đình. Thực đơn phối hợp hương vị vùng núi Yên Tử với cách làm món Âu.",
+          "placeId": "rs-ha-long-tho-quang-restaurant-leg-bfe4a7e3"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "ha-long-vinh-ha-long",
+      "name": "Vịnh Hạ Long",
+      "category": "canh",
+      "area": "Vịnh Hạ Long",
+      "hook": "Chọn một chuyến ra vịnh để nhìn những đảo đá từ mặt nước.",
+      "summary": "Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo của khu vực đô thị Hạ Long thuộc thành phố Quảng Ninh. Là trung tâm của một khu vực rộng lớn có những yếu tố ít nhiều tương đồng về địa chất, địa mạo, cảnh quan, khí hậu và văn hóa, với vịnh Bái Tử Long phía Đông Bắc và quần đảo Cát Bà phía Tây Nam, vịnh Hạ Long giới hạn trong diện tích khoảng 1.553 km² bao gồm 1.969 hòn đảo lớn nhỏ, phần lớn là đảo đá vôi, trong đó vùng lõi của vịnh có diện tích 335…",
+      "lat": 20.9,
+      "lon": 107.2,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo chuyến tàu",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Xác nhận tuyến tàu và tình trạng thời tiết với đơn vị vận hành.",
+        "Không dùng tọa độ giữa vịnh làm điểm lên tàu."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-vinh-ha-long-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_H%E1%BA%A1_Long_-_NKS.jpg"
+        },
+        {
+          "file": "ha-long-vinh-ha-long-2.jpg",
+          "author": "Thomas Hirsch / User:Ravn",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Halong_Bay_in_Vietnam.jpg"
+        },
+        {
+          "file": "ha-long-vinh-ha-long-3.jpg",
+          "author": "Thierry Borie colour adjusted by Lycaon",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Halong_ensemble_(colour_corrected).jpg"
+        }
+      ],
+      "wikipediaTitle": "Vịnh Hạ Long"
+    },
+    {
+      "id": "ha-long-tuan-chau",
+      "name": "Tuần Châu",
+      "category": "canh",
+      "area": "Tuần Châu",
+      "hook": "Khám phá không gian ven biển Tuần Châu và tìm hiểu các chuyến tham quan vịnh.",
+      "summary": "Tuần Châu là một phường thuộc thành phố Quảng Ninh, Việt Nam. Địa phương đã được tặng thưởng huân chương Kháng chiến hạng nhất vào tháng 5 năm 1971.",
+      "lat": 20.97305892,
+      "lon": 106.93286562,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-tuan-chau-1.jpg",
+          "author": "Takeshi aka. Momotaro from Tokyo, Japan",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tu%E1%BA%A7n_Ch%C3%A2u.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tuần Châu"
+    },
+    {
+      "id": "ha-long-dong-thien-cung",
+      "name": "Động Thiên Cung",
+      "category": "canh",
+      "area": "Vịnh Hạ Long",
+      "hook": "Kết hợp chuyến tàu với một đoạn đi bộ tham quan hang trên vịnh.",
+      "summary": "Động Thiên Cung là một hang động đẹp nổi tiếng ở Vịnh Hạ Long, nằm trong dãy đảo Đầu Gỗ thuộc phía Tây Nam vịnh Hạ Long cách cảng tàu du lịch khoảng 4 km.",
+      "lat": 20.8733,
+      "lon": 107.075,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến tàu",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-dong-thien-cung-1.jpg",
+          "author": "Erik A. Drabløs",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thien_Cung.jpg"
+        }
+      ],
+      "wikipediaTitle": "Động Thiên Cung"
+    },
+    {
+      "id": "ha-long-hang-sung-sot",
+      "name": "Hang Sửng Sốt",
+      "category": "canh",
+      "area": "Hạ Long",
+      "hook": "Bước vào thế giới nhũ đá trong lòng đảo.",
+      "summary": "Hang Sửng Sốt là một hang động dạng karst trong khối núi đá vôi của đảo Bồ Hòn, vịnh Hạ Long, thành phố Quảng Ninh, Việt Nam.",
+      "lat": 20.844753,
+      "lon": 107.090432,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-hang-sung-sot-1.jpg",
+          "author": "Mike Colvin from Manchester, UK",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_S%E1%BB%ADng_S%E1%BB%91t_3.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hang Sửng Sốt"
+    },
+    {
+      "id": "ha-long-dao-ti-top",
+      "name": "Đảo Ti Tốp",
+      "category": "canh",
+      "area": "Hạ Long",
+      "hook": "Chọn góc nhìn vịnh từ bờ biển hoặc trên cao.",
+      "summary": "Đảo Titov là đảo nhỏ trong vịnh Hạ Long, về mặt hành chính thuộc phường Hồng Gai, thành phố Quảng Ninh, Việt Nam. Hòn đảo cách cảng tàu du lịch Bãi Cháy khoảng 7–8 km về hướng Đông Nam. Hòn đảo nhỏ tựa lưng vào vịnh Cửa Lục, phía trước là hang Sửng Sốt có đảo Bồ Hòn, bên phải là hòn Dầm Nam và phía bắc là hòn Dầm Bắc.",
+      "lat": 20.859,
+      "lon": 107.08014,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-dao-ti-top-1.jpg",
+          "author": "NKSTTSSHNVN",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BA%A3o_Ti_T%E1%BB%91p.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đảo Ti Tốp"
+    },
+    {
+      "id": "ha-long-bao-tang-quang-ninh",
+      "name": "Bảo tàng Quảng Ninh",
+      "category": "van",
+      "area": "Hạ Long",
+      "hook": "Tìm hiểu đất mỏ trước khi ra với vịnh.",
+      "summary": "Bảo tàng Quảng Ninh là bảo tàng công lập đầu ngành của thành phố Quảng Ninh. Bảo tàng Quảng Ninh là đơn vị sự nghiệp trực thuộc Sở Văn hóa và Thể thao thành phố Quảng Ninh; thực hiện chức năng sưu tầm, bảo quản, nghiên cứu, trưng bày, giới thiệu di sản văn hóa, bằng chứng vật chất về lịch sử, văn hóa, thiên nhiên, con người Quảng Ninh và Việt Nam.",
+      "lat": 20.94876531315614,
+      "lon": 107.09748922475673,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-bao-tang-quang-ninh-1.jpg",
+          "author": "Hoangkid",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quang_Ninh_Museum_facade_1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Quảng Ninh"
+    },
+    {
+      "id": "ha-long-nui-bai-tho",
+      "name": "Núi Bài Thơ",
+      "category": "canh",
+      "area": "Hạ Long",
+      "hook": "Ngắm ngọn núi gắn với câu chuyện của Hạ Long.",
+      "summary": "Núi Bài Thơ là một ngọn núi đá vôi thuộc phường Hồng Gai, thành phố Quảng Ninh. Trên núi này còn lưu lại các bài thơ chữ Hán của Lê Thánh Tông khắc trên đá năm 1468, và của Trịnh Cương năm 1729. Các bài thơ này đã đem lại tên gọi cho núi.",
+      "lat": 20.947977,
+      "lon": 107.078005,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-nui-bai-tho-1.jpg",
+          "author": "Zack Knowles",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ha_Long_City_-_panoramio_(1).jpg"
+        }
+      ],
+      "wikipediaTitle": "Núi Bài Thơ"
+    },
+    {
+      "id": "ha-long-cau-bai-chay",
+      "name": "Cầu Bãi Cháy",
+      "category": "canh",
+      "area": "Hạ Long",
+      "hook": "Ngắm nhịp cầu nối hai phía thành phố biển.",
+      "summary": "Cầu Bãi Cháy nằm trên quốc lộ 18, nối hai phường Hồng Gai và Bãi Cháy qua vịnh Cửa Lục nơi đổ ra vịnh Hạ Long, thuộc địa phận thành phố Quảng Ninh. Sau 20 năm lên kế hoạch cầu mới được hoàn thành. Cầu được xác định là công trình trọng điểm quốc gia, có vị trí chiến lược về giao thông, kinh tế và quốc phòng được Công an Thành phố Quảng Ninh bảo vệ.",
+      "lat": 20.96027778,
+      "lon": 107.06583333,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ha-long-cau-bai-chay-1.jpg",
+          "author": "Jean-Pierre Dalbéra",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Le_pont_suspendu_d%27Halong.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cầu Bãi Cháy"
+    },
+    {
+      "id": "ha-long-hang-dau-go",
+      "name": "Hang Đầu Gỗ",
+      "category": "canh",
+      "area": "Hạ Long",
+      "hook": "Tìm hiểu một hang động khác trên hành trình vịnh.",
+      "summary": "Hang Đầu Gỗ là hang trên hòn Đầu Gỗ trong vịnh Hạ Long, thành phố Quảng Ninh, Việt Nam. Hang thuộc dạng karst trong khối núi đá vôi. Hang Đầu Gỗ là một trong những hang đẹp nhất Việt Nam, nằm cách Cảng tàu du lịch Bãi Cháy khoảng 6 km.",
+      "lat": 20.908333,
+      "lon": 107.020833,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Hang Đầu Gỗ"
+    },
+    {
+      "id": "exp-food-ha-long-cha-muc",
+      "name": "Chả mực Hạ Long",
+      "category": "am",
+      "area": "Mốc khu vực Hạ Long",
+      "hook": "Thử chả mực giòn thơm, ăn riêng hoặc cùng một bữa.",
+      "summary": "Thử chả mực giòn thơm, ăn riêng hoặc cùng một bữa. Hỏi nguồn nguyên liệu và thành phần tại nơi bạn chọn. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 20.95,
+      "lon": 107.08,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-cha-muc-1.jpg",
+          "author": "Hoangkid (Đặng Thái Hoàng)",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_m%E1%BB%B1c.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chả mực"
+    },
+    {
+      "id": "ha-long-yen-tu",
+      "name": "Yên Tử",
+      "category": "leo",
+      "area": "Hạ Long",
+      "hook": "Tìm hiểu cung đi bộ qua rừng và di tích trên núi.",
+      "summary": "Dãy núi gắn với lịch sử nhà Trần và Thiền phái Trúc Lâm. Chuyến đi cần chọn rõ khu di tích, đường đi bộ và cách lên xuống; đây là một hành trình riêng cần chuẩn bị.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 21.160515,
+      "lon": 106.715149,
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Núi và rừng",
+        "Văn hóa Trúc Lâm",
+        "Đi bộ theo tuyến"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Xác nhận tuyến đang mở, thời lượng và phương án xuống núi; ghim không phải đầu tuyến.",
+        "Ghim là mốc tham khảo của vùng núi, không phải đầu tuyến. Chốt cung, guide và thời lượng trước khi xếp ngày.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/Y%C3%AAn%20T%E1%BB%AD",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-ha-long-yen-tu-1.jpg",
+          "author": "Thang Nguyen from Nottingham, United Kingdom",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:N%C3%BAi_Y%C3%AAn_T%E1%BB%AD.jpg"
+        }
+      ],
+      "wikipediaTitle": "Yên Tử"
+    },
+    {
+      "id": "venue-ha-long-wyndham-legend",
+      "name": "Wyndham Legend Halong",
+      "category": "luu",
+      "area": "Hạ Long",
+      "hook": "Một điểm nghỉ ở phía Bãi Cháy; chọn bến đi vịnh riêng theo tour.",
+      "summary": "Một điểm nghỉ ở phía Bãi Cháy; chọn bến đi vịnh riêng theo tour. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 20.9594663,
+      "lon": 107.0602861,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 12 Hạ Long, Bãi Cháy",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/1278946629"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "12 Hạ Long, Bãi Cháy",
+        "website": "https://www.wyndhamhalong.com/",
+        "sourceUrl": "https://www.wyndhamhalong.com/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-ha-long-angsana-quan-lan-ha-long-4f8a5285",
+      "name": "Angsana Quan Lan Ha Long Bay",
+      "category": "luu",
+      "area": "Hạ Long",
+      "hook": "Angsana Quan Lan Ha Long Bay: có hạng suite tại HA LONG.",
+      "summary": "Angsana Quan Lan Ha Long Bay: có hạng suite tại HA LONG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có quầy bar.",
+      "lat": 20.89645,
+      "lon": 107.515427,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có quầy bar",
+        "Vị trí gần hoặc sát bãi biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +842033933888.",
+        "Email liên hệ theo nguồn: reservations-quanlan@angsana.com.",
+        "Nguồn: https://all.accor.com/hotel/C324/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Son Hao Village, Quan Lan Island, Ha Long Bay, HA LONG, Vietnam",
+        "website": "https://all.accor.com/hotel/C324/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/C324/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842033933888",
+        "serviceHours": "Nhận phòng 15:00; Trả phòng 12:00",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ha-long-market-place-angsana-qua-fdf1d834",
+      "name": "MARKET PLACE · Angsana Quan Lan Ha Long Bay",
+      "category": "am",
+      "area": "Hạ Long",
+      "hook": "Nhà hàng trong Angsana Quan Lạn lấy cảm hứng từ chợ Việt.",
+      "summary": "Nhà hàng trong Angsana Quan Lạn lấy cảm hứng từ chợ Việt. Không gian có giỏ nguyên liệu và phục vụ theo nhiều khung bữa.",
+      "lat": 20.89645,
+      "lon": 107.515427,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món địa phương",
+        "Không gian gợi khu chợ",
+        "Đảo Quan Lạn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món địa phương và không gian gợi khu chợ.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận lịch phục vụ và kế hoạch di chuyển ra đảo trước khi đặt.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842033933888.",
+        "Email liên hệ theo nguồn: reservations-quanlan@angsana.com.",
+        "Nguồn: https://all.accor.com/hotel/C324/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Son Hao Village, Quan Lan Island, Ha Long Bay, HA LONG, Vietnam",
+        "website": "https://all.accor.com/hotel/C324/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/C324/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842033933888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ha-long-novotel-ha-long-bay-adb78c96",
+      "name": "Novotel Ha Long Bay",
+      "category": "luu",
+      "area": "Hạ Long",
+      "hook": "Novotel Ha Long Bay: có hạng suite tại Quang Ninh.",
+      "summary": "Novotel Ha Long Bay: có hạng suite tại Quang Ninh. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có quầy bar.",
+      "lat": 20.951973,
+      "lon": 107.041898,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có quầy bar",
+        "Có thông tin lưu trú cho gia đình"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và thiết kế hoặc vị trí gắn với nhà hát.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842033848108.",
+        "Email liên hệ theo nguồn: info@novotelhalong.com.vn.",
+        "Nguồn: https://all.accor.com/hotel/6185/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "160 Ha Long road, Bai Chay ward, Quang Ninh province, Vietnam, Quang Ninh, Vietnam",
+        "website": "https://all.accor.com/hotel/6185/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/6185/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842033848108",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ha-long-the-square-novotel-ha-lo-a2612389",
+      "name": "THE SQUARE · Novotel Ha Long Bay",
+      "category": "am",
+      "area": "Hạ Long",
+      "hook": "THE SQUARE trong Novotel Ha Long Bay.",
+      "summary": "THE SQUARE trong Novotel Ha Long Bay. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; món việt; thực đơn quốc tế.",
+      "lat": 20.951973,
+      "lon": 107.041898,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Món Việt",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và món việt.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842033848108.",
+        "Email liên hệ theo nguồn: info@novotelhalong.com.vn.",
+        "Nguồn: https://all.accor.com/hotel/6185/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "160 Ha Long road, Bai Chay ward, Quang Ninh province, Vietnam, Quang Ninh, Vietnam",
+        "website": "https://all.accor.com/hotel/6185/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/6185/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842033848108",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ha-long-legacy-yen-tu-resort-ret-3f834823",
+      "name": "Legacy Yen Tu Resort & Retreat - MGallery Collection",
+      "category": "luu",
+      "area": "Hạ Long",
+      "hook": "Khu nghỉ dưới chân Yên Tử lấy cảm hứng từ kiến trúc cung điện và thiền viện.",
+      "summary": "Công trình mới sử dụng gạch thủ công, gỗ và đồ trang trí gợi kiến trúc Việt cổ. Phòng nhìn về rừng; nguồn giới thiệu không có TV nhằm giữ không khí tĩnh. Có thể kết hợp lưu trú với lịch đi cáp treo và tham quan núi Yên Tử.",
+      "lat": 21.156358,
+      "lon": 106.71801,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Kiến trúc cảm hứng Việt cổ",
+        "Cảnh quan rừng",
+        "Khu chân núi Yên Tử"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn kiến trúc cảm hứng việt cổ và cảnh quan rừng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi vé và giờ cáp treo riêng; kiểm tra phương án đi bộ phù hợp thời tiết và thể lực.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/uong-bi-city/legacy-yen-tu-mgallery-124415-14064",
+        "Nguồn: https://www.openstreetmap.org/way/793463360",
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842036259888.",
+        "Email liên hệ theo nguồn: HB1Y7-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B1Y7/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Yen Tu Relic Site, Yen Tu Ward, QUANG NINH, Vietnam",
+        "website": "https://all.accor.com/hotel/B1Y7/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B1Y7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842036259888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ha-long-tho-quang-restaurant-leg-bfe4a7e3",
+      "name": "Tho Quang Restaurant · Legacy Yen Tu Resort & Retreat - MGallery Collection",
+      "category": "am",
+      "area": "Hạ Long",
+      "hook": "Nhà hàng trong Legacy Yên Tử, lấy cảm hứng ẩm thực cung đình.",
+      "summary": "Nhà hàng trong Legacy Yên Tử, lấy cảm hứng ẩm thực cung đình. Thực đơn phối hợp hương vị vùng núi Yên Tử với cách làm món Âu.",
+      "lat": 21.156358,
+      "lon": 106.71801,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cảm hứng cung đình",
+        "Hương vị Yên Tử",
+        "Món Việt và Âu"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cảm hứng cung đình và hương vị yên tử.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lựa chọn món chay và lịch phục vụ khi ghé khu Yên Tử.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842036259888.",
+        "Email liên hệ theo nguồn: HB1Y7-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B1Y7/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Yen Tu Relic Site, Yen Tu Ward, QUANG NINH, Vietnam",
+        "website": "https://all.accor.com/hotel/B1Y7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B1Y7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842036259888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-7276642",
+      "theme": "hanh-trinh",
+      "caption": "Chèo kayak giữa những vách núi đá Hạ Long",
+      "file": "pexels-7276642.jpg",
+      "author": "Rachel Claire",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-kayaking-in-ha-long-bay-in-vietnam-7276642/"
+    },
+    {
+      "id": "food-research-ha-long",
+      "theme": "mon-an",
+      "caption": "Chả mực Hạ Long · một món muốn thử (ảnh minh họa)",
+      "file": "food-cha-muc-1.jpg",
+      "author": "Hoangkid (Đặng Thái Hoàng)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_m%E1%BB%B1c.jpg"
+    },
+    {
+      "id": "wave-pexels-36204575",
+      "theme": "hanh-trinh",
+      "caption": "Ở lại thêm chút nữa khi vịnh Hạ Long lên màu",
+      "file": "wave-pexels-36204575.jpg",
+      "author": "Quý Nguyễn",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/sunset-over-halong-bay-with-fishing-boats-36204575/"
+    }
+  ]
+}

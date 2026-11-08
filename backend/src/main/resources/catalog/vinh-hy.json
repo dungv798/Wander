@@ -71,6 +71,92 @@
           "title": "Giày bám tốt"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh căn vùng nắng gió",
+          "text": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng.",
+          "placeId": "exp-food-vinh-hy-banh-can"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm gà Phan Rang",
+          "text": "Một bữa cơm gà để thử trong chuyến khám phá vùng nắng gió. Hỏi quán về phần thịt, nước chấm và đồ ăn kèm.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh canh chả cá",
+          "text": "Một tô bánh canh cho bữa ăn bên phố biển. Phần cá, chả hoặc thịt thay đổi tùy quán.",
+          "placeId": "exp-food-vinh-hy-banh-canh-cha-ca"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chạm vào câu chuyện làng nghề",
+          "text": "Tìm hiểu gốm Bàu Trúc hoặc dệt Mỹ Nghiệp; nếu muốn thử làm, hỏi trước nơi tổ chức."
+        },
+        {
+          "icon": "route",
+          "title": "Nho và những cung biển",
+          "text": "Cân nhắc vườn nho Thái An cùng tuyến ven biển; xác nhận mùa và hoạt động thực tế tại vườn."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Vĩnh Hy Resort",
+          "text": "Một điểm nghỉ ở khu vực vịnh Vĩnh Hy để khám phá biển và làng chài.",
+          "placeId": "venue-vinh-hy-vinh-hy-resort"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh căn Vĩnh Hy",
+          "text": "Bánh căn dùng cùng nước chấm theo cách ăn ven biển.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Gỏi cá mai Vĩnh Hy",
+          "text": "Cá mai trộn rau gia vị; hỏi cách sơ chế và nước chấm.",
+          "placeId": null
+        }
+      ]
     }
   ],
   "places": [
@@ -490,6 +576,203 @@
         }
       ],
       "wikipediaTitle": "Tháp Po Rome"
+    },
+    {
+      "id": "exp-food-vinh-hy-banh-can",
+      "name": "Bánh căn vùng nắng gió",
+      "category": "am",
+      "area": "Mốc khu vực Vĩnh Hy",
+      "hook": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng..",
+      "summary": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 11.7,
+      "lon": 109.2,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-extra-0-1.jpg",
+          "author": "Saigon Time",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
+        },
+        {
+          "file": "food-extra-0-2.jpg",
+          "author": "VinhNguyen.1257",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_(Vietnamese_mini_pancake)_clay_cooking_pots.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh căn"
+    },
+    {
+      "id": "exp-food-vinh-hy-banh-canh-cha-ca",
+      "name": "Bánh canh chả cá",
+      "category": "am",
+      "area": "Mốc khu vực Vĩnh Hy",
+      "hook": "Một tô bánh canh cho bữa ăn bên phố biển.",
+      "summary": "Một tô bánh canh cho bữa ăn bên phố biển. Phần cá, chả hoặc thịt thay đổi tùy quán. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 11.7,
+      "lon": 109.2,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-canh-cha-ca-2.jpg",
+          "author": "SauceSupreme",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_canh.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh canh"
+    },
+    {
+      "id": "vinh-hy-bau-truc",
+      "name": "Làng gốm Bàu Trúc",
+      "category": "van",
+      "area": "Vĩnh Hy",
+      "hook": "Tìm hiểu cách người thợ tạo dáng gốm bằng tay.",
+      "summary": "",
+      "lat": 11.5297922,
+      "lon": 108.9250124,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/12433562410",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [
+        {
+          "file": "ref-vinh-hy-bau-truc-2.jpg",
+          "author": "Liftold",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%E1%BB%91m_B%C3%A0u_Tr%C3%BAc.JPG"
+        },
+        {
+          "file": "ref-vinh-hy-bau-truc-1.jpg",
+          "author": "Windrain",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%A3p_t%C3%A1c_x%C3%A3_G%E1%BB%91m_Ch%C4%83m_B%C3%A0u_Tr%C3%BAc.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "venue-vinh-hy-vinh-hy-resort",
+      "name": "Vĩnh Hy Resort",
+      "category": "luu",
+      "area": "Vĩnh Hy",
+      "hook": "Một điểm nghỉ ở khu vực vịnh Vĩnh Hy để khám phá biển và làng chài.",
+      "summary": "Một điểm nghỉ ở khu vực vịnh Vĩnh Hy để khám phá biển và làng chài. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 11.7218675,
+      "lon": 109.1969029,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: Thôn Vĩnh Hy, Vĩnh Hải",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4378204809"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Thôn Vĩnh Hy, Vĩnh Hải",
+        "website": "https://resortvinhhy.com/lien-he/",
+        "sourceUrl": "https://resortvinhhy.com/lien-he/",
+        "checkedAt": "2026-11-07"
+      }
     }
-  ]
+  ],
+  "moments": [
+    {
+      "id": "commons-vinh-hy-20261105-27",
+      "theme": "nghe",
+      "caption": "Thuyền cá nghỉ trong vịnh Vĩnh Hy",
+      "file": "vinh-hy-moment-20261105-27.jpg",
+      "author": "Phương Huy",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(35d).jpg"
+    },
+    {
+      "id": "commons-vinh-hy-20261105-28",
+      "theme": "nghe",
+      "caption": "Một góc nuôi biển bên làng Vĩnh Hy",
+      "file": "vinh-hy-moment-20261105-28.jpg",
+      "author": "Phương Huy",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(37).jpg"
+    },
+    {
+      "id": "food-research-vinh-hy",
+      "theme": "mon-an",
+      "caption": "Bánh căn vùng nắng gió · một món muốn thử (ảnh minh họa)",
+      "file": "food-extra-0-1.jpg",
+      "author": "Saigon Time",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
+    },
+    {
+      "id": "wave-pexels-35105957",
+      "theme": "nghe",
+      "caption": "Nhìn đất thành hình dưới đôi tay người thợ gốm",
+      "file": "wave-pexels-35105957.jpg",
+      "author": "Quang Nguyen Vinh",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/artisan-crafting-pottery-with-traditional-technique-35105957/"
+    }
+  ],
+  "coverPhoto": {
+    "file": "vinh-hy-moment-20261105-27.jpg",
+    "author": "Phương Huy",
+    "license": "CC BY-SA 4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(35d).jpg"
+  }
 }

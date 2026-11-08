@@ -72,6 +72,156 @@
           "title": "Dép đi biển"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thử bánh xèo tôm nhảy",
+          "text": "Thử miếng bánh nóng giòn cùng rau và nước chấm. Nhân và kích thước bánh thay đổi theo vùng và từng quán.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh bèo buổi chiều",
+          "text": "Những chén bánh nhỏ với phần nhân và nước chấm. Có thể gọi một phần để thử trước khi chọn thêm món.",
+          "placeId": "exp-food-quy-nhon-banh-beo"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún cá Quy Nhơn",
+          "text": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển. Hỏi về loại cá và thành phần nếu bạn có dị ứng.",
+          "placeId": "exp-food-quy-nhon-bun-ca"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh ít lá gai",
+          "text": "Tìm hiểu chiếc bánh nhỏ gói lá, hỏi phần nhân và cách giữ bánh khi mua làm quà.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh hỏi lòng heo",
+          "text": "Lên ý tưởng một bữa bánh hỏi; phần lòng và món ăn kèm cần hỏi trực tiếp tại quán.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Một buổi cho biển Nhơn Lý",
+          "text": "Cân nhắc Eo Gió hoặc Kỳ Co; xác nhận điều kiện tiếp cận và chuyến tàu nếu chọn đi biển."
+        },
+        {
+          "icon": "route",
+          "title": "Chọn một món để nhớ phố biển",
+          "text": "Thử bánh xèo tôm nhảy hoặc bún cá, rồi dành một khoảng đi bộ ở khu vực gần nơi ăn."
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún rạm",
+          "text": "Nước bún nấu từ rạm, ăn kèm rau và bánh tráng nướng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh xèo tôm nhảy",
+          "text": "Bánh xèo nhân tôm, cuốn với rau và bánh tráng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chả ram tôm đất",
+          "text": "Cuốn ram có tôm đất, chiên giòn trước khi ăn.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Đông Tây Hotel",
+          "text": "Đông Tây Hotel: có nhà hàng hoặc không gian ăn uống tại Quy Nhơn. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; có lựa chọn nhìn ra biển; điều hòa; wi-fi.",
+          "placeId": "rs-quy-nhon-dong-tay-hotel-18ff0eac"
+        },
+        {
+          "icon": "bed",
+          "title": "Hoàng Yến Hotel",
+          "text": "Hoàng Yến Hotel: có nhà hàng hoặc không gian ăn uống tại Quy Nhơn. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển; bể bơi.",
+          "placeId": "rs-quy-nhon-hoang-yen-hotel-1b419244"
+        },
+        {
+          "icon": "bed",
+          "title": "Khách sạn Sài Gòn – Quy Nhơn",
+          "text": "Khách sạn Sài Gòn – Quy Nhơn: spa hoặc dịch vụ thư giãn tại Quy Nhơn. Hồ sơ nguồn giới thiệu spa hoặc dịch vụ thư giãn; phòng tập; bể bơi.",
+          "placeId": "rs-quy-nhon-khach-san-sai-gon-quy-nh-ed6c0d55"
+        },
+        {
+          "icon": "bed",
+          "title": "Seagull Hotel",
+          "text": "Seagull Hotel: có hạng suite tại Quy Nhơn. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển.",
+          "placeId": "rs-quy-nhon-seagull-hotel-b7e7336d"
+        },
+        {
+          "icon": "bed",
+          "title": "Haven Guesthouse",
+          "text": "Cẩm nang giới thiệu phòng đôi và phòng gia đình tại cơ sở. Nhà hàng phục vụ món phương Tây cùng một số món Việt và có đón khách không lưu trú; website hiện giới thiệu thêm Big Tree Bistro.",
+          "placeId": "rs-quy-nhon-haven-guesthouse-71e7055e"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "coffee",
+          "title": "Đất Việt Cafe",
+          "text": "Café dưới các tán cây trên đường Trần Lương ở khu tây nam Quy Nhơn. Cẩm nang mô tả quán nằm trên một lối nhỏ, tách khỏi đường biển đông người.",
+          "placeId": "rs-quy-nhon-dat-viet-cafe-d373eea3"
+        },
+        {
+          "icon": "coffee",
+          "title": "Like Cafe",
+          "text": "Café gần khu chợ thực phẩm trung tâm Quy Nhơn. Không gian có bàn ngoài trời và khu trong nhà, với các lựa chọn đồ uống theo thực đơn.",
+          "placeId": "rs-quy-nhon-like-cafe-6a5e298c"
+        }
+      ]
     }
   ],
   "places": [
@@ -439,6 +589,635 @@
         }
       ],
       "wikipediaTitle": "Đồ Bàn"
+    },
+    {
+      "id": "quy-nhon-ky-co",
+      "name": "Bãi Kỳ Co",
+      "category": "canh",
+      "area": "Quy Nhơn",
+      "hook": "Dành một buổi cho bãi biển và màu nước.",
+      "summary": "Bãi Kỳ Co là tên một bãi biển thuộc phường Quy Nhơn Đông, tỉnh Gia Lai, Việt Nam. Bãi này nằm cách trung tâm phường Quy Nhơn khoảng 25 km về phía đông bắc, thuộc khu vực bán đảo Phương Mai. Do đặc điểm địa hình nằm ở chân núi Phương Mai, có một mặt giáp biển và ba mặt còn lại đều là núi nên hiện nay chỉ có hai cách để đến bãi Kỳ Co. Cách thứ nhất là đi ca-nô hoặc thuyền thúng của người dân địa phương theo đường biển từ Eo Gió và cách thứ hai là đi bằng đường bộ từ cầu Suối Cả theo sườn núi về hướng Nam.",
+      "lat": 13.850027,
+      "lon": 109.29264,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Bãi Kỳ Co"
+    },
+    {
+      "id": "quy-nhon-hon-kho",
+      "name": "Hòn Khô",
+      "category": "canh",
+      "area": "Quy Nhơn",
+      "hook": "Tìm hiểu hành trình biển từ làng chài Nhơn Hải.",
+      "summary": "",
+      "lat": 13.764166666667,
+      "lon": 109.29944444444,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "quy-nhon-cu-lao-xanh",
+      "name": "Cù lao Xanh",
+      "category": "canh",
+      "area": "Quy Nhơn",
+      "hook": "Lên ý tưởng một chuyến đi đảo riêng.",
+      "summary": "Cù lao Xanh còn gọi là đảo Vân Phi là một hòn đảo nằm về phía đông nam phường Quy Nhơn, tỉnh Gia Lai, Việt Nam. Về hành chính, toàn bộ hòn đảo này là xã Nhơn Châu, tỉnh Gia Lai. Trong thư tịch nước ngoài, Cù lao Xanh được gọi là Pullo-cambir, Cambir, seu Cambir. Cù lao này có diện tích: 365 ha, dân số: 2300 người và gồm các thôn: Thôn Tây, Thôn Trung, Thôn Đông.",
+      "lat": 13.61583333,
+      "lon": 109.35055556,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [],
+      "wikipediaTitle": "Cù lao Xanh"
+    },
+    {
+      "id": "quy-nhon-ghenh-rang",
+      "name": "Ghềnh Ráng",
+      "category": "canh",
+      "area": "Quy Nhơn",
+      "hook": "Ghé Ghềnh Ráng, tìm hiểu dấu tích gắn với Hàn Mặc Tử.",
+      "summary": "",
+      "lat": 13.71388889,
+      "lon": 109.2072222,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ref-quy-nhon-ghenh-rang-1.jpg",
+          "author": "Liftold ( thảo luận )",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99_h%C3%A0n_m%E1%BA%A1c_T%E1%BB%AD.JPG"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "quy-nhon-tieu-chung-vien-lang-song",
+      "name": "Tiểu chủng viện Làng Sông",
+      "category": "van",
+      "area": "Quy Nhơn",
+      "hook": "Khám phá kiến trúc giữa không gian đồng quê.",
+      "summary": "Tiểu chủng viện Làng Sông là một tiểu chủng viện cũ của Giáo phận Qui Nhơn. Công trình nằm tại thôn Quảng Vân, xã Phước Thuận, huyện Tuy Phước, tỉnh Bình Định trước đợt sắp xếp đơn vị hành chính năm 2025. Sau sắp xếp, xã Phước Thuận được nhập vào xã Tuy Phước thuộc tỉnh Gia Lai. Tên gọi \"Lòng Sông\" cũng được dùng trong khẩu ngữ địa phương.",
+      "lat": 13.82053611,
+      "lon": 109.19907222,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "quy-nhon-tieu-chung-vien-lang-song-1.jpg",
+          "author": "Theodor",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A0ng_Song_minor_seminary_6.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tiểu chủng viện Làng Sông"
+    },
+    {
+      "id": "exp-food-quy-nhon-banh-beo",
+      "name": "Bánh bèo buổi chiều",
+      "category": "am",
+      "area": "Mốc khu vực Quy Nhơn",
+      "hook": "Những chén bánh nhỏ với phần nhân và nước chấm.",
+      "summary": "Những chén bánh nhỏ với phần nhân và nước chấm. Có thể gọi một phần để thử trước khi chọn thêm món. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 13.7765,
+      "lon": 109.2237,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-beo-1.jpg",
+          "author": "Nha Nghi La from Ho Chi Minh, Viet Nam",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o_ch%C3%A9n.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh bèo"
+    },
+    {
+      "id": "exp-food-quy-nhon-bun-ca",
+      "name": "Bún cá Quy Nhơn",
+      "category": "am",
+      "area": "Mốc khu vực Quy Nhơn",
+      "hook": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển.",
+      "summary": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển. Hỏi về loại cá và thành phần nếu bạn có dị ứng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 13.7765,
+      "lon": 109.2237,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-bun-cha-ca-1.jpg",
+          "author": "Phương Huy ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_c%C3%A1,_th%C3%A1ng_8_n%C4%83m_2018.JPG"
+        }
+      ],
+      "wikipediaTitle": "Bún chả cá"
+    },
+    {
+      "id": "quy-nhon-eo-gio",
+      "name": "Eo Gió",
+      "category": "canh",
+      "area": "Quy Nhơn",
+      "hook": "Đi bộ ngắm những nếp đá ôm bờ biển.",
+      "summary": "",
+      "lat": 13.8908797,
+      "lon": 109.2914119,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4132751593",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [
+        {
+          "file": "ref-quy-nhon-eo-gio-1.jpg",
+          "author": "Hưng Hồ Bá",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eo_Gi%C3%B3_-_Nh%C6%A1n_L%C3%BD.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "rs-quy-nhon-dat-viet-cafe-d373eea3",
+      "name": "Đất Việt Cafe",
+      "category": "am",
+      "area": "Quy Nhơn",
+      "hook": "Café dưới các tán cây trên đường Trần Lương ở khu tây nam Quy Nhơn.",
+      "summary": "Café dưới các tán cây trên đường Trần Lương ở khu tây nam Quy Nhơn. Cẩm nang mô tả quán nằm trên một lối nhỏ, tách khỏi đường biển đông người.",
+      "lat": 13.7562,
+      "lon": 109.2109,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Không gian cây xanh",
+        "Đường Trần Lương",
+        "Khu tây nam Quy Nhơn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn không gian cây xanh và đường trần lương.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận cửa vào và giờ phục vụ trước khi ghé.",
+        "Ghim theo mục cẩm nang cập nhật 2026-11-01; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "11 Trần Lương",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-quy-nhon-like-cafe-6a5e298c",
+      "name": "Like Cafe",
+      "category": "am",
+      "area": "Quy Nhơn",
+      "hook": "Café gần khu chợ thực phẩm trung tâm Quy Nhơn.",
+      "summary": "Café gần khu chợ thực phẩm trung tâm Quy Nhơn. Không gian có bàn ngoài trời và khu trong nhà, với các lựa chọn đồ uống theo thực đơn.",
+      "lat": 13.772,
+      "lon": 109.2207,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Gần chợ trung tâm",
+        "Bàn ngoài trời",
+        "Khu trong nhà"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn gần chợ trung tâm và bàn ngoài trời.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Chọn khu ngồi theo thời tiết và hỏi giờ phục vụ hiện tại.",
+        "Ghim theo mục cẩm nang cập nhật 2026-11-01; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "52 Trường Chinh",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-quy-nhon-dong-tay-hotel-18ff0eac",
+      "name": "Đông Tây Hotel",
+      "category": "luu",
+      "area": "Quy Nhơn",
+      "hook": "Đông Tây Hotel: có nhà hàng hoặc không gian ăn uống tại Quy Nhơn.",
+      "summary": "Đông Tây Hotel: có nhà hàng hoặc không gian ăn uống tại Quy Nhơn. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; có lựa chọn nhìn ra biển; điều hòa; wi-fi.",
+      "lat": 13.7632,
+      "lon": 109.2238,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có lựa chọn nhìn ra biển",
+        "Điều hòa",
+        "Wi-Fi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có nhà hàng hoặc không gian ăn uống và có lựa chọn nhìn ra biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Ghim theo mục cẩm nang cập nhật 2026-11-01; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "404 Xuân Diệu",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-quy-nhon-hoang-yen-hotel-1b419244",
+      "name": "Hoàng Yến Hotel",
+      "category": "luu",
+      "area": "Quy Nhơn",
+      "hook": "Hoàng Yến Hotel: có nhà hàng hoặc không gian ăn uống tại Quy Nhơn.",
+      "summary": "Hoàng Yến Hotel: có nhà hàng hoặc không gian ăn uống tại Quy Nhơn. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển; bể bơi.",
+      "lat": 13.7546399,
+      "lon": 109.2174595,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Vị trí gần hoặc sát bãi biển",
+        "Bể bơi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có nhà hàng hoặc không gian ăn uống và vị trí gần hoặc sát bãi biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "Nguồn: https://www.openstreetmap.org/way/741436348"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "5 An Dương Vương",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-quy-nhon-khach-san-sai-gon-quy-nh-ed6c0d55",
+      "name": "Khách sạn Sài Gòn – Quy Nhơn",
+      "category": "luu",
+      "area": "Quy Nhơn",
+      "hook": "Khách sạn Sài Gòn – Quy Nhơn: spa hoặc dịch vụ thư giãn tại Quy Nhơn.",
+      "summary": "Khách sạn Sài Gòn – Quy Nhơn: spa hoặc dịch vụ thư giãn tại Quy Nhơn. Hồ sơ nguồn giới thiệu spa hoặc dịch vụ thư giãn; phòng tập; bể bơi.",
+      "lat": 13.7709541,
+      "lon": 109.2342493,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Spa hoặc dịch vụ thư giãn",
+        "Phòng tập",
+        "Bể bơi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn spa hoặc dịch vụ thư giãn và phòng tập.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "Nguồn: https://www.openstreetmap.org/node/1527934304"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "24 Nguyễn Huệ",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-quy-nhon-seagull-hotel-b7e7336d",
+      "name": "Seagull Hotel",
+      "category": "luu",
+      "area": "Quy Nhơn",
+      "hook": "Seagull Hotel: có hạng suite tại Quy Nhơn.",
+      "summary": "Seagull Hotel: có hạng suite tại Quy Nhơn. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; vị trí gần hoặc sát bãi biển.",
+      "lat": 13.7564277,
+      "lon": 109.2185593,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có khu trên tầng mái",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Vị trí gần hoặc sát bãi biển",
+        "Có lựa chọn nhìn ra biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có khu trên tầng mái.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "Nguồn: https://www.seagullhotel.com.vn/en/",
+        "Nguồn: https://www.openstreetmap.org/way/741785272"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "489 An Dương Vương",
+        "website": "https://www.seagullhotel.com.vn/en/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-quy-nhon-haven-guesthouse-71e7055e",
+      "name": "Haven Guesthouse",
+      "category": "luu",
+      "area": "Quy Nhơn",
+      "hook": "Chỗ ở bên bãi biển trong làng chài Bãi Xếp.",
+      "summary": "Cẩm nang giới thiệu phòng đôi và phòng gia đình tại cơ sở. Nhà hàng phục vụ món phương Tây cùng một số món Việt và có đón khách không lưu trú; website hiện giới thiệu thêm Big Tree Bistro.",
+      "lat": 13.6856778,
+      "lon": 109.2310953,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bãi Xếp",
+        "Có lựa chọn phòng gia đình",
+        "Nhà hàng đón khách ngoài"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bãi xếp và có lựa chọn phòng gia đình.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận tên hạng phòng hiện tại và lối tiếp cận qua làng trước khi đặt xe.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Số liên hệ theo hồ sơ nguồn: +84 866 815 105.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "Nguồn: https://www.havenvietnam.com/"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Tổ 2, Khu vực 1, Bãi Xếp",
+        "website": "https://www.havenvietnam.com/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Quy_Nhon",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 866 815 105",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
-  ]
+  ],
+  "moments": [
+    {
+      "id": "unsplash-bCowTECni_w",
+      "theme": "hanh-trinh",
+      "caption": "Con đường dốc ven biển",
+      "url": "https://images.unsplash.com/photo-1715153414595-b3d35d485f85?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Mnx8UXV5JTIwTmhvbiUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODQ1Mzg5fDA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Cashel Nguyen",
+      "authorUrl": "https://unsplash.com/@cashelng?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-woman-walking-down-a-path-next-to-the-ocean-bCowTECni_w?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-A7K99Px9430",
+      "theme": "nghe",
+      "caption": "Thuyền neo ngoài vịnh",
+      "url": "https://images.unsplash.com/photo-1679108230114-cacd55ca27da?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTN8fFF1eSUyME5ob24lMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg0NTM4OXww&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Leonie Clough",
+      "authorUrl": "https://unsplash.com/@leoniec?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-group-of-boats-floating-on-top-of-a-body-of-water-A7K99Px9430?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-8tZyucSgpMI",
+      "theme": "nghe",
+      "caption": "Chiếc thuyền nhỏ trên bãi cát",
+      "url": "https://images.unsplash.com/photo-1723354050564-532f211536f5?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjF8fFF1eSUyME5ob24lMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg0NTM4OXww&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Alice Dang",
+      "authorUrl": "https://unsplash.com/@tzoanh?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-small-boat-sitting-on-top-of-a-sandy-beach-8tZyucSgpMI?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-JH4o9jKCX34",
+      "theme": "nghe",
+      "caption": "Theo một chuyến thuyền ở Quy Nhơn",
+      "url": "https://images.unsplash.com/photo-1671891776373-4283cb5fd11e?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjB8fFF1eSUyME5ob24lMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg0NTM4OXww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Phuc-Thanh Mai Vo",
+      "authorUrl": "https://unsplash.com/@maivophucthanh?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-black-and-white-photo-of-people-on-a-boat-JH4o9jKCX34?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-Ny_HkT_QdvU",
+      "theme": "mon-an",
+      "caption": "Ấm nước trên bếp lửa, một khoảng nghỉ ở Quy Nhơn",
+      "url": "https://images.unsplash.com/photo-1698374996103-6b8940fc9e1c?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Mjh8fFF1eSUyME5ob24lMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg0NTM4OXww&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Uyen Nguyen Thi Dieu",
+      "authorUrl": "https://unsplash.com/@uyennguyen2401?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-tea-kettle-sitting-on-top-of-a-fire-pit-Ny_HkT_QdvU?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "food-research-quy-nhon",
+      "theme": "mon-an",
+      "caption": "Bánh bèo buổi chiều · một món muốn thử (ảnh minh họa)",
+      "file": "food-banh-beo-1.jpg",
+      "author": "Nha Nghi La from Ho Chi Minh, Viet Nam",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o_ch%C3%A9n.jpg"
+    },
+    {
+      "id": "wave-pexels-30277984",
+      "theme": "nghe",
+      "caption": "Ra biển Quy Nhơn cùng ánh sáng đầu ngày",
+      "file": "wave-pexels-30277984.jpg",
+      "author": "Vũ Bụi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/sunrise-boat-at-beach-in-quy-nh-n-vietnam-30277984/"
+    },
+    {
+      "id": "wave-pexels-38815905",
+      "theme": "nghe",
+      "caption": "Những lớp lưới trước bến thuyền Quy Nhơn",
+      "file": "wave-pexels-38815905.jpg",
+      "author": "Flint Huynh",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/fishing-nets-overlook-vibrant-harbor-in-quy-nh-n-38815905/"
+    },
+    {
+      "id": "wave-pexels-37920715",
+      "theme": "hanh-trinh",
+      "caption": "Chờ chiều xuống cùng người đi tắm biển Quy Nhơn",
+      "file": "wave-pexels-37920715.jpg",
+      "author": "Flint Huynh",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/tranquil-evening-at-quy-nhon-beach-vietnam-37920715/"
+    }
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1722944175475-6bbc2d6812c6?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MXx8UXV5JTIwTmhvbiUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODQ1Mzg5fDA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+    "author": "Alice Dang",
+    "authorUrl": "https://unsplash.com/@tzoanh?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/a-view-of-a-beach-from-a-high-point-of-view-qyV0Q_FDiUk?utm_source=wander&utm_medium=referral"
+  }
 }

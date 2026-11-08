@@ -1,0 +1,684 @@
+{
+  "id": "can-tho",
+  "name": "Cần Thơ",
+  "region": "Đồng bằng sông Cửu Long",
+  "tagline": "Ăn sáng trên sông, ghé chợ nổi và chậm lại bên bến nước",
+  "coverPlaceId": "can-tho-cho-noi-cai-rang",
+  "references": [
+    {
+      "id": "trung-tam-can-tho",
+      "name": "Mốc tham chiếu Cần Thơ",
+      "lat": 10.0342,
+      "lon": 105.7882,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Hủ tiếu buổi sáng",
+          "text": "Có thể chọn nước hoặc khô, rồi tự thêm rau và gia vị. Một bữa nhỏ để bắt đầu khám phá khu phố.",
+          "placeId": "exp-food-can-tho-hu-tieu"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh xèo miền Tây",
+          "text": "Thử miếng bánh nóng giòn cùng rau và nước chấm. Nhân và kích thước bánh thay đổi theo vùng và từng quán.",
+          "placeId": "exp-food-can-tho-banh-xeo"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh cống",
+          "text": "Chiếc bánh chiên giòn ăn cùng rau và nước chấm. Một món nhỏ để thêm vào buổi khám phá miền sông nước.",
+          "placeId": "exp-food-can-tho-banh-cong"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh tằm bì",
+          "text": "Chọn một bữa bánh tằm với phần bì và nước cốt dừa theo khẩu vị.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh tét lá cẩm",
+          "text": "Tìm hiểu sắc bánh và phần nhân; hỏi loại mặn/ngọt và cách bảo quản nếu mua mang đi.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Ăn sáng trong chuyến sông nước",
+          "text": "Nếu chọn chợ nổi, hỏi bến xuất phát và dịch vụ bữa sáng trước khi đặt thuyền."
+        },
+        {
+          "icon": "route",
+          "title": "Đi vì một câu chuyện trên cồn",
+          "text": "Tìm hiểu Cồn Sơn hoặc hoạt động làm món địa phương; liên hệ người đón khách trước khi thêm vào lịch."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Victoria Can Tho Resort",
+          "text": "Tìm một nhịp nghỉ bên sông trước hành trình miền Tây.",
+          "placeId": "venue-can-tho-victoria"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh hỏi Phong Điền",
+          "text": "Bánh hỏi gắn với Phong Điền; chọn phần ăn theo cách quán phục vụ.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Lẩu mắm Cần Thơ",
+          "text": "Nồi lẩu có mắm và rau, thích hợp chia phần khi đi nhóm.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cá lóc nướng",
+          "text": "Cá lóc nướng là một món được nguồn du lịch giới thiệu tại Cần Thơ.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Canh chua cá linh bông điên điển",
+          "text": "Canh chua với cá linh và bông điên điển; hỏi nguyên liệu theo mùa.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Pizza hủ tiếu",
+          "text": "Hủ tiếu chế biến giòn tại các cơ sở làng nghề, ăn như món nhẹ.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Hotel Xoai",
+          "text": "Hotel Xoai: thiết kế hoặc vị trí gắn với nhà hát tại Cần Thơ. Hồ sơ nguồn giới thiệu thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có nước nóng theo mô tả nguồn; spa hoặc dịch vụ thư giãn.",
+          "placeId": "rs-can-tho-hotel-xoai-f749458f"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "can-tho-cho-noi-cai-rang",
+      "name": "Chợ nổi Cái Răng",
+      "category": "cho",
+      "area": "Cái Răng",
+      "hook": "Tìm một chuyến thuyền buổi sớm để quan sát nhịp buôn bán và ăn uống trên sông.",
+      "summary": "Chợ nổi Cái Răng là chợ nổi đầu mối chuyên mua bán trái cây và rau củ ở trên sông Cần Thơ và là điểm tham quan đặc sắc của phường Cái Răng, thành phố Cần Thơ. Năm 2016, Chợ nổi Cái Răng đã được Bộ văn hóa thể thao và du lịch công nhận Di sản Văn hóa phi vật thể quốc gia.",
+      "lat": 10.005,
+      "lon": 105.746,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Chợ nổi là trải nghiệm buổi sớm; xác nhận giờ xuất phát với người vận hành thuyền.",
+      "tips": [
+        "Tọa độ chợ không phải bến đón khách.",
+        "Xác nhận bến, giờ, giá và áo phao trước chuyến đi."
+      ],
+      "photos": [
+        {
+          "file": "can-tho-cho-noi-cai-rang-1.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99t_c%E1%BA%A3nh_%E1%BB%9F_ch%E1%BB%A3_n%E1%BB%95i_C%C3%A1i_R%C4%83ng.jpg"
+        },
+        {
+          "file": "pexels-32607908.jpg",
+          "author": "Duy Nguyen",
+          "license": "Giấy phép Pexels",
+          "sourceUrl": "https://www.pexels.com/photo/cai-rang-floating-market-aerial-view-in-c-n-th-32607908/"
+        }
+      ],
+      "wikipediaTitle": "Chợ nổi Cái Răng"
+    },
+    {
+      "id": "can-tho-cong-vien-ninh-kieu",
+      "name": "Công viên Ninh Kiều",
+      "category": "canh",
+      "area": "Ninh Kiều",
+      "hook": "Đi dạo bên sông ở công viên Ninh Kiều, tìm một góc ngồi và ngắm nhịp phố lên đèn.",
+      "summary": "",
+      "lat": 10.03381,
+      "lon": 105.78923,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "1–2 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "can-tho-nha-co-binh-thuy",
+      "name": "Nhà cổ Bình Thủy",
+      "category": "van",
+      "area": "Bình Thủy",
+      "hook": "Ghé tìm hiểu kiến trúc và những câu chuyện tại nhà cổ Bình Thủy.",
+      "summary": "",
+      "lat": 10.067,
+      "lon": 105.74963,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "45–60 phút (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "can-tho-bao-tang-can-tho",
+      "name": "Bảo tàng Cần Thơ",
+      "category": "van",
+      "area": "Cần Thơ",
+      "hook": "Tìm hiểu thêm đời sống và lịch sử miền sông nước.",
+      "summary": "Bảo tàng Cần Thơ là bảo tàng tọa lạc tại góc đường Hòa Bình và Trần Quốc Toản ở Cần Thơ, Việt Nam được thành lập vào năm 1976 và sở hữu hơn 5.000 hiện vật cùng di tích lịch sử. Bảo tàng này ghi nhận sự định cư từ thuở sơ khai của người Khmer cũng như sự đóng góp của người Minh Hương và những lớp dân cư đến sau này. Bảo tàng còn trưng bày cả mô hình và mô tả về phương tiện đường thủy của vùng đồng bằng sông Cửu Long.",
+      "lat": 10.0352,
+      "lon": 105.7867,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "can-tho-bao-tang-can-tho-1.jpg",
+          "author": "Daaé",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Can_Tho_Museum.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Cần Thơ"
+    },
+    {
+      "id": "exp-food-can-tho-hu-tieu",
+      "name": "Hủ tiếu buổi sáng",
+      "category": "am",
+      "area": "Mốc khu vực Cần Thơ",
+      "hook": "Có thể chọn nước hoặc khô, rồi tự thêm rau và gia vị.",
+      "summary": "Có thể chọn nước hoặc khô, rồi tự thêm rau và gia vị. Một bữa nhỏ để bắt đầu khám phá khu phố. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 10.0342,
+      "lon": 105.7882,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-hu-tieu-1.jpg",
+          "author": "Phương Huy ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%A7_t%C3%ADu_Nam_Vang_(h%E1%BB%A7_t%C3%ADu_t%C3%B4m),_qu%C3%A1n_C%E1%BA%A7u_Tr%E1%BA%AFng,_K%C3%AAnh_n%C6%B0%E1%BB%9Bc_%C4%91en_(1).jpg"
+        },
+        {
+          "file": "food-hu-tieu-3.jpg",
+          "author": "Kham Tran - www.khamtran.com",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hu-Tieu-Kho-2008.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hủ tiếu"
+    },
+    {
+      "id": "exp-food-can-tho-banh-xeo",
+      "name": "Bánh xèo miền Tây",
+      "category": "am",
+      "area": "Mốc khu vực Cần Thơ",
+      "hook": "Thử miếng bánh nóng giòn cùng rau và nước chấm.",
+      "summary": "Thử miếng bánh nóng giòn cùng rau và nước chấm. Nhân và kích thước bánh thay đổi theo vùng và từng quán. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 10.0342,
+      "lon": 105.7882,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-xeo-1.jpg",
+          "author": "Vivian D Nguyen",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_x%C3%A8o_with_n%C6%B0%E1%BB%9Bc_m%E1%BA%AFm.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh xèo"
+    },
+    {
+      "id": "exp-food-can-tho-banh-cong",
+      "name": "Bánh cống",
+      "category": "am",
+      "area": "Mốc khu vực Cần Thơ",
+      "hook": "Chiếc bánh chiên giòn ăn cùng rau và nước chấm.",
+      "summary": "Chiếc bánh chiên giòn ăn cùng rau và nước chấm. Một món nhỏ để thêm vào buổi khám phá miền sông nước. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 10.0342,
+      "lon": 105.7882,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-cong-1.jpg",
+          "author": "Vietcuongdao",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%E1%BB%91ng_de_C%E1%BA%A7n_Th%C6%A1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh cống"
+    },
+    {
+      "id": "can-tho-chua-ong",
+      "name": "Chùa Ông",
+      "category": "van",
+      "area": "Cần Thơ",
+      "hook": "Ghé một góc kiến trúc Hoa bên bến Ninh Kiều.",
+      "summary": "",
+      "lat": 10.0341631,
+      "lon": 105.7885335,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/1924771927",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "can-tho-con-son",
+      "name": "Cồn Sơn",
+      "category": "canh",
+      "area": "Cần Thơ",
+      "hook": "Dành một buổi tìm hiểu đời sống trên cồn.",
+      "summary": "",
+      "lat": 10.0845129,
+      "lon": 105.74988,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/26753093",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "can-tho-truc-lam-phuong-nam",
+      "name": "Thiền viện Trúc Lâm Phương Nam",
+      "category": "van",
+      "area": "Cần Thơ",
+      "hook": "Đi bộ qua những khoảng sân và mái ngói.",
+      "summary": "Ghé thiền viện để ngắm kiến trúc, dạo qua những khoảng sân và tìm một nhịp chậm hơn ngoài trung tâm Cần Thơ. Sinh hoạt tôn giáo được ưu tiên khi tham quan.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 9.9896795,
+      "lon": 105.7037191,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Kiến trúc Phật giáo",
+        "Sân chùa",
+        "Khoảng lặng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Ăn mặc phù hợp và xin phép trước khi chụp người hoặc vào khu đang hành lễ.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4709395094",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "supp-can-tho-truc-lam-phuong-nam-1.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.jpg"
+        },
+        {
+          "file": "supp-can-tho-truc-lam-phuong-nam-3.jpg",
+          "author": "Bùi Thụy Đào Nguyên",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99t_s%E1%BB%91_t%C6%B0%E1%BB%A3ng_La_H%C3%A1n.jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "venue-can-tho-victoria",
+      "name": "Victoria Can Tho Resort",
+      "category": "luu",
+      "area": "Cần Thơ",
+      "hook": "Tìm một nhịp nghỉ bên sông trước hành trình miền Tây.",
+      "summary": "Tìm một nhịp nghỉ bên sông trước hành trình miền Tây. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 10.0393054,
+      "lon": 105.7930514,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: Khu Cái Khế, Cần Thơ",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/168424431"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-63a22c9be92d1e3203.jpg",
+          "author": "Andre Hospers",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Victoria_Can_Tho_Resort.jpg"
+        },
+        {
+          "file": "venue-fill-ef61bda420f9f81627.jpg",
+          "author": "Andre Hospers",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Victoria_Can_Tho_Resort_(35060).jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Khu Cái Khế, Cần Thơ",
+        "website": "https://www.victoriahotels.asia/vi/victoria-can-tho-resort/",
+        "sourceUrl": "https://www.victoriahotels.asia/vi/victoria-can-tho-resort/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-can-tho-hotel-xoai-f749458f",
+      "name": "Hotel Xoai",
+      "category": "luu",
+      "area": "Cần Thơ",
+      "hook": "Hotel Xoai: thiết kế hoặc vị trí gắn với nhà hát tại Cần Thơ.",
+      "summary": "Hotel Xoai: thiết kế hoặc vị trí gắn với nhà hát tại Cần Thơ. Hồ sơ nguồn giới thiệu thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có nước nóng theo mô tả nguồn; spa hoặc dịch vụ thư giãn.",
+      "lat": 10.031168,
+      "lon": 105.7752943,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có nước nóng theo mô tả nguồn",
+        "Spa hoặc dịch vụ thư giãn",
+        "Có khu ban công hoặc sân hiên"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn thiết kế hoặc vị trí gắn với nhà hát và có nhà hàng hoặc không gian ăn uống.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Can%20Tho&oldid=5396782",
+        "Nguồn: https://hotelxoai.com/",
+        "Nguồn: https://www.openstreetmap.org/node/1777639453"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "93 Mau Than St, Xuan Khanh, Ninh Kieu",
+        "website": "https://hotelxoai.com/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Can%20Tho&oldid=5396782",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-5218142",
+      "theme": "cho",
+      "caption": "Gặp nhau giữa những ghe hàng ở Cần Thơ",
+      "file": "pexels-5218142.jpg",
+      "author": "Văn Long Bùi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/fishing-boats-on-lakeshore-5218142/"
+    },
+    {
+      "id": "pexels-32607908",
+      "theme": "cho",
+      "caption": "Chợ nổi Cái Răng nhìn từ trên cao",
+      "file": "pexels-32607908.jpg",
+      "author": "Duy Nguyen",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/cai-rang-floating-market-aerial-view-in-c-n-th-32607908/"
+    },
+    {
+      "id": "pexels-28428682",
+      "theme": "mon-an",
+      "caption": "Chọn một trái dừa giữa buổi chợ nổi Cần Thơ",
+      "file": "pexels-28428682.jpg",
+      "author": "Vietnam Tri Duong Photographer",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/vibrant-c-n-th-floating-market-scene-28428682/"
+    },
+    {
+      "id": "food-research-can-tho",
+      "theme": "mon-an",
+      "caption": "Hủ tiếu buổi sáng · một món muốn thử (ảnh minh họa)",
+      "file": "food-hu-tieu-1.jpg",
+      "author": "Phương Huy ( thảo luận )",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%A7_t%C3%ADu_Nam_Vang_(h%E1%BB%A7_t%C3%ADu_t%C3%B4m),_qu%C3%A1n_C%E1%BA%A7u_Tr%E1%BA%AFng,_K%C3%AAnh_n%C6%B0%E1%BB%9Bc_%C4%91en_(1).jpg"
+    },
+    {
+      "id": "wave-pexels-35631797",
+      "theme": "nguoi",
+      "caption": "Một nụ cười giữa buổi chợ trên sông",
+      "file": "wave-pexels-35631797.jpg",
+      "author": "Nguyễn Viết Minh Lâm",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/smiling-woman-at-can-tho-floating-market-in-vietnam-35631797/"
+    },
+    {
+      "id": "wave-pexels-4332584",
+      "theme": "cho",
+      "caption": "Tìm trái cây theo mùa trên những chiếc ghe",
+      "file": "wave-pexels-4332584.jpg",
+      "author": "Văn Long Bùi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/photo-of-person-selling-fruits-while-standing-on-boat-4332584/"
+    }
+  ],
+  "coverPhoto": {
+    "file": "pexels-32607908.jpg",
+    "author": "Duy Nguyen",
+    "license": "Giấy phép Pexels",
+    "sourceUrl": "https://www.pexels.com/photo/cai-rang-floating-market-aerial-view-in-c-n-th-32607908/"
+  }
+}

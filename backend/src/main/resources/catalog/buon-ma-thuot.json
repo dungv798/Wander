@@ -1,0 +1,573 @@
+{
+  "id": "buon-ma-thuot",
+  "name": "Buôn Ma Thuột",
+  "region": "Tây Nguyên",
+  "tagline": "Cà phê, thác nước và những điểm chạm văn hóa cao nguyên",
+  "coverPlaceId": "buon-ma-thuot-thac-dray-nur",
+  "references": [
+    {
+      "id": "trung-tam-buon-ma-thuot",
+      "name": "Mốc tham chiếu Buôn Ma Thuột",
+      "lat": 12.6667,
+      "lon": 108.05,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún đỏ Buôn Ma Thuột",
+          "text": "Một tô bún với màu nước dùng đặc trưng và đồ ăn kèm tùy hàng. Dành một bữa cho hương vị Buôn Ma Thuột.",
+          "placeId": "exp-food-buon-ma-thuot-bun-do"
+        },
+        {
+          "icon": "coffee",
+          "title": "Một ly cà phê phin",
+          "text": "Dành thời gian nhìn cà phê nhỏ qua phin, rồi chọn uống đen hoặc thêm sữa theo khẩu vị.",
+          "placeId": "exp-food-buon-ma-thuot-ca-phe-phin"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm lam Tây Nguyên",
+          "text": "Một ý tưởng cho bữa ăn với cơm nấu trong ống tre; chọn món ăn kèm tại nơi đến.",
+          "placeId": "exp-food-buon-ma-thuot-com-lam"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Một chuyến đi vì cà phê",
+          "text": "Thử cà phê phin, tìm hiểu cách chế biến hoặc ghé không gian văn hóa cà phê phù hợp."
+        },
+        {
+          "icon": "route",
+          "title": "Gặp Tây Nguyên qua đời sống",
+          "text": "Tìm hiểu văn hóa Ê Đê và không gian nhà dài; hỏi trước về việc đón khách, chụp ảnh và vào nhà."
+        }
+      ]
+    },
+    {
+      "id": "quan-xa-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán để ghé",
+      "summary": "Từ món muốn thử đến một điểm dừng cụ thể.",
+      "items": [
+        {
+          "icon": "coffee",
+          "title": "Làng cà phê Trung Nguyên",
+          "text": "Tìm hiểu văn hóa cà phê trong một không gian riêng của Buôn Ma Thuột.",
+          "placeId": "venue-buon-ma-thuot-lang-ca-phe"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh ướt chồng đĩa",
+          "text": "Mỗi bánh mỏng phục vụ trên một đĩa; gọi thêm theo sức ăn.",
+          "placeId": null
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "buon-ma-thuot-thac-dray-nur",
+      "name": "Thác Dray Nur",
+      "category": "canh",
+      "area": "Dray Nur",
+      "hook": "Nghe tiếng thác và đi bộ ngắm cảnh quan quanh Dray Nur.",
+      "summary": "Thác Đray Nur là một con thác nằm cách phường Buôn Ma Thuột 25 km theo hướng Quốc lộ 14, ngang qua thủy điện Buôn Kuốp gần 3 km. Thác Đray Nur là thác chung nguồn nằm trong hệ thống 3 thác: Gia Long - Đray Nur - Dray Sáp của sông Sông Srêpốk, tỉnh Lâm Đồng. Đray Nur nghĩa là thác cái. Vì thế thác còn có tên thông tục là thác Vợ, thác này cũng được gọi là thác Đray Nur thượng như thác Gia Long phần Đray Nur hạ nằm ở tỉnh Lâm Đồng.",
+      "lat": 12.541851,
+      "lon": 107.889689,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "1–2 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Ở trong khu vực được phép tham quan, không vượt rào tới mép nước.",
+        "Xác nhận điều kiện tham quan khi mưa hoặc nước lớn."
+      ],
+      "photos": [
+        {
+          "file": "buon-ma-thuot-thac-dray-nur-1.jpg",
+          "author": "Y Kpia Mlo",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Draynur_falls.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thác Đray Nur"
+    },
+    {
+      "id": "buon-ma-thuot-ho-lak",
+      "name": "Hồ Lắk",
+      "category": "canh",
+      "area": "Lắk",
+      "hook": "Tìm nhịp sống ven hồ và một khoảng nghỉ giữa hành trình cao nguyên.",
+      "summary": "Hồ Lắk là một hồ nước ngọt tự nhiên lớn nhất tỉnh Đăk Lăk và hồ tự nhiên lớn thứ hai Việt Nam sau Hồ Ba Bể. Xung quanh hồ có những dãy núi lớn được bao phủ bởi các cánh rừng nguyên sinh. Buôn Jun, một buôn làng nổi tiếng của người M'Nông, nằm cạnh hồ này. Xung quanh hồ còn có những kiến trúc lịch sử như biệt điện của hoàng đế Bảo Đại, nhà dài của người M'Nông.",
+      "lat": 12.4225,
+      "lon": 108.18,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "buon-ma-thuot-ho-lak-1.jpg",
+          "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lak_Lake.jpg"
+        },
+        {
+          "file": "buon-ma-thuot-ho-lak-2.jpg",
+          "author": "Đỗ Tuấn Hưng",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buonjuin.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hồ Lắk"
+    },
+    {
+      "id": "buon-ma-thuot-yok-don",
+      "name": "Vườn quốc gia Yok Đôn",
+      "category": "leo",
+      "area": "Buôn Đôn",
+      "hook": "Tìm hiểu các tuyến đi bộ khám phá hệ sinh thái rừng tại Yok Đôn.",
+      "summary": "Vườn quốc gia Yok Đôn là một trong những khu rừng đặc dụng lớn nhất Việt Nam, thuộc 2 tỉnh Lâm Đồng và Đắk Lắk.",
+      "lat": 12.8038,
+      "lon": 107.671,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến của Vườn",
+      "difficulty": "Theo tuyến",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Liên hệ Vườn để xác nhận tuyến, hướng dẫn và hoạt động đang mở.",
+        "Mốc bản đồ không thay cho tuyến đi bộ hoặc điểm xuất phát."
+      ],
+      "photos": [
+        {
+          "file": "buon-ma-thuot-yok-don-1.jpg",
+          "author": "Đỗ Tuấn Hưng",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yokdon01.JPG"
+        }
+      ],
+      "wikipediaTitle": "Vườn quốc gia Yok Đôn"
+    },
+    {
+      "id": "buon-ma-thuot-thac-dray-sap",
+      "name": "Thác Đray Sáp",
+      "category": "canh",
+      "area": "Buôn Ma Thuột",
+      "hook": "Nghe tiếng nước giữa không gian rừng và đá.",
+      "summary": "Thác Đray Sáp hay Thác Dray Sap là thác trên dòng sông Srêpốk ở vùng đất xã Nam Đà, tỉnh Lâm Đồng, Việt Nam. Thác Đray Sáp còn có tên gọi nữa là thác Chồng. Thác ở cách phường Buôn Ma Thuột chừng 30 km về hướng Nam. Cách thác Đray Sáp không xa là thác Đray Nur thuộc địa phận tỉnh Đăk Lăk.",
+      "lat": 12.538567,
+      "lon": 107.889975,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ref-buon-ma-thuot-thac-dray-sap-3.jpg",
+          "author": "Dotuanhungdaklak at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Draysap01.JPG"
+        },
+        {
+          "file": "ref-buon-ma-thuot-thac-dray-sap-4.jpg",
+          "author": "Dotuanhungdaklak at Vietnamese Wikipedia",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Draysap02.JPG"
+        }
+      ],
+      "wikipediaTitle": "Thác Đray Sáp"
+    },
+    {
+      "id": "buon-ma-thuot-buon-don",
+      "name": "Buôn Đôn (huyện)",
+      "category": "van",
+      "area": "Buôn Ma Thuột",
+      "hook": "Tìm hiểu văn hóa bản địa bên dòng Sêrêpốk.",
+      "summary": "Buôn Đôn là một huyện miền núi biên giới cũ nằm ở phía tây tỉnh Đắk Lắk, Việt Nam.",
+      "lat": 12.811091,
+      "lon": 107.895556,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ref-buon-ma-thuot-buon-don-2.jpg",
+          "author": "Đỗ Tuấn Hưng",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bandon05.JPG"
+        },
+        {
+          "file": "ref-buon-ma-thuot-buon-don-1.jpg",
+          "author": "Đỗ Tuấn Hưng",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bandon02.JPG"
+        }
+      ],
+      "wikipediaTitle": "Buôn Đôn (huyện)"
+    },
+    {
+      "id": "exp-food-buon-ma-thuot-bun-do",
+      "name": "Bún đỏ Buôn Ma Thuột",
+      "category": "am",
+      "area": "Mốc khu vực Buôn Ma Thuột",
+      "hook": "Một tô bún với màu nước dùng đặc trưng và đồ ăn kèm tùy hàng.",
+      "summary": "Một tô bún với màu nước dùng đặc trưng và đồ ăn kèm tùy hàng. Dành một bữa cho hương vị Buôn Ma Thuột. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 12.6667,
+      "lon": 108.05,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-bun-do-1.jpg",
+          "author": "Nlam.94",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%9AN_%C4%90%E1%BB%8E_%C4%90%E1%BA%AEK_L%E1%BA%AEK.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bún đỏ"
+    },
+    {
+      "id": "exp-food-buon-ma-thuot-ca-phe-phin",
+      "name": "Một ly cà phê phin",
+      "category": "am",
+      "area": "Mốc khu vực Buôn Ma Thuột",
+      "hook": "Dành thời gian nhìn cà phê nhỏ qua phin, rồi chọn uống đen hoặc thêm sữa theo khẩu vị..",
+      "summary": "Dành thời gian nhìn cà phê nhỏ qua phin, rồi chọn uống đen hoặc thêm sữa theo khẩu vị. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 12.6667,
+      "lon": 108.05,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-ca-phe-phin-1.jpg",
+          "author": "Clarin",
+          "license": "CC BY 2.5",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cà phê sữa đá"
+    },
+    {
+      "id": "buon-ma-thuot-bao-tang-ca-phe",
+      "name": "Bảo tàng Thế giới Cà phê",
+      "category": "van",
+      "area": "Buôn Ma Thuột",
+      "hook": "Khám phá những cách nhìn khác nhau về cà phê.",
+      "summary": "",
+      "lat": 12.6908584,
+      "lon": 108.0445203,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/1545026830",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "buon-ma-thuot-chua-khai-doan",
+      "name": "Chùa Sắc tứ Khải Đoan",
+      "category": "van",
+      "area": "Buôn Ma Thuột",
+      "hook": "Chậm lại giữa kiến trúc gỗ và sân chùa.",
+      "summary": "",
+      "lat": 12.6820008,
+      "lon": 108.038859,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/241740050",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "venue-buon-ma-thuot-lang-ca-phe",
+      "name": "Làng cà phê Trung Nguyên",
+      "category": "am",
+      "area": "Buôn Ma Thuột",
+      "hook": "Tìm hiểu văn hóa cà phê trong một không gian riêng của Buôn Ma Thuột.",
+      "summary": "Tìm hiểu văn hóa cà phê trong một không gian riêng của Buôn Ma Thuột. Xem lựa chọn đồ uống và chỗ ngồi trước khi ghé.",
+      "lat": 12.7011483,
+      "lon": 108.0610076,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Nghỉ chân",
+        "Chọn đồ uống tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 163 Lý Thái Tổ, Buôn Ma Thuột",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/2494793015"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-1d12d117ddb12c9aa8.jpg",
+          "author": "Phan Thanh Huyền",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langcaphetrungnguyen.JPG"
+        },
+        {
+          "file": "venue-fill-fda34023ec57d24aeb.jpg",
+          "author": "vi:User:Pttp1991",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lang_ca_phe_Trung_Nguyen.JPG"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "163 Lý Thái Tổ, Buôn Ma Thuột",
+        "website": "https://trungnguyenlegend.com/lang-ca-phe-trung-nguyen/",
+        "sourceUrl": "https://trungnguyenlegend.com/lang-ca-phe-trung-nguyen/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "exp-food-buon-ma-thuot-com-lam",
+      "name": "Cơm lam Tây Nguyên",
+      "category": "am",
+      "area": "Mốc khu vực Buôn Ma Thuột",
+      "hook": "Một ý tưởng cho bữa ăn với cơm nấu trong ống tre; chọn món ăn kèm tại nơi đến.",
+      "summary": "Một ý tưởng cho bữa ăn với cơm nấu trong ống tre; chọn món ăn kèm tại nơi đến. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 12.6667,
+      "lon": 108.05,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Tìm hiểu thêm: https://vietnam.travel/things-to-do/7-reasons-explore-dak-lak/"
+      ],
+      "photos": [
+        {
+          "file": "dish-buon-ma-thuot-com-lam-2.jpg",
+          "author": "Lam Nguyen from Ho Chi Minh City, Vietnam",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C6%A1m_lam_T%C3%A2y_Nguy%C3%AAn.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cơm lam"
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-3263933",
+      "theme": "mon-an",
+      "caption": "Một khoảng nghỉ trong quán cà phê ở Đắk Lắk",
+      "file": "pexels-3263933.jpg",
+      "author": "Nam Phong Bùi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-seated-at-a-table-in-a-cafe-3263933/"
+    },
+    {
+      "id": "food-research-buon-ma-thuot",
+      "theme": "mon-an",
+      "caption": "Bún đỏ Buôn Ma Thuột · một món muốn thử (ảnh minh họa)",
+      "file": "food-bun-do-1.jpg",
+      "author": "Nlam.94",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%9AN_%C4%90%E1%BB%8E_%C4%90%E1%BA%AEK_L%E1%BA%AEK.jpg"
+    },
+    {
+      "id": "wave-pexels-21353296",
+      "theme": "nguoi",
+      "caption": "Tìm hiểu trang phục và đời sống ở Buôn Ma Thuột",
+      "file": "wave-pexels-21353296.jpg",
+      "author": "Long Bà Mùi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-in-a-montagnard-shirt-standing-in-the-doorway-21353296/"
+    },
+    {
+      "id": "wave-pexels-21033104",
+      "theme": "mon-an",
+      "caption": "Nhìn một mùa trái chín ngay trên cây",
+      "file": "wave-pexels-21033104.jpg",
+      "author": "Long Bà Mùi",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/tree-with-leaves-and-blossoming-fruit-21033104/"
+    }
+  ]
+}

@@ -68,6 +68,526 @@
           "title": "Giày đi bộ"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mì Quảng",
+          "text": "Sợi mì, ít nước dùng, rau và bánh tráng tạo nên nhiều lớp vị. Phần nhân thay đổi tùy quán.",
+          "placeId": "exp-food-da-nang-mi-quang"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh xèo Đà Nẵng",
+          "text": "Thử miếng bánh nóng giòn cùng rau và nước chấm. Nhân và kích thước bánh thay đổi theo vùng và từng quán.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún chả cá",
+          "text": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển. Hỏi về loại cá và thành phần nếu bạn có dị ứng.",
+          "placeId": "exp-food-da-nang-bun-cha-ca"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún mắm nêm",
+          "text": "Một bữa bún đậm mùi mắm; hỏi thành phần và điều chỉnh lượng mắm theo ý thích.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh tráng cuốn thịt heo",
+          "text": "Dành một bữa cuốn bánh tráng cùng rau và thịt, hỏi loại mắm trước khi chọn.",
+          "placeId": "exp-food-da-nang-banh-trang-thit-heo"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Buổi sáng bên biển",
+          "text": "Kết hợp dạo biển với một bữa mì Quảng; kiểm tra thời tiết trước khi chốt lịch ngoài trời."
+        },
+        {
+          "icon": "route",
+          "title": "Nhìn gần đời sống địa phương",
+          "text": "Ghé chợ hoặc tìm một bữa ăn trong khu vực bạn đang khám phá, thay vì chỉ di chuyển giữa các điểm chụp ảnh."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "HAIAN Beach Hotel & Spa",
+          "text": "Lên ý tưởng nghỉ ở khu vực biển Mỹ Khê.",
+          "placeId": "venue-da-nang-haian-beach"
+        }
+      ]
+    },
+    {
+      "id": "quan-xa-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán để ghé",
+      "summary": "Từ món muốn thử đến một điểm dừng cụ thể.",
+      "items": [
+        {
+          "icon": "coffee",
+          "title": "XLIII Specialty Coffee · 43 Factory",
+          "text": "Tìm hiểu hạt và cách pha cà phê đặc sản ở Đà Nẵng.",
+          "placeId": "venue-da-nang-43-factory"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh xèo Bà Dưỡng",
+          "text": "Tìm vào con hẻm để thử bánh xèo cuốn rau và nước chấm của quán.",
+          "placeId": "venue-da-nang-ba-duong"
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "InterContinental Danang Sun Peninsula Resort",
+          "text": "Kiến trúc lấy cảm hứng Việt Nam với nhiều hạng phòng, suite và villa hướng vịnh. Bể bơi riêng, xông hơi hay sân mái chỉ thuộc một số hạng cao cấp; khu nghỉ còn có spa, yoga và nhiều nhà hàng.",
+          "placeId": "rs-da-nang-intercontinental-danang-de91928d"
+        },
+        {
+          "icon": "bed",
+          "title": "Hyatt Regency Danang Resort and Spa",
+          "text": "Các hạng phòng khác nhau về hướng biển, hướng bể bơi và quyền dùng khu club. Khu nghỉ có spa cùng nhà hàng Việt và quốc tế, phù hợp sắp xếp những ngày chủ yếu nghỉ ở biển.",
+          "placeId": "rs-da-nang-hyatt-regency-danang-res-6a1a7f1b"
+        },
+        {
+          "icon": "bed",
+          "title": "New Orient Hotel Da Nang",
+          "text": "Bể bơi trung tâm được bố trí như một khoảng sân bên trong khách sạn, có cây xanh và quầy phục vụ đồ uống. Một số hạng phòng thêm ban công riêng hoặc bồn tắm.",
+          "placeId": "rs-da-nang-new-orient-hotel-da-nang-6de5c27d"
+        },
+        {
+          "icon": "bed",
+          "title": "Mercure Danang French Village Bana Hills",
+          "text": "Mercure Danang French Village Bana Hills: có hạng suite tại DANANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; không gian có tác phẩm nghệ thuật.",
+          "placeId": "rs-da-nang-mercure-danang-french-vi-ae25ff8f"
+        },
+        {
+          "icon": "bed",
+          "title": "Pullman Danang Beach Resort",
+          "text": "Pullman Danang Beach Resort: có hạng suite tại DANANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống.",
+          "placeId": "rs-da-nang-pullman-danang-beach-res-57d88f85"
+        },
+        {
+          "icon": "bed",
+          "title": "Grand Mercure Danang",
+          "text": "Grand Mercure Danang: có hạng suite tại Danang. Hồ sơ nguồn giới thiệu có hạng suite; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình; không gian ven sông.",
+          "placeId": "rs-da-nang-grand-mercure-danang-d40cae2d"
+        },
+        {
+          "icon": "bed",
+          "title": "Novotel Danang Premier Han River",
+          "text": "Novotel Danang Premier Han River: có hạng suite tại DANANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-da-nang-novotel-danang-premier-h-73c54590"
+        },
+        {
+          "icon": "bed",
+          "title": "Sea Wonder Hotel",
+          "text": "Khách sạn trên đường Nguyễn Công Sáu, gần khu bãi biển theo cẩm nang. Khu xung quanh có các địa chỉ uống cà phê và ăn đường phố.",
+          "placeId": "rs-da-nang-sea-wonder-hotel-aa0838a4"
+        },
+        {
+          "icon": "bed",
+          "title": "Dai A Hotel",
+          "text": "Khách sạn lâu năm trên đường Yên Bái, khu trung tâm Đà Nẵng. Cẩm nang giới thiệu đây là lựa chọn lưu trú trong thành phố.",
+          "placeId": "rs-da-nang-dai-a-hotel-caaafcfe"
+        },
+        {
+          "icon": "bed",
+          "title": "Sanouva Danang Hotel",
+          "text": "Sanouva Danang Hotel: có hạng suite tại Đà Nẵng. Hồ sơ nguồn giới thiệu có hạng suite; spa hoặc dịch vụ thư giãn; bể bơi.",
+          "placeId": "rs-da-nang-sanouva-danang-hotel-0350f74c"
+        },
+        {
+          "icon": "bed",
+          "title": "Sao Minh Business Hotel",
+          "text": "Sao Minh Business Hotel: có nhà hàng hoặc không gian ăn uống tại Đà Nẵng. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; spa hoặc dịch vụ thư giãn; điều hòa.",
+          "placeId": "rs-da-nang-sao-minh-business-hotel-4c81e5e7"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Rang",
+          "text": "Món Ấn với cà ri, bánh naan và cơm biryani. Hai đầu bếp gốc Ấn kết hợp kinh nghiệm nấu ăn quốc tế trong thực đơn. Chicken tikka, dal tadka và các loại bánh là những gợi ý để bắt đầu.",
+          "placeId": "rs-da-nang-rang-dc2f3186"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "La Maison 1888",
+          "text": "Thực đơn Pháp theo bộ trong khu nghỉ dưỡng InterContinental Đà Nẵng. Nguồn giới thiệu các bộ năm hoặc tám món, dùng nguyên liệu Việt Nam, Pháp và Nhật Bản; có món gnocchi dùng với nấm truffle.",
+          "placeId": "rs-da-nang-la-maison-1888-c8c40cc6"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh Bèo - Bánh đập",
+          "text": "Hai món bánh miền Trung, làm và phục vụ theo từng phần nhỏ. Bánh bèo có phần xốt thịt, mộc nhĩ, hành và lạc. Bánh đập kết hợp bánh tráng giòn với lớp bánh mềm, dùng cùng nước chấm lên men.",
+          "placeId": "rs-da-nang-banh-beo-banh-dap-08b52894"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún Bò Huế Bà Thương",
+          "text": "Bún bò kiểu Huế với nước dùng sả tại Đà Nẵng. Các lựa chọn trong bát gồm thịt bò thái, giò heo hoặc viên thịt, ăn cùng bún và rau. Vị cay có thể điều chỉnh khi thêm gia vị.",
+          "placeId": "rs-vietnam-bun-bo-hue-ba-thuong-cf050c3b"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh Xèo Tôm Nhảy Cô Ba",
+          "text": "Bánh xèo vỏ mỏng kiểu Bình Định với nhân tôm. Quán gia đình có thêm món ăn nhẹ. Bánh dùng cùng nước mắm hoặc nước chấm lạc; nguồn cũng nhắc tới món nem.",
+          "placeId": "rs-da-nang-banh-xeo-tom-nhay-co-ba-79cf8499"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Ăn Thôi",
+          "text": "Món Việt trong ngôi nhà hai tầng gần chợ Hàn và sông Hàn. Mặt tiền xanh vàng và không gian gợi kiến trúc Pháp. Thực đơn gọn, trong đó bánh xèo có nhân thịt, tôm, mực và rau củ.",
+          "placeId": "rs-da-nang-an-thoi-5d090c93"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thìa Gỗ",
+          "text": "Phở Nam và bánh xèo miền Tây trong không gian nhiều cây. Quán có khu ngồi ngoài trời và thực đơn qua mã QR. Phở thập cẩm giúp thử nhiều phần thịt bò trong cùng một bát.",
+          "placeId": "rs-da-nang-thia-go-af5c2456"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh Xèo 76",
+          "text": "Bánh xèo, ram bắp và bún thịt nướng trong quán địa phương. Bếp than ở lối vào dùng nướng thịt. Ram bắp có nhân ngô, cuốn lớp vỏ mỏng rồi chiên.",
+          "placeId": "rs-da-nang-banh-xeo-76-94db2e60"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún Chả Cá 109",
+          "text": "Bún nước với chả cá chiên hoặc hấp tự làm. Nước dùng có vị chua nhẹ từ cà chua và dứa. Ngoài chả cá còn có lựa chọn cá ngừ, cá thu và các món từ cua.",
+          "placeId": "rs-da-nang-bun-cha-ca-109-00305134"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Quán Nhân",
+          "text": "Cháo vịt nấu cùng đậu xanh và hạt ý dĩ. Gạo được ninh trong nước vịt cho kết cấu mềm sánh. Quán còn phục vụ vịt luộc và gỏi vịt để ăn cùng.",
+          "placeId": "rs-da-nang-quan-nhan-5aa9e15c"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún Chả Cá Hờn",
+          "text": "Bún chả cá trong quán gia đình, có lựa chọn bát đặc biệt. Bát đặc biệt có thịt cua cùng chả cá chiên và luộc. Bạn cũng có thể chọn lát cá thu hoặc cá ngừ; nước dùng cà chua có thêm măng.",
+          "placeId": "rs-da-nang-bun-cha-ca-hon-a5d7050a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Ngọc Chi",
+          "text": "Món chay dùng rau địa phương, có hoành thánh và chả giò. Thực đơn phần lớn là món Việt, một số món dùng đạm thực vật và gia vị lên men. Canh chua rau củ là một lựa chọn khởi đầu.",
+          "placeId": "rs-da-nang-ngoc-chi-74c5f00a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bà Đông",
+          "text": "Bún mắm nêm với heo quay và các lựa chọn đồ ăn kèm. Nước mắm nêm được pha cùng ớt, tỏi và trái cây. Phần thập cẩm có thêm chả và nem, bên cạnh lựa chọn nước mía.",
+          "placeId": "rs-da-nang-ba-dong-1024af3e"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Lê Gia Khang (Ngũ Hành Sơn)",
+          "text": "Bún bò kiểu Huế với lựa chọn xí quách. Ngoài phần xương lớn còn có bát thập cẩm với huyết, chả và gân; lưỡi bò là một lựa chọn được nguồn nhắc tới.",
+          "placeId": "rs-da-nang-le-gia-khang-ngu-hanh-so-7b7103b5"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Quê Xưa (Hòa Cường)",
+          "text": "Mì Quảng và bánh tráng cuốn thịt heo trong quán hai tầng. Bánh tráng cuốn dùng cùng thịt ba chỉ luộc, bánh phở và rau; nước chấm pha từ mắm cá cơm với trái cây.",
+          "placeId": "rs-da-nang-que-xua-hoa-cuong-a22715f5"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún Bò Bà Rơi (Hoà Cường)",
+          "text": "Bún bò theo cách nấu của gia đình gốc Huế tại Đà Nẵng. Nước dùng được ninh với thịt và xương bò. Các phần thêm có gân, sườn, nạm, lưỡi, giò heo và viên cua.",
+          "placeId": "rs-da-nang-bun-bo-ba-roi-hoa-cuong-23ed054b"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Nam Hìn (Phan Thanh Street)",
+          "text": "Bánh xèo và bánh tráng thịt heo trong không gian nhiều cây. Bánh xèo có thể chọn bò, mực hoặc tôm, ăn cùng rau và xốt lạc. Bánh tráng cuốn dùng thịt ba chỉ với mắm cá cơm lên men.",
+          "placeId": "rs-da-nang-nam-hin-phan-thanh-stree-6bcaf258"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Shamballa",
+          "text": "Món chay trong không gian lấy cảm hứng Tây Tạng, nhìn về sông Hàn. Vườn trên mái trồng các loại rau gia vị dùng trong bếp. Món nướng cuốn lá lốt là một lựa chọn được nguồn giới thiệu.",
+          "placeId": "rs-da-nang-shamballa-1e01813f"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bé Ni 2",
+          "text": "Quán cơm và hải sản với bể để chọn nguyên liệu tại chỗ. Nguồn ghi ban ngày thiên về cơm, buổi tối nhiều món hải sản; tôm nướng là một gợi ý.",
+          "placeId": "rs-da-nang-be-ni-2-70535b75"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cô Chủ Nhỏ",
+          "text": "Quán chuyên vịt với cháo, vịt luộc và gỏi. Cháo được nấu với gạo và đậu xanh trong nước vịt; gỏi phối hợp xoài xanh, chuối xanh, sung và rau thơm.",
+          "placeId": "rs-da-nang-co-chu-nho-488b52af"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bà Vui",
+          "text": "Bún gà và xôi gà là hai món chính của quán. Bún có nước dùng trong; xôi dùng cùng gà xé, hành ngâm và hành phi, phục vụ phần ăn khá đầy.",
+          "placeId": "rs-da-nang-ba-vui-da8da6f4"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mỳ Quảng Sứa Hồng Vân",
+          "text": "Mì Quảng với nước tôm và lựa chọn thêm sứa. Các phần thêm còn có trứng cút, thịt heo, tôm và thịt viên. Nước dùng có màu cam đỏ từ tôm.",
+          "placeId": "rs-da-nang-my-quang-sua-hong-van-1a82b754"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Indian Aroma",
+          "text": "Món Ấn từ nhiều vùng trong không gian nhà hàng ba tầng. Thực đơn do đầu bếp Ấn chuẩn bị; papadam với xốt bạc hà là một món khởi đầu được nguồn giới thiệu.",
+          "placeId": "rs-da-nang-indian-aroma-dfbb785e"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Phú Hồng",
+          "text": "Bún thịt nướng và các phần thịt để cuốn rau, bánh tráng. Bạn có thể chọn thịt heo, thịt xay nướng que, ba chỉ hoặc bò theo thực đơn.",
+          "placeId": "rs-da-nang-phu-hong-89ad8a21"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh Canh Yến (Hải Châu)",
+          "text": "Bánh canh sợi dai trong nước dùng cá lóc và thịt heo. Phần thêm có chả cá, trứng cút hoặc chả cua; có thể dùng cùng quẩy để thêm độ giòn.",
+          "placeId": "rs-da-nang-banh-canh-yen-hai-chau-334ca9b3"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún Riêu Cua 39",
+          "text": "Quán buổi sáng chuyên bún riêu cua dưới tán cây. Bát đặc biệt có cua và các loại chả cá; có thêm chả gói lá chuối.",
+          "placeId": "rs-da-nang-bun-rieu-cua-39-9912db02"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mỳ Quảng Cô Sáu",
+          "text": "Mì Quảng dùng nước nghệ với lựa chọn gà, cá hoặc tôm. Quán bên sông Hàn còn phục vụ bánh tráng cuốn thịt heo cùng rau.",
+          "placeId": "rs-da-nang-my-quang-co-sau-ca361117"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mì Quảng 1A",
+          "text": "Mì Quảng trong quán bình dân, có lựa chọn thịt heo tôm hoặc gà. Nước dùng có nghệ, ăn cùng lạc, giá và rau; phần đặc biệt gom nhiều topping.",
+          "placeId": "rs-da-nang-mi-quang-1a-bf34b693"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Olivia's Prime",
+          "text": "Bít tết nướng than với nhiều lựa chọn bò nhập khẩu. Thực đơn có Wagyu Nhật, các loại bò Úc và Mỹ; cheesecake kiểu New York là món ngọt được nguồn nhắc tới.",
+          "placeId": "rs-da-nang-olivia-s-prime-c6e31bb7"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bà Diệu (Tran Tong Street)",
+          "text": "Bún bò có nhiều phần thịt như bắp, lưỡi và gân. Bạn có thể chọn giò heo, thịt viên hoặc bát thập cẩm để thử cả bò lẫn heo.",
+          "placeId": "rs-da-nang-ba-dieu-tran-tong-street-4abfc79c"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Nu Đồ Kitchen",
+          "text": "Bốn lựa chọn mì Quảng có nước dùng riêng theo nguyên liệu chính. Nguồn giới thiệu mì cá lóc có hương nghệ, phục vụ trong không gian hiên nhiều cây.",
+          "placeId": "rs-da-nang-nu-do-kitchen-5554f72d"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "The Temptation",
+          "text": "Món Âu đương đại trong biệt thự có sân. Bếp có món ngọt trình bày như tổ trứng, với vỏ đường trong khung tre theo hồ sơ nguồn.",
+          "placeId": "rs-da-nang-the-temptation-f9feb092"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Dì Hoa (Hòa Cường)",
+          "text": "Các món bánh tráng khô hoặc ướt với nhiều topping. Bánh tráng trứng có trứng cút, pâté, chà bông và hành, cùng xoài mắm để ăn nhẹ.",
+          "placeId": "rs-da-nang-di-hoa-hoa-cuong-7da45894"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "My Hanh Seafood",
+          "text": "Nhà hàng hải sản sát biển có sân nhìn ra mặt nước. Khách chọn nguyên liệu tại bể; nguồn giới thiệu bề bề chế biến với tỏi chiên và cơm giòn.",
+          "placeId": "rs-da-nang-my-hanh-seafood-4bf2fa0c"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún Chả Cá Bà Hoa",
+          "text": "Bún chả cá trong nước dùng cà chua và bí đỏ. Bạn có thể chọn chỉ chả cá hoặc thêm miếng cá thu, cá ngừ.",
+          "placeId": "rs-da-nang-bun-cha-ca-ba-hoa-4d95bbda"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bé Mặn",
+          "text": "Quán hải sản ở khu Mỹ Khê với nhiều bể nguyên liệu. Nguồn giới thiệu mực hấp gừng hành, bên cạnh các lựa chọn hấp, xào và chiên.",
+          "placeId": "rs-da-nang-be-man-4a78d873"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "MỘC Quán Seafood",
+          "text": "Hải sản trong không gian mộc có khu ngồi ngoài trời. Khách chọn nguyên liệu tại bể; tôm hùm xốt bơ tỏi là món nguồn giới thiệu.",
+          "placeId": "rs-da-nang-moc-quan-seafood-52769b01"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bếp Cuốn",
+          "text": "Món Việt từ Bắc tới Nam trong không gian có cây, đèn lồng và tre. Có bàn nhóm và các mẹt kết hợp phù hợp khách đi một mình.",
+          "placeId": "rs-da-nang-bep-cuon-7eb08e25"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Le Comptoir",
+          "text": "Bistro Pháp do đầu bếp từ Lyon điều hành, có món gọi riêng và thực đơn theo bộ. Nguồn giới thiệu tủy bò nướng và tartare Wagyu, cùng quầy deli.",
+          "placeId": "rs-da-nang-le-comptoir-125ad3c8"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Nén Danang",
+          "text": "Thực đơn Việt sáng tạo theo mùa trong không gian ánh sáng tập trung. Mỗi món được giới thiệu cùng thẻ về ý tưởng, nguyên liệu; có ghép rượu hoặc sake.",
+          "placeId": "rs-da-nang-nen-danang-b4c729cc"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bếp Hên",
+          "text": "Cơm nhà trong không gian có đồ vật gợi thập niên 1990. Thực đơn nhiều món để chia sẻ, trong đó có nhóm món mẹ chọn như tôm chiên tỏi và rau muống xào tỏi.",
+          "placeId": "rs-da-nang-bep-hen-ad950773"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Năm Đảnh",
+          "text": "Quán hải sản trong khu dân cư có nhiều bàn và bể nguyên liệu. Tôm hùm có các cách hấp, xốt phô mai hoặc rang tỏi ớt.",
+          "placeId": "rs-da-nang-nam-danh-b6dab1d0"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Madame Lân",
+          "text": "Món Việt trong khu nhà vàng có đèn lồng và các khoảng nước. Thực đơn rộng, trong đó có cuốn cá chiên và bò trộn rau càng cua.",
+          "placeId": "rs-da-nang-madame-lan-6ba5f9a6"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Luk Lak",
+          "text": "Món Việt đương đại trong phòng ăn nhiều cây bên sông Hàn. Nguồn giới thiệu bò nướng que với sả, rau thơm, dùng cuốn rau hoặc cùng xôi và sắn trong nồi đất.",
+          "placeId": "rs-da-nang-luk-lak-938f1a61"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm Gà Lan",
+          "text": "Cơm gà có thể chọn gà quay, luộc hoặc xé trộn. Phần gà xé có hành, rau mùi và sả, ăn với cơm, canh và đồ chua.",
+          "placeId": "rs-da-nang-com-ga-lan-88082b86"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Si Dining",
+          "text": "Món Ý với cá, hải sản theo ngày, có thực đơn bộ và món riêng. Quầy bar ở dưới, phòng ăn phía trên; tranh của nghệ sĩ địa phương được trưng bày.",
+          "placeId": "rs-da-nang-si-dining-8f348d2f"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "LA CRIQUE · Mercure Danang French Village Bana Hills",
+          "text": "LA CRIQUE trong Mercure Danang French Village Bana Hills. Hồ sơ nguồn giới thiệu có lựa chọn buffet; có phục vụ bữa sáng; bánh và món ăn nhẹ.",
+          "placeId": "rs-da-nang-la-crique-mercure-danang-9449de09"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "L'Étable · Mercure Danang French Village Bana Hills",
+          "text": "Nhà hàng mang cảm hứng Địa Trung Hải trong khu Mercure tại Bà Nà. Thực đơn bistro hiện đại dùng nguyên liệu theo mùa.",
+          "placeId": "rs-da-nang-l-etable-mercure-danang-b10fb5a3"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Maison du Roi · Mercure Danang French Village Bana Hills",
+          "text": "Maison du Roi trong Mercure Danang French Village Bana Hills. Hồ sơ nguồn giới thiệu ẩm thực pháp; món việt.",
+          "placeId": "rs-da-nang-maison-du-roi-mercure-da-20caad22"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "La Côte d'Azur · Mercure Danang French Village Bana Hills",
+          "text": "La Côte d'Azur trong Mercure Danang French Village Bana Hills. Hồ sơ nguồn giới thiệu có lựa chọn buffet; hương vị địa trung hải.",
+          "placeId": "rs-da-nang-la-cote-d-azur-mercure-d-6e00670a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "RESTAURANT EPICE · Pullman Danang Beach Resort",
+          "text": "RESTAURANT EPICE trong Pullman Danang Beach Resort. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; bếp mở; có khu ngồi ngoài trời.",
+          "placeId": "rs-da-nang-restaurant-epice-pullman-9d39dc55"
+        },
+        {
+          "icon": "glass-cocktail",
+          "title": "AZURE BEACH LOUNGE · Pullman Danang Beach Resort",
+          "text": "AZURE BEACH LOUNGE trong Pullman Danang Beach Resort. Hồ sơ nguồn giới thiệu không gian gần biển; cocktail.",
+          "placeId": "rs-da-nang-azure-beach-lounge-pullm-f5aa1eff"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "LA RIVE GAUCHE · Grand Mercure Danang",
+          "text": "LA RIVE GAUCHE trong Grand Mercure Danang. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; có phục vụ bữa sáng; thực đơn quốc tế.",
+          "placeId": "rs-da-nang-la-rive-gauche-grand-mer-2d5b148a"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "THE GOLDEN DRAGON · Grand Mercure Danang",
+          "text": "THE GOLDEN DRAGON trong Grand Mercure Danang. Hồ sơ nguồn giới thiệu ẩm thực quảng đông; ẩm thực hoa.",
+          "placeId": "rs-da-nang-the-golden-dragon-grand-790f4413"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "VERANDA VIETNAMESE · Grand Mercure Danang",
+          "text": "Nhà hàng món Việt trong Grand Mercure Đà Nẵng. Thực đơn giới thiệu các món từ nhiều vùng, từ Bắc đến Nam.",
+          "placeId": "rs-da-nang-veranda-vietnamese-grand-5f3b1c3f"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "THE SQUARE · Novotel Danang Premier Han River",
+          "text": "THE SQUARE trong Novotel Danang Premier Han River. Hồ sơ nguồn giới thiệu có lựa chọn buffet; có phục vụ bữa sáng; các món cá và hải sản; bếp mở.",
+          "placeId": "rs-da-nang-the-square-novotel-danan-1e8e48b3"
+        }
+      ]
     }
   ],
   "places": [
@@ -618,6 +1138,3179 @@
         }
       ],
       "wikipediaTitle": "Chợ Hàn"
+    },
+    {
+      "id": "exp-food-da-nang-mi-quang",
+      "name": "Mì Quảng",
+      "category": "am",
+      "area": "Mốc khu vực Đà Nẵng",
+      "hook": "Sợi mì, ít nước dùng, rau và bánh tráng tạo nên nhiều lớp vị.",
+      "summary": "Sợi mì, ít nước dùng, rau và bánh tráng tạo nên nhiều lớp vị. Phần nhân thay đổi tùy quán. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.0544,
+      "lon": 108.2022,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-mi-quang-1.jpg",
+          "author": "Jpatokal",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mi_Quang_1A_Danang.jpg"
+        }
+      ],
+      "wikipediaTitle": "Mì Quảng"
+    },
+    {
+      "id": "exp-food-da-nang-bun-cha-ca",
+      "name": "Bún chả cá",
+      "category": "am",
+      "area": "Mốc khu vực Đà Nẵng",
+      "hook": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển.",
+      "summary": "Bún, nước dùng và chả cá cho một bữa ăn ở phố biển. Hỏi về loại cá và thành phần nếu bạn có dị ứng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.0544,
+      "lon": 108.2022,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-bun-cha-ca-1.jpg",
+          "author": "Phương Huy ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_c%C3%A1,_th%C3%A1ng_8_n%C4%83m_2018.JPG"
+        }
+      ],
+      "wikipediaTitle": "Bún chả cá"
+    },
+    {
+      "id": "da-nang-bao-tang-cham",
+      "name": "Bảo tàng Điêu khắc Chăm Đà Nẵng",
+      "category": "van",
+      "area": "Đà Nẵng",
+      "hook": "Nhìn gần những chi tiết điêu khắc Chăm.",
+      "summary": "Những hiện vật điêu khắc Chăm giúp bạn nhìn kỹ hơn các chi tiết thường gặp ở tháp Chăm dọc miền Trung. Một điểm ghé phù hợp trước hoặc sau khi tìm hiểu các di tích khác.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 16.059894,
+      "lon": 108.222641,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Điêu khắc Chăm",
+        "Di sản miền Trung",
+        "Không gian bảo tàng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Hỏi về thuyết minh hoặc hướng dẫn trưng bày để hiểu thêm từng nhóm hiện vật.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/B%E1%BA%A3o%20t%C3%A0ng%20%C4%90i%C3%AAu%20kh%E1%BA%AFc%20Ch%C4%83m%20%C4%90%C3%A0%20N%E1%BA%B5ng",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-da-nang-bao-tang-cham-1.jpg",
+          "author": "Phó Nháy ( talk ) 04:57, 27 August 2011 (UTC)",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museum_of_Cham_Sculpture.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Điêu khắc Chăm Đà Nẵng"
+    },
+    {
+      "id": "venue-da-nang-haian-beach",
+      "name": "HAIAN Beach Hotel & Spa",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Lên ý tưởng nghỉ ở khu vực biển Mỹ Khê.",
+      "summary": "Lên ý tưởng nghỉ ở khu vực biển Mỹ Khê. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 16.053048,
+      "lon": 108.2475341,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 278 Võ Nguyên Giáp, Đà Nẵng",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/693058159"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "278 Võ Nguyên Giáp, Đà Nẵng",
+        "website": "https://haianbeachhotelspa.com/",
+        "sourceUrl": "https://haianbeachhotelspa.com/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-da-nang-43-factory",
+      "name": "XLIII Specialty Coffee · 43 Factory",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Tìm hiểu hạt và cách pha cà phê đặc sản ở Đà Nẵng.",
+      "summary": "Tìm hiểu hạt và cách pha cà phê đặc sản ở Đà Nẵng. Xem lựa chọn đồ uống và chỗ ngồi trước khi ghé.",
+      "lat": 16.0480775,
+      "lon": 108.2459757,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Nghỉ chân",
+        "Chọn đồ uống tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 422 Ngô Thì Sĩ, Đà Nẵng",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/1181332013"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "422 Ngô Thì Sĩ, Đà Nẵng",
+        "website": "https://43factory.coffee/",
+        "sourceUrl": "https://43factory.coffee/location/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-da-nang-ba-duong",
+      "name": "Bánh xèo Bà Dưỡng",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Tìm vào con hẻm để thử bánh xèo cuốn rau và nước chấm của quán.",
+      "summary": "Tìm vào con hẻm để thử bánh xèo cuốn rau và nước chấm của quán. Hỏi thành phần, khẩu phần và giá trước khi gọi món.",
+      "lat": 16.0588034,
+      "lon": 108.2160349,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Địa chỉ cụ thể",
+        "Chọn món tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 280/23 Hoàng Diệu, Đà Nẵng",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4541527689"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "280/23 Hoàng Diệu, Đà Nẵng",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/vn/en/da-nang-region/da-nang_2984390/restaurant/banh-xeo-ba-duong",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3873 168",
+        "serviceHours": "Hằng ngày 09:30–21:30",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "exp-food-da-nang-banh-trang-thit-heo",
+      "name": "Bánh tráng cuốn thịt heo",
+      "category": "am",
+      "area": "Mốc khu vực Đà Nẵng",
+      "hook": "Dành một bữa cuốn bánh tráng cùng rau và thịt, hỏi loại mắm trước khi chọn.",
+      "summary": "Dành một bữa cuốn bánh tráng cùng rau và thịt, hỏi loại mắm trước khi chọn. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 16.0544,
+      "lon": 108.2022,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Tìm hiểu thêm: https://vietnam.travel/things-to-do/foodie-guide-da-nang/"
+      ],
+      "photos": [
+        {
+          "file": "dish-da-nang-banh-trang-thit-heo-1.jpg",
+          "author": "Lê Huỳnh Bộ",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo.jpg"
+        },
+        {
+          "file": "dish-da-nang-banh-trang-thit-heo-2.jpg",
+          "author": "Lê Huỳnh Bộ",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo_(18521).jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "rs-da-nang-rang-dc2f3186",
+      "name": "Rang",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Ấn với cà ri, bánh naan và cơm biryani.",
+      "summary": "Món Ấn với cà ri, bánh naan và cơm biryani. Hai đầu bếp gốc Ấn kết hợp kinh nghiệm nấu ăn quốc tế trong thực đơn. Chicken tikka, dal tadka và các loại bánh là những gợi ý để bắt đầu.",
+      "lat": 16.0430524,
+      "lon": 108.24779,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chicken tikka",
+        "Dal tadka",
+        "Biryani"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn chicken tikka và dal tadka.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Chọn độ cay và gọi cơm hoặc bánh ăn cùng cà ri.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 866 141 217.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/rang"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "384 Vo Nguyen Giap Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/rang",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 866 141 217",
+        "serviceHours": "Hằng ngày 11:30–15:00, 17:30–22:30",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-la-maison-1888-c8c40cc6",
+      "name": "La Maison 1888",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Thực đơn Pháp theo bộ trong khu nghỉ dưỡng InterContinental Đà Nẵng.",
+      "summary": "Thực đơn Pháp theo bộ trong khu nghỉ dưỡng InterContinental Đà Nẵng. Nguồn giới thiệu các bộ năm hoặc tám món, dùng nguyên liệu Việt Nam, Pháp và Nhật Bản; có món gnocchi dùng với nấm truffle.",
+      "lat": 16.1218937,
+      "lon": 108.3066406,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Thực đơn theo bộ",
+        "Ẩm thực Pháp",
+        "Khu nghỉ dưỡng Sơn Trà"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn thực đơn theo bộ và ẩm thực pháp.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nguồn ghi tạm phục vụ tại Club Lounge; xác nhận đúng nơi đón và đặt bàn trước.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3938 888.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/la-maison-1888"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-c41460650b9db501e2.jpg",
+          "author": "LVa2013",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Private_Beach_of_InterContinental_Danang_Sun_Peninsula.jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "InterContinental Danang Sun Peninsula Resort, Son Tra Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/la-maison-1888",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3938 888",
+        "serviceHours": "Hằng ngày 18:30–21:00",
+        "priceNote": "Phân khúc Michelin: phân khúc cao; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-banh-beo-banh-dap-08b52894",
+      "name": "Bánh Bèo - Bánh đập",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Hai món bánh miền Trung, làm và phục vụ theo từng phần nhỏ.",
+      "summary": "Hai món bánh miền Trung, làm và phục vụ theo từng phần nhỏ. Bánh bèo có phần xốt thịt, mộc nhĩ, hành và lạc. Bánh đập kết hợp bánh tráng giòn với lớp bánh mềm, dùng cùng nước chấm lên men.",
+      "lat": 16.0598894,
+      "lon": 108.2194858,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh bèo",
+        "Bánh đập",
+        "Quán bánh địa phương"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh bèo và bánh đập.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nguồn ghi quán bắt đầu từ giữa chiều; đối chiếu giờ trong ngày trước khi ghé.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-beo-banh-%C4%91ap"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "251 Phan Chau Trinh Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-beo-banh-%C4%91ap",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "Hằng ngày 16:00–20:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-banh-xeo-tom-nhay-co-ba-79cf8499",
+      "name": "Bánh Xèo Tôm Nhảy Cô Ba",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bánh xèo vỏ mỏng kiểu Bình Định với nhân tôm.",
+      "summary": "Bánh xèo vỏ mỏng kiểu Bình Định với nhân tôm. Quán gia đình có thêm món ăn nhẹ. Bánh dùng cùng nước mắm hoặc nước chấm lạc; nguồn cũng nhắc tới món nem.",
+      "lat": 16.0545067,
+      "lon": 108.2197565,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh xèo tôm",
+        "Nước chấm lạc",
+        "Quán gia đình"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh xèo tôm và nước chấm lạc.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi số bánh trong một phần để chọn đủ cho nhóm.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 509 70 71.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-xeo-tom-nhay-co-ba"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "248 Trung Nu Vuong Street, Hoa Cuong Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-xeo-tom-nhay-co-ba",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 509 70 71",
+        "serviceHours": "Hằng ngày 09:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-an-thoi-5d090c93",
+      "name": "Ăn Thôi",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Việt trong ngôi nhà hai tầng gần chợ Hàn và sông Hàn.",
+      "summary": "Món Việt trong ngôi nhà hai tầng gần chợ Hàn và sông Hàn. Mặt tiền xanh vàng và không gian gợi kiến trúc Pháp. Thực đơn gọn, trong đó bánh xèo có nhân thịt, tôm, mực và rau củ.",
+      "lat": 16.0684464,
+      "lon": 108.2248426,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh xèo",
+        "Gần chợ Hàn",
+        "Nhà hai tầng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh xèo và gần chợ hàn.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Có thể ghép bữa ăn với hành trình đi bộ quanh chợ; kiểm tra giờ trước khi ghé.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 98 782 42 85.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/an-thoi"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "114 Bach Dang Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/an-thoi",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 98 782 42 85",
+        "serviceHours": "T2–T4 10:30–21:30; T5 10:30–20:00; T6–CN 10:30–21:30",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-thia-go-af5c2456",
+      "name": "Thìa Gỗ",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Phở Nam và bánh xèo miền Tây trong không gian nhiều cây.",
+      "summary": "Phở Nam và bánh xèo miền Tây trong không gian nhiều cây. Quán có khu ngồi ngoài trời và thực đơn qua mã QR. Phở thập cẩm giúp thử nhiều phần thịt bò trong cùng một bát.",
+      "lat": 16.052986,
+      "lon": 108.24158,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phở Nam",
+        "Bánh xèo miền Tây",
+        "Khu cây xanh"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phở nam và bánh xèo miền tây.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Xem lựa chọn phần thịt trên thực đơn trước khi chọn bát thập cẩm.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3689 005.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/thia-go%C2%A0"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "53 Phan Thuc Duyen Street, Ngu Hanh Son Ward, Da Nang, 50507, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/thia-go%C2%A0",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3689 005",
+        "serviceHours": "Hằng ngày 10:00–22:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-banh-xeo-76-94db2e60",
+      "name": "Bánh Xèo 76",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bánh xèo, ram bắp và bún thịt nướng trong quán địa phương.",
+      "summary": "Bánh xèo, ram bắp và bún thịt nướng trong quán địa phương. Bếp than ở lối vào dùng nướng thịt. Ram bắp có nhân ngô, cuốn lớp vỏ mỏng rồi chiên.",
+      "lat": 16.0424731,
+      "lon": 108.2399598,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh xèo",
+        "Ram bắp",
+        "Bún thịt nướng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh xèo và ram bắp.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi các phần bánh và ram để ghép một bữa vừa sức ăn.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 98 239 06 42.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-xeo-76"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "85A Le Van Huu Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-xeo-76",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 98 239 06 42",
+        "serviceHours": "T2–T7 10:00–21:00; CN Nghỉ",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bun-cha-ca-109-00305134",
+      "name": "Bún Chả Cá 109",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún nước với chả cá chiên hoặc hấp tự làm.",
+      "summary": "Bún nước với chả cá chiên hoặc hấp tự làm. Nước dùng có vị chua nhẹ từ cà chua và dứa. Ngoài chả cá còn có lựa chọn cá ngừ, cá thu và các món từ cua.",
+      "lat": 16.0745199,
+      "lon": 108.2207547,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chả cá chiên",
+        "Chả cá hấp",
+        "Nước dùng cà chua dứa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn chả cá chiên và chả cá hấp.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nói rõ loại cá và chả muốn thêm trước khi quán chuẩn bị bát.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 94 571 31 71.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-cha-ca-109"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "109 Nguyen Chi Thanh Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-cha-ca-109",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 94 571 31 71",
+        "serviceHours": "Hằng ngày 06:00–22:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-quan-nhan-5aa9e15c",
+      "name": "Quán Nhân",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Cháo vịt nấu cùng đậu xanh và hạt ý dĩ.",
+      "summary": "Cháo vịt nấu cùng đậu xanh và hạt ý dĩ. Gạo được ninh trong nước vịt cho kết cấu mềm sánh. Quán còn phục vụ vịt luộc và gỏi vịt để ăn cùng.",
+      "lat": 16.0464239,
+      "lon": 108.2455548,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cháo vịt",
+        "Vịt luộc",
+        "Gỏi vịt"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cháo vịt và vịt luộc.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nếu đi nhóm, hỏi phần vịt ăn kèm cháo để gọi vừa đủ.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 899 860 495.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/quan-nhan"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "83 Phan Tu Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/quan-nhan",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 899 860 495",
+        "serviceHours": "Hằng ngày 09:00–00:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bun-cha-ca-hon-a5d7050a",
+      "name": "Bún Chả Cá Hờn",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún chả cá trong quán gia đình, có lựa chọn bát đặc biệt.",
+      "summary": "Bún chả cá trong quán gia đình, có lựa chọn bát đặc biệt. Bát đặc biệt có thịt cua cùng chả cá chiên và luộc. Bạn cũng có thể chọn lát cá thu hoặc cá ngừ; nước dùng cà chua có thêm măng.",
+      "lat": 16.0741438,
+      "lon": 108.2212217,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chả cá",
+        "Thịt cua",
+        "Cá thu hoặc cá ngừ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn chả cá và thịt cua.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi thành phần bát đặc biệt và chọn phần cá theo sở thích.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3810 307.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-cha-ca-hon"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "113/03 Nguyen Chi Thanh Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-cha-ca-hon",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3810 307",
+        "serviceHours": "Hằng ngày 06:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-ngoc-chi-74c5f00a",
+      "name": "Ngọc Chi",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món chay dùng rau địa phương, có hoành thánh và chả giò.",
+      "summary": "Món chay dùng rau địa phương, có hoành thánh và chả giò. Thực đơn phần lớn là món Việt, một số món dùng đạm thực vật và gia vị lên men. Canh chua rau củ là một lựa chọn khởi đầu.",
+      "lat": 16.0620931,
+      "lon": 108.2174064,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực chay",
+        "Hoành thánh",
+        "Chả giò"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực chay và hoành thánh.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi món có dùng trứng, sữa hoặc gia vị cần tránh nếu ăn thuần chay.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 93 508 50 88.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ngoc-chi"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "202 Hoang Dieu Street, Hoa Cuong Ward, Da Nang, 50000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ngoc-chi",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 93 508 50 88",
+        "serviceHours": "Hằng ngày 09:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-ba-dong-1024af3e",
+      "name": "Bà Đông",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún mắm nêm với heo quay và các lựa chọn đồ ăn kèm.",
+      "summary": "Bún mắm nêm với heo quay và các lựa chọn đồ ăn kèm. Nước mắm nêm được pha cùng ớt, tỏi và trái cây. Phần thập cẩm có thêm chả và nem, bên cạnh lựa chọn nước mía.",
+      "lat": 16.0574415,
+      "lon": 108.2181012,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún mắm nêm",
+        "Heo quay",
+        "Nước mía"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún mắm nêm và heo quay.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nói rõ lượng mắm và phần thịt bạn muốn trong bát.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 573 42 37.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ba-%C4%91ong"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "145 Huynh Thuc Khang Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ba-%C4%91ong",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 573 42 37",
+        "serviceHours": "Hằng ngày 06:00–19:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-le-gia-khang-ngu-hanh-so-7b7103b5",
+      "name": "Lê Gia Khang (Ngũ Hành Sơn)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún bò kiểu Huế với lựa chọn xí quách.",
+      "summary": "Bún bò kiểu Huế với lựa chọn xí quách. Ngoài phần xương lớn còn có bát thập cẩm với huyết, chả và gân; lưỡi bò là một lựa chọn được nguồn nhắc tới.",
+      "lat": 16.0548911,
+      "lon": 108.2441419,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún bò",
+        "Xí quách",
+        "Bát thập cẩm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún bò và xí quách.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đến sớm nếu muốn gọi xí quách vì số phần có hạn.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 97 431 88 25.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/le-gia-khang-ngu-hanh-son"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "19 Le Quang Dao Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/le-gia-khang-ngu-hanh-son",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 97 431 88 25",
+        "serviceHours": "Hằng ngày 06:30–13:00, 16:30–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-que-xua-hoa-cuong-a22715f5",
+      "name": "Quê Xưa (Hòa Cường)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Mì Quảng và bánh tráng cuốn thịt heo trong quán hai tầng.",
+      "summary": "Mì Quảng và bánh tráng cuốn thịt heo trong quán hai tầng. Bánh tráng cuốn dùng cùng thịt ba chỉ luộc, bánh phở và rau; nước chấm pha từ mắm cá cơm với trái cây.",
+      "lat": 16.04708,
+      "lon": 108.2211049,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Mì Quảng",
+        "Bánh tráng thịt heo",
+        "Mắm nêm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn mì quảng và bánh tráng thịt heo.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Giờ đông khách có thể ngồi ghép bàn; hỏi trước nếu đi nhóm đông.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3660 677.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/que-xua"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "165-167 Nui Thanh Street, Hoa Cuong Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/que-xua",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3660 677",
+        "serviceHours": "Hằng ngày 06:00–22:30",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bun-bo-ba-roi-hoa-cuong-23ed054b",
+      "name": "Bún Bò Bà Rơi (Hoà Cường)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún bò theo cách nấu của gia đình gốc Huế tại Đà Nẵng.",
+      "summary": "Bún bò theo cách nấu của gia đình gốc Huế tại Đà Nẵng. Nước dùng được ninh với thịt và xương bò. Các phần thêm có gân, sườn, nạm, lưỡi, giò heo và viên cua.",
+      "lat": 16.0537594,
+      "lon": 108.2214295,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún bò Huế",
+        "Nhiều phần thịt",
+        "Bát đặc biệt"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún bò huế và nhiều phần thịt.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi thành phần bát đặc biệt nếu muốn thử nhiều topping.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 704 196 497.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-bo-ba-roi-hai-chau"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "5 Phan Thanh Tai Street, Hoa Cuong Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-bo-ba-roi-hai-chau",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 704 196 497",
+        "serviceHours": "Hằng ngày 06:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-nam-hin-phan-thanh-stree-6bcaf258",
+      "name": "Nam Hìn (Phan Thanh Street)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bánh xèo và bánh tráng thịt heo trong không gian nhiều cây.",
+      "summary": "Bánh xèo và bánh tráng thịt heo trong không gian nhiều cây. Bánh xèo có thể chọn bò, mực hoặc tôm, ăn cùng rau và xốt lạc. Bánh tráng cuốn dùng thịt ba chỉ với mắm cá cơm lên men.",
+      "lat": 16.064686,
+      "lon": 108.20793,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh xèo",
+        "Bánh tráng thịt heo",
+        "Xốt lạc"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh xèo và bánh tráng thịt heo.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Báo trước nếu cần tránh lạc hoặc mắm lên men.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 568 42 46.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nam-hien-phan-thanh-street"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "46 Phan Thanh Street, Thanh Khe Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nam-hien-phan-thanh-street",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 568 42 46",
+        "serviceHours": "Hằng ngày 09:30–22:15",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-shamballa-1e01813f",
+      "name": "Shamballa",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món chay trong không gian lấy cảm hứng Tây Tạng, nhìn về sông Hàn.",
+      "summary": "Món chay trong không gian lấy cảm hứng Tây Tạng, nhìn về sông Hàn. Vườn trên mái trồng các loại rau gia vị dùng trong bếp. Món nướng cuốn lá lốt là một lựa chọn được nguồn giới thiệu.",
+      "lat": 16.0759305,
+      "lon": 108.2289527,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực chay",
+        "Sân nhìn sông",
+        "Rau gia vị"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực chay và sân nhìn sông.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi thực đơn thuần chay và bàn sân nếu bạn muốn ngồi ngoài trời.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 775 648 668.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/shamballa"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "277 Tran Hung Dao Street, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/shamballa",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 775 648 668",
+        "serviceHours": "Hằng ngày 10:00–22:00",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-be-ni-2-70535b75",
+      "name": "Bé Ni 2",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Quán cơm và hải sản với bể để chọn nguyên liệu tại chỗ.",
+      "summary": "Quán cơm và hải sản với bể để chọn nguyên liệu tại chỗ. Nguồn ghi ban ngày thiên về cơm, buổi tối nhiều món hải sản; tôm nướng là một gợi ý.",
+      "lat": 16.066809,
+      "lon": 108.244791,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món cơm",
+        "Hải sản chọn tại bể",
+        "Tôm nướng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món cơm và hải sản chọn tại bể.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi giá theo cân, trọng lượng và cách chế biến trước khi chọn hải sản.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 773 515 685.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/be-ni-2"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "228 Vo Nguyen Giap Street, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/be-ni-2",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 773 515 685",
+        "serviceHours": "Hằng ngày 00:00–00:00",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-co-chu-nho-488b52af",
+      "name": "Cô Chủ Nhỏ",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Quán chuyên vịt với cháo, vịt luộc và gỏi.",
+      "summary": "Quán chuyên vịt với cháo, vịt luộc và gỏi. Cháo được nấu với gạo và đậu xanh trong nước vịt; gỏi phối hợp xoài xanh, chuối xanh, sung và rau thơm.",
+      "lat": 16.0462151,
+      "lon": 108.245465,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cháo vịt",
+        "Vịt luộc",
+        "Gỏi vịt"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cháo vịt và vịt luộc.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi khẩu phần vịt luộc đi cùng cháo để chọn vừa đủ.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 362 712 589.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/co-chu-nho"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "36 Phan Tu Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/co-chu-nho",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 362 712 589",
+        "serviceHours": "T2 10:00–03:00; T3–CN 10:00–23:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-ba-vui-da8da6f4",
+      "name": "Bà Vui",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún gà và xôi gà là hai món chính của quán.",
+      "summary": "Bún gà và xôi gà là hai món chính của quán. Bún có nước dùng trong; xôi dùng cùng gà xé, hành ngâm và hành phi, phục vụ phần ăn khá đầy.",
+      "lat": 16.0641542,
+      "lon": 108.2208754,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún gà",
+        "Xôi gà",
+        "Gà xé"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún gà và xôi gà.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Chọn một món chính trước rồi cân nhắc gọi thêm theo sức ăn.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3897 107.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ba-vui"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "55 Le Hong Phong Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ba-vui",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3897 107",
+        "serviceHours": "Hằng ngày 04:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-my-quang-sua-hong-van-1a82b754",
+      "name": "Mỳ Quảng Sứa Hồng Vân",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Mì Quảng với nước tôm và lựa chọn thêm sứa.",
+      "summary": "Mì Quảng với nước tôm và lựa chọn thêm sứa. Các phần thêm còn có trứng cút, thịt heo, tôm và thịt viên. Nước dùng có màu cam đỏ từ tôm.",
+      "lat": 16.064079,
+      "lon": 108.220627,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Mì Quảng",
+        "Sứa",
+        "Nước tôm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn mì quảng và sứa.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nguồn ghi phục vụ buổi sáng đến đầu giờ chiều; kiểm tra giờ trước khi ghé.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 788 492 977.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/my-quang-sua-hong-van"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "59 Le Hong Phong Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/my-quang-sua-hong-van",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 788 492 977",
+        "serviceHours": "Hằng ngày 06:00–20:30",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-indian-aroma-dfbb785e",
+      "name": "Indian Aroma",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Ấn từ nhiều vùng trong không gian nhà hàng ba tầng.",
+      "summary": "Món Ấn từ nhiều vùng trong không gian nhà hàng ba tầng. Thực đơn do đầu bếp Ấn chuẩn bị; papadam với xốt bạc hà là một món khởi đầu được nguồn giới thiệu.",
+      "lat": 16.0487165,
+      "lon": 108.2371295,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Ấn",
+        "Papadam",
+        "Xốt bạc hà"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực ấn và papadam.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Quán đã chuyển địa điểm theo nguồn; đối chiếu địa chỉ và chọn độ cay.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3839 888.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/indian-aroma-restaurant"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "69 Hoai Thanh Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/indian-aroma-restaurant",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3839 888",
+        "serviceHours": "T2–T3 11:30–23:30; T4 11:30–21:30; T5–CN 11:30–23:30",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-phu-hong-89ad8a21",
+      "name": "Phú Hồng",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún thịt nướng và các phần thịt để cuốn rau, bánh tráng.",
+      "summary": "Bún thịt nướng và các phần thịt để cuốn rau, bánh tráng. Bạn có thể chọn thịt heo, thịt xay nướng que, ba chỉ hoặc bò theo thực đơn.",
+      "lat": 16.0696386,
+      "lon": 108.2229549,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún thịt nướng",
+        "Thịt nướng que",
+        "Rau cuốn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún thịt nướng và thịt nướng que.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Chọn bún làm món chính hoặc hỏi phần thịt riêng nếu muốn tự cuốn.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 558 88 55.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/phu-hong"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "19 Yen Bai Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/phu-hong",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 558 88 55",
+        "serviceHours": "T2–T6 10:30–14:00, 16:00–21:30; T7 Nghỉ; CN 10:30–14:00, 16:00–21:30",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-banh-canh-yen-hai-chau-334ca9b3",
+      "name": "Bánh Canh Yến (Hải Châu)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bánh canh sợi dai trong nước dùng cá lóc và thịt heo.",
+      "summary": "Bánh canh sợi dai trong nước dùng cá lóc và thịt heo. Phần thêm có chả cá, trứng cút hoặc chả cua; có thể dùng cùng quẩy để thêm độ giòn.",
+      "lat": 16.0578177,
+      "lon": 108.2132186,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh canh",
+        "Cá lóc",
+        "Chả cua"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh canh và cá lóc.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Xác nhận đúng cơ sở Hải Châu và chọn topping trước khi gọi.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 364 700 711.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-canh-yen"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "253 Nguyen Hoang Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/banh-canh-yen",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 364 700 711",
+        "serviceHours": "Hằng ngày 06:00–22:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bun-rieu-cua-39-9912db02",
+      "name": "Bún Riêu Cua 39",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Quán buổi sáng chuyên bún riêu cua dưới tán cây.",
+      "summary": "Quán buổi sáng chuyên bún riêu cua dưới tán cây. Bát đặc biệt có cua và các loại chả cá; có thêm chả gói lá chuối.",
+      "lat": 16.0669234,
+      "lon": 108.2231894,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún riêu cua",
+        "Bát đặc biệt",
+        "Chả cá"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún riêu cua và bát đặc biệt.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Kiểm tra giờ buổi sáng và đến trước khi quán hết món.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3897 563.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-rieu-cua-39"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "39 Le Hong Phong Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-rieu-cua-39",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3897 563",
+        "serviceHours": "T2–T6 06:00–14:00; T7 06:00–11:00; CN 06:00–14:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-my-quang-co-sau-ca361117",
+      "name": "Mỳ Quảng Cô Sáu",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Mì Quảng dùng nước nghệ với lựa chọn gà, cá hoặc tôm.",
+      "summary": "Mì Quảng dùng nước nghệ với lựa chọn gà, cá hoặc tôm. Quán bên sông Hàn còn phục vụ bánh tráng cuốn thịt heo cùng rau.",
+      "lat": 16.0664166,
+      "lon": 108.2296495,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Mì Quảng",
+        "Bánh tráng thịt heo",
+        "Bên sông Hàn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn mì quảng và bánh tráng thịt heo.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi topping đang có và phần rau ăn kèm khi gọi.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 96 398 26 34.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/my-quang-co-sau"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "397 Tran Hung Dao Street, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/my-quang-co-sau",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 96 398 26 34",
+        "serviceHours": "T2 06:30–22:00; T3–T6 Nghỉ; T7–CN 06:30–22:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-mi-quang-1a-bf34b693",
+      "name": "Mì Quảng 1A",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Mì Quảng trong quán bình dân, có lựa chọn thịt heo tôm hoặc gà.",
+      "summary": "Mì Quảng trong quán bình dân, có lựa chọn thịt heo tôm hoặc gà. Nước dùng có nghệ, ăn cùng lạc, giá và rau; phần đặc biệt gom nhiều topping.",
+      "lat": 16.0722697,
+      "lon": 108.2191652,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Mì Quảng",
+        "Gà hoặc tôm thịt",
+        "Rau ăn kèm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn mì quảng và gà hoặc tôm thịt.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Địa chỉ ở Đà Nẵng; Hải Phòng trong địa chỉ là tên đường.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3827 936.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/mi-quang-1a"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-52612e6adef9576dc4.jpg",
+          "author": "Jpatokal",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=119843025"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "1A Hai Phong Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/mi-quang-1a",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3827 936",
+        "serviceHours": "Hằng ngày 06:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-olivia-s-prime-c6e31bb7",
+      "name": "Olivia's Prime",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bít tết nướng than với nhiều lựa chọn bò nhập khẩu.",
+      "summary": "Bít tết nướng than với nhiều lựa chọn bò nhập khẩu. Thực đơn có Wagyu Nhật, các loại bò Úc và Mỹ; cheesecake kiểu New York là món ngọt được nguồn nhắc tới.",
+      "lat": 16.0701482,
+      "lon": 108.2242387,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bít tết",
+        "Bò nhập khẩu",
+        "Cheesecake"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bít tết và bò nhập khẩu.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Xác nhận phần cắt, cấp thịt, trọng lượng và cách tính giá.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 816 33 52.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/olivia-s-prime"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Lot G1-G4, GF, Indochina Mall, 74 Bach Dang Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/olivia-s-prime",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 816 33 52",
+        "serviceHours": "Hằng ngày 11:00–23:00",
+        "priceNote": "Phân khúc Michelin: phân khúc cao; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-ba-dieu-tran-tong-street-4abfc79c",
+      "name": "Bà Diệu (Tran Tong Street)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún bò có nhiều phần thịt như bắp, lưỡi và gân.",
+      "summary": "Bún bò có nhiều phần thịt như bắp, lưỡi và gân. Bạn có thể chọn giò heo, thịt viên hoặc bát thập cẩm để thử cả bò lẫn heo.",
+      "lat": 16.0586231,
+      "lon": 108.2109151,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún bò",
+        "Gân và lưỡi",
+        "Bát thập cẩm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún bò và gân và lưỡi.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Kiểm tra đúng địa chỉ Trần Tống và lựa chọn topping.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3652 323.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ba-dieu-tran-tong-street"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "17 Tran Tong Street, Thanh Khe Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/ba-dieu-tran-tong-street",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3652 323",
+        "serviceHours": "Hằng ngày 13:00–20:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-nu-do-kitchen-5554f72d",
+      "name": "Nu Đồ Kitchen",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bốn lựa chọn mì Quảng có nước dùng riêng theo nguyên liệu chính.",
+      "summary": "Bốn lựa chọn mì Quảng có nước dùng riêng theo nguyên liệu chính. Nguồn giới thiệu mì cá lóc có hương nghệ, phục vụ trong không gian hiên nhiều cây.",
+      "lat": 16.041299,
+      "lon": 108.245252,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Mì Quảng",
+        "Cá lóc",
+        "Hiên cây xanh"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn mì quảng và cá lóc.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi từng loại nước dùng để chọn hợp khẩu vị.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 697 06 07.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nu-%C4%91o-kitchen"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "11/1 Luu Quang Thuan Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nu-%C4%91o-kitchen",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 697 06 07",
+        "serviceHours": "T2–T7 09:00–16:00; CN Nghỉ",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-the-temptation-f9feb092",
+      "name": "The Temptation",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Âu đương đại trong biệt thự có sân.",
+      "summary": "Món Âu đương đại trong biệt thự có sân. Bếp có món ngọt trình bày như tổ trứng, với vỏ đường trong khung tre theo hồ sơ nguồn.",
+      "lat": 16.0735611,
+      "lon": 108.2433229,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực đương đại",
+        "Biệt thự",
+        "Món ngọt sáng tạo"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực đương đại và biệt thự.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi thực đơn hiện tại và dành thời gian cho bữa nhiều món.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 817 952 552.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/the-temptation"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "125 Ho Nghinh Street, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/the-temptation",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 817 952 552",
+        "serviceHours": "T2 18:00–22:00; T3–CN 11:00–14:00, 18:00–22:00",
+        "priceNote": "Phân khúc Michelin: dịp đặc biệt; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-di-hoa-hoa-cuong-7da45894",
+      "name": "Dì Hoa (Hòa Cường)",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Các món bánh tráng khô hoặc ướt với nhiều topping.",
+      "summary": "Các món bánh tráng khô hoặc ướt với nhiều topping. Bánh tráng trứng có trứng cút, pâté, chà bông và hành, cùng xoài mắm để ăn nhẹ.",
+      "lat": 16.0527667,
+      "lon": 108.2200156,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bánh tráng trứng",
+        "Xoài mắm",
+        "Món ăn nhẹ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bánh tráng trứng và xoài mắm.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Xem thực đơn hình để phân biệt bánh khô và bánh ướt.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 530 48 27.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/di-hoa-hoa-cuong"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "62/2A Nui Thanh Street, Hoa Cuong Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/di-hoa-hoa-cuong",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 530 48 27",
+        "serviceHours": "T2–T7 14:00–21:30; CN Nghỉ",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-my-hanh-seafood-4bf2fa0c",
+      "name": "My Hanh Seafood",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Nhà hàng hải sản sát biển có sân nhìn ra mặt nước.",
+      "summary": "Nhà hàng hải sản sát biển có sân nhìn ra mặt nước. Khách chọn nguyên liệu tại bể; nguồn giới thiệu bề bề chế biến với tỏi chiên và cơm giòn.",
+      "lat": 16.06547,
+      "lon": 108.2459684,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hải sản chọn tại bể",
+        "Bề bề",
+        "Tầm nhìn biển"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hải sản chọn tại bể và bề bề.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Thống nhất trọng lượng, giá và cách chế biến trước khi bếp làm món.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 96 774 86 68.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/my-hanh-seafood"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "3-5 Vo Nguyen Giap Street, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/my-hanh-seafood",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 96 774 86 68",
+        "serviceHours": "Hằng ngày 09:00–23:00",
+        "priceNote": "Phân khúc Michelin: dịp đặc biệt; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bun-cha-ca-ba-hoa-4d95bbda",
+      "name": "Bún Chả Cá Bà Hoa",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún chả cá trong nước dùng cà chua và bí đỏ.",
+      "summary": "Bún chả cá trong nước dùng cà chua và bí đỏ. Bạn có thể chọn chỉ chả cá hoặc thêm miếng cá thu, cá ngừ.",
+      "lat": 16.06389,
+      "lon": 108.22159,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún chả cá",
+        "Nước dùng bí đỏ",
+        "Cá thu hoặc cá ngừ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún chả cá và nước dùng bí đỏ.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Thử nước dùng trước khi thêm mắm tôm hoặc đồ chua.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 588 65 35.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-cha-ca-ba-hoa"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "27 Le Hong Phong Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-cha-ca-ba-hoa",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 588 65 35",
+        "serviceHours": "Hằng ngày 06:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-be-man-4a78d873",
+      "name": "Bé Mặn",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Quán hải sản ở khu Mỹ Khê với nhiều bể nguyên liệu.",
+      "summary": "Quán hải sản ở khu Mỹ Khê với nhiều bể nguyên liệu. Nguồn giới thiệu mực hấp gừng hành, bên cạnh các lựa chọn hấp, xào và chiên.",
+      "lat": 16.0817651,
+      "lon": 108.2472366,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hải sản sống",
+        "Mực hấp",
+        "Khu Mỹ Khê"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hải sản sống và mực hấp.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi tổng giá cả nguyên liệu và công chế biến trước khi chọn.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 520 78 48.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/be-man"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Lot 9, Vo Nguyen Giap Street, Son Tra Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/be-man",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 520 78 48",
+        "serviceHours": "Hằng ngày 09:00–00:00",
+        "priceNote": "Phân khúc Michelin: dịp đặc biệt; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-moc-quan-seafood-52769b01",
+      "name": "MỘC Quán Seafood",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Hải sản trong không gian mộc có khu ngồi ngoài trời.",
+      "summary": "Hải sản trong không gian mộc có khu ngồi ngoài trời. Khách chọn nguyên liệu tại bể; tôm hùm xốt bơ tỏi là món nguồn giới thiệu.",
+      "lat": 16.0642436,
+      "lon": 108.2415529,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hải sản chọn tại bể",
+        "Tôm hùm bơ tỏi",
+        "Sân ngoài trời"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hải sản chọn tại bể và tôm hùm bơ tỏi.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đặt bàn và xác nhận trọng lượng, giá trước khi chế biến.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 566 50 58.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/moc"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "26 To Hien Thanh, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/moc",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 566 50 58",
+        "serviceHours": "Hằng ngày 10:30–22:30",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bep-cuon-7eb08e25",
+      "name": "Bếp Cuốn",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Việt từ Bắc tới Nam trong không gian có cây, đèn lồng và tre.",
+      "summary": "Món Việt từ Bắc tới Nam trong không gian có cây, đèn lồng và tre. Có bàn nhóm và các mẹt kết hợp phù hợp khách đi một mình.",
+      "lat": 16.0579365,
+      "lon": 108.2451728,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Mẹt món Việt",
+        "Rau cuốn",
+        "Bàn nhóm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn mẹt món việt và rau cuốn.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Xem số món trên mẹt và lượng ăn trước khi gọi thêm.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 702 689 989.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bep-cuon"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "31-33 Tran Bach Dang Street, An Hai Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bep-cuon",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 702 689 989",
+        "serviceHours": "Hằng ngày 10:30–21:00",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-le-comptoir-125ad3c8",
+      "name": "Le Comptoir",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bistro Pháp do đầu bếp từ Lyon điều hành, có món gọi riêng và thực đơn theo bộ.",
+      "summary": "Bistro Pháp do đầu bếp từ Lyon điều hành, có món gọi riêng và thực đơn theo bộ. Nguồn giới thiệu tủy bò nướng và tartare Wagyu, cùng quầy deli.",
+      "lat": 16.0435407,
+      "lon": 108.2455154,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bistro Pháp",
+        "Tủy bò nướng",
+        "Tartare Wagyu"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bistro pháp và tủy bò nướng.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi cách chế biến và món chín thay thế nếu bạn không dùng thịt sống.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 708 040 560.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/le-comptoir-1211839"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "16 Che Lan Vien Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/le-comptoir-1211839",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 708 040 560",
+        "serviceHours": "T2–T7 Nghỉ; CN 17:00–21:00",
+        "priceNote": "Phân khúc Michelin: dịp đặc biệt; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-nen-danang-b4c729cc",
+      "name": "Nén Danang",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Thực đơn Việt sáng tạo theo mùa trong không gian ánh sáng tập trung.",
+      "summary": "Thực đơn Việt sáng tạo theo mùa trong không gian ánh sáng tập trung. Mỗi món được giới thiệu cùng thẻ về ý tưởng, nguyên liệu; có ghép rượu hoặc sake.",
+      "lat": 16.03466,
+      "lon": 108.24062,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Thực đơn theo mùa",
+        "Nguyên liệu địa phương",
+        "Ghép sake"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn thực đơn theo mùa và nguyên liệu địa phương.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Xác nhận thực đơn và thời gian bắt đầu khi đặt bàn.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 847 148 866.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nen-danang"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "16 My Da Tay 2 Street, Ngu Hanh Son Ward, Da Nang, 50506, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nen-danang",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 847 148 866",
+        "serviceHours": "T2 10:30–14:00, 17:30–20:45; T3 17:30–20:45; T4 10:30–14:00, 17:30–20:45; T5 17:30–20:45; T6 10:30–14:00, 17:30–20:45; T7–CN 17:30–20:45",
+        "priceNote": "Phân khúc Michelin: phân khúc cao; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-bep-hen-ad950773",
+      "name": "Bếp Hên",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Cơm nhà trong không gian có đồ vật gợi thập niên 1990.",
+      "summary": "Cơm nhà trong không gian có đồ vật gợi thập niên 1990. Thực đơn nhiều món để chia sẻ, trong đó có nhóm món mẹ chọn như tôm chiên tỏi và rau muống xào tỏi.",
+      "lat": 16.0641288,
+      "lon": 108.2209519,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cơm nhà",
+        "Tôm chiên tỏi",
+        "Rau muống xào"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cơm nhà và tôm chiên tỏi.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Tham khảo nhóm món gợi ý của quán nếu cần ghép một mâm cơm.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 93 533 77 05.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bep-hen"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "47 Le Hong Phong Street, Hai Chau Ward, Da Nang, 840236, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bep-hen",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 93 533 77 05",
+        "serviceHours": "Hằng ngày 10:00–15:00, 17:00–21:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-nam-danh-b6dab1d0",
+      "name": "Năm Đảnh",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Quán hải sản trong khu dân cư có nhiều bàn và bể nguyên liệu.",
+      "summary": "Quán hải sản trong khu dân cư có nhiều bàn và bể nguyên liệu. Tôm hùm có các cách hấp, xốt phô mai hoặc rang tỏi ớt.",
+      "lat": 16.1021138,
+      "lon": 108.2528756,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Hải sản chọn tại bể",
+        "Tôm hùm",
+        "Quán trong khu dân cư"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn hải sản chọn tại bể và tôm hùm.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi dịch vụ xe đón từ đường Phan Vinh và xác nhận giá trước khi chế biến.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 762 654 677.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nam-%C4%91anh"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "139/59/38 Tran Quang Khai Street, Son Tra Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/nam-%C4%91anh",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 762 654 677",
+        "serviceHours": "Hằng ngày 10:00–22:30",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-madame-lan-6ba5f9a6",
+      "name": "Madame Lân",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Việt trong khu nhà vàng có đèn lồng và các khoảng nước.",
+      "summary": "Món Việt trong khu nhà vàng có đèn lồng và các khoảng nước. Thực đơn rộng, trong đó có cuốn cá chiên và bò trộn rau càng cua.",
+      "lat": 16.0812954,
+      "lon": 108.2232854,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cuốn cá",
+        "Bò rau càng cua",
+        "Khu trong và ngoài trời"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cuốn cá và bò rau càng cua.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi phần món để chia sẻ; xác nhận khu ngồi phù hợp thời tiết.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 90 569 75 55.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/madame-lan"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "4 Bach Dang Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/madame-lan",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 90 569 75 55",
+        "serviceHours": "Hằng ngày 06:30–21:30",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-luk-lak-938f1a61",
+      "name": "Luk Lak",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Việt đương đại trong phòng ăn nhiều cây bên sông Hàn.",
+      "summary": "Món Việt đương đại trong phòng ăn nhiều cây bên sông Hàn. Nguồn giới thiệu bò nướng que với sả, rau thơm, dùng cuốn rau hoặc cùng xôi và sắn trong nồi đất.",
+      "lat": 16.0788486,
+      "lon": 108.2236448,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bò nướng que",
+        "Xôi nồi đất",
+        "Bên sông Hàn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bò nướng que và xôi nồi đất.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Địa chỉ này ở Đà Nẵng, khác cơ sở cùng tên tại Hà Nội.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 818 122 828.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/luk-lak-1211910"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "28 Bach Dang Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/luk-lak-1211910",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 818 122 828",
+        "serviceHours": "Hằng ngày 07:00–14:30, 18:00–22:00",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-com-ga-lan-88082b86",
+      "name": "Cơm Gà Lan",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Cơm gà có thể chọn gà quay, luộc hoặc xé trộn.",
+      "summary": "Cơm gà có thể chọn gà quay, luộc hoặc xé trộn. Phần gà xé có hành, rau mùi và sả, ăn với cơm, canh và đồ chua.",
+      "lat": 16.0488832,
+      "lon": 108.2130368,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cơm gà",
+        "Gà xé",
+        "Canh ăn kèm"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cơm gà và gà xé.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Nguồn ghi thường đông; đi lệch giờ cao điểm nếu muốn ít chờ.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 93 543 46 36.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/com-ga-lan"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "520 Trung Nu Vuong Street, Hoa Cuong Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/com-ga-lan",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 93 543 46 36",
+        "serviceHours": "T2 00:00–20:30; T3–T7 09:00–20:30; CN 09:00–00:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-si-dining-8f348d2f",
+      "name": "Si Dining",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Món Ý với cá, hải sản theo ngày, có thực đơn bộ và món riêng.",
+      "summary": "Món Ý với cá, hải sản theo ngày, có thực đơn bộ và món riêng. Quầy bar ở dưới, phòng ăn phía trên; tranh của nghệ sĩ địa phương được trưng bày.",
+      "lat": 16.0302343,
+      "lon": 108.2380513,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Ý",
+        "Hải sản theo ngày",
+        "Thực đơn theo bộ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực ý và hải sản theo ngày.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Hỏi loại cá trong ngày và lựa chọn ghép đồ uống trước khi chọn bộ món.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 774 464 441.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/si-dining"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "1 Giang Chau 2 Street, Ngu Hanh Son Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/si-dining",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 774 464 441",
+        "serviceHours": "Hằng ngày 17:30–21:30",
+        "priceNote": "Phân khúc Michelin: chi tiêu vừa phải; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-mercure-danang-french-vi-ae25ff8f",
+      "name": "Mercure Danang French Village Bana Hills",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Mercure Danang French Village Bana Hills: có hạng suite tại DANANG.",
+      "summary": "Mercure Danang French Village Bana Hills: có hạng suite tại DANANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; không gian có tác phẩm nghệ thuật.",
+      "lat": 15.997454,
+      "lon": 107.988289,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Không gian có tác phẩm nghệ thuật",
+        "Bể bơi trong nhà"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842363799888.",
+        "Email liên hệ theo nguồn: h8488-re@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8488/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-13febb900df9da5049.jpg",
+          "author": "Raita Futo from Tokyo, Japan",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "An Son, Hoa Son Commune, Hoa Vang District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8488/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/8488/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363799888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-la-crique-mercure-danang-9449de09",
+      "name": "LA CRIQUE · Mercure Danang French Village Bana Hills",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "LA CRIQUE trong Mercure Danang French Village Bana Hills.",
+      "summary": "LA CRIQUE trong Mercure Danang French Village Bana Hills. Hồ sơ nguồn giới thiệu có lựa chọn buffet; có phục vụ bữa sáng; bánh và món ăn nhẹ.",
+      "lat": 15.997454,
+      "lon": 107.988289,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn buffet",
+        "Có phục vụ bữa sáng",
+        "Bánh và món ăn nhẹ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn buffet và có phục vụ bữa sáng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363799888.",
+        "Email liên hệ theo nguồn: h8488-re@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8488/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-13febb900df9da5049.jpg",
+          "author": "Raita Futo from Tokyo, Japan",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "An Son, Hoa Son Commune, Hoa Vang District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8488/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8488/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363799888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-l-etable-mercure-danang-b10fb5a3",
+      "name": "L'Étable · Mercure Danang French Village Bana Hills",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Nhà hàng mang cảm hứng Địa Trung Hải trong khu Mercure tại Bà Nà.",
+      "summary": "Nhà hàng mang cảm hứng Địa Trung Hải trong khu Mercure tại Bà Nà. Thực đơn bistro hiện đại dùng nguyên liệu theo mùa.",
+      "lat": 15.997454,
+      "lon": 107.988289,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Địa Trung Hải",
+        "Bistro",
+        "Khu Bà Nà"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn địa trung hải và bistro.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận điều kiện lên Bà Nà, lịch cáp treo và việc vào nhà hàng.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363799888.",
+        "Email liên hệ theo nguồn: h8488-re@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8488/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-13febb900df9da5049.jpg",
+          "author": "Raita Futo from Tokyo, Japan",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "An Son, Hoa Son Commune, Hoa Vang District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8488/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8488/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363799888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-maison-du-roi-mercure-da-20caad22",
+      "name": "Maison du Roi · Mercure Danang French Village Bana Hills",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Maison du Roi trong Mercure Danang French Village Bana Hills.",
+      "summary": "Maison du Roi trong Mercure Danang French Village Bana Hills. Hồ sơ nguồn giới thiệu ẩm thực pháp; món việt.",
+      "lat": 15.997454,
+      "lon": 107.988289,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Pháp",
+        "Món Việt"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực pháp và món việt.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363799888.",
+        "Email liên hệ theo nguồn: h8488-re@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8488/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-13febb900df9da5049.jpg",
+          "author": "Raita Futo from Tokyo, Japan",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "An Son, Hoa Son Commune, Hoa Vang District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8488/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8488/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363799888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-la-cote-d-azur-mercure-d-6e00670a",
+      "name": "La Côte d'Azur · Mercure Danang French Village Bana Hills",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "La Côte d'Azur trong Mercure Danang French Village Bana Hills.",
+      "summary": "La Côte d'Azur trong Mercure Danang French Village Bana Hills. Hồ sơ nguồn giới thiệu có lựa chọn buffet; hương vị địa trung hải.",
+      "lat": 15.997454,
+      "lon": 107.988289,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn buffet",
+        "Hương vị Địa Trung Hải"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn buffet và hương vị địa trung hải.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363799888.",
+        "Email liên hệ theo nguồn: h8488-re@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8488/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-13febb900df9da5049.jpg",
+          "author": "Raita Futo from Tokyo, Japan",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "An Son, Hoa Son Commune, Hoa Vang District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8488/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8488/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363799888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-pullman-danang-beach-res-57d88f85",
+      "name": "Pullman Danang Beach Resort",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Pullman Danang Beach Resort: có hạng suite tại DANANG.",
+      "summary": "Pullman Danang Beach Resort: có hạng suite tại DANANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống.",
+      "lat": 16.040022,
+      "lon": 108.249353,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842363958888.",
+        "Email liên hệ theo nguồn: H8838@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8838/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Nang"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-9b385fbf5387809f68.jpg",
+          "author": "Daderot",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02282.JPG"
+        },
+        {
+          "file": "venue-fill-6822eec110115f3c6a.jpg",
+          "author": "Daderot",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02270.JPG"
+        },
+        {
+          "file": "venue-fill-61d93dba2c87f0253a.jpg",
+          "author": "Blowing Puffer Fish",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/83128028@N00/27093077560"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "101 VO NGUYEN GIAP STREET, NGU HANH SON WARD, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8838/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/8838/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363958888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-restaurant-epice-pullman-9d39dc55",
+      "name": "RESTAURANT EPICE · Pullman Danang Beach Resort",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "RESTAURANT EPICE trong Pullman Danang Beach Resort.",
+      "summary": "RESTAURANT EPICE trong Pullman Danang Beach Resort. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; bếp mở; có khu ngồi ngoài trời.",
+      "lat": 16.040022,
+      "lon": 108.249353,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Bếp mở",
+        "Có khu ngồi ngoài trời"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và bếp mở.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363958888.",
+        "Email liên hệ theo nguồn: H8838@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8838/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-9b385fbf5387809f68.jpg",
+          "author": "Daderot",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02282.JPG",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "101 VO NGUYEN GIAP STREET, NGU HANH SON WARD, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8838/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8838/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363958888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-grand-mercure-danang-d40cae2d",
+      "name": "Grand Mercure Danang",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Grand Mercure Danang: có hạng suite tại Danang.",
+      "summary": "Grand Mercure Danang: có hạng suite tại Danang. Hồ sơ nguồn giới thiệu có hạng suite; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình; không gian ven sông.",
+      "lat": 16.048371,
+      "lon": 108.227005,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Không gian ven sông",
+        "Spa hoặc dịch vụ thư giãn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có nhà hàng hoặc không gian ăn uống.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842363797777.",
+        "Email liên hệ theo nguồn: h7821@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/7821/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Lot A1, Green Island, Hoa Cuong Ward, Danang, Vietnam",
+        "website": "https://all.accor.com/hotel/7821/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/7821/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363797777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-la-rive-gauche-grand-mer-2d5b148a",
+      "name": "LA RIVE GAUCHE · Grand Mercure Danang",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "LA RIVE GAUCHE trong Grand Mercure Danang.",
+      "summary": "LA RIVE GAUCHE trong Grand Mercure Danang. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; có phục vụ bữa sáng; thực đơn quốc tế.",
+      "lat": 16.048371,
+      "lon": 108.227005,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Có lựa chọn buffet",
+        "Có phục vụ bữa sáng",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và có lựa chọn buffet.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363797777.",
+        "Email liên hệ theo nguồn: h7821@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/7821/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Lot A1, Green Island, Hoa Cuong Ward, Danang, Vietnam",
+        "website": "https://all.accor.com/hotel/7821/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/7821/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363797777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-the-golden-dragon-grand-790f4413",
+      "name": "THE GOLDEN DRAGON · Grand Mercure Danang",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "THE GOLDEN DRAGON trong Grand Mercure Danang.",
+      "summary": "THE GOLDEN DRAGON trong Grand Mercure Danang. Hồ sơ nguồn giới thiệu ẩm thực quảng đông; ẩm thực hoa.",
+      "lat": 16.048371,
+      "lon": 108.227005,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Quảng Đông",
+        "Ẩm thực Hoa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực quảng đông và ẩm thực hoa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363797777.",
+        "Email liên hệ theo nguồn: h7821@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/7821/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Lot A1, Green Island, Hoa Cuong Ward, Danang, Vietnam",
+        "website": "https://all.accor.com/hotel/7821/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/7821/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363797777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-veranda-vietnamese-grand-5f3b1c3f",
+      "name": "VERANDA VIETNAMESE · Grand Mercure Danang",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Nhà hàng món Việt trong Grand Mercure Đà Nẵng.",
+      "summary": "Nhà hàng món Việt trong Grand Mercure Đà Nẵng. Thực đơn giới thiệu các món từ nhiều vùng, từ Bắc đến Nam.",
+      "lat": 16.048371,
+      "lon": 108.227005,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món Việt",
+        "Ẩm thực vùng miền",
+        "Grand Mercure"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn món việt và ẩm thực vùng miền.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi khẩu phần và thực đơn hiện tại nếu muốn dùng bữa nhiều món.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363797777.",
+        "Email liên hệ theo nguồn: h7821@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/7821/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Lot A1, Green Island, Hoa Cuong Ward, Danang, Vietnam",
+        "website": "https://all.accor.com/hotel/7821/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/7821/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363797777",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-novotel-danang-premier-h-73c54590",
+      "name": "Novotel Danang Premier Han River",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Novotel Danang Premier Han River: có hạng suite tại DANANG.",
+      "summary": "Novotel Danang Premier Han River: có hạng suite tại DANANG. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 16.077222,
+      "lon": 108.223333,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Không gian ven sông"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842363929999.",
+        "Email liên hệ theo nguồn: H8287@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8287/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [
+        {
+          "file": "completion-74f1ff29a549a581.jpg",
+          "author": "hotu101191",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/109638663@N05/15415333351"
+        },
+        {
+          "file": "completion-966c91e930e42cdd.jpg",
+          "author": "hotu101191",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/109638663@N05/15231975047"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "36 Bach Dang Street, Hai Chau District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8287/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/8287/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363929999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-the-square-novotel-danan-1e8e48b3",
+      "name": "THE SQUARE · Novotel Danang Premier Han River",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "THE SQUARE trong Novotel Danang Premier Han River.",
+      "summary": "THE SQUARE trong Novotel Danang Premier Han River. Hồ sơ nguồn giới thiệu có lựa chọn buffet; có phục vụ bữa sáng; các món cá và hải sản; bếp mở.",
+      "lat": 16.077222,
+      "lon": 108.223333,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn buffet",
+        "Có phục vụ bữa sáng",
+        "Các món cá và hải sản",
+        "Bếp mở"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn buffet và có phục vụ bữa sáng.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363929999.",
+        "Email liên hệ theo nguồn: H8287@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8287/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "completion-74f1ff29a549a581.jpg",
+          "author": "hotu101191",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/109638663@N05/15415333351",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "36 Bach Dang Street, Hai Chau District, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8287/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8287/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363929999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-intercontinental-danang-de91928d",
+      "name": "InterContinental Danang Sun Peninsula Resort",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Phòng nghỉ và villa trên sườn núi nhìn xuống vịnh tại Sơn Trà.",
+      "summary": "Kiến trúc lấy cảm hứng Việt Nam với nhiều hạng phòng, suite và villa hướng vịnh. Bể bơi riêng, xông hơi hay sân mái chỉ thuộc một số hạng cao cấp; khu nghỉ còn có spa, yoga và nhiều nhà hàng.",
+      "lat": 16.1211058,
+      "lon": 108.3063202,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Cảnh quan núi và vịnh",
+        "Nhiều hạng phòng và villa",
+        "Spa và yoga"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn cảnh quan núi và vịnh và nhiều hạng phòng và villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận phương tiện đi lại trong khu nghỉ và tiện ích riêng của đúng hạng phòng.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Số liên hệ theo hồ sơ nguồn: +84 511 3938888.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/da-nang/intercontinental-danang-sun-peninsula-resort-16382",
+        "Nguồn: https://www.openstreetmap.org/way/360113559"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-c41460650b9db501e2.jpg",
+          "author": "LVa2013",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Private_Beach_of_InterContinental_Danang_Sun_Peninsula.jpg"
+        },
+        {
+          "file": "venue-fill-42a4ed8cf1a73c8a1b.jpg",
+          "author": "Daderot",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Danang_Sun_Peninsula_Resort_-_Da_Nang,_Vietnam_-_DSC02351.JPG"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Bai Bac Bay, Son Tra District, Da Nang, Vietnam",
+        "website": "https://danang.intercontinental.com/",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/da-nang/intercontinental-danang-sun-peninsula-resort-16382",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 511 3938888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-hyatt-regency-danang-res-6a1a7f1b",
+      "name": "Hyatt Regency Danang Resort and Spa",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Phòng nghỉ có ban công bên dải biển phía nam Đà Nẵng.",
+      "summary": "Các hạng phòng khác nhau về hướng biển, hướng bể bơi và quyền dùng khu club. Khu nghỉ có spa cùng nhà hàng Việt và quốc tế, phù hợp sắp xếp những ngày chủ yếu nghỉ ở biển.",
+      "lat": 16.0126126,
+      "lon": 108.2637436,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ban công",
+        "Không gian ven biển",
+        "Spa và nhà hàng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ban công và không gian ven biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Phân biệt phòng khách sạn, căn hộ và villa; đối chiếu quyền sử dụng club của hạng đặt.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 398 1234.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/da-nang/hyatt-regency-danang-resort-and-spa-6595",
+        "Nguồn: https://www.openstreetmap.org/way/164333086"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-aa271126d4f2df4c34.jpg",
+          "author": "Tungnguyen47",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyatt_Regency_Danang,_Beach_View,_March_2014.jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Truong Sa Street, Hoa Hai Ward, Ngu Hanh Son District, Da Nang, Vietnam",
+        "website": "https://www.hyatt.com/en-US/hotel/vietnam/hyatt-regency-danang-resort-and-spa/danhr",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/da-nang/hyatt-regency-danang-resort-and-spa-6595",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 398 1234",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-new-orient-hotel-da-nang-6de5c27d",
+      "name": "New Orient Hotel Da Nang",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Khách sạn gần khu cửa sông Hàn, có bể bơi và quầy bar trên mái.",
+      "summary": "Bể bơi trung tâm được bố trí như một khoảng sân bên trong khách sạn, có cây xanh và quầy phục vụ đồ uống. Một số hạng phòng thêm ban công riêng hoặc bồn tắm.",
+      "lat": 16.0825866,
+      "lon": 108.2214313,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Khu cửa sông Hàn",
+        "Bể bơi trung tâm",
+        "Quầy bar sân mái"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn khu cửa sông hàn và bể bơi trung tâm.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xem ảnh và diện tích của đúng hạng phòng; ban công và bồn tắm không có ở mọi hạng.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/da-nang/new-orient-hotel-da-nang-13580",
+        "Nguồn: https://www.openstreetmap.org/node/6518732280"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "20 Dong Da, Hai Chau District, Da Nang, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/da-nang/new-orient-hotel-da-nang-13580",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-vietnam-bun-bo-hue-ba-thuong-cf050c3b",
+      "name": "Bún Bò Huế Bà Thương",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "Bún bò kiểu Huế với nước dùng sả tại Đà Nẵng.",
+      "summary": "Bún bò kiểu Huế với nước dùng sả tại Đà Nẵng. Các lựa chọn trong bát gồm thịt bò thái, giò heo hoặc viên thịt, ăn cùng bún và rau. Vị cay có thể điều chỉnh khi thêm gia vị.",
+      "lat": 16.0669093,
+      "lon": 108.2229997,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bún bò Huế",
+        "Nước dùng sả",
+        "Giò heo"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bún bò huế và nước dùng sả.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Địa chỉ này ở Đà Nẵng; chọn phần thịt và lượng ớt theo khẩu vị.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +84 236 3829 240.",
+        "Nguồn: https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-bo-hue-ba-thuong"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "23 Tran Quoc Toan Street, Hai Chau Ward, Da Nang, 550000, Vietnam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/da-nang-region/da-nang_2984390/restaurant/bun-bo-hue-ba-thuong",
+        "checkedAt": "2026-11-07",
+        "phone": "+84 236 3829 240",
+        "serviceHours": "Hằng ngày 06:00–10:00",
+        "priceNote": "Phân khúc Michelin: bình dân; xem giá trên thực đơn."
+      }
+    },
+    {
+      "id": "rs-da-nang-azure-beach-lounge-pullm-f5aa1eff",
+      "name": "AZURE BEACH LOUNGE · Pullman Danang Beach Resort",
+      "category": "am",
+      "area": "Đà Nẵng",
+      "hook": "AZURE BEACH LOUNGE trong Pullman Danang Beach Resort.",
+      "summary": "AZURE BEACH LOUNGE trong Pullman Danang Beach Resort. Hồ sơ nguồn giới thiệu không gian gần biển; cocktail.",
+      "lat": 16.040022,
+      "lon": 108.249353,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy buổi nghỉ bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Không gian gần biển",
+        "Cocktail"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn không gian gần biển và cocktail.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842363958888.",
+        "Email liên hệ theo nguồn: H8838@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/8838/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-9b385fbf5387809f68.jpg",
+          "author": "Daderot",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02282.JPG",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "bar",
+        "address": "101 VO NGUYEN GIAP STREET, NGU HANH SON WARD, DANANG, Vietnam",
+        "website": "https://all.accor.com/hotel/8838/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/8838/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842363958888",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-sea-wonder-hotel-aa0838a4",
+      "name": "Sea Wonder Hotel",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Khách sạn trên đường Nguyễn Công Sáu, gần khu bãi biển theo cẩm nang.",
+      "summary": "Khách sạn trên đường Nguyễn Công Sáu, gần khu bãi biển theo cẩm nang. Khu xung quanh có các địa chỉ uống cà phê và ăn đường phố.",
+      "lat": 16.0728,
+      "lon": 108.2421,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Khu Nguyễn Công Sáu",
+        "Gần khu biển",
+        "Chỗ ở đô thị"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn khu nguyễn công sáu và gần khu biển.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu cửa vào, hạng phòng và khoảng đi bộ tới biển với cơ sở.",
+        "Ghim theo mục cẩm nang cập nhật 2024-03-26; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Nang"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "57 Nguyen Cong Sau, Phước Mỹ, Sơn Trà",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Da_Nang",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-dai-a-hotel-caaafcfe",
+      "name": "Dai A Hotel",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Khách sạn lâu năm trên đường Yên Bái, khu trung tâm Đà Nẵng.",
+      "summary": "Khách sạn lâu năm trên đường Yên Bái, khu trung tâm Đà Nẵng. Cẩm nang giới thiệu đây là lựa chọn lưu trú trong thành phố.",
+      "lat": 16.065957,
+      "lon": 108.2226034,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Đường Yên Bái",
+        "Khu Hải Châu",
+        "Chỗ ở đô thị"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn đường yên bái và khu hải châu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận hạng phòng và các dịch vụ hiện có trước khi đặt.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Nang",
+        "Nguồn: https://www.openstreetmap.org/node/7095281754"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "51, Yen Bai St, Hai Chau District",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Da_Nang",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-sanouva-danang-hotel-0350f74c",
+      "name": "Sanouva Danang Hotel",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Sanouva Danang Hotel: có hạng suite tại Đà Nẵng.",
+      "summary": "Sanouva Danang Hotel: có hạng suite tại Đà Nẵng. Hồ sơ nguồn giới thiệu có hạng suite; spa hoặc dịch vụ thư giãn; bể bơi.",
+      "lat": 16.0669848,
+      "lon": 108.220137,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Spa hoặc dịch vụ thư giãn",
+        "Bể bơi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và spa hoặc dịch vụ thư giãn.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +84236 382 3468.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Nang",
+        "Nguồn: https://www.openstreetmap.org/node/2985700733"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "68 Phan Chau Trinh",
+        "website": "https://www.sanouvadanang.com/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Da_Nang",
+        "checkedAt": "2026-11-07",
+        "phone": "+84236 382 3468",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-nang-sao-minh-business-hotel-4c81e5e7",
+      "name": "Sao Minh Business Hotel",
+      "category": "luu",
+      "area": "Đà Nẵng",
+      "hook": "Sao Minh Business Hotel: có nhà hàng hoặc không gian ăn uống tại Đà Nẵng.",
+      "summary": "Sao Minh Business Hotel: có nhà hàng hoặc không gian ăn uống tại Đà Nẵng. Hồ sơ nguồn giới thiệu có nhà hàng hoặc không gian ăn uống; spa hoặc dịch vụ thư giãn; điều hòa.",
+      "lat": 16.0782,
+      "lon": 108.218,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Spa hoặc dịch vụ thư giãn",
+        "Điều hòa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có nhà hàng hoặc không gian ăn uống và spa hoặc dịch vụ thư giãn.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Ghim theo mục cẩm nang cập nhật 2024-03-26; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Nang"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "137 Nguyen Du St",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Da_Nang",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
   ],
   "moments": [
@@ -638,6 +4331,70 @@
       "author": "JingKe888",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/96214671@N08/25977412085"
+    },
+    {
+      "id": "unsplash-PknaOrb1lVo",
+      "theme": "hanh-trinh",
+      "caption": "Đi giữa mây trên Cầu Vàng",
+      "url": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MXx8RGElMjBOYW5nJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4OTA0MzJ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Andreea Popa",
+      "authorUrl": "https://unsplash.com/@elfcodobelf?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/people-walking-on-bridge-during-daytime-PknaOrb1lVo?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-NhsaAc3SyXg",
+      "theme": "mon-an",
+      "caption": "Bữa sáng ở một quán ven đường Đà Nẵng",
+      "url": "https://images.unsplash.com/photo-1509072619873-adb3dc289b50?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8N3x8RGElMjBOYW5nJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4OTA0MzJ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "René DeAnda",
+      "authorUrl": "https://unsplash.com/@renedeanda?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/pair-of-brown-chopsticks-on-white-ceramic-bowl-NhsaAc3SyXg?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-Nb1vqDVwEwY",
+      "theme": "hanh-trinh",
+      "caption": "Dạo bên cầu Trần Thị Lý khi thành phố lên đèn",
+      "url": "https://images.unsplash.com/photo-1492161587417-3562f41c95fe?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTl8fERhJTIwTmFuZyUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODkwNDMyfDA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Tu Nguyen",
+      "authorUrl": "https://unsplash.com/@wickylancaster?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/turned-on-led-wire-bridge-Nb1vqDVwEwY?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "pexels-36123440",
+      "theme": "nghe",
+      "caption": "Đón bình minh cùng nhịp chài lưới Đà Nẵng",
+      "file": "pexels-36123440.jpg",
+      "author": "nhavantuonglai",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/peaceful-sunrise-at-da-n-ng-fishing-beach-36123440/"
+    },
+    {
+      "id": "food-research-da-nang",
+      "theme": "mon-an",
+      "caption": "Mì Quảng · một món muốn thử (ảnh minh họa)",
+      "file": "food-mi-quang-1.jpg",
+      "author": "Jpatokal",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mi_Quang_1A_Danang.jpg"
+    },
+    {
+      "id": "wave-pexels-37578543",
+      "theme": "mon-an",
+      "caption": "Giữ lại một bữa ăn đáng nhớ ở Đà Nẵng",
+      "file": "wave-pexels-37578543.jpg",
+      "author": "Nhà văn",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/candid-dining-experience-in-da-nang-vietnam-37578543/"
     }
-  ]
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1505018620898-92616e1849cc?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Nnx8RGElMjBOYW5nJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4OTA0MzJ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+    "author": "Anh Nguyen",
+    "authorUrl": "https://unsplash.com/@pwign?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/photo-of-high-rise-buildings-Zj0ICCMaWmk?utm_source=wander&utm_medium=referral"
+  }
 }

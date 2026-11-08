@@ -1,0 +1,584 @@
+{
+  "id": "phong-nha",
+  "name": "Phong Nha",
+  "region": "Bắc Trung Bộ",
+  "tagline": "Thuyền trên sông, rừng đá vôi và những hành trình vào hang",
+  "coverPlaceId": "phong-nha-dong-phong-nha",
+  "references": [
+    {
+      "id": "trung-tam-phong-nha",
+      "name": "Mốc tham chiếu Phong Nha",
+      "lat": 17.5937,
+      "lon": 106.2833,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bữa gà nướng ở Bồng Lai",
+          "text": "Một bữa gà nướng có thể là điểm dừng sau khi đạp xe vùng Bồng Lai. Xác nhận chỗ ăn và cách chế biến trước chuyến đi.",
+          "placeId": null
+        },
+        {
+          "icon": "coffee",
+          "title": "Cà phê sau một ngày khám phá",
+          "text": "Dành thời gian nhìn cà phê nhỏ qua phin, rồi chọn uống đen hoặc thêm sữa theo khẩu vị.",
+          "placeId": "exp-food-phong-nha-ca-phe-phin"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh bột lọc Quảng Bình",
+          "text": "Thử món bánh bột lọc trong hành trình Phong Nha; hỏi phần nhân và nước chấm tại hàng.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Trekking có một hành trình riêng",
+          "text": "Hang Én, Sơn Đoòng và các cung hang cần lịch đoàn, điều kiện tham gia và thời lượng riêng; không ghép như điểm ghé nhanh."
+        },
+        {
+          "icon": "route",
+          "title": "Đạp xe rồi ngồi lại",
+          "text": "Tìm hiểu cung Bồng Lai, bữa gà nướng và cà phê; chọn lịch theo thời tiết và tình trạng đường."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Phong Nha Farmstay",
+          "text": "Chọn điểm nghỉ ở vùng quê để khám phá Phong Nha và Bồng Lai.",
+          "placeId": "venue-phong-nha-farmstay"
+        }
+      ]
+    },
+    {
+      "id": "quan-xa-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán để ghé",
+      "summary": "Từ món muốn thử đến một điểm dừng cụ thể.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "The Pub With Cold Beer",
+          "text": "Tìm hiểu một điểm ăn uống trong chuyến khám phá thung lũng Bồng Lai.",
+          "placeId": "venue-phong-nha-pub-cold-beer"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cháo canh Quảng Bình",
+          "text": "Món sợi ăn cùng nước dùng; chọn nơi bán trước khi lên lịch.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh khoái Quảng Bình",
+          "text": "Bánh chiên có nhân, ăn kèm rau và nước chấm.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Khoai deo",
+          "text": "Khoai lang phơi dẻo, một lựa chọn quà địa phương.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh nậm Quảng Bình",
+          "text": "Bánh gói lá, hấp chín; hỏi phần nhân trước khi chọn.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Chay Lap",
+          "text": "Chay Lap: có lựa chọn villa tại Phong Nha. Hồ sơ nguồn giới thiệu có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-phong-nha-chay-lap-23f8cc99"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "phong-nha-dong-phong-nha",
+      "name": "Động Phong Nha",
+      "category": "canh",
+      "area": "Phong Nha",
+      "hook": "Theo chuyến thuyền và lối tham quan để cảm nhận không gian hang Phong Nha.",
+      "summary": "Động Phong Nha là một hang động trong Vườn quốc gia Phong Nha – Kẻ Bàng, Di sản thiên nhiên thế giới được UNESCO công nhận, thuộc xã Phong Nha, tỉnh Quảng Trị, cách phường Đồng Hới về phía Tây Bắc khoảng 45 km. Độ dài 7.729 mét và có 14 hang động, cũng như một con sông ngầm dài 13.969 mét. Trong khi các nhà khoa học đã khảo sát 44,5 km các lối đi, khách du lịch chỉ được phép khám phá 1500 mét đầu tiên.",
+      "lat": 17.581325,
+      "lon": 106.283125,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "phong-nha-dong-phong-nha-1.jpg",
+          "author": "Genghiskhanviet",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phongnhakebang2.jpg"
+        },
+        {
+          "file": "phong-nha-dong-phong-nha-3.jpg",
+          "author": "Edgardo W. Olivera from Montevideo, Uruguay",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cueva_Phong_Nha,_Vietnam_(38652790530).jpg"
+        }
+      ],
+      "wikipediaTitle": "Động Phong Nha"
+    },
+    {
+      "id": "phong-nha-dong-thien-duong",
+      "name": "Động Thiên Đường",
+      "category": "canh",
+      "area": "Phong Nha – Kẻ Bàng",
+      "hook": "Đi bộ giữa những khối thạch nhũ trên tuyến tham quan động Thiên Đường.",
+      "summary": "Động Thiên Đường là một động tại vườn quốc gia Phong Nha – Kẻ Bàng, thuộc xã Phong Nha, tỉnh Quảng Trị, cách Đồng Hới 60 km về phía tây bắc. Hang động này nằm trong phân khu rừng phục hồi sinh thái, thuộc vùng lõi núi đá vôi của vườn quốc gia Phong Nha – Kẻ Bàng. Động Thiên Đường được phát hiện năm 2005, Hiệp hội hang động Hoàng gia Anh khám phá từ năm 2005-2010 và năm 2010 họ công bố hang này có tổng chiều dài là 31,4 km, hang dài nhất châu Á.",
+      "lat": 17.519514,
+      "lon": 106.222972,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "phong-nha-dong-thien-duong-1.jpg",
+          "author": "Preparetavalise.com",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grotte_Thien_Duong.jpg"
+        },
+        {
+          "file": "phong-nha-dong-thien-duong-2.jpg",
+          "author": "Genghiskhan",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThienDuongCave1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Động Thiên Đường"
+    },
+    {
+      "id": "phong-nha-vuon-quoc-gia",
+      "name": "Trekking Phong Nha – Kẻ Bàng",
+      "category": "leo",
+      "area": "Phong Nha – Kẻ Bàng",
+      "hook": "Tìm một tuyến khám phá rừng phù hợp, qua đơn vị quản lý hoặc tổ chức được phép.",
+      "summary": "Vườn quốc gia Phong Nha – Kẻ Bàng là một vườn quốc gia của Việt Nam, nằm tại xã Bố Trạch và Minh Hóa, tỉnh Quảng Trị, cách phường Đồng Hới khoảng 50 km về phía Tây Bắc, cách thủ đô Hà Nội khoảng 500 km về phía nam. Vườn quốc gia này giáp khu bảo tồn thiên nhiên Hin Namno ở tỉnh Khammouan, Lào về phía tây; cách Biển Đông 42 km về phía đông kể từ đường biên giới của vườn quốc gia này.",
+      "lat": 17.53722222,
+      "lon": 106.15125,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Theo tuyến",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Tọa độ là mốc Vườn, không phải tuyến GPX hay đầu cung trekking.",
+        "Xác nhận tuyến được phép mở, guide và đăng ký với đơn vị quản lý.",
+        "Không tự vào hang hoặc rừng ngoài tuyến tham quan đã được xác nhận."
+      ],
+      "photos": [
+        {
+          "file": "phong-nha-vuon-quoc-gia-1.jpg",
+          "author": "Genghiskhanviet",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phongnhakebang6.jpg"
+        },
+        {
+          "file": "phong-nha-vuon-quoc-gia-2.jpg",
+          "author": "Genghiskhanviet",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phongnhatourism.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vườn quốc gia Phong Nha – Kẻ Bàng"
+    },
+    {
+      "id": "phong-nha-hang-en",
+      "name": "Hang Én",
+      "category": "leo",
+      "area": "Phong Nha",
+      "hook": "Tìm hiểu hành trình đi bộ và cắm trại trong hang.",
+      "summary": "Hang Én là một hang động nằm trong vườn quốc gia Phong Nha-Kẻ Bàng, thuộc tỉnh Quảng Trị. Hang Én có chiều dài hơn 1,6 km, gồm 3 cửa. Trần hang có nơi cao 100 m, nơi rộng nhất 170 m. Đây là hang động lớn thứ 3 thế giới sau hang Sơn Đoòng và hang Deer.",
+      "lat": 17.4345655,
+      "lon": 106.3003618,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Tọa độ là mốc địa danh, không phải đầu tuyến đi bộ.",
+        "Chốt tuyến, thời lượng, giấy phép và lịch đoàn với guide trước khi xếp ngày."
+      ],
+      "photos": [
+        {
+          "file": "phong-nha-hang-en-1.jpg",
+          "author": "Jérémie B.",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_%C3%89n_Cave_-_201505_-_JB.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hang Én"
+    },
+    {
+      "id": "phong-nha-son-doong",
+      "name": "Hang Sơn Đoòng",
+      "category": "leo",
+      "area": "Phong Nha",
+      "hook": "Tìm hiểu một hành trình thám hiểm cần tổ chức riêng.",
+      "summary": "Hang Sơn Đoòng là một hang động tự nhiên tại xã Thượng Trạch, tỉnh Quảng Trị, Việt Nam. Hang Sơn Đoòng được coi là hang động tự nhiên lớn nhất thế giới đã biết. Hang này nằm trong quần thể hang động Phong Nha-Kẻ Bàng. Hang Sơn Đoòng là một phần của hệ thống ngầm nối với hơn 150 động khác ở Việt Nam gần biên giới với Lào.",
+      "lat": 17.45694444,
+      "lon": 106.2875,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Tọa độ là mốc địa danh, không phải đầu tuyến đi bộ.",
+        "Chốt tuyến, thời lượng, giấy phép và lịch đoàn với guide trước khi xếp ngày."
+      ],
+      "photos": [
+        {
+          "file": "phong-nha-son-doong-1.jpg",
+          "author": "Trantuanviet",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_Beam_Through_the_Darkness_-_Son_Doong_Cave.jpg"
+        }
+      ],
+      "wikipediaTitle": "Hang Sơn Đoòng"
+    },
+    {
+      "id": "phong-nha-song-son",
+      "name": "Sông Son",
+      "category": "canh",
+      "area": "Phong Nha",
+      "hook": "Ngắm nhịp sống ven sông và những dãy núi.",
+      "summary": "Sông Son, còn gọi là Nguồn Son, Rào Son, sông Troóc hay sông Tróc, là một chi lưu của sông Gianh ở Bắc Trung Bộ. Sông chảy hoàn toàn trên địa phận tỉnh Quảng Bình. Một phần thượng nguồn của sông dài 7.729 mét chảy ngầm trong các núi đá vôi ở phía tây Quảng Bình. Sông Son chảy ra từ cửa động Phong Nha nằm trên đất làng Phong Nha thuộc thị trấn Phong Nha, huyện Bố Trạch.",
+      "lat": 17.716666666667,
+      "lon": 106.41666666667,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "phong-nha-song-son-1.jpg",
+          "author": "BacLuong at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Song_Son_@Quang_Binh.jpg"
+        }
+      ],
+      "wikipediaTitle": "Sông Son"
+    },
+    {
+      "id": "exp-food-phong-nha-ca-phe-phin",
+      "name": "Cà phê sau một ngày khám phá",
+      "category": "am",
+      "area": "Mốc khu vực Phong Nha",
+      "hook": "Dành thời gian nhìn cà phê nhỏ qua phin, rồi chọn uống đen hoặc thêm sữa theo khẩu vị..",
+      "summary": "Dành thời gian nhìn cà phê nhỏ qua phin, rồi chọn uống đen hoặc thêm sữa theo khẩu vị. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 17.5937,
+      "lon": 106.2833,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-ca-phe-phin-1.jpg",
+          "author": "Clarin",
+          "license": "CC BY 2.5",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cà phê sữa đá"
+    },
+    {
+      "id": "venue-phong-nha-farmstay",
+      "name": "Phong Nha Farmstay",
+      "category": "luu",
+      "area": "Phong Nha",
+      "hook": "Chọn điểm nghỉ ở vùng quê để khám phá Phong Nha và Bồng Lai.",
+      "summary": "Chọn điểm nghỉ ở vùng quê để khám phá Phong Nha và Bồng Lai. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 17.6242297,
+      "lon": 106.3851832,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: Cự Nẫm, Phong Nha",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/1914591738"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Cự Nẫm, Phong Nha",
+        "website": "https://phongnhafarmstay.com/",
+        "sourceUrl": "https://phongnhafarmstay.com/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-phong-nha-pub-cold-beer",
+      "name": "The Pub With Cold Beer",
+      "category": "am",
+      "area": "Phong Nha",
+      "hook": "Tìm hiểu một điểm ăn uống trong chuyến khám phá thung lũng Bồng Lai.",
+      "summary": "Tìm hiểu một điểm ăn uống trong chuyến khám phá thung lũng Bồng Lai. Hỏi thành phần, khẩu phần và giá trước khi gọi món.",
+      "lat": 17.5982371,
+      "lon": 106.3635278,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Địa chỉ cụ thể",
+        "Chọn món tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: Bồng Lai, Phong Nha",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4279348989"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Bồng Lai, Phong Nha",
+        "website": "https://phongnhafarmstay.com/bong-lai-valley/",
+        "sourceUrl": "https://phongnhafarmstay.com/bong-lai-valley/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-phong-nha-chay-lap-23f8cc99",
+      "name": "Chay Lap",
+      "category": "luu",
+      "area": "Phong Nha",
+      "hook": "Chay Lap: có lựa chọn villa tại Phong Nha.",
+      "summary": "Chay Lap: có lựa chọn villa tại Phong Nha. Hồ sơ nguồn giới thiệu có lựa chọn villa; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 17.6018382,
+      "lon": 106.2541396,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có lựa chọn villa",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Không gian gắn với ruộng bậc thang"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có lựa chọn villa và thiết kế hoặc vị trí gắn với nhà hát.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Phong%20Nha-Ke%20Bang&oldid=5414378",
+        "Nguồn: https://chaylapfarmstay.com/",
+        "Nguồn: https://www.openstreetmap.org/way/711587546"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Thon Chay",
+        "website": "https://chaylapfarmstay.com/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Phong%20Nha-Ke%20Bang&oldid=5414378",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-33092448",
+      "theme": "hanh-trinh",
+      "caption": "Theo chuyến thuyền trên sông ở Phong Nha",
+      "file": "pexels-33092448.jpg",
+      "author": "Huy Nguyen",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/scenic-boat-ride-near-phong-nha-cave-33092448/"
+    },
+    {
+      "id": "food-research-phong-nha",
+      "theme": "mon-an",
+      "caption": "Cà phê sau một ngày khám phá · một món muốn thử (ảnh minh họa)",
+      "file": "food-ca-phe-phin-1.jpg",
+      "author": "Clarin",
+      "license": "CC BY 2.5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"
+    }
+  ]
+}

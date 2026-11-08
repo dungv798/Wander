@@ -67,6 +67,166 @@
           "title": "Tiền mặt nhỏ"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cao lầu",
+          "text": "Sợi mì dai, thịt và rau trong một bát ít nước. Một món để dành riêng một bữa khi ghé Hội An.",
+          "placeId": "exp-food-hoi-an-cao-lau"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm gà Hội An",
+          "text": "Cơm, thịt gà và rau ăn kèm là một lựa chọn cho bữa trưa trong phố cổ.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh mì Hội An",
+          "text": "Vỏ bánh giòn, rau và phần nhân tùy lựa chọn. Ghé một hàng bánh mì trên cung đi bộ của bạn.",
+          "placeId": "exp-food-hoi-an-banh-mi"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh bao bánh vạc",
+          "text": "Tìm hiểu món bánh nhỏ gắn với ẩm thực Hội An.",
+          "placeId": "exp-food-hoi-an-banh-vac"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thử món trước, lên cung sau",
+          "text": "Dành một bữa cho cao lầu rồi đi bộ quanh phố cổ."
+        },
+        {
+          "icon": "route",
+          "title": "Một chuyến đi vì nghề thủ công",
+          "text": "Tìm hiểu Trà Quế hoặc làng gốm; nếu muốn tham gia hoạt động, xác nhận với nơi tổ chức trước."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Anantara Hoi An Resort",
+          "text": "Nghỉ bên sông Thu Bồn, cân nhắc những buổi đi bộ phố cổ.",
+          "placeId": "venue-hoi-an-anantara"
+        }
+      ]
+    },
+    {
+      "id": "quan-xa-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán để ghé",
+      "summary": "Từ món muốn thử đến một điểm dừng cụ thể.",
+      "items": [
+        {
+          "icon": "coffee",
+          "title": "Hoi An Roastery · Trần Phú",
+          "text": "Nghỉ chân với cà phê trong một buổi dạo phố cổ.",
+          "placeId": "venue-hoi-an-roastery"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh mì Phượng",
+          "text": "Chọn một bữa bánh mì trong hành trình đi bộ phố cổ.",
+          "placeId": "venue-hoi-an-banh-mi-phuong"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bông Hồng Trắng · White Rose",
+          "text": "Ghé một địa chỉ chuyên bánh bao bánh vạc, hỏi phần nhân và món ăn kèm.",
+          "placeId": "venue-hoi-an-white-rose"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Madam Khanh · Bánh mì Queen",
+          "text": "Chọn một ổ bánh mì theo khẩu vị trước khi tiếp tục dạo phố.",
+          "placeId": "venue-hoi-an-madam-khanh"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún thịt nướng Hội An",
+          "text": "Bún, thịt nướng và rau được trộn cùng nước sốt.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh xèo Hội An",
+          "text": "Bẻ bánh, cuốn cùng rau trong bánh tráng rồi chấm sốt.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mì Quảng Hội An",
+          "text": "Mì ăn với ít nước dùng, rau, lạc và bánh tráng.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Namia River Retreat - Wellness Inclusive Resort",
+          "text": "Các villa một hoặc hai phòng ngủ có sân hiên và hướng nhìn sông hoặc cây xanh. Hai nhà hàng khai thác nguyên liệu địa phương; khu chăm sóc sức khỏe có yoga, thiền, xông thảo dược và các liệu trình thư giãn.",
+          "placeId": "rs-hoi-an-namia-river-retreat-well-ce0d75f5"
+        },
+        {
+          "icon": "bed",
+          "title": "Quynh Long Villa",
+          "text": "Quynh Long Villa: bể bơi tại Hội An. Hồ sơ nguồn giới thiệu bể bơi; có khu ban công hoặc sân hiên; có thông tin trải nghiệm bằng xe đạp; wi-fi.",
+          "placeId": "rs-hoi-an-quynh-long-villa-13500d83"
+        },
+        {
+          "icon": "bed",
+          "title": "Victoria Hoi An Beach Resort and Spa",
+          "text": "Khu nghỉ ở bãi Cửa Đại, Hội An theo địa chỉ của hồ sơ. Đối chiếu các hạng phòng, gói dịch vụ và phương tiện vào phố cổ trên nguồn cơ sở.",
+          "placeId": "rs-hoi-an-victoria-hoi-an-beach-re-b8ce1d6f"
+        }
+      ]
     }
   ],
   "places": [
@@ -355,7 +515,20 @@
         "Ăn mặc lịch sự khi vào nơi thờ tự.",
         "Hỏi giờ mở cửa và giá vé tại chỗ trước khi đến."
       ],
-      "photos": [],
+      "photos": [
+        {
+          "file": "nha-co-phung-hung-wave-20261105-14.jpg",
+          "author": "Dennis G. Jarvis",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:DGJ_0967_-_Phung_Hung_Old_House_(3415825802).jpg"
+        },
+        {
+          "file": "nha-co-phung-hung-wave-20261105-1.jpg",
+          "author": "Khương Việt Hà",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phung_Hung_old_house_2_(inside).JPG"
+        }
+      ],
       "wikipediaTitle": null
     },
     {
@@ -954,9 +1127,581 @@
         }
       ],
       "wikipediaTitle": null
+    },
+    {
+      "id": "exp-food-hoi-an-cao-lau",
+      "name": "Cao lầu",
+      "category": "am",
+      "area": "Mốc khu vực Hội An",
+      "hook": "Sợi mì dai, thịt và rau trong một bát ít nước.",
+      "summary": "Sợi mì dai, thịt và rau trong một bát ít nước. Một món để dành riêng một bữa khi ghé Hội An. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 15.8801,
+      "lon": 108.338,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-cao-lau-3.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_l%E1%BA%A7u_H%E1%BB%99i_An_(2024).jpg"
+        },
+        {
+          "file": "food-cao-lau-2.jpg",
+          "author": "Dragfyre",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_Lau_Hoi_An.JPG"
+        }
+      ],
+      "wikipediaTitle": "Cao lầu"
+    },
+    {
+      "id": "exp-food-hoi-an-banh-mi",
+      "name": "Bánh mì Hội An",
+      "category": "am",
+      "area": "Mốc khu vực Hội An",
+      "hook": "Vỏ bánh giòn, rau và phần nhân tùy lựa chọn.",
+      "summary": "Vỏ bánh giòn, rau và phần nhân tùy lựa chọn. Ghé một hàng bánh mì trên cung đi bộ của bạn. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 15.8801,
+      "lon": 108.338,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-extra-3-1.jpg",
+          "author": "Stu Spivack",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_m%C3%AC.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh mì"
+    },
+    {
+      "id": "hoi-an-bao-tang-hoi-an",
+      "name": "Bảo tàng Hội An",
+      "category": "van",
+      "area": "Hội An",
+      "hook": "Tìm câu chuyện về thương cảng trước khi dạo phố.",
+      "summary": "Xem hiện vật và tư liệu về lịch sử Hội An để hiểu hơn khu phố bạn sắp đi bộ qua. Một điểm ghé cho người muốn tìm câu chuyện phía sau thương cảng.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 15.879,
+      "lon": 108.329,
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Lịch sử thương cảng",
+        "Hiện vật",
+        "Tư liệu phố cổ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Xác nhận thông tin vé và phần trưng bày đang mở trước khi ghép vào buổi dạo phố.",
+        "Tọa độ tham khảo; xác nhận lối vào hoặc điểm hẹn trước chuyến đi.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/B%E1%BA%A3o%20t%C3%A0ng%20H%E1%BB%99i%20An",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-hoi-an-bao-tang-hoi-an-1.jpg",
+          "author": "Mztourist",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoi_An_Museum_main_building.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bảo tàng Hội An"
+    },
+    {
+      "id": "venue-hoi-an-anantara",
+      "name": "Anantara Hoi An Resort",
+      "category": "luu",
+      "area": "Hội An",
+      "hook": "Nghỉ bên sông Thu Bồn, cân nhắc những buổi đi bộ phố cổ.",
+      "summary": "Nghỉ bên sông Thu Bồn, cân nhắc những buổi đi bộ phố cổ. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 15.8774464,
+      "lon": 108.3359654,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 1 Phạm Hồng Thái, Hội An",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/2271214793"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "1 Phạm Hồng Thái, Hội An",
+        "website": "https://www.anantara.com/en/hoi-an",
+        "sourceUrl": "https://www.anantara.com/en/hoi-an/contact",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-hoi-an-roastery",
+      "name": "Hoi An Roastery · Trần Phú",
+      "category": "am",
+      "area": "Hội An",
+      "hook": "Nghỉ chân với cà phê trong một buổi dạo phố cổ.",
+      "summary": "Nghỉ chân với cà phê trong một buổi dạo phố cổ. Xem lựa chọn đồ uống và chỗ ngồi trước khi ghé.",
+      "lat": 15.877009,
+      "lon": 108.3286946,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Nghỉ chân",
+        "Chọn đồ uống tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 135 Trần Phú, Hội An",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4597386290"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-c84a203a714b6a9a64.jpg",
+          "author": "Bex.Walton",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/7831824@N04/28504229895"
+        },
+        {
+          "file": "venue-fill-5edb1d8aa763c57807.jpg",
+          "author": "Bex.Walton",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://www.flickr.com/photos/7831824@N04/28504237765"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "135 Trần Phú, Hội An",
+        "website": "https://www.hoianroastery.com/",
+        "sourceUrl": "https://www.hoianroastery.com/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-hoi-an-banh-mi-phuong",
+      "name": "Bánh mì Phượng",
+      "category": "am",
+      "area": "Hội An",
+      "hook": "Chọn một bữa bánh mì trong hành trình đi bộ phố cổ.",
+      "summary": "Chọn một bữa bánh mì trong hành trình đi bộ phố cổ. Hỏi thành phần, khẩu phần và giá trước khi gọi món.",
+      "lat": 15.8784841,
+      "lon": 108.3320081,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Địa chỉ cụ thể",
+        "Chọn món tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 2B Phan Châu Trinh, Hội An",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4279536690"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-1a90089b8ca05cb5cb.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=151094332"
+        },
+        {
+          "file": "venue-fill-451bf0ca46dcfb24e7.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=151094328"
+        },
+        {
+          "file": "venue-fill-792b84ab71d1d905e4.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=151094329"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "2B Phan Châu Trinh, Hội An",
+        "website": "",
+        "sourceUrl": "https://hoianworldheritage.org.vn/en/news/Hoi-An-Travel/explore-the-food-of-hoi-an-751.hwh",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-hoi-an-white-rose",
+      "name": "Bông Hồng Trắng · White Rose",
+      "category": "am",
+      "area": "Hội An",
+      "hook": "Ghé một địa chỉ chuyên bánh bao bánh vạc, hỏi phần nhân và món ăn kèm.",
+      "summary": "Ghé một địa chỉ chuyên bánh bao bánh vạc, hỏi phần nhân và món ăn kèm. Hỏi thành phần, khẩu phần và giá trước khi gọi món.",
+      "lat": 15.8829593,
+      "lon": 108.3250054,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Địa chỉ cụ thể",
+        "Chọn món tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 533 Hai Bà Trưng, Hội An",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/6114429391"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "533 Hai Bà Trưng, Hội An",
+        "website": "",
+        "sourceUrl": "https://hoianworldheritage.org.vn/en/news/Hoi-An-Travel/explore-the-food-of-hoi-an-751.hwh",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-hoi-an-madam-khanh",
+      "name": "Madam Khanh · Bánh mì Queen",
+      "category": "am",
+      "area": "Hội An",
+      "hook": "Chọn một ổ bánh mì theo khẩu vị trước khi tiếp tục dạo phố.",
+      "summary": "Chọn một ổ bánh mì theo khẩu vị trước khi tiếp tục dạo phố. Hỏi thành phần, khẩu phần và giá trước khi gọi món.",
+      "lat": 15.8806334,
+      "lon": 108.3279134,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Địa chỉ cụ thể",
+        "Chọn món tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 115 Trần Cao Vân, Hội An",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/9938321717"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "115 Trần Cao Vân, Hội An",
+        "website": "",
+        "sourceUrl": "https://hoianworldheritage.org.vn/en/news/Hoi-An-Travel/explore-the-food-of-hoi-an-751.hwh",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "exp-food-hoi-an-banh-vac",
+      "name": "Bánh bao bánh vạc",
+      "category": "am",
+      "area": "Mốc khu vực Hội An",
+      "hook": "Tìm hiểu món bánh nhỏ gắn với ẩm thực Hội An.",
+      "summary": "Tìm hiểu món bánh nhỏ gắn với ẩm thực Hội An. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 15.8801,
+      "lon": 108.338,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Tìm hiểu thêm: https://vietnam.travel/things-to-do/explore-food-hoi-an/"
+      ],
+      "photos": [
+        {
+          "file": "dish-hoi-an-banh-vac-1.jpg",
+          "author": "Chainwit.",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_bao_b%C3%A1nh_v%E1%BA%A1c_-_hoi_an_(2024).jpg"
+        }
+      ],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "rs-hoi-an-namia-river-retreat-well-ce0d75f5",
+      "name": "Namia River Retreat - Wellness Inclusive Resort",
+      "category": "luu",
+      "area": "Hội An",
+      "hook": "Villa có bể bơi riêng trên cồn ven sông Thu Bồn.",
+      "summary": "Các villa một hoặc hai phòng ngủ có sân hiên và hướng nhìn sông hoặc cây xanh. Hai nhà hàng khai thác nguyên liệu địa phương; khu chăm sóc sức khỏe có yoga, thiền, xông thảo dược và các liệu trình thư giãn.",
+      "lat": 15.8741279,
+      "lon": 108.3520047,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Villa có bể bơi riêng",
+        "Không gian ven sông",
+        "Chăm sóc sức khỏe"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn villa có bể bơi riêng và không gian ven sông.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi những liệu trình nào thuộc gói lưu trú và điều kiện tham gia của trẻ em.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/hoi-an/namia-river-retreat-wellness-inclusive-resort-16969",
+        "Nguồn: https://www.openstreetmap.org/way/286443031"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "232 Trần Nhân Tông, Hội An, Việt Nam",
+        "website": "",
+        "sourceUrl": "https://guide.michelin.com/en/hotels-stays/hoi-an/namia-river-retreat-wellness-inclusive-resort-16969",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hoi-an-quynh-long-villa-13500d83",
+      "name": "Quynh Long Villa",
+      "category": "luu",
+      "area": "Hội An",
+      "hook": "Quynh Long Villa: bể bơi tại Hội An.",
+      "summary": "Quynh Long Villa: bể bơi tại Hội An. Hồ sơ nguồn giới thiệu bể bơi; có khu ban công hoặc sân hiên; có thông tin trải nghiệm bằng xe đạp; wi-fi.",
+      "lat": 15.8843,
+      "lon": 108.32963,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bể bơi",
+        "Có khu ban công hoặc sân hiên",
+        "Có thông tin trải nghiệm bằng xe đạp",
+        "Wi-Fi",
+        "Có phục vụ bữa sáng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bể bơi và có khu ban công hoặc sân hiên.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Ghim theo mục cẩm nang cập nhật 2024-02; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Hoi_An"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "28 Nguyễn Công Trứ, Phường Minh An",
+        "website": "",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Hoi_An",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-hoi-an-victoria-hoi-an-beach-re-b8ce1d6f",
+      "name": "Victoria Hoi An Beach Resort and Spa",
+      "category": "luu",
+      "area": "Hội An",
+      "hook": "Khu nghỉ ở bãi Cửa Đại, Hội An theo địa chỉ của hồ sơ.",
+      "summary": "Khu nghỉ ở bãi Cửa Đại, Hội An theo địa chỉ của hồ sơ. Đối chiếu các hạng phòng, gói dịch vụ và phương tiện vào phố cổ trên nguồn cơ sở.",
+      "lat": 15.8954375,
+      "lon": 108.3700257,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Bãi Cửa Đại",
+        "Khu nghỉ Hội An",
+        "Chọn hạng phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn bãi cửa đại và khu nghỉ hội an.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận tình trạng bãi biển và dịch vụ đã gồm trong gói đặt.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Hoi_An",
+        "Nguồn: https://www.victoriahotels.asia/en/travel/victoria-hoi-an-and-the-yoke-that-carries-the-soul-of-the-vietnamese-countryside/",
+        "Nguồn: https://www.openstreetmap.org/way/514065082"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-ed53db45b08e431bad.jpg",
+          "author": "yuichiro anazawa",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=57767803"
+        },
+        {
+          "file": "venue-fill-a53b3ff98169282b6b.jpg",
+          "author": "yuichiro anazawa",
+          "license": "CC BY 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=57767795"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Cua Dai Beach",
+        "website": "https://www.victoriahotels.asia/en/travel/victoria-hoi-an-and-the-yoke-that-carries-the-soul-of-the-vietnamese-countryside/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Hoi_An",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
   ],
   "moments": [
+    {
+      "id": "unsplash-tCM6cQjIQ7Q",
+      "theme": "cho",
+      "caption": "Chợ đêm dưới những chiếc đèn lồng",
+      "url": "https://images.unsplash.com/photo-1526139334526-f591a54b477c?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MXx8SG9pJTIwQW4lMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg0NTM5NXww&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Chris Slupski",
+      "authorUrl": "https://unsplash.com/@kslupski?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/people-walking-between-food-stalls-under-chinese-lanterns-tCM6cQjIQ7Q?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-AX_NYiTROVg",
+      "theme": "cho",
+      "caption": "Con phố nhộn nhịp ở phố cổ",
+      "url": "https://images.unsplash.com/photo-1701397955184-a65af828f90a?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTN8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "allPhoto Bangkok",
+      "authorUrl": "https://unsplash.com/@allphotobangkok?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-group-of-people-walking-down-a-street-next-to-tall-buildings-AX_NYiTROVg?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-0tLquA5qMrw",
+      "theme": "cho",
+      "caption": "Người bán rau ở chợ",
+      "url": "https://images.unsplash.com/photo-1603519203402-fa71f28d31ce?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8Mjl8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Jean Papillon",
+      "authorUrl": "https://unsplash.com/@jeanpapillon?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/people-sitting-on-brown-wooden-chair-surrounded-by-green-vegetables-during-daytime-0tLquA5qMrw?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-qDZ-Xd8dX6w",
+      "theme": "le-hoi",
+      "caption": "Đèn lồng giấy nhiều màu",
+      "url": "https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8NHx8SG9pJTIwQW4lMjBWaWV0bmFtfGVufDF8fHx8MTc5Mzg0NTM5NXww&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Steffen Bertram",
+      "authorUrl": "https://unsplash.com/@steffen_bertram?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/white-and-red-paper-lanterns-qDZ-Xd8dX6w?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-nj70WidlPjc",
+      "theme": "le-hoi",
+      "caption": "Đèn lồng treo rực rỡ",
+      "url": "https://images.unsplash.com/photo-1691927644490-e1a24b366a5e?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTB8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Hieu Do Quang",
+      "authorUrl": "https://unsplash.com/@magicaleye7?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-bunch-of-lanterns-that-are-hanging-from-a-tree-nj70WidlPjc?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-0EOE_YOS4mo",
+      "theme": "nghe",
+      "caption": "Thuyền thúng giữa rừng dừa",
+      "url": "https://images.unsplash.com/photo-1722987170598-556327f43fc7?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTJ8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Ronin",
+      "authorUrl": "https://unsplash.com/@roninkgd?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-group-of-people-riding-on-top-of-colorful-boats-0EOE_YOS4mo?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-HX3LO5lCqnY",
+      "theme": "nghe",
+      "caption": "Người đội nón lá bên sông",
+      "url": "https://images.unsplash.com/photo-1532904852347-f4e5e1d80751?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjB8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
+      "author": "Katherine McCormack",
+      "authorUrl": "https://unsplash.com/@kathymack?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/person-standing-and-wearing-conical-hat-HX3LO5lCqnY?utm_source=wander&utm_medium=referral"
+    },
     {
       "id": "cho-1",
       "theme": "cho",
@@ -1010,6 +1755,87 @@
       "author": "lightwrite",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/77442936@N00/14361477040"
+    },
+    {
+      "id": "unsplash-ixoDBfBZlBU",
+      "theme": "hanh-trinh",
+      "caption": "Rẽ vào con phố vàng dưới những chiếc đèn lồng",
+      "url": "https://images.unsplash.com/photo-1722706202511-8743d7b34794?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjN8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Jess Silaya",
+      "authorUrl": "https://unsplash.com/@jesssilaya?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-street-lined-with-yellow-buildings-and-lots-of-balloons-ixoDBfBZlBU?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-TguuCt67ark",
+      "theme": "hanh-trinh",
+      "caption": "Chậm lại bên dòng nước giữa phố cổ Hội An",
+      "url": "https://images.unsplash.com/photo-1635777957702-3d39b9bdfde0?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjR8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Phú Nguyễn Đạt",
+      "authorUrl": "https://unsplash.com/@phu99?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-river-running-through-a-city-next-to-a-yellow-building-TguuCt67ark?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "pexels-29374692",
+      "theme": "mon-an",
+      "caption": "Dừng bên quầy món ăn nhỏ giữa Hội An",
+      "file": "pexels-29374692.jpg",
+      "author": "Võ Văn Tiến",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/street-food-vendor-in-h-i-an-vietnam-29374692/"
+    },
+    {
+      "id": "pexels-2010701",
+      "theme": "mon-an",
+      "caption": "Đứng chờ món nướng giữa buổi chợ đêm Hội An",
+      "file": "pexels-2010701.jpg",
+      "author": "Pragyan Bezbaruah",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-watching-barbecues-getting-cooked-2010701/"
+    },
+    {
+      "id": "food-research-hoi-an",
+      "theme": "mon-an",
+      "caption": "Cao lầu · một món muốn thử (ảnh minh họa)",
+      "file": "food-cao-lau-3.jpg",
+      "author": "Chainwit.",
+      "license": "CC BY 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_l%E1%BA%A7u_H%E1%BB%99i_An_(2024).jpg"
+    },
+    {
+      "id": "wave-pexels-5681228",
+      "theme": "cho",
+      "caption": "Rẽ vào một góc chợ rau Hội An",
+      "file": "wave-pexels-5681228.jpg",
+      "author": "Jean Papillon",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-selling-vegetables-in-the-market-5681228/"
+    },
+    {
+      "id": "wave-pexels-35261229",
+      "theme": "nghe",
+      "caption": "Nhìn gần đôi tay làm đèn lồng ở Hội An",
+      "file": "wave-pexels-35261229.jpg",
+      "author": "Xuân Anh Nguyễn",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/colorful-lantern-market-scene-with-artisans-35261229/"
+    },
+    {
+      "id": "wave-pexels-34949987",
+      "theme": "nguoi",
+      "caption": "Một tà áo dài giữa sắc đèn Hội An",
+      "file": "wave-pexels-34949987.jpg",
+      "author": "Võ Văn Tiến",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/colorful-lantern-display-in-hoi-an-vietnam-34949987/"
     }
-  ]
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1558334466-afce6bf36c69?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTF8fEhvaSUyMEFuJTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4NDUzOTV8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+    "author": "Patrick Pellegrini",
+    "authorUrl": "https://unsplash.com/@pelles_ch?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/panoramic-photography-of-house-in-front-of-body-of-water-IBt5j35OIj4?utm_source=wander&utm_medium=referral"
+  }
 }

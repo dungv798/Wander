@@ -1,0 +1,1025 @@
+{
+  "id": "ninh-binh",
+  "name": "Ninh Bình",
+  "region": "Đồng bằng Bắc Bộ",
+  "tagline": "Ngồi thuyền giữa núi đá, rồi rẽ vào làng và những bậc đá",
+  "coverPlaceId": "ninh-binh-trang-an",
+  "references": [
+    {
+      "id": "trung-tam-ninh-binh",
+      "name": "Mốc tham chiếu Ninh Bình",
+      "lat": 20.2506,
+      "lon": 105.9745,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm cháy Ninh Bình",
+          "text": "Cơm cháy là một hương vị để tìm hiểu khi đến Ninh Bình. Hỏi quán về cách chế biến và phần nước ăn kèm.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Dê núi Ninh Bình",
+          "text": "Chọn một món dê tại quán phù hợp với khẩu vị của nhóm. Hỏi cách chế biến và giá theo phần trước khi gọi.",
+          "placeId": "exp-food-ninh-binh-de-nui"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh cuốn buổi sáng",
+          "text": "Một đĩa bánh vừa tráng để thử trong buổi dạo chợ. Cách ăn kèm và nước chấm có thể khác nhau giữa các vùng.",
+          "placeId": "exp-food-ninh-binh-banh-cuon"
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chậm lại trên mặt nước",
+          "text": "Cân nhắc Vân Long hoặc một tuyến thuyền phù hợp, chừa thời gian cho bến và chờ lượt."
+        },
+        {
+          "icon": "route",
+          "title": "Một buổi giữa màu xanh",
+          "text": "Đi bộ Cúc Phương theo tuyến được xác nhận hoặc chọn một cung xe đạp quanh khu lưu trú."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Tam Coc Garden",
+          "text": "Nghỉ giữa không gian đồng quê và những dãy núi đá.",
+          "placeId": "venue-ninh-binh-tam-coc-garden"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Dê xào lăn",
+          "text": "Thịt dê xào với gia vị, dùng trong bữa ăn chung.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Dê nướng Ninh Bình",
+          "text": "Thịt dê nướng; hỏi rõ phần thịt và khẩu phần trước khi chọn.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cua đồng rang lá lốt",
+          "text": "Cua đồng rang cùng lá lốt trong danh mục món địa phương.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Miến lươn Ninh Bình",
+          "text": "Miến với lươn; chọn phiên bản nước hoặc khô theo thực đơn.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bún mọc Kim Sơn",
+          "text": "Bún mọc gắn với vùng Kim Sơn, rộng hơn khu trung tâm Ninh Bình.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Pullman Ninh Binh",
+          "text": "Pullman Ninh Binh: có hạng suite tại Ninh Binh Province.. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-ninh-binh-pullman-ninh-binh-9067e273"
+        },
+        {
+          "icon": "bed",
+          "title": "Ngoc Anh Hotel",
+          "text": "Ngoc Anh Hotel: có hạng suite tại Ninh Bình. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-ninh-binh-ngoc-anh-hotel-b5ac66f1"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Food ConneXion · Pullman Ninh Binh",
+          "text": "Food ConneXion trong Pullman Ninh Binh. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; thực đơn quốc tế.",
+          "placeId": "rs-ninh-binh-food-connexion-pullman-n-f52a9028"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mad Cow Wine and Grill · Pullman Ninh Binh",
+          "text": "Mad Cow Wine and Grill trong Pullman Ninh Binh. Hồ sơ nguồn giới thiệu không gian nhìn ra thành phố; có thông tin về chương trình âm nhạc.",
+          "placeId": "rs-ninh-binh-mad-cow-wine-and-grill-p-5319d9a1"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Hoa Thuy Tien Restaurant · Pullman Ninh Binh",
+          "text": "Hoa Thuy Tien Restaurant trong Pullman Ninh Binh. Hồ sơ nguồn giới thiệu ẩm thực quảng đông; ẩm thực hoa; các món cá và hải sản.",
+          "placeId": "rs-ninh-binh-hoa-thuy-tien-restaurant-9449e099"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Chookie's Beer Garden",
+          "text": "Chookie's Beer Garden. Hồ sơ nguồn giới thiệu burger; các món gỏi hoặc salad; sinh tố; có thông tin về lựa chọn từ thực vật.",
+          "placeId": "rs-ninh-binh-chookie-s-beer-garden-21f3b18e"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thang Long Restaurant",
+          "text": "Thang Long Restaurant. Hồ sơ nguồn giới thiệu các món dê núi; cơm cháy; gà đồi; bít tết và món nướng.",
+          "placeId": "rs-ninh-binh-thang-long-restaurant-d8537246"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "ninh-binh-trang-an",
+      "name": "Tràng An",
+      "category": "canh",
+      "area": "Tràng An",
+      "hook": "Chọn một hành trình thuyền giữa mặt nước, hang và núi đá Tràng An.",
+      "summary": "Quần thể danh thắng Tràng An là một vùng du lịch tổng hợp gồm các di sản văn hóa và thiên nhiên được UNESCO công nhận ở Ninh Bình, Việt Nam. Trước đó, nhiều di tích danh thắng nơi đây đã được Chính phủ Việt Nam xếp hạng di tích quốc gia đặc biệt quan trọng như Khu du lịch sinh thái Tràng An, khu du lịch Tam Cốc - Bích Động, chùa Bái Đính, cố đô Hoa Lư... Liên kết giữa các khu vực này là hệ sinh thái rừng đặc dụng Hoa Lư trên núi đá vôi, đất ngập nước và hệ thống sông, hồ, đầm với diện tích 12.252 ha.",
+      "lat": 20.25666667,
+      "lon": 105.89638889,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "3–4 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-trang-an-1.jpg",
+          "author": "Richard Mortel from Riyadh, Saudi Arabia",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trang_An_Scenic_Landscape_Complex,_northern_Vietnam_(354)_(38540830421).jpg"
+        }
+      ],
+      "wikipediaTitle": "Quần thể danh thắng Tràng An"
+    },
+    {
+      "id": "ninh-binh-tam-coc",
+      "name": "Tam Cốc – Bích Động",
+      "category": "canh",
+      "area": "Tam Cốc",
+      "hook": "Đi thuyền qua những khoảng núi và đồng ruộng của Tam Cốc.",
+      "summary": "Tam Cốc – Bích Động là quần thể hang động ở phường Nam Hoa Lư, tỉnh Ninh Bình, Việt Nam. Tam Cốc – Bích Động còn được biết đến với những cái tên nổi tiếng như \"vịnh Hạ Long trên cạn\" hay \"Nam thiên đệ nhị động\" là một khu du lịch trọng điểm quốc gia Việt Nam. Toàn khu vực bao gồm hệ thống các hang động núi đá vôi và các di tích lịch sử liên quan đến hành cung Vũ Lâm của triều đại nhà Trần.",
+      "lat": 20.218515,
+      "lon": 105.914698,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Ánh sáng buổi sáng và chiều muộn đẹp, tránh nắng gắt buổi trưa.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-tam-coc-2.jpg",
+          "author": "Vinnie Cartabiano",
+          "license": "CC BY 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:-i---i-_(43520225892).jpg"
+        },
+        {
+          "file": "ninh-binh-tam-coc-3.jpg",
+          "author": "Ji-Elle",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bananiers_%C3%A0_Tam_Coc.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tam Cốc – Bích Động"
+    },
+    {
+      "id": "ninh-binh-hang-mua",
+      "name": "Hang Múa",
+      "category": "leo",
+      "area": "Hoa Lư",
+      "hook": "Chọn một buổi đi bộ lên những bậc đá để nhìn ra thung lũng.",
+      "summary": "Hang Múa là hang trong núi đá vôi ở vùng đất thôn Khê Đầu Hạ phường Hoa Lư, tỉnh Ninh Bình, Việt Nam. Hang Múa nằm ở trung tâm tỉnh Ninh Bình, và cách Hà Nội khoảng 100 km. Hang Múa là một điểm du lịch nằm trong vùng lõi Quần thể di sản thế giới Tràng An, tỉnh Ninh Bình. Hang Múa có đặc điểm địa chất, địa mạo đặc trưng của vùng núi đá vôi có tuổi đời hàng triệu năm.",
+      "lat": 20.228611,
+      "lon": 105.931667,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "1–2 giờ (tham khảo)",
+      "difficulty": "Vừa",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Tuyến bậc đá tham quan, không phải cung trekking rừng nhiều ngày.",
+        "Đi chậm trên bậc dốc; dừng nếu thời tiết không phù hợp."
+      ],
+      "photos": [
+        {
+          "file": "pexels-19578152.jpg",
+          "author": "Quý Nguyễn",
+          "license": "Giấy phép Pexels",
+          "sourceUrl": "https://www.pexels.com/photo/hang-mua-viewpoint-19578152/"
+        }
+      ],
+      "wikipediaTitle": "Hang Múa"
+    },
+    {
+      "id": "ninh-binh-cuc-phuong",
+      "name": "Vườn quốc gia Cúc Phương",
+      "category": "leo",
+      "area": "Cúc Phương",
+      "hook": "Tìm một tuyến đi bộ trong rừng phù hợp thời gian và thể lực tại Cúc Phương.",
+      "summary": "Vườn Quốc gia Cúc Phương là một khu bảo tồn thiên nhiên, khu rừng đặc dụng nằm trên địa phận ranh giới 3 khu vực Đông Bắc Bộ, đồng bằng sông Hồng và Bắc Trung Bộ thuộc 3 tỉnh: Ninh Bình, Phú Thọ và Thanh Hóa. Vườn quốc gia này có hệ động thực vật phong phú đa dạng mang đặc trưng rừng mưa nhiệt đới. Nhiều loài động thực vật có nguy cơ tuyệt chủng cao được phát hiện và bảo tồn tại đây. Đây cũng là vườn quốc gia đầu tiên tại Việt Nam.",
+      "lat": 20.31666667,
+      "lon": 105.60833333,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến của Vườn",
+      "difficulty": "Theo tuyến",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Mốc bản đồ là Vườn quốc gia, không thay cho sơ đồ tuyến.",
+        "Xác nhận tuyến mở, giờ và hướng dẫn với đơn vị quản lý trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-cuc-phuong-1.jpg",
+          "author": "Kien1980v ( thảo luận )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cuc_Phuong_01.jpg"
+        },
+        {
+          "file": "ninh-binh-cuc-phuong-2.jpg",
+          "author": "No machine-readable author provided. Ravikiran r assumed (based on copyright claims).",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cuc.Phuong.National.Park.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vườn quốc gia Cúc Phương"
+    },
+    {
+      "id": "ninh-binh-co-do-hoa-lu",
+      "name": "Cố đô Hoa Lư",
+      "category": "van",
+      "area": "Ninh Bình",
+      "hook": "Dành thời gian cho câu chuyện kinh đô xưa.",
+      "summary": "Cố đô Hoa Lư là kinh đô của Việt Nam trong giai đoạn 968-1010. Đây là kinh đô đầu tiên của nhà nước phong kiến Trung ương tập quyền ở Việt Nam và là quê hương của vị Anh hùng dân tộc Đinh Bộ Lĩnh. Kinh đô Hoa Lư tồn tại 42 năm, gắn với sự nghiệp của ba triều đại liên tiếp là nhà Đinh, nhà Tiền Lê và nhà Lý với các dấu ấn lịch sử: thống nhất đất nước, đánh Tống - dẹp Chiêm và phát tích quá trình định đô Hà Nội. Năm 1010 vua Lý Thái Tổ dời kinh đô từ Hoa Lư về Thăng Long, Hoa Lư trở thành Cố đô.",
+      "lat": 20.25527778,
+      "lon": 105.95416667,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ref-ninh-binh-co-do-hoa-lu-4.jpg",
+          "author": "Kien1980v at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Codohoalu-1.jpg"
+        }
+      ],
+      "wikipediaTitle": "Cố đô Hoa Lư"
+    },
+    {
+      "id": "ninh-binh-chua-bai-dinh",
+      "name": "Chùa Bái Đính",
+      "category": "van",
+      "area": "Ninh Bình",
+      "hook": "Đi bộ khám phá quần thể kiến trúc Phật giáo.",
+      "summary": "Chùa Bái Đính là một quần thể chùa lớn với nhiều kỷ lục châu Á và Việt Nam được xác lập như chùa có tượng Phật bằng đồng dát vàng lớn nhất châu Á, chùa có hành lang La Hán dài nhất châu Á, có tượng Di lặc bằng đồng lớn nhất Đông Nam Á... Đây là ngôi chùa lớn nhất và sở hữu nhiều kỷ lục nhất ở Việt Nam.",
+      "lat": 20.27694444,
+      "lon": 105.86277778,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-chua-bai-dinh-1.jpg",
+          "author": "Kien1980v ( thảo luận ) 01:40, ngày 3 tháng 9 năm 2017 (UTC)",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chua_Bai_Dinh_X8.JPG"
+        }
+      ],
+      "wikipediaTitle": "Chùa Bái Đính"
+    },
+    {
+      "id": "ninh-binh-chua-bich-dong",
+      "name": "Chùa Bích Động",
+      "category": "van",
+      "area": "Ninh Bình",
+      "hook": "Theo những bậc đá vào ngôi chùa bên núi.",
+      "summary": "Chùa Bích Động là một ngôi chùa cổ được xây dựng trên dãy núi đá vôi Tràng An thuộc phường Nam Hoa Lư, tỉnh Ninh Bình. Đây là một di tích lịch sử văn hóa thuộc Quần thể danh thắng Tràng An Tam Cốc - Bích Động đã được xếp hạng di tích quốc gia đặc biệt và UNESCO công nhận là di sản thế giới. Chùa Bích Động nguyên có tên \"Bạch Ngọc Thạch Sơn Đồng\"- nghĩa là ngôi chùa bằng đá đẹp và trong trắng như ngọc ở chốn thâm sơn cùng cốc, năm 1774 chúa Trịnh Sâm tới đây mới đổi tên là chùa Bích Động.",
+      "lat": 20.218056,
+      "lon": 105.914444,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-chua-bich-dong-1.jpg",
+          "author": "Jakub Hałun",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bich_Dong_Pagoda,_Ninh_Binh,_Vietnam,_20240203_1126_5619.jpg"
+        }
+      ],
+      "wikipediaTitle": "Chùa Bích Động"
+    },
+    {
+      "id": "ninh-binh-dong-am-tien",
+      "name": "Động Am Tiên",
+      "category": "canh",
+      "area": "Ninh Bình",
+      "hook": "Dạo quanh hồ và không gian núi đá.",
+      "summary": "Động Am Tiên là một danh lam thuộc quần thể di tích quốc gia đặc biệt cố đô Hoa Lư, phường Tây Hoa Lư, tỉnh Ninh Bình, Việt Nam. Động nằm cách cửa Đông - đền Vua Đinh Tiên Hoàng 20°17′08″B 105°54′12″Đ khoảng 400m theo hướng đi Tràng An. Vị trí của động Am Tiên khi xưa tiếp giáp với thành Đông của kinh đô Hoa Lư. Phần lớn khu vực động Am Tiên là một thung lũng ngập nước được bao bọc bởi những vách núi đá.",
+      "lat": 20.283056,
+      "lon": 105.911944,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-dong-am-tien-1.jpg",
+          "author": "Kien1980v at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chuaamtien5.JPG"
+        }
+      ],
+      "wikipediaTitle": "Động Am Tiên"
+    },
+    {
+      "id": "ninh-binh-nha-tho-phat-diem",
+      "name": "Nhà thờ chính tòa Phát Diệm",
+      "category": "van",
+      "area": "Ninh Bình",
+      "hook": "Khám phá kiến trúc đá và gỗ ở Kim Sơn.",
+      "summary": "Nhà thờ chính tòa Phát Diệm là một quần thể nhà thờ Công giáo rộng khoảng 22 ha, nằm tại xã Phát Diệm, tỉnh Ninh Bình, cách Hà Nội khoảng 120 km về hướng Nam. Quần thể các công trình nơi đây được xây dựng từ năm 1875, đến năm 1899 thì hoàn thành. Nhà thờ lớn tại vị trí trung tâm, hiện là nhà thờ chính tòa của Giáo phận Phát Diệm ở miền Bắc Việt Nam, được hoàn thành năm 1891.",
+      "lat": 20.09277778,
+      "lon": 106.07944444,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "ninh-binh-nha-tho-phat-diem-1.jpg",
+          "author": "Kien1980v at Vietnamese Wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phatdiemk-77.jpg"
+        }
+      ],
+      "wikipediaTitle": "Nhà thờ chính tòa Phát Diệm"
+    },
+    {
+      "id": "exp-food-ninh-binh-de-nui",
+      "name": "Dê núi Ninh Bình",
+      "category": "am",
+      "area": "Mốc khu vực Ninh Bình",
+      "hook": "Chọn một món dê tại quán phù hợp với khẩu vị của nhóm.",
+      "summary": "Chọn một món dê tại quán phù hợp với khẩu vị của nhóm. Hỏi cách chế biến và giá theo phần trước khi gọi. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 20.2506,
+      "lon": 105.9745,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-extra-8-3.jpg",
+          "author": "Thịt_dê_Ninh_Bình.JPG : Nguyễn Thanh Quang derivative work: Phó Nháy ( talk )",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A1i_d%C3%AA.jpg"
+        }
+      ],
+      "wikipediaTitle": "Dê núi Ninh Bình"
+    },
+    {
+      "id": "exp-food-ninh-binh-banh-cuon",
+      "name": "Bánh cuốn buổi sáng",
+      "category": "am",
+      "area": "Mốc khu vực Ninh Bình",
+      "hook": "Một đĩa bánh vừa tráng để thử trong buổi dạo chợ.",
+      "summary": "Một đĩa bánh vừa tráng để thử trong buổi dạo chợ. Cách ăn kèm và nước chấm có thể khác nhau giữa các vùng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 20.2506,
+      "lon": 105.9745,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-banh-cuon-1.jpg",
+          "author": "Lưu Ly",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
+        },
+        {
+          "file": "food-banh-cuon-2.jpg",
+          "author": "Casablanca1911 at vi.wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_cu%E1%BB%91n_Thanh_Tr%C3%AC.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh cuốn"
+    },
+    {
+      "id": "ninh-binh-dam-van-long",
+      "name": "Đầm Vân Long",
+      "category": "canh",
+      "area": "Ninh Bình",
+      "hook": "Đi chậm trên mặt nước giữa những dãy núi.",
+      "summary": "",
+      "lat": 20.37222222,
+      "lon": 105.875,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Tọa độ tham khảo, không thay cho việc xác nhận lối vào hoặc điểm hẹn.",
+        "Nguồn vị trí: https://www.wikidata.org/wiki/Q105723502",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [
+        {
+          "file": "ref-ninh-binh-dam-van-long-1.jpg",
+          "author": "Andre Hospers",
+          "license": "CC BY 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Van_Long_Nature_Reserve_Riet_Grotten_Kalksteen_Ninh_Binh.jpg"
+        }
+      ],
+      "wikipediaTitle": "Khu bảo tồn thiên nhiên đất ngập nước Vân Long"
+    },
+    {
+      "id": "venue-ninh-binh-tam-coc-garden",
+      "name": "Tam Coc Garden",
+      "category": "luu",
+      "area": "Ninh Bình",
+      "hook": "Nghỉ giữa không gian đồng quê và những dãy núi đá.",
+      "summary": "Nghỉ giữa không gian đồng quê và những dãy núi đá. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 20.211299,
+      "lon": 105.9080338,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: Hải Nham, Nam Hoa Lư, Ninh Bình",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/5514399176"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Hải Nham, Nam Hoa Lư, Ninh Bình",
+        "website": "https://www.tamcocgarden.com/",
+        "sourceUrl": "https://www.tamcocgarden.com/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-ninh-binh-pullman-ninh-binh-9067e273",
+      "name": "Pullman Ninh Binh",
+      "category": "luu",
+      "area": "Ninh Bình",
+      "hook": "Pullman Ninh Binh: có hạng suite tại Ninh Binh Province..",
+      "summary": "Pullman Ninh Binh: có hạng suite tại Ninh Binh Province.. Hồ sơ nguồn giới thiệu có hạng suite; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 20.272045,
+      "lon": 105.957318,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có khu trên tầng mái",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có lựa chọn nhìn núi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có khu trên tầng mái.",
+      "bestSlots": [],
+      "slotReason": "Chọn khung ghé phù hợp lịch phục vụ công bố.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Lịch phục vụ theo nguồn đối chiếu ngày 07/11/2026; xác nhận lại vào ngày lễ hoặc khi đặt chỗ.",
+        "Số liên hệ theo hồ sơ nguồn: +842293883883.",
+        "Email liên hệ theo nguồn: HA8E7@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A8E7/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "128 Le Thai To Street, Xuan Thanh Urban Area, Hoa Lu Ward, Ninh Binh Province., Vietnam",
+        "website": "https://all.accor.com/hotel/A8E7/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/A8E7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842293883883",
+        "serviceHours": "Nhận phòng 14:00; Trả phòng 12:00",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ninh-binh-food-connexion-pullman-n-f52a9028",
+      "name": "Food ConneXion · Pullman Ninh Binh",
+      "category": "am",
+      "area": "Ninh Bình",
+      "hook": "Food ConneXion trong Pullman Ninh Binh.",
+      "summary": "Food ConneXion trong Pullman Ninh Binh. Hồ sơ nguồn giới thiệu phục vụ theo nhiều khung bữa trong ngày; có lựa chọn buffet; thực đơn quốc tế.",
+      "lat": 20.272045,
+      "lon": 105.957318,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Phục vụ theo nhiều khung bữa trong ngày",
+        "Có lựa chọn buffet",
+        "Thực đơn quốc tế"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn phục vụ theo nhiều khung bữa trong ngày và có lựa chọn buffet.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842293883883.",
+        "Email liên hệ theo nguồn: HA8E7@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A8E7/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "128 Le Thai To Street, Xuan Thanh Urban Area, Hoa Lu Ward, Ninh Binh Province., Vietnam",
+        "website": "https://all.accor.com/hotel/A8E7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A8E7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842293883883",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ninh-binh-mad-cow-wine-and-grill-p-5319d9a1",
+      "name": "Mad Cow Wine and Grill · Pullman Ninh Binh",
+      "category": "am",
+      "area": "Ninh Bình",
+      "hook": "Mad Cow Wine and Grill trong Pullman Ninh Binh.",
+      "summary": "Mad Cow Wine and Grill trong Pullman Ninh Binh. Hồ sơ nguồn giới thiệu không gian nhìn ra thành phố; có thông tin về chương trình âm nhạc.",
+      "lat": 20.272045,
+      "lon": 105.957318,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Không gian nhìn ra thành phố",
+        "Có thông tin về chương trình âm nhạc"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn không gian nhìn ra thành phố và có thông tin về chương trình âm nhạc.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842293883883.",
+        "Email liên hệ theo nguồn: HA8E7@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A8E7/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "128 Le Thai To Street, Xuan Thanh Urban Area, Hoa Lu Ward, Ninh Binh Province., Vietnam",
+        "website": "https://all.accor.com/hotel/A8E7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A8E7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842293883883",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ninh-binh-hoa-thuy-tien-restaurant-9449e099",
+      "name": "Hoa Thuy Tien Restaurant · Pullman Ninh Binh",
+      "category": "am",
+      "area": "Ninh Bình",
+      "hook": "Hoa Thuy Tien Restaurant trong Pullman Ninh Binh.",
+      "summary": "Hoa Thuy Tien Restaurant trong Pullman Ninh Binh. Hồ sơ nguồn giới thiệu ẩm thực quảng đông; ẩm thực hoa; các món cá và hải sản.",
+      "lat": 20.272045,
+      "lon": 105.957318,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Quảng Đông",
+        "Ẩm thực Hoa",
+        "Các món cá và hải sản"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực quảng đông và ẩm thực hoa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842293883883.",
+        "Email liên hệ theo nguồn: HA8E7@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A8E7/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "128 Le Thai To Street, Xuan Thanh Urban Area, Hoa Lu Ward, Ninh Binh Province., Vietnam",
+        "website": "https://all.accor.com/hotel/A8E7/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A8E7/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842293883883",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ninh-binh-chookie-s-beer-garden-21f3b18e",
+      "name": "Chookie's Beer Garden",
+      "category": "am",
+      "area": "Ninh Bình",
+      "hook": "Chookie's Beer Garden.",
+      "summary": "Chookie's Beer Garden. Hồ sơ nguồn giới thiệu burger; các món gỏi hoặc salad; sinh tố; có thông tin về lựa chọn từ thực vật.",
+      "lat": 20.21679,
+      "lon": 105.94107,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Burger",
+        "Các món gỏi hoặc salad",
+        "Sinh tố",
+        "Có thông tin về lựa chọn từ thực vật",
+        "Món nướng than hoặc củi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn burger và các món gỏi hoặc salad.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu thực đơn và khẩu phần trước khi chọn món.",
+        "Ghim theo mục cẩm nang cập nhật 2026-01-02; xác nhận cửa vào với cơ sở trước khi đi.",
+        "Số liên hệ theo hồ sơ nguồn: +84962942961.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Ninh%20Binh&oldid=5340950",
+        "Nguồn: https://chookiestravel.com/chookies-beer-garden/"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Tam Coc - Bich Dong Road",
+        "website": "https://chookiestravel.com/chookies-beer-garden/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Ninh%20Binh&oldid=5340950",
+        "checkedAt": "2026-11-07",
+        "phone": "+84962942961",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ninh-binh-thang-long-restaurant-d8537246",
+      "name": "Thang Long Restaurant",
+      "category": "am",
+      "area": "Ninh Bình",
+      "hook": "Thang Long Restaurant.",
+      "summary": "Thang Long Restaurant. Hồ sơ nguồn giới thiệu các món dê núi; cơm cháy; gà đồi; bít tết và món nướng.",
+      "lat": 20.2895968,
+      "lon": 105.8891242,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Các món dê núi",
+        "Cơm cháy",
+        "Gà đồi",
+        "Bít tết và món nướng",
+        "Món nướng than hoặc củi"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn các món dê núi và cơm cháy.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu thực đơn và khẩu phần trước khi chọn món.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Ninh%20Binh&oldid=5340950",
+        "Nguồn: https://nhahangdenuininhbinh.vn/en/",
+        "Nguồn: https://www.openstreetmap.org/node/3889399634"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "Chi Phong hamlet, Tay Hoa Lu",
+        "website": "https://nhahangdenuininhbinh.vn/en/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Ninh%20Binh&oldid=5340950",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-ninh-binh-ngoc-anh-hotel-b5ac66f1",
+      "name": "Ngoc Anh Hotel",
+      "category": "luu",
+      "area": "Ninh Bình",
+      "hook": "Ngoc Anh Hotel: có hạng suite tại Ninh Bình.",
+      "summary": "Ngoc Anh Hotel: có hạng suite tại Ninh Bình. Hồ sơ nguồn giới thiệu có hạng suite; thiết kế hoặc vị trí gắn với nhà hát; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 20.2568931,
+      "lon": 105.9710254,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Thiết kế hoặc vị trí gắn với nhà hát",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Có khu ban công hoặc sân hiên"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và thiết kế hoặc vị trí gắn với nhà hát.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Ninh%20Binh&oldid=5340950",
+        "Nguồn: https://ngocanhhotels.com/",
+        "Nguồn: https://www.openstreetmap.org/node/4365880493"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "30 Luong Van Tuy St",
+        "website": "https://ngocanhhotels.com/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Ninh%20Binh&oldid=5340950",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-28949259",
+      "theme": "hanh-trinh",
+      "caption": "Cùng xuống thuyền giữa núi đá Ninh Bình",
+      "file": "pexels-28949259.jpg",
+      "author": "Viett Anh",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/scenic-boat-ride-in-ninh-binh-vietnam-28949259/"
+    },
+    {
+      "id": "pexels-19578152",
+      "theme": "hanh-trinh",
+      "caption": "Đi theo những bậc đá lên điểm nhìn Hang Múa",
+      "file": "pexels-19578152.jpg",
+      "author": "Quý Nguyễn",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/hang-mua-viewpoint-19578152/"
+    },
+    {
+      "id": "food-research-ninh-binh",
+      "theme": "mon-an",
+      "caption": "Dê núi Ninh Bình · một món muốn thử (ảnh minh họa)",
+      "file": "food-extra-8-3.jpg",
+      "author": "Thịt_dê_Ninh_Bình.JPG : Nguyễn Thanh Quang derivative work: Phó Nháy ( talk )",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A1i_d%C3%AA.jpg"
+    },
+    {
+      "id": "wave-pexels-25575383",
+      "theme": "nghe",
+      "caption": "Nhìn nhịp sống từ mặt nước Ninh Bình",
+      "file": "wave-pexels-25575383.jpg",
+      "author": "Ninh Tien Dat",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-in-conical-hat-on-boat-on-river-in-ninh-binh-vietnam-25575383/"
+    }
+  ]
+}

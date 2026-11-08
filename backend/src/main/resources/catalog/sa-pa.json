@@ -1,0 +1,884 @@
+{
+  "id": "sa-pa",
+  "name": "Sa Pa",
+  "region": "Tây Bắc",
+  "tagline": "Bước qua ruộng bậc thang, bản làng và những đỉnh núi",
+  "coverPlaceId": "sapa-fansipan",
+  "references": [
+    {
+      "id": "trung-tam-sa-pa",
+      "name": "Mốc tham chiếu Sa Pa",
+      "lat": 22.3357,
+      "lon": 103.8426,
+      "approximate": true
+    }
+  ],
+  "guide": [
+    {
+      "id": "mua",
+      "layout": "MONTHS",
+      "category": "canh",
+      "icon": "calendar-event",
+      "title": "Mùa nên đi",
+      "summary": "Chọn thời điểm theo hoạt động, dự báo thời tiết và tình trạng mở cửa hoặc tuyến đi.",
+      "bestMonths": [
+        4,
+        5,
+        9,
+        10
+      ],
+      "rainyMonths": [],
+      "notes": [
+        "Các tháng chưa được đánh dấu không có nghĩa là không thể đi.",
+        "Kiểm tra dự báo và xác nhận dịch vụ hoặc tuyến trước khi chốt chuyến."
+      ],
+      "items": []
+    },
+    {
+      "id": "chuanbi",
+      "layout": "CHECKLIST",
+      "category": "van",
+      "icon": "backpack",
+      "title": "Chuẩn bị mang gì",
+      "summary": "Chuẩn bị theo địa hình và hoạt động đã chọn.",
+      "items": [
+        {
+          "icon": "check",
+          "title": "Nước uống và vật dụng cá nhân"
+        },
+        {
+          "icon": "check",
+          "title": "Giày phù hợp địa hình"
+        },
+        {
+          "icon": "check",
+          "title": "Áo khoác hoặc áo mưa nhẹ"
+        },
+        {
+          "icon": "check",
+          "title": "Sạc dự phòng"
+        }
+      ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Thịt trâu gác bếp",
+          "text": "Thử phần thịt hun khói xé nhỏ và hỏi cách người bán dùng cùng gia vị. Kiểm tra nguồn và bảo quản khi mua về.",
+          "placeId": "exp-food-sa-pa-thit-trau-gac-bep"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Đậu phụ trong bữa cơm bản",
+          "text": "Đậu phụ và rau theo mùa là một gợi ý cho bữa cơm bản. Xác nhận món chay và nước dùng nếu bạn kiêng thịt.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Rau su su xào tỏi",
+          "text": "Tìm rau su su trong bữa ăn theo mùa, chẳng hạn món xào tỏi. Hỏi trước về rau sẵn có tại nơi bạn chọn.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cơm lam Sa Pa",
+          "text": "Thử cơm lam trong bữa ăn vùng cao; hỏi món ăn kèm và thời điểm phục vụ.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Theo chân người hiểu bản",
+          "text": "Chốt cung trekking với guide địa phương theo thể lực và thời gian của bạn."
+        },
+        {
+          "icon": "route",
+          "title": "Tìm hiểu một đường chỉ, một hoa văn",
+          "text": "Hỏi về hoạt động thêu, dệt hoặc batik; xin phép trước khi chụp người và vào nhà."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Pao’s Sapa Leisure Hotel",
+          "text": "Một điểm nghỉ ở khu vực Mường Hoa để chuẩn bị các buổi khám phá Sa Pa.",
+          "placeId": "venue-sa-pa-paos"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Lẩu cá hồi Sa Pa",
+          "text": "Cá hồi dùng trong nồi lẩu nóng, ăn cùng rau.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Lợn cắp nách quay",
+          "text": "Lợn bản nhỏ được quay; hỏi khẩu phần trước khi gọi.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cá suối chiên Sa Pa",
+          "text": "Cá suối chiên giòn, một món được bài viết giới thiệu.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Cải mèo Sa Pa",
+          "text": "Rau cải địa phương có vị hơi đắng; chọn cách nấu theo thực đơn.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Hotel de la Coupole Sapa - MGallery Collection",
+          "text": "Màu sắc, vật liệu và chi tiết trang trí là điểm nhấn của các không gian chung. Khách sạn có Nuages Spa và bể bơi trong nhà trên tầng cao.",
+          "placeId": "rs-sa-pa-hotel-de-la-coupole-sapa-f25e058c"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "CHIC · Hotel de la Coupole Sapa - MGallery Collection",
+          "text": "CHIC trong Hotel de la Coupole Sapa - MGallery Collection. Hồ sơ nguồn giới thiệu ẩm thực pháp; có lựa chọn rượu dùng cùng bữa.",
+          "placeId": "rs-sa-pa-chic-hotel-de-la-coupole-5addf3c7"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "CACAO · Hotel de la Coupole Sapa - MGallery Collection",
+          "text": "CACAO trong Hotel de la Coupole Sapa - MGallery Collection. Hồ sơ nguồn giới thiệu ẩm thực pháp; bánh và món ăn nhẹ.",
+          "placeId": "rs-sa-pa-cacao-hotel-de-la-coupol-c85830b9"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Little View Restaurant",
+          "text": "Little View Restaurant. Hồ sơ nguồn giới thiệu lẩu cá hồi; không gian nhìn ra thành phố.",
+          "placeId": "rs-sa-pa-little-view-restaurant-0d361692"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "sapa-fansipan",
+      "name": "Fansipan · trekking",
+      "category": "leo",
+      "area": "Hoàng Liên Sơn",
+      "hook": "Tìm hiểu cung trekking Fansipan; hành trình đi bộ có cách chuẩn bị khác với tham quan bằng cáp treo.",
+      "summary": "Fansipan là đỉnh núi cao nhất của Việt Nam, nằm trên dãy núi Hoàng Liên Sơn ở vùng Tây Bắc Bộ, Việt Nam. Đỉnh núi có độ cao tuyệt đối là 3.147,3 m. Fansipan cũng là đỉnh núi cao nhất bán đảo Đông Dương và được mệnh danh là \"Nóc nhà Đông Dương\".",
+      "lat": 22.304276,
+      "lon": 103.777063,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Khó",
+      "highlights": [
+        "Trekking Hoàng Liên Sơn",
+        "Phân biệt với cáp treo"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Giờ xuất phát phụ thuộc tuyến và lịch đoàn đã xác nhận.",
+      "tips": [
+        "Tọa độ là mốc ngọn núi, không phải đầu tuyến trekking.",
+        "Liên hệ đơn vị quản lý hoặc guide để xác nhận tuyến, đăng ký và lịch đoàn; không suy ra lối đi bộ từ tuyến xe trên bản đồ."
+      ],
+      "photos": [
+        {
+          "file": "sapa-fansipan-1.jpg",
+          "author": "Isderion ( talk )",
+          "license": "CC BY-SA 3.0 de",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fansipan_Summit.jpg"
+        },
+        {
+          "file": "sapa-fansipan-2.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amit%C4%81bha_statue_on_Fansipan_1.jpg"
+        },
+        {
+          "file": "sapa-fansipan-3.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amit%C4%81bha_statue_on_Fansipan_2.jpg"
+        }
+      ],
+      "wikipediaTitle": "Fansipan"
+    },
+    {
+      "id": "sapa-nui-ham-rong",
+      "name": "Núi Hàm Rồng",
+      "category": "leo",
+      "area": "Trung tâm Sa Pa",
+      "hook": "Dành thời gian đi bộ giữa vườn và những bậc đá trên núi Hàm Rồng.",
+      "summary": "Núi Hàm Rồng là ngọn núi nằm trong dãy Hoàng Liên Sơn ở vùng Tây Bắc Bộ, Việt Nam. Với ý nghĩa \"hàm của rồng\", Hàm Rồng là một trong số ít các núi ở Việt Nam có hình tượng đẹp và rõ nét, gắn liền với nó là truyền thuyết thú vị và ly kỳ.",
+      "lat": 22.3329,
+      "lon": 103.8614,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Vừa",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang"
+      ],
+      "slotReason": "Khởi hành sáng sớm để có thời tiết mát và thời gian dư dả.",
+      "tips": [
+        "Thời lượng là gợi ý xếp lịch; xác nhận tình trạng hoạt động và thông tin địa phương trước khi đi."
+      ],
+      "photos": [
+        {
+          "file": "sapa-nui-ham-rong-1.jpg",
+          "author": "wtpwt",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nui_Ham_Rong_mua_xuan.jpg"
+        }
+      ],
+      "wikipediaTitle": "Núi Hàm Rồng (Sa Pa)"
+    },
+    {
+      "id": "sapa-ban-cat-cat",
+      "name": "Bản Cát Cát",
+      "category": "van",
+      "area": "Cát Cát",
+      "hook": "Đi bộ tìm hiểu không gian bản làng, kiến trúc và đời sống quanh Sa Pa.",
+      "summary": "Bản Cát Cát hay thôn Cát Cát là một làng dân tộc Mông thuộc xã Tả Van, tỉnh Lào Cai, Việt Nam, cách trung tâm thị xã 2 km. Đây là điểm tham quan hấp dẫn của du lịch Sa Pa nói riêng và Lào Cai nói chung. Bản Cát Cát là nơi tập trung đông đúc đồng bào dân tộc Mông sinh sống. Nằm dưới chân núi Hoàng Liên Sơn, bản Cát Cát được hình thành từ giữa thế kỷ 19 do một bộ phận dân tộc ít người quần tụ theo phương pháp mật tập.",
+      "lat": 22.3277,
+      "lon": 103.8341,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "2–3 giờ (tham khảo)",
+      "difficulty": "Dễ",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý để khám phá theo sở thích và thời gian của bạn.",
+      "bestSlots": [
+        "sang",
+        "chieu"
+      ],
+      "slotReason": "Buổi sáng hoặc chiều mát đi tham quan thoải mái hơn, ít đông.",
+      "tips": [
+        "Xin phép trước khi chụp người hoặc vào nhà.",
+        "Xác nhận thông tin vé và dịch vụ tại nguồn địa phương."
+      ],
+      "photos": [
+        {
+          "file": "sapa-ban-cat-cat-1.jpg",
+          "author": "Liftold ( thảo luận )",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3n_C%C3%A1t_C%C3%A1t.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bản Cát Cát"
+    },
+    {
+      "id": "sa-pa-ta-phin",
+      "name": "Tả Phìn",
+      "category": "van",
+      "area": "Sa Pa",
+      "hook": "Tìm hiểu nghề thủ công và đời sống trong bản.",
+      "summary": "Tả Phìn là một xã thuộc tỉnh Lào Cai, Việt Nam.",
+      "lat": 22.39508184,
+      "lon": 103.84292955,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "sa-pa-ta-phin-1.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Landscape_in_T%E1%BA%A3_Ph%C3%ACn_3.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tả Phìn"
+    },
+    {
+      "id": "sa-pa-ta-van",
+      "name": "Tả Van",
+      "category": "van",
+      "area": "Sa Pa",
+      "hook": "Đi bộ qua thung lũng và không gian bản làng.",
+      "summary": "Tả Van là một xã thuộc tỉnh Lào Cai, Việt Nam.",
+      "lat": 22.30287287,
+      "lon": 103.88962031,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "sa-pa-ta-van-1.jpg",
+          "author": "Christophe95",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_T%E1%BA%A3_Van_14.jpg"
+        }
+      ],
+      "wikipediaTitle": "Tả Van"
+    },
+    {
+      "id": "sa-pa-thac-bac",
+      "name": "Thác Bạc (Sa Pa)",
+      "category": "canh",
+      "area": "Sa Pa",
+      "hook": "Ghé ngắm dòng thác trên đường lên đèo.",
+      "summary": "Thác Bạc là một thắng cảnh thác nước tại phường Sa Pa, tỉnh Lào Cai. Thác nằm ngay cạnh quốc lộ 4D, tuyến đường huyết mạch để đến tỉnh Lai Châu và chỉ cách khu vực phường Sa Pa khoảng 12 km về hướng tây bắc nên khá thuận lợi để tham quan. Thác Bạc có độ cao hơn 200 mét là thượng nguồn của dòng suối Mường Hoa với độ cao 1.800 m nằm dưới chân đèo Ô Quý Hồ. Đứng trên đỉnh núi Hàm Rồng ở trung tâm thị trấn Sa Pa có thể nhìn thấy thác Bạc trắng xóa vào những hôm trời quang và đây cũng là nguồn gốc tên gọi của thác.",
+      "lat": 22.361626,
+      "lon": 103.778912,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "sa-pa-thac-bac-1.jpg",
+          "author": "Lori_NY",
+          "license": "CC BY-SA 2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thacbac3.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thác Bạc (Sa Pa)"
+    },
+    {
+      "id": "sa-pa-deo-o-quy-ho",
+      "name": "Đèo Ô Quý Hồ",
+      "category": "canh",
+      "area": "Sa Pa",
+      "hook": "Ngắm những lớp núi từ cung đèo.",
+      "summary": "Đèo Ô Quý Hồ, đèo Ô Quy Hồ hay đèo Hoàng Liên Sơn là một ngọn đèo nằm trên quốc lộ 4D ở vùng giáp ranh giữa 2 tỉnh Lào Cai và Lai Châu, Việt Nam. Đèo cắt ngang dãy Hoàng Liên Sơn, với đỉnh đèo cũng ở gần ranh giới giữa 2 tỉnh. Tên chính thức của đèo ở đường phân thủy là \"đèo Trạm Tôn\". Đèo còn có tên địa phương còn là Cổng Trời.",
+      "lat": 22.3532,
+      "lon": 103.76453,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Chưa có dữ liệu",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để cân nhắc theo sở thích của bạn.",
+      "bestSlots": [],
+      "slotReason": "Chưa xác minh thời gian phù hợp; kiểm tra thời tiết và đơn vị quản lý.",
+      "tips": [
+        "Xác nhận tình trạng tiếp cận, giờ hoạt động và giá tại nguồn địa phương.",
+        "Xin phép khi chụp người hoặc vào không gian riêng."
+      ],
+      "photos": [
+        {
+          "file": "sa-pa-deo-o-quy-ho-1.jpg",
+          "author": "Kiếm Anh",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:O_Quy_Ho_pass.jpg"
+        }
+      ],
+      "wikipediaTitle": "Đèo Ô Quý Hồ"
+    },
+    {
+      "id": "exp-food-sa-pa-thit-trau-gac-bep",
+      "name": "Thịt trâu gác bếp",
+      "category": "am",
+      "area": "Mốc khu vực Sa Pa",
+      "hook": "Thử phần thịt hun khói xé nhỏ và hỏi cách người bán dùng cùng gia vị.",
+      "summary": "Thử phần thịt hun khói xé nhỏ và hỏi cách người bán dùng cùng gia vị. Kiểm tra nguồn và bảo quản khi mua về. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 22.3357,
+      "lon": 103.8426,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-thit-trau-gac-bep-1.jpg",
+          "author": "Cabokho",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg"
+        }
+      ],
+      "wikipediaTitle": "Thịt gác bếp"
+    },
+    {
+      "id": "sa-pa-nhiu-co-san",
+      "name": "Nhìu Cồ San",
+      "category": "leo",
+      "area": "Sa Pa",
+      "hook": "Tìm hiểu một cung trekking, chuẩn bị theo tuyến và thể lực của bạn.",
+      "summary": "",
+      "lat": 22.58402,
+      "lon": 103.58326,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Ghim là mốc ngọn núi, không phải đầu tuyến trekking. Chốt tuyến, thời lượng và lịch đoàn với guide trước khi xếp ngày.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/8101025699",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "sa-pa-ngu-chi-son",
+      "name": "Ngũ Chỉ Sơn",
+      "category": "leo",
+      "area": "Sa Pa",
+      "hook": "Tìm hiểu một cung trekking, chuẩn bị theo tuyến và thể lực của bạn.",
+      "summary": "",
+      "lat": 22.40973,
+      "lon": 103.74258,
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước khi đi",
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận thời tiết và tình trạng tiếp cận tại địa phương.",
+      "tips": [
+        "Ghim là mốc ngọn núi, không phải đầu tuyến trekking. Chốt tuyến, thời lượng và lịch đoàn với guide trước khi xếp ngày.",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/11621998449",
+        "Xác nhận giờ, giá và khả năng đón khách trước chuyến đi."
+      ],
+      "photos": [],
+      "wikipediaTitle": null
+    },
+    {
+      "id": "sa-pa-hoang-lien",
+      "name": "Vườn quốc gia Hoàng Liên",
+      "category": "leo",
+      "area": "Sa Pa",
+      "hook": "Tìm hiểu các tuyến đi bộ trong hệ sinh thái núi cao.",
+      "summary": "Vùng núi cao của dãy Hoàng Liên Sơn có nhiều lựa chọn tìm hiểu thiên nhiên. Muốn trekking cần chốt một tuyến cụ thể với đơn vị địa phương; không dùng một ghim vườn quốc gia làm chỉ dẫn đi bộ.",
+      "bestMonths": [],
+      "bestLabel": "Xem thời tiết trước chuyến đi",
+      "lat": 22.303441,
+      "lon": 103.775139,
+      "duration": "Theo tuyến và lịch đoàn",
+      "difficulty": "Chưa xác định",
+      "highlights": [
+        "Hệ sinh thái núi cao",
+        "Rừng",
+        "Trekking có chuẩn bị"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo sở thích.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận tình trạng tiếp cận và lịch đón khách trước khi đi.",
+      "tips": [
+        "Thống nhất tuyến, người dẫn đường, thủ tục tiếp cận và thời tiết trước chuyến đi.",
+        "Ghim là mốc tham khảo của vùng núi, không phải đầu tuyến. Chốt cung, guide và thời lượng trước khi xếp ngày.",
+        "Nguồn vị trí: https://vi.wikipedia.org/wiki/V%C6%B0%E1%BB%9Dn%20qu%E1%BB%91c%20gia%20Ho%C3%A0ng%20Li%C3%AAn",
+        "Giờ mở cửa, giá và các hoạt động cần được xác nhận với nơi đón khách."
+      ],
+      "photos": [
+        {
+          "file": "wave-sa-pa-hoang-lien-1.jpg",
+          "author": "Viethavvh at vi.wikipedia",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vuon_QG_Hoang_Lien.JPG"
+        },
+        {
+          "file": "wave-sa-pa-hoang-lien-2.jpg",
+          "author": "Ondřej Žváček",
+          "license": "CC BY 2.5",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoang_Lien.jpg"
+        }
+      ],
+      "wikipediaTitle": "Vườn quốc gia Hoàng Liên"
+    },
+    {
+      "id": "venue-sa-pa-paos",
+      "name": "Pao’s Sapa Leisure Hotel",
+      "category": "luu",
+      "area": "Sa Pa",
+      "hook": "Một điểm nghỉ ở khu vực Mường Hoa để chuẩn bị các buổi khám phá Sa Pa.",
+      "summary": "Một điểm nghỉ ở khu vực Mường Hoa để chuẩn bị các buổi khám phá Sa Pa. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 22.3270114,
+      "lon": 103.8466396,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: Cầu Mây 1, Sa Pa, Lào Cai",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/12824980787"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Cầu Mây 1, Sa Pa, Lào Cai",
+        "website": "https://paoshotel.com/lien-he",
+        "sourceUrl": "https://paoshotel.com/lien-he",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-sa-pa-hotel-de-la-coupole-sapa-f25e058c",
+      "name": "Hotel de la Coupole Sapa - MGallery Collection",
+      "category": "luu",
+      "area": "Sa Pa",
+      "hook": "Khách sạn ở Sa Pa với nội thất kết hợp cảm hứng Pháp và Đông Dương.",
+      "summary": "Màu sắc, vật liệu và chi tiết trang trí là điểm nhấn của các không gian chung. Khách sạn có Nuages Spa và bể bơi trong nhà trên tầng cao.",
+      "lat": 22.334686,
+      "lon": 103.840433,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Thiết kế Pháp và Đông Dương",
+        "Bể bơi trong nhà",
+        "Nuages Spa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn thiết kế pháp và đông dương và bể bơi trong nhà.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi giờ sử dụng bể bơi, nhiệt độ nước và điều kiện cho trẻ em theo ngày nghỉ.",
+        "Đối chiếu sức chứa, bữa ăn đi kèm và điều kiện hủy của đúng hạng phòng.",
+        "Nguồn: https://guide.michelin.com/en/hotels-stays/sa-pa/hotel-de-la-coupole-11847",
+        "Nguồn: https://www.openstreetmap.org/node/13282967120",
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842143629999.",
+        "Email liên hệ theo nguồn: HA5V2-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A5V2/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-a8b06aa8f86670e216.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_Coupole_architecture_Sa_Pa_Viet_Nam.jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "1, Hoang Lien Street, Sapa District, Lao Cai Province, SAPA, Vietnam",
+        "website": "https://all.accor.com/hotel/A5V2/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/A5V2/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842143629999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-sa-pa-chic-hotel-de-la-coupole-5addf3c7",
+      "name": "CHIC · Hotel de la Coupole Sapa - MGallery Collection",
+      "category": "am",
+      "area": "Sa Pa",
+      "hook": "CHIC trong Hotel de la Coupole Sapa - MGallery Collection.",
+      "summary": "CHIC trong Hotel de la Coupole Sapa - MGallery Collection. Hồ sơ nguồn giới thiệu ẩm thực pháp; có lựa chọn rượu dùng cùng bữa.",
+      "lat": 22.334686,
+      "lon": 103.840433,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Pháp",
+        "Có lựa chọn rượu dùng cùng bữa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực pháp và có lựa chọn rượu dùng cùng bữa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842143629999.",
+        "Email liên hệ theo nguồn: HA5V2-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A5V2/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-a8b06aa8f86670e216.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_Coupole_architecture_Sa_Pa_Viet_Nam.jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "1, Hoang Lien Street, Sapa District, Lao Cai Province, SAPA, Vietnam",
+        "website": "https://all.accor.com/hotel/A5V2/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A5V2/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842143629999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-sa-pa-cacao-hotel-de-la-coupol-c85830b9",
+      "name": "CACAO · Hotel de la Coupole Sapa - MGallery Collection",
+      "category": "am",
+      "area": "Sa Pa",
+      "hook": "CACAO trong Hotel de la Coupole Sapa - MGallery Collection.",
+      "summary": "CACAO trong Hotel de la Coupole Sapa - MGallery Collection. Hồ sơ nguồn giới thiệu ẩm thực pháp; bánh và món ăn nhẹ.",
+      "lat": 22.334686,
+      "lon": 103.840433,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Pháp",
+        "Bánh và món ăn nhẹ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực pháp và bánh và món ăn nhẹ.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi lễ tân vị trí nhà hàng và việc đón khách không lưu trú.",
+        "Xác nhận thực đơn gọi món, buffet hoặc theo bộ cho khung giờ bạn chọn.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842143629999.",
+        "Email liên hệ theo nguồn: HA5V2-RE@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/A5V2/index.en.shtml"
+      ],
+      "photos": [
+        {
+          "file": "venue-fill-a8b06aa8f86670e216.jpg",
+          "author": "Vivu Vietnam",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_Coupole_architecture_Sa_Pa_Viet_Nam.jpg",
+          "caption": "Ảnh khách sạn"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "1, Hoang Lien Street, Sapa District, Lao Cai Province, SAPA, Vietnam",
+        "website": "https://all.accor.com/hotel/A5V2/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/A5V2/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842143629999",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-sa-pa-little-view-restaurant-0d361692",
+      "name": "Little View Restaurant",
+      "category": "am",
+      "area": "Sa Pa",
+      "hook": "Little View Restaurant.",
+      "summary": "Little View Restaurant. Hồ sơ nguồn giới thiệu lẩu cá hồi; không gian nhìn ra thành phố.",
+      "lat": 22.3325185,
+      "lon": 103.8429278,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Lẩu cá hồi",
+        "Không gian nhìn ra thành phố"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn lẩu cá hồi và không gian nhìn ra thành phố.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu thực đơn và khẩu phần trước khi chọn món.",
+        "Số liên hệ theo hồ sơ nguồn: +84988787711.",
+        "Nguồn: https://en.wikivoyage.org/w/index.php?title=Sa%20Pa&oldid=5416441",
+        "Nguồn: https://littleviewhomestay.com/",
+        "Nguồn: https://www.openstreetmap.org/node/5403233925"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "042 Ngõ Cầu Mây Street",
+        "website": "https://littleviewhomestay.com/",
+        "sourceUrl": "https://en.wikivoyage.org/w/index.php?title=Sa%20Pa&oldid=5416441",
+        "checkedAt": "2026-11-07",
+        "phone": "+84988787711",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    }
+  ],
+  "moments": [
+    {
+      "id": "pexels-235925",
+      "theme": "nghe",
+      "caption": "Theo nhịp mùa gặt trên những thửa ruộng Sa Pa",
+      "file": "pexels-235925.jpg",
+      "author": "Pixabay",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-on-rice-terraces-235925/"
+    },
+    {
+      "id": "pexels-36074826",
+      "theme": "nguoi",
+      "caption": "Sa Pa lên đèn, gặp nhau trước ga",
+      "file": "pexels-36074826.jpg",
+      "author": "Haneul Trac",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/vibrant-night-scene-at-sun-plaza-sapa-station-vietnam-36074826/"
+    },
+    {
+      "id": "food-research-sa-pa",
+      "theme": "mon-an",
+      "caption": "Thịt trâu gác bếp · một món muốn thử (ảnh minh họa)",
+      "file": "food-thit-trau-gac-bep-1.jpg",
+      "author": "Cabokho",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg"
+    },
+    {
+      "id": "wave-pexels-37667705",
+      "theme": "nguoi",
+      "caption": "Một cuộc gặp trên đường ở Sa Pa",
+      "file": "wave-pexels-37667705.jpg",
+      "author": "Duong Nguyen",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/hmong-women-in-traditional-clothing-sa-pa-37667705/"
+    },
+    {
+      "id": "wave-pexels-35294293",
+      "theme": "cho",
+      "caption": "Theo sắc áo vào một buổi chợ vùng cao",
+      "file": "wave-pexels-35294293.jpg",
+      "author": "Nguyen Ngoc Tien",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/vibrant-hill-tribe-market-scene-in-vietnam-35294293/"
+    },
+    {
+      "id": "wave-pexels-40581284",
+      "theme": "nguoi",
+      "caption": "Một giai điệu giữa những thửa ruộng Sa Pa",
+      "file": "wave-pexels-40581284.jpg",
+      "author": "Tuấn Nguyễn",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/ethnic-woman-playing-traditional-musical-instrument-40581284/"
+    }
+  ],
+  "coverPhoto": {
+    "file": "pexels-235925.jpg",
+    "author": "Pixabay",
+    "license": "Giấy phép Pexels",
+    "sourceUrl": "https://www.pexels.com/photo/people-on-rice-terraces-235925/"
+  }
+}

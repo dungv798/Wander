@@ -71,6 +71,170 @@
           "title": "Sạc dự phòng"
         }
       ]
+    },
+    {
+      "id": "an",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Ăn gì",
+      "summary": "Chọn một món để bắt đầu chuyến khám phá.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh căn Đà Lạt",
+          "text": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng.",
+          "placeId": "exp-food-da-lat-banh-can"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh mì xíu mại",
+          "text": "Bánh mì chấm vào chén xíu mại nóng là một gợi ý để thử trong chuyến Đà Lạt.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Mì Quảng ở Đà Lạt",
+          "text": "Sợi mì, ít nước dùng, rau và bánh tráng tạo nên nhiều lớp vị. Phần nhân thay đổi tùy quán.",
+          "placeId": "exp-food-da-lat-mi-quang"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh tráng nướng Đà Lạt",
+          "text": "Một món ăn vặt nóng giữa buổi dạo phố; chọn topping và độ cay tại hàng.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Kem bơ",
+          "text": "Thêm một khoảng dừng ngọt mát, hỏi phần kem và thành phần sữa nếu cần.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "goi-y-trai-nghiem-2026",
+      "layout": "ROWS",
+      "category": "van",
+      "icon": "route",
+      "title": "Đi vì một trải nghiệm",
+      "summary": "Ẩm thực, đời sống và những khoảng đi chậm.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Hơi ấm ở chợ đêm",
+          "text": "Thử bánh căn hoặc tìm một bữa nóng; chọn điểm ăn gần nơi bạn nghỉ để bớt di chuyển."
+        },
+        {
+          "icon": "route",
+          "title": "Chừa một buổi chậm",
+          "text": "Đan xen đi bộ và cà phê giữa các điểm tham quan, thay vì lấp kín mọi giờ trong ngày."
+        }
+      ]
+    },
+    {
+      "id": "cho-o-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Chọn chỗ nghỉ theo vị trí, ngày đi và ngân sách.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Dalat Palace Heritage Hotel",
+          "text": "Tìm hiểu một khách sạn mang dấu ấn lịch sử gần hồ Xuân Hương.",
+          "placeId": "venue-da-lat-dalat-palace"
+        }
+      ]
+    },
+    {
+      "id": "quan-xa-tham-khao-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán để ghé",
+      "summary": "Từ món muốn thử đến một điểm dừng cụ thể.",
+      "items": [
+        {
+          "icon": "coffee",
+          "title": "Là Việt Coffee · Nguyễn Công Trứ",
+          "text": "Ghé một điểm cà phê gắn với vùng trồng và rang xay Đà Lạt.",
+          "placeId": "venue-da-lat-la-viet"
+        }
+      ]
+    },
+    {
+      "id": "am-thuc-research-20261107",
+      "layout": "CARDS",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Thêm món địa phương",
+      "summary": "Món địa phương và cách thưởng thức; xem nguồn trong hồ sơ nghiên cứu.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Phở bò Đà Lạt",
+          "text": "Phở bò ăn cùng rau, trong đó có xà lách theo cách ăn địa phương.",
+          "placeId": null
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "Bánh bèo Đà Lạt",
+          "text": "Bánh bèo là một món được đầu bếp người Đà Lạt giới thiệu trong bài.",
+          "placeId": null
+        }
+      ]
+    },
+    {
+      "id": "cho-o-research-20261107",
+      "layout": "PLACES",
+      "category": "luu",
+      "icon": "bed",
+      "title": "Chỗ ở để cân nhắc",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "bed",
+          "title": "Grand Mercure Dalat",
+          "text": "Grand Mercure Dalat: có hạng suite tại Da Lat. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+          "placeId": "rs-da-lat-grand-mercure-dalat-97d8c27f"
+        },
+        {
+          "icon": "bed",
+          "title": "Dalat Edensee Lake Resort & Spa",
+          "text": "Dalat Edensee Lake Resort & Spa: có hạng suite tại Đà Lạt. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống.",
+          "placeId": "rs-da-lat-dalat-edensee-lake-resor-ade64990"
+        }
+      ]
+    },
+    {
+      "id": "quan-an-research-20261107",
+      "layout": "PLACES",
+      "category": "am",
+      "icon": "tools-kitchen-2",
+      "title": "Quán ăn và đồ uống",
+      "summary": "Mở thẻ để xem địa chỉ, nguồn, liên hệ và lưu ý trước khi đặt.",
+      "items": [
+        {
+          "icon": "tools-kitchen-2",
+          "title": "DEUX AMANTS · Grand Mercure Dalat",
+          "text": "Nhà hàng phục vụ nhiều khung bữa trong Grand Mercure Đà Lạt. Thực đơn kết hợp các lựa chọn Á và Âu.",
+          "placeId": "rs-da-lat-deux-amants-grand-mercur-f4476d9e"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "BAO Eatery Dalat · Grand Mercure Dalat",
+          "text": "Món Hoa hiện đại kết hợp hương vị Quảng Đông và Tứ Xuyên trong Grand Mercure Đà Lạt. Cách phục vụ hướng tới bữa ăn chia sẻ.",
+          "placeId": "rs-da-lat-bao-eatery-dalat-grand-m-0bfa5e6d"
+        },
+        {
+          "icon": "tools-kitchen-2",
+          "title": "IndiaGate",
+          "text": "IndiaGate. Hồ sơ nguồn giới thiệu ẩm thực ấn; có thông tin về lựa chọn từ thực vật.",
+          "placeId": "rs-da-lat-indiagate-c2d73da8"
+        }
+      ]
     }
   ],
   "places": [
@@ -230,6 +394,12 @@
           "author": "DHN",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BB%A3_%C4%90%C3%A0_L%E1%BA%A1t_to%C3%A0n_c%E1%BA%A3nh.jpg"
+        },
+        {
+          "file": "wave-pexels-20411011.jpg",
+          "author": "King Panther",
+          "license": "Giấy phép Pexels",
+          "sourceUrl": "https://www.pexels.com/photo/cho-da-lat-in-da-lat-city-in-vietnam-at-night-20411011/"
         }
       ],
       "wikipediaTitle": "Chợ Đà Lạt"
@@ -816,6 +986,383 @@
         }
       ],
       "wikipediaTitle": "Thác Pongour"
+    },
+    {
+      "id": "exp-food-da-lat-banh-can",
+      "name": "Bánh căn Đà Lạt",
+      "category": "am",
+      "area": "Mốc khu vực Đà Lạt",
+      "hook": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng..",
+      "summary": "Nhìn những chiếc bánh nhỏ chín trong khuôn đất, rồi thử cùng nước chấm và đồ ăn kèm của từng vùng. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 11.9404,
+      "lon": 108.4583,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-extra-0-1.jpg",
+          "author": "Saigon Time",
+          "license": "CC0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
+        },
+        {
+          "file": "food-extra-0-2.jpg",
+          "author": "VinhNguyen.1257",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_(Vietnamese_mini_pancake)_clay_cooking_pots.jpg"
+        }
+      ],
+      "wikipediaTitle": "Bánh căn"
+    },
+    {
+      "id": "exp-food-da-lat-mi-quang",
+      "name": "Mì Quảng ở Đà Lạt",
+      "category": "am",
+      "area": "Mốc khu vực Đà Lạt",
+      "hook": "Sợi mì, ít nước dùng, rau và bánh tráng tạo nên nhiều lớp vị.",
+      "summary": "Sợi mì, ít nước dùng, rau và bánh tráng tạo nên nhiều lớp vị. Phần nhân thay đổi tùy quán. Đây là ý tưởng thử món; chọn quán trước khi chốt điểm dừng.",
+      "lat": 11.9404,
+      "lon": 108.4583,
+      "bestMonths": [],
+      "bestLabel": "Tùy nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Món muốn thử",
+        "Chọn quán sau"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý ẩm thực theo vùng để bạn cân nhắc theo khẩu vị.",
+      "bestSlots": [],
+      "slotReason": "Chưa có giờ của một quán cụ thể; chọn thời gian sau khi xác nhận nơi ăn.",
+      "tips": [
+        "Ghim là mốc khu vực, không phải địa chỉ quán đã xác minh.",
+        "Ảnh minh họa món, không đại diện cho một quán cụ thể hoặc phiên bản riêng của vùng.",
+        "Hỏi thành phần, giá và giờ phục vụ tại quán bạn chọn."
+      ],
+      "photos": [
+        {
+          "file": "food-mi-quang-1.jpg",
+          "author": "Jpatokal",
+          "license": "CC BY-SA 4.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mi_Quang_1A_Danang.jpg"
+        }
+      ],
+      "wikipediaTitle": "Mì Quảng"
+    },
+    {
+      "id": "venue-da-lat-dalat-palace",
+      "name": "Dalat Palace Heritage Hotel",
+      "category": "luu",
+      "area": "Đà Lạt",
+      "hook": "Tìm hiểu một khách sạn mang dấu ấn lịch sử gần hồ Xuân Hương.",
+      "summary": "Tìm hiểu một khách sạn mang dấu ấn lịch sử gần hồ Xuân Hương. So sánh hạng phòng, điều kiện hủy và tổng giá theo ngày trước khi đặt.",
+      "lat": 11.9375798,
+      "lon": 108.4403914,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Bạn chọn ngày nhận phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Chỗ ở tham khảo",
+        "Chọn ngày nhận phòng"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Lưu vào chuyến để cân nhắc chỗ nghỉ; việc lưu không phải là đặt phòng.",
+        "Địa chỉ: 2 Trần Phú, Đà Lạt",
+        "Nguồn vị trí: https://www.openstreetmap.org/way/407699702"
+      ],
+      "photos": [
+        {
+          "file": "venue-da-lat-dalat-palace-3.jpg",
+          "author": "Trần Huy Phương",
+          "license": "CC BY-SA 3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khach_san_Dalat_Palace_-_Huy_Phuong_2.jpg"
+        },
+        {
+          "file": "venue-da-lat-dalat-palace-1.jpg",
+          "author": "Diane Selwyn ( talk )",
+          "license": "Public domain",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dalat_Palace_Hotel.jpg"
+        }
+      ],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "2 Trần Phú, Đà Lạt",
+        "website": "https://www.dalatpalacehotel.com/",
+        "sourceUrl": "https://www.dalatpalacehotel.com/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "venue-da-lat-la-viet",
+      "name": "Là Việt Coffee · Nguyễn Công Trứ",
+      "category": "am",
+      "area": "Đà Lạt",
+      "hook": "Ghé một điểm cà phê gắn với vùng trồng và rang xay Đà Lạt.",
+      "summary": "Ghé một điểm cà phê gắn với vùng trồng và rang xay Đà Lạt. Xem lựa chọn đồ uống và chỗ ngồi trước khi ghé.",
+      "lat": 11.9569186,
+      "lon": 108.435107,
+      "bestMonths": [],
+      "bestLabel": "Xác nhận với nơi bạn chọn",
+      "duration": "Tùy bữa ăn và nơi bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Nghỉ chân",
+        "Chọn đồ uống tại quán"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Gợi ý biên tập để bạn cân nhắc theo nhu cầu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận giờ phục vụ và khả năng đón khách trước khi đi.",
+      "tips": [
+        "Kiểm tra giờ phục vụ và thực đơn hiện tại trên nguồn của cơ sở.",
+        "Địa chỉ: 200 Nguyễn Công Trứ, Đà Lạt",
+        "Nguồn vị trí: https://www.openstreetmap.org/node/4601279191",
+        "Website cơ sở ghi 200 Nguyễn Công Trứ; điểm OSM hiện ghi 198 cùng đoạn đường. Xác nhận cửa vào khi đến."
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "cafe",
+        "address": "200 Nguyễn Công Trứ, Đà Lạt",
+        "website": "https://laviet.coffee/",
+        "sourceUrl": "https://laviet.coffee/en/from-out-place/",
+        "checkedAt": "2026-11-07"
+      }
+    },
+    {
+      "id": "rs-da-lat-grand-mercure-dalat-97d8c27f",
+      "name": "Grand Mercure Dalat",
+      "category": "luu",
+      "area": "Đà Lạt",
+      "hook": "Grand Mercure Dalat: có hạng suite tại Da Lat.",
+      "summary": "Grand Mercure Dalat: có hạng suite tại Da Lat. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có nhà hàng hoặc không gian ăn uống; có thông tin lưu trú cho gia đình.",
+      "lat": 11.945187,
+      "lon": 108.459494,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Có thông tin lưu trú cho gia đình",
+        "Spa hoặc dịch vụ thư giãn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Số liên hệ theo hồ sơ nguồn: +842633810826.",
+        "Email liên hệ theo nguồn: HB8H0@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B8H0/index.en.shtml",
+        "Nguồn: https://all.accor.com/a/en/destination/country/hotels-vietnam-pvn.html"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "03 Nguyen Du Street, Ward 09, Da Lat, Vietnam",
+        "website": "https://all.accor.com/hotel/B8H0/index.en.shtml",
+        "sourceUrl": "https://all.accor.com/hotel/B8H0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842633810826",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-lat-deux-amants-grand-mercur-f4476d9e",
+      "name": "DEUX AMANTS · Grand Mercure Dalat",
+      "category": "am",
+      "area": "Đà Lạt",
+      "hook": "Nhà hàng phục vụ nhiều khung bữa trong Grand Mercure Đà Lạt.",
+      "summary": "Nhà hàng phục vụ nhiều khung bữa trong Grand Mercure Đà Lạt. Thực đơn kết hợp các lựa chọn Á và Âu.",
+      "lat": 11.945187,
+      "lon": 108.459494,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Á",
+        "Ẩm thực Âu",
+        "Phục vụ nhiều khung bữa"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực á và ẩm thực âu.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Xác nhận buổi bạn ghé dùng món gọi riêng hay buffet.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842633810826.",
+        "Email liên hệ theo nguồn: HB8H0@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B8H0/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "03 Nguyen Du Street, Ward 09, Da Lat, Vietnam",
+        "website": "https://all.accor.com/hotel/B8H0/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B8H0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842633810826",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-lat-bao-eatery-dalat-grand-m-0bfa5e6d",
+      "name": "BAO Eatery Dalat · Grand Mercure Dalat",
+      "category": "am",
+      "area": "Đà Lạt",
+      "hook": "Món Hoa hiện đại kết hợp hương vị Quảng Đông và Tứ Xuyên trong Grand Mercure Đà Lạt.",
+      "summary": "Món Hoa hiện đại kết hợp hương vị Quảng Đông và Tứ Xuyên trong Grand Mercure Đà Lạt. Cách phục vụ hướng tới bữa ăn chia sẻ.",
+      "lat": 11.945187,
+      "lon": 108.459494,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Quảng Đông",
+        "Tứ Xuyên",
+        "Bữa ăn chia sẻ"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn quảng đông và tứ xuyên.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Hỏi độ cay và số người phù hợp của từng phần.",
+        "Ghim tại lối vào khách sạn; vị trí phòng ăn hoặc tầng phục vụ cần hỏi tại cơ sở.",
+        "Số liên hệ theo hồ sơ nguồn: +842633810826.",
+        "Email liên hệ theo nguồn: HB8H0@accor.com.",
+        "Nguồn: https://all.accor.com/hotel/B8H0/index.en.shtml"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "03 Nguyen Du Street, Ward 09, Da Lat, Vietnam",
+        "website": "https://all.accor.com/hotel/B8H0/index.en.shtml#section-facilities",
+        "sourceUrl": "https://all.accor.com/hotel/B8H0/index.en.shtml",
+        "checkedAt": "2026-11-07",
+        "phone": "+842633810826",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-lat-indiagate-c2d73da8",
+      "name": "IndiaGate",
+      "category": "am",
+      "area": "Đà Lạt",
+      "hook": "IndiaGate.",
+      "summary": "IndiaGate. Hồ sơ nguồn giới thiệu ẩm thực ấn; có thông tin về lựa chọn từ thực vật.",
+      "lat": 11.9443439,
+      "lon": 108.4398625,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Tùy bữa ăn bạn chọn",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Ẩm thực Ấn",
+        "Có thông tin về lựa chọn từ thực vật"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn ẩm thực ấn và có thông tin về lựa chọn từ thực vật.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu thực đơn và khẩu phần trước khi chọn món.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Lat",
+        "Nguồn: https://www.facebook.com/people/Indiagate-Indian-Restaurant/100063466991891/",
+        "Nguồn: https://www.openstreetmap.org/node/10819215405"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "restaurant",
+        "address": "19 Đường Bùi Thị Xuân",
+        "website": "https://www.facebook.com/people/Indiagate-Indian-Restaurant/100063466991891/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Da_Lat",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
+    },
+    {
+      "id": "rs-da-lat-dalat-edensee-lake-resor-ade64990",
+      "name": "Dalat Edensee Lake Resort & Spa",
+      "category": "luu",
+      "area": "Đà Lạt",
+      "hook": "Dalat Edensee Lake Resort & Spa: có hạng suite tại Đà Lạt.",
+      "summary": "Dalat Edensee Lake Resort & Spa: có hạng suite tại Đà Lạt. Hồ sơ nguồn giới thiệu có hạng suite; có lựa chọn villa; có khu trên tầng mái; có nhà hàng hoặc không gian ăn uống.",
+      "lat": 11.8856405,
+      "lon": 108.4236024,
+      "bestMonths": [],
+      "bestLabel": "Theo lịch phục vụ của cơ sở",
+      "duration": "Chọn ngày nhận và trả phòng",
+      "difficulty": "Không áp dụng",
+      "highlights": [
+        "Có hạng suite",
+        "Có lựa chọn villa",
+        "Có khu trên tầng mái",
+        "Có nhà hàng hoặc không gian ăn uống",
+        "Spa hoặc dịch vụ thư giãn"
+      ],
+      "verdict": "worth",
+      "verdictReason": "Phù hợp nếu bạn muốn có hạng suite và có lựa chọn villa.",
+      "bestSlots": [],
+      "slotReason": "Xác nhận lịch phục vụ với cơ sở trước khi chọn giờ ghé.",
+      "tips": [
+        "Đối chiếu hạng phòng, sức chứa và điều kiện hủy theo ngày nhận phòng.",
+        "Hỏi dịch vụ nào đã gồm trong giá và khoản nào tính riêng.",
+        "Nguồn: https://en.wikivoyage.org/wiki/Da_Lat",
+        "Nguồn: https://www.dalatedensee.com/",
+        "Nguồn: https://www.openstreetmap.org/way/473736708"
+      ],
+      "photos": [],
+      "wikipediaTitle": null,
+      "venue": {
+        "kind": "lodging",
+        "address": "Tuyen Lam Lake - Zone VII.2",
+        "website": "https://www.dalatedensee.com/",
+        "sourceUrl": "https://en.wikivoyage.org/wiki/Da_Lat",
+        "checkedAt": "2026-11-07",
+        "phone": "",
+        "serviceHours": "",
+        "priceNote": ""
+      }
     }
   ],
   "moments": [
@@ -836,6 +1383,79 @@
       "author": "tuey",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/21168473@N00/55061383"
+    },
+    {
+      "id": "unsplash-SjuEHXEhe_Q",
+      "theme": "mon-an",
+      "caption": "Bánh căn vừa đổ trên bếp nóng ở Đà Lạt",
+      "url": "https://images.unsplash.com/photo-1622087250339-9295c9ef442b?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTR8fERhJTIwTGF0JTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4ODk4MzZ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "gau xam",
+      "authorUrl": "https://unsplash.com/@gauxam?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/person-pouring-yellow-liquid-on-stainless-steel-bowl-SjuEHXEhe_Q?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-SfmKd40Jn-Y",
+      "theme": "nguoi",
+      "caption": "Đi bộ giữa nhịp phố Đà Lạt",
+      "url": "https://images.unsplash.com/photo-1594485770339-87069fe40467?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTV8fERhJTIwTGF0JTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4ODk4MzZ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Giuliano Gabella",
+      "authorUrl": "https://unsplash.com/@ggabella91?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/people-walking-on-street-during-daytime-SfmKd40Jn-Y?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "unsplash-HchQKxOSm7o",
+      "theme": "mon-an",
+      "caption": "Một ly cà phê, trước mặt là rừng thông",
+      "url": "https://images.unsplash.com/photo-1660287989246-639df4884ed3?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MjR8fERhJTIwTGF0JTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4ODk4MzZ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+      "author": "Hoang Thanh",
+      "authorUrl": "https://unsplash.com/@lamhoangthanh13?utm_source=wander&utm_medium=referral",
+      "license": "Giấy phép Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-cup-of-coffee-on-a-wood-table-with-a-forest-in-the-background-HchQKxOSm7o?utm_source=wander&utm_medium=referral"
+    },
+    {
+      "id": "pexels-37223759",
+      "theme": "mon-an",
+      "caption": "Hơi ấm từ một hàng nướng trong đêm Đà Lạt",
+      "file": "pexels-37223759.jpg",
+      "author": "Xuân Thống Trần",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/street-food-vendor-cooking-at-night-market-37223759/"
+    },
+    {
+      "id": "food-research-da-lat",
+      "theme": "mon-an",
+      "caption": "Bánh căn Đà Lạt · một món muốn thử (ảnh minh họa)",
+      "file": "food-extra-0-1.jpg",
+      "author": "Saigon Time",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
+    },
+    {
+      "id": "wave-pexels-20411011",
+      "theme": "cho",
+      "caption": "Hẹn nhau trước cổng chợ Đà Lạt khi lên đèn",
+      "file": "wave-pexels-20411011.jpg",
+      "author": "King Panther",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/cho-da-lat-in-da-lat-city-in-vietnam-at-night-20411011/"
+    },
+    {
+      "id": "wave-pexels-37130929",
+      "theme": "hanh-trinh",
+      "caption": "Đi bộ thêm một vòng phố đêm Đà Lạt",
+      "file": "wave-pexels-37130929.jpg",
+      "author": "Pew Nguyen",
+      "license": "Giấy phép Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/bustling-night-street-scene-in-da-lat-vietnam-37130929/"
     }
-  ]
+  ],
+  "coverPhoto": {
+    "url": "https://images.unsplash.com/photo-1586595276832-b6840c79bdfc?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MTN8fERhJTIwTGF0JTIwVmlldG5hbXxlbnwxfHx8fDE3OTM4ODk4MzZ8MA&ixlib=rb-4.1.0&w=1200&q=80&fm=jpg&fit=max",
+    "author": "Polina Rytova",
+    "authorUrl": "https://unsplash.com/@polina_art?utm_source=wander&utm_medium=referral",
+    "license": "Giấy phép Unsplash",
+    "sourceUrl": "https://unsplash.com/photos/brown-wooden-house-near-green-trees-under-blue-sky-during-daytime-eZbxM176E2c?utm_source=wander&utm_medium=referral"
+  }
 }

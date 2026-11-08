@@ -1,0 +1,41 @@
+{
+  "destinationId": "phu-yen",
+  "center": [
+    13.0882,
+    109.0929
+  ],
+  "radiusM": 5000,
+  "snapshotAt": "2026-11-06T14:56:13.367Z",
+  "osmTimestamp": "2026-11-06T14:55:20Z",
+  "sourceBbox": "around:5000,13.0882,109.0929",
+  "notice": "Dữ liệu snapshot OSM chưa xác minh hiện trạng hoặc giờ hoạt động; không phải danh sách Discover đã duyệt.",
+  "statistics": {
+    "before": 0,
+    "named": 0,
+    "removedUnnamed": 0,
+    "mergedDuplicates": 0,
+    "after": 0,
+    "beforeByKind": {
+      "food": 0,
+      "cafe": 0,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    },
+    "namedByKind": {
+      "food": 0,
+      "cafe": 0,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    },
+    "afterByKind": {
+      "food": 0,
+      "cafe": 0,
+      "fast_food": 0,
+      "bar": 0,
+      "other": 0
+    }
+  },
+  "pois": []
+}
