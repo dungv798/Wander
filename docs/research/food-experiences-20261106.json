@@ -1,0 +1,279 @@
+{
+  "researchedAt": "2026-11-06",
+  "trendSource": "https://news.booking.com/the-era-of-you-bookingcom-predicts-the-top-trends-defining-travel-in-2026-with-individuality-taking-center-stage/",
+  "trendScope": "Khảo sát ý định toàn cầu, không phải xếp hạng nhu cầu Việt Nam hay dữ liệu thời gian thực.",
+  "destinations": {
+    "sa-pa": {
+      "source": "https://vietnam.travel/things-to-do/sapa-itinerary-sustainable-travellers/",
+      "anchor": "trung-tam-sa-pa",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-sa-pa-thit-trau-gac-bep"
+      ],
+      "guideFoods": [
+        "Thịt trâu gác bếp",
+        "Đậu phụ trong bữa cơm bản",
+        "Rau su su xào tỏi"
+      ]
+    },
+    "ta-xua": {
+      "source": "https://en.baosonla.org.vn/kinh-te/shan-tuyet-tea-a-fragrant-treasure-of-ta-xuas-cloudy-mountains-2RRolfJvR.html",
+      "anchor": "ta-xua",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-ta-xua-tra-shan-tuyet"
+      ],
+      "guideFoods": [
+        "Ngồi lại với trà Shan tuyết"
+      ]
+    },
+    "vinh-hy": {
+      "source": "https://vietnam.travel/things-to-do/ninh-thuan-beyond-sun-wind-and-beach/",
+      "anchor": "vinh-hy",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-vinh-hy-banh-can",
+        "exp-food-vinh-hy-banh-canh-cha-ca"
+      ],
+      "guideFoods": [
+        "Bánh căn vùng nắng gió",
+        "Cơm gà Phan Rang",
+        "Bánh canh chả cá"
+      ]
+    },
+    "quy-nhon": {
+      "source": "https://dulichquynhon.binhdinh.gov.vn/ja/detailnews/?id=news_275&t=quy-nhon-ve-dem-co-gi-hap-dan",
+      "anchor": "trung-tam-quy-nhon",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-quy-nhon-banh-beo",
+        "exp-food-quy-nhon-bun-ca"
+      ],
+      "guideFoods": [
+        "Thử bánh xèo tôm nhảy",
+        "Bánh bèo buổi chiều",
+        "Bún cá Quy Nhơn"
+      ]
+    },
+    "phu-yen": {
+      "source": "https://phuyentourism.gov.vn/thongtin/bandodulich.pdf",
+      "anchor": "trung-tam-tuy-hoa",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-phu-yen-banh-trang"
+      ],
+      "guideFoods": [
+        "Một bữa cá ngừ Phú Yên",
+        "Tìm hiểu bánh tráng Hòa Đa"
+      ]
+    },
+    "ha-noi": {
+      "source": "https://vietnam.travel/things-to-do/ha-noi-food-guide-best-street-food-dishes-sample/",
+      "anchor": "trung-tam-ha-noi",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-ha-noi-pho",
+        "exp-food-ha-noi-bun-cha",
+        "exp-food-ha-noi-ca-phe-trung"
+      ],
+      "guideFoods": [
+        "Phở Hà Nội",
+        "Bún chả",
+        "Cà phê trứng"
+      ]
+    },
+    "ho-chi-minh": {
+      "source": "https://vietnam.travel/things-to-do/ho-chi-minh-city-cuisine-street-eats-fine-dining/",
+      "anchor": "trung-tam-sai-gon",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-ho-chi-minh-com-tam",
+        "exp-food-ho-chi-minh-hu-tieu",
+        "exp-food-ho-chi-minh-banh-mi"
+      ],
+      "guideFoods": [
+        "Cơm tấm Sài Gòn",
+        "Hủ tiếu",
+        "Bánh mì Sài Gòn"
+      ]
+    },
+    "hue": {
+      "source": "https://vietnam.travel/things-to-do/how-eat-local-hue/",
+      "anchor": "trung-tam-hue",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-hue-bun-bo-hue",
+        "exp-food-hue-banh-beo",
+        "exp-food-hue-banh-bot-loc"
+      ],
+      "guideFoods": [
+        "Bún bò Huế",
+        "Bánh bèo",
+        "Bánh bột lọc"
+      ]
+    },
+    "da-nang": {
+      "source": "https://vietnam.travel/things-to-do/foodie-guide-da-nang/",
+      "anchor": "trung-tam-da-nang",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-da-nang-mi-quang",
+        "exp-food-da-nang-bun-cha-ca"
+      ],
+      "guideFoods": [
+        "Mì Quảng",
+        "Bánh xèo Đà Nẵng",
+        "Bún chả cá"
+      ]
+    },
+    "hoi-an": {
+      "source": "https://vietnam.travel/things-to-do/explore-food-hoi-an/",
+      "anchor": "trung-tam-hoi-an",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-hoi-an-cao-lau",
+        "exp-food-hoi-an-banh-mi"
+      ],
+      "guideFoods": [
+        "Cao lầu",
+        "Cơm gà Hội An",
+        "Bánh mì Hội An"
+      ]
+    },
+    "da-lat": {
+      "source": "https://vietnam.travel/things-to-do/eating-dalat-chef-peter/",
+      "anchor": "trung-tam-da-lat",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-da-lat-banh-can",
+        "exp-food-da-lat-mi-quang"
+      ],
+      "guideFoods": [
+        "Bánh căn Đà Lạt",
+        "Bánh mì xíu mại",
+        "Mì Quảng ở Đà Lạt"
+      ]
+    },
+    "nha-trang": {
+      "source": "https://www.vietnam.travel/node/1333",
+      "anchor": "trung-tam-nha-trang",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-nha-trang-nem-nuong",
+        "exp-food-nha-trang-banh-can",
+        "exp-food-nha-trang-bun-cha-ca"
+      ],
+      "guideFoods": [
+        "Nem nướng Nha Trang",
+        "Bánh căn Nha Trang",
+        "Bún chả cá"
+      ]
+    },
+    "phu-quoc": {
+      "source": "https://vietnam.travel/things-to-do/a-day-in-phu-quoc/",
+      "anchor": "trung-tam-phu-quoc",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-phu-quoc-bun-quay"
+      ],
+      "guideFoods": [
+        "Bún quậy",
+        "Gỏi cá trích",
+        "Bún kèn"
+      ]
+    },
+    "can-tho": {
+      "source": "https://vietnam.travel/things-to-do/can-tho-glimpse-river-and-garden/",
+      "anchor": "trung-tam-can-tho",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-can-tho-hu-tieu",
+        "exp-food-can-tho-banh-xeo",
+        "exp-food-can-tho-banh-cong"
+      ],
+      "guideFoods": [
+        "Hủ tiếu buổi sáng",
+        "Bánh xèo miền Tây",
+        "Bánh cống"
+      ]
+    },
+    "buon-ma-thuot": {
+      "source": "https://vietnam.travel/things-to-do/7-reasons-explore-dak-lak/",
+      "anchor": "trung-tam-buon-ma-thuot",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-buon-ma-thuot-bun-do",
+        "exp-food-buon-ma-thuot-ca-phe-phin"
+      ],
+      "guideFoods": [
+        "Bún đỏ Buôn Ma Thuột",
+        "Một ly cà phê phin"
+      ]
+    },
+    "cao-bang": {
+      "source": "https://vietnam.travel/things-to-do/discovering-cao-bang-7-must-do-experiences/",
+      "anchor": "trung-tam-cao-bang",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-cao-bang-banh-cuon"
+      ],
+      "guideFoods": [
+        "Bánh cuốn Cao Bằng",
+        "Phở chua"
+      ]
+    },
+    "ha-long": {
+      "source": "https://baoquangninh.vn/cha-muc-dai-su-du-lich-am-thuc-cua-quang-ninh-3293249.html",
+      "anchor": "trung-tam-ha-long",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-ha-long-cha-muc"
+      ],
+      "guideFoods": [
+        "Chả mực Hạ Long",
+        "Bánh cuốn chả mực"
+      ]
+    },
+    "ninh-binh": {
+      "source": "https://vietnam.travel/things-to-do/10-must-do-activities-ninh-binh/",
+      "anchor": "trung-tam-ninh-binh",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-ninh-binh-de-nui",
+        "exp-food-ninh-binh-banh-cuon"
+      ],
+      "guideFoods": [
+        "Cơm cháy Ninh Bình",
+        "Dê núi Ninh Bình",
+        "Bánh cuốn buổi sáng"
+      ]
+    },
+    "phong-nha": {
+      "source": "https://vietnam.travel/things-to-do/complete-guide-phong-nha/",
+      "anchor": "trung-tam-phong-nha",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-phong-nha-ca-phe-phin"
+      ],
+      "guideFoods": [
+        "Bữa gà nướng ở Bồng Lai",
+        "Cà phê sau một ngày khám phá"
+      ]
+    },
+    "ha-giang": {
+      "source": "https://vietnam.travel/jp/things-to-do/local-unpacked-one-kind-cuisine-ha-giang-karst-plateau/",
+      "anchor": "pho-co-dong-van",
+      "coordinateKind": "AREA_REFERENCE_NOT_VENUE",
+      "foodCards": [
+        "exp-food-ha-giang-banh-cuon",
+        "exp-food-ha-giang-thang-co",
+        "exp-food-ha-giang-xoi-ngu-sac"
+      ],
+      "guideFoods": [
+        "Bánh cuốn Đồng Văn",
+        "Thử thắng cố ở chợ phiên",
+        "Xôi ngũ sắc"
+      ]
+    }
+  }
+}

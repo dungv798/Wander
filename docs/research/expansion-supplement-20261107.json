@@ -1,0 +1,192 @@
+{
+  "phong-nha-hang-toi": {
+    "dest": "phong-nha",
+    "id": "phong-nha-hang-toi",
+    "name": "Hang Tối",
+    "category": "canh",
+    "hook": "Tìm hiểu một trải nghiệm hang động khác bên sông Chày.",
+    "lat": 17.5737841,
+    "lon": 106.2541677,
+    "sourceUrl": "https://www.openstreetmap.org/node/5063396623",
+    "osmType": "cave_entrance",
+    "position": "OSM_UNVERIFIED_REFERENCE",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": []
+  },
+  "phong-nha-nuoc-mooc": {
+    "dest": "phong-nha",
+    "id": "phong-nha-nuoc-mooc",
+    "name": "Suối Nước Moọc",
+    "category": "canh",
+    "hook": "Dành một buổi giữa suối và rừng.",
+    "lat": 17.5553924,
+    "lon": 106.2357356,
+    "sourceUrl": "https://www.openstreetmap.org/node/4387487189",
+    "osmType": "monument",
+    "position": "OSM_UNVERIFIED_REFERENCE",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": []
+  },
+  "nha-trang-thap-ba-ponagar": {
+    "dest": "nha-trang",
+    "id": "nha-trang-thap-ba-ponagar",
+    "name": "Tháp Bà Po Nagar",
+    "category": "van",
+    "hook": "Khám phá kiến trúc Chăm nhìn xuống sông Cái.",
+    "lat": 12.2653884,
+    "lon": 109.1951777,
+    "sourceUrl": "https://www.openstreetmap.org/way/146780347",
+    "osmType": "archaeological_site",
+    "position": "OSM_UNVERIFIED_REFERENCE",
+    "wikipediaTitle": null,
+    "candidates": [
+      {
+        "title": "File:2008-01-27 Thap-Ba Nha-Trang.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/2008-01-27_Thap-Ba_Nha-Trang.jpg/1280px-2008-01-27_Thap-Ba_Nha-Trang.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "Public domain",
+        "author": "Udo Braunschweiger",
+        "source": "https://commons.wikimedia.org/wiki/File:2008-01-27_Thap-Ba_Nha-Trang.jpg",
+        "file": "supp-nha-trang-thap-ba-ponagar-1.jpg"
+      },
+      {
+        "title": "File:Templo Po Nagar 07.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Templo_Po_Nagar_07.jpg/1280px-Templo_Po_Nagar_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "RG72",
+        "source": "https://commons.wikimedia.org/wiki/File:Templo_Po_Nagar_07.jpg",
+        "file": "supp-nha-trang-thap-ba-ponagar-2.jpg"
+      },
+      {
+        "title": "File:Templo Po Nagar 14.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Templo_Po_Nagar_14.jpg/1280px-Templo_Po_Nagar_14.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "RG72",
+        "source": "https://commons.wikimedia.org/wiki/File:Templo_Po_Nagar_14.jpg",
+        "file": "supp-nha-trang-thap-ba-ponagar-3.jpg"
+      }
+    ],
+    "approved": []
+  },
+  "nha-trang-hon-chong": {
+    "dest": "nha-trang",
+    "id": "nha-trang-hon-chong",
+    "name": "Hòn Chồng (Nha Trang)",
+    "category": "canh",
+    "hook": "Ngồi bên những khối đá và nhìn ra vịnh.",
+    "lat": 12.2728399,
+    "lon": 109.2065606,
+    "sourceUrl": "https://www.openstreetmap.org/way/792392852",
+    "osmType": "bare_rock",
+    "position": "OSM_UNVERIFIED_REFERENCE",
+    "wikipediaTitle": null,
+    "candidates": [
+      {
+        "title": "File:Hon Vo seen from Hon Chong.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Hon_Vo_seen_from_Hon_Chong.JPG/1280px-Hon_Vo_seen_from_Hon_Chong.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Vinhtantran",
+        "source": "https://commons.wikimedia.org/wiki/File:Hon_Vo_seen_from_Hon_Chong.JPG",
+        "file": "supp-nha-trang-hon-chong-1.jpg"
+      },
+      {
+        "title": "File:Rock with hand sign, Hon Chong.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Rock_with_hand_sign%2C_Hon_Chong.jpg/1280px-Rock_with_hand_sign%2C_Hon_Chong.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Vinhtantran",
+        "source": "https://commons.wikimedia.org/wiki/File:Rock_with_hand_sign,_Hon_Chong.jpg",
+        "file": "supp-nha-trang-hon-chong-2.jpg"
+      },
+      {
+        "title": "File:Hon Chong seen from the hill.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Hon_Chong_seen_from_the_hill.JPG/1280px-Hon_Chong_seen_from_the_hill.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Vinhtantran",
+        "source": "https://commons.wikimedia.org/wiki/File:Hon_Chong_seen_from_the_hill.JPG",
+        "file": "supp-nha-trang-hon-chong-3.jpg"
+      }
+    ],
+    "approved": []
+  },
+  "can-tho-truc-lam-phuong-nam": {
+    "dest": "can-tho",
+    "id": "can-tho-truc-lam-phuong-nam",
+    "name": "Thiền viện Trúc Lâm Phương Nam",
+    "category": "van",
+    "hook": "Đi bộ qua những khoảng sân và mái ngói.",
+    "lat": 9.9896795,
+    "lon": 105.7037191,
+    "sourceUrl": "https://www.openstreetmap.org/node/4709395094",
+    "osmType": "place_of_worship",
+    "position": "OSM_UNVERIFIED_REFERENCE",
+    "wikipediaTitle": null,
+    "candidates": [
+      {
+        "title": "File:Thiền viện Trúc Lâm Phương Nam.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.jpg/1280px-Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Bùi Thụy Đào Nguyên",
+        "source": "https://commons.wikimedia.org/wiki/File:Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.jpg",
+        "file": "supp-can-tho-truc-lam-phuong-nam-1.jpg"
+      },
+      {
+        "title": "File:Tam quan Thiền viện Trúc Lâm Phương Nam.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Tam_quan_Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.JPG/1280px-Tam_quan_Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Bùi Thụy Đào Nguyên",
+        "source": "https://commons.wikimedia.org/wiki/File:Tam_quan_Thi%E1%BB%81n_vi%E1%BB%87n_Tr%C3%BAc_L%C3%A2m_Ph%C6%B0%C6%A1ng_Nam.JPG",
+        "file": "supp-can-tho-truc-lam-phuong-nam-2.jpg"
+      },
+      {
+        "title": "File:Một số tượng La Hán.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/M%E1%BB%99t_s%E1%BB%91_t%C6%B0%E1%BB%A3ng_La_H%C3%A1n.jpg/1280px-M%E1%BB%99t_s%E1%BB%91_t%C6%B0%E1%BB%A3ng_La_H%C3%A1n.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Bùi Thụy Đào Nguyên",
+        "source": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99t_s%E1%BB%91_t%C6%B0%E1%BB%A3ng_La_H%C3%A1n.jpg",
+        "file": "supp-can-tho-truc-lam-phuong-nam-3.jpg"
+      }
+    ],
+    "approved": []
+  },
+  "phu-quoc-suoi-tranh": {
+    "dest": "phu-quoc",
+    "id": "phu-quoc-suoi-tranh",
+    "name": "Suối Tranh",
+    "category": "canh",
+    "hook": "Lên ý tưởng một buổi đi bộ giữa cây xanh.",
+    "lat": 10.1837812,
+    "lon": 104.0153429,
+    "sourceUrl": "https://www.openstreetmap.org/node/357411250",
+    "osmType": "waterfall",
+    "position": "OSM_UNVERIFIED_REFERENCE",
+    "wikipediaTitle": null,
+    "candidates": [
+      {
+        "title": "File:Phu quoc suoi tranh.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Phu_quoc_suoi_tranh.jpg/1280px-Phu_quoc_suoi_tranh.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "ntt",
+        "source": "https://commons.wikimedia.org/wiki/File:Phu_quoc_suoi_tranh.jpg",
+        "file": "supp-phu-quoc-suoi-tranh-1.jpg"
+      },
+      {
+        "title": "File:Suối Tranh Phú Quốc (37732301196).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_%2837732301196%29.jpg/1280px-Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_%2837732301196%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 2.0",
+        "author": "Sketyl none",
+        "source": "https://commons.wikimedia.org/wiki/File:Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_(37732301196).jpg",
+        "file": "supp-phu-quoc-suoi-tranh-2.jpg"
+      },
+      {
+        "title": "File:Suối Tranh Phú Quốc (37111056503).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_%2837111056503%29.jpg/1280px-Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_%2837111056503%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 2.0",
+        "author": "Sketyl none",
+        "source": "https://commons.wikimedia.org/wiki/File:Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_(37111056503).jpg",
+        "file": "supp-phu-quoc-suoi-tranh-3.jpg"
+      }
+    ],
+    "approved": []
+  }
+}

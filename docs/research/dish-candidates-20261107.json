@@ -1,0 +1,780 @@
+{
+  "exp-food-ha-noi-cha-ca": {
+    "id": "exp-food-ha-noi-cha-ca",
+    "dest": "ha-noi",
+    "name": "Chả cá Hà Nội",
+    "title": "Chả cá Lã Vọng",
+    "summary": "Chọn một bữa chả cá, hỏi cách ăn cùng bún và rau tại quán.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/ha-noi-food-guide-best-street-food-dishes-sample/",
+    "wikipediaTitle": "Chả cá Lã Vọng",
+    "candidates": [
+      {
+        "title": "File:Chả_cá_Lã_Vọng_Hà_Nội_tháng_2_năm_2018_(1).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng_H%C3%A0_N%E1%BB%99i_th%C3%A1ng_2_n%C4%83m_2018_%281%29.jpg/1280px-Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng_H%C3%A0_N%E1%BB%99i_th%C3%A1ng_2_n%C4%83m_2018_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Phương Huy",
+        "source": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng_H%C3%A0_N%E1%BB%99i_th%C3%A1ng_2_n%C4%83m_2018_(1).jpg",
+        "file": "dish-ha-noi-cha-ca-1.jpg"
+      },
+      {
+        "title": "File:Chả cá Lã Vọng.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng.jpg/1280px-Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Lionel Ng from Singapore",
+        "source": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng.jpg",
+        "file": "dish-ha-noi-cha-ca-2.jpg"
+      },
+      {
+        "title": "File:Thịt cá.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Th%E1%BB%8Bt_c%C3%A1.JPG/1280px-Th%E1%BB%8Bt_c%C3%A1.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Thương QB",
+        "source": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_c%C3%A1.JPG",
+        "file": "dish-ha-noi-cha-ca-3.jpg"
+      }
+    ],
+    "approved": [
+      1,
+      2
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-ha-noi-bun-thang": {
+    "id": "exp-food-ha-noi-bun-thang",
+    "dest": "ha-noi",
+    "name": "Bún thang",
+    "title": "Bún thang",
+    "summary": "Một bát bún với nhiều thành phần; hỏi món có nguyên liệu nào trước khi gọi.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/ha-noi-food-guide-best-street-food-dishes-sample/",
+    "wikipediaTitle": "Bún thang",
+    "candidates": [
+      {
+        "title": "File:Bún_thang.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/B%C3%BAn_thang.JPG/1280px-B%C3%BAn_thang.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Nguyễn Thanh Quang",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_thang.JPG",
+        "file": "dish-ha-noi-bun-thang-1.jpg"
+      },
+      {
+        "title": "File:Bún thang.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/B%C3%BAn_thang.JPG/1280px-B%C3%BAn_thang.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Nguyễn Thanh Quang",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_thang.JPG",
+        "file": "dish-ha-noi-bun-thang-2.jpg"
+      },
+      {
+        "title": "File:Plateau de garniture et assiettes de rau răm et laitue.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Plateau_de_garniture_et_assiettes_de_rau_r%C4%83m_et_laitue.jpg/1280px-Plateau_de_garniture_et_assiettes_de_rau_r%C4%83m_et_laitue.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Vietcuongdao",
+        "source": "https://commons.wikimedia.org/wiki/File:Plateau_de_garniture_et_assiettes_de_rau_r%C4%83m_et_laitue.jpg",
+        "file": "dish-ha-noi-bun-thang-3.jpg"
+      }
+    ],
+    "approved": [
+      1
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-ho-chi-minh-banh-trang-tron": {
+    "id": "exp-food-ho-chi-minh-banh-trang-tron",
+    "dest": "ho-chi-minh",
+    "name": "Bánh tráng trộn",
+    "title": "Bánh tráng trộn",
+    "summary": "Một món ăn vặt để thử khi dạo phố; chọn độ cay và topping theo khẩu vị.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/ho-chi-minh-city-cuisine-street-eats-fine-dining/",
+    "wikipediaTitle": "Bánh tráng trộn",
+    "candidates": [
+      {
+        "title": "File:Vietnamese_\"banh_trang_tron\".JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Vietnamese_%22banh_trang_tron%22.JPG/1280px-Vietnamese_%22banh_trang_tron%22.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Memberofc1",
+        "source": "https://commons.wikimedia.org/wiki/File:Vietnamese_%22banh_trang_tron%22.JPG",
+        "file": "dish-ho-chi-minh-banh-trang-tron-1.jpg"
+      },
+      {
+        "title": "File:Vietnamese \"banh trang tron\".JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Vietnamese_%22banh_trang_tron%22.JPG/1280px-Vietnamese_%22banh_trang_tron%22.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Memberofc1",
+        "source": "https://commons.wikimedia.org/wiki/File:Vietnamese_%22banh_trang_tron%22.JPG",
+        "file": "dish-ho-chi-minh-banh-trang-tron-2.jpg"
+      },
+      {
+        "title": "File:Mixed rice paper.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Mixed_rice_paper.jpg/1280px-Mixed_rice_paper.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Khanh Ha, Tran",
+        "source": "https://commons.wikimedia.org/wiki/File:Mixed_rice_paper.jpg",
+        "file": "dish-ho-chi-minh-banh-trang-tron-3.jpg"
+      }
+    ],
+    "approved": [
+      1,
+      3
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-ho-chi-minh-bot-chien": {
+    "id": "exp-food-ho-chi-minh-bot-chien",
+    "dest": "ho-chi-minh",
+    "name": "Bột chiên",
+    "title": "Bột chiên",
+    "summary": "Tìm một đĩa bột chiên cùng trứng, ăn nóng với nước chấm của quán.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/ho-chi-minh-city-cuisine-street-eats-fine-dining/",
+    "wikipediaTitle": "Bánh bột chiên",
+    "candidates": [
+      {
+        "title": "File:Mì_xào_trứng_và_bột_chiên_ở_Bình_Tân_ngày_26_tháng_4_năm_2020_ở_Bình_Tân_(5).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/M%C3%AC_x%C3%A0o_tr%E1%BB%A9ng_v%C3%A0_b%E1%BB%99t_chi%C3%AAn_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_ng%C3%A0y_26_th%C3%A1ng_4_n%C4%83m_2020_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_%285%29.jpg/960px-M%C3%AC_x%C3%A0o_tr%E1%BB%A9ng_v%C3%A0_b%E1%BB%99t_chi%C3%AAn_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_ng%C3%A0y_26_th%C3%A1ng_4_n%C4%83m_2020_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_%285%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Phương Huy",
+        "source": "https://commons.wikimedia.org/wiki/File:M%C3%AC_x%C3%A0o_tr%E1%BB%A9ng_v%C3%A0_b%E1%BB%99t_chi%C3%AAn_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_ng%C3%A0y_26_th%C3%A1ng_4_n%C4%83m_2020_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_(5).jpg",
+        "file": "dish-ho-chi-minh-bot-chien-1.jpg"
+      },
+      {
+        "title": "File:Botchien in Vietnam.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Botchien_in_Vietnam.jpg/1280px-Botchien_in_Vietnam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Memberofc1",
+        "source": "https://commons.wikimedia.org/wiki/File:Botchien_in_Vietnam.jpg",
+        "file": "dish-ho-chi-minh-bot-chien-2.jpg"
+      },
+      {
+        "title": "File:Mì xào trứng và bột chiên ở Bình Tân ngày 26 tháng 4 năm 2020 ở Bình Tân (5).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/M%C3%AC_x%C3%A0o_tr%E1%BB%A9ng_v%C3%A0_b%E1%BB%99t_chi%C3%AAn_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_ng%C3%A0y_26_th%C3%A1ng_4_n%C4%83m_2020_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_%285%29.jpg/960px-M%C3%AC_x%C3%A0o_tr%E1%BB%A9ng_v%C3%A0_b%E1%BB%99t_chi%C3%AAn_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_ng%C3%A0y_26_th%C3%A1ng_4_n%C4%83m_2020_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_%285%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Phương Huy",
+        "source": "https://commons.wikimedia.org/wiki/File:M%C3%AC_x%C3%A0o_tr%E1%BB%A9ng_v%C3%A0_b%E1%BB%99t_chi%C3%AAn_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_ng%C3%A0y_26_th%C3%A1ng_4_n%C4%83m_2020_%E1%BB%9F_B%C3%ACnh_T%C3%A2n_(5).jpg",
+        "file": "dish-ho-chi-minh-bot-chien-3.jpg"
+      }
+    ],
+    "approved": [
+      1,
+      2
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-ho-chi-minh-goi-cuon": {
+    "id": "exp-food-ho-chi-minh-goi-cuon",
+    "dest": "ho-chi-minh",
+    "name": "Gỏi cuốn",
+    "title": "Gỏi cuốn",
+    "summary": "Một lựa chọn cuốn nhẹ nhàng; hỏi nhân cuốn và loại nước chấm.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/ho-chi-minh-city-cuisine-street-eats-fine-dining/",
+    "wikipediaTitle": "Gỏi cuốn",
+    "candidates": [
+      {
+        "title": "File:Summer_roll.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Summer_roll.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "license": "CC BY 2.0",
+        "author": "Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:Summer_roll.jpg",
+        "file": "dish-ho-chi-minh-goi-cuon-1.jpg"
+      },
+      {
+        "title": "File:Summer roll.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Summer_roll.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "license": "CC BY 2.0",
+        "author": "Wikimedia Commons",
+        "source": "https://commons.wikimedia.org/wiki/File:Summer_roll.jpg",
+        "file": "dish-ho-chi-minh-goi-cuon-2.jpg"
+      },
+      {
+        "title": "File:Vietnamese cuisine - table serving.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Vietnamese_cuisine_-_table_serving.jpg/1280px-Vietnamese_cuisine_-_table_serving.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Michael Osmenda",
+        "source": "https://commons.wikimedia.org/wiki/File:Vietnamese_cuisine_-_table_serving.jpg",
+        "file": "dish-ho-chi-minh-goi-cuon-3.jpg"
+      }
+    ],
+    "approved": [
+      1
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-hue-com-hen": {
+    "id": "exp-food-hue-com-hen",
+    "dest": "hue",
+    "name": "Cơm hến",
+    "title": "Cơm hến",
+    "summary": "Thử vị cay, rau và các thành phần ăn kèm của một bữa cơm hến.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/how-eat-local-hue/",
+    "wikipediaTitle": "Cơm hến",
+    "candidates": [
+      {
+        "title": "File:Hến_trộn.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/H%E1%BA%BFn_tr%E1%BB%99n.jpg/1280px-H%E1%BA%BFn_tr%E1%BB%99n.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Lucas Jans from USA",
+        "source": "https://commons.wikimedia.org/wiki/File:H%E1%BA%BFn_tr%E1%BB%99n.jpg",
+        "file": "dish-hue-com-hen-1.jpg"
+      },
+      {
+        "title": "File:Hến trộn.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/H%E1%BA%BFn_tr%E1%BB%99n.jpg/1280px-H%E1%BA%BFn_tr%E1%BB%99n.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Lucas Jans from USA",
+        "source": "https://commons.wikimedia.org/wiki/File:H%E1%BA%BFn_tr%E1%BB%99n.jpg",
+        "file": "dish-hue-com-hen-2.jpg"
+      }
+    ],
+    "approved": [
+      1
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-hue-banh-nam": {
+    "id": "exp-food-hue-banh-nam",
+    "dest": "hue",
+    "name": "Bánh nậm",
+    "title": "Bánh nậm",
+    "summary": "Tìm những gói bánh mềm; hỏi phần nhân và nước chấm khi gọi.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/how-eat-local-hue/",
+    "wikipediaTitle": "Bánh nậm",
+    "candidates": [
+      {
+        "title": "File:Bánh Nậm.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/B%C3%A1nh_N%E1%BA%ADm.jpg/1280px-B%C3%A1nh_N%E1%BA%ADm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Christopher Crouzet",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_N%E1%BA%ADm.jpg",
+        "file": "dish-hue-banh-nam-1.jpg"
+      }
+    ],
+    "approved": [
+      1
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-hoi-an-com-ga": {
+    "id": "exp-food-hoi-an-com-ga",
+    "dest": "hoi-an",
+    "name": "Cơm gà Hội An",
+    "title": "Cơm gà Hội An",
+    "summary": "Chọn một bữa cơm gà và cân nhắc phần thịt, rau và nước trộn theo khẩu vị.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/explore-food-hoi-an/",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-hoi-an-banh-vac": {
+    "id": "exp-food-hoi-an-banh-vac",
+    "dest": "hoi-an",
+    "name": "Bánh bao bánh vạc",
+    "title": "Bánh bao bánh vạc",
+    "summary": "Tìm hiểu món bánh nhỏ gắn với ẩm thực Hội An.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/explore-food-hoi-an/",
+    "wikipediaTitle": null,
+    "candidates": [
+      {
+        "title": "File:Bánh bao bánh vạc - hoi an (2024).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/B%C3%A1nh_bao_b%C3%A1nh_v%E1%BA%A1c_-_hoi_an_%282024%29.jpg/1280px-B%C3%A1nh_bao_b%C3%A1nh_v%E1%BA%A1c_-_hoi_an_%282024%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 4.0",
+        "author": "Chainwit.",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_bao_b%C3%A1nh_v%E1%BA%A1c_-_hoi_an_(2024).jpg",
+        "file": "dish-hoi-an-banh-vac-1.jpg"
+      }
+    ],
+    "approved": [
+      1
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-da-nang-bun-mam-nem": {
+    "id": "exp-food-da-nang-bun-mam-nem",
+    "dest": "da-nang",
+    "name": "Bún mắm nêm",
+    "title": "Bún mắm nêm",
+    "summary": "Một bữa bún đậm mùi mắm; hỏi thành phần và điều chỉnh lượng mắm theo ý thích.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/foodie-guide-da-nang/",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-da-nang-banh-trang-thit-heo": {
+    "id": "exp-food-da-nang-banh-trang-thit-heo",
+    "dest": "da-nang",
+    "name": "Bánh tráng cuốn thịt heo",
+    "title": "Bánh tráng cuốn thịt heo",
+    "summary": "Dành một bữa cuốn bánh tráng cùng rau và thịt, hỏi loại mắm trước khi chọn.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/foodie-guide-da-nang/",
+    "wikipediaTitle": null,
+    "candidates": [
+      {
+        "title": "File:Bánh tráng cuốn thịt heo.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo.jpg/1280px-B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Lê Huỳnh Bộ",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo.jpg",
+        "file": "dish-da-nang-banh-trang-thit-heo-1.jpg"
+      },
+      {
+        "title": "File:Bánh tráng cuốn thịt heo (18521).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo_%2818521%29.jpg/1280px-B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo_%2818521%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Lê Huỳnh Bộ",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo_(18521).jpg",
+        "file": "dish-da-nang-banh-trang-thit-heo-2.jpg"
+      }
+    ],
+    "approved": [
+      1,
+      2
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-da-lat-banh-trang-nuong": {
+    "id": "exp-food-da-lat-banh-trang-nuong",
+    "dest": "da-lat",
+    "name": "Bánh tráng nướng Đà Lạt",
+    "title": "Bánh tráng nướng",
+    "summary": "Một món ăn vặt nóng giữa buổi dạo phố; chọn topping và độ cay tại hàng.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/eating-dalat-chef-peter/",
+    "wikipediaTitle": "Bánh tráng",
+    "candidates": [
+      {
+        "title": "File:Bánh tráng nướng TP. Hồ Chí Minh - street food in Ho Chi Minh City, Vietnam.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/B%C3%A1nh_tr%C3%A1ng_n%C6%B0%E1%BB%9Bng_TP._H%E1%BB%93_Ch%C3%AD_Minh_-_street_food_in_Ho_Chi_Minh_City%2C_Vietnam.jpg/1280px-B%C3%A1nh_tr%C3%A1ng_n%C6%B0%E1%BB%9Bng_TP._H%E1%BB%93_Ch%C3%AD_Minh_-_street_food_in_Ho_Chi_Minh_City%2C_Vietnam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Light Write",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_n%C6%B0%E1%BB%9Bng_TP._H%E1%BB%93_Ch%C3%AD_Minh_-_street_food_in_Ho_Chi_Minh_City,_Vietnam.jpg",
+        "file": "dish-da-lat-banh-trang-nuong-1.jpg"
+      }
+    ],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-da-lat-kem-bo": {
+    "id": "exp-food-da-lat-kem-bo",
+    "dest": "da-lat",
+    "name": "Kem bơ",
+    "title": "Kem bơ",
+    "summary": "Thêm một khoảng dừng ngọt mát, hỏi phần kem và thành phần sữa nếu cần.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/eating-dalat-chef-peter/",
+    "wikipediaTitle": "Kem bơ",
+    "candidates": [
+      {
+        "title": "File:Chocolate_Cupcakes_with_Raspberry_Buttercream.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Chocolate_Cupcakes_with_Raspberry_Buttercream.jpg/1280px-Chocolate_Cupcakes_with_Raspberry_Buttercream.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 2.0",
+        "author": "Whitney",
+        "source": "https://commons.wikimedia.org/wiki/File:Chocolate_Cupcakes_with_Raspberry_Buttercream.jpg",
+        "file": "dish-da-lat-kem-bo-1.jpg"
+      },
+      {
+        "title": "File:Buttercreme in einer Glasschüssel-8493.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Buttercreme_in_einer_Glassch%C3%BCssel-8493.jpg/1280px-Buttercreme_in_einer_Glassch%C3%BCssel-8493.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Raimond Spekking",
+        "source": "https://commons.wikimedia.org/wiki/File:Buttercreme_in_einer_Glassch%C3%BCssel-8493.jpg",
+        "file": "dish-da-lat-kem-bo-2.jpg"
+      },
+      {
+        "title": "File:Buttercreme in einer Glasschüssel-8495.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Buttercreme_in_einer_Glassch%C3%BCssel-8495.jpg/1280px-Buttercreme_in_einer_Glassch%C3%BCssel-8495.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Raimond Spekking",
+        "source": "https://commons.wikimedia.org/wiki/File:Buttercreme_in_einer_Glassch%C3%BCssel-8495.jpg",
+        "file": "dish-da-lat-kem-bo-3.jpg"
+      }
+    ],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-nha-trang-bun-sua": {
+    "id": "exp-food-nha-trang-bun-sua",
+    "dest": "nha-trang",
+    "name": "Bún sứa",
+    "title": "Bún sứa",
+    "summary": "Tìm hiểu một bữa bún hải sản, hỏi nguyên liệu và cách dùng theo quán.",
+    "sourceUrl": "https://www.vietnam.travel/node/1333",
+    "wikipediaTitle": "Bún sứa",
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-phu-quoc-goi-ca-trich": {
+    "id": "exp-food-phu-quoc-goi-ca-trich",
+    "dest": "phu-quoc",
+    "name": "Gỏi cá trích",
+    "title": "Gỏi cá trích",
+    "summary": "Cân nhắc món cá trích và cách chế biến thực tế tại quán; hỏi thành phần ăn kèm.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/a-day-in-phu-quoc/",
+    "wikipediaTitle": "Gỏi cá trích",
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-phu-quoc-bun-ken": {
+    "id": "exp-food-phu-quoc-bun-ken",
+    "dest": "phu-quoc",
+    "name": "Bún kèn",
+    "title": "Bún kèn",
+    "summary": "Tìm một bữa bún có nước dùng riêng của vùng đảo, hỏi cách nấu tại nơi ăn.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/a-day-in-phu-quoc/",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-can-tho-banh-tam-bi": {
+    "id": "exp-food-can-tho-banh-tam-bi",
+    "dest": "can-tho",
+    "name": "Bánh tằm bì",
+    "title": "Bánh tằm bì",
+    "summary": "Chọn một bữa bánh tằm với phần bì và nước cốt dừa theo khẩu vị.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/can-tho-glimpse-river-and-garden/",
+    "wikipediaTitle": "Bánh tằm bì",
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-can-tho-banh-tet-la-cam": {
+    "id": "exp-food-can-tho-banh-tet-la-cam",
+    "dest": "can-tho",
+    "name": "Bánh tét lá cẩm",
+    "title": "Bánh tét lá cẩm",
+    "summary": "Tìm hiểu sắc bánh và phần nhân; hỏi loại mặn/ngọt và cách bảo quản nếu mua mang đi.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/can-tho-glimpse-river-and-garden/",
+    "wikipediaTitle": "Bánh tét lá cẩm",
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-buon-ma-thuot-com-lam": {
+    "id": "exp-food-buon-ma-thuot-com-lam",
+    "dest": "buon-ma-thuot",
+    "name": "Cơm lam Tây Nguyên",
+    "title": "Cơm lam",
+    "summary": "Một ý tưởng cho bữa ăn với cơm nấu trong ống tre; chọn món ăn kèm tại nơi đến.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/7-reasons-explore-dak-lak/",
+    "wikipediaTitle": "Cơm lam",
+    "candidates": [
+      {
+        "title": "File:Paung_din.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Paung_din.JPG/1280px-Paung_din.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Wagaung at en.wikipedia",
+        "source": "https://commons.wikimedia.org/wiki/File:Paung_din.JPG",
+        "file": "dish-buon-ma-thuot-com-lam-1.jpg"
+      },
+      {
+        "title": "File:Cơm lam Tây Nguyên.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/C%C6%A1m_lam_T%C3%A2y_Nguy%C3%AAn.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "license": "CC BY 2.0",
+        "author": "Lam Nguyen from Ho Chi Minh City, Vietnam",
+        "source": "https://commons.wikimedia.org/wiki/File:C%C6%A1m_lam_T%C3%A2y_Nguy%C3%AAn.jpg",
+        "file": "dish-buon-ma-thuot-com-lam-2.jpg"
+      },
+      {
+        "title": "File:ငချိတ်ဆန်.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/%E1%80%84%E1%80%81%E1%80%BB%E1%80%AD%E1%80%90%E1%80%BA%E1%80%86%E1%80%94%E1%80%BA.jpg/1280px-%E1%80%84%E1%80%81%E1%80%BB%E1%80%AD%E1%80%90%E1%80%BA%E1%80%86%E1%80%94%E1%80%BA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC0",
+        "author": "စာကလေး SarKaLay",
+        "source": "https://commons.wikimedia.org/wiki/File:%E1%80%84%E1%80%81%E1%80%BB%E1%80%AD%E1%80%90%E1%80%BA%E1%80%86%E1%80%94%E1%80%BA.jpg",
+        "file": "dish-buon-ma-thuot-com-lam-3.jpg"
+      }
+    ],
+    "approved": [
+      2
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-cao-bang-pho-chua": {
+    "id": "exp-food-cao-bang-pho-chua",
+    "dest": "cao-bang",
+    "name": "Phở chua Cao Bằng",
+    "title": "Phở chua",
+    "summary": "Thử một cách ăn phở khác, hỏi phần sốt và các nguyên liệu trộn của quán.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/discovering-cao-bang-7-must-do-experiences/",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-quy-nhon-banh-it-la-gai": {
+    "id": "exp-food-quy-nhon-banh-it-la-gai",
+    "dest": "quy-nhon",
+    "name": "Bánh ít lá gai",
+    "title": "Bánh ít lá gai",
+    "summary": "Tìm hiểu chiếc bánh nhỏ gói lá, hỏi phần nhân và cách giữ bánh khi mua làm quà.",
+    "sourceUrl": "https://dulichquynhon.binhdinh.gov.vn/ja/detailnews/?id=news_275&t=quy-nhon-ve-dem-co-gi-hap-dan",
+    "wikipediaTitle": "Bánh gai",
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-quy-nhon-banh-hoi-long-heo": {
+    "id": "exp-food-quy-nhon-banh-hoi-long-heo",
+    "dest": "quy-nhon",
+    "name": "Bánh hỏi lòng heo",
+    "title": "Bánh hỏi",
+    "summary": "Lên ý tưởng một bữa bánh hỏi; phần lòng và món ăn kèm cần hỏi trực tiếp tại quán.",
+    "sourceUrl": "https://dulichquynhon.binhdinh.gov.vn/ja/detailnews/?id=news_275&t=quy-nhon-ve-dem-co-gi-hap-dan",
+    "wikipediaTitle": "Bánh hỏi",
+    "candidates": [
+      {
+        "title": "File:Bánh_hỏi_trình_bày_trên_đĩa.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/B%C3%A1nh_h%E1%BB%8Fi_tr%C3%ACnh_b%C3%A0y_tr%C3%AAn_%C4%91%C4%A9a.jpg/1280px-B%C3%A1nh_h%E1%BB%8Fi_tr%C3%ACnh_b%C3%A0y_tr%C3%AAn_%C4%91%C4%A9a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Ngô Trung",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_h%E1%BB%8Fi_tr%C3%ACnh_b%C3%A0y_tr%C3%AAn_%C4%91%C4%A9a.jpg",
+        "file": "dish-quy-nhon-banh-hoi-long-heo-1.jpg"
+      },
+      {
+        "title": "File:Banh hoi.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Banh_hoi.jpg/1280px-Banh_hoi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Memberofc1",
+        "source": "https://commons.wikimedia.org/wiki/File:Banh_hoi.jpg",
+        "file": "dish-quy-nhon-banh-hoi-long-heo-2.jpg"
+      },
+      {
+        "title": "File:Bánh hỏi trình bày trên đĩa.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/B%C3%A1nh_h%E1%BB%8Fi_tr%C3%ACnh_b%C3%A0y_tr%C3%AAn_%C4%91%C4%A9a.jpg/1280px-B%C3%A1nh_h%E1%BB%8Fi_tr%C3%ACnh_b%C3%A0y_tr%C3%AAn_%C4%91%C4%A9a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Ngô Trung",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_h%E1%BB%8Fi_tr%C3%ACnh_b%C3%A0y_tr%C3%AAn_%C4%91%C4%A9a.jpg",
+        "file": "dish-quy-nhon-banh-hoi-long-heo-3.jpg"
+      }
+    ],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-phu-yen-banh-canh-he": {
+    "id": "exp-food-phu-yen-banh-canh-he",
+    "dest": "phu-yen",
+    "name": "Bánh canh hẹ",
+    "title": "Bánh canh hẹ",
+    "summary": "Tìm một bát bánh canh thơm hẹ, hỏi phần cá và topping của quán.",
+    "sourceUrl": "https://phuyentourism.gov.vn/thongtin/bandodulich.pdf",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-vinh-hy-com-ga": {
+    "id": "exp-food-vinh-hy-com-ga",
+    "dest": "vinh-hy",
+    "name": "Cơm gà Phan Rang",
+    "title": "Cơm gà Phan Rang",
+    "summary": "Chọn một bữa cơm gà trong hành trình vùng Phan Rang, hỏi phần thịt và nước chấm.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/ninh-thuan-beyond-sun-wind-and-beach/",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-sa-pa-com-lam": {
+    "id": "exp-food-sa-pa-com-lam",
+    "dest": "sa-pa",
+    "name": "Cơm lam Sa Pa",
+    "title": "Cơm lam",
+    "summary": "Thử cơm lam trong bữa ăn vùng cao; hỏi món ăn kèm và thời điểm phục vụ.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/sapa-itinerary-sustainable-travellers/",
+    "wikipediaTitle": "Cơm lam",
+    "candidates": [
+      {
+        "title": "File:Paung_din.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Paung_din.JPG/1280px-Paung_din.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Wagaung at en.wikipedia",
+        "source": "https://commons.wikimedia.org/wiki/File:Paung_din.JPG",
+        "file": "dish-sa-pa-com-lam-1.jpg"
+      },
+      {
+        "title": "File:Cơm lam Tây Nguyên.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/C%C6%A1m_lam_T%C3%A2y_Nguy%C3%AAn.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "license": "CC BY 2.0",
+        "author": "Lam Nguyen from Ho Chi Minh City, Vietnam",
+        "source": "https://commons.wikimedia.org/wiki/File:C%C6%A1m_lam_T%C3%A2y_Nguy%C3%AAn.jpg",
+        "file": "dish-sa-pa-com-lam-2.jpg"
+      },
+      {
+        "title": "File:Sticky Rice (85950).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Sticky_Rice_%2885950%29.jpg/1280px-Sticky_Rice_%2885950%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "SarKaLay စာကလေး",
+        "source": "https://commons.wikimedia.org/wiki/File:Sticky_Rice_(85950).jpg",
+        "file": "dish-sa-pa-com-lam-3.jpg"
+      }
+    ],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-ta-xua-thit-gac-bep": {
+    "id": "exp-food-ta-xua-thit-gac-bep",
+    "dest": "ta-xua",
+    "name": "Thịt gác bếp Tây Bắc",
+    "title": "Thịt trâu gác bếp",
+    "summary": "Tìm hiểu cách chế biến thịt gác bếp, hỏi thành phần và cách dùng trước khi chọn.",
+    "sourceUrl": "https://en.baosonla.org.vn/kinh-te/shan-tuyet-tea-a-fragrant-treasure-of-ta-xuas-cloudy-mountains-2RRolfJvR.html",
+    "wikipediaTitle": "Thịt gác bếp",
+    "candidates": [
+      {
+        "title": "File:Thịt trâu gác bếp Tả Phìn Hồ.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_T%E1%BA%A3_Ph%C3%ACn_H%E1%BB%93.jpg/1280px-Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_T%E1%BA%A3_Ph%C3%ACn_H%E1%BB%93.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "GiangLy",
+        "source": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_T%E1%BA%A3_Ph%C3%ACn_H%E1%BB%93.jpg",
+        "file": "dish-ta-xua-thit-gac-bep-1.jpg"
+      },
+      {
+        "title": "File:Lễ hội ẩm thực Cửa Việt th4n2023 đặc sản Tây Bắc, thịt trâu gác bếp mắc khén (2).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/L%E1%BB%85_h%E1%BB%99i_%E1%BA%A9m_th%E1%BB%B1c_C%E1%BB%ADa_Vi%E1%BB%87t_th4n2023_%C4%91%E1%BA%B7c_s%E1%BA%A3n_T%C3%A2y_B%E1%BA%AFc%2C_th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_m%E1%BA%AFc_kh%C3%A9n_%282%29.jpg/1280px-L%E1%BB%85_h%E1%BB%99i_%E1%BA%A9m_th%E1%BB%B1c_C%E1%BB%ADa_Vi%E1%BB%87t_th4n2023_%C4%91%E1%BA%B7c_s%E1%BA%A3n_T%C3%A2y_B%E1%BA%AFc%2C_th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_m%E1%BA%AFc_kh%C3%A9n_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Phương Huy",
+        "source": "https://commons.wikimedia.org/wiki/File:L%E1%BB%85_h%E1%BB%99i_%E1%BA%A9m_th%E1%BB%B1c_C%E1%BB%ADa_Vi%E1%BB%87t_th4n2023_%C4%91%E1%BA%B7c_s%E1%BA%A3n_T%C3%A2y_B%E1%BA%AFc,_th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_m%E1%BA%AFc_kh%C3%A9n_(2).jpg",
+        "file": "dish-ta-xua-thit-gac-bep-2.jpg"
+      },
+      {
+        "title": "File:Thịt trâu gác bếp Lam Sơn Food.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg/1280px-Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Cabokho",
+        "source": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg",
+        "file": "dish-ta-xua-thit-gac-bep-3.jpg"
+      }
+    ],
+    "approved": [
+      2,
+      3
+    ],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Đã xem ảnh đúng món, loại ảnh lặp và ảnh khác món/vùng. Ảnh minh họa món, không đại diện quán."
+  },
+  "exp-food-ha-giang-thang-den": {
+    "id": "exp-food-ha-giang-thang-den",
+    "dest": "ha-giang",
+    "name": "Thắng dền",
+    "title": "Thắng dền",
+    "summary": "Tìm một bát thắng dền ấm sau buổi dạo phố, hỏi phần nhân và độ ngọt.",
+    "sourceUrl": "https://vietnam.travel/jp/things-to-do/local-unpacked-one-kind-cuisine-ha-giang-karst-plateau/",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-ha-long-banh-cuon-cha-muc": {
+    "id": "exp-food-ha-long-banh-cuon-cha-muc",
+    "dest": "ha-long",
+    "name": "Bánh cuốn chả mực",
+    "title": "Bánh cuốn chả mực",
+    "summary": "Lên ý tưởng một bữa bánh cuốn với chả mực; hỏi phần ăn và giá tại quán.",
+    "sourceUrl": "https://baoquangninh.vn/cha-muc-dai-su-du-lich-am-thuc-cua-quang-ninh-3293249.html",
+    "wikipediaTitle": null,
+    "candidates": [],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-ninh-binh-com-chay": {
+    "id": "exp-food-ninh-binh-com-chay",
+    "dest": "ninh-binh",
+    "name": "Cơm cháy Ninh Bình",
+    "title": "Cơm cháy",
+    "summary": "Chọn cơm cháy như một món ăn tại chỗ hoặc quà mang về; hỏi cách dùng với sốt.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/10-must-do-activities-ninh-binh/",
+    "wikipediaTitle": "Cơm cháy",
+    "candidates": [
+      {
+        "title": "File:Cơm_cháy_kho_quẹt_tại_Bích_La_Thôn-Đông_Hà_(1).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/C%C6%A1m_ch%C3%A1y_kho_qu%E1%BA%B9t_t%E1%BA%A1i_B%C3%ADch_La_Th%C3%B4n-%C4%90%C3%B4ng_H%C3%A0_%281%29.jpg/1280px-C%C6%A1m_ch%C3%A1y_kho_qu%E1%BA%B9t_t%E1%BA%A1i_B%C3%ADch_La_Th%C3%B4n-%C4%90%C3%B4ng_H%C3%A0_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "Public domain",
+        "author": "Phương Huy ( thảo luận )",
+        "source": "https://commons.wikimedia.org/wiki/File:C%C6%A1m_ch%C3%A1y_kho_qu%E1%BA%B9t_t%E1%BA%A1i_B%C3%ADch_La_Th%C3%B4n-%C4%90%C3%B4ng_H%C3%A0_(1).jpg",
+        "file": "dish-ninh-binh-com-chay-1.jpg"
+      },
+      {
+        "title": "File:Fluweelpootje, (Flammulina velutipes), (d.j.b.) 03.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Fluweelpootje%2C_%28Flammulina_velutipes%29%2C_%28d.j.b.%29_03.jpg/1280px-Fluweelpootje%2C_%28Flammulina_velutipes%29%2C_%28d.j.b.%29_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Dominicus Johannes Bergsma",
+        "source": "https://commons.wikimedia.org/wiki/File:Fluweelpootje,_(Flammulina_velutipes),_(d.j.b.)_03.jpg",
+        "file": "dish-ninh-binh-com-chay-2.jpg"
+      },
+      {
+        "title": "File:Holunderbusch.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Holunderbusch.jpg/1280px-Holunderbusch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Rosa-Maria Rinkl",
+        "source": "https://commons.wikimedia.org/wiki/File:Holunderbusch.jpg",
+        "file": "dish-ninh-binh-com-chay-3.jpg"
+      }
+    ],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  },
+  "exp-food-phong-nha-banh-bot-loc": {
+    "id": "exp-food-phong-nha-banh-bot-loc",
+    "dest": "phong-nha",
+    "name": "Bánh bột lọc Quảng Bình",
+    "title": "Bánh bột lọc",
+    "summary": "Thử món bánh bột lọc trong hành trình Phong Nha; hỏi phần nhân và nước chấm tại hàng.",
+    "sourceUrl": "https://vietnam.travel/things-to-do/complete-guide-phong-nha/",
+    "wikipediaTitle": "Bánh bột lọc",
+    "candidates": [
+      {
+        "title": "File:Bánh_bèo,_bột_lọc,_nem_chua.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/B%C3%A1nh_b%C3%A8o%2C_b%E1%BB%99t_l%E1%BB%8Dc%2C_nem_chua.jpg/1280px-B%C3%A1nh_b%C3%A8o%2C_b%E1%BB%99t_l%E1%BB%8Dc%2C_nem_chua.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Thang Nguyen from Nottingham, United Kingdom",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o,_b%E1%BB%99t_l%E1%BB%8Dc,_nem_chua.jpg",
+        "file": "dish-phong-nha-banh-bot-loc-1.jpg"
+      },
+      {
+        "title": "File:Bánh bèo, bột lọc, nem chua.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/B%C3%A1nh_b%C3%A8o%2C_b%E1%BB%99t_l%E1%BB%8Dc%2C_nem_chua.jpg/1280px-B%C3%A1nh_b%C3%A8o%2C_b%E1%BB%99t_l%E1%BB%8Dc%2C_nem_chua.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Thang Nguyen from Nottingham, United Kingdom",
+        "source": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o,_b%E1%BB%99t_l%E1%BB%8Dc,_nem_chua.jpg",
+        "file": "dish-phong-nha-banh-bot-loc-2.jpg"
+      },
+      {
+        "title": "File:Transluent ravioli in Hanoi.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Transluent_ravioli_in_Hanoi.jpg/1280px-Transluent_ravioli_in_Hanoi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC0",
+        "author": "Amenoc",
+        "source": "https://commons.wikimedia.org/wiki/File:Transluent_ravioli_in_Hanoi.jpg",
+        "file": "dish-phong-nha-banh-bot-loc-3.jpg"
+      }
+    ],
+    "approved": [],
+    "reviewedAt": "2026-11-07",
+    "reviewNotes": "Chỉ giữ ý tưởng trong cẩm nang; thiếu ảnh đúng món/vùng, không lấy ảnh không liên quan."
+  }
+}

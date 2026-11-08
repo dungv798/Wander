@@ -1,0 +1,48 @@
+{
+  "reviewedAt": "2026-11-06",
+  "method": "Viewed all eight full-ratio national contact sheets; removed only own new photo references, never baseline assets. Files retained on disk.",
+  "removals": [
+    {
+      "destination": "ninh-binh",
+      "placeId": "ninh-binh-trang-an",
+      "file": "ninh-binh-trang-an-2.jpg",
+      "reason": "Source identifies Tam Coc, not the specific Trang An boat route."
+    },
+    {
+      "destination": "ninh-binh",
+      "placeId": "ninh-binh-tam-coc",
+      "file": "ninh-binh-tam-coc-1.jpg",
+      "reason": "Source identifies Trang An Cave."
+    },
+    {
+      "destination": "ninh-binh",
+      "placeId": "ninh-binh-hang-mua",
+      "file": "ninh-binh-hang-mua-1.jpg",
+      "reason": "Source confirms Tam Coc only; Hang Mua camera viewpoint not established."
+    },
+    {
+      "destination": "phong-nha",
+      "placeId": "phong-nha-dong-phong-nha",
+      "file": "phong-nha-dong-phong-nha-2.jpg",
+      "reason": "Source explicitly names Paradise Cave; separate attraction."
+    },
+    {
+      "destination": "phu-quoc",
+      "placeId": "phu-quoc-vuon-quoc-gia",
+      "file": "phu-quoc-vuon-quoc-gia-1.jpg",
+      "reason": "Source identifies Sao beach, not national park."
+    },
+    {
+      "destination": "buon-ma-thuot",
+      "placeId": "buon-ma-thuot-yok-don",
+      "file": "buon-ma-thuot-yok-don-2.jpg",
+      "reason": "Historical elephant riding photo does not represent the current walking/nature experience."
+    },
+    {
+      "destination": "buon-ma-thuot",
+      "placeId": "buon-ma-thuot-ho-lak",
+      "file": "buon-ma-thuot-ho-lak-3.jpg",
+      "reason": "Historical elephant riding photo omitted from new walking/culture collection."
+    }
+  ]
+}

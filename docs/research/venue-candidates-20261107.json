@@ -1,0 +1,3078 @@
+{
+  "venue-ha-noi-metropole": {
+    "dest": "ha-noi",
+    "slug": "metropole",
+    "name": "Sofitel Legend Metropole Hanoi",
+    "kind": "lodging",
+    "url": "https://www.sofitel-legend-metropole-hanoi.com/location/",
+    "address": "15 Ngô Quyền, Hà Nội",
+    "focus": "Khách sạn mang dấu ấn lịch sử gần Nhà hát Lớn.",
+    "id": "venue-ha-noi-metropole",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://www.sofitel-legend-metropole-hanoi.com/location/",
+    "title": "Location &ndash; Metropole Hanoi",
+    "sourceBytes": 120700,
+    "mapLinks": [
+      "https:\\/\\/maps.googleapis.com\\/maps\\/api\\/js?v=3&libraries=places&key=AIzaSyBJuG1E1gSCqx-pEFtOn0UFFYg4s11Zrwo"
+    ],
+    "hits": [
+      {
+        "place_id": 431823873,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "relation",
+        "osm_id": 21802486,
+        "lat": "21.0256106",
+        "lon": "105.8559780",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 24,
+        "importance": 0.0800728305485618,
+        "addresstype": "hotel",
+        "name": "Sofitel Legend Metropole Hà Nội",
+        "display_name": "Sofitel Legend Metropole Hà Nội, 15, Phường Hoàn Kiếm, Thành phố Hà Nội, 11024, Việt Nam",
+        "boundingbox": [
+          "21.0251545",
+          "21.0260374",
+          "105.8553912",
+          "105.8565871"
+        ]
+      }
+    ],
+    "photoCandidates": [
+      {
+        "title": "File:Hanoi - Square Chavassieux - Résidence Supérieure.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Hanoi_-_Square_Chavassieux_-_R%C3%A9sidence_Sup%C3%A9rieure.jpg/1280px-Hanoi_-_Square_Chavassieux_-_R%C3%A9sidence_Sup%C3%A9rieure.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "Public domain",
+        "author": "Pierre Dieulefils",
+        "source": "https://commons.wikimedia.org/wiki/File:Hanoi_-_Square_Chavassieux_-_R%C3%A9sidence_Sup%C3%A9rieure.jpg",
+        "file": "venue-ha-noi-metropole-1.jpg"
+      },
+      {
+        "title": "File:Hôtel Métropole (3).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/H%C3%B4tel_M%C3%A9tropole_%283%29.jpg/1280px-H%C3%B4tel_M%C3%A9tropole_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Guerinf",
+        "source": "https://commons.wikimedia.org/wiki/File:H%C3%B4tel_M%C3%A9tropole_(3).jpg",
+        "file": "venue-ha-noi-metropole-2.jpg"
+      },
+      {
+        "title": "File:Sofitel Metropole, Ngô Quyền - 2022-09-02 01.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Sofitel_Metropole%2C_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg/1280px-Sofitel_Metropole%2C_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "The Hanoian",
+        "source": "https://commons.wikimedia.org/wiki/File:Sofitel_Metropole,_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg",
+        "file": "venue-ha-noi-metropole-3.jpg"
+      }
+    ],
+    "selectedOsm": {
+      "type": "relation",
+      "id": 21802486,
+      "lat": 21.0256106,
+      "lon": 105.855978,
+      "name": "Sofitel Legend Metropole Hà Nội, 15, Phường Hoàn Kiếm, Thành phố Hà Nội, 11024, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": [
+      3,
+      2
+    ]
+  },
+  "venue-ho-chi-minh-majestic": {
+    "dest": "ho-chi-minh",
+    "slug": "majestic",
+    "name": "Hotel Majestic Saigon",
+    "kind": "lodging",
+    "url": "https://www.majesticsaigon.com/",
+    "address": "1 Đồng Khởi, Thành phố Hồ Chí Minh",
+    "focus": "Chọn một điểm nghỉ mang dấu ấn kiến trúc bên sông Sài Gòn.",
+    "id": "venue-ho-chi-minh-majestic",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://www.majesticsaigon.com/",
+    "title": "HOTEL MAJESTIC SAIGON",
+    "sourceBytes": 102067,
+    "mapLinks": [
+      "\"latitude\":\"-6.233406",
+      "\"longitude\":\"-35.049906",
+      "\"latitude\":\"-6.233406",
+      "\"longitude\":\"-35.049906",
+      "\"latitude\":\"-6.233406",
+      "\"longitude\":\"-35.049906",
+      "\"latitude\":\"-6.233406",
+      "\"longitude\":\"-35.049906",
+      "\"latitude\":\"-6.233406",
+      "\"longitude\":\"-35.049906",
+      "\"latitude\":\"-6.233406",
+      "\"longitude\":\"-35.049906"
+    ],
+    "hits": [
+      {
+        "place_id": 258672562,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 193142038,
+        "lat": "10.7729295",
+        "lon": "106.7060707",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.3649233439058235,
+        "addresstype": "tourism",
+        "name": "Majestic Hotel",
+        "display_name": "Majestic Hotel, Đồng Khởi, Khu phố 9, Phường Sài Gòn, Thành phố Hồ Chí Minh, 71016, Việt Nam",
+        "boundingbox": [
+          "10.7724482",
+          "10.7734409",
+          "106.7056401",
+          "106.7062810"
+        ]
+      },
+      {
+        "place_id": 258423422,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 193142040,
+        "lat": "10.7725305",
+        "lon": "106.7058711",
+        "category": "leisure",
+        "type": "park",
+        "place_rank": 24,
+        "importance": 0.08006703364614325,
+        "addresstype": "park",
+        "name": "Công viên Majestic Hotel",
+        "display_name": "Công viên Majestic Hotel, Phường Sài Gòn, Thành phố Hồ Chí Minh, 71016, Việt Nam",
+        "boundingbox": [
+          "10.7721042",
+          "10.7728774",
+          "106.7056264",
+          "106.7062467"
+        ]
+      }
+    ],
+    "photoCandidates": [
+      {
+        "title": "File:Majestic Hotel, Sai Gon.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Majestic_Hotel%2C_Sai_Gon.jpg/1280px-Majestic_Hotel%2C_Sai_Gon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 2.0",
+        "author": "Marufish",
+        "source": "https://commons.wikimedia.org/wiki/File:Majestic_Hotel,_Sai_Gon.jpg",
+        "file": "venue-ho-chi-minh-majestic-1.jpg"
+      },
+      {
+        "title": "File:Hotel Majestic, Saigon, 2023 (01).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Hotel_Majestic%2C_Saigon%2C_2023_%2801%29.jpg/1280px-Hotel_Majestic%2C_Saigon%2C_2023_%2801%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 4.0",
+        "author": "Bahnfrend",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotel_Majestic,_Saigon,_2023_(01).jpg",
+        "file": "venue-ho-chi-minh-majestic-2.jpg"
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 193142038,
+      "lat": 10.7729295,
+      "lon": 106.7060707,
+      "name": "Majestic Hotel, Đồng Khởi, Khu phố 9, Phường Sài Gòn, Thành phố Hồ Chí Minh, 71016, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": [
+      2,
+      1
+    ]
+  },
+  "venue-hue-saigon-morin": {
+    "dest": "hue",
+    "slug": "saigon-morin",
+    "name": "Saigon Morin Hotel",
+    "kind": "lodging",
+    "url": "https://morinhotel.com.vn/",
+    "address": "30 Lê Lợi, Huế",
+    "focus": "Một điểm nghỉ ở khu vực bờ sông Hương và cầu Trường Tiền.",
+    "id": "venue-hue-saigon-morin",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://morinhotel.com.vn/",
+    "title": "Home - Khách sạn Sài Gòn Morin - Saigon Morin Hotel",
+    "sourceBytes": 83295,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 239145813,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 239566031,
+        "lat": "16.4666195",
+        "lon": "107.5902634",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00006297627222090512,
+        "addresstype": "tourism",
+        "name": "Hotel Saigon Morin",
+        "display_name": "Hotel Saigon Morin, 30, Lê Lợi, Vĩnh Ninh, Tổ dân phố 3, Phường Thuận Hóa, Hương Thuỷ, Thành phố Huế, 47000, Việt Nam",
+        "boundingbox": [
+          "16.4660156",
+          "16.4671371",
+          "107.5896449",
+          "107.5909544"
+        ]
+      }
+    ],
+    "photoCandidates": [
+      {
+        "title": "File:Hue Hotel Saigon (24675543497).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Hue_Hotel_Saigon_%2824675543497%29.jpg/1280px-Hue_Hotel_Saigon_%2824675543497%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 2.0",
+        "author": "dronepicr",
+        "source": "https://commons.wikimedia.org/wiki/File:Hue_Hotel_Saigon_(24675543497).jpg",
+        "file": "venue-hue-saigon-morin-1.jpg"
+      },
+      {
+        "title": "File:Hotel Saigon Morin, Hue (2024) 03.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Hotel_Saigon_Morin%2C_Hue_%282024%29_03.jpg/1280px-Hotel_Saigon_Morin%2C_Hue_%282024%29_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 4.0",
+        "author": "Chainwit.",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotel_Saigon_Morin,_Hue_(2024)_03.jpg",
+        "file": "venue-hue-saigon-morin-2.jpg"
+      },
+      {
+        "title": "File:Hotel Saigon Morin, Hue (2024) 01.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Hotel_Saigon_Morin%2C_Hue_%282024%29_01.jpg/1280px-Hotel_Saigon_Morin%2C_Hue_%282024%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY 4.0",
+        "author": "Chainwit.",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotel_Saigon_Morin,_Hue_(2024)_01.jpg",
+        "file": "venue-hue-saigon-morin-3.jpg"
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 239566031,
+      "lat": 16.4666195,
+      "lon": 107.5902634,
+      "name": "Hotel Saigon Morin, 30, Lê Lợi, Vĩnh Ninh, Tổ dân phố 3, Phường Thuận Hóa, Hương Thuỷ, Thành phố Huế, 47000, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": [
+      1,
+      2
+    ]
+  },
+  "venue-hoi-an-anantara": {
+    "dest": "hoi-an",
+    "slug": "anantara",
+    "name": "Anantara Hoi An Resort",
+    "kind": "lodging",
+    "url": "https://www.anantara.com/en/hoi-an",
+    "address": "1 Phạm Hồng Thái, Hội An",
+    "focus": "Nghỉ bên sông Thu Bồn, cân nhắc những buổi đi bộ phố cổ.",
+    "id": "venue-hoi-an-anantara",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 403,
+    "finalUrl": "https://www.anantara.com/en/hoi-an",
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 256975773,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 2271214793,
+        "lat": "15.8774464",
+        "lon": "108.3359654",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "tourism",
+        "name": "Anantara Resort",
+        "display_name": "Anantara Resort, 1, Phạm Hồng Thái, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8773964",
+          "15.8774964",
+          "108.3359154",
+          "108.3360154"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 2271214793,
+      "lat": 15.8774464,
+      "lon": 108.3359654,
+      "name": "Anantara Resort, 1, Phạm Hồng Thái, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-da-nang-haian-beach": {
+    "dest": "da-nang",
+    "slug": "haian-beach",
+    "name": "HAIAN Beach Hotel & Spa",
+    "kind": "lodging",
+    "url": "https://haianbeachhotelspa.com/",
+    "address": "278 Võ Nguyên Giáp, Đà Nẵng",
+    "focus": "Lên ý tưởng nghỉ ở khu vực biển Mỹ Khê.",
+    "id": "venue-da-nang-haian-beach",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://haianbeachhotelspa.com/",
+    "title": "HAIAN Beach Hotel Spa, Danang | Official Website",
+    "sourceBytes": 349325,
+    "mapLinks": [
+      "https://www.google.com/maps?cid=7997918751679133123&#038;g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&#038;hl=en-US&#038;source=embed",
+      "https://maps.google.com/maps?q=Haian%20Beach%20Hotel%20%26%20Spa%2C%20V%C3%B5%20Nguy%C3%AAn%20Gi%C3%A1p%2C%20My%20An%2C%20Ng%C5%A9%20H%C3%A0nh%20S%C6%A1n%2C%20Da%20Nang%2C%20Vietnam&#038;t=m&#038;z=14&#038;output=embed&#038;iwloc=near"
+    ],
+    "hits": [
+      {
+        "place_id": 238649195,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 693058159,
+        "lat": "16.0530480",
+        "lon": "108.2475341",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00006461966887917934,
+        "addresstype": "tourism",
+        "name": "Haian Beach Hotel & Spa",
+        "display_name": "Haian Beach Hotel & Spa, 278, Đường Võ Nguyên Giáp, Phường Ngũ Hành Sơn, Thành phố Đà Nẵng, 50510, Việt Nam",
+        "boundingbox": [
+          "16.0529220",
+          "16.0531740",
+          "108.2473261",
+          "108.2477420"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 693058159,
+      "lat": 16.053048,
+      "lon": 108.2475341,
+      "name": "Haian Beach Hotel & Spa, 278, Đường Võ Nguyên Giáp, Phường Ngũ Hành Sơn, Thành phố Đà Nẵng, 50510, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-da-lat-dalat-palace": {
+    "dest": "da-lat",
+    "slug": "dalat-palace",
+    "name": "Dalat Palace Heritage Hotel",
+    "kind": "lodging",
+    "url": "https://www.dalatpalacehotel.com/",
+    "address": "2 Trần Phú, Đà Lạt",
+    "focus": "Tìm hiểu một khách sạn mang dấu ấn lịch sử gần hồ Xuân Hương.",
+    "id": "venue-da-lat-dalat-palace",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://www.dalatpalacehotel.com/chao-mung/",
+    "title": "Chào Mừng &#8211; Dalat Palace Heritage Hotel",
+    "sourceBytes": 178064,
+    "mapLinks": [],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 259407604,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 407699702,
+        "lat": "11.9375798",
+        "lon": "108.4403914",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "tourism",
+        "name": "Dalat Palace Hotel",
+        "display_name": "Dalat Palace Hotel, Hồ Tùng Mậu, Ấp Xuân An, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 02633, Việt Nam",
+        "boundingbox": [
+          "11.9371376",
+          "11.9379109",
+          "108.4400746",
+          "108.4407456"
+        ]
+      },
+      {
+        "place_id": 258197973,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 6545196270,
+        "lat": "11.9458952",
+        "lon": "108.4250841",
+        "category": "tourism",
+        "type": "chalet",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "tourism",
+        "name": "Solar Palace Đà Lạt",
+        "display_name": "Solar Palace Đà Lạt, Dã Tượng, Cư xá Ngoạn Mục, Phường Cam Ly - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 66113, Việt Nam",
+        "boundingbox": [
+          "11.9458452",
+          "11.9459452",
+          "108.4250341",
+          "108.4251341"
+        ]
+      },
+      {
+        "place_id": 259307563,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 1152320175,
+        "lat": "11.9282663",
+        "lon": "108.4468202",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "amenity",
+        "name": "Ocean Palace",
+        "display_name": "Ocean Palace, Tô Hiến Thành, Ấp Tân Lạc, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 66116, Việt Nam",
+        "boundingbox": [
+          "11.9282163",
+          "11.9283163",
+          "108.4467702",
+          "108.4468702"
+        ]
+      },
+      {
+        "place_id": 259306772,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 6031332170,
+        "lat": "11.9432772",
+        "lon": "108.4675620",
+        "category": "shop",
+        "type": "ticket",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "shop",
+        "name": "King Palace",
+        "display_name": "King Palace, 1, Trần Quang Diệu, Ấp Hồng Lạc, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 66117, Việt Nam",
+        "boundingbox": [
+          "11.9432272",
+          "11.9433272",
+          "108.4675120",
+          "108.4676120"
+        ]
+      },
+      {
+        "place_id": 259303085,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 463866431,
+        "lat": "11.9301096",
+        "lon": "108.4296724",
+        "category": "building",
+        "type": "yes",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "building",
+        "name": "Dinh Bao Dai 3",
+        "display_name": "Dinh Bao Dai 3, Triệu Việt Vương, Ấp An Lạc, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 66115, Việt Nam",
+        "boundingbox": [
+          "11.9299785",
+          "11.9302049",
+          "108.4294214",
+          "108.4299902"
+        ]
+      },
+      {
+        "place_id": 259002272,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1238335794,
+        "lat": "11.9340080",
+        "lon": "108.4297109",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "tourism",
+        "name": "Khu Biệt Thự Nguyễn Viết Xuân",
+        "display_name": "Khu Biệt Thự Nguyễn Viết Xuân, 1, Nguyễn Viết Xuân, Ấp An Lạc, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 66115, Việt Nam",
+        "boundingbox": [
+          "11.9339184",
+          "11.9341137",
+          "108.4295487",
+          "108.4297937"
+        ]
+      }
+    ],
+    "photoCandidates": [
+      {
+        "title": "File:Dalat Palace Hotel.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Dalat_Palace_Hotel.jpg/1280px-Dalat_Palace_Hotel.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "Public domain",
+        "author": "Diane Selwyn ( talk )",
+        "source": "https://commons.wikimedia.org/wiki/File:Dalat_Palace_Hotel.jpg",
+        "file": "venue-da-lat-dalat-palace-1.jpg"
+      },
+      {
+        "title": "File:Xuan Huong Lake 19.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Xuan_Huong_Lake_19.jpg/1280px-Xuan_Huong_Lake_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Diane Selwyn",
+        "source": "https://commons.wikimedia.org/wiki/File:Xuan_Huong_Lake_19.jpg",
+        "file": "venue-da-lat-dalat-palace-2.jpg"
+      },
+      {
+        "title": "File:Khach san Dalat Palace - Huy Phuong 2.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Khach_san_Dalat_Palace_-_Huy_Phuong_2.jpg/1280px-Khach_san_Dalat_Palace_-_Huy_Phuong_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC BY-SA 3.0",
+        "author": "Trần Huy Phương",
+        "source": "https://commons.wikimedia.org/wiki/File:Khach_san_Dalat_Palace_-_Huy_Phuong_2.jpg",
+        "file": "venue-da-lat-dalat-palace-3.jpg"
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 407699702,
+      "lat": 11.9375798,
+      "lon": 108.4403914,
+      "name": "Dalat Palace Hotel, Hồ Tùng Mậu, Ấp Xuân An, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 02633, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": [
+      3,
+      1
+    ]
+  },
+  "venue-nha-trang-havana": {
+    "dest": "nha-trang",
+    "slug": "havana",
+    "name": "Havana Nha Trang Hotel",
+    "kind": "lodging",
+    "url": "https://havanahotel.vn/en/lien-he",
+    "address": "38 Trần Phú, Nha Trang",
+    "focus": "Điểm nghỉ trên trục đường biển Trần Phú.",
+    "id": "venue-nha-trang-havana",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://havanahotel.vn/en/contact",
+    "title": "Contact - Khách sạn 5 Sao Havana Nha Trang",
+    "sourceBytes": 46613,
+    "mapLinks": [
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.072117012343!2d109.19376216476294!3d12.243396241336546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31706778fd8c5dff%3A0xd3c343b165958165!2sPremier%20Havana!5e0!3m2!1svi!2s!4v1639988504531!5m2!1svi!2s"
+    ],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 258682489,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1385329338,
+        "lat": "10.9625294",
+        "lon": "106.8545768",
+        "category": "shop",
+        "type": "beauty",
+        "place_rank": 30,
+        "importance": 0.00005591439688711402,
+        "addresstype": "shop",
+        "name": "Havana",
+        "display_name": "Havana, 289, Đường Phan Trung, Khu phố 12, Phường Tam Hiệp, Đồng Nai, Thành phố Đồng Nai, 76109, Việt Nam",
+        "boundingbox": [
+          "10.9623951",
+          "10.9626172",
+          "106.8545267",
+          "106.8546427"
+        ]
+      },
+      {
+        "place_id": 257871550,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4920642221,
+        "lat": "15.8805683",
+        "lon": "108.3411861",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Havana",
+        "display_name": "Havana, 476, Cửa Đại, Phường Hội An Đông, Hội An, Thành phố Đà Nẵng, 51320, Việt Nam",
+        "boundingbox": [
+          "15.8805183",
+          "15.8806183",
+          "108.3411361",
+          "108.3412361"
+        ]
+      },
+      {
+        "place_id": 238323340,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 12751062854,
+        "lat": "20.2122784",
+        "lon": "105.9366462",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.000045001144426596745,
+        "addresstype": "tourism",
+        "name": "Havana",
+        "display_name": "Havana, Đường tỉnh 478B, Văn Lâm, Phường Nam Hoa Lư, Ninh Hải, Tỉnh Ninh Bình, 08213, Việt Nam",
+        "boundingbox": [
+          "20.2122284",
+          "20.2123284",
+          "105.9365962",
+          "105.9366962"
+        ]
+      },
+      {
+        "place_id": 238140949,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11655769803,
+        "lat": "21.0361083",
+        "lon": "105.8528973",
+        "category": "amenity",
+        "type": "bar",
+        "place_rank": 30,
+        "importance": 0.00007283054856179167,
+        "addresstype": "amenity",
+        "name": "Havana Pub",
+        "display_name": "Havana Pub, 1B, Phố Mã Mây, Khu phố cổ, Phường Hoàn Kiếm, Thành phố Hà Nội, 11010, Việt Nam",
+        "boundingbox": [
+          "21.0360583",
+          "21.0361583",
+          "105.8528473",
+          "105.8529473"
+        ]
+      },
+      {
+        "place_id": 258421393,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 189193713,
+        "lat": "10.7713731",
+        "lon": "106.7003562",
+        "category": "building",
+        "type": "office",
+        "place_rank": 30,
+        "importance": 0.00006703364614323671,
+        "addresstype": "building",
+        "name": "Tòa nhà Havana Tower",
+        "display_name": "Tòa nhà Havana Tower, 132, Hàm Nghi, Khu phố 1, Phường Bến Thành, Thành phố Hồ Chí Minh, 71009, Việt Nam",
+        "boundingbox": [
+          "10.7712687",
+          "10.7714491",
+          "106.7001936",
+          "106.7005166"
+        ]
+      },
+      {
+        "place_id": 258580549,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 6727410063,
+        "lat": "10.7514886",
+        "lon": "106.6095632",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00006703364614323671,
+        "addresstype": "tourism",
+        "name": "Khách Sạn Havana",
+        "display_name": "Khách Sạn Havana, Đường số 7A, Khu phố 12, Phường An Lạc, Thành phố Hồ Chí Minh, 73118, Việt Nam",
+        "boundingbox": [
+          "10.7514386",
+          "10.7515386",
+          "106.6095132",
+          "106.6096132"
+        ]
+      }
+    ],
+    "boundedHits": [
+      {
+        "place_id": 258293368,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 650959856,
+        "lat": "12.2434932",
+        "lon": "109.1958235",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00005969710841530507,
+        "addresstype": "tourism",
+        "name": "Havana premier 5 star",
+        "display_name": "Havana premier 5 star, Trần Phú, Phước Hòa, Phường Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57106, Việt Nam",
+        "boundingbox": [
+          "12.2432404",
+          "12.2437782",
+          "109.1953865",
+          "109.1962565"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 650959856,
+      "lat": 12.2434932,
+      "lon": 109.1958235,
+      "name": "Havana premier 5 star, Trần Phú, Phước Hòa, Phường Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57106, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-phu-quoc-cassia-cottage": {
+    "dest": "phu-quoc",
+    "slug": "cassia-cottage",
+    "name": "Cassia Cottage",
+    "kind": "lodging",
+    "url": "https://cassiacottage.com/contact/",
+    "address": "100C/12 Trần Hưng Đạo, Phú Quốc",
+    "focus": "Một ý tưởng nghỉ giữa vườn cây và không gian ven biển.",
+    "id": "venue-phu-quoc-cassia-cottage",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://cassiacottage.com/contact/",
+    "title": "Contact Cassia Cottage Phu Quoc | Get in Touch for Bookings &amp; Inquiries",
+    "sourceBytes": 131632,
+    "mapLinks": [
+      "\"latitude\": 10.1725825",
+      "\"longitude\": 103.9706254",
+      "https://maps.app.goo.gl/L1AwfVanazotAvaD8"
+    ],
+    "hits": [
+      {
+        "place_id": 257131764,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 13437202908,
+        "lat": "10.1983547",
+        "lon": "103.9638641",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00004850919356064725,
+        "addresstype": "tourism",
+        "name": "Cassia Cottage",
+        "display_name": "Cassia Cottage, Trần Hưng Đạo, 7 Dương Đông, Đặc khu Phú Quốc, Tỉnh An Giang, 92516, Việt Nam",
+        "boundingbox": [
+          "10.1983047",
+          "10.1984047",
+          "103.9638141",
+          "103.9639141"
+        ]
+      },
+      {
+        "place_id": 256495787,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 12153242602,
+        "lat": "10.1983927",
+        "lon": "103.9640466",
+        "category": "leisure",
+        "type": "resort",
+        "place_rank": 30,
+        "importance": 0.00004850919356064725,
+        "addresstype": "leisure",
+        "name": "Cassia Cottage",
+        "display_name": "Cassia Cottage, Trần Hưng Đạo, 7 Dương Đông, Đặc khu Phú Quốc, Tỉnh An Giang, 92516, Việt Nam",
+        "boundingbox": [
+          "10.1983427",
+          "10.1984427",
+          "103.9639966",
+          "103.9640966"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 13437202908,
+      "lat": 10.1983547,
+      "lon": 103.9638641,
+      "name": "Cassia Cottage, Trần Hưng Đạo, 7 Dương Đông, Đặc khu Phú Quốc, Tỉnh An Giang, 92516, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-can-tho-victoria": {
+    "dest": "can-tho",
+    "slug": "victoria",
+    "name": "Victoria Can Tho Resort",
+    "kind": "lodging",
+    "url": "https://www.victoriahotels.asia/vi/victoria-can-tho-resort/",
+    "address": "Khu Cái Khế, Cần Thơ",
+    "focus": "Tìm một nhịp nghỉ bên sông trước hành trình miền Tây.",
+    "id": "venue-can-tho-victoria",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://www.victoriahotels.asia/vi/victoria-can-tho-resort/",
+    "title": "Victoria Can Tho Resort | Resort Bên Sông Cần Thơ",
+    "sourceBytes": 626850,
+    "mapLinks": [
+      "https://www.victoriahotels.asia/wp-content/plugins/elementor/assets/css/widget-google_maps.min.css?ver=4.3.6",
+      "https://www.google.com/maps/dir/?api=1&#038;destination=Victoria%20Can%20Tho%20Resort%2C%20Cai%20Khe%20Ward%2C%20Can%20Tho%20City%2C%20Vietnam",
+      "https://maps.google.com/maps?q=Victoria%20Can%20Tho%2C%20Cai%20Khe%20Ward%2C%20Ninh%20Kieu%20District%2C%20Can%20Tho%20City%2C%20Vietnam&#038;t=m&#038;z=16&#038;output=embed&#038;iwloc=near"
+    ],
+    "hits": [
+      {
+        "place_id": 258270422,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 168424431,
+        "lat": "10.0393054",
+        "lon": "105.7930514",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00006129930571445818,
+        "addresstype": "tourism",
+        "name": "Victoria Cần Thơ Resort",
+        "display_name": "Victoria Cần Thơ Resort, Sông Hậu, Phường Cái Khế, Thành phố Cần Thơ, 94111, Việt Nam",
+        "boundingbox": [
+          "10.0388874",
+          "10.0397077",
+          "105.7929342",
+          "105.7937638"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 168424431,
+      "lat": 10.0393054,
+      "lon": 105.7930514,
+      "name": "Victoria Cần Thơ Resort, Sông Hậu, Phường Cái Khế, Thành phố Cần Thơ, 94111, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-buon-ma-thuot-dakruco": {
+    "dest": "buon-ma-thuot",
+    "slug": "dakruco",
+    "name": "Dakruco Hotel",
+    "kind": "lodging",
+    "url": "https://dakrucohotels.com/",
+    "address": "30 Nguyễn Chí Thanh, Buôn Ma Thuột",
+    "focus": "Một điểm nghỉ để khám phá ẩm thực và văn hóa thành phố cà phê.",
+    "id": "venue-buon-ma-thuot-dakruco",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 256572397,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 241752744,
+        "lat": "12.6933774",
+        "lon": "108.0660931",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00005386053253981868,
+        "addresstype": "tourism",
+        "name": "Dakruco Hotels",
+        "display_name": "Dakruco Hotels, 30, Nguyễn Chí Thanh, Phường Tân An, Păn Lăm, Tỉnh Đắk Lắk, 63119, Việt Nam",
+        "boundingbox": [
+          "12.6931548",
+          "12.6935514",
+          "108.0658643",
+          "108.0663635"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-cao-bang-muong-thanh": {
+    "dest": "cao-bang",
+    "slug": "muong-thanh",
+    "name": "Mường Thanh Luxury Cao Bằng",
+    "kind": "lodging",
+    "url": "https://luxurycaobang.muongthanh.com/",
+    "address": "42 Kim Đồng, Cao Bằng",
+    "focus": "Lấy khu trung tâm Cao Bằng làm điểm nghỉ, chọn lịch đi thác riêng.",
+    "id": "venue-cao-bang-muong-thanh",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://luxurycaobang.muongthanh.com/",
+    "title": "Khách Sạn Mường Thanh Luxury Cao Bằng",
+    "sourceBytes": 368197,
+    "mapLinks": [
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d920.4411744442341!2d106.25967158035661!3d22.66256009293414!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe1d816e0c5031367!2zTcaw4budbmcgVGhhbmggTHV4dXJ5IENhbyBC4bqxbmcgSG90ZWw!5e0!3m2!1svi!2s!4v1670828766757!5m2!1svi!2s"
+    ],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 240989867,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11186666814,
+        "lat": "21.3872796",
+        "lon": "103.0168652",
+        "category": "place",
+        "type": "suburb",
+        "place_rank": 19,
+        "importance": 0.14672138475623708,
+        "addresstype": "suburb",
+        "name": "Mường Thanh",
+        "display_name": "Mường Thanh, Điện Biên Phủ, Phường Điện Biên Phủ, Tỉnh Điện Biên, Việt Nam",
+        "boundingbox": [
+          "21.3672796",
+          "21.4072796",
+          "102.9968652",
+          "103.0368652"
+        ]
+      },
+      {
+        "place_id": 239724416,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 6447209434,
+        "lat": "17.4863590",
+        "lon": "106.6268113",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.000054919508659449414,
+        "addresstype": "tourism",
+        "name": "Mường Thanh Holiday Quảng Trị",
+        "display_name": "Mường Thanh Holiday Quảng Trị, 119, Đường Trương Pháp, Phường Đồng Hới, Tỉnh Quảng Trị, Việt Nam",
+        "boundingbox": [
+          "17.4863090",
+          "17.4864090",
+          "106.6267613",
+          "106.6268613"
+        ]
+      },
+      {
+        "place_id": 238670795,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1149062825,
+        "lat": "22.6626747",
+        "lon": "106.2595775",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00005066834515902979,
+        "addresstype": "tourism",
+        "name": "Khách sạn Mường Thanh Cao Bằng",
+        "display_name": "Khách sạn Mường Thanh Cao Bằng, 42, Phố Kim Đồng, Phường Thục Phán, Cao Bằng, Tỉnh Cao Bằng, 27000, Việt Nam",
+        "boundingbox": [
+          "22.6623982",
+          "22.6629812",
+          "106.2592079",
+          "106.2599389"
+        ]
+      },
+      {
+        "place_id": 240903669,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1028840322,
+        "lat": "21.3276591",
+        "lon": "103.9127652",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00004168993667501362,
+        "addresstype": "tourism",
+        "name": "Khách sạn Mường Thanh Luxury Sơn La",
+        "display_name": "Khách sạn Mường Thanh Luxury Sơn La, 2, Đường Tô Hiệu, Phường Tô Hiệu, Sơn La, Tỉnh Sơn La, Việt Nam",
+        "boundingbox": [
+          "21.3271832",
+          "21.3280563",
+          "103.9121256",
+          "103.9133085"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 1149062825,
+      "lat": 22.6626747,
+      "lon": 106.2595775,
+      "name": "Khách sạn Mường Thanh Cao Bằng, 42, Phố Kim Đồng, Phường Thục Phán, Cao Bằng, Tỉnh Cao Bằng, 27000, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-ha-long-wyndham-legend": {
+    "dest": "ha-long",
+    "slug": "wyndham-legend",
+    "name": "Wyndham Legend Halong",
+    "kind": "lodging",
+    "url": "https://www.wyndhamhalong.com/",
+    "address": "12 Hạ Long, Bãi Cháy",
+    "focus": "Một điểm nghỉ ở phía Bãi Cháy; chọn bến đi vịnh riêng theo tour.",
+    "id": "venue-ha-long-wyndham-legend",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://www.wyndhamhalong.com/",
+    "title": "Wyndham Legend Halong - Hotel in Baichay",
+    "sourceBytes": 115119,
+    "mapLinks": [],
+    "hits": [],
+    "shortHits": [],
+    "boundedHits": [
+      {
+        "place_id": 238723281,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1484006518,
+        "lat": "20.6994689",
+        "lon": "106.7804599",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00006315022507052747,
+        "addresstype": "tourism",
+        "name": "Wyndham",
+        "display_name": "Wyndham, Phố Vạn Lê, Vạn Hương, Phường Đồ Sơn, Thành phố Hải Phòng, 05014, Việt Nam",
+        "boundingbox": [
+          "20.6992204",
+          "20.6997165",
+          "106.7793981",
+          "106.7812123"
+        ]
+      },
+      {
+        "place_id": 239500821,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1278946629,
+        "lat": "20.9594663",
+        "lon": "107.0602861",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00005052491035320085,
+        "addresstype": "tourism",
+        "name": "Wyndham Hotel",
+        "display_name": "Wyndham Hotel, Đường Hạ Long, Phường Bãi Cháy, Thành phố Quảng Ninh, 01000, Việt Nam",
+        "boundingbox": [
+          "20.9590713",
+          "20.9599620",
+          "107.0599570",
+          "107.0606843"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 1278946629,
+      "lat": 20.9594663,
+      "lon": 107.0602861,
+      "name": "Wyndham Hotel, Đường Hạ Long, Phường Bãi Cháy, Thành phố Quảng Ninh, 01000, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-ninh-binh-tam-coc-garden": {
+    "dest": "ninh-binh",
+    "slug": "tam-coc-garden",
+    "name": "Tam Coc Garden",
+    "kind": "lodging",
+    "url": "https://www.tamcocgarden.com/",
+    "address": "Hải Nham, Nam Hoa Lư, Ninh Bình",
+    "focus": "Nghỉ giữa không gian đồng quê và những dãy núi đá.",
+    "id": "venue-ninh-binh-tam-coc-garden",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://www.tamcocgarden.com/",
+    "title": "Home - Tam Coc Garden",
+    "sourceBytes": 296453,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 238199723,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5514399176,
+        "lat": "20.2112990",
+        "lon": "105.9080338",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.000045001144426596745,
+        "addresstype": "tourism",
+        "name": "Tam Coc Garden (Authentic & natural resort)",
+        "display_name": "Tam Coc Garden (Authentic & natural resort), Đường tỉnh 478B, Phường Nam Hoa Lư, Ninh Hải, Tỉnh Ninh Bình, 08213, Việt Nam",
+        "boundingbox": [
+          "20.2112490",
+          "20.2113490",
+          "105.9079838",
+          "105.9080838"
+        ]
+      },
+      {
+        "place_id": 238917629,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5514381150,
+        "lat": "20.2036183",
+        "lon": "105.8657119",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.000045001144426596745,
+        "addresstype": "tourism",
+        "name": "Tam Coc garden",
+        "display_name": "Tam Coc garden, Quốc lộ 12B, Phường Yên Sơn, Tỉnh Ninh Bình, Việt Nam",
+        "boundingbox": [
+          "20.2035683",
+          "20.2036683",
+          "105.8656619",
+          "105.8657619"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 5514399176,
+      "lat": 20.211299,
+      "lon": 105.9080338,
+      "name": "Tam Coc Garden (Authentic & natural resort), Đường tỉnh 478B, Phường Nam Hoa Lư, Ninh Hải, Tỉnh Ninh Bình, 08213, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-phong-nha-farmstay": {
+    "dest": "phong-nha",
+    "slug": "farmstay",
+    "name": "Phong Nha Farmstay",
+    "kind": "lodging",
+    "url": "https://phongnhafarmstay.com/",
+    "address": "Cự Nẫm, Phong Nha",
+    "focus": "Chọn điểm nghỉ ở vùng quê để khám phá Phong Nha và Bồng Lai.",
+    "id": "venue-phong-nha-farmstay",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://phongnhafarmstay.com/",
+    "title": "Phong Nha Farmstay &#8211; Tailored Adventure Tourism in Real Vietnam!",
+    "sourceBytes": 161453,
+    "mapLinks": [
+      "https://maps.app.goo.gl/wbu8yjucCWSFkysP8",
+      "https://maps.app.goo.gl/MZtDNMqswN3Qn6NKA",
+      "https://maps.app.goo.gl/wbu8yjucCWSFkysP8"
+    ],
+    "hits": [
+      {
+        "place_id": 239274617,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5234632823,
+        "lat": "17.5818037",
+        "lon": "106.3087403",
+        "category": "tourism",
+        "type": "hostel",
+        "place_rank": 30,
+        "importance": 0.000051773098344350615,
+        "addresstype": "tourism",
+        "name": "Phong Nha Eco Mountain Farmstay",
+        "display_name": "Phong Nha Eco Mountain Farmstay, Quốc lộ 9G (Đường 20), Xã Phong Nha, Tỉnh Quảng Trị, 47257, Việt Nam",
+        "boundingbox": [
+          "17.5817537",
+          "17.5818537",
+          "106.3086903",
+          "106.3087903"
+        ]
+      }
+    ],
+    "shortHits": [
+      {
+        "place_id": 239004620,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 1914591738,
+        "lat": "17.6242297",
+        "lon": "106.3851832",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00000999999999995449,
+        "addresstype": "tourism",
+        "name": "Phong Nha Farmstay",
+        "display_name": "Phong Nha Farmstay, Đường tỉnh 561, Xã Bố Trạch, Tỉnh Quảng Trị, Việt Nam",
+        "boundingbox": [
+          "17.6241797",
+          "17.6242797",
+          "106.3851332",
+          "106.3852332"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 1914591738,
+      "lat": 17.6242297,
+      "lon": 106.3851832,
+      "name": "Phong Nha Farmstay, Đường tỉnh 561, Xã Bố Trạch, Tỉnh Quảng Trị, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-ha-giang-hmong-village": {
+    "dest": "ha-giang",
+    "slug": "hmong-village",
+    "name": "H’Mong Village Resort",
+    "kind": "lodging",
+    "url": "https://hmongvillage.com.vn/gioi-thieu-khu",
+    "address": "Tráng Kìm, khu vực Quản Bạ, Hà Giang",
+    "focus": "Cân nhắc nghỉ ở khu vực Quản Bạ trên hành trình cao nguyên đá.",
+    "id": "venue-ha-giang-hmong-village",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://hmongvillage.com.vn/gioi-thieu-khu",
+    "title": "GIỚI THIỆU KHU HMONG VILLAGE RESORT - KHU NGHỈ DƯỠNG ĐẸP NHẤT HÀ GIANG, Trang web chính thức",
+    "sourceBytes": 467560,
+    "mapLinks": [
+      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14690.400417786996!2d105.0397242!3d23.0017282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cb8b62435e7975%3A0xb79a600f61216e!2sH"
+    ],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 240957862,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 7311764886,
+        "lat": "22.2678268",
+        "lon": "103.5711604",
+        "category": "tourism",
+        "type": "attraction",
+        "place_rank": 30,
+        "importance": 0.00003750133516437045,
+        "addresstype": "tourism",
+        "name": "Lao Chai Hmong Village",
+        "display_name": "Lao Chai Hmong Village, Đường tỉnh 136, Bản Chăn Nuôi, Xã Khun Há, Tỉnh Lai Châu, Việt Nam",
+        "boundingbox": [
+          "22.2677768",
+          "22.2678768",
+          "103.5711104",
+          "103.5712104"
+        ]
+      },
+      {
+        "place_id": 238687483,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 7292418687,
+        "lat": "22.1731933",
+        "lon": "103.6316440",
+        "category": "tourism",
+        "type": "attraction",
+        "place_rank": 30,
+        "importance": 0.00000999999999995449,
+        "addresstype": "tourism",
+        "name": "Ho So Flower Hmong Village",
+        "display_name": "Ho So Flower Hmong Village, Xã Mường Khoa, Tỉnh Lai Châu, Việt Nam",
+        "boundingbox": [
+          "22.1731433",
+          "22.1732433",
+          "103.6315940",
+          "103.6316940"
+        ]
+      },
+      {
+        "place_id": 238393107,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 6248756885,
+        "lat": "22.2675881",
+        "lon": "104.5512655",
+        "category": "tourism",
+        "type": "information",
+        "place_rank": 30,
+        "importance": 0.00000999999999995449,
+        "addresstype": "tourism",
+        "name": "Nà Khuong (Hmong Christian village)",
+        "display_name": "Nà Khuong (Hmong Christian village), Đường tỉnh 160, Phố Ràng, Xã Bảo Yên, Tỉnh Lào Cai, Việt Nam",
+        "boundingbox": [
+          "22.2675381",
+          "22.2676381",
+          "104.5512155",
+          "104.5513155"
+        ]
+      }
+    ],
+    "boundedHits": [
+      {
+        "place_id": 235565979,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4748403079,
+        "lat": "22.7486962",
+        "lon": "104.2543551",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "",
+        "display_name": "Xã Pha Long, Tỉnh Lào Cai, Việt Nam",
+        "boundingbox": [
+          "22.7286962",
+          "22.7686962",
+          "104.2343551",
+          "104.2743551"
+        ]
+      },
+      {
+        "place_id": 236567744,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4756441630,
+        "lat": "22.3695592",
+        "lon": "105.7007587",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Nà Hai",
+        "display_name": "Nà Hai, Xã Đồng Phúc, Tỉnh Thái Nguyên, Việt Nam",
+        "boundingbox": [
+          "22.3495592",
+          "22.3895592",
+          "105.6807587",
+          "105.7207587"
+        ]
+      },
+      {
+        "place_id": 235758101,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5487845776,
+        "lat": "22.6466672",
+        "lon": "104.3152897",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Thôn Cán Chư Sử",
+        "display_name": "Thôn Cán Chư Sử, Xã Si Ma Cai, Tỉnh Lào Cai, Việt Nam",
+        "boundingbox": [
+          "22.6266672",
+          "22.6666672",
+          "104.2952897",
+          "104.3352897"
+        ]
+      },
+      {
+        "place_id": 235747380,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11047527735,
+        "lat": "22.5260381",
+        "lon": "105.4414101",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Lũng Vài",
+        "display_name": "Lũng Vài, Xã Côn Lôn, Tỉnh Tuyên Quang, 22451, Việt Nam",
+        "boundingbox": [
+          "22.5060381",
+          "22.5460381",
+          "105.4214101",
+          "105.4614101"
+        ]
+      },
+      {
+        "place_id": 238091787,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 7041628986,
+        "lat": "23.0710114",
+        "lon": "105.0165829",
+        "category": "shop",
+        "type": "ticket",
+        "place_rank": 30,
+        "importance": 0.00003750133516437045,
+        "addresstype": "shop",
+        "name": "Village",
+        "display_name": "Village, Quốc lộ 4C, Tam Sơn, Xã Quản Bạ, Tỉnh Tuyên Quang, Việt Nam",
+        "boundingbox": [
+          "23.0709614",
+          "23.0710614",
+          "105.0165329",
+          "105.0166329"
+        ]
+      },
+      {
+        "place_id": 238083364,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4755860332,
+        "lat": "22.4153130",
+        "lon": "105.8585930",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670750820172423,
+        "addresstype": "village",
+        "name": "Nà Mèo",
+        "display_name": "Nà Mèo, Xã Phúc Lộc, Tỉnh Thái Nguyên, Việt Nam",
+        "boundingbox": [
+          "22.3953130",
+          "22.4353130",
+          "105.8385930",
+          "105.8785930"
+        ]
+      },
+      {
+        "place_id": 238054242,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4755860335,
+        "lat": "22.4678540",
+        "lon": "105.7526980",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670666742961772,
+        "addresstype": "village",
+        "name": "Pác Vạt",
+        "display_name": "Pác Vạt, Xã Chợ Rã, Tỉnh Thái Nguyên, Việt Nam",
+        "boundingbox": [
+          "22.4478540",
+          "22.4878540",
+          "105.7326980",
+          "105.7726980"
+        ]
+      },
+      {
+        "place_id": 237815957,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4756441629,
+        "lat": "22.4167904",
+        "lon": "105.6650092",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670666742961772,
+        "addresstype": "village",
+        "name": "Nà Cọ",
+        "display_name": "Nà Cọ, Xã Ba Bể, Tỉnh Thái Nguyên, 23000, Việt Nam",
+        "boundingbox": [
+          "22.3967904",
+          "22.4367904",
+          "105.6450092",
+          "105.6850092"
+        ]
+      },
+      {
+        "place_id": 237999207,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11047906510,
+        "lat": "22.5137621",
+        "lon": "105.5563493",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670666742961772,
+        "addresstype": "village",
+        "name": "Nà Kiếm",
+        "display_name": "Nà Kiếm, Xã Hồng Thái, Tỉnh Tuyên Quang, Việt Nam",
+        "boundingbox": [
+          "22.4937621",
+          "22.5337621",
+          "105.5363493",
+          "105.5763493"
+        ]
+      },
+      {
+        "place_id": 235580080,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11047906517,
+        "lat": "22.4397602",
+        "lon": "105.5114436",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Bản Lục",
+        "display_name": "Bản Lục, Xã Hồng Thái, Tỉnh Tuyên Quang, Việt Nam",
+        "boundingbox": [
+          "22.4197602",
+          "22.4597602",
+          "105.4914436",
+          "105.5314436"
+        ]
+      },
+      {
+        "place_id": 238175456,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 3158133719,
+        "lat": "22.4031749",
+        "lon": "105.6034421",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Cóc Tôc",
+        "display_name": "Cóc Tôc, Xã Ba Bể, Tỉnh Thái Nguyên, 23000, Việt Nam",
+        "boundingbox": [
+          "22.3831749",
+          "22.4231749",
+          "105.5834421",
+          "105.6234421"
+        ]
+      },
+      {
+        "place_id": 238126155,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4756579795,
+        "lat": "22.1997440",
+        "lon": "105.8656263",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Ba Hoi",
+        "display_name": "Ba Hoi, Xã Cẩm Giàng, Tỉnh Thái Nguyên, Việt Nam",
+        "boundingbox": [
+          "22.1797440",
+          "22.2197440",
+          "105.8456263",
+          "105.8856263"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-sa-pa-paos": {
+    "dest": "sa-pa",
+    "slug": "paos",
+    "name": "Pao’s Sapa Leisure Hotel",
+    "kind": "lodging",
+    "url": "https://paoshotel.com/lien-he",
+    "address": "Cầu Mây 1, Sa Pa, Lào Cai",
+    "focus": "Một điểm nghỉ ở khu vực Mường Hoa để chuẩn bị các buổi khám phá Sa Pa.",
+    "id": "venue-sa-pa-paos",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://paoshotel.com/lien-he",
+    "title": "LI&#202;N HỆ",
+    "sourceBytes": 21959,
+    "mapLinks": [
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBkKxeP9U3h8QzyGoPPUuL7prK8pbC8ovg&callback=initMap"
+    ],
+    "hits": [
+      {
+        "place_id": 239958118,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 12824980787,
+        "lat": "22.3270114",
+        "lon": "103.8466396",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00004782864118405459,
+        "addresstype": "tourism",
+        "name": "Pao's Sapa Leisure Hotel",
+        "display_name": "Pao's Sapa Leisure Hotel, Đường Violet, Sapa, Phường Sa Pa, Tỉnh Lào Cai, 33300, Việt Nam",
+        "boundingbox": [
+          "22.3269614",
+          "22.3270614",
+          "103.8465896",
+          "103.8466896"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 12824980787,
+      "lat": 22.3270114,
+      "lon": 103.8466396,
+      "name": "Pao's Sapa Leisure Hotel, Đường Violet, Sapa, Phường Sa Pa, Tỉnh Lào Cai, 33300, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-ta-xua-thac-may": {
+    "dest": "ta-xua",
+    "slug": "thac-may",
+    "name": "Thác Mây Homestay Tà Xùa",
+    "kind": "lodging",
+    "url": "https://thacmaytaxua.vn/",
+    "address": "Đỉnh Gió, Tà Xùa, Sơn La",
+    "focus": "Lên ý tưởng nghỉ trên núi, xem mây tùy thời tiết thực tế.",
+    "id": "venue-ta-xua-thac-may",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://thacmaytaxua.vn/",
+    "title": "Thác Mây Homestay Tà Xùa - Xem Lịch Trống &amp; Đặt Phòng Trực Tuyến",
+    "sourceBytes": 106917,
+    "mapLinks": [],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 238583819,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4810006123,
+        "lat": "20.3652844",
+        "lon": "105.4478720",
+        "category": "waterway",
+        "type": "waterfall",
+        "place_rank": 20,
+        "importance": 0.1333433333333333,
+        "addresstype": "waterfall",
+        "name": "Thác mây",
+        "display_name": "Thác mây, Xã Thạch Quảng, Tỉnh Thanh Hóa, Việt Nam",
+        "boundingbox": [
+          "20.3652344",
+          "20.3653344",
+          "105.4478220",
+          "105.4479220"
+        ]
+      }
+    ],
+    "boundedHits": [
+      {
+        "place_id": 240844678,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 485543356,
+        "lat": "21.4964675",
+        "lon": "103.9965489",
+        "category": "waterway",
+        "type": "dam",
+        "place_rank": 20,
+        "importance": 0.34188389141160974,
+        "addresstype": "dam",
+        "name": "Nhà máy thủy điện Sơn La",
+        "display_name": "Nhà máy thủy điện Sơn La, Mường La, Xã Mường La, Tỉnh Sơn La, Việt Nam",
+        "boundingbox": [
+          "21.4931603",
+          "21.4998189",
+          "103.9939280",
+          "103.9998072"
+        ]
+      },
+      {
+        "place_id": 238914585,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1263497521,
+        "lat": "21.5153799",
+        "lon": "104.1030036",
+        "category": "building",
+        "type": "industrial",
+        "place_rank": 30,
+        "importance": 0.3022467077917196,
+        "addresstype": "building",
+        "name": "Nhà máy thủy điện Nậm Chiến 1",
+        "display_name": "Nhà máy thủy điện Nậm Chiến 1, Đường tỉnh 111, Xã Mường La, Tỉnh Sơn La, Việt Nam",
+        "boundingbox": [
+          "21.5152227",
+          "21.5155371",
+          "104.1026892",
+          "104.1033179"
+        ]
+      },
+      {
+        "place_id": 239067362,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1267181646,
+        "lat": "20.4459704",
+        "lon": "105.0532780",
+        "category": "building",
+        "type": "industrial",
+        "place_rank": 30,
+        "importance": 0.18929199030239088,
+        "addresstype": "building",
+        "name": "Nhà máy thủy điện Hồi Xuân",
+        "display_name": "Nhà máy thủy điện Hồi Xuân, Quốc lộ 15, Xã Hồi Xuân, Tỉnh Thanh Hóa, Việt Nam",
+        "boundingbox": [
+          "20.4457275",
+          "20.4462134",
+          "105.0529716",
+          "105.0535843"
+        ]
+      },
+      {
+        "place_id": 238170972,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 913333686,
+        "lat": "21.5659125",
+        "lon": "105.0124937",
+        "category": "highway",
+        "type": "residential",
+        "place_rank": 26,
+        "importance": 0.05337333409628439,
+        "addresstype": "residential",
+        "name": "Phố Gò Mây",
+        "display_name": "Phố Gò Mây, Hạ Hòa, Xã Hạ Hòa, Tỉnh Phú Thọ, Việt Nam",
+        "boundingbox": [
+          "21.5654097",
+          "21.5663803",
+          "105.0116318",
+          "105.0133784"
+        ]
+      },
+      {
+        "place_id": 421314028,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1534493832,
+        "lat": "21.5773452",
+        "lon": "104.4911854",
+        "category": "landuse",
+        "type": "industrial",
+        "place_rank": 24,
+        "importance": 0.08004706416418704,
+        "addresstype": "industrial",
+        "name": "Nhà máy gạch Tuynel Nghĩa Lộ",
+        "display_name": "Nhà máy gạch Tuynel Nghĩa Lộ, Bản Đêu, Phường Nghĩa Lộ, Tỉnh Lào Cai, Việt Nam",
+        "boundingbox": [
+          "21.5759584",
+          "21.5785474",
+          "104.4892073",
+          "104.4925976"
+        ]
+      },
+      {
+        "place_id": 429233620,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1377358751,
+        "lat": "21.5679284",
+        "lon": "104.5320819",
+        "category": "landuse",
+        "type": "industrial",
+        "place_rank": 24,
+        "importance": 0.08004706416418704,
+        "addresstype": "industrial",
+        "name": "Nhà máy chè Nghĩa Lộ",
+        "display_name": "Nhà máy chè Nghĩa Lộ, Nông trường Nghĩa Lộ, Phường Trung Tâm, Tỉnh Lào Cai, Việt Nam",
+        "boundingbox": [
+          "21.5672918",
+          "21.5685756",
+          "104.5314062",
+          "104.5327645"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-vinh-hy-vinh-hy-resort": {
+    "dest": "vinh-hy",
+    "slug": "vinh-hy-resort",
+    "name": "Vĩnh Hy Resort",
+    "kind": "lodging",
+    "url": "https://resortvinhhy.com/lien-he/",
+    "address": "Thôn Vĩnh Hy, Vĩnh Hải",
+    "focus": "Một điểm nghỉ ở khu vực vịnh Vĩnh Hy để khám phá biển và làng chài.",
+    "id": "venue-vinh-hy-vinh-hy-resort",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://resortvinhhy.com/lien-he/",
+    "title": "Liên hệ - Vĩnh Hy Resort",
+    "sourceBytes": 79030,
+    "mapLinks": [
+      "https://maps.google.com/maps?q=vinh%20hy%20resort&#038;t=m&#038;z=10&#038;output=embed&#038;iwloc=near",
+      "https://maps.google.com/maps?q=resort%20v%C4%A9nh%20hy&#038;t=m&#038;z=13&#038;output=embed&#038;iwloc=near"
+    ],
+    "hits": [
+      {
+        "place_id": 259231231,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4378204809,
+        "lat": "11.7218675",
+        "lon": "109.1969029",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00003750133516437045,
+        "addresstype": "tourism",
+        "name": "Vinh Hy resort",
+        "display_name": "Vinh Hy resort, Đường Hoàng Sa, Vĩnh Hy, Xã Vĩnh Hải, Tỉnh Khánh Hòa, Việt Nam",
+        "boundingbox": [
+          "11.7218175",
+          "11.7219175",
+          "109.1968529",
+          "109.1969529"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4378204809,
+      "lat": 11.7218675,
+      "lon": 109.1969029,
+      "name": "Vinh Hy resort, Đường Hoàng Sa, Vĩnh Hy, Xã Vĩnh Hải, Tỉnh Khánh Hòa, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-phu-yen-stelia": {
+    "dest": "phu-yen",
+    "slug": "stelia",
+    "name": "Stelia Beach Resort",
+    "kind": "lodging",
+    "url": "https://steliabeachresort.com/",
+    "address": "Lô C1 đường Độc Lập, Tuy Hòa",
+    "focus": "Cân nhắc nghỉ gần biển Tuy Hòa và dành thời gian riêng cho các điểm xa.",
+    "id": "venue-phu-yen-stelia",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://steliabeachresort.com/",
+    "title": "Trang chủ - Stelia Beach Resort, Phú Yên | Trang web chính thức",
+    "sourceBytes": 97746,
+    "mapLinks": [
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.7724708791156!2d109.30494117588863!3d13.1135955117476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316fedf5286b5b99%3A0xb61fec4369cc3130!2sStelia%20Beach%20Resort!5e0!3m2!1sen!2s!4v1761557743740!5m2!1sen!2s"
+    ],
+    "hits": [],
+    "shortHits": [],
+    "boundedHits": [],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-quy-nhon-avani": {
+    "dest": "quy-nhon",
+    "slug": "avani",
+    "name": "Avani Quy Nhon Resort",
+    "kind": "lodging",
+    "url": "https://www.avanihotels.com/en/quy-nhon",
+    "address": "Ghềnh Ráng, Quy Nhơn",
+    "focus": "Một điểm nghỉ ven biển để cân nhắc cho chuyến đi Quy Nhơn.",
+    "id": "venue-quy-nhon-avani",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 403,
+    "finalUrl": "https://www.avanihotels.com/en/quy-nhon",
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 237105297,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 240674450,
+        "lat": "20.8640693",
+        "lon": "106.6896223",
+        "category": "tourism",
+        "type": "hotel",
+        "place_rank": 30,
+        "importance": 0.00006315022507052747,
+        "addresstype": "tourism",
+        "name": "Avani Harbour View Hotel",
+        "display_name": "Avani Harbour View Hotel, Phố Trần Phú, Minh Khai, Phường Ngô Quyền, Thành phố Hải Phòng, 04117, Việt Nam",
+        "boundingbox": [
+          "20.8637301",
+          "20.8641957",
+          "106.6892495",
+          "106.6899938"
+        ]
+      }
+    ],
+    "boundedHits": [],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-ha-noi-giang": {
+    "dest": "ha-noi",
+    "slug": "giang",
+    "name": "Café Giảng · Nguyễn Hữu Huân",
+    "kind": "cafe",
+    "url": "https://cafegiang.vn/",
+    "address": "39 Nguyễn Hữu Huân, Hà Nội",
+    "focus": "Dừng lại với một tách cà phê trứng trong khu phố cũ.",
+    "id": "venue-ha-noi-giang",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 239160100,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4311854914,
+        "lat": "21.0336060",
+        "lon": "105.8546223",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00007283054856179167,
+        "addresstype": "amenity",
+        "name": "Cà Phê Giảng - Cà Phê Trứng",
+        "display_name": "Cà Phê Giảng - Cà Phê Trứng, 39, Phố Nguyễn Hữu Huân, Khu phố cổ, Phường Hoàn Kiếm, Thành phố Hà Nội, 11010, Việt Nam",
+        "boundingbox": [
+          "21.0335560",
+          "21.0336560",
+          "105.8545723",
+          "105.8546723"
+        ]
+      },
+      {
+        "place_id": 238348028,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4306911795,
+        "lat": "21.0342713",
+        "lon": "105.8544991",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00007283054856179167,
+        "addresstype": "amenity",
+        "name": "Cà Phê Giang",
+        "display_name": "Cà Phê Giang, 39, Phố Nguyễn Hữu Huân, Khu phố cổ, Phường Hoàn Kiếm, Thành phố Hà Nội, 11010, Việt Nam",
+        "boundingbox": [
+          "21.0342213",
+          "21.0343213",
+          "105.8544491",
+          "105.8545491"
+        ]
+      },
+      {
+        "place_id": 239244177,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 2523425211,
+        "lat": "21.0414560",
+        "lon": "105.8489970",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00007283054856179167,
+        "addresstype": "amenity",
+        "name": "Cà Phê Giang",
+        "display_name": "Cà Phê Giang, 106, Đường Yên Phụ, Hoè Nhai, Phường Ba Đình, Thành phố Hà Nội, 11120, Việt Nam",
+        "boundingbox": [
+          "21.0414060",
+          "21.0415060",
+          "105.8489470",
+          "105.8490470"
+        ]
+      }
+    ],
+    "photoCandidates": [
+      {
+        "title": "File:Giang Café (Café Giảng) - Nguyen Huu Huan Street, Hanoi, Vietnam - DSC03676.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Giang_Caf%C3%A9_%28Caf%C3%A9_Gi%E1%BA%A3ng%29_-_Nguyen_Huu_Huan_Street%2C_Hanoi%2C_Vietnam_-_DSC03676.JPG/1280px-Giang_Caf%C3%A9_%28Caf%C3%A9_Gi%E1%BA%A3ng%29_-_Nguyen_Huu_Huan_Street%2C_Hanoi%2C_Vietnam_-_DSC03676.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC0",
+        "author": "Daderot",
+        "source": "https://commons.wikimedia.org/wiki/File:Giang_Caf%C3%A9_(Caf%C3%A9_Gi%E1%BA%A3ng)_-_Nguyen_Huu_Huan_Street,_Hanoi,_Vietnam_-_DSC03676.JPG",
+        "file": "venue-ha-noi-giang-1.jpg"
+      },
+      {
+        "title": "File:Giang Café - Nguyen Huu Huan Street, Hanoi, Vietnam - DSC03675.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Giang_Caf%C3%A9_-_Nguyen_Huu_Huan_Street%2C_Hanoi%2C_Vietnam_-_DSC03675.JPG/1280px-Giang_Caf%C3%A9_-_Nguyen_Huu_Huan_Street%2C_Hanoi%2C_Vietnam_-_DSC03675.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "license": "CC0",
+        "author": "Daderot",
+        "source": "https://commons.wikimedia.org/wiki/File:Giang_Caf%C3%A9_-_Nguyen_Huu_Huan_Street,_Hanoi,_Vietnam_-_DSC03675.JPG",
+        "file": "venue-ha-noi-giang-2.jpg"
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4311854914,
+      "lat": 21.033606,
+      "lon": 105.8546223,
+      "name": "Cà Phê Giảng - Cà Phê Trứng, 39, Phố Nguyễn Hữu Huân, Khu phố cổ, Phường Hoàn Kiếm, Thành phố Hà Nội, 11010, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": [
+      1,
+      2
+    ]
+  },
+  "venue-ho-chi-minh-workshop": {
+    "dest": "ho-chi-minh",
+    "slug": "workshop",
+    "name": "The Workshop Coffee",
+    "kind": "cafe",
+    "url": "https://theworkshopcoffee.com/",
+    "address": "27 Ngô Đức Kế, Thành phố Hồ Chí Minh",
+    "focus": "Dành một khoảng nghỉ cho cà phê giữa trung tâm thành phố.",
+    "id": "venue-ho-chi-minh-workshop",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 258850734,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4214872992,
+        "lat": "10.7734061",
+        "lon": "106.7055391",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00006703364614323671,
+        "addresstype": "amenity",
+        "name": "The Workshop Coffee",
+        "display_name": "The Workshop Coffee, 27, Ngô Đức Kế, Khu phố 9, Phường Sài Gòn, Thành phố Hồ Chí Minh, 71016, Việt Nam",
+        "boundingbox": [
+          "10.7733561",
+          "10.7734561",
+          "106.7054891",
+          "106.7055891"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-hue-tan": {
+    "dest": "hue",
+    "slug": "tan",
+    "name": "Tân Café · Nguyễn Thị Minh Khai",
+    "kind": "cafe",
+    "url": "https://tancafe.vn/",
+    "address": "86 Đinh Tiên Hoàng, Huế",
+    "focus": "Tìm hiểu một điểm hẹn cà phê trong nhịp sống Huế.",
+    "id": "venue-hue-tan",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 239730021,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5305945821,
+        "lat": "16.4650663",
+        "lon": "107.5889980",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00006297627222090512,
+        "addresstype": "amenity",
+        "name": "Cà phê Hèo",
+        "display_name": "Cà phê Hèo, 30, Trương Định, Vĩnh Ninh, Tổ dân phố 9, Phường Thuận Hóa, Hương Thuỷ, Thành phố Huế, 54000, Việt Nam",
+        "boundingbox": [
+          "16.4650163",
+          "16.4651163",
+          "107.5889480",
+          "107.5890480"
+        ]
+      },
+      {
+        "place_id": 239752278,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11715518269,
+        "lat": "16.4610473",
+        "lon": "107.5967656",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00006297627222090512,
+        "addresstype": "amenity",
+        "name": "tan.",
+        "display_name": "tan., 25, Nguyễn Thị Minh Khai, Phú Nhuận, Tổ dân phố 8, Phường Thuận Hóa, Hương Thuỷ, Thành phố Huế, 49118, Việt Nam",
+        "boundingbox": [
+          "16.4609973",
+          "16.4610973",
+          "107.5967156",
+          "107.5968156"
+        ]
+      },
+      {
+        "place_id": 239806574,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11893036369,
+        "lat": "16.4733122",
+        "lon": "107.5815629",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00006297627222090512,
+        "addresstype": "amenity",
+        "name": "tan.",
+        "display_name": "tan., 86, Đinh Tiên Hoàng, Tổ dân phố Thái Trạch, Phường Phú Xuân, Hương Thuỷ, Thành phố Huế, 54000, Việt Nam",
+        "boundingbox": [
+          "16.4732622",
+          "16.4733622",
+          "107.5815129",
+          "107.5816129"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-hoi-an-roastery": {
+    "dest": "hoi-an",
+    "slug": "roastery",
+    "name": "Hoi An Roastery · Trần Phú",
+    "kind": "cafe",
+    "url": "https://www.hoianroastery.com/",
+    "address": "135 Trần Phú, Hội An",
+    "focus": "Nghỉ chân với cà phê trong một buổi dạo phố cổ.",
+    "id": "venue-hoi-an-roastery",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://hoianroastery.com/",
+    "title": "Hoi An Roastery – Espresso &amp; Coffee House in Hoi An Ancient Town",
+    "sourceBytes": 43606,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 259272685,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5452312231,
+        "lat": "15.8774664",
+        "lon": "108.3307673",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Hoi An Roastery",
+        "display_name": "Hoi An Roastery, Trần Phú, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8774164",
+          "15.8775164",
+          "108.3307173",
+          "108.3308173"
+        ]
+      },
+      {
+        "place_id": 256939134,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5197657823,
+        "lat": "15.8765196",
+        "lon": "108.3273168",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Hoi An Roastery",
+        "display_name": "Hoi An Roastery, Nguyễn Thái Học, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8764696",
+          "15.8765696",
+          "108.3272668",
+          "108.3273668"
+        ]
+      },
+      {
+        "place_id": 257935659,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4717672963,
+        "lat": "15.8775629",
+        "lon": "108.3269120",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Hoi An Roastery",
+        "display_name": "Hoi An Roastery, Hai Bà Trưng, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8775129",
+          "15.8776129",
+          "108.3268620",
+          "108.3269620"
+        ]
+      },
+      {
+        "place_id": 259246315,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4597386290,
+        "lat": "15.8770090",
+        "lon": "108.3286946",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Hoi An Roastery",
+        "display_name": "Hoi An Roastery, 135, Trần Phú, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8769590",
+          "15.8770590",
+          "108.3286446",
+          "108.3287446"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4597386290,
+      "lat": 15.877009,
+      "lon": 108.3286946,
+      "name": "Hoi An Roastery, 135, Trần Phú, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-da-nang-43-factory": {
+    "dest": "da-nang",
+    "slug": "43-factory",
+    "name": "XLIII Specialty Coffee · 43 Factory",
+    "kind": "cafe",
+    "url": "https://43factory.coffee/",
+    "address": "422 Ngô Thì Sĩ, Đà Nẵng",
+    "focus": "Tìm hiểu hạt và cách pha cà phê đặc sản ở Đà Nẵng.",
+    "id": "venue-da-nang-43-factory",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://43factory.coffee/",
+    "title": "Specialty Coffee in Viet Nam - 43 Factory Coffee Roaster",
+    "sourceBytes": 62058,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 428388239,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1181332013,
+        "lat": "16.0480775",
+        "lon": "108.2459757",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00006461966887917934,
+        "addresstype": "amenity",
+        "name": "XLIII Specialty Coffee",
+        "display_name": "XLIII Specialty Coffee, 422, Đường Ngô Thì Sĩ, Phường Ngũ Hành Sơn, Thành phố Đà Nẵng, 50510, Việt Nam",
+        "boundingbox": [
+          "16.0479912",
+          "16.0481637",
+          "108.2458624",
+          "108.2460891"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "way",
+      "id": 1181332013,
+      "lat": 16.0480775,
+      "lon": 108.2459757,
+      "name": "XLIII Specialty Coffee, 422, Đường Ngô Thì Sĩ, Phường Ngũ Hành Sơn, Thành phố Đà Nẵng, 50510, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-da-lat-la-viet": {
+    "dest": "da-lat",
+    "slug": "la-viet",
+    "name": "Là Việt Coffee · Nguyễn Công Trứ",
+    "kind": "cafe",
+    "url": "https://laviet.coffee/",
+    "address": "200 Nguyễn Công Trứ, Đà Lạt",
+    "focus": "Ghé một điểm cà phê gắn với vùng trồng và rang xay Đà Lạt.",
+    "id": "venue-da-lat-la-viet",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://laviet.coffee/",
+    "title": "Chút cà phê - Laviet Coffee",
+    "sourceBytes": 101891,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 259064666,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 12770400401,
+        "lat": "11.9433406",
+        "lon": "108.4358554",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "amenity",
+        "name": "Là Việt Coffee Kiosk",
+        "display_name": "Là Việt Coffee Kiosk, Khu Hòa Bình, Ấp An Hòa, Phường Xuân Hương - Đà Lạt, Đà Lạt, Tỉnh Lâm Đồng, 66113, Việt Nam",
+        "boundingbox": [
+          "11.9432906",
+          "11.9433906",
+          "108.4358054",
+          "108.4359054"
+        ]
+      },
+      {
+        "place_id": 259002605,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4601279191,
+        "lat": "11.9569186",
+        "lon": "108.4351070",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.000057698176546837834,
+        "addresstype": "amenity",
+        "name": "La Viet Coffee",
+        "display_name": "La Viet Coffee, 198, Nguyễn Công Trứ, Ấp Nghệ Tĩnh, Lâm Viên, Phường Lâm Viên - Đà Lạt, Tỉnh Lâm Đồng, 66100, Việt Nam",
+        "boundingbox": [
+          "11.9568686",
+          "11.9569686",
+          "108.4350570",
+          "108.4351570"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4601279191,
+      "lat": 11.9569186,
+      "lon": 108.435107,
+      "name": "La Viet Coffee, 198, Nguyễn Công Trứ, Ấp Nghệ Tĩnh, Lâm Viên, Phường Lâm Viên - Đà Lạt, Tỉnh Lâm Đồng, 66100, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-nha-trang-rainforest": {
+    "dest": "nha-trang",
+    "slug": "rainforest",
+    "name": "Rainforest · Võ Trứ",
+    "kind": "cafe",
+    "url": "https://rainforestnt.vn/",
+    "address": "146 Võ Trứ, Nha Trang",
+    "focus": "Tìm một khoảng nghỉ cà phê trong khu trung tâm Nha Trang.",
+    "id": "venue-nha-trang-rainforest",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 256406475,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5323269822,
+        "lat": "12.2408187",
+        "lon": "109.1919716",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00005969710841530507,
+        "addresstype": "amenity",
+        "name": "Rainforest",
+        "display_name": "Rainforest, 146, Võ Trứ, Phước Hòa, Phường Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57100, Việt Nam",
+        "boundingbox": [
+          "12.2407687",
+          "12.2408687",
+          "109.1919216",
+          "109.1920216"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-sa-pa-viettrekking": {
+    "dest": "sa-pa",
+    "slug": "viettrekking",
+    "name": "Viettrekking Coffee & Restaurant",
+    "kind": "cafe",
+    "url": "https://viettrekking.vn/en",
+    "address": "33 Hoàng Liên, Sa Pa",
+    "focus": "Dừng cà phê, nhìn về không gian núi và thung lũng Sa Pa.",
+    "id": "venue-sa-pa-viettrekking",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://viettrekking.vn/en",
+    "title": "Viettrekking – Tour trekking chinh phục đỉnh núi Việt Nam",
+    "sourceBytes": 214032,
+    "mapLinks": [],
+    "hits": [],
+    "shortHits": [],
+    "boundedHits": [],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-buon-ma-thuot-lang-ca-phe": {
+    "dest": "buon-ma-thuot",
+    "slug": "lang-ca-phe",
+    "name": "Làng cà phê Trung Nguyên",
+    "kind": "cafe",
+    "url": "https://trungnguyenlegend.com/lang-ca-phe-trung-nguyen/",
+    "address": "163 Lý Thái Tổ, Buôn Ma Thuột",
+    "focus": "Tìm hiểu văn hóa cà phê trong một không gian riêng của Buôn Ma Thuột.",
+    "id": "venue-buon-ma-thuot-lang-ca-phe",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://trungnguyenlegend.com/lang-ca-phe-trung-nguyen/",
+    "title": "LÀNG CÀ PHÊ TRUNG NGUYÊN - Trung Nguyên Legend",
+    "sourceBytes": 117178,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 258474557,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 2494793015,
+        "lat": "12.7011483",
+        "lon": "108.0610076",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00005386053253981868,
+        "addresstype": "amenity",
+        "name": "Làng cà phê Trung Nguyên",
+        "display_name": "Làng cà phê Trung Nguyên, Lý Thái Tổ, Tổ dân phố 7, Phường Buôn Ma Thuột, Buôn Ma Thuột, Tỉnh Đắk Lắk, 63119, Việt Nam",
+        "boundingbox": [
+          "12.7010983",
+          "12.7011983",
+          "108.0609576",
+          "108.0610576"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 2494793015,
+      "lat": 12.7011483,
+      "lon": 108.0610076,
+      "name": "Làng cà phê Trung Nguyên, Lý Thái Tổ, Tổ dân phố 7, Phường Buôn Ma Thuột, Buôn Ma Thuột, Tỉnh Đắk Lắk, 63119, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-hoi-an-banh-mi-phuong": {
+    "dest": "hoi-an",
+    "slug": "banh-mi-phuong",
+    "name": "Bánh mì Phượng",
+    "kind": "restaurant",
+    "url": "https://banhmiphuong.vn/",
+    "address": "2B Phan Châu Trinh, Hội An",
+    "focus": "Chọn một bữa bánh mì trong hành trình đi bộ phố cổ.",
+    "id": "venue-hoi-an-banh-mi-phuong",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 260886521,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4279536690,
+        "lat": "15.8784841",
+        "lon": "108.3320081",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Banh Mi Phuong",
+        "display_name": "Banh Mi Phuong, 2B, Phan Châu Trinh, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8784341",
+          "15.8785341",
+          "108.3319581",
+          "108.3320581"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4279536690,
+      "lat": 15.8784841,
+      "lon": 108.3320081,
+      "name": "Banh Mi Phuong, 2B, Phan Châu Trinh, Hoi An Old Town, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-hue-hanh": {
+    "dest": "hue",
+    "slug": "hanh",
+    "name": "Nhà hàng Hạnh",
+    "kind": "restaurant",
+    "url": "https://hanhrestaurant.com/",
+    "address": "11–15 Phó Đức Chính, Huế",
+    "focus": "Tìm hiểu nhiều món bánh Huế trong cùng một bữa ăn.",
+    "id": "venue-hue-hanh",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 239291994,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4693154298,
+        "lat": "16.4662679",
+        "lon": "107.5951097",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00006297627222090512,
+        "addresstype": "amenity",
+        "name": "Quán Hạnh",
+        "display_name": "Quán Hạnh, 11, Phó Đức Chính, Phú Hội, Tổ dân phố 4, Phường Thuận Hóa, Hương Thuỷ, Thành phố Huế, 49118, Việt Nam",
+        "boundingbox": [
+          "16.4662179",
+          "16.4663179",
+          "107.5950597",
+          "107.5951597"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-nha-trang-nem-dang-van-quyen": {
+    "dest": "nha-trang",
+    "slug": "nem-dang-van-quyen",
+    "name": "Nem nướng Đặng Văn Quyên",
+    "kind": "restaurant",
+    "url": "https://nemnuongdangvanquyen.com.vn/",
+    "address": "16A Lãn Ông, Nha Trang",
+    "focus": "Lên ý tưởng một bữa nem nướng với rau và bánh tráng.",
+    "id": "venue-nha-trang-nem-dang-van-quyen",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 256413899,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4445784195,
+        "lat": "12.2537022",
+        "lon": "109.1938962",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00005969710841530507,
+        "addresstype": "amenity",
+        "name": "Dang Van Quyen",
+        "display_name": "Dang Van Quyen, Hoàng Văn Thụ, Phước Hòa, Phường Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57100, Việt Nam",
+        "boundingbox": [
+          "12.2536522",
+          "12.2537522",
+          "109.1938462",
+          "109.1939462"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-ha-long-hong-hanh-3": {
+    "dest": "ha-long",
+    "slug": "hong-hanh-3",
+    "name": "Nhà hàng Hồng Hạnh 3",
+    "kind": "restaurant",
+    "url": "https://honghanh.vn/",
+    "address": "50 Hạ Long, Bãi Cháy",
+    "focus": "Một địa chỉ để tìm hiểu thực đơn hải sản ở phía Bãi Cháy.",
+    "id": "venue-ha-long-hong-hanh-3",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://honghanh.vn/",
+    "title": "HEAD Hồng Hạnh – Hệ thống 7 cửa hàng Honda",
+    "sourceBytes": 106703,
+    "mapLinks": [],
+    "hits": [
+      {
+        "place_id": 238341908,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 12998514201,
+        "lat": "20.9566676",
+        "lon": "107.0558474",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00005052491035320085,
+        "addresstype": "amenity",
+        "name": "Nhà hàng Hồng Hạnh 3",
+        "display_name": "Nhà hàng Hồng Hạnh 3, 50, Đường Hạ Long, Phường Bãi Cháy, Thành phố Quảng Ninh, 01000, Việt Nam",
+        "boundingbox": [
+          "20.9566176",
+          "20.9567176",
+          "107.0557974",
+          "107.0558974"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-phu-quoc-kien-xay": {
+    "dest": "phu-quoc",
+    "slug": "kien-xay",
+    "name": "Bún quậy Kiến Xây",
+    "kind": "restaurant",
+    "url": "https://kienxay.vn/",
+    "address": "28 Bạch Đằng, Phú Quốc",
+    "focus": "Chọn một bữa bún quậy và tự pha nước chấm theo khẩu vị.",
+    "id": "venue-phu-quoc-kien-xay",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://kienxay.vn/",
+    "title": "Kiến Xây Academy &#8211; Học viện đào tạo kiến trúc và xây dựng thực chiến",
+    "sourceBytes": 303830,
+    "mapLinks": [
+      "https://maps.app.goo.gl/BCBYXx1KHohoBeot6"
+    ],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 256456371,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 12203642083,
+        "lat": "10.2188026",
+        "lon": "103.9585037",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00004850919356064725,
+        "addresstype": "amenity",
+        "name": "Kiên Xây",
+        "display_name": "Kiên Xây, Bạch Đằng, 4 Dương Đông, Đặc khu Phú Quốc, Tỉnh An Giang, 92516, Việt Nam",
+        "boundingbox": [
+          "10.2187526",
+          "10.2188526",
+          "103.9584537",
+          "103.9585537"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-ninh-binh-chookies": {
+    "dest": "ninh-binh",
+    "slug": "chookies",
+    "name": "Chookie’s Beer Garden",
+    "kind": "restaurant",
+    "url": "https://chookies.com.vn/",
+    "address": "Tam Cốc, Ninh Bình",
+    "focus": "Một địa chỉ ăn uống để nghỉ lại sau buổi khám phá Tam Cốc.",
+    "id": "venue-ninh-binh-chookies",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "sourceError": "fetch failed",
+    "hits": [
+      {
+        "place_id": 238258901,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4829977126,
+        "lat": "20.2160311",
+        "lon": "105.9320775",
+        "category": "amenity",
+        "type": "bar",
+        "place_rank": 30,
+        "importance": 0.000045001144426596745,
+        "addresstype": "amenity",
+        "name": "Chookie's Beer Garden",
+        "display_name": "Chookie's Beer Garden, Đường tỉnh 478B, Đam Khê, Phường Nam Hoa Lư, Ninh Hải, Tỉnh Ninh Bình, 08213, Việt Nam",
+        "boundingbox": [
+          "20.2159811",
+          "20.2160811",
+          "105.9320275",
+          "105.9321275"
+        ]
+      }
+    ],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-phong-nha-pub-cold-beer": {
+    "dest": "phong-nha",
+    "slug": "pub-cold-beer",
+    "name": "The Pub With Cold Beer",
+    "kind": "restaurant",
+    "url": "https://phongnhafarmstay.com/bong-lai-valley/",
+    "address": "Bồng Lai, Phong Nha",
+    "focus": "Tìm hiểu một điểm ăn uống trong chuyến khám phá thung lũng Bồng Lai.",
+    "id": "venue-phong-nha-pub-cold-beer",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "httpStatus": 200,
+    "finalUrl": "https://phongnhafarmstay.com/bong-lai-valley/",
+    "title": "Bong Lai Valley &#8211; Phong Nha Farmstay",
+    "sourceBytes": 114792,
+    "mapLinks": [
+      "https://maps.app.goo.gl/wbu8yjucCWSFkysP8",
+      "https://maps.app.goo.gl/MZtDNMqswN3Qn6NKA",
+      "https://maps.app.goo.gl/wbu8yjucCWSFkysP8"
+    ],
+    "hits": [],
+    "shortHits": [
+      {
+        "place_id": 238632816,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4279348989,
+        "lat": "17.5982371",
+        "lon": "106.3635278",
+        "category": "amenity",
+        "type": "pub",
+        "place_rank": 30,
+        "importance": 0.000051773098344350615,
+        "addresstype": "amenity",
+        "name": "Pub With Cold Beer",
+        "display_name": "Pub With Cold Beer, Đường Hồ Chí Minh nhánh Đông, Xã Bố Trạch, Tỉnh Quảng Trị, Việt Nam",
+        "boundingbox": [
+          "17.5981871",
+          "17.5982871",
+          "106.3634778",
+          "106.3635778"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4279348989,
+      "lat": 17.5982371,
+      "lon": 106.3635278,
+      "name": "Pub With Cold Beer, Đường Hồ Chí Minh nhánh Đông, Xã Bố Trạch, Tỉnh Quảng Trị, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-ha-noi-pho-bat-dan": {
+    "id": "venue-ha-noi-pho-bat-dan",
+    "dest": "ha-noi",
+    "slug": "pho-bat-dan",
+    "name": "Phở Gia Truyền · Bát Đàn",
+    "address": "49 Bát Đàn, Hà Nội",
+    "url": "https://guide.michelin.com/us/en/ha-noi/ha-noi_2974158/restaurant/pho-gia-truyen",
+    "focus": "Một bữa phở bò trong hành trình đi bộ khu phố cũ.",
+    "kind": "restaurant",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "hits": [
+      {
+        "place_id": 238484732,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5116302421,
+        "lat": "21.0336377",
+        "lon": "105.8463792",
+        "category": "amenity",
+        "type": "fast_food",
+        "place_rank": 30,
+        "importance": 0.00007283054856179167,
+        "addresstype": "amenity",
+        "name": "Phở Gia Truyền",
+        "display_name": "Phở Gia Truyền, 49, Phố Bát Đàn, Khu phố cổ, Phường Hoàn Kiếm, Thành phố Hà Nội, 11016, Việt Nam",
+        "boundingbox": [
+          "21.0335877",
+          "21.0336877",
+          "105.8463292",
+          "105.8464292"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 5116302421,
+      "lat": 21.0336377,
+      "lon": 105.8463792,
+      "name": "Phở Gia Truyền, 49, Phố Bát Đàn, Khu phố cổ, Phường Hoàn Kiếm, Thành phố Hà Nội, 11016, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-ho-chi-minh-ba-ghien": {
+    "id": "venue-ho-chi-minh-ba-ghien",
+    "dest": "ho-chi-minh",
+    "slug": "ba-ghien",
+    "name": "Cơm tấm Ba Ghiền",
+    "address": "84 Đặng Văn Ngữ, Thành phố Hồ Chí Minh",
+    "url": "https://guide.michelin.com/us/en/ho-chi-minh/ho-chi-minh_2978179/restaurant/com-tam-ba-ghien",
+    "focus": "Thử một bữa cơm tấm với sườn nướng, chọn phần ăn theo khẩu vị.",
+    "kind": "restaurant",
+    "checkedAt": "2026-11-07",
+    "approved": false,
+    "photos": [],
+    "hits": [
+      {
+        "place_id": 258446867,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5444797566,
+        "lat": "15.8844411",
+        "lon": "108.3286918",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Ba Ghiền",
+        "display_name": "Ba Ghiền, Nguyễn Công Trứ, Phường Hội An Tây, Hội An, Thành phố Đà Nẵng, 51321, Việt Nam",
+        "boundingbox": [
+          "15.8843911",
+          "15.8844911",
+          "108.3286418",
+          "108.3287418"
+        ]
+      }
+    ],
+    "boundedHits": [],
+    "reviewNotes": "Giữ ngoài catalog: chưa đủ nguồn chính thức hoặc chưa đối chiếu vị trí/chi nhánh."
+  },
+  "venue-da-nang-ba-duong": {
+    "id": "venue-da-nang-ba-duong",
+    "dest": "da-nang",
+    "slug": "ba-duong",
+    "name": "Bánh xèo Bà Dưỡng",
+    "address": "280/23 Hoàng Diệu, Đà Nẵng",
+    "url": "https://guide.michelin.com/vn/en/da-nang-region/da-nang_2984390/restaurant/banh-xeo-ba-duong",
+    "focus": "Tìm vào con hẻm để thử bánh xèo cuốn rau và nước chấm của quán.",
+    "kind": "restaurant",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "hits": [
+      {
+        "place_id": 239448598,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4541527689,
+        "lat": "16.0588034",
+        "lon": "108.2160349",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00006461966887917934,
+        "addresstype": "amenity",
+        "name": "Bà Dưỡng",
+        "display_name": "Bà Dưỡng, 23, Kiệt 280 Hoàng Diệu, Tổ dân phố 49 Bình Hiên, Phường Hải Châu, Thành phố Đà Nẵng, 50206, Việt Nam",
+        "boundingbox": [
+          "16.0587534",
+          "16.0588534",
+          "108.2159849",
+          "108.2160849"
+        ]
+      },
+      {
+        "place_id": 239779872,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4541141193,
+        "lat": "16.0652255",
+        "lon": "108.2194342",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00006461966887917934,
+        "addresstype": "amenity",
+        "name": "Ba Duong Banh Xeo",
+        "display_name": "Ba Duong Banh Xeo, Đường Hoàng Diệu, Tổ dân phố 41 Phước Ninh, Phường Hải Châu, Thành phố Đà Nẵng, 50206, Việt Nam",
+        "boundingbox": [
+          "16.0651755",
+          "16.0652755",
+          "108.2193842",
+          "108.2194842"
+        ]
+      },
+      {
+        "place_id": 237717928,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 156084425,
+        "lat": "19.8164755",
+        "lon": "105.7758234",
+        "category": "highway",
+        "type": "trunk",
+        "place_rank": 26,
+        "importance": 0.4756793363201296,
+        "addresstype": "trunk",
+        "name": "Đường Bà Triệu",
+        "display_name": "Đường Bà Triệu, Điện Biên, Phường Hạc Thành, Tỉnh Thanh Hóa, 45000, Việt Nam",
+        "boundingbox": [
+          "19.8118154",
+          "19.8211858",
+          "105.7743773",
+          "105.7773880"
+        ]
+      },
+      {
+        "place_id": 239990761,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 156084453,
+        "lat": "19.8226812",
+        "lon": "105.7740481",
+        "category": "highway",
+        "type": "trunk",
+        "place_rank": 26,
+        "importance": 0.4756793363201296,
+        "addresstype": "trunk",
+        "name": "Đường Bà Triệu",
+        "display_name": "Đường Bà Triệu, Đông Thọ, Phường Hàm Rồng, Tỉnh Thanh Hóa, 45000, Việt Nam",
+        "boundingbox": [
+          "19.8215117",
+          "19.8238500",
+          "105.7737825",
+          "105.7743104"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 4541527689,
+      "lat": 16.0588034,
+      "lon": 108.2160349,
+      "name": "Bà Dưỡng, 23, Kiệt 280 Hoàng Diệu, Tổ dân phố 49 Bình Hiên, Phường Hải Châu, Thành phố Đà Nẵng, 50206, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-hoi-an-white-rose": {
+    "id": "venue-hoi-an-white-rose",
+    "dest": "hoi-an",
+    "slug": "white-rose",
+    "name": "Bông Hồng Trắng · White Rose",
+    "address": "533 Hai Bà Trưng, Hội An",
+    "url": "",
+    "sourceUrl": "https://hoianworldheritage.org.vn/en/news/Hoi-An-Travel/explore-the-food-of-hoi-an-751.hwh",
+    "focus": "Ghé một địa chỉ chuyên bánh bao bánh vạc, hỏi phần nhân và món ăn kèm.",
+    "kind": "restaurant",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "hits": [
+      {
+        "place_id": 258752988,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 6114429391,
+        "lat": "15.8829593",
+        "lon": "108.3250054",
+        "category": "amenity",
+        "type": "restaurant",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Bong Hong Trang",
+        "display_name": "Bong Hong Trang, 533, Hai Bà Trưng, Phố cổ Hội An, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8829093",
+          "15.8830093",
+          "108.3249554",
+          "108.3250554"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 6114429391,
+      "lat": 15.8829593,
+      "lon": 108.3250054,
+      "name": "Bong Hong Trang, 533, Hai Bà Trưng, Phố cổ Hội An, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  },
+  "venue-hoi-an-madam-khanh": {
+    "id": "venue-hoi-an-madam-khanh",
+    "dest": "hoi-an",
+    "slug": "madam-khanh",
+    "name": "Madam Khanh · Bánh mì Queen",
+    "address": "115 Trần Cao Vân, Hội An",
+    "url": "",
+    "sourceUrl": "https://hoianworldheritage.org.vn/en/news/Hoi-An-Travel/explore-the-food-of-hoi-an-751.hwh",
+    "focus": "Chọn một ổ bánh mì theo khẩu vị trước khi tiếp tục dạo phố.",
+    "kind": "restaurant",
+    "checkedAt": "2026-11-07",
+    "approved": true,
+    "photos": [],
+    "hits": [
+      {
+        "place_id": 258509272,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 9938321717,
+        "lat": "15.8806334",
+        "lon": "108.3279134",
+        "category": "amenity",
+        "type": "fast_food",
+        "place_rank": 30,
+        "importance": 0.00004934386205839654,
+        "addresstype": "amenity",
+        "name": "Madam Khanh - Bánh Mi Queen",
+        "display_name": "Madam Khanh - Bánh Mi Queen, 115, Trần Cao Vân, Phố cổ Hội An, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam",
+        "boundingbox": [
+          "15.8805834",
+          "15.8806834",
+          "108.3278634",
+          "108.3279634"
+        ]
+      }
+    ],
+    "selectedOsm": {
+      "type": "node",
+      "id": 9938321717,
+      "lat": 15.8806334,
+      "lon": 108.3279134,
+      "name": "Madam Khanh - Bánh Mi Queen, 115, Trần Cao Vân, Phố cổ Hội An, Phường Hội An, Hội An, Thành phố Đà Nẵng, 51319, Việt Nam"
+    },
+    "reviewNotes": "Đã đọc nguồn chính thức và đối chiếu đúng cơ sở/địa chỉ, không chọn hit đầu tự động.",
+    "approvedPhotos": []
+  }
+}

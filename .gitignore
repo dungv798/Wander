@@ -22,3 +22,15 @@ docs/design/crops/*.png
 docs/design/crops/*.jpg
 docs/design/glass-trial/*.png
 docs/design/glass-trial/*.jpg
+
+# Quyết định PO 08/11/2026 (DR-036): ảnh chụp review, spike và dữ liệu nghiên cứu nặng sinh lại được bằng tools/catalog; giữ trên đĩa, không đưa vào lịch sử git.
+docs/design/liquid-review-2026-11-05/
+web/spike/
+docs/research/photo-fill-20261107/
+docs/research/expansion-20261107/
+docs/research/completion-20261107/
+docs/research/photo-multisource-20261107/
+docs/research/photo-candidates/**/*.jpg
+docs/research/photo-candidates/**/*.jpeg
+docs/research/photo-candidates/**/*.png
+docs/research/photo-candidates/**/*.webp

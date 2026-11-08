@@ -1,0 +1,314 @@
+{
+  "checkedAt": "2026-11-07",
+  "venues": [
+    {
+      "id": "venue-ha-noi-metropole",
+      "dest": "ha-noi",
+      "kind": "lodging",
+      "photos": 2
+    },
+    {
+      "id": "venue-ho-chi-minh-majestic",
+      "dest": "ho-chi-minh",
+      "kind": "lodging",
+      "photos": 2
+    },
+    {
+      "id": "venue-hue-saigon-morin",
+      "dest": "hue",
+      "kind": "lodging",
+      "photos": 2
+    },
+    {
+      "id": "venue-hoi-an-anantara",
+      "dest": "hoi-an",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-da-nang-haian-beach",
+      "dest": "da-nang",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-da-lat-dalat-palace",
+      "dest": "da-lat",
+      "kind": "lodging",
+      "photos": 2
+    },
+    {
+      "id": "venue-phu-quoc-cassia-cottage",
+      "dest": "phu-quoc",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-can-tho-victoria",
+      "dest": "can-tho",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-cao-bang-muong-thanh",
+      "dest": "cao-bang",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-ninh-binh-tam-coc-garden",
+      "dest": "ninh-binh",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-phong-nha-farmstay",
+      "dest": "phong-nha",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-sa-pa-paos",
+      "dest": "sa-pa",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-vinh-hy-vinh-hy-resort",
+      "dest": "vinh-hy",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-nha-trang-havana",
+      "dest": "nha-trang",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-ha-long-wyndham-legend",
+      "dest": "ha-long",
+      "kind": "lodging",
+      "photos": 0
+    },
+    {
+      "id": "venue-ha-noi-giang",
+      "dest": "ha-noi",
+      "kind": "cafe",
+      "photos": 2
+    },
+    {
+      "id": "venue-hoi-an-roastery",
+      "dest": "hoi-an",
+      "kind": "cafe",
+      "photos": 0
+    },
+    {
+      "id": "venue-da-nang-43-factory",
+      "dest": "da-nang",
+      "kind": "cafe",
+      "photos": 0
+    },
+    {
+      "id": "venue-da-lat-la-viet",
+      "dest": "da-lat",
+      "kind": "cafe",
+      "photos": 0
+    },
+    {
+      "id": "venue-buon-ma-thuot-lang-ca-phe",
+      "dest": "buon-ma-thuot",
+      "kind": "cafe",
+      "photos": 0
+    },
+    {
+      "id": "venue-hoi-an-banh-mi-phuong",
+      "dest": "hoi-an",
+      "kind": "restaurant",
+      "photos": 0
+    },
+    {
+      "id": "venue-phong-nha-pub-cold-beer",
+      "dest": "phong-nha",
+      "kind": "restaurant",
+      "photos": 0
+    },
+    {
+      "id": "venue-ha-noi-pho-bat-dan",
+      "dest": "ha-noi",
+      "kind": "restaurant",
+      "photos": 0
+    },
+    {
+      "id": "venue-da-nang-ba-duong",
+      "dest": "da-nang",
+      "kind": "restaurant",
+      "photos": 0
+    },
+    {
+      "id": "venue-hoi-an-white-rose",
+      "dest": "hoi-an",
+      "kind": "restaurant",
+      "photos": 0
+    },
+    {
+      "id": "venue-hoi-an-madam-khanh",
+      "dest": "hoi-an",
+      "kind": "restaurant",
+      "photos": 0
+    }
+  ],
+  "dishes": [
+    "exp-food-ha-noi-cha-ca",
+    "exp-food-ha-noi-bun-thang",
+    "exp-food-ho-chi-minh-banh-trang-tron",
+    "exp-food-ho-chi-minh-bot-chien",
+    "exp-food-ho-chi-minh-goi-cuon",
+    "exp-food-hue-com-hen",
+    "exp-food-hue-banh-nam",
+    "exp-food-hoi-an-banh-vac",
+    "exp-food-da-nang-banh-trang-thit-heo",
+    "exp-food-buon-ma-thuot-com-lam",
+    "exp-food-ta-xua-thit-gac-bep"
+  ],
+  "guideAdditions": [
+    {
+      "dest": "ha-noi",
+      "name": "Chả cá Hà Nội",
+      "placeId": "exp-food-ha-noi-cha-ca"
+    },
+    {
+      "dest": "ha-noi",
+      "name": "Bún thang",
+      "placeId": "exp-food-ha-noi-bun-thang"
+    },
+    {
+      "dest": "ho-chi-minh",
+      "name": "Bánh tráng trộn",
+      "placeId": "exp-food-ho-chi-minh-banh-trang-tron"
+    },
+    {
+      "dest": "ho-chi-minh",
+      "name": "Bột chiên",
+      "placeId": "exp-food-ho-chi-minh-bot-chien"
+    },
+    {
+      "dest": "ho-chi-minh",
+      "name": "Gỏi cuốn",
+      "placeId": "exp-food-ho-chi-minh-goi-cuon"
+    },
+    {
+      "dest": "hue",
+      "name": "Cơm hến",
+      "placeId": "exp-food-hue-com-hen"
+    },
+    {
+      "dest": "hue",
+      "name": "Bánh nậm",
+      "placeId": "exp-food-hue-banh-nam"
+    },
+    {
+      "dest": "hoi-an",
+      "name": "Bánh bao bánh vạc",
+      "placeId": "exp-food-hoi-an-banh-vac"
+    },
+    {
+      "dest": "da-nang",
+      "name": "Bún mắm nêm",
+      "placeId": null
+    },
+    {
+      "dest": "da-nang",
+      "name": "Bánh tráng cuốn thịt heo",
+      "placeId": "exp-food-da-nang-banh-trang-thit-heo"
+    },
+    {
+      "dest": "da-lat",
+      "name": "Bánh tráng nướng Đà Lạt",
+      "placeId": null
+    },
+    {
+      "dest": "da-lat",
+      "name": "Kem bơ",
+      "placeId": null
+    },
+    {
+      "dest": "nha-trang",
+      "name": "Bún sứa",
+      "placeId": null
+    },
+    {
+      "dest": "can-tho",
+      "name": "Bánh tằm bì",
+      "placeId": null
+    },
+    {
+      "dest": "can-tho",
+      "name": "Bánh tét lá cẩm",
+      "placeId": null
+    },
+    {
+      "dest": "buon-ma-thuot",
+      "name": "Cơm lam Tây Nguyên",
+      "placeId": "exp-food-buon-ma-thuot-com-lam"
+    },
+    {
+      "dest": "cao-bang",
+      "name": "Phở chua Cao Bằng",
+      "placeId": null
+    },
+    {
+      "dest": "quy-nhon",
+      "name": "Bánh ít lá gai",
+      "placeId": null
+    },
+    {
+      "dest": "quy-nhon",
+      "name": "Bánh hỏi lòng heo",
+      "placeId": null
+    },
+    {
+      "dest": "phu-yen",
+      "name": "Bánh canh hẹ",
+      "placeId": null
+    },
+    {
+      "dest": "sa-pa",
+      "name": "Cơm lam Sa Pa",
+      "placeId": null
+    },
+    {
+      "dest": "ta-xua",
+      "name": "Thịt gác bếp Tây Bắc",
+      "placeId": "exp-food-ta-xua-thit-gac-bep"
+    },
+    {
+      "dest": "ha-giang",
+      "name": "Thắng dền",
+      "placeId": null
+    },
+    {
+      "dest": "phong-nha",
+      "name": "Bánh bột lọc Quảng Bình",
+      "placeId": null
+    }
+  ],
+  "photoRefs": 26,
+  "heldVenues": [
+    "venue-buon-ma-thuot-dakruco",
+    "venue-ha-giang-hmong-village",
+    "venue-ta-xua-thac-may",
+    "venue-phu-yen-stelia",
+    "venue-quy-nhon-avani",
+    "venue-ho-chi-minh-workshop",
+    "venue-hue-tan",
+    "venue-nha-trang-rainforest",
+    "venue-sa-pa-viettrekking",
+    "venue-hue-hanh",
+    "venue-nha-trang-nem-dang-van-quyen",
+    "venue-ha-long-hong-hanh-3",
+    "venue-phu-quoc-kien-xay",
+    "venue-ninh-binh-chookies",
+    "venue-ho-chi-minh-ba-ghien"
+  ]
+}

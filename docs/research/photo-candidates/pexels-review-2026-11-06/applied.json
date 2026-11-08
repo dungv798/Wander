@@ -1,0 +1,119 @@
+[
+  {
+    "id": 37970026,
+    "dest": "ha-giang",
+    "added": []
+  },
+  {
+    "id": 16020286,
+    "dest": "ha-giang",
+    "added": []
+  },
+  {
+    "id": 29374692,
+    "dest": "hoi-an",
+    "added": []
+  },
+  {
+    "id": 2010701,
+    "dest": "hoi-an",
+    "added": []
+  },
+  {
+    "id": 235925,
+    "dest": "sa-pa",
+    "added": []
+  },
+  {
+    "id": 36074826,
+    "dest": "sa-pa",
+    "added": []
+  },
+  {
+    "id": 28949259,
+    "dest": "ninh-binh",
+    "added": []
+  },
+  {
+    "id": 5218142,
+    "dest": "can-tho",
+    "added": []
+  },
+  {
+    "id": 32607908,
+    "dest": "can-tho",
+    "added": []
+  },
+  {
+    "id": 28428682,
+    "dest": "can-tho",
+    "added": []
+  },
+  {
+    "id": 33092448,
+    "dest": "phong-nha",
+    "added": []
+  },
+  {
+    "id": 3263933,
+    "dest": "buon-ma-thuot",
+    "added": []
+  },
+  {
+    "id": 36776136,
+    "dest": "hue",
+    "added": []
+  },
+  {
+    "id": 4619765,
+    "dest": "hue",
+    "added": []
+  },
+  {
+    "id": 4619764,
+    "dest": "hue",
+    "added": []
+  },
+  {
+    "id": 37223759,
+    "dest": "da-lat",
+    "added": []
+  },
+  {
+    "id": 36123440,
+    "dest": "da-nang",
+    "added": []
+  },
+  {
+    "id": 29999414,
+    "dest": "phu-quoc",
+    "added": []
+  },
+  {
+    "id": 6875004,
+    "dest": "cao-bang",
+    "added": []
+  },
+  {
+    "id": 7276642,
+    "dest": "ha-long",
+    "added": [
+      "moment"
+    ]
+  },
+  {
+    "id": 19578152,
+    "dest": "ninh-binh",
+    "added": [
+      "moment",
+      "poi-photo"
+    ]
+  },
+  {
+    "id": 21567735,
+    "dest": "nha-trang",
+    "added": [
+      "moment"
+    ]
+  }
+]

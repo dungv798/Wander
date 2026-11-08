@@ -1,0 +1,32 @@
+{
+  "buon-ma-thuot": {
+    "error": "HTTP 502"
+  },
+  "can-tho": {
+    "error": "The operation was aborted due to timeout"
+  },
+  "cao-bang": {
+    "error": "The operation was aborted due to timeout"
+  },
+  "ninh-binh": {
+    "error": "HTTP 502"
+  },
+  "phong-nha": {
+    "error": "The operation was aborted due to timeout"
+  },
+  "phu-quoc": {
+    "error": "The operation was aborted due to timeout"
+  },
+  "sa-pa": {
+    "error": "HTTP 502"
+  },
+  "vinh-hy": {
+    "error": "HTTP 502"
+  },
+  "phu-yen": {
+    "error": "HTTP 502"
+  },
+  "quy-nhon": {
+    "error": "HTTP 502"
+  }
+}

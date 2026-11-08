@@ -1,0 +1,514 @@
+{
+  "phong-nha-hang-toi": {
+    "name": "Hang Tối",
+    "hits": [
+      {
+        "place_id": 238729959,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 5063396623,
+        "lat": "17.5737841",
+        "lon": "106.2541677",
+        "category": "natural",
+        "type": "cave_entrance",
+        "place_rank": 30,
+        "importance": 0.000051773098344350615,
+        "addresstype": "natural",
+        "name": "Hang Tối",
+        "display_name": "Hang Tối, Đường Hồ Chí Minh nhánh Tây, Xã Phong Nha, Tỉnh Quảng Trị, 47257, Việt Nam",
+        "boundingbox": [
+          "17.5737341",
+          "17.5738341",
+          "106.2541177",
+          "106.2542177"
+        ]
+      },
+      {
+        "place_id": 238309618,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11162900606,
+        "lat": "20.2711850",
+        "lon": "105.8667217",
+        "category": "natural",
+        "type": "cave_entrance",
+        "place_rank": 30,
+        "importance": 0.000045001144426596745,
+        "addresstype": "natural",
+        "name": "Hang Tối",
+        "display_name": "Hang Tối, Lối đi xuống, Phường Tây Hoa Lư, Tỉnh Ninh Bình, 08251, Việt Nam",
+        "boundingbox": [
+          "20.2711350",
+          "20.2712350",
+          "105.8666717",
+          "105.8667717"
+        ]
+      }
+    ]
+  },
+  "phong-nha-nuoc-mooc": {
+    "name": "Suối Nước Moọc",
+    "hits": [
+      {
+        "place_id": 236185922,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4387487189,
+        "lat": "17.5553924",
+        "lon": "106.2357356",
+        "category": "historic",
+        "type": "monument",
+        "place_rank": 30,
+        "importance": 0.00000999999999995449,
+        "addresstype": "historic",
+        "name": "Suoi Nuoc Mooc",
+        "display_name": "Suoi Nuoc Mooc, Đường Hồ Chí Minh nhánh Tây, Xã Thượng Trạch, Tỉnh Quảng Trị, 47257, Việt Nam",
+        "boundingbox": [
+          "17.5553424",
+          "17.5554424",
+          "106.2356856",
+          "106.2357856"
+        ]
+      }
+    ]
+  },
+  "phong-nha-tu-lan": {
+    "name": "Tú Làn",
+    "hits": [
+      {
+        "place_id": 246523389,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "relation",
+        "osm_id": 18788173,
+        "lat": "21.2934939",
+        "lon": "106.0636900",
+        "category": "boundary",
+        "type": "administrative",
+        "place_rank": 12,
+        "importance": 0.38401233771949483,
+        "addresstype": "suburb",
+        "name": "Phường Tự Lạn",
+        "display_name": "Phường Tự Lạn, Kinh Bắc, Thành phố Bắc Ninh, Việt Nam",
+        "boundingbox": [
+          "21.2705797",
+          "21.3427742",
+          "106.0237854",
+          "106.1001569"
+        ]
+      }
+    ]
+  },
+  "nha-trang-thap-ba-ponagar": {
+    "name": "Po Nagar",
+    "hits": [
+      {
+        "place_id": 258509807,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 146780347,
+        "lat": "12.2653884",
+        "lon": "109.1951777",
+        "category": "historic",
+        "type": "archaeological_site",
+        "place_rank": 30,
+        "importance": 0.3750543179568698,
+        "addresstype": "historic",
+        "name": "Tháp Po Nagar",
+        "display_name": "Tháp Po Nagar, Cầu Xóm Bóng, Phường Bắc Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57100, Việt Nam",
+        "boundingbox": [
+          "12.2647893",
+          "12.2657845",
+          "109.1942242",
+          "109.1960485"
+        ]
+      },
+      {
+        "place_id": 259190958,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 695895031,
+        "lat": "10.7760329",
+        "lon": "106.7015380",
+        "category": "building",
+        "type": "yes",
+        "place_rank": 30,
+        "importance": 0.00006703364614323671,
+        "addresstype": "building",
+        "name": "Chủ tịch Hồ Chí Minh",
+        "display_name": "Chủ tịch Hồ Chí Minh, Nguyễn Huệ, Khu phố 5, Phường Sài Gòn, Thành phố Hồ Chí Minh, 71016, Việt Nam",
+        "boundingbox": [
+          "10.7760210",
+          "10.7760448",
+          "106.7015258",
+          "106.7015502"
+        ]
+      }
+    ]
+  },
+  "nha-trang-hon-chong": {
+    "name": "Hòn Chồng",
+    "hits": [
+      {
+        "place_id": 255708470,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 792392852,
+        "lat": "12.2728399",
+        "lon": "109.2065606",
+        "category": "natural",
+        "type": "bare_rock",
+        "place_rank": 22,
+        "importance": 0.10670416800183105,
+        "addresstype": "bare_rock",
+        "name": "Hòn Chồng",
+        "display_name": "Hòn Chồng, Phường Bắc Nha Trang, Nha Trang, Tỉnh Khánh Hòa, Việt Nam",
+        "boundingbox": [
+          "12.2724693",
+          "12.2731956",
+          "109.2059684",
+          "109.2069579"
+        ]
+      },
+      {
+        "place_id": 255404631,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 126480383,
+        "lat": "12.2744037",
+        "lon": "109.2001796",
+        "category": "highway",
+        "type": "residential",
+        "place_rank": 26,
+        "importance": 0.053393030441748646,
+        "addresstype": "residential",
+        "name": "Hòn Chồng",
+        "display_name": "Hòn Chồng, Phường Bắc Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57100, Việt Nam",
+        "boundingbox": [
+          "12.2742866",
+          "12.2745640",
+          "109.1981836",
+          "109.2021739"
+        ]
+      },
+      {
+        "place_id": 258660049,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4884705621,
+        "lat": "12.2719555",
+        "lon": "109.2059818",
+        "category": "tourism",
+        "type": "museum",
+        "place_rank": 30,
+        "importance": 0.00003750133516437045,
+        "addresstype": "tourism",
+        "name": "Hòn Chồng",
+        "display_name": "Hòn Chồng, Nguyễn Đình Chiểu, Phường Bắc Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57106, Việt Nam",
+        "boundingbox": [
+          "12.2719055",
+          "12.2720055",
+          "109.2059318",
+          "109.2060318"
+        ]
+      },
+      {
+        "place_id": 258512050,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4683680191,
+        "lat": "12.2721046",
+        "lon": "109.2058785",
+        "category": "amenity",
+        "type": "cafe",
+        "place_rank": 30,
+        "importance": 0.00003750133516437045,
+        "addresstype": "amenity",
+        "name": "Hòn Chồng",
+        "display_name": "Hòn Chồng, Nguyễn Đình Chiểu, Phường Bắc Nha Trang, Nha Trang, Tỉnh Khánh Hòa, 57106, Việt Nam",
+        "boundingbox": [
+          "12.2720546",
+          "12.2721546",
+          "109.2058285",
+          "109.2059285"
+        ]
+      }
+    ]
+  },
+  "nha-trang-doc-let": {
+    "name": "Dốc Lết",
+    "hits": [
+      {
+        "place_id": 259344783,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4796131321,
+        "lat": "12.5494008",
+        "lon": "109.2292533",
+        "category": "amenity",
+        "type": "bus_station",
+        "place_rank": 30,
+        "importance": 0.00002329976348511509,
+        "addresstype": "amenity",
+        "name": "Doc Let",
+        "display_name": "Doc Let, Đường Hà Huy Tập, Phường Đông Ninh Hòa, Tỉnh Khánh Hòa, Việt Nam",
+        "boundingbox": [
+          "12.5493508",
+          "12.5494508",
+          "109.2292033",
+          "109.2293033"
+        ]
+      }
+    ]
+  },
+  "can-tho-truc-lam-phuong-nam": {
+    "name": "Thiền viện Trúc Lâm Phương Nam",
+    "hits": [
+      {
+        "place_id": 258672986,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4709395094,
+        "lat": "9.9896795",
+        "lon": "105.7037191",
+        "category": "amenity",
+        "type": "place_of_worship",
+        "place_rank": 30,
+        "importance": 0.00006129930571445818,
+        "addresstype": "amenity",
+        "name": "Thiền Viện Trúc Lâm Phương Nam",
+        "display_name": "Thiền Viện Trúc Lâm Phương Nam, Nguyễn Văn Cừ, Phường An Bình, Phong Điền, Thành phố Cần Thơ, Việt Nam",
+        "boundingbox": [
+          "9.9896295",
+          "9.9897295",
+          "105.7036691",
+          "105.7037691"
+        ]
+      },
+      {
+        "place_id": 258666135,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11920014768,
+        "lat": "9.9905362",
+        "lon": "105.7047189",
+        "category": "highway",
+        "type": "bus_stop",
+        "place_rank": 30,
+        "importance": 0.00006129930571445818,
+        "addresstype": "highway",
+        "name": "Thiền viện Trúc Lâm Phương Nam",
+        "display_name": "Thiền viện Trúc Lâm Phương Nam, Nguyễn Văn Cừ, Phường An Bình, Phong Điền, Thành phố Cần Thơ, Việt Nam",
+        "boundingbox": [
+          "9.9904862",
+          "9.9905862",
+          "105.7046689",
+          "105.7047689"
+        ]
+      }
+    ]
+  },
+  "can-tho-munir-ansay": {
+    "name": "Munir Ansay",
+    "hits": []
+  },
+  "can-tho-gian-gua": {
+    "name": "Giàn Gừa",
+    "hits": [
+      {
+        "place_id": 258236847,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 11359494605,
+        "lat": "10.1125695",
+        "lon": "104.9753737",
+        "category": "place",
+        "type": "village",
+        "place_rank": 19,
+        "importance": 0.14670416800183103,
+        "addresstype": "village",
+        "name": "Giàn Gừa",
+        "display_name": "Giàn Gừa, Xã Sơn Kiên, Tỉnh An Giang, Việt Nam",
+        "boundingbox": [
+          "10.0925695",
+          "10.1325695",
+          "104.9553737",
+          "104.9953737"
+        ]
+      },
+      {
+        "place_id": 259004930,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 836566713,
+        "lat": "9.9786976",
+        "lon": "105.7241214",
+        "category": "highway",
+        "type": "residential",
+        "place_rank": 26,
+        "importance": 0.053394632639047805,
+        "addresstype": "residential",
+        "name": "Giàn Gừa",
+        "display_name": "Giàn Gừa, Khu vực Tân Thạnh Tây, Phường Cái Răng, Xã Nhơn Ái, Thành phố Cần Thơ, 94908, Việt Nam",
+        "boundingbox": [
+          "9.9786974",
+          "9.9786978",
+          "105.7240112",
+          "105.7242316"
+        ]
+      }
+    ]
+  },
+  "vinh-hy-my-nghiep": {
+    "name": "Làng dệt Mỹ Nghiệp",
+    "hits": []
+  },
+  "vinh-hy-nam-cuong": {
+    "name": "Đồi cát Nam Cương",
+    "hits": []
+  },
+  "vinh-hy-binh-tien": {
+    "name": "Bình Tiên",
+    "hits": [
+      {
+        "place_id": 257204431,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "relation",
+        "osm_id": 19260736,
+        "lat": "10.7429821",
+        "lon": "106.6433709",
+        "category": "boundary",
+        "type": "administrative",
+        "place_rank": 12,
+        "importance": 0.3411720307708333,
+        "addresstype": "suburb",
+        "name": "Phường Bình Tiên",
+        "display_name": "Phường Bình Tiên, Thành phố Hồ Chí Minh, 73120, Việt Nam",
+        "boundingbox": [
+          "10.7337463",
+          "10.7487562",
+          "106.6339512",
+          "106.6550498"
+        ]
+      },
+      {
+        "place_id": 430400199,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "relation",
+        "osm_id": 21607692,
+        "lat": "10.1525776",
+        "lon": "106.5117510",
+        "category": "boundary",
+        "type": "administrative",
+        "place_rank": 18,
+        "importance": 0.16004500114442663,
+        "addresstype": "quarter",
+        "name": "Ấp Bình Tiên",
+        "display_name": "Ấp Bình Tiên, Xã Giồng Trôm, Tỉnh Vĩnh Long, Việt Nam",
+        "boundingbox": [
+          "10.1465713",
+          "10.1648819",
+          "106.5017855",
+          "106.5202741"
+        ]
+      },
+      {
+        "place_id": 256624636,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4741480843,
+        "lat": "11.7975020",
+        "lon": "109.1845400",
+        "category": "place",
+        "type": "hamlet",
+        "place_rank": 20,
+        "importance": 0.13337083466849772,
+        "addresstype": "hamlet",
+        "name": "Bình Tiên",
+        "display_name": "Bình Tiên, Xã Công Hải, Tỉnh Khánh Hòa, Việt Nam",
+        "boundingbox": [
+          "11.7775020",
+          "11.8175020",
+          "109.1645400",
+          "109.2045400"
+        ]
+      }
+    ]
+  },
+  "phu-quoc-suoi-tranh": {
+    "name": "Suối Tranh",
+    "hits": [
+      {
+        "place_id": 259047032,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 357411250,
+        "lat": "10.1837812",
+        "lon": "104.0153429",
+        "category": "waterway",
+        "type": "waterfall",
+        "place_rank": 20,
+        "importance": 0.133381842526894,
+        "addresstype": "waterfall",
+        "name": "Suối Tranh",
+        "display_name": "Suối Tranh, Đặc khu Phú Quốc, Tỉnh An Giang, 92516, Việt Nam",
+        "boundingbox": [
+          "10.1837312",
+          "10.1838312",
+          "104.0152929",
+          "104.0153929"
+        ]
+      },
+      {
+        "place_id": 259223696,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 1188468166,
+        "lat": "10.7091582",
+        "lon": "107.7969695",
+        "category": "waterway",
+        "type": "stream",
+        "place_rank": 22,
+        "importance": 0.10671166781109329,
+        "addresstype": "stream",
+        "name": "Suối Tranh",
+        "display_name": "Suối Tranh, Phường La Gi, Xã Tân Hải, Tỉnh Lâm Đồng, 77650, Việt Nam",
+        "boundingbox": [
+          "10.7016562",
+          "10.7115226",
+          "107.7903803",
+          "107.8009390"
+        ]
+      }
+    ]
+  },
+  "phu-quoc-ham-ninh": {
+    "name": "Làng chài Hàm Ninh",
+    "hits": []
+  },
+  "phu-yen-bai-mon": {
+    "name": "Bãi Môn",
+    "hits": [
+      {
+        "place_id": 258873935,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 160203374,
+        "lat": "12.8967790",
+        "lon": "109.4521503",
+        "category": "natural",
+        "type": "beach",
+        "place_rank": 22,
+        "importance": 0.10671067292286562,
+        "addresstype": "beach",
+        "name": "Bãi Môn",
+        "display_name": "Bãi Môn, Xã Hòa Xuân, Tỉnh Đắk Lắk, Việt Nam",
+        "boundingbox": [
+          "12.8943750",
+          "12.8991777",
+          "109.4499645",
+          "109.4538254"
+        ]
+      }
+    ]
+  }
+}
