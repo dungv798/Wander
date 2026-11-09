@@ -37,7 +37,7 @@ web/src/
 ```
 - **Tên tệp:** thành phần `PascalCase.tsx` (một thành phần chính mỗi tệp); hook `useXxx.ts`; hàm thuần `camelCase.ts`; kiểu `Xxx.types.ts`; hằng số `xxx.const.ts`; API `xxx.api.ts`; test `Xxx.test.tsx` cạnh tệp. Thư mục `kebab-case` (hoặc tên tính năng một từ).
 - **Hướng phụ thuộc một chiều:** `app → features → shared`. `shared` không import `features`; tính năng này không import ruột của tính năng khác (chỉ qua `index.ts`). Kiểm bằng công cụ (§9), như `ArchitectureTest.java` ở backend.
-- (`PROPOSED`) Một tệp không quá ~250 dòng; một hàm không quá ~40 dòng; quá thì tách. (Hai con số này tự nó là hằng số của quy tắc lint, đặt ở cấu hình, không rải trong mã.)
+- (`PROPOSED`) Một hàm không quá ~40 dòng (lint: 60); quá thì tách. (Con số này là hằng số của quy tắc lint, đặt ở cấu hình, không rải trong mã.) **PO bỏ giới hạn số dòng của TỆP (09/11/2026):** không còn quy tắc `max-lines`; vẫn nên tách tệp khi nó gánh nhiều trách nhiệm (SOLID), không phải vì đếm dòng.
 
 ## 2. Pattern (trong stack đã duyệt, không thêm thư viện)
 - **Tách trình bày và logic:** thành phần chỉ dựng giao diện từ props/hook; logic nằm trong custom hook hoặc lớp dịch vụ. Thành phần "container" (nối dữ liệu) mỏng, thành phần "presentational" thuần.
@@ -100,7 +100,7 @@ Phía **backend** ACID là thật và đã có (`docs/architecture/README.md`, A
 | Không chuỗi cứng trong JSX (§8) | `react/jsx-no-literals` (eslint-plugin-react) |
 | Không hex ngoài token (§8) | `stylelint` + `color-no-hex` |
 | Hướng phụ thuộc (§1) | `eslint-plugin-boundaries` hoặc `dependency-cruiser` |
-| Kích thước tệp/hàm (§1) | ESLint `max-lines`, `max-lines-per-function` |
+| Kích thước hàm (§1) | ESLint `max-lines-per-function` (giới hạn dòng của tệp đã bỏ 09/11/2026) |
 | Ngân sách JS (§4) | `size-limit` hoặc kiểm gói trong CI |
 | Truy cập (§2) | `eslint-plugin-jsx-a11y` + `docs/ux/tools/a11y-scan.mjs` trên bản dựng |
 Cho tới khi PO duyệt: cùng các quy tắc áp dụng bằng rà soát (`wander-code-reviewer` kiểm theo chuẩn này).

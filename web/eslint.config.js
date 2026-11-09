@@ -9,7 +9,7 @@ import jsdoc from 'eslint-plugin-jsdoc';
 import boundaries from 'eslint-plugin-boundaries';
 import globals from 'globals';
 
-const QUALITY = { maxFileLines: 250, maxFunctionLines: 60, allowedNumbers: [0, 1, -1, 100] };
+const QUALITY = { maxFunctionLines: 60, allowedNumbers: [0, 1, -1, 100] };
 
 /** Loại phần tử kiến trúc: app → features → shared (chuẩn §1). */
 const ELEMENTS = [
@@ -20,7 +20,7 @@ const ELEMENTS = [
 
 export default tseslint.config(
   // spike/ là mã thử nghiệm không vào bản dựng (gồm bản vendor three.js): không lint (quy ước spike, ghi ở NOTES.md của từng spike).
-  { ignores: ['dist', 'node_modules', 'scripts', 'spike'] },
+  { ignores: ['dist', 'node_modules', 'scripts', 'spike', 'public'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -52,8 +52,7 @@ export default tseslint.config(
       // §8: không số ma thuật, không chữ cứng trong JSX.
       'no-magic-numbers': ['error', { ignore: QUALITY.allowedNumbers, ignoreArrayIndexes: true, enforceConst: true }],
       'react/jsx-no-literals': ['error', { noStrings: false, allowedStrings: ['·', '–', '—', '/', ':', '(', ')', '+', '×', '%'], ignoreProps: true }],
-      // §1: kích thước.
-      'max-lines': ['error', { max: QUALITY.maxFileLines, skipBlankLines: true, skipComments: true }],
+      // §1: kích thước hàm (PO bỏ giới hạn số dòng của TỆP ngày 09/11/2026: không còn `max-lines`).
       'max-lines-per-function': ['error', { max: QUALITY.maxFunctionLines, skipBlankLines: true, skipComments: true }],
       // §1: hướng phụ thuộc một chiều; tính năng khác chỉ qua index.ts.
       'boundaries/dependencies': ['error', {
@@ -74,7 +73,7 @@ export default tseslint.config(
   {
     // Tệp hằng số và kiểm thử định nghĩa/ép giá trị nên được phép dùng số và chữ trực tiếp.
     files: ['src/**/*.const.ts', 'src/**/*.copy.ts', 'src/**/*.test.ts', 'src/**/*.test.tsx'],
-    rules: { 'no-magic-numbers': 'off', 'max-lines': 'off', 'jsdoc/require-jsdoc': 'off', 'max-lines-per-function': 'off' },
+    rules: { 'no-magic-numbers': 'off', 'jsdoc/require-jsdoc': 'off', 'max-lines-per-function': 'off' },
   },
   {
     // Hình vẽ SVG: tọa độ hình học không phải "số ma thuật" nghiệp vụ.

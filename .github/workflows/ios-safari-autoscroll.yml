@@ -1,0 +1,62 @@
+# Thử trên Safari iOS THẬT (iOS Simulator của máy macOS GitHub): cách nào tự cuộn trang lúc tải mà làm Safari thu thanh công cụ không cần người dùng vuốt?
+# Chỉ chạy khi bấm "Run workflow"; không secret, không deploy, không phụ thuộc Render: tự phục vụ web/public ở localhost trên chính máy chạy.
+name: ios-safari-autoscroll
+
+on:
+  workflow_dispatch:
+    inputs:
+      device:
+        description: Tên iPhone ảo (không có thì dùng iPhone Pro mới nhất có sẵn)
+        required: true
+        default: iPhone 16 Pro
+
+permissions:
+  contents: read
+
+jobs:
+  safari:
+    name: Safari iOS (Simulator) tự cuộn khi tải
+    runs-on: macos-15
+    timeout-minutes: 15
+    env:
+      DEVICE: ${{ inputs.device }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools/ios-sim
+            web/public
+
+      - name: Chọn và bật iPhone ảo
+        run: |
+          UDID=$(xcrun simctl list devices available -j | node tools/ios-sim/pick-device.mjs)
+          echo "UDID=$UDID" >> "$GITHUB_ENV"
+          xcrun simctl boot "$UDID"
+          xcrun simctl bootstatus "$UDID" -b
+
+      - name: Phục vụ các trang thử ở localhost
+        run: |
+          cd web/public
+          nohup python3 -m http.server 8080 --bind 127.0.0.1 > "$RUNNER_TEMP/server.log" 2>&1 &
+          sleep 2
+          curl -s -o /dev/null -w "autoscroll-test.html -> HTTP %{http_code}\n" http://127.0.0.1:8080/autoscroll-test.html
+
+      - name: Mở từng biến thể trong Safari và chụp ảnh
+        run: |
+          mkdir -p shots
+          for v in f a b c d e; do
+            xcrun simctl terminate "$UDID" com.apple.mobilesafari || true
+            sleep 2
+            xcrun simctl openurl "$UDID" "http://localhost:8080/autoscroll-test.html?v=$v"
+            sleep 9
+            xcrun simctl io "$UDID" screenshot "shots/$v.png"
+            echo "đã chụp biến thể $v"
+          done
+          ls -la shots
+
+      - name: Tải ảnh lên
+        uses: actions/upload-artifact@v4
+        with:
+          name: safari-ios-autoscroll
+          path: shots/*.png
+          if-no-files-found: error

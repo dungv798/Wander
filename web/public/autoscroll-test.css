@@ -1,0 +1,12 @@
+/* Thử: có thể làm Safari iPhone thu thanh công cụ ngay lúc tải trang (không cần người dùng vuốt) không? Công cụ chẩn đoán, không thuộc giao diện chính. */
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { min-height: 300vh; font: 15px/1.45 system-ui, -apple-system, sans-serif; background: linear-gradient(#cfe3e6, #eaf2f3); color: #243740; }
+.panel { position: fixed; top: 80px; left: 12px; right: 12px; padding: 12px; background: rgb(255 255 255 / .94); border-radius: 14px; box-shadow: 0 6px 24px rgb(0 0 0 / .2); }
+.panel h1 { margin: 0 0 6px; font-size: 16px; }
+.panel dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-variant-numeric: tabular-nums; }
+.panel dt { color: #587; } .panel dd { margin: 0; font-weight: 600; }
+.verdict { margin: 8px 0 0; padding: 8px; border-radius: 8px; font-weight: 700; text-align: center; background: #fde7d9; color: #a3470d; }
+.verdict[data-state="collapsed"] { background: #d8f2dd; color: #14602a; }
+.h-lvh { position: fixed; visibility: hidden; height: 100lvh; }
+.h-svh { position: fixed; visibility: hidden; height: 100svh; }
