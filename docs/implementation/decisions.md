@@ -610,3 +610,9 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 | Hệ quả | Dù Safari thu thanh lại hết cỡ (trang cuộn được), trang chỉ lấy thêm 754 − 714 = **40 px (≈ 4,6%)**. Vì vậy (1) KHÔNG làm "cho trang chính cuộn" (hướng 2): phá bản đồ/tờ kính/cử chỉ mà chỉ được +40 px; (2) KHÔNG đổi sang `lvh` cho bản đồ: cùng +40 px. Cách duy nhất lấy lại phần lớn 160 px là chế độ "Thêm vào Màn hình chính" (standalone), chưa đo được trong Simulator | DECIDED (theo số đo; PO xác nhận khi đọc báo cáo) |
 | Hạn chế của Simulator CI | Máy ảo macOS không có GPU: bản đồ WebGL không mở được (app hiện đúng lời báo "Chưa mở được bản đồ trên thiết bị hoặc mạng này" và danh sách vẫn dùng được: suy thoái nhẹ nhàng đã được xác nhận); `simctl` không bấm/cuộn được | DONE (ghi nhận) |
 | Icon app | PO chọn v1 (nền `#eaf2f3`, chữ "w" `#243740`, chấm cam) 09/11/2026; `public/pwa/icon-{180,192,512}.png` đã là v1 (ghi chú ở bảng trên đã sửa cho khớp) | DONE |
+
+## Deploy Render lỗi tạm thời khi tải Gradle (09/11/2026)
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Sự cố | Lần deploy commit `439f597` (log `wander-deploy-439f597-2026-11-09-1447.log`) hỏng ở bước Docker `gradlew bootJar`: `services.gradle.org` trả HTTP 504 khi tải `gradle-9.8.1-bin.zip`, mà wrapper chỉ thử 1 lần ("Attempt 1/1", `retries=0`, `networkTimeout=10000`). Web build trong cùng lần chạy biên dịch xong bình thường; bản cũ vẫn chạy trên Render (build hỏng thì Render không thay bản đang chạy) | DONE (chẩn đoán) |
+| Sửa | `backend/gradle/wrapper/gradle-wrapper.properties`: `retries=5`, `retryBackOffMs=5000`, `networkTimeout=30000` (tùy chọn có sẵn của Gradle wrapper; giữ `distributionSha256Sum` và `validateDistributionUrl=true`, nên không giảm an toàn chuỗi cung ứng). Lỗi 504 tạm thời của CDN Gradle không còn làm hỏng cả lần deploy | DEFAULTED (Tầng B) |
