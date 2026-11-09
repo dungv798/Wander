@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix",
     "test": "node --test \"src/**/*.test.ts\"",
     "gen:icons": "node scripts/gen-icons.mjs",
-    "e2e": "node --test --test-concurrency=2 \"e2e/**/*.test.ts\"",
+    "e2e": "node --test --test-concurrency=2 --test-timeout=240000 \"e2e/**/*.test.ts\"",
     "shots": "node scripts/shots.mjs"
   },
   "dependencies": {

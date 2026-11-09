@@ -127,3 +127,27 @@ test('mặc định tắt; ?fs=1 bật (trang cuộn được, app cố định,
     await ctx.close();
   }
 });
+
+const IPHONE_SAFARI_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Mobile/15E148 Safari/604.1';
+
+test('Safari iPhone: mặc định BẬT không cần tham số; ?fs=0 tắt và được nhớ cho các lần mở sau', async () => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, locale: 'vi-VN', userAgent: IPHONE_SAFARI_UA });
+  await ctx.addInitScript(() => localStorage.setItem('wander.web.onboarding.v1', '{"done":true}'));
+  const page = await ctx.newPage();
+  try {
+    await page.goto(`${baseUrl}/#/`);
+    await page.waitForSelector('.sheet-toggle');
+    const byDefault = await measure(page);
+    assert.equal(byDefault.flag, '1', 'Safari iPhone: bật mặc định');
+    assert.equal(byDefault.scrollable, true);
+
+    await page.goto(`${baseUrl}/?fs=0#/`);
+    await page.waitForSelector('.sheet-toggle');
+    assert.equal((await measure(page)).flag, undefined, '?fs=0 tắt');
+    await page.goto(`${baseUrl}/#/dest/ha-giang`);
+    await page.waitForSelector('.sheet-toggle');
+    assert.equal((await measure(page)).flag, undefined, 'đã tắt thì được nhớ, mặc định không bật lại');
+  } finally {
+    await ctx.close();
+  }
+});

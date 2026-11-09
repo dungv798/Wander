@@ -1,4 +1,4 @@
-/** Thử nghiệm "full" trong tab Safari iPhone (PO chọn 09/11/2026): bật bằng `?fs=1`, tắt bằng `?fs=0`; xem docs/implementation/decisions.md. */
+/** "Full" trong tab Safari iPhone (PO chọn 09/11/2026; mặc định bật trên Safari iOS 09/11/2026): `?fs=1` ép bật, `?fs=0` ép tắt (đều được nhớ); xem docs/implementation/decisions.md. */
 export const FULLSCREEN = {
   param: 'fs',
   storageKey: 'wander.web.fs.v1',

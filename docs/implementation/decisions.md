@@ -634,3 +634,24 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 | Sửa lỗi cơ chế | `<body>` không được đặt `overflow`/`overscroll-behavior` (thành khung cuộn chặn việc chuyển cuộn lên trang); chỉ `<html>` là khung cuộn | DONE |
 | Bỏ giới hạn dòng tệp (PO 09/11/2026) | Gỡ ESLint `max-lines` (250 dòng/tệp) và hằng `QUALITY.maxFileLines`; sửa `frontend-standards.md` (§1 và bảng công cụ). Giữ `max-lines-per-function` (60). Lý do: giới hạn buộc đẩy logic ra tệp con chỉ để vượt ngưỡng (ví dụ `GeoMap.ts` sát 250) | DONE (PO quyết) |
 | ESLint bỏ qua `public/` | `public/` là tài sản tĩnh (trang đo `viewport-test.js` dùng biến trình duyệt), không phải mã ứng dụng; trước đó `npm run lint` (`eslint .`) sẽ đỏ vì tệp này | DONE |
+
+## "Tự thu thanh Safari lúc tải" — KHÔNG làm được (đo thật 09/11/2026)
+| Hạng mục | Kết quả | Trạng thái |
+|---|---|---|
+| Phép đo | Workflow `ios-safari-autoscroll` (run 42595129123, commit `9e43357`; Safari iOS trong Simulator iPhone 16 Pro, trang `web/public/autoscroll-test.*` phục vụ ở localhost). 6 biến thể: đối chứng; `scrollTo(0, 60)` lúc `DOMContentLoaded`; `scrollTo` sau `load` + 800 ms; `scrollTo({behavior: 'smooth'})`; `documentElement.scrollTop = 60`; cuộn từng bước 4 px/khung hình tới 80 px | DONE |
+| Kết quả | Cả 5 biến thể tự cuộn đều làm `scrollY` đạt 60–84 px nhưng `innerHeight` vẫn 714 px (= svh, thấp hơn lvh 754) và thanh Safari vẫn đầy đủ. Safari chỉ thu thanh khi NGƯỜI DÙNG cuộn trang | DONE (bằng chứng; Simulator, khớp hành vi iOS ≥ 15) |
+| Quyết định | Không thêm mẹo tự cuộn lúc tải hoặc khi chạm: không hiệu quả và có thể phá cơ chế "cú vuốt đầu tiên ở bất kỳ đâu thu thanh" của `?fs=1` (cờ coi là đã thu khi `scrollY ≥ 32` dù thanh chưa thu). Cú vuốt đầu của người dùng là cách duy nhất | DECIDED (theo số đo) |
+
+## `fs` BẬT MẶC ĐỊNH trên Safari iPhone/iPad (PO 09/11/2026: "bật cờ mặc định")
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Quyết định | `shouldEnableFullscreen`: lựa chọn người dùng (`?fs=1`/`?fs=0`, ĐƯỢC NHỚ ở `wander.web.fs.v1`) luôn thắng; chưa chọn thì BẬT khi `isIosSafari(userAgent)` (loại Chrome/Firefox/Edge/Opera/Google trên iOS) VÀ không standalone, tắt ở mọi chỗ khác (Android, máy tính, Chrome iOS, đã thêm vào màn hình chính). CSS vẫn chỉ áp < 768 px | DEFAULTED (Tầng B; PO chọn) |
+| Lối thoát | `?fs=0` tắt và GHI NHỚ "tắt" (trước đó chỉ xóa cờ nên vô nghĩa khi mặc định bật): `readUrlFlag` nay trả `boolean \| null` và nhớ cả hai chiều; `?fs=1` ép bật ở trình duyệt khác | DONE |
+| Test | `fullscreen.test.ts` (4: mặc định theo nền tảng, standalone, lựa chọn thắng mặc định), `urlFlag.test.ts` (5), `platform.test.ts` (2); e2e `fullscreen-experiment` (Chrome: mặc định tắt + hành vi bản 2; Safari iPhone UA: mặc định bật, `?fs=0` tắt và nhớ) | DONE |
+| Rủi ro | PO chưa xác nhận bản 2 mượt hơn trên iPhone thật khi bật mặc định; mọi người dùng iPhone Safari sẽ gặp cơ chế này (bản đồ/tờ nhường cú vuốt dọc đầu tiên cho trang). Nếu giật hoặc lỗi: đặt lại mặc định tắt bằng một dòng ở `shouldEnableFullscreen` | Mở (theo dõi) |
+
+## E2E có giới hạn thời gian từng test (09/11/2026)
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Sự cố | Một lượt `dev.ps1 e2e` treo > 1 giờ không báo gì: hai tiến trình kiểm thử con đứng im (log của `node --test` chỉ ghi khi test xong nên trông như đang chạy); chạy lại thì xanh 118/118 trong 581 s, không lặp lại | DONE (ghi nhận, nguyên nhân gốc chưa rõ) |
+| Sửa | `web/package.json`: `e2e` thêm `--test-timeout=240000` (4 phút/test; test chậm nhất ~20–60 s): test treo sẽ đỏ kèm tên thay vì chặn im lặng | DEFAULTED (Tầng B) |
