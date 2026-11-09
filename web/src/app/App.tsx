@@ -14,11 +14,13 @@ import { CreateTripSheet, ExportScreen, JoinScreen, TodayScreen, TripScreen, Tri
 import { ScreenSkeleton } from '../shared/ui/Skeleton.tsx';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
+import { initializeFullscreenExperiment } from './fullscreen.ts';
 import { initializeLook } from './look.ts';
 import { RouteEscape } from './RouteEscape.tsx';
 import { DeckSpotlightProvider } from '../features/discover/index.ts';
 
 void initializeLook();
+initializeFullscreenExperiment();
 
 const DestinationPickerScreen = lazy(() => import('../features/discover/components/DestinationPickerScreen.tsx'));
 

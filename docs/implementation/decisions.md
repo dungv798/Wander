@@ -616,3 +616,11 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 |---|---|---|
 | Sự cố | Lần deploy commit `439f597` (log `wander-deploy-439f597-2026-11-09-1447.log`) hỏng ở bước Docker `gradlew bootJar`: `services.gradle.org` trả HTTP 504 khi tải `gradle-9.8.1-bin.zip`, mà wrapper chỉ thử 1 lần ("Attempt 1/1", `retries=0`, `networkTimeout=10000`). Web build trong cùng lần chạy biên dịch xong bình thường; bản cũ vẫn chạy trên Render (build hỏng thì Render không thay bản đang chạy) | DONE (chẩn đoán) |
 | Sửa | `backend/gradle/wrapper/gradle-wrapper.properties`: `retries=5`, `retryBackOffMs=5000`, `networkTimeout=30000` (tùy chọn có sẵn của Gradle wrapper; giữ `distributionSha256Sum` và `validateDistributionUrl=true`, nên không giảm an toàn chuỗi cung ứng). Lỗi 504 tạm thời của CDN Gradle không còn làm hỏng cả lần deploy | DEFAULTED (Tầng B) |
+
+## Thử nghiệm "full" trong tab Safari bằng cờ `?fs=1` (09/11/2026, PO chọn)
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Yêu cầu của PO | App phải trải nghiệm trên WEB trước, không bắt người dùng "Thêm vào Màn hình chính". Vì vậy thẻ hướng dẫn cài đặt đã làm xong (chỉ Safari iPhone, đóng được) bị GỠ trước khi commit; không có hướng dẫn cài app nào trong app | DECIDED |
+| Giới hạn thật | Trong tab Safari không thể ẩn thanh (không có API; Fullscreen API iPhone chỉ cho video). Thu thanh như ảnh 3 của PO chỉ xảy ra khi TRANG cuộn và lấy lại ~40 px (lvh 754 − svh 714); dải trạng thái phía trên không đổi | DONE (số đo) |
+| Cờ thử nghiệm | `?fs=1` bật (nhớ ở `wander.web.fs.v1`), `?fs=0` tắt; `initializeFullscreenExperiment()` đặt `data-fs` trên `<html>`; CSS (< 768 px): thân trang cao `100lvh + 120px` (cuộn được), `.app` cố định `inset: 0`, `#screen` cho cuộn chuyển lên trang ở cuối danh sách, `.map-chrome` và `#tabbar` cho phép vuốt dọc (`touch-action: pan-y`). MẶC ĐỊNH TẮT nên không ảnh hưởng ai; PO tự thử trên iPhone, tốt mới bật mặc định. Test: `urlFlag.test.ts` (4) + e2e `fullscreen-experiment` (trang cuộn được, app không dịch khi cuộn, kéo thẻ vẫn chạy, nhớ cờ, `?fs=0` xóa) | DEFAULTED (Tầng B), chờ PO thử trên iPhone |
+| Rủi ro đã biết | Chưa kiểm được trên Safari iOS thật (Simulator CI không cuộn được bằng `simctl`); có thể xung đột với cử chỉ bản đồ/tờ ở vài vùng; chỉ lấy lại ~40 px | Mở |

@@ -106,3 +106,13 @@
 @media (prefers-reduced-motion: reduce) {
   .app[data-surface="sheet"] #screen, .sheet-toggle, .sheet-toggle .ic { transition: none; }
 }
+
+/* THỬ NGHIỆM `?fs=1` (điện thoại; PO chọn 09/11/2026): Safari iPhone chỉ thu thanh công cụ khi TRANG cuộn. Cho thân trang cao hơn khung nhìn một đoạn và để app cố định, nên
+   một cú vuốt trượt ra ngoài bản đồ/tờ (thanh tab, khung đầu, hoặc cuối danh sách chuyển sang trang) làm Safari thu thanh, lấy lại ~40 px (lvh − svh). Mặc định tắt. */
+@media (max-width: 767px) {
+  html[data-fs], html[data-fs] body { height: auto; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: none; }
+  html[data-fs] body::after { content: ''; display: block; height: calc(100lvh + var(--fs-scroll-range, 120px)); }
+  html[data-fs] .app { position: fixed; inset: 0; height: auto; }
+  html[data-fs] #screen { overscroll-behavior-y: auto; }
+  html[data-fs] .map-chrome, html[data-fs] #tabbar { touch-action: pan-y; }
+}
