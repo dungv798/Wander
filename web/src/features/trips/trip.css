@@ -44,6 +44,14 @@
 .tcc-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; background: var(--glass-label-surface); border: 1px solid var(--sheet-edge); border-radius: var(--r-md); }
 :root:not([data-look='classic']) .tcc-actions .btn { color: var(--ink); background: transparent; border: 0; border-radius: var(--r-md); box-shadow: none; backdrop-filter: none; text-shadow: none; padding-inline: var(--s-2); font: var(--text-secondary); font-weight: 700; }
 
+/* Bìa gọn (tab Lịch, Chưa xếp, Chi phí): tên + ngày một hàng, hai nút chỉ còn biểu tượng 44 px; nhãn giữ cho trình đọc màn hình. Mục lịch lên cao ~100 px. */
+.trip-cover-card[data-compact] { grid-template-columns: minmax(0, 1fr) auto; align-items: center; align-content: center; min-height: 0; padding: var(--s-3) var(--s-4); column-gap: var(--s-3); }
+.trip-cover-card[data-compact] .tcc-in h1 { overflow: hidden; font-size: var(--fs-lg); text-overflow: ellipsis; white-space: nowrap; }
+.trip-cover-card[data-compact] .tcc-in p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.trip-cover-card[data-compact] .tcc-actions { grid-template-columns: repeat(2, var(--tap)); }
+.trip-cover-card[data-compact] .tcc-actions .btn { min-width: var(--tap); padding-inline: 0; }
+.trip-cover-card[data-compact] .tcc-label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
 /* Hai tầng điều khiển: CHẾ ĐỘ (4 tab chia đều) ở trên; CHỌN NGÀY (chip nhẹ, chỉ ở Lịch) ở dưới, khác cấp về kích thước và chất liệu. */
 .trip-nav { display: grid; gap: var(--s-2); padding-block: var(--s-3) var(--s-2); }
 .tmodes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-1); padding: var(--s-1); border: var(--glass-border) solid var(--sheet-edge); border-radius: var(--r-md); background: var(--surface-2); }

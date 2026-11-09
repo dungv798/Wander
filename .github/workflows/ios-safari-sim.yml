@@ -17,7 +17,7 @@ on:
       warmup_seconds:
         description: Giây chờ tối đa cho Render gói free thức dậy
         required: true
-        default: "90"
+        default: "240"
 
 permissions:
   contents: read
@@ -52,27 +52,33 @@ jobs:
           xcrun simctl list devices | grep "$UDID" || true
 
       - name: Đánh thức máy chủ Render
+        # Render gói free ngủ khi vắng người: lần gọi đầu có thể mất 1-2 phút. Mỗi lần chờ tối đa 120 giây, lặp tới khi có HTTP 200 hoặc hết WARMUP.
         run: |
-          for i in $(seq 1 $((WARMUP / 10))); do
-            code=$(curl -s -o /dev/null -m 15 -w "%{http_code}" "$APP_URL/actuator/health/readiness" || true)
-            echo "lần $i: HTTP $code"
+          start=$SECONDS
+          while [ $((SECONDS - start)) -lt "$WARMUP" ]; do
+            code=$(curl -s -o /dev/null -m 120 -w "%{http_code}" "$APP_URL/actuator/health/readiness" || true)
+            echo "sau $((SECONDS - start))s: HTTP $code"
             [ "$code" = "200" ] && break
-            sleep 10
+            sleep 5
           done
 
       - name: Mở Safari và chụp ảnh
+        # Mỗi ảnh khởi động lại Safari để không kẹt ở màn hình chính nếu lần trước Safari thoát (CI không có GPU nên trang bản đồ nặng có thể làm Safari thoát).
+        # simctl không bấm/cuộn được; chỉ mở URL rồi chụp. Trang đo viewport không cần WebGL nên đáng tin nhất ở môi trường này.
         run: |
           mkdir -p shots
           shot() { # $1 = tên ảnh, $2 = đường dẫn trong ứng dụng, $3 = giây chờ
+            xcrun simctl terminate "$UDID" com.apple.mobilesafari || true
+            sleep 2
             xcrun simctl openurl "$UDID" "$APP_URL$2"
             sleep "${3:-15}"
             xcrun simctl io "$UDID" screenshot "shots/$1.png"
             echo "đã chụp $1 ($2)"
           }
-          shot 01-home "/#/" 25
-          shot 02-ha-giang "/#/dest/ha-giang" 12
-          shot 03-deck "/#/deck/ha-giang" 12
-          shot 04-viewport-test "/viewport-test.html" 8
+          shot 01-viewport-test "/viewport-test.html" 15
+          shot 02-home "/?intro=0#/" 30
+          shot 03-ha-giang "/?intro=0#/dest/ha-giang" 25
+          shot 04-deck "/?intro=0#/deck/ha-giang" 25
           ls -la shots
 
       - name: Tải ảnh lên

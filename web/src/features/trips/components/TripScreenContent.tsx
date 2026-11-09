@@ -53,7 +53,7 @@ function TripHead({ trip, dest, days, tab, lastDay, onTab, onPeople }: { readonl
   return (
     <>
       <button className="grab" type="button" aria-label={T.view.sheetHandle} aria-expanded="true" />
-      <TripCoverHead trip={trip} dest={dest} onPeople={onPeople} />
+      <TripCoverHead trip={trip} dest={dest} onPeople={onPeople} compact={modeOfTab(tab) !== 'overview'} />
       <TripNav tab={tab} days={days} unassigned={unassignedItems(trip).length} lastDay={lastDay} onTab={onTab} />
     </>
   );

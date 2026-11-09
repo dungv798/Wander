@@ -49,6 +49,7 @@ export const COPY = {
     crashTitle: 'Có lỗi ở phía Wander',
     crashText: 'Việc bạn vừa làm có thể chưa được lưu. Tải lại trang để tiếp tục; những gì bạn đã chọn vẫn được giữ trên máy.',
     reload: 'Tải lại trang',
+    crashDetail: 'Chi tiết kỹ thuật (gửi cho người làm app nếu cần)',
     comingTitle: 'Phần này đang được dựng',
     comingText: 'Giao diện chuyến đi sẽ có ở lát tiếp theo của pha dựng giao diện.',
   },

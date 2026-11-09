@@ -26,6 +26,7 @@ const PROFILES = [
   { id: 'desktop-webkit', launch: () => webkit.launch({ headless: true }), ctx: { viewport: { width: 1440, height: 900 } } },
   { id: 'android-chrome', launch: () => chromium.launch({ channel: 'chrome', headless: true }), ctx: { ...devices['Pixel 7'] } },
   { id: 'iphone-safari', launch: () => webkit.launch({ headless: true }), ctx: { ...devices['iPhone 15'] } },
+  { id: 'iphone-promax-safari', launch: () => webkit.launch({ headless: true }), ctx: { ...devices['iPhone 15 Pro Max'] } },
   { id: 'iphone-se-safari', launch: () => webkit.launch({ headless: true }), ctx: { ...devices['iPhone SE'] } },
 ].filter((p) => wanted.length === 0 || wanted.includes(p.id));
 

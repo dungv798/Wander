@@ -72,6 +72,8 @@ export function transitionPhoto(origin: PhotoOrigin | null, update: () => void, 
       if (target) { target.style.viewTransitionName = ''; if (target.classList.contains('photo-flight')) target.remove(); }
     };
     cancelCurrent = () => { cancelled = true; transition.skipTransition(); finish(); };
+    void transition.ready.catch(() => undefined);
+    void transition.updateCallbackDone.catch(() => undefined);
     void transition.finished.catch(() => undefined).finally(finish);
     return;
   }

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#eaf2f3" />
+    <title>Đo viewport</title>
+    <link rel="stylesheet" href="/viewport-test.css" />
+  </head>
+  <body data-mode="app">
+    <div class="band band-lvh"><span>100lvh (đỏ)</span></div>
+    <div class="band band-dvh"><span>100dvh (xanh lá)</span></div>
+    <div class="band band-svh"><span>100svh (xanh dương)</span></div>
+    <div class="edge edge-top">cạnh trên · top:0</div>
+    <div class="edge edge-bottom">cạnh dưới · bottom:0</div>
+    <div class="panel">
+      <h1>Đo viewport Safari</h1>
+      <dl id="readout"></dl>
+      <div class="row">
+        <button type="button" data-set-mode="app" aria-pressed="true">A · như app</button>
+        <button type="button" data-set-mode="scroll" aria-pressed="false">B · trang cuộn</button>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="probe" id="probe"></div>
+    <div class="h-svh" id="h-svh"></div><div class="h-dvh" id="h-dvh"></div><div class="h-lvh" id="h-lvh"></div>
+    <script src="/viewport-test.js"></script>
+  </body>
+</html>

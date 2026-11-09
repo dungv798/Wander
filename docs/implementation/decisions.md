@@ -576,3 +576,13 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 | Cỡ chữ tối thiểu | Chữ phụ 9–11 px đổi sang token `--text-secondary` (12 px): `.pl-count`, `.pr-cat`, `.pr-area`, `.pr-actions > small`, `.deck-instruction`, `.card-hook` | DEFAULTED (Tầng B) |
 | Chữ trên bản đồ (deck) | `.deck-instruction` và `.deck-tray` có nền `--glass-label-surface`; `.deck-tray` không còn co xuống 36 px ở màn thấp (giữ 44 px) | DEFAULTED (Tầng B) |
 | Cuộn trang chính (hướng 2) | CHƯA LÀM. PO chọn "meta + trang chính cuộn", nhưng khảo sát cho thấy `#screen` là tờ kính nổi trên bản đồ phủ kín, tham chiếu ở 18 tệp CSS và gắn với hằng số JS che bản đồ (`SHEET_OPEN_FRACTION`); đổi sang cuộn trang sẽ phá bản đồ/kéo tờ/vuốt. Quay lại hỏi PO | Chờ PO (Tầng A) |
+
+## Sau thử iPhone thật (09/11/2026): màn lỗi, thẻ quẹt, bìa gọn, trang đo viewport
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Bằng chứng | 12 ảnh iPhone Safari thật của PO (Pro Max, thanh nổi iOS): trang chỉ dùng ~83% chiều cao (≈6% trên + ≈10,5% dưới là dải trơn); bản đồ chạy tốt; một lần hiện màn "Có lỗi ở phía Wander" (11:47) không tái hiện được trên WebKit giả lập | DONE (ghi nhận) |
+| Chi tiết lỗi | `ErrorBoundary` giữ `detail` (tên + thông điệp + `CRASH_STACK_LINES`=6 dòng dấu vết, tối đa `CRASH_DETAIL_MAX_CHARS`=900) và hiện trong `<details>` gập sẵn dưới nút "Tải lại trang"; lý do: iPhone không có console. Dấu vết chỉ chứa mã bundle công khai. Cần xem lại (có thể ẩn sau cờ) trước khi phát hành cho người dùng thật (RG) | DEFAULTED (Tầng B) |
+| Mũi tên ảnh thẻ quẹt | `.card-photo-controls` `top: 40%` → `26%` để không đè dòng "LOẠI · KHU VỰC" khi mô tả dài | DEFAULTED (Tầng B) |
+| View transition | `photoTransition.ts` bắt thêm `transition.ready` và `updateCallbackDone` (từ chối `AbortError` khi `skipTransition`); trước đó chỉ bắt `finished` | DEFAULTED (Tầng C) |
+| Bìa chuyến gọn | `TripCoverHead` có `compact` (mọi tab trừ Tổng quan): tên + ngày một hàng, hai nút còn biểu tượng 44 px (nhãn `.tcc-label` giữ cho trình đọc màn hình); bìa cao ~475 → ~190 px (ảnh Pro Max), mục lịch đầu tiên hiện đủ thay vì chỉ lộ đỉnh | DEFAULTED (Tầng B) |
+| Trang đo viewport | `web/public/viewport-test.{html,css,js}`: đo svh/dvh/lvh, visualViewport, safe-area, standalone, chế độ cuộn A/B ngay trên iPhone; công cụ chẩn đoán, KHÔNG thuộc giao diện (dùng CSS/JS ngoài vì CSP `'self'`); xóa trước khi phát hành. Hướng `lvh` (bản đồ phủ dưới thanh Safari) CHƯA đổi mã app: chờ số đo trên iPhone | Chờ số đo (PO) |
