@@ -36,10 +36,11 @@ jobs:
 
       - name: Phục vụ các trang thử ở localhost
         run: |
-          cd web/public
-          nohup python3 -m http.server 8080 --bind 127.0.0.1 > "$RUNNER_TEMP/server.log" 2>&1 &
-          sleep 2
-          curl -s -o /dev/null -w "autoscroll-test.html -> HTTP %{http_code}\n" http://127.0.0.1:8080/autoscroll-test.html
+          nohup node tools/ios-sim/serve-public.mjs web/public 8080 > "$RUNNER_TEMP/server.log" 2>&1 &
+          if ! curl -sf -o /dev/null --retry 15 --retry-connrefused --retry-delay 1 --max-time 5 http://127.0.0.1:8080/autoscroll-test.html; then
+            echo "Máy chủ thử không lên. Log:"; cat "$RUNNER_TEMP/server.log"; exit 1
+          fi
+          echo "máy chủ thử đã sẵn sàng ở http://127.0.0.1:8080"
 
       - name: Mở từng biến thể trong Safari và chụp ảnh
         run: |
