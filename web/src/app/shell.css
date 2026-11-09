@@ -34,20 +34,24 @@
   box-shadow: var(--sheet-shadow);
   -webkit-backdrop-filter: blur(var(--sheet-blur)) saturate(1.1);
   backdrop-filter: blur(var(--sheet-blur)) saturate(1.1);
-  transition: top var(--dur-med) var(--ease-out);
+  transform: translateY(var(--sheet-drag-y, 0px));
+  transition: top var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
 }
 /* Thu lại: chỉ còn dải tiêu đề phía trên thanh tab; phần còn lại mờ dần để không lộ nửa nội dung sau thanh tab. */
 .app[data-surface="sheet"][data-sheet="peek"] #screen { top: calc(100% - var(--shell-peek-height)); overflow: hidden; -webkit-mask-image: linear-gradient(black var(--s-6), transparent var(--s-8)); mask-image: linear-gradient(black var(--s-6), transparent var(--s-8)); }
 
-/* Nút thu/mở tờ (chỉ điện thoại): nằm trên mép tờ, 44 px, không phụ thuộc hover. */
+/* Tay nắm thu/mở tờ (chỉ điện thoại): dải 44 px dọc mép trên của tờ; KÉO xuống/lên để thu/mở (useSheetDrag), bấm cũng đổi. `touch-action: none` để trình duyệt không cuộn trang thay cho cử chỉ kéo. */
 .sheet-toggle {
-  position: absolute; z-index: var(--z-nav); left: 50%; translate: -50% 0; top: calc(var(--shell-sheet-top) - var(--tap) / 2);
-  display: inline-grid; place-items: center; width: var(--tap); height: var(--tap); padding: 0;
+  position: absolute; z-index: var(--z-nav); left: 7px; right: 7px; top: calc(var(--shell-sheet-top) - var(--tap) / 2);
+  translate: 0 var(--sheet-drag-y, 0px); touch-action: none; -webkit-user-select: none; user-select: none;
+  display: inline-grid; place-items: center; height: var(--tap); padding: 0;
   border: 0; border-radius: var(--r-pill); background: transparent; color: var(--ink); box-shadow: none;
-  transition: top var(--dur-med) var(--ease-out), transform var(--dur-press) var(--ease-out);
+  transition: top var(--dur-med) var(--ease-out), translate var(--dur-med) var(--ease-out), transform var(--dur-press) var(--ease-out);
 }
+/* Đang kéo: tờ và tay nắm bám sát ngón tay, không hoạt họa. */
+.app[data-dragging] #screen, .app[data-dragging] .sheet-toggle { transition: none; }
 .sheet-toggle .ic { display: none; }
-.sheet-toggle::after { content: ''; position: absolute; top: calc(var(--tap) / 2 + var(--s-2)); width: var(--handle-width); height: var(--handle-height); border-radius: var(--r-pill); background: var(--control-hover-edge); }
+.sheet-toggle::after { content: ''; position: absolute; left: 50%; translate: -50% 0; top: calc(var(--tap) / 2 + var(--s-2)); width: var(--handle-width); height: var(--handle-height); border-radius: var(--r-pill); background: var(--control-hover-edge); }
 .app[data-sheet="peek"] .sheet-toggle { top: calc(100% - var(--shell-peek-height) - var(--tap) / 2); }
 .app[data-sheet="peek"] .sheet-toggle .ic { transform: rotate(180deg); }
 .sheet-toggle:active { transform: scale(var(--glass-pressed-scale)); }

@@ -5,9 +5,8 @@ import { useIsWide } from '../shared/hooks/useMediaQuery.ts';
 import { navigate, replaceRoute, useRoute } from '../shared/router/hashRoute.ts';
 import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
-import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, useDiscover } from '../features/discover/index.ts';
+import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, SheetToggle, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, useDiscover } from '../features/discover/index.ts';
 import type { AddingMode, PlaceView, SheetMode } from '../features/discover/index.ts';
-import { Icon } from '../shared/ui/Icon.tsx';
 import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
 import { SettingsScreen } from '../features/settings/index.ts';
 import { OnboardScreen, OnboardingProvider, useOnboarding } from '../features/onboarding/index.ts';
@@ -97,9 +96,7 @@ function Shell() {
       {onMap ? <ShellMap view={route.view} sheet={sheet} /> : null}
       {onMap || route.view === VIEW.TRIP ? <MapChrome /> : null}
       {mapSheet ? (
-        <button className="sheet-toggle" type="button" aria-expanded={sheet === 'open'} aria-label={sheet === 'open' ? COPY.map.sheetCollapse : COPY.map.sheetExpand} onClick={() => setSheet(sheet === 'open' ? 'peek' : 'open')}>
-          <Icon name="chevron-down" />
-        </button>
+        <SheetToggle mode={sheet} onChange={setSheet} />
       ) : null}
       <ScreenHost view={route.view} routeKey={`${route.view}|${route.id ?? ''}`} noBar={hideBar}>
         <RouteEscape view={route.view} />

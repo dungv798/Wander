@@ -23,6 +23,7 @@ class StaticWebIT extends ApiTestSupport {
             Files.createDirectories(dir.resolve("assets"));
             Files.writeString(dir.resolve("index.html"), "<!doctype html><title>Wander</title>");
             Files.writeString(dir.resolve("assets/app-123.js"), "console.log('wander')");
+            Files.writeString(dir.resolve("manifest.webmanifest"), "{\"name\":\"Wander\"}");
             return dir;
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -71,6 +72,14 @@ class StaticWebIT extends ApiTestSupport {
         assertThat(unknown.code()).isEqualTo("NOT_FOUND");
         assertThat(unknown.raw().headers().firstValue("Content-Type").orElse("")).as("Safari mở thẳng URL lỗi phải đọc UTF-8, không đoán Latin-1")
                 .containsIgnoringCase("charset=UTF-8");
+    }
+
+    @Test
+    @DisplayName("manifest ứng dụng web được phục vụ đúng kiểu application/manifest+json (iOS Safari dùng nó để chạy toàn màn hình)")
+    void servesWebManifestWithItsOwnMediaType() {
+        Res manifest = call("GET", "/manifest.webmanifest", null);
+        assertThat(manifest.status()).isEqualTo(200);
+        assertThat(manifest.raw().headers().firstValue("Content-Type").orElse("")).startsWith("application/manifest+json");
     }
 
     @Test

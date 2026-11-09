@@ -22,3 +22,15 @@ export const SHELL_MAP = {
   /** Điện thoại, bảng thu lại: chiều cao thanh tiêu đề còn che đáy, px. */
   PEEK_INSET_PX: 140,
 } as const;
+
+/** Kéo tờ nội dung trên điện thoại (thu để xem bản đồ rộng hơn, kéo lên để mở lại). */
+export const SHEET_DRAG = {
+  /** Kéo quá phần này của quãng đường giữa hai trạng thái thì chuyển trạng thái khi thả. */
+  COMMIT_FRACTION: 0.25,
+  /** Hất nhanh hơn tốc độ này (px/ms) thì chuyển trạng thái dù kéo chưa tới ngưỡng. */
+  FLING_PX_PER_MS: 0.5,
+  /** Di chuyển ngắn hơn mức này (px) vẫn là một lần bấm, không phải kéo. */
+  TAP_SLOP_PX: 8,
+  /** Chiều cao (px) của tờ khi mở nếu chưa đo được. */
+  FALLBACK_OPEN_TOP_FRACTION: 0.3,
+} as const;

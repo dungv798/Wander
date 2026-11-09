@@ -6,6 +6,7 @@ export { PlaceSheetProvider, usePlaceSheet } from './hooks/PlaceSheetProvider.ts
 export type { PlaceSlot } from './hooks/PlaceSheetProvider.tsx';
 export { useDestination } from './hooks/useDestination.ts';
 export { HomeScreen } from './components/HomeScreen.tsx';
+export { SheetToggle } from './components/SheetToggle.tsx';
 export { ShellMap } from './components/ShellMap.tsx';
 export { MapChrome } from './components/MapChrome.tsx';
 export { DiscoveryTopicProvider } from './hooks/DiscoveryTopicProvider.tsx';

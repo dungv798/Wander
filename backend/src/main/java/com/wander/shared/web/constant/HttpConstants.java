@@ -98,6 +98,12 @@ public final class HttpConstants {
      */
     public static final MediaType JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8);
 
+    /** Đuôi tệp manifest ứng dụng web (không có dấu chấm). */
+    public static final String WEB_MANIFEST_EXTENSION = "webmanifest";
+
+    /** Kiểu nội dung của manifest ứng dụng web; iOS Safari cần đúng kiểu này để dùng manifest (chạy toàn màn hình khi Thêm vào Màn hình chính). */
+    public static final String WEB_MANIFEST_MEDIA_TYPE = "application/manifest+json";
+
     private HttpConstants() {
     }
 }
