@@ -46,8 +46,8 @@
 .place-source-link small { font: var(--text-secondary); color: var(--muted); }
 .place-source-link > .ic { flex: none; }
 /* Ảnh dọc đứng cạnh thông số; ảnh ngang nằm trên thông số. */
-.pd-media[data-orient="portrait"] { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; }
-.pd-media[data-orient="portrait"] .place-facts { grid-template-columns: minmax(0, 1fr); }
+.pd-media[data-orient="portrait"] { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: stretch; }
+.pd-media[data-orient="portrait"] .place-facts { grid-template-columns: minmax(0, 1fr); align-content: space-evenly; }
 :root .place-content .pp { gap: var(--s-3); padding: var(--s-2) var(--s-4) var(--s-4); }
 
 /* Thẻ bên trong dùng nền đặc để giữ một lớp kính chính trên sheet. */

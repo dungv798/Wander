@@ -3,6 +3,7 @@ package com.wander.shared.web.error;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.constant.ErrorMessages;
 import com.wander.shared.kernel.error.WanderException;
+import com.wander.shared.web.constant.HttpConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,6 +28,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiError> handleBusinessError(WanderException e) {
         return ResponseEntity.status(HttpStatuses.of(e.kind()))
                 .cacheControl(CacheControl.noStore())
+                .contentType(HttpConstants.JSON_UTF8)
                 .body(ApiError.of(e.code(), e.getMessage(), e.field(), e.details()));
     }
 
@@ -66,6 +68,6 @@ public class ApiExceptionHandler {
 
     /** Dựng phản hồi lỗi chuẩn từ mã HTTP, mã lỗi và lời báo. */
     private static ResponseEntity<ApiError> errorResponse(HttpStatus status, String code, String message) {
-        return ResponseEntity.status(status).cacheControl(CacheControl.noStore()).body(ApiError.simple(code, message));
+        return ResponseEntity.status(status).cacheControl(CacheControl.noStore()).contentType(HttpConstants.JSON_UTF8).body(ApiError.simple(code, message));
     }
 }

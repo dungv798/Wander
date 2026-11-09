@@ -37,6 +37,9 @@ test('cấu hình lớp native hợp lệ với style-spec MapLibre đang cài, 
   assert.equal(clustered.cluster, true);
   assert.equal(clustered.clusterMaxZoom, 16, 'cụm tách hết ở zoom tối đa 17');
   assert.equal(plain.cluster, false);
+  const clusterPhoto = style.layers.find((layer) => layer.id === `${MAP.CLUSTER_LAYER}-photo`);
+  assert.equal(clusterPhoto?.type === 'symbol' ? clusterPhoto.layout?.['icon-ignore-placement'] : undefined, false, 'ảnh cụm chiếm chỗ va chạm để nhãn ghim không bị vẽ chồng lên dưới nó');
+  assert.equal(clusterPhoto?.type === 'symbol' ? clusterPhoto.layout?.['icon-allow-overlap'] : undefined, true, 'ảnh cụm vẫn luôn được vẽ');
   const photo = style.layers.find((layer) => layer.id === `${MAP.PIN_LAYER_PREFIX}0-photo`);
   assert.ok(photo?.type === 'symbol');
   assert.ok(style.layers.indexOf(photo) > style.layers.findIndex((layer) => layer.id === `${MAP.PIN_LAYER_PREFIX}0-circle`), 'ảnh nằm trên nền tròn');

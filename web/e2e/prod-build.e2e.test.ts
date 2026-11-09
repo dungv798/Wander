@@ -67,6 +67,9 @@ test('bản dựng: có manifest + meta để "Thêm vào Màn hình chính" ch�
   assert.match(html, /<meta name="apple-mobile-web-app-capable" content="yes"/, 'iOS chạy được ở chế độ toàn màn hình');
   const href = /<link rel="apple-touch-icon" href="([^"]+)"/.exec(html)?.[1];
   assert.ok(href && fs.existsSync(path.join(outDir, href)), 'biểu tượng apple-touch có thật trong bản dựng');
+  const preloads = [...html.matchAll(/<link rel="preload" as="image" href="([^"]+)"/g)].map((m) => m[1] as string);
+  assert.equal(preloads.length, 3, 'tải trước biểu tượng 3 tab (Khám phá, Đã chọn, Chuyến đi) để không hiện trễ sau chữ');
+  for (const href of preloads) assert.ok(fs.existsSync(path.join(outDir, href)), `${href} có trong bản dựng`);
   const manifest = JSON.parse(built('manifest.webmanifest')) as { display: string; start_url: string; icons: { src: string; sizes: string }[] };
   assert.equal(manifest.display, 'standalone');
   assert.equal(manifest.start_url, '/');

@@ -31,6 +31,7 @@ export const COPY = {
     back: 'Quay lại',
     close: 'Đóng',
     retry: 'Thử lại',
+    slowLoad: 'Máy chủ đang thức dậy sau lúc nghỉ, lần đầu có thể mất khoảng một phút. Bạn cứ chờ nhé, không cần tải lại.',
     undo: 'Hoàn tác',
     loading: 'Đang tải',
     seeMore: 'Xem thêm',

@@ -248,6 +248,7 @@
   /* ---- Biểu tượng và vùng chạm ---- */
   --icon-s: 16px; --icon-m: 20px; --icon-l: 26px; --icon-xl: 30px;
   --tap: 44px;
+  --reading-width: 640px;   /* độ rộng tối đa của cột đọc/hành động trên màn rộng (Hôm nay): nút và chữ không kéo ra hết bề ngang */
   --focus: var(--sky);
 
   /* ---- Điểm ngắt (dùng trong @media, ghi ở đây để tra) ---- */

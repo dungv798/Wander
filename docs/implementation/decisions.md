@@ -586,3 +586,13 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 | View transition | `photoTransition.ts` bắt thêm `transition.ready` và `updateCallbackDone` (từ chối `AbortError` khi `skipTransition`); trước đó chỉ bắt `finished` | DEFAULTED (Tầng C) |
 | Bìa chuyến gọn | `TripCoverHead` có `compact` (mọi tab trừ Tổng quan): tên + ngày một hàng, hai nút còn biểu tượng 44 px (nhãn `.tcc-label` giữ cho trình đọc màn hình); bìa cao ~475 → ~190 px (ảnh Pro Max), mục lịch đầu tiên hiện đủ thay vì chỉ lộ đỉnh | DEFAULTED (Tầng B) |
 | Trang đo viewport | `web/public/viewport-test.{html,css,js}`: đo svh/dvh/lvh, visualViewport, safe-area, standalone, chế độ cuộn A/B ngay trên iPhone; công cụ chẩn đoán, KHÔNG thuộc giao diện (dùng CSS/JS ngoài vì CSP `'self'`); xóa trước khi phát hành. Hướng `lvh` (bản đồ phủ dưới thanh Safari) CHƯA đổi mã app: chờ số đo trên iPhone | Chờ số đo (PO) |
+
+## "Sửa hết" các lỗi còn lại sau thử iPhone (09/11/2026)
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Thân lỗi JSON có UTF-8 | `HttpConstants.JSON_UTF8` (`application/json;charset=UTF-8`) đặt cho mọi phản hồi lỗi của `ApiExceptionHandler`: Spring bỏ `charset` nên Safari mở thẳng URL lỗi hiểu Latin-1 và vỡ tiếng Việt; `StaticWebIT` có kiểm (đã đỏ trước khi sửa) | DONE (Tầng C) |
+| Màn Hôm nay (màn rộng) | `--reading-width: 640px` (tokens.css); cột `.stack.pad-x` của màn Hôm nay không vượt độ rộng này ở ≥ 768 px, nút/chữ không kéo hết bề ngang | DEFAULTED (Tầng B) |
+| Chi tiết địa điểm (ảnh dọc) | Khối thông số giãn đều theo chiều cao cột ảnh (`align-items: stretch` + `align-content: space-evenly`), không còn trống nửa cột phải | DEFAULTED (Tầng B) |
+| Tóm tắt ngày | `.dayhead .s` ở màn Chuyến đi: căn trái, `text-wrap: pretty`, `overflow-wrap: break-word` (trước đây căn phải và rớt chữ lẻ) | DEFAULTED (Tầng B) |
+| Ghi công bản đồ (điện thoại) | MapLibre 6.16 mở sẵn dải chữ ghi công (thuộc tính `open` + lớp `compact-show`, chỉ có lúc khởi tạo) chui xuống dưới thanh tab; CSS ẩn phần chữ ở đúng trạng thái đó trên < 768 px, giữ nút "i" (bấm mở/đóng; sau lần kéo đầu MapLibre tự thu như mặc định). Phụ thuộc vào cấu trúc nội bộ nên MapLibre đang ghim chính xác 6.16.0. LƯU Ý: nút "i" thay dải chữ là cách thu gọn mặc định của chính MapLibre, nhưng điều khoản OpenFreeMap/OSM về hiển thị ghi công nên được PO/pháp lý xác nhận trước khi phát hành thật | DEFAULTED (Tầng B), cần xác nhận trước RG |
+| Bản đồ chuyến (điện thoại) | `TripMap` `TOP_INSET` 56 → 132 px: ghim và nhãn "~N km" nằm dưới thanh "wander" và hàng nút nổi, không bị che | DEFAULTED (Tầng B) |

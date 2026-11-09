@@ -20,7 +20,8 @@ interface TripMapProps {
   readonly coveredBottom: number;
 }
 
-const TOP_INSET = 56;
+/** Lề trên của bản đồ trên điện thoại: chừa chỗ cho thanh "wander" (≈68 px) và hàng nút nổi (lùi, thời tiết, chia sẻ, sửa; ≈52 px) để ghim và nhãn tuyến không nằm dưới chúng. */
+const TOP_INSET = 132;
 /** Tuyến cần ít nhất hai điểm. */
 const MIN_ROUTE_POINTS = 2;
 

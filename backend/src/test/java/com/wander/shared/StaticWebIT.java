@@ -69,6 +69,8 @@ class StaticWebIT extends ApiTestSupport {
         Res unknown = call("GET", "/api/khong-co", u.token());
         assertThat(unknown.status()).isEqualTo(404);
         assertThat(unknown.code()).isEqualTo("NOT_FOUND");
+        assertThat(unknown.raw().headers().firstValue("Content-Type").orElse("")).as("Safari mở thẳng URL lỗi phải đọc UTF-8, không đoán Latin-1")
+                .containsIgnoringCase("charset=UTF-8");
     }
 
     @Test

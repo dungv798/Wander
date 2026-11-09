@@ -1,5 +1,8 @@
 package com.wander.shared.web.constant;
 
+import java.nio.charset.StandardCharsets;
+import org.springframework.http.MediaType;
+
 /**
  * Hằng số HTTP dùng chung (tầng HỆ THỐNG, tầng web): tên header, giá trị header bảo mật và cache, tiền tố đường dẫn.
  */
@@ -88,6 +91,12 @@ public final class HttpConstants {
     public static final String VALUE_CONTENT_SECURITY_POLICY = "default-src 'self'; script-src 'self'; style-src 'self'; "
             + "img-src 'self' data: blob: https://images.unsplash.com; connect-src 'self' https://tiles.openfreemap.org https://s3.amazonaws.com; "
             + "worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+
+    /**
+     * Kiểu nội dung của thân lỗi JSON, nêu rõ UTF-8: Spring bỏ `charset` khỏi `application/json`, nên Safari mở thẳng URL lỗi
+     * hiểu thân là Latin-1 và làm vỡ tiếng Việt (ứng dụng đọc bằng `fetch().json()` luôn là UTF-8 nên không bị).
+     */
+    public static final MediaType JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8);
 
     private HttpConstants() {
     }

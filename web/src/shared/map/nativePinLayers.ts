@@ -49,7 +49,7 @@ export function addNativePinLayers(map: MlMap, host: HTMLElement): void {
     'circle-radius': MAP.PIN_RADIUS, 'circle-color': pinColor(host, '--surface'), 'circle-stroke-color': pinColor(host, '--line'), 'circle-stroke-width': MAP.PIN_BORDER,
   } });
   map.addLayer({ id: `${MAP.CLUSTER_LAYER}-photo`, type: 'symbol', source: MAP.PIN_SOURCES[0], filter: ['has', 'point_count'], layout: {
-    'icon-image': ['image', ['get', 'image']], 'icon-allow-overlap': true, 'icon-ignore-placement': true,
+    'icon-image': ['image', ['get', 'image']], 'icon-allow-overlap': true, 'icon-ignore-placement': false,
   } });
   map.addLayer({ id: `${MAP.CLUSTER_LAYER}-badge`, type: 'circle', source: MAP.PIN_SOURCES[0], filter: ['has', 'point_count'], paint: {
     'circle-radius': MAP.CLUSTER_BADGE_RADIUS, 'circle-translate': [MAP.CLUSTER_BADGE_OFFSET, -MAP.CLUSTER_BADGE_OFFSET], 'circle-color': pinColor(host, '--muted'), 'circle-stroke-color': pinColor(host, '--white'), 'circle-stroke-width': 2,

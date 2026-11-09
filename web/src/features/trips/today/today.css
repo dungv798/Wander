@@ -16,3 +16,5 @@
 .today-checklist input { width: var(--icon-m); height: var(--icon-m); }
 .today-completed summary { min-height: var(--tap); cursor: pointer; font: var(--text-button); }
 .today-completed .todaylist { margin-top: var(--s-2); }
+/* Màn rộng: cột nội dung giữ độ rộng đọc được thay vì kéo nút và chữ ra hết bề ngang. */
+@media (min-width: 768px) { #screen[data-view="today"] .stack.pad-x { max-width: var(--reading-width); } }
