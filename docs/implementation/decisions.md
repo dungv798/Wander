@@ -565,3 +565,14 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 | Ảnh có người | Tránh chân dung cận mặt, ảnh trẻ em, ảnh tư liệu cũ; ảnh minh họa không khí, không khẳng định một địa điểm cụ thể | DEFAULTED (Tầng B) |
 | Unsplash / Pexels / oEmbed MXH / UGC | PO chọn cả bốn (DR-034); điều khoản ở `docs/research/image-sources/TERMS.md`; chưa bật, chờ khóa API, đánh giá riêng tư và RG-5 | Mở |
 | Ảnh ngoài (DR-034) | `Photo` có đúng một nguồn (`file` hoặc `externalUrl`); máy chủ ngoài chỉ `images.unsplash.com`; `Destination.coverPhoto` tùy chọn; chủ đề `hanh-trinh`; CSP `img-src` thêm `https://images.unsplash.com` (PO duyệt hotlink 05/11/2026) | DONE (backend), chờ e2e + kiểm CSP trình duyệt thật |
+
+## Chạy chéo trình duyệt + sửa Safari iPhone/vùng chạm (09/11/2026)
+| Hạng mục | Mặc định | Trạng thái |
+|---|---|---|
+| Công cụ đo | `web/scripts/cross-browser.mjs` chạy `screens.mjs` trên 6 cấu hình (Chrome, Edge, WebKit máy tính; Pixel 7 Chrome; iPhone 15 và SE WebKit). `--base=<url>` kiểm bản đã triển khai, `--skip=` bỏ màn. WebKit của Playwright trên Windows (WinCairo) KHÔNG phải Safari của Apple: kết quả WebKit chỉ là dấu hiệu, phải thử iPhone thật | DONE |
+| Nhiễu đo WebKit | Lỗi "Refused to apply a stylesheet" (CSP `style-src 'self'`) là do lệnh `screenshot` của Playwright chèn `<style>`, không phải lỗi ứng dụng (tái hiện: chỉ xuất hiện sau chụp ảnh; không chụp thì sạch) | DONE (đã kiểm) |
+| Toàn màn hình iOS | `index.html` thêm `theme-color`, `apple-mobile-web-app-capable`, `manifest.webmanifest`, `apple-touch-icon`; `public/pwa/icon-{180,192,512}.png` là BẢN NHÁP v2 (PO yêu cầu làm lại 09/11): ô nền mực tối `#243740`, chữ "w" trắng, chấm cam `#f57932` (token thương hiệu), chờ PO duyệt. `theme-color`/manifest phải ghi hex (HTML/JSON không đọc được token) và khớp `--bg` ở `tokens.css` | DEFAULTED (Tầng B) |
+| Vùng chạm đầu trang | `.map-chrome-brand` và `.map-chrome-scope` tối thiểu `--tap` (44 px) | DEFAULTED (Tầng B) |
+| Cỡ chữ tối thiểu | Chữ phụ 9–11 px đổi sang token `--text-secondary` (12 px): `.pl-count`, `.pr-cat`, `.pr-area`, `.pr-actions > small`, `.deck-instruction`, `.card-hook` | DEFAULTED (Tầng B) |
+| Chữ trên bản đồ (deck) | `.deck-instruction` và `.deck-tray` có nền `--glass-label-surface`; `.deck-tray` không còn co xuống 36 px ở màn thấp (giữ 44 px) | DEFAULTED (Tầng B) |
+| Cuộn trang chính (hướng 2) | CHƯA LÀM. PO chọn "meta + trang chính cuộn", nhưng khảo sát cho thấy `#screen` là tờ kính nổi trên bản đồ phủ kín, tham chiếu ở 18 tệp CSS và gắn với hằng số JS che bản đồ (`SHEET_OPEN_FRACTION`); đổi sang cuộn trang sẽ phá bản đồ/kéo tờ/vuốt. Quay lại hỏi PO | Chờ PO (Tầng A) |

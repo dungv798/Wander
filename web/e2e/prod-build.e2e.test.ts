@@ -54,3 +54,22 @@ test('bản dựng: không hiển thị hộp BẢN THỬ/GIẢ LẬP ở Bảo 
   assert.equal(await page.locator('.protobox').count(), 0, 'màn Khôi phục bằng thiết bị cũ không hiện nút giả lập duyệt');
   await ctx.close();
 });
+
+/** Đọc một tệp trong thư mục bản dựng. */
+function built(file: string): string {
+  return fs.readFileSync(path.join(outDir, file), 'utf8');
+}
+
+test('bản dựng: có manifest + meta để "Thêm vào Màn hình chính" chạy toàn màn hình (không còn thanh Safari)', () => {
+  const html = built('index.html');
+  assert.match(html, /<link rel="manifest" href="\/manifest\.webmanifest"/, 'index.html trỏ tới manifest');
+  assert.match(html, /<meta name="theme-color" content="#[0-9a-f]{6}"/i, 'có theme-color');
+  assert.match(html, /<meta name="apple-mobile-web-app-capable" content="yes"/, 'iOS chạy được ở chế độ toàn màn hình');
+  const href = /<link rel="apple-touch-icon" href="([^"]+)"/.exec(html)?.[1];
+  assert.ok(href && fs.existsSync(path.join(outDir, href)), 'biểu tượng apple-touch có thật trong bản dựng');
+  const manifest = JSON.parse(built('manifest.webmanifest')) as { display: string; start_url: string; icons: { src: string; sizes: string }[] };
+  assert.equal(manifest.display, 'standalone');
+  assert.equal(manifest.start_url, '/');
+  assert.ok(manifest.icons.some((i) => i.sizes === '192x192') && manifest.icons.some((i) => i.sizes === '512x512'), 'đủ biểu tượng 192 và 512');
+  for (const icon of manifest.icons) assert.ok(fs.existsSync(path.join(outDir, icon.src)), `${icon.src} có trong bản dựng`);
+});

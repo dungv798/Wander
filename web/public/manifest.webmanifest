@@ -1,0 +1,16 @@
+{
+  "name": "Wander",
+  "short_name": "Wander",
+  "description": "Lập kế hoạch chuyến đi bằng tiếng Việt: khám phá, chọn nơi, xếp lịch theo ngày, chi phí.",
+  "lang": "vi",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eaf2f3",
+  "theme_color": "#eaf2f3",
+  "icons": [
+    { "src": "/pwa/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/pwa/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

@@ -9,7 +9,7 @@
 .shell-map .maplibregl-ctrl-bottom-right, .shell-map .maplibregl-ctrl-bottom-left { top: auto; bottom: 0; max-width: 100%; }
 .shell-map .maplibregl-ctrl-attrib { margin-bottom: 0; font: 400 9px / 1.4 var(--font-body); }
 .map-chrome { position: absolute; z-index: var(--z-nav); top: calc(var(--s-4) + env(safe-area-inset-top, 0px)); left: var(--s-4); right: var(--s-4); min-height: var(--shell-chrome-height); display: flex; align-items: center; gap: var(--s-3); padding: var(--s-2) var(--s-4); border: 1px solid var(--sheet-edge); border-radius: var(--r-pill); background: var(--sheet-surface); box-shadow: var(--btn-shadow); backdrop-filter: blur(var(--sheet-blur)); }
-.map-chrome-brand { padding: 0; color: var(--ink); font: var(--text-screen); letter-spacing: var(--tracking-screen); text-transform: lowercase; }
+.map-chrome-brand { display: inline-flex; align-items: center; min-width: var(--tap); min-height: var(--tap); padding: 0; color: var(--ink); font: var(--text-screen); letter-spacing: var(--tracking-screen); text-transform: lowercase; }
 .map-chrome-brand > span { color: var(--accent); }
 .map-chrome-scope { display: none; }
 :root .map-chrome .search { position: static; display: flex; justify-content: flex-end; flex: 1; min-height: var(--tap); min-width: var(--tap); margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
@@ -55,7 +55,7 @@
   .app { --shell-chrome-height: 52px; }
   .map-chrome { padding: 4px 10px 4px 16px; gap: 8px; }
   .map-chrome-brand { margin-right: auto; }
-  .map-chrome-scope { display: inline-block; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: transparent; color: var(--muted); font: 400 11px / 1.5 var(--font-body); }
+  .map-chrome-scope { display: inline-flex; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; align-items: center; min-height: var(--tap); background: transparent; color: var(--muted); font: var(--text-secondary); }
   .map-chrome-scope .ic { display: none; }
   :root .map-chrome .search { flex: 0 0 44px; }
 }

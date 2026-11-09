@@ -59,19 +59,19 @@ export const SCREENS = [
       if (!r.same || r.overflow) throw new Error(`đổi cỡ ${w}x${h} làm hỏng khung: ${JSON.stringify(r)}`);
     }
   } },
-  { id: 'home-search', go: async (p, url) => { await p.goto(`${url}/#/`); await p.waitForSelector('input[type=search]'); await p.fill('input[type=search]', 'ha gi'); } },
+  { id: 'home-search', go: async (p, url) => { await p.goto(`${url}/#/`); await p.locator('.map-chrome .search').click(); await p.waitForSelector('input[type=search]'); await p.fill('input[type=search]', 'ha gi'); } },
   { id: 'dest', go: async (p, url) => p.goto(`${url}/#/dest/ha-giang`) },
   { id: 'dest-guide', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.waitForSelector('.guide'); await p.evaluate(() => { document.getElementById('screen').scrollTop = 900; }); } },
   // Bản đồ chính của khung (không còn bản đồ nhúng): ở điện thoại thu tờ bằng nút Bản đồ để xem ghim và camera.
   { id: 'dest-map', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.waitForSelector('.shell-map-view[data-ready="1"]'); const peek = p.getByRole('button', { name: 'Bản đồ', exact: true }); if (await peek.isVisible()) { await peek.click(); await p.waitForSelector('.app[data-sheet="peek"]'); } await p.waitForTimeout(2500); } },
-  { id: 'dest-filter-hiking', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.waitForSelector('.place-row'); await p.getByRole('group', { name: 'Lọc theo loại' }).getByRole('button', { name: 'Leo núi' }).click(); await p.waitForTimeout(500); } },
+  { id: 'dest-filter-hiking', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.waitForSelector('.place-row'); await p.getByRole('group', { name: 'Lọc theo loại' }).getByRole('button', { name: /Trekking|Leo núi/ }).click(); await p.waitForTimeout(500); } },
   // Một template chi tiết: ảnh dọc cạnh 4 thông số; ảnh ngang nằm trên thông số.
   { id: 'place-portrait', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.locator('[data-place-id="cot-co-lung-cu"] .pr-photo').click(); await p.waitForSelector('.panel .pd-media[data-orient]'); await p.waitForTimeout(800); } },
   { id: 'place-landscape', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.locator('[data-place-id="deo-ma-pi-leng"] .pr-photo').click(); await p.waitForSelector('.panel .pd-media[data-orient="landscape"]'); await p.waitForTimeout(800); } },
   { id: 'place-nophoto', go: async (p, url) => { await p.goto(`${url}/#/dest/ha-giang`); await p.waitForSelector('.place-row'); const row = p.locator('.place-row:has(.pr-photo .img-ph)').first(); if (await row.count()) { await row.locator('.pr-photo').click(); await p.waitForSelector('.panel .photo-ph'); } await p.waitForTimeout(500); } },
   { id: 'deck', go: async (p, url) => p.goto(`${url}/#/deck/ha-giang`) },
-  { id: 'deck-info', go: async (p, url) => { await p.goto(`${url}/#/deck/ha-giang`); await p.waitForSelector('.card.front'); await p.click('.round.small[aria-label="Xem chi tiết"]'); await p.waitForSelector('.panel'); } },
-  { id: 'place-route', go: async (p, url) => { await p.goto(`${url}/#/deck/ha-giang`); await p.waitForSelector('.card.front'); await p.click('.round.small[aria-label="Xem chi tiết"]'); await p.waitForSelector('.minimap[data-ready="1"]'); await p.locator('.minimap').scrollIntoViewIfNeeded(); await p.waitForTimeout(1600); } },
+  { id: 'deck-info', go: async (p, url) => { await p.goto(`${url}/#/deck/ha-giang`); await p.waitForSelector('.card.front'); await p.click('.card.front .card-detail'); await p.waitForSelector('.panel'); } },
+  { id: 'place-route', go: async (p, url) => { await p.goto(`${url}/#/deck/ha-giang`); await p.waitForSelector('.card.front'); await p.click('.card.front .card-detail'); await p.waitForSelector('.minimap[data-ready="1"]'); await p.locator('.minimap').scrollIntoViewIfNeeded(); await p.waitForTimeout(1600); } },
   { id: 'picked', go: async (p, url) => { await p.goto(`${url}/#/deck/ha-giang`); await p.waitForSelector('.card.front'); for (let i = 0; i < 4; i += 1) { await p.keyboard.press('ArrowRight'); await p.waitForTimeout(450); } await p.goto(`${url}/#/picked`); } },
   { id: 'deck-empty', go: async (p, url) => { await p.goto(`${url}/#/deck/ha-giang`); await p.waitForSelector('.card.front'); for (let i = 0; i < 9; i += 1) { await p.keyboard.press(i % 2 ? 'ArrowLeft' : 'ArrowRight'); await p.waitForTimeout(420); } } },
   { id: 'trips-empty', go: async (p, url) => p.goto(`${url}/#/trips`) },
