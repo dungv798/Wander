@@ -1,0 +1,83 @@
+# Chụp Wander trong Safari iOS THẬT chạy trong iOS Simulator (máy macOS của GitHub). Chỉ chạy khi PO bấm "Run workflow" (workflow_dispatch):
+# KHÔNG tự chạy khi push/PR, không có secret, không deploy, không ghi gì vào kho. Ảnh nằm ở mục Artifacts của lượt chạy.
+# Vì sao: Safari thật chỉ có trên macOS; WebKit của Playwright trên Windows không có thanh địa chỉ/công cụ của Safari.
+name: ios-safari-sim
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Địa chỉ ứng dụng cần chụp (không có dấu / cuối)
+        required: true
+        default: https://wander-fx65.onrender.com
+      device:
+        description: Tên iPhone ảo (không có thì dùng iPhone Pro mới nhất có sẵn)
+        required: true
+        default: iPhone 16 Pro
+      warmup_seconds:
+        description: Giây chờ tối đa cho Render gói free thức dậy
+        required: true
+        default: "90"
+
+permissions:
+  contents: read
+
+jobs:
+  safari:
+    name: Safari iOS (Simulator)
+    runs-on: macos-15
+    timeout-minutes: 20
+    env:
+      APP_URL: ${{ inputs.url }}
+      DEVICE: ${{ inputs.device }}
+      WARMUP: ${{ inputs.warmup_seconds }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools/ios-sim
+
+      - name: Xem runtime và máy ảo có sẵn
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes
+          xcrun simctl list devices available | head -60
+
+      - name: Chọn và bật iPhone ảo
+        run: |
+          UDID=$(xcrun simctl list devices available -j | node tools/ios-sim/pick-device.mjs)
+          echo "UDID=$UDID" >> "$GITHUB_ENV"
+          echo "Máy ảo: $UDID"
+          xcrun simctl boot "$UDID"
+          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl list devices | grep "$UDID" || true
+
+      - name: Đánh thức máy chủ Render
+        run: |
+          for i in $(seq 1 $((WARMUP / 10))); do
+            code=$(curl -s -o /dev/null -m 15 -w "%{http_code}" "$APP_URL/actuator/health/readiness" || true)
+            echo "lần $i: HTTP $code"
+            [ "$code" = "200" ] && break
+            sleep 10
+          done
+
+      - name: Mở Safari và chụp ảnh
+        run: |
+          mkdir -p shots
+          shot() { # $1 = tên ảnh, $2 = đường dẫn trong ứng dụng, $3 = giây chờ
+            xcrun simctl openurl "$UDID" "$APP_URL$2"
+            sleep "${3:-15}"
+            xcrun simctl io "$UDID" screenshot "shots/$1.png"
+            echo "đã chụp $1 ($2)"
+          }
+          shot 01-home "/#/" 25
+          shot 02-ha-giang "/#/dest/ha-giang" 12
+          shot 03-deck "/#/deck/ha-giang" 12
+          shot 04-viewport-test "/viewport-test.html" 8
+          ls -la shots
+
+      - name: Tải ảnh lên
+        uses: actions/upload-artifact@v4
+        with:
+          name: safari-ios-screenshots
+          path: shots/*.png
+          if-no-files-found: error
