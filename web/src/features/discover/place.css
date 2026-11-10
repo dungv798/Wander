@@ -1,7 +1,11 @@
 ﻿/* Sheet chi tiết: chỉ nội dung cuộn; thanh hành động nằm ngoài vùng cuộn. */
 :root:not([data-look='classic']) .panel:has(> .place-content) { overflow: hidden; border-radius: var(--shell-sheet-radius); background: var(--sheet-surface); border: 1px solid var(--sheet-edge); box-shadow: var(--shell-panel-shadow); backdrop-filter: blur(var(--sheet-blur)); }
 .place-content { display: flex; flex-direction: column; max-height: 96dvh; }
-.place-scroll { overflow: auto; min-height: 0; overscroll-behavior: contain; }
+/* Chỉ cuộn dọc: một chip hoặc dòng không ngắt làm nội dung rộng hơn khung từng khiến hộp thoại cuộn ngang và cắt chữ. */
+.place-scroll { overflow-x: hidden; overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
+.place-scroll :is(.pp, .place-info-card, .chips) { min-width: 0; max-width: 100%; }
+.place-scroll .chip { max-width: 100%; white-space: normal; }
+.place-scroll .pp { grid-template-columns: minmax(0, 1fr); }
 .place-actions { flex: none; z-index: 3; }
 :root .place-actions { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
 .place-actions .btn { min-width: 0; padding-inline: var(--s-2); text-decoration: none; }

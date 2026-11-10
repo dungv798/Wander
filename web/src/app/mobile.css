@@ -1,0 +1,201 @@
+/* Danh sách điện thoại cuộn theo trang; bản đồ và điều hướng là các lớp độc lập. */
+@media (max-width: 767px) {
+  :root { --font-body: var(--mobile-font); --font-display: var(--mobile-font); }
+  html { background-color: var(--mobile-canvas); }
+  body { background-color: var(--mobile-canvas); }
+  html[data-document-scroll], html[data-document-scroll] body { height: auto; overflow: visible; }
+  html[data-document-scroll] #root { height: auto; }
+  html[data-document-scroll] { scroll-padding-top: calc(var(--mobile-header-total) + var(--s-4)); }
+  .app[data-document-scroll] {
+    height: auto; min-height: 100svh; max-width: none;
+    overflow: visible; background: var(--mobile-canvas);
+  }
+  .app[data-document-scroll]::before, .app[data-document-scroll]::after { content: none; }
+  .app[data-document-scroll][data-surface='sheet'] { padding-top: var(--mobile-header-total); background: transparent; }
+  .app[data-document-scroll] .shell-map { position: fixed; inset: 0 0 auto; height: calc(var(--mobile-header-total) + var(--mobile-map-preview)); }
+  .app[data-document-scroll] .map-chrome {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--mobile-header-total); min-height: 0;
+    padding: env(safe-area-inset-top, 0px) max(var(--s-4), env(safe-area-inset-right, 0px)) 0 max(var(--s-4), env(safe-area-inset-left, 0px));
+    gap: var(--s-2); border: 0; border-radius: 0;
+    background: var(--mobile-header-scrim); box-shadow: 0 1px 0 var(--mobile-divider);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    transition: transform var(--mobile-chrome-dur) var(--mobile-chrome-ease); will-change: transform;
+  }
+  .app[data-document-scroll] .map-chrome-brand { margin-right: auto; font-size: var(--fs-xl); letter-spacing: var(--tracking-screen); }
+  .app[data-document-scroll] .map-chrome-scope {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-1);
+    max-width: 36vw; min-height: var(--tap); padding: var(--s-2) var(--s-3);
+    border-radius: var(--r-pill); font: var(--text-secondary); font-weight: 600;
+  }
+  .app[data-document-scroll] .map-chrome-scope .ic:first-child { display: none; }
+  .app[data-document-scroll] .map-chrome-scope .ic:last-child { width: var(--s-3); height: var(--s-3); }
+  .app[data-document-scroll] .map-chrome:has(.mobile-map-switch) .map-chrome-scope { display: none; }
+  :root .app[data-document-scroll] .map-chrome .search {
+    width: var(--tap); height: var(--tap); flex: 0 0 var(--tap);
+    justify-content: center; border-radius: var(--r-pill);
+  }
+  .mobile-map-preview {
+    position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: flex-end;
+    width: 100%; height: var(--mobile-map-preview); padding: var(--s-3) var(--s-4) var(--s-5);
+    touch-action: pan-y pinch-zoom; color: var(--ink);
+  }
+  .mobile-map-preview > span {
+    display: none; align-items: center; gap: var(--s-2); min-height: var(--tap);
+    padding: var(--s-2) var(--s-3); border: 1px solid var(--mobile-divider); border-radius: var(--r-pill);
+    font: var(--text-secondary); font-weight: 600;
+  }
+  .mobile-map-preview .ic { width: 16px; height: 16px; }
+  .app[data-document-scroll] #screen,
+  .app[data-document-scroll][data-sheet='peek'] #screen {
+    position: relative; inset: auto; z-index: var(--z-raised); width: 100%; height: auto; max-height: none;
+    min-height: calc(100svh - var(--mobile-header-total)); margin: 0;
+    overflow: visible; padding-bottom: calc(var(--mobile-dock-total) + var(--s-6));
+    border: 0; border-radius: 0; background: var(--mobile-sheet); box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    -webkit-mask-image: none; mask-image: none; transform: none; transition: none;
+  }
+  .app[data-document-scroll][data-surface='sheet'] #screen {
+    border-top: 1px solid var(--mobile-glass-edge); border-radius: var(--r-xl) var(--r-xl) 0 0;
+    min-height: calc(100svh - var(--mobile-header-total) - var(--mobile-map-preview));
+    box-shadow: var(--sheet-shadow);
+  }
+  .app[data-document-scroll][data-surface='sheet'] #screen::before {
+    content: ''; position: absolute; top: var(--s-2); left: 50%; translate: -50% 0;
+    width: var(--s-6); height: var(--s-1); border-radius: var(--r-pill); background: var(--mobile-divider); pointer-events: none;
+  }
+  .app[data-document-scroll] .national-home { gap: var(--s-5); padding: var(--s-6) var(--gutter) var(--s-6); }
+  .app[data-document-scroll] .nh-head > h1 { font: var(--mobile-title); letter-spacing: var(--tracking-screen); }
+  .app[data-document-scroll] .home-topics { order: 1; gap: var(--s-2); }
+  .app[data-document-scroll] .home-hero-card { order: 2; min-height: var(--mobile-hero-height); border-radius: var(--r-xl); }
+  .app[data-document-scroll] .hhc-in { padding: var(--s-5); }
+  .app[data-document-scroll] .hhc-in h2 { font-size: var(--mobile-hero-title-size); letter-spacing: var(--tracking-screen); }
+  .app[data-document-scroll] .hhc-in .btn { grid-row: 2; padding-inline: var(--s-3); }
+  .app[data-document-scroll] .hhc-eyebrow { grid-column: 1 / -1; font-size: var(--mobile-eyebrow-size); }
+  .app[data-document-scroll] .hhc-tag { display: block; grid-column: 1 / -1; margin: var(--s-1) 0 0; font: var(--text-body); }
+  .app[data-document-scroll] :is(.hhc-in .btn, .hhc-credit .credit-btn) {
+    background: var(--mobile-glass); border: 1px solid var(--mobile-glass-edge);
+    box-shadow: var(--mobile-glass-shadow); color: var(--ink);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  :root .app[data-document-scroll] .pl-filters .fchip {
+    padding-inline: var(--s-4); background: var(--surface); border-color: var(--mobile-divider);
+    box-shadow: none; font: var(--text-secondary); font-weight: 500;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  /* Chip đang chọn: cam đặc như mẫu (chữ trắng trên --control-accent đạt 4,5:1). */
+  :root .app[data-document-scroll] .pl-filters .fchip[aria-pressed='true'] {
+    color: var(--white); background: var(--control-accent); border-color: var(--control-accent);
+    box-shadow: none; font-weight: 700;
+  }
+  .app[data-document-scroll] .home-resume { order: 3; }
+  .app[data-document-scroll] .nh-grid { gap: var(--s-5) var(--s-3); }
+  .app[data-document-scroll] .nh-card { display: flex; flex-direction: column; aspect-ratio: auto; overflow: visible; border-radius: 0; background: transparent; }
+  .app[data-document-scroll] .nh-card::after { content: none; }
+  .app[data-document-scroll] .nh-card > img {
+    position: relative; inset: auto; z-index: auto; width: 100%; height: auto;
+    aspect-ratio: var(--mobile-card-ratio); object-fit: cover; border-radius: var(--r-lg);
+  }
+  .app[data-document-scroll] .nh-card-copy { position: static; padding-top: var(--s-2); gap: var(--s-1); color: var(--ink); text-shadow: none; }
+  .app[data-document-scroll] .nh-grid .nh-tag { display: block; color: var(--muted); font: var(--text-secondary); }
+  .app[data-document-scroll] .national-home > section > .h2 { font: var(--text-screen); letter-spacing: var(--tracking-screen); }
+  :root .app #tabbar {
+    position: fixed; left: max(var(--s-4), env(safe-area-inset-left, 0px)); right: max(var(--s-4), env(safe-area-inset-right, 0px));
+    bottom: max(var(--s-3), env(safe-area-inset-bottom, 0px)); z-index: var(--z-nav); isolation: isolate;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) var(--mobile-create-slot);
+    height: var(--mobile-dock-height); gap: 0; padding: var(--s-1);
+    border: 0; border-radius: var(--r-pill); background: transparent; box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    transition: transform var(--mobile-chrome-dur) var(--mobile-chrome-ease); will-change: transform;
+  }
+  :root .app #tabbar::before {
+    content: ''; position: absolute; z-index: -1; inset: 0 var(--mobile-create-slot) 0 0; border-radius: inherit;
+  }
+  :root .app #tabbar .tab {
+    align-content: center; padding: var(--s-1); gap: 0; border-radius: var(--r-pill); font: var(--mobile-nav-font);
+  }
+  /* Nhãn mọi tab cùng cỡ; tab đang chọn chỉ đổi nền và độ đậm (không đổi cỡ chữ như bản trước). */
+  :root .app #tabbar .tab span { font: var(--mobile-nav-font); color: var(--muted); }
+  :root .app #tabbar .tab[aria-current='page'] {
+    background: var(--mobile-glass-selected); box-shadow: var(--mobile-glass-selected-shadow);
+  }
+  :root .app #tabbar .tab[aria-current='page'] span { font-weight: 700; color: var(--ink); }
+  :root .app #tabbar .tab .ic { width: var(--fluent-sm); height: var(--fluent-sm); stroke-width: 1.8; }
+  :root .app #tabbar .tab-create .ic { color: var(--ink); }
+  :root .app #tabbar .tab-create {
+    justify-self: end; align-self: center; width: var(--mobile-create-size); height: var(--mobile-create-size); margin: 0 calc(-1 * var(--s-1)) 0 0;
+  }
+  :root .app #tabbar .tab-create > span {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  :root .app #tabbar .tab-create .ic { width: var(--fluent-md); height: var(--fluent-md); }
+  .mobile-map-switch {
+    position: relative; flex: none;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+    min-height: var(--tap); padding: var(--s-2) var(--s-3); border-radius: var(--r-pill);
+    color: var(--ink); font: var(--text-secondary); font-weight: 600;
+  }
+  .mobile-map-switch:active { transform: scale(var(--glass-pressed-scale)); }
+  .mobile-map-switch .ic { width: 18px; height: 18px; }
+  :root .app .map-chrome-scope, :root .app .map-chrome .search,
+  :root .app .mobile-map-preview > span, :root .app .mobile-map-switch,
+  :root .app #tabbar::before, :root .app #tabbar .tab-create {
+    border: 1px solid var(--mobile-glass-edge); background: var(--mobile-glass); box-shadow: var(--mobile-glass-shadow);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  :root .app #tabbar::before { background: var(--mobile-nav-glass); }
+  /* Thanh trên/dưới trượt ra khi cuộn xuống (useScrollChrome); focus bàn phím luôn đưa chúng trở lại. */
+  html[data-chrome='hidden'] .app[data-document-scroll] .map-chrome:not(:has(:focus-visible)) { transform: translateY(-100%); }
+  html[data-chrome='hidden'] .app[data-document-scroll] #tabbar:not(:has(:focus-visible)) { transform: translateY(calc(100% + var(--mobile-dock-total))); }
+  /* Ghi nguồn bản đồ: ở chế độ xem trước nút "i" không chạm được (lớp xem trước nằm trên) nên thay bằng dòng chữ; ở chế độ bản đồ nâng lên trên thanh tab. */
+  .app[data-document-scroll][data-sheet='open'] .shell-map .maplibregl-ctrl-bottom-right { display: none; }
+  .app[data-document-scroll][data-sheet='peek'] .shell-map .maplibregl-ctrl-bottom-right { bottom: calc(var(--mobile-dock-total) + var(--s-2)); }
+  .mobile-map-credit {
+    position: absolute; left: var(--s-3); bottom: var(--s-2); max-width: calc(100% - var(--s-6) * 2);
+    padding: 2px var(--s-2); border-radius: var(--r-pill); background: var(--mobile-glass);
+    color: var(--muted); font: var(--text-secondary); font-size: .6875rem; line-height: 1.25;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; pointer-events: none;
+  }
+  .app[data-document-scroll] .dest-head { padding-top: var(--s-5); }
+  .app[data-document-scroll] .dh-in h1 { font: var(--mobile-title); letter-spacing: var(--tracking-screen); }
+  .app[data-document-scroll] .place-row { border-color: var(--mobile-divider); border-radius: var(--r-lg); background: var(--surface); }
+  .app[data-document-scroll] .pr-title h3 { font-size: var(--fs-md); }
+  .app[data-document-scroll][data-sheet='peek'] :is(#screen, .mobile-map-preview) { visibility: hidden; pointer-events: none; }
+  .app[data-document-scroll][data-sheet='peek'] .shell-map { top: 0; height: 100dvh; }
+  .app[data-document-scroll] .map-peek { display: none; }
+  .app[data-document-scroll] .picked-map-peek { display: none; }
+  .app[data-document-scroll] .destination-picker { min-height: 100svh; background: var(--mobile-sheet); }
+  .app[data-document-scroll] #screen.nobar { padding-bottom: max(var(--s-6), env(safe-area-inset-bottom, 0px)); }
+  .app[data-document-scroll] .destination-picker-header { background: var(--mobile-canvas); padding-top: max(var(--s-4), env(safe-area-inset-top, 0px)); }
+  html[data-document-scroll]:has(.sheet:not(.drawer)) { overscroll-behavior: none; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --mobile-canvas: var(--bg); --mobile-sheet: var(--surface); --mobile-divider: var(--line);
+    --mobile-glass: color-mix(in srgb, var(--surface) 88%, transparent); --mobile-glass-edge: var(--line);
+    --mobile-nav-glass: var(--mobile-glass);
+    --mobile-glass-selected: color-mix(in srgb, var(--surface) 85%, var(--ink));
+    --mobile-glass-fallback: var(--surface); --mobile-glass-shadow: var(--sh-1); --mobile-glass-selected-shadow: var(--sh-1);
+    --mobile-header-scrim: var(--mobile-canvas);
+  }
+}
+:root[data-theme='dark'] {
+  --mobile-canvas: var(--bg); --mobile-sheet: var(--surface); --mobile-divider: var(--line);
+  --mobile-glass: color-mix(in srgb, var(--surface) 88%, transparent); --mobile-glass-edge: var(--line);
+  --mobile-nav-glass: var(--mobile-glass);
+  --mobile-glass-selected: color-mix(in srgb, var(--surface) 85%, var(--ink));
+  --mobile-glass-fallback: var(--surface); --mobile-glass-shadow: var(--sh-1); --mobile-glass-selected-shadow: var(--sh-1);
+  --mobile-header-scrim: var(--mobile-canvas);
+}
+/* Giảm trong suốt: mọi bề mặt điều khiển thành đặc hoàn toàn (header cũng vậy, tránh chữ nội dung lộ ra sau logo). */
+@media (prefers-reduced-transparency: reduce) {
+  :root { --mobile-glass: var(--mobile-glass-fallback); --mobile-nav-glass: var(--mobile-glass-fallback); --mobile-header-scrim: var(--mobile-canvas); }
+}
+@media (prefers-contrast: more) {
+  :root { --mobile-glass-edge: var(--ink); --mobile-glass: var(--mobile-glass-fallback); --mobile-nav-glass: var(--mobile-glass-fallback); --mobile-header-scrim: var(--mobile-canvas); }
+}
+/* Giảm chuyển động: thanh trên/dưới đổi trạng thái tức thì. */
+@media (prefers-reduced-motion: reduce) {
+  :root .app .map-chrome, :root .app #tabbar { transition: none; }
+}

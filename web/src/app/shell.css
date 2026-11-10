@@ -106,16 +106,3 @@
 @media (prefers-reduced-motion: reduce) {
   .app[data-surface="sheet"] #screen, .sheet-toggle, .sheet-toggle .ic { transition: none; }
 }
-
-/* THỬ NGHIỆM `?fs=1` (điện thoại; PO chọn 09/11/2026): Safari iPhone chỉ thu thanh công cụ khi TRANG cuộn. Thân trang cao hơn khung nhìn một đoạn, app cố định.
-   Chưa thu thanh (không có data-fs-collapsed): MỌI cú vuốt dọc, kể cả trên bản đồ, tờ, khung đầu, thanh tab, phải cuộn TRANG để thanh thu ngay (tờ tạm không tự cuộn, bản đồ tạm nhường vuốt dọc).
-   Đã thu: mọi thứ về như thường. Trong lúc cuộn (data-fs-scrolling) tạm bỏ kính mờ trên bản đồ WebGL, vì vẽ lại mỗi khung hình khi thanh co gây giật. Mặc định tắt. */
-@media (max-width: 767px) {
-  html[data-fs] { height: auto; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: none; }
-  html[data-fs] body { height: auto; overflow: visible; }
-  html[data-fs] body::after { content: ''; display: block; height: calc(100lvh + var(--fs-scroll-range, 120px)); }
-  html[data-fs] .app { position: fixed; inset: 0; height: auto; }
-  html[data-fs]:not([data-fs-collapsed]) #screen { overflow-y: hidden; overscroll-behavior-y: auto; }
-  html[data-fs]:not([data-fs-collapsed]) :is(.tmroot, .maplibregl-canvas-container, .maplibregl-canvas) { touch-action: pan-y !important; }
-  html[data-fs][data-fs-scrolling] :is(#screen, #tabbar, .map-chrome, .sheet-toggle) { backdrop-filter: none; -webkit-backdrop-filter: none; }
-}

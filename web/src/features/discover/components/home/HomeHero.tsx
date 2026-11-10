@@ -2,6 +2,7 @@ import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import { Button } from '../../../../shared/ui/Button.tsx';
 import type { DestinationSummary } from '../../model/Catalog.types.ts';
 import { HOME } from '../../model/home.const.ts';
+import { HOME_COPY } from '../../model/home.copy.ts';
 import { CreditPill } from '../CreditPill.tsx';
 import { useCreditPill } from '../../hooks/useCreditPill.ts';
 import { COPY } from '../../../../shared/const/copy.vi.ts';
@@ -30,7 +31,7 @@ export function HomeHero({ destination, eyebrow, cta, onOpen }: HomeHeroProps) {
       <div className="hhc-in">
         <p className="hhc-eyebrow">{eyebrow}</p>
         <h2>{destination.name}</h2>
-        <p className="hhc-tag">{destination.tagline}</p>
+        <p className="hhc-tag">{HOME_COPY.hooks[destination.id] ?? destination.tagline}</p>
         <Button arrow onClick={onOpen}>{cta}</Button>
       </div>
       {destination.coverPhoto ? <div className="hhc-credit"><IconButton icon="info-circle" label={COPY.deck.creditAria} aria-expanded={credit.open} onClick={credit.toggle} />{credit.open ? <CreditPill photo={destination.coverPhoto} fullAuthor /> : null}</div> : null}

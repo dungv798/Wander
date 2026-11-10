@@ -4,8 +4,9 @@ import { HIDE_TABBAR_ALWAYS, HIDE_TABBAR_ON_PHONE, VIEW } from '../shared/const/
 import { useIsWide } from '../shared/hooks/useMediaQuery.ts';
 import { navigate, replaceRoute, useRoute } from '../shared/router/hashRoute.ts';
 import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
+import { Icon } from '../shared/ui/Icon.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
-import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, SheetToggle, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, useDiscover } from '../features/discover/index.ts';
+import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, useDiscover } from '../features/discover/index.ts';
 import type { AddingMode, PlaceView, SheetMode } from '../features/discover/index.ts';
 import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
 import { SettingsScreen } from '../features/settings/index.ts';
@@ -14,13 +15,14 @@ import { CreateTripSheet, ExportScreen, JoinScreen, TodayScreen, TripScreen, Tri
 import { ScreenSkeleton } from '../shared/ui/Skeleton.tsx';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 import { TabBar } from './TabBar.tsx';
-import { initializeFullscreenExperiment } from './fullscreen.ts';
+import { useDocumentScroll } from './useDocumentScroll.ts';
+import { useScrollChrome } from './useScrollChrome.ts';
+import { MobileMapControls } from './MobileMapControls.tsx';
 import { initializeLook } from './look.ts';
 import { RouteEscape } from './RouteEscape.tsx';
 import { DeckSpotlightProvider } from '../features/discover/index.ts';
 
 void initializeLook();
-initializeFullscreenExperiment();
 
 const DestinationPickerScreen = lazy(() => import('../features/discover/components/DestinationPickerScreen.tsx'));
 
@@ -82,11 +84,17 @@ function Shell() {
   const hideBar = HIDE_TABBAR_ALWAYS.includes(route.view) || (!wide && HIDE_TABBAR_ON_PHONE.includes(route.view));
   const onMap = SHELL_MAP.VISIBLE_VIEWS.includes(route.view);
   const mapSheet = onMap && route.view !== VIEW.DECK;
+  const documentScroll = !wide && (mapSheet || route.view === VIEW.DESTINATIONS);
   // Bản đồ khung chỉ tồn tại ở các màn nằm trên nó (Khám phá/Điểm đến/Đã chọn/Chuyến đi): bộ thẻ, chuyến chi tiết, Hôm nay, cài đặt… không giữ canvas WebGL ẩn.
   // Chế độ tờ chỉ có nghĩa trong màn đã đặt nó: đổi màn thì tờ tự mở lại (không cần effect).
-  const [sheetChoice, setSheetChoice] = useState<{ readonly view: string; readonly mode: SheetMode }>({ view: route.view, mode: 'open' });
-  const sheet: SheetMode = sheetChoice.view === route.view ? sheetChoice.mode : 'open';
-  const setSheet = useCallback((mode: SheetMode): void => setSheetChoice({ view: route.view, mode }), [route.view]);
+  const routeKey = `${route.view}|${route.id ?? ''}`;
+  const [sheetChoice, setSheetChoice] = useState<{ readonly view: string; readonly mode: SheetMode }>({ view: routeKey, mode: 'open' });
+  // Xóa lựa chọn của màn cũ cả khi quay lại bằng Back, tránh mang trạng thái bản đồ mở về danh sách.
+  if (sheetChoice.view !== routeKey) setSheetChoice({ view: routeKey, mode: 'open' });
+  const sheet: SheetMode = sheetChoice.view === routeKey ? sheetChoice.mode : 'open';
+  const setSheet = useCallback((mode: SheetMode): void => setSheetChoice({ view: routeKey, mode }), [routeKey]);
+  useDocumentScroll(documentScroll, mapSheet && sheet === 'peek', routeKey);
+  useScrollChrome(documentScroll && !(mapSheet && sheet === 'peek'), routeKey);
   useEffect(() => {
     if ((route.view === VIEW.DEST || route.view === VIEW.DECK) && route.id && route.id !== currentDestId && destinations.some((destination) => destination.id === route.id)) select(route.id);
   }, [route.view, route.id, currentDestId, destinations, select]);
@@ -94,13 +102,11 @@ function Shell() {
   const sheetValue = useMemo(() => ({ mode: sheet, setMode: setSheet }), [sheet, setSheet]);
   return (
     <ShellSheetContext.Provider value={sheetValue}>
-    <div className="app" data-surface={mapSheet ? 'sheet' : onMap ? 'deck' : 'page'} data-sheet={sheet}>
-      {onMap ? <ShellMap view={route.view} sheet={sheet} /> : null}
-      {onMap || route.view === VIEW.TRIP ? <MapChrome /> : null}
-      {mapSheet ? (
-        <SheetToggle mode={sheet} onChange={setSheet} />
-      ) : null}
-      <ScreenHost view={route.view} routeKey={`${route.view}|${route.id ?? ''}`} noBar={hideBar}>
+    <div className="app" data-surface={mapSheet ? 'sheet' : onMap ? 'deck' : 'page'} data-sheet={sheet} data-document-scroll={documentScroll || undefined}>
+      {onMap ? <ShellMap view={route.view} sheet={sheet} documentScroll={documentScroll} /> : null}
+      {onMap || route.view === VIEW.TRIP ? <MapChrome>{documentScroll && mapSheet ? <MobileMapControls open={sheet === 'peek'} onToggle={() => setSheet(sheet === 'peek' ? 'open' : 'peek')} /> : null}</MapChrome> : null}
+      {documentScroll && mapSheet ? <button className="mobile-map-preview" type="button" onClick={() => setSheet('peek')} aria-label={COPY.map.preview}><span><Icon name="map-pin" />{COPY.map.preview}</span><small className="mobile-map-credit">{COPY.map.credit}</small></button> : null}
+      <ScreenHost view={route.view} routeKey={routeKey} noBar={hideBar} inert={documentScroll && mapSheet && sheet === 'peek'}>
         <RouteEscape view={route.view} />
         {route.view === VIEW.ONBOARD ? <OnboardScreen /> : null}
         {route.view === VIEW.DESTINATIONS ? <Suspense fallback={<ScreenSkeleton />}><DestinationPickerScreen initialScope={route.id} /></Suspense> : null}

@@ -24,3 +24,8 @@ test('Home mobile vừa camera trong vùng map thật sự lộ ra, khớp vị 
   assert.ok(top);
   assert.equal(1 - Number(top[1]) / 100, SHELL_MAP.HOME_SHEET_COVER_FRACTION);
 });
+
+test('camera dùng đúng chiều cao header và vùng xem trước của trang điện thoại', () => {
+  assert.equal(token('--mobile-header-height', 'px'), SHELL_MAP.DOCUMENT_HEADER_PX);
+  assert.equal(token('--mobile-map-preview', 'px'), SHELL_MAP.DOCUMENT_PREVIEW_PX);
+});

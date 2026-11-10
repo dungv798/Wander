@@ -25,6 +25,7 @@
 @import './shell.css';
 @import '../shared/ui/forms.css';
 @import '../features/onboarding/onboardingSurface.css';
+@import './mobile.css';
 
 /* Chi tiết lỗi dưới màn "Có lỗi ở phía Wander": gập sẵn, cuộn ngang được, chữ nhỏ nhưng ≥ 12 px. */
 .crash-detail { width: min(100%, 420px); margin: var(--s-4) auto 0; text-align: left; color: var(--muted); font: var(--text-secondary); }

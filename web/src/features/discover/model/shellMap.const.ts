@@ -21,6 +21,9 @@ export const SHELL_MAP = {
   HOME_SHEET_COVER_FRACTION: 0.61,
   /** Điện thoại, bảng thu lại: chiều cao thanh tiêu đề còn che đáy, px. */
   PEEK_INSET_PX: 140,
+  /** Kích thước trang điện thoại, khớp token CSS của header và vùng bản đồ xem trước. */
+  DOCUMENT_HEADER_PX: 60,
+  DOCUMENT_PREVIEW_PX: 160,
 } as const;
 
 /** Kéo tờ nội dung trên điện thoại (thu để xem bản đồ rộng hơn, kéo lên để mở lại). */

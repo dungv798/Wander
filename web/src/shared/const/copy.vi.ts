@@ -189,6 +189,10 @@ export const COPY = {
     trekRouteNoteNoRef: 'Vị trí chỉ để tham khảo, KHÔNG phải tuyến leo. Wander chưa có dữ liệu tuyến, giờ mở cửa hay giấy phép cho nơi này: hãy hỏi người dẫn đường hoặc ban quản lý trước khi đi.',
   },
   map: {
+    showMap: 'Bản đồ',
+    showList: 'Danh sách',
+    preview: 'Khám phá trên bản đồ',
+    credit: 'Bản đồ © OpenFreeMap, OpenMapTiles, OpenStreetMap',
     name: 'Bản đồ địa hình',
     shell: 'Bản đồ khám phá Việt Nam',
     sheetCollapse: 'Thu bảng để xem bản đồ',

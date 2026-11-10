@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
-    <!-- Màu thanh trạng thái/thanh địa chỉ và chế độ "Thêm vào Màn hình chính" (toàn màn hình, không còn thanh Safari). Giá trị khớp --bg ở src/styles/tokens.css; tệp HTML/JSON không đọc được biến CSS. -->
-    <meta name="theme-color" content="#eaf2f3" />
+    <!-- Khớp --mobile-canvas / --bg; nền CSS sát mép vẫn là nguồn màu chính trên Safari mới. -->
+    <meta name="theme-color" content="#f2f4f5" media="(max-width: 767px)" />
+    <meta name="theme-color" content="#eaf2f3" media="(min-width: 768px)" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Wander" />

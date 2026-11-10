@@ -9,6 +9,37 @@
    Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
 
 :root {
+  /* Nền liền mạch và kích thước bố cục cuộn trang trên Safari điện thoại. */
+  --mobile-canvas: #f2f4f5;
+  --mobile-sheet: #fafbfc;
+  --mobile-divider: rgb(36 55 64 / .12);
+  --mobile-header-height: 60px;
+  --mobile-map-preview: 160px;
+  --mobile-dock-height: 68px;
+  --mobile-header-total: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px));
+  --mobile-dock-total: calc(var(--mobile-dock-height) + max(var(--s-3), env(safe-area-inset-bottom, 0px)));
+  /* Bề mặt điều khiển theo mẫu của PO (docs/UI-sample): gần đặc + viền mảnh + bóng mềm, KHÔNG blur trên nội dung đang cuộn.
+     Lý do: Safari 26 có lỗi lấy màu thanh khi phần tử cố định ở mép có backdrop-filter (WebKit 319479); chi phí blur trên iPhone chưa có số đo. */
+  --mobile-glass: rgb(255 255 255 / .98);
+  --mobile-nav-glass: rgb(255 255 255 / .985);
+  --mobile-glass-edge: rgb(36 55 64 / .12);
+  --mobile-glass-shadow: 0 1px 2px rgb(36 55 64 / .06), 0 6px 18px rgb(36 55 64 / .10);
+  --mobile-glass-selected: rgb(36 55 64 / .08);
+  --mobile-glass-selected-shadow: inset 0 1px 2px rgb(36 55 64 / .10);
+  --mobile-glass-fallback: #ffffff;
+  --mobile-header-scrim: var(--mobile-canvas);
+  /* Thanh trên/dưới trượt ra khi cuộn xuống để nhường chỗ cho ảnh (full màn). */
+  --mobile-chrome-dur: 220ms;
+  --mobile-chrome-ease: cubic-bezier(.2, .8, .2, 1);
+  --mobile-create-size: 64px;
+  --mobile-create-slot: calc(var(--mobile-create-size) + var(--s-3));
+  --mobile-title: 700 1.875rem / 1.15 var(--font-display);
+  --mobile-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mobile-hero-height: 240px;
+  --mobile-card-ratio: 1.15;
+  --mobile-hero-title-size: 32px;
+  --mobile-eyebrow-size: .6875rem;
+  --mobile-nav-font: 600 .75rem / 1rem var(--font-body);
   --cover-1: linear-gradient(135deg, #e3f0e2, #7fb4a0);
   --cover-2: linear-gradient(135deg, var(--sky-soft), var(--sky));
   --cover-3: linear-gradient(135deg, var(--brand), var(--ink));

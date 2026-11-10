@@ -21,15 +21,19 @@ import { useDeckSpotlight } from '../hooks/DeckSpotlightProvider.tsx';
 const SHELL_MAP_ID = 'vn';
 
 /** Lề che bản đồ: màn rộng có bảng bên trái, điện thoại có bảng đáy (thu lại thì chỉ còn thanh tiêu đề). */
-function useMapInsets(sheet: SheetMode, view: ViewName): { top: number; left: number; bottom: number } {
+function useMapInsets(sheet: SheetMode, view: ViewName, documentScroll: boolean): { top: number; left: number; bottom: number } {
   const wide = useIsWide();
   return useMemo(() => {
     if (wide) return { top: SHELL_MAP.INSET_TOP_PX, left: SHELL_MAP.PANEL_INSET_PX, bottom: 0 };
+    if (documentScroll) {
+      const top = document.querySelector('.map-chrome')?.getBoundingClientRect().height ?? SHELL_MAP.DOCUMENT_HEADER_PX;
+      return { top, left: 0, bottom: sheet === 'open' ? 0 : SHELL_MAP.PEEK_INSET_PX };
+    }
     if (view === VIEW.EXPLORE) return { top: SHELL_MAP.INSET_TOP_PX, left: 0, bottom: sheet === 'peek' ? SHELL_MAP.PEEK_INSET_PX : Math.round(window.innerHeight * SHELL_MAP.HOME_SHEET_COVER_FRACTION) };
     if (view === VIEW.DECK) return { top: SHELL_MAP.INSET_TOP_PX, left: 0, bottom: 0 };
     const bottom = sheet === 'peek' ? SHELL_MAP.PEEK_INSET_PX : Math.round(window.innerHeight * SHELL_MAP.SHEET_OPEN_FRACTION);
     return { top: SHELL_MAP.INSET_TOP_PX, left: 0, bottom };
-  }, [wide, sheet, view]);
+  }, [wide, sheet, view, documentScroll]);
 }
 
 /**
@@ -37,7 +41,7 @@ function useMapInsets(sheet: SheetMode, view: ViewName): { top: number; left: nu
  * Ở màn khác che/có bản đồ riêng nó chỉ ẩn (không hủy) nên quay lại là có ngay, không tải lại. Không xin vị trí người dùng.
  * Chạm ghim: cảnh cả nước thì chọn điểm đến đó; cảnh điểm đến/đã chọn thì mở chi tiết nơi đó.
  */
-export function ShellMap({ view, sheet }: { readonly view: ViewName; readonly sheet: SheetMode }) {
+export function ShellMap({ view, sheet, documentScroll = false }: { readonly view: ViewName; readonly sheet: SheetMode; readonly documentScroll?: boolean }) {
   const { destId, selectedId, destinations, select } = useCurrentDestination();
   const topic = useDiscoveryTopic();
   const { focus } = useDeckSpotlight();
@@ -47,7 +51,7 @@ export function ShellMap({ view, sheet }: { readonly view: ViewName; readonly sh
   const { state } = useDiscover();
   const place = usePlaceSheet();
   const { state: tripState } = useTrips();
-  const insets = useMapInsets(sheet, view);
+  const insets = useMapInsets(sheet, view, documentScroll);
   const detail = useMemo(() => {
     if (loaded.status !== 'ready') return null;
     const places = loaded.data.places.filter(place => matchesDiscoveryFilter(place, sub));
@@ -72,7 +76,7 @@ export function ShellMap({ view, sheet }: { readonly view: ViewName; readonly sh
     else place.open(id, view === VIEW.DECK && sub ? { noDecide: true } : undefined);
   }
   return (
-    <div className="shell-map" data-scene={scene.kind} aria-hidden={hidden || undefined} inert={hidden}>
+    <div className="shell-map" data-scene={scene.kind} aria-hidden={hidden || (documentScroll && sheet === 'open') || undefined} inert={hidden || (documentScroll && sheet === 'open')}>
       <TerrainMapView className="shell-map-view" dest={SHELL_MAP_ID} label={COPY.map.shell} markers={scene.markers} fit={fit} insets={insets} creditBand={false} selected={place.placeId} onPin={onPin} />
     </div>
   );

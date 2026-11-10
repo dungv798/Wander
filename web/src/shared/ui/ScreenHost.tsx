@@ -39,6 +39,8 @@ interface ScreenHostProps {
   /** Khóa đổi khi sang màn khác: kích hoạt hoạt họa vào màn và đưa cuộn về đầu. */
   readonly routeKey: string;
   readonly noBar: boolean;
+  /** Bản đồ đang mở: giữ bố cục danh sách nhưng loại khỏi tương tác và cây truy cập. */
+  readonly inert?: boolean;
   readonly children: ReactNode;
 }
 
@@ -46,7 +48,7 @@ interface ScreenHostProps {
  * Vùng cuộn chính `#screen`. Giữ các lớp CSS theo màn (`nobar`, `immersive`, `searching`, `enter`) tại MỘT chỗ,
  * để màn con chỉ khai báo mong muốn qua `useScreenFlag` thay vì chạm DOM của nơi khác.
  */
-export function ScreenHost({ view, routeKey, noBar, children }: ScreenHostProps) {
+export function ScreenHost({ view, routeKey, noBar, inert = false, children }: ScreenHostProps) {
   useFocusModality();
   const ref = useRef<HTMLElement | null>(null);
 
@@ -84,7 +86,7 @@ export function ScreenHost({ view, routeKey, noBar, children }: ScreenHostProps)
 
   return (
     <ScreenContext.Provider value={api}>
-      <main id="screen" ref={ref} data-view={view}>
+      <main id="screen" ref={ref} data-view={view} inert={inert}>
         {children}
       </main>
     </ScreenContext.Provider>

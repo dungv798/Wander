@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { KeyboardEvent, ReactNode } from 'react';
 import { MEDIA } from '../const/app.const.ts';
 import { useMediaQuery } from '../hooks/useMediaQuery.ts';
+import { lockDocumentScroll } from '../lib/lockDocumentScroll.ts';
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
 const DRAWER_BODY_CLASS = 'has-drawer';
@@ -48,6 +49,8 @@ export function Sheet({ label, onClose, asDrawer = false, full = false, children
   const panelRef = useRef<HTMLDivElement | null>(null);
   const downOnOverlay = useRef(false);
 
+  useLayoutEffect(() => drawer ? undefined : lockDocumentScroll(), [drawer]);
+
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
     const panel = panelRef.current;
@@ -55,7 +58,7 @@ export function Sheet({ label, onClose, asDrawer = false, full = false, children
     document.body.classList.toggle(DRAWER_BODY_CLASS, drawer);
     return () => {
       document.body.classList.remove(DRAWER_BODY_CLASS);
-      opener?.focus?.();
+      opener?.focus?.({ preventScroll: true });
     };
   }, [drawer]);
 

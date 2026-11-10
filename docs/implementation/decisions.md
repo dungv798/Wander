@@ -655,3 +655,34 @@ Kết quả đọc từ log đã chạy trong phiên này: backend `check` BUILD
 |---|---|---|
 | Sự cố | Một lượt `dev.ps1 e2e` treo > 1 giờ không báo gì: hai tiến trình kiểm thử con đứng im (log của `node --test` chỉ ghi khi test xong nên trông như đang chạy); chạy lại thì xanh 118/118 trong 581 s, không lặp lại | DONE (ghi nhận, nguyên nhân gốc chưa rõ) |
 | Sửa | `web/package.json`: `e2e` thêm `--test-timeout=240000` (4 phút/test; test chậm nhất ~20–60 s): test treo sẽ đỏ kèm tên thay vì chặn im lặng | DEFAULTED (Tầng B) |
+
+## Prototype cuộn tài liệu trên điện thoại thay thử nghiệm `fs` (09/11/2026)
+
+| Hạng mục | Hành vi | Trạng thái |
+|---|---|---|
+| Cuộn danh sách | Dưới 768px, các màn danh sách trên bản đồ và bộ chọn điểm đến cuộn tài liệu. Gỡ cơ chế `fs` chuyển quyền vuốt theo ngưỡng; không còn suy đoán trạng thái thanh Safari bằng `scrollY`. Lịch sử thử nghiệm `fs` phía trên được giữ để đối chiếu | IMPLEMENTED, cục bộ, chưa deploy |
+| Bố cục | Header 60px + safe area, xem trước bản đồ 180px, bảng nền gần đặc cuộn tự nhiên; header/dock cùng nền `--mobile-canvas`. Desktop giữ bảng cạnh bản đồ | DEFAULTED (Tầng B) |
+| Bản đồ và quay lại | Nút Bản đồ/Danh sách khóa nền, giữ vị trí đọc; hộp thoại dùng khóa cuộn lồng nhau. Rời màn đặt lại trạng thái bản đồ để Back luôn hiện danh sách; Back khôi phục vị trí cuộn đã lưu | IMPLEMENTED |
+| Kiểm chứng | Build PASS; unit 475/475; E2E mục tiêu 4/4 với danh mục chỉ đọc. Chi tiết và giới hạn ảnh WebKit Windows: `docs/design/safari-ui-research-2026-11-09.md` §Prototype. Chưa xác nhận gesture/thanh Safari trên iPhone thật, chưa chạy toàn bộ E2E backend cho bản này | PARTIALLY VERIFIED |
+
+## Mobile theo iOS 27 Liquid Glass và tham khảo sản phẩm thực tế (09/11/2026)
+
+PO bác bản mobile nền phẳng và yêu cầu hướng iOS 27.2, đồng thời xem các website thiết kế ấn tượng. Chọn cụm tab kính nổi + nút tạo chuyến riêng, SVG đơn sắc và font hệ thống trên mobile; giữ nền nội dung đọc rõ. Nút Bản đồ/Danh sách chuyển lên header sau khi ảnh 375×667 cho thấy nút nổi đáy che hero. Vùng bản đồ xem trước 160px, hero 240px có câu gợi ý, thẻ điểm đến tách ảnh khỏi tên/mô tả. Desktop giữ bố cục cũ. Đây là mặc định thiết kế Tầng B trong hướng PO yêu cầu, chưa deploy.
+
+Nguồn Apple, Flighty, Airbnb Experiences, Visit Finland, Awwwards và Godly; quan sát, giới hạn truy cập và bằng chứng kiểm tra: `docs/design/ios27-liquid-glass-2026-11-09.md`. Build/lint đạt; E2E mục tiêu cuối 4/4, camera/CSS 3/3. Chưa xác nhận trên Safari iPhone thật.
+
+## Mobile Safari: hướng "bám mẫu, kính đúng chỗ" (10/11/2026)
+
+PO chọn phương án A của `docs/design/safari-ui-research-2-2026-11-10.md` (tập trung Safari thường; mục tiêu: full màn, ưu tiên thị giác, không lag). Các lựa chọn Tầng B đã áp dụng (DEFAULTED):
+
+| Mục | Mặc định | Trạng thái |
+|---|---|---|
+| Bề mặt điều khiển mobile | Gần đặc (98%), viền mảnh, bóng mềm như `docs/UI-sample`; bỏ mọi `backdrop-filter` ở header, dock, nút bản đồ/tìm kiếm, nút hero; header đặc hẳn (tránh WebKit 319479 và chữ đè logo khi giảm trong suốt) | DEFAULTED |
+| Biểu tượng thanh tab | Trả lại biểu tượng 3D (`semantic`) như mẫu; nhãn mọi tab 12px, tab chọn chỉ đậm hơn | DEFAULTED |
+| Chip lọc đang chọn | Cam đặc `--control-accent` + chữ trắng (4,6:1) | DEFAULTED |
+| Full màn | Thanh trên/dưới trượt ra khi cuộn xuống (`useScrollChrome`, ngưỡng ở `scrollChrome.const.ts`), hiện lại khi cuộn lên ≥20px hoặc gần cuối trang; luôn hiện khi bản đồ mở; focus bàn phím luôn hiện | DEFAULTED |
+| Khóa cuộn nền | `overflow:hidden` trên html+body thay `body{position:fixed}` (WebKit Windows crash khi mở chi tiết địa điểm; không còn nhảy vị trí). Cần iOS 16+ | DEFAULTED, UNVERIFIED trên iPhone |
+| Ghi nguồn bản đồ | Dòng chữ ở vùng xem trước (nút "i" không chạm được ở đó); ở chế độ bản đồ nút "i" nâng lên trên dock | DEFAULTED |
+| Chi tiết địa điểm | Hết tràn ngang (`.place-scroll` chỉ cuộn dọc, `minmax(0,1fr)`) | IMPLEMENTED |
+
+Kiểm chứng: lint, 481 unit, build PASS; E2E mobile 7/7 ba lần liên tiếp (Chrome và WebKit Windows, gồm mở chi tiết địa điểm). Số đo và ảnh: `.logs/ios27-audit/`. Chưa đo trên iPhone: thanh Safari, safe area, bàn phím, độ mượt, `overflow:hidden` chặn cuộn nền, thanh tab so với thanh nổi Safari 26. Đo desktop cho thấy chi phí luồng chính tăng nhẹ (<1ms/khung) do hook cuộn; mở/đóng bản đồ còn 1–3 khung >34ms chưa rõ nguyên nhân (nhiễu máy chưa loại trừ).
