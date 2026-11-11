@@ -1,7 +1,8 @@
-/** Chữ riêng của xuất PNG; không dùng nhãn giả vờ PDF/Lịch đã hoạt động. */
+/** Chữ riêng của xuất PNG; chỉ có ảnh PNG (PDF/Lịch chưa làm nên không hiện, B-07). */
 export const EXPORT_COPY = {
-  image: 'Ảnh PNG', pdf: 'PDF · Sắp có', calendar: 'Lịch · Sắp có',
-  formats: 'Hiện có ảnh PNG, cao vừa đủ nội dung. PDF và Lịch chưa hỗ trợ tạo tệp.',
+  image: 'Ảnh PNG',
+  share: 'Gửi ảnh', shareFailed: 'Chưa mở được bảng chia sẻ. Bạn tải ảnh rồi gửi từ máy nhé.',
+  holdHint: 'Trên điện thoại: nhấn giữ ảnh bên dưới rồi chọn Lưu vào Ảnh.',
   loading: 'Đang tạo ảnh xem trước…', error: 'Chưa tạo được ảnh. Bạn thử lại nhé.', retry: 'Thử lại',
   styleLabel: 'Kiểu ảnh', styleSummary: 'Tóm tắt chuyến', styleDays: 'Theo từng ngày',
   styleSummaryNote: 'Mỗi ngày một dòng tên các nơi: gọn, dễ gửi nhóm.', styleDaysNote: 'Từng nơi theo thứ tự, kèm giờ và giá khi bạn đã nhập.',

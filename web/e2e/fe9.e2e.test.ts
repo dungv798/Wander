@@ -5,7 +5,6 @@ import path from 'node:path';
 import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
-import { withAria } from './diag.ts';
 import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { addDevice, api, createOwner, devicesOf, loginAs } from './backend.ts';
 import { seedIdentity, seedTrips, seededOf } from './seed.ts';
@@ -109,7 +108,7 @@ test('Hôm nay: chưa có chuyến thì nói rõ; chuyến chưa chắc ngày kh
   await ctx.close();
 });
 
-test('Lưu hoặc gửi lịch trình: PNG thật, PDF/Lịch sắp có, tổng D17/D18 và không xuất mục chưa có ngày', async () => {
+test('Lưu hoặc gửi lịch trình: PNG thật, không có nút PDF/Lịch giả, tổng D17/D18 và không xuất mục chưa có ngày', async () => {
   const { ctx, errors } = await phone();
   // Đọc chữ thực sự được vẽ vào PNG vì bản xem trước hiện là ảnh, không còn bảng DOM.
   await ctx.addInitScript(() => {
@@ -127,9 +126,7 @@ test('Lưu hoặc gửi lịch trình: PNG thật, PDF/Lịch sắp có, tổng 
   const create = page.getByRole('button', { name: 'Tạo ảnh PNG', exact: true });
   await create.waitFor();
   assert.equal(await create.isEnabled(), true);
-  await withAria(page, 'main', () => page.getByRole('button', { name: 'PDF · Sắp có', exact: true }).waitFor({ timeout: 8000 }));
-  assert.equal(await page.getByRole('button', { name: 'PDF · Sắp có', exact: true }).isDisabled(), true);
-  assert.equal(await page.getByRole('button', { name: 'Lịch · Sắp có', exact: true }).isDisabled(), true);
+  assert.equal(await page.getByText('Sắp có').count(), 0, 'B-07: không còn nút PDF/Lịch giả');
   await page.locator('.png-export-image').first().waitFor();
   const text = await page.evaluate(() => (window as Window & { exportDrawnText?: string[] }).exportDrawnText?.join('\n') ?? '');
   assert.match(text, /750\.000\s₫/);

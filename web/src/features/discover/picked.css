@@ -15,4 +15,5 @@
 #screen .picked-row .in { position: static; display: grid; gap: 8px; padding: 0; min-width: 0; color: var(--ink); text-shadow: none; }
 #screen .picked-row .in h3 { margin: 0; color: var(--ink); font: 700 14px / 1.5 var(--font-display); }
 #screen .picked-row .in p { margin: 0; color: var(--muted); font: 400 11px / 1.5 var(--font-body); }
+#screen .picked-row .picked-tag { justify-self: start; padding: 2px var(--s-3); border: 1px solid var(--control-edge); border-radius: var(--r-pill); background: var(--control-surface); color: var(--muted); font: var(--text-secondary); }
 #screen .picked-row .x { position: static; display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--sheet-edge); border-radius: var(--r-pill); background: var(--control-surface); color: var(--ink); }

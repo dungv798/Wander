@@ -145,6 +145,8 @@ export const COPY = {
     emptyText: 'Quẹt phải những nơi bạn muốn đến, chúng sẽ nằm ở đây.',
     startExploring: 'Bắt đầu khám phá',
     saveAsTrip: 'Lưu {n} địa điểm thành chuyến đi',
+    inTrip: 'Đã vào chuyến đi',
+    allSaved: 'Mọi nơi bạn chọn đã nằm trong chuyến đi. Quẹt thêm để chọn nơi mới.',
     view: 'Xem {name}',
     unpick: 'Bỏ chọn {name}',
   },

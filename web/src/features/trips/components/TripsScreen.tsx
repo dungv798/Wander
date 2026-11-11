@@ -5,7 +5,7 @@ import { navigate } from '../../../shared/router/hashRoute.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { EmptyState } from '../../../shared/ui/EmptyState.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
-import { DestinationGate, pickedOf, useDiscover, useCurrentDestination, useDestination } from '../../discover/index.ts';
+import { DestinationGate, pendingPickCount, pickedOf, useDiscover, useCurrentDestination, useDestination } from '../../discover/index.ts';
 import type { DestinationDetail, PlaceView } from '../../discover/index.ts';
 import { todayLocal } from '../../../shared/lib/dates.ts';
 import { TripListControls } from '../list/TripListControls.tsx';
@@ -61,7 +61,7 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
   const [saving, setSaving] = useState<{ readonly destId: string; readonly picked: readonly PlaceView[] } | null>(null);
   const { destinations, select } = useCurrentDestination();
   const { state: discover } = useDiscover();
-  const hasPending = Object.values(discover.decisions).includes('like');
+  const hasPending = pendingPickCount(discover) > 0;
   const { options, searchOptions, setOptions } = useTripList();
   const showFilters = state.trips.length >= TRIP_FILTER_MIN;
   const today = todayLocal();

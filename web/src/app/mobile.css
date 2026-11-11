@@ -199,3 +199,9 @@
 @media (prefers-reduced-motion: reduce) {
   :root .app .map-chrome, :root .app #tabbar { transition: none; }
 }
+/* Xoay ngang trên điện thoại hẹp (B-11, DR-037): chiều cao chỉ còn khoảng 340 px nên bỏ dải bản đồ xem trước và để thanh dưới nằm theo dòng chảy trang thay vì cố định; nhờ đó danh sách có chỗ. Nút "Bản đồ" ở đầu trang vẫn mở bản đồ đầy màn. */
+@media (max-width: 767px) and (max-height: 450px) {
+  :root { --mobile-map-preview: 0px; --mobile-dock-total: var(--s-4); }
+  .mobile-map-preview { display: none; }
+  :root .app #tabbar { position: static; margin: var(--s-4) max(var(--s-4), env(safe-area-inset-left, 0px)); }
+}

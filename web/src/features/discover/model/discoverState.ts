@@ -21,6 +21,8 @@ export interface DiscoverState {
   /** Mục "Chuẩn bị mang gì" đã đánh dấu (khóa = chỉ số mục). */
   readonly pack: Readonly<Record<string, boolean>>;
   readonly onboarded: boolean;
+  /** placeId → true: nơi đã thích và đã được lưu vào một chuyến đi (B-06, DR-037). Vẫn là quyết định "thích" nhưng không còn tính vào "chờ lưu". */
+  readonly saved: Readonly<Record<string, boolean>>;
 }
 
 /** Mã khối cẩm nang mở mặc định khi mới vào (Mùa nên đi). */
@@ -28,17 +30,30 @@ export const DEFAULT_GUIDE_OPEN = 'mua';
 
 /** Trạng thái ban đầu của người mới. */
 export const INITIAL_DISCOVER_STATE: DiscoverState = {
-  decisions: {}, history: [], photo: {}, cat: 'all', guide: DEFAULT_GUIDE_OPEN, pack: {}, onboarded: false,
+  decisions: {}, history: [], photo: {}, cat: 'all', guide: DEFAULT_GUIDE_OPEN, pack: {}, onboarded: false, saved: {},
 };
 
-/** Ghi quyết định cho một thẻ; thẻ nào cũng về ảnh đầu và vào lịch sử để Hoàn tác. */
+/** Bản sao của `saved` không có `placeId` (gỡ dấu "đã vào chuyến"). */
+function withoutSaved(saved: DiscoverState['saved'], placeId: string): DiscoverState['saved'] {
+  const { [placeId]: _removed, ...rest } = saved;
+  return rest;
+}
+
+/** Ghi quyết định cho một thẻ; thẻ nào cũng về ảnh đầu và vào lịch sử để Hoàn tác. Quyết định mới xóa dấu "đã vào chuyến" cũ. */
 export function decide(s: DiscoverState, placeId: string, decision: Decision): DiscoverState {
   return {
     ...s,
     decisions: { ...s.decisions, [placeId]: decision },
     history: [...s.history, placeId],
     photo: { ...s.photo, [placeId]: 0 },
+    saved: withoutSaved(s.saved, placeId),
   };
+}
+
+/** Đánh dấu các nơi ĐÃ THÍCH là đã vào chuyến đi; bỏ qua mã không phải nơi đã thích. Quyết định "thích" được giữ nguyên. */
+export function markSaved(s: DiscoverState, ids: readonly string[]): DiscoverState {
+  const liked = ids.filter((id) => s.decisions[id] === 'like');
+  return liked.length ? { ...s, saved: { ...s.saved, ...Object.fromEntries(liked.map((id) => [id, true])) } } : s;
 }
 
 /** Hoàn tác thẻ quyết định gần nhất (không có gì thì giữ nguyên). */
@@ -47,19 +62,24 @@ export function undoLast(s: DiscoverState): DiscoverState {
   if (id === undefined) return s;
   const { [id]: _removed, ...rest } = s.decisions;
   // đưa bộ lọc về "Tất cả": thẻ vừa hoàn tác có thể thuộc loại khác loại đang lọc và sẽ không hiện
-  return { ...s, decisions: rest, history: s.history.slice(0, -1), cat: 'all' };
+  return { ...s, decisions: rest, history: s.history.slice(0, -1), cat: 'all', saved: withoutSaved(s.saved, id) };
 }
 
-/** Bỏ chọn một nơi đã thích (khỏi "Đã chọn" và khỏi lịch sử Hoàn tác). */
+/** Bỏ chọn một nơi đã thích (khỏi "Đã chọn", khỏi lịch sử Hoàn tác và gỡ dấu "đã vào chuyến"). */
 export function unpick(s: DiscoverState, placeId: string): DiscoverState {
   const { [placeId]: _removed, ...rest } = s.decisions;
-  return { ...s, decisions: rest, history: s.history.filter((h) => h !== placeId) };
+  return { ...s, decisions: rest, history: s.history.filter((h) => h !== placeId), saved: withoutSaved(s.saved, placeId) };
 }
 
-/** Gỡ nhiều nơi khỏi "Đã chọn" cùng lúc (sau khi đã lưu vào chuyến đi) và khỏi lịch sử Hoàn tác. */
+/** Gỡ nhiều nơi khỏi "Đã chọn" cùng lúc, khỏi lịch sử Hoàn tác và khỏi dấu "đã vào chuyến". */
 export function clearPicked(s: DiscoverState, ids: readonly string[]): DiscoverState {
   const drop = new Set(ids);
-  return { ...s, decisions: Object.fromEntries(Object.entries(s.decisions).filter(([id]) => !drop.has(id))), history: s.history.filter((h) => !drop.has(h)) };
+  return {
+    ...s,
+    decisions: Object.fromEntries(Object.entries(s.decisions).filter(([id]) => !drop.has(id))),
+    history: s.history.filter((h) => !drop.has(h)),
+    saved: Object.fromEntries(Object.entries(s.saved).filter(([id]) => !drop.has(id))),
+  };
 }
 
 /** Cho xem lại mọi thẻ đã bỏ qua (giữ nguyên các nơi đã chọn) và xóa lịch sử Hoàn tác. */
@@ -95,9 +115,19 @@ export function remainingIds<P extends { id: string; category: CategoryCode; pho
   return [...left.filter(hasPhoto), ...left.filter((p) => !hasPhoto(p))];
 }
 
-/** Các nơi đã chọn (thích), theo thứ tự của kho biên tập. */
+/** Các nơi đã chọn (thích) và CHƯA vào chuyến nào, theo thứ tự của kho biên tập. Dùng cho số đếm, nút "+" và "Lưu N địa điểm". */
 export function pickedOf<P extends { id: string }>(s: DiscoverState, places: readonly P[]): P[] {
-  return places.filter((p) => s.decisions[p.id] === 'like');
+  return places.filter((p) => s.decisions[p.id] === 'like' && !s.saved[p.id]);
+}
+
+/** Số nơi đã thích và chưa vào chuyến nào, tính trên mọi điểm đến (không cần kho biên tập). */
+export function pendingPickCount(s: DiscoverState): number {
+  return Object.entries(s.decisions).filter(([id, d]) => d === 'like' && !s.saved[id]).length;
+}
+
+/** Các nơi đã chọn và ĐÃ vào một chuyến đi, theo thứ tự của kho biên tập (hiện ở "Đã chọn" kèm nhãn). */
+export function savedPicksOf<P extends { id: string }>(s: DiscoverState, places: readonly P[]): P[] {
+  return places.filter((p) => s.decisions[p.id] === 'like' && s.saved[p.id] === true);
 }
 
 const CATEGORY_CODES: readonly string[] = ['all', 'canh', 'van', 'am', 'leo', 'luu', 'cho'];
@@ -127,5 +157,6 @@ export function sanitizeDiscoverState(raw: unknown): DiscoverState | null {
     guide: typeof raw['guide'] === 'string' ? raw['guide'] : base.guide,
     pack: pickRecord(raw['pack'], (v): v is boolean => typeof v === 'boolean'),
     onboarded: raw['onboarded'] === true,
+    saved: pickRecord(raw['saved'], (v): v is true => v === true),
   };
 }

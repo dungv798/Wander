@@ -52,4 +52,8 @@
 .panel .deck { position: relative; height: min(62vh, 480px); flex: none; }
 @media (min-width: 768px) { #screen.immersive .deckcol { padding-inline: 24px; } }
 @media (max-height: 700px) { #screen.immersive .deckcol { gap: 8px; } .deckwrap { gap: 6px; } .card-info { bottom: 16px; padding-inline: 18px; } .card-hook { -webkit-line-clamp: 3; font-size: var(--fs-xs); }  .deck-instruction { display: none; } }
+/* Màn thấp (B-04, DR-037): thẻ quá thấp để đặt mũi tên ở 26% chiều cao mà không đè nút thông tin và nhãn loại. Dồn cả ba nút vào hàng trên cùng (mũi tên trước/sau + nút nguồn ảnh) và đẩy chú thích ảnh xuống dưới hàng đó. */
+@media (max-height: 700px) { .card-photo-controls { top: 22px; right: 60px; } .card-photo-caption { top: 74px; } }
+/* Màn rất thấp (iPhone SE ngang tầm 553 px): thẻ chỉ còn ~200 px ảnh, nên rút khối chữ xuống 2 dòng mô tả để không chạm hàng nút trên cùng. */
+@media (max-height: 620px) { .card-info { gap: 6px; } .card h2 { font-size: 24px; } .card-hook { -webkit-line-clamp: 2; line-height: 1.5; } }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }

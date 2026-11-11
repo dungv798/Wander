@@ -22,7 +22,7 @@ export { DestinationGate } from './components/DestinationGate.tsx';
 export { CATEGORY_ICON, CATEGORY_NAME, COMING_SOON } from './model/discover.const.ts';
 export { firstPhotoUrl, mainAway, placeById, coverPlace } from './model/destinationQueries.ts';
 export { hubMarker, placeMarkers } from './model/mapMarkers.ts';
-export { pickedOf } from './model/discoverState.ts';
+export { pendingPickCount, pickedOf, savedPicksOf } from './model/discoverState.ts';
 export type { DestinationDetail, PlaceView, CategoryCode } from './model/Catalog.types.ts';
 export type { CatalogRepository } from './api/CatalogRepository.ts';
 export { HERO_PHOTOS } from './model/heroPhotos.const.ts';

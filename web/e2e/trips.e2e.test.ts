@@ -133,6 +133,31 @@ test('lưu các nơi đã chọn thành chuyến: nơi đó ở "Chưa có ngày
   await page.goto(`${baseUrl}/#/picked`);
   await page.locator('.picked-row').first().waitFor();
   assert.equal(await page.locator('.picked-row').count(), 2);
+  assert.equal(await page.locator('.picked-tag', { hasText: 'Đã vào chuyến đi' }).count(), 2, 'B-06: nơi đã lưu được đánh dấu "Đã vào chuyến đi"');
+  assert.equal(await page.getByRole('button', { name: /Lưu \d+ địa điểm thành chuyến đi/ }).count(), 0, 'B-06: hết nơi chờ lưu thì không còn nút lưu');
+  assert.equal(await page.locator('#tabbar').getByText('2', { exact: true }).count(), 0, 'B-06: huy hiệu "Đã chọn" chỉ đếm nơi chờ lưu');
+  assert.deepEqual(errors, []);
+  await ctx.close();
+});
+
+test('nút "+" ở thanh dưới: có nơi đã chọn thì mở "Lưu N địa điểm", không có thì tạo chuyến trống (B-06, UX-1)', async () => {
+  const { ctx, errors } = await phone();
+  const page = await open(ctx, '#/deck/ha-giang');
+  await page.locator('.card.front').waitFor();
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('button', { name: 'Xem đã chọn (1)' }).waitFor();
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('button', { name: 'Xem đã chọn (2)' }).waitFor();
+  await page.goto(`${baseUrl}/#/picked`);
+  await page.locator('.picked-row').first().waitFor();
+  await page.locator('#tabbar .tab-create').click();
+  await page.getByRole('dialog').getByRole('heading', { name: /Lưu 2 địa điểm thành chuyến đi/ }).waitFor();
+  await page.getByRole('dialog').getByRole('button', { name: 'Hủy', exact: true }).click();
+  await page.locator('.picked-row .x').first().click();
+  await page.locator('.picked-row .x').first().click();
+  await page.goto(`${baseUrl}/#/trips`);
+  await page.locator('#tabbar .tab-create').click();
+  await page.getByRole('dialog').getByRole('heading', { name: 'Tạo chuyến đi', exact: true }).waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
 });

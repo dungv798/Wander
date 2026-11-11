@@ -3,6 +3,7 @@ import { fill } from '../../../shared/const/copy.vi.ts';
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import { navigate } from '../../../shared/router/hashRoute.ts';
 import { useToast } from '../../../shared/ui/Toast.tsx';
+import { useDiscover } from '../../discover/index.ts';
 import { useReportError } from '../../identity/index.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import type { PlaceRef } from '../model/tripState.ts';
@@ -13,6 +14,7 @@ import { TRIP_TAB } from '../model/tripTabs.ts';
 /** Tạo một chuyến trống qua máy chủ: khi xong đóng tờ, mở chuyến và báo; thất bại báo lỗi. Trả true nếu tạo được. `busy` để khóa nút trong lúc chờ. */
 export function useCreateTripFlow(onClose: () => void): { readonly busy: boolean; readonly create: (n: NewTrip, picked?: readonly PlaceRef[]) => Promise<boolean> } {
   const { actions } = useTrips();
+  const { actions: discover } = useDiscover();
   const toast = useToast();
   const report = useReportError();
   const [busy, setBusy] = useState(false);
@@ -20,6 +22,7 @@ export function useCreateTripFlow(onClose: () => void): { readonly busy: boolean
     (n: NewTrip, picked: readonly PlaceRef[] = []) => {
       setBusy(true);
       return actions.create(n, picked).then((trip) => {
+        discover.markSaved(picked.map((place) => place.id));
         onClose();
         navigate(VIEW.TRIP, trip.id, picked.length ? TRIP_TAB.UNASSIGNED : TRIP_TAB.OVERVIEW);
         toast.show(fill(T.create.saved, { name: trip.name }));
@@ -29,7 +32,7 @@ export function useCreateTripFlow(onClose: () => void): { readonly busy: boolean
         return false;
       }).finally(() => setBusy(false));
     },
-    [actions, onClose, toast, report],
+    [actions, discover, onClose, toast, report],
   );
   return { busy, create };
 }

@@ -8,7 +8,7 @@ import { WarnBox } from '../../../shared/ui/Controls.tsx';
 import { Field } from '../../../shared/ui/Field.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
-import { useDestination } from '../../discover/index.ts';
+import { useDestination, useDiscover } from '../../discover/index.ts';
 import { useRequireIdentity } from '../../identity/index.ts';
 import type { PlaceRef } from '../model/tripState.ts';
 import { useReportError } from '../../identity/index.ts';
@@ -96,11 +96,13 @@ function PickedModes({ mode, onMode, form, trips, tripId, onTrip }: { readonly m
   );
 }
 
-/** Kết thúc tạo/lưu: giữ bộ sưu tập như B, đóng tờ, mở chuyến và báo đã lưu. */
+/** Kết thúc tạo/lưu: đánh dấu các nơi đã vào chuyến (B-06), đóng tờ, mở chuyến và báo đã lưu. */
 function useFinish(picked: readonly PlaceRef[], onClose: () => void): { readonly finish: (id: string, name: string) => void; readonly keep: () => void } {
   const toast = useToast();
+  const { actions: discover } = useDiscover();
   return {
     finish: (id, name) => {
+      discover.markSaved(picked.map((place) => place.id));
       onClose();
       navigate(VIEW.TRIP, id, picked.length ? TRIP_TAB.UNASSIGNED : TRIP_TAB.OVERVIEW);
       toast.show(fill(T.create.saved, { name }));
@@ -119,7 +121,7 @@ function CreateHeading({ heading, hasPicked, destName }: { readonly heading: str
 
 /**
  * Tờ "Tạo chuyến đi" / "Lưu N địa điểm thành chuyến đi?". Có nơi đã chọn thì có ba cách: chuyến mới, thêm vào chuyến sẵn có, giữ lại.
- * Chuyến mới nhận các nơi ở mục "Chưa có ngày". Lưu xong vẫn giữ bộ sưu tập và mở chuyến. Chưa có danh tính ẩn danh thì hỏi lưu lần đầu trước (F2).
+ * Chuyến mới nhận các nơi ở mục "Chưa có ngày". Lưu xong các nơi được đánh dấu "đã vào chuyến" (vẫn ở màn Đã chọn nhưng không còn chờ lưu) và mở chuyến. Chưa có danh tính ẩn danh thì hỏi lưu lần đầu trước (F2).
  */
 export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProps) {
   const { state, actions } = useTrips();

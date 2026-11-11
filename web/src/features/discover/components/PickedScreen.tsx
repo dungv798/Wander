@@ -11,7 +11,7 @@ import { useResource } from '../../../shared/hooks/useResource.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import type { DestinationDetail, PlaceView } from '../model/Catalog.types.ts';
 import { firstPhotoUrl } from '../model/destinationQueries.ts';
-import { pickedOf } from '../model/discoverState.ts';
+import { pickedOf, savedPicksOf } from '../model/discoverState.ts';
 import { DestinationGate } from './DestinationGate.tsx';
 import { MapPeekButton } from './MapPeekButton.tsx';
 import { PlacePlaceholder } from './PlacePlaceholder.tsx';
@@ -26,12 +26,33 @@ function PickedHead({ dest }: { readonly dest: DestinationDetail }) {
   );
 }
 
-/** Lưới các nơi đã quẹt phải: chạm để xem chi tiết, nút ✕ để bỏ chọn, thanh dưới để lưu thành chuyến đi. */
-function PickedContent({ dest, onSave, showEmpty }: { readonly dest: DestinationDetail; readonly onSave: (picked: readonly PlaceView[]) => void; readonly showEmpty: boolean }) {
-  const { state, actions } = useDiscover();
+/** Một hàng nơi đã chọn: chạm để xem chi tiết, nút ✕ để bỏ chọn; `saved` thêm nhãn "Đã vào chuyến đi". */
+function PickedRow({ place, saved }: { readonly place: PlaceView; readonly saved: boolean }) {
+  const { actions } = useDiscover();
   const sheet = usePlaceSheet();
+  return (
+    <div className={`tile picked-row cat-${place.category}`}>
+      <button data-place-photo={place.id} className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: place.name })} onClick={() => sheet.open(place.id)}>
+        {place.photos.length ? <RevealImage alt="" src={firstPhotoUrl(place)} /> : <PlacePlaceholder place={place} />}
+        <span className="in">
+          <h3>{place.name}</h3>
+          <p>{place.area}</p>
+          {saved ? <span className="picked-tag">{COPY.picked.inTrip}</span> : null}
+        </span>
+      </button>
+      <button className="x" type="button" aria-label={fill(COPY.picked.unpick, { name: place.name })} onClick={() => actions.unpick(place.id)}>
+        <Icon name="x" size="s" />
+      </button>
+    </div>
+  );
+}
+
+/** Lưới các nơi đã quẹt phải: nơi chờ lưu kèm nút "Lưu N địa điểm", rồi các nơi đã vào chuyến kèm nhãn (B-06). */
+function PickedContent({ dest, onSave, showEmpty }: { readonly dest: DestinationDetail; readonly onSave: (picked: readonly PlaceView[]) => void; readonly showEmpty: boolean }) {
+  const { state } = useDiscover();
   const picked = useMemo(() => pickedOf(state, dest.places), [state, dest.places]);
-  if (!picked.length) {
+  const saved = useMemo(() => savedPicksOf(state, dest.places), [state, dest.places]);
+  if (!picked.length && !saved.length) {
     if (!showEmpty) return null;
     return (
       <>
@@ -47,22 +68,14 @@ function PickedContent({ dest, onSave, showEmpty }: { readonly dest: Destination
   return (
     <>
       <PickedHead dest={dest} />
-      <div className="picked-create pad-x"><Button block arrow onClick={() => onSave(picked)}>{fill(COPY.picked.saveAsTrip, { n: picked.length })}</Button></div>
+      <div className="picked-create pad-x">
+        {picked.length
+          ? <Button block arrow onClick={() => onSave(picked)}>{fill(COPY.picked.saveAsTrip, { n: picked.length })}</Button>
+          : <p className="note">{COPY.picked.allSaved}</p>}
+      </div>
       <div className="picked-list pad-x">
-        {picked.map((p) => (
-          <div key={p.id} className={`tile picked-row cat-${p.category}`}>
-            <button data-place-photo={p.id} className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: p.name })} onClick={() => sheet.open(p.id)}>
-              {p.photos.length ? <RevealImage alt="" src={firstPhotoUrl(p)} /> : <PlacePlaceholder place={p} />}
-              <span className="in">
-                <h3>{p.name}</h3>
-                <p>{p.area}</p>
-              </span>
-            </button>
-            <button className="x" type="button" aria-label={fill(COPY.picked.unpick, { name: p.name })} onClick={() => actions.unpick(p.id)}>
-              <Icon name="x" size="s" />
-            </button>
-          </div>
-        ))}
+        {picked.map((p) => <PickedRow key={p.id} place={p} saved={false} />)}
+        {saved.map((p) => <PickedRow key={p.id} place={p} saved />)}
       </div>
       <div className="pad-x picked-map-peek"><MapPeekButton /></div>
     </>

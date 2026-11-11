@@ -15,6 +15,8 @@ export interface DiscoverActions {
   readonly undo: () => void;
   readonly unpick: (placeId: string) => void;
   readonly clearPicked: (ids: readonly string[]) => void;
+  /** Đánh dấu các nơi đã thích là đã vào chuyến đi (sau khi lưu thành công). */
+  readonly markSaved: (ids: readonly string[]) => void;
   readonly restart: () => void;
   readonly setPhoto: (placeId: string, index: number) => void;
   readonly setCategory: (c: CategoryFilter) => void;
@@ -51,6 +53,7 @@ export function DiscoverProvider({ children, catalog, store }: DiscoverProviderP
       undo: () => kv.update(S.undoLast),
       unpick: (id) => kv.update((s) => S.unpick(s, id)),
       clearPicked: (ids) => kv.update((s) => S.clearPicked(s, ids)),
+      markSaved: (ids) => kv.update((s) => S.markSaved(s, ids)),
       restart: () => kv.update(S.restartSkipped),
       setPhoto: (id, i) => kv.update((s) => S.setPhotoIndex(s, id, i)),
       setCategory: (c) => kv.update((s) => S.setCategory(s, c)),

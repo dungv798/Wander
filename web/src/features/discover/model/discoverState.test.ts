@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { INITIAL_DISCOVER_STATE as S0, decide, pickedOf, remainingIds, restartSkipped, sanitizeDiscoverState, setPhotoIndex, toggleGuide, undoLast, unpick } from './discoverState.ts';
+import { INITIAL_DISCOVER_STATE as S0, decide, markSaved, pendingPickCount, pickedOf, remainingIds, restartSkipped, sanitizeDiscoverState, savedPicksOf, setPhotoIndex, toggleGuide, undoLast, unpick } from './discoverState.ts';
 
 const PLACES = [
   { id: 'a', category: 'canh' as const },
@@ -59,6 +59,36 @@ test('làm sạch dữ liệu lưu hỏng: null, mảng, sai kiểu từng trư�
 test('hoàn tác đưa bộ lọc về "Tất cả" để thẻ trả về luôn hiện', () => {
   const s = undoLast({ ...decide(S0, 'a', 'like'), cat: 'van' });
   assert.equal(s.cat, 'all');
+});
+
+test('đánh dấu đã vào chuyến: chỉ nơi đã thích, nơi đó thôi tính vào "đã chọn" nhưng vẫn là quyết định thích (B-06)', () => {
+  const liked = decide(decide(decide(S0, 'a', 'like'), 'b', 'like'), 'c', 'skip');
+  const s = markSaved(liked, ['a', 'c', 'khong-co']);
+  assert.deepEqual(pickedOf(s, PLACES).map((p) => p.id), ['b']);
+  assert.deepEqual(savedPicksOf(s, PLACES).map((p) => p.id), ['a']);
+  assert.equal(s.decisions['a'], 'like');
+  assert.equal(s.saved['c'], undefined);
+  assert.equal(s.saved['khong-co'], undefined);
+});
+
+test('số nơi chờ lưu chỉ đếm nơi đã thích và chưa vào chuyến', () => {
+  const s = markSaved(decide(decide(decide(S0, 'a', 'like'), 'b', 'like'), 'c', 'skip'), ['a']);
+  assert.equal(pendingPickCount(s), 1);
+  assert.equal(pendingPickCount(S0), 0);
+});
+
+test('bỏ chọn, quẹt lại hoặc hoàn tác một nơi đã vào chuyến thì gỡ dấu "đã vào chuyến"', () => {
+  const saved = markSaved(decide(S0, 'a', 'like'), ['a']);
+  assert.equal(unpick(saved, 'a').saved['a'], undefined);
+  assert.equal(decide(saved, 'a', 'skip').saved['a'], undefined);
+  assert.equal(undoLast(saved).saved['a'], undefined);
+});
+
+test('làm sạch trường saved: chỉ giữ cặp giá trị true; thiếu trường thì rỗng', () => {
+  const s = sanitizeDiscoverState({ saved: { a: true, b: false, c: 'x' } });
+  assert.ok(s);
+  assert.deepEqual(s.saved, { a: true });
+  assert.deepEqual(sanitizeDiscoverState({})?.saved, {});
 });
 
 test('thẻ quẹt: nơi có ảnh thật đứng trước nơi chưa có ảnh, giữ thứ tự biên tập trong từng nhóm', () => {

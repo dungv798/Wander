@@ -22,8 +22,7 @@ test('xuất chuyến thành PNG hợp lệ, xem trước khớp tệp tải xu�
     await page.goto(`${url}/#/export/${seeded.tripId}`);
     const create = page.getByRole('button', { name: 'Tạo ảnh PNG', exact: true });
     await create.waitFor();
-    assert.equal(await page.getByRole('button', { name: 'PDF · Sắp có' }).isDisabled(), true);
-    assert.equal(await page.getByRole('button', { name: 'Lịch · Sắp có' }).isDisabled(), true);
+    assert.equal(await page.getByText('Sắp có').count(), 0, 'B-07: không còn nút PDF/Lịch giả "Sắp có"');
     const pending = page.waitForEvent('download');
     await create.click();
     const download = await pending;

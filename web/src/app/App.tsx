@@ -6,7 +6,7 @@ import { navigate, replaceRoute, useRoute } from '../shared/router/hashRoute.ts'
 import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
 import { Icon } from '../shared/ui/Icon.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
-import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, useDiscover } from '../features/discover/index.ts';
+import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, pendingPickCount, pickedOf, useDestination, useDiscover } from '../features/discover/index.ts';
 import type { AddingMode, PlaceView, SheetMode } from '../features/discover/index.ts';
 import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
 import { SettingsScreen } from '../features/settings/index.ts';
@@ -26,10 +26,17 @@ void initializeLook();
 
 const DestinationPickerScreen = lazy(() => import('../features/discover/components/DestinationPickerScreen.tsx'));
 
-/** Số nơi đã quẹt phải, để hiện trên tab "Đã chọn". */
+/** Số nơi đã quẹt phải và chưa vào chuyến nào, để hiện trên tab "Đã chọn". */
 function usePickedCount(): number {
   const { state } = useDiscover();
-  return Object.values(state.decisions).filter(decision => decision === 'like').length;
+  return pendingPickCount(state);
+}
+
+/** Các nơi chờ lưu của điểm đến hiện tại; nút "+" ở thanh dưới mở thẳng "Lưu N địa điểm" khi danh sách này không rỗng (B-06, UX-1). */
+function useCurrentPending(destId: string): readonly PlaceView[] {
+  const { state } = useDiscover();
+  const { state: destination } = useDestination(destId);
+  return useMemo(() => (destination.status === 'ready' ? pickedOf(state, destination.data.places) : []), [state, destination]);
 }
 
 /** Chế độ "thêm địa điểm vào chuyến" của bộ thẻ khi địa chỉ có mã chuyến; null nếu không có chuyến đó. */
@@ -80,6 +87,7 @@ function Shell() {
   const wide = useIsWide();
   const { destId: currentDestId, destinations, select } = useCurrentDestination();
   const pickedCount = usePickedCount();
+  const currentPending = useCurrentPending(currentDestId);
   const [create, setCreate] = useState<readonly PlaceView[] | null>(null);
   const hideBar = HIDE_TABBAR_ALWAYS.includes(route.view) || (!wide && HIDE_TABBAR_ON_PHONE.includes(route.view));
   const onMap = SHELL_MAP.VISIBLE_VIEWS.includes(route.view);
@@ -124,7 +132,7 @@ function Shell() {
         {route.view === VIEW.JOIN && route.id ? <JoinScreen code={route.id} /> : null}
         {route.view === VIEW.TRIP && route.id ? <TripScreen tripId={route.id} sub={route.sub} /> : null}
       </ScreenHost>
-      {hideBar ? null : <TabBar current={route.view} wide={wide} pickedCount={pickedCount} onCreate={() => setCreate([])} />}
+      {hideBar ? null : <TabBar current={route.view} wide={wide} pickedCount={pickedCount} onCreate={() => setCreate(currentPending)} />}
       {create ? <CreateTripSheet destId={currentDestId} picked={create} onClose={() => setCreate(null)} /> : null}
     </div>
     </ShellSheetContext.Provider>

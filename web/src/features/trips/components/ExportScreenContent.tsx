@@ -10,7 +10,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 const PngPreview = lazy(() => import('../export/PngPreview.tsx'));
 
-/** Màn xuất PNG tải lười phần vẽ; PDF/Lịch bị khóa và giải thích ngay trước xem trước. */
+/** Màn xuất ảnh PNG, tải lười phần vẽ. Chưa có PDF/Lịch nên không hiện nút giả (B-07). */
 export function ExportScreen({ tripId }: { readonly tripId: string }) {
   const { trip: find } = useTrips();
   const trip = find(tripId);
@@ -22,14 +22,6 @@ export function ExportScreen({ tripId }: { readonly tripId: string }) {
           <div className="pagehead pad-x">
             <div><IconButton icon="chevron-left" label={T.export.back} onClick={goBack} /></div>
             <p className="note">{trip.name}</p><h1>{T.export.title}</h1>
-          </div>
-          <div className="stack pad-x">
-            <div className="chips" role="group" aria-label={T.export.kinds}>
-              <button type="button" className="fchip active" aria-pressed="true">{C.image}</button>
-              <button type="button" className="fchip" disabled aria-describedby="export-formats">{C.pdf}</button>
-              <button type="button" className="fchip" disabled aria-describedby="export-formats">{C.calendar}</button>
-            </div>
-            <p className="note" id="export-formats">{C.formats}</p>
           </div>
           <Suspense fallback={<p role="status" className="pad-x">{C.loading}</p>}>
             <PngPreview trip={trip} destination={dest} />
