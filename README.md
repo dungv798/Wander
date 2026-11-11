@@ -1,5 +1,7 @@
 # Wander — lập kế hoạch chuyến đi
 
+> English summary: [`README.en.md`](README.en.md). Bài viết về thiết kế khôi phục: [`docs/articles/recovery-design.md`](docs/articles/recovery-design.md).
+
 Ứng dụng lập kế hoạch chuyến đi bằng tiếng Việt (dự án cá nhân để học). Hiện ở **Lát 1a**: một người dùng ẩn danh, lưu trên máy chủ, mở được trên thiết bị khác, chuyến → ngày → mục, sắp xếp thủ công, chi phí, xóa mềm + Hoàn tác, đặt chỗ, ngân sách.
 
 > **Chưa được phát hành cho người dùng thật.** Cổng phát hành RG-2/5/6/7 còn mở (`docs/implementation/decisions.md` §3). Chưa có tài nguyên AWS nào.

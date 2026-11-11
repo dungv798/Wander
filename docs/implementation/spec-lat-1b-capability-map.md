@@ -1,7 +1,7 @@
 # Lát 1b — Bản đồ khả năng (Phase 0, chờ PO duyệt) — 28/10/2026
 
 > Trạng thái: **BẢN ĐỒ ĐÃ DUYỆT 28/10/2026 (DR-021)**; H1–H4 đã trả lời (xem `docs/decisions/DR-021-po-tra-loi-28-10-lat-1b.md`). Mô-đun `proposals` giữ mã nhưng chỉ còn **đề nghị xóa** (H2). Đặc tả mô-đun đầu: `SPEC-membership.md` (chờ duyệt).
-> (Trạng thái cũ: ~~DỰ THẢO, chưa duyệt.~~) Theo `spec-driven-development`, đặc tả chi tiết từng mô-đun chỉ viết SAU khi PO duyệt bản đồ này. Chưa có dòng mã nào của 1b.
+> (Trạng thái cũ: ~~DỰ THẢO, chưa duyệt.~~) Theo `spec-driven-development`, đặc tả chi tiết từng mô-đun chỉ viết SAU khi PO duyệt bản đồ này. ~~Chưa có dòng mã nào của 1b.~~ (Cập nhật 11/11/2026: mã 1b đã có — thành viên, liên kết mời, đề nghị xóa, checklist; xem RG-3 ở `decisions.md`. Phần còn lại của tài liệu là bản đồ lúc duyệt, chưa rà lại từng dòng.)
 > Nguồn đã duyệt: `docs/decisions/DR-018` (Q6–Q9, Q12), kế hoạch gốc §14–§15 (R9–R11, D8, D10, D19), luồng F9–F11 ở `docs/ux/user-flows.md`. Mọi chỗ 🔶/❓ bên dưới KHÔNG phải quyết định.
 
 ## 1. Đã được PO duyệt (làm nền, không hỏi lại)
