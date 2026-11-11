@@ -1,0 +1,43 @@
+# Workflow CI cho giao diện web Wander (PO yêu cầu bật CI ngày 11/11/2026). Chạy kiểm kiểu, lint, kiểm thử đơn vị và build.
+# KHÔNG chạy e2e (cần backend thật và trình duyệt, chạy trên máy qua `tools\dev.ps1 e2e`). Không có secret, không deploy.
+name: web-ci
+
+on:
+  pull_request:
+    paths: ["web/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
+  push:
+    branches: [main]
+    paths: ["web/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: typecheck + lint + unit tests + build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+      # playwright-core (kiểu cho e2e, tsc kiểm cả web/e2e) khai báo ở package.json GỐC nên phải cài ở gốc trước.
+      - run: npm ci --no-audit --no-fund
+        working-directory: .
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
