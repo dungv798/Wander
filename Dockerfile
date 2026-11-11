@@ -18,11 +18,13 @@ WORKDIR /app
 COPY --from=backend-build /src/backend/build/libs/wander-backend.jar /app/app.jar
 COPY --from=web-build /src/web/dist /app/web
 USER wander
+# TieredStopAtLevel=1 (chỉ trình biên dịch C1) + SerialGC: khi CPU ít (Render Free) khởi động nhanh gần gấp đôi
+# (đo 11/11/2026 ở 0,25 CPU: 124 s -> 65 s, DR-037); đổi lại đỉnh hiệu năng thấp hơn, chấp nhận với tải nhỏ.
 ENV SPRING_PROFILES_ACTIVE=free \
     WANDER_BIND_ADDRESS=0.0.0.0 \
     WANDER_WEB_DIR=/app/web \
     PORT=8787 \
-    JAVA_TOOL_OPTIONS="-Xms64m -Xmx256m -XX:+ExitOnOutOfMemoryError"
+    JAVA_TOOL_OPTIONS="-Xms64m -Xmx256m -XX:+ExitOnOutOfMemoryError -XX:TieredStopAtLevel=1 -XX:+UseSerialGC"
 EXPOSE 8787
 # Probe không query DB, tránh đánh thức Neon mỗi vài giây.
 HEALTHCHECK --interval=30s --timeout=3s --start-period=120s --retries=3 \
