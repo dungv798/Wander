@@ -2,7 +2,7 @@
 # Build jar trước: .\gradlew.bat bootJar  (hoặc tools\dev.ps1 backend-build)
 # KHÔNG dùng cho Render/Neon: bản demo miễn phí build từ Dockerfile Ở GỐC REPO (heap cố định -Xmx256m, profile free, có giao diện web).
 # Tệp này chỉ cho compose cục bộ và AWS; MaxRAMPercentage=75 phụ thuộc giới hạn RAM của task (rà kiến trúc 08/11/2026).
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 RUN addgroup -S wander && adduser -S wander -G wander
 WORKDIR /app
