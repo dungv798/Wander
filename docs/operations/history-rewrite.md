@@ -56,8 +56,9 @@ After pushing:
    For a full purge ask GitHub Support to run a garbage collection / remove cached views, or create a new private repository and push
    the rewritten history there instead.
 3. **Render.** `autoDeploy` is off; trigger a manual deploy after the push. If the service tracks `main`, it now builds the rewritten tip.
-4. **Secrets are not fixed by a rewrite.** The leaked key reported in `docs/upgrade-report.md` is still in the rewritten history (it is
-   in a text file). Rotate it. To drop the file as well:
+4. **Secret-scanner alerts are not fixed by the binary rewrite.** The two Google Maps key strings reported in `docs/upgrade-report.md`
+   (public keys of third-party hotel websites, scraped into a research file; not yours) are still in the rewritten history because they
+   are in a text file. They are harmless to you but would raise alerts on a public repository. To drop the file:
    `git filter-repo --force --invert-paths --path docs/research/venue-candidates-20261107.json` in the rewritten clone, then push as above.
 5. Keep the mirror backup until the rewritten repository has been used for a while.
 

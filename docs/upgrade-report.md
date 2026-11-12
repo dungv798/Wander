@@ -89,9 +89,12 @@ Not defensible, so not claimed:
 
 These are listed for the owner to do; nothing below was done or attempted.
 
-1. **Rotate the leaked Google API key.** A full-history scan found one in `docs/research/venue-candidates-20261107.json`, introduced in
-   commit `480978dc76` and already on `origin/main`. It was not cleaned from history by this work. Rotate it first; the rewritten history
-   removes the file but does not make a published key safe.
+1. **A secret scanner flags two Google Maps keys in history; they are not yours (correction of an earlier version of this report).**
+   The full-history scan found them in `docs/research/venue-candidates-20261107.json` (commit `480978dc76`, already on `origin/main`).
+   Inspecting the context showed they are public browser keys embedded in the HTML of two hotel websites (the Sofitel Metropole Hanoi
+   site and paoshotel.com) that the research step scraped into the file; they belong to those businesses, so there is nothing for you
+   to rotate. They would still raise scanner alerts on a public repository, so drop the file from history before making the repo public
+   (command in [`history-rewrite.md`](operations/history-rewrite.md), step 4). Other scraped research files may contain similar strings.
 2. Create the Cloudflare R2 bucket, set `WANDER_PHOTO_BASE_URL`, run `tools/catalog/upload-photos.mjs` ([`photos.md`](operations/photos.md)).
 3. Publish the rewritten history with a force push. The final prepared clone is `D:\wander-backup-20261112-rewritten-final`
    (132 commits, 9 `phase-*` tags, tip tree identical to `portfolio-upgrade` at commit `be723dd`, tree `258e8f3…`; the only later commit changes these two notes, so refresh the rewrite once more before publishing if you want it byte-identical). `D:\Wander-rewritten` is an older, stale
