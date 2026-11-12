@@ -100,3 +100,18 @@ test('thân lỗi sai hình dạng (code không phải chuỗi, rỗng, error nu
     await assert.rejects(new ApiClient(f.fetchImpl).get('/api/x'), (e: unknown) => e instanceof ApiError && e.code === 'INTERNAL' && e.status === 503);
   }
 });
+
+test('bộ theo dõi lời gọi: mỗi lời gọi được báo bắt đầu và kết thúc đúng một lần, kể cả khi lỗi mạng, lỗi HTTP hay bị hủy', async () => {
+  const events: string[] = [];
+  const tracker = { begin: () => { events.push('begin'); return () => { events.push('end'); }; } };
+  const ok = new ApiClient(fakeFetch(() => json({ ok: 1 })).fetchImpl, undefined, tracker);
+  await ok.get('/api/x');
+  assert.deepEqual(events, ['begin', 'end']);
+  events.length = 0;
+  await assert.rejects(new ApiClient(fakeFetch(() => json({ error: { code: 'NOT_FOUND' } }, 404)).fetchImpl, undefined, tracker).get('/api/x'));
+  await assert.rejects(new ApiClient(() => Promise.reject(new TypeError('offline')), undefined, tracker).get('/api/x'));
+  const abort = new AbortController();
+  abort.abort();
+  await assert.rejects(new ApiClient(() => Promise.reject(new Error('x')), undefined, tracker).get('/api/x', abort.signal));
+  assert.deepEqual(events, ['begin', 'end', 'begin', 'end', 'begin', 'end']);
+});

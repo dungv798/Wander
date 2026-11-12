@@ -6,6 +6,7 @@ import { navigate, replaceRoute, useRoute } from '../shared/router/hashRoute.ts'
 import { ScreenHost } from '../shared/ui/ScreenHost.tsx';
 import { Icon } from '../shared/ui/Icon.tsx';
 import { ToastProvider, useToast } from '../shared/ui/Toast.tsx';
+import { SlowServerNotice } from '../shared/ui/SlowServerNotice.tsx';
 import { CurrentDestinationProvider, useCurrentDestination, DeckScreen, DestScreen, DiscoverProvider, DiscoveryTopicProvider, HomeScreen, PickedScreen, PlaceSheetProvider, ShellMap, MapChrome, ShellSheetContext, SHELL_MAP, pendingPickCount, pickedOf, useDestination, useDiscover } from '../features/discover/index.ts';
 import type { AddingMode, PlaceView, SheetMode } from '../features/discover/index.ts';
 import { ExpiredScreen, IdentityProvider, RecoverScreen, SecurityScreen, useReportError, useSessionExpired } from '../features/identity/index.ts';
@@ -152,6 +153,7 @@ export function App() {
                 <TripsProvider>
                   <PlaceSheetProvider>
                     <DeckSpotlightProvider>
+                    <SlowServerNotice />
                     <Shell />
                     </DeckSpotlightProvider>
                   </PlaceSheetProvider>

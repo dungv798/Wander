@@ -1,0 +1,2 @@
+/* Dải "máy chủ đang thức dậy" (B-05): dính đầu màn hình, dưới vùng an toàn, nền cảnh báo của hệ thống; không chặn thao tác bên dưới. */
+.slow-notice { position: fixed; inset-inline: var(--s-3); top: calc(env(safe-area-inset-top, 0px) + var(--s-2)); z-index: var(--z-toast); margin: 0; padding: var(--s-3) var(--s-4); border-radius: var(--r-lg); background: var(--warn-bg); color: var(--warn-ink); font: var(--text-secondary); box-shadow: var(--shadow-float); pointer-events: none; }

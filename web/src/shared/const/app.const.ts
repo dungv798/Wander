@@ -42,7 +42,6 @@ export const UI = {
   TOAST_MS: 2600,
   TOAST_UNDO_MS: 10_000,
   /** Sau chừng này (ms) khung xương vẫn chưa xong thì giải thích: máy chủ gói miễn phí ngủ khi vắng người, lần gọi đầu có thể mất khoảng một phút. */
-  SLOW_LOAD_NOTICE_MS: 6000,
 } as const;
 
 /** Ngưỡng cử chỉ quẹt thẻ (khớp prototype). */

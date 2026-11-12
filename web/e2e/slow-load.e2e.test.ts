@@ -64,3 +64,22 @@ test('tải nhanh: không hiện lời giải thích', async () => {
     await ctx.close();
   }
 });
+
+test('hành động chờ máy chủ (lưu chuyến mới) quá ngưỡng cũng được giải thích, rồi biến mất khi xong (B-05)', async () => {
+  const { ctx, page } = await openDelayed(0);
+  try {
+    await page.route('**/api/trips', async (route) => {
+      if (route.request().method() === 'POST') await new Promise((resolve) => setTimeout(resolve, SERVER_DELAY_MS));
+      await route.continue();
+    });
+    await page.goto(`${baseUrl}/#/dest/ha-giang`);
+    await page.getByRole('button', { name: 'Tạo chuyến đi' }).click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
+    await page.getByRole('button', { name: 'Để sau, lưu chuyến đi luôn' }).click();
+    await page.getByRole('status').filter({ hasText: SLOW_NOTICE }).waitFor({ timeout: SLOW_NOTICE_MS + 3000 });
+    await page.locator('.tcc-in h1').waitFor({ timeout: SERVER_DELAY_MS + 8000 });
+    assert.equal(await page.getByText(SLOW_NOTICE).count(), 0, 'lưu xong thì lời giải thích phải biến mất');
+  } finally {
+    await ctx.close();
+  }
+});

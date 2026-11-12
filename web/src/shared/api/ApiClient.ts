@@ -7,6 +7,11 @@ export type FetchLike = (input: string, init?: RequestInit) => Promise<Response>
 /** Nguồn tiêu đề bổ sung cho MỖI lời gọi (ví dụ `Authorization: Bearer …`); gọi lại mỗi lần nên bí mật đổi là có hiệu lực ngay. */
 export type HeaderSource = () => Record<string, string>;
 
+/** Phần tối thiểu của bộ theo dõi lời gọi mà `ApiClient` cần: báo bắt đầu, trả hàm báo kết thúc (B-05). */
+export interface RequestObserver {
+  readonly begin: () => () => void;
+}
+
 /** Có phải lỗi hủy: `AbortError` của `fetch`/`json()`, hoặc bất kỳ lỗi nào khi `signal` đã bị hủy (hủy bằng `abort(lý do)` ném chính lý do). */
 function isAbort(e: unknown, signal?: AbortSignal): boolean {
   if (signal?.aborted) return true;
@@ -35,11 +40,13 @@ async function toApiError(res: Response, signal?: AbortSignal): Promise<ApiError
 export class ApiClient {
   private readonly fetchImpl: FetchLike;
   private readonly extraHeaders: HeaderSource;
+  private readonly observer: RequestObserver | undefined;
 
   /** Tạo máy khách; mặc định dùng `fetch` của trình duyệt và không thêm tiêu đề nào. */
-  constructor(fetchImpl: FetchLike = (input, init) => fetch(input, init), extraHeaders: HeaderSource = () => ({})) {
+  constructor(fetchImpl: FetchLike = (input, init) => fetch(input, init), extraHeaders: HeaderSource = () => ({}), observer?: RequestObserver) {
     this.fetchImpl = fetchImpl;
     this.extraHeaders = extraHeaders;
+    this.observer = observer;
   }
 
   /** GET một đường dẫn và trả JSON đã phân tích. */
@@ -52,6 +59,16 @@ export class ApiClient {
    * Mất kết nối ⇒ `ApiError('NETWORK')`; mã HTTP lỗi ⇒ `ApiError` mang mã của backend; thân 2xx hỏng ⇒ `ApiError('INTERNAL')`.
    */
   async send<T = unknown>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    const done = this.observer?.begin();
+    try {
+      return await this.exchange<T>(method, path, body, signal);
+    } finally {
+      done?.();
+    }
+  }
+
+  /** Một vòng gửi và đọc phản hồi (tách khỏi `send` để `send` luôn báo kết thúc cho bộ theo dõi). */
+  private async exchange<T>(method: string, path: string, body: unknown, signal: AbortSignal | undefined): Promise<T> {
     const headers: Record<string, string> = { [HEADER.ACCEPT]: HEADER.JSON, ...this.extraHeaders() };
     const init: RequestInit = { method, headers };
     if (body !== undefined) {
