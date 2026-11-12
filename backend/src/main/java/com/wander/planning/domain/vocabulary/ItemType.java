@@ -3,7 +3,7 @@ package com.wander.planning.domain.vocabulary;
 import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
-/** 9 loại mục ở plan §7.2 (D13), kèm nhãn tiếng Việt. Thứ tự khai báo là thứ tự hiển thị tổng theo loại. */
+/** The 9 item types of plan section 7.2 (D13), with Vietnamese labels. The declaration order is the display order of the totals by type. */
 public enum ItemType implements CodedValue {
     SIGHTSEEING("sightseeing", "Tham quan"),
     FOOD("food", "Ăn uống"),
@@ -28,22 +28,22 @@ public enum ItemType implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Nghỉ và Việc cần làm không có giá cụ thể: không tính là "chưa rõ giá" khi so với ngân sách (Q11). */
+    /** Rest and To-do have no concrete price: they do not count as 'unknown price' when compared with the budget (Q11). */
     public boolean isPriced() {
         return this != REST && this != TASK;
     }
 
-    /** Nghỉ và Việc cần làm không có đặt chỗ (A-14); các loại còn lại có. */
+    /** Rest and To-do have no booking (A-14); the other types do. */
     public boolean supportsBooking() {
         return this != REST && this != TASK;
     }
 
-    /** Loại mục theo mã trong dữ liệu và API; mã lạ trả rỗng. */
+    /** The item type by code in data and API; an unknown code returns empty. */
     public static Optional<ItemType> fromCode(String code) {
         return CodedValue.find(ItemType.class, code);
     }

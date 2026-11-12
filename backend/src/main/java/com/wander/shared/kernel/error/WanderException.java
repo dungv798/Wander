@@ -3,8 +3,8 @@ package com.wander.shared.kernel.error;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.constant.ErrorMessages;
 /**
- * Lỗi có mã ổn định mà giao diện dựa vào (ví dụ NEGATIVE, DATES_ORPHAN_ITEMS).
- * Mã và trường giữ nguyên như hợp đồng API cũ để web không phải đổi.
+ * An error with a stable code that the UI relies on (for example NEGATIVE, DATES_ORPHAN_ITEMS).
+ * The code and field stay as in the old API contract so the web does not have to change.
  */
 public class WanderException extends RuntimeException {
 
@@ -13,7 +13,7 @@ public class WanderException extends RuntimeException {
     private final String field;
     private final transient Object details;
 
-    /** Tạo lỗi đầy đủ: loại, mã, lời báo, trường sai (nếu có) và chi tiết kèm theo (nếu có). */
+    /** Creates a full error: the kind, the code, the message, the wrong field (if any) and the accompanying details (if any). */
     public WanderException(ErrorKind kind, String code, String message, String field, Object details) {
         super(message);
         this.kind = kind;
@@ -22,57 +22,57 @@ public class WanderException extends RuntimeException {
         this.details = details;
     }
 
-    /** Lỗi dữ liệu gửi lên không hợp lệ ở một trường. */
+    /** An invalid-input error on one field. */
     public static WanderException invalid(String code, String message, String field) {
         return new WanderException(ErrorKind.INVALID, code, message, field, null);
     }
 
-    /** Lỗi giá trị không hợp lệ ở một trường, dùng lời báo chung. */
+    /** An invalid-value error on one field, using the generic message. */
     public static WanderException invalidValue(String code, String field) {
         return invalid(code, ErrorMessages.VALUE_INVALID, field);
     }
 
-    /** Không tìm thấy tài nguyên, dùng lời báo chung. */
+    /** The resource was not found, using the generic message. */
     public static WanderException notFound() {
         return notFound(ErrorMessages.NOT_FOUND);
     }
 
-    /** Không tìm thấy tài nguyên, kèm lời báo riêng. */
+    /** The resource was not found, with its own message. */
     public static WanderException notFound(String message) {
         return new WanderException(ErrorKind.NOT_FOUND, ErrorCodes.NOT_FOUND, message, null, null);
     }
 
-    /** Xung đột trạng thái, không kèm chi tiết. */
+    /** A state conflict, with no details. */
     public static WanderException conflict(String code, String message) {
         return new WanderException(ErrorKind.CONFLICT, code, message, null, null);
     }
 
-    /** Xung đột trạng thái, kèm chi tiết cho client (ví dụ danh sách mục vướng). */
+    /** A state conflict, with details for the client (for example the list of blocking items). */
     public static WanderException conflict(String code, String message, Object details) {
         return new WanderException(ErrorKind.CONFLICT, code, message, null, details);
     }
 
-    /** Không đủ quyền thực hiện thao tác. */
+    /** Not enough permission to perform the action. */
     public static WanderException forbidden(String code, String message) {
         return new WanderException(ErrorKind.FORBIDDEN, code, message, null, null);
     }
 
-    /** Loại lỗi; tầng web đổi sang mã HTTP. */
+    /** The kind of error; the web layer turns it into an HTTP status. */
     public ErrorKind kind() {
         return kind;
     }
 
-    /** Mã lỗi ổn định cho giao diện. */
+    /** The stable error code for the UI. */
     public String code() {
         return code;
     }
 
-    /** Tên trường sai, hoặc null nếu lỗi không gắn với trường nào. */
+    /** The name of the wrong field, or null if the error is not tied to a field. */
     public String field() {
         return field;
     }
 
-    /** Chi tiết kèm theo, hoặc null. */
+    /** The accompanying details, or null. */
     public Object details() {
         return details;
     }

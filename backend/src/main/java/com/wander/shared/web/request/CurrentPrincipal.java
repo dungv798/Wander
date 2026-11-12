@@ -14,8 +14,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * Cho phép controller nhận {@link AuthenticatedPrincipal} làm tham số. Lấy từ SecurityContext do chuỗi bảo mật
- * (module identity) đặt sau khi xác thực phiên; nếu thiếu thì yêu cầu không có phiên hợp lệ.
+ * Lets a controller receive {@link AuthenticatedPrincipal} as a parameter. Taken from the SecurityContext that the security chain
+ * (identity module) sets after authenticating the session; if it is missing the request has no valid session.
  */
 public final class CurrentPrincipal implements HandlerMethodArgumentResolver {
 

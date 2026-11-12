@@ -15,7 +15,7 @@ public final class RatingInput {
     private RatingInput() {
     }
 
-    /** Mã quán đúng dạng; sai thì báo MALFORMED ở trường {@code placeRef}. */
+    /** A well-formed venue id; otherwise MALFORMED is reported on the {@code placeRef} field. */
     public static String placeRef(String value) {
         if (value == null || !PLACE_REF.matcher(value).matches()) {
             throw WanderException.invalidValue(ErrorCodes.MALFORMED, RatingFields.PLACE_REF);
@@ -23,7 +23,7 @@ public final class RatingInput {
         return value;
     }
 
-    /** Điểm: bắt buộc, số nguyên 1–5 (thiếu ⇒ REQUIRED; chuỗi, số thập phân, boolean ⇒ MALFORMED; ngoài khoảng ⇒ OUT_OF_RANGE). */
+    /** The score: required, an integer 1-5 (missing => REQUIRED; a string, decimal, boolean => MALFORMED; out of range => OUT_OF_RANGE). */
     public static int stars(Integer number) {
         if (number == null) throw WanderException.invalidValue(ErrorCodes.REQUIRED, RatingFields.STARS);
         if (number < RatingConstants.STARS_MIN || number > RatingConstants.STARS_MAX) {
@@ -32,7 +32,7 @@ public final class RatingInput {
         return number;
     }
 
-    /** Lời bình tùy chọn: chuẩn hóa như nhãn người dùng (không ký tự điều khiển/vô hình); rỗng hoặc không nêu ⇒ null. */
+    /** An optional comment: normalized like a user label (no control/invisible characters); empty or not given => null. */
     public static String comment(String raw) {
         if (raw == null) return null;
         String text = Labels.normalize(raw, RatingConstants.COMMENT_MAX_LENGTH, RatingFields.COMMENT);

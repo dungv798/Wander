@@ -1,21 +1,21 @@
 package com.wander.shared.kernel.constant;
 
 /**
- * Khóa cấu hình ứng dụng (tầng HỆ THỐNG). Biểu thức {@code ${...}} dùng với {@code @Value}; mặc định đi kèm sau dấu hai chấm
- * phải khớp {@code application.yml}. Một nơi duy nhất để đổi tên khóa.
+ * Application configuration keys (SYSTEM tier). The {@code ${...}} expressions are used with {@code @Value}; the default after the colon
+ * must match {@code application.yml}. A single place to rename a key.
  */
 public final class ConfigConstants {
 
-    /** Profile cho container cloud miễn phí, có kiểm tra metadata khóa trước khi nhận traffic. */
+    /** The profile for the free cloud container, with a key-metadata check before it accepts traffic. */
     public static final String FREE_PROFILE = "free";
 
-    /** Tiền tố cấu hình các giới hạn tần suất. */
+    /** Configuration prefix of the rate limits. */
     public static final String LIMITS_PREFIX = "wander.limits";
 
-    /** Thư mục giao diện đã build; rỗng = chỉ chạy API. */
+    /** The built UI directory; empty = API only. */
     public static final String WEB_DIR_EXPRESSION = "${wander.web.dir:}";
 
-    /** Số proxy tin cậy trước ứng dụng; 0 = bỏ qua X-Forwarded-For. */
+    /** The number of trusted proxies in front of the application; 0 = ignore X-Forwarded-For. */
     public static final String TRUSTED_PROXY_HOPS_EXPRESSION = "${wander.web.trusted-proxy-hops:0}";
 
     private ConfigConstants() {

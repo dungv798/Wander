@@ -1,6 +1,6 @@
 package com.wander.catalog.domain.vocabulary;
 
-/** Snapshot chưa chứng minh cơ sở còn hoạt động hay dữ kiện đã được đối chiếu. */
+/** The snapshot has not proven that the establishment is still operating or that the fact has been cross-checked. */
 public enum PoiVerificationStatus {
     SNAPSHOT_UNVERIFIED
 }

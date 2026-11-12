@@ -14,7 +14,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Xử lý lệnh checklist chuẩn bị (Q12). Mỗi phương thức một giao dịch; quyền kiểm qua {@link TripAccess} TRƯỚC khi đụng dữ liệu. */
+/** Handles the preparation-checklist commands (Q12). One transaction per method; access is checked through {@link TripAccess} BEFORE touching data. */
 @Service
 @Transactional
 public class ChecklistCommandHandler {
@@ -23,14 +23,14 @@ public class ChecklistCommandHandler {
     private final TripAccess access;
     private final Clock clock;
 
-    /** Nhận cổng lưu, cổng quyền và đồng hồ. */
+    /** Takes the storage port, the access port and the clock. */
     public ChecklistCommandHandler(ChecklistRepository checklist, TripAccess access, Clock clock) {
         this.checklist = checklist;
         this.access = access;
         this.clock = clock;
     }
 
-    /** Organizer thêm hạng mục ({@code group} tùy chọn, {@code title} bắt buộc) ở cuối; trả mã hạng mục. */
+    /** The Organizer adds an item ({@code group} optional, {@code title} required) at the end; returns the item id. */
     public UUID add(UUID actor, UUID tripId, String group, String title) {
         access.requireOrganizer(tripId, actor);
         if (checklist.countOf(tripId) >= PlanningConstants.MAX_CHECKLIST_ITEMS) {
@@ -42,7 +42,7 @@ public class ChecklistCommandHandler {
         return item.id();
     }
 
-    /** Organizer sửa tên/nhóm (trường không nêu thì giữ nguyên). */
+    /** The Organizer edits the title/group (a field that is not given stays unchanged). */
     public void edit(UUID actor, UUID tripId, UUID itemId, String group, String title) {
         access.requireOrganizer(tripId, actor);
         ChecklistItem item = checklist.find(tripId, itemId).orElseThrow(WanderException::notFound);
@@ -50,13 +50,13 @@ public class ChecklistCommandHandler {
         checklist.save(item);
     }
 
-    /** Organizer xóa hẳn một hạng mục. */
+    /** The Organizer deletes an item for good. */
     public void remove(UUID actor, UUID tripId, UUID itemId) {
         access.requireOrganizer(tripId, actor);
         if (!checklist.delete(tripId, itemId)) throw WanderException.notFound();
     }
 
-    /** Mọi thành viên đặt/bỏ dấu hoàn thành CỦA CHÍNH MÌNH (người = người gọi, không bao giờ lấy từ thân yêu cầu). */
+    /** Every member sets/clears THEIR OWN completion mark (the person = the caller, never taken from the request body). */
     public void setDone(UUID actor, UUID tripId, UUID itemId, Boolean done) {
         access.requireMember(tripId, actor);
         ChecklistItem item = checklist.find(tripId, itemId).orElseThrow(WanderException::notFound);

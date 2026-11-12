@@ -4,8 +4,8 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Vai của một người trong chuyến (Q6, DR-021): hai vai, không có "chỉ xem". Mỗi chuyến đúng một Organizer (chủ chuyến); đổi mã phải
- * kèm migration cho cột {@code trip_members.role}.
+ * The role of a person in a trip (Q6, DR-021): two roles, no 'view only'. Each trip has exactly one Organizer (the trip owner); changing a code must
+ * come with a migration for the column {@code trip_members.role}.
  */
 public enum MemberRole implements CodedValue {
     ORGANIZER("organizer"),
@@ -22,7 +22,7 @@ public enum MemberRole implements CodedValue {
         return code;
     }
 
-    /** Vai theo mã đã lưu; mã lạ thì trống. */
+    /** The role by stored code; an unknown code is empty. */
     public static Optional<MemberRole> fromCode(String code) {
         return CodedValue.find(MemberRole.class, code);
     }

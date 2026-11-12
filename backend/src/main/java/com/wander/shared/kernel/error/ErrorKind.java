@@ -1,8 +1,8 @@
 package com.wander.shared.kernel.error;
 
 /**
- * Loại lỗi theo ngữ nghĩa nghiệp vụ. Tầng web (shared.web) ánh xạ sang mã HTTP;
- * domain và application không biết gì về HTTP.
+ * The kind of error by business meaning. The web layer (shared.web) maps it to an HTTP status;
+ * the domain and application layers know nothing about HTTP.
  */
 public enum ErrorKind {
     INVALID,

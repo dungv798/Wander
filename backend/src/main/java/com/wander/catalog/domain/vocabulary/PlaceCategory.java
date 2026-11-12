@@ -3,7 +3,7 @@ package com.wander.catalog.domain.vocabulary;
 import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
-/** Loại địa điểm. Mã ngắn ổn định (dùng trong dữ liệu và API), nhãn hiển thị tiếng Việt. Thêm giá trị mới an toàn. */
+/** The kind of place. A short stable code (used in data and the API), a Vietnamese display label. Adding a new value is safe. */
 public enum PlaceCategory implements CodedValue {
     CANH("canh", "Cảnh quan"),
     VAN("van", "Văn hóa"),
@@ -25,12 +25,12 @@ public enum PlaceCategory implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Loại theo mã ngắn trong dữ liệu; mã lạ trả rỗng. */
+    /** The kind by short code in the data; an unknown code returns empty. */
     public static Optional<PlaceCategory> fromCode(String code) {
         return CodedValue.find(PlaceCategory.class, code);
     }

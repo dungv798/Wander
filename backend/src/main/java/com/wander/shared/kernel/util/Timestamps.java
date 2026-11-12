@@ -7,7 +7,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-/** Thao tác thời gian dùng chung, không phụ thuộc framework. */
+/** Shared time operations, independent of any framework. */
 public final class Timestamps {
 
     private static final DateTimeFormatter ISO_MILLIS =
@@ -16,17 +16,17 @@ public final class Timestamps {
     private Timestamps() {
     }
 
-    /** Lưu thời điểm ở độ chính xác mili-giây (khớp kiểu timestamptz và định dạng API). */
+    /** Stores an instant at millisecond precision (matches the timestamptz type and the API format). */
     public static Instant truncate(Instant t) {
         return t.truncatedTo(ChronoUnit.MILLIS);
     }
 
-    /** Thời điểm hiện tại theo đồng hồ đã cho, cắt về mili-giây; mọi service dùng hàm này thay vì tự viết lại. */
+    /** The current instant by the given clock, truncated to milliseconds; every service uses this instead of rewriting it. */
     public static Instant now(Clock clock) {
         return truncate(clock.instant());
     }
 
-    /** Định dạng ISO-8601 UTC luôn có mili-giây, ví dụ 2026-10-24T01:02:03.000Z; null giữ nguyên null. */
+    /** ISO-8601 UTC format that always has milliseconds, for example 2026-10-24T01:02:03.000Z; null stays null. */
     public static String format(Instant t) {
         return t == null ? null : ISO_MILLIS.format(t);
     }

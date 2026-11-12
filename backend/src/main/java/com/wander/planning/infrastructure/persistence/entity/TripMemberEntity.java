@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code trip_members}: một người trong một chuyến (vai + tên hiển thị tự khai). */
+/** Table {@code trip_members}: one person in one trip (the role + a self-declared display name). */
 @Entity
 @Table(name = "trip_members")
 public class TripMemberEntity {

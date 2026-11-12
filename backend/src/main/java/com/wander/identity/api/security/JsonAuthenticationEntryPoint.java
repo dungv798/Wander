@@ -19,7 +19,7 @@ final class JsonAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private final ObjectMapper mapper;
 
-    /** Nhận công cụ JSON để ghi thân lỗi. */
+    /** Takes the JSON tool used to write the error body. */
     JsonAuthenticationEntryPoint(ObjectMapper mapper) {
         this.mapper = mapper;
     }

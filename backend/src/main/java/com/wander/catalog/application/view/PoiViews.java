@@ -1,6 +1,6 @@
 package com.wander.catalog.application.view;
 
-/** Hợp đồng POI rút gọn; provenance toàn bộ được giữ trong tài nguyên, không gửi ở danh sách. */
+/** The reduced POI contract; the full provenance is kept in the resource and is not sent in the list. */
 public final class PoiViews {
     private PoiViews() {
     }

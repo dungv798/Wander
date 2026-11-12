@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/** API liên kết mời không gắn với chuyến: xem trước (công khai, có hạn mức) và vào chuyến (cần phiên, có hạn mức theo phiên). */
+/** Invite-link API not tied to a trip: preview (public, rate limited) and join a trip (needs a session, rate limited per session). */
 @RestController
 @RequestMapping(PlanningApiConstants.INVITES_BASE_PATH)
 public class InviteController {
@@ -30,7 +30,7 @@ public class InviteController {
     private final RateLimits limits;
     private final ClientAddress clientAddress;
 
-    /** Nhận bộ xử lý lệnh, phía đọc, hạn mức và bộ lấy địa chỉ người gọi. */
+    /** Takes the command handler, the read side, the rate limits and the resolver of the caller's address. */
     public InviteController(MembershipCommandHandler commands, MembershipQueries queries, RateLimits limits, ClientAddress clientAddress) {
         this.commands = commands;
         this.queries = queries;
@@ -38,7 +38,7 @@ public class InviteController {
         this.clientAddress = clientAddress;
     }
 
-    /** Xem trước liên kết: chỉ tên chuyến và số thành viên; mọi liên kết không dùng được trả cùng một lỗi. */
+    /** Preview a link: only the trip name and the member count; every link that cannot be used returns the same error. */
     @SecurityRequirements
     @PostMapping(PlanningApiConstants.INVITE_PREVIEW_PATH)
     public PlanningResponses.InvitePreviewResponse preview(HttpServletRequest request, @RequestBody InvitePreviewRequest body) {
@@ -46,7 +46,7 @@ public class InviteController {
         return new PlanningResponses.InvitePreviewResponse(queries.preview(body.code()));
     }
 
-    /** Vào chuyến bằng liên kết với tên hiển thị; trả mã chuyến và thành viên (không lộ mã danh tính). */
+    /** Join a trip with a link and a display name; returns the trip id and the member (without exposing the identity id). */
     @PostMapping(PlanningApiConstants.INVITE_JOIN_PATH)
     @ResponseStatus(HttpStatus.CREATED)
     public PlanningResponses.JoinedResponse join(AuthenticatedPrincipal principal, @RequestBody JoinRequest body) {

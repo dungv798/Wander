@@ -5,16 +5,16 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Quy tắc đặt tên chuyến không trùng (DR-006): khi tên đã có chuyến khác của cùng chủ dùng thì thêm hậu tố " - 2", " - 3"…
- * với số nhỏ nhất chưa dùng. Phần đầu của tên bị cắt khi cần để cả tên vẫn không quá {@value PlanningConstants#MAX_TRIP_NAME}
- * ký tự. Hết hậu tố số thì dùng mã ngắn ngẫu nhiên.
+ * The rule for giving a trip a name that does not clash (DR-006): when another trip of the same owner already uses the name, a suffix ' - 2', ' - 3'... is added
+ * with the smallest unused number. The start of the name is cut when needed so the whole name stays within {@value PlanningConstants#MAX_TRIP_NAME}
+ * characters. When number suffixes run out a random short code is used.
  */
 public final class TripNaming {
 
     private TripNaming() {
     }
 
-    /** Tên không trùng với bất kỳ tên nào trong {@code takenNames}, bắt đầu từ {@code base}. */
+    /** A name that clashes with none of {@code takenNames}, starting from {@code base}. */
     public static String uniqueName(Set<String> takenNames, String base) {
         if (!takenNames.contains(base)) return base;
         for (int n = PlanningConstants.FIRST_NAME_SUFFIX; n < PlanningConstants.MAX_NAME_SUFFIX; n++) {
@@ -25,7 +25,7 @@ public final class TripNaming {
         return withSuffix(base, PlanningConstants.NAME_SUFFIX_SEPARATOR + shortCode);
     }
 
-    /** Ghép hậu tố vào cuối tên, cắt phần đầu của tên cho vừa giới hạn độ dài. */
+    /** Appends the suffix to the end of the name, cutting the start of the name to fit the length limit. */
     private static String withSuffix(String base, String suffix) {
         int keep = Math.min(base.length(), PlanningConstants.MAX_TRIP_NAME - suffix.length());
         return base.substring(0, keep) + suffix;

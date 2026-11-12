@@ -2,14 +2,14 @@ package com.wander.catalog.domain.model;
 
 import com.wander.catalog.domain.constant.CatalogConstants;
 /**
- * Ước tính quãng đường và thời gian đi xe máy giữa hai điểm. Đây là phép tính thô, KHÔNG phải chỉ đường:
- * đường chim bay (haversine) nhân {@value CatalogConstants#ROAD_FACTOR} cho độ quanh co của đường núi, chia cho tốc độ
- * giả định {@value CatalogConstants#SPEED_KMH} km/h. Hai hệ số là giả định chưa kiểm chứng (decisions.md);
- * giao diện luôn ghi "ước tính".
+ * An estimate of the distance and the motorbike travel time between two points. This is a rough calculation, NOT directions:
+ * the straight-line distance (haversine) times {@value CatalogConstants#ROAD_FACTOR} for the winding of mountain roads, divided by the
+ * assumed speed {@value CatalogConstants#SPEED_KMH} km/h. Both factors are unverified assumptions (decisions.md);
+ * the UI always says 'estimate'.
  */
 public record TravelEstimate(int roadKm, int minutes) {
 
-    /** Khoảng cách đường chim bay giữa hai tọa độ, tính bằng km (công thức haversine). */
+    /** The straight-line distance between two coordinates, in km (the haversine formula). */
     public static double airKm(GeoPoint from, GeoPoint to) {
         double deltaLat = Math.toRadians(to.lat() - from.lat());
         double deltaLon = Math.toRadians(to.lon() - from.lon());
@@ -20,7 +20,7 @@ public record TravelEstimate(int roadKm, int minutes) {
         return CatalogConstants.EARTH_RADIUS_KM * angle;
     }
 
-    /** Ước tính quãng đường (làm tròn, tối thiểu 1 km) và số phút đi xe máy giữa hai tọa độ. */
+    /** Estimates the distance (rounded, at least 1 km) and the number of motorbike minutes between two coordinates. */
     public static TravelEstimate between(GeoPoint from, GeoPoint to) {
         double roadKm = airKm(from, to) * CatalogConstants.ROAD_FACTOR;
         int minutes = (int) Math.round(roadKm / CatalogConstants.SPEED_KMH * CatalogConstants.MINUTES_PER_HOUR);

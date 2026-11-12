@@ -17,13 +17,13 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Mục trong lịch (D13, D16; R6). Entity bên trong aggregate {@link Trip}: chỉ Trip được đổi ngày/vị trí
- * để giữ bất biến thứ tự trong ngày. Giờ và thời lượng tùy chọn; thứ tự là thủ công.
+ * An item in the schedule (D13, D16; R6). An entity inside the {@link Trip} aggregate: only Trip may change the day/position
+ * so the in-day order invariant holds. Time and duration are optional; the order is manual.
  */
 public final class Item {
 
     private final UUID id;
-    /** Ngày của mục; null = "Chưa có ngày" (DR-011 A1). Mục chưa có ngày vẫn có thứ tự riêng trong vùng đó. */
+    /** The item's day; null = 'no date yet' (DR-011 A1). An undated item still has its own order inside that area. */
     private LocalDate day;
     private int position;
     private ItemType type;
@@ -32,19 +32,19 @@ public final class Item {
     private Integer durationMin;
     private String note;
     private ItemCost cost;
-    /** Trạng thái đặt chỗ (A-14); null chỉ khi loại mục không có đặt chỗ (Nghỉ, Việc cần làm). */
+    /** Booking status (A-14); null only when the item type has no booking (Rest, To-do). */
     private BookingStatus booking;
-    /** Mã địa điểm trong kho biên tập mà mục liên kết tới; null = mục tự do. */
+    /** Id of the place in the editorial catalog that the item links to; null = a free-form item. */
     private String placeId;
     private Instant deletedAt;
     private final Instant createdAt;
     private Instant updatedAt;
-    /** Hoàn thành/Đã ghé theo cặp (mục × danh tính), dùng chung cho việc cần làm và địa điểm (DR-029). */
+    /** Completion/Visited as (item x identity) pairs, shared by to-dos and places (DR-029). */
     private final Map<UUID, Instant> completions;
-    /** Mã THÀNH VIÊN đã thêm mục (null = Organizer/dữ liệu cũ); dùng cho quyền sửa/xóa mục của mình (H3). */
+    /** The MEMBER id who added the item (null = Organizer/old data); used for the permission to edit/delete one's own item (H3). */
     private final UUID addedByMemberId;
 
-    /** Dựng lại từ dữ liệu đã lưu (không chuẩn hóa lại: cơ sở dữ liệu có ràng buộc CHECK tương ứng). */
+    /** Rebuilt from stored data (not normalized again: the database has the matching CHECK constraints). */
     public Item(UUID id, LocalDate day, int position, ItemType type, String title, LocalTime timeOfDay,
                 Integer durationMin, String note, ItemCost cost, BookingStatus booking, String placeId, Instant deletedAt,
                 Instant createdAt, Instant updatedAt, Map<UUID, Instant> completions, UUID addedByMemberId) {
@@ -66,12 +66,12 @@ public final class Item {
         this.addedByMemberId = addedByMemberId;
     }
 
-    /** Mã thành viên đã thêm mục; null nếu do Organizer thêm hoặc là dữ liệu cũ. */
+    /** The id of the member who added the item; null if the Organizer added it or it is old data. */
     public UUID addedByMemberId() {
         return addedByMemberId;
     }
 
-    /** Tạo mục mới ở vị trí 0 của ngày {@code day} (null = chưa có ngày) từ các trường đã kiểm tra; Trip sẽ đánh số lại vị trí. */
+    /** Creates a new item at position 0 of day {@code day} (null = no date yet) from validated fields; Trip renumbers the positions. */
     static Item create(LocalDate day, ItemDetails details, UUID addedByMemberId, Instant now) {
         return new Item(UUID.randomUUID(), day, 0, details.type(), details.title(), details.timeOfDay(),
                 checkDuration(details.durationMin()), details.note(), details.cost(),
@@ -79,8 +79,8 @@ public final class Item {
     }
 
     /**
-     * Quy tắc trạng thái đặt chỗ (A-14): loại có đặt chỗ luôn có trạng thái (không nêu ⇒ "Chờ xác nhận");
-     * Nghỉ và Việc cần làm không có, và không nhận giá trị.
+     * Booking-status rule (A-14): a type that has booking always has a status (not given => 'Awaiting confirmation');
+     * Rest and To-do have none, and accept no value.
      */
     static BookingStatus bookingFor(ItemType type, BookingStatus requested) {
         if (!type.supportsBooking()) {
@@ -93,7 +93,7 @@ public final class Item {
         return requested == null ? BookingStatus.PENDING : requested;
     }
 
-    /** Thời lượng (nếu có) phải trong [0, tối đa]; sai thì báo OUT_OF_RANGE. */
+    /** The duration (if any) must be in [0, maximum]; otherwise OUT_OF_RANGE is reported. */
     static Integer checkDuration(Integer minutes) {
         if (minutes != null && (minutes < 0 || minutes > PlanningConstants.MAX_DURATION_MIN)) {
             throw WanderException.invalidValue(ErrorCodes.OUT_OF_RANGE, PlanningFields.DURATION_MIN);
@@ -101,7 +101,7 @@ public final class Item {
         return minutes;
     }
 
-    /** Áp dụng các trường mới của mục (không đổi ngày hay vị trí). */
+    /** Applies the item's new fields (no change of day or position). */
     void apply(ItemDetails details, Instant now) {
         this.type = details.type();
         this.title = details.title();
@@ -114,101 +114,101 @@ public final class Item {
         this.updatedAt = now;
     }
 
-    /** Ghi nhận mục vừa được sắp xếp lại (đổi ngày hoặc vị trí) tại thời điểm {@code now}. */
+    /** Records that the item has just been rearranged (day or position changed) at time {@code now}. */
     void touch(Instant now) {
         this.updatedAt = now;
     }
 
-    /** Chuyển mục sang ngày khác, hoặc về "Chưa có ngày" nếu {@code newDay} là null (vị trí do Trip đánh số lại). */
+    /** Moves the item to another day, or back to 'no date yet' if {@code newDay} is null (Trip renumbers the position). */
     void moveTo(LocalDate newDay) {
         this.day = newDay;
     }
 
-    /** Đặt vị trí trong ngày. */
+    /** Sets the position within the day. */
     void setPosition(int position) {
         this.position = position;
     }
 
-    /** Đánh dấu đã xóa mềm tại thời điểm {@code now}; giữ nguyên ngày và vị trí. */
+    /** Marks it soft-deleted at time {@code now}; the day and position are kept. */
     void markDeleted(Instant now) {
         this.deletedAt = now;
         this.updatedAt = now;
     }
 
-    /** Bỏ dấu xóa mềm (khôi phục). */
+    /** Clears the soft-delete mark (restore). */
     void markRestored(Instant now) {
         this.deletedAt = null;
         this.updatedAt = now;
     }
 
-    /** Ghi hoặc xóa trạng thái hoàn thành của một người. */
+    /** Sets or clears one person's completion state. */
     void setDone(UUID personId, boolean done, Instant now) {
         if (done) completions.put(personId, now);
         else completions.remove(personId);
     }
 
-    /** Các trường người dùng sửa được của mục. */
+    /** The fields a user can edit on an item. */
     public ItemDetails details() {
         return new ItemDetails(type, title, timeOfDay, durationMin, note, cost, booking, placeId);
     }
 
-    /** Mục đã bị xóa mềm. */
+    /** The item has been soft-deleted. */
     public boolean isDeleted() {
         return deletedAt != null;
     }
 
-    /** Người này đã hoàn thành việc cần làm hoặc ghé mục địa điểm chưa. */
+    /** Whether this person has finished the to-do or visited the place item. */
     public boolean isDoneBy(UUID personId) {
         return completions.containsKey(personId);
     }
 
-    /** Phần chi phí tính vào tổng (R2): mục đã xóa không tính. */
+    /** The cost counted into the total (R2): a deleted item is not counted. */
     public long countedK() {
         return isDeleted() ? 0 : cost.countedK();
     }
 
-    /** Mã mục. */
+    /** Item id. */
     public UUID id() { return id; }
 
-    /** Ngày của mục, hoặc null nếu chưa có ngày. */
+    /** The item's day, or null if it has no date. */
     public LocalDate day() { return day; }
 
-    /** Mã địa điểm trong kho mà mục liên kết tới, hoặc null nếu là mục tự do. */
+    /** Id of the catalog place the item links to, or null if it is a free-form item. */
     public String placeId() { return placeId; }
 
-    /** Vị trí trong ngày, bắt đầu từ 0. */
+    /** Position within the day, starting from 0. */
     public int position() { return position; }
 
-    /** Loại mục. */
+    /** Item type. */
     public ItemType type() { return type; }
 
-    /** Tiêu đề. */
+    /** Title. */
     public String title() { return title; }
 
-    /** Giờ trong ngày, hoặc null. */
+    /** Time of day, or null. */
     public LocalTime timeOfDay() { return timeOfDay; }
 
-    /** Thời lượng, phút, hoặc null. */
+    /** Duration, in minutes, or null. */
     public Integer durationMin() { return durationMin; }
 
-    /** Ghi chú, hoặc null. */
+    /** Note, or null. */
     public String note() { return note; }
 
-    /** Chi phí. */
+    /** Cost. */
     public ItemCost cost() { return cost; }
 
-    /** Trạng thái đặt chỗ, hoặc null nếu loại mục không có. */
+    /** Booking status, or null if the item type has none. */
     public BookingStatus booking() { return booking; }
 
-    /** Thời điểm xóa mềm, hoặc null nếu chưa xóa. */
+    /** Time of soft deletion, or null if not deleted. */
     public Instant deletedAt() { return deletedAt; }
 
-    /** Thời điểm tạo. */
+    /** Creation time. */
     public Instant createdAt() { return createdAt; }
 
-    /** Thời điểm sửa gần nhất. */
+    /** Time of the last edit. */
     public Instant updatedAt() { return updatedAt; }
 
-    /** Hoàn thành theo người (không sửa được). */
+    /** Completion by person (not editable). */
     public Map<UUID, Instant> completions() { return Collections.unmodifiableMap(completions); }
 }

@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code device_links} (ánh xạ JPA; mô hình domain ở identity.domain.IdentityModel). */
+/** Table {@code device_links} (JPA mapping; the domain model is in identity.domain.IdentityModel). */
 @Entity
 @Table(name = "device_links")
 public class DeviceLinkEntity {

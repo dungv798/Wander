@@ -23,16 +23,16 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Aggregate root "Chuyến đi". Mọi thay đổi mục đi qua đây để giữ các bất biến:
+ * The 'Trip' aggregate root. Every change to items goes through here to keep the invariants:
  * <ul>
- *   <li>Mục còn hiện trong một ngày có thứ tự thủ công theo vị trí lưu, tăng dần (D16). Vị trí được đánh số lại liền mạch
- *       0..n-1 khi thêm, sắp xếp lại hoặc chèn vào ngày; xóa mềm và chuyển mục ra khỏi ngày KHÔNG đánh số lại nên có thể
- *       có khoảng trống (giữ chỗ cho mục trong thùng rác). API luôn trả thứ hạng liền mạch, xem {@code PlanningQueries}.</li>
- *   <li>Mục hoặc thuộc một ngày nằm trong khoảng ngày của chuyến, hoặc "Chưa có ngày" (ngày null, vẫn có thứ tự riêng).
- *       R12 mới (DR-011 A1): đổi khoảng ngày luôn được; mục (kể cả đã xóa mềm) nằm ngoài khoảng mới tự về "Chưa có ngày".</li>
- *   <li>Xóa mềm giữ nguyên ngày và vị trí cũ để khôi phục về đúng chỗ (D19, R7).</li>
+ *   <li>The visible items in a day have a manual order by stored position, increasing (D16). Positions are renumbered gaplessly
+ *       0..n-1 when adding, reordering or inserting into a day; soft-deleting and moving an item out of a day do NOT renumber, so there can be
+ *       gaps (holding the place of items in the trash). The API always returns a gapless rank, see {@code PlanningQueries}.</li>
+ *   <li>An item either belongs to a day inside the trip's date range, or to 'no date yet' (a null day, still with its own order).
+ *       New R12 (DR-011 A1): the date range can always be changed; items (even soft-deleted ones) outside the new range go back to 'no date yet'.</li>
+ *   <li>Soft delete keeps the old day and position so it can be restored to the exact place (D19, R7).</li>
  * </ul>
- * Không phụ thuộc Spring/JPA: tầng infrastructure ánh xạ sang bảng.
+ * Does not depend on Spring/JPA: the infrastructure layer maps it to tables.
  */
 public final class Trip {
 
@@ -45,20 +45,20 @@ public final class Trip {
     private String name;
     private String destination;
     private DateRange range;
-    /** Tùy chọn chuyến đi (Q11, DR-002): ngân sách, kiểu chuyến, nhịp. */
+    /** Trip options (Q11, DR-002): budget, trip kind, pace. */
     private TripOptions options;
-    /** Bìa đã chọn; null là tự động theo điểm đến. */
+    /** The chosen cover; null is automatic by destination. */
     private Cover cover;
     private final Instant createdAt;
     private Instant updatedAt;
-    /** Thời điểm xóa mềm chuyến (PO 28/10/2026); null = chuyến còn hiện. Chuyến đã xóa vẫn giữ nguyên mục để khôi phục. */
+    /** The time the trip was soft-deleted (PO 28/10/2026); null = the trip is visible. A deleted trip keeps its items so it can be restored. */
     private Instant deletedAt;
     private final long version;
     private final List<Item> items;
-    /** Vòng người: thành viên (đúng một Organizer, tối đa MAX_MEMBERS, tên không trùng) và liên kết mời (tối đa một chưa thu hồi). */
+    /** The circle of people: members (exactly one Organizer, at most MAX_MEMBERS, no duplicate names) and invite links (at most one not revoked). */
     private final TripCircle circle;
 
-    /** Dựng lại chuyến từ dữ liệu đã lưu (không chuẩn hóa lại). */
+    /** Rebuilds a trip from stored data (not normalized again). */
     public Trip(UUID id, UUID ownerId, String name, String destination, DateRange range, TripOptions options,
                 Instant createdAt, Instant updatedAt, Instant deletedAt, long version, List<Item> items,
                 List<TripMember> members, List<TripInvite> invites, List<DeletionRequest> requests, Cover cover) {
@@ -77,12 +77,12 @@ public final class Trip {
         this.circle = new TripCircle(members, invites, requests);
     }
 
-    /** A-1: tạo chuyến với tên, điểm đến và khoảng ngày hợp lệ. */
+    /** A-1: creates a trip with a valid name, destination and date range. */
     public static Trip plan(UUID ownerId, String name, String destination, DateRange range, Instant now) {
         return plan(ownerId, name, destination, range, TripOptions.NONE, now);
     }
 
-    /** A-1 kèm tùy chọn chuyến đi (Q11). */
+    /** A-1 with the trip options (Q11). */
     public static Trip plan(UUID ownerId, String name, String destination, DateRange range, TripOptions options, Instant now) {
         UUID tripOwner = ownerId;
         TripMember organizer = new TripMember(UUID.randomUUID(), tripOwner, MemberRole.ORGANIZER, PlanningConstants.ORGANIZER_DISPLAY_NAME, now);
@@ -92,81 +92,81 @@ public final class Trip {
                 range, options, now, now, null, 0, List.of(), List.of(organizer), List.of(), List.of(), null);
     }
 
-    /** Chuyến đã bị xóa mềm (nằm trong "Chuyến đã xóa gần đây")? */
+    /** Has the trip been soft-deleted (is it in 'Recently deleted trips')? */
     public boolean isDeleted() {
         return deletedAt != null;
     }
 
-    /** Thời điểm xóa mềm; null nếu chuyến còn hiện. */
+    /** The time of soft deletion; null if the trip is visible. */
     public Instant deletedAt() {
         return deletedAt;
     }
 
-    /** Xóa mềm cả chuyến (D19): chuyến rời danh sách, mục giữ nguyên để khôi phục. Xóa hai lần là xung đột. */
+    /** Soft-deletes the whole trip (D19): the trip leaves the list, the items stay so it can be restored. Deleting twice is a conflict. */
     public void moveToTrash(Instant now) {
         if (isDeleted()) throw WanderException.conflict(PlanningErrorCodes.ALREADY_DELETED, PlanningMessages.TRIP_DELETED);
         this.deletedAt = now;
         this.updatedAt = now;
     }
 
-    /** Khôi phục chuyến từ "Chuyến đã xóa gần đây" về đúng như cũ; chuyến chưa xóa thì xung đột. */
+    /** Restores a trip from 'Recently deleted trips' exactly as it was; a trip that is not deleted is a conflict. */
     public void recoverFromTrash(Instant now) {
         if (!isDeleted()) throw WanderException.conflict(PlanningErrorCodes.NOT_DELETED, PlanningMessages.TRIP_NOT_DELETED);
         this.deletedAt = null;
         this.updatedAt = now;
     }
 
-    // ---- thành viên và liên kết mời (Lát 1b, DR-021): quy tắc ở {@link TripCircle} ----
+    // ---- members and invite links (Slice 1b, DR-021): the rules are in {@link TripCircle} ----
 
-    /** Vòng người của chuyến: thành viên và liên kết mời cùng các quy tắc (tạo/thu hồi liên kết, vào, gỡ, rời, đổi tên). */
+    /** The circle of people of the trip: members and invite links with their rules (create/revoke a link, join, remove, leave, rename). */
     public TripCircle circle() {
         return circle;
     }
 
-    /** Vai của một danh tính trong chuyến; người ngoài thì trống. */
+    /** The role of an identity in the trip; empty for an outsider. */
     public Optional<MemberRole> roleOf(UUID identityId) {
         return circle.roleOf(identityId);
     }
 
-    /** Thành viên của danh tính này; người ngoài ⇒ 404 (không lộ chuyến tồn tại, INV-6). */
+    /** The member of this identity; an outsider => 404 (does not reveal that the trip exists, INV-6). */
     public TripMember requireMember(UUID identityId) {
         return circle.requireMember(identityId);
     }
 
-    /** Chỉ Organizer: người ngoài ⇒ 404, thành viên thường ⇒ 403 NOT_ORGANIZER. */
+    /** Organizer only: an outsider => 404, a regular member => 403 NOT_ORGANIZER. */
     public void requireOrganizer(UUID identityId) {
         circle.requireOrganizer(identityId);
     }
 
-    /** Quyền sửa/xóa/khôi phục một mục (H3): Organizer mọi mục; thành viên chỉ mục do mình thêm (403 NOT_YOUR_ITEM); người ngoài 404. */
+    /** Permission to edit/delete/restore an item (H3): the Organizer any item; a member only items they added (403 NOT_YOUR_ITEM); an outsider 404. */
     public void requireMayChange(UUID identityId, Item item) {
         circle.requireMayChange(identityId, item.addedByMemberId());
     }
 
-    /** Vào chuyến bằng liên kết; chuyến đã xóa mềm không nhận ai (INVALID_INVITE). */
+    /** Joins the trip with a link; a soft-deleted trip accepts nobody (INVALID_INVITE). */
     public TripMember joinWithInvite(UUID identityId, String rawDisplayName, String codeHash, Instant now) {
         TripMember member = circle.joinWithInvite(identityId, rawDisplayName, codeHash, now, isDeleted());
         this.updatedAt = now;
         return member;
     }
-    /** Bìa đã chọn; null để dùng ảnh mặc định của điểm đến. */
+    /** The chosen cover; null to use the destination's default photo. */
     public Cover cover() { return cover; }
 
-    /** Đổi bìa hoặc về tự động; quyền Organizer được kiểm trước trong use case. */
+    /** Changes the cover or goes back to automatic; the Organizer permission is checked first in the use case. */
     public void changeCover(Cover newCover, Instant now) {
         this.cover = newCover;
         this.updatedAt = now;
     }
 
-    /** Q11: đổi tùy chọn chuyến đi (ngân sách, kiểu, nhịp). Không có lịch sử chỉnh sửa (D19). */
+    /** Q11: changes the trip options (budget, kind, pace). There is no edit history (D19). */
     public void changeOptions(TripOptions newOptions, Instant now) {
         this.options = newOptions;
         this.updatedAt = now;
     }
 
     /**
-     * A-1 sửa chuyến. R12 mới (DR-011 A1): đổi khoảng ngày luôn được; mục (kể cả đã xóa mềm) nằm ngoài khoảng mới
-     * về "Chưa có ngày", mục còn hiện nối vào cuối vùng đó theo ngày cũ rồi vị trí cũ.
+     * A-1 edit a trip. New R12 (DR-011 A1): the date range can always be changed; items (even soft-deleted ones) outside the new range
+     * go back to 'no date yet', visible items are appended to the end of that area by old day then old position.
      */
     public void changeDetails(String newName, String newDestination, DateRange newRange, Instant now) {
         String checkedName = ItemText.required(newName, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME);
@@ -180,19 +180,19 @@ public final class Trip {
         this.updatedAt = now;
     }
 
-    /** Ngày phải nằm trong khoảng ngày của chuyến; sai thì báo DAY_OUT_OF_RANGE ở trường {@code day}. */
+    /** The day must be inside the trip's date range; otherwise DAY_OUT_OF_RANGE is reported on the {@code day} field. */
     public void requireDayInRange(LocalDate day) {
         if (!range.contains(day)) {
             throw WanderException.invalid(PlanningErrorCodes.DAY_OUT_OF_RANGE, PlanningMessages.DAY_OUT_OF_RANGE, PlanningFields.DAY);
         }
     }
 
-    /** A-3: thêm mục vào ngày đã chọn (null = "Chưa có ngày"), mặc định cuối ngày hoặc tại vị trí yêu cầu. */
+    /** A-3: adds an item to the chosen day (null = 'no date yet'), by default at the end of the day or at the requested position. */
     public Item addItem(LocalDate day, ItemDetails details, Integer requestedPosition, Instant now) {
         return addItem(day, details, requestedPosition, null, now);
     }
 
-    /** Như {@link #addItem(LocalDate, ItemDetails, Integer, Instant)} và ghi thành viên đã thêm (null = Organizer). */
+    /** Like {@link #addItem(LocalDate, ItemDetails, Integer, Instant)} and records the member who added it (null = Organizer). */
     public Item addItem(LocalDate day, ItemDetails details, Integer requestedPosition, UUID addedByMemberId, Instant now) {
         if (day != null) requireDayInRange(day);
         Item item = Item.create(day, details, addedByMemberId, now);
@@ -202,7 +202,7 @@ public final class Trip {
         return item;
     }
 
-    /** Mục tồn tại và chưa bị xóa (để sửa). */
+    /** The item exists and has not been deleted (so it can be edited). */
     public Item editableItem(UUID itemId) {
         Item item = item(itemId);
         if (item.isDeleted()) {
@@ -212,8 +212,8 @@ public final class Trip {
     }
 
     /**
-     * A-7: sửa mục. {@code newDay} phân biệt ba trường hợp: không nêu ⇒ giữ ngày; nêu null ⇒ về "Chưa có ngày"; nêu ngày ⇒
-     * chuyển sang ngày đó. Khi đổi ngày thì bỏ khỏi ngày cũ và chèn vào ngày mới (mặc định cuối ngày).
+     * A-7: edits an item. {@code newDay} distinguishes three cases: not given => keep the day; given null => back to 'no date yet'; given a date =>
+     * move to that day. When the day changes it is removed from the old day and inserted into the new day (by default at the end).
      */
     public Item editItem(UUID itemId, ItemDetails details, Patch<LocalDate> newDay, Integer requestedPosition, Instant now) {
         Item item = editableItem(itemId);
@@ -225,7 +225,7 @@ public final class Trip {
         return item;
     }
 
-    /** A-5: thứ tự mới phải là hoán vị đúng các mục đang hiện trong ngày. Đổi giờ không tự sắp xếp lại. */
+    /** A-5: the new order must be exactly a permutation of the items visible in the day. Changing a time does not reorder by itself. */
     public List<Item> reorderDay(LocalDate day, List<UUID> orderedIds) {
         requireDayInRange(day);
         List<Item> current = liveItems(day);
@@ -242,9 +242,9 @@ public final class Trip {
     }
 
     /**
-     * Gán ngày hàng loạt, nguyên tử: kiểm tra TOÀN BỘ danh sách trước (mục có thật và chưa xóa, không trùng, ngày nằm trong
-     * chuyến), rồi mới áp dụng lần lượt theo thứ tự danh sách. Phần tử cùng ngày hiện tại mà không nêu vị trí thì giữ nguyên;
-     * có vị trí thì xếp lại tại đó. Gửi lại trạng thái cũ (theo vị trí tăng dần) là cách Hoàn tác.
+     * Bulk date assignment, atomic: the WHOLE list is validated first (the item exists and is not deleted, no duplicates, the day is within the
+     * trip), and only then applied in list order. An element for the item's current day with no position stays as it is;
+     * with a position it is rearranged there. Sending back the old state (by increasing position) is how Undo works.
      */
     public void assignDays(List<DayAssignment> assignments, Instant now) {
         requireValidAssignments(assignments);
@@ -259,8 +259,8 @@ public final class Trip {
     }
 
     /**
-     * D19/R7: xóa mềm. Mục rời khỏi lịch và tổng, giữ ngày và vị trí cũ. Các mục còn hiện KHÔNG bị đánh số lại: chỗ của mục
-     * đã xóa được giữ (vị trí có khoảng trống) để khôi phục theo bất kỳ thứ tự nào vẫn về đúng chỗ cũ.
+     * D19/R7: soft delete. The item leaves the schedule and the totals, keeping its old day and position. The visible items are NOT renumbered: the place of the
+     * deleted item is kept (the position has a gap) so that restoring in any order still goes back to the exact old place.
      */
     public Item softDelete(UUID itemId, Instant now) {
         Item item = item(itemId);
@@ -274,9 +274,9 @@ public final class Trip {
     }
 
     /**
-     * Hoàn tác và "khôi phục từ Đã xóa gần đây" là cùng một thao tác: về đúng ngày và chỗ cũ. Mục giữ nguyên vị trí đã lưu
-     * (không đánh số lại các mục khác, để mục còn trong thùng rác vẫn so sánh được). Chỉ khi vị trí đó đã bị mục khác chiếm
-     * (sau một lần sắp xếp lại) mới chèn nó đứng trước các mục từ vị trí đó trở đi và đánh số lại liền mạch.
+     * Undo and 'restore from Recently deleted' are the same operation: back to the exact old day and place. The item keeps its stored position
+     * (other items are not renumbered, so items still in the trash stay comparable). Only when that position has been taken by another item
+     * (after a reorder) is it inserted before the items from that position on and the positions renumbered gaplessly.
      */
     public Item restore(UUID itemId, Instant now) {
         Item item = item(itemId);
@@ -291,7 +291,7 @@ public final class Trip {
         return item;
     }
 
-    /** Xóa vĩnh viễn chỉ áp dụng cho mục đã nằm trong "Đã xóa gần đây" (mặc định cho Q17c). */
+    /** Permanent deletion applies only to an item that is already in 'Recently deleted' (the default for Q17c). */
     public void purge(UUID itemId) {
         Item item = item(itemId);
         if (!item.isDeleted()) {
@@ -301,7 +301,7 @@ public final class Trip {
         circle.forgetItem(itemId);
     }
 
-    /** A-10/DR-029: tích việc cần làm hoặc Đã ghé mục có địa điểm; lưu riêng từng người, mục đã xóa không được tích. */
+    /** A-10/DR-029: ticks a to-do or 'Visited' on an item that has a place; stored per person, a deleted item cannot be ticked. */
     public Item setTaskDone(UUID itemId, UUID personId, Boolean done, Instant now) {
         Item item = item(itemId);
         if (item.isDeleted()) throw WanderException.conflict(PlanningErrorCodes.ITEM_DELETED, PlanningMessages.ITEM_DELETED);
@@ -313,17 +313,17 @@ public final class Trip {
         return item;
     }
 
-    /** Mục theo mã (kể cả đã xóa mềm); không có thì 404. */
+    /** An item by id (including soft-deleted); 404 if it does not exist. */
     public Item item(UUID itemId) {
         return items.stream().filter(item -> item.id().equals(itemId)).findFirst().orElseThrow(WanderException::notFound);
     }
 
-    /** Mục còn hiện trong ngày (null = vùng "Chưa có ngày"), theo thứ tự thủ công. */
+    /** The visible items in a day (null = the 'no date yet' area), in manual order. */
     public List<Item> liveItems(LocalDate day) {
         return items.stream().filter(item -> !item.isDeleted() && Objects.equals(item.day(), day)).sorted(DAY_ORDER).toList();
     }
 
-    /** Mỗi phần tử phải trỏ tới mục có thật và chưa xóa, không trùng mục, và ngày (nếu có) nằm trong chuyến. */
+    /** Each element must point to an item that exists and is not deleted, no duplicate items, and the day (if any) is within the trip. */
     private void requireValidAssignments(List<DayAssignment> assignments) {
         Set<UUID> seen = new HashSet<>();
         for (DayAssignment assignment : assignments) {
@@ -337,8 +337,8 @@ public final class Trip {
     }
 
     /**
-     * Chuyển mục sang ngày {@code day} (null = "Chưa có ngày"): chèn vào vùng mới (mặc định cuối) và đánh số lại vùng mới.
-     * Vùng cũ KHÔNG đánh số lại (để lại khoảng trống) cho khỏi làm mất chỗ của mục đang nằm trong "Đã xóa gần đây".
+     * Moves the item to day {@code day} (null = 'no date yet'): inserts it into the new area (by default at the end) and renumbers the new area.
+     * The old area is NOT renumbered (the gap is left) so as not to lose the place of an item that is in 'Recently deleted'.
      */
     private void moveToDay(Item item, LocalDate day, Integer requestedPosition) {
         List<Item> target = liveItems(day);
@@ -347,8 +347,8 @@ public final class Trip {
     }
 
     /**
-     * R12 mới: mọi mục (kể cả đã xóa mềm) có ngày nằm ngoài khoảng hiện tại về "Chưa có ngày". Mục còn hiện nối vào cuối vùng
-     * đó theo ngày cũ rồi vị trí cũ; mục đã xóa giữ vị trí cũ để khôi phục về đúng chỗ.
+     * New R12: every item (even soft-deleted ones) with a day outside the current range goes back to 'no date yet'. Visible items are appended to the end of
+     * that area by old day then old position; deleted items keep their old position so they can be restored to the exact place.
      */
     private void detachItemsOutsideRange() {
         Set<LocalDate> outsideDays = new HashSet<>(range.outside(items.stream().map(Item::day).filter(Objects::nonNull).toList()));
@@ -363,7 +363,7 @@ public final class Trip {
         renumber(unscheduledLive);
     }
 
-    /** Danh sách mới sau khi đặt {@code item} tại {@code index} (kẹp vào [0, kích thước]), bỏ bản cũ của mục nếu có. */
+    /** The new list after placing {@code item} at {@code index} (clamped to [0, size]), dropping the item's old copy if present. */
     private static List<Item> insertAt(List<Item> live, Item item, int index) {
         List<Item> ordered = new ArrayList<>(live);
         ordered.remove(item);
@@ -372,29 +372,29 @@ public final class Trip {
         return ordered;
     }
 
-    /** Đánh lại vị trí liền mạch 0..n-1 theo thứ tự danh sách. */
+    /** Renumbers the positions gaplessly 0..n-1 in list order. */
     private static void renumber(List<Item> ordered) {
         for (int position = 0; position < ordered.size(); position++) ordered.get(position).setPosition(position);
     }
 
-    /** Mã chuyến. */
+    /** Trip id. */
     public UUID id() { return id; }
-    /** Mã danh tính chủ chuyến. */
+    /** Identity id of the trip owner. */
     public UUID ownerId() { return ownerId; }
-    /** Tên chuyến. */
+    /** Trip name. */
     public String name() { return name; }
-    /** Điểm đến. */
+    /** Destination. */
     public String destination() { return destination; }
-    /** Khoảng ngày. */
+    /** Date range. */
     public DateRange range() { return range; }
-    /** Tùy chọn chuyến. */
+    /** Trip options. */
     public TripOptions options() { return options; }
-    /** Thời điểm tạo. */
+    /** Creation time. */
     public Instant createdAt() { return createdAt; }
-    /** Thời điểm sửa gần nhất. */
+    /** Time of the last edit. */
     public Instant updatedAt() { return updatedAt; }
-    /** Phiên bản của aggregate (khóa lạc quan). */
+    /** Version of the aggregate (optimistic lock). */
     public long version() { return version; }
-    /** Mọi mục, kể cả đã xóa mềm (không sửa được). */
+    /** Every item, including soft-deleted ones (not editable). */
     public List<Item> items() { return Collections.unmodifiableList(items); }
 }

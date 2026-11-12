@@ -36,7 +36,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Phía đọc của Planning: dựng read model từ dòng dữ liệu phẳng, dùng lại quy tắc tính tổng của domain. */
+/** The read side of Planning: builds the read model from flat data rows, reusing the domain's rule for totals. */
 @Service
 @Transactional(readOnly = true)
 public class PlanningQueries {
@@ -45,32 +45,32 @@ public class PlanningQueries {
 
     private final TripReadModel read;
 
-    /** Nhận cổng đọc dữ liệu phẳng. */
+    /** Takes the port that reads flat data. */
     public PlanningQueries(TripReadModel read) {
         this.read = read;
     }
 
-    /** Các chuyến của chủ, mới nhất trước. */
+    /** The owner's trips, newest first. */
     public List<TripView> listTrips(UUID ownerId) {
         return read.listTrips(ownerId).stream().map(PlanningQueries::toView).toList();
     }
 
-    /** Chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
+    /** The owner's soft-deleted trips, most recently deleted first. */
     public List<DeletedTrip> deletedTrips(UUID ownerId) {
         return read.listDeletedTrips(ownerId).stream().map(row -> new DeletedTrip(toView(row), row.deletedAt().toString())).toList();
     }
 
-    /** Sở thích theo danh tính (BE-10): mã + nhãn theo thứ tự cố định; chưa đặt thì rỗng. */
+    /** Preferences by identity (BE-10): code + label in a fixed order; empty if not set. */
     public List<Choice> interestPreferences(UUID ownerId) {
         return interestChoices(read.interestPreferences(ownerId));
     }
 
-    /** Một chuyến của chủ; chuyến của người khác coi như không có (404). */
+    /** One trip of the owner; someone else's trip counts as absent (404). */
     public TripView trip(UUID ownerId, UUID tripId) {
         return toView(requireTrip(ownerId, tripId));
     }
 
-    /** Một mục của chuyến, kèm trạng thái hoàn thành của chủ. */
+    /** One item of the trip, with the owner's completion status. */
     public ItemView item(UUID ownerId, UUID tripId, UUID itemId) {
         requireTrip(ownerId, tripId);
         ItemRow row = rankedItems(tripId).stream().filter(found -> found.id().equals(itemId)).findFirst()
@@ -78,7 +78,7 @@ public class PlanningQueries {
         return toView(row, read.doneItemIds(tripId, ownerId).contains(itemId), doneBy(tripId).getOrDefault(itemId, List.of()));
     }
 
-    /** Các mục đang hiện (chưa xóa mềm) của một ngày, theo thứ tự thủ công. */
+    /** The visible (not soft-deleted) items of a day, in manual order. */
     public List<ItemView> dayItems(UUID ownerId, UUID tripId, LocalDate day) {
         requireTrip(ownerId, tripId);
         Set<UUID> done = read.doneItemIds(tripId, ownerId);
@@ -89,7 +89,7 @@ public class PlanningQueries {
                 .toList();
     }
 
-    /** Các mục trong "Đã xóa gần đây", xóa gần nhất trước. */
+    /** The items in 'Recently deleted', most recently deleted first. */
     public List<ItemView> trash(UUID ownerId, UUID tripId) {
         requireTrip(ownerId, tripId);
         Set<UUID> done = read.doneItemIds(tripId, ownerId);
@@ -97,7 +97,7 @@ public class PlanningQueries {
         return read.trash(tripId).stream().map(row -> toView(row, done.contains(row.id()), doneBy.getOrDefault(row.id(), List.of()))).toList();
     }
 
-    /** A-11 xem lịch, A-13 tổng theo ngày/loại, A-16 việc cần làm chưa xong. */
+    /** A-11 view the schedule, A-13 totals by day/type, A-16 unfinished to-dos. */
     public TripDetail detail(UUID ownerId, UUID tripId) {
         TripRow trip = requireTrip(ownerId, tripId);
         TripTally tally = TripTally.of(rankedItems(tripId), read.doneItemIds(tripId, ownerId), doneBy(tripId));
@@ -109,7 +109,7 @@ public class PlanningQueries {
                 tally.trashCount(), budget(trip.budgetK(), tally.extraK(), tally.unknownCount()));
     }
 
-    /** Q11: chỉ so sánh trên tổng R2; mục chưa rõ giá được đếm riêng và không bao giờ coi là 0 (D18). Ngân sách chưa đặt ⇒ null. */
+    /** Q11: compared only against the R2 total; items with an unknown price are counted separately and never treated as 0 (D18). Budget not set => null. */
     static Budget budget(Long budgetK, long extraK, int unknownCount) {
         if (budgetK == null) return null;
         boolean over = extraK > budgetK;
@@ -118,7 +118,7 @@ public class PlanningQueries {
                 Vnd.fromThousands(gap));
     }
 
-    /** Dạng hiển thị của chuyến: kiểu chuyến và nhịp có nhãn, mã lạ trong dữ liệu hiện nguyên mã. */
+    /** The display form of a trip: the trip kind and pace with labels; an unknown code in the data is shown as the raw code. */
     static TripView toView(TripRow trip) {
         List<Choice> styles = trip.styles() == null || trip.styles().isBlank() ? List.of()
                 : Arrays.stream(trip.styles().split(PlanningConstants.STYLE_CODE_SEPARATOR))
@@ -134,14 +134,14 @@ public class PlanningQueries {
                 trip.selfMemberId() == null ? null : trip.selfMemberId().toString(), coverView(trip.cover()));
     }
 
-    /** Giải mã cột bìa sang read model phẳng, không nạp aggregate. */
+    /** Decodes the cover column into a flat read model, without loading the aggregate. */
     private static CoverView coverView(String stored) {
         if (stored == null) return null;
         String[] parts = stored.split(CoverConstants.SEPARATOR, 2);
         return new CoverView(parts[0], parts[1]);
     }
 
-    /** Sở thích có nhãn từ chuỗi mã cách nhau bằng dấu phẩy; mã lạ trong dữ liệu hiện nguyên mã. */
+    /** Interests with labels from a comma-separated string of codes; an unknown code in the data is shown as the raw code. */
     private static List<Choice> interestChoices(String csv) {
         if (csv == null || csv.isBlank()) return List.of();
         return Arrays.stream(csv.split(PlanningConstants.STYLE_CODE_SEPARATOR))
@@ -150,7 +150,7 @@ public class PlanningQueries {
     }
 
     /**
-     * Ai đã xong từng mục, tính bằng MÃ THÀNH VIÊN (không lộ mã danh tính), theo thứ tự vào chuyến. Người đã rời chuyến không còn trong danh sách.
+     * Who finished each item, by MEMBER ID (the identity id is not exposed), in the order they joined the trip. A person who left the trip is no longer in the list.
      */
     private Map<UUID, List<String>> doneBy(UUID tripId) {
         Map<UUID, Integer> order = new HashMap<>();
@@ -165,7 +165,7 @@ public class PlanningQueries {
         return result;
     }
 
-    /** Dạng hiển thị của mục: nhãn loại và đặt chỗ, giờ dạng HH:mm, tiền đầy đủ, trạng thái hoàn thành. */
+    /** The display form of an item: type and booking labels, time as HH:mm, the full amount of money, the completion status. */
     static ItemView toView(ItemRow row, boolean done, List<String> doneBy) {
         String typeLabel = ItemType.fromCode(row.type()).map(ItemType::label).orElse(row.type());
         String bookingLabel = row.bookingStatus() == null ? null
@@ -178,15 +178,15 @@ public class PlanningQueries {
                 row.addedByMemberId() == null ? null : row.addedByMemberId().toString(), doneBy);
     }
 
-    /** Mọi mục của chuyến, mục còn hiện mang thứ hạng liền mạch trong ngày (xem {@link #withDenseLivePositions}). */
+    /** Every item of the trip, the visible ones carrying a gapless rank within the day (see {@link #withDenseLivePositions}). */
     private List<ItemRow> rankedItems(UUID tripId) {
         return withDenseLivePositions(read.items(tripId));
     }
 
     /**
-     * Hợp đồng API: {@code position} của mục còn hiện là thứ hạng liền mạch 0..n-1 trong ngày (hoặc trong vùng "Chưa có ngày"),
-     * dù khóa lưu có khoảng trống do mục đã xóa giữ chỗ (lát 4). Nhờ vậy giá trị đọc từ view dùng lại được làm {@code position}
-     * khi thêm, chuyển hoặc Hoàn tác. Mục đã xóa giữ nguyên vị trí lưu. Đầu vào phải đã sắp theo ngày rồi vị trí lưu.
+     * API contract: the {@code position} of a visible item is a gapless rank 0..n-1 within the day (or within the 'no date yet' area),
+     * even if the stored key has gaps held by deleted items (slice 4). So a value read from the view can be reused as {@code position}
+     * when adding, moving or undoing. A deleted item keeps its stored position. The input must already be sorted by day then stored position.
      */
     static List<ItemRow> withDenseLivePositions(List<ItemRow> rows) {
         Map<String, Integer> nextRankByDay = new HashMap<>();
@@ -202,12 +202,12 @@ public class PlanningQueries {
         return ranked;
     }
 
-    /** Chuyến của đúng chủ; không có thì 404. */
+    /** A trip of exactly this owner; otherwise 404. */
     private TripRow requireTrip(UUID ownerId, UUID tripId) {
         return read.findTrip(tripId, ownerId).orElseThrow(WanderException::notFound);
     }
 
-    /** Mọi ngày của chuyến kèm các mục đang hiện (ngày trống có danh sách rỗng). */
+    /** Every day of the trip with its visible items (an empty day has an empty list). */
     private static List<DayView> dayViews(DateRange range, TripTally tally) {
         return range.days().stream()
                 .map(day -> new DayView(day.date().toString(), day.index(), day.weekday(), day.weekdayLabel(),
@@ -215,7 +215,7 @@ public class PlanningQueries {
                 .toList();
     }
 
-    /** Tổng phải trả thêm của từng ngày trong chuyến (R2). */
+    /** The extra amount to pay for each day of the trip (R2). */
     private static List<DayTotal> dayTotals(DateRange range, TripTally tally) {
         return range.days().stream()
                 .map(day -> {
@@ -225,7 +225,7 @@ public class PlanningQueries {
                 .toList();
     }
 
-    /** Tổng phải trả thêm theo loại, chỉ gồm loại đang có mục hiện, theo thứ tự khai báo của {@link ItemType}. */
+    /** The extra amount to pay by type, only for types that have visible items, in the declaration order of {@link ItemType}. */
     private static List<TypeTotal> typeTotals(TripTally tally) {
         List<TypeTotal> totals = new ArrayList<>();
         for (ItemType type : ItemType.values()) {
@@ -236,7 +236,7 @@ public class PlanningQueries {
         return totals;
     }
 
-    /** Các "Việc cần làm" chưa xong, theo thứ tự ngày rồi vị trí, các việc chưa có ngày đứng cuối với ngày null (A-16). */
+    /** The unfinished 'To-dos', ordered by day then position; to-dos with no date go last with a null day (A-16). */
     private static List<PendingTask> pendingTasks(List<DayView> days, List<ItemView> unscheduled) {
         List<PendingTask> pending = new ArrayList<>();
         for (DayView day : days) addPendingTasks(pending, day.date(), day.items());
@@ -244,7 +244,7 @@ public class PlanningQueries {
         return pending;
     }
 
-    /** Thêm các việc cần làm chưa xong trong {@code items} vào danh sách, gắn với ngày {@code date} (null = chưa có ngày). */
+    /** Adds the unfinished to-dos in {@code items} to the list, attached to the day {@code date} (null = no date yet). */
     private static void addPendingTasks(List<PendingTask> pending, String date, List<ItemView> items) {
         for (ItemView item : items) {
             if (ItemType.TASK.code().equals(item.type()) && !item.done()) {

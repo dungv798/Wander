@@ -4,8 +4,8 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Nhãn biên tập thay cho điểm sao (DR-007): ý kiến của Wander, không phải đánh giá của người dùng.
- * Không có số sao khi chưa có nguồn dữ liệu thật (ADR-009).
+ * An editorial label in place of a star score (DR-007): Wander's opinion, not a user rating.
+ * There is no star number while there is no real data source (ADR-009).
  */
 public enum Verdict implements CodedValue {
     MUST_SEE("must", "Nên ghé"),
@@ -25,12 +25,12 @@ public enum Verdict implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Nhãn theo mã ngắn trong dữ liệu; mã lạ trả rỗng. */
+    /** The label by short code in the data; an unknown code returns empty. */
     public static Optional<Verdict> fromCode(String code) {
         return CodedValue.find(Verdict.class, code);
     }

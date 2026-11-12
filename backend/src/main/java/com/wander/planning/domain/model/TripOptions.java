@@ -14,30 +14,30 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Tùy chọn chuyến đi (Q11, DR-002, gói C). Tất cả đều tùy chọn:
+ * Trip options (Q11, DR-002, package C). All of them are optional:
  * <ul>
- *   <li>{@code budgetK}: ngân sách dự kiến, nghìn đồng, số nguyên không âm như D17. {@code null} = chưa đặt;
- *       {@code 0} = đã đặt bằng 0 (D18). Là trường duy nhất có hành vi: so với "tổng phải trả thêm" (R2) ở phía đọc.</li>
- *   <li>{@code styles}: kiểu chuyến, tối đa {@value PlanningConstants#MAX_STYLES}, không trùng, lưu theo thứ tự khai báo của
- *       {@link TripStyle}. Chỉ là nhãn.</li>
- *   <li>{@code pace}: nhịp chuyến. Chỉ là nhãn.</li>
- *   <li>{@code datesTentative}: ngày đi/về chưa chắc (DR-018 A3). Chỉ là nhãn; ngày vẫn bắt buộc và vẫn được kiểm.</li>
- *   <li>{@code kind}: "ai đi" (chọn một) và {@code interests}: sở thích (tối đa {@value PlanningConstants#MAX_INTERESTS}, không
- *       trùng, theo thứ tự khai báo) (DR-018 F2, ADR-014). Chỉ là nhãn.</li>
+ *   <li>{@code budgetK}: planned budget, thousand VND, a non-negative integer like D17. {@code null} = not set;
+ *       {@code 0} = set to zero (D18). The only field with behavior: compared with 'extra to pay' (R2) on the read side.</li>
+ *   <li>{@code styles}: trip kinds, at most {@value PlanningConstants#MAX_STYLES}, no duplicates, stored in the declaration order of
+ *       {@link TripStyle}. Only a label.</li>
+ *   <li>{@code pace}: trip pace. Only a label.</li>
+ *   <li>{@code datesTentative}: the departure/return dates are tentative (DR-018 A3). Only a label; the dates are still required and still validated.</li>
+ *   <li>{@code kind}: 'who is going' (choose one) and {@code interests}: interests (at most {@value PlanningConstants#MAX_INTERESTS}, no
+ *       duplicates, in declaration order) (DR-018 F2, ADR-014). Only labels.</li>
  * </ul>
  */
 public record TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace, boolean datesTentative, TripKind kind,
                           List<TripInterest> interests) {
 
-    /** Không có tùy chọn nào được đặt. */
+    /** No option is set. */
     public static final TripOptions NONE = new TripOptions(null, List.of(), null, false, null, List.of());
 
-    /** Tùy chọn với ngày đã chốt, chưa đặt "ai đi" và sở thích. */
+    /** Options with the dates confirmed, 'who is going' and interests not set. */
     public TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace) {
         this(budgetK, styles, pace, false, null, List.of());
     }
 
-    /** Tùy chọn chưa đặt "ai đi" và sở thích. */
+    /** Options with 'who is going' and interests not set. */
     public TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace, boolean datesTentative) {
         this(budgetK, styles, pace, datesTentative, null, List.of());
     }
@@ -51,7 +51,7 @@ public record TripOptions(Long budgetK, List<TripStyle> styles, TripPace pace, b
         interests = Interests.normalize(interests);
     }
 
-    /** Ngân sách (nếu có) phải không âm và không vượt mức tối đa như chi phí. */
+    /** The budget (if any) must be non-negative and not above the maximum, like a cost. */
     private static void requireValidBudget(Long budgetK) {
         if (budgetK == null) return;
         if (budgetK < 0) throw WanderException.invalidValue(ErrorCodes.NEGATIVE, PlanningFields.BUDGET);

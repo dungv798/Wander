@@ -8,14 +8,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * Xác thực bí mật phiên bằng {@link IdentityService#authenticateSession}. Gọi ở MỌI yêu cầu cần phiên (không cache,
- * không JWT tự chứa) nên phiên bị thu hồi mất hiệu lực ở yêu cầu kế tiếp.
+ * Authenticates the session secret with {@link IdentityService#authenticateSession}. Called on EVERY request that needs a session (no cache,
+ * no self-contained JWT), so a revoked session stops working on the very next request.
  */
 final class SessionAuthenticationProvider implements AuthenticationProvider {
 
     private final IdentityService identities;
 
-    /** Nhận dịch vụ danh tính dùng để tra phiên. */
+    /** Takes the identity service used to look the session up. */
     SessionAuthenticationProvider(IdentityService identities) {
         this.identities = identities;
     }

@@ -11,20 +11,20 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng yêu cầu ghép thiết bị. */
+/** Spring Data JPA repository of the device-pairing request table. */
 public interface DeviceLinkJpaRepository extends JpaRepository<DeviceLinkEntity, UUID> {
 
-    /** Có yêu cầu ghép nào đang giữ băm bí mật này ở trạng thái đã cho. */
+    /** Whether a pairing request holds this secret hash in the given state. */
     boolean existsBySessionTokenHashAndState(String sessionTokenHash, String state);
 
-    /** Mã ghép đang được một yêu cầu ở trạng thái đã cho còn hạn dùng. */
+    /** The pairing code is in use by a request in the given state that has not expired. */
     boolean existsByPairingCodeAndStateAndExpiresAtAfter(String pairingCode, String state, Instant now);
 
-    /** Yêu cầu ghép còn chờ và còn hạn theo mã ghép, đọc KHÔNG khóa (xem trước chỉ đọc nên không chặn các lượt khác). */
+    /** The pairing request that is pending and not expired, by pairing code, read WITHOUT a lock (a preview only reads, so it does not block other calls). */
     @Query(IdentityQueryConstants.ACTIVE_LINK_BY_PAIRING_CODE)
     List<DeviceLinkEntity> findActiveByPairingCode(@Param("code") String code, @Param("now") Instant now);
 
-    /** Yêu cầu ghép còn chờ và còn hạn theo mã ghép, với khóa ghi (SELECT … FOR UPDATE). */
+    /** The pairing request that is pending and not expired, by pairing code, with a write lock (SELECT ... FOR UPDATE). */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.ACTIVE_LINK_BY_PAIRING_CODE)
     List<DeviceLinkEntity> lockActiveByPairingCode(@Param("code") String code, @Param("now") Instant now);

@@ -1,105 +1,105 @@
 package com.wander.planning.domain.constant;
 
-/** Tên các trường JSON của API Planning (hợp đồng, khớp {@code web/src/api.ts}); cũng dùng làm tên trường trong lỗi. */
+/** Names of the JSON fields of the Planning API (the contract, matching {@code web/src/api.ts}); also used as the field name in errors. */
 public final class PlanningFields {
-    /** Bìa chuyến, nullable là tự động. */
+    /** Trip cover; nullable means automatic. */
     public static final String COVER = "cover";
-    /** Mã tham chiếu ảnh hoặc gradient. */
+    /** Reference code of a photo or gradient. */
     public static final String REF = "ref";
 
-    /** Tên chuyến. */
+    /** Trip name. */
     public static final String NAME = "name";
 
-    /** Điểm đến. */
+    /** Destination. */
     public static final String DESTINATION = "destination";
 
-    /** Ngày bắt đầu. */
+    /** Start date. */
     public static final String START_DATE = "startDate";
 
-    /** Ngày kết thúc. */
+    /** End date. */
     public static final String END_DATE = "endDate";
 
-    /** Ngân sách dự kiến. */
+    /** Planned budget. */
     public static final String BUDGET = "budget";
 
-    /** Kiểu chuyến. */
+    /** Trip kind. */
     public static final String STYLES = "styles";
 
-    /** Nhịp chuyến. */
+    /** Trip pace. */
     public static final String PACE = "pace";
 
-    /** Ngày của mục. */
+    /** Date of an item. */
     public static final String DAY = "day";
 
-    /** Loại mục. */
+    /** Item type. */
     public static final String TYPE = "type";
 
-    /** Tiêu đề mục. */
+    /** Item title. */
     public static final String TITLE = "title";
 
-    /** Giờ trong ngày. */
+    /** Time of day. */
     public static final String TIME_OF_DAY = "timeOfDay";
 
-    /** Thời lượng, phút. */
+    /** Duration, in minutes. */
     public static final String DURATION_MIN = "durationMin";
 
-    /** Ghi chú. */
+    /** Note. */
     public static final String NOTE = "note";
 
-    /** Trạng thái đặt chỗ. */
+    /** Booking status. */
     public static final String BOOKING = "booking";
 
-    /** Vị trí trong ngày. */
+    /** Position in the day. */
     public static final String POSITION = "position";
 
-    /** Chi phí. */
+    /** Cost. */
     public static final String COST = "cost";
 
-    /** Đã bao gồm. */
+    /** Included. */
     public static final String INCLUDED = "included";
 
-    /** Giá tham khảo. */
+    /** Reference price. */
     public static final String REFERENCE_COST = "referenceCost";
 
-    /** Danh sách gán ngày hàng loạt của lệnh lịch. */
+    /** The bulk date-assignment list of the schedule command. */
     public static final String ASSIGNMENTS = "assignments";
 
-    /** Mã mục trong một phần tử gán ngày. */
+    /** Item id in one date-assignment element. */
     public static final String ITEM_ID = "itemId";
 
-    /** "Ai đi" của chuyến (ADR-014). */
+    /** 'Who is going' of the trip (ADR-014). */
     public static final String KIND = "kind";
 
-    /** Sở thích của chuyến (ADR-014). */
+    /** Interests of the trip (ADR-014). */
     public static final String INTERESTS = "interests";
 
-    /** Cờ ngày đi/về chưa chắc (DR-018 A3). */
+    /** Flag that the departure/return dates are tentative (DR-018 A3). */
     public static final String DATES_TENTATIVE = "datesTentative";
 
-    /** Mã địa điểm trong kho biên tập mà mục liên kết tới. */
+    /** Id of the place in the editorial catalog that the item links to. */
     public static final String PLACE_ID = "placeId";
 
-    /** Danh sách mã mục theo thứ tự mới. */
+    /** The list of item ids in the new order. */
     public static final String ORDERED_IDS = "orderedIds";
 
-    /** Đã hoàn thành. */
+    /** Completed. */
     public static final String DONE = "done";
 
     private PlanningFields() {
     }
 
-    /** Tên hiển thị của thành viên. */
+    /** Display name of a member. */
     public static final String DISPLAY_NAME = "displayName";
 
-    /** Mã liên kết mời. */
+    /** Invite link code. */
     public static final String INVITE_CODE = "code";
 
-    /** Mã mục trong đề nghị xóa. */
+    /** Item id in a deletion request. */
     public static final String REQUEST_ITEM_ID = "itemId";
 
-    /** Lý do đề nghị xóa. */
+    /** Reason for a deletion request. */
     public static final String REASON = "reason";
 
-    /** Nhóm của hạng mục checklist. */
+    /** Group of a checklist item. */
     public static final String GROUP = "group";
 }

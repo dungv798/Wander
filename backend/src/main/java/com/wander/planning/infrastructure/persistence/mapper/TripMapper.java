@@ -41,33 +41,33 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
 /**
- * Ánh xạ entity JPA ↔ domain (ADR-008), sinh lúc biên dịch. {@code unmappedTargetPolicy = ERROR} kiểm tra đích của mỗi
- * chiều: thêm cột vào entity mà quên ánh xạ ở chiều ghi, hoặc thêm tham số constructor vào domain mà quên ánh xạ ở chiều
- * đọc, thì biên dịch đỏ. Giới hạn: chiều ghi dùng {@code expression} nên một trường domain chỉ có accessor mà không có cột
- * tương ứng thì không bị bắt (giống mã viết tay).
+ * Maps JPA entity <-> domain (ADR-008), generated at compile time. {@code unmappedTargetPolicy = ERROR} checks the target in each
+ * direction: adding a column to the entity and forgetting to map it in the write direction, or adding a constructor parameter to the domain and forgetting to map it in the
+ * read direction, turns the build red. Limitation: the write direction uses {@code expression}, so a domain field that has only an accessor and no matching column
+ * is not caught (like hand-written code).
  * <p>
- * Chiều entity → domain dựng domain qua constructor (bất biến do domain kiểm tra). Chiều domain → entity cập nhật
- * entity đang được Hibernate theo dõi (managed) tại chỗ; việc đồng bộ danh sách mục (thêm/xóa vĩnh viễn) và tập hoàn thành
- * nằm ở {@link JpaTripRepository} vì cần đối chiếu theo id.
+ * The entity -> domain direction builds the domain through the constructor (invariants are checked by the domain). The domain -> entity direction updates the
+ * entity tracked by Hibernate (managed) in place; syncing the item list (add/permanently delete) and the completion set
+ * is in {@link JpaTripRepository} because it needs matching by id.
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR, imports = {DateRange.class, ItemCost.class, TripOptions.class})
 public interface TripMapper {
 
-    /** Dữ liệu cột thành bìa hợp lệ; null giữ mặc định cho chuyến cũ. */
+    /** Column data into a valid cover; null keeps the default for an old trip. */
     default Cover decodeCover(String stored) {
         if (stored == null) return null;
         String[] parts = stored.split(CoverConstants.SEPARATOR, 2);
         return new Cover(parts[0], parts.length == 2 ? parts[1] : null);
     }
 
-    /** Bìa thành một cột loại:mã; slug không chứa dấu phân cách. */
+    /** A cover into one kind:id column; a slug contains no separator. */
     default String encodeCover(Cover cover) {
         return cover == null ? null : cover.kind() + CoverConstants.SEPARATOR + cover.ref();
     }
 
     // ---- entity → domain ----
 
-    /** Chuyến domain từ entity (dựng qua constructor nên mọi bất biến được kiểm tra). */
+    /** The domain trip from an entity (built through the constructor so every invariant is checked). */
     @Mapping(target = "ownerId", source = "ownerIdentityId")
     @Mapping(target = "members", expression = "java(members(e.getMembers()))")
     @Mapping(target = "invites", expression = "java(invites(e.getInvites()))")
@@ -76,7 +76,7 @@ public interface TripMapper {
     @Mapping(target = "options", expression = "java(new TripOptions(e.getBudgetK(), styles(e.getStyles()), pace(e.getPace()), e.isDatesTentative(), kind(e.getKind()), interests(e.getInterests())))")
     Trip toDomain(TripEntity e);
 
-    /** Chuỗi mã cách nhau bằng dấu phẩy → danh sách (rỗng = không có). Mã lạ trong cơ sở dữ liệu là lỗi dữ liệu. */
+    /** A string of comma-separated codes -> a list (empty = none). An unknown code in the database is a data error. */
     default List<TripStyle> styles(String csv) {
         if (csv == null || csv.isBlank()) return List.of();
         return Arrays.stream(csv.split(PlanningConstants.STYLE_CODE_SEPARATOR))
@@ -85,19 +85,19 @@ public interface TripMapper {
                 .toList();
     }
 
-    /** Nhịp chuyến từ mã đã lưu; null giữ nguyên null, mã lạ là lỗi dữ liệu. */
+    /** The trip pace from the stored code; null stays null, an unknown code is a data error. */
     default TripPace pace(String code) {
         if (code == null) return null;
         return TripPace.fromCode(code).orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_TRIP_PACE.formatted(code)));
     }
 
-    /** "Ai đi" từ mã đã lưu; null giữ nguyên null, mã lạ là lỗi dữ liệu. */
+    /** 'Who is going' from the stored code; null stays null, an unknown code is a data error. */
     default TripKind kind(String code) {
         if (code == null) return null;
         return TripKind.fromCode(code).orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_TRIP_KIND.formatted(code)));
     }
 
-    /** Chuỗi mã sở thích cách nhau bằng dấu phẩy → danh sách (rỗng = không có); mã lạ là lỗi dữ liệu. */
+    /** A string of comma-separated interest codes -> a list (empty = none); an unknown code is a data error. */
     default List<TripInterest> interests(String csv) {
         if (csv == null || csv.isBlank()) return List.of();
         return Arrays.stream(csv.split(PlanningConstants.STYLE_CODE_SEPARATOR))
@@ -106,45 +106,45 @@ public interface TripMapper {
                 .toList();
     }
 
-    /** Danh sách sở thích → chuỗi mã cách nhau bằng dấu phẩy để lưu một cột. */
+    /** A list of interests -> a string of comma-separated codes to store in one column. */
     default String interestCodes(List<TripInterest> interests) {
         return interests.stream().map(TripInterest::code).collect(Collectors.joining(PlanningConstants.STYLE_CODE_SEPARATOR));
     }
 
-    /** Danh sách kiểu chuyến → chuỗi mã cách nhau bằng dấu phẩy để lưu một cột. */
+    /** A list of trip kinds -> a string of comma-separated codes to store in one column. */
     default String styleCodes(List<TripStyle> styles) {
         return styles.stream().map(TripStyle::code).collect(Collectors.joining(PlanningConstants.STYLE_CODE_SEPARATOR));
     }
 
-    /** Mục domain từ entity (dựng qua constructor; chi phí và hoàn thành dựng từ các cột). */
+    /** The domain item from an entity (built through the constructor; the cost and completion are built from the columns). */
     @Mapping(target = "day", source = "dayDate")
     @Mapping(target = "booking", source = "bookingStatus")
     @Mapping(target = "cost", expression = "java(new ItemCost(e.getCostK(), e.isIncluded(), e.getReferenceK()))")
     @Mapping(target = "completions", expression = "java(completions(e.getCompletions()))")
     Item toDomain(ItemEntity e);
 
-    /** Loại mục từ mã đã lưu; mã lạ là lỗi dữ liệu. */
+    /** The item type from the stored code; an unknown code is a data error. */
     default ItemType itemType(String code) {
         return ItemType.fromCode(code).orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_ITEM_TYPE.formatted(code)));
     }
 
-    /** Trạng thái đặt chỗ từ mã đã lưu; null giữ nguyên null, mã lạ là lỗi dữ liệu. */
+    /** The booking status from the stored code; null stays null, an unknown code is a data error. */
     default BookingStatus bookingStatus(String code) {
         if (code == null) return null;
         return BookingStatus.fromCode(code)
                 .orElseThrow(() -> new IllegalStateException(PlanningMessages.UNKNOWN_BOOKING_STATUS.formatted(code)));
     }
 
-    /** Tập hoàn thành đã lưu → bản đồ người → thời điểm hoàn thành (giữ thứ tự duyệt). */
+    /** The stored completion set -> a map person -> completion time (keeping the iteration order). */
     default Map<UUID, Instant> completions(Set<ItemEntity.Completion> stored) {
         Map<UUID, Instant> completions = new LinkedHashMap<>();
         for (ItemEntity.Completion completion : stored) completions.put(completion.getPersonId(), completion.getDoneAt());
         return completions;
     }
 
-    // ---- domain → entity (cập nhật tại chỗ) ----
+    // ---- domain -> entity (update in place) ----
 
-    /** Ghi trạng thái chuyến domain vào entity đang được theo dõi (không đụng chủ, ngày tạo, danh sách mục). */
+    /** Writes the domain trip state into the tracked entity (does not touch the owner, the creation date, the item list). */
     @Mapping(target = "cover", expression = "java(encodeCover(trip.cover()))")
     @Mapping(target = "name", expression = "java(trip.name())")
     @Mapping(target = "destination", expression = "java(trip.destination())")
@@ -166,7 +166,7 @@ public interface TripMapper {
     @Mapping(target = "deletionRequests", ignore = true)
     void update(Trip trip, @MappingTarget TripEntity e);
 
-    /** Đề nghị xóa domain từ các dòng đã lưu, cũ trước. */
+    /** The domain deletion requests from stored rows, oldest first. */
     default List<DeletionRequest> requests(List<DeletionRequestEntity> stored) {
         return stored.stream()
                 .map(r -> new DeletionRequest(r.getId(), r.getItemId(), r.getRequesterMemberId(), r.getReason(), RequestStatus.fromCode(r.getStatus())
@@ -175,7 +175,7 @@ public interface TripMapper {
                 .toList();
     }
 
-    /** Thành viên domain từ các dòng đã lưu (thứ tự vào chuyến). */
+    /** The domain members from stored rows (in the order they joined the trip). */
     default List<TripMember> members(List<TripMemberEntity> stored) {
         return stored.stream()
                 .map(m -> new TripMember(m.getId(), m.getIdentityId(), MemberRole.fromCode(m.getRole())
@@ -184,12 +184,12 @@ public interface TripMapper {
                 .toList();
     }
 
-    /** Liên kết mời domain từ các dòng đã lưu. */
+    /** The domain invite links from stored rows. */
     default List<TripInvite> invites(List<TripInviteEntity> stored) {
         return stored.stream().map(i -> new TripInvite(i.getId(), i.getCodeHash(), i.getCreatedAt(), i.getExpiresAt(), i.getRevokedAt())).toList();
     }
 
-    /** Ghi trạng thái mục domain vào entity đang được theo dõi (không đụng ngày tạo và tập hoàn thành). */
+    /** Writes the domain item state into the tracked entity (does not touch the creation date and the completion set). */
     @Mapping(target = "dayDate", expression = "java(item.day())")
     @Mapping(target = "position", expression = "java(item.position())")
     @Mapping(target = "type", expression = "java(item.type().code())")

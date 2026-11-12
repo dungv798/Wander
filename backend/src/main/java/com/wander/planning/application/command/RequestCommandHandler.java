@@ -15,7 +15,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Xử lý lệnh đề nghị xóa. Mỗi phương thức một giao dịch; đồng ý thì xóa mềm mục trong CÙNG giao dịch (cùng aggregate). */
+/** Handles the deletion-request commands. One transaction per method; on approval the item is soft-deleted in the SAME transaction (same aggregate). */
 @Service
 @Transactional
 public class RequestCommandHandler {
@@ -23,13 +23,13 @@ public class RequestCommandHandler {
     private final TripRepository trips;
     private final Clock clock;
 
-    /** Nhận cổng lưu chuyến và đồng hồ. */
+    /** Takes the trip storage port and the clock. */
     public RequestCommandHandler(TripRepository trips, Clock clock) {
         this.trips = trips;
         this.clock = clock;
     }
 
-    /** Thành viên gửi đề nghị xóa mục của người khác; trả đề nghị. */
+    /** A member asks to delete an item that belongs to someone else; returns the request. */
     public DeletionRequest submit(RequestCommands.Submit command) {
         Trip trip = load(command.actor(), command.tripId());
         UUID itemId = Ids.parse(command.itemId() == null ? "" : command.itemId())
@@ -40,14 +40,14 @@ public class RequestCommandHandler {
         return request;
     }
 
-    /** Người đề nghị hủy đề nghị còn chờ. */
+    /** The requester cancels a pending request. */
     public void cancel(RequestCommands.Cancel command) {
         Trip trip = load(command.actor(), command.tripId());
         trip.circle().cancelDeletion(command.actor(), command.requestId());
         trips.save(trip);
     }
 
-    /** Organizer đồng ý (xóa mềm mục nếu còn hiện) hoặc từ chối; trả đề nghị đã quyết định. */
+    /** The Organizer approves (soft-deletes the item if it is still visible) or rejects; returns the decided request. */
     public DeletionRequest decide(RequestCommands.Decide command) {
         Trip trip = load(command.actor(), command.tripId());
         var now = Timestamps.now(clock);
@@ -57,7 +57,7 @@ public class RequestCommandHandler {
         return decided;
     }
 
-    /** Nạp chuyến mà người gọi là thành viên; người ngoài ⇒ 404. */
+    /** Loads a trip of which the caller is a member; an outsider => 404. */
     private Trip load(UUID actor, UUID tripId) {
         return trips.findAccessible(tripId, actor).orElseThrow(WanderException::notFound);
     }

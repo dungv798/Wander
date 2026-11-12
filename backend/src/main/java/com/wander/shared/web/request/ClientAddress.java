@@ -13,19 +13,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Địa chỉ của người gọi để giới hạn tần suất (AD-6, ADR-006). Sau CloudFront → ALB, địa chỉ kết nối trực tiếp là của
- * ALB nên mọi người chung một bộ đếm; còn tin {@code X-Forwarded-For} thô thì kẻ tấn công tự đặt được địa chỉ.
+ * The caller's address for rate limiting (AD-6, ADR-006). Behind CloudFront -> ALB the direct connection address is the
+ * ALB's, so everyone shares one counter; and if the raw {@code X-Forwarded-For} were trusted an attacker could choose their own address.
  * <p>
- * Cách làm: chỉ tin các mục do hạ tầng của mình thêm vào bên PHẢI của {@code X-Forwarded-For}. Mỗi proxy tin cậy
- * (CloudFront, ALB) nối địa chỉ nó thấy vào cuối danh sách, nên với {@code trustedHops = N} người gọi thật là mục thứ N
- * tính từ bên phải; mọi mục bên trái do người gọi tự gửi và bị bỏ qua.
+ * The approach: trust only the entries our own infrastructure adds on the RIGHT of {@code X-Forwarded-For}. Each trusted proxy
+ * (CloudFront, ALB) appends the address it sees to the end of the list, so with {@code trustedHops = N} the real caller is the Nth entry
+ * from the right; every entry to its left was sent by the caller and is ignored.
  * <ul>
- *   <li>{@code trustedHops = 0} (mặc định, chạy trực tiếp không proxy): bỏ qua hoàn toàn {@code X-Forwarded-For}.</li>
- *   <li>Danh sách ngắn hơn {@code trustedHops} (yêu cầu không đi qua đủ chuỗi proxy, ví dụ gọi thẳng vào ALB): không tin,
- *       dùng địa chỉ kết nối trực tiếp, nên mọi yêu cầu lách chuỗi dồn vào một bộ đếm chung (đóng theo mặc định).</li>
- *   <li>Mục không giống địa chỉ IP: không tin, dùng địa chỉ kết nối trực tiếp (tránh khóa bộ đếm bằng chuỗi tùy ý).</li>
+ *   <li>{@code trustedHops = 0} (the default, running directly without a proxy): {@code X-Forwarded-For} is ignored entirely.</li>
+ *   <li>A list shorter than {@code trustedHops} (the request did not go through the whole proxy chain, for example a call straight to the ALB): not trusted,
+ *       the direct connection address is used, so every request that bypasses the chain lands in one shared counter (closed by default).</li>
+ *   <li>An entry that does not look like an IP address: not trusted, the direct connection address is used (so a counter cannot be locked by an arbitrary string).</li>
  * </ul>
- * Phải kết hợp với việc chỉ cho phép ALB nhận lưu lượng từ CloudFront (hạ tầng); xem ADR-006.
+ * It must be combined with only letting the ALB accept traffic from CloudFront (infrastructure); see ADR-006.
  */
 public final class ClientAddress {
 
@@ -34,18 +34,18 @@ public final class ClientAddress {
 
     private final int trustedHops;
 
-    /** Tạo bộ lấy địa chỉ với số proxy tin cậy (không âm). */
+    /** Creates the address resolver with the number of trusted proxies (not negative). */
     public ClientAddress(int trustedHops) {
         if (trustedHops < 0) throw new IllegalArgumentException(ClientAddressConstants.TRUSTED_HOPS_NEGATIVE_MESSAGE);
         this.trustedHops = trustedHops;
     }
 
-    /** Địa chỉ người gọi đáng tin nhất của yêu cầu; không tin được thì dùng địa chỉ kết nối trực tiếp. */
+    /** The most trustworthy address of the caller of the request; if none can be trusted the direct connection address is used. */
     public String of(HttpServletRequest request) {
         return groupIpv6Prefix(trustedAddress(request));
     }
 
-    /** Địa chỉ đáng tin nhất trước khi gộp tiền tố IPv6. */
+    /** The most trustworthy address before folding the IPv6 prefix. */
     private String trustedAddress(HttpServletRequest request) {
         String direct = request.getRemoteAddr();
         if (trustedHops == 0) return direct;
@@ -56,13 +56,13 @@ public final class ClientAddress {
     }
 
     /**
-     * Gộp địa chỉ IPv6 về tiền tố /64 (một thuê bao thường được cấp cả dải /64 nên không thể coi từng địa chỉ là một người);
-     * IPv4, IPv4 nhúng trong IPv6 và chuỗi không phân tích được giữ nguyên.
+     * Folds an IPv6 address to its /64 prefix (a subscriber is usually given a whole /64 so each address cannot be treated as one person);
+     * IPv4, IPv4 embedded in IPv6 and strings that cannot be parsed are kept as they are.
      */
     static String groupIpv6Prefix(String address) {
         if (!address.contains(ClientAddressConstants.IPV6_SEPARATOR) || !IPV6.matcher(address).matches()) return address;
         try {
-            // Chuỗi đã khớp mẫu chỉ gồm hex, ':' và '.', nên getByName không tra DNS.
+            // The string has already matched the pattern and has only hex, ':' and '.', so getByName does no DNS lookup.
             byte[] bytes = InetAddress.getByName(address).getAddress();
             if (bytes.length != ClientAddressConstants.IPV6_BYTE_COUNT) return address;
             return HexFormat.of().formatHex(bytes, 0, ClientAddressConstants.IPV6_PREFIX_BYTES) + ClientAddressConstants.IPV6_PREFIX_SUFFIX;
@@ -71,14 +71,14 @@ public final class ClientAddress {
         }
     }
 
-    /** Chuỗi có đúng dạng địa chỉ IPv4 (mỗi nhóm không quá 255) hoặc IPv6 dạng chữ hay không. */
+    /** Whether the string has exactly the form of an IPv4 address (each group at most 255) or a textual IPv6 address. */
     private static boolean isAddress(String text) {
         Matcher v4 = IPV4.matcher(text);
         if (v4.matches()) return hasValidIpv4Groups(v4);
         return IPV6.matcher(text).matches();
     }
 
-    /** Mọi nhóm của một địa chỉ IPv4 đã khớp mẫu đều không vượt giá trị lớn nhất. */
+    /** Every group of an IPv4 address that matched the pattern does not exceed the largest value. */
     private static boolean hasValidIpv4Groups(Matcher ipv4) {
         for (int group = 1; group <= ClientAddressConstants.IPV4_GROUP_COUNT; group++) {
             if (Integer.parseInt(ipv4.group(group)) > ClientAddressConstants.IPV4_GROUP_MAX) return false;
@@ -86,7 +86,7 @@ public final class ClientAddress {
         return true;
     }
 
-    /** Các mục của X-Forwarded-For (qua mọi header cùng tên) theo thứ tự từ trái sang phải, đã bỏ mục rỗng. */
+    /** The entries of X-Forwarded-For (across all headers with that name) from left to right, with empty entries removed. */
     private static List<String> forwardedChain(HttpServletRequest request) {
         List<String> chain = new ArrayList<>();
         Enumeration<String> headers = request.getHeaders(HttpConstants.HEADER_X_FORWARDED_FOR);
@@ -96,7 +96,7 @@ public final class ClientAddress {
         return chain;
     }
 
-    /** Tách một giá trị header theo dấu phẩy và thêm các mục không rỗng vào danh sách. */
+    /** Splits a header value on commas and adds the non-empty entries to the list. */
     private static void addNonEmptyEntries(List<String> chain, String headerValue) {
         for (String part : headerValue.split(CommonConstants.COMMA)) {
             String entry = part.trim();

@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng dấu vân tay khóa khôi phục (khóa chính là nhãn khóa). */
+/** Spring Data JPA repository of the recovery-key fingerprint table (the primary key is the key label). */
 public interface RecoveryKeyCheckJpaRepository extends JpaRepository<RecoveryKeyCheckEntity, String> {
 
-    /** Ghi dấu vân tay nếu nhãn chưa có (an toàn khi hai instance khởi động cùng lúc); trả số dòng đã ghi, 0 nghĩa là đã có. */
+    /** Records the fingerprint if the label is not there yet (safe when two instances start at the same time); returns the rows written, 0 means it already existed. */
     @Modifying(clearAutomatically = true)
     @Query(value = IdentityQueryConstants.INSERT_KEY_CHECK_IF_ABSENT, nativeQuery = true)
     int insertIfAbsent(@Param("version") String version, @Param("fingerprint") String fingerprint, @Param("now") Instant now);

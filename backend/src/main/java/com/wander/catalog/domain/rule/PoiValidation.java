@@ -4,23 +4,23 @@ import com.wander.catalog.domain.constant.PoiConstants;
 import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 
-/** Kiểm tra bất biến mới bằng lỗi miền, không phụ thuộc HTTP. */
+/** Checks the new invariants with a domain error, independent of HTTP. */
 public final class PoiValidation {
     private PoiValidation() {
     }
 
-    /** Từ chối bất biến sai, giữ mã và trường để adapter hoặc API xử lý. */
+    /** Rejects a wrong invariant, keeping the code and field for the adapter or the API to handle. */
     public static void require(boolean valid, String field) {
         if (!valid) throw WanderException.invalid(ErrorCodes.OUT_OF_RANGE, PoiConstants.INVALID_RECORD, field);
     }
 
-    /** Kiểm tra namespace và số OSM, phân biệt node/way/relation có cùng số. */
+    /** Checks the OSM namespace and number, distinguishing node/way/relation with the same number. */
     public static void requireOsmIdentity(String type, long id) {
         require(type != null && type.matches(PoiConstants.OSM_TYPE_PATTERN), PoiConstants.OSM_TYPE);
         require(id > 0, PoiConstants.OSM_ID);
     }
 
-    /** Kiểm tra chuỗi bắt buộc, không sửa chuỗi raw. */
+    /** Checks a required string, without changing the raw string. */
     public static void requireText(String value, String field) {
         require(value != null && !value.isBlank(), field);
     }

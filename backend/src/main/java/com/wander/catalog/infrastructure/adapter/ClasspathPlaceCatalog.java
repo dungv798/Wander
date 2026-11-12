@@ -46,9 +46,9 @@ import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
 /**
- * Adapter đọc kho địa điểm biên tập từ classpath (ADR-009, ADR-010): mỗi điểm đến một tệp {@code catalog/<id>.json},
- * ảnh ở {@code catalog/photos/}. Nạp và kiểm tra hết lúc khởi động: dữ liệu sai hay thiếu ảnh thì ứng dụng không chạy,
- * để lỗi biên tập lộ ngay thay vì thành thẻ hỏng trên giao diện.
+ * The adapter that reads the editorial venue catalog from the classpath (ADR-009, ADR-010): one file per destination {@code catalog/<id>.json},
+ * photos in {@code catalog/photos/}. It loads and validates everything at startup: wrong data or a missing photo means the application does not run,
+ * so an editorial error shows up immediately instead of becoming a broken card in the UI.
  */
 @Component
 public class ClasspathPlaceCatalog implements PlaceCatalog {
@@ -56,14 +56,14 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
     private final Map<String, Destination> byId;
     private final Map<String, List<ItineraryTemplate>> templatesByDestination;
 
-    /** Chỉ nạp điểm đến, không có lịch mẫu (dùng trong test của riêng kho địa điểm). */
+    /** Loads only destinations, no sample itineraries (used in the venue catalog's own tests). */
     public ClasspathPlaceCatalog(String pattern) {
         this(pattern, "");
     }
 
     /**
-     * Nạp mọi tệp điểm đến khớp {@code pattern} và mọi tệp lịch mẫu khớp {@code templatesPattern} (rỗng = không có), kiểm tra hết,
-     * và sắp điểm đến theo tên (không dấu) để kết quả ổn định.
+     * Loads every destination file that matches {@code pattern} and every sample-itinerary file that matches {@code templatesPattern} (empty = none), validates everything,
+     * and sorts destinations by name (without accents) so the result is stable.
      */
     @Autowired
     public ClasspathPlaceCatalog(@Value(CatalogConstants.LOCATION_EXPRESSION) String pattern,
@@ -92,14 +92,14 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return destinationId == null ? List.of() : templatesByDestination.getOrDefault(destinationId, List.of());
     }
 
-    /** Điểm đến khớp chuỗi tìm kiếm (đã chuẩn hóa) ở tên, vùng hoặc mô tả ngắn. */
+    /** The destinations whose name, region or short description matches the (normalized) search string. */
     private static boolean matches(Destination destination, String normalizedQuery) {
         return SearchText.normalize(destination.name()).contains(normalizedQuery)
                 || SearchText.normalize(destination.region()).contains(normalizedQuery)
                 || SearchText.normalize(destination.tagline()).contains(normalizedQuery);
     }
 
-    /** Đọc mọi tệp khớp mẫu; hai tệp cùng mã điểm đến hoặc tệp không đọc được thì ném lỗi khởi động. */
+    /** Reads every file that matches the pattern; two files with the same destination id or a file that cannot be read throw a startup error. */
     private static Map<String, Destination> loadAll(JsonMapper mapper, String pattern) {
         Map<String, Destination> loaded = new LinkedHashMap<>();
         try {
@@ -115,7 +115,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return loaded;
     }
 
-    /** Đọc mọi tệp lịch mẫu khớp mẫu (rỗng = không có); tệp trỏ tới điểm đến lạ, trùng điểm đến hoặc hỏng thì ném lỗi khởi động. */
+    /** Reads every sample-itinerary file that matches the pattern (empty = none); a file that points to an unknown destination, duplicates a destination or is broken throws a startup error. */
     private static Map<String, List<ItineraryTemplate>> loadTemplates(JsonMapper mapper, String pattern, Map<String, Destination> destinations) {
         Map<String, List<ItineraryTemplate>> loaded = new LinkedHashMap<>();
         if (pattern == null || pattern.isBlank()) return loaded;
@@ -138,7 +138,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return loaded;
     }
 
-    /** Dựng lịch mẫu domain từ một tệp: điểm đến phải có trong kho, mỗi địa điểm phải có trong điểm đến, mã lịch không trùng. */
+    /** Builds the domain itinerary from one file: the destination must be in the catalog, each place must be in the destination, itinerary ids must not repeat. */
     private static List<ItineraryTemplate> toTemplates(TemplatesFile source, Map<String, Destination> destinations) {
         Destination destination = destinations.get(source.destinationId());
         CatalogValidation.require(destination != null, CatalogMessages.TEMPLATE_DESTINATION_UNKNOWN, source.destinationId());
@@ -154,7 +154,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return List.copyOf(templates);
     }
 
-    /** Dựng một lịch mẫu domain; trạng thái lạ KHÔNG được coi là đã duyệt mà là lỗi dữ liệu. */
+    /** Builds one domain itinerary; an unknown status is NOT treated as approved but as a data error. */
     private static ItineraryTemplate toTemplate(TemplateEntry entry) {
         TemplateStatus status = TemplateStatus.fromCode(entry.status())
                 .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.TEMPLATE_STATUS_INVALID.formatted(entry.id(), entry.status())));
@@ -163,7 +163,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return new ItineraryTemplate(entry.id(), entry.title(), entry.summary(), status, days);
     }
 
-    /** Đọc một tệp điểm đến, dựng domain và kiểm tra mọi ảnh có thật trong classpath; sai thì nêu tên tệp. */
+    /** Reads one destination file, builds the domain and checks that every photo really exists on the classpath; if wrong, names the file. */
     private static Destination read(JsonMapper mapper, Resource file) {
         String fileName = String.valueOf(file.getFilename());
         try (InputStream in = file.getInputStream()) {
@@ -181,7 +181,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         }
     }
 
-    /** Mọi ảnh của mọi địa điểm đều có tệp trong thư mục ảnh của classpath. */
+    /** Every photo of every place has a file in the photo directory of the classpath. */
     private static void requirePhotoFilesExist(List<Place> places) {
         for (Place place : places) {
             for (Photo photo : place.photos()) {
@@ -190,25 +190,25 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         }
     }
 
-    /** Mọi ảnh khoảnh khắc đều có tệp trong thư mục ảnh của classpath. */
+    /** Every moment photo has a file in the photo directory of the classpath. */
     private static void requireMomentFilesExist(List<Moment> moments) {
         for (Moment moment : moments) {
             requireClasspathPhoto(moment.photo(), moment.id(), CatalogMessages.MOMENT_PHOTO_FILE_MISSING);
         }
     }
 
-    /** Ảnh bìa riêng (tùy chọn) của điểm đến; thiếu thì null. */
+    /** The destination's own cover photo (optional); null if missing. */
     private static Photo toCoverPhoto(PhotoFile source) {
         return source == null ? null : new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), source.caption(),
                 source.authorUrl(), source.thumbFile());
     }
 
-    /** Ảnh bìa riêng, nếu là tệp cục bộ, phải có trong thư mục ảnh của classpath. */
+    /** The own cover photo, if it is a local file, must exist in the photo directory of the classpath. */
     private static void requireCoverPhotoFileExists(Destination destination) {
         requireClasspathPhoto(destination.coverPhoto(), destination.id(), CatalogMessages.DESTINATION_PHOTO_FILE_MISSING);
     }
 
-    /** Ảnh cục bộ phải tồn tại dưới thư mục ảnh; bỏ qua ảnh ngoài và ảnh tùy chọn chưa khai báo. */
+    /** A local photo must exist under the photo directory; external photos and optional photos that are not declared are skipped. */
     private static void requireClasspathPhoto(Photo photo, String objectId, String missingMessage) {
         if (photo == null || photo.isExternal()) return;
         for (String name : photo.thumbFile() == null ? List.of(photo.file()) : List.of(photo.file(), photo.thumbFile())) {
@@ -219,7 +219,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         }
     }
 
-    /** Dựng danh sách khoảnh khắc domain; chủ đề lạ là lỗi dữ liệu, thiếu danh sách thì rỗng. */
+    /** Builds the list of domain moments; an unknown theme is a data error, a missing list is empty. */
     private static List<Moment> toMoments(List<MomentFile> sources) {
         return ImmutableLists.copyOrEmpty(sources).stream().map(source -> {
             MomentTheme theme = MomentTheme.fromCode(source.theme())
@@ -230,7 +230,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         }).toList();
     }
 
-    /** Dựng địa điểm domain từ dòng dữ liệu; tọa độ chỉ có khi đủ cả vĩ độ lẫn kinh độ. */
+    /** Builds the domain place from a data row; coordinates exist only when both latitude and longitude are present. */
     private static Place toPlace(String destinationId, PlaceFile source) {
         PlaceCategory category = requireCategory(source.category());
         Verdict verdict = Verdict.fromCode(source.verdict())
@@ -244,7 +244,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                 source.verdictReason(), toTimeSlots(source.bestSlots()), source.slotReason(), source.tips(), photos, source.wikipediaTitle(), toVenue(source.venue()));
     }
 
-    /** Metadata mới là tùy chọn: tệp catalog cũ không cần được viết lại. */
+    /** The new metadata is optional: an old catalog file does not need to be rewritten. */
     private static VenueDetails toVenue(VenueFile source) {
         if (source == null) return null;
         VenueKind kind = VenueKind.fromCode(source.kind())
@@ -253,7 +253,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                 source.phone(), source.serviceHours(), source.priceNote());
     }
 
-    /** Tập buổi trong ngày từ danh sách mã; mã lạ thì ném lỗi dữ liệu. */
+    /** The set of times of day from a list of codes; an unknown code throws a data error. */
     private static Set<TimeSlot> toTimeSlots(List<String> codes) {
         Set<TimeSlot> slots = EnumSet.noneOf(TimeSlot.class);
         for (String code : codes) {
@@ -263,7 +263,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return slots;
     }
 
-    /** Dựng mốc tham chiếu domain; thiếu tọa độ thì ném lỗi dữ liệu. */
+    /** Builds the domain reference landmark; missing coordinates throw a data error. */
     private static ReferencePoint toReference(ReferenceFile source) {
         if (source.lat() == null || source.lon() == null) {
             throw new IllegalArgumentException(CatalogMessages.REFERENCE_COORDINATES_MISSING.formatted(source.id()));
@@ -271,7 +271,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
         return new ReferencePoint(source.id(), source.name(), new GeoPoint(source.lat(), source.lon()), source.approximate());
     }
 
-    /** Dựng khối cẩm nang domain từ dòng dữ liệu. */
+    /** Builds the domain guide block from a data row. */
     private static GuideSection toSection(SectionFile source) {
         PlaceCategory category = requireCategory(source.category());
         List<GuideItem> items = source.items().stream()
@@ -280,13 +280,13 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                 source.summary(), source.bestMonths(), source.rainyMonths(), source.notes(), items);
     }
 
-    /** Loại địa điểm theo mã; mã lạ thì ném lỗi dữ liệu. */
+    /** The place kind by code; an unknown code throws a data error. */
     private static PlaceCategory requireCategory(String code) {
         return PlaceCategory.fromCode(code)
                 .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.CATEGORY_INVALID.formatted(code)));
     }
 
-    // ---- hình dạng tệp JSON (chỉ dùng trong adapter) ----
+    // ---- the shape of the JSON files (used only inside the adapter) ----
     record DestinationFile(String id, String name, String region, String tagline, String coverPlaceId, List<ReferenceFile> references,
                            List<SectionFile> guide, List<PlaceFile> places, List<MomentFile> moments, PhotoFile coverPhoto) {
     }

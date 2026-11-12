@@ -3,7 +3,7 @@ package com.wander.catalog.domain.vocabulary;
 import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
-/** Buổi trong ngày. Dùng cho gợi ý "nên đi buổi nào". */
+/** A time of day. Used for the suggestion 'which part of the day to go'. */
 public enum TimeSlot implements CodedValue {
     MORNING("sang"), NOON("trua"), AFTERNOON("chieu"), EVENING("toi");
 
@@ -18,7 +18,7 @@ public enum TimeSlot implements CodedValue {
         return code;
     }
 
-    /** Buổi theo mã ngắn trong dữ liệu; mã lạ trả rỗng. */
+    /** The time of day by short code in the data; an unknown code returns empty. */
     public static Optional<TimeSlot> fromCode(String code) {
         return CodedValue.find(TimeSlot.class, code);
     }

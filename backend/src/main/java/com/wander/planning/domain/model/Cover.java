@@ -7,12 +7,12 @@ import com.wander.planning.domain.constant.PlanningMessages;
 import com.wander.shared.kernel.error.WanderException;
 
 /**
- * Bìa chuyến bất biến, chỉ giữ loại và mã (DR-031); null ở chuyến là bìa tự động.
- * Planning chỉ kiểm dạng slug ảnh, không tra catalog để giữ ranh giới module.
- * Giới hạn: FE chịu trách nhiệm chỉ gửi mã ảnh có thật trong catalog của điểm đến chuyến.
+ * An immutable trip cover, keeping only the kind and the code (DR-031); null on a trip is the automatic cover.
+ * Planning checks only the photo slug shape, and does not look up the catalog, to keep the module boundary.
+ * Limitation: the front end is responsible for sending only photo ids that really exist in the catalog of the trip's destination.
  */
 public record Cover(String kind, String ref) {
-    /** Kiểm bìa ngay khi dựng: gradient thuộc tập cố định, ảnh chỉ nhận slug có giới hạn. */
+    /** Validates the cover as soon as it is built: a gradient belongs to a fixed set, a photo accepts only a bounded slug. */
     public Cover {
         boolean validRef = ref != null && ref.length() <= CoverConstants.MAX_REF_LENGTH;
         boolean photo = CoverConstants.PHOTO.equals(kind) && validRef && ref.matches(CoverConstants.PHOTO_REF_PATTERN);

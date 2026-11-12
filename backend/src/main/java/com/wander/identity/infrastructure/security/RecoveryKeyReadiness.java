@@ -17,8 +17,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 /**
- * Kiểm tra dữ liệu sau Flyway: không được bỏ khóa mà mã đang hiệu lực vẫn cần, và giá trị khóa không được đổi trong khi nhãn
- * giữ nguyên (so với dấu vân tay đã lưu). Lỗi thì dừng khởi động; không bao giờ in khóa.
+ * Checks the data after Flyway: a key that codes in force still need must not be dropped, and a key value must not change while its label
+ * stays the same (compared with the stored fingerprint). On failure startup stops; the key is never printed.
  */
 @Component
 @Profile(ConfigConstants.FREE_PROFILE)
@@ -30,7 +30,7 @@ public class RecoveryKeyReadiness implements ApplicationRunner {
     private final Clock clock;
     private final TransactionTemplate transaction;
 
-    /** Nhận truy vấn metadata, bảng dấu vân tay, bộ khóa, đồng hồ và bộ quản lý giao dịch; không cần đọc mã plaintext hoặc in secret. */
+    /** Takes the metadata query, the fingerprint table, the key set, the clock and the transaction manager; it never needs to read a plaintext code or print a secret. */
     public RecoveryKeyReadiness(RecoveryCodeJpaRepository codes, RecoveryKeyCheckJpaRepository checks, RecoveryCodeHasher hasher, Clock clock,
                                 PlatformTransactionManager transactionManager) {
         this.codes = codes;
@@ -46,7 +46,7 @@ public class RecoveryKeyReadiness implements ApplicationRunner {
         ensureFingerprintsMatch();
     }
 
-    /** Mọi nhãn khóa mà mã đang hiệu lực hoặc mã chờ còn cần phải có trong cấu hình. */
+    /** Every key label that codes in force or pending codes still need must be in the configuration. */
     void ensureRequiredKeysConfigured() {
         if (!hasher.keyVersions().containsAll(codes.findRequiredKeyVersions())) {
             throw new IllegalStateException(IdentityMessages.RECOVERY_KEY_STILL_REQUIRED);
@@ -54,14 +54,14 @@ public class RecoveryKeyReadiness implements ApplicationRunner {
     }
 
     /**
-     * Nhãn lần đầu thấy thì ghi dấu vân tay (tin ở lần dùng đầu); nhãn đã có mà dấu vân tay khác nghĩa là giá trị pepper đã
-     * bị đổi trong khi nhãn giữ nguyên, nên dừng khởi động thay vì để mọi mã cũ vô hiệu im lặng.
+     * A label seen for the first time gets its fingerprint recorded (trust on first use); a label that exists with a different fingerprint means the pepper value was
+     * changed while the label stayed the same, so startup stops instead of silently invalidating every old code.
      */
     void ensureFingerprintsMatch() {
         transaction.executeWithoutResult(status -> verifyFingerprints());
     }
 
-    /** Ghi hoặc so dấu vân tay của từng nhãn khóa trong một giao dịch (lệnh ghi cần giao dịch dù chạy lúc khởi động). */
+    /** Records or compares the fingerprint of each key label in one transaction (a write needs a transaction even when it runs at startup). */
     private void verifyFingerprints() {
         for (String version : hasher.keyVersions()) {
             String fingerprint = hasher.keyFingerprint(version).orElseThrow();

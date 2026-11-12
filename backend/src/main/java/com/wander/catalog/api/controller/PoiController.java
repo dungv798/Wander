@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/** API POI cộng thêm, dùng chung hạn mức công khai của catalog. */
+/** The extra POI API, sharing the catalog's public limit. */
 @RestController
 @SecurityRequirements
 public class PoiController {
@@ -22,14 +22,14 @@ public class PoiController {
     private final RateLimits limits;
     private final ClientAddress clientAddress;
 
-    /** Nhận truy vấn, hạn mức và bộ lấy địa chỉ đã chuẩn hóa của hệ thống. */
+    /** Takes the query, the limit and the system's normalized address resolver. */
     public PoiController(PoiQueries queries, RateLimits limits, ClientAddress clientAddress) {
         this.queries = queries;
         this.limits = limits;
         this.clientAddress = clientAddress;
     }
 
-    /** Tìm ứng viên theo mét; giới hạn tốc độ trước khi phân tích các tham số không tin cậy. */
+    /** Finds candidates by meters; rate limits before parsing the untrusted parameters. */
     @GetMapping(PoiApiConstants.PATH)
     public CatalogResponses.PoiResponse searchPoi(HttpServletRequest request, @PathVariable String id,
             @RequestParam(name = PoiConstants.KIND, required = false) String kind,

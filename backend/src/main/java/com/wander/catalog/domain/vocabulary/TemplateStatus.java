@@ -4,9 +4,9 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Trạng thái duyệt nội dung của một lịch mẫu (DR-018 N-2): {@code draft} = bản nháp chờ PO duyệt, {@code approved} = PO đã duyệt,
- * {@code reference} = lịch trình tham khảo (DR-033): ghép từ nơi có vị trí đã kiểm, ghi rõ điểm xuất phát, phương tiện giả định và nhịp, không hứa giờ.
- * Mã lạ KHÔNG được coi là đã duyệt: {@link #fromCode} trả rỗng và adapter từ chối tệp.
+ * The content review state of a sample itinerary (DR-018 N-2): {@code draft} = a draft waiting for PO approval, {@code approved} = approved by the PO,
+ * {@code reference} = a reference itinerary (DR-033): assembled from places whose location was checked, it states the starting point, the assumed vehicle and the pace, and promises no times.
+ * An unknown code is NOT treated as approved: {@link #fromCode} returns empty and the adapter rejects the file.
  */
 public enum TemplateStatus implements CodedValue {
     DRAFT("draft", "Bản nháp"),
@@ -26,12 +26,12 @@ public enum TemplateStatus implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Trạng thái theo mã trong dữ liệu và API; mã lạ trả rỗng. */
+    /** The state by code in data and API; an unknown code returns empty. */
     public static Optional<TemplateStatus> fromCode(String code) {
         return CodedValue.find(TemplateStatus.class, code);
     }

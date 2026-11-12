@@ -14,13 +14,13 @@ import java.util.UUID;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-/** Cài đặt {@link RatingStore} bằng JPA và SQL thuần cho thao tác ghi nguyên tử. */
+/** Implements {@link RatingStore} with JPA and plain SQL for the atomic write. */
 @Repository
 public class JpaRatingStore implements RatingStore {
 
     private final PlaceRatingJpaRepository ratings;
 
-    /** Nhận repository của điểm rating. */
+    /** Takes the repository of the rating scores. */
     public JpaRatingStore(PlaceRatingJpaRepository ratings) {
         this.ratings = ratings;
     }
@@ -73,7 +73,7 @@ public class JpaRatingStore implements RatingStore {
         ratings.insertReport(ratingId, reporterId, now);
     }
 
-    /** Đổi entity sang mô hình domain. */
+    /** Turns an entity into a domain model. */
     private static PlaceRating toDomain(PlaceRatingEntity entity) {
         return new PlaceRating(entity.getId(), entity.getIdentityId(), entity.getPlaceRef(), entity.getStars(), entity.getComment(),
                 entity.getCreatedAt(), entity.getUpdatedAt());

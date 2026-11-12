@@ -16,10 +16,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Băm mã khôi phục bằng HMAC-SHA-256 với khóa (pepper) lấy từ cấu hình {@code wander.security.recovery-pepper}
- * (biến môi trường {@code WANDER_RECOVERY_PEPPER}). Thiếu khóa hoặc khóa ngắn hơn
- * {@value IdentityConstants#RECOVERY_PEPPER_MIN_BYTES} byte thì ứng dụng KHÔNG khởi động (không có khóa mặc định, để không
- * bao giờ chạy với khóa đoán được). Không bao giờ ghi khóa vào log hay lời báo lỗi.
+ * Hashes recovery codes with HMAC-SHA-256 using a key (pepper) taken from the configuration {@code wander.security.recovery-pepper}
+ * (environment variable {@code WANDER_RECOVERY_PEPPER}). A missing key, or one shorter than
+ * {@value IdentityConstants#RECOVERY_PEPPER_MIN_BYTES} bytes, means the application does NOT start (there is no default key, so it can
+ * never run with a guessable one). The key is never written to a log or an error message.
  */
 @Component
 public class HmacRecoveryCodeHasher implements RecoveryCodeHasher {
@@ -28,12 +28,12 @@ public class HmacRecoveryCodeHasher implements RecoveryCodeHasher {
     private final Map<String, SecretKeySpec> keys;
     private final List<String> versions;
 
-    /** Dựng từ khóa cấu hình; khóa thiếu, trống hoặc ngắn thì ném lỗi khởi động (lời báo không chứa khóa). */
+    /** Built from the configured key; a missing, empty or short key throws a startup error (the message does not contain the key). */
     public HmacRecoveryCodeHasher(String pepper) {
         this(pepper, IdentityConstants.RECOVERY_LEGACY_KEY_VERSION, "", "");
     }
 
-    /** Nhận khóa hiện hành và tùy chọn khóa trước đó; thiếu một nửa cấu hình hoặc trùng nhãn thì dừng khởi động. */
+    /** Takes the current key and optionally the previous key; half a configuration or a duplicate label stops startup. */
     @Autowired
     public HmacRecoveryCodeHasher(@Value(IdentityConstants.RECOVERY_PEPPER_EXPRESSION) String pepper,
                                  @Value(IdentityConstants.RECOVERY_KEY_VERSION_EXPRESSION) String currentVersion,
@@ -51,12 +51,12 @@ public class HmacRecoveryCodeHasher implements RecoveryCodeHasher {
         this.versions = hasPrevious ? List.of(currentVersion, previousVersion) : List.of(currentVersion);
     }
 
-    /** Nhãn khóa chỉ chứa ký tự cấu hình cho phép, tối đa 32 ký tự. */
+    /** A key label contains only the characters the configuration allows, at most 32 characters. */
     private static boolean validVersion(String version) {
         return version != null && version.matches(IdentityConstants.RECOVERY_KEY_VERSION_REGEX);
     }
 
-    /** Tạo khóa HMAC đã kiểm độ dài, không đưa secret vào ngoại lệ. */
+    /** Creates the HMAC key with its length checked, without putting the secret into an exception. */
     private static SecretKeySpec keyOf(String pepper) {
         boolean unresolvedPlaceholder = pepper != null && pepper.strip().startsWith(IdentityConstants.PLACEHOLDER_PREFIX);
         byte[] bytes = pepper == null || unresolvedPlaceholder ? new byte[0] : pepper.strip().getBytes(StandardCharsets.UTF_8);
@@ -92,7 +92,7 @@ public class HmacRecoveryCodeHasher implements RecoveryCodeHasher {
                 digest(IdentityConstants.RECOVERY_KEY_CHECK_PREFIX + keyVersion, key).substring(0, IdentityConstants.RECOVERY_KEY_FINGERPRINT_HEX_LENGTH));
     }
 
-    /** Băm với khóa đã chọn; mỗi lần dùng Mac riêng vì Mac không an toàn khi chia sẻ giữa thread. */
+    /** Hashes with the chosen key; each use gets its own Mac because a Mac is not safe to share between threads. */
     private static String digest(String normalizedCode, SecretKeySpec key) {
         try {
             Mac mac = Mac.getInstance(IdentityConstants.RECOVERY_HMAC_ALGORITHM);

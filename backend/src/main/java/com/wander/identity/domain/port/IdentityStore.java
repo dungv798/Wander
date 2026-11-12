@@ -14,122 +14,122 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Cổng lưu trữ của Identity (port). Phương thức có chữ {@code ForUpdate} khóa dòng (SELECT … FOR UPDATE)
- * để hai yêu cầu đồng thời không cùng tiêu thụ một mã (INV-7).
+ * Storage port of Identity. A method with {@code ForUpdate} in its name locks the row (SELECT ... FOR UPDATE)
+ * so two concurrent requests cannot consume the same code (INV-7).
  */
 public interface IdentityStore {
 
-    // ---- danh tính, phiên ----
+    // ---- identities, sessions ----
 
-    /** Lưu danh tính mới. */
+    /** Saves a new identity. */
     void addIdentity(Identity identity);
 
-    /** Khóa danh tính đến hết giao dịch, tuần tự hóa mọi thay đổi mã khôi phục theo cùng một thứ tự khóa. */
+    /** Locks the identity until the end of the transaction, serializing every recovery-code change in the same lock order. */
     void lockIdentity(UUID identityId);
 
-    /** Lưu phiên mới. */
+    /** Saves a new session. */
     void addSession(Session session);
 
-    /** Phiên theo băm bí mật (còn hiệu lực hay không do người gọi kiểm tra). */
+    /** The session by its secret hash (whether it is still valid is checked by the caller). */
     Optional<Session> findSessionByTokenHash(String tokenHash);
 
-    /** Ghi thời điểm phiên được dùng gần nhất. */
+    /** Records the time the session was last used. */
     void touchSession(UUID sessionId, Instant now);
 
-    /** Các phiên chưa bị thu hồi của danh tính, theo thứ tự tạo. */
+    /** The identity's sessions that are not revoked, in creation order. */
     List<Session> activeSessions(UUID identityId);
 
-    /** Phiên chưa bị thu hồi của đúng danh tính này; phiên của người khác coi như không có. */
+    /** A session of exactly this identity that is not revoked; another person's session counts as absent. */
     Optional<Session> findActiveSession(UUID sessionId, UUID identityId);
 
-    /** Ghi một sự kiện bảo mật rồi cắt bớt, chỉ giữ {@code keepLatest} sự kiện mới nhất của danh tính. */
+    /** Records a security event and then trims, keeping only the {@code keepLatest} newest events of the identity. */
     boolean addEvent(UUID eventId, SecurityEvent event, int keepLatest);
 
-    /** Tối đa {@code limit} sự kiện gần nhất của danh tính, mới nhất trước. */
+    /** At most {@code limit} of the identity's latest events, newest first. */
     List<SecurityEvent> recentEvents(UUID identityId, int limit);
 
-    /** Có sự kiện thêm thiết bị (ghép, khôi phục) mới hơn lần xem gần nhất không. */
+    /** Whether there is a device-added event (pairing, recovery) newer than the last time it was viewed. */
     boolean hasUnseenAlert(UUID identityId);
 
-    /** Ghi mốc "đã xem" của danh tính: mọi sự kiện hiện có coi như đã thấy. */
+    /** Records the identity's 'seen' mark: every existing event counts as seen. */
     void markEventsSeen(UUID identityId);
 
-    /** Thu hồi một phiên. */
+    /** Revokes a session. */
     void revokeSession(UUID sessionId, Instant now);
 
-    /** Đặt hoặc xóa (null) tên thiết bị của một phiên. */
+    /** Sets or clears (null) the device name of a session. */
     void renameSession(UUID sessionId, String deviceName);
 
-    /** Bí mật phiên đã thuộc về một phiên, một lần khôi phục đang chờ, hoặc một yêu cầu ghép thiết bị đang chờ. */
+    /** The session secret already belongs to a session, a pending recovery, or a pending device pairing request. */
     boolean isTokenHashInUse(String tokenHash);
 
-    // ---- mã khôi phục ----
+    // ---- recovery codes ----
 
-    /** Lưu mã khôi phục mới. */
+    /** Saves a new recovery code. */
     void addRecoveryCode(RecoveryCode code);
 
-    /** Ghi việc vô hiệu mã ngay (flush) trước khi thêm mã mới, vì có ràng buộc "một mã hợp lệ / danh tính". */
+    /** Writes the invalidation of the code right away (flush) before adding a new code, because of the 'one valid code per identity' constraint. */
     void invalidateRecoveryCode(RecoveryCode invalidated);
 
-    /** Mã còn hợp lệ theo băm. */
+    /** The code that is still valid, by hash. */
     Optional<RecoveryCode> findActiveCodeByHash(String codeHash);
 
-    /** Mã còn hợp lệ của danh tính (nếu đã có). */
+    /** The identity's valid code (if it has one). */
     Optional<RecoveryCode> findActiveCode(UUID identityId);
 
-    /** Mã theo id, khóa dòng để hai lần khôi phục đồng thời cùng một mã chỉ một lần thắng. */
+    /** The code by id, row-locked so that of two concurrent recoveries with the same code only one wins. */
     Optional<RecoveryCode> findCodeForUpdate(UUID codeId);
 
-    // ---- lần thử khôi phục ----
+    // ---- recovery attempts ----
 
-    /** Lần thử theo mã nhận diện, khóa dòng. */
+    /** The attempt by its id, row-locked. */
     Optional<RecoveryAttempt> findAttemptForUpdate(String attemptKey);
 
-    /** Đọc lần thử để xác định danh tính trước khi khóa; phải đọc lại có khóa trước khi thay đổi trạng thái. */
+    /** Reads the attempt to find the identity before locking; it must be read again with a lock before the state changes. */
     Optional<RecoveryAttempt> findAttempt(String attemptKey);
 
-    /** Lưu lần thử (thêm mới hoặc cập nhật). */
+    /** Saves the attempt (insert or update). */
     void saveAttempt(RecoveryAttempt attempt);
 
-    // ---- tái tạo mã ----
+    // ---- code regeneration ----
 
-    /** Hủy mọi mã thay thế đang chờ của danh tính (chỉ có một mã chờ tại mọi thời điểm). */
+    /** Cancels every pending replacement code of the identity (there is only one pending code at any moment). */
     void voidPendingReplacements(UUID identityId);
 
-    /** Lưu mã thay thế (thêm mới hoặc cập nhật). */
+    /** Saves a replacement code (insert or update). */
     void saveReplacement(CodeReplacement replacement);
 
-    /** Mã thay thế đang chờ của đúng danh tính này. */
+    /** The pending replacement code of exactly this identity. */
     Optional<CodeReplacement> findPendingReplacement(UUID id, UUID identityId);
 
-    // ---- ghép thiết bị ----
+    // ---- device pairing ----
 
-    /** Mã ghép đang được một yêu cầu còn hạn dùng. */
+    /** The pairing code is in use by a request that has not expired. */
     boolean isPairingCodeActive(String pairingCode, Instant now);
 
-    /** Lưu yêu cầu ghép thiết bị (thêm mới hoặc cập nhật). */
+    /** Saves a device pairing request (insert or update). */
     void saveDeviceLink(DeviceLink link);
 
-    /** Yêu cầu ghép thiết bị theo id. */
+    /** A device pairing request by id. */
     Optional<DeviceLink> findDeviceLink(UUID id);
 
-    /** Yêu cầu ghép còn chờ và còn hạn theo mã ghép, đọc không khóa (xem trước). */
+    /** A pairing request that is pending and not expired for the pairing code, read without a lock (preview). */
     Optional<DeviceLink> findActiveDeviceLink(String pairingCode, Instant now);
 
-    /** Yêu cầu ghép còn chờ và còn hạn theo mã ghép, khóa dòng để mã chỉ dùng một lần. */
+    /** A pairing request that is pending and not expired for the pairing code, row-locked so the code is single-use. */
     Optional<DeviceLink> findActiveDeviceLinkForUpdate(String pairingCode, Instant now);
 
-    // ---- xác thực lại ----
+    // ---- re-authentication ----
 
-    /** Lưu yêu cầu xác thực lại (thêm mới hoặc cập nhật). */
+    /** Saves a re-authentication request (insert or update). */
     void saveStepUp(StepUpRequest request);
 
-    /** Như {@link #findApprovableStepUp} nhưng khóa dòng: duyệt/từ chối đồng thời chỉ một lượt thắng. */
+    /** Like {@link #findApprovableStepUp} but row-locked: of concurrent approve/deny calls only one wins. */
     Optional<StepUpRequest> findApprovableStepUpForUpdate(String approvalCode, UUID identityId, UUID notSessionId, Instant now);
 
-    /** Yêu cầu có thể duyệt: đúng mã, đúng danh tính, đang chờ, còn hạn và do một phiên KHÁC xin (đọc không khóa). */
+    /** A request that can be approved: right code, right identity, pending, not expired, and requested by ANOTHER session (read without a lock). */
     Optional<StepUpRequest> findApprovableStepUp(String approvalCode, UUID identityId, UUID notSessionId, Instant now);
 
-    /** Yêu cầu đã được duyệt và dùng được cho đúng phiên, đúng thao tác, còn hạn; khóa dòng để phê duyệt chỉ dùng một lần. */
+    /** A request that was approved and is usable for exactly this session and action, not expired; row-locked so an approval is single-use. */
     Optional<StepUpRequest> findUsableStepUp(UUID id, UUID identityId, UUID sessionId, String operation, Instant now);
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/** API sở thích theo danh tính (BE-10): đọc và thay thế "Bạn mê gì?" của onboarding, gắn với danh tính chứ không với một chuyến. */
+/** Preferences-by-identity API (BE-10): read and replace the onboarding's 'What are you into?', tied to the identity and not to one trip. */
 @RestController
 @RequestMapping(PlanningApiConstants.PREFERENCES_PATH)
 public class PreferencesController {
@@ -20,19 +20,19 @@ public class PreferencesController {
     private final PlanningCommandHandler commands;
     private final PlanningQueries queries;
 
-    /** Nhận bộ xử lý lệnh (ghi) và phía đọc. */
+    /** Takes the command handler (writes) and the read side. */
     public PreferencesController(PlanningCommandHandler commands, PlanningQueries queries) {
         this.commands = commands;
         this.queries = queries;
     }
 
-    /** Sở thích hiện có của danh tính đang gọi (mã + nhãn, theo thứ tự cố định); chưa đặt thì rỗng. */
+    /** The existing preferences of the calling identity (code + label, in a fixed order); empty if not set. */
     @GetMapping
     public PlanningResponses.InterestsResponse preferences(AuthenticatedPrincipal principal) {
         return new PlanningResponses.InterestsResponse(queries.interestPreferences(principal.identityId()));
     }
 
-    /** Thay toàn bộ sở thích (idempotent); danh sách rỗng hoặc null xóa; trả sở thích sau khi đặt. */
+    /** Replaces all preferences (idempotent); an empty or null list clears them; returns the preferences after setting. */
     @PutMapping(PlanningApiConstants.INTERESTS_PATH)
     public PlanningResponses.InterestsResponse setInterests(AuthenticatedPrincipal principal, @RequestBody InterestsRequest body) {
         commands.setInterestPreferences(body.toCommand(principal.identityId()));

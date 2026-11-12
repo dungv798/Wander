@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code owner_preferences}: sở thích theo danh tính (BE-10). Khóa chính chính là mã danh tính của chủ. */
+/** Table {@code owner_preferences}: preferences by identity (BE-10). The primary key is the owner's identity id itself. */
 @Entity
 @Table(name = "owner_preferences")
 public class OwnerPreferencesEntity {
@@ -17,7 +17,7 @@ public class OwnerPreferencesEntity {
     @Column(name = "owner_identity_id")
     private UUID ownerIdentityId;
 
-    /** Mã sở thích cách nhau bằng dấu phẩy, theo thứ tự khai báo; rỗng = không có. */
+    /** Preference codes separated by commas, in declaration order; empty = none. */
     @Column(nullable = false, length = PlanningConstants.INTERESTS_COLUMN_LENGTH)
     private String interests = "";
 

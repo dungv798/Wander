@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code recovery_codes} (ánh xạ JPA; mô hình domain ở identity.domain.IdentityModel). */
+/** Table {@code recovery_codes} (JPA mapping; the domain model is in identity.domain.IdentityModel). */
 @Entity
 @Table(name = "recovery_codes")
 public class RecoveryCodeEntity {

@@ -1,8 +1,8 @@
 package com.wander.catalog.api.constant;
 
-/** Đường dẫn và khóa phản hồi cộng thêm của POI. */
+/** The path and extra response keys of POI. */
 public final class PoiApiConstants {
-    /** Endpoint POI theo điểm đến, nằm trong mẫu công khai catalog hiện có. */
+    /** The POI endpoint by destination, inside the existing public catalog pattern. */
     public static final String PATH = CatalogApiConstants.BASE_PATH + CatalogApiConstants.DESTINATION_PATH + "/poi";
 
     private PoiApiConstants() {

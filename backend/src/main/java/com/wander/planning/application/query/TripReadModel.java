@@ -6,56 +6,56 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Cổng đọc (phía Query của CQRS): trả về dòng dữ liệu phẳng, không nạp aggregate.
- * Cài đặt bằng JPQL trong infrastructure. Phía đọc có thể tối ưu riêng (index, view, cache) mà không đụng domain.
+ * The read port (the Query side of CQRS): returns flat data rows, never loads the aggregate.
+ * Implemented with JPQL in infrastructure. The read side can be optimized on its own (indexes, views, cache) without touching the domain.
  */
 public interface TripReadModel {
 
-    /** Chuyến theo mã của đúng chủ; chuyến của người khác coi như không có. */
+    /** A trip by id of exactly this owner; someone else's trip counts as absent. */
     Optional<TripRow> findTrip(UUID tripId, UUID ownerId);
 
-    /** Chuyến của chủ, mới nhất trước (ngày đi giảm dần, rồi thời điểm tạo giảm dần). */
+    /** The owner's trips, newest first (start date descending, then creation time descending). */
     List<TripRow> listTrips(UUID ownerId);
 
-    /** Vai của danh tính trong chuyến còn hiện; trống nếu không phải thành viên hoặc chuyến đã xóa. */
+    /** The role of an identity in a visible trip; empty if not a member or the trip is deleted. */
     Optional<String> roleIn(UUID tripId, UUID identityId);
 
-    /** Mã thành viên của danh tính trong chuyến còn hiện. */
+    /** The member id of an identity in a visible trip. */
     Optional<UUID> memberIdIn(UUID tripId, UUID identityId);
 
-    /** Hạng mục checklist của chuyến theo nhóm rồi vị trí. */
+    /** The checklist items of the trip by group then position. */
     List<ChecklistRow> checklist(UUID tripId);
 
-    /** Mọi thành viên của chuyến, theo thứ tự vào. */
+    /** Every member of the trip, in the order they joined. */
     List<MemberRow> members(UUID tripId);
 
-    /** Mọi đề nghị xóa của chuyến, cũ trước. */
+    /** Every deletion request of the trip, oldest first. */
     List<RequestRow> deletionRequests(UUID tripId);
 
-    /** Liên kết mời chưa thu hồi của chuyến, nếu có. */
+    /** The trip's invite link that is not revoked, if any. */
     Optional<InviteRow> unrevokedInvite(UUID tripId);
 
-    /** Xem trước liên kết mời còn dùng được tại {@code now}; mã sai/hết hạn/thu hồi/chuyến đã xóa đều trả trống. */
+    /** Preview of an invite link that is still usable at {@code now}; a wrong, expired, revoked code or a deleted trip all return empty. */
     Optional<InvitePreviewRow> previewInvite(String codeHash, java.time.Instant now);
 
-    /** Chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
+    /** The owner's soft-deleted trips, most recently deleted first. */
     List<TripRow> listDeletedTrips(UUID ownerId);
 
-    /** Mọi mục (kể cả đã xóa mềm), theo ngày rồi thứ tự thủ công. */
+    /** Every item (including soft-deleted), by day then manual order. */
     List<ItemRow> items(UUID tripId);
 
-    /** Một mục của chuyến theo mã (kể cả đã xóa mềm). */
+    /** One item of the trip by id (including soft-deleted). */
     Optional<ItemRow> item(UUID tripId, UUID itemId);
 
-    /** Mục đã xóa mềm, xóa gần nhất trước. */
+    /** Soft-deleted items, most recently deleted first. */
     List<ItemRow> trash(UUID tripId);
 
-    /** Sở thích theo danh tính dạng chuỗi mã cách nhau bằng dấu phẩy; chưa đặt thì chuỗi rỗng. */
+    /** Preferences by identity as a comma-separated string of codes; an empty string if not set. */
     String interestPreferences(UUID ownerId);
 
-    /** Hoàn thành theo mục: mã mục → mã danh tính những người đã xong (chỉ dùng nội bộ để đổi sang mã thành viên). */
+    /** Completion by item: item id -> the identity ids of those who finished (used only internally to convert to member ids). */
     java.util.Map<UUID, List<UUID>> completions(UUID tripId);
 
-    /** Mã các mục mà người này đã đánh dấu hoàn thành. */
+    /** The ids of the items this person marked as done. */
     Set<UUID> doneItemIds(UUID tripId, UUID personId);
 }

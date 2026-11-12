@@ -19,7 +19,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Phía đọc thành viên và liên kết mời. Mọi hàm kiểm quyền theo vai TRƯỚC khi đọc; người ngoài ⇒ 404. */
+/** The read side of members and invite links. Every method checks the role permission BEFORE reading; an outsider => 404. */
 @Service
 @Transactional(readOnly = true)
 public class MembershipQueries {
@@ -28,14 +28,14 @@ public class MembershipQueries {
     private final InviteCodeHasher hasher;
     private final Clock clock;
 
-    /** Nhận cổng đọc, bộ băm mã mời và đồng hồ. */
+    /** Takes the read port, the invite-code hasher and the clock. */
     public MembershipQueries(TripReadModel read, InviteCodeHasher hasher, Clock clock) {
         this.read = read;
         this.hasher = hasher;
         this.clock = clock;
     }
 
-    /** Thành viên của chuyến (mọi thành viên xem được); {@code self} đánh dấu chính người gọi. KHÔNG trả mã danh tính. */
+    /** The trip's members (every member can see them); {@code self} marks the caller. The identity id is NOT returned. */
     public List<MemberView> members(UUID identityId, UUID tripId) {
         requireTrip(identityId, tripId);
         return read.members(tripId).stream()
@@ -43,7 +43,7 @@ public class MembershipQueries {
                 .toList();
     }
 
-    /** Trạng thái liên kết mời đang có (chỉ Organizer); không trả mã. Chưa có thì trống. */
+    /** Status of the existing invite link (Organizer only); the code is not returned. Empty if there is none. */
     public Optional<InviteView> invite(UUID identityId, UUID tripId) {
         TripRow trip = requireTrip(identityId, tripId);
         if (!MemberRole.ORGANIZER.code().equals(trip.role())) {
@@ -53,7 +53,7 @@ public class MembershipQueries {
                 Timestamps.format(row.expiresAt()), Timestamps.now(clock).isBefore(row.expiresAt())));
     }
 
-    /** Xem trước liên kết mời (công khai): sai dạng, sai, hết hạn, thu hồi, chuyến đã xóa ⇒ CÙNG MỘT lỗi INVALID_INVITE. */
+    /** Preview of an invite link (public): wrong shape, wrong, expired, revoked, trip deleted => THE SAME error INVALID_INVITE. */
     public InvitePreviewView preview(String code) {
         if (!hasher.isWellFormed(code)) throw invalidInvite();
         return read.previewInvite(hasher.hash(code), Timestamps.now(clock))
@@ -61,8 +61,8 @@ public class MembershipQueries {
     }
 
     /**
-     * Đề nghị xóa của chuyến: Organizer thấy tất cả (chờ duyệt trước, rồi đã quyết định mới nhất trước); thành viên chỉ thấy đề nghị của MÌNH
-     * (kể cả "Đã từ chối", Q9). Người ngoài ⇒ 404.
+     * The trip's deletion requests: the Organizer sees all (pending first, then decided ones, newest first); a member sees only THEIR OWN requests
+     * (including 'Rejected', Q9). An outsider => 404.
      */
     public List<DeletionRequestView> deletionRequests(UUID identityId, UUID tripId) {
         TripRow trip = requireTrip(identityId, tripId);
@@ -79,12 +79,12 @@ public class MembershipQueries {
                 .toList();
     }
 
-    /** Chuyến còn hiện mà người này là thành viên; người ngoài ⇒ 404. */
+    /** A visible trip of which this person is a member; an outsider => 404. */
     private TripRow requireTrip(UUID identityId, UUID tripId) {
         return read.findTrip(tripId, identityId).orElseThrow(WanderException::notFound);
     }
 
-    /** Lỗi chung cho mọi liên kết không dùng được. */
+    /** The common error for every link that cannot be used. */
     private static WanderException invalidInvite() {
         return WanderException.invalid(PlanningErrorCodes.INVALID_INVITE, PlanningMessages.INVALID_INVITE, PlanningFields.INVITE_CODE);
     }

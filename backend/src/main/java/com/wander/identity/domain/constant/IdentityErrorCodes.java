@@ -1,42 +1,42 @@
 package com.wander.identity.domain.constant;
 
-/** Mã lỗi riêng của module identity (hợp đồng API, khớp {@code web/src/api.ts}). Mã dùng chung ở {@code ErrorCodes}. */
+/** Error codes specific to the identity module (the API contract, matching {@code web/src/api.ts}). Shared codes are in {@code ErrorCodes}. */
 public final class IdentityErrorCodes {
 
-    /** Mã ghép thiết bị sai hoặc hết hạn. */
+    /** The device pairing code is wrong or expired. */
     public static final String INVALID_PAIRING_CODE = "INVALID_PAIRING_CODE";
 
-    /** Mã khôi phục sai hoặc đã dùng. */
+    /** The recovery code is wrong or already used. */
     public static final String INVALID_CODE = "INVALID_CODE";
 
-    /** Mã thay thế nhập lại không đúng. */
+    /** The replacement code typed again is wrong. */
     public static final String INVALID_REPLACEMENT = "INVALID_REPLACEMENT";
 
-    /** Mã nhận diện lần thử không hợp lệ. */
+    /** The attempt id is not valid. */
     public static final String INVALID_ATTEMPT = "INVALID_ATTEMPT";
 
-    /** Bí mật phiên không hợp lệ hoặc đã dùng. */
+    /** The session secret is not valid or was already used. */
     public static final String INVALID_SESSION_TOKEN = "INVALID_SESSION_TOKEN";
 
-    /** Thao tác không nằm trong danh sách cần xác thực lại. */
+    /** The action is not in the list of actions that need re-authentication. */
     public static final String INVALID_OPERATION = "INVALID_OPERATION";
 
-    /** Mã phê duyệt xác thực lại sai hoặc hết hạn. */
+    /** The re-authentication approval code is wrong or expired. */
     public static final String INVALID_APPROVAL_CODE = "INVALID_APPROVAL_CODE";
 
-    /** Người duyệt chọn sai số khớp. */
+    /** The approver chose the wrong matching number. */
     public static final String MATCH_MISMATCH = "MATCH_MISMATCH";
 
-    /** Lần thử khôi phục hoặc mã thay thế đã hết hạn. */
+    /** The recovery attempt or replacement code has expired. */
     public static final String ATTEMPT_EXPIRED = "ATTEMPT_EXPIRED";
 
-    /** Mã khôi phục đã được dùng ở một lần khôi phục khác. */
+    /** The recovery code was already used in another recovery. */
     public static final String CODE_ALREADY_USED = "CODE_ALREADY_USED";
 
-    /** Mã khôi phục đã đổi trong lúc chờ xác nhận. */
+    /** The recovery code changed while waiting for confirmation. */
     public static final String CODE_CHANGED = "CODE_CHANGED";
 
-    /** Cần xác thực lại trước khi thực hiện thao tác nhạy cảm. */
+    /** Re-authentication is needed before a sensitive action. */
     public static final String STEP_UP_REQUIRED = "STEP_UP_REQUIRED";
 
     private IdentityErrorCodes() {

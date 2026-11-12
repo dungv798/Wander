@@ -39,12 +39,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Khôi phục quyền chủ theo D20–D26 và bản thiết kế docs/autopilot/q16-design-draft.md.
- * <b>RELEASE GATE RG-1:</b> thiết kế chưa được Product Owner duyệt; không phát hành cho người dùng thật.
- * Các mặc định MĐ-1…MĐ-8 là PROPOSED; mã bám sát chúng và sẽ đổi theo kết quả duyệt.
+ * Recovery of ownership following D20-D26 and the design draft docs/autopilot/q16-design-draft.md (archived, see the git tag pre-portfolio-cleanup).
+ * <b>RELEASE GATE RG-1:</b> the design has not been approved by the Product Owner; do not release to real users.
+ * The defaults MĐ-1...MĐ-8 are PROPOSED; the code follows them closely and will change with the review outcome.
  * <p>
- * Mỗi phương thức public là một giao dịch. Ném lỗi ⇒ rollback toàn bộ (kể cả việc đánh dấu hết hạn trước khi ném),
- * giống bản cài đặt cũ.
+ * Every public method is one transaction. Throwing an error => the whole transaction rolls back (including marking something expired before the throw),
+ * like the old implementation.
  */
 @Service
 @Transactional
@@ -55,7 +55,7 @@ public class RecoveryService {
     private final RecoveryCodeHasher hasher;
     private final SecurityEventService events;
 
-    /** Nhận cổng lưu trữ, đồng hồ (test thay bằng đồng hồ giả), bộ băm mã khôi phục có khóa và nhật ký sự kiện bảo mật. */
+    /** Takes the storage port, the clock (tests replace it with a fake), the keyed recovery-code hasher and the security event log. */
     public RecoveryService(IdentityStore store, Clock clock, RecoveryCodeHasher hasher, SecurityEventService events) {
         this.store = store;
         this.clock = clock;
@@ -63,11 +63,11 @@ public class RecoveryService {
         this.events = events;
     }
 
-    // ---------- Khôi phục bằng mã (KP-C, D24) ----------
+    // ---------- Recovery with a code (KP-C, D24) ----------
 
     /**
-     * Bước 1–2: kiểm tra mã hiện hành, tạo lần thử chờ và phát hành mã thay thế (chưa hợp lệ).
-     * Mã cũ CHƯA bị tiêu thụ; chưa có phiên nào được tạo (INV-15).
+     * Steps 1-2: check the current code, create a pending attempt and issue the replacement code (not valid yet).
+     * The old code is NOT consumed yet; no session has been created (INV-15).
      */
     public RecoveryStarted startRecovery(String attemptId, String sessionToken, String deviceNameRaw, String code) {
         String attemptKey = IdentityInput.attemptKey(attemptId);
@@ -96,8 +96,8 @@ public class RecoveryService {
     }
 
     /**
-     * Bước 3–4: chủ nhập lại mã thay thế, rồi commit nguyên tử: vô hiệu mã cũ + kích hoạt mã thay thế + tạo phiên (INV-11).
-     * Không thu hồi phiên nào khác (D23, INV-10). Gọi lại sau commit với cùng lần thử là idempotent (INV-12).
+     * Steps 3-4: the owner types the replacement code again, then an atomic commit: invalidate the old code + activate the replacement + create a session (INV-11).
+     * No other session is revoked (D23, INV-10). Calling again after the commit with the same attempt is idempotent (INV-12).
      */
     public Committed completeRecovery(String attemptId, String replacementCode) {
         String attemptKey = IdentityInput.attemptKey(attemptId);
@@ -113,7 +113,7 @@ public class RecoveryService {
         if (attempt.isExpired(now)) {
             throw WanderException.invalid(IdentityErrorCodes.ATTEMPT_EXPIRED, IdentityMessages.RECOVERY_EXPIRED, null);
         }
-        // Khóa dòng mã cũ: hai lần thử đồng thời cùng một mã ⇒ đúng một lần commit (INV-7).
+        // Row lock on the old code: two concurrent attempts with the same code => exactly one commit (INV-7).
         RecoveryCode oldCode = store.findCodeForUpdate(attempt.oldCodeId()).filter(RecoveryCode::isActive)
                 .orElseThrow(() -> WanderException.conflict(IdentityErrorCodes.CODE_ALREADY_USED, IdentityMessages.CODE_ALREADY_USED));
         store.invalidateRecoveryCode(oldCode.invalidate(IdentityConstants.INVALIDATED_BY_RECOVERY, now));
@@ -124,17 +124,17 @@ public class RecoveryService {
         return Committed.YES;
     }
 
-    // ---------- Phát hành lần đầu và tái tạo mã từ một phiên hợp lệ (hai pha; D23, D25, MĐ-2) ----------
+    // ---------- First issue and regeneration of the code from a valid session (two phases; D23, D25, MĐ-2) ----------
 
     /**
-     * Pha 1: tạo mã thay thế chờ. Mã hiện hành (nếu có) vẫn hợp lệ đến khi pha 2 commit (INV-13).
-     * Có mã hiện hành thì bắt buộc xác thực lại: trình mã hiện hành, hoặc phê duyệt từ thiết bị khác.
+     * Phase 1: create the pending replacement code. The current code (if any) stays valid until phase 2 commits (INV-13).
+     * When there is a current code, re-authentication is required: present the current code, or an approval from another device.
      */
     public ReplacementBegun beginReplacement(AuthenticatedPrincipal principal, EvidenceInput evidence) {
         store.lockIdentity(principal.identityId());
         Optional<RecoveryCode> current = store.findActiveCode(principal.identityId());
         current.ifPresent(code -> requireStepUpEvidence(principal, evidence, code));
-        // Tại mọi thời điểm chỉ có một mã thay thế chờ.
+        // At any moment there is only one pending replacement code.
         store.voidPendingReplacements(principal.identityId());
         String replacement = Secrets.newRecoveryCode();
         Instant now = Timestamps.now(clock);
@@ -146,7 +146,7 @@ public class RecoveryService {
         return new ReplacementBegun(id.toString(), replacement, Timestamps.format(expiresAt));
     }
 
-    /** Pha 2: chủ nhập lại mã thay thế; commit vô hiệu mã cũ và kích hoạt mã mới trong một giao dịch. */
+    /** Phase 2: the owner types the replacement code again; the commit invalidates the old code and activates the new one in one transaction. */
     public Committed confirmReplacement(AuthenticatedPrincipal principal, String pendingId, String replacementCode) {
         store.lockIdentity(principal.identityId());
         String normalized = Secrets.normalize(replacementCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
@@ -170,9 +170,9 @@ public class RecoveryService {
         return Committed.YES;
     }
 
-    // ---------- Xác thực lại bằng phê duyệt từ thiết bị tin cậy khác (D25, MĐ-1) ----------
+    // ---------- Re-authentication by approval from another trusted device (D25, MĐ-1) ----------
 
-    /** Xin phê duyệt xác thực lại cho một thao tác nhạy cảm; trả mã ngắn để thiết bị khác nhập. */
+    /** Asks for a re-authentication approval for a sensitive action; returns a short code for the other device to type. */
     public StepUpCreated requestStepUp(AuthenticatedPrincipal principal, String operation) {
         if (operation == null || !IdentityConstants.STEP_UP_OPERATIONS.contains(operation)) {
             throw WanderException.invalid(IdentityErrorCodes.INVALID_OPERATION, IdentityMessages.INVALID_OPERATION, IdentityFields.OPERATION);
@@ -188,8 +188,8 @@ public class RecoveryService {
     }
 
     /**
-     * Máy duyệt xem trước yêu cầu xác thực lại (DR-018 E1): thao tác, tên máy đang xin (tự khai, chưa xác minh), thời điểm và các
-     * lựa chọn số khớp cố định lúc tạo. Không đổi trạng thái.
+     * The approving device previews the re-authentication request (DR-018 E1): the action, the requesting device name (self-declared, unverified), the time and the
+     * matching-number choices fixed at creation. Changes no state.
      */
     public StepUpPreview previewStepUp(AuthenticatedPrincipal principal, String approvalCode) {
         StepUpRequest request = findApprovableStepUp(principal, approvalCode, false);
@@ -198,17 +198,17 @@ public class RecoveryService {
                 request.challenge().options());
     }
 
-    /** Máy duyệt từ chối chủ động: yêu cầu thành denied và không bao giờ duyệt lại được. */
+    /** The approving device actively denies: the request becomes denied and can never be approved again. */
     public Denied denyStepUp(AuthenticatedPrincipal principal, String approvalCode) {
         store.saveStepUp(findApprovableStepUp(principal, approvalCode, true).deny());
         return Denied.YES;
     }
 
     /**
-     * Phải do một phiên KHÁC của cùng danh tính duyệt, bằng cách CHỌN ĐÚNG SỐ KHỚP: phiên đang xin không tự duyệt chính nó.
-     * Chọn sai ⇒ yêu cầu bị từ chối vĩnh viễn (giữ lại dù ném lỗi, nên {@code noRollbackFor}). Số thiếu/sai dạng bị từ chối
-     * trước khi đụng tới yêu cầu. LƯU Ý: mọi {@code WanderException} thêm vào
-     * phương thức này SAU lần ghi sẽ commit dở; chỉ ném lỗi trước khi ghi hoặc ngay sau lần ghi từ chối.
+     * Must be approved by ANOTHER session of the same identity, by CHOOSING THE RIGHT MATCHING NUMBER: the requesting session cannot approve itself.
+     * A wrong choice => the request is denied for good (kept even though an error is thrown, hence {@code noRollbackFor}). A missing or malformed number is rejected
+     * before the request is touched. NOTE: any {@code WanderException} added to
+     * this method AFTER the write would commit half the work; only throw before writing or right after the denying write.
      */
     @Transactional(noRollbackFor = WanderException.class)
     public Approved approveStepUp(AuthenticatedPrincipal principal, String approvalCode, Integer number) {
@@ -223,8 +223,8 @@ public class RecoveryService {
     }
 
     /**
-     * Yêu cầu xác thực lại đang chờ, còn hạn, đúng danh tính và do phiên KHÁC xin; {@code lock} = khóa dòng (duyệt/từ chối, để
-     * đồng thời chỉ một lượt thắng) hay đọc thường (xem trước). Sai mã ⇒ INVALID_APPROVAL_CODE.
+     * The re-authentication request that is pending, still valid, of the right identity and requested by ANOTHER session; {@code lock} = row lock (approve/deny, so
+     * only one concurrent attempt wins) or a plain read (preview). Wrong code => INVALID_APPROVAL_CODE.
      */
     private StepUpRequest findApprovableStepUp(AuthenticatedPrincipal principal, String approvalCodeRaw, boolean lock) {
         String code = Secrets.normalize(approvalCodeRaw, IdentityConstants.SHORT_CODE_SYMBOLS);
@@ -236,9 +236,9 @@ public class RecoveryService {
                 .orElseThrow(RecoveryService::invalidApprovalCode);
     }
 
-    // ---------- hỗ trợ ----------
+    // ---------- helpers ----------
 
-    /** Bắt buộc có bằng chứng xác thực lại hợp lệ (trình mã hiện hành hoặc phê duyệt từ thiết bị khác) trước khi tạo mã mới. */
+    /** Valid re-authentication evidence (present the current code or an approval from another device) is required before creating a new code. */
     private void requireStepUpEvidence(AuthenticatedPrincipal principal, EvidenceInput evidence, RecoveryCode current) {
         WanderException denied = WanderException.forbidden(IdentityErrorCodes.STEP_UP_REQUIRED, IdentityMessages.STEP_UP_REQUIRED_FOR_NEW_CODE);
         if (evidence == null) throw denied;
@@ -252,13 +252,13 @@ public class RecoveryService {
         }
     }
 
-    /** Mã người dùng trình phải khớp mã khôi phục hiện hành; không khớp thì ném lỗi {@code denied}. */
+    /** The code the user presents must match the current recovery code; otherwise throw {@code denied}. */
     private void requireMatchesCurrentCode(String typedCode, RecoveryCode current, WanderException denied) {
         String normalized = Secrets.normalize(typedCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null || !hasher.matches(normalized, current.codeHash(), current.keyVersion())) throw denied;
     }
 
-    /** Dùng (một lần) phê duyệt đã được duyệt cho đúng phiên và thao tác; không có thì ném STEP_UP_REQUIRED. */
+    /** Uses (once) an approval that was approved for exactly this session and action; none available => throws STEP_UP_REQUIRED. */
     private void consumeStepUp(AuthenticatedPrincipal principal, String requestId, String operation) {
         WanderException denied = WanderException.forbidden(IdentityErrorCodes.STEP_UP_REQUIRED, IdentityMessages.STEP_UP_REQUIRED);
         if (requestId == null) throw denied;
@@ -268,7 +268,7 @@ public class RecoveryService {
         store.saveStepUp(request.consume());
     }
 
-    /** Lần thử đã có được bắt đầu lại, nhưng chỉ cho chính bên đã tạo (cùng mã, cùng bí mật phiên) và khi còn chờ (MĐ-6). */
+    /** An existing attempt may be restarted, but only by the party that created it (same code, same session secret) and while it is pending (MĐ-6). */
     private RecoveryAttempt restartedAttempt(RecoveryAttempt attempt, RecoveryCode oldCode, String tokenHash,
                                                     String replacementHash, Instant expiresAt, String deviceName) {
         boolean sameOwner = attempt.state() == AttemptState.PENDING
@@ -278,23 +278,23 @@ public class RecoveryService {
         return attempt.restart(replacementHash, expiresAt, deviceName, hasher.currentKeyVersion());
     }
 
-    /** Tìm mã theo từng khóa còn hỗ trợ, kiểm cả metadata để không nhầm nhãn khóa. */
+    /** Looks the code up with each key still supported, checking the metadata as well so a key label is never confused. */
     private Optional<RecoveryCode> findActiveCode(String normalized) {
         return hasher.keyVersions().stream().flatMap(version -> hasher.hashWithVersion(normalized, version)
                 .flatMap(store::findActiveCodeByHash).filter(code -> version.equals(code.keyVersion())).stream()).findFirst();
     }
 
-    /** Lỗi mã khôi phục sai hoặc đã được dùng. */
+    /** Error: the recovery code is wrong or has already been used. */
     private static WanderException invalidCode() {
         return WanderException.invalid(IdentityErrorCodes.INVALID_CODE, IdentityMessages.INVALID_CODE, null);
     }
 
-    /** Lỗi mã thay thế nhập lại không đúng. */
+    /** Error: the replacement code typed again is wrong. */
     private static WanderException invalidReplacement() {
         return WanderException.invalid(IdentityErrorCodes.INVALID_REPLACEMENT, IdentityMessages.INVALID_REPLACEMENT, null);
     }
 
-    /** Lỗi mã phê duyệt sai hoặc hết hạn. */
+    /** Error: the approval code is wrong or expired. */
     private static WanderException invalidApprovalCode() {
         return WanderException.invalid(IdentityErrorCodes.INVALID_APPROVAL_CODE, IdentityMessages.INVALID_APPROVAL_CODE, null);
     }

@@ -3,13 +3,13 @@ package com.wander.shared.web.error;
 import com.wander.shared.kernel.error.ErrorKind;
 import org.springframework.http.HttpStatus;
 
-/** Nơi duy nhất ánh xạ loại lỗi nghiệp vụ sang mã HTTP. */
+/** The single place that maps a business error kind to an HTTP status. */
 public final class HttpStatuses {
 
     private HttpStatuses() {
     }
 
-    /** Mã HTTP tương ứng với loại lỗi nghiệp vụ. */
+    /** The HTTP status that corresponds to a business error kind. */
     public static HttpStatus of(ErrorKind kind) {
         return switch (kind) {
             case INVALID -> HttpStatus.BAD_REQUEST;

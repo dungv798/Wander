@@ -15,7 +15,7 @@ public final class IdentityInput {
     private IdentityInput() {
     }
 
-    /** Mã nhận diện lần thử khôi phục đúng dạng; sai thì báo lỗi trường {@code attemptId}. */
+    /** Id of the recovery attempt in the right shape; otherwise reports an error on the {@code attemptId} field. */
     public static String attemptKey(String text) {
         if (text == null || !Secrets.ATTEMPT_KEY.matcher(text).matches()) {
             throw WanderException.invalid(IdentityErrorCodes.INVALID_ATTEMPT, IdentityMessages.INVALID_ATTEMPT, IdentityFields.ATTEMPT_ID);
@@ -23,7 +23,7 @@ public final class IdentityInput {
         return text;
     }
 
-    /** Bí mật phiên đúng dạng; sai thì báo lỗi trường {@code sessionToken}. */
+    /** Session secret in the right shape; otherwise reports an error on the {@code sessionToken} field. */
     public static String sessionToken(String text) {
         if (text == null || !Secrets.SESSION_TOKEN.matcher(text).matches()) {
             throw WanderException.invalid(IdentityErrorCodes.INVALID_SESSION_TOKEN, IdentityMessages.INVALID_SESSION_TOKEN, IdentityFields.SESSION_TOKEN);
@@ -32,10 +32,10 @@ public final class IdentityInput {
     }
 
     /**
-     * Tên thiết bị tùy chọn. Đây là nhãn do thiết bị TỰ KHAI, CHƯA ĐƯỢC XÁC MINH: không dùng làm bằng chứng nhận diện.
-     * Chuẩn hóa NFC; ký tự điều khiển, định dạng/vô hình (RTL override, zero-width, BOM…), tách dòng, vùng riêng hoặc chưa gán
-     * ⇒ MALFORMED; dãy khoảng trắng gộp thành một dấu cách; không nêu, null hoặc rỗng sau chuẩn hóa ⇒ null (chưa đặt tên).
-     * Quá {@value IdentityConstants#MAX_DEVICE_NAME_LENGTH} ký tự (tính theo code point, khớp CHECK của DB) ⇒ TOO_LONG.
+     * Optional device name. This is a label the device DECLARES ITSELF, NOT VERIFIED: it is never used as identifying evidence.
+     * NFC-normalized; control, format or invisible characters (RTL override, zero-width, BOM...), line separators, private-use or unassigned
+     * => MALFORMED; runs of whitespace collapse to one space; absent, null or empty after normalization => null (no name set).
+     * More than {@value IdentityConstants#MAX_DEVICE_NAME_LENGTH} characters (counted in code points, matching the DB CHECK) => TOO_LONG.
      */
     public static String deviceName(String raw) {
         if (raw == null) return null;
@@ -46,8 +46,8 @@ public final class IdentityInput {
 
 
     /**
-     * Số khớp người duyệt chọn: bắt buộc (thiếu ⇒ REQUIRED), phải là số nguyên hai chữ số (chuỗi, số thập phân, boolean, danh
-     * sách hay ngoài khoảng ⇒ MALFORMED). Kiểm tra TRƯỚC khi đụng tới yêu cầu: dạng sai là lỗi của giao diện, không phải chọn sai.
+     * Matching number chosen by the approver: required (missing => REQUIRED), must be a two-digit integer (a string, decimal, boolean, list
+     * or out-of-range value => MALFORMED). Checked BEFORE the request is touched: a wrong shape is a UI error, not a wrong choice.
      */
     public static int matchNumber(Integer number) {
         if (number == null) {
@@ -59,7 +59,7 @@ public final class IdentityInput {
         return number;
     }
 
-    /** Lỗi báo bí mật phiên đã thuộc về phiên hoặc yêu cầu khác. */
+    /** Error: the session secret already belongs to another session or request. */
     public static WanderException tokenInUse() {
         return WanderException.invalid(IdentityErrorCodes.INVALID_SESSION_TOKEN, IdentityMessages.SESSION_TOKEN_IN_USE, IdentityFields.SESSION_TOKEN);
     }

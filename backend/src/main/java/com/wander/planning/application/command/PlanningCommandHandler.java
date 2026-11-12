@@ -39,8 +39,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Xử lý lệnh của bounded context Planning. Mỗi phương thức = một giao dịch:
- * nạp aggregate → gọi hành vi domain → lưu. Không chứa quy tắc nghiệp vụ; quy tắc nằm trong {@link Trip}.
+ * Handles the commands of the Planning bounded context. Each method = one transaction:
+ * load the aggregate -> call the domain behavior -> save. Contains no business rules; the rules live in {@link Trip}.
  */
 @Service
 @Transactional
@@ -50,7 +50,7 @@ public class PlanningCommandHandler {
     private final PreferencesStore preferences;
     private final Clock clock;
 
-    /** Nhận cổng lưu chuyến, cổng lưu sở thích theo danh tính và đồng hồ (test thay bằng đồng hồ giả). */
+    /** Takes the trip storage port, the preferences-by-identity storage port and the clock (tests replace it with a fake). */
     public PlanningCommandHandler(TripRepository trips, PreferencesStore preferences, Clock clock) {
         this.trips = trips;
         this.preferences = preferences;
@@ -58,8 +58,8 @@ public class PlanningCommandHandler {
     }
 
     /**
-     * Thay toàn bộ sở thích theo danh tính (BE-10). Phải nêu khóa {@code interests} (thiếu ⇒ REQUIRED); null hoặc rỗng = xóa;
-     * mã lạ hoặc sai kiểu ⇒ INVALID_INTEREST và không đổi gì.
+     * Replaces all preferences by identity (BE-10). The {@code interests} key must be present (missing => REQUIRED); null or empty = clear;
+     * an unknown code or a wrong type => INVALID_INTEREST and nothing changes.
      */
     public void setInterestPreferences(PlanningCommands.SetInterestPreferences command) {
         if (!command.interests().isPresent()) {
@@ -69,7 +69,7 @@ public class PlanningCommandHandler {
         preferences.saveInterests(command.ownerId(), interests, Timestamps.now(clock));
     }
 
-    /** Tạo chuyến mới của chủ; trả mã chuyến. */
+    /** Creates a new trip for the owner; returns the trip id. */
     public UUID createTrip(PlanningCommands.CreateTrip command) {
         String requestedName = PlanningInput.requiredText(command.name(), PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME);
         String destination = PlanningInput.requiredText(command.destination(), PlanningConstants.MAX_DESTINATION,
@@ -85,7 +85,7 @@ public class PlanningCommandHandler {
         return trip.id();
     }
 
-    /** Sửa tên, điểm đến, khoảng ngày và tùy chọn của chuyến; trường không nêu thì giữ nguyên. */
+    /** Edits the name, destination, date range and options of a trip; a field that is not given stays unchanged. */
     public void updateTrip(PlanningCommands.UpdateTrip command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
@@ -95,7 +95,7 @@ public class PlanningCommandHandler {
         String destination = valueOrCurrent(command.destination(),
                 value -> PlanningInput.requiredText(value, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION), trip.destination());
         DateRange range = rangeFromInput(command.startDate(), command.endDate(), trip);
-        // Tùy chọn chuyến (Q11): không nêu ⇒ giữ nguyên; nêu null hoặc "" ⇒ xóa (chưa đặt).
+        // Trip options (Q11): not given => unchanged; given as null or an empty string => cleared (not set).
         TripOptions current = trip.options();
         TripOptions options = new TripOptions(
                 valueOrCurrent(command.budget(), PlanningInput::budget, current.budgetK()),
@@ -112,9 +112,9 @@ public class PlanningCommandHandler {
     }
 
     /**
-     * Lệnh "lịch": tùy chọn đổi khoảng ngày (chỉ nêu một đầu thì đầu kia giữ nguyên) rồi gán ngày hàng loạt, tất cả trong một
-     * giao dịch và một lần tăng phiên bản; lỗi ở bất kỳ bước nào thì không đổi gì. Gửi lại khoảng ngày và ngày cũ của từng mục
-     * là cách Hoàn tác một lần đổi ngày chuyến hay một lần xếp lịch.
+     * The 'schedule' command: optionally change the date range (if only one end is given the other stays) then assign dates in bulk, all in one
+     * transaction and one version increment; an error at any step changes nothing. Sending back the date range and each item's old date
+     * is how a change of trip dates or one scheduling action is undone.
      */
     public void applySchedule(PlanningCommands.ApplySchedule command) {
         Trip trip = load(command.ownerId(), command.tripId());
@@ -132,8 +132,8 @@ public class PlanningCommandHandler {
     }
 
     /**
-     * Thêm mục vào một ngày của chuyến (mặc định cuối ngày); không nêu ngày hoặc ngày null ⇒ "Chưa có ngày" (DR-011 A1).
-     * Trả mã mục.
+     * Adds an item to a day of the trip (by default at the end of the day); no day, or a null day => 'no date yet' (DR-011 A1).
+     * Returns the item id.
      */
     public UUID addItem(PlanningCommands.AddItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
@@ -150,7 +150,7 @@ public class PlanningCommandHandler {
         return item.id();
     }
 
-    /** Sửa một mục chưa bị xóa; trường không nêu thì giữ nguyên, có thể đổi ngày và vị trí. */
+    /** Edits an item that is not deleted; a field that is not given stays unchanged; the date and position can change. */
     public void editItem(PlanningCommands.EditItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
@@ -163,18 +163,18 @@ public class PlanningCommandHandler {
         Integer durationMin = valueOrCurrent(fields.durationMin(), PlanningInput::durationMin, current.durationMin());
         String note = valueOrCurrent(fields.note(), PlanningInput::note, current.note());
         ItemCost cost = cost(fields, current.cost());
-        // Không nêu trạng thái đặt chỗ ⇒ giữ nguyên; đổi sang loại không có đặt chỗ (Nghỉ, Việc cần làm) ⇒ tự bỏ trạng thái.
+        // No booking status given => unchanged; changing to a type with no booking (Rest, To-do) => the status is cleared automatically.
         BookingStatus booking = fields.booking().isPresent() ? PlanningInput.booking(fields.booking().value())
                 : (type.supportsBooking() ? current.booking() : null);
         String placeId = valueOrCurrent(fields.placeId(), PlanningInput::placeId, current.placeId());
         ItemDetails details = new ItemDetails(type, title, timeOfDay, durationMin, note, cost, booking, placeId);
-        // Ngày: không nêu ⇒ giữ nguyên; nêu null ⇒ về "Chưa có ngày"; nêu ngày ⇒ chuyển sang ngày đó.
+        // Day: not given => unchanged; given as null => back to 'no date yet'; given a date => moves to that day.
         Patch<LocalDate> newDay = fields.day().map(PlanningInput::dayOrNull);
         trip.editItem(command.itemId(), details, newDay, PlanningInput.position(fields.position().orElse(null)), Timestamps.now(clock));
         trips.save(trip);
     }
 
-    /** Sắp xếp lại các mục đang hiện trong một ngày theo thứ tự mới; trả ngày đã sắp xếp. */
+    /** Reorders the items currently shown in a day into the new order; returns the reordered day. */
     public LocalDate reorderDay(PlanningCommands.ReorderDay command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
@@ -185,7 +185,7 @@ public class PlanningCommandHandler {
         return day;
     }
 
-    /** Xóa mềm một mục (vào "Đã xóa gần đây"). */
+    /** Soft-deletes an item (into 'Recently deleted'). */
     public void softDeleteItem(PlanningCommands.SoftDeleteItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
@@ -193,7 +193,7 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Khôi phục một mục đã xóa mềm về đúng ngày và vị trí cũ. */
+    /** Restores a soft-deleted item to its exact old day and position. */
     public void restoreItem(PlanningCommands.RestoreItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
@@ -201,7 +201,7 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Xóa vĩnh viễn một mục đã nằm trong "Đã xóa gần đây". */
+    /** Permanently deletes an item that is already in 'Recently deleted'. */
     public void purgeItem(PlanningCommands.PurgeItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
@@ -209,7 +209,7 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Tích/bỏ tích việc cần làm hoặc Đã ghé địa điểm cho chính thành viên đang gọi, không phụ thuộc người thêm mục. */
+    /** Ticks/unticks a to-do or 'Visited' for the calling member themself, regardless of who added the item. */
     public void setTaskDone(PlanningCommands.SetTaskDone command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMember(command.ownerId());
@@ -217,9 +217,9 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    // ---- hỗ trợ ----
+    // ---- helpers ----
 
-    /** Xóa mềm cả chuyến (PO 28/10/2026): chuyến rời danh sách, mục giữ nguyên để khôi phục. */
+    /** Soft-deletes a whole trip (PO 28/10/2026): the trip leaves the list, the items stay so it can be restored. */
     public void deleteTrip(PlanningCommands.DeleteTrip command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
@@ -227,21 +227,21 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Khôi phục chuyến từ "Chuyến đã xóa gần đây". */
+    /** Restores a trip from 'Recently deleted trips'. */
     public void restoreTrip(PlanningCommands.RestoreTrip command) {
         Trip trip = trips.findOwnedDeleted(command.tripId(), command.ownerId()).orElseThrow(WanderException::notFound);
         trip.recoverFromTrash(Timestamps.now(clock));
         trips.save(trip);
     }
 
-    /** Nạp chuyến mà người gọi là thành viên (mọi vai); người ngoài và chuyến đã xóa coi như không có (404). Quyền theo vai kiểm ở từng lệnh. */
+    /** Loads a trip of which the caller is a member (any role); an outsider and a deleted trip count as absent (404). Role permissions are checked in each command. */
     private Trip load(UUID actorId, UUID tripId) {
         return trips.findAccessible(tripId, actorId).orElseThrow(WanderException::notFound);
     }
 
     /**
-     * Tên không trùng với tên chuyến khác của cùng chủ (DR-006): trùng thì thêm hậu tố " - 2", " - 3"… Chuyến {@code exceptTripId}
-     * (chính chuyến đang đổi tên, null khi tạo mới) không tính là trùng.
+     * A name that does not clash with another trip's name of the same owner (DR-006): on a clash a suffix ' - 2', ' - 3'... is added. The trip {@code exceptTripId}
+     * (the trip being renamed, null when creating) does not count as a clash.
      */
     private String uniqueTripName(UUID ownerId, UUID exceptTripId, String requestedName) {
         Map<UUID, String> names = new HashMap<>(trips.tripNamesOf(ownerId));
@@ -249,17 +249,17 @@ public class PlanningCommandHandler {
         return TripNaming.uniqueName(new HashSet<>(names.values()), requestedName);
     }
 
-    /** Khoảng ngày từ đầu vào: đầu nào không nêu thì lấy của chuyến hiện tại. */
+    /** The date range from the input: an end that is not given is taken from the current trip. */
     private static DateRange rangeFromInput(Patch<String> startDate, Patch<String> endDate, Trip trip) {
         return range(startDate.orElse(trip.range().start().toString()), endDate.orElse(trip.range().end().toString()));
     }
 
-    /** Giá trị đã kiểm tra của trường nếu được nêu trong đầu vào, nếu không thì giữ giá trị hiện tại. */
+    /** The validated value of a field if it is given in the input, otherwise the current value is kept. */
     private static <A, T> T valueOrCurrent(Patch<A> sent, Function<A, T> parse, T current) {
         return sent.isPresent() ? parse.apply(sent.value()) : current;
     }
 
-    /** Danh sách mã mục theo thứ tự mới từ đầu vào thô; không phải danh sách chuỗi mã hợp lệ thì báo lỗi thứ tự. */
+    /** The list of item ids in the new order from the raw input; if it is not a list of valid id strings, an order error is reported. */
     private static List<UUID> parseOrderedIds(List<String> list) {
         if (list == null || list.stream().anyMatch(java.util.Objects::isNull)) {
             throw WanderException.invalid(ErrorCodes.MALFORMED, PlanningMessages.ORDER_MALFORMED, PlanningFields.ORDERED_IDS);
@@ -272,7 +272,7 @@ public class PlanningCommandHandler {
         return ids;
     }
 
-    /** Khoảng ngày theo thứ tự lỗi của hợp đồng API: START_REQUIRED, END_REQUIRED, INVALID_DATE, END_BEFORE_START, TOO_LONG. */
+    /** The date range in the error order of the API contract: START_REQUIRED, END_REQUIRED, INVALID_DATE, END_BEFORE_START, TOO_LONG. */
     static DateRange range(String start, String end) {
         if (PlanningInput.isMissing(start)) {
             throw WanderException.invalid(PlanningErrorCodes.START_REQUIRED, PlanningMessages.TRIP_RANGE_INVALID, PlanningFields.START_DATE);
@@ -289,8 +289,8 @@ public class PlanningCommandHandler {
     }
 
     /**
-     * Ba trường chi phí theo thứ tự kiểm tra: "đã bao gồm" (kiểu boolean), chi phí, giá tham khảo,
-     * rồi quy tắc giá tham khảo chỉ hợp lệ khi đã tick (trong {@link ItemCost}).
+     * The three cost fields in validation order: 'included' (a boolean), cost, reference price,
+     * then the rule that a reference price is valid only when ticked (in {@link ItemCost}).
      */
     static ItemCost cost(PlanningCommands.ItemFields fields, ItemCost current) {
         boolean included = fields.included().isPresent()

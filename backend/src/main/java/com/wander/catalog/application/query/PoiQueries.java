@@ -11,17 +11,17 @@ import java.util.Comparator;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-/** Phía đọc POI snapshot, tìm gần nhất mà không nạp aggregate hay sửa lịch. */
+/** The read side of the POI snapshot, finding the nearest without loading an aggregate or changing the itinerary. */
 @Service
 public class PoiQueries {
     private final PoiCatalog catalog;
 
-    /** Nhận cổng đọc bất biến của POI. */
+    /** Takes the immutable POI read port. */
     public PoiQueries(PoiCatalog catalog) {
         this.catalog = catalog;
     }
 
-    /** Lọc bán kính trên số mét chưa làm tròn, hòa khoảng cách theo id; chưa có batch trả rỗng. */
+    /** Filters the radius on the unrounded meters, breaks distance ties by id; with no batch yet returns empty. */
     public List<PoiViews.Candidate> search(String destinationId, PoiSearch search) {
         return catalog.destination(destinationId).map(batch -> {
             GeoPoint near = search.near() == null ? batch.center() : search.near();
@@ -33,7 +33,7 @@ public class PoiQueries {
         }).orElse(List.of());
     }
 
-    /** Chiếu trường cần cho danh sách; khoảng cách chim bay, không phải quãng đường chỉ dẫn. */
+    /** Projects the fields the list needs; the distance is as the crow flies, not a route distance. */
     private static PoiViews.Candidate toCandidate(PoiRecord poi, GeoPoint near) {
         var place = poi.place();
         FieldProvenance source = poi.provenance().get(PoiConstants.NAME);

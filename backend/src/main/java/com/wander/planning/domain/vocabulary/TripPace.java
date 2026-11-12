@@ -3,7 +3,7 @@ package com.wander.planning.domain.vocabulary;
 import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
-/** Nhịp chuyến (Q11, DR-002): nhãn hiển thị, chọn một. Không có hành vi cảnh báo "ngày quá dày" (sẽ là gợi ý tự động, plan §7.2). */
+/** Trip pace (Q11, DR-002): a display label, choose one. There is no 'day too packed' warning behavior (that would be an automatic suggestion, plan section 7.2). */
 public enum TripPace implements CodedValue {
     RELAXED("relaxed", "Thoải mái"),
     MODERATE("moderate", "Vừa"),
@@ -22,12 +22,12 @@ public enum TripPace implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Nhịp theo mã trong dữ liệu và API; mã lạ trả rỗng. */
+    /** The pace by code in data and API; an unknown code returns empty. */
     public static Optional<TripPace> fromCode(String code) {
         return CodedValue.find(TripPace.class, code);
     }

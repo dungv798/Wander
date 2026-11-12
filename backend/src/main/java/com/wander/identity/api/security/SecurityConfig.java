@@ -33,14 +33,14 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import tools.jackson.databind.ObjectMapper;
 
 /**
- * Khung xác thực (ADR-005): Spring Security với token phiên tự quản lý.
+ * Authentication framework (ADR-005): Spring Security with self-managed session tokens.
  * <ul>
- *   <li>Mọi {@code /api/**} cần phiên hợp lệ, trừ {@link #PUBLIC_ROUTES} (tạo danh tính, khôi phục, ghép thiết bị).
- *       Đường dẫn không phải {@code /api} (giao diện tĩnh, {@code /actuator/health}) không cần phiên.</li>
- *   <li>Không session HTTP, không cookie ⇒ không có thông tin xác thực "tự gắn" nên tắt CSRF là hợp lệ.
- *       Nếu sau này chuyển sang cookie (xem ADR-005 "Nơi lưu bí mật phiên") phải bật lại CSRF.</li>
- *   <li>Header bảo mật/cache do {@code ResponseHeadersFilter} đặt (một nguồn duy nhất, chạy trước chuỗi này), nên tắt
- *       header mặc định của Spring Security để không ghi đè CSP và {@code Cache-Control} của giao diện.</li>
+ *   <li>Every {@code /api/**} needs a valid session, except {@link #PUBLIC_ROUTES} (create identity, recovery, device pairing).
+ *       Paths outside {@code /api} (static UI, {@code /actuator/health}) need no session.</li>
+ *   <li>No HTTP session and no cookie means nothing is 'attached automatically' to a request, so turning CSRF off is valid.
+ *       If this ever moves to cookies (see ADR-005 'Where the session secret is kept') CSRF must be turned back on.</li>
+ *   <li>Security/cache headers are set by {@code ResponseHeadersFilter} (single source, runs before this chain), so the
+ *       default Spring Security headers are off to avoid overwriting the CSP and the UI's {@code Cache-Control}.</li>
  * </ul>
  */
 @Configuration
@@ -48,7 +48,7 @@ public class SecurityConfig {
 
     private static final Pattern BEARER = Pattern.compile(IdentityApiConstants.BEARER_HEADER_REGEX);
 
-    /** Nguồn duy nhất của danh sách điểm cuối công khai; dùng cho cả phân quyền lẫn việc bỏ qua xác thực. */
+    /** Single source of the list of public endpoints; used both for authorization and for skipping authentication. */
     private static final RequestMatcher PUBLIC_ROUTES = new OrRequestMatcher(
             publicRoute(HttpMethod.POST, IdentityApiConstants.PUBLIC_IDENTITY_PATTERN),
             publicRoute(HttpMethod.POST, IdentityApiConstants.PUBLIC_RECOVERY_START_PATTERN),
@@ -58,21 +58,21 @@ public class SecurityConfig {
             publicRoute(HttpMethod.GET, IdentityApiConstants.PUBLIC_CATALOG_PATTERN),
             publicRoute(HttpMethod.POST, IdentityApiConstants.PUBLIC_INVITE_PREVIEW_PATTERN));
 
-    /** Bộ khớp đường dẫn công khai theo phương thức HTTP và mẫu đường dẫn. */
+    /** Matcher of public paths by HTTP method and path pattern. */
     private static RequestMatcher publicRoute(HttpMethod method, String pattern) {
         return PathPatternRequestMatcher.withDefaults().matcher(method, pattern);
     }
 
     /**
-     * Khai báo thành bean để Spring Boot không tự tạo người dùng mặc định có mật khẩu sinh ngẫu nhiên
-     * (UserDetailsServiceAutoConfiguration lùi lại khi đã có AuthenticationProvider): Wander không có tài khoản mật khẩu.
+     * Declared as a bean so that Spring Boot does not create a default user with a random generated password
+     * (UserDetailsServiceAutoConfiguration backs off once there is an AuthenticationProvider): Wander has no password accounts.
      */
     @Bean
     public AuthenticationProvider sessionAuthenticationProvider(IdentityService identities) {
         return new SessionAuthenticationProvider(identities);
     }
 
-    /** Chuỗi lọc bảo mật của API: xác thực bí mật phiên cho mọi /api trừ route công khai, không session, không cookie. */
+    /** The API security filter chain: authenticates the session secret on every /api path except public routes; no session, no cookie. */
     @Bean
     public SecurityFilterChain apiSecurity(HttpSecurity http, AuthenticationProvider sessionProvider, ObjectMapper mapper)
             throws Exception {
@@ -96,10 +96,10 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /** Bộ lọc đọc Bearer ở mọi /api (trừ route công khai) và xác thực qua {@code manager}; lỗi trả 401 bằng {@code entryPoint}. */
+    /** Filter that reads the Bearer token on every /api path (except public routes) and authenticates through {@code manager}; failures answer 401 through {@code entryPoint}. */
     private static AuthenticationFilter buildSessionFilter(AuthenticationManager manager, AuthenticationEntryPoint entryPoint) {
         AuthenticationFilter filter = new AuthenticationFilter(manager, SecurityConfig::readBearerToken);
-        // Điểm cuối công khai không đọc Authorization: phiên cũ/hỏng gửi kèm không làm hỏng việc tạo danh tính hay khôi phục.
+        // Public endpoints do not read Authorization: a stale or broken session sent along does not break identity creation or recovery.
         filter.setRequestMatcher(new AndRequestMatcher(
                 PathPatternRequestMatcher.withDefaults().matcher(IdentityApiConstants.ALL_API_PATTERN), new NegatedRequestMatcher(PUBLIC_ROUTES)));
         filter.setFailureHandler(new AuthenticationEntryPointFailureHandler(entryPoint));
@@ -107,7 +107,7 @@ public class SecurityConfig {
         return filter;
     }
 
-    /** Đọc bí mật phiên từ header Authorization; không có header thì trả null để bước phân quyền trả 401, sai dạng thì từ chối. */
+    /** Reads the session secret from the Authorization header; no header returns null so that authorization answers 401, a wrong shape is rejected. */
     private static Authentication readBearerToken(HttpServletRequest request) {
         String header = request.getHeader(IdentityApiConstants.HEADER_AUTHORIZATION);
         if (header == null) return null;
@@ -117,15 +117,15 @@ public class SecurityConfig {
     }
 
     /**
-     * Mặc định của AuthenticationFilter là chuyển hướng tới "yêu cầu đã lưu" (302). API chỉ cần đi tiếp chuỗi lọc
-     * sau khi xác thực thành công.
+     * The default of AuthenticationFilter is to redirect to the 'saved request' (302). The API only needs to continue the filter chain
+     * after a successful authentication.
      */
     private static AuthenticationSuccessHandler continueChainOnSuccess() {
         return new AuthenticationSuccessHandler() {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                                 Authentication authentication) {
-                // không làm gì: việc đi tiếp nằm ở phương thức có FilterChain bên dưới
+                // does nothing: continuing is done by the method that has the FilterChain below
             }
 
             @Override

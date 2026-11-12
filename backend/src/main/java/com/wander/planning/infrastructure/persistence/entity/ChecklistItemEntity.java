@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-/** Bảng {@code checklist_items} và bảng con {@code checklist_completions} (hoàn thành theo người). */
+/** Table {@code checklist_items} and its child table {@code checklist_completions} (completion per person). */
 @Entity
 @Table(name = "checklist_items")
 public class ChecklistItemEntity {
@@ -61,7 +61,7 @@ public class ChecklistItemEntity {
     public void setCreatedAt(Instant v) { this.createdAt = v; }
     public Set<Completion> getCompletions() { return completions; }
 
-    /** Một dấu hoàn thành: người + thời điểm. */
+    /** One completion mark: the person + the time. */
     @Embeddable
     public static class Completion {
         @Column(name = "person_id", nullable = false)

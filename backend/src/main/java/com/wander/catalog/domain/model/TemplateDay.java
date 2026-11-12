@@ -8,8 +8,8 @@ import com.wander.shared.kernel.util.Texts;
 import java.util.List;
 
 /**
- * Một ngày của lịch mẫu: các địa điểm theo thứ tự đi và ghi chú biên tập tùy chọn. Cố ý KHÔNG có giờ, giá hay đánh giá
- * (DR-018 N-2: chỉ dùng địa điểm có thật trong kho). Ngày không có địa điểm nào là hợp lệ khi có ghi chú giải thích.
+ * One day of a sample itinerary: the places in visiting order and an optional editorial note. Deliberately has NO times, prices or ratings
+ * (DR-018 N-2: use only places that really exist in the catalog). A day with no place is valid when it has an explanatory note.
  */
 public record TemplateDay(List<String> placeIds, String note) {
 
@@ -22,7 +22,7 @@ public record TemplateDay(List<String> placeIds, String note) {
                 note == null ? 0 : note.length(), CatalogConstants.TEMPLATE_TEXT_MAX_LENGTH);
     }
 
-    /** Mã địa điểm đã cắt khoảng trắng; trống là lỗi dữ liệu. */
+    /** The place id trimmed; blank is a data error. */
     private static String trimmedPlaceId(String placeId) {
         CatalogValidation.require(!Texts.isNullOrBlank(placeId), CatalogMessages.TEMPLATE_PLACE_ID_BLANK);
         return placeId.trim();

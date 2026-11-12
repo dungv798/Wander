@@ -8,7 +8,7 @@ import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 import java.util.Set;
 
-/** Đầu vào truy vấn đã kiểm định dạng và giới hạn; null near dùng tâm batch. */
+/** The query input, with its format and limits checked; a null near uses the batch center. */
 public record PoiSearch(String kind, GeoPoint near, int radiusM, int limit) {
     public PoiSearch {
         if (kind == null || !Set.of(PoiConstants.FOOD, PoiConstants.CAFE, PoiConstants.REST, PoiConstants.ALL).contains(kind)) {
@@ -18,14 +18,14 @@ public record PoiSearch(String kind, GeoPoint near, int radiusM, int limit) {
         requireRange(limit, PoiConstants.MAX_LIMIT, PoiConstants.LIMIT);
     }
 
-    /** Chuyển chuỗi query sang giá trị hữu hạn; lỗi luôn có mã/trường và không rơi vào 500. */
+    /** Turns a query string into a finite value; an error always has a code/field and never falls into a 500. */
     public static PoiSearch parse(String kind, String near, String radiusM, String limit) {
         return new PoiSearch(kind == null ? PoiConstants.ALL : requireLength(kind, PoiConstants.KIND), parseNear(near),
                 parseInteger(radiusM, PoiConstants.DEFAULT_RADIUS_M, PoiConstants.RADIUS_M),
                 parseInteger(limit, PoiConstants.DEFAULT_LIMIT, PoiConstants.LIMIT));
     }
 
-    /** Tách đúng hai số theo lat,lon; không nhận NaN, vô cực hoặc tọa độ ngoài WGS-84. */
+    /** Splits exactly two numbers by lat,lon; NaN, infinity or coordinates outside WGS-84 are not accepted. */
     private static GeoPoint parseNear(String near) {
         if (near == null) return null;
         String[] parts = requireLength(near, PoiConstants.NEAR).split(CommonConstants.COMMA, -1);
@@ -42,7 +42,7 @@ public record PoiSearch(String kind, GeoPoint near, int radiusM, int limit) {
         }
     }
 
-    /** Đọc số nguyên thập phân; không âm, không số lẻ, không tràn int. */
+    /** Reads a decimal integer; not negative, no fraction, no int overflow. */
     private static int parseInteger(String raw, int defaultValue, String field) {
         if (raw == null) return defaultValue;
         if (!requireLength(raw, field).matches(PoiConstants.INTEGER_PATTERN)) {
@@ -55,13 +55,13 @@ public record PoiSearch(String kind, GeoPoint near, int radiusM, int limit) {
         }
     }
 
-    /** Chặn chuỗi query quá dài trước khi split hoặc phân tích số. */
+    /** Blocks a query string that is too long before splitting or parsing numbers. */
     private static String requireLength(String raw, String field) {
         if (raw.length() > PoiConstants.MAX_PARAMETER_LENGTH) throw WanderException.invalidValue(ErrorCodes.MALFORMED, field);
         return raw;
     }
 
-    /** Giới hạn chặt từ 1 tới trần; không âm thầm mở rộng bán kính hoặc cắt đầu vào sai. */
+    /** A tight limit from 1 up to the ceiling; it does not silently widen the radius or cut a wrong input. */
     private static void requireRange(int value, int maximum, String field) {
         if (value < 1 || value > maximum) throw WanderException.invalidValue(ErrorCodes.OUT_OF_RANGE, field);
     }

@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Thử thách "số khớp" (DR-018 E1): máy mới (hoặc máy đang xin xác thực lại) hiện {@link #number()}; máy duyệt thấy
- * {@link #options()} (số thật cộng các số nhiễu, đã xáo trộn) và phải chọn đúng số thật. Các lựa chọn được CỐ ĐỊNH lúc tạo
- * và lưu lại: nếu sinh lại mỗi lần xem thì ai xem nhiều lần sẽ lộ số thật là số xuất hiện ở mọi lần (phép giao).
+ * The 'matching number' challenge (DR-018 E1): the new device (or the device asking for re-authentication) shows {@link #number()}; the approving device sees
+ * {@link #options()} (the real number plus decoys, shuffled) and must pick the real number. The choices are FIXED at creation
+ * and stored: if they were regenerated on every view, anyone who looked several times would reveal the real number as the one that appears every time (an intersection attack).
  */
 public record MatchChallenge(int number, List<Integer> options) {
 
@@ -28,7 +28,7 @@ public record MatchChallenge(int number, List<Integer> options) {
         require(options.contains(number), IdentityMessages.MATCH_OPTIONS_MISSING_REAL);
     }
 
-    /** Sinh thử thách mới: số thật ngẫu nhiên cộng số nhiễu khác nhau, xáo trộn bằng bộ sinh mạnh. */
+    /** Generates a new challenge: a random real number plus distinct decoys, shuffled with a strong generator. */
     public static MatchChallenge random() {
         Set<Integer> picked = new LinkedHashSet<>();
         while (picked.size() < IdentityConstants.MATCH_OPTION_COUNT) picked.add(randomNumber());
@@ -38,7 +38,7 @@ public record MatchChallenge(int number, List<Integer> options) {
         return new MatchChallenge(number, options);
     }
 
-    /** Dựng lại thử thách đã lưu từ số thật và chuỗi lựa chọn (giữ nguyên thứ tự); chuỗi sai dạng thì ném lỗi. */
+    /** Rebuilds a stored challenge from the real number and the string of choices (order preserved); a malformed string throws. */
     public static MatchChallenge of(int number, String optionsText) {
         try {
             List<Integer> options = Arrays.stream(optionsText.split(IdentityConstants.MATCH_OPTIONS_SEPARATOR))
@@ -49,27 +49,27 @@ public record MatchChallenge(int number, List<Integer> options) {
         }
     }
 
-    /** Các lựa chọn dạng chuỗi để lưu một cột, giữ thứ tự. */
+    /** The choices as a string for storing in one column, order preserved. */
     public String optionsText() {
         return String.join(IdentityConstants.MATCH_OPTIONS_SEPARATOR, options.stream().map(String::valueOf).toList());
     }
 
-    /** Số người duyệt chọn có phải số thật không. */
+    /** Whether the number the approver chose is the real number. */
     public boolean matches(int chosen) {
         return chosen == number;
     }
 
-    /** Số ngẫu nhiên hai chữ số. */
+    /** A random two-digit number. */
     private static int randomNumber() {
         return IdentityConstants.MATCH_NUMBER_MIN + RANDOM.nextInt(IdentityConstants.MATCH_NUMBER_MAX - IdentityConstants.MATCH_NUMBER_MIN + 1);
     }
 
-    /** Số nằm trong khoảng hai chữ số. */
+    /** The number is within the two-digit range. */
     private static boolean inRange(int value) {
         return value >= IdentityConstants.MATCH_NUMBER_MIN && value <= IdentityConstants.MATCH_NUMBER_MAX;
     }
 
-    /** Ném lỗi dữ liệu nếu điều kiện sai. */
+    /** Throws a data error if the condition is false. */
     private static void require(boolean condition, String message) {
         if (!condition) throw new IllegalArgumentException(message);
     }

@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Nhật ký sự kiện bảo mật (BE-11): các dịch vụ khác ghi sự kiện qua {@link #record}, màn Bảo mật đọc qua {@link #recent} và
- * đánh dấu đã xem qua {@link #markSeen}. Mỗi danh tính giữ tối đa {@value IdentityConstants#MAX_EVENTS_PER_IDENTITY} sự kiện mới nhất.
+ * Security event log (BE-11): other services record events through {@link #record}, the Security screen reads through {@link #recent} and
+ * marks them seen through {@link #markSeen}. Each identity keeps at most {@value IdentityConstants#MAX_EVENTS_PER_IDENTITY} of the latest events.
  */
 @Service
 @Transactional
@@ -41,7 +41,7 @@ public class SecurityEventService {
         publisher.publishEvent(new SecurityEventOccurred(UUID.randomUUID(), identityId, kind.code(), deviceName, Timestamps.now(clock)));
     }
 
-    /** Sự kiện gần đây (mới nhất trước) và cờ "chưa xem". */
+    /** Recent events (newest first) and the 'unseen' flag. */
     @Transactional(readOnly = true)
     public EventsView recent(UUID identityId) {
         return new EventsView(store.recentEvents(identityId, IdentityConstants.MAX_EVENTS_PER_IDENTITY).stream()
@@ -49,7 +49,7 @@ public class SecurityEventService {
                 store.hasUnseenAlert(identityId));
     }
 
-    /** Chủ đã mở màn Bảo mật: tắt cờ "chưa xem" cho tới khi có thiết bị mới. */
+    /** The owner opened the Security screen: turn the 'unseen' flag off until a new device appears. */
     public EventsView markSeen(UUID identityId) {
         store.markEventsSeen(identityId);
         return recent(identityId);

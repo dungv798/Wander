@@ -1,14 +1,14 @@
 package com.wander.planning.domain.port;
 
-/** Sinh và băm mã liên kết mời. Mã là bí mật 256 bit ngẫu nhiên chỉ hiện một lần; máy chủ chỉ giữ băm. */
+/** Generates and hashes invite-link codes. A code is a random 256-bit secret shown only once; the server keeps only the hash. */
 public interface InviteCodeHasher {
 
-    /** Mã mới (đủ ngẫu nhiên, an toàn dùng trong URL). */
+    /** A new code (random enough, safe to use in a URL). */
     String newCode();
 
-    /** Mã đúng dạng? Sai dạng thì khỏi băm và coi như liên kết không hợp lệ. */
+    /** Is the code well-formed? A wrong shape needs no hashing and counts as an invalid link. */
     boolean isWellFormed(String code);
 
-    /** Băm của mã (hex), dùng để lưu và so khớp. */
+    /** The hash of the code (hex), used for storing and matching. */
     String hash(String code);
 }

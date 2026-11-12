@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * Một khối cẩm nang điểm đến (mùa nên đi, chuẩn bị, ăn gì...). {@link Layout} cho giao diện biết cách vẽ.
- * Khối {@code MONTHS} dùng {@code bestMonths}/{@code rainyMonths}; các khối khác dùng {@code items}.
+ * A guide block of a destination (best season, preparation, what to eat...). {@link Layout} tells the UI how to draw it.
+ * A {@code MONTHS} block uses {@code bestMonths}/{@code rainyMonths}; the other blocks use {@code items}.
  */
 public record GuideSection(
         String id,
@@ -24,7 +24,7 @@ public record GuideSection(
         List<String> notes,
         List<GuideItem> items) {
 
-    /** Kiểu hiển thị của khối cho giao diện. */
+    /** The display kind of the block for the UI. */
     public enum Layout { MONTHS, CHECKLIST, CARDS, PLACES, ROWS }
 
     public GuideSection {

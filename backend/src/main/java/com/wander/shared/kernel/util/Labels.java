@@ -7,8 +7,8 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 /**
- * Nhãn do người dùng TỰ KHAI (tên thiết bị, tên hiển thị): chưa được xác minh nên chỉ dùng để nhận ra nhau, không làm bằng chứng danh tính.
- * Một nơi duy nhất chuẩn hóa để các module không viết lại (DRY-1).
+ * Labels the user DECLARES THEMSELF (device name, display name): not verified, so they only help people recognize each other and are never identity evidence.
+ * One single place that normalizes them so modules do not rewrite it (DRY-1).
  */
 public final class Labels {
 
@@ -18,9 +18,9 @@ public final class Labels {
     }
 
     /**
-     * Chuẩn hóa NFC, gộp mọi khoảng trắng thành một dấu cách và cắt hai đầu. Ký tự điều khiển, định dạng/vô hình (RTL override,
-     * zero-width, BOM…), tách dòng/đoạn, vùng riêng hoặc chưa gán ⇒ MALFORMED; quá {@code maxCodePoints} (tính theo code point) ⇒ TOO_LONG.
-     * Trả chuỗi rỗng nếu chỉ có khoảng trắng; người gọi tự quyết rỗng là lỗi hay là "không đặt".
+     * Normalizes to NFC, collapses all whitespace into one space and trims both ends. Control, format/invisible characters (RTL override,
+     * zero-width, BOM...), line/paragraph separators, private-use or unassigned characters => MALFORMED; more than {@code maxCodePoints} (counted in code points) => TOO_LONG.
+     * Returns an empty string if there is only whitespace; the caller decides whether empty is an error or 'not set'.
      */
     public static String normalize(String raw, int maxCodePoints, String field) {
         String normalized = Normalizer.normalize(raw, Normalizer.Form.NFC);
@@ -30,7 +30,7 @@ public final class Labels {
         return text;
     }
 
-    /** Ký tự không được có trong nhãn: điều khiển, định dạng/vô hình, tách dòng/đoạn, thay thế, vùng riêng, chưa gán. */
+    /** Characters not allowed in a label: control, format/invisible, line/paragraph separators, surrogate, private-use, unassigned. */
     private static boolean isForbidden(int codePoint) {
         if (Character.isISOControl(codePoint)) return true;
         return switch (Character.getType(codePoint)) {

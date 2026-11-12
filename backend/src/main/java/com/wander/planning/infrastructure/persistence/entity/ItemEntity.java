@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-/** Bảng {@code items} và bảng con {@code item_completions} (hoàn thành theo người, P5). */
+/** Table {@code items} and its child table {@code item_completions} (completion per person, P5). */
 @Entity
 @Table(name = "items")
 public class ItemEntity {
@@ -31,7 +31,7 @@ public class ItemEntity {
     @JoinColumn(name = "trip_id", nullable = false)
     private TripEntity trip;
 
-    /** Ngày của mục; NULL = "Chưa có ngày" (V4). */
+    /** The item's day; NULL = 'no date yet' (V4). */
     @Column(name = "day_date")
     private LocalDate dayDate;
 
@@ -65,7 +65,7 @@ public class ItemEntity {
     @Column(name = "booking_status", length = PlanningConstants.BOOKING_COLUMN_LENGTH)
     private String bookingStatus;
 
-    /** Mã địa điểm trong kho biên tập; NULL = mục tự do (V4). */
+    /** Id of the place in the editorial catalog; NULL = a free-form item (V4). */
     @Column(name = "place_id", length = PlanningConstants.MAX_PLACE_ID_LENGTH)
     private String placeId;
 
@@ -82,7 +82,7 @@ public class ItemEntity {
     @CollectionTable(name = "item_completions", joinColumns = @JoinColumn(name = "item_id"))
     private Set<Completion> completions = new HashSet<>();
 
-    /** Mã thành viên đã thêm mục (NULL = Organizer/dữ liệu cũ). */
+    /** The member id who added the item (NULL = Organizer/old data). */
     @Column(name = "added_by_member_id")
     private UUID addedByMemberId;
 

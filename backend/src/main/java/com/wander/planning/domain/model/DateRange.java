@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.TreeSet;
 
 /**
- * Khoảng ngày của chuyến (R1, R5): gồm cả hai đầu, mỗi ngày lịch là một ngày của chuyến.
- * Value object bất biến; tạo qua {@link #of} nên không bao giờ ở trạng thái sai.
+ * The date range of a trip (R1, R5): both ends included, each calendar day is a day of the trip.
+ * An immutable value object; created through {@link #of} so it is never in a wrong state.
  */
 public record DateRange(LocalDate start, LocalDate end) {
 
@@ -25,7 +25,7 @@ public record DateRange(LocalDate start, LocalDate end) {
         }
     }
 
-    /** Kiểm tra theo thứ tự của hợp đồng API: END_BEFORE_START rồi TOO_LONG. */
+    /** Validates in the order of the API contract: END_BEFORE_START, then TOO_LONG. */
     public static DateRange of(LocalDate start, LocalDate end) {
         if (end.isBefore(start)) {
             throw WanderException.invalid(PlanningErrorCodes.END_BEFORE_START, PlanningMessages.TRIP_RANGE_INVALID, PlanningFields.END_DATE);
@@ -36,17 +36,17 @@ public record DateRange(LocalDate start, LocalDate end) {
         return new DateRange(start, end);
     }
 
-    /** Số ngày của chuyến, tính cả hai đầu. */
+    /** The number of days of the trip, both ends counted. */
     public int dayCount() {
         return (int) ChronoUnit.DAYS.between(start, end) + 1;
     }
 
-    /** Ngày có nằm trong khoảng (gồm cả hai đầu) hay không. */
+    /** Whether a date is within the range (both ends included). */
     public boolean contains(LocalDate date) {
         return !date.isBefore(start) && !date.isAfter(end);
     }
 
-    /** Danh sách các ngày của chuyến, kèm số thứ tự (từ 1) và thứ trong tuần (0 = Chủ nhật … 6 = Thứ bảy). */
+    /** The list of the trip's days, with the ordinal number (from 1) and the weekday (0 = Sunday ... 6 = Saturday). */
     public List<TripDay> days() {
         List<TripDay> days = new ArrayList<>(dayCount());
         LocalDate date = start;
@@ -57,14 +57,14 @@ public record DateRange(LocalDate start, LocalDate end) {
         return days;
     }
 
-    /** Các ngày nằm ngoài khoảng (R12), đã sắp xếp, không trùng. */
+    /** The days outside the range (R12), sorted, without duplicates. */
     public List<LocalDate> outside(Collection<LocalDate> dates) {
         TreeSet<LocalDate> outside = new TreeSet<>();
         for (LocalDate date : dates) if (!contains(date)) outside.add(date);
         return List.copyOf(outside);
     }
 
-    /** Một ngày của chuyến: ngày lịch, số thứ tự trong chuyến, thứ trong tuần và nhãn thứ. */
+    /** One day of the trip: the calendar date, the ordinal number in the trip, the weekday and the weekday label. */
     public record TripDay(LocalDate date, int index, int weekday, String weekdayLabel) {
     }
 }

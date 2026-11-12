@@ -13,9 +13,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Một địa điểm trong bộ thẻ quẹt. Nội dung biên tập (hook, nhãn gợi ý, buổi nên đi, mẹo) là bản nháp cho tới khi
- * PO duyệt. Ảnh KHÔNG bắt buộc (PO 03/11/2026, DR-033): địa điểm đủ căn cứ vẫn nhập được khi chưa có ảnh đã tuyển, giao diện
- * dùng ô giữ chỗ theo loại; mỗi ảnh đã khai báo vẫn phải đủ ghi công và tệp phải tồn tại.
+ * A place in the swipe-card deck. The editorial content (hook, suggestion label, best time of day, tip) is a draft until the
+ * PO approves. A photo is NOT required (PO 03/11/2026, DR-033): a place with enough grounds can still be entered when there is no curated photo yet, the UI
+ * uses a placeholder by kind; each declared photo must still have full attribution and the file must exist.
  */
 public record Place(
         String id,
@@ -66,7 +66,7 @@ public record Place(
                 id, CatalogConstants.MAX_PHOTOS_PER_PLACE);
     }
 
-    /** Chuỗi có đúng dạng slug (không null). */
+    /** The string has exactly the slug shape (not null). */
     private static boolean isSlug(String value) {
         return value != null && SLUG.matcher(value).matches();
     }

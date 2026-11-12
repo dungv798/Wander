@@ -1,90 +1,90 @@
 package com.wander.catalog.domain.constant;
 
-/** Giới hạn và tên trường của lớp POI snapshot, độc lập với hồ sơ Discover. */
+/** Limits and field names of the POI snapshot layer, independent of the Discover profile. */
 public final class PoiConstants {
-    /** Mẫu tài nguyên POI, mỗi điểm đến một tệp. */
+    /** The POI resource pattern, one file per destination. */
     public static final String LOCATION = "${wander.catalog.poi-location:classpath*:catalog/poi/*.json}";
-    /** Số mét trong một km. */
+    /** The number of meters in a km. */
     public static final int METERS_PER_KM = 1000;
-    /** Bán kính tìm kiếm mặc định, mét. */
+    /** The default search radius, meters. */
     public static final int DEFAULT_RADIUS_M = 2000;
-    /** Bán kính tìm kiếm tối đa, mét. */
+    /** The maximum search radius, meters. */
     public static final int MAX_RADIUS_M = 5000;
-    /** Trần phạm vi batch quanh tâm điểm đến, mét; không phải bán kính tìm kiếm. */
+    /** The ceiling of the batch's range around the destination center, meters; not the search radius. */
     public static final int MAX_DESTINATION_RADIUS_M = 15000;
-    /** Số kết quả mặc định. */
+    /** The default number of results. */
     public static final int DEFAULT_LIMIT = 20;
-    /** Số kết quả tối đa. */
+    /** The maximum number of results. */
     public static final int MAX_LIMIT = 30;
-    /** Độ dài tối đa chuỗi tham số trước khi phân tích. */
+    /** The maximum length of a parameter string before parsing. */
     public static final int MAX_PARAMETER_LENGTH = 80;
-    /** Khóa loại địa điểm. */
+    /** The place-kind key. */
     public static final String KIND = "kind";
-    /** Bộ lọc món ăn, gồm food và fast_food. */
+    /** The food filter, covering food and fast_food. */
     public static final String FOOD = "food";
-    /** Bộ lọc cà phê. */
+    /** The coffee filter. */
     public static final String CAFE = "cafe";
-    /** Nhu cầu nghỉ, chỉ chọn cafe trong lát này. */
+    /** The rest need, choosing only cafe in this slice. */
     public static final String REST = "rest";
-    /** Bộ lọc mọi loại. */
+    /** The filter of every kind. */
     public static final String ALL = "all";
-    /** Khóa điểm gần định dạng lat,lon. */
+    /** The nearby-point key in lat,lon form. */
     public static final String NEAR = "near";
-    /** Khóa bán kính mét. */
+    /** The radius key in meters. */
     public static final String RADIUS_M = "radiusM";
-    /** Khóa số kết quả. */
+    /** The result-count key. */
     public static final String LIMIT = "limit";
-    /** Mẫu số nguyên dương. */
+    /** The positive-integer pattern. */
     public static final String INTEGER_PATTERN = "[0-9]+";
-    /** Khóa danh tính nội bộ. */
+    /** The internal identity key. */
     public static final String ID = "id";
-    /** Khóa điểm đến. */
+    /** The destination key. */
     public static final String DESTINATION_ID = "destinationId";
-    /** Khóa tên. */
+    /** The name key. */
     public static final String NAME = "name";
-    /** Khóa tọa độ theo thứ tự lat,lon. */
+    /** The coordinates key in lat,lon order. */
     public static final String CENTER = "center";
-    /** Khóa loại tọa độ. */
+    /** The coordinate kind key. */
     public static final String COORDINATE_KIND = "coordinateKind";
-    /** Tọa độ của node. */
+    /** The coordinates of a node. */
     public static final String POINT = "point";
-    /** Tâm hình học do nguồn cung cấp. */
+    /** The geometric center supplied by the source. */
     public static final String CENTER_KIND = "center";
-    /** Khóa địa chỉ hiển thị. */
+    /** The display address key. */
     public static final String ADDRESS = "address";
-    /** Khóa giờ nguyên văn. */
+    /** The verbatim opening-hours key. */
     public static final String HOURS = "openingHoursRaw";
-    /** Khóa số điện thoại. */
+    /** The phone-number key. */
     public static final String PHONE = "phone";
-    /** Khóa website; chỉ trả dữ liệu, không truy cập URL. */
+    /** The website key; it only returns data, the URL is never visited. */
     public static final String WEBSITE = "website";
-    /** Khóa Wikidata tùy có. */
+    /** The optional Wikidata key. */
     public static final String WIKIDATA_ID = "wikidataId";
-    /** Mẫu mã Wikidata. */
+    /** The Wikidata id pattern. */
     public static final String WIKIDATA_PATTERN = "Q[1-9][0-9]*";
-    /** Khóa loại nguồn OSM. */
+    /** The OSM source kind key. */
     public static final String OSM_TYPE = "osmType";
-    /** Các namespace OSM hợp lệ. */
+    /** The valid OSM namespaces. */
     public static final String OSM_TYPE_PATTERN = "node|way|relation";
-    /** Khóa số định danh OSM. */
+    /** The OSM identifier number key. */
     public static final String OSM_ID = "osmId";
-    /** Tên nguồn dữ liệu. */
+    /** The name of the data source. */
     public static final String OSM = "OSM";
-    /** Gốc URL nguồn dữ kiện. */
+    /** The base URL of the source of facts. */
     public static final String OSM_URL = "https://www.openstreetmap.org/";
-    /** Giấy phép dữ liệu snapshot. */
+    /** The license of the snapshot data. */
     public static final String LICENSE = "ODbL-1.0";
-    /** URL giấy phép và ghi công OSM. */
+    /** The OSM license and attribution URL. */
     public static final String LICENSE_URL = "https://www.openstreetmap.org/copyright";
-    /** Chuỗi ghi công nguồn. */
+    /** The source attribution string. */
     public static final String ATTRIBUTION = "© OpenStreetMap contributors";
-    /** Khóa provenance theo trường. */
+    /** The per-field provenance key. */
     public static final String PROVENANCE = "provenance";
-    /** Khóa trạng thái kiểm chứng. */
+    /** The verification status key. */
     public static final String VERIFICATION = "verificationStatus";
-    /** Lời báo dữ liệu POI không hợp lệ. */
+    /** The message for invalid POI data. */
     public static final String INVALID_RECORD = "Dữ liệu POI không hợp lệ hoặc thiếu bằng chứng nguồn.";
-    /** Lỗi không đọc được tài nguyên; tham số là tên tệp. */
+    /** Error: the resource cannot be read; parameter is the file name. */
     public static final String FILE_UNREADABLE = "Không đọc được dữ liệu POI: %s";
 
     private PoiConstants() {

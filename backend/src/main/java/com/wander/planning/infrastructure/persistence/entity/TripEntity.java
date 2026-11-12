@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/** Bảng {@code trips}. Lớp JPA tách khỏi domain {@code Trip}: domain không mang annotation của framework. */
+/** Table {@code trips}. A JPA class separate from the domain {@code Trip}: the domain carries no framework annotations. */
 @Entity
 @Table(name = "trips")
 public class TripEntity {
@@ -38,14 +38,14 @@ public class TripEntity {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    /** Bìa mã hóa loại:mã; null là tự động. */
+    /** The cover encoded as kind:id; null is automatic. */
     @Column(length = CoverConstants.COLUMN_LENGTH)
     private String cover;
 
     @Column(name = "budget_k")
     private Long budgetK;
 
-    /** Mã kiểu chuyến cách nhau bằng dấu phẩy, theo thứ tự khai báo; rỗng = không có. */
+    /** Trip-kind codes separated by commas, in declaration order; empty = none. */
     @Column(nullable = false, length = PlanningConstants.STYLES_COLUMN_LENGTH)
     private String styles = "";
 
@@ -55,7 +55,7 @@ public class TripEntity {
     @Column(length = PlanningConstants.KIND_COLUMN_LENGTH)
     private String kind;
 
-    /** Mã sở thích cách nhau bằng dấu phẩy, theo thứ tự khai báo; rỗng = không có. */
+    /** Interest codes separated by commas, in declaration order; empty = none. */
     @Column(nullable = false, length = PlanningConstants.INTERESTS_COLUMN_LENGTH)
     private String interests = "";
 
@@ -68,11 +68,11 @@ public class TripEntity {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    /** Thời điểm xóa mềm chuyến; null = còn hiện. */
+    /** The time the trip was soft-deleted; null = visible. */
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
-    /** Khóa lạc quan: hai lệnh đồng thời trên cùng chuyến ⇒ lệnh sau nhận 409 thay vì ghi đè âm thầm. */
+    /** Optimistic lock: two concurrent commands on the same trip => the later one gets 409 instead of silently overwriting. */
     @Version
     private long version;
 

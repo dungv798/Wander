@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  */
 public final class PlanningInput {
 
-    /** Bìa tùy chọn: null là tự động; sai kiểu dùng chung INVALID_COVER với domain. */
+    /** Optional cover: null is automatic; a wrong type shares INVALID_COVER with the domain. */
     public static Cover cover(CoverInput raw) {
         if (raw == null) return null;
         return new Cover(raw.kind(), raw.ref());
@@ -50,12 +50,12 @@ public final class PlanningInput {
     private PlanningInput() {
     }
 
-    /** Giá trị vắng mặt theo nghĩa của API: null hoặc chuỗi rỗng. */
+    /** A value that is absent in the API's sense: null or an empty string. */
     public static boolean isMissing(String value) {
         return value == null || value.isEmpty();
     }
 
-    /** Ngày dạng YYYY-MM-DD, phải là ngày lịch có thật; sai thì trả null. */
+    /** A date as YYYY-MM-DD that must be a real calendar date; otherwise returns null. */
     public static LocalDate isoDateOrNull(String text) {
         if (text == null || !ISO_DATE.matcher(text).matches()) return null;
         try {
@@ -66,9 +66,9 @@ public final class PlanningInput {
     }
 
     /**
-     * Danh sách gán ngày hàng loạt: mảng các đối tượng {@code {itemId, day?, position?}}. Không phải mảng hoặc phần tử không
-     * phải đối tượng thì MALFORMED; quá {@value PlanningConstants#MAX_ASSIGNMENTS} phần tử thì TOO_MANY; mã mục không phải UUID
-     * coi như mục không tồn tại (404).
+     * The list of bulk date assignments: an array of objects {@code {itemId, day?, position?}}. If it is not an array or an element is not
+     * an object => MALFORMED; more than {@value PlanningConstants#MAX_ASSIGNMENTS} elements => TOO_MANY; an item id that is not a UUID
+     * counts as a non-existent item (404).
      */
     public static List<DayAssignment> assignments(List<AssignmentInput> raw) {
         if (raw == null) throw invalidAssignments();
@@ -80,18 +80,18 @@ public final class PlanningInput {
         return assignments;
     }
 
-    /** Ngày tùy chọn của mục: null = "Chưa có ngày" (DR-011 A1); có giá trị thì phải đúng như {@link #day(Object)}. */
+    /** Optional date of an item: null = 'no date yet' (DR-011 A1); a value must be exactly as in {@link #day(Object)}. */
     public static LocalDate dayOrNull(String value) {
         return value == null ? null : day(value);
     }
 
-    /** Mã địa điểm trong kho: null hoặc trống = không liên kết; không phải chuỗi thì MALFORMED, sai dạng thì báo như {@link ItemText#placeId}. */
+    /** The place id in the catalog: null or blank = not linked; not a string => MALFORMED, a wrong shape is reported as in {@link ItemText#placeId}. */
     public static String placeId(String value) {
         if (value == null) return null;
         return ItemText.placeId(value);
     }
 
-    /** Ngày của mục; sai thì báo INVALID_DATE ở trường {@code day}. */
+    /** The date of an item; a wrong one reports INVALID_DATE on the {@code day} field. */
     public static LocalDate day(String value) {
         LocalDate date = isoDateOrNull(value);
         if (date == null) {
@@ -100,7 +100,7 @@ public final class PlanningInput {
         return date;
     }
 
-    /** Loại mục theo mã; sai thì báo INVALID_TYPE. */
+    /** The item type by code; a wrong one reports INVALID_TYPE. */
     public static ItemType type(String code) {
         if (code != null) {
             Optional<ItemType> type = ItemType.fromCode(code);
@@ -110,8 +110,8 @@ public final class PlanningInput {
     }
 
     /**
-     * Trạng thái đặt chỗ (A-14): chuỗi phải là "pending" hoặc "booked". {@code null} được gửi tường minh có nghĩa là
-     * "Chờ xác nhận" (mặc định theo loại mục); muốn giữ nguyên khi sửa thì KHÔNG gửi khóa {@code booking}.
+     * Booking status (A-14): the string must be 'pending' or 'booked'. An explicit {@code null} means
+     * 'Awaiting confirmation' (the default for the item type); to keep it unchanged on edit, do NOT send the {@code booking} key.
      */
     public static BookingStatus booking(String code) {
         if (code == null) return null;
@@ -120,17 +120,17 @@ public final class PlanningInput {
         throw WanderException.invalid(PlanningErrorCodes.INVALID_BOOKING, PlanningMessages.BOOKING_INVALID, PlanningFields.BOOKING);
     }
 
-    /** Ngân sách dự kiến (Q11): như chi phí D17 (nghìn đồng, số nguyên không âm); null hoặc chuỗi rỗng = chưa đặt. */
+    /** Planned budget (Q11): like the D17 cost (thousand VND, a non-negative integer); null or an empty string = not set. */
     public static Long budget(FlexibleNumber value) {
         return amountK(value, PlanningFields.BUDGET);
     }
 
-    /** Cờ ngày chưa chắc: null ⇒ false (chưa đặt); chỉ nhận boolean thật, chuỗi "true" hay số 1 là MALFORMED. */
+    /** The tentative-dates flag: null => false (not set); only a real boolean is accepted, the string 'true' or the number 1 is MALFORMED. */
     public static boolean datesTentative(Boolean flag) {
         return flag != null && flag;
     }
 
-    /** Kiểu chuyến (Q11): danh sách mã; null hoặc chuỗi rỗng = không có kiểu nào (như ngân sách và nhịp). */
+    /** Trip kind (Q11): a list of codes; null or an empty string = no kind (like budget and pace). */
     public static List<TripStyle> styles(List<String> raw) {
         if (raw == null) return List.of();
         List<TripStyle> styles = new ArrayList<>();
@@ -141,7 +141,7 @@ public final class PlanningInput {
         return styles;
     }
 
-    /** "Ai đi" (ADR-014): mã hoặc null/chuỗi rỗng = chưa đặt; nhãn tiếng Việt hay sai kiểu là INVALID_KIND. */
+    /** 'Who is going' (ADR-014): a code or null/empty string = not set; a Vietnamese label or a wrong type is INVALID_KIND. */
     public static TripKind kind(String code) {
         if (isMissing(code)) return null;
         Optional<TripKind> kind = TripKind.fromCode(code);
@@ -149,7 +149,7 @@ public final class PlanningInput {
         throw WanderException.invalid(PlanningErrorCodes.INVALID_KIND, PlanningMessages.KIND_INVALID, PlanningFields.KIND);
     }
 
-    /** Sở thích (ADR-014): danh sách mã; null hoặc chuỗi rỗng = không có; không phải danh sách hoặc mã lạ là INVALID_INTEREST. */
+    /** Interests (ADR-014): a list of codes; null or an empty string = none; not a list or an unknown code is INVALID_INTEREST. */
     public static List<TripInterest> interests(List<String> raw) {
         if (raw == null) return List.of();
         List<TripInterest> interests = new ArrayList<>();
@@ -160,12 +160,12 @@ public final class PlanningInput {
         return interests;
     }
 
-    /** Lỗi sở thích không hợp lệ. */
+    /** Error: invalid interest. */
     private static WanderException invalidInterest() {
         return WanderException.invalid(PlanningErrorCodes.INVALID_INTEREST, PlanningMessages.INTEREST_INVALID, PlanningFields.INTERESTS);
     }
 
-    /** Nhịp chuyến (Q11): mã hoặc null/chuỗi rỗng = chưa đặt. */
+    /** Trip pace (Q11): a code or null/empty string = not set. */
     public static TripPace pace(String code) {
         if (isMissing(code)) return null;
         Optional<TripPace> pace = TripPace.fromCode(code);
@@ -173,7 +173,7 @@ public final class PlanningInput {
         throw WanderException.invalid(PlanningErrorCodes.INVALID_PACE, PlanningMessages.PACE_INVALID, PlanningFields.PACE);
     }
 
-    /** Tiêu đề mục: bắt buộc, phải là chuỗi; thiếu thì REQUIRED, sai kiểu thì MALFORMED. */
+    /** Item title: required, must be a string; missing is REQUIRED, a wrong type is MALFORMED. */
     public static String title(String text) {
         if (text == null) {
             throw WanderException.invalidValue(ErrorCodes.REQUIRED, PlanningFields.TITLE);
@@ -181,13 +181,13 @@ public final class PlanningInput {
         return ItemText.title(text);
     }
 
-    /** Ghi chú mục: null giữ nguyên null; phải là chuỗi. */
+    /** Item note: null stays null; must be a string. */
     public static String note(String text) {
         if (text == null) return null;
         return ItemText.note(text);
     }
 
-    /** Văn bản bắt buộc của chuyến (tên, điểm đến). */
+    /** Required text of a trip (name, destination). */
     public static String requiredText(String text, int max, String field) {
         if (text == null || text.strip().isEmpty()) {
             throw WanderException.invalid(ErrorCodes.REQUIRED, PlanningMessages.FIELD_REQUIRED, field);
@@ -195,7 +195,7 @@ public final class PlanningInput {
         return ItemText.required(text, max, field);
     }
 
-    /** Giờ tùy chọn "HH:MM" 24 giờ; trống ⇒ null. */
+    /** Optional time 'HH:MM' in 24 hours; blank => null. */
     public static LocalTime timeOfDay(String raw) {
         if (raw == null) return null;
         String text = raw.strip();
@@ -210,7 +210,7 @@ public final class PlanningInput {
         return LocalTime.of(hour, minute);
     }
 
-    /** Thời lượng tùy chọn: số nguyên phút trong [0, 7 ngày]. Giờ + thời lượng qua nửa đêm vẫn hợp lệ (Q18b). */
+    /** Optional duration: an integer number of minutes in [0, 7 days]. A time + duration that passes midnight is still valid (Q18b). */
     public static Integer durationMin(FlexibleNumber value) {
         if (value == null || value.isBlankText()) return null;
         BigDecimal minutes = wholeNumberOrMalformed(value, PlanningFields.DURATION_MIN);
@@ -221,8 +221,8 @@ public final class PlanningInput {
     }
 
     /**
-     * Chi phí (nghìn đồng) theo D17: trống ⇒ chưa biết (null); số nguyên không âm; số thập phân, dấu phân cách,
-     * ký hiệu tiền tệ đều là định dạng sai.
+     * Cost (thousand VND) per D17: blank => unknown (null); a non-negative integer; decimals, separators,
+     * and currency symbols are all a wrong format.
      */
     public static Long amountK(FlexibleNumber value, String field) {
         if (value == null) return null;
@@ -230,13 +230,13 @@ public final class PlanningInput {
         return amountFromText(value.text().strip(), field);
     }
 
-    /** Giá trị đúng/sai bắt buộc; sai kiểu thì MALFORMED. */
+    /** A required true/false value; a wrong type is MALFORMED. */
     public static boolean bool(Boolean flag, String field) {
         if (flag != null) return flag;
         throw WanderException.invalidValue(ErrorCodes.MALFORMED, field);
     }
 
-    /** Vị trí yêu cầu: chỉ nhận số (cắt phần thập phân), ngược lại bỏ qua. */
+    /** The requested position: only a number is accepted (the decimal part is cut), otherwise it is ignored. */
     public static Integer position(FlexibleNumber value) {
         if (value == null || value.number() == null) return null;
         BigDecimal decimal = toDecimal(value.number());
@@ -247,7 +247,7 @@ public final class PlanningInput {
         return whole.intValue();
     }
 
-    /** Một phần tử gán ngày: đối tượng có {@code itemId} hợp lệ, {@code day} tùy chọn và {@code position} tùy chọn. */
+    /** One date-assignment element: an object with a valid {@code itemId}, an optional {@code day} and an optional {@code position}. */
     private static DayAssignment assignment(AssignmentInput element) {
         if (element == null) throw invalidAssignments();
         if (element.itemId() == null) throw WanderException.notFound();
@@ -255,17 +255,17 @@ public final class PlanningInput {
         return new DayAssignment(itemId, dayOrNull(element.day()), position(element.position()));
     }
 
-    /** Lỗi danh sách gán ngày sai dạng. */
+    /** Error: the date-assignment list has the wrong shape. */
     private static WanderException invalidAssignments() {
         return WanderException.invalid(ErrorCodes.MALFORMED, PlanningMessages.ASSIGNMENTS_MALFORMED, PlanningFields.ASSIGNMENTS);
     }
 
-    /** Lỗi kiểu chuyến không hợp lệ. */
+    /** Error: invalid trip kind. */
     private static WanderException invalidStyle() {
         return WanderException.invalid(PlanningErrorCodes.INVALID_STYLE, PlanningMessages.STYLE_INVALID, PlanningFields.STYLES);
     }
 
-    /** Số nguyên (không có phần thập phân) từ số JSON hoặc chuỗi chỉ gồm chữ số; mọi dạng khác báo MALFORMED. */
+    /** An integer (no decimal part) from a JSON number or a string of digits only; any other form reports MALFORMED. */
     private static BigDecimal wholeNumberOrMalformed(FlexibleNumber value, String field) {
         BigDecimal decimal;
         if (value.number() != null) {
@@ -280,14 +280,14 @@ public final class PlanningInput {
         return decimal;
     }
 
-    /** Chi phí từ số JSON: phải là số nguyên hữu hạn, không âm, không quá lớn. */
+    /** A cost from a JSON number: must be a finite integer, not negative, not too large. */
     private static Long amountFromNumber(Number number, String field) {
         BigDecimal decimal = toDecimal(number);
         if (decimal == null || decimal.stripTrailingZeros().scale() > 0) throw WanderException.invalidValue(ErrorCodes.MALFORMED, field);
         return checkedAmount(decimal, field);
     }
 
-    /** Chi phí từ chuỗi đã cắt khoảng trắng: rỗng ⇒ null; chỉ nhận chữ số; số âm và số quá lớn có mã lỗi riêng. */
+    /** A cost from a trimmed string: empty => null; only digits are accepted; a negative number and a too-large number have their own error codes. */
     private static Long amountFromText(String text, String field) {
         if (text.isEmpty()) return null;
         if (NEGATIVE_DIGITS.matcher(text).matches()) throw WanderException.invalidValue(ErrorCodes.NEGATIVE, field);
@@ -298,7 +298,7 @@ public final class PlanningInput {
         return checkedAmount(new BigDecimal(text), field);
     }
 
-    /** Số đã là số nguyên: không âm và không vượt mức tối đa. */
+    /** The number is already an integer: not negative and not above the maximum. */
     private static Long checkedAmount(BigDecimal amount, String field) {
         if (amount.signum() < 0) throw WanderException.invalidValue(ErrorCodes.NEGATIVE, field);
         if (amount.compareTo(BigDecimal.valueOf(PlanningConstants.MAX_COST_K)) > 0) {
@@ -307,7 +307,7 @@ public final class PlanningInput {
         return amount.longValueExact();
     }
 
-    /** Số JSON → BigDecimal; NaN/vô cực ⇒ null. */
+    /** A JSON number -> BigDecimal; NaN/infinity => null. */
     private static BigDecimal toDecimal(Number number) {
         if (number instanceof BigDecimal decimal) return decimal;
         if (number instanceof BigInteger integer) return new BigDecimal(integer);

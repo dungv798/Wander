@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code trip_invites}: liên kết mời (chỉ giữ băm của mã). */
+/** Table {@code trip_invites}: an invite link (it keeps only the hash of the code). */
 @Entity
 @Table(name = "trip_invites")
 public class TripInviteEntity {

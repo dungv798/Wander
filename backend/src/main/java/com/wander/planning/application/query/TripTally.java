@@ -13,15 +13,15 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Kết quả gom một lượt các dòng mục của một chuyến để dựng màn xem lịch: mục đang hiện theo ngày và mục "Chưa có ngày",
- * tổng phải trả thêm (R2) theo ngày, theo loại và riêng cho mục chưa có ngày (DR-006: vẫn tính vào tổng cả chuyến),
- * số mục trong "Đã xóa gần đây" và số mục chưa rõ giá (D18).
+ * The result of gathering the item rows of a trip in one pass to build the schedule view: visible items by day and the 'no date yet' items,
+ * the extra amount to pay (R2) by day, by type and separately for undated items (DR-006: still counted in the trip total),
+ * the number of items in 'Recently deleted' and the number of items with an unknown price (D18).
  */
 record TripTally(Map<LocalDate, List<ItemView>> liveByDay, List<ItemView> unscheduled, Map<LocalDate, Long> perDay,
                  Map<String, Long> perType, Set<String> liveTypes, long extraK, long unscheduledK, int trashCount,
                  int unknownCount) {
 
-    /** Duyệt các dòng mục một lần: mục đã xóa mềm chỉ được đếm vào thùng rác, mục còn hiện được gom vào các tổng. */
+    /** Walks the item rows once: a soft-deleted item is counted only into the trash, a visible item is gathered into the totals. */
     static TripTally of(List<ItemRow> rows, Set<UUID> done, java.util.Map<UUID, List<String>> doneBy) {
         Map<LocalDate, List<ItemView>> liveByDay = new HashMap<>();
         List<ItemView> unscheduled = new ArrayList<>();
@@ -54,7 +54,7 @@ record TripTally(Map<LocalDate, List<ItemView>> liveByDay, List<ItemView> unsche
         return new TripTally(liveByDay, unscheduled, perDay, perType, liveTypes, extraK, unscheduledK, trashCount, unknownCount);
     }
 
-    /** Mục thuộc loại có giá, chưa nhập chi phí và chưa tick "đã bao gồm": chưa rõ giá, không bao giờ coi là 0 (D18). */
+    /** An item of a type that has a price, with no cost entered and 'included' not ticked: unknown price, never treated as 0 (D18). */
     private static boolean hasUnknownPrice(ItemRow row) {
         boolean priced = ItemType.fromCode(row.type()).map(ItemType::isPriced).orElse(true);
         return priced && row.costK() == null && !row.included();

@@ -1,33 +1,33 @@
 package com.wander.rating.domain.constant;
 
-/** Hằng số của rating Wander (DR-032). */
+/** Constants of Wander rating (DR-032). */
 public final class RatingConstants {
 
-    /** Điểm thấp nhất. */
+    /** The lowest score. */
     public static final int STARS_MIN = 1;
 
-    /** Điểm cao nhất. */
+    /** The highest score. */
     public static final int STARS_MAX = 5;
 
-    /** Độ dài tối đa của lời bình, tính theo code point (khớp độ dài cột của DB). */
+    /** Maximum length of a comment, in code points (matches the DB column length). */
     public static final int COMMENT_MAX_LENGTH = 280;
 
-    /** Độ dài tối đa của mã quán (khớp độ dài cột của DB). */
+    /** Maximum length of a venue id (matches the DB column length). */
     public static final int PLACE_REF_MAX_LENGTH = 64;
 
-    /** Dạng mã quán hợp lệ: chữ, số và : _ . - tối đa 64 ký tự (mã POI/quán trong catalog). */
+    /** A valid venue id: letters, digits and : _ . - up to 64 characters (the POI/venue id in the catalog). */
     public static final String PLACE_REF_REGEX = "^[A-Za-z0-9:_.-]{1,64}$";
 
-    /** Số người báo cáo khác nhau để ẩn một lời bình. */
+    /** The number of different reporters that hides a comment. */
     public static final int REPORT_HIDE_THRESHOLD = 3;
 
-    /** Số lời bình mới nhất trả về cho một quán. */
+    /** The number of newest comments returned for a venue. */
     public static final int COMMENTS_PAGE_SIZE = 10;
 
-    /** Số quán tối đa một danh tính được chấm (chặn làm đầy DB bằng mã quán tùy ý). */
+    /** The maximum number of venues one identity may rate (stops filling the DB with arbitrary venue ids). */
     public static final int MAX_RATINGS_PER_IDENTITY = 1000;
 
-    /** Hệ số làm tròn điểm trung bình đến một chữ số thập phân. */
+    /** The factor that rounds the average score to one decimal place. */
     public static final double AVERAGE_ROUNDING_FACTOR = 10.0;
 
     private RatingConstants() {

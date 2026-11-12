@@ -8,33 +8,33 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/** Cổng lưu trữ rating Wander. */
+/** The storage port of Wander rating. */
 public interface RatingStore {
 
-    /** Điểm của danh tính cho quán, nếu có. */
+    /** The identity's score for the venue, if any. */
     Optional<PlaceRating> findMine(UUID identityId, String placeRef);
 
-    /** Danh tính đã chấm quán này chưa. */
+    /** Whether the identity has rated this venue. */
     boolean exists(UUID identityId, String placeRef);
 
-    /** Điểm theo mã, nếu có. */
+    /** The score by id, if any. */
     Optional<PlaceRating> findById(UUID ratingId);
 
-    /** Số quán danh tính đã chấm. */
+    /** The number of venues the identity has rated. */
     long countByIdentity(UUID identityId);
 
-    /** Ghi hoặc cập nhật điểm của danh tính cho quán trong một câu lệnh (an toàn khi hai yêu cầu cùng lúc). */
+    /** Writes or updates the identity's score for the venue in one statement (safe when two requests arrive at the same time). */
     void upsert(UUID identityId, String placeRef, int stars, String comment, Instant now);
 
-    /** Xóa điểm của danh tính cho quán; trả true nếu có xóa. */
+    /** Deletes the identity's score for the venue; returns true if something was deleted. */
     boolean delete(UUID identityId, String placeRef);
 
-    /** Điểm tổng hợp của quán. */
+    /** The aggregate score of the venue. */
     RatingSummary summary(String placeRef);
 
-    /** Các lời bình mới nhất chưa bị ẩn của quán. */
+    /** The venue's newest comments that are not hidden. */
     List<PlaceComment> latestComments(String placeRef, int limit);
 
-    /** Ghi báo cáo (bỏ qua nếu người này đã báo cáo lời bình đó). */
+    /** Records a report (ignored if this person has already reported that comment). */
     void addReport(UUID ratingId, UUID reporterId, Instant now);
 }

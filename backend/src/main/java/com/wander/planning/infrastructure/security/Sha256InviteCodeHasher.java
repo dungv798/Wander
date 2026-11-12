@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 
 /**
- * Mã mời là 256 bit từ {@link SecureRandom} (base64url, 43 ký tự). Entropy này đủ cao để băm SHA-256 thường (không cần khóa/pepper) là an toàn:
- * không thể dò ngược hay đoán. Băm có tiền tố riêng để không trùng miền với băm khác.
+ * An invite code is 256 bits from {@link SecureRandom} (base64url, 43 characters). That entropy is high enough that a plain SHA-256 hash (no key/pepper) is safe:
+ * it cannot be reversed or guessed. The hash has its own prefix so it does not share a domain with other hashes.
  */
 @Component
 public class Sha256InviteCodeHasher implements InviteCodeHasher {

@@ -2,10 +2,10 @@ package com.wander.shared.web.ratelimit;
 
 import java.time.Duration;
 
-/** Hằng số riêng của chức năng giới hạn tần suất ({@link RateLimits}, {@link FixedWindowRateLimiter}). */
+/** Constants specific to the rate-limit feature ({@link RateLimits}, {@link FixedWindowRateLimiter}). */
 final class RateLimitConstants {
 
-    /** Số lần tạo danh tính tối đa mỗi giờ cho một địa chỉ (mặc định, đổi qua cấu hình). */
+    /** Maximum number of identity creations per hour for one address (default, changed through configuration). */
     /** Name of the counter of rejected calls; tagged with the limiter that rejected them. */
     static final String REJECTED_METRIC = "wander.ratelimit.rejected";
 
@@ -31,46 +31,46 @@ final class RateLimitConstants {
 
     static final int DEFAULT_IDENTITY_PER_HOUR = 30;
 
-    /** Số lần khôi phục/ghép thiết bị chưa xác thực tối đa mỗi giờ cho một địa chỉ. */
+    /** Maximum number of unauthenticated recoveries/device pairings per hour for one address. */
     static final int DEFAULT_RECOVERY_PER_HOUR = 30;
 
-    /** Số lần duyệt/xác thực lại/tái tạo mã tối đa mỗi giờ cho một phiên. */
+    /** Maximum number of approvals/re-authentications/code regenerations per hour for one session. */
     static final int DEFAULT_APPROVAL_PER_HOUR = 20;
 
-    /** Số lần đọc kho địa điểm công khai tối đa mỗi phút cho một địa chỉ (DR-008 Q-a; mặc định, đổi qua cấu hình). */
+    /** Maximum number of public venue-catalog reads per minute for one address (DR-008 Q-a; default, changed through configuration). */
     static final int DEFAULT_CATALOG_PER_MINUTE = 120;
 
-    /** Ngân sách request ghi API mỗi phút cho một danh tính, dùng chung giữa các thiết bị. */
+    /** The API write-request budget per minute for one identity, shared across devices. */
     static final int DEFAULT_WRITES_PER_MINUTE = 120;
 
     /**
-     * Số lần thiết bị mới hỏi trạng thái yêu cầu ghép tối đa mỗi phút cho một địa chỉ. Máy mới hỏi mỗi giây
-     * (60 lần/phút) nên cần trần riêng, không dùng chung hạn mức khôi phục theo giờ.
+     * Maximum number of times a new device polls the pairing-request status per minute for one address. The new device polls every second
+     * (60 per minute) so it needs its own ceiling, not shared with the hourly recovery limit.
      */
     static final int DEFAULT_LINK_POLL_PER_MINUTE = 120;
 
-    /** Số yêu cầu duyệt (ghép thiết bị, xin xác thực lại) tối đa mỗi cửa sổ 10 phút (DR-018 E1). */
+    /** Maximum number of approval requests (device pairing, asking for re-authentication) per 10-minute window (DR-018 E1). */
     static final int DEFAULT_APPROVAL_REQUESTS_PER_WINDOW = 3;
 
-    /** Độ dài cửa sổ đếm yêu cầu duyệt. */
+    /** Length of the window that counts approval requests. */
     static final Duration APPROVAL_REQUEST_WINDOW = Duration.ofMinutes(10);
 
-    /** Độ dài cửa sổ đếm. */
+    /** Length of the counting window. */
     static final Duration WINDOW = Duration.ofHours(1);
 
-    /** Độ dài cửa sổ đếm của kho địa điểm công khai. */
+    /** Length of the counting window of the public venue catalog. */
     static final Duration CATALOG_WINDOW = Duration.ofMinutes(1);
 
-    /** Số khóa theo dõi tối đa trước khi dọn các cửa sổ đã hết hạn. */
+    /** Maximum number of tracked keys before expired windows are cleaned up. */
     static final int MAX_TRACKED_KEYS = 10_000;
 
-    /** Khóa của xô tràn dùng chung khi bảng đầy (chỉ kênh khôi phục); không trùng được địa chỉ thật vì chứa dấu '#'. */
+    /** Key of the shared overflow bucket used when the table is full (recovery channel only); it cannot clash with a real address because it contains the character '#'. */
     static final String OVERFLOW_KEY = "#overflow";
 
-    /** Ngân sách của xô tràn tính theo bội số của hạn mức một khóa. */
+    /** The overflow bucket's budget as a multiple of the one-key limit. */
     static final int OVERFLOW_BUDGET_FACTOR = 20;
 
-    /** Khoảng cách tối thiểu giữa hai lần quét khi bảng khóa đã đầy. */
+    /** Minimum interval between two sweeps when the key table is already full. */
     static final Duration PRUNE_INTERVAL = Duration.ofSeconds(1);
 
     private RateLimitConstants() {

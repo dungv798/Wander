@@ -11,20 +11,20 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng mã khôi phục. */
+/** Spring Data JPA repository of the recovery-code table. */
 public interface RecoveryCodeJpaRepository extends JpaRepository<RecoveryCodeEntity, UUID> {
 
-    /** Metadata không bí mật của những khóa chưa được phép bỏ khỏi cấu hình deploy. */
+    /** Non-secret metadata of the keys that must not yet be dropped from the deployment configuration. */
     @Query(value = IdentityQueryConstants.REQUIRED_RECOVERY_KEY_VERSIONS, nativeQuery = true)
     List<String> findRequiredKeyVersions();
 
-    /** Mã còn hợp lệ theo băm. */
+    /** The code that is still valid, by hash. */
     Optional<RecoveryCodeEntity> findByCodeHashAndInvalidatedAtIsNull(String codeHash);
 
-    /** Mã còn hợp lệ của danh tính. */
+    /** The identity's code that is still valid. */
     Optional<RecoveryCodeEntity> findByIdentityIdAndInvalidatedAtIsNull(UUID identityId);
 
-    /** Mã theo id với khóa ghi (SELECT … FOR UPDATE). */
+    /** The code by id with a write lock (SELECT ... FOR UPDATE). */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.RECOVERY_CODE_BY_ID)
     Optional<RecoveryCodeEntity> lockById(@Param("id") UUID id);

@@ -8,9 +8,9 @@ import java.net.URI;
 import java.util.regex.Pattern;
 
 /**
- * Ảnh kèm thông tin ghi công. Giấy phép mở (Creative Commons...) hay giấy phép Unsplash buộc hiển thị tác giả, giấy phép và liên kết gốc
- * (ADR-009), nên các trường đó là bắt buộc. Nguồn ảnh là ĐÚNG MỘT trong hai: {@code file} (tệp lưu cục bộ trong kho) hoặc
- * {@code externalUrl} (ảnh tải thẳng từ máy chủ ngoài thuộc danh sách cho phép, DR-034: Unsplash bắt buộc hotlink).
+ * A photo with its attribution. An open license (Creative Commons...) or the Unsplash license requires showing the author, the license and the original link
+ * (ADR-009), so those fields are required. The photo source is EXACTLY ONE of two: {@code file} (a file stored locally in the catalog) or
+ * {@code externalUrl} (a photo loaded directly from an allowed external server, DR-034: Unsplash requires hotlinking).
  */
 public record Photo(String file, String externalUrl, String author, String license, String sourceUrl, String caption, String authorUrl,
                     String thumbFile) {
@@ -23,17 +23,17 @@ public record Photo(String file, String externalUrl, String author, String licen
         this(file, externalUrl, author, license, sourceUrl, caption, authorUrl, null);
     }
 
-    /** Ảnh đã có chú thích vẫn đọc được khi chưa có liên kết tác giả. */
+    /** A photo that already has a caption can still be read when there is no author link yet. */
     public Photo(String file, String externalUrl, String author, String license, String sourceUrl, String caption) {
         this(file, externalUrl, author, license, sourceUrl, caption, "");
     }
 
-    /** Dữ liệu ảnh cũ không cần chú thích để tiếp tục đọc được. */
+    /** Old photo data does not need a caption to remain readable. */
     public Photo(String file, String externalUrl, String author, String license, String sourceUrl) {
         this(file, externalUrl, author, license, sourceUrl, "");
     }
 
-    /** Ảnh lưu cục bộ (trường hợp thường gặp). */
+    /** A locally stored photo (the common case). */
     public Photo(String file, String author, String license, String sourceUrl) {
         this(file, null, author, license, sourceUrl);
     }
@@ -70,7 +70,7 @@ public record Photo(String file, String externalUrl, String author, String licen
         }
     }
 
-    /** Ảnh tải thẳng từ máy chủ ngoài (không có tệp cục bộ). */
+    /** A photo loaded directly from an external server (no local file). */
     public boolean isExternal() {
         return externalUrl != null;
     }
@@ -106,7 +106,7 @@ public record Photo(String file, String externalUrl, String author, String licen
         return variant.matches() ? Integer.valueOf(variant.group(2)) : null;
     }
 
-    /** URL ngoài phải là https và máy chủ nằm trong danh sách cho phép (khớp CSP {@code img-src}). */
+    /** An external URL must be https and its host in the allowed list (matches the CSP {@code img-src}). */
     private static void requireAllowedExternalUrl(String url) {
         CatalogValidation.require(url.startsWith(CatalogConstants.HTTPS_PREFIX), CatalogMessages.PHOTO_SOURCE_NOT_HTTPS, url);
         String host;
@@ -119,7 +119,7 @@ public record Photo(String file, String externalUrl, String author, String licen
                 CatalogMessages.PHOTO_EXTERNAL_HOST_NOT_ALLOWED, url);
     }
 
-    /** Trường văn bản bắt buộc của ảnh: không rỗng, trả về bản đã cắt khoảng trắng. */
+    /** A required text field of a photo: not empty, returns the trimmed copy. */
     private static String requiredPhotoField(String value, String label) {
         CatalogValidation.require(!Texts.isNullOrBlank(value), CatalogMessages.PHOTO_FIELD_MISSING, label);
         return value.trim();

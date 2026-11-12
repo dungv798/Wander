@@ -4,7 +4,7 @@ import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.constant.PoiConstants;
 import com.wander.catalog.domain.rule.PoiValidation;
 
-/** Danh tính và dữ kiện nền chỉ đọc; hồ sơ Discover hiện có vẫn giữ hợp đồng riêng. */
+/** Read-only identity and base facts; the existing Discover profile keeps its own contract. */
 public record PlaceRecord(String id, String destinationId, String osmType, long osmId, String wikidataId,
                           String name, GeoPoint location, String coordinateKind, String address, String phone, String website) {
     public PlaceRecord {

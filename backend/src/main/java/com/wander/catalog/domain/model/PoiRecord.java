@@ -9,7 +9,7 @@ import com.wander.shared.kernel.constant.CommonConstants;
 import java.util.List;
 import java.util.Map;
 
-/** Projection POI không cần ảnh/rating; mọi dữ kiện có giá trị phải có bằng chứng cùng nguồn. */
+/** A POI projection needs no photo/rating; every fact that has a value must have evidence from the same source. */
 public record PoiRecord(PlaceRecord place, PoiKind kind, String openingHoursRaw,
                         Map<String, FieldProvenance> provenance, List<OsmReference> mergedFrom) {
     public PoiRecord {
@@ -22,17 +22,17 @@ public record PoiRecord(PlaceRecord place, PoiKind kind, String openingHoursRaw,
         requireEvidence(place, openingHoursRaw, provenance);
     }
 
-    /** Trạng thái chỉ phản ánh có raw; không đọc hoặc parse lịch mở cửa. */
+    /** The status only reflects that there is a raw value; the opening hours are not read or parsed. */
     public OpeningHoursStatus openingHoursStatus() {
         return openingHoursRaw == null ? OpeningHoursStatus.UNKNOWN : OpeningHoursStatus.RAW;
     }
 
-    /** Lát đầu luôn chưa xác minh, kể cả khi nguồn có giờ hoặc liên hệ. */
+    /** The first slice is always unverified, even when the source has hours or contact information. */
     public PoiVerificationStatus verificationStatus() {
         return PoiVerificationStatus.SNAPSHOT_UNVERIFIED;
     }
 
-    /** Bắt buộc provenance cho các giá trị thực sự có, cùng đối tượng OSM đang được chọn. */
+    /** Provenance is required for values that really exist, from the same OSM object that is being chosen. */
     private static void requireEvidence(PlaceRecord place, String raw, Map<String, FieldProvenance> evidence) {
         requireField(evidence, PoiConstants.OSM_TYPE, place.osmType(), place);
         requireField(evidence, PoiConstants.OSM_ID, place.osmId(), place);
@@ -47,7 +47,7 @@ public record PoiRecord(PlaceRecord place, PoiKind kind, String openingHoursRaw,
         requireField(evidence, PoiConstants.WIKIDATA_ID, place.wikidataId(), place);
     }
 
-    /** Không nhận bằng chứng của cơ sở khác hoặc gán nguồn cho dữ kiện đang thiếu. */
+    /** Does not accept evidence of another establishment or attach a source to a fact that is missing. */
     private static void requireField(Map<String, FieldProvenance> evidence, String field, Object value, PlaceRecord place) {
         if (value == null) {
             PoiValidation.require(!evidence.containsKey(field), PoiConstants.PROVENANCE);

@@ -4,8 +4,8 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Loại sự kiện trong "Hoạt động gần đây" (BE-11). {@link #raisesAlert()} cho biết sự kiện làm bật cờ "chưa xem": chỉ khi có thiết bị
- * MỚI được thêm (ghép hoặc khôi phục), vì đó là điều chủ cần biết để thu hồi nếu không phải mình.
+ * Kind of event in 'Recent activity' (BE-11). {@link #raisesAlert()} says whether the event raises the 'unseen' flag: only when a NEW device
+ * is added (pairing or recovery), because that is what the owner needs to know in order to revoke it if it was not them.
  */
 public enum EventKind implements CodedValue {
     CREATED("created", false),
@@ -27,12 +27,12 @@ public enum EventKind implements CodedValue {
         return code;
     }
 
-    /** Sự kiện này có làm bật cờ "chưa xem" không. */
+    /** Whether this event raises the 'unseen' flag. */
     public boolean raisesAlert() {
         return raisesAlert;
     }
 
-    /** Loại theo mã trong dữ liệu; mã lạ trả rỗng. */
+    /** The kind by its code in the data; an unknown code returns empty. */
     public static Optional<EventKind> fromCode(String code) {
         return CodedValue.find(EventKind.class, code);
     }

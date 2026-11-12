@@ -4,83 +4,83 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.http.MediaType;
 
 /**
- * Hằng số HTTP dùng chung (tầng HỆ THỐNG, tầng web): tên header, giá trị header bảo mật và cache, tiền tố đường dẫn.
+ * Shared HTTP constants (SYSTEM tier, web layer): header names, security and cache header values, path prefixes.
  */
 public final class HttpConstants {
 
-    /** Mã đầu tiên của nhóm lỗi phía client; mọi lỗi không được cache như asset immutable. */
+    /** The first code of the client-error group; no error is cached as an immutable asset. */
     public static final int CLIENT_ERROR_STATUS_MIN = 400;
 
-    /** Mẫu đường dẫn cho interceptor API. */
+    /** Path pattern for the API interceptor. */
     public static final String ALL_API_PATHS = "/api/**";
 
     /**
-     * Đường dẫn không tính vào ngân sách ghi theo danh tính vì đã có bộ đếm "duyệt" riêng theo từng phiên (20/giờ):
-     * ghép thiết bị, mã khôi phục, xác thực lại. Nhờ vậy kẻ giữ một phiên không làm cạn quyền duyệt/từ chối của chủ.
+     * Paths not counted into the per-identity write budget because there is already a separate 'approval' counter per session (20/hour):
+     * device pairing, recovery code, re-authentication. This way someone holding a session cannot exhaust the owner's approve/deny ability.
      */
     public static final String[] WRITE_BUDGET_EXEMPT_PATHS = {"/api/device-links/**", "/api/recovery-code/**", "/api/step-up/**"};
 
-    /** Tiền tố đường dẫn các phiên (thu hồi phiên là DELETE dưới tiền tố này). */
+    /** Path prefix of the sessions (revoking a session is a DELETE under this prefix). */
     public static final String SESSIONS_PATH_PREFIX = "/api/sessions/";
 
-    /** Tiền tố đường dẫn của API (có dấu gạch chéo đầu). */
+    /** Path prefix of the API (with the leading slash). */
     public static final String API_PATH_PREFIX = "/api/";
 
-    /** Tiền tố đường dẫn của actuator (có dấu gạch chéo đầu). */
+    /** Path prefix of the actuator (with the leading slash). */
     public static final String ACTUATOR_PATH_PREFIX = "/actuator/";
 
-    /** Tiền tố đường dẫn tệp giao diện có băm (có dấu gạch chéo đầu). */
+    /** Path prefix of the hashed UI files (with the leading slash). */
     public static final String ASSETS_PATH_PREFIX = "/assets/";
 
-    /** Tiền tố tài nguyên API khi đã bỏ dấu gạch chéo đầu (dùng trong bộ phân giải tài nguyên). */
+    /** The API resource prefix without the leading slash (used in the resource resolver). */
     public static final String API_RESOURCE_PREFIX = "api/";
 
-    /** Tiền tố tài nguyên actuator khi đã bỏ dấu gạch chéo đầu. */
+    /** The actuator resource prefix without the leading slash. */
     public static final String ACTUATOR_RESOURCE_PREFIX = "actuator/";
 
-    /** Header chuỗi địa chỉ qua các proxy. */
+    /** The header with the chain of addresses through the proxies. */
     public static final String HEADER_X_FORWARDED_FOR = "X-Forwarded-For";
 
-    /** Header chặn trình duyệt đoán kiểu nội dung. */
+    /** The header that stops the browser from guessing the content type. */
     public static final String HEADER_X_CONTENT_TYPE_OPTIONS = "X-Content-Type-Options";
 
-    /** Giá trị của {@link #HEADER_X_CONTENT_TYPE_OPTIONS}. */
+    /** The value of {@link #HEADER_X_CONTENT_TYPE_OPTIONS}. */
     public static final String VALUE_NOSNIFF = "nosniff";
 
     /** Header HSTS. */
     public static final String HEADER_STRICT_TRANSPORT_SECURITY = "Strict-Transport-Security";
 
-    /** Thời hạn HSTS: 365 ngày tính bằng giây. */
+    /** HSTS lifetime: 365 days in seconds. */
     public static final long HSTS_MAX_AGE_SECONDS = 31_536_000L;
 
-    /** Giá trị header HSTS (không includeSubDomains/preload để không ràng buộc tên miền khác). */
+    /** The HSTS header value (no includeSubDomains/preload so it does not bind other domains). */
     public static final String VALUE_HSTS = "max-age=" + HSTS_MAX_AGE_SECONDS;
 
-    /** Header điều khiển cache. */
+    /** The cache-control header. */
     public static final String HEADER_CACHE_CONTROL = "Cache-Control";
 
-    /** API không được cache. */
+    /** The API must not be cached. */
     public static final String VALUE_CACHE_NO_STORE = "no-store";
 
-    /** Giao diện thường phải xác nhận lại với máy chủ. */
+    /** The UI normally has to revalidate with the server. */
     public static final String VALUE_CACHE_NO_CACHE = "no-cache";
 
-    /** Tệp có băm trong tên được cache một năm, không đổi. */
+    /** A file with a hash in its name is cached for one year, unchanged. */
     public static final String VALUE_CACHE_IMMUTABLE_ASSET = "public, max-age=" + HSTS_MAX_AGE_SECONDS + ", immutable";
 
-    /** Header chống nhúng khung. */
+    /** The header against framing. */
     public static final String HEADER_X_FRAME_OPTIONS = "X-Frame-Options";
 
-    /** Giá trị của {@link #HEADER_X_FRAME_OPTIONS}. */
+    /** The value of {@link #HEADER_X_FRAME_OPTIONS}. */
     public static final String VALUE_DENY = "DENY";
 
-    /** Header chính sách referrer. */
+    /** The referrer-policy header. */
     public static final String HEADER_REFERRER_POLICY = "Referrer-Policy";
 
-    /** Không gửi referrer. */
+    /** Do not send a referrer. */
     public static final String VALUE_NO_REFERRER = "no-referrer";
 
-    /** Header chính sách nội dung. */
+    /** The content-security-policy header. */
     public static final String HEADER_CONTENT_SECURITY_POLICY = "Content-Security-Policy";
 
     /** Default {@code img-src} directive: this origin, inline data/blob images and Unsplash. */
@@ -133,24 +133,24 @@ public final class HttpConstants {
     public static final String PHOTO_BASE_URL_EXPRESSION = "${wander.catalog.photo-base-url:}";
 
     /**
-     * CSP chặt: không script ngoài, không nhúng khung, chỉ cùng nguồn gốc, TRỪ hai máy chủ bản đồ đã duyệt ở ADR-015
-     * (kiểu, ô vector, phông và biểu tượng ở tiles.openfreemap.org; ô độ cao ở s3.amazonaws.com) và worker/ảnh {@code blob:}
-     * mà MapLibre GL tạo ra, cùng ảnh Unsplash tải thẳng từ images.unsplash.com (DR-034: điều khoản Unsplash bắt buộc hotlink). Không dùng ký tự đại diện.
+     * A strict CSP: no external scripts, no framing, same origin only, EXCEPT the two map servers approved in ADR-015
+     * (style, vector tiles, fonts and sprites at tiles.openfreemap.org; elevation tiles at s3.amazonaws.com) and the {@code blob:} workers/images
+     * that MapLibre GL creates, plus Unsplash photos loaded directly from images.unsplash.com (DR-034: the Unsplash terms require hotlinking). No wildcards.
      */
     public static final String VALUE_CONTENT_SECURITY_POLICY = "default-src 'self'; script-src 'self'; style-src 'self'; "
             + CSP_IMG_SRC_DEFAULT + "; connect-src 'self' https://tiles.openfreemap.org https://s3.amazonaws.com; "
             + "worker-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
     /**
-     * Kiểu nội dung của thân lỗi JSON, nêu rõ UTF-8: Spring bỏ `charset` khỏi `application/json`, nên Safari mở thẳng URL lỗi
-     * hiểu thân là Latin-1 và làm vỡ tiếng Việt (ứng dụng đọc bằng `fetch().json()` luôn là UTF-8 nên không bị).
+     * The content type of the JSON error body, stating UTF-8 explicitly: Spring drops `charset` from `application/json`, so Safari opening an error URL directly
+     * reads the body as Latin-1 and breaks Vietnamese (the app reads with `fetch().json()`, which is always UTF-8, so it is not affected).
      */
     public static final MediaType JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8);
 
-    /** Đuôi tệp manifest ứng dụng web (không có dấu chấm). */
+    /** The file extension of the web app manifest (without the dot). */
     public static final String WEB_MANIFEST_EXTENSION = "webmanifest";
 
-    /** Kiểu nội dung của manifest ứng dụng web; iOS Safari cần đúng kiểu này để dùng manifest (chạy toàn màn hình khi Thêm vào Màn hình chính). */
+    /** The content type of the web app manifest; iOS Safari needs exactly this type to use the manifest (to run full-screen when Added to the Home Screen). */
     public static final String WEB_MANIFEST_MEDIA_TYPE = "application/manifest+json";
 
     private HttpConstants() {

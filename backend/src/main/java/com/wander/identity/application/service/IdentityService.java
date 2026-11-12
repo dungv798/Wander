@@ -27,7 +27,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Danh tính ẩn danh và phiên (D15). Phần khôi phục ở {@link RecoveryService}. */
+/** Anonymous identity and sessions (D15). Recovery is in {@link RecoveryService}. */
 @Service
 @Transactional
 public class IdentityService {
@@ -37,7 +37,7 @@ public class IdentityService {
     private final RecoveryCodeHasher hasher;
     private final SecurityEventService events;
 
-    /** Nhận cổng lưu trữ, đồng hồ (test thay bằng đồng hồ giả), bộ băm mã khôi phục có khóa và nhật ký sự kiện bảo mật. */
+    /** Takes the storage port, the clock (tests replace it with a fake), the keyed recovery-code hasher and the security event log. */
     public IdentityService(IdentityStore store, Clock clock, RecoveryCodeHasher hasher, SecurityEventService events) {
         this.store = store;
         this.clock = clock;
@@ -46,8 +46,8 @@ public class IdentityService {
     }
 
     /**
-     * Tạo danh tính + phiên đầu tiên. D26: mã khôi phục hiển thị một lần ngay lúc tạo; người dùng được phép bỏ qua
-     * (khi đó chưa có mã, tạo sau ở mục Bảo mật — MĐ-2).
+     * Creates an identity and its first session. D26: the recovery code is shown once right at creation; the user may skip it
+     * (then there is no code yet, created later in the Security section - MĐ-2).
      */
     public CreatedIdentity createIdentity(boolean skipRecoveryCode, String deviceName) {
         Instant now = Timestamps.now(clock);
@@ -65,7 +65,7 @@ public class IdentityService {
         return new CreatedIdentity(identityId.toString(), token, displayedCode);
     }
 
-    /** Kiểm tra hạn và thu hồi trước khi gia hạn trượt; mọi phiên không hợp lệ đều mất quyền như nhau. */
+    /** Checks expiry and revocation before the sliding extension; every invalid session loses access in the same way. */
     public Optional<AuthenticatedPrincipal> authenticateSession(String token) {
         Instant now = Timestamps.now(clock);
         Optional<Session> session = store.findSessionByTokenHash(Secrets.hashToken(token)).filter(found -> found.isActive(now, () -> store.findActiveCode(found.identityId()).isPresent()));
@@ -73,7 +73,7 @@ public class IdentityService {
         return session.map(found -> new AuthenticatedPrincipal(found.identityId(), found.id()));
     }
 
-    /** Các phiên đang hoạt động của danh tính, đánh dấu phiên hiện tại. */
+    /** The active sessions of the identity, marking the current one. */
     @Transactional(readOnly = true)
     public List<SessionView> listActiveSessions(AuthenticatedPrincipal principal) {
         Instant now = Timestamps.now(clock);
@@ -85,8 +85,8 @@ public class IdentityService {
     }
 
     /**
-     * Đổi hoặc xóa tên của CHÍNH thiết bị đang gọi (không đổi được tên máy khác). Phải nêu trường {@code deviceName}; giá trị
-     * null hoặc trống = xóa tên. Trả về phiên sau khi đổi.
+     * Renames or clears the name of the CALLING device itself (another device's name cannot be changed). The {@code deviceName} field must be present; a
+     * null or blank value = clear the name. Returns the session after the change.
      */
     public SessionView renameCurrentDevice(AuthenticatedPrincipal principal, Patch<String> newName) {
         if (!newName.isPresent()) {
@@ -99,7 +99,7 @@ public class IdentityService {
                 Timestamps.format(session.lastSeenAt()), true, deviceName);
     }
 
-    /** Thu hồi một phiên của chính danh tính này (không cần xác thực lại: không thuộc D25). */
+    /** Revokes one session of this very identity (no re-authentication needed: not part of D25). */
     public void revokeSession(AuthenticatedPrincipal principal, String sessionId) {
         UUID id = Ids.parse(sessionId).orElseThrow(WanderException::notFound);
         Session revoked = store.findActiveSession(id, principal.identityId()).orElseThrow(WanderException::notFound);
@@ -107,7 +107,7 @@ public class IdentityService {
         events.record(principal.identityId(), EventKind.REVOKED, revoked.deviceName());
     }
 
-    /** Thu hồi mọi phiên khác của cùng danh tính, kể cả phiên đã hết hạn; giữ nguyên phiên đang gọi. */
+    /** Revokes every other session of the same identity, including expired ones; the calling session is kept. */
     public void revokeOtherSessions(AuthenticatedPrincipal principal) {
         Instant now = Timestamps.now(clock);
         for (Session session : store.activeSessions(principal.identityId())) {
@@ -118,7 +118,7 @@ public class IdentityService {
         }
     }
 
-    /** Danh tính đã có mã khôi phục hợp lệ chưa, và mã được tạo lúc nào. */
+    /** Whether the identity already has a valid recovery code, and when the code was created. */
     @Transactional(readOnly = true)
     public CodeStatus getRecoveryCodeStatus(UUID identityId) {
         return store.findActiveCode(identityId)

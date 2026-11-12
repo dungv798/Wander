@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Bộ đếm cửa sổ cố định theo khóa (địa chỉ hoặc phiên), lưu trong bộ nhớ của một tiến trình.
- * Giới hạn đã biết: chạy nhiều bản (ví dụ nhiều task ECS) thì mỗi bản đếm riêng; khi đó cần kho dùng chung
+ * A fixed-window counter per key (address or session), kept in the memory of one process.
+ * Known limit: when several copies run (for example several ECS tasks) each copy counts on its own; then a shared store is needed
  * (Redis/ElastiCache) — xem docs/architecture/aws-deployment.md.
  */
 public final class FixedWindowRateLimiter {
@@ -19,18 +19,18 @@ public final class FixedWindowRateLimiter {
     private final Map<String, Window> hits = new ConcurrentHashMap<>();
     private long nextPruneAt;
 
-    /** Một cửa sổ đếm: thời điểm bắt đầu và số lần đã ghi nhận. */
+    /** One counting window: its start time and the number of hits recorded. */
     private record Window(long start, int count) {
     }
 
-    /** Tạo bộ đếm đóng cửa với khóa mới khi bảng đầy: tối đa {@code max} lần trong mỗi cửa sổ {@code window}. */
+    /** Creates a closed counter that refuses new keys when the table is full: at most {@code max} hits in each window of {@code window}. */
     public FixedWindowRateLimiter(int max, Duration window, Clock clock) {
         this(max, window, clock, false);
     }
 
     /**
-     * Tạo bộ đếm; {@code sharedOverflow} bật chính sách mềm cho kênh khôi phục: khi bảng đầy, khóa mới dùng chung một xô
-     * tràn có ngân sách {@link RateLimitConstants#OVERFLOW_BUDGET_FACTOR} lần {@code max}, thay vì bị từ chối ngay.
+     * Creates a counter; {@code sharedOverflow} turns on a soft policy for the recovery channel: when the table is full, new keys share one
+     * overflow bucket with a budget of {@link RateLimitConstants#OVERFLOW_BUDGET_FACTOR} times {@code max}, instead of being refused right away.
      */
     public FixedWindowRateLimiter(int max, Duration window, Clock clock, boolean sharedOverflow) {
         this.max = max;
@@ -39,7 +39,7 @@ public final class FixedWindowRateLimiter {
         this.sharedOverflow = sharedOverflow;
     }
 
-    /** Ghi nhận một lần; trả về false nếu đã vượt giới hạn trong cửa sổ hiện tại. */
+    /** Records one hit; returns false if the limit was exceeded in the current window. */
     public synchronized boolean hit(String key) {
         long now = clock.millis();
         if (hits.size() >= RateLimitConstants.MAX_TRACKED_KEYS && now >= nextPruneAt) {
@@ -59,17 +59,17 @@ public final class FixedWindowRateLimiter {
         return window.count() <= limit;
     }
 
-    /** Số khóa đang được theo dõi (dùng cho test và theo dõi bộ nhớ). */
+    /** The number of keys being tracked (used by tests and memory monitoring). */
     public int size() {
         return hits.size();
     }
 
-    /** Cửa sổ chưa có hoặc đã hết hạn tại thời điểm {@code now}. */
+    /** The window is missing or has expired at time {@code now}. */
     private boolean isExpired(Window window, long now) {
         return window == null || now - window.start() >= windowMs;
     }
 
-    /** Xóa mọi cửa sổ đã hết hạn để bộ nhớ không phình ra. */
+    /** Removes every expired window so memory does not grow. */
     private void pruneExpired(long now) {
         hits.values().removeIf(window -> isExpired(window, now));
     }

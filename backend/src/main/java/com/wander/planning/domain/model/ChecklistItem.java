@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Một hạng mục checklist chuẩn bị của chuyến (Q12): do Organizer tạo, mỗi người tick RIÊNG của mình (không có trạng thái chung). Tên và
- * nhóm là nhãn tự khai nên được chuẩn hóa; nhóm trống nghĩa là "không nhóm".
+ * One preparation-checklist item of a trip (Q12): created by the Organizer, each person ticks THEIR OWN (there is no shared state). The name and
+ * group are self-declared labels so they are normalized; an empty group means 'no group'.
  */
 public final class ChecklistItem {
 
@@ -26,7 +26,7 @@ public final class ChecklistItem {
     private final Instant createdAt;
     private final Map<UUID, Instant> completions;
 
-    /** Dựng lại từ dữ liệu đã lưu (không chuẩn hóa lại). */
+    /** Rebuilt from stored data (not normalized again). */
     public ChecklistItem(UUID id, UUID tripId, String group, String title, int position, Instant createdAt, Map<UUID, Instant> completions) {
         this.id = id;
         this.tripId = tripId;
@@ -37,74 +37,74 @@ public final class ChecklistItem {
         this.completions = new LinkedHashMap<>(completions);
     }
 
-    /** Tạo hạng mục mới ở {@code position}; tên bắt buộc, nhóm tùy chọn. */
+    /** Creates a new item at {@code position}; the name is required, the group optional. */
     public static ChecklistItem create(UUID tripId, String rawGroup, String rawTitle, int position, Instant now) {
         return new ChecklistItem(UUID.randomUUID(), tripId, normalizeGroup(rawGroup), normalizeTitle(rawTitle), position, now, Map.of());
     }
 
-    /** Sửa tên/nhóm: trường null thì giữ nguyên. */
+    /** Edits the name/group: a null field stays unchanged. */
     public void edit(String rawGroup, String rawTitle) {
         if (rawGroup != null) this.group = normalizeGroup(rawGroup);
         if (rawTitle != null) this.title = normalizeTitle(rawTitle);
     }
 
-    /** Đặt hoặc bỏ dấu hoàn thành CỦA {@code personId} (idempotent); không ảnh hưởng người khác. */
+    /** Sets or clears the completion mark OF {@code personId} (idempotent); it does not affect others. */
     public void setDone(UUID personId, boolean done, Instant now) {
         if (done) completions.putIfAbsent(personId, now);
         else completions.remove(personId);
     }
 
-    /** Người này đã xong chưa. */
+    /** Whether this person has finished. */
     public boolean isDoneBy(UUID personId) {
         return completions.containsKey(personId);
     }
 
-    /** Những người đã xong (mã danh tính, chỉ dùng nội bộ), theo thứ tự tick. */
+    /** The people who have finished (identity ids, used only internally), in tick order. */
     public List<UUID> doneBy() {
         return List.copyOf(completions.keySet());
     }
 
-    /** Thời điểm hoàn thành theo người (để lưu). */
+    /** The completion time per person (for storing). */
     public Map<UUID, Instant> completions() {
         return Map.copyOf(completions);
     }
 
-    /** Mã hạng mục. */
+    /** The item id. */
     public UUID id() {
         return id;
     }
 
-    /** Mã chuyến chứa hạng mục. */
+    /** The id of the trip that holds the item. */
     public UUID tripId() {
         return tripId;
     }
 
-    /** Nhóm (chuỗi rỗng = không nhóm). */
+    /** The group (an empty string = no group). */
     public String group() {
         return group;
     }
 
-    /** Tên hạng mục (đã chuẩn hóa, không rỗng). */
+    /** The item name (normalized, not empty). */
     public String title() {
         return title;
     }
 
-    /** Vị trí trong checklist (tăng dần theo thứ tự thêm). */
+    /** Position in the checklist (increasing in the order added). */
     public int position() {
         return position;
     }
 
-    /** Thời điểm tạo. */
+    /** Creation time. */
     public Instant createdAt() {
         return createdAt;
     }
 
-    /** Nhóm đã chuẩn hóa; null hoặc trống thành chuỗi rỗng. */
+    /** The normalized group; null or blank becomes an empty string. */
     private static String normalizeGroup(String raw) {
         return raw == null ? "" : Labels.normalize(raw, PlanningConstants.MAX_CHECKLIST_GROUP, PlanningFields.GROUP);
     }
 
-    /** Tên đã chuẩn hóa; trống thì REQUIRED. */
+    /** The normalized name; blank is REQUIRED. */
     private static String normalizeTitle(String raw) {
         String text = Labels.normalize(raw == null ? "" : raw, PlanningConstants.MAX_CHECKLIST_TITLE, PlanningFields.TITLE);
         if (text.isEmpty()) throw WanderException.invalid(ErrorCodes.REQUIRED, PlanningMessages.CHECKLIST_TITLE_REQUIRED, PlanningFields.TITLE);
