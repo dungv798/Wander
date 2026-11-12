@@ -1,0 +1,24 @@
+# Giữ máy chủ Render Free khỏi ngủ (OPS-1 phương án E, PO chọn 11/11/2026, DR-037): gọi /actuator/health mỗi ~10 phút.
+# /actuator/health không truy vấn DB (application-free.yml tắt health.db) nên không đánh thức Neon. Không có secret, không ghi gì.
+# RỦI RO ĐIỀU KHOẢN: Render không nhắc ping/keep-alive nhưng cấm "lách" ranh giới gói Free/trả phí (DR-037 mục OPS-1); gỡ workflow này nếu Render phản đối.
+# Cron của GitHub có thể trễ hoặc bỏ lượt, nên thỉnh thoảng máy chủ vẫn ngủ. Đổi URL ở biến WANDER_HEALTH_URL nếu dịch vụ đổi tên.
+name: keep-warm
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  WANDER_HEALTH_URL: https://wander-fx65.onrender.com/actuator/health
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Gọi /actuator/health
+        # Lúc máy chủ đang ngủ, lượt gọi chờ tới ~215 s mới trả lời; --max-time 300 đủ cho lần đánh thức.
+        run: curl --fail --silent --show-error --max-time 300 --output /dev/null --write-out 'HTTP %{http_code} trong %{time_total}s\n' "$WANDER_HEALTH_URL"
