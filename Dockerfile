@@ -6,12 +6,12 @@ RUN npm ci --prefix web --no-audit --no-fund
 COPY web/ ./web/
 RUN npm --prefix web run build
 
-FROM eclipse-temurin:21-jdk-alpine@sha256:b78a1d385da875588e21207f07dddf9a1418849971ae857fb24c8f3a7d441a72 AS backend-build
+FROM eclipse-temurin:25-jdk-alpine@sha256:c7c3d0bdf7f2bbc5a05a6712ed334d198360105634ea9adf76fca94f381b1e3f AS backend-build
 WORKDIR /src/backend
 COPY backend/ ./
 RUN sh ./gradlew --no-daemon bootJar --console=plain
 
-FROM eclipse-temurin:21-jre-alpine@sha256:82cf3d9ccbe1ed46252008d51b2f2329e6b9e8a2f4394c4bebefc3ea7f4b1372 AS runtime
+FROM eclipse-temurin:25-jre-alpine@sha256:e1898fd6a11fc965a994d8ace186fd3585aeb636cf8f05f47a723fcfee0b0918 AS runtime
 RUN addgroup -S wander && adduser -S wander -G wander
 WORKDIR /app
 # Tệp chạy thuộc root, người dùng wander chỉ đọc: nếu có RCE thì không ghi đè được jar hay giao diện.
