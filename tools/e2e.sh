@@ -20,7 +20,7 @@ docker compose up -d --wait postgres
 docker compose exec -T postgres psql -U wander -d postgres -v ON_ERROR_STOP=1 -q -c "DROP DATABASE IF EXISTS $E2E_DB WITH (FORCE)"
 docker compose exec -T postgres psql -U wander -d postgres -v ON_ERROR_STOP=1 -q -c "CREATE DATABASE $E2E_DB"
 
-(cd backend && sh ./gradlew bootJar --console=plain)
+(cd backend && sh ./gradlew bootJar --no-daemon --console=plain)
 npm ci --no-audit --no-fund
 npm --prefix web ci --no-audit --no-fund
 npm --prefix web run build
