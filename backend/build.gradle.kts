@@ -73,6 +73,8 @@ tasks.test {
     systemProperty("spring.test.context.cache.maxSize", "2")
     // OpenApiContractIT rewrites backend/openapi.yaml when run with -Pwander.openapi.update=true (see docs/architecture/api-contract.md)
     systemProperty("wander.openapi.update", providers.gradleProperty("wander.openapi.update").getOrElse("false"))
+    // ModulesTest rewrites docs/architecture/modules only with -Pwander.modules.docs=true (the generated files list relations in a varying order)
+    systemProperty("wander.modules.docs", providers.gradleProperty("wander.modules.docs").getOrElse("false"))
     // Kết quả từng test hiện ra log để đọc được khi chạy qua tools/dev.ps1
     testLogging {
         events("passed", "skipped", "failed")

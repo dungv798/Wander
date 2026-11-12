@@ -4,7 +4,7 @@ SHELL := /bin/sh
 GRADLE := cd backend && sh ./gradlew --console=plain
 
 .DEFAULT_GOAL := help
-.PHONY: help doctor docker-check db-up test check backend-build web-build web-check gen-api run e2e verify
+.PHONY: help doctor docker-check db-up test check backend-build web-build web-check gen-api run e2e perf verify
 
 help: ## List the targets
 	@grep -E '^[a-z0-9-]+:.*## ' $(MAKEFILE_LIST) | sed -E 's/:.*## /	/'
@@ -47,6 +47,9 @@ gen-api: docker-check ## Regenerate backend/openapi.yaml from the application, t
 run: db-up web-build ## Run backend (port 8787) serving web/dist; needs WANDER_RECOVERY_PEPPER (>= 32 bytes) in the environment
 	@test -n "$$WANDER_RECOVERY_PEPPER" || { echo "Set WANDER_RECOVERY_PEPPER to a random string of at least 32 bytes." >&2; exit 1; }
 	WANDER_WEB_DIR=$(CURDIR)/web/dist $(GRADLE) bootRun
+
+perf: docker-check ## k6 load test (20 virtual users) against a running backend with raised rate limits; see docs/performance.md
+	docker run --rm -i grafana/k6:latest run -e BASE_URL=$${BASE_URL:-http://host.docker.internal:8787} -e VUS=$${VUS:-20} - < tools/perf/k6-trip-flow.js
 
 e2e: docker-check ## Browser end-to-end scenarios against the real backend (database wander_e2e)
 	sh tools/e2e.sh

@@ -1,6 +1,7 @@
 package com.wander;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.IOException;
 import org.junit.jupiter.api.DisplayName;
@@ -37,8 +38,9 @@ class ModulesTest {
     }
 
     @Test
-    @DisplayName("generates the module documentation (component diagrams and canvases) into docs/architecture/modules")
+    @DisplayName("with -Pwander.modules.docs=true, regenerates the module diagrams and canvases in docs/architecture/modules")
     void generatesModuleDocumentation() throws IOException {
+        assumeTrue(Boolean.parseBoolean(System.getProperty("wander.modules.docs")), "run with -Pwander.modules.docs=true to regenerate");
         new Documenter(MODULES, Documenter.Options.defaults().withOutputFolder("../docs/architecture/modules"))
                 .writeModulesAsPlantUml()
                 .writeIndividualModulesAsPlantUml()

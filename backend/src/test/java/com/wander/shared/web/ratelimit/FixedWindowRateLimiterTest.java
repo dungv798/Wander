@@ -14,6 +14,47 @@ import org.junit.jupiter.api.Test;
 /** Trần bộ nhớ và tính nguyên tử của bộ đếm khi nhiều request đến cùng lúc. */
 class FixedWindowRateLimiterTest {
 
+    /** A clock the test moves by hand. */
+    private static final class MovableClock extends Clock {
+        private Instant now = Instant.EPOCH;
+
+        @Override
+        public ZoneOffset getZone() {
+            return ZoneOffset.UTC;
+        }
+
+        @Override
+        public Clock withZone(java.time.ZoneId zone) {
+            return this;
+        }
+
+        @Override
+        public Instant instant() {
+            return now;
+        }
+
+        void advance(Duration by) {
+            now = now.plus(by);
+        }
+    }
+
+    @Test
+    @DisplayName("once the window has elapsed the key gets a fresh budget; before that, the budget is spent")
+    void budgetIsRenewedWhenTheWindowElapses() {
+        MovableClock clock = new MovableClock();
+        var limiter = new FixedWindowRateLimiter(2, Duration.ofMinutes(1), clock);
+        assertThat(limiter.hit("a")).isTrue();
+        assertThat(limiter.hit("a")).isTrue();
+        assertThat(limiter.hit("a")).isFalse();
+        clock.advance(Duration.ofSeconds(59));
+        assertThat(limiter.hit("a")).as("still inside the window").isFalse();
+        assertThat(limiter.hit("b")).as("another key has its own budget").isTrue();
+        clock.advance(Duration.ofSeconds(1));
+        assertThat(limiter.hit("a")).as("window of a has elapsed").isTrue();
+        assertThat(limiter.hit("a")).isTrue();
+        assertThat(limiter.hit("a")).isFalse();
+    }
+
     @Test
     @DisplayName("bảng đầy từ chối khóa mới, không bỏ quota của khóa cũ hoặc vượt trần bộ nhớ")
     void capacityIsAHardLimit() {
