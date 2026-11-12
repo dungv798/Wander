@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { travelEstimate } from '../../../shared/lib/geo.ts';
+import { safeHttpUrl } from '../../../shared/lib/safeUrl.ts';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { Chip } from '../../../shared/ui/Chip.tsx';
 import { Icon } from '../../../shared/ui/Icon.tsx';
@@ -54,7 +55,7 @@ export function NextCard({ trip, item, cat, previous, onCompleted }: ItemProps &
   const from = previous?.placeId ? coord(previous.placeId) : null;
   const to = item.placeId ? coord(item.placeId) : null;
   return <section className="today-next panel todayrow">
-    {photo ? <figure><RevealImage src={photo.url} alt={place?.name ?? ''} /><figcaption><a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer">{fill(C.photo, { author: photo.author, license: photo.license })}</a></figcaption></figure> : null}
+    {photo ? <figure><RevealImage src={photo.url} alt={place?.name ?? ''} /><figcaption><a href={safeHttpUrl(photo.sourceUrl)} target="_blank" rel="noopener noreferrer">{fill(C.photo, { author: photo.author, license: photo.license })}</a></figcaption></figure> : null}
     <div className="today-next-body">
       <Chip tone="sun" icon={isPlaceItem(item) ? 'map-pin' : 'check'}>{isPlaceItem(item) ? C.next : C.nextTask}</Chip>
       <span className="tdtime">{item.timeOfDay ?? C.noTime}</span>

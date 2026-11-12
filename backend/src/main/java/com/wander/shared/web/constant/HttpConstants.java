@@ -90,7 +90,7 @@ public final class HttpConstants {
      */
     public static final String VALUE_CONTENT_SECURITY_POLICY = "default-src 'self'; script-src 'self'; style-src 'self'; "
             + "img-src 'self' data: blob: https://images.unsplash.com; connect-src 'self' https://tiles.openfreemap.org https://s3.amazonaws.com; "
-            + "worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+            + "worker-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
     /**
      * Kiểu nội dung của thân lỗi JSON, nêu rõ UTF-8: Spring bỏ `charset` khỏi `application/json`, nên Safari mở thẳng URL lỗi

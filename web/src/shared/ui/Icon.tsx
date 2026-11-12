@@ -23,5 +23,6 @@ export function Icon({ name, size, className, semantic = false }: IconProps) {
     const pixels = FLUENT_SIZE[size ?? 'default'];
     return <img className={`${cls} fluent-icon`} src={`${FLUENT_PATH}${fluent}${FLUENT_SUFFIX}`} width={pixels} height={pixels} decoding="async" alt="" aria-hidden="true" />;
   }
+  // eslint-disable-next-line react/no-danger -- nguồn là hằng tĩnh ICON_PATHS, tên biểu tượng đã được chặn bằng hasOwnProperty (iconNames.ts)
   return <svg className={cls} viewBox="0 0 24 24" aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: ICON_PATHS[name] }} />;
 }

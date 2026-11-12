@@ -51,6 +51,7 @@ export default tseslint.config(
       'jsdoc/check-alignment': 'error',
       // §8: không số ma thuật, không chữ cứng trong JSX.
       'no-magic-numbers': ['error', { ignore: QUALITY.allowedNumbers, ignoreArrayIndexes: true, enforceConst: true }],
+      'react/no-danger': 'error', // XSS: chỉ Icon.tsx được phép (nguồn là hằng tĩnh), có chú thích tắt riêng
       'react/jsx-no-literals': ['error', { noStrings: false, allowedStrings: ['·', '–', '—', '/', ':', '(', ')', '+', '×', '%'], ignoreProps: true }],
       // §1: kích thước hàm (PO bỏ giới hạn số dòng của TỆP ngày 09/11/2026: không còn `max-lines`).
       'max-lines-per-function': ['error', { max: QUALITY.maxFunctionLines, skipBlankLines: true, skipComments: true }],

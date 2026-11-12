@@ -244,6 +244,21 @@ class RecoveryApiIT extends ApiTestSupport {
         }
     }
 
+    /** Thông tin chuyến (tên, điểm đến, ngày đi) không bao giờ đủ làm bằng chứng khôi phục, và bị từ chối y như mã sai. */
+    @Test
+    @DisplayName("INV-5/NEG-1: tên chuyến, điểm đến và ngày đi không làm bằng chứng khôi phục; bị từ chối như mã sai")
+    void tripDetailsAreNeverRecoveryEvidence() {
+        User user = newUser();
+        newTrip(user.token());
+        Map<String, Object> expectedBody = Map.of("error", Map.of(
+                "code", "INVALID_CODE", "message", "Mã không hợp lệ hoặc đã được dùng."));
+        for (String guess : List.of("Hà Giang – Tà Xùa", "Hà Giang", "2026-08-29", "Hà Giang 2026-08-29 2026-09-06")) {
+            Res rejection = start(guess).r();
+            assertThat(rejection.status()).as(guess).isEqualTo(400);
+            assertThat(rejection.body()).as(guess).isEqualTo(expectedBody);
+        }
+    }
+
     @Test
     @DisplayName("INV-6/MĐ-8: mọi lý do từ chối mã cho cùng một phản hồi; bí mật phiên phải đủ mạnh")
     void uniformRejection() {

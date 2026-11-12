@@ -42,6 +42,10 @@ class StaticWebIT extends ApiTestSupport {
         assertThat(home.status()).isEqualTo(200);
         assertThat(home.raw().body()).contains("<title>Wander</title>");
         assertThat(home.raw().headers().firstValue("Content-Security-Policy").orElse("")).contains("default-src 'self'");
+        // ghim các chỉ thị chặn XSS (RG-6): không script nội tuyến/eval, không plugin, không nhúng khung, không ký tự đại diện
+        assertThat(home.raw().headers().firstValue("Content-Security-Policy").orElse(""))
+                .contains("script-src 'self';", "object-src 'none'", "frame-ancestors 'none'", "base-uri 'none'")
+                .doesNotContain("unsafe-inline", "unsafe-eval", "unsafe-hashes", " * ", "https:;");
         assertThat(home.raw().headers().firstValue("X-Frame-Options")).hasValue("DENY");
         assertThat(home.raw().headers().firstValue("Strict-Transport-Security")).hasValue("max-age=31536000");
         assertThat(home.raw().headers().firstValue("Cache-Control")).hasValue("no-cache");

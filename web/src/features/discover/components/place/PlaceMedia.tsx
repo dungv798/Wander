@@ -87,7 +87,7 @@ export function PlaceMedia({ place, registerGo }: PlaceMediaProps) {
       <div className="pd-photo-col">
         <div className="pd-photo" aria-label={fill(COPY.place.photosOf, { name: place.name })}>
           {current ? <PhotoFrame photo={current} name={place.name} onOrientation={setOrientation} onVisible={setShownSource} /> : <PlacePlaceholder place={place} />}
-          {shown ? <a className="btn ghost pd-original" href={shown.url} target="_blank" rel="noopener noreferrer">{COPY.place.sourceOriginal}</a> : null}
+          {shown ? <a className="btn ghost pd-original" href={safeHttpUrl(shown.url)} target="_blank" rel="noopener noreferrer">{COPY.place.sourceOriginal}</a> : null}
         </div>
         {current ? (
           <>
