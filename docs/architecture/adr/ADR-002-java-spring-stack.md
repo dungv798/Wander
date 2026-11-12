@@ -1,5 +1,8 @@
 # ADR-002 — Stack Java/Spring, Clean Architecture, DDD, CQRS, PostgreSQL, AWS; giao diện TypeScript
 
+> **English title:** Java/Spring stack with Clean Architecture, DDD, CQRS, PostgreSQL and an AWS target; TypeScript front end
+> **Summary (EN):** The backend moves from a Node/SQLite prototype to Java 21 + Spring Boot with Clean Architecture, DDD and CQRS on PostgreSQL, with AWS as the deployment target and a React + TypeScript front end. Supersedes ADR-001 (the prototype stack).
+
 - **Trạng thái:** `APPROVED` — Product Owner chọn ngày 24/10/2026 (trong phiên làm việc với Claude).
 - **Thay thế:** ADR-001 (TypeScript trên Node + SQLite, do agent tự chọn ngày 23/10/2026 mà không hỏi PO) → `SUPERSEDED`.
 - **Lý do của PO:** dự án làm vì thích và để **học**; muốn dùng đúng stack đang làm ở FPT để luyện tay và mang kinh nghiệm về công việc.

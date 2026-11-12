@@ -17,9 +17,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Vòng người của một chuyến (Lát 1b, DR-021): thành viên và liên kết mời cùng bất biến — đúng một Organizer, tối đa
- * {@value PlanningConstants#MAX_MEMBERS} thành viên, tên hiển thị không trùng, tối đa một liên kết chưa thu hồi. Là một phần của aggregate
- * {@link Trip}: chỉ truy cập qua {@code trip.circle()}, và lưu cùng chuyến (cùng khóa lạc quan) nên vào chuyến đồng thời không vượt trần.
+ * The circle of people of one trip (Slice 1b, DR-021): members and invite links with shared invariants - exactly one Organizer, at most
+ * {@value PlanningConstants#MAX_MEMBERS} members, no duplicate display names, at most one link that is not revoked. Part of the {@link Trip} aggregate:
+ * reached only through {@code trip.circle()}, and saved with the trip (same optimistic lock) so concurrent joins cannot exceed the ceiling.
  */
 public final class TripCircle {
 
@@ -27,51 +27,51 @@ public final class TripCircle {
     private final List<TripInvite> invites;
     private final List<DeletionRequest> requests;
 
-    /** Dựng từ dữ liệu đã lưu. */
+    /** Built from stored data. */
     TripCircle(List<TripMember> members, List<TripInvite> invites, List<DeletionRequest> requests) {
         this.members = new ArrayList<>(members);
         this.invites = new ArrayList<>(invites);
         this.requests = new ArrayList<>(requests);
     }
 
-    /** Mọi đề nghị xóa (chờ và đã quyết định), cũ trước. */
+    /** Every deletion request (pending and decided), oldest first. */
     public List<DeletionRequest> requests() {
         return List.copyOf(requests);
     }
 
-    /** Thành viên (kể cả Organizer), thứ tự vào chuyến. */
+    /** Members (including the Organizer), in the order they joined the trip. */
     public List<TripMember> members() {
         return List.copyOf(members);
     }
 
-    /** Mọi liên kết mời (kể cả đã thu hồi/hết hạn). */
+    /** Every invite link (including revoked/expired ones). */
     public List<TripInvite> invites() {
         return List.copyOf(invites);
     }
 
-    /** Thành viên ứng với một danh tính, nếu có. */
+    /** The member that corresponds to an identity, if any. */
     public Optional<TripMember> memberOf(UUID identityId) {
         return members.stream().filter(m -> m.identityId().equals(identityId)).findFirst();
     }
 
-    /** Vai của một danh tính trong chuyến; người ngoài thì trống. */
+    /** The role of an identity in the trip; empty for an outsider. */
     public Optional<MemberRole> roleOf(UUID identityId) {
         return memberOf(identityId).map(TripMember::role);
     }
 
-    /** Thành viên của danh tính này; người ngoài ⇒ 404 (không lộ chuyến tồn tại, INV-6). */
+    /** The member of this identity; an outsider => 404 (does not reveal that the trip exists, INV-6). */
     public TripMember requireMember(UUID identityId) {
         return memberOf(identityId).orElseThrow(WanderException::notFound);
     }
 
-    /** Chỉ Organizer: người ngoài ⇒ 404, thành viên thường ⇒ 403 NOT_ORGANIZER. */
+    /** Organizer only: an outsider => 404, a regular member => 403 NOT_ORGANIZER. */
     public void requireOrganizer(UUID identityId) {
         if (requireMember(identityId).role() != MemberRole.ORGANIZER) {
             throw WanderException.forbidden(PlanningErrorCodes.NOT_ORGANIZER, PlanningMessages.NOT_ORGANIZER);
         }
     }
 
-    /** Quyền sửa/xóa/khôi phục một mục (H3): Organizer mọi mục; thành viên chỉ mục do mình thêm (403 NOT_YOUR_ITEM); người ngoài 404. */
+    /** Permission to edit/delete/restore an item (H3): the Organizer any item; a member only items they added (403 NOT_YOUR_ITEM); an outsider 404. */
     public void requireMayChange(UUID identityId, UUID itemAddedByMemberId) {
         TripMember member = requireMember(identityId);
         if (member.role() == MemberRole.ORGANIZER) return;
@@ -80,12 +80,12 @@ public final class TripCircle {
         }
     }
 
-    /** Liên kết đang dùng được tại {@code now}, nếu có. */
+    /** The link that is usable at {@code now}, if any. */
     public Optional<TripInvite> activeInvite(Instant now) {
         return invites.stream().filter(i -> i.isActiveAt(now)).findFirst();
     }
 
-    /** Organizer tạo liên kết mời mới (hết hạn sau INVITE_TTL_DAYS); mọi liên kết chưa thu hồi trước đó bị thu hồi để chỉ còn một. */
+    /** The Organizer creates a new invite link (expires after INVITE_TTL_DAYS); every earlier link that is not revoked is revoked so only one remains. */
     public TripInvite createInvite(UUID actor, String codeHash, Instant now) {
         requireOrganizer(actor);
         revokeAllInvites(now);
@@ -94,21 +94,21 @@ public final class TripCircle {
         return invite;
     }
 
-    /** Organizer thu hồi liên kết đang dùng; không có liên kết đang dùng thì 404. */
+    /** The Organizer revokes the link in use; no link in use => 404. */
     public void revokeInvite(UUID actor, Instant now) {
         requireOrganizer(actor);
         if (activeInvite(now).isEmpty()) throw WanderException.notFound();
         revokeAllInvites(now);
     }
 
-    /** Thu hồi mọi liên kết chưa thu hồi (kể cả đã hết hạn). */
+    /** Revokes every link that is not revoked (including expired ones). */
     private void revokeAllInvites(Instant now) {
         invites.replaceAll(i -> i.revoked(now));
     }
 
     /**
-     * Vào chuyến bằng liên kết: mã phải khớp liên kết đang dùng (sai/hết hạn/thu hồi/chuyến đã xóa ⇒ MỘT lỗi INVALID_INVITE). Đã là
-     * thành viên thì trả đúng người đó (idempotent). Đủ MAX_MEMBERS ⇒ TRIP_FULL.
+     * Joins the trip with a link: the code must match the link in use (wrong/expired/revoked/trip deleted => ONE error INVALID_INVITE). If already a
+     * member, that very member is returned (idempotent). MAX_MEMBERS reached => TRIP_FULL.
      */
     public TripMember joinWithInvite(UUID identityId, String rawDisplayName, String codeHash, Instant now, boolean tripDeleted) {
         boolean valid = !tripDeleted && activeInvite(now).map(i -> i.codeHash().equals(codeHash)).orElse(false);
@@ -123,7 +123,7 @@ public final class TripCircle {
         return member;
     }
 
-    /** Organizer gỡ một thành viên; không gỡ được Organizer; gỡ xong thu hồi liên kết đang dùng (người bị gỡ không vào lại bằng mã cũ). */
+    /** The Organizer removes a member; the Organizer cannot be removed; after removal the link in use is revoked (the removed person cannot rejoin with the old code). */
     public void removeMember(UUID actor, UUID memberId, Instant now) {
         requireOrganizer(actor);
         TripMember target = members.stream().filter(m -> m.id().equals(memberId)).findFirst().orElseThrow(WanderException::notFound);
@@ -134,7 +134,7 @@ public final class TripCircle {
         revokeAllInvites(now);
     }
 
-    /** Thành viên tự rời chuyến; Organizer không rời được; người ngoài 404. */
+    /** A member leaves the trip themself; the Organizer cannot leave; an outsider 404. */
     public void leave(UUID identityId, Instant now) {
         TripMember member = requireMember(identityId);
         if (member.role() == MemberRole.ORGANIZER) {
@@ -143,7 +143,7 @@ public final class TripCircle {
         members.remove(member);
     }
 
-    /** Đổi tên hiển thị của chính mình theo cùng quy tắc (không tính trùng với chính mình). */
+    /** Changes one's own display name by the same rule (it does not clash with oneself). */
     public TripMember renameMember(UUID identityId, String rawDisplayName, Instant now) {
         TripMember member = requireMember(identityId);
         TripMember renamed = member.withDisplayName(uniqueDisplayName(rawDisplayName, member.id(), member.role()));
@@ -152,9 +152,9 @@ public final class TripCircle {
     }
 
     /**
-     * Chuẩn hóa tên hiển thị (NFC, cấm ký tự điều khiển/vô hình, ≤ MAX_DISPLAY_NAME điểm mã; trống ⇒ REQUIRED) và làm cho không trùng
-     * trong chuyến (không phân biệt hoa thường): trùng thì thêm hậu tố " - 2", " - 3"… sau khi cắt tên gốc cho vừa giới hạn. "Organizer"
-     * là tên dành riêng cho Organizer.
+     * Normalizes the display name (NFC, control/invisible characters forbidden, at most MAX_DISPLAY_NAME code points; blank => REQUIRED) and makes it unique
+     * within the trip (case-insensitive): on a clash a suffix ' - 2', ' - 3'... is added after trimming the base name to fit the limit. 'Organizer'
+     * is the name reserved for the Organizer.
      */
     private String uniqueDisplayName(String raw, UUID exceptMemberId, MemberRole role) {
         String text = Labels.normalize(raw == null ? "" : raw, PlanningConstants.MAX_DISPLAY_NAME, PlanningFields.DISPLAY_NAME);
@@ -171,18 +171,18 @@ public final class TripCircle {
         return candidate;
     }
 
-    /** Tên đã có người khác dùng (không phân biệt hoa thường) hoặc là tên dành riêng của Organizer. */
+    /** The name is already used by someone else (case-insensitive) or is the Organizer's reserved name. */
     private boolean isDisplayNameTaken(String candidate, UUID exceptMemberId, MemberRole role) {
         boolean reserved = role != MemberRole.ORGANIZER && PlanningConstants.ORGANIZER_DISPLAY_NAME.equalsIgnoreCase(candidate);
         return reserved || members.stream().anyMatch(m -> !m.id().equals(exceptMemberId) && m.displayName().equalsIgnoreCase(candidate));
     }
 
 
-    // ---- đề nghị xóa (H2/H3) ----
+    // ---- deletion requests (H2/H3) ----
 
     /**
-     * Thành viên đề nghị xóa mục của NGƯỜI KHÁC. Organizer và chủ mục xóa thẳng nên bị từ chối; mục phải còn hiện; mỗi mục tối đa một đề nghị
-     * chờ, mỗi thành viên tối đa MAX_PENDING_REQUESTS đề nghị chờ. Lý do tùy chọn, chuẩn hóa như nhãn tự khai.
+     * A member asks to delete an item that belongs to SOMEONE ELSE. The Organizer and the item's owner delete directly so they are refused; the item must be visible; at most one pending request per item,
+     * at most MAX_PENDING_REQUESTS pending requests per member. The reason is optional, normalized like a self-declared label.
      */
     public DeletionRequest submitDeletion(UUID identityId, Item item, String rawReason, Instant now) {
         TripMember requester = requireMember(identityId);
@@ -205,7 +205,7 @@ public final class TripCircle {
         return request;
     }
 
-    /** Người đề nghị tự hủy khi còn chờ; đề nghị của người khác ⇒ 404, đã quyết định ⇒ ALREADY_DECIDED. */
+    /** The requester cancels while it is pending; another person's request => 404, already decided => ALREADY_DECIDED. */
     public void cancelDeletion(UUID identityId, UUID requestId) {
         TripMember requester = requireMember(identityId);
         DeletionRequest request = requests.stream().filter(r -> r.id().equals(requestId) && r.requesterMemberId().equals(requester.id()))
@@ -214,7 +214,7 @@ public final class TripCircle {
         requests.remove(request);
     }
 
-    /** Organizer đồng ý hoặc từ chối một đề nghị đang chờ; trả đề nghị đã quyết định. Việc xóa mềm mục khi đồng ý do bộ xử lý lệnh làm trong cùng giao dịch. */
+    /** The Organizer approves or rejects a pending request; returns the decided request. Soft-deleting the item on approval is done by the command handler in the same transaction. */
     public DeletionRequest decideDeletion(UUID identityId, UUID requestId, boolean approve, Instant now) {
         requireOrganizer(identityId);
         DeletionRequest request = requests.stream().filter(r -> r.id().equals(requestId)).findFirst().orElseThrow(WanderException::notFound);
@@ -225,24 +225,24 @@ public final class TripCircle {
         return decided;
     }
 
-    /** Giữ tối đa MAX_DECIDED_REQUESTS đề nghị đã quyết định (cũ nhất bị dọn) để dữ liệu không phình mãi. */
+    /** Keeps at most MAX_DECIDED_REQUESTS decided requests (the oldest are cleaned up) so the data does not grow forever. */
     private void trimDecided() {
         List<DeletionRequest> decided = requests.stream().filter(r -> !r.isPending()).sorted(java.util.Comparator.comparing(DeletionRequest::decidedAt)).toList();
         int excess = decided.size() - PlanningConstants.MAX_DECIDED_REQUESTS;
         for (int i = 0; i < excess; i++) requests.remove(decided.get(i));
     }
 
-    /** Mục vừa bị xóa mềm (không qua duyệt): đề nghị xóa còn chờ của mục đó thành "đã đồng ý" vì điều người đề nghị muốn đã xảy ra. */
+    /** An item has just been soft-deleted (not through approval): the pending deletion request for it becomes 'approved' because what the requester wanted has happened. */
     public void settlePendingOf(UUID itemId, Instant now) {
         requests.replaceAll(r -> r.isPending() && r.itemId().equals(itemId) ? r.decided(RequestStatus.APPROVED, now) : r);
     }
 
-    /** Mục bị xóa vĩnh viễn: mọi đề nghị của mục đó không còn ý nghĩa. */
+    /** An item is permanently deleted: every request for it loses its meaning. */
     public void forgetItem(UUID itemId) {
         requests.removeIf(r -> r.itemId().equals(itemId));
     }
 
-    /** Thành viên rời hoặc bị gỡ: các đề nghị còn chờ của họ bị bỏ (đã quyết định thì giữ làm lịch sử). */
+    /** A member leaves or is removed: their pending requests are dropped (decided ones are kept as history). */
     public void dropPendingOf(UUID memberId) {
         requests.removeIf(r -> r.isPending() && r.requesterMemberId().equals(memberId));
     }

@@ -5,37 +5,37 @@ import com.wander.catalog.domain.constant.CatalogMessages;
 import com.wander.shared.kernel.util.Texts;
 import java.util.Collection;
 
-/** Kiểm tra dữ liệu biên tập dùng chung cho các lớp domain của catalog (một nơi, tránh lặp). */
+/** Editorial data checks shared by the catalog's domain classes (one place, to avoid repetition). */
 public final class CatalogValidation {
 
     private CatalogValidation() {
     }
 
-    /** Ném lỗi với lời báo đã định dạng nếu điều kiện sai. */
+    /** Throws an error with the formatted message if the condition is false. */
     public static void require(boolean condition, String messageTemplate, Object... arguments) {
         if (!condition) throw new IllegalArgumentException(messageTemplate.formatted(arguments));
     }
 
-    /** Chuỗi bắt buộc có nội dung; trả về chuỗi đã cắt khoảng trắng. */
+    /** A required string with content; returns the trimmed string. */
     public static String requiredText(String value, String label) {
         require(!Texts.isNullOrBlank(value), CatalogMessages.FIELD_REQUIRED, label);
         return value.trim();
     }
 
-    /** Chuỗi bắt buộc có nội dung và không dài quá {@code maxLength}; trả về chuỗi đã cắt khoảng trắng. */
+    /** A required string with content and not longer than {@code maxLength}; returns the trimmed string. */
     public static String requiredText(String value, String label, int maxLength) {
         String trimmed = requiredText(value, label);
         require(trimmed.length() <= maxLength, CatalogMessages.FIELD_TOO_LONG, label, trimmed.length(), maxLength);
         return trimmed;
     }
 
-    /** Mọi giá trị đều là tháng 1..12 (không null); sai thì ném lỗi với lời báo đã định dạng theo {@code owner}. */
+    /** Every value is a month 1..12 (not null); otherwise throws an error with a message formatted by {@code owner}. */
     public static void requireMonths(Collection<Integer> months, String messageTemplate, String owner) {
         boolean allValid = months.stream().allMatch(CatalogValidation::isMonth);
         require(allValid, messageTemplate, owner);
     }
 
-    /** Số là tháng hợp lệ (1..12). */
+    /** The number is a valid month (1..12). */
     private static boolean isMonth(Integer month) {
         return month != null && month >= CatalogConstants.MONTH_MIN && month <= CatalogConstants.MONTH_MAX;
     }

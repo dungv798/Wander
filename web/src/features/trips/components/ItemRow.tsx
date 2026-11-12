@@ -16,15 +16,15 @@ import { ItemMeta } from './ItemMeta.tsx';
 
 interface ItemRowProps {
   readonly item: TripItem;
-  /** Số thứ tự trong ngày (hiện trên ảnh); null ở mục chưa có ngày. */
+  /** The ordinal number in the day (shown on the photo); null for an item with no date yet. */
   readonly num: number | null;
-  /** Hiện nút lên/xuống (chế độ sắp xếp); `first/last` để tắt nút ở biên. */
+  /** Shows the up/down buttons (reorder mode); `first/last` turns off a button at the edge. */
   readonly sort?: { readonly first: boolean; readonly last: boolean };
-  /** Hiện hàng "Chọn ngày: [Ngày 1] [Ngày 2]…" (mục chưa có ngày). */
+  /** Shows the row 'Choose day: [Day 1] [Day 2]...' (an item with no date yet). */
   readonly assignable?: boolean;
 }
 
-/** Hàng chọn nhanh ngày cho mục chưa có ngày. */
+/** The quick day-choosing row for an item with no date yet. */
 function AssignRow({ item }: { readonly item: TripItem }) {
   const { actions } = useTrips();
   const fire = useFire();
@@ -50,7 +50,7 @@ function AssignRow({ item }: { readonly item: TripItem }) {
   );
 }
 
-/** Chân thẻ: "Ngày" và "Giờ" của mục, bấm để đổi ngay (mở tờ chọn ngày / trình sửa) mà không phải mở cả thẻ. */
+/** The card footer: the item's 'Day' and 'Time', tap to change at once (opens the day sheet / the editor) without opening the whole card. */
 function ItemFoot({ item, name }: { readonly item: TripItem; readonly name: string }) {
   const { days, setOverlay } = useTripView();
   const dayIdx = item.day ? days.indexOf(item.day) : -1;
@@ -68,7 +68,7 @@ function ItemFoot({ item, name }: { readonly item: TripItem; readonly name: stri
   );
 }
 
-/** Nút lên/xuống của chế độ sắp xếp (thay thế đầy đủ cho kéo thả; bàn phím và đọc màn hình dùng được). */
+/** The up/down buttons of the reorder mode (a full replacement for drag and drop; usable by keyboard and screen readers). */
 function MoveButtons({ item, name, sort }: { readonly item: TripItem; readonly name: string; readonly sort: { readonly first: boolean; readonly last: boolean } }) {
   const { actions } = useTrips();
   const fire = useFire();
@@ -88,7 +88,7 @@ function MoveButtons({ item, name, sort }: { readonly item: TripItem; readonly n
   );
 }
 
-/** Một hàng mục trong chuyến: ảnh/biểu tượng (kèm số thứ tự), loại + khu vực, tên, câu dẫn, chip giờ/giá/đặt chỗ; việc cần làm có ô tích. */
+/** One item row in a trip: photo/icon (with the ordinal number), kind + area, name, lead line, time/price/booking chips; a to-do has a tick box. */
 export function ItemRow({ item, num, sort, assignable }: ItemRowProps) {
   const { actions } = useTrips();
   const fire = useFire();

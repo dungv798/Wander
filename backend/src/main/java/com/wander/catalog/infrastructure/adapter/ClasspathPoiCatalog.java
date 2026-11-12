@@ -24,12 +24,12 @@ import org.springframework.stereotype.Component;
 import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
-/** Adapter JSON chỉ đọc; không truy cập mạng và từ chối batch hỏng ngay lúc khởi động. */
+/** A read-only JSON adapter; it makes no network access and rejects a broken batch right at startup. */
 @Component
 public class ClasspathPoiCatalog implements PoiCatalog {
     private final Map<String, PoiCollection> byDestination;
 
-    /** Nạp tài nguyên POI và đối chiếu tâm với mốc chính trong catalog hiện có. */
+    /** Loads the POI resource and checks the center against the main landmark in the existing catalog. */
     public ClasspathPoiCatalog(@Value(PoiConstants.LOCATION) String pattern, PlaceCatalog destinations) {
         this.byDestination = loadAll(pattern, destinations);
     }
@@ -39,7 +39,7 @@ public class ClasspathPoiCatalog implements PoiCatalog {
         return Optional.ofNullable(destinationId == null ? null : byDestination.get(destinationId));
     }
 
-    /** Nạp tất cả batch; trùng điểm đến hoặc tài nguyên không đọc được đều làm khởi động thất bại. */
+    /** Loads all batches; a duplicate destination or a resource that cannot be read makes startup fail. */
     private static Map<String, PoiCollection> loadAll(String pattern, PlaceCatalog destinations) {
         JsonMapper mapper = JsonMapper.builder().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build();
         Map<String, PoiCollection> loaded = new HashMap<>();
@@ -54,7 +54,7 @@ public class ClasspathPoiCatalog implements PoiCatalog {
         return Map.copyOf(loaded);
     }
 
-    /** Đọc và kiểm phạm vi: tâm phải trùng MỘT mốc tham chiếu của điểm đến (Hà Giang có hai mốc, DR-033); giữ tên tệp trong lỗi khởi động. */
+    /** Reads and checks the range: the center must match ONE reference landmark of the destination (Ha Giang has two landmarks, DR-033); keeps the file name in the startup error. */
     private static PoiCollection readBatch(JsonMapper mapper, Resource resource, PlaceCatalog destinations) {
         try (InputStream stream = resource.getInputStream()) {
             PoiFile file = mapper.readValue(stream, PoiFile.class);
@@ -69,7 +69,7 @@ public class ClasspathPoiCatalog implements PoiCatalog {
         }
     }
 
-    /** Kiểm ngày nguồn của mọi trường khớp batch và số lượng sau nhập. */
+    /** Checks the source date of every field that matches the batch and the count after import. */
     private static void requireSnapshot(PoiFile file, List<PoiRecord> pois) {
         PoiValidation.require(file.statistics() != null && file.statistics().after() == pois.size(), PoiConstants.PROVENANCE);
         PoiValidation.requireText(file.notice(), PoiConstants.PROVENANCE);
@@ -81,7 +81,7 @@ public class ClasspathPoiCatalog implements PoiCatalog {
         }
     }
 
-    /** Dựng projection thuần và kiểm trạng thái khai báo khớp dữ kiện, không tự nâng xác minh. */
+    /** Builds a pure projection and checks that the declared status matches the facts, without raising the verification on its own. */
     private static PoiRecord toRecord(String destinationId, PoiEntry entry) {
         PlaceRecord place = new PlaceRecord(entry.id(), destinationId, entry.osmType(), entry.osmId(), entry.wikidataId(), entry.name(),
                 toLocation(entry.center()), entry.coordinateKind(), entry.address(), entry.phone(), entry.website());
@@ -91,7 +91,7 @@ public class ClasspathPoiCatalog implements PoiCatalog {
         return poi;
     }
 
-    /** Cặp tọa độ bắt buộc theo thứ tự lat,lon; không nhận thiếu một vế. */
+    /** The coordinate pair is required in lat,lon order; one half missing is not accepted. */
     private static GeoPoint toLocation(List<Double> center) {
         PoiValidation.require(center != null && center.size() == 2, PoiConstants.CENTER);
         return new GeoPoint(center.getFirst(), center.getLast());

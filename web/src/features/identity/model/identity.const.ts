@@ -1,32 +1,32 @@
-/** Giới hạn và thời lượng của danh tính ẩn danh (DR-001, DR-018). Bản máy chủ thật PHẢI khớp các con số này. */
+/** Limits and durations of the anonymous identity (DR-001, DR-018). The real server version MUST match these numbers. */
 export const IDENTITY = {
-  /** Số lần nhập sai tối đa ở một thiết bị trước khi bị khóa tạm (D23). */
+  /** The maximum number of wrong entries on one device before a temporary lock (D23). */
   MAX_ATTEMPTS: 5,
-  /** Khóa tạm 15 phút sau khi sai đủ số lần (bản giả; khóa thật theo thiết bị ở backend). */
+  /** A 15-minute temporary lock after the number of wrong entries is reached (a fake; the real per-device lock is in the backend). */
   LOCK_MS: 900_000,
-  /** Mã ghép hết hạn sau 5 phút. */
+  /** A pairing code expires after 5 minutes. */
   PAIR_TTL_MS: 300_000,
-  /** Hạn mức yêu cầu duyệt thiết bị: tối đa 3 yêu cầu trong 10 phút (DR-018 E1). */
+  /** The request limit for device approval: at most 3 requests in 10 minutes (DR-018 E1). */
   PAIR_REQUEST_LIMIT: 3,
   PAIR_REQUEST_WINDOW_MS: 600_000,
-  /** Số lựa chọn "số khớp" hiện cho thiết bị duyệt (có một số đúng). */
+  /** The number of 'matching number' choices shown to the approving device (one of them is right). */
   MATCH_OPTIONS: 3,
-  /** Số khớp là số hai chữ số. */
+  /** The matching number is a two-digit number. */
   MATCH_MIN: 10,
   MATCH_MAX: 99,
-  /** Số sự kiện "Hoạt động gần đây" giữ lại và hiện. */
+  /** The number of 'Recent activity' events kept and shown. */
   MAX_EVENTS: 50,
   SHOWN_EVENTS: 8,
-  /** Độ dài tối đa tên thiết bị. */
+  /** Maximum length of a device name. */
   MAX_DEVICE_NAME: 40,
-  /** Lần thử khôi phục hết hạn sau 15 phút (phải bắt đầu lại). */
+  /** A recovery attempt expires after 15 minutes (it must start over). */
   ATTEMPT_TTL_MS: 900_000,
-  /** Nhịp kiểm tra yêu cầu ghép/hết hạn khi đang chờ, ms. */
+  /** The polling rhythm to check a pairing request/expiry while waiting, ms. */
   POLL_MS: 1000,
 } as const;
 
-/** Tên tệp mã khôi phục tải về. */
+/** The file name of the downloaded recovery code. */
 export const CODE_FILE_NAME = 'wander-ma-khoi-phuc.txt';
 
-/** Tên thiết bị mặc định của bản thử. */
+/** The default device name of the trial version. */
 export const DEFAULT_DEVICE_NAME = 'Thiết bị này';

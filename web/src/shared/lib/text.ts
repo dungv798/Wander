@@ -3,12 +3,12 @@ import { COPY } from '../const/copy.vi.ts';
 
 const COMBINING_MARKS = /\p{M}+/gu;
 
-/** Chuẩn hóa chuỗi để so khớp không phân biệt hoa thường và dấu tiếng Việt ("ha giang" khớp "Hà Giang"); như `SearchText` của backend. */
+/** Normalizes a string for matching that ignores case and Vietnamese accents ('ha giang' matches the accented name of Ha Giang); like the backend's `SearchText`. */
 export function normalizeSearch(s: string): string {
   return s.trim().replace(/đ/g, 'd').replace(/Đ/g, 'D').normalize('NFD').replace(COMBINING_MARKS, '').toLowerCase();
 }
 
-/** Gộp các tháng liền nhau: [9,10,11] → "Tháng 9–11"; [3,4,9,10,11] → "Tháng 3–4, 9–11"; rỗng → "". */
+/** Merges consecutive months: [9,10,11] -> 'Months 9-11'; [3,4,9,10,11] -> 'Months 3-4, 9-11'; empty -> ''. */
 export function monthRangeLabel(months: readonly number[], prefix: string = COPY.units.monthPrefix): string {
   const sorted = [...new Set(months.map(Number).filter((m) => m >= 1 && m <= UI.MONTHS_IN_YEAR))].sort((a, b) => a - b);
   const parts: string[] = [];

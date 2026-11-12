@@ -4,14 +4,14 @@ import { planDays, planPreview, summarizePlan, withDayOverrides } from './planDa
 import { S0 as INITIAL_TRIPS_STATE, createTrip } from './tripFixtures.ts';
 
 const HUB = { lat: 11.94, lon: 108.44 };
-// a,b sát nhau (~1 km); c cách ~12 km; far cách ~60 km (cụm khác)
+// a,b are close together (about 1 km); c is about 12 km away; far is about 60 km away (another cluster)
 const COORDS: Record<string, { lat: number; lon: number }> = {
   a: { lat: 11.9418, lon: 108.4468 }, b: { lat: 11.9475, lon: 108.4411 }, c: { lat: 12.03, lon: 108.45 }, far: { lat: 12.5, lon: 108.45 },
 };
 const coordOf = (id: string) => COORDS[id] ?? null;
 const DAYS = ['2026-10-31', '2026-11-01'];
 
-/** Chuyến với các địa điểm cho trước (chưa có ngày). */
+/** A trip with the given places (no day yet). */
 function trip(places: string[], end = '2026-11-01') {
   const ids = (() => { let n = 0; return () => `i${(n += 1)}`; })();
   return createTrip(INITIAL_TRIPS_STATE, { name: 'T', destinationId: 'd', startDate: '2026-10-31', endDate: end }, places.map((id) => ({ id, category: 'canh' })), ids, 1).trip;

@@ -5,15 +5,15 @@ import { fill } from '../const/copy.vi.ts';
 import { Button } from './Button.tsx';
 
 interface ErrorBoxProps {
-  /** Lỗi cần hiện (thường là `ApiError`). */
+  /** The error to show (usually an `ApiError`). */
   readonly error: unknown;
-  /** Làm gì khi bấm nút của lối đi gợi ý (thử lại, mở Bảo mật…). Không có thì không hiện nút. */
+  /** What to do when the suggested way-out button is pressed (retry, open Security...). If there is none the button is not shown. */
   readonly onAction?: (action: ErrorAction) => void;
-  /** Nút "Đóng" phụ (tùy chọn). */
+  /** A secondary 'Close' button (optional). */
   readonly onClose?: () => void;
 }
 
-/** Hộp lỗi theo mã (S20): `role=alert`, tiêu đề + lời tiếng Việt + mã nhỏ để hỏi hỗ trợ; không đếm lần thử, không lộ lỗi thô. */
+/** The error box by code (S20): `role=alert`, a title + Vietnamese text + a small code to ask support; it counts no attempts and exposes no raw error. */
 export function ErrorBox({ error, onAction, onClose }: ErrorBoxProps) {
   const d = describeError(error);
   return (

@@ -12,13 +12,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
-/** Cài đặt cổng checklist bằng JPA; ánh xạ hai chiều giữa thực thể và đối tượng miền. */
+/** Implements the checklist port with JPA; maps both ways between the entity and the domain object. */
 @Repository
 public class JpaChecklistRepository implements ChecklistRepository {
 
     private final ChecklistItemJpaRepository jpa;
 
-    /** Nhận kho Spring Data. */
+    /** Takes the Spring Data repository. */
     public JpaChecklistRepository(ChecklistItemJpaRepository jpa) {
         this.jpa = jpa;
     }
@@ -71,7 +71,7 @@ public class JpaChecklistRepository implements ChecklistRepository {
         return found.isPresent();
     }
 
-    /** Hạng mục miền từ thực thể. */
+    /** The domain item from an entity. */
     private static ChecklistItem toDomain(ChecklistItemEntity e) {
         Map<UUID, java.time.Instant> completions = new LinkedHashMap<>();
         e.getCompletions().stream().sorted(java.util.Comparator.comparing(ChecklistItemEntity.Completion::getDoneAt))

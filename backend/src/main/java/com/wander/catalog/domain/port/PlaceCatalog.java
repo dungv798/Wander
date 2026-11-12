@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Cổng tới kho địa điểm (ADR-009, ADR-010). Nghiệp vụ không biết nguồn là tệp biên tập, Google hay cổng admin.
- * Chỉ đọc.
+ * The port to the venue catalog (ADR-009, ADR-010). The business logic does not know whether the source is an editorial file, Google or an admin portal.
+ * Read only.
  */
 public interface PlaceCatalog {
 
-    /** Tìm điểm đến theo tên/vùng, không phân biệt hoa thường và dấu. Chuỗi rỗng trả tất cả. */
+    /** Finds destinations by name/region, case- and accent-insensitive. An empty string returns all. */
     List<Destination> searchDestinations(String query);
 
-    /** Điểm đến theo mã; mã null hoặc không có trong kho thì trả rỗng. */
+    /** A destination by id; a null id or one not in the catalog returns empty. */
     Optional<Destination> destination(String id);
 
-    /** Lịch mẫu của một điểm đến theo thứ tự biên tập; điểm đến chưa có lịch hoặc mã lạ thì trả danh sách rỗng. */
+    /** The sample itineraries of a destination in editorial order; a destination with no itinerary yet or an unknown id returns an empty list. */
     List<ItineraryTemplate> templates(String destinationId);
 }

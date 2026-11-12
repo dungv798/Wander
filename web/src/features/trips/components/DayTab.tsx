@@ -18,7 +18,7 @@ import { MEAL_GAPS_COPY as M } from '../model/mealGaps.copy.ts';
 
 const MealSuggestEntry = lazy(() => import('./MealSuggestEntry.tsx').then(module => ({ default: module.MealSuggestEntry })));
 
-/** Nhắc bỏ qua được theo chuyến/ngày; chỉ mở editor, không tạo mục trước xác nhận. */
+/** A reminder that can be skipped per trip/day; it only opens the editor, no item is created before confirmation. */
 function MealReminders({ day }: { readonly day: string }) {
   const { trip, cat } = useTripView();
   const key = mealGapStorageKey(trip.id, day);
@@ -26,7 +26,7 @@ function MealReminders({ day }: { readonly day: string }) {
   const [expanded, setExpanded] = useState<MealGap | null>(null);
   if (!permissionsOf(trip).schedule) return null;
   const gaps = mealGaps(trip.items, day, cat.place, dismissed);
-  /** Đóng ngay và nhớ lựa chọn nếu localStorage khả dụng. */
+  /** Closes at once and remembers the choice if localStorage is available. */
   const dismiss = (gap: MealGap): void => {
     const next = [...dismissed, gap];
     setDismissed(next);
@@ -51,7 +51,7 @@ function MealReminders({ day }: { readonly day: string }) {
 
 const MEAL_CHOICES: readonly MealGap[] = ['lunch', 'dinner', 'rest'];
 
-/** Lối "Thêm ăn uống / nghỉ" luôn có ở MỌI ngày (không phụ thuộc ngưỡng nhắc): chọn bữa trưa, bữa tối hoặc nghỉ rồi mở gợi ý/nhập tay. */
+/** The 'Add food / rest' entry is always present on EVERY day (independent of the reminder threshold): choose lunch, dinner or rest and then open the suggestions/hand entry. */
 function MealAddRow({ day }: { readonly day: string }) {
   const { trip } = useTripView();
   const [open, setOpen] = useState(false);
@@ -70,7 +70,7 @@ function MealAddRow({ day }: { readonly day: string }) {
   );
 }
 
-/** Dòng "≈ 1,5 giờ · 25 km · ước tính" giữa hai mục liền nhau có tọa độ. */
+/** The line 'about 1.5 hours - 25 km - estimate' between two adjacent items that have coordinates. */
 function TravelLine({ km }: { readonly km: number }) {
   return (
     <div className="travel">
@@ -80,7 +80,7 @@ function TravelLine({ km }: { readonly km: number }) {
   );
 }
 
-/** Tab một ngày: tiêu đề (thứ, quãng đường, chi phí), nút sắp xếp, các mục kèm dòng di chuyển, nút thêm. */
+/** The tab of one day: the title (weekday, distance, cost), the reorder button, the items with travel lines, the add button. */
 export function DayTab({ index }: { readonly index: number }) {
   const { trip, cat, days, sorting, setSorting, setOverlay } = useTripView();
   const day = days[index];

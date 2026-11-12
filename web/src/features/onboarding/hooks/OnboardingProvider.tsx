@@ -4,26 +4,26 @@ import { STORAGE } from '../../../shared/const/app.const.ts';
 import { useStore } from '../../../shared/hooks/useStore.ts';
 import { PersistentStore } from '../../../shared/state/PersistentStore.ts';
 
-/** Trạng thái giới thiệu: đã xem xong (hoặc bỏ qua) chưa. Chỉ hiện một lần; muốn xem lại thì vào thẳng địa chỉ `#/onboard`. */
+/** The intro state: has it been watched to the end (or skipped). It shows only once; to watch again go straight to the address `#/onboard`. */
 export interface OnboardingState {
   readonly done: boolean;
 }
 
 interface OnboardingValue {
   readonly state: OnboardingState;
-  /** Ghi nhận đã xem xong hoặc bỏ qua. */
+  /** Records it as watched to the end or skipped. */
   readonly finish: () => void;
 }
 
 const INITIAL: OnboardingState = { done: false };
 const OnboardingContext = createContext<OnboardingValue | null>(null);
 
-/** Làm sạch trạng thái đọc từ localStorage: chỉ nhận cờ `done === true`. */
+/** Cleans the state read from localStorage: only accepts the flag `done === true`. */
 function sanitize(raw: unknown): OnboardingState | null {
   return typeof raw === 'object' && raw !== null ? { done: (raw as Record<string, unknown>)['done'] === true } : null;
 }
 
-/** Cấp trạng thái "đã xem giới thiệu" (lưu cục bộ). */
+/** Provides the 'intro watched' state (stored locally). */
 export function OnboardingProvider({ children }: { readonly children: ReactNode }) {
   const [kv] = useState(() => new PersistentStore<OnboardingState>(STORAGE.ONBOARDING, INITIAL, sanitize));
   const state = useStore(kv);
@@ -31,7 +31,7 @@ export function OnboardingProvider({ children }: { readonly children: ReactNode 
   return <OnboardingContext.Provider value={value}>{children}</OnboardingContext.Provider>;
 }
 
-/** Truy cập trạng thái giới thiệu; ném lỗi nếu quên bọc `OnboardingProvider`. */
+/** Access to the intro state; throws if `OnboardingProvider` was forgotten. */
 export function useOnboarding(): OnboardingValue {
   const ctx = useContext(OnboardingContext);
   if (!ctx) throw new Error('useOnboarding phải nằm trong OnboardingProvider');

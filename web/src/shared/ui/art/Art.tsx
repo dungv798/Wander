@@ -7,12 +7,12 @@ interface StopSpec {
   readonly opacity?: number;
 }
 
-/** Id gradient duy nhất cho mỗi lần dựng (nhiều bản trên một trang không trùng id). */
+/** A unique gradient id for each build (several copies on a page do not share an id). */
 function useUid(): string {
   return useId().replace(/[^a-zA-Z0-9]/g, '');
 }
 
-/** Dải màu nhiều điểm dừng; màu lấy từ token CSS nên đổi bộ màu là đổi theo. */
+/** A multi-stop color ramp; the colors come from CSS tokens so changing the palette changes them too. */
 function Stops({ list }: { readonly list: readonly StopSpec[] }) {
   return (
     <>
@@ -33,7 +33,7 @@ const SUN_RAYS = Array.from({ length: 12 }, (_, i) => i);
 const TICK_FULL_STEP = 3;
 const DEG_STEP = 30;
 
-/** Máy bay hành khách nhìn nghiêng, đuôi khói; trang trí (ẩn với trình đọc màn hình). */
+/** A passenger plane seen from the side, a smoke tail; decorative (hidden from screen readers). */
 export function Plane({ className = 'plane' }: ArtProps): ReactNode {
   const u = useUid();
   return (
@@ -68,7 +68,7 @@ export function Plane({ className = 'plane' }: ArtProps): ReactNode {
   );
 }
 
-/** La bàn bóng kính có kim lắc nhẹ (CSS `.ac-needle`); trang trí. */
+/** A glass-ball compass with a gently swinging needle (CSS `.ac-needle`); decorative. */
 export function Compass({ className = 'compass' }: ArtProps): ReactNode {
   const u = useUid();
   return (
@@ -97,7 +97,7 @@ export function Compass({ className = 'compass' }: ArtProps): ReactNode {
   );
 }
 
-/** Mặt trời có tia quay chậm (CSS `.as-rays`); trang trí. */
+/** A sun with slowly rotating rays (CSS `.as-rays`); decorative. */
 export function Sun({ className = 'sun3d' }: ArtProps): ReactNode {
   const u = useUid();
   return (

@@ -5,7 +5,7 @@ import { buildTrip, dayOfPlace } from './sampleTrip.ts';
 import { initialShare, shareReducer } from './shareState.ts';
 import type { ShareAction } from './shareState.ts';
 
-/** Địa điểm giả tối thiểu. */
+/** A minimal fake place. */
 function place(id: string): PlaceView {
   return { id, name: id, lat: 11.9, lon: 108.4, photos: [] } as unknown as PlaceView;
 }

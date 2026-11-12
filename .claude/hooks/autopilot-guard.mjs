@@ -1,7 +1,7 @@
 // PreToolUse guard for Wander planning runs. Deterministic, dependency-free, fail-closed.
 // It can only RESTRICT: it never grants permission (exit 0 falls through to the normal permission system).
 // Always on:    master plan is read-only (Write/Edit/MultiEdit/NotebookEdit and write-capable shell commands).
-// During a run: (docs/autopilot/ACTIVE.json lease is valid) writes limited to docs/autopilot/, shell limited to the
+// During a run: (.claude/autopilot/ACTIVE.json lease is valid) writes limited to .claude/autopilot/, shell limited to the
 //               autopilot CLI, subagents limited to the 4 wander reviewers with round/dispatch limits.
 import fs from 'node:fs';
 import { evaluate, loadLease, appendLine, runDir, nowIso } from '../scripts/autopilot-lib.mjs';

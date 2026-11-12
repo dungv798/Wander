@@ -1,4 +1,4 @@
-/** Cổng công khai của tính năng "Chuyến đi". */
+/** The public gate of the 'Trips' feature. */
 export { TripsProvider, useTrips } from './hooks/TripsProvider.tsx';
 export { TripsScreen } from './components/TripsScreen.tsx';
 export { TodayScreen } from './components/TodayScreen.tsx';

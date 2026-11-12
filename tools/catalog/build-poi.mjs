@@ -8,7 +8,7 @@ const DEDUPE_RADIUS_M = 50;
 export const DEFAULT_POI_CONFIG = { destinationId: 'da-lat', center: [11.9404, 108.4583], radiusM: 15_000 };
 const KINDS = ['food', 'cafe', 'fast_food', 'bar', 'other'];
 const KIND_MAP = { restaurant: 'food', cafe: 'cafe', fast_food: 'fast_food', bar: 'bar', pub: 'bar' };
-const INPUT = new URL('../../docs/research/da-lat-poi-trial/pois.json', import.meta.url);
+const INPUT = new URL('./data/da-lat-poi-trial/pois.json', import.meta.url);
 const OUTPUT = new URL('../../backend/src/main/resources/catalog/poi/da-lat.json', import.meta.url);
 
 /** Tính khoảng cách chim bay bằng mét, không phải khoảng cách đi đường. */

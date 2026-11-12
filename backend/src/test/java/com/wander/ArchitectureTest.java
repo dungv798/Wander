@@ -7,12 +7,17 @@ import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_
 import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
+import com.tngtech.archunit.lang.ArchCondition;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -244,6 +249,25 @@ class ArchitectureTest {
         classes().that().resideInAPackage("com.wander..").and().haveSimpleNameEndingWith("Service")
                 .and().resideInAPackage("..application..")
                 .should().resideInAPackage("..application.service..")
+                .check(classes);
+    }
+
+    @Test
+    @DisplayName("API-1: controller methods exchange typed request/response records, never a Map or a raw JSON body")
+    void controllersAreTyped() {
+        methods().that().areDeclaredInClassesThat().areAnnotatedWith(RestController.class).and().arePublic()
+                .should(new ArchCondition<JavaMethod>("not take or return a java.util.Map or a JsonBody") {
+                    /** Flags a controller method whose return type or any parameter is a Map or called JsonBody. */
+                    @Override
+                    public void check(JavaMethod method, ConditionEvents events) {
+                        boolean returnsMap = method.getRawReturnType().isAssignableTo(Map.class);
+                        boolean takesMap = method.getRawParameterTypes().stream()
+                                .anyMatch(type -> type.isAssignableTo(Map.class) || type.getSimpleName().equals("JsonBody"));
+                        if (returnsMap || takesMap) {
+                            events.add(SimpleConditionEvent.violated(method, method.getFullName() + " uses a Map or JsonBody in its signature"));
+                        }
+                    }
+                })
                 .check(classes);
     }
 }

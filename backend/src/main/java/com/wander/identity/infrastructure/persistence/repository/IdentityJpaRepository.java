@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository (truy vấn suy diễn từ tên, @Query JPQL, @Lock = SELECT … FOR UPDATE). */
+/** Spring Data JPA repository (queries derived from names, @Query JPQL, @Lock = SELECT ... FOR UPDATE). */
 public interface IdentityJpaRepository extends JpaRepository<IdentityEntity, UUID> {
 
-    /** Khóa danh tính trước mọi thay đổi mã để recovery và tái tạo không ghi đè nhau. */
+    /** Locks the identity before any code change so recovery and regeneration do not overwrite each other. */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.IDENTITY_BY_ID)
     Optional<IdentityEntity> lockById(@Param("id") UUID id);

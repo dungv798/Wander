@@ -4,23 +4,23 @@ import type { Snap } from './bottomSheet.const.ts';
 
 const snaps = new Map<string, Snap>();
 
-/** Giữ nấc theo màn/chuyến trong phiên, bỏ phần tab cuối URL để đổi ngày không thu tờ. */
+/** Keeps the step per screen/trip in the session, dropping the last tab part of the URL so changing the day does not collapse the sheet. */
 export function sheetMemoryKey(hash: string): string {
   return hash.split('/').slice(0, SHEET_ROUTE_PARTS).join('/');
 }
 
-/** Đọc nấc từng dùng trong phiên; màn mới vẫn dùng nấc mặc định của nơi gọi. */
+/** Reads the step used in the session; a new screen still uses the caller's default step. */
 export function rememberedSnap(key: string, fallback: Snap): Snap { return snaps.get(key) ?? fallback; }
 
-/** Ghi nấc sau mỗi lần thay đổi, không cần ghi thông tin chuyến xuống thiết bị. */
+/** Writes the step after each change, without needing to write trip information to the device. */
 export function rememberSnap(key: string, snap: Snap): void { snaps.set(key, snap); }
 
-/** Storage bị chặn vẫn hiện lời mời kéo và không làm hỏng màn lịch. */
+/** Blocked storage still shows the drag invitation and does not break the schedule screen. */
 export function shouldShowSheetHint(storage?: Pick<Storage, 'getItem'>): boolean {
   try { return PersistentStore.readRaw(SHEET_HINT.KEY, storage) !== SHEET_HINT.VALUE; } catch { return true; }
 }
 
-/** Ghi nhận cử chỉ thành công; chế độ riêng tư không cản việc kéo hoặc ẩn gợi ý. */
+/** Records a successful gesture; private mode does not block dragging or hiding the hint. */
 export function dismissSheetHint(storage?: Pick<Storage, 'setItem'>): void {
-  try { PersistentStore.writeRaw(SHEET_HINT.KEY, SHEET_HINT.VALUE, storage); } catch { /* Vẫn ẩn trong DOM của lần mở hiện tại. */ }
+  try { PersistentStore.writeRaw(SHEET_HINT.KEY, SHEET_HINT.VALUE, storage); } catch { /* Still hidden in the DOM of the current open. */ }
 }

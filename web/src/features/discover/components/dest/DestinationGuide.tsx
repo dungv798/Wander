@@ -8,7 +8,7 @@ import { useDiscover } from '../../hooks/DiscoverProvider.tsx';
 import type { DestinationDetail } from '../../model/Catalog.types.ts';
 import { GuideSections } from './GuideSections.tsx';
 
-/** Lối vào cẩm nang luôn ở đầu điểm đến; món ăn không còn bị chôn sau hàng chục thẻ. */
+/** The guide entry is always at the top of the destination; food is no longer buried behind dozens of cards. */
 export function DestinationGuide({ dest }: { readonly dest: DestinationDetail }) {
   const [opened, setOpened] = useState(false);
   const { state, actions } = useDiscover();

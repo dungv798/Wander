@@ -2,35 +2,35 @@ import { useCallback, useMemo, useState } from 'react';
 import { useLatestRef } from '../../../shared/hooks/useLatestRef.ts';
 import { SCENES } from '../model/onboarding.const.ts';
 
-/** Dấu hiệu "sắp chuyển cảnh" trên chấm tiến độ của cảnh `scene` (ms = thời gian còn lại; 0 ở cảnh cuối = đã kể xong). */
+/** The 'about to change scene' sign on the progress dot of scene `scene` (ms = the time left; 0 at the last scene = the story is finished). */
 export interface OnboardCue {
   readonly scene: number;
   readonly ms: number;
 }
 
-/** Điều khiển luồng bốn cảnh: cảnh hiện tại, còn tự chuyển không, và đã có thao tác của người xem chưa (để dời tiêu điểm tới tiêu đề mới). */
+/** Controls the four-scene flow: the current scene, whether it still advances by itself, and whether the viewer has acted yet (to move the focus to the new title). */
 export interface OnboardFlow {
   readonly scene: number;
   readonly auto: boolean;
   readonly moved: boolean;
-  /** Dấu hiệu sắp chuyển cảnh (chỉ khi còn tự chạy). */
+  /** The sign that the scene is about to change (only while it still runs by itself). */
   readonly cue: OnboardCue | null;
-  /** Báo sắp chuyển cảnh sau `ms` mili-giây. */
+  /** Reports that the scene is about to change after `ms` milliseconds. */
   readonly announce: (ms: number) => void;
-  /** Người xem chọn cảnh (nút Tiếp/Quay lại/chấm): dừng tự chuyển. */
+  /** The viewer chooses the scene (the Next/Back button/dots): stops the auto-advance. */
   readonly go: (to: number) => void;
-  /** Cảnh vừa xong và tự chuyển sang cảnh kế (chỉ khi còn ở chế độ tự chạy). */
+  /** The scene has just finished and moves to the next by itself (only while still in auto mode). */
   readonly advance: () => void;
-  /** Người xem chạm vào nội dung cảnh: từ nay không tự chuyển nữa. */
+  /** The viewer touches the scene's content: from now on it does not advance by itself. */
   readonly takeControl: () => void;
 }
 
-/** Giữ chỉ số cảnh trong khoảng hợp lệ. */
+/** Keeps the scene index in the valid range. */
 function clampScene(n: number): number {
   return Math.max(0, Math.min(SCENES.length - 1, n));
 }
 
-/** Trạng thái luồng giới thiệu: tự chạy theo từng cảnh cho tới khi người xem tự điều khiển. */
+/** The intro flow state: runs by itself scene by scene until the viewer takes control. */
 export function useOnboardFlow(): OnboardFlow {
   const [scene, setScene] = useState(0);
   const [auto, setAuto] = useState(true);

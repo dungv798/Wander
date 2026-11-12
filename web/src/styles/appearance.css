@@ -1,5 +1,5 @@
-/* Look mặc định theo §3/6; giữ các luồng và bố cục responsive hiện có. */
-/* V2 chỉ đổi vật liệu nền; không thay kích thước/bố cục trang chủ. */
+/* The default look per section 3/6; it keeps the existing flows and responsive layouts. */
+/* V2 only changes the base material; it does not change the sizes/layout of the home page. */
 :root:not([data-look='classic']) :is(.sky, .xcard) { background: linear-gradient(var(--scene-top), var(--bg)); }
 :root:not([data-look='classic']) :is(.ribbon, .next, .next .ib, .devrow .ib, .tl) { background: var(--surface-2); color: var(--ink); }
 :root:not([data-look='classic']) .app::before,
@@ -23,7 +23,7 @@
 :root:not([data-look='classic']) .stat b { font: var(--text-stat); letter-spacing: var(--tracking-place); font-variant-numeric: tabular-nums; }
 :root:not([data-look='classic']) .costbox .big { font: var(--text-money); letter-spacing: var(--tracking-section); font-variant-numeric: tabular-nums; }
 
-/* PNG không thừa hưởng kiểu ảnh bìa (absolute, width:100%) của các thẻ. */
+/* A PNG does not inherit the cover-photo style (absolute, width:100%) of the cards. */
 :root .ic.fluent-icon {
   position: static;
   inset: auto;
@@ -65,7 +65,7 @@
 :root:not([data-look='classic']) .bar { position: sticky; top: 0; z-index: var(--z-sticky); }
 :root:not([data-look='classic']) .float { bottom: var(--safe-bottom); }
 
-/* Nhịp 8/12/16 px thay khối trang trí và phần đệm rỗng; giữ vùng chạm 44 px. */
+/* An 8/12/16 px rhythm replaces decorative blocks and empty padding; keeps the 44 px touch area. */
 :root:not([data-look='classic']) :is(.sections, .dbody, .tbody, .pp, .stack) { gap: var(--layout-section-gap); }
 :root:not([data-look='classic']) :is(.sections, .dbody) { padding-block: var(--s-4); }
 :root:not([data-look='classic']) .tbody { padding-top: var(--s-3); }
@@ -103,7 +103,7 @@
   :root:not([data-look='classic']) #screen[data-view='trip'] .sheet-head { padding-top: 0; }
 }
 
-/* Ô chọn dùng chung: hộp tự vẽ thay cho ô xanh mặc định của trình duyệt (cùng token với nút chọn khác) */
+/* The shared check box: a self-drawn box in place of the browser's default green box (the same token as the other choice buttons) */
 .checkrow input[type='checkbox'] { appearance: none; display: grid; place-content: center; width: 26px; height: 26px; margin: 0; border: 2px solid var(--border-ctrl); border-radius: var(--r-sm); background: var(--surface); cursor: pointer; }
 .checkrow input[type='checkbox']::after { content: ""; width: 6px; height: 12px; margin-top: -2px; border: solid var(--on-brand-2); border-width: 0 3px 3px 0; rotate: 45deg; scale: 0; transition: scale var(--dur-fast, 120ms) ease; }
 .checkrow input[type='checkbox']:checked { background: var(--brand-2); border-color: var(--brand-2); }

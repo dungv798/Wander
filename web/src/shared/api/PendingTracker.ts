@@ -1,17 +1,17 @@
 import { SLOW_REQUEST_AFTER_MS } from './slowRequest.const.ts';
 
-/** Hẹn chạy `fn` sau `ms` mili giây; trả hàm hủy hẹn (tiêm được khi test). */
+/** Schedules `fn` to run after `ms` milliseconds; returns a function that cancels the timer (injectable in tests). */
 export type Scheduler = (fn: () => void, ms: number) => () => void;
 
-/** Bộ hẹn giờ mặc định của trình duyệt. */
+/** The browser's default timer. */
 const browserSchedule: Scheduler = (fn, ms) => {
   const id = setTimeout(fn, ms);
   return () => clearTimeout(id);
 };
 
 /**
- * Theo dõi các lời gọi API đang chờ: `slow` là true chừng nào còn ít nhất một lời gọi đã treo quá ngưỡng mà chưa xong.
- * Lời gọi nhanh không bao giờ làm đổi trạng thái, nên người nghe chỉ bị đánh thức khi `slow` thật sự đổi.
+ * Tracks the pending API calls: `slow` is true as long as at least one call has hung past the threshold and is not done.
+ * A fast call never changes the state, so a listener is only woken when `slow` really changes.
  */
 export class PendingTracker {
   private readonly slowAfterMs: number;
@@ -19,18 +19,18 @@ export class PendingTracker {
   private readonly listeners = new Set<() => void>();
   private overdue = 0;
 
-  /** Tạo bộ theo dõi; ngưỡng và bộ hẹn giờ tiêm được để test không phải chờ thật. */
+  /** Creates the tracker; the threshold and the timer are injectable so tests do not wait for real. */
   constructor(slowAfterMs: number = SLOW_REQUEST_AFTER_MS, schedule: Scheduler = browserSchedule) {
     this.slowAfterMs = slowAfterMs;
     this.schedule = schedule;
   }
 
-  /** Có lời gọi nào đang treo quá ngưỡng. */
+  /** Whether any call has hung past the threshold. */
   get slow(): boolean {
     return this.overdue > 0;
   }
 
-  /** Báo một lời gọi bắt đầu; trả hàm gọi khi lời gọi kết thúc (thành công, lỗi hay hủy). Gọi nhiều lần chỉ tính một. */
+  /** Reports that a call started; returns a function to call when the call ends (success, error or cancel). Calling it several times counts only once. */
   begin(): () => void {
     let finished = false;
     let counted = false;
@@ -50,7 +50,7 @@ export class PendingTracker {
     };
   }
 
-  /** Đăng ký nghe thay đổi của `slow`; trả hàm hủy đăng ký. Chữ ký khớp `useSyncExternalStore`. */
+  /** Subscribes to changes of `slow`; returns an unsubscribe function. The signature matches `useSyncExternalStore`. */
   subscribe = (listener: () => void): (() => void) => {
     this.listeners.add(listener);
     return () => {
@@ -58,11 +58,11 @@ export class PendingTracker {
     };
   };
 
-  /** Đánh thức mọi người nghe. */
+  /** Wakes every listener. */
   private emit(): void {
     for (const listener of this.listeners) listener();
   }
 }
 
-/** Bộ theo dõi dùng chung của ứng dụng, gắn vào `apiClient`. */
+/** The app's shared tracker, attached to `apiClient`. */
 export const pendingRequests = new PendingTracker();

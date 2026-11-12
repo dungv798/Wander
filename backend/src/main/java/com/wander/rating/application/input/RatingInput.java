@@ -7,7 +7,7 @@ import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.util.Labels;
 import java.util.regex.Pattern;
 
-/** Đọc và kiểm tra các trường đầu vào dạng thô của API rating. */
+/** Validates the rating inputs (place reference, stars, comment); the JSON layer has already enforced their types. */
 public final class RatingInput {
 
     private static final Pattern PLACE_REF = Pattern.compile(RatingConstants.PLACE_REF_REGEX);
@@ -15,7 +15,7 @@ public final class RatingInput {
     private RatingInput() {
     }
 
-    /** Mã quán đúng dạng; sai thì báo MALFORMED ở trường {@code placeRef}. */
+    /** A well-formed venue id; otherwise MALFORMED is reported on the {@code placeRef} field. */
     public static String placeRef(String value) {
         if (value == null || !PLACE_REF.matcher(value).matches()) {
             throw WanderException.invalidValue(ErrorCodes.MALFORMED, RatingFields.PLACE_REF);
@@ -23,20 +23,18 @@ public final class RatingInput {
         return value;
     }
 
-    /** Điểm: bắt buộc, số nguyên 1–5 (thiếu ⇒ REQUIRED; chuỗi, số thập phân, boolean ⇒ MALFORMED; ngoài khoảng ⇒ OUT_OF_RANGE). */
-    public static int stars(Object value) {
-        if (value == null) throw WanderException.invalidValue(ErrorCodes.REQUIRED, RatingFields.STARS);
-        if (!(value instanceof Integer number)) throw WanderException.invalidValue(ErrorCodes.MALFORMED, RatingFields.STARS);
+    /** The score: required, an integer 1-5 (missing => REQUIRED; a string, decimal, boolean => MALFORMED; out of range => OUT_OF_RANGE). */
+    public static int stars(Integer number) {
+        if (number == null) throw WanderException.invalidValue(ErrorCodes.REQUIRED, RatingFields.STARS);
         if (number < RatingConstants.STARS_MIN || number > RatingConstants.STARS_MAX) {
             throw WanderException.invalid(ErrorCodes.OUT_OF_RANGE, RatingMessages.STARS_OUT_OF_RANGE, RatingFields.STARS);
         }
         return number;
     }
 
-    /** Lời bình tùy chọn: chuẩn hóa như nhãn người dùng (không ký tự điều khiển/vô hình); rỗng hoặc không nêu ⇒ null. */
-    public static String comment(Object value) {
-        if (value == null) return null;
-        if (!(value instanceof String raw)) throw WanderException.invalidValue(ErrorCodes.MALFORMED, RatingFields.COMMENT);
+    /** An optional comment: normalized like a user label (no control/invisible characters); empty or not given => null. */
+    public static String comment(String raw) {
+        if (raw == null) return null;
         String text = Labels.normalize(raw, RatingConstants.COMMENT_MAX_LENGTH, RatingFields.COMMENT);
         return text.isEmpty() ? null : text;
     }

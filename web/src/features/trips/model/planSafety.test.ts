@@ -20,7 +20,7 @@ test('bản nháp sống qua lượt đọc lại cùng dữ liệu; thay ngày,
   assert.notEqual(planDraftKey({ ...trip, items: [{ ...trip.items[0]!, booking: 'booked' }] }), key);
 });
 
-/** Các địa điểm chưa có ngày; không gọi API hay sửa fixture toàn cục. */
+/** The places with no day yet; it calls no API and edits no global fixture. */
 function sample(ids: string[], end = DAY): Trip {
   let sequence = 0;
   return createTrip(S0, { name: 'Kiểm an toàn gợi ý', destinationId: 'd', startDate: DAY, endDate: end }, ids.map(id => ({ id, category: 'canh' })), () => `s${++sequence}`, 1).trip;

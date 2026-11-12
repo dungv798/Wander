@@ -1,5 +1,8 @@
 # ADR-008 — Dùng MapStruct cho ánh xạ entity ↔ domain (AD-9)
 
+> **English title:** MapStruct for entity-to-domain mapping
+> **Summary (EN):** Compile-time MapStruct mappers (unmappedTargetPolicy = ERROR) live only in the infrastructure layer. Chosen for learning value although hand-written mapping was the council recommendation.
+
 - **Trạng thái:** `APPROVED` — PO chọn "Thêm MapStruct (AD-9)" ngày 24/10/2026 trong phiên `/wander-council` về các quyết định kỹ thuật còn lại, để học (quen thuộc ở FPT). Hội đồng khuyến nghị giữ ánh xạ tay; PO chọn khác với khuyến nghị.
 - **Thực hiện:** xong 24/10/2026 qua `/wander-feature` (`TripMapper`, `IdentityMapper`, `unmappedTargetPolicy = ERROR`; `verify` PASS, 117/117 test backend + 6/6 e2e). Phiên bản `mapstruct` 1.6.3.
 - **Giới hạn của lợi ích "biên dịch đỏ":** `unmappedTargetPolicy = ERROR` bắt cột entity chưa được ghi (chiều domain → entity) và tham số constructor domain chưa được dựng (chiều entity → domain). Chiều ghi của `Trip`/`Item` dùng `expression` (domain có accessor `name()` chứ không phải `getName()`), nên một trường domain mà không có cột tương ứng thì không bị bắt — giống mã viết tay.

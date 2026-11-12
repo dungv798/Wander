@@ -1,62 +1,62 @@
-/** Mô hình danh tính ẩn danh ở FE, dựng từ API thật (`/api/sessions`, `/api/events`, `/api/recovery-code`). Máy chủ là nguồn sự thật. */
+/** The anonymous identity model on the front end, built from the real API (`/api/sessions`, `/api/events`, `/api/recovery-code`). The server is the source of truth. */
 
-/** Một thiết bị tin cậy (một phiên chưa bị thu hồi); `at` là lần hoạt động cuối (mili giây). `name` là nhãn do thiết bị tự khai, CHƯA xác minh. */
+/** A trusted device (a session that is not revoked); `at` is the last activity (milliseconds). `name` is a label the device declares itself, NOT verified. */
 export interface Device {
   readonly id: string;
   readonly name: string;
   readonly at: number;
-  /** Đây là MÁY NÀY (phiên đang gọi). */
+  /** This is THIS DEVICE (the calling session). */
   readonly current: boolean;
 }
 
-/** Loại sự kiện trong "Hoạt động gần đây" (khớp `EventKind` của backend). */
+/** The event kind in 'Recent activity' (matches the backend's `EventKind`). */
 export type EventKind = 'created' | 'code' | 'paired' | 'revoked' | 'recovered';
 
-/** Một dòng "Hoạt động gần đây"; chữ hiển thị suy ra từ `kind` ở lớp giao diện (không lưu câu chữ trong dữ liệu). */
+/** One line of 'Recent activity'; the display text is derived from `kind` in the UI layer (no wording is stored in the data). */
 export interface IdentityEvent {
   readonly at: number;
   readonly kind: EventKind;
-  /** Tên thiết bị liên quan (tự khai, chưa xác minh), nếu có. */
+  /** The related device name (self-declared, unverified), if any. */
   readonly device?: string;
 }
 
-/** Ảnh chụp danh tính của máy này lấy từ máy chủ: thiết bị, hoạt động, cờ "chưa xem" và đã có mã khôi phục chưa. */
+/** The snapshot of this device's identity taken from the server: devices, activity, the 'unseen' flag and whether there is a recovery code yet. */
 export interface IdentitySnapshot {
   readonly devices: readonly Device[];
   readonly events: readonly IdentityEvent[];
-  /** Có thiết bị mới được thêm (ghép/khôi phục) kể từ lần mở màn Bảo mật gần nhất. */
+  /** A new device was added (pairing/recovery) since the last time the Security screen was opened. */
   readonly unseen: boolean;
   readonly hasCode: boolean;
 }
 
-/** Điều đã biết lần cuối về danh tính, để chọn nhánh màn hết phiên khi không còn gọi được máy chủ (không chứa bí mật). */
+/** What was last known about the identity, to choose the session-ended screen branch when the server can no longer be called (contains no secret). */
 export interface KnownIdentity {
   readonly hasCode: boolean;
   readonly deviceCount: number;
 }
 
-/** Cờ riêng của máy này (không bí mật): vừa mở bằng khôi phục, và mốc đã biết gần nhất. */
+/** This device's own flags (no secret): just opened by recovery, and the latest known mark. */
 export interface SessionState {
-  /** Vừa mở chuyến đi trên máy này bằng khôi phục (hiện nhắc kiểm tra danh sách thiết bị). */
+  /** A trip was just opened on this device by recovery (shows a reminder to check the device list). */
   readonly recovered: boolean;
   readonly known: KnownIdentity | null;
 }
 
-/** Trạng thái danh tính của máy này. `loading`: đang nạp lần đầu khi đã có bí mật phiên; `error`: không nạp được (mạng), KHÔNG coi là chưa có danh tính. */
+/** The identity state of this device. `loading`: the first load when there is already a session secret; `error`: could not load (network), NOT treated as having no identity. */
 export type IdentityStatus = 'loading' | 'anonymous' | 'ready' | 'expired' | 'error';
 
-/** Một yêu cầu ghép do MÁY MỚI tạo (DR-018 E1): mã ghép 8 ký hiệu + số khớp 2 chữ số, hết hạn sau 5 phút. */
+/** A pairing request created by the NEW DEVICE (DR-018 E1): an 8-symbol pairing code + a 2-digit matching number, expiring after 5 minutes. */
 export interface PairingRequest {
   readonly requestId: string;
-  /** Mã ghép đã chuẩn hóa (8 ký hiệu). */
+  /** The normalized pairing code (8 symbols). */
   readonly code: string;
   readonly number: number;
   readonly name: string;
   readonly at: number;
   readonly expiresAt: number;
-  /** Bí mật phiên máy này đã tự sinh; chỉ có hiệu lực khi thiết bị cũ duyệt đúng số. */
+  /** The session secret this device generated itself; it takes effect only when the old device approves the right number. */
   readonly sessionToken: string;
 }
 
-/** Trạng thái một yêu cầu ghép theo máy chủ. */
+/** The state of a pairing request according to the server. */
 export type PairingStatus = 'pending' | 'approved' | 'denied' | 'expired';

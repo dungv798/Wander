@@ -4,7 +4,7 @@ import com.wander.catalog.domain.constant.CatalogConstants;
 import java.text.Normalizer;
 import java.util.Locale;
 
-/** Chuẩn hóa chuỗi để tìm không phân biệt hoa thường và dấu tiếng Việt ("ha giang" khớp "Hà Giang"). */
+/** Normalizes a string for searching that ignores case and Vietnamese accents (the query 'ha giang' matches the accented name of Ha Giang). */
 public final class SearchText {
 
     private static final char D_STROKE_LOWER = 'đ';
@@ -13,7 +13,7 @@ public final class SearchText {
     private SearchText() {
     }
 
-    /** Dạng so sánh của chuỗi: bỏ dấu, đ thành d, chữ thường, cắt khoảng trắng; null thành chuỗi rỗng. */
+    /** The comparison form of a string: accents removed, the Vietnamese d-with-stroke becomes d, lowercase, trimmed; null becomes an empty string. */
     public static String normalize(String text) {
         if (text == null) return "";
         String trimmed = text.trim().replace(D_STROKE_LOWER, 'd').replace(D_STROKE_UPPER, 'D');

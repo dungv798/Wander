@@ -9,14 +9,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng mã thay thế. */
+/** Spring Data JPA repository of the replacement-code table. */
 public interface CodeReplacementJpaRepository extends JpaRepository<CodeReplacementEntity, UUID> {
 
-    /** Hủy mọi mã thay thế đang chờ của danh tính; flush trước và làm sạch bộ nhớ đệm sau để truy vấn kế tiếp thấy kết quả. */
+    /** Cancels every pending replacement code of the identity; flushes first and clears the persistence context after so the next query sees the result. */
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query(IdentityQueryConstants.VOID_PENDING_REPLACEMENTS)
     void voidPending(@Param("identity") UUID identityId);
 
-    /** Mã thay thế theo id, danh tính và trạng thái. */
+    /** The replacement code by id, identity and state. */
     Optional<CodeReplacementEntity> findByIdAndIdentityIdAndState(UUID id, UUID identityId, String state);
 }

@@ -13,7 +13,7 @@ interface Call {
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
 
-/** Cổng dựng trên fetch giả; `calls` để kiểm đường dẫn/thân. */
+/** A gateway built on a fake fetch; `calls` is used to check the path/body. */
 function gateway(handler: (c: Call) => Response): { readonly gw: HttpPreferencesGateway; readonly calls: Call[] } {
   const calls: Call[] = [];
   const fetchImpl: FetchLike = (url, init) => {
@@ -38,5 +38,5 @@ test('lưu sở thích: PUT danh sách mã (thay thế toàn bộ) và trả dan
 
 test('phản hồi sai dạng thành INTERNAL; lỗi máy chủ giữ mã lỗi', async () => {
   await assert.rejects(gateway(() => json({ nope: 1 })).gw.interests(), (e: unknown) => e instanceof ApiError && e.code === 'INTERNAL');
-  await assert.rejects(gateway(() => json({ error: { code: 'INVALID_INTEREST' } }, 400)).gw.saveInterests(['x']), (e: unknown) => e instanceof ApiError && e.code === 'INVALID_INTEREST');
+  await assert.rejects(gateway(() => json({ code: 'INVALID_INTEREST' }, 400)).gw.saveInterests(['x']), (e: unknown) => e instanceof ApiError && e.code === 'INVALID_INTEREST');
 });

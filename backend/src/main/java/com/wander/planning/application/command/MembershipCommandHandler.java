@@ -15,7 +15,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Xử lý lệnh thành viên và liên kết mời. Mỗi phương thức một giao dịch; mọi quy tắc nằm trong {@link Trip}. */
+/** Handles the member and invite-link commands. One transaction per method; every rule lives in {@link Trip}. */
 @Service
 @Transactional
 public class MembershipCommandHandler {
@@ -24,14 +24,14 @@ public class MembershipCommandHandler {
     private final InviteCodeHasher hasher;
     private final Clock clock;
 
-    /** Nhận cổng lưu chuyến, bộ băm mã mời và đồng hồ. */
+    /** Takes the trip storage port, the invite-code hasher and the clock. */
     public MembershipCommandHandler(TripRepository trips, InviteCodeHasher hasher, Clock clock) {
         this.trips = trips;
         this.hasher = hasher;
         this.clock = clock;
     }
 
-    /** Tạo liên kết mời mới và trả MÃ (chỉ hiện đúng lần này) cùng liên kết. */
+    /** Creates a new invite link and returns the CODE (shown only this once) along with the link. */
     public CreatedInvite createInvite(MembershipCommands.CreateInvite command) {
         Trip trip = load(command.actor(), command.tripId());
         String code = hasher.newCode();
@@ -40,26 +40,24 @@ public class MembershipCommandHandler {
         return new CreatedInvite(invite, code);
     }
 
-    /** Thu hồi liên kết đang dùng. */
+    /** Revokes the invite link in use. */
     public void revokeInvite(MembershipCommands.RevokeInvite command) {
         Trip trip = load(command.actor(), command.tripId());
         trip.circle().revokeInvite(command.actor(), Timestamps.now(clock));
         trips.save(trip);
     }
 
-    /** Vào chuyến bằng mã; trả mã chuyến và thành viên. Mã sai dạng/không có chuyến ⇒ cùng một lỗi INVALID_INVITE. */
+    /** Join a trip with a code; returns the trip id and the member. A malformed code / no trip => the same error INVALID_INVITE. */
     public Joined join(MembershipCommands.Join command) {
-        Object rawCode = command.input().get(PlanningFields.INVITE_CODE);
-        String code = rawCode instanceof String text ? text : null;
+        String code = command.code();
         if (!hasher.isWellFormed(code)) throw invalidInvite();
         Trip trip = trips.findByInviteHash(hasher.hash(code)).orElseThrow(MembershipCommandHandler::invalidInvite);
-        Object rawName = command.input().get(PlanningFields.DISPLAY_NAME);
-        TripMember member = trip.joinWithInvite(command.actor(), rawName instanceof String name ? name : null, hasher.hash(code), Timestamps.now(clock));
+        TripMember member = trip.joinWithInvite(command.actor(), command.displayName(), hasher.hash(code), Timestamps.now(clock));
         trips.save(trip);
         return new Joined(trip.id(), member);
     }
 
-    /** Organizer gỡ một thành viên (thu hồi luôn liên kết đang dùng). */
+    /** The Organizer removes a member (and also revokes the invite link in use). */
     public void removeMember(MembershipCommands.RemoveMember command) {
         Trip trip = load(command.actor(), command.tripId());
         trip.circle().removeMember(command.actor(), command.memberId(), Timestamps.now(clock));
@@ -67,7 +65,7 @@ public class MembershipCommandHandler {
         trips.save(trip);
     }
 
-    /** Thành viên rời chuyến. */
+    /** A member leaves the trip. */
     public void leave(MembershipCommands.Leave command) {
         Trip trip = load(command.actor(), command.tripId());
         UUID memberId = trip.requireMember(command.actor()).id();
@@ -76,30 +74,29 @@ public class MembershipCommandHandler {
         trips.save(trip);
     }
 
-    /** Đổi tên hiển thị của chính mình. */
+    /** Change your own display name. */
     public TripMember renameSelf(MembershipCommands.RenameSelf command) {
         Trip trip = load(command.actor(), command.tripId());
-        Object rawName = command.input().get(PlanningFields.DISPLAY_NAME);
-        TripMember renamed = trip.circle().renameMember(command.actor(), rawName instanceof String name ? name : null, Timestamps.now(clock));
+        TripMember renamed = trip.circle().renameMember(command.actor(), command.displayName(), Timestamps.now(clock));
         trips.save(trip);
         return renamed;
     }
 
-    /** Nạp chuyến mà người gọi là thành viên; người ngoài và chuyến đã xóa ⇒ 404. */
+    /** Loads a trip of which the caller is a member; an outsider and a deleted trip => 404. */
     private Trip load(UUID actor, UUID tripId) {
         return trips.findAccessible(tripId, actor).orElseThrow(WanderException::notFound);
     }
 
-    /** Lỗi chung cho mọi liên kết không dùng được. */
+    /** The common error for every link that cannot be used. */
     private static WanderException invalidInvite() {
         return WanderException.invalid(PlanningErrorCodes.INVALID_INVITE, PlanningMessages.INVALID_INVITE, PlanningFields.INVITE_CODE);
     }
 
-    /** Kết quả tạo liên kết: bản ghi và mã (bí mật, chỉ trả một lần). */
+    /** Result of creating a link: the record and the code (a secret, returned only once). */
     public record CreatedInvite(TripInvite invite, String code) {
     }
 
-    /** Kết quả vào chuyến. */
+    /** Result of joining a trip. */
     public record Joined(UUID tripId, TripMember member) {
     }
 }

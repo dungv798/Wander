@@ -17,66 +17,66 @@ import type {
 
 type Json = Record<string, unknown>;
 
-/** Có phải đối tượng thường. */
+/** Whether it is a plain object. */
 function isRecord(v: unknown): v is Json {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Lấy trường chuỗi bắt buộc; thiếu hoặc sai kiểu thì phản hồi hỏng (`INTERNAL`). */
+/** Gets a required string field; missing or of the wrong type means a broken response (`INTERNAL`). */
 function text(body: unknown, key: string): string {
   const v = isRecord(body) ? body[key] : undefined;
   if (typeof v !== 'string' || !v) throw new ApiError(CLIENT_ERROR.INTERNAL);
   return v;
 }
 
-/** Lấy trường số bắt buộc. */
+/** Gets a required number field. */
 function num(body: unknown, key: string): number {
   const v = isRecord(body) ? body[key] : undefined;
   if (typeof v !== 'number') throw new ApiError(CLIENT_ERROR.INTERNAL);
   return v;
 }
 
-/** Thời điểm ISO bắt buộc thành mili giây. */
+/** A required ISO instant as milliseconds. */
 function when(body: unknown, key: string): number {
   const t = Date.parse(text(body, key));
   if (Number.isNaN(t)) throw new ApiError(CLIENT_ERROR.INTERNAL);
   return t;
 }
 
-/** Ba lựa chọn số khớp từ phản hồi `preview`; sai hình dạng thì phản hồi hỏng. */
+/** The three matching-number choices from the `preview` response; a wrong shape means a broken response. */
 function options(body: unknown): number[] {
   const list = isRecord(body) ? body['options'] : undefined;
   if (!Array.isArray(list) || !list.every((n) => typeof n === 'number')) throw new ApiError(CLIENT_ERROR.INTERNAL);
   return list as number[];
 }
 
-/** Tên thiết bị tự khai trong phản hồi, hoặc null nếu chưa đặt. */
+/** The self-declared device name in the response, or null if not set. */
 function optionalText(body: unknown, key: string): string | null {
   const v = isRecord(body) ? body[key] : undefined;
   return typeof v === 'string' && v ? v : null;
 }
 
 /**
- * Cài đặt `IdentityGateway` bằng API thật. Bí mật phiên do `ApiClient` gắn (nguồn tiêu đề), trừ các lời gọi công khai
- * (tạo danh tính, khôi phục, ghép) không cần phiên. Mọi thất bại là `ApiError` có mã của backend.
+ * Implements `IdentityGateway` with the real API. The session secret is attached by `ApiClient` (the header source), except for the public calls
+ * (create identity, recovery, pairing) that need no session. Every failure is an `ApiError` with the backend's code.
  */
 export class HttpIdentityGateway implements IdentityGateway {
   private readonly client: ApiClient;
   private readonly fallbackName: string;
 
-  /** Dùng máy khách HTTP đã cho; `fallbackName` là tên hiện cho thiết bị chưa tự đặt tên. */
+  /** Uses the given HTTP client; `fallbackName` is the name shown for a device that has not named itself. */
   constructor(client: ApiClient, fallbackName: string) {
     this.client = client;
     this.fallbackName = fallbackName;
   }
 
-  /** Tạo danh tính ẩn danh (bỏ qua mã khôi phục lúc này) và trả bí mật phiên của máy này. */
+  /** Creates an anonymous identity (skipping the recovery code for now) and returns this device's session secret. */
   async createIdentity(deviceName: string): Promise<string> {
     const body = await this.client.send<unknown>('POST', P.IDENTITY, { skipRecoveryCode: true, deviceName });
     return text(body, 'token');
   }
 
-  /** Gộp phiên, nhật ký và trạng thái mã thành ảnh chụp danh tính; phản hồi sai dạng là lỗi nội bộ. */
+  /** Merges the sessions, the log and the code status into an identity snapshot; a wrongly shaped response is an internal error. */
   async snapshot(): Promise<IdentitySnapshot> {
     const [sessions, events, code] = await Promise.all([
       this.client.get<unknown>(P.SESSIONS),
@@ -88,56 +88,56 @@ export class HttpIdentityGateway implements IdentityGateway {
     return snapshot;
   }
 
-  /** Đánh dấu chủ đã xem hoạt động mới. */
+  /** Marks that the owner has seen the new activity. */
   async markSeen(): Promise<void> {
     await this.client.send('POST', P.EVENTS_SEEN);
   }
 
-  /** Thu hồi một thiết bị tin cậy theo mã thiết bị. */
+  /** Revokes a trusted device by device id. */
   async revoke(deviceId: string): Promise<void> {
     await this.client.send('DELETE', `${P.SESSIONS}/${encodeURIComponent(deviceId)}`);
   }
 
-  /** Đổi tên thiết bị đang dùng. */
+  /** Renames the device in use. */
   async rename(name: string): Promise<void> {
     await this.client.send('PATCH', P.CURRENT_SESSION, { deviceName: name });
   }
 
-  /** Pha 1 phát mã thay thế: máy chủ sinh mã, mã cũ vẫn còn hiệu lực tới khi xác nhận; có mã hiện hành thì cần bằng chứng. */
+  /** Phase 1 of issuing a replacement code: the server generates the code, the old code stays valid until confirmation; with a current code, evidence is needed. */
   async beginReplacement(evidence?: Evidence): Promise<BegunReplacement> {
     const body = await this.client.send<unknown>('POST', P.CODE_BEGIN, evidence ? { evidence } : {});
     return { pendingId: text(body, 'pendingId'), code: text(body, 'replacementCode'), expiresAt: when(body, 'expiresAt') };
   }
 
-  /** Pha 2 phát mã thay thế: nhập lại đúng mã thì mã mới có hiệu lực. */
+  /** Phase 2 of issuing a replacement code: typing the code again correctly makes the new code take effect. */
   async confirmReplacement(pendingId: string, code: string): Promise<void> {
     await this.client.send('POST', P.CODE_CONFIRM, { pendingId, replacementCode: code });
   }
 
-  /** Xin phê duyệt xác thực lại từ thiết bị tin cậy khác cho thao tác tạo mã mới. */
+  /** Asks for a re-authentication approval from another trusted device for the action of creating a new code. */
   async requestStepUp(): Promise<StepUpRequested> {
     const body = await this.client.send<unknown>('POST', P.STEP_UP_REQUESTS, { operation: P.OPERATION_REGENERATE });
     return { requestId: text(body, 'requestId'), approvalCode: text(body, 'approvalCode'), number: num(body, 'matchNumber'), expiresAt: when(body, 'expiresAt') };
   }
 
-  /** Bắt đầu khôi phục bằng mã; trả mã thay thế do máy chủ sinh (lần thử hết hạn sau 15 phút). */
+  /** Starts recovery with a code; returns the replacement code generated by the server (the attempt expires after 15 minutes). */
   async startRecovery(code: string, attemptId: string, sessionToken: string, deviceName: string): Promise<RecoveryStarted> {
     const body = await this.client.send<unknown>('POST', P.RECOVERY_START, { code, attemptId, sessionToken, deviceName });
     return { attemptId, code: text(body, 'replacementCode'), expiresAt: when(body, 'expiresAt') };
   }
 
-  /** Hoàn tất khôi phục: xác nhận mã thay thế để phiên của máy này có hiệu lực. */
+  /** Completes recovery: confirming the replacement code makes this device's session take effect. */
   async completeRecovery(attemptId: string, replacementCode: string): Promise<void> {
     await this.client.send('POST', P.RECOVERY_COMPLETE, { attemptId, replacementCode });
   }
 
-  /** Máy mới xin ghép: nhận mã ghép, số khớp và hạn. */
+  /** A new device asks to be paired: receives the pairing code, the matching number and the time limit. */
   async createLink(sessionToken: string, deviceName: string): Promise<LinkCreated> {
     const body = await this.client.send<unknown>('POST', P.LINKS, { sessionToken, deviceName });
     return { requestId: text(body, 'requestId'), pairingCode: text(body, 'pairingCode'), number: num(body, 'matchNumber'), expiresAt: when(body, 'expiresAt') };
   }
 
-  /** Trạng thái yêu cầu ghép của máy mới; giá trị lạ là lỗi nội bộ. */
+  /** The pairing-request status of the new device; an unknown value is an internal error. */
   async linkStatus(requestId: string, signal?: AbortSignal): Promise<PairingStatus> {
     const body = await this.client.get<unknown>(`${P.LINKS}/${encodeURIComponent(requestId)}`, signal);
     const status = text(body, 'status');
@@ -145,7 +145,7 @@ export class HttpIdentityGateway implements IdentityGateway {
     return status;
   }
 
-  /** Xem trước yêu cầu theo mã: thử mã ghép rồi mã duyệt; sai ở cả hai thì một lỗi chung. */
+  /** Previews a request by code: tries the pairing code and then the approval code; wrong in both gives one common error. */
   async preview(code: string): Promise<ApprovalPreview> {
     try {
       const body = await this.client.send<unknown>('POST', P.LINK_PREVIEW, { pairingCode: code });
@@ -157,13 +157,13 @@ export class HttpIdentityGateway implements IdentityGateway {
       const body = await this.client.send<unknown>('POST', P.STEP_UP_PREVIEW, { approvalCode: code });
       return { kind: 'stepUp', code, deviceName: optionalText(body, 'requesterDeviceName'), createdAt: when(body, 'createdAt'), options: options(body) };
     } catch (e) {
-      // sai ở cả hai nơi: một thông báo chung, không lộ mã thuộc loại nào (MĐ-8)
+      // wrong in both places: one common message that does not reveal which kind the code is (MĐ-8)
       if (e instanceof ApiError && e.code === P.INVALID_APPROVAL_CODE) throw new ApiError(P.INVALID_PAIRING_CODE, e.status);
       throw e;
     }
   }
 
-  /** Trả lời bằng số khớp: đúng là duyệt, chọn sai là `wrong` (yêu cầu bị từ chối vĩnh viễn). */
+  /** Answers with the matching number: right approves, a wrong choice is `wrong` (the request is denied for good). */
   async answer(preview: ApprovalPreview, number: number): Promise<AnswerOutcome> {
     const link = preview.kind === 'link';
     try {
@@ -179,7 +179,7 @@ export class HttpIdentityGateway implements IdentityGateway {
     }
   }
 
-  /** Từ chối chủ động một yêu cầu ghép hoặc xác thực lại. */
+  /** Actively denies a pairing or re-authentication request. */
   async deny(preview: ApprovalPreview): Promise<void> {
     const link = preview.kind === 'link';
     await this.client.send('POST', link ? P.LINK_DENY : P.STEP_UP_DENY, link ? { pairingCode: preview.code } : { approvalCode: preview.code });

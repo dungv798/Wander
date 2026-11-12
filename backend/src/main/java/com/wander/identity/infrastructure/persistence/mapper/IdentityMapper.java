@@ -25,112 +25,112 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
 /**
- * Ánh xạ entity JPA ↔ record domain của Identity (ADR-008). {@code unmappedTargetPolicy = ERROR}: thêm cột/trường mà
- * quên ánh xạ thì biên dịch đỏ. Trạng thái lưu dạng chữ thường trong cơ sở dữ liệu (pending, committed…).
+ * Maps JPA entities <-> Identity domain records (ADR-008). {@code unmappedTargetPolicy = ERROR}: adding a column/field and
+ * forgetting to map it turns the build red. States are stored in lowercase in the database (pending, committed...).
  * <p>
- * Chiều domain → entity cập nhật entity có sẵn (tìm theo id) hoặc entity mới; adapter quyết định nạp hay tạo.
+ * The domain -> entity direction updates an existing entity (found by id) or a new one; the adapter decides whether to load or create.
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface IdentityMapper {
 
     // ---- entity → domain ----
 
-    /** Phiên domain từ entity. */
+    /** The domain session from an entity. */
     Session toDomain(SessionEntity entity);
 
-    /** Mã khôi phục domain từ entity. */
+    /** The domain recovery code from an entity. */
     RecoveryCode toDomain(RecoveryCodeEntity entity);
 
-    // Các hàm chuyển trạng thái của record domain (withState, approve) có một tham số và trả về chính kiểu đó nên
-    // MapStruct nhầm là "fluent setter"; chúng không phải trường để ánh xạ.
+    // The state-transition methods of the domain records (withState, approve) take one parameter and return the same type, so
+    // MapStruct mistakes them for 'fluent setters'; they are not fields to map.
 
-    /** Lần thử khôi phục domain từ entity. */
+    /** The domain recovery attempt from an entity. */
     @Mapping(target = "withState", ignore = true)
     RecoveryAttempt toDomain(RecoveryAttemptEntity entity);
 
-    /** Mã thay thế domain từ entity. */
+    /** The domain replacement code from an entity. */
     @Mapping(target = "withState", ignore = true)
     CodeReplacement toDomain(CodeReplacementEntity entity);
 
-    /** Yêu cầu ghép thiết bị domain từ entity. */
+    /** The domain device pairing request from an entity. */
     @Mapping(target = "approve", ignore = true)
     DeviceLink toDomain(DeviceLinkEntity entity);
 
-    /** Yêu cầu xác thực lại domain từ entity. */
+    /** The domain re-authentication request from an entity. */
     @Mapping(target = "approve", ignore = true)
     StepUpRequest toDomain(StepUpRequestEntity entity);
 
-    // ---- domain → entity (cập nhật tại chỗ) ----
+    // ---- domain -> entity (update in place) ----
 
-    /** Ghi giá trị của danh tính domain vào entity. */
+    /** Writes the values of the domain identity into the entity. */
     void update(Identity identity, @MappingTarget IdentityEntity entity);
 
-    /** Ghi giá trị của phiên domain vào entity. */
+    /** Writes the values of the domain session into the entity. */
     void update(Session session, @MappingTarget SessionEntity entity);
 
-    /** Ghi giá trị của mã khôi phục domain vào entity. */
+    /** Writes the values of the domain recovery code into the entity. */
     void update(RecoveryCode code, @MappingTarget RecoveryCodeEntity entity);
 
-    /** Ghi giá trị của lần thử khôi phục domain vào entity. */
+    /** Writes the values of the domain recovery attempt into the entity. */
     void update(RecoveryAttempt attempt, @MappingTarget RecoveryAttemptEntity entity);
 
-    /** Ghi giá trị của mã thay thế domain vào entity. */
+    /** Writes the values of the domain replacement code into the entity. */
     void update(CodeReplacement replacement, @MappingTarget CodeReplacementEntity entity);
 
-    /** Ghi giá trị của yêu cầu ghép thiết bị domain vào entity. */
+    /** Writes the values of the domain device pairing request into the entity. */
     void update(DeviceLink link, @MappingTarget DeviceLinkEntity entity);
 
-    /** Ghi giá trị của yêu cầu xác thực lại domain vào entity. */
+    /** Writes the values of the domain re-authentication request into the entity. */
     void update(StepUpRequest request, @MappingTarget StepUpRequestEntity entity);
 
-    // ---- trạng thái: enum ↔ chữ thường ----
+    // ---- states: enum <-> lowercase ----
 
-    /** Trạng thái lần thử dưới dạng chữ thường để lưu. */
+    /** The attempt state as lowercase for storing. */
     default String text(AttemptState state) {
         return lower(state);
     }
 
-    /** Trạng thái mã thay thế dưới dạng chữ thường để lưu. */
+    /** The replacement code state as lowercase for storing. */
     default String text(ReplacementState state) {
         return lower(state);
     }
 
-    /** Trạng thái yêu cầu ghép dưới dạng chữ thường để lưu. */
+    /** The pairing request state as lowercase for storing. */
     default String text(LinkState state) {
         return lower(state);
     }
 
-    /** Trạng thái yêu cầu xác thực lại dưới dạng chữ thường để lưu. */
+    /** The re-authentication request state as lowercase for storing. */
     default String text(StepUpState state) {
         return lower(state);
     }
 
-    /** Trạng thái lần thử từ chữ thường đã lưu. */
+    /** The attempt state from the stored lowercase. */
     default AttemptState attemptState(String text) {
         return AttemptState.valueOf(upper(text));
     }
 
-    /** Trạng thái mã thay thế từ chữ thường đã lưu. */
+    /** The replacement code state from the stored lowercase. */
     default ReplacementState replacementState(String text) {
         return ReplacementState.valueOf(upper(text));
     }
 
-    /** Trạng thái yêu cầu ghép từ chữ thường đã lưu. */
+    /** The pairing request state from the stored lowercase. */
     default LinkState linkState(String text) {
         return LinkState.valueOf(upper(text));
     }
 
-    /** Trạng thái yêu cầu xác thực lại từ chữ thường đã lưu. */
+    /** The re-authentication request state from the stored lowercase. */
     default StepUpState stepUpState(String text) {
         return StepUpState.valueOf(upper(text));
     }
 
-    /** Tên giá trị liệt kê viết thường; null giữ nguyên null. */
+    /** The enum constant name in lowercase; null stays null. */
     private static String lower(Enum<?> state) {
         return state == null ? null : state.name().toLowerCase(Locale.ROOT);
     }
 
-    /** Chuỗi viết hoa để tra giá trị liệt kê; null giữ nguyên null. */
+    /** A string in uppercase for looking up an enum constant; null stays null. */
     private static String upper(String text) {
         return text == null ? null : text.toUpperCase(Locale.ROOT);
     }

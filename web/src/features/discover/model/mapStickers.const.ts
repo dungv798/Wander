@@ -1,6 +1,6 @@
 import type { CategoryCode } from './Catalog.types.ts';
 
-/** Biểu tượng cùng bộ với loại địa điểm; chỉ dùng cho những điểm đến có thật trong catalog. */
+/** The same icon set as the place kinds; used only for destinations that really exist in the catalog. */
 export const DESTINATION_STICKERS: Readonly<Record<string, CategoryCode>> = {
   'ha-giang': 'leo', 'ta-xua': 'leo', 'sa-pa': 'leo', 'cao-bang': 'canh',
   'ha-noi': 'van', 'ho-chi-minh': 'van', 'hoi-an': 'van', hue: 'van',

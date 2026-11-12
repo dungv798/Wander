@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code place_rating_reports}: mỗi người báo cáo một lời bình tối đa một lần (chỉ đọc qua JPA, ghi bằng SQL thuần). */
+/** Table {@code place_rating_reports}: each person reports a comment at most once (read through JPA only, written with plain SQL). */
 @Entity
 @Table(name = "place_rating_reports")
 public class RatingReportEntity {

@@ -1,4 +1,4 @@
-/** Chữ của phần giới thiệu lần đầu (S14, bản 4 cảnh theo mẫu đã duyệt 02/11/2026). Lịch trình chỉ là minh họa: không giờ mở cửa, giá vé hay thời gian di chuyển. */
+/** The copy of the first-time intro (S14, the 4-scene version following the sample approved on 02/11/2026). The itinerary is only an illustration: no opening hours, ticket prices or travel times. */
 export const ONBOARD_COPY = {
   skip: 'Bỏ qua',
   back: 'Quay lại',
@@ -11,7 +11,7 @@ export const ONBOARD_COPY = {
   sceneNames: ['Khám phá', 'Quẹt chọn', 'Lịch trình trên bản đồ', 'Chia sẻ cho nhóm'],
   titles: [['Một nơi khiến bạn', 'muốn lên đường.'], ['Thích nơi nào,', 'quẹt chọn nơi đó.'], ['Những nơi muốn đến,', 'thành chuyến đi của bạn.'], ['Gửi một liên kết.', 'Cùng nhau chốt chuyến.']],
   descriptions: ['Từ bữa sáng ở chợ đến những cung đường trên mây. Tìm điều bạn muốn trải nghiệm trên bản đồ.', 'Chọn điều làm bạn tò mò. Những nơi đã chọn được giữ lại để lên lịch khi bạn sẵn sàng.', 'Xem các điểm trên bản đồ, thử gợi ý xếp ngày rồi chỉnh lại nhịp đi theo ý mình.', 'Mời bạn đồng hành, cùng thêm những nơi muốn ghé. Chủ chuyến xếp chúng vào lịch chung.'],
-  /** Số nơi của một điểm đến trên thẻ mở đầu. */
+  /** The number of places of a destination on the opening card. */
   destinationPlaces: '{n} nơi',
   experiences: { food: 'Một món ăn đáng thử', culture: 'Một cuộc gặp trên đường', trail: 'Một cung đường mới' },
   chooseStamp: 'CHỌN',

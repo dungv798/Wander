@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { PendingTracker } from './PendingTracker.ts';
 import type { Scheduler } from './PendingTracker.ts';
 
-/** Bộ hẹn giờ giả: `advance(ms)` chạy các hẹn đã tới hạn theo thứ tự thời gian; không cần chờ thật. */
+/** A fake timer: `advance(ms)` runs the due timers in time order; no real waiting needed. */
 function fakeClock(): { readonly schedule: Scheduler; readonly advance: (ms: number) => void } {
   let now = 0;
   const jobs: { at: number; fn: () => void; live: boolean }[] = [];

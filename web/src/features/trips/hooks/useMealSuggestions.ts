@@ -8,7 +8,7 @@ import { MEAL_SUGGEST_COPY as C } from '../model/mealSuggest.copy.ts';
 type Result = { readonly status: 'loading' } | { readonly status: 'error'; readonly message: string } | { readonly status: 'ready'; readonly poi: readonly PoiSuggestion[] };
 const api = new PoiApi();
 
-/** Chỉ tải khi tờ được dựng và có mốc; hủy cả fetch/đọc thân khi đóng, đổi loại hoặc bán kính. */
+/** Loads only when the sheet is built and there is a landmark; cancels the fetch/body read when closed or when the kind or the radius changes. */
 export function useMealSuggestions(destination: string, kind: 'food' | 'cafe', anchor: MealAnchor | null, radius: number) {
   const [result, setResult] = useState<Result>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
@@ -26,7 +26,7 @@ export function useMealSuggestions(destination: string, kind: 'food' | 'cafe', a
     });
     return () => controller.abort();
   }, [destination, kind, lat, lon, radius, attempt, requestKey]);
-  /** Xóa danh sách cũ ngay khi người dùng thử lại. */
+  /** Clears the old list as soon as the user retries. */
   const retry = (): void => { setResult({ status: 'loading' }); setAttempt(n => n + 1); };
   return { result: resolvedKey === requestKey ? result : { status: 'loading' } as Result, retry };
 }

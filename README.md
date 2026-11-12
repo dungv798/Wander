@@ -1,140 +1,204 @@
-# Wander — lập kế hoạch chuyến đi
+# Wander
 
-> English summary: [`README.en.md`](README.en.md). Bài viết về thiết kế khôi phục: [`docs/articles/recovery-design.md`](docs/articles/recovery-design.md).
+[![backend-ci](https://github.com/dungv798/Wander/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/dungv798/Wander/actions/workflows/backend-ci.yml)
+[![web-ci](https://github.com/dungv798/Wander/actions/workflows/web-ci.yml/badge.svg)](https://github.com/dungv798/Wander/actions/workflows/web-ci.yml)
+[![secret scan](https://github.com/dungv798/Wander/actions/workflows/secret-scan-history.yml/badge.svg)](https://github.com/dungv798/Wander/actions/workflows/secret-scan-history.yml)
 
-Ứng dụng lập kế hoạch chuyến đi bằng tiếng Việt (dự án cá nhân để học). Hiện ở **Lát 1a**: một người dùng ẩn danh, lưu trên máy chủ, mở được trên thiết bị khác, chuyến → ngày → mục, sắp xếp thủ công, chi phí, xóa mềm + Hoàn tác, đặt chỗ, ngân sách.
+**A mobile-first trip planner for Vietnam.** Swipe through hand-curated places, turn the picks into a trip, arrange days, track costs and
+share the plan: no account, no email, no phone number. The backend is a Java 21 / Spring Boot 4 modular monolith (Clean Architecture,
+DDD, CQRS) on PostgreSQL; the front end is React 19 + TypeScript. The UI is in Vietnamese.
 
-> **Chưa được phát hành cho người dùng thật.** Cổng phát hành RG-2/5/6/7 còn mở (`docs/implementation/decisions.md` §3). Chưa có tài nguyên AWS nào.
+It is a personal project built to practise production backend engineering: concurrency control, an authentication/recovery design
+without accounts, architecture enforced by tests, and an honest account of the trade-offs. It has not been released to real users.
 
-Stack: Java 21 · Spring Boot 4.1 · Spring Security · Clean Architecture + DDD + CQRS · PostgreSQL (Flyway) · MapStruct — giao diện React 19 + TypeScript (Vite). Kiến trúc: [`docs/architecture/README.md`](docs/architecture/README.md).
+**Live demo:** <https://wander-fx65.onrender.com> (Render free tier: after idle the service sleeps and the first request can take
+about 70–90 seconds; measured 71 s and 87 s on a 0.25 CPU / 512 MB container). Best on a phone-sized viewport.
 
-## 1. Cần cài
+| Explore | Destination | Swipe deck | Trip |
+|---|---|---|---|
+| <img src="docs/screenshots/home.webp" width="190" alt="Home: explore Vietnam"> | <img src="docs/screenshots/destination.webp" width="190" alt="Destination: Da Lat"> | <img src="docs/screenshots/deck.webp" width="190" alt="Swipe deck"> | <img src="docs/screenshots/trip.webp" width="190" alt="Trip overview"> |
 
-| Công cụ | Phiên bản | Dùng để |
-|---|---|---|
-| JDK | **21** | Chạy và build backend (Gradle tự tải bản phụ thuộc, không cần cài Gradle) |
-| Docker (Docker Desktop trên Windows/macOS) | bản mới, **đang chạy** | PostgreSQL cục bộ và test tích hợp (Testcontainers) |
-| Node.js | **≥ 24** | Build giao diện, chạy e2e |
-| Edge hoặc Chrome | bản mới | Chỉ cho test e2e (Playwright dùng trình duyệt đã cài) |
-| Git | bất kỳ | |
+<sub>Screenshots are real (Chrome, 390×844, real backend and catalog, `web/scripts/readme-shots.mjs`). Every photo carries its author, license
+and source link in the catalog data and in the app.</sub>
 
-Windows: `winget install Microsoft.OpenJDK.21` và `winget install Docker.DockerDesktop` (Docker có thể đòi khởi động lại máy vì WSL2). Hoặc để script cài: `powershell -ExecutionPolicy Bypass -File tools\dev.ps1 install-runtime`.
+## Architecture
 
-Kiểm tra máy: 
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools\dev.ps1 doctor
+```mermaid
+flowchart LR
+  user([Traveler on a phone]) -->|HTTPS| app
+  subgraph render["Render free web service: one Docker image"]
+    app["Spring Boot 4 modular monolith<br/>REST /api/*, serves the React build"]
+    cat[("Catalog on the classpath<br/>JSON + WebP photos")]
+    app --- cat
+  end
+  app -->|JDBC, Flyway| pg[("PostgreSQL<br/>Neon")]
+  user -.->|vector tiles| tiles["OpenFreeMap + AWS terrain tiles"]
+  user -.->|optional, when configured| cdn["Photo origin: R2 + CDN"]
 ```
 
-`[ok]` là đã có; `[miss]` ở java/docker/node/git là thiếu hoặc Docker Desktop chưa chạy. Các dòng `rtk`, `code-review-graph`, `uv`, `rg` là công cụ cho trợ lý AI, **không bắt buộc** để chạy app (xem mục 7).
+Four business modules plus a shared kernel, in one deployable. Each module is layered `api → application → domain ← infrastructure`;
+the domain has no Spring or JPA imports, and infrastructure implements the ports the domain declares.
 
-## 2. Chạy nhanh (một lệnh mỗi bước)
-
-Mở PowerShell tại thư mục gốc `D:\Wander`:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools\dev.ps1 web-build   # cài dependency + build giao diện vào web\dist (lần đầu, hoặc khi đổi giao diện)
-powershell -ExecutionPolicy Bypass -File tools\dev.ps1 run         # bật PostgreSQL (docker) rồi chạy backend, phục vụ cả giao diện
+```mermaid
+flowchart TB
+  subgraph catalog["catalog (read-only editorial data)"]
+    direction LR
+    cd["domain: PlaceCatalog, PoiCatalog ports"] --- ci["infrastructure: classpath JSON adapters"]
+  end
+  subgraph identity["identity (anonymous identity, sessions, recovery)"]
+    direction LR
+    id_d["domain: IdentityStore, RecoveryCodeHasher ports"] --- id_i["infrastructure: JPA store, HMAC hasher"]
+  end
+  subgraph planning["planning (trips, days, items, costs, sharing)"]
+    direction LR
+    pd["domain: TripRepository, ChecklistRepository,<br/>PreferencesStore, InviteCodeHasher ports"] --- pi["infrastructure: JPA repositories"]
+  end
+  subgraph rating["rating (place ratings)"]
+    direction LR
+    rd["domain: RatingStore port"] --- ri["infrastructure: JPA store"]
+  end
+  shared["shared: kernel (errors, constants, utils), web (error handling, rate limiting, request context)"]
+  catalog --> shared
+  identity --> shared
+  planning --> shared
+  rating --> shared
 ```
 
-Mở **http://localhost:8787**. Lần đầu: "Bắt đầu lập kế hoạch" → tạo mã khôi phục (hiện một lần, **hãy lưu lại**) → tạo chuyến.
+No business module imports another (checked: each depends only on `shared`); `ArchitectureTest` (layers) and Spring Modulith's
+`ApplicationModules.verify()` ([`ModulesTest`](backend/src/test/java/com/wander/ModulesTest.java), module diagrams in
+[`docs/architecture/modules/`](docs/architecture/modules/)) keep it that way.
+Write side: a command handler loads an aggregate, calls a domain method and saves it in one transaction. Read side: query services return
+flat records and never load aggregates. A guided tour of the code (request lifecycle, folder map) is in
+[`docs/architecture/README.md`](docs/architecture/README.md) (Vietnamese).
 
-Dừng: `Ctrl+C` ở cửa sổ đang chạy. Dữ liệu nằm trong volume Docker `wander-pg` nên còn nguyên lần sau; xóa sạch: `docker compose down -v`.
+## Engineering highlights
 
-`run` **không** tự build giao diện — nếu chưa có `web\dist` thì trang chủ không hiện (API vẫn chạy). Hãy chạy `web-build` trước.
+Each item links to the code and to the test that proves it.
 
-## 3. Chế độ phát triển (sửa giao diện có tải lại nóng)
+- **A concurrent-recovery race with exactly one winner.** Two devices redeeming the same single-use recovery code at once is handled
+  with pessimistic row locks (`@Lock(PESSIMISTIC_WRITE)` in
+  [`IdentityJpaRepository`](backend/src/main/java/com/wander/identity/infrastructure/persistence/repository/IdentityJpaRepository.java),
+  `RecoveryAttemptJpaRepository`, `DeviceLinkJpaRepository`). The test fires real parallel HTTP requests, not sequential calls:
+  [`RecoveryConcurrencyIT`](backend/src/test/java/com/wander/identity/RecoveryConcurrencyIT.java).
+- **Optimistic locking instead of silent overwrites.** `Trip` carries `@Version`
+  ([`TripEntity`](backend/src/main/java/com/wander/planning/infrastructure/persistence/entity/TripEntity.java)); a lost update returns
+  `409 CONCURRENT_MODIFICATION`. [`ConcurrencyIT`](backend/src/test/java/com/wander/planning/ConcurrencyIT.java) covers it both
+  deterministically (two transactions on the same version) and with parallel requests (no lost update).
+- **Recovery codes are never stored.** Only an HMAC-SHA-256 keyed with a server-side pepper
+  ([`HmacRecoveryCodeHasher`](backend/src/main/java/com/wander/identity/infrastructure/security/HmacRecoveryCodeHasher.java)) is kept,
+  with a key version per row so the pepper can be rotated without invalidating existing codes
+  ([`RecoveryKeyRotationIT`](backend/src/test/java/com/wander/identity/RecoveryKeyRotationIT.java)). The application refuses to start
+  without a pepper of at least 32 bytes, and a startup guard checks that every key version still in use has its key configured.
+- **Rate limiting, with its limits stated.** A fixed-window limiter per client
+  ([`FixedWindowRateLimiter`](backend/src/main/java/com/wander/shared/web/ratelimit/FixedWindowRateLimiter.java),
+  [test](backend/src/test/java/com/wander/shared/web/ratelimit/FixedWindowRateLimiterTest.java)) with correct client addressing behind
+  proxies (trusted-hop count, IPv6 collapsed to /64). It lives in memory, so it is only correct for one instance: see
+  [limitations](#known-limitations-and-roadmap).
+- **A typed API contract, generated end to end.** Every endpoint takes and returns typed records (no `Map` in a controller: ArchUnit rule
+  `API-1`); errors are RFC 9457 `application/problem+json` with a stable `code` and the request id; the OpenAPI 3.1 document is generated by
+  the application, committed as [`backend/openapi.yaml`](backend/openapi.yaml) and checked for staleness by a test, and the web client's
+  TypeScript types are generated from it (CI fails on drift). The generated types caught a real inconsistency on first use. Decision,
+  trade-offs and the intentional behaviour changes: [ADR-017](docs/architecture/adr/ADR-017-typed-api-contract.md),
+  [`docs/architecture/api-contract.md`](docs/architecture/api-contract.md).
+- **A transactional outbox, tested for the failure modes.** Security events are published inside the transaction and recorded after
+  commit by an idempotent listener (Spring Modulith event publication registry, Flyway-owned table). Tests prove: a rolled-back
+  transaction publishes nothing, delivering the same event twice leaves one row, a failing listener leaves a `FAILED` publication that
+  can be resubmitted. [`docs/architecture/events.md`](docs/architecture/events.md),
+  [`SecurityEventOutboxIT`](backend/src/test/java/com/wander/identity/SecurityEventOutboxIT.java). (Honest note: the modules never called
+  each other, so this first use is an in-module decoupling, explained in the document.)
+- **Observability you can run.** `X-Request-Id` on every response, repeated as `requestId` in error bodies and in every log line; JSON logs
+  on the public profile; Prometheus metrics (HTTP by route template, rate-limit rejections, outbox deliveries) with a local
+  Prometheus + Grafana stack (`docker compose --profile observability`). Verified by running it:
+  [`docs/operations/observability.md`](docs/operations/observability.md).
+- **Performance with numbers, and a guard against N+1.** A trip read prepares 6 SQL statements and the trip list 2, whether the data is
+  1 item or 25 ([`QueryCountIT`](backend/src/test/java/com/wander/planning/QueryCountIT.java), fails the build otherwise). k6 results on a
+  developer machine and in the 0.25-CPU deployment shape, with what they do not show: [`docs/performance.md`](docs/performance.md).
+- **Architecture as tests.** [`ArchitectureTest`](backend/src/test/java/com/wander/ArchitectureTest.java) has 21 ArchUnit rules: layer
+  direction, a pure domain, queries never load aggregates, `@Transactional` only in the application layer, no cycles, typed controllers,
+  naming and package conventions. Coverage floors and Checkstyle (zero warnings) are part of `./gradlew check`.
+- **Real-database integration tests.** 43 `*IT` classes start the whole application against PostgreSQL in Testcontainers; browser tests
+  drive real Chrome against the real backend at phone size (126 scenarios).
+- **A reproducible photo pipeline.** 589 catalog photos are re-encoded to content-hashed WebP (480 px and 1280 px, metadata stripped),
+  served with a one-year `immutable` cache, and can be moved to object storage by one environment variable
+  ([ADR-016](docs/architecture/adr/ADR-016-photo-delivery.md), [`optimize-photos.mjs`](tools/catalog/optimize-photos.mjs),
+  [`upload-photos.mjs`](tools/catalog/upload-photos.mjs) whose request signing is checked against the official AWS test vectors).
+  Photo data went from 261,159,915 to 133,041,404 bytes and the image bytes of one destination page from 7.5 MB to 1.9 MB.
 
-Ba cửa sổ terminal tại thư mục gốc:
+## Testing and quality
 
-```powershell
-docker compose up -d postgres                       # 1) PostgreSQL ở 127.0.0.1:5433 (db/user/mật khẩu: wander)
-cd backend; .\gradlew.bat bootRun                   # 2) Backend ở http://127.0.0.1:8787 (Flyway tự tạo bảng)
-npm --prefix web install; npm --prefix web run dev  # 3) Giao diện ở http://localhost:5173, tự chuyển /api sang backend
-```
+Measured on 2026-11-12 with `make verify`-equivalent commands (Docker running):
 
-Mở **http://localhost:5173** (dùng `localhost`, không dùng `127.0.0.1`: Vite chỉ nghe `localhost`). Sửa file trong `web/src/` là trình duyệt tự cập nhật.
-
-### Chỉ giao diện (pha FE, chưa cần backend)
-
-```powershell
-npm --prefix web install
-npm --prefix web run dev        # http://localhost:5173 — kho biên tập THẬT + trạng thái lưu trên máy (API giả)
-npm --prefix web run typecheck; npm --prefix web run lint; npm --prefix web test   # cổng kiểm của pha FE
-npm --prefix web run e2e        # Playwright (Chrome/Edge có sẵn), tự mở máy chủ Vite
-npm --prefix web run shots      # chụp ảnh 390/1280 px vào docs/ux/screenshots/web/
-node web/scripts/a11y.mjs       # quét truy cập tự động
-node web/scripts/reflow.mjs     # kiểm tràn ngang ở 320 px và phóng 200% trên mọi màn
-node web/scripts/swipe-perf.mjs # đo độ mượt kéo thẻ (trình duyệt không đầu; chưa thay cho thử trên máy thật)
-```
-
-Trong chế độ `dev`, các màn cần "thiết bị khác" hay máy chủ (ghép thiết bị, hết phiên, lỗi theo mã, giả lập ngày ở Hôm nay) có hộp **BẢN THỬ/GIẢ LẬP**; hộp này không hiển thị ở bản dựng (`vite build`), dù chữ của nó vẫn nằm trong gói JS. Danh tính ẩn danh, mã khôi phục và thiết bị đang chạy trên **máy chủ giả lưu trong trình duyệt** (`wander.web.server.v1`, chỉ giữ băm giả của mã), nên khôi phục chuyến đi thật chờ backend (FE-10). Lần đầu mở ứng dụng sẽ vào màn giới thiệu; thêm `?intro=0` vào địa chỉ để bỏ qua.
-
-Giao diện gọi API thật qua `/api` (khi phát triển Vite chuyển tiếp tới backend ở cổng 8787). Kịch bản trình duyệt thật nằm ở `web/e2e/` (cần backend chạy ở cổng 8787; `toolsdev.ps1 e2e` tự dựng và chạy). Bản giao diện cũ giữ ở `legacy/web-v1/`.
-
-Không dùng PowerShell hay Windows? Các lệnh trên giống nhau trên macOS/Linux (`./gradlew bootRun`); chỉ `tools/dev.ps1` là dành cho Windows.
-
-Chạy backend trong container (cần build jar và giao diện trước): `cd backend; .\gradlew.bat bootJar`, `npm --prefix web run build`, rồi `docker compose --profile app up -d --build`.
-
-## 4. Kiểm thử
-
-| Lệnh (`tools\dev.ps1 …`) | Làm gì |
+| What | Result |
 |---|---|
-| `backend-test` | JUnit: luật kiến trúc (ArchUnit), test domain, test API tích hợp trên PostgreSQL thật (Testcontainers, cần Docker) |
-| `e2e` | Build jar + giao diện, chạy backend ở cổng 18787, chạy kịch bản trình duyệt thật (Edge/Chrome, khung nhìn điện thoại) |
-| `verify` | `doctor` + `tools-check` + `backend-test` + `e2e` (đo ngày 24/10/2026 trên máy phát triển: khoảng 2 phút) |
-| `web-build`, `backend-build` | Build giao diện / jar |
+| Backend (`./gradlew clean check`) | 444 tests (unit, ArchUnit, 43 Testcontainers IT classes): 443 passed, 1 skipped by design (module-diagram regeneration, opt-in), 0 failures |
+| Coverage (JaCoCo) | 97.6 % line, 87.3 % branch; gates: bundle ≥ 90 % / 70 %, domain + application packages ≥ 90 % / 50 % |
+| Static analysis | Checkstyle with zero warnings |
+| Web | typecheck, ESLint, stylelint; 505 unit tests |
+| End to end | 126 browser scenarios against the real backend |
+| CI | `backend-ci` (check, gitleaks, Trivy on the jar), `web-ci`, weekly full-history secret scan. Added: `e2e` (the same `tools/e2e.sh`, WebKit installed in the job), `codeql` (Java, TypeScript; it runs once the repository is public or has Code Security) and Dependabot |
 
-Kết quả ghi ở `.logs\<lệnh>.log` và `.logs\<lệnh>.status` (`PASS`/`FAIL`). Báo cáo từng test: `backend\build\reports\tests\test\index.html`. Tóm tắt trạng thái dự án: `node tools/wander-status.mjs`.
+Baseline numbers and how they were measured: [`docs/baseline.md`](docs/baseline.md).
 
-Chạy nhanh một lớp test: `cd backend; .\gradlew.bat test --tests "com.wander.planning.TripOptionsApiIT"`.
+## Run it locally
 
-> `verify` gồm `tools-check` (kiểm RTK và code-review-graph). Nếu bạn không dùng các công cụ AI này, chạy `backend-test` và `e2e` riêng.
+Needs Docker (running), JDK 21, Node 24+, and Chrome or Edge for the browser tests.
 
-## 5. Cấu hình (biến môi trường)
+```bash
+make doctor      # check the toolchain
+make run         # PostgreSQL in Docker, build the web app, start the backend on http://localhost:8787
+                 # (set WANDER_RECOVERY_PEPPER to a random string of at least 32 bytes first)
+make check       # backend gate: tests, ArchUnit, Checkstyle, JaCoCo
+make web-check   # typecheck, lint, unit tests
+make e2e         # browser scenarios on a scratch database
+make verify      # everything
+```
 
-Mặc định chạy được ngay trên máy cá nhân. Giá trị mặc định lấy từ `backend/src/main/resources/application.yml`.
+Windows users without `make` can use `powershell -ExecutionPolicy Bypass -File tools\dev.ps1 <doctor|run|backend-test|e2e|verify>`. The Vietnamese
+[`README.vi.md`](README.vi.md) has the full guide (environment variables, troubleshooting). Backend and web specifics:
+[`backend/README.md`](backend/README.md), [`web/README.md`](web/README.md).
 
-| Biến | Mặc định | Ý nghĩa |
-|---|---|---|
-| `PORT` | `8787` | Cổng backend |
-| `WANDER_BIND_ADDRESS` | `127.0.0.1` | Địa chỉ nghe (container đặt `0.0.0.0`) |
-| `WANDER_DB_URL` / `WANDER_DB_USER` / `WANDER_DB_PASSWORD` | `jdbc:postgresql://localhost:5433/wander` / `wander` / `wander` | Kết nối PostgreSQL (mật khẩu mặc định **chỉ cho máy cá nhân**) |
-| `WANDER_WEB_DIR` | trống | Thư mục giao diện đã build (vd `web\dist`); trống = chỉ API |
-| `WANDER_LIMIT_IDENTITY`, `WANDER_LIMIT_RECOVERY`, `WANDER_LIMIT_APPROVAL` | `30`, `30`, `20` | Giới hạn thao tác mỗi giờ (tạo danh tính, khôi phục/ghép thiết bị, duyệt) |
-| `WANDER_RECOVERY_PEPPER` | **bắt buộc**, không mặc định | Khóa HMAC-SHA-256 băm mã khôi phục, từ 32 byte (DR-018 B3). Thiếu hoặc ngắn thì ứng dụng không khởi động. `tools\dev.ps1` tự sinh khóa cục bộ ở `.logs\dev-recovery-pepper.txt`; đổi khóa làm mọi mã khôi phục hiện có vô hiệu |
-| `WANDER_TRUSTED_PROXY_HOPS` | `0` | Số proxy tin cậy trước ứng dụng để lấy địa chỉ người gọi (`0` = bỏ qua `X-Forwarded-For`; sau CloudFront → ALB là `2`, chỉ khi ALB đã khóa nguồn) |
-| `WANDER_LOG_SQL` | `info` | Đặt `debug` để xem câu SQL của Hibernate |
+iOS Safari has two manual simulator workflows (`ios-safari-sim.yml`, `ios-safari-autoscroll.yml`) for checks Chrome cannot reproduce.
+How AI assistance is used on this repository, and who decides what: [`docs/ai-assisted-workflow.md`](docs/ai-assisted-workflow.md).
 
-Không đặt bí mật thật vào repo. `.env` và `.env.*` đã nằm trong `.gitignore`.
+## Decisions (ADR index)
 
-## 6. Xử lý sự cố
+Records are in Vietnamese with an English title and summary at the top of each.
 
-| Triệu chứng | Nguyên nhân / cách xử lý |
+| ADR | Decision |
 |---|---|
-| `failed to connect to the docker API … dockerDesktopLinuxEngine` | Docker Desktop chưa chạy. Mở nó, đợi "running", chạy lại. |
-| Cổng `5433` hoặc `8787` đã bị chiếm | Tắt tiến trình cũ (`Get-NetTCPConnection -LocalPort 8787`) hoặc đổi `PORT`/cổng trong `docker-compose.yml`. Cổng 5433 được chọn để không đụng PostgreSQL cài sẵn (5432). |
-| Trang chủ trắng / 404 ở `http://localhost:8787` | Chưa build giao diện: chạy `web-build`. |
-| `http://127.0.0.1:5173` không mở được | Dùng `http://localhost:5173`. |
-| Test báo `Could not find a valid Docker environment` | Docker chưa chạy hoặc Testcontainers không thấy; xem `docker info`. |
-| e2e: `Không mở được trình duyệt (cần Edge hoặc Chrome)` | Cài Edge hoặc Chrome. |
-| `Unsupported class file major version` / thiếu JDK | Cần JDK 21. Đặt `JAVA_HOME` trỏ tới JDK 21 (script `dev.ps1` tự tìm trong `Program Files`). |
-| Mất mã khôi phục | Theo thiết kế (D20–D26) **không có đường khôi phục** nếu mất cả mã lẫn mọi thiết bị đang đăng nhập. Trên máy phát triển có thể xóa dữ liệu: `docker compose down -v`. |
+| [002](docs/architecture/adr/ADR-002-java-spring-stack.md) | Java/Spring, Clean Architecture, DDD, CQRS, PostgreSQL, AWS target; TypeScript front end |
+| [003](docs/architecture/adr/ADR-003-modules-layers-cqrs.md) | Modular monolith; four layers per module; commands return ids, queries return flat read models |
+| [004](docs/architecture/adr/ADR-004-java21-spring-boot-4.md) | Java 21 + Spring Boot 4.1 |
+| [005](docs/architecture/adr/ADR-005-spring-security-bearer.md) | Spring Security with self-managed opaque bearer tokens (hashed in the database) |
+| [006](docs/architecture/adr/ADR-006-aws-fargate-cdk.md) | AWS direction (Fargate, ALB, RDS, CloudFront, CDK); on hold, deployment runs on Render + Neon |
+| [007](docs/architecture/adr/ADR-007-remove-legacy-ts-server.md) | Remove the prototype TypeScript server |
+| [008](docs/architecture/adr/ADR-008-mapstruct.md) | MapStruct for entity ↔ domain mapping, infrastructure only |
+| [009](docs/architecture/adr/ADR-009-nguon-dia-diem-mien-phi.md) | Free, hand-curated place data behind a `PlaceCatalog` port |
+| [010](docs/architecture/adr/ADR-010-module-catalog.md) | A read-only `catalog` module; photos public, data validated at startup |
+| [011](docs/architecture/adr/ADR-011-spring-modulith-va-outbox.md) | Spring Modulith and an event outbox when the fourth module exists |
+| [012](docs/architecture/adr/ADR-012-chien-luoc-cache.md) | Cache policy first (HTTP caching), Caffeine only when measured |
+| [013](docs/architecture/adr/ADR-013-cong-chat-luong-trong-gradle.md) | Quality gates are Gradle tasks; CI only runs them |
+| [014](docs/architecture/adr/ADR-014-kind-va-interests-cua-chuyen.md) | Trip kind and interests: vocabulary owned by `planning`, parity-tested against the catalog |
+| [015](docs/architecture/adr/ADR-015-maplibre-openfreemap.md) | MapLibre GL + OpenFreeMap + terrain hillshade, no API key |
+| [016](docs/architecture/adr/ADR-016-photo-delivery.md) | Optimized WebP on the classpath now, object storage + CDN when configured |
+| [017](docs/architecture/adr/ADR-017-typed-api-contract.md) | Typed request/response records, RFC 9457 errors, generated OpenAPI and TypeScript types; paths stay unversioned |
+| [018](docs/architecture/adr/ADR-018-rate-limiter.md) | Keep the small in-memory fixed-window limiter; alternatives and when to replace it |
 
-## 7. Công cụ cho trợ lý AI (tùy chọn)
+## Known limitations and roadmap
 
-Dự án có workflow cho Claude Code (`.claude/`, hướng dẫn: [`docs/agent-system.md`](docs/agent-system.md)): `/wander-status`, `/wander-council`, `/wander-feature`, `/wander-verify`… Hai công cụ phụ trợ: **RTK** (rút gọn đầu ra lệnh) và **code-review-graph** (đồ thị mã cho review). Cài: `tools\dev.ps1 install-tools` (cài bằng winget/uv, cấu hình hook Claude Code, có sao lưu); kiểm tra: `tools\dev.ps1 tools-check`. Không cần cho việc chạy app.
-
-## 8. Bản đồ thư mục
-
-| Đường dẫn | Nội dung |
-|---|---|
-| `backend/` | Backend Java (modular monolith `identity`, `planning`, `shared`), migration Flyway, test |
-| `web/` | Giao diện React + TypeScript (Vite) theo chuẩn `docs/architecture/frontend-standards.md`: `src/{app,features,shared,styles}`; API giả cho tới FE-10 |
-| `legacy/web-v1/` | Giao diện React cũ (thay bởi `web/` mới; giữ để tham khảo, có thể xóa) |
-| `web/e2e/` | Kịch bản trình duyệt thật (Playwright core) trên backend thật |
-| `tools/` | `dev.ps1` (lệnh Windows), `wander-status.mjs` |
-| `docs/` | Kế hoạch (`wander-master-plan.md`, **chỉ PO sửa**), kiến trúc + ADR, quyết định sản phẩm (`decisions/`), mặc định và cổng phát hành (`implementation/decisions.md`) |
-| `docker-compose.yml` | PostgreSQL cục bộ (+ backend trong container, profile `app`) |
-
-Muốn thêm một tính năng: công thức ở [`docs/architecture/README.md`](docs/architecture/README.md) §5 (domain → migration → infrastructure → application → API → test → e2e) và quy ước ở `.claude/rules/backend.md`, `.claude/rules/frontend.md`.
+- **Rate limiting is per process.** The limiter is in memory, so with more than one instance each would count separately. Single
+  instance is deliberate for now; a Postgres- or Redis-backed limiter is the path for scaling out.
+- **The outbox has one use and no retention job.** Only the security-event log goes through it, and completed publications are kept
+  (nothing prunes them yet); failed ones are resubmitted by a call or a restart, not on a schedule. See
+  [`docs/architecture/events.md`](docs/architecture/events.md).
+- **Metrics are not published on the public instance** (the free profile exposes only `health`): to see production numbers you would add
+  a managed Prometheus/Grafana, which is a cost decision. Tracing and alert rules are not done
+  ([`docs/operations/observability.md`](docs/operations/observability.md)).
+- **Performance is measured on a developer machine and in a CPU-limited container, not on Render/Neon**; at 10 simultaneous users the
+  quarter-CPU shape saturates (p95 about 1.1 s) with no errors ([`docs/performance.md`](docs/performance.md)).
+- **The catalog is small and hand-curated**: 20 destinations, 704 places, 578 place photos and 153 moments; not every place has a photo or
+  a price. Travel times are estimates (straight-line distance times a factor), not routing.
+- **No real-time sync** between collaborators and **no offline mode**; the session secret is kept in `localStorage` (release gate RG-6 is
+  still open, so the app is not offered to real users).
+- **Free hosting sleeps when idle** (see the live-demo note); a keep-warm workflow pings the health endpoint, which reduces but does not
+  remove cold starts.

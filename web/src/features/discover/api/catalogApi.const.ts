@@ -1,8 +1,8 @@
-/** Đường dẫn API kho biên tập (khớp `CatalogApiConstants` của backend). */
+/** Paths of the editorial catalog API (matching the backend's `CatalogApiConstants`). */
 export const CATALOG_API = {
   DESTINATIONS: '/api/catalog/destinations',
   QUERY_PARAM: 'q',
 } as const;
 
-/** Mã loại trong hợp đồng catalog; trường additive được kiểm trước khi dùng để lọc toàn quốc. */
+/** The kind code in the catalog contract; the additive field is checked before it is used to filter nationwide. */
 export const CATALOG_CATEGORIES: readonly string[] = ['canh', 'van', 'am', 'leo', 'luu', 'cho'];

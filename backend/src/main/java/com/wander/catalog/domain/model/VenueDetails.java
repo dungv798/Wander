@@ -8,11 +8,11 @@ import com.wander.shared.kernel.util.Texts;
 import java.net.URI;
 import java.time.LocalDate;
 
-/** Thông tin địa chỉ có nguồn; không suy ra giá, phòng trống hoặc giờ mở cửa từ việc có website. */
+/** Address information with a source; no price, vacancy or opening hours are inferred from the existence of a website. */
 public record VenueDetails(VenueKind kind, String address, String website, String sourceUrl, LocalDate checkedAt,
                            String phone, String serviceHours, String priceNote) {
 
-    /** Dữ liệu cũ giữ nguyên khả năng đọc khi chưa thu thập các thông tin tùy chọn. */
+    /** Old data stays readable when the optional information has not been collected yet. */
     public VenueDetails(VenueKind kind, String address, String website, String sourceUrl, LocalDate checkedAt) {
         this(kind, address, website, sourceUrl, checkedAt, "", "", "");
     }
@@ -28,13 +28,13 @@ public record VenueDetails(VenueKind kind, String address, String website, Strin
         priceNote = optional(priceNote, CatalogMessages.LABEL_VENUE_PRICE_NOTE, CatalogConstants.VENUE_PRICE_NOTE_MAX_LENGTH);
     }
 
-    /** Trống là chưa có thông tin, không tự thêm một giá trị mặc định để giả định đã xác nhận. */
+    /** Empty means there is no information yet; no default value is added that would pretend it was confirmed. */
     private static String optional(String value, String label, int maxLength) {
         String text = Texts.trimToEmpty(value);
         return text.isEmpty() ? text : CatalogValidation.requiredText(text, label, maxLength);
     }
 
-    /** Chỉ nhận liên kết web HTTPS có host, không có thông tin đăng nhập nhúng trong URL. */
+    /** Accepts only an HTTPS web link that has a host and no login information embedded in the URL. */
     private static boolean https(String value) {
         try {
             URI uri = URI.create(value);

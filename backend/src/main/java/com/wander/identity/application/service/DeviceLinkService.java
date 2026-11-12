@@ -1,6 +1,5 @@
 package com.wander.identity.application.service;
 
-import com.wander.identity.application.input.IdentityFields;
 import com.wander.identity.application.input.IdentityInput;
 import com.wander.identity.application.view.IdentityViews.Approved;
 import com.wander.identity.application.view.IdentityViews.Denied;
@@ -24,12 +23,11 @@ import com.wander.shared.kernel.util.Timestamps;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Thiết bị tin cậy duyệt thiết bị mới (D21). RG-1: thiết kế chưa được duyệt. */
+/** A trusted device approves a new device (D21). RG-1: the design is not approved yet. */
 @Service
 @Transactional
 public class DeviceLinkService {
@@ -38,17 +36,17 @@ public class DeviceLinkService {
     private final Clock clock;
     private final SecurityEventService events;
 
-    /** Nhận cổng lưu trữ, đồng hồ (test thay bằng đồng hồ giả) và nhật ký sự kiện bảo mật. */
+    /** Takes the storage port, the clock (tests replace it with a fake) and the security event log. */
     public DeviceLinkService(IdentityStore store, Clock clock, SecurityEventService events) {
         this.store = store;
         this.clock = clock;
         this.events = events;
     }
 
-    /** Thiết bị mới tự sinh bí mật phiên, chỉ gửi lên để server giữ băm; nhận mã ghép để thiết bị cũ nhập. */
-    public DeviceLinkCreated createLink(Map<String, Object> input) {
-        String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(input.get(IdentityFields.SESSION_TOKEN)));
-        String deviceName = IdentityInput.deviceName(input.get(IdentityFields.DEVICE_NAME));
+    /** The new device generates its own session secret and only sends it so the server keeps its hash; it receives a pairing code for the old device to type. */
+    public DeviceLinkCreated createLink(String sessionToken, String deviceNameRaw) {
+        String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(sessionToken));
+        String deviceName = IdentityInput.deviceName(deviceNameRaw);
         if (store.isTokenHashInUse(tokenHash)) throw IdentityInput.tokenInUse();
         Instant now = Timestamps.now(clock);
         String pairingCode = Secrets.newShortCode();
@@ -61,7 +59,7 @@ public class DeviceLinkService {
         return new DeviceLinkCreated(id.toString(), pairingCode, challenge.number(), Timestamps.format(expiresAt));
     }
 
-    /** Trạng thái hiển thị của yêu cầu ghép (pending, approved, expired); yêu cầu không có thì 404. */
+    /** Displayed status of a pairing request (pending, approved, expired); an unknown request is a 404. */
     @Transactional(readOnly = true)
     public DeviceLinkStatus getLinkStatus(String requestId) {
         DeviceLink link = Ids.parse(requestId).flatMap(store::findDeviceLink).orElseThrow(WanderException::notFound);
@@ -69,30 +67,30 @@ public class DeviceLinkService {
     }
 
     /**
-     * Máy duyệt xem trước yêu cầu (DR-018 E1: "thao tác nêu rõ trên máy duyệt"): tên máy tự khai, thời điểm và các lựa chọn số
-     * khớp cố định lúc tạo. Không đổi trạng thái, không tạo phiên.
+     * The approving device previews the request (DR-018 E1: 'the action is stated clearly on the approving device'): self-declared device name, time and the matching-number
+     * choices fixed at creation. Changes no state and creates no session.
      */
-    public LinkPreview previewLink(Map<String, Object> input) {
-        DeviceLink link = findPendingLink(input, false);
+    public LinkPreview previewLink(String pairingCode) {
+        DeviceLink link = findPendingLink(pairingCode, false);
         return new LinkPreview(link.id().toString(), link.deviceName(), Timestamps.format(link.createdAt()), link.challenge().options());
     }
 
-    /** Máy duyệt từ chối chủ động: yêu cầu thành denied và không bao giờ duyệt lại được. */
-    public Denied denyLink(Map<String, Object> input) {
-        store.saveDeviceLink(findPendingLink(input, true).deny());
+    /** The approving device actively denies: the request becomes denied and can never be approved again. */
+    public Denied denyLink(String pairingCode) {
+        store.saveDeviceLink(findPendingLink(pairingCode, true).deny());
         return Denied.YES;
     }
 
     /**
-     * Thiết bị đã có phiên duyệt bằng cách CHỌN ĐÚNG SỐ KHỚP: tạo phiên cho bí mật mà thiết bị mới đã tự sinh. Mã ghép dùng một
-     * lần. Chọn sai ⇒ yêu cầu bị từ chối vĩnh viễn (giữ lại dù ném lỗi, nên {@code noRollbackFor}). Số thiếu/sai dạng bị từ chối
-     * trước khi đụng tới yêu cầu. LƯU Ý: mọi {@code WanderException} thêm vào phương thức này SAU lần ghi sẽ commit dở; chỉ ném
-     * lỗi trước khi ghi hoặc ngay sau lần ghi từ chối.
+     * A device that already has a session approves by CHOOSING THE RIGHT MATCHING NUMBER: a session is created for the secret the new device generated itself. The pairing code is
+     * single-use. A wrong choice => the request is denied for good (kept even though an error is thrown, hence {@code noRollbackFor}). A missing or malformed number is rejected
+     * before the request is touched. NOTE: any {@code WanderException} added to this method AFTER the write would commit half the work; only throw
+     * before writing or right after the denying write.
      */
     @Transactional(noRollbackFor = WanderException.class)
-    public Approved approveLink(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        int chosen = IdentityInput.matchNumber(input.get(IdentityFields.NUMBER));
-        DeviceLink link = findPendingLink(input, true);
+    public Approved approveLink(AuthenticatedPrincipal principal, String pairingCode, Integer number) {
+        int chosen = IdentityInput.matchNumber(number);
+        DeviceLink link = findPendingLink(pairingCode, true);
         Instant now = Timestamps.now(clock);
         if (!link.challenge().matches(chosen)) {
             store.saveDeviceLink(link.deny());
@@ -105,11 +103,11 @@ public class DeviceLinkService {
     }
 
     /**
-     * Yêu cầu ghép đang chờ và còn hạn theo mã ghép người dùng nhập; {@code lock} = khóa dòng (duyệt/từ chối) hay đọc thường (xem
-     * trước). Sai, hết hạn hoặc đã xử lý ⇒ INVALID_PAIRING_CODE.
+     * The pairing request that is pending and still valid for the pairing code the user typed; {@code lock} = row lock (approve/deny) or a plain read (preview).
+     * Wrong, expired or already handled => INVALID_PAIRING_CODE.
      */
-    private DeviceLink findPendingLink(Map<String, Object> input, boolean lock) {
-        String code = Secrets.normalize(input.get(IdentityFields.PAIRING_CODE), IdentityConstants.SHORT_CODE_SYMBOLS);
+    private DeviceLink findPendingLink(String pairingCodeRaw, boolean lock) {
+        String code = Secrets.normalize(pairingCodeRaw, IdentityConstants.SHORT_CODE_SYMBOLS);
         if (code == null) throw invalidPairingCode();
         String pairingCode = Secrets.formatShort(code);
         Instant now = Timestamps.now(clock);
@@ -117,7 +115,7 @@ public class DeviceLinkService {
                 .orElseThrow(DeviceLinkService::invalidPairingCode);
     }
 
-    /** Lỗi mã ghép thiết bị sai hoặc hết hạn. */
+    /** Error: the device pairing code is wrong or expired. */
     private static WanderException invalidPairingCode() {
         return WanderException.invalid(IdentityErrorCodes.INVALID_PAIRING_CODE, IdentityMessages.INVALID_PAIRING_CODE, null);
     }

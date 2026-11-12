@@ -1,5 +1,5 @@
-/* Vật liệu B: một chủ sở hữu cho kính, nút và trạng thái. Các màn chỉ bố trí điều khiển.
-   Cầu nối không dùng ID trong :is() để các màn có thể bố trí nút mà không tranh specificity. */
+/* Material B: one owner for glass, buttons and state. Screens only lay out the controls.
+   The bridge uses no ID inside :is() so screens can lay out the button without fighting over specificity. */
 :root:not([data-look='classic']) :is(.glass-control, .btn, .pill, .iconbtn, .round, .gnav, .credit-btn, .fchip, .dchip, .dtab, .pack, .opt, .linkbtn, .taskchk, .undo-control) {
   color: var(--ink);
   background: var(--control-surface);
@@ -37,7 +37,7 @@
 :root:not([data-look='classic']) .round { animation: none; }
 :root:not([data-look='classic']) :is(.chip:not(.glass), .mchip) { color: var(--ink); background: var(--control-surface); border: var(--glass-border) solid var(--control-edge); box-shadow: none; text-decoration: none; }
 
-/* Một nền chung cho tờ chính và cửa sổ chi tiết. */
+/* One shared background for the main sheet and the detail window. */
 :root:not([data-look='classic']) :where(.panel, #screen .sheetbody) {
   background: var(--sheet-surface);
   border: var(--glass-border) solid var(--sheet-edge);
@@ -61,7 +61,7 @@
   box-shadow: none;
 }
 :root:not([data-look='classic']) .map-chrome .search { background: transparent; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-/* Tờ cha đã làm mờ nền: tránh thêm một lớp GPU cho mỗi nút con. */
+/* The parent sheet already blurs the background: avoids adding a GPU layer for each child button. */
 :root:not([data-look='classic']) :where(.panel, .sheetbody, .ob-panel) :is(.btn, .iconbtn, .fchip, .dchip, .dtab, .pill, .glass-control) { -webkit-backdrop-filter: none; backdrop-filter: none; }
 :root:not([data-look='classic']) .maplibregl-ctrl-group { background: var(--sheet-surface); border: var(--glass-border) solid var(--sheet-edge); box-shadow: var(--btn-shadow); }
 :root:not([data-look='classic']) .maplibregl-ctrl-group button { color: var(--ink); border: 0; background-color: transparent; box-shadow: none; }
@@ -72,7 +72,7 @@
 :root:not([data-look='classic']) #tabbar .tab :is(span, .ic) { color: var(--muted); background: transparent; }
 :root:not([data-look='classic']) #tabbar .tab[aria-current='page'] :is(span, .ic) { color: var(--brand-ink); }
 
-/* Nhãn và nút trên ảnh luôn có đệm tương phản, không phụ thuộc màu ảnh. */
+/* Labels and buttons on a photo always have contrast padding, independent of the photo color. */
 :root:not([data-look='classic']) :where(.dhero .pill, .deckbar .pill, .mapfull .pill, .mapcard .pill, .dhero .iconbtn, .credit-btn, .gnav) { background: var(--glass-label-surface); color: var(--ink); }
 :root:not([data-look='classic']) :where(.gal .chip, .card .chip, .chip.glass, .dhero .chip, .gcount) { color: var(--white); background: var(--glass-photo-scrim); text-shadow: var(--glass-photo-shadow); }
 :root:not([data-look='classic']) .card .chip { min-height: 0; color: var(--white); background: var(--glass-photo-scrim); border-color: var(--glass-edge); backdrop-filter: none; }

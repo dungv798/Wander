@@ -18,7 +18,7 @@ interface SectionProps {
   readonly dest: DestinationDetail;
 }
 
-/** Một thẻ tiếp tục duy nhất: chuyến đang làm/Hôm nay trước, rồi nơi đang chọn dở; trống thì ẩn. */
+/** A single continue card: the trip in progress/Today first, then the places half-chosen; hidden when empty. */
 export function ResumeSection({ dest }: SectionProps) {
   const { state } = useDiscover();
   const { state: trips } = useTrips();
@@ -42,7 +42,7 @@ export function ResumeSection({ dest }: SectionProps) {
   );
 }
 
-/** Tối đa năm mood thật, ưu tiên loại đang chọn; xem tất cả mở cẩm nang và bản đồ điểm đến. */
+/** At most five real moods, preferring the kind being chosen; see all opens the guide and the destination map. */
 export function MoodSection({ dest }: SectionProps) {
   const { state, actions } = useDiscover();
   const groups = [...groupByCategory(dest).entries()];

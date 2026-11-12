@@ -16,7 +16,7 @@ import { SwipeCard } from './deck/SwipeCard.tsx';
 import { DEST_COPY } from '../model/dest.copy.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 
-/** Màn "Hết thẻ rồi": nói rõ vì sao (đã hết, hay hết ở loại này) và cho đường đi tiếp. */
+/** The 'Out of cards' screen: says clearly why (all done, or done in this kind) and gives a way to go on. */
 function DeckEmpty({ dest, adding }: { readonly dest: DestinationDetail; readonly adding?: AddingMode }) {
   const { state, actions } = useDiscover();
   const picked = pickedOf(state, dest.places).length;
@@ -41,7 +41,7 @@ function DeckEmpty({ dest, adding }: { readonly dest: DestinationDetail; readonl
   );
 }
 
-/** Một cột duy nhất (thanh trên, bộ lọc, thẻ cùng chiều rộng); hết thẻ thì chuyển sang màn sáng bình thường. Bộ bài đang quẹt: tối đa 3 thẻ (thẻ trên cùng nhận cử chỉ), hàng nút và phím tắt (←, →, ↑, Backspace/Z). */
+/** A single column (top bar, filter, the card at the same width); when the cards run out it switches to an ordinary light screen. The deck being swiped: at most 3 cards (the top card receives the gesture), the button row and shortcut keys (left, right, up, Backspace/Z). */
 function DeckContent({ dest, adding }: { readonly dest: DestinationDetail; readonly adding?: AddingMode }) {
   const { state, actions, left, front, deckRef, handlers, swipeTop, openFront, undo } = useDeck(dest, adding);
   const visible = left.slice(0, SWIPE.VISIBLE_CARDS);
@@ -66,7 +66,7 @@ function DeckContent({ dest, adding }: { readonly dest: DestinationDetail; reado
   );
 }
 
-/** Màn quẹt thẻ toàn màn (ẩn thanh điều hướng trên điện thoại để thẻ chiếm trọn màn hình). */
+/** The full-screen card-swipe screen (hides the navigation bar on a phone so the card fills the whole screen). */
 export function DeckScreen({ destId, adding }: { readonly destId: string; readonly adding?: AddingMode }) {
   return (
     <DestinationGate destId={destId} inDeck>

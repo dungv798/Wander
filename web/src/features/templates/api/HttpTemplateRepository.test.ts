@@ -7,7 +7,7 @@ import { HttpTemplateRepository } from './HttpTemplateRepository.ts';
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
 
-/** Kho dựng trên fetch giả; trả thêm danh sách URL đã gọi. */
+/** A repository built on a fake fetch; it also returns the list of URLs that were called. */
 function repo(handler: (url: string) => Response): { readonly repository: HttpTemplateRepository; readonly urls: string[] } {
   const urls: string[] = [];
   const fetchImpl: FetchLike = (url) => {
@@ -33,8 +33,8 @@ test('đổi days[].placeIds của API thành days[].places mà bộ ánh xạ l
 
 test('điểm đến chưa có lịch hoặc 404 trả dữ liệu rỗng (không phải lỗi); lỗi khác vẫn ném', async () => {
   assert.deepEqual(await repo(() => json({ templates: [] })).repository.templates('x'), { templates: [] });
-  assert.deepEqual(await repo(() => json({ error: { code: 'NOT_FOUND' } }, 404)).repository.templates('x'), {});
-  await assert.rejects(repo(() => json({ error: { code: 'RATE_LIMITED' } }, 429)).repository.templates('x'), (e: unknown) => e instanceof ApiError && e.code === 'RATE_LIMITED');
+  assert.deepEqual(await repo(() => json({ code: 'NOT_FOUND' }, 404)).repository.templates('x'), {});
+  await assert.rejects(repo(() => json({ code: 'RATE_LIMITED' }, 429)).repository.templates('x'), (e: unknown) => e instanceof ApiError && e.code === 'RATE_LIMITED');
 });
 
 test('thân sai hình dạng thành INTERNAL; phần tử hỏng bị bỏ qua thay vì làm sập danh sách', async () => {
@@ -45,7 +45,7 @@ test('thân sai hình dạng thành INTERNAL; phần tử hỏng bị bỏ qua t
 
 test('lịch mẫu được nhớ: gọi lặp chỉ một lần; lỗi không được nhớ; thiếu placeIds thành danh sách rỗng', async () => {
   let fail = true;
-  const r = repo(() => (fail ? json({ error: { code: 'INTERNAL' } }, 500) : json({ templates: [{ id: 't', title: 'T', status: 'draft', days: [{ note: 'Nghỉ' }] }] })));
+  const r = repo(() => (fail ? json({ code: 'INTERNAL' }, 500) : json({ templates: [{ id: 't', title: 'T', status: 'draft', days: [{ note: 'Nghỉ' }] }] })));
   await assert.rejects(r.repository.templates('ha-giang'));
   fail = false;
   const [a, b] = await Promise.all([r.repository.templates('ha-giang'), r.repository.templates('ha-giang')]);

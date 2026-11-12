@@ -31,7 +31,7 @@ for (const entry of before) {
   const dest = JSON.parse(fs.readFileSync(file, 'utf8'));
   if (dest.id === 'sa-pa') {
     dest.places = dest.places.filter(place => place.id !== 'sa-pa-ngu-chi-son' || oldIds.has(place.id));
-    const source = JSON.parse(fs.readFileSync(path.join(root, 'docs/research/osm-candidates/sa-pa.json'), 'utf8')).places;
+    const source = JSON.parse(fs.readFileSync(path.join(root, 'tools/catalog/data/osm-candidates/sa-pa.json'), 'utf8')).places;
     for (const [id, name] of [['sa-pa-ngu-chi-son', 'Núi Ngũ Chỉ Sơn'], ['sa-pa-nhiu-co-san', 'Núi Nhìu Cồ San']]) {
       const hit = source.find(point => point.name === name && point.kind === 'peak');
       if (!hit || dest.places.some(place => place.id === id)) continue;

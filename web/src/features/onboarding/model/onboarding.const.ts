@@ -1,14 +1,14 @@
 import type { SampleDay, SceneKind } from './onboarding.types.ts';
 
-/** Điểm đến của phần giới thiệu. */
+/** The destination of the intro. */
 export const ONBOARD_DESTINATION = 'da-lat';
 
-/** Thứ tự bốn cảnh. */
+/** The order of the four scenes. */
 export const SCENES: readonly SceneKind[] = ['discover', 'swipe', 'plan', 'share'];
-/** Chỉ số các cảnh (khớp `SCENES`). */
+/** The indexes of the scenes (matching `SCENES`). */
 export const SCENE = { DISCOVER: 0, SWIPE: 1, PLAN: 2, SHARE: 3 } as const;
 
-/** Ảnh dựng sẵn của minh họa (phục vụ từ `public/onboard`). */
+/** Prebuilt images of the illustration (served from `public/onboard`). */
 export const ART = {
   PLANE: '/onboard/plane.webp',
   COMPASS: '/onboard/compass.webp',
@@ -16,23 +16,23 @@ export const ART = {
   CLOUDS: ['/onboard/cloud1.webp', '/onboard/cloud2.webp', '/onboard/cloud3.webp', '/onboard/cloud1.webp'],
 } as const;
 
-/** Ba điểm đến làm thẻ xòe của cảnh mở đầu (mã điểm đến; thẻ đầu là thẻ chính, cũng là điểm đến của câu chuyện sau đó). */
+/** The three destinations that make up the fanned cards of the opening scene (destination ids; the first card is the main one and is also the destination of the later story). */
 export const FAN_DESTINATIONS: readonly string[] = ['da-lat', 'ha-giang', 'ta-xua'];
 
-/** Bộ thẻ cảnh quẹt: thẻ 1 có trong lịch mẫu (demo chọn), thẻ 2 nằm ngoài lịch mẫu (demo bỏ qua); lịch mẫu KHÔNG phụ thuộc lựa chọn của người xem. */
+/** The deck of the swipe scene: card 1 is in the sample itinerary (the demo chooses it), card 2 is outside the sample itinerary (the demo skips it); the sample itinerary does NOT depend on the viewer's choices. */
 export const DECK_IDS: readonly string[] = ['nha-tho-con-ga', 'thac-prenn', 'ga-da-lat', 'linh-phuoc', 'thac-datanla', 'cho-da-lat'];
 
-/** Ảnh đẹp nhất của từng địa điểm cho phần giới thiệu (chỉ số trong danh sách ảnh của kho): chọn theo độ phân giải, độ nét và độ rực màu, cắt dọc vẫn đủ nét. Địa điểm không có ở đây dùng ảnh đầu. */
+/** The best photo of each place for the intro (an index in the catalog's photo list): chosen by resolution, sharpness and color vividness, and still sharp when cropped to portrait. A place not listed here uses the first photo. */
 export const PLACE_PHOTO_INDEX: Readonly<Record<string, number>> = { 'nha-tho-con-ga': 1, 'thac-prenn': 1, 'thac-datanla': 1 };
 
-/** Ảnh riêng cho thẻ điểm đến ở cảnh mở đầu (ảnh có giấy phép trong kho) và điểm lấy nét khi cắt thẻ cao. */
+/** A separate photo for the destination card in the opening scene (a photo with a license in the catalog) and the focal point when cropping a tall card. */
 export const DESTINATION_PHOTOS: Readonly<Record<string, { readonly url: string; readonly position: string }>> = {
-  'da-lat': { url: '/catalog/photos/nha-tho-con-ga-2.jpg', position: 'center' },
-  'ha-giang': { url: '/catalog/photos/hoang-su-phi-2.jpg', position: 'center 60%' },
-  'ta-xua': { url: '/catalog/photos/ta-xua-1.jpg', position: '38% center' },
+  'da-lat': { url: '/catalog/photos/nha-tho-con-ga-2-w1280-a1ffaede55.webp', position: 'center' },
+  'ha-giang': { url: '/catalog/photos/hoang-su-phi-2-w800-635f36a91f.webp', position: 'center 60%' },
+  'ta-xua': { url: '/catalog/photos/ta-xua-1-w1280-e935c21120.webp', position: '38% center' },
 };
 
-/** Hình học và nhịp của cảnh quẹt (px, ms). */
+/** The geometry and rhythm of the swipe scene (px, ms). */
 export const SWIPE = {
   DRAG_PX: 96,
   TILT_PER_PX: 0.06,
@@ -61,7 +61,7 @@ export const SWIPE = {
   THUMB_BOTTOM_PX: 82,
 } as const;
 
-/** Lịch mẫu cố định "Đà Lạt · 2 ngày thong thả". Ngày 1 đi quanh khu trung tâm (tây → đông dọc hồ rồi về chợ buổi tối); Ngày 2 đi một chiều bắc → nam từ thiền viện xuống thác Datanla rồi hồ Tuyền Lâm. Khung buổi lấy theo `bestSlots` của kho. */
+/** The fixed sample itinerary 'Da Lat - 2 relaxed days'. Day 1 goes around the center (west to east along the lake and back to the market in the evening); Day 2 goes one way north to south from the meditation monastery down to Datanla waterfall and then Tuyen Lam lake. The part of day follows the catalog's `bestSlots`. */
 export const SAMPLE_TRIP: readonly SampleDay[] = [
   {
     theme: 'center',
@@ -83,17 +83,17 @@ export const SAMPLE_TRIP: readonly SampleDay[] = [
   },
 ];
 
-/** Đề xuất của thành viên ở cảnh chia sẻ: thêm một địa điểm cùng hướng vào đầu một ngày (chỉ số ngày bắt đầu từ 0). */
+/** The member's suggestion in the share scene: adds a place in the same direction at the start of a day (the day index starts from 0). */
 export const PROPOSAL = { placeId: 'ga-da-lat', dayIndex: 1, slot: 'morning', by: 'Mai' } as const;
 
-/** Thành viên minh họa của cảnh chia sẻ: tên hiển thị và khóa màu. */
+/** The illustrative members of the share scene: the display name and the color key. */
 export const MEMBERS = [
   { id: 'me', name: 'Bạn', tone: 'me' },
   { id: 'mai', name: 'Mai', tone: 'a' },
   { id: 'bao', name: 'Bảo', tone: 'b' },
 ] as const;
 
-/** Nhịp của cảnh bản đồ (ms) và khoảng đệm khi vừa khung (px). */
+/** The rhythm of the map scene (ms) and the padding when fitting the frame (px). */
 export const PLAN_TIMING = {
   OVERVIEW_MS: 1400,
   DAY_ZOOM_MS: 1000,
@@ -105,7 +105,7 @@ export const PLAN_TIMING = {
   MAP_WAIT_MS: 6000,
 } as const;
 
-/** Nhịp của cảnh chia sẻ (ms). */
+/** The rhythm of the share scene (ms). */
 export const SHARE_TIMING = {
   START_MS: 600,
   TAP_MOVE_MS: 500,
@@ -121,15 +121,15 @@ export const SHARE_TIMING = {
   MANUAL_PROPOSAL_MS: 450,
 } as const;
 
-/** Tự chuyển cảnh mở đầu sau (ms) khi người xem chưa chạm vào gì. */
+/** Auto-advance from the opening scene after (ms) when the viewer has not touched anything. */
 export const DISCOVER_AUTO_MS = 3000;
-/** Thời gian chuyển cảnh (ms): cảnh cũ trượt ra, cảnh mới trượt vào. */
+/** The scene transition time (ms): the old scene slides out, the new scene slides in. */
 export const TRANSITION_MS = 420;
-/** Thời gian thẻ dùng chung bay từ cảnh này sang cảnh kia (ms); nhỏ hơn nhịp mở đầu demo quẹt để demo bắt đầu khi thẻ đã vào chỗ. */
+/** The time the shared card flies from one scene to the other (ms); smaller than the opening beat of the swipe demo so the demo starts when the card is in place. */
 export const MORPH_MS = 460;
-/** Thông báo ngắn tự tắt sau (ms). */
+/** A short notice turns off by itself after (ms). */
 export const TOAST_MS = 2200;
-/** Bản đồ chưa sẵn sàng sau chừng này thì hiện sơ đồ minh họa thay thế. */
+/** If the map is not ready after this long, the illustrative diagram is shown instead. */
 export const MAP_FALLBACK_MS = 6000;
-/** Khoảng đệm quanh các ghim khi vừa khung bản đồ (px). */
+/** The padding around the pins when fitting the map frame (px). */
 export const MAP_PADDING = 36;

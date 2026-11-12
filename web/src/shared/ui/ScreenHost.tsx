@@ -2,24 +2,24 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef } fr
 import type { ReactNode } from 'react';
 import { UI } from '../const/app.const.ts';
 
-/** Cờ lớp CSS mà một màn có thể bật trên vùng cuộn `#screen` (CSS của prototype định kiểu theo `#screen.<cờ>`). */
+/** The CSS class flag that a screen can turn on at the `#screen` scroll region (the prototype's CSS styles by `#screen.<flag>`). */
 export type ScreenFlag = 'immersive' | 'searching' | 'nobar';
 
 interface ScreenApi {
-  /** Đặt (hoặc gỡ khi null) một biến CSS tùy biến trên `#screen` (tên KHÔNG có `--`). */
+  /** Sets (or removes when null) a custom CSS variable on `#screen` (the name has NO `--`). */
   readonly setVar: (name: string, value: string | null) => void;
-  /** Bật/tắt một cờ lớp trên `#screen`. */
+  /** Turns a class flag on/off on `#screen`. */
   readonly setFlag: (flag: ScreenFlag, on: boolean) => void;
 }
 
 const ScreenContext = createContext<ScreenApi | null>(null);
 
-/** Ghi cách tương tác để ô nhập không tự hiện vòng focus khi chạm; Tab khôi phục chỉ báo bàn phím. */
+/** Records how the interaction happened so an input box does not show a focus ring by itself on touch; Tab restores the keyboard indicator. */
 function useFocusModality(): void {
   useEffect(() => {
-    /** Chạm/chuột không cần vòng focus nhưng vẫn giữ focus cho công nghệ hỗ trợ. */
+    /** Touch/mouse needs no focus ring but still keeps focus for assistive technology. */
     const pointer = (): void => { document.body.dataset.inputModality = 'pointer'; };
-    /** Phím điều hướng kích hoạt lại chỉ báo, kể cả khi đang ở ô nhập. */
+    /** A navigation key re-activates the indicator, even when in an input box. */
     const keyboard = (event: KeyboardEvent): void => {
       if (event.key === 'Tab' || event.key.startsWith('Arrow') || event.key === 'Home' || event.key === 'End') document.body.dataset.inputModality = 'keyboard';
     };
@@ -34,26 +34,26 @@ function useFocusModality(): void {
 }
 
 interface ScreenHostProps {
-  /** Tên màn, đặt vào `data-view` (CSS dùng để định kiểu). */
+  /** The screen name, put into `data-view` (CSS uses it for styling). */
   readonly view: string;
-  /** Khóa đổi khi sang màn khác: kích hoạt hoạt họa vào màn và đưa cuộn về đầu. */
+  /** A key that changes when going to another screen: triggers the screen-entry animation and brings the scroll back to the top. */
   readonly routeKey: string;
   readonly noBar: boolean;
-  /** Bản đồ đang mở: giữ bố cục danh sách nhưng loại khỏi tương tác và cây truy cập. */
+  /** The map is open: keeps the list layout but removes it from interaction and the accessibility tree. */
   readonly inert?: boolean;
   readonly children: ReactNode;
 }
 
 /**
- * Vùng cuộn chính `#screen`. Giữ các lớp CSS theo màn (`nobar`, `immersive`, `searching`, `enter`) tại MỘT chỗ,
- * để màn con chỉ khai báo mong muốn qua `useScreenFlag` thay vì chạm DOM của nơi khác.
+ * The main scroll region `#screen`. Keeps the per-screen CSS classes (`nobar`, `immersive`, `searching`, `enter`) in ONE place,
+ * so a child screen only declares what it wants through `useScreenFlag` instead of touching the DOM of another place.
  */
 export function ScreenHost({ view, routeKey, noBar, inert = false, children }: ScreenHostProps) {
   useFocusModality();
   const ref = useRef<HTMLElement | null>(null);
 
   const setFlag = useCallback(
-    /** Bật/tắt lớp trên phần tử `#screen`. */
+    /** Turns a class on/off on the `#screen` element. */
     (flag: ScreenFlag, on: boolean) => {
       ref.current?.classList.toggle(flag, on);
     },
@@ -61,7 +61,7 @@ export function ScreenHost({ view, routeKey, noBar, inert = false, children }: S
   );
 
   const setVar = useCallback(
-    /** Đặt/gỡ biến CSS trên phần tử `#screen`. */
+    /** Sets/removes a CSS variable on the `#screen` element. */
     (name: string, value: string | null) => {
       if (value === null) ref.current?.style.removeProperty(`--${name}`);
       else ref.current?.style.setProperty(`--${name}`, value);
@@ -93,7 +93,7 @@ export function ScreenHost({ view, routeKey, noBar, inert = false, children }: S
   );
 }
 
-/** Bật một cờ lớp trên `#screen` suốt thời gian màn còn hiển thị (hoặc khi `on` đúng); tự gỡ khi rời màn. */
+/** Turns on a class flag on `#screen` for as long as the screen is shown (or when `on` is exactly true); it removes itself when leaving the screen. */
 export function useScreenFlag(flag: ScreenFlag, on: boolean = true): void {
   const api = useContext(ScreenContext);
   useEffect(() => {
@@ -102,7 +102,7 @@ export function useScreenFlag(flag: ScreenFlag, on: boolean = true): void {
   }, [api, flag, on]);
 }
 
-/** Đặt một biến CSS trên `#screen` suốt thời gian màn hiển thị (ví dụ ảnh nền mờ `stage` của bộ thẻ); tự gỡ khi rời màn. */
+/** Sets a CSS variable on `#screen` for as long as the screen is shown (for example the blurred `stage` background of the deck); it removes itself when leaving the screen. */
 export function useScreenVar(name: string, value: string | null): void {
   const api = useContext(ScreenContext);
   useEffect(() => {

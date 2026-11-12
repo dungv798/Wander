@@ -1,4 +1,4 @@
-/** Chữ hiển thị của tính năng rating (tiếng Việt). */
+/** The display copy of the rating feature (Vietnamese). */
 export const RATING_COPY = {
   title: 'Đánh giá',
   source: 'Wander',

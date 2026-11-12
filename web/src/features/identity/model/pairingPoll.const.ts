@@ -1,4 +1,4 @@
-/** Nhịp lùi cho mọi lỗi poll liên tiếp; đơn vị ms, không đổi hạn duyệt của máy chủ. */
+/** The backoff rhythm for every consecutive poll error; unit ms, it does not change the server's approval time limit. */
 export const PAIRING_POLL = {
   BACKOFF_FACTOR: 2,
   MAX_DELAY_MS: 30_000,

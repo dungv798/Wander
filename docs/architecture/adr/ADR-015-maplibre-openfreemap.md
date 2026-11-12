@@ -1,5 +1,8 @@
 # ADR-015 — Bản đồ: MapLibre GL + OpenFreeMap + bóng núi từ ô độ cao AWS (thay bản đồ địa hình tự dựng)
 
+> **English title:** Map: MapLibre GL + OpenFreeMap + AWS terrain hillshade
+> **Summary (EN):** Replace the hand-built terrain map with MapLibre GL, free OpenFreeMap vector tiles and AWS open elevation tiles: no API key, zero cost; the allowed origins are pinned in the Content-Security-Policy.
+
 - **Trạng thái:** `APPROVED` — PO chọn "MapLibre + OpenFreeMap + hillshade AWS (Recommended)" ngày 28/10/2026 (DR-023), sau khi yêu cầu "kiếm xem trên mạng có cách nào tối ưu, chứ tự dựng thì effort cao quá mà còn không chính xác". Việc tích hợp vào các màn là bước sau ADR này; chưa thay gì ở mã ứng dụng khi ghi ADR.
 - **Liên quan:** DR-023, ADR-009 (dữ liệu miễn phí, chi phí 0), `docs/architecture/frontend-standards.md` (ngân sách JS ≤ 170 KB gzip, tải theo tuyến).
 

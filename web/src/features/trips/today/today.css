@@ -1,4 +1,4 @@
-/* Bản đồ tuyến của hôm nay: khung thấp trong thân trang, cùng kiểu nền/ghim/ghi công với bản đồ chuyến. */
+/* The route map of today: a low frame in the page body, the same base/pin/attribution style as the trip map. */
 .today-map { position: relative; height: calc(var(--s-8) * 3 + var(--s-3)); overflow: hidden; border-radius: var(--r-lg); background: var(--map-low); }
 .tmap-today { position: absolute; inset: 0; }
 #screen .today-next.panel.todayrow { display: block; width: 100%; max-height: none; overflow: hidden; border-radius: var(--r-lg); padding: 0; }
@@ -16,5 +16,5 @@
 .today-checklist input { width: var(--icon-m); height: var(--icon-m); }
 .today-completed summary { min-height: var(--tap); cursor: pointer; font: var(--text-button); }
 .today-completed .todaylist { margin-top: var(--s-2); }
-/* Màn rộng: cột nội dung giữ độ rộng đọc được thay vì kéo nút và chữ ra hết bề ngang. */
+/* Wide screen: the content column keeps a readable width instead of stretching the buttons and text across the whole width. */
 @media (min-width: 768px) { #screen[data-view="today"] .stack.pad-x { max-width: var(--reading-width); } }

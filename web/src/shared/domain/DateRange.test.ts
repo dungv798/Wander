@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DateRange, DateRangeError } from './DateRange.ts';
 
-/** Gom mã lỗi của một phép tính; 'OK' nếu không lỗi. */
+/** Collects the error code of a computation; 'OK' if there is no error. */
 const codeOf = (fn: () => unknown): string => {
   try {
     fn();

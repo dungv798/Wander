@@ -5,11 +5,11 @@ import { calendarEvents, costCell, imageCards, pdfTable, undatedCount } from './
 import type { Trip } from './trip.types.ts';
 
 let n = 0;
-/** Mã tăng dần để test xác định. */
+/** An increasing id so the test is deterministic. */
 const ids = (): string => `id${(n += 1)}`;
 const nameOf = (i: { placeId: string | null; title: string }): string => i.title || i.placeId || '?';
 
-/** Chuyến 2 ngày có: địa điểm a (100k), ăn trưa (đã bao gồm, ref), nghỉ, một việc cần làm, địa điểm b chưa có ngày. */
+/** A 2-day trip with: place a (100k), lunch (included, ref), rest, a to-do, place b with no date. */
 function trip(): Trip {
   let t = createTrip(S0, { name: 'T', destinationId: 'd', startDate: '2026-11-10', endDate: '2026-11-11' }, [{ id: 'a', category: 'van' }, { id: 'b', category: 'canh' }], ids, 1).trip;
   const [a] = t.items;

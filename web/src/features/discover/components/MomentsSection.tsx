@@ -7,13 +7,14 @@ import { Chip } from '../../../shared/ui/Chip.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import type { DestinationDetail, MomentTheme, MomentView } from '../model/Catalog.types.ts';
+import { thumbOrUrl } from '../model/destinationQueries.ts';
 import { filterMoments, momentThemes } from '../model/moments.ts';
 import { ALL_MOMENTS } from '../model/moments.const.ts';
 import { MOMENTS_COPY } from '../model/moments.copy.ts';
 import { CreditPill } from './CreditPill.tsx';
 import '../moments.css';
 
-/** Dải ảnh đời sống: ẩn khi rỗng, chỉ hiện bộ lọc khi có nhiều chủ đề. */
+/** The life-photo strip: hidden when empty, the filter shows only when there are several themes. */
 export function MomentsSection({ dest }: { readonly dest: DestinationDetail }) {
   const [theme, setTheme] = useState<MomentTheme | typeof ALL_MOMENTS>(ALL_MOMENTS);
   const [opened, setOpened] = useState<MomentView | null>(null);
@@ -30,7 +31,7 @@ export function MomentsSection({ dest }: { readonly dest: DestinationDetail }) {
     <div className="hscroll moment-rail">
       {filterMoments(moments, selected).map(moment => <article className="moment-card" key={moment.id}>
         <button type="button" className="moment-photo" aria-label={fill(MOMENTS_COPY.open, { caption: moment.caption })} onClick={() => setOpened(moment)}>
-          <RevealImage src={moment.photo.url} alt={moment.caption} loading="lazy" />
+          <RevealImage src={thumbOrUrl(moment.photo)} alt={moment.caption} loading="lazy" />
         </button>
         <div className="moment-copy"><Chip>{moment.themeLabel}</Chip><p>{moment.caption}</p></div>
       </article>)}

@@ -6,9 +6,9 @@ import com.wander.planning.domain.vocabulary.ItemType;
 import java.time.LocalTime;
 
 /**
- * Các trường người dùng sửa được của một mục (đã qua kiểm tra định dạng). {@code booking} có thể null: với loại có đặt chỗ,
- * null nghĩa là "Chờ xác nhận" (mặc định); với Nghỉ/Việc cần làm, bắt buộc null. {@code placeId} là mã địa điểm trong kho
- * mà mục liên kết tới (null = mục tự do); luôn được chuẩn hóa và kiểm dạng ngay khi dựng.
+ * The fields a user can edit on an item (already format-checked). {@code booking} may be null: for a type with booking,
+ * null means 'Awaiting confirmation' (the default); for Rest/To-do it must be null. {@code placeId} is the id of the place in the catalog
+ * that the item links to (null = a free-form item); it is always normalized and shape-checked as soon as it is built.
  */
 public record ItemDetails(ItemType type, String title, LocalTime timeOfDay, Integer durationMin, String note, ItemCost cost,
                           BookingStatus booking, String placeId) {
@@ -17,13 +17,13 @@ public record ItemDetails(ItemType type, String title, LocalTime timeOfDay, Inte
         placeId = ItemText.placeId(placeId);
     }
 
-    /** Không nêu liên kết kho (mục tự do). */
+    /** No catalog link given (a free-form item). */
     public ItemDetails(ItemType type, String title, LocalTime timeOfDay, Integer durationMin, String note, ItemCost cost,
                        BookingStatus booking) {
         this(type, title, timeOfDay, durationMin, note, cost, booking, null);
     }
 
-    /** Không nêu trạng thái đặt chỗ (mặc định theo loại mục) và không liên kết kho. */
+    /** No booking status given (the default for the item type) and no catalog link. */
     public ItemDetails(ItemType type, String title, LocalTime timeOfDay, Integer durationMin, String note, ItemCost cost) {
         this(type, title, timeOfDay, durationMin, note, cost, null, null);
     }

@@ -4,8 +4,8 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Chủ đề của một "khoảnh khắc" trong thư viện ảnh điểm đến (DR-034): ảnh minh họa không khí (chợ, món ăn, con người...),
- * không khẳng định đúng một địa điểm cụ thể. Mã lạ KHÔNG được chấp nhận: {@link #fromCode} trả rỗng và adapter từ chối tệp.
+ * The theme of a 'moment' in the destination photo library (DR-034): an atmosphere photo (market, food, people...),
+ * that does not claim to be one specific place. An unknown code is NOT accepted: {@link #fromCode} returns empty and the adapter rejects the file.
  */
 public enum MomentTheme implements CodedValue {
     MARKET("cho", "Chợ & phố"),
@@ -28,12 +28,12 @@ public enum MomentTheme implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Chủ đề theo mã trong dữ liệu và API; mã lạ trả rỗng. */
+    /** The theme by code in data and API; an unknown code returns empty. */
     public static Optional<MomentTheme> fromCode(String code) {
         return CodedValue.find(MomentTheme.class, code);
     }

@@ -2,7 +2,7 @@ import type { StyleSpecification } from 'maplibre-gl';
 import { MAP } from './map.const.ts';
 import { VIETNAM_ARCHIPELAGO_LABELS } from './vietnamLabels.const.ts';
 
-/** Bổ sung nhãn tiếng Việt vào mọi map thật, độc lập với thiếu sót nhãn của tile nền. */
+/** Adds Vietnamese labels to every real map, independent of gaps in the base tile's labels. */
 export function withVietnamLabels(style: StyleSpecification, ink: string, halo: string): StyleSpecification {
   if (!style.glyphs) return style;
   return {

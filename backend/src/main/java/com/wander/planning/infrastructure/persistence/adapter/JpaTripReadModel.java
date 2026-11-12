@@ -19,15 +19,15 @@ import java.util.UUID;
 import org.springframework.stereotype.Repository;
 
 /**
- * Phía đọc bằng JPQL "constructor expression": chỉ lấy cột cần, trả record phẳng, không qua aggregate
- * và không bị Hibernate theo dõi (không dirty-checking) — rẻ hơn cho màn hình xem lịch.
+ * The read side with JPQL 'constructor expressions': it fetches only the needed columns, returns flat records, does not go through the aggregate
+ * and is not tracked by Hibernate (no dirty checking) - cheaper for the schedule view.
  */
 @Repository
 public class JpaTripReadModel implements TripReadModel {
 
     private final EntityManager em;
 
-    /** Nhận bộ quản lý thực thể của giao dịch hiện tại. */
+    /** Takes the entity manager of the current transaction. */
     public JpaTripReadModel(EntityManager em) {
         this.em = em;
     }

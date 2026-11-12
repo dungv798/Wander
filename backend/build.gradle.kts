@@ -22,14 +22,27 @@ repositories {
     mavenCentral()
 }
 
+// Spring Modulith (ADR-011): module verification, the transactional event publication registry (outbox) and module documentation.
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.modulith:spring-modulith-bom:2.1.2")
+    }
+}
+
 dependencies {
     // Web (Spring MVC trên Tomcat), JPA/Hibernate, Flyway, Actuator (health check cho load balancer AWS)
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-flyway")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
     // Khung xác thực (ADR-005): SecurityFilterChain + AuthenticationProvider; token phiên vẫn tự quản lý (Bearer, băm trong DB)
     implementation("org.springframework.boot:spring-boot-starter-security")
+    // Bean Validation for typed request records and the generated OpenAPI contract (served outside the "free" profile only)
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
+    implementation("org.springframework.modulith:spring-modulith-starter-core")
+    implementation("org.springframework.modulith:spring-modulith-starter-jdbc")
     implementation("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("org.postgresql:postgresql")
 
@@ -40,6 +53,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:testcontainers-postgresql")
+    testImplementation("org.springframework.modulith:spring-modulith-starter-test")
+    testImplementation("org.awaitility:awaitility")
+    testImplementation("org.springframework.modulith:spring-modulith-docs")
     testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
@@ -55,6 +71,10 @@ tasks.test {
     // không giữ nhiều bản catalog/Hibernate trong heap mặc định 512 MB của test worker.
     maxHeapSize = "1g"
     systemProperty("spring.test.context.cache.maxSize", "2")
+    // OpenApiContractIT rewrites backend/openapi.yaml when run with -Pwander.openapi.update=true (see docs/architecture/api-contract.md)
+    systemProperty("wander.openapi.update", providers.gradleProperty("wander.openapi.update").getOrElse("false"))
+    // ModulesTest rewrites docs/architecture/modules only with -Pwander.modules.docs=true (the generated files list relations in a varying order)
+    systemProperty("wander.modules.docs", providers.gradleProperty("wander.modules.docs").getOrElse("false"))
     // Kết quả từng test hiện ra log để đọc được khi chạy qua tools/dev.ps1
     testLogging {
         events("passed", "skipped", "failed")

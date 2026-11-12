@@ -15,27 +15,27 @@ import type { TripsActions } from './tripsActions.ts';
 
 export type { TripsActions };
 
-/** Tình trạng nạp danh sách chuyến: `loading` (đang nạp lần đầu), `ready` (đã nạp, hoặc chưa có danh tính nên chưa có chuyến), `error` (không nạp được). */
+/** The loading state of the trip list: `loading` (the first load), `ready` (loaded, or no identity yet so no trips), `error` (could not load). */
 export type TripsStatus = 'loading' | 'ready' | 'error';
 
 interface TripsContextValue {
   readonly status: TripsStatus;
   readonly state: TripsState;
   readonly actions: TripsActions;
-  /** Chuyến theo mã; undefined nếu không có. */
+  /** A trip by id; undefined if there is none. */
   readonly trip: (id: string | null) => Trip | undefined;
-  /** Mili giây từ epoch của bản chỉ đọc đang hiện khi máy chủ không trả lời; null khi dữ liệu là bản mới nhất từ máy chủ (B-09). */
+  /** Milliseconds since the epoch of the read-only copy being shown when the server does not answer; null when the data is the latest copy from the server (B-09). */
   readonly staleSince: number | null;
-  /** Nạp lại mọi chuyến từ máy chủ (nút "Thử lại"). */
+  /** Reloads every trip from the server (the 'Retry' button). */
   readonly reload: () => void;
 }
 
 const TripsContext = createContext<TripsContextValue | null>(null);
 
-/** Khóa nội bộ của kho trong bộ nhớ (không ghi ra localStorage). */
+/** The internal key of the in-memory store (it is not written to localStorage). */
 const TRIPS_STORE_KEY = 'trips.server';
 
-/** Kết quả nạp danh sách: `idle` chưa nạp, `ok`, `failed`; gắn với `round` để bỏ kết quả của lần nạp cũ. `staleAt`: khi nạp hỏng mà có bản chỉ đọc thì là thời điểm lưu bản đó. */
+/** The result of loading the list: `idle` not loaded, `ok`, `failed`; tied to `round` to drop the result of an old load. `staleAt`: when loading fails and a read-only copy exists it is the time that copy was saved. */
 interface LoadState {
   readonly round: number;
   readonly result: 'idle' | 'ok' | 'failed';
@@ -43,8 +43,8 @@ interface LoadState {
 }
 
 /**
- * Cấp kho chuyến đi cho cây giao diện. MÁY CHỦ là nguồn sự thật: kho trong bộ nhớ chỉ là bản đọc lại, nạp khi danh tính sẵn sàng và sau mỗi
- * thao tác. Phải nằm trong `IdentityProvider`. Chưa có danh tính (hoặc hết phiên) thì không có chuyến nào.
+ * Provides the trip store to the UI tree. The SERVER is the source of truth: the in-memory store is only a re-read copy, loaded when the identity is ready and after every
+ * action. It must be inside `IdentityProvider`. With no identity (or an ended session) there is no trip.
  */
 export function TripsProvider({ children, gateway }: { readonly children: ReactNode; readonly gateway?: TripsGateway }) {
   const [store] = useState(() => new PersistentStore<TripsState>(TRIPS_STORE_KEY, INITIAL_TRIPS_STATE, () => null, null));
@@ -55,7 +55,7 @@ export function TripsProvider({ children, gateway }: { readonly children: ReactN
   const [round, setRound] = useState(0);
   const [load, setLoad] = useState<LoadState>({ round: -1, result: 'idle', staleAt: null });
   const ready = identityStatus === 'ready';
-  // danh tính vào/ra trạng thái sẵn sàng (hết phiên, khôi phục, ghép máy): kết quả nạp cũ không còn đúng, nạp lại
+  // the identity goes in/out of the ready state (session ended, recovery, device pairing): the old load result is no longer right, reload
   const [prevReady, setPrevReady] = useState(ready);
   if (prevReady !== ready) {
     setPrevReady(ready);
@@ -64,23 +64,23 @@ export function TripsProvider({ children, gateway }: { readonly children: ReactN
 
   useEffect(() => {
     if (!ready) {
-      // không kiểm tra được phiên vì máy chủ không trả lời: hiện bản chỉ đọc nếu có (nhãn ở `staleSince`), khác thì màn trống như cũ
+      // the session cannot be checked because the server does not answer: show the read-only copy if there is one (the label is in `staleSince`), otherwise the screen is empty as before
       const kept = identityStatus === 'error' ? loadTripsCache() : null;
       store.update(() => (kept ? { trips: kept.trips } : INITIAL_TRIPS_STATE));
-      // chỉ xóa khi chắc chắn không còn phiên (chưa có danh tính, hết phiên): lúc đang kiểm tra phiên khi mở trang ('loading') hoặc kiểm tra lỗi ('error') thì giữ bản chỉ đọc
-      if (identityStatus === 'anonymous' || identityStatus === 'expired') clearTripsCache(); // chuyến của danh tính cũ không được hiện lại
+      // clear only when it is certain there is no session (no identity, session ended): while the session is being checked on page open ('loading') or the check failed ('error') keep the read-only copy
+      if (identityStatus === 'anonymous' || identityStatus === 'expired') clearTripsCache(); // the trips of the old identity must not show again
       return undefined;
     }
     let live = true;
     const started = store.getSnapshot();
     api.loadAll().then((trips) => {
       if (!live) return;
-      // thao tác ghi xen giữa lúc nạp: chuyến đã được đọc lại sau đó giữ bản mới, chuyến mới tạo không mất
+      // a write action interleaved with the load: a trip that has been re-read afterward keeps the newer copy, a newly created trip is not lost
       store.update((cur) => ({ trips: mergeLoaded(started, cur, trips) }));
       setLoad({ round, result: 'ok', staleAt: null });
     }).catch(() => {
       if (!live) return;
-      // máy chủ không trả lời: nếu có bản chỉ đọc lần nạp thành công trước thì hiện nó (kèm nhãn), không để màn trống
+      // the server does not answer: if a read-only copy of the earlier successful load exists show it (with a label), do not leave the screen empty
       const cached = loadTripsCache();
       if (cached) store.update(() => ({ trips: cached.trips }));
       setLoad({ round, result: 'failed', staleAt: cached ? cached.savedAt : null });
@@ -90,7 +90,7 @@ export function TripsProvider({ children, gateway }: { readonly children: ReactN
     };
   }, [ready, identityStatus, api, store, round]);
 
-  // bản chỉ đọc luôn là lần nạp thành công gần nhất; không ghi khi đang hiện bản cũ (nếu không mốc "đã lưu lúc" bị làm mới giả)
+  // the read-only copy is always the most recent successful load; do not write while an old copy is being shown (otherwise the 'saved at' mark would be falsely refreshed)
   const fresh = ready && load.round === round && load.result === 'ok';
   useEffect(() => {
     if (fresh) saveTripsCache(state.trips, Date.now());
@@ -98,7 +98,7 @@ export function TripsProvider({ children, gateway }: { readonly children: ReactN
 
   const actions = useMemo(() => createTripsActions({ gateway: api, store }), [api, store]);
   const reload = useCallback(() => {
-    if (identityStatus === 'error') void identityActions.refresh(); // chưa qua được bước kiểm tra phiên: hỏi lại danh tính trước
+    if (identityStatus === 'error') void identityActions.refresh(); // the session check did not pass: ask the identity again first
     setRound((r) => r + 1);
   }, [identityStatus, identityActions]);
   const settled = ready && load.round === round;
@@ -109,7 +109,7 @@ export function TripsProvider({ children, gateway }: { readonly children: ReactN
   return <TripsContext.Provider value={value}>{children}</TripsContext.Provider>;
 }
 
-/** Truy cập kho chuyến đi; ném lỗi nếu quên bọc `TripsProvider`. */
+/** Access to the trip store; throws if `TripsProvider` was forgotten. */
 export function useTrips(): TripsContextValue {
   const ctx = useContext(TripsContext);
   if (!ctx) throw new Error('useTrips phải nằm trong TripsProvider');

@@ -2,14 +2,14 @@ import { useLayoutEffect, useRef } from 'react';
 import { lockDocumentScroll } from '../shared/lib/lockDocumentScroll.ts';
 import { restoreDocumentPosition } from './restoreDocumentPosition.ts';
 
-/** Một vùng cuộn tự nhiên cho danh sách điện thoại; mở bản đồ giữ nguyên vị trí đang đọc. */
+/** One natural scroll region for the phone list; opening the map keeps the position being read. */
 export function useDocumentScroll(enabled: boolean, mapOpen: boolean, routeKey: string): void {
   const positions = useRef(new Map<string, number>());
   const poppedHash = useRef<string | null>(null);
   useLayoutEffect(() => {
     const previous = history.scrollRestoration;
     history.scrollRestoration = 'manual';
-    /** Back/Forward khôi phục vị trí; chọn một trang mới luôn bắt đầu từ đầu. */
+    /** Back/Forward restore the position; picking a new page always starts from the top. */
     const popped = (): void => { poppedHash.current = location.hash; };
     window.addEventListener('popstate', popped);
     return () => { history.scrollRestoration = previous; window.removeEventListener('popstate', popped); };
@@ -21,7 +21,7 @@ export function useDocumentScroll(enabled: boolean, mapOpen: boolean, routeKey: 
     const top = enabled && poppedHash.current === location.hash ? positions.current.get(routeKey) ?? 0 : 0;
     poppedHash.current = null;
     const stopRestore = restoreDocumentPosition(top);
-    /** Không ghi vị trí 0 tạm thời khi bản đồ/hộp thoại đang khóa body. */
+    /** Does not record a temporary position 0 while the map/dialog is locking the body. */
     const remember = (): void => {
       if (enabled && !root.hasAttribute('data-scroll-locked')) positions.current.set(routeKey, window.scrollY);
     };

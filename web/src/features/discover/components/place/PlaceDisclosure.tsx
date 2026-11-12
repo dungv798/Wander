@@ -12,7 +12,7 @@ interface PlaceDisclosureProps {
   readonly defaultOpen?: boolean;
 }
 
-/** Giữ nội dung trong DOM để đóng/mở theo chiều cao thật, trả focus và trạng thái đúng cho bàn phím. */
+/** Keeps the content in the DOM to open/close by the real height, returning focus and state correctly for the keyboard. */
 export function PlaceDisclosure({ title, icon, children, className = '', defaultOpen = false }: PlaceDisclosureProps) {
   const [open, setOpen] = useState(defaultOpen);
   const id = useId();
@@ -31,7 +31,7 @@ export function PlaceDisclosure({ title, icon, children, className = '', default
   </section>;
 }
 
-/** Một kiểu link-button kính trung tính cho mọi nút xem thêm trong chi tiết. */
+/** A neutral glass link-button style for every 'see more' button in the detail. */
 export function PlaceMoreButton({ open, controls, onClick }: { readonly open: boolean; readonly controls: string; readonly onClick: () => void }) {
   return <button className="place-more" type="button" aria-expanded={open} aria-controls={controls} onClick={onClick}>
     {open ? DISCOVER_COPY.seeLess : DISCOVER_COPY.seeMore}

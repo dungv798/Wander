@@ -1,6 +1,6 @@
 import { ART } from '../model/onboarding.const.ts';
 
-/** Nền trời với bốn đám mây dựng sẵn (ảnh WebP nhỏ, tải lười); trang trí nên ẩn với trình đọc màn hình. */
+/** A sky background with four prebuilt clouds (small WebP images, lazy loaded); decorative so it is hidden from screen readers. */
 export function Sky() {
   return (
     <div className="ob-sky" aria-hidden="true">

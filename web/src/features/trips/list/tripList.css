@@ -11,8 +11,8 @@
 .add-many-list .checkrow { min-height: var(--tap); }
 .add-many-footer { flex: none; display: grid; gap: var(--s-2); padding: var(--s-3) var(--s-4) var(--safe-bottom); border-radius: var(--r-lg) var(--r-lg) 0 0; }
 .add-many-footer select { min-height: var(--tap); width: 100%; background: var(--surface); color: var(--ink); border: var(--glass-border) solid var(--line); border-radius: var(--r-sm); padding-inline: var(--s-2); }
-/* Ảnh catalog phủ cả thẻ, chữ đọc được trên scrim chung của thương hiệu. */
-/* Màn Chuyến đi: hành động chính đứng đầu (nút chính rộng + nút phụ), thẻ bìa vừa phải, lối phụ gọn một hàng. */
+/* The catalog photo covers the whole card, text readable on the brand's shared scrim. */
+/* The Trips screen: the main action first (a wide primary button + a secondary button), a moderate cover card, a compact one-row secondary entry. */
 .trips-cta { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--s-2); }
 .trips-cta .btn { width: 100%; padding-inline: var(--s-2); }
 .trips-links { display: flex; flex-wrap: wrap; gap: var(--s-2); padding-block: var(--s-3) var(--s-4); }

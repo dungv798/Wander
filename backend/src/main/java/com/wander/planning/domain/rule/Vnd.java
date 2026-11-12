@@ -1,13 +1,13 @@
 package com.wander.planning.domain.rule;
 
 import com.wander.planning.domain.constant.PlanningConstants;
-/** Hiển thị VND đầy đủ (D17): 1500 nghìn → "1.500.000 ₫" (dấu chấm ngăn nghìn như vi-VN). */
+/** Full VND display (D17): 1500 thousand -> "1.500.000 ₫" (a dot separates the thousands as in vi-VN). */
 public final class Vnd {
 
     private Vnd() {
     }
 
-    /** Số tiền (đơn vị nghìn đồng) thành chuỗi VND đầy đủ có dấu ngăn nhóm và hậu tố ₫. */
+    /** An amount (in thousand VND) as a full VND string with group separators and the suffix ₫. */
     public static String fromThousands(long thousands) {
         String digits = Long.toString(Math.abs(thousands * PlanningConstants.VND_PER_THOUSAND));
         StringBuilder grouped = new StringBuilder();
@@ -22,7 +22,7 @@ public final class Vnd {
         return sign + grouped + PlanningConstants.VND_SUFFIX;
     }
 
-    /** Như {@link #fromThousands(long)} nhưng null (chưa biết) giữ nguyên null. */
+    /** Like {@link #fromThousands(long)} but null (unknown) stays null. */
     public static String fromThousandsOrNull(Long thousands) {
         return thousands == null ? null : fromThousands(thousands);
     }

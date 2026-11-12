@@ -167,7 +167,16 @@ function Tools-Check {
     return $fail
 }
 
+# Docker phai dang chay truoc moi lenh can Testcontainers hoac PostgreSQL; thieu thi bao ro ngay, khong de 200+ test do vi li do khac.
+function Require-Docker {
+    if (-not (Has 'docker')) { Write-Host 'Chua cai Docker. Chay: toolsdev.ps1 install-runtime'; return $false }
+    docker info --format '{{.ServerVersion}}' 2>$null | Out-Null
+    if ($LASTEXITCODE -ne 0) { Write-Host 'Docker Desktop chua chay: mo Docker Desktop, doi engine san sang roi chay lai (Testcontainers va PostgreSQL can Docker).'; return $false }
+    return $true
+}
+
 function Db-Up {
+    if (-not (Require-Docker)) { return 1 }
     Push-Location $Root
     $code = Run 'docker compose up -d postgres' { docker compose up -d --wait postgres }
     Pop-Location
@@ -175,6 +184,7 @@ function Db-Up {
 }
 
 function Backend-Test {
+    if (-not (Require-Docker)) { return 1 }
     Push-Location (Join-Path $Root 'backend')
     $code = Run 'gradlew test' { .\gradlew.bat test --no-daemon --console=plain }
     Pop-Location

@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
 
-/** Cài đặt JPA của cổng {@link PreferencesStore}: một dòng cho mỗi chủ, thay thế nguyên khối. */
+/** The JPA implementation of the {@link PreferencesStore} port: one row per owner, replaced as a whole. */
 @Repository
 public class JpaPreferencesStore implements PreferencesStore {
 
     private final OwnerPreferencesJpaRepository preferences;
     private final TripMapper mapper;
 
-    /** Nhận repository của bảng sở thích và bộ ánh xạ (dùng lại cách mã hóa danh sách sở thích của chuyến). */
+    /** Takes the repository of the preferences table and the mapper (reusing the trip's way of encoding a list of interests). */
     public JpaPreferencesStore(OwnerPreferencesJpaRepository preferences, TripMapper mapper) {
         this.preferences = preferences;
         this.mapper = mapper;

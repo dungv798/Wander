@@ -1,39 +1,39 @@
 import { VIEW } from '../../../shared/const/routes.const.ts';
 import type { ViewName } from '../../../shared/const/routes.const.ts';
 
-/** Hằng số của bản đồ khung ứng dụng (một bản đồ bền sau các màn Khám phá / Điểm đến / Đã chọn / Chuyến đi). */
+/** Constants of the app frame's map (one persistent map behind the Discover / Destination / Selected / Trips screens). */
 export const SHELL_MAP = {
-  /** Các màn nằm trên bản đồ khung; màn khác (bộ thẻ, chuyến, cài đặt…) ẩn nó. */
+  /** The screens that sit on the frame map; other screens (deck, trip, settings...) hide it. */
   VISIBLE_VIEWS: [VIEW.EXPLORE, VIEW.DEST, VIEW.DECK, VIEW.PICKED, VIEW.TRIPS] as readonly ViewName[],
-  /** Lề vừa khung quanh ghim (px). */
+  /** The fit-to-frame margin around a pin (px). */
   FIT_PADDING_PX: 16,
-  /** Lề vừa khung cho cảnh nhiều điểm đến/chuyến: đủ cho ảnh ghim (nửa cạnh) và nhãn tên, để Bắc/Nam không bị cắt ở điện thoại nhỏ (px). */
+  /** The fit-to-frame margin for a scene with many destinations/trips: enough for the pin photo (half a side) and the name label, so North/South are not cut off on a small phone (px). */
   OVERVIEW_PADDING_PX: 24,
-  /** Trần zoom của cảnh cả nước để các điểm đến xa nhau vẫn nằm trọn khung. */
+  /** The zoom ceiling of the whole-country scene so far-apart destinations still fit the frame. */
   OVERVIEW_MAX_ZOOM: 7,
-  /** Lề trên của vùng nhìn thấy (chừa chỗ cho thanh logo/tìm kiếm nổi), px. */
+  /** The top margin of the visible area (leaves room for the floating logo/search bar), px. */
   INSET_TOP_PX: 100,
-  /** Màn rộng: bề rộng bảng bên trái che bản đồ (khớp `--shell-panel-width` + lề), px. */
+  /** Wide screen: the width of the left panel that covers the map (matches `--shell-panel-width` + margin), px. */
   PANEL_INSET_PX: 556,
-  /** Điện thoại, bảng mở: phần chiều cao khung bị bảng che. */
+  /** Phone, panel open: the part of the frame height covered by the panel. */
   SHEET_OPEN_FRACTION: 0.7,
-  /** Home mobile có tờ bắt đầu ở 39%, phải vừa map trong khoảng thật sự nhìn thấy. */
+  /** Mobile home has a sheet starting at 39%, so the map must fit within the really visible range. */
   HOME_SHEET_COVER_FRACTION: 0.61,
-  /** Điện thoại, bảng thu lại: chiều cao thanh tiêu đề còn che đáy, px. */
+  /** Phone, panel collapsed: the height of the title strip that still covers the bottom, px. */
   PEEK_INSET_PX: 140,
-  /** Kích thước trang điện thoại, khớp token CSS của header và vùng bản đồ xem trước. */
+  /** The size of the phone page, matching the CSS tokens of the header and the preview map area. */
   DOCUMENT_HEADER_PX: 60,
   DOCUMENT_PREVIEW_PX: 160,
 } as const;
 
-/** Kéo tờ nội dung trên điện thoại (thu để xem bản đồ rộng hơn, kéo lên để mở lại). */
+/** Dragging the content sheet on a phone (collapse to see a wider map, drag up to open it again). */
 export const SHEET_DRAG = {
-  /** Kéo quá phần này của quãng đường giữa hai trạng thái thì chuyển trạng thái khi thả. */
+  /** Dragging past this part of the distance between the two states switches the state on release. */
   COMMIT_FRACTION: 0.25,
-  /** Hất nhanh hơn tốc độ này (px/ms) thì chuyển trạng thái dù kéo chưa tới ngưỡng. */
+  /** A flick faster than this speed (px/ms) switches the state even if the drag did not reach the threshold. */
   FLING_PX_PER_MS: 0.5,
-  /** Di chuyển ngắn hơn mức này (px) vẫn là một lần bấm, không phải kéo. */
+  /** A movement shorter than this (px) is still a tap, not a drag. */
   TAP_SLOP_PX: 8,
-  /** Chiều cao (px) của tờ khi mở nếu chưa đo được. */
+  /** The height (px) of the sheet when open if it could not be measured. */
   FALLBACK_OPEN_TOP_FRACTION: 0.3,
 } as const;

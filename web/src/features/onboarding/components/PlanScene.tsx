@@ -10,7 +10,7 @@ import { DaySheet } from './DaySheet.tsx';
 import { PlanMap } from './PlanMap.tsx';
 import { ReplayButton } from './SwipeParts.tsx';
 
-/** Cảnh 3: lịch hai ngày trên bản đồ. Tên chuyến → Ngày 1 (ghim 1→2→3→4, danh sách đồng bộ) → Ngày 2 → toàn chuyến; đường nối chỉ biểu diễn thứ tự ghé thăm. */
+/** Scene 3: the two-day itinerary on the map. Trip name -> Day 1 (pins 1->2->3->4, the list synchronized) -> Day 2 -> the whole trip; the connecting line only shows the order of visits. */
 export function PlanScene({ dest, reduced, auto, onDone, onInteract, onCue }: SceneProps) {
   const days = useMemo(() => buildTrip((id) => placeById(dest, id)), [dest]);
   const host = useRef<HTMLDivElement | null>(null);

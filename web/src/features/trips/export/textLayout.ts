@@ -6,7 +6,7 @@ export const LINE_HEIGHT: Readonly<Record<TextRole, number>> = {
   title: PNG.titleLine, heading: PNG.headingLine, body: PNG.bodyLine, small: PNG.smallLine,
 };
 
-/** Rút chữ theo điểm mã Unicode và kiểm cả độ rộng dấu ba chấm, không cắt giữa cặp surrogate. */
+/** Shortens text by Unicode code point and also checks the width of the ellipsis, not cutting in the middle of a surrogate pair. */
 export function ellipsize(text: string, width: number, measure: (text: string) => number): string {
   if (measure(text) <= width) return text;
   const chars = Array.from(text);
@@ -14,7 +14,7 @@ export function ellipsize(text: string, width: number, measure: (text: string) =
   return measure('…') <= width ? `${chars.join('')}…` : '';
 }
 
-/** Xuống dòng theo từ, tách cả từ liền quá dài; giới hạn dòng chỉ khi người gọi yêu cầu. */
+/** Wraps by word, also splitting a word that is too long; limits lines only when the caller asks. */
 export function wrapText(text: string, width: number, measure: (text: string) => number, maxLines = Infinity): string[] {
   const lines: string[] = [];
   let line = '';
@@ -35,16 +35,16 @@ export function wrapText(text: string, width: number, measure: (text: string) =>
   return visible;
 }
 
-/** Khoảng cách sau một khối: khối đi liền với khối kế (tên → giờ/giá) sát nhau hơn khoảng cách giữa các nhóm. */
+/** The spacing after a block: a block that goes with the next block (name -> time/price) is closer than the spacing between groups. */
 function gapAfter(block: Pick<TextBlock, 'keepNext'>): number {
   return block.keepNext ? PNG.tightGap : PNG.gap;
 }
 
-/** Chia đoạn theo chiều cao thật; giữ tiêu đề ngày với khối kế và không bỏ dòng khi sang ảnh. */
+/** Splits the paragraphs by the real height; keeps the day title with the next block and does not drop a line when moving to the next image. */
 export function paginateBlocks(blocks: readonly TextBlock[], measure: MeasureText, top: number, bottom: number, nextTop: number): LayoutPage[] {
   const pages: { lines: { text: string; role: TextRole; y: number }[] }[] = [{ lines: [] }];
   let y = top;
-  /** Nhắc lại ngày khi tiếp nội dung ở ảnh sau để người nhận không nhầm thứ tự ngày. */
+  /** Repeats the day when the content continues on a later image so the recipient does not confuse the order of the days. */
   function nextPage(section: string | undefined): void {
     pages.push({ lines: [] }); y = nextTop;
     if (!section) return;

@@ -1,11 +1,11 @@
 import type { SegmentFeature } from './geoRouteLayer.ts';
 
-/** Kẹp tiến độ hữu hạn, kể cả timestamp âm; giảm chuyển động trả tuyến đầy đủ. */
+/** Clamps a finite progress, even for a negative timestamp; reduced motion returns the full route. */
 export function drawProgress(elapsed: number, duration: number, reducedMotion = false): number {
   return reducedMotion || duration <= 0 ? 1 : Math.max(0, Math.min(1, elapsed / duration));
 }
 
-/** Vẽ lần lượt từng đoạn theo thứ tự, nội suy điểm cuối thay vì bật cả tuyến cùng lúc. */
+/** Draws each segment in turn in order, interpolating the end point instead of turning the whole route on at once. */
 export function drawRouteFeatures(features: readonly SegmentFeature[], progress: number): SegmentFeature[] {
   const position = Math.max(0, Math.min(1, progress)) * features.length;
   return features.flatMap((feature, order) => {

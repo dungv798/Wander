@@ -1,4 +1,4 @@
-/** Cổng công khai của tính năng "Danh tính ẩn danh" (mã khôi phục, thiết bị tin cậy, khôi phục). */
+/** The public gate of the 'Anonymous identity' feature (recovery code, trusted devices, recovery). */
 export { IdentityProvider } from './hooks/IdentityProvider.tsx';
 export { useIdentity, useRequireIdentity, useSessionExpired } from './hooks/identityContext.ts';
 export { SecurityScreen } from './components/SecurityScreen.tsx';

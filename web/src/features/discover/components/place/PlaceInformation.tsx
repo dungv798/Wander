@@ -9,7 +9,7 @@ import { PlaceRouteMap } from './PlaceRouteMap.tsx';
 
 const PlaceRatingCard = lazy(() => import('../../../rating/index.ts').then(module => ({ default: module.PlaceRatingCard })));
 
-/** Cột thông tin chung; desktop đặt facts tại đây, mobile dùng chính facts cạnh ảnh, không đổi dữ liệu. */
+/** The shared information column; on desktop the facts are placed here, on mobile the facts next to the photo are used, with no change to the data. */
 export function PlaceInformation({ dest, place, extra, mapLink }: { readonly dest: DestinationDetail; readonly place: PlaceView; readonly extra?: ReactNode; readonly mapLink: boolean }) {
   return <div className={`pp place-information cat-${place.category}`}>
     {extra}

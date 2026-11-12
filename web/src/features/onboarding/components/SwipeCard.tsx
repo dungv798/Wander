@@ -10,21 +10,21 @@ import type { SwipeKind } from '../model/swipeDeck.ts';
 
 interface SwipeCardProps {
   readonly place: PlaceView;
-  /** Vị trí trong chồng (0 = trên cùng). Âm = đã bay đi. */
+  /** The position in the stack (0 = top). Negative = has flown away. */
   readonly depth: number;
   readonly flight: SwipeKind | undefined;
   readonly dragging: boolean;
   readonly cardRef: Ref<HTMLElement>;
-  /** Chỉ thẻ trên cùng nhận kéo. */
+  /** Only the top card receives a drag. */
   readonly drag: CardDragHandlers | null;
 }
 
-/** Ghép các lớp CSS của một thẻ theo trạng thái (nghỉ, đang kéo, đã bay theo hướng nào). */
+/** Combines the CSS classes of a card by state (rest, dragging, which direction it flew). */
 function cardClass({ depth, flight, dragging, drag }: Pick<SwipeCardProps, 'depth' | 'flight' | 'dragging' | 'drag'>): string {
   return ['ob-card', drag ? 'is-top' : '', dragging ? 'drag' : '', flight ? `fly-${flight}` : '', depth > SWIPE.FAR_DEPTH ? 'far' : ''].filter(Boolean).join(' ');
 }
 
-/** Một thẻ ảnh của bộ bài: ảnh thật, tên, nhãn CHỌN/BỎ QUA (độ đậm theo độ lệch `--dx` bằng CSS). */
+/** One photo card of the deck: a real photo, the name, the CHOOSE/SKIP labels (the strength follows the `--dx` offset by CSS). */
 export function SwipeCard({ place, depth, flight, dragging, cardRef, drag }: SwipeCardProps) {
   return (
     <figure ref={cardRef} className={cardClass({ depth, flight, dragging, drag })} style={cssVars({ k: Math.max(0, depth) })} {...(drag ?? {})}>

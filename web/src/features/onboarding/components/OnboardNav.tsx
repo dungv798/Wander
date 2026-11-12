@@ -8,18 +8,18 @@ import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
 
 interface OnboardNavProps {
   readonly scene: number;
-  /** Dấu hiệu sắp tự chuyển cảnh (null = không có). */
+  /** The sign that the scene is about to change by itself (null = none). */
   readonly cue: OnboardCue | null;
   readonly onGo: (to: number) => void;
 }
 
-/** Lớp CSS của một chấm: đang ở cảnh này, và (nếu sắp tự chuyển) chấm đó chạy đầy dần đúng bằng thời gian còn lại. */
+/** The CSS class of one dot: it is at this scene, and (if about to change by itself) that dot fills up gradually in exactly the time that is left. */
 function dotClass(active: boolean, cue: OnboardCue | null): string | undefined {
   const sweeping = active && cue !== null && cue.ms > 0;
   return [active ? 'on' : '', sweeping ? 'cue' : ''].filter(Boolean).join(' ') || undefined;
 }
 
-/** Điều hướng dưới cùng: Quay lại, bốn chấm bấm được (chấm hiện tại chạy đầy khi sắp tự chuyển) và Tiếp (nhúc nhích nhắc bước kế). Luôn dùng được, không bắt xem hết chuyển động. */
+/** The bottom navigation: Back, four tappable dots (the current dot fills up when about to change by itself) and Next (nudges to hint at the next step). Always usable, never requiring the viewer to watch all the motion. */
 export function OnboardNav({ scene, cue, onGo }: OnboardNavProps) {
   const last = scene === SCENES.length - 1;
   return (

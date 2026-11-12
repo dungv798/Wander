@@ -3,7 +3,7 @@ package com.wander.planning.domain.vocabulary;
 import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
-/** Trạng thái một đề nghị xóa (H2): chờ duyệt, được đồng ý, bị từ chối (Q9: người đề nghị thấy "Đã từ chối", không lý do). Đổi mã phải kèm migration. */
+/** The state of a deletion request (H2): pending, approved, rejected (Q9: the requester sees 'Rejected', with no reason). Changing a code must come with a migration. */
 public enum RequestStatus implements CodedValue {
     PENDING("pending"),
     APPROVED("approved"),
@@ -20,7 +20,7 @@ public enum RequestStatus implements CodedValue {
         return code;
     }
 
-    /** Trạng thái theo mã đã lưu; mã lạ thì trống. */
+    /** The state by stored code; an unknown code is empty. */
     public static Optional<RequestStatus> fromCode(String code) {
         return CodedValue.find(RequestStatus.class, code);
     }

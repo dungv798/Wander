@@ -3,15 +3,15 @@ import type { RefObject } from 'react';
 import { nextCollapsed } from '../model/scrollCollapse.ts';
 
 /**
- * Theo dõi vùng cuộn của danh sách lịch: trả true khi nên thu gọn đầu tờ (bìa + hàng chế độ) để dành chỗ cho các thẻ (B-01).
- * Tắt (`enabled` false) thì luôn false. Quyết định có độ trễ nằm ở `nextCollapsed`.
+ * Watches the scroll area of the schedule list: returns true when the sheet head (cover + mode row) should collapse to leave room for the cards (B-01).
+ * When off (`enabled` false) it is always false. The decision with hysteresis is in `nextCollapsed`.
  */
 export function useScrollCollapse(scrollRef: RefObject<HTMLElement | null>, enabled: boolean): boolean {
   const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     const el = scrollRef.current;
     if (!enabled || !el) return undefined;
-    /** Cập nhật theo vị trí cuộn hiện tại. */
+    /** Updates by the current scroll position. */
     const onScroll = (): void => setCollapsed((current) => nextCollapsed(current, el.scrollTop, el.scrollHeight - el.clientHeight));
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => {

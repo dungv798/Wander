@@ -3,7 +3,7 @@ package com.wander.catalog.domain.vocabulary;
 import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
-/** Phân biệt địa chỉ dịch vụ thật với ý tưởng món; quán cà phê không mặc định là một bữa ăn. */
+/** Distinguishes a real service address from a dish idea; a coffee shop is not by default a meal. */
 public enum VenueKind implements CodedValue {
     RESTAURANT("restaurant", "Quán ăn", PlaceCategory.AM),
     CAFE("cafe", "Quán cà phê", PlaceCategory.AM),
@@ -23,12 +23,12 @@ public enum VenueKind implements CodedValue {
     @Override
     public String code() { return code; }
 
-    /** Nhãn loại hình để hiển thị trên thẻ chi tiết. */
+    /** The kind label to display on the detail card. */
     public String label() { return label; }
 
-    /** Nhóm khám phá tương ứng, không tạo thêm loại địa điểm hoặc module. */
+    /** The matching discovery group; it creates no new place kind or module. */
     public PlaceCategory category() { return category; }
 
-    /** Mã dịch vụ lạ không được tự đổi thành quán ăn. */
+    /** An unknown service code is not silently turned into a restaurant. */
     public static Optional<VenueKind> fromCode(String code) { return CodedValue.find(VenueKind.class, code); }
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { groupCosts } from './costView.ts';
 import type { TripItem } from './trip.types.ts';
 
-/** Mục mẫu, ghi đè các trường cần thử. */
+/** A sample item, overriding the fields to try. */
 function item(over: Partial<TripItem>): TripItem {
   return { id: 'x', placeId: null, type: 'food', title: 't', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: null, done: false, addedBy: null, doneBy: [], ...over };
 }

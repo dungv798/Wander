@@ -12,21 +12,21 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng yêu cầu xác thực lại. */
+/** Spring Data JPA repository of the re-authentication request table. */
 public interface StepUpJpaRepository extends JpaRepository<StepUpRequestEntity, UUID> {
 
-    /** Yêu cầu có thể duyệt: đúng mã, đúng danh tính, đang chờ, còn hạn và do một phiên KHÁC xin. */
+    /** A request that can be approved: right code, right identity, pending, not expired, and requested by ANOTHER session. */
     @Query(IdentityQueryConstants.APPROVABLE_STEP_UP)
     List<StepUpRequestEntity> findApprovable(@Param("code") String code, @Param("identity") UUID identity,
                                              @Param("session") UUID notSession, @Param("now") Instant now);
 
-    /** Như {@link #findApprovable} nhưng khóa ghi (SELECT … FOR UPDATE): duyệt/từ chối đồng thời chỉ một lượt thắng. */
+    /** Like {@link #findApprovable} but with a write lock (SELECT ... FOR UPDATE): of concurrent approve/deny calls only one wins. */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.APPROVABLE_STEP_UP)
     List<StepUpRequestEntity> lockApprovable(@Param("code") String code, @Param("identity") UUID identity,
                                              @Param("session") UUID notSession, @Param("now") Instant now);
 
-    /** Yêu cầu đã được duyệt và dùng được cho đúng phiên, đúng thao tác, còn hạn; khóa ghi để dùng đúng một lần. */
+    /** A request that was approved and is usable for exactly this session and action, not expired; write-locked so it is used exactly once. */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.USABLE_STEP_UP)
     Optional<StepUpRequestEntity> findUsable(@Param("id") UUID id, @Param("identity") UUID identity,

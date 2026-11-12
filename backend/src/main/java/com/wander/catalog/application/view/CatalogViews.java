@@ -2,13 +2,13 @@ package com.wander.catalog.application.view;
 
 import java.util.List;
 
-/** Read model của catalog: bản phẳng cho API, không lộ kiểu domain. Tên trường khớp {@code web/src/api.ts}. */
+/** The read model of the catalog: a flat form for the API, not exposing domain types. Field names match {@code web/src/api.ts}. */
 public final class CatalogViews {
 
     private CatalogViews() {
     }
 
-    /** Ảnh và tên một địa điểm tiêu biểu, để vẽ màn Khám phá mà không phải tải cả điểm đến. */
+    /** The photo and name of a representative place, to draw the Discover screen without loading the whole destination. */
     public record Preview(String placeId, String name, String url) {
     }
 
@@ -16,10 +16,15 @@ public final class CatalogViews {
                                      List<Preview> previews, Double lat, Double lon, PhotoView coverPhoto, List<String> categories) {
     }
 
-    public record PhotoView(String url, String author, String license, String sourceUrl, String caption, String authorUrl) {
+    /**
+     * A photo with attribution. {@code id} is the stable photo identifier (trip covers store it), {@code thumbUrl} the 480 px
+     * variant and {@code srcSet} the ready-made {@code srcset} value; the last three are {@code null} when not applicable.
+     */
+    public record PhotoView(String url, String author, String license, String sourceUrl, String caption, String authorUrl,
+                            String id, String thumbUrl, String srcSet) {
     }
 
-    /** Khoảng cách ước tính từ một mốc tham chiếu. {@code approximate} = tọa độ mốc chưa kiểm chứng. */
+    /** The estimated distance from a reference landmark. {@code approximate} = the landmark's coordinates are not verified. */
     public record Away(String refId, String refName, int km, int minutes, boolean approximate) {
     }
 
@@ -42,19 +47,19 @@ public final class CatalogViews {
             List<Integer> bestMonths, List<Integer> rainyMonths, List<String> notes, List<GuideItemView> items) {
     }
 
-    /** Mốc tham chiếu để tính khoảng cách; có tọa độ để giao diện vẽ bản đồ nhỏ. {@code approximate} = tọa độ chưa kiểm chứng. */
-    /** Một ngày của lịch mẫu: mã địa điểm theo thứ tự đi (ghép với địa điểm của điểm đến ở phía gọi) và ghi chú biên tập. */
+    /** A reference landmark for computing distance; it has coordinates so the UI can draw a small map. {@code approximate} = coordinates not verified. */
+    /** One day of a sample itinerary: the place ids in visiting order (joined with the destination's places by the caller) and an editorial note. */
     public record TemplateDayView(List<String> placeIds, String note) {
     }
 
-    /** Lịch mẫu của điểm đến (N-2). {@code status} là mã duyệt ({@code draft}/{@code approved}); không có giờ, giá hay đánh giá. */
+    /** The sample itinerary of a destination (N-2). {@code status} is the review code ({@code draft}/{@code approved}); it has no times, prices or ratings. */
     public record TemplateView(String id, String title, String summary, String status, List<TemplateDayView> days) {
     }
 
     public record ReferenceView(String id, String name, double lat, double lon, boolean approximate) {
     }
 
-    /** Khoảnh khắc đời sống của điểm đến (DR-034): ảnh minh họa không khí kèm chủ đề, chú thích và ghi công. */
+    /** A life moment of a destination (DR-034): an atmosphere photo with a theme, a caption and attribution. */
     public record MomentView(String id, String theme, String themeLabel, String caption, PhotoView photo, String authorUrl) {
     }
 

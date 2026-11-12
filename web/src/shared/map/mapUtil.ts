@@ -2,24 +2,24 @@ import { MEDIA } from '../const/app.const.ts';
 import { MAP } from './map.const.ts';
 import type { MapMarker } from './map.types.ts';
 
-/** Hai danh sách ghim có giống nhau (cùng id, tọa độ, nhãn, số, ảnh, kiểu) không: để bỏ qua việc dựng lại khi chỉ đổi tham chiếu mảng. */
+/** Whether two pin lists are identical (same id, coordinates, label, number, photo, kind): to skip rebuilding when only the array reference changes. */
 export function sameMarkers(a: readonly MapMarker[], b: readonly MapMarker[]): boolean {
   return a.length === b.length && a.every((m, i) => JSON.stringify(m) === JSON.stringify(b[i]));
 }
 
-/** Người dùng yêu cầu giảm chuyển động. */
+/** The user asked for reduced motion. */
 export function prefersReducedMotion(): boolean {
   return window.matchMedia(MEDIA.REDUCED_MOTION).matches;
 }
 
-/** Liên kết bản đồ ngoài (OpenStreetMap) tới ghim đầu tiên; chưa có ghim thì cho thấy cả nước. Dùng khi bản đồ trong ứng dụng không mở được. */
+/** An external map link (OpenStreetMap) to the first pin; with no pin it shows the whole country. Used when the in-app map cannot open. */
 export function externalMapHref(markers: readonly Pick<MapMarker, 'lat' | 'lon'>[]): string {
   const first = markers[0];
   if (!first) return `https://www.openstreetmap.org/#map=${MAP.EXTERNAL_COUNTRY}`;
   return `https://www.openstreetmap.org/?mlat=${first.lat}&mlon=${first.lon}#map=${MAP.EXTERNAL_ZOOM}/${first.lat}/${first.lon}`;
 }
 
-/** Trình duyệt có tạo được ngữ cảnh WebGL không (MapLibre cần). */
+/** Whether the browser can create a WebGL context (MapLibre needs it). */
 export function webglAvailable(): boolean {
   try {
     const canvas = document.createElement('canvas');
@@ -32,7 +32,7 @@ export function webglAvailable(): boolean {
 let colorCtx: CanvasRenderingContext2D | null = null;
 const BYTE_MAX = 255;
 
-/** Đọc một màu CSS bất kỳ (kể cả `var()` đã giải) thành [r, g, b] trong 0..1 bằng canvas 1×1. */
+/** Reads any CSS color (including a resolved `var()`) into [r, g, b] in 0..1 using a 1x1 canvas. */
 export function cssColorToRgb(css: string): [number, number, number] {
   colorCtx ??= document.createElement('canvas').getContext('2d', { willReadFrequently: true });
   if (!colorCtx) return [0, 0, 0];

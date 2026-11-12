@@ -4,16 +4,16 @@ import type { SlotKey, TripBreak, TripDay, TripItem, TripStop } from './onboardi
 
 const LUNCH_SLOT: SlotKey = 'noon';
 
-/** Tra địa điểm theo mã trong kho của điểm đến; null nếu không có. */
+/** Looks a place up by id in the destination's catalog; null if there is none. */
 export type PlaceLookup = (id: string) => PlaceView | null;
 
-/** Đánh lại số 1, 2, 3… cho các địa điểm của một ngày (khoảng nghỉ không có số) để số ghim luôn khớp số trong danh sách. */
+/** Renumbers 1, 2, 3... the places of a day (a break has no number) so the pin number always matches the number in the list. */
 function renumber(items: readonly TripItem[]): TripItem[] {
   let n = 0;
   return items.map((item) => (item.kind === 'stop' ? { ...item, num: ++n } : item));
 }
 
-/** Dựng lịch mẫu từ dữ liệu thật của điểm đến; địa điểm thiếu trong kho hoặc thiếu tọa độ bị bỏ qua (không thay bằng điểm khác). */
+/** Builds the sample itinerary from the destination's real data; a place missing from the catalog or lacking coordinates is skipped (it is not replaced by another place). */
 export function buildTrip(find: PlaceLookup): TripDay[] {
   return SAMPLE_TRIP.map((day, index) => {
     const items: TripItem[] = day.items.flatMap((entry): TripItem[] => {
@@ -26,17 +26,17 @@ export function buildTrip(find: PlaceLookup): TripDay[] {
   });
 }
 
-/** Các địa điểm (có ghim) của một ngày theo thứ tự ghé thăm. */
+/** The places (with a pin) of a day in visiting order. */
 export function dayPlaces(day: TripDay): PlaceView[] {
   return day.items.flatMap((item) => (item.kind === 'stop' ? [item.place] : []));
 }
 
-/** Địa điểm có trong lịch ở ngày nào (chỉ số ngày) hoặc -1 nếu chưa có. */
+/** Which day (day index) a place is in the itinerary, or -1 if it is not there. */
 export function dayOfPlace(days: readonly TripDay[], placeId: string): number {
   return days.findIndex((d) => d.items.some((i) => i.kind === 'stop' && i.place.id === placeId));
 }
 
-/** Chủ chuyến chấp nhận đề xuất: đặt địa điểm lên đầu ngày được đề xuất và đánh lại số; không tạo bản sao nếu địa điểm đã có trong lịch. */
+/** The trip owner accepts the suggestion: puts the place at the start of the suggested day and renumbers; no copy is made if the place is already in the itinerary. */
 export function applyProposal(days: readonly TripDay[], place: PlaceView): TripDay[] {
   if (dayOfPlace(days, place.id) >= 0) return [...days];
   return days.map((day) => {

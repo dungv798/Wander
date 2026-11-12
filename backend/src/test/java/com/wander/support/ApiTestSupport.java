@@ -66,7 +66,7 @@ public abstract class ApiTestSupport {
 
     /** Phản hồi HTTP; {@code body} là Map/List/String/Number/Boolean/null như JSON. */
     public record Res(int status, Object body, HttpResponse<String> raw) {
-        /** Lấy giá trị theo đường dẫn, ví dụ {@code "error.code"} hay {@code "days.1.items.0.title"}. */
+        /** Lấy giá trị theo đường dẫn, ví dụ {@code "code"} hay {@code "days.1.items.0.title"}. */
         public Object at(String path) {
             Object cur = body;
             for (String part : path.split("\\.")) {
@@ -92,8 +92,39 @@ public abstract class ApiTestSupport {
         }
 
         public String code() {
-            return str("error.code");
+            return str("code");
         }
+    }
+
+    /**
+     * Asserts that a response is an RFC 9457 problem: the right status, media type, standard members and application {@code code};
+     * errors must never be cached.
+     */
+    protected static void assertProblem(Res res, int status, String code) {
+        org.assertj.core.api.Assertions.assertThat(res.status()).as(String.valueOf(res.body())).isEqualTo(status);
+        org.assertj.core.api.Assertions.assertThat(res.raw().headers().firstValue("Content-Type").orElse("").toLowerCase())
+                .isEqualTo("application/problem+json;charset=utf-8");
+        org.assertj.core.api.Assertions.assertThat(res.raw().headers().firstValue("Cache-Control")).hasValue("no-store");
+        org.assertj.core.api.Assertions.assertThat(res.code()).isEqualTo(code);
+        org.assertj.core.api.Assertions.assertThat(res.str("type")).isEqualTo("urn:wander:problem:" + code.toLowerCase().replace('_', '-'));
+        org.assertj.core.api.Assertions.assertThat(res.num("status")).isEqualTo(status);
+        org.assertj.core.api.Assertions.assertThat(res.str("title")).isNotBlank();
+        org.assertj.core.api.Assertions.assertThat(res.str("detail")).isNotBlank();
+    }
+
+    /** The response body as a map without the {@code instance} member (the request path the caller itself sent). */
+    /** The problem body without {@code requestId}, which is different for every request; for comparing two refusals of the same kind. */
+    protected static Map<Object, Object> withoutRequestId(Res res) {
+        Map<Object, Object> copy = new java.util.HashMap<>((Map<?, ?>) res.body());
+        copy.remove("requestId");
+        return copy;
+    }
+
+    protected static Map<Object, Object> withoutInstance(Res res) {
+        Map<Object, Object> copy = new java.util.HashMap<>((Map<?, ?>) res.body());
+        copy.remove("instance");
+        copy.remove("requestId");
+        return copy;
     }
 
     protected Res call(String method, String path, String token, Object body) {

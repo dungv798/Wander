@@ -11,7 +11,7 @@ import { useIdentity } from '../hooks/identityContext.ts';
 import { useReportError } from '../hooks/useReportError.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
 
-/** Hộp xác nhận thu hồi một thiết bị (không cần xác thực lại và không hoàn tác được: DR-001 MĐ-5). */
+/** The confirmation box for revoking a device (no re-authentication needed and it cannot be undone: DR-001 MĐ-5). */
 export function RevokeSheet({ deviceId, onClose }: { readonly deviceId: string; readonly onClose: () => void }) {
   const { identity, actions } = useIdentity();
   const toast = useToast();
@@ -19,7 +19,7 @@ export function RevokeSheet({ deviceId, onClose }: { readonly deviceId: string; 
   const [busy, setBusy] = useState(false);
   const device = identity?.devices.find((d) => d.id === deviceId);
   if (!device) return null;
-  /** Thu hồi ở máy chủ; thành công thì báo và đóng, thất bại thì báo lỗi và giữ tờ để thử lại. */
+  /** Revokes on the server; on success it notifies and closes, on failure it reports the error and keeps the sheet to retry. */
   const revoke = (): void => {
     setBusy(true);
     actions.revoke(deviceId).then(() => {
@@ -48,9 +48,9 @@ export function RevokeSheet({ deviceId, onClose }: { readonly deviceId: string; 
 }
 
 /**
- * Tờ duyệt thiết bị mới hoặc yêu cầu xác thực lại (S11): đủ thông tin để nhận ra thiết bị lạ (tên TỰ KHAI, chưa xác minh), cảnh báo lừa
- * đảo, và SỐ KHỚP (DR-018 E1): chọn đúng số máy kia đang hiện mới được duyệt; chọn sai là từ chối vĩnh viễn yêu cầu đó.
- * Các lựa chọn do máy chủ cố định lúc tạo yêu cầu (xem nhiều lần không lộ số thật). Khu vực chưa có dữ liệu thật (B4/E5).
+ * The sheet for approving a new device or a re-authentication request (S11): enough information to recognize a strange device (a SELF-DECLARED name, unverified), a phishing
+ * warning, and the MATCHING NUMBER (DR-018 E1): only choosing exactly the number the other device is showing approves; a wrong choice denies that request for good.
+ * The choices are fixed by the server when the request is created (viewing several times does not reveal the real number). The area has no real data yet (B4/E5).
  */
 export function PairConfirmSheet({ preview, onClose }: { readonly preview: ApprovalPreview; readonly onClose: () => void }) {
   const { actions } = useIdentity();
@@ -59,7 +59,7 @@ export function PairConfirmSheet({ preview, onClose }: { readonly preview: Appro
   const [busy, setBusy] = useState(false);
   const [now] = useState(() => Date.now());
   const name = preview.deviceName ?? C.pair.unnamed;
-  /** Chọn một số: đúng thì duyệt, sai thì máy chủ từ chối vĩnh viễn; yêu cầu hết hạn giữa chừng thì báo. */
+  /** Choose a number: right approves, wrong and the server denies for good; if the request expires midway it notifies. */
   const choose = (n: number): void => {
     setBusy(true);
     actions.answer(preview, n).then((outcome) => {
@@ -70,7 +70,7 @@ export function PairConfirmSheet({ preview, onClose }: { readonly preview: Appro
       onClose();
     }).finally(() => setBusy(false));
   };
-  /** Từ chối chủ động. */
+  /** Actively deny. */
   const deny = (): void => {
     setBusy(true);
     actions.deny(preview).then(() => {

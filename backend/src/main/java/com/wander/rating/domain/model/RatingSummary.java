@@ -1,5 +1,5 @@
 package com.wander.rating.domain.model;
 
-/** Điểm tổng hợp của một quán: trung bình (null khi chưa có lượt) và số lượt. */
+/** The aggregate score of a venue: the average (null when there are no ratings yet) and the number of ratings. */
 public record RatingSummary(Double average, long count) {
 }

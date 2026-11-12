@@ -17,10 +17,10 @@ import { useDiscoveryTopic } from '../hooks/DiscoveryTopicProvider.tsx';
 import { matchesDiscoveryFilter } from '../model/discoveryFilters.ts';
 import { useDeckSpotlight } from '../hooks/DeckSpotlightProvider.tsx';
 
-/** Mã giữ chỗ cho tùy chọn `dest` của bản đồ: một bản đồ bền cho cả nước nên mã không đổi theo điểm đến (đổi mã sẽ hủy và dựng lại bản đồ). */
+/** The placeholder id for the map's `dest` option: one persistent map for the whole country so the id does not change with the destination (changing the id would destroy and rebuild the map). */
 const SHELL_MAP_ID = 'vn';
 
-/** Lề che bản đồ: màn rộng có bảng bên trái, điện thoại có bảng đáy (thu lại thì chỉ còn thanh tiêu đề). */
+/** The margin that the sheet covers on the map: a wide screen has a left panel, a phone has a bottom panel (when collapsed only the title bar remains). */
 function useMapInsets(sheet: SheetMode, view: ViewName, documentScroll: boolean): { top: number; left: number; bottom: number } {
   const wide = useIsWide();
   return useMemo(() => {
@@ -37,9 +37,9 @@ function useMapInsets(sheet: SheetMode, view: ViewName, documentScroll: boolean)
 }
 
 /**
- * Bản đồ BỀN ở khung ứng dụng: một thể hiện MapLibre duy nhất nằm sau mọi màn, chỉ đổi cảnh (ghim + camera) theo màn hiện tại.
- * Ở màn khác che/có bản đồ riêng nó chỉ ẩn (không hủy) nên quay lại là có ngay, không tải lại. Không xin vị trí người dùng.
- * Chạm ghim: cảnh cả nước thì chọn điểm đến đó; cảnh điểm đến/đã chọn thì mở chi tiết nơi đó.
+ * The PERSISTENT map of the app frame: a single MapLibre instance behind every screen, changing only the scene (pins + camera) by the current screen.
+ * On other screens that cover it or have their own map it is only hidden (not destroyed) so coming back is instant, with no reload. It does not ask for the user's location.
+ * Tapping a pin: on the whole-country scene it chooses that destination; on the destination/selected scene it opens that place's detail.
  */
 export function ShellMap({ view, sheet, documentScroll = false }: { readonly view: ViewName; readonly sheet: SheetMode; readonly documentScroll?: boolean }) {
   const { destId, selectedId, destinations, select } = useCurrentDestination();
@@ -64,10 +64,10 @@ export function ShellMap({ view, sheet, documentScroll = false }: { readonly vie
   const pickedIds = useMemo(() => new Set(Object.entries(state.decisions).filter(([, decision]) => decision === 'like').map(([id]) => id)), [state.decisions]);
   const trips = useMemo(() => tripState.trips.map((trip) => ({ id: trip.id, name: trip.name, destinationId: trip.destinationId })), [tripState.trips]);
   const scene = useMemo(() => shellMapScene({ view, selectedId, destId, summaries, detail, pickedIds, trips }), [view, selectedId, destId, summaries, detail, pickedIds, trips]);
-  // Đối tượng vừa khung MỚI mỗi khi cảnh dựng lại hoặc tờ thu/mở (lề đổi → camera bay lại để ghim ra giữa phần bản đồ lộ ra); render lại thường thì giữ nguyên.
-  const fit = useMemo(() => (scene.fit ? { ...scene.fit } : null), [scene, sheet]); // eslint-disable-line react-hooks/exhaustive-deps -- `sheet` chỉ để làm mới yêu cầu vừa khung
+  // A NEW fit-to-frame object each time the scene is rebuilt or the sheet collapses/expands (the margin changes -> the camera flies again so the pins end up in the middle of the visible map part); an ordinary re-render keeps it.
+  const fit = useMemo(() => (scene.fit ? { ...scene.fit } : null), [scene, sheet]); // eslint-disable-line react-hooks/exhaustive-deps -- `sheet` is only there to refresh the fit-to-frame request
   const hidden = scene.kind === 'hidden';
-  /** Chạm một ghim: điểm đến → mở trang điểm đến đó; chuyến → mở chuyến; nơi → mở chi tiết. */
+  /** Tapping a pin: a destination -> opens that destination's page; a trip -> opens the trip; a place -> opens the detail. */
   function onPin(id: string): void {
     if (scene.kind === 'overview') {
       select(id);

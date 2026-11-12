@@ -8,11 +8,14 @@
   "scripts": {
     "build:web": "npm --prefix web run build",
     "typecheck:web": "npm --prefix web run typecheck",
-    "test:e2e": "npm --prefix web run e2e"
+    "test:e2e": "npm --prefix web run e2e",
+    "gen:api": "openapi-typescript backend/openapi.yaml -o web/src/shared/api/contract.generated.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
+    "openapi-typescript": "7.13.0",
     "playwright-core": "^1.64.1",
+    "sharp": "0.35.5",
     "typescript": "^5.9.0"
   }
 }

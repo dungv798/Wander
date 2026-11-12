@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code step_up_requests} (ánh xạ JPA; mô hình domain ở identity.domain.IdentityModel). */
+/** Table {@code step_up_requests} (JPA mapping; the domain model is in identity.domain.IdentityModel). */
 @Entity
 @Table(name = "step_up_requests")
 public class StepUpRequestEntity {

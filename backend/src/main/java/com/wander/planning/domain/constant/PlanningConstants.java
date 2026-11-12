@@ -3,186 +3,186 @@ package com.wander.planning.domain.constant;
 import java.util.List;
 
 /**
- * Hằng số của module planning (tầng CHỨC NĂNG): giới hạn nội dung, định dạng nhập liệu, độ dài cột, cách hiển thị.
- * Mã lỗi ở {@link PlanningErrorCodes}, lời báo ở {@link PlanningMessages}. Các giới hạn là mặc định của implementation
- * (docs/implementation/decisions.md), đổi được.
+ * Constants of the planning module (FEATURE tier): content limits, input formats, column lengths, display format.
+ * Error codes are in {@link PlanningErrorCodes}, messages in {@link PlanningMessages}. The limits are implementation defaults
+ * (docs/implementation/decisions.md) and can be changed.
  */
 public final class PlanningConstants {
 
-    /** Độ dài tối đa của tiêu đề mục. */
+    /** Maximum length of an item title. */
     public static final int MAX_TITLE = 200;
 
-    /** Độ dài tối đa của ghi chú mục. */
+    /** Maximum length of an item note. */
     public static final int MAX_NOTE = 2000;
 
-    /** Độ dài tối đa của tên chuyến. */
+    /** Maximum length of a trip name. */
     public static final int MAX_TRIP_NAME = 120;
 
-    /** Độ dài tối đa của điểm đến. */
+    /** Maximum length of a destination. */
     public static final int MAX_DESTINATION = 200;
 
-    /** Độ dài tối đa của mã địa điểm trong kho (khớp {@code Place.id} ở catalog; hai module chỉ tham chiếu bằng mã). */
+    /** Maximum length of a place id in the catalog (matches {@code Place.id} in catalog; the two modules refer to each other only by id). */
     public static final int MAX_PLACE_ID_LENGTH = 60;
 
-    /** Mã địa điểm dạng slug: chữ thường, số, nối nhau bằng gạch ngang (khớp CHECK ở migration V4). */
+    /** A place id as a slug: lowercase, digits, joined by hyphens (matches the CHECK in migration V4). */
     public static final String PLACE_ID_REGEX = "[a-z0-9]+(-[a-z0-9]+)*";
 
-    /** Số phần tử tối đa của một lệnh gán ngày hàng loạt (bằng trần "Đã xóa gần đây", DR-020). */
+    /** Maximum number of elements of one bulk date-assignment command (equal to the 'Recently deleted' ceiling, DR-020). */
     public static final int MAX_ASSIGNMENTS = 500;
 
-    /** Trần "Đã xóa gần đây" của một chuyến (DR-020): đầy thì chặn xóa thêm, không tự xóa vĩnh viễn mục cũ (D19). Khớp `LIMITS.MAX_TRASH` ở giao diện. */
+    /** The 'Recently deleted' ceiling of a trip (DR-020): when full, further deletes are blocked, old items are never permanently deleted automatically (D19). Matches `LIMITS.MAX_TRASH` in the UI. */
     public static final int MAX_TRASH_ITEMS = 500;
 
-    /** Dấu nối trước hậu tố số khi tên chuyến trùng (DR-006). */
+    /** Hyphen before the number suffix when a trip name clashes (DR-006). */
     public static final String NAME_SUFFIX_SEPARATOR = " - ";
 
-    /** Hậu tố số đầu tiên khi tên trùng: " - 2". */
+    /** The first number suffix when a name clashes: ' - 2'. */
     public static final int FIRST_NAME_SUFFIX = 2;
 
-    /** Hậu tố số lớn nhất thử (loại trừ); hết thì dùng mã ngắn ngẫu nhiên. */
+    /** The largest number suffix tried (exclusive); after that a random short code is used. */
     public static final int MAX_NAME_SUFFIX = 200;
 
-    /** Số ký tự của mã ngắn dùng khi hết hậu tố số. */
+    /** Number of characters of the short code used when number suffixes run out. */
     public static final int NAME_SHORT_CODE_LENGTH = 4;
 
-    /** Số ngày trong một tuần. */
+    /** Number of days in a week. */
     public static final int DAYS_PER_WEEK = 7;
 
-    /** Số giờ trong một ngày. */
+    /** Number of hours in a day. */
     public static final int HOURS_PER_DAY = 24;
 
-    /** Số phút trong một giờ. */
+    /** Number of minutes in an hour. */
     public static final int MINUTES_PER_HOUR = 60;
 
-    /** Thời lượng tối đa của một mục, phút: 7 ngày (Q18b). */
+    /** Maximum duration of an item, in minutes: 7 days (Q18b). */
     public static final int MAX_DURATION_MIN = DAYS_PER_WEEK * HOURS_PER_DAY * MINUTES_PER_HOUR;
 
-    /** Giờ lớn nhất của giờ trong ngày (24 giờ). */
+    /** Largest hour of the time of day (24-hour clock). */
     public static final int MAX_HOUR = 23;
 
-    /** Phút lớn nhất của giờ trong ngày. */
+    /** Largest minute of the time of day. */
     public static final int MAX_MINUTE = 59;
 
-    /** Chi phí tối đa, nghìn đồng (Q18d). */
+    /** Maximum cost, in thousand VND (Q18d). */
     public static final long MAX_COST_K = 1_000_000_000L;
 
-    /** Số chữ số tối đa của một chi phí dạng chuỗi sau khi bỏ số 0 đứng đầu (đủ chứa {@link #MAX_COST_K}). */
+    /** Maximum number of digits of a cost given as a string after leading zeros are removed (enough to hold {@link #MAX_COST_K}). */
     public static final int MAX_AMOUNT_DIGITS = 10;
 
-    /** Số ngày tối đa của một chuyến (gồm hai đầu). */
+    /** Maximum number of days of a trip (both ends included). */
     public static final int MAX_DAYS = 366;
 
-    /** Số kiểu chuyến tối đa chọn cùng lúc. */
+    /** Maximum number of trip kinds chosen at once. */
     public static final int MAX_STYLES = 5;
 
-    /** Nhãn thứ trong tuần, chỉ số 0 là Chủ nhật. */
+    /** Weekday labels, index 0 is Sunday. */
     public static final List<String> WEEKDAY_LABELS = List.of("CN", "T2", "T3", "T4", "T5", "T6", "T7");
 
-    /** Ngày dạng YYYY-MM-DD. */
+    /** A date as YYYY-MM-DD. */
     public static final String ISO_DATE_REGEX = "^\\d{4}-\\d{2}-\\d{2}$";
 
-    /** Giờ dạng HH:MM, hai nhóm là giờ và phút. */
+    /** A time as HH:MM, two groups for hours and minutes. */
     public static final String TIME_OF_DAY_REGEX = "^(\\d{2}):(\\d{2})$";
 
-    /** Mẫu hiển thị giờ trong ngày. */
+    /** Display pattern of a time of day. */
     public static final String TIME_OF_DAY_PATTERN = "HH:mm";
 
-    /** Chuỗi chỉ gồm chữ số. */
+    /** A string made only of digits. */
     public static final String DIGITS_REGEX = "^\\d+$";
 
-    /** Chuỗi là số nguyên âm. */
+    /** A string that is a negative integer. */
     public static final String NEGATIVE_DIGITS_REGEX = "^-\\d+$";
 
-    /** Số 0 đứng đầu cần bỏ (giữ lại một chữ số). */
+    /** Leading zeros to remove (keeping one digit). */
     public static final String LEADING_ZEROS_REGEX = "^0+(?=\\d)";
 
-    /** Dấu ngăn cách các mã kiểu chuyến khi lưu thành một cột. */
+    /** Separator of the trip-kind codes when stored in one column. */
     public static final String STYLE_CODE_SEPARATOR = ",";
 
-    /** Số lần nghìn: 1 nghìn đồng = 1.000 đồng. */
+    /** The thousand multiplier: 1 thousand VND = 1,000 VND. */
     public static final long VND_PER_THOUSAND = 1000;
 
-    /** Số chữ số mỗi nhóm khi hiển thị tiền. */
+    /** Number of digits per group when displaying money. */
     public static final int VND_GROUP_SIZE = 3;
 
-    /** Dấu ngăn nhóm nghìn của tiền (như vi-VN). */
+    /** Thousands group separator of money (as in vi-VN). */
     public static final char VND_GROUP_SEPARATOR = '.';
 
-    /** Hậu tố hiển thị tiền. */
+    /** Suffix when displaying money. */
     public static final String VND_SUFFIX = " ₫";
 
-    /** Dấu âm khi hiển thị tiền. */
+    /** Minus sign when displaying money. */
     public static final String VND_MINUS = "-";
 
-    /** Độ dài cột {@code trips.styles}. */
+    /** Length of the column {@code trips.styles}. */
     public static final int STYLES_COLUMN_LENGTH = 100;
 
-    /** Số sở thích tối đa của một chuyến (bằng số loại địa điểm). */
+    /** Maximum number of interests of a trip (equal to the number of place types). */
     public static final int MAX_INTERESTS = 6;
 
-    /** Độ dài cột {@code trips.interests}. */
+    /** Length of the column {@code trips.interests}. */
     public static final int INTERESTS_COLUMN_LENGTH = 100;
 
-    /** Độ dài cột {@code trips.kind}. */
+    /** Length of the column {@code trips.kind}. */
     public static final int KIND_COLUMN_LENGTH = 16;
 
-    /** Độ dài cột {@code trips.pace}. */
+    /** Length of the column {@code trips.pace}. */
     public static final int PACE_COLUMN_LENGTH = 16;
 
-    /** Độ dài cột {@code items.type}. */
+    /** Length of the column {@code items.type}. */
     public static final int ITEM_TYPE_COLUMN_LENGTH = 32;
 
-    /** Độ dài cột {@code items.booking_status}. */
+    /** Length of the column {@code items.booking_status}. */
     public static final int BOOKING_COLUMN_LENGTH = 16;
 
     private PlanningConstants() {
     }
 
-    /** Số thành viên tối đa của một chuyến, kể cả Organizer (H5, Tầng B). */
+    /** Maximum number of members of a trip, including the Organizer (H5, Tier B). */
     public static final int MAX_MEMBERS = 10;
 
-    /** Liên kết mời hết hạn sau bấy nhiêu ngày kể từ lúc tạo (Q7). */
+    /** An invite link expires after this many days from when it was created (Q7). */
     public static final long INVITE_TTL_DAYS = 7;
 
-    /** Tên hiển thị tối đa (tính theo code point). */
+    /** Maximum display name (counted in code points). */
     public static final int MAX_DISPLAY_NAME = 40;
 
-    /** Tên hiển thị mặc định (và tên dành riêng) của Organizer: trung tính, KHÔNG lấy tên thiết bị. */
+    /** Default (and reserved) display name of the Organizer: neutral, NOT taken from the device name. */
     public static final String ORGANIZER_DISPLAY_NAME = "Organizer";
 
-    /** Số byte ngẫu nhiên của mã mời (256 bit → 43 ký tự base64url). */
+    /** Number of random bytes of an invite code (256 bits -> 43 base64url characters). */
     public static final int INVITE_CODE_BYTES = 32;
 
-    /** Mã mời đúng dạng: 43 ký tự base64url. */
+    /** A well-formed invite code: 43 base64url characters. */
     public static final String INVITE_CODE_REGEX = "[A-Za-z0-9_-]{43}";
 
-    /** Thuật toán băm mã mời. */
+    /** Hash algorithm of invite codes. */
     public static final String INVITE_HASH_ALGORITHM = "SHA-256";
 
-    /** Tiền tố miền của băm mã mời. */
+    /** Domain prefix of the invite-code hash. */
     public static final String INVITE_HASH_PREFIX = "wander.invite.v1:";
 
-    /** Độ dài cột vai thành viên. */
+    /** Length of the member-role column. */
     public static final int ROLE_COLUMN_LENGTH = 16;
 
-    /** Số đề nghị xóa đang chờ tối đa của một thành viên. */
+    /** Maximum number of pending deletion requests of one member. */
     public static final int MAX_PENDING_REQUESTS = 20;
 
-    /** Số đề nghị đã quyết định được giữ lại mỗi chuyến (cũ hơn bị dọn). */
+    /** Number of decided requests kept per trip (older ones are cleaned up). */
     public static final int MAX_DECIDED_REQUESTS = 50;
 
-    /** Lý do đề nghị xóa tối đa (G4). */
+    /** Maximum deletion-request reason (G4). */
     public static final int MAX_REQUEST_REASON = 200;
 
-    /** Độ dài cột lý do đề nghị (đủ cho MAX_REQUEST_REASON ký tự dạng bất kỳ code point). */
+    /** Length of the request-reason column (enough for MAX_REQUEST_REASON characters of any code point form). */
     public static final int REQUEST_REASON_COLUMN_LENGTH = 800;
 
-    /** Số hạng mục checklist tối đa của một chuyến. */
+    /** Maximum number of checklist items of a trip. */
     public static final int MAX_CHECKLIST_ITEMS = 100;
 
-    /** Tên hạng mục checklist tối đa. */
+    /** Maximum checklist item name. */
     public static final int MAX_CHECKLIST_TITLE = 120;
 
-    /** Tên nhóm checklist tối đa (trống = không nhóm). */
+    /** Maximum checklist group name (empty = no group). */
     public static final int MAX_CHECKLIST_GROUP = 60;
 }

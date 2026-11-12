@@ -1,131 +1,98 @@
 package com.wander.planning.api.constant;
 
-/** Hằng số của API Planning (tầng CHỨC NĂNG): đường dẫn và khóa JSON của phản hồi (khớp {@code web/src/api.ts}). */
+/** Constants of the Planning API (FEATURE tier): paths and JSON keys of the responses (matching {@code web/src/api.ts}). */
 public final class PlanningApiConstants {
 
-    /** Đường dẫn gốc của chuyến. */
+    /** Base path of trips. */
     public static final String TRIPS_PATH = "/api/trips";
 
-    /** Một chuyến theo mã. */
+    /** One trip by id. */
     public static final String TRIP_PATH = "/{tripId}";
 
-    /** Các mục của một chuyến. */
+    /** The items of a trip. */
     public static final String ITEMS_PATH = TRIP_PATH + "/items";
 
-    /** Một mục theo mã. */
+    /** One item by id. */
     public static final String ITEM_PATH = ITEMS_PATH + "/{itemId}";
 
-    /** Khôi phục một mục đã xóa mềm. */
+    /** Restore a soft-deleted item. */
     public static final String ITEM_RESTORE_PATH = ITEM_PATH + "/restore";
 
-    /** Xóa vĩnh viễn một mục. */
+    /** Permanently delete an item. */
     public static final String ITEM_PERMANENT_PATH = ITEM_PATH + "/permanent";
 
-    /** Đánh dấu hoàn thành một việc cần làm. */
+    /** Mark a to-do as done. */
     public static final String ITEM_DONE_PATH = ITEM_PATH + "/done";
 
-    /** Sắp xếp lại các mục của một ngày. */
+    /** Reorder the items of a day. */
     public static final String DAY_REORDER_PATH = TRIP_PATH + "/days/{day}/reorder";
 
-    /** Lệnh lịch: đổi khoảng ngày và/hoặc gán ngày hàng loạt nguyên tử (cũng dùng để Hoàn tác). */
+    /** Schedule command: change the date range and/or assign dates in bulk atomically (also used for Undo). */
     public static final String SCHEDULE_PATH = TRIP_PATH + "/schedule";
 
-    /** Các mục trong "Đã xóa gần đây". */
+    /** The items in 'Recently deleted'. */
     public static final String TRASH_PATH = TRIP_PATH + "/trash";
 
-    /** Danh sách chuyến đã xóa mềm. */
+    /** List of soft-deleted trips. */
     public static final String DELETED_TRIPS_PATH = "/deleted";
 
-    /** Khôi phục một chuyến đã xóa mềm. */
+    /** Restore a soft-deleted trip. */
     public static final String TRIP_RESTORE_PATH = TRIP_PATH + "/restore";
 
-    /** Khóa JSON của danh sách chuyến. */
-    public static final String KEY_TRIPS = "trips";
-
-    /** Sở thích theo danh tính (BE-10). */
+    /** Preferences by identity (BE-10). */
     public static final String PREFERENCES_PATH = "/api/preferences";
 
-    /** Phần đường dẫn của sở thích. */
+    /** The path part of preferences. */
     public static final String INTERESTS_PATH = "/interests";
-
-    /** Khóa JSON của danh sách sở thích. */
-    public static final String KEY_INTERESTS = "interests";
-
-    /** Khóa JSON của một chuyến. */
-    public static final String KEY_TRIP = "trip";
-
-    /** Khóa JSON của một mục. */
-    public static final String KEY_ITEM = "item";
-
-    /** Khóa JSON của danh sách mục. */
-    public static final String KEY_ITEMS = "items";
 
     private PlanningApiConstants() {
     }
 
-    /** Liên kết mời của một chuyến. */
+    /** Invite links of a trip. */
     public static final String INVITES_PATH = TRIP_PATH + "/invites";
 
-    /** Liên kết mời đang dùng (để thu hồi). */
+    /** The invite link in use (for revoking). */
     public static final String INVITE_ACTIVE_PATH = INVITES_PATH + "/active";
 
-    /** Thành viên của một chuyến. */
+    /** Members of a trip. */
     public static final String MEMBERS_PATH = TRIP_PATH + "/members";
 
-    /** Một thành viên theo mã. */
+    /** One member by id. */
     public static final String MEMBER_PATH = MEMBERS_PATH + "/{memberId}";
 
-    /** Chính người gọi trong chuyến. */
+    /** The caller themself in the trip. */
     public static final String MEMBER_ME_PATH = MEMBERS_PATH + "/me";
 
-    /** Gốc API liên kết mời không gắn với một chuyến cụ thể. */
+    /** Root of the invite-link API that is not tied to a specific trip. */
     public static final String INVITES_BASE_PATH = "/api/invites";
 
-    /** Xem trước liên kết (công khai, có hạn mức). */
+    /** Preview a link (public, rate limited). */
     public static final String INVITE_PREVIEW_PATH = "/preview";
 
-    /** Vào chuyến bằng liên kết (cần phiên). */
+    /** Join a trip with a link (needs a session). */
     public static final String INVITE_JOIN_PATH = "/join";
 
-    /** Khóa JSON của liên kết mời. */
-    public static final String KEY_INVITE = "invite";
-
-    /** Khóa JSON của một thành viên. */
-    public static final String KEY_MEMBER = "member";
-
-    /** Khóa JSON của danh sách thành viên. */
-    public static final String KEY_MEMBERS = "members";
-
-    /** Khóa JSON mã chuyến vừa vào. */
-    public static final String KEY_TRIP_ID = "tripId";
-
-    /** Tên đoạn đường dẫn "me" dùng cho thành viên hiện tại. */
+    /** Name of the path segment 'me' used for the current member. */
     public static final String ME = "me";
 
-    /** Đề nghị xóa của một chuyến. */
+    /** Deletion requests of a trip. */
     public static final String REQUESTS_PATH = TRIP_PATH + "/deletion-requests";
 
-    /** Một đề nghị theo mã. */
+    /** One request by id. */
     public static final String REQUEST_PATH = REQUESTS_PATH + "/{requestId}";
 
-    /** Đồng ý đề nghị. */
+    /** Approve a request. */
     public static final String REQUEST_APPROVE_PATH = REQUEST_PATH + "/approve";
 
-    /** Từ chối đề nghị. */
+    /** Reject a request. */
     public static final String REQUEST_REJECT_PATH = REQUEST_PATH + "/reject";
 
-    /** Khóa JSON của một đề nghị. */
-    public static final String KEY_REQUEST = "request";
-
-    /** Khóa JSON của danh sách đề nghị. */
-    public static final String KEY_REQUESTS = "requests";
-
-    /** Checklist chuẩn bị của một chuyến. */
+    /** The preparation checklist of a trip. */
     public static final String CHECKLIST_PATH = TRIP_PATH + "/checklist";
 
-    /** Một hạng mục checklist. */
+    /** One checklist item. */
     public static final String CHECKLIST_ITEM_PATH = CHECKLIST_PATH + "/{itemId}";
 
-    /** Dấu hoàn thành của chính mình trên một hạng mục checklist. */
+    /** The caller's own completion mark on a checklist item. */
     public static final String CHECKLIST_DONE_PATH = CHECKLIST_ITEM_PATH + "/done";
 }

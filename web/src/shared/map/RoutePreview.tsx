@@ -12,16 +12,16 @@ interface RoutePreviewProps {
   readonly onDetails: () => void;
 }
 
-/** Thẻ chọn có ảnh cố định 96×96; đóng bằng Escape hoặc chạm ngoài, giữ nguyên luồng chi tiết của màn gọi. */
+/** The selection card has a fixed 96x96 photo; it closes by Escape or a tap outside, keeping the detail flow of the calling screen. */
 export function RoutePreview({ name, thumb, time, km, onClose, onDetails }: RoutePreviewProps) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
-    /** Canvas xử lý chọn ghim/đoạn sau pointerdown; chỉ đóng ngay khi chạm giao diện bên ngoài canvas. */
+    /** The canvas handles pin/segment selection after pointerdown; it closes at once only when the UI outside the canvas is touched. */
     const outside = (event: PointerEvent) => {
       const target = event.target;
       if (target instanceof Element && !ref.current?.contains(target) && !target.closest('.tm-gl, .tm-accessible')) onClose();
     };
-    /** Đóng thẻ bằng Escape mà không sửa trạng thái chuyến. */
+    /** Closes the card with Escape without changing the trip state. */
     const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
     document.addEventListener('pointerdown', outside);
     document.addEventListener('keydown', escape);

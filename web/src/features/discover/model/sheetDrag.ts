@@ -1,21 +1,21 @@
 import { SHEET_DRAG } from './shellMap.const.ts';
 
-/** Trạng thái tờ nội dung ở điện thoại: mở (che phần lớn bản đồ) hoặc thu lại (chỉ còn dải tiêu đề). */
+/** The state of the content sheet on a phone: open (covers most of the map) or collapsed (only the title strip remains). */
 export type SheetDragMode = 'open' | 'peek';
 
-/** Độ dịch hiển thị khi đang kéo: chỉ theo chiều dẫn tới trạng thái kia (mở → kéo xuống; thu → kéo lên), không quá `travel` px. */
+/** The displayed offset while dragging: only in the direction that leads to the other state (open -> drag down; collapsed -> drag up), no more than `travel` px. */
 export function clampDragOffset(mode: SheetDragMode, dy: number, travel: number): number {
   return mode === 'open' ? Math.min(travel, Math.max(0, dy)) : Math.max(-travel, Math.min(0, dy));
 }
 
-/** Một lần chạm có dịch chuyển nhỏ hơn ngưỡng thì là bấm, không phải kéo. */
+/** A touch whose movement is smaller than the threshold is a tap, not a drag. */
 export function isTap(dx: number, dy: number): boolean {
   return Math.hypot(dx, dy) <= SHEET_DRAG.TAP_SLOP_PX;
 }
 
 /**
- * Trạng thái sau khi thả: chuyển sang trạng thái kia nếu kéo đủ xa (`COMMIT_FRACTION` của `travel`) hoặc hất đủ nhanh; ngược lại giữ nguyên.
- * `dy` là độ dịch dọc (dương = xuống), `elapsedMs` là thời gian kéo, `travel` là quãng đường giữa hai trạng thái (px).
+ * The state after release: switches to the other state if dragged far enough (`COMMIT_FRACTION` of `travel`) or flicked fast enough; otherwise unchanged.
+ * `dy` is the vertical offset (positive = down), `elapsedMs` is the drag time, `travel` is the distance between the two states (px).
  */
 export function decideSheetMode(mode: SheetDragMode, dy: number, elapsedMs: number, travel: number): SheetDragMode {
   const towardOther = mode === 'open' ? dy : -dy;

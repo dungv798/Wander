@@ -24,15 +24,15 @@ import { DestinationGuide } from './dest/DestinationGuide.tsx';
 import { discoveryFilters } from '../model/discoveryFilters.ts';
 import type { CategoryCode } from '../model/Catalog.types.ts';
 
-/** Một dòng tóm tắt thật của điểm đến: số nơi và (nếu kho có) mùa đẹp chung. */
+/** One real summary line of the destination: the number of places and (if the catalog has it) the common good season. */
 function destMeta(dest: DestinationDetail): string {
   const months = monthRangeLabel(destBestMonths(dest), '');
   return months ? fill(DEST_COPY.metaBest, { n: dest.places.length, months }) : fill(DEST_COPY.metaPlain, { n: dest.places.length });
 }
 
 /**
- * Đầu trang điểm đến gọn: dải ảnh bìa thấp (tên, câu giới thiệu, quay lại) rồi hàng hành động.
- * Hành động chính duy nhất là "Quẹt khám phá"; "Đã chọn", "Tạo chuyến đi" và "Bản đồ" là hành động phụ cùng kích thước ≥ 44 px.
+ * The compact top of the destination page: a low cover-photo strip (name, tagline, back) then the action row.
+ * The single main action is 'Swipe to explore'; 'Selected', 'Create trip' and 'Map' are secondary actions of the same size, at least 44 px.
  */
 function DestHead({ dest }: { readonly dest: DestinationDetail }) {
   const { state, actions } = useDiscover();
@@ -62,7 +62,7 @@ function DestHead({ dest }: { readonly dest: DestinationDetail }) {
   );
 }
 
-/** Trang điểm đến: đầu trang gọn, hành động, lọc + danh sách nơi, khoảnh khắc, cẩm nang và lịch mẫu (bản đồ là bản đồ chính của khung ứng dụng). */
+/** The destination page: a compact top, the actions, the filter + the list of places, the moments, the guide and the sample itinerary (the map is the app frame's main map). */
 function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; readonly onCreate: () => void }) {
   const ref = useReveal<HTMLDivElement>();
   return (
@@ -84,7 +84,7 @@ function DestContent({ dest, onCreate }: { readonly dest: DestinationDetail; rea
   );
 }
 
-/** Màn điểm đến (cẩm nang). */
+/** The destination screen (the guide). */
 export function DestScreen({ destId, onCreate }: { readonly destId: string; readonly onCreate: () => void }) {
   return <DestinationGate destId={destId}>{(dest) => <DestContent dest={dest} onCreate={onCreate} />}</DestinationGate>;
 }

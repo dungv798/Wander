@@ -1,4 +1,4 @@
-/* Bộ thẻ theo demo B: một ảnh dọc, nội dung trên ảnh, dải Chi tiết và hành động bên dưới. */
+/* The deck per demo B: one portrait photo, the content on the photo, a Detail strip and the actions below. */
 .card-photo-caption { position: absolute; z-index: 3; top: 32px; left: 14px; max-width: calc(100% - 88px); padding: 4px 8px; border-radius: var(--r-sm); background: var(--glass-label-surface); color: var(--ink); font: 400 12px / 1.4 var(--font-body); }
 #screen.immersive { padding: 0; overflow: hidden; background: transparent; color: var(--ink); }
 #screen.immersive::before { content: none; }
@@ -52,8 +52,8 @@
 .panel .deck { position: relative; height: min(62vh, 480px); flex: none; }
 @media (min-width: 768px) { #screen.immersive .deckcol { padding-inline: 24px; } }
 @media (max-height: 700px) { #screen.immersive .deckcol { gap: 8px; } .deckwrap { gap: 6px; } .card-info { bottom: 16px; padding-inline: 18px; } .card-hook { -webkit-line-clamp: 3; font-size: var(--fs-xs); }  .deck-instruction { display: none; } }
-/* Màn thấp (B-04, DR-037): thẻ quá thấp để đặt mũi tên ở 26% chiều cao mà không đè nút thông tin và nhãn loại. Dồn cả ba nút vào hàng trên cùng (mũi tên trước/sau + nút nguồn ảnh) và đẩy chú thích ảnh xuống dưới hàng đó. */
+/* Short screen (B-04, DR-037): the card is too short to put the arrows at 26% of the height without covering the info button and the kind label. All three buttons are packed into the top row (previous/next arrows + the photo-source button) and the photo caption is pushed below that row. */
 @media (max-height: 700px) { .card-photo-controls { top: 22px; right: 60px; } .card-photo-caption { top: 74px; } }
-/* Màn rất thấp (iPhone SE ngang tầm 553 px): thẻ chỉ còn ~200 px ảnh, nên rút khối chữ xuống 2 dòng mô tả để không chạm hàng nút trên cùng. */
+/* Very short screen (iPhone SE landscape, about 553 px): the card has only about 200 px of photo, so the text block is cut to 2 lines of description so it does not touch the top button row. */
 @media (max-height: 620px) { .card-info { gap: 6px; } .card h2 { font-size: 24px; } .card-hook { -webkit-line-clamp: 2; line-height: 1.5; } }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }

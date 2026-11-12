@@ -1,5 +1,8 @@
 # ADR-006 — Hướng triển khai AWS: ECS Fargate + ALB + RDS, CloudFront cùng origin, CDK TypeScript (AD-2, AD-3, AD-6)
 
+> **English title:** AWS direction: ECS Fargate + ALB + RDS, CloudFront same-origin, CDK (TypeScript)
+> **Summary (EN):** Direction only, nothing provisioned: Fargate behind an ALB, single-AZ RDS PostgreSQL, CloudFront serving the UI and proxying /api on one origin, infrastructure as AWS CDK; rate limiting stays in memory with exactly one task. In practice deployment currently runs on Render + Neon and AWS work is on hold (DR-040).
+
 - **Trạng thái:** `APPROVED` — PO chọn ngày 24/10/2026 sau phiên `/wander-council AD-2` (software-architect, security-reviewer, skeptic-qa; 1 vòng): "A: ECS Fargate + ALB + RDS", "Cùng origin qua CloudFront", "AWS CDK TypeScript", "In-memory, 1 task, sửa cách lấy IP".
 - **Phạm vi:** chỉ **chọn hướng**. **Chưa tạo tài nguyên AWS, khóa bí mật hay pipeline nào**; việc đó vẫn cần PO duyệt riêng (`planning-safety.md` mục 5) và bị chặn bởi RG-1/RG-5.
 - **Bổ sung cho:** ADR-002 ("AWS (target)"), ADR-005 (khung xác thực).

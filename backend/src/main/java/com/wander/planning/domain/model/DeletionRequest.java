@@ -4,15 +4,15 @@ import com.wander.planning.domain.vocabulary.RequestStatus;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Một đề nghị xóa mục do thành viên gửi cho Organizer. {@code reason} tùy chọn (chuỗi rỗng nếu không nêu). */
+/** A request, sent by a member to the Organizer, to delete an item. {@code reason} is optional (an empty string if not given). */
 public record DeletionRequest(UUID id, UUID itemId, UUID requesterMemberId, String reason, RequestStatus status, Instant requestedAt, Instant decidedAt) {
 
-    /** Còn chờ duyệt? */
+    /** Still waiting for a decision? */
     public boolean isPending() {
         return status == RequestStatus.PENDING;
     }
 
-    /** Bản sao đã được quyết định tại {@code now}. */
+    /** A copy that was decided at {@code now}. */
     public DeletionRequest decided(RequestStatus newStatus, Instant now) {
         return new DeletionRequest(id, itemId, requesterMemberId, reason, newStatus, requestedAt, now);
     }

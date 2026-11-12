@@ -193,19 +193,22 @@
       ],
       "photos": [
         {
-          "file": "cao-bang-thac-ban-gioc-1.jpg",
+          "file": "cao-bang-thac-ban-gioc-1-w1280-60e6822f02.webp",
+          "thumbFile": "cao-bang-thac-ban-gioc-1-w480-12e3373410.webp",
           "author": "Lê Minh Phát",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bangioc9tam.jpg"
         },
         {
-          "file": "cao-bang-thac-ban-gioc-2.jpg",
+          "file": "cao-bang-thac-ban-gioc-2-w1280-85f89c9191.webp",
+          "thumbFile": "cao-bang-thac-ban-gioc-2-w480-9b46d566ac.webp",
           "author": "jankgo",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ban_Gioc_-_Detian_Falls2.jpg"
         },
         {
-          "file": "pexels-6875004.jpg",
+          "file": "pexels-6875004-w1280-c7ef234fe2.webp",
+          "thumbFile": "pexels-6875004-w480-d8f93d43de.webp",
           "author": "Quang Nguyen Vinh",
           "license": "Giấy phép Pexels",
           "sourceUrl": "https://www.pexels.com/photo/people-standing-knee-deep-in-water-and-looking-at-the-ban-gioc-waterfall-in-vietnam-6875004/"
@@ -239,13 +242,15 @@
       ],
       "photos": [
         {
-          "file": "cao-bang-pac-bo-1.jpg",
+          "file": "cao-bang-pac-bo-1-w1280-2ab1411fa7.webp",
+          "thumbFile": "cao-bang-pac-bo-1-w480-8ea6814507.webp",
           "author": "[Tycho] talk , http://shansov.net",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%91c_B%C3%B3.jpg"
         },
         {
-          "file": "cao-bang-pac-bo-2.jpg",
+          "file": "cao-bang-pac-bo-2-w1280-03788e54f2.webp",
+          "thumbFile": "cao-bang-pac-bo-2-w480-90ae345d9f.webp",
           "author": "[Tycho] talk , http://shansov.net",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:P%C3%A1c_B%C3%B3.jpg"
@@ -280,7 +285,8 @@
       ],
       "photos": [
         {
-          "file": "cao-bang-dong-nguom-ngao-1.jpg",
+          "file": "cao-bang-dong-nguom-ngao-1-w1280-55a7c96fdd.webp",
+          "thumbFile": "cao-bang-dong-nguom-ngao-1-w480-d189b643a2.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%99ng_Ng%C6%B0%E1%BB%9Dm_Ngao.jpg"
@@ -366,7 +372,8 @@
       ],
       "photos": [
         {
-          "file": "cao-bang-phia-oac-1.jpg",
+          "file": "cao-bang-phia-oac-1-w1280-6c5942e7a7.webp",
+          "thumbFile": "cao-bang-phia-oac-1-w480-66427e912d.webp",
           "author": "Unknown author Unknown author",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%89nh_n%C3%BAi_Phja_O%E1%BA%AFc.jpg"
@@ -402,13 +409,15 @@
       ],
       "photos": [
         {
-          "file": "food-banh-cuon-1.jpg",
+          "file": "food-banh-cuon-1-w1280-f32e248776.webp",
+          "thumbFile": "food-banh-cuon-1-w480-2f8a583295.webp",
           "author": "Lưu Ly",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
         },
         {
-          "file": "food-banh-cuon-2.jpg",
+          "file": "food-banh-cuon-2-w1280-3a5ea6bde4.webp",
+          "thumbFile": "food-banh-cuon-2-w480-7cb529751a.webp",
           "author": "Casablanca1911 at vi.wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_cu%E1%BB%91n_Thanh_Tr%C3%AC.jpg"
@@ -484,7 +493,8 @@
       "id": "pexels-6875004",
       "theme": "hanh-trinh",
       "caption": "Gặp những người mê chụp ảnh bên thác Bản Giốc",
-      "file": "pexels-6875004.jpg",
+      "file": "pexels-6875004-w1280-c7ef234fe2.webp",
+      "thumbFile": "pexels-6875004-w480-d8f93d43de.webp",
       "author": "Quang Nguyen Vinh",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/people-standing-knee-deep-in-water-and-looking-at-the-ban-gioc-waterfall-in-vietnam-6875004/"
@@ -493,7 +503,8 @@
       "id": "food-research-cao-bang",
       "theme": "mon-an",
       "caption": "Bánh cuốn Cao Bằng · một món muốn thử (ảnh minh họa)",
-      "file": "food-banh-cuon-1.jpg",
+      "file": "food-banh-cuon-1-w1280-f32e248776.webp",
+      "thumbFile": "food-banh-cuon-1-w480-2f8a583295.webp",
       "author": "Lưu Ly",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
@@ -502,7 +513,8 @@
       "id": "wave-pexels-25186083",
       "theme": "nguoi",
       "caption": "Chậm lại bên dòng nước và nhịp sống Cao Bằng",
-      "file": "wave-pexels-25186083.jpg",
+      "file": "wave-pexels-25186083-w1280-f30f44b282.webp",
+      "thumbFile": "wave-pexels-25186083-w480-9ac752ff2e.webp",
       "author": "Vietnam Hidden Light",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/people-from-village-by-the-river-25186083/"
@@ -511,7 +523,8 @@
       "id": "wave-pexels-22602392",
       "theme": "hanh-trinh",
       "caption": "Đi qua những ô ruộng bên dòng nước Cao Bằng",
-      "file": "wave-pexels-22602392.jpg",
+      "file": "wave-pexels-22602392-w1280-93c012083d.webp",
+      "thumbFile": "wave-pexels-22602392-w480-db2caabdb9.webp",
       "author": "Hao Hoang",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/lake-and-fields-in-countryside-22602392/"

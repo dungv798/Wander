@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-/** Kết quả của `useLoaded`: dữ liệu mới nhất (giữ bản cũ khi đang nạp lại), lỗi nạp gần nhất và hàm nạp lại. */
+/** The result of `useLoaded`: the latest data (the old copy is kept while reloading), the most recent load error and the reload function. */
 export interface Loaded<T> {
   readonly data: T | null;
   readonly error: unknown;
@@ -8,8 +8,8 @@ export interface Loaded<T> {
 }
 
 /**
- * Nạp một danh sách từ máy chủ khi `deps` đổi và khi gọi `reload()`. Khác `useResource`: GIỮ dữ liệu cũ trong lúc nạp lại nên danh sách không
- * nhấp nháy sau mỗi thao tác. Kết quả của lần nạp cũ bị bỏ khi có lần nạp mới hoặc màn bị gỡ.
+ * Loads a list from the server when `deps` change and when `reload()` is called. Unlike `useResource`: KEEPS the old data while reloading so the list does not
+ * flicker after every action. The result of an old load is dropped when a new load starts or the screen is removed.
  */
 export function useLoaded<T>(load: () => Promise<T>, deps: readonly unknown[]): Loaded<T> {
   const [data, setData] = useState<T | null>(null);
@@ -18,7 +18,7 @@ export function useLoaded<T>(load: () => Promise<T>, deps: readonly unknown[]): 
 
   useEffect(() => {
     let live = true;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- tham số đổi (ví dụ sang chuyến khác) thì bỏ dữ liệu của tham số cũ
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- when the parameter changes (for example to another trip) the old parameter's data is dropped
     setData(null);
     load().then((value) => {
       if (!live) return;
@@ -30,7 +30,7 @@ export function useLoaded<T>(load: () => Promise<T>, deps: readonly unknown[]): 
     return () => {
       live = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- `deps` do người gọi khai báo có chủ đích
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- `deps` is deliberately declared by the caller
   }, [...deps, round]);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export function useLoaded<T>(load: () => Promise<T>, deps: readonly unknown[]): 
   }, []);
 
   const reload = useCallback(
-    /** Nạp lại (sau một thao tác ghi). */
+    /** Reload (after a write action). */
     () => setRound((n) => n + 1),
     [],
   );

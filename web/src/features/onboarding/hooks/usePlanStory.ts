@@ -17,16 +17,16 @@ interface PlanStoryDeps {
   readonly onCue: (ms: number) => void;
 }
 
-/** Trạng thái câu chuyện của cảnh bản đồ và thao tác của người xem. */
+/** The story state of the map scene and the viewer's actions. */
 export interface PlanStory {
   readonly view: PlanView;
   readonly phase: SwipePhase;
-  /** Người xem chọn tab: dừng phần tự chạy và hiện đủ ngày đó. */
+  /** The viewer chooses a tab: stops the self-running part and shows that day in full. */
   readonly selectTab: (tab: number) => void;
   readonly replay: () => void;
 }
 
-/** Câu chuyện cảnh bản đồ: tự chạy khi vào cảnh (chờ bản đồ sẵn sàng), dừng khi người xem chạm tab, cho xem lại. Giảm chuyển động: hiện thẳng Ngày 1 đầy đủ. */
+/** The map scene story: runs by itself on entering the scene (waits for the map to be ready), stops when the viewer taps a tab, allows watching again. Reduced motion: shows Day 1 in full directly. */
 export function usePlanStory({ days, settled, reduced, auto, onDone, onInteract, onCue }: PlanStoryDeps): PlanStory {
   const scope = useRunScope();
   const autoRef = useLatestRef(auto);
@@ -46,7 +46,7 @@ export function usePlanStory({ days, settled, reduced, auto, onDone, onInteract,
     if (!reduced) play();
   }, [play, reduced]);
   const selectTab = useCallback(
-    /** Dừng kịch bản và hiện đủ tab đã chọn. */
+    /** Stops the script and shows the chosen tab in full. */
     (tab: number) => {
       scope.cancel();
       onInteract();

@@ -9,7 +9,7 @@ interface RevealImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   readonly onSourceError?: () => void;
 }
 
-/** Một img giữ nguyên ảnh cũ đến khi ảnh mới decode xong; lớp ảnh cũ mờ dần phía trên, không fade từ nền trống. */
+/** An img that keeps the old photo until the new photo has decoded; the old photo layer fades above it, not fading in from an empty background. */
 export function RevealImage({ src, alt = '', width = IMAGE_SIZE.WIDTH, height = IMAGE_SIZE.HEIGHT, transitionFit = 'cover', onVisible, onSourceError, ...props }: RevealImageProps) {
   const ref = useRef<HTMLImageElement | null>(null);
   const buffer = useImageBuffer(src, { onVisible, onSourceError }, ref);

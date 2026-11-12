@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTrips } from './TripsProvider.tsx';
 
-/** Chỉ chọn chuyến cùng điểm đến; tự lấy chuyến đầu tiên nếu danh sách tải sau khi mở form. */
+/** Chooses only trips of the same destination; automatically takes the first trip if the list loads after the form opens. */
 export function useCompatibleTrips(destinationId: string) {
   const { state } = useTrips();
   const [selectedId, select] = useState('');

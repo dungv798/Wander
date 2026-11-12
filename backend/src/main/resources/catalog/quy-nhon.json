@@ -265,7 +265,8 @@
       ],
       "photos": [
         {
-          "file": "thap-doi-1.jpg",
+          "file": "thap-doi-1-w1280-6607675a5f.webp",
+          "thumbFile": "thap-doi-1-w480-19b32d0a94.webp",
           "author": "Minh Khiem",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_%C4%90%C3%B4i,_Quy_Nh%C6%A1n_-_43083336701.jpg"
@@ -313,13 +314,15 @@
       ],
       "photos": [
         {
-          "file": "thap-banh-it-1.jpg",
+          "file": "thap-banh-it-1-w1280-3dd04eb4cb.webp",
+          "thumbFile": "thap-banh-it-1-w480-e9af233a44.webp",
           "author": "Dongson*vmvn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%A5m_th%C3%A1p_B%C3%A1nh_%C3%8Dt,_Tuy_Ph%C6%B0%E1%BB%9Bc,_B%C3%ACnh_%C4%90%E1%BB%8Bnh.JPG"
         },
         {
-          "file": "thap-banh-it-2.jpg",
+          "file": "thap-banh-it-2-w1280-405518b1a2.webp",
+          "thumbFile": "thap-banh-it-2-w480-540d6778f8.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040323_Thap_Banh_It_complex,_Nhon_Hoa,_Binh_Dinh_Vietnam_001.jpg"
@@ -367,13 +370,15 @@
       ],
       "photos": [
         {
-          "file": "bao-tang-quang-trung-1.jpg",
+          "file": "bao-tang-quang-trung-1-w1280-50ce014a58.webp",
+          "thumbFile": "bao-tang-quang-trung-1-w480-033e312037.webp",
           "author": "Original uploader was Liftold at vi.wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3o_T%C3%A0ng_Quang_Trung.JPG"
         },
         {
-          "file": "bao-tang-quang-trung-2.jpg",
+          "file": "bao-tang-quang-trung-2-w1280-06d9791068.webp",
+          "thumbFile": "bao-tang-quang-trung-2-w480-eeceadb33f.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bi%E1%BB%83u_di%E1%BB%85n_v%C3%B5_thu%E1%BA%ADt.jpg"
@@ -420,7 +425,8 @@
       ],
       "photos": [
         {
-          "file": "dam-thi-nai-1.jpg",
+          "file": "dam-thi-nai-1-w1280-7c957b3514.webp",
+          "thumbFile": "dam-thi-nai-1-w480-a262e45575.webp",
           "author": "Lê Thy ( thảo luận )",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:DamThiNai.jpg"
@@ -468,19 +474,22 @@
       ],
       "photos": [
         {
-          "file": "thap-duong-long-1.jpg",
+          "file": "thap-duong-long-1-w1280-fa051aaf1a.webp",
+          "thumbFile": "thap-duong-long-1-w480-a5fc0fee43.webp",
           "author": "Uranus2808",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:DuongLong_ChamTemple_TaySon.jpg"
         },
         {
-          "file": "thap-duong-long-2.jpg",
+          "file": "thap-duong-long-2-w1280-fc4e571b52.webp",
+          "thumbFile": "thap-duong-long-2-w480-37723d199d.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Duong_Long_Cham_tower_temples,_Hindu_trinity,_Binh_Dinh_Vietnam_024.jpg"
         },
         {
-          "file": "thap-duong-long-3.jpg",
+          "file": "thap-duong-long-3-w1280-cac357f759.webp",
+          "thumbFile": "thap-duong-long-3-w480-57bfb0714e.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Duong_Long_Cham_tower_temples,_Hindu_trinity,_Binh_Dinh_Vietnam_043.jpg"
@@ -528,13 +537,15 @@
       ],
       "photos": [
         {
-          "file": "thap-canh-tien-1.jpg",
+          "file": "thap-canh-tien-1-w1280-444a8b7c8f.webp",
+          "thumbFile": "thap-canh-tien-1-w480-43213402f1.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Canh_Tien_Cham_Hindu_temple,_Binh_Dinh_Vietnam_048.jpg"
         },
         {
-          "file": "thap-canh-tien-2.jpg",
+          "file": "thap-canh-tien-2-w1280-672e098171.webp",
+          "thumbFile": "thap-canh-tien-2-w480-5c15d62af6.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:0040423_Thap_Canh_Tien_Cham_Hindu_temple,_Binh_Dinh_Vietnam_075.jpg"
@@ -582,7 +593,8 @@
       ],
       "photos": [
         {
-          "file": "thanh-do-ban-1.jpg",
+          "file": "thanh-do-ban-1-w1280-d91ced49c7.webp",
+          "thumbFile": "thanh-do-ban-1-w480-e930bb5232.webp",
           "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_C%C3%A1nh_Ti%C3%AAn_trong_th%C3%A0nh_Vijaya.JPG"
@@ -689,7 +701,8 @@
       ],
       "photos": [
         {
-          "file": "ref-quy-nhon-ghenh-rang-1.jpg",
+          "file": "ref-quy-nhon-ghenh-rang-1-w1280-7a748daeaf.webp",
+          "thumbFile": "ref-quy-nhon-ghenh-rang-1-w480-5c7bf789a1.webp",
           "author": "Liftold ( thảo luận )",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99_h%C3%A0n_m%E1%BA%A1c_T%E1%BB%AD.JPG"
@@ -721,7 +734,8 @@
       ],
       "photos": [
         {
-          "file": "quy-nhon-tieu-chung-vien-lang-song-1.jpg",
+          "file": "quy-nhon-tieu-chung-vien-lang-song-1-w1280-41bc6fb2af.webp",
+          "thumbFile": "quy-nhon-tieu-chung-vien-lang-song-1-w480-55d2061578.webp",
           "author": "Theodor",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A0ng_Song_minor_seminary_6.jpg"
@@ -757,7 +771,8 @@
       ],
       "photos": [
         {
-          "file": "food-banh-beo-1.jpg",
+          "file": "food-banh-beo-1-w1280-3707b5e173.webp",
+          "thumbFile": "food-banh-beo-1-w480-d73b144a28.webp",
           "author": "Nha Nghi La from Ho Chi Minh, Viet Nam",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o_ch%C3%A9n.jpg"
@@ -793,7 +808,8 @@
       ],
       "photos": [
         {
-          "file": "food-bun-cha-ca-1.jpg",
+          "file": "food-bun-cha-ca-1-w1280-8a168fbfc2.webp",
+          "thumbFile": "food-bun-cha-ca-1-w480-65b6e3a352.webp",
           "author": "Phương Huy ( thảo luận )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_c%C3%A1,_th%C3%A1ng_8_n%C4%83m_2018.JPG"
@@ -826,7 +842,8 @@
       ],
       "photos": [
         {
-          "file": "ref-quy-nhon-eo-gio-1.jpg",
+          "file": "ref-quy-nhon-eo-gio-1-w1280-4a65beb57c.webp",
+          "thumbFile": "ref-quy-nhon-eo-gio-1-w480-59bcab66ae.webp",
           "author": "Hưng Hồ Bá",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eo_Gi%C3%B3_-_Nh%C6%A1n_L%C3%BD.jpg"
@@ -1180,7 +1197,8 @@
       "id": "food-research-quy-nhon",
       "theme": "mon-an",
       "caption": "Bánh bèo buổi chiều · một món muốn thử (ảnh minh họa)",
-      "file": "food-banh-beo-1.jpg",
+      "file": "food-banh-beo-1-w1280-3707b5e173.webp",
+      "thumbFile": "food-banh-beo-1-w480-d73b144a28.webp",
       "author": "Nha Nghi La from Ho Chi Minh, Viet Nam",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o_ch%C3%A9n.jpg"
@@ -1189,7 +1207,8 @@
       "id": "wave-pexels-30277984",
       "theme": "nghe",
       "caption": "Ra biển Quy Nhơn cùng ánh sáng đầu ngày",
-      "file": "wave-pexels-30277984.jpg",
+      "file": "wave-pexels-30277984-w1280-96580a9b86.webp",
+      "thumbFile": "wave-pexels-30277984-w480-eb848ebd6c.webp",
       "author": "Vũ Bụi",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/sunrise-boat-at-beach-in-quy-nh-n-vietnam-30277984/"
@@ -1198,7 +1217,8 @@
       "id": "wave-pexels-38815905",
       "theme": "nghe",
       "caption": "Những lớp lưới trước bến thuyền Quy Nhơn",
-      "file": "wave-pexels-38815905.jpg",
+      "file": "wave-pexels-38815905-w1280-b0b02fdea3.webp",
+      "thumbFile": "wave-pexels-38815905-w480-f123924755.webp",
       "author": "Flint Huynh",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/fishing-nets-overlook-vibrant-harbor-in-quy-nh-n-38815905/"
@@ -1207,7 +1227,8 @@
       "id": "wave-pexels-37920715",
       "theme": "hanh-trinh",
       "caption": "Chờ chiều xuống cùng người đi tắm biển Quy Nhơn",
-      "file": "wave-pexels-37920715.jpg",
+      "file": "wave-pexels-37920715-w1280-87bb8eeb4c.webp",
+      "thumbFile": "wave-pexels-37920715-w480-af0cd67558.webp",
       "author": "Flint Huynh",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/tranquil-evening-at-quy-nhon-beach-vietnam-37920715/"

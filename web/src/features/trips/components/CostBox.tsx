@@ -11,24 +11,24 @@ import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
 
-/** Số hàng ngày tối đa trên thẻ gọn; phần còn lại xem trong tờ chi tiết. */
+/** The maximum number of day rows on the compact card; the rest are viewed in the detail sheet. */
 const CARD_DAY_ROWS = 2;
 
-/** Dòng "Ngày 1 — 120.000 ₫ + 4 mục chưa rõ" của một nhóm ngày; chưa có giá nào thì nói thẳng, không hiện 0. */
+/** The line 'Day 1 - 120,000 VND + 4 items with an unknown price' of a day group; when no price exists yet it says so plainly, not showing 0. */
 export function dayCostText(label: string, g: CostGroup): string {
   if (!g.knownCount) return fill(T.cost.dayNone, { day: label, n: g.unknownCount + g.includedCount });
   const base = fill(T.cost.dayKnown, { day: label, money: money(g.knownK) });
   return g.unknownCount ? base + fill(T.cost.dayUnknown, { n: g.unknownCount }) : base;
 }
 
-/** Thẻ chi phí gọn: số đã ghi nhận, tiến độ nhập giá, ngân sách (nếu có), vài dòng ngày và lối vào chi tiết. Chi tiết từng khoản nằm trong tờ riêng. */
+/** The compact cost card: the amount recorded, the progress of entering prices, the budget (if any), a few day rows and the entry to the detail. The detail of each cost is in its own sheet. */
 export function CostBox({ allDays = false }: { readonly allDays?: boolean }) {
   const { trip, days, setOverlay } = useTripView();
   const cs = summarizeCosts(trip);
   const bud = cs.knownCount ? budgetStatus(trip.budgetK, cs.totalK) : null;
   const pricedTotal = cs.bookable - cs.includedCount;
   const dayGroups = groupCosts(trip.items, 'day', days).filter((g) => g.key);
-  // Tổng quan chỉ hiện vài ngày đầu; chế độ Chi phí (`allDays`) hiện đủ mọi ngày.
+  // The overview shows only the first few days; the Cost mode (`allDays`) shows every day.
   const shown = allDays ? dayGroups : dayGroups.slice(0, CARD_DAY_ROWS);
   const empty = !cs.bookable;
   const progress = fill(T.cost.progress, { n: cs.knownCount, m: pricedTotal });

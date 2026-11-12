@@ -1,27 +1,27 @@
 package com.wander.planning.infrastructure.persistence.constant;
 
-/** Câu JPQL và tên tham số của phía đọc/ghi Planning (tầng CHỨC NĂNG). Tên tham số {@code :x} khớp {@code setParameter("x")}. */
+/** JPQL queries and parameter names of the Planning read/write side (FEATURE tier). The parameter name {@code :x} matches {@code setParameter("x")}. */
 public final class PlanningQueryConstants {
 
-    /** Tham số: mã chuyến. */
+    /** Parameter: the trip id. */
     public static final String PARAM_TRIP_ID = "id";
 
-    /** Tham số: mã danh tính chủ chuyến. */
+    /** Parameter: the identity id of the trip owner. */
     public static final String PARAM_OWNER = "owner";
 
-    /** Tham số: mã chuyến khi lọc mục. */
+    /** Parameter: the trip id when filtering items. */
     public static final String PARAM_TRIP = "trip";
 
-    /** Tham số: mã mục. */
+    /** Parameter: the item id. */
     public static final String PARAM_ITEM_ID = "id";
 
-    /** Tham số: băm mã liên kết mời. */
+    /** Parameter: the hash of the invite-link code. */
     public static final String PARAM_CODE_HASH = "codeHash";
 
-    /** Tham số: mã người hoàn thành. */
+    /** Parameter: the id of the person who finished. */
     public static final String PARAM_PERSON = "person";
 
-    /** Chọn các cột của chuyến thành dòng phẳng {@code TripRow} (constructor expression). */
+    /** Selects the trip columns into the flat row {@code TripRow} (constructor expression). */
     public static final String TRIP_ROW = "select new com.wander.planning.application.query.TripRow("
             + "t.id, t.ownerIdentityId, t.name, t.destination, t.startDate, t.endDate, t.budgetK, t.styles, t.pace, t.datesTentative, t.kind, t.interests, "
             + "t.createdAt, t.updatedAt, t.deletedAt, "
@@ -30,86 +30,86 @@ public final class PlanningQueryConstants {
             + "(select m3.id from TripMemberEntity m3 where m3.trip = t and m3.identityId = :" + PARAM_OWNER + "), t.cover) "
             + "from TripEntity t ";
 
-    /** Chọn các cột của mục thành dòng phẳng {@code ItemRow} (constructor expression). */
+    /** Selects the item columns into the flat row {@code ItemRow} (constructor expression). */
     public static final String ITEM_ROW = "select new com.wander.planning.application.query.ItemRow("
             + "i.id, i.trip.id, i.dayDate, i.position, i.type, i.title, i.timeOfDay, i.durationMin, i.note, "
             + "i.costK, i.included, i.referenceK, i.bookingStatus, i.placeId, i.deletedAt, i.createdAt, i.addedByMemberId) from ItemEntity i ";
 
-    /** Điều kiện: người này là thành viên của chuyến (mọi vai). */
+    /** Condition: this person is a member of the trip (any role). */
     public static final String IS_MEMBER = "exists (select 1 from TripMemberEntity mm where mm.trip = t and mm.identityId = :" + PARAM_OWNER + ")";
 
-    /** Điều kiện: chuyến CÒN HIỆN theo mã mà người gọi là thành viên (người ngoài và chuyến đã xóa mềm coi như không có). */
+    /** Condition: a VISIBLE trip by id of which the caller is a member (an outsider and a soft-deleted trip count as absent). */
     public static final String WHERE_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and " + IS_MEMBER + " and t.deletedAt is null";
 
-    /** Điều kiện chuyến ĐÃ XÓA MỀM theo mã của đúng chủ (chỉ Organizer thấy chuyến đã xóa). */
+    /** Condition: a SOFT-DELETED trip by id of exactly the owner (only the Organizer sees a deleted trip). */
     public static final String WHERE_DELETED_TRIP_OF_OWNER = "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null";
 
-    /** Điều kiện và thứ tự: mọi chuyến của chủ, mới nhất trước. */
+    /** Condition and order: every trip of the owner, newest first. */
     public static final String WHERE_OWNER_NEWEST_FIRST =
             "where " + IS_MEMBER + " and t.deletedAt is null order by t.startDate desc, t.createdAt desc";
 
-    /** Điều kiện và thứ tự: chuyến đã xóa mềm của chủ, xóa gần nhất trước. */
+    /** Condition and order: the owner's soft-deleted trips, most recently deleted first. */
     public static final String WHERE_OWNER_DELETED_RECENT_FIRST =
             "where t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null order by t.deletedAt desc, t.id";
 
-    /** Điều kiện và thứ tự: mọi mục của chuyến, theo ngày rồi vị trí thủ công. */
+    /** Condition and order: every item of the trip, by day then manual position. */
     public static final String WHERE_TRIP_ITEMS_IN_ORDER =
             "where i.trip.id = :" + PARAM_TRIP + " order by i.dayDate, i.position, i.createdAt, i.id";
 
-    /** Điều kiện: một mục của chuyến theo mã. */
+    /** Condition: one item of the trip by id. */
     public static final String WHERE_TRIP_ITEM = "where i.trip.id = :" + PARAM_TRIP + " and i.id = :" + PARAM_ITEM_ID;
 
-    /** Điều kiện và thứ tự: mục đã xóa mềm của chuyến, xóa gần nhất trước. */
+    /** Condition and order: the trip's soft-deleted items, most recently deleted first. */
     public static final String WHERE_TRIP_TRASH =
             "where i.trip.id = :" + PARAM_TRIP + " and i.deletedAt is not null order by i.deletedAt desc, i.id";
 
-    /** Mọi cặp (mục, người đã xong) của chuyến. */
+    /** Every (item, person who finished) pair of the trip. */
     public static final String COMPLETIONS_OF_TRIP = "select i.id, c.personId from ItemEntity i join i.completions c where i.trip.id = :" + PARAM_TRIP;
 
-    /** Mã các mục mà một người đã hoàn thành trong chuyến. */
+    /** The ids of the items a person has completed in the trip. */
     public static final String DONE_ITEM_IDS = "select i.id from ItemEntity i join i.completions c "
             + "where i.trip.id = :" + PARAM_TRIP + " and c.personId = :" + PARAM_PERSON;
 
-    /** Sở thích theo danh tính của chủ (BE-10). */
+    /** The owner's preferences by identity (BE-10). */
     public static final String OWNER_INTEREST_PREFERENCES =
             "select p.interests from OwnerPreferencesEntity p where p.ownerIdentityId = :" + PARAM_OWNER;
 
-    /** Ghi hoặc thay sở thích theo danh tính bằng một câu nguyên tử (SQL thuần vì cần ON CONFLICT). */
+    /** Writes or replaces the preferences by identity with one atomic statement (plain SQL because it needs ON CONFLICT). */
     public static final String UPSERT_OWNER_INTERESTS = "INSERT INTO owner_preferences (owner_identity_id, interests, updated_at) "
             + "VALUES (:owner, :interests, :now) ON CONFLICT (owner_identity_id) DO UPDATE "
             + "SET interests = EXCLUDED.interests, updated_at = EXCLUDED.updated_at";
 
-    /** Mã và tên mọi chuyến của chủ (để đặt tên không trùng). */
+    /** The id and name of every trip of the owner (to choose a name that does not clash). */
     public static final String TRIP_NAMES = "select t.id, t.name from TripEntity t where t.ownerIdentityId = :" + PARAM_OWNER;
 
-    /** Nạp chuyến của chủ kèm mọi mục trong một truy vấn (tránh N+1). */
+    /** Loads the owner's trip with all its items in one query (avoiding N+1). */
     public static final String TRIP_WITH_ITEMS = "select distinct t from TripEntity t left join fetch t.items "
             + "where t.id = :" + PARAM_TRIP_ID + " and t.deletedAt is null and exists (select 1 from TripMemberEntity mm where mm.trip = t and mm.identityId = :" + PARAM_OWNER + ")";
 
-    /** Nạp chuyến ĐÃ XÓA MỀM của chủ kèm mục (để khôi phục). */
+    /** Loads the owner's SOFT-DELETED trip with its items (to restore it). */
     public static final String TRIP_WITH_ITEMS_DELETED = "select distinct t from TripEntity t left join fetch t.items "
             + "where t.id = :" + PARAM_TRIP_ID + " and t.ownerIdentityId = :" + PARAM_OWNER + " and t.deletedAt is not null";
 
-    /** Chuyến còn hiện có liên kết mời với băm mã này (kể cả liên kết hết hạn/thu hồi: domain quyết định). */
+    /** A visible trip that has an invite link with this code hash (including an expired/revoked link: the domain decides). */
     public static final String TRIP_BY_INVITE_HASH = "select distinct t from TripEntity t left join fetch t.items where t.deletedAt is null "
             + "and exists (select 1 from TripInviteEntity i where i.trip = t and i.codeHash = :" + PARAM_CODE_HASH + ")";
 
-    /** Mọi thành viên của chuyến, theo thứ tự vào. */
+    /** Every member of the trip, in the order they joined. */
     public static final String MEMBERS_OF_TRIP = "select new com.wander.planning.application.query.MemberRow(m.id, m.identityId, m.role, m.displayName, m.joinedAt) "
             + "from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP + " order by m.joinedAt, m.id";
 
-    /** Mọi đề nghị xóa của chuyến, cũ trước. */
+    /** Every deletion request of the trip, oldest first. */
     public static final String REQUESTS_OF_TRIP = "select new com.wander.planning.application.query.RequestRow(r.id, r.itemId, r.requesterMemberId, r.reason, r.status, r.requestedAt, r.decidedAt) "
             + "from DeletionRequestEntity r where r.trip.id = :" + PARAM_TRIP + " order by r.requestedAt, r.id";
 
-    /** Liên kết mời chưa thu hồi của chuyến (tối đa một). */
+    /** The invite link of the trip that is not revoked (at most one). */
     public static final String UNREVOKED_INVITE_OF_TRIP = "select new com.wander.planning.application.query.InviteRow(i.id, i.createdAt, i.expiresAt, i.revokedAt) "
             + "from TripInviteEntity i where i.trip.id = :" + PARAM_TRIP + " and i.revokedAt is null";
 
-    /** Tham số: thời điểm hiện tại. */
+    /** Parameter: the current time. */
     public static final String PARAM_NOW = "now";
 
-    /** Xem trước liên kết mời còn dùng được: tên chuyến và số thành viên. */
+    /** Preview of an invite link that is still usable: the trip name and the member count. */
     public static final String INVITE_PREVIEW = "select new com.wander.planning.application.query.InvitePreviewRow(t.name, (select count(m) from TripMemberEntity m where m.trip = t)) "
             + "from TripEntity t where t.deletedAt is null and exists (select 1 from TripInviteEntity i where i.trip = t and i.codeHash = :" + PARAM_CODE_HASH
             + " and i.revokedAt is null and i.expiresAt > :" + PARAM_NOW + ")";
@@ -117,20 +117,20 @@ public final class PlanningQueryConstants {
     private PlanningQueryConstants() {
     }
 
-    /** Hạng mục checklist của chuyến theo nhóm rồi vị trí. */
+    /** The trip's checklist items by group then position. */
     public static final String CHECKLIST_OF_TRIP = "select c from ChecklistItemEntity c where c.tripId = :trip order by c.groupTitle, c.position, c.id";
 
-    /** Một hạng mục checklist của đúng chuyến. */
+    /** One checklist item of exactly this trip. */
     public static final String CHECKLIST_ITEM_OF_TRIP = "select c from ChecklistItemEntity c where c.tripId = :trip and c.id = :item";
 
-    /** Vị trí lớn nhất của checklist. */
+    /** The largest position of the checklist. */
     public static final String CHECKLIST_MAX_POSITION = "select max(c.position) from ChecklistItemEntity c where c.tripId = :trip";
 
-    /** Quyền của một danh tính trong chuyến còn hiện (rỗng = không phải thành viên hoặc chuyến đã xóa). */
+    /** The role of an identity in a visible trip (empty = not a member or the trip is deleted). */
     public static final String ROLE_IN_TRIP = "select m.role from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP
             + " and m.identityId = :" + PARAM_OWNER + " and m.trip.deletedAt is null";
 
-    /** Mã thành viên của một danh tính trong chuyến còn hiện. */
+    /** The member id of an identity in a visible trip. */
     public static final String MEMBER_ID_IN_TRIP = "select m.id from TripMemberEntity m where m.trip.id = :" + PARAM_TRIP
             + " and m.identityId = :" + PARAM_OWNER + " and m.trip.deletedAt is null";
 }

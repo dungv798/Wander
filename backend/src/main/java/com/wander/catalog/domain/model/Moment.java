@@ -8,17 +8,17 @@ import com.wander.shared.kernel.util.Texts;
 import java.net.URI;
 
 /**
- * Một khoảnh khắc của điểm đến (DR-034): ảnh đời sống kèm chủ đề và chú thích ngắn, có ghi công đầy đủ như ảnh địa điểm.
- * Ảnh chỉ minh họa không khí, không gắn vào một địa điểm cụ thể.
+ * A moment of a destination (DR-034): a life photo with a theme and a short caption, fully attributed like a place photo.
+ * The photo only illustrates the atmosphere and is not tied to one specific place.
  */
 public record Moment(String id, MomentTheme theme, String caption, Photo photo, String authorUrl) {
 
-    /** Dữ liệu khoảnh khắc cũ được giữ nguyên khi chưa có liên kết tác giả. */
+    /** Old moment data is kept as it is while there is no author link yet. */
     public Moment(String id, MomentTheme theme, String caption, Photo photo) {
         this(id, theme, caption, photo, null);
     }
 
-    /** Giữ các trường bắt buộc và từ chối liên kết tác giả khác https trên Unsplash; null là chưa có liên kết. */
+    /** Keeps the required fields and rejects an author link that is not https on Unsplash; null means no link yet. */
     public Moment {
         CatalogValidation.require(!Texts.isNullOrBlank(id), CatalogMessages.MOMENT_FIELD_MISSING, CatalogMessages.LABEL_MOMENT_ID);
         CatalogValidation.require(theme != null, CatalogMessages.MOMENT_FIELD_MISSING, CatalogMessages.LABEL_MOMENT_THEME);
@@ -31,7 +31,7 @@ public record Moment(String id, MomentTheme theme, String caption, Photo photo, 
         }
     }
 
-    /** Liên kết tác giả phải có cú pháp URI hợp lệ, dùng https và đúng máy chủ Unsplash, không có thông tin đăng nhập. */
+    /** The author link must have a valid URI syntax, use https and be the Unsplash server, with no login information. */
     private static void requireAllowedAuthorUrl(String authorUrl) {
         URI uri;
         try {

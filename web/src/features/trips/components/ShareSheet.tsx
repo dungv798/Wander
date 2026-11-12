@@ -7,7 +7,7 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { SHARE_COPY as C } from '../model/share.copy.ts';
 
-/** Chọn cách chia sẻ trước khi rời lịch: cộng tác có quyền hoặc gửi ảnh tĩnh, không nhầm hai hành động. */
+/** Choose how to share before leaving the schedule: collaboration with permissions or sending a static image, so the two actions are not confused. */
 export function ShareSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, setOverlay } = useTripView();
   const invite = permissionsOf(trip).manageTrip;

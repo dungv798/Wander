@@ -1,9 +1,9 @@
 import { MOTION } from './motion.const.ts';
 
-/** Chờ chính img ban đầu để browser vẫn quyết định lazy-load; hủy listener khi component rời hoặc đổi yêu cầu. */
+/** Waits for the original img itself so the browser still decides lazy loading; removes the listener when the component leaves or the request changes. */
 export async function decodeImageElement(image: HTMLImageElement, signal: AbortSignal): Promise<void> {
   if (!image.complete) await new Promise<void>((resolve, reject) => {
-    /** Dọn cả listener load, lỗi và hủy, tránh giữ ảnh lazy đã rời màn. */
+    /** Cleans up the load, error and cancel listeners, avoiding holding a lazy image that has left the screen. */
     const clean = (): void => { image.removeEventListener('load', loaded); image.removeEventListener('error', failed); signal.removeEventListener('abort', failed); };
     const loaded = (): void => { clean(); resolve(); };
     const failed = (): void => { clean(); reject(new Error(MOTION.DECODE_ERROR)); };
@@ -15,7 +15,7 @@ export async function decodeImageElement(image: HTMLImageElement, signal: AbortS
   await image.decode?.();
 }
 
-/** Giải mã ngoài DOM trước khi đổi ảnh đang xem; không giữ cache bitmap lớn của riêng ứng dụng. */
+/** Decodes outside the DOM before changing the photo being viewed; it keeps no large bitmap cache of its own. */
 export async function decodeImage(source: string): Promise<void> {
   const image = new Image();
   image.decoding = 'async';

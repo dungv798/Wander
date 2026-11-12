@@ -23,7 +23,7 @@ test('PATCH bìa cộng thêm: giữ đối tượng và null; không gửi khó
   assert.deepEqual(g.calls.map(c => c.body), [{ cover: { kind: 'gradient', ref: 'cover-1' } }, { cover: null }, { name: 'Tên mới' }]);
 });
 
-/** Cổng dựng trên fetch giả; `handler` trả phản hồi cho từng lời gọi, `calls` để kiểm đường dẫn/thân. */
+/** A gateway built on a fake fetch; `handler` returns the response for each call, `calls` is used to check the path/body. */
 function gateway(handler: (c: Call) => Response): { readonly gw: HttpTripsGateway; readonly calls: Call[] } {
   const calls: Call[] = [];
   const fetchImpl: FetchLike = (url, init) => {
@@ -34,7 +34,7 @@ function gateway(handler: (c: Call) => Response): { readonly gw: HttpTripsGatewa
   return { gw: new HttpTripsGateway(new ApiClient(fetchImpl)), calls };
 }
 
-/** Máy chủ giả cho đọc: danh sách một chuyến, chi tiết có một mục, thùng rác có một mục đã xóa. */
+/** A fake server for reading: the list has one trip, the detail has one item, the trash has one deleted item. */
 function reader(c: Call): Response {
   if (c.url === '/api/trips') return json({ trips: [VIEW] });
   if (c.url === '/api/trips/t1') return json({ trip: VIEW, days: [{ date: '2026-11-01', items: [ITEM] }], unscheduled: [] });
@@ -53,9 +53,9 @@ test('nạp tất cả: danh sách rồi chi tiết + thùng rác từng chuyế
 
 test('phản hồi hỏng thành INTERNAL; chuyến bị xóa giữa chừng thì bỏ qua, lỗi khác không bị nuốt', async () => {
   await assert.rejects(gateway(() => json({ nope: 1 })).gw.loadAll(), (e: unknown) => e instanceof ApiError && e.code === 'INTERNAL');
-  // chuyến vừa bị xóa ở máy khác (404 lúc đọc chi tiết) thì bỏ qua, các lỗi khác vẫn báo
-  assert.deepEqual(await gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ error: { code: 'NOT_FOUND' } }, 404))).gw.loadAll(), []);
-  await assert.rejects(gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ error: { code: 'INTERNAL' } }, 500))).gw.loadAll(), (e: unknown) => e instanceof ApiError && e.status === 500);
+  // a trip that was just deleted on another device (404 when reading the detail) is skipped, other errors are still reported
+  assert.deepEqual(await gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ code: 'NOT_FOUND' }, 404))).gw.loadAll(), []);
+  await assert.rejects(gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ code: 'INTERNAL' }, 500))).gw.loadAll(), (e: unknown) => e instanceof ApiError && e.status === 500);
 });
 
 test('tạo chuyến: ánh xạ tên trường (destination, budget) và trả mã chuyến mới', async () => {

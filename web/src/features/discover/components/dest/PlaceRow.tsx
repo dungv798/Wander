@@ -4,26 +4,26 @@ import { Icon } from '../../../../shared/ui/Icon.tsx';
 import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import { PlacePlaceholder } from '../PlacePlaceholder.tsx';
 import type { PlaceView } from '../../model/Catalog.types.ts';
-import { firstPhotoUrl } from '../../model/destinationQueries.ts';
+import { firstPhotoThumbUrl } from '../../model/destinationQueries.ts';
 import { DEST_COPY } from '../../model/dest.copy.ts';
 
 interface PlaceRowProps {
   readonly place: PlaceView;
-  /** Đã nằm trong tập "Đã chọn" của người dùng. */
+  /** Already in the user's 'Selected' set. */
   readonly chosen: boolean;
   readonly onOpen: () => void;
   readonly onToggle: () => void;
 }
 
 /**
- * Thẻ ngang của một nơi/trải nghiệm: ảnh thật bên trái (chạm = xem chi tiết), tên, khu vực, rồi "Xem chi tiết" và "Chọn".
- * "Chọn" là nút bật/tắt (`aria-pressed`): chọn rồi thì thành "Đã chọn" và chạm lại sẽ bỏ chọn. Mọi nút cao ≥ 44 px, không phụ thuộc hover.
+ * The horizontal card of a place/experience: a real photo on the left (tap = see detail), the name, the area, then 'See detail' and 'Select'.
+ * 'Select' is a toggle button (`aria-pressed`): once selected it becomes 'Selected' and tapping again deselects. Every button is at least 44 px high, not dependent on hover.
  */
 export function PlaceRow({ place, chosen, onOpen, onToggle }: PlaceRowProps) {
   return (
     <li className={`place-row cat-${place.category}`} data-place-id={place.id}>
       <button className="pr-photo" type="button" data-place-photo={place.id} aria-label={fill(DEST_COPY.openNamed, { name: place.name })} onClick={onOpen}>
-        {place.photos.length ? <RevealImage alt="" src={firstPhotoUrl(place)} loading="lazy" /> : <PlacePlaceholder place={place} />}
+        {place.photos.length ? <RevealImage alt="" src={firstPhotoThumbUrl(place)} loading="lazy" /> : <PlacePlaceholder place={place} />}
         <span className="pr-cat">{place.id.startsWith('exp-') ? DEST_COPY.experience : place.categoryName}</span>
         {place.photos[0]?.caption ? <span className="pr-photo-caption">{place.photos[0].caption}</span> : null}
       </button>

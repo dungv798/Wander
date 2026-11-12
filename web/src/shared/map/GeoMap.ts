@@ -15,16 +15,16 @@ import type { FitOptions, Insets, MapMarker, MapMode, MapRoute, ProjectedMarker,
 
 const NO_INSET: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
 
-/** Camera đang chờ bản đồ tải xong: vừa khung các ghim (null = tất cả). */
+/** The camera waiting for the map to finish loading: fit the pins (null = all). */
 interface FitRequest {
   readonly ids: readonly string[] | null;
   readonly o: FitOptions;
 }
 
 /**
- * Bản đồ WebGL của Wander (ADR-015): nền MapLibre GL + OpenFreeMap + bóng núi từ ô độ cao; ghim ảnh, cụm, nhãn là lớp native
- * qua `MapLayers`; tuyến là lớp đường GeoJSON. Các màn dùng cổng React `TerrainMapView`.
- * Tọa độ ghim (`p`) ở đây là [kinh độ, vĩ độ].
+ * Wander's WebGL map (ADR-015): a MapLibre GL base + OpenFreeMap + a terrain shadow from elevation tiles; photo pins, clusters, labels are native layers
+ * through `MapLayers`; the route is a GeoJSON line layer. Screens use the React gate `TerrainMapView`.
+ * The pin coordinates (`p`) here are [longitude, latitude].
  */
 export class GeoMap {
   private readonly host: HTMLElement;
@@ -47,10 +47,10 @@ export class GeoMap {
   private lastFit: FitRequest | null = null;
   private pendingFit: FitRequest | null = null;
   private loadTimer: number | undefined;
-  /** Thử lại tải bản đồ (nút trong hộp lỗi). */
+  /** Retries loading the map (the button in the error box). */
   private readonly retry = (): void => void this.start();
 
-  /** Dựng bản đồ vào `host` (cần có kích thước); MapLibre và kiểu bản đồ tải bất đồng bộ, ghim/tuyến đặt trước sẽ hiện khi xong. */
+  /** Builds the map into `host` (it needs a size); MapLibre and the map style load asynchronously, pins/route set earlier show when done. */
   constructor(host: HTMLElement, opt: GeoMapOptions) {
     this.host = host;
     this.opt = { interactive: true, towns: true, credit: true, ...opt };
@@ -69,7 +69,7 @@ export class GeoMap {
     void this.start();
   }
 
-  /** Giải phóng bản đồ MapLibre, bộ quan sát kích thước và dọn phần tử. */
+  /** Releases the MapLibre map, the size observer and cleans up the elements. */
   destroy(): void {
     this.dead = true;
     window.clearTimeout(this.loadTimer);
@@ -82,7 +82,7 @@ export class GeoMap {
     this.host.replaceChildren();
   }
 
-  /** Đặt vùng nhìn thấy thật sự (ví dụ trừ phần tờ dưới che) để vừa khung căn giữa đúng. */
+  /** Sets the really visible area (for example minus the part covered by the bottom sheet) so fitting to the frame centers correctly. */
   setInsets(inset: Partial<Insets>): void {
     if (this.dead) return;
     const before = this.inset;
@@ -94,43 +94,43 @@ export class GeoMap {
     if (needsInsetRefit(before, this.inset, this.touchedByUser, this.allInView(pts))) this.fitTo(fit.ids, { ...fit.o, animate: false, keepIfVisible: false });
   }
 
-  /** Đặt danh sách ghim (hiện khi bản đồ đã tải). */
+  /** Sets the list of pins (shown once the map has loaded). */
   setMarkers(list: readonly MapMarker[]): void {
     if (this.dead || sameMarkers(this.raw, list)) return;
     this.raw = list;
     if (this.ready) this.applyMarkers();
   }
 
-  /** Chế độ 'browse' (gộp cụm) hoặc 'route' (đánh số, không gộp). */
+  /** The mode 'browse' (cluster) or 'route' (numbered, no clustering). */
   setMode(mode: MapMode): void {
     if (this.dead || mode === this.mode) return;
     this.mode = mode;
     if (this.ready) this.applyMarkers();
   }
 
-  /** Vẽ tuyến nối các ghim theo thứ tự id; nhãn khoảng cách tùy chọn theo từng đoạn. */
+  /** Draws a route connecting the pins in id order; an optional distance label per segment. */
   setRoute(ids: readonly string[] | null, labels: readonly string[] = [], detail?: MapRoute): void {
     if (this.dead) return;
     this.route = ids && ids.length > 1 ? { ids, labels, ...detail } : null;
     if (this.ready) this.drawRoute();
   }
 
-  /** Chọn một ghim (vòng sáng); null để bỏ chọn. */
+  /** Selects a pin (a glowing ring); null to deselect. */
   select(id: string | null): void {
     if (this.dead) return;
     this.selected = id;
     this.layers.select(id);
   }
 
-  /** Điểm kiểm đoạn đang chọn dùng chung với thẻ React; không tạo thêm trạng thái chọn ghim. */
+  /** The checkpoint of the selected segment shared with the React card; it adds no extra pin-selection state. */
   selectSegment(id: string | null): void { this.host.dataset['selectedSegment'] = id ?? ''; }
 
-  /** Vừa khung mọi ghim; chưa có ghim nào thì cho thấy cả nước. */
+  /** Fits every pin; with no pin yet it shows the whole country. */
   fitAll(animate = true): void {
     this.fitTo(null, { animate });
   }
 
-  /** Vừa khung các ghim theo id (null = tất cả). Chưa tải xong thì nhớ để làm sau. */
+  /** Fits the pins by id (null = all). If loading has not finished it is remembered to do later. */
   fitTo(ids: readonly string[] | null, o: FitOptions = {}): void {
     if (this.dead) return;
     this.lastFit = { ids, o };
@@ -144,7 +144,7 @@ export class GeoMap {
     else this.fitCountry(o.animate !== false);
   }
 
-  /** Tải MapLibre và kiểu bản đồ song song, dựng bản đồ; lỗi thì hiện thông báo kèm nút thử lại. */
+  /** Loads MapLibre and the map style in parallel, builds the map; on an error it shows a notice with a retry button. */
   private async start(): Promise<void> {
     showMapLoading(this.host);
     if (!webglAvailable()) return showMapUnavailable(this.host, COPY.map.noWebgl, this.raw, this.retry);
@@ -161,7 +161,7 @@ export class GeoMap {
     }
   }
 
-  /** Dựng MapLibre không xoay; nhãn khoảng cách tuyến là phần HTML duy nhất cần theo camera. */
+  /** Builds MapLibre without rotation; the route distance label is the only HTML that needs to follow the camera. */
   private createMap(ml: MapLibre, style: Awaited<ReturnType<typeof loadMapStyle>>): MlMap {
     const map = new ml.Map({
       container: this.mapEl,
@@ -183,7 +183,7 @@ export class GeoMap {
     }
     map.on('move', () => this.layers.place(this.project));
     map.on('moveend', () => this.layout());
-    map.on('idle', () => this.layout()); // ghim chỉ truy vấn được sau khi vẽ xong: moveend có thể đến trước đó và không còn lần tính nào sau
+    map.on('idle', () => this.layout()); // pins can be queried only after drawing finishes: moveend may arrive before that and no later computation follows
     map.on('dragstart', () => this.markTouched());
     map.on('zoomstart', (e) => {
       if ((e as { originalEvent?: Event }).originalEvent) this.markTouched();
@@ -202,12 +202,12 @@ export class GeoMap {
     return map;
   }
 
-  /** Người dùng tự kéo/phóng: ngừng tự vừa khung lại khi đổi cỡ. */
+  /** The user drags/zooms by themself: stops re-fitting automatically when the size changes. */
   private markTouched(): void {
     this.touchedByUser = true;
   }
 
-  /** Kiểu bản đồ đã tải: thêm lớp tuyến, hiện ghim đang chờ rồi vừa khung. */
+  /** The map style has loaded: adds the route layer, shows the pins that were waiting and then fits the frame. */
   private onLoad(map: MlMap): void {
     if (this.dead) return;
     this.nativeRoute?.attach(map);
@@ -224,13 +224,13 @@ export class GeoMap {
     this.fitTo(f?.ids ?? null, f?.o ?? { animate: false });
   }
 
-  /** Tọa độ [kinh độ, vĩ độ] → điểm trên màn hình trong khung bản đồ. */
+  /** Coordinates [longitude, latitude] -> a point on the screen within the map frame. */
   private readonly project = (p: Pt): Pt => {
     const s = this.gl?.project([p[0], p[1]]);
     return s ? [s.x, s.y] : [0, 0];
   };
 
-  /** Chiếu ghim đầu vào (giữ [kinh độ, vĩ độ] làm `p`) rồi đồng bộ phần tử ghim, tuyến và bố cục. */
+  /** Projects the input pins (keeping [longitude, latitude] as `p`) and then syncs the pin elements, the route and the layout. */
   private applyMarkers(): void {
     this.markers = this.raw.map((m) => ({ ...m, p: [m.lon, m.lat] as Pt }));
     this.layers.syncMarkers(this.markers, this.mode, this.selected, this.opt.onPin);
@@ -238,7 +238,7 @@ export class GeoMap {
     this.layout();
   }
 
-  /** Cập nhật dữ liệu lớp tuyến và nhãn km theo ghim hiện có (ghim thiếu thì bỏ khỏi tuyến, nhãn giữ đúng đoạn). */
+  /** Updates the route layer data and the km labels by the pins present (a missing pin is dropped from the route, labels keep the right segment). */
   private drawRoute(): void {
     this.nativeRoute?.update(this.route, this.raw, this.opt.onSegment);
     const { labels, mids } = this.nativeRoute?.labels() ?? { labels: [], mids: [] };
@@ -246,17 +246,17 @@ export class GeoMap {
     this.layers.place(this.project);
   }
 
-  /** Sau khi camera dừng chỉ ghi điểm kiểm; worker và renderer native tự gộp cụm/đặt nhãn. */
+  /** After the camera stops it only records the checkpoint; the worker and the native renderer cluster/place labels by themselves. */
   private layout(): void {
     const gl = this.gl;
     if (!this.ready || !gl) return;
     this.host.dataset['center'] = gl.getCenter().toArray().join(',');
-    this.host.dataset['zoom'] = gl.getZoom().toFixed(MAP.ZOOM_DIGITS); // điểm kiểm cho e2e: mức zoom hiện tại
+    this.host.dataset['zoom'] = gl.getZoom().toFixed(MAP.ZOOM_DIGITS); // a checkpoint for e2e: the current zoom level
     this.layers.snapshot();
     this.nativeRoute?.snapshot();
   }
 
-  /** Mọi điểm đều nằm trong vùng nhìn thấy thật sự (khung trừ phần bị che và lề)? Rỗng trả false. */
+  /** Are all the points within the really visible area (the frame minus the covered part and the margin)? Empty returns false. */
   private allInView(pts: readonly Pt[]): boolean {
     const r = this.host.getBoundingClientRect();
     const m = MAP.KEEP_VISIBLE_MARGIN;
@@ -270,13 +270,13 @@ export class GeoMap {
     );
   }
 
-  /** Lề cho `fitBounds`: phần bị che cộng đệm, kẹp để không vượt quá nửa khung (tránh MapLibre tính ra kích thước âm). */
+  /** The margins for `fitBounds`: the covered part plus padding, clamped so it does not exceed half the frame (avoiding MapLibre computing a negative size). */
   private fitPadding(pad: number): PaddingOptions {
     const r = this.host.getBoundingClientRect();
     return fitPadding({ w: r.width, h: r.height }, this.inset, pad, this.opt.creditBand ?? this.opt.credit);
   }
 
-  /** Bay (hoặc nhảy, khi giảm chuyển động) tới khung vừa các điểm. */
+  /** Flies (or jumps, under reduced motion) to a frame that fits the points. */
   private fitPoints(pts: readonly Pt[], o: FitOptions): void {
     const { ml, gl } = this;
     const first = pts[0];
@@ -287,13 +287,13 @@ export class GeoMap {
     flyToBounds(gl, bounds, this.fitPadding(o.padding ?? MAP.FIT_PADDING), fitMaxZoom(o, pts), animate ? MAP.FLY_MS : 0);
   }
 
-  /** Cho thấy cả nước (khi chưa có ghim nào). */
+  /** Shows the whole country (when there is no pin yet). */
   private fitCountry(animate: boolean): void {
     const [west, south, east, north] = MAP.VIETNAM_BOUNDS;
     this.gl?.fitBounds([[west, south], [east, north]], { padding: this.fitPadding(0), absolutePadding: true, duration: animate && !prefersReducedMotion() ? MAP.FLY_MS : 0, essential: true });
   }
 
-  /** Đổi cỡ khung: báo MapLibre, đặt lại ghim; chưa ai kéo/phóng thì vừa khung lại theo cỡ mới. */
+  /** A frame size change: tells MapLibre, resets the pins; if nobody has dragged/zoomed it re-fits by the new size. */
   private onResize(): void {
     if (!this.ready || !this.gl) return;
     this.gl.resize();

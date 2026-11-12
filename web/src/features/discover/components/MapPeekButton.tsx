@@ -3,8 +3,8 @@ import { HOME_COPY } from '../model/home.copy.ts';
 import { useShellSheet } from '../hooks/ShellSheetProvider.tsx';
 
 /**
- * Nút "Bản đồ" đưa người dùng tới BẢN ĐỒ CHÍNH của khung ứng dụng (cùng dữ liệu, cùng camera) bằng cách thu tờ nội dung.
- * Chỉ có nghĩa ở điện thoại, nơi tờ che bản đồ; màn rộng đã thấy bản đồ cạnh bảng nên CSS ẩn nút (`.map-peek`).
+ * The 'Map' button takes the user to the app frame's MAIN MAP (same data, same camera) by collapsing the content sheet.
+ * It only means something on a phone, where the sheet covers the map; a wide screen already sees the map next to the panel so CSS hides the button (`.map-peek`).
  */
 export function MapPeekButton() {
   const sheet = useShellSheet();

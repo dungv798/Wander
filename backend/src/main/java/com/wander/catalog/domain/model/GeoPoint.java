@@ -3,7 +3,7 @@ package com.wander.catalog.domain.model;
 import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.constant.CatalogMessages;
 import com.wander.catalog.domain.rule.CatalogValidation;
-/** Tọa độ WGS84 đã kiểm tra khoảng hợp lệ. */
+/** WGS84 coordinates whose valid range has been checked. */
 public record GeoPoint(double lat, double lon) {
 
     public GeoPoint {

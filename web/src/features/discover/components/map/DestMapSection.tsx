@@ -16,7 +16,7 @@ const CARD_INSETS = { bottom: 0 };
 const CARD_FIT: MapFit = { ids: null, options: { animate: false, padding: 24 } };
 const FULL_FIT: MapFit = { ids: null, options: { animate: false, padding: 48 } };
 
-/** Bản đồ toàn màn có kéo, phóng, gộp cụm; chạm ghim thì đóng bản đồ và mở chi tiết nơi đó. */
+/** A full-screen map with drag, zoom and clustering; tapping a pin closes the map and opens that place's detail. */
 function FullMapSheet({ dest, onClose }: { readonly dest: DestinationDetail; readonly onClose: () => void }) {
   const place = usePlaceSheet();
   const markers = useMemo(() => placeMarkers(dest.places), [dest]);
@@ -41,7 +41,7 @@ function FullMapSheet({ dest, onClose }: { readonly dest: DestinationDetail; rea
   );
 }
 
-/** Khối "<Điểm đến> trên bản đồ": bản đồ nhỏ tĩnh (chạm ghim xem chi tiết) và nút "Mở rộng" để kéo, phóng toàn màn. */
+/** The '<Destination> on the map' block: a small static map (tap a pin to see detail) and an 'Expand' button to drag and zoom full screen. */
 export function DestMapSection({ dest, title }: { readonly dest: DestinationDetail; readonly title?: string }) {
   const place = usePlaceSheet();
   const [expanded, setExpanded] = useState(false);

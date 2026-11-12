@@ -12,7 +12,7 @@ import { RatingComments } from './RatingComments.tsx';
 import { RatingForm } from './RatingForm.tsx';
 import '../rating.css';
 
-/** Dòng "Wander ★ 4,5 · 7 người" hoặc lời mời chấm đầu tiên khi chưa có lượt nào. */
+/** The line 'Wander * 4.5 - 7 people' or an invitation to give the first rating when there is none. */
 function SummaryRow({ data }: { readonly data: PlaceRating }) {
   const { average, count } = data.summary;
   if (average === null || count === 0) return <p className="rating-empty">{C.noneYet}</p>;
@@ -28,8 +28,8 @@ function SummaryRow({ data }: { readonly data: PlaceRating }) {
 }
 
 /**
- * Thẻ đánh giá Wander của một quán (DR-032): điểm tổng hợp từ người dùng Wander, "Bạn chấm" 1–5 sao kèm lời bình ngắn tùy chọn,
- * lời bình ẩn danh gần đây và nút báo cáo. Dùng với `key={placeId}`. Không có phiên trên máy này thì không hiện gì.
+ * The Wander rating card of a venue (DR-032): the aggregate score from Wander users, 'You rate' 1-5 stars with an optional short comment,
+ * recent anonymous comments and a report button. Used with `key={placeId}`. With no session on this device nothing is shown.
  */
 export function PlaceRatingCard({ placeId }: { readonly placeId: string }) {
   const rating = usePlaceRating(placeId);

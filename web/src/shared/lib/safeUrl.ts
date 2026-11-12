@@ -1,9 +1,9 @@
 const SAFE_PROTOCOLS: readonly string[] = ['https:', 'http:'];
 
-/** Hai ký tự đầu là "/" rồi "/" hoặc gạch ngược: trình duyệt hiểu là máy chủ khác (protocol-relative). */
+/** The first two characters are '/' then '/' or a backslash: the browser reads it as another host (protocol-relative). */
 const CROSS_ORIGIN_PATH = /^\/[\\/]/;
 
-/** Trả về địa chỉ nếu là http(s) hợp lệ; ngược lại `undefined` (chặn `javascript:`, `data:`... trước khi đưa vào `href`). */
+/** Returns the address if it is a valid http(s); otherwise `undefined` (blocks `javascript:`, `data:`... before it goes into `href`). */
 export function safeHttpUrl(value: string | undefined | null): string | undefined {
   if (!value) return undefined;
   try {
@@ -14,8 +14,8 @@ export function safeHttpUrl(value: string | undefined | null): string | undefine
 }
 
 /**
- * Như `safeHttpUrl` nhưng nhận thêm đường dẫn cùng nguồn (`/catalog/photos/a.jpg`), dùng cho ảnh do chính máy chủ phục vụ.
- * Chặn `//host` và `/\host` (trình duyệt hiểu là máy chủ khác), `javascript:`, `data:` và đường dẫn tương đối không có `/` đầu.
+ * Like `safeHttpUrl` but also accepts a same-origin path (`/catalog/photos/a.jpg`), used for photos served by the server itself.
+ * Blocks `//host` and `/\host` (the browser reads them as another host), `javascript:`, `data:` and a relative path without a leading `/`.
  */
 export function safeLinkUrl(value: string | undefined | null): string | undefined {
   if (!value) return undefined;

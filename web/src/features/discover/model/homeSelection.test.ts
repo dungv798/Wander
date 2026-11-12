@@ -12,8 +12,8 @@ test('ảnh hero không có tuyển chọn dùng ảnh bìa, không tự đưa �
 });
 
 test('ảnh đã chọn chỉ hiện khi còn trong catalog và giữ thứ tự xếp hạng', () => {
-  const dest = { id: 'da-lat', coverUrl: 'cover', places: [{ photos: [{ url: '/catalog/photos/ho-xuan-huong-2.jpg' }, { url: '/catalog/photos/ho-tuyen-lam-1.jpg' }] }] } as unknown as DestinationDetail;
-  assert.deepEqual(heroImages(dest), ['/catalog/photos/ho-tuyen-lam-1.jpg', '/catalog/photos/ho-xuan-huong-2.jpg']);
+  const dest = { id: 'da-lat', coverUrl: 'cover', places: [{ photos: [{ url: '/catalog/photos/ho-xuan-huong-2-w1280-9d989b3de5.webp' }, { url: '/catalog/photos/ho-tuyen-lam-1-w1280-0c24449240.webp' }] }] } as unknown as DestinationDetail;
+  assert.deepEqual(heroImages(dest), ['/catalog/photos/ho-tuyen-lam-1-w1280-0c24449240.webp', '/catalog/photos/ho-xuan-huong-2-w1280-9d989b3de5.webp']);
   assert.deepEqual(heroImages({ ...dest, places: [] }), ['cover']);
 });
 

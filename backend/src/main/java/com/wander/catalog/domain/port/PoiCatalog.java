@@ -3,8 +3,8 @@ package com.wander.catalog.domain.port;
 import com.wander.catalog.domain.model.PoiCollection;
 import java.util.Optional;
 
-/** Cổng đọc POI rộng; không ép POI thiếu ảnh vào kho Discover. */
+/** The port that reads the broad POI set; it does not force a POI with no photo into the Discover catalog. */
 public interface PoiCatalog {
-    /** Đọc batch của điểm đến; chưa có dữ liệu trả Optional rỗng. */
+    /** Reads the batch of a destination; if there is no data yet it returns an empty Optional. */
     Optional<PoiCollection> destination(String destinationId);
 }

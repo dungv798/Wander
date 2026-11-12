@@ -4,9 +4,9 @@ import { Icon } from '../../../../shared/ui/Icon.tsx';
 import { safeHttpUrl } from '../../../../shared/lib/safeUrl.ts';
 import { fill } from '../../../../shared/const/copy.vi.ts';
 
-/** Mở tìm kiếm có tên và vùng để xem thông tin hiện tại; không giả rating Google khi chưa có dữ liệu API. */
+/** Opens a search with the name and region to see current information; it does not fake a Google rating when there is no API data. */
 export function PlaceDecisionLinks({ dest, place }: { readonly dest: DestinationDetail; readonly place: PlaceView }) {
-  // chỉ http(s): chặn javascript:/data: từ dữ liệu danh mục trước khi đưa vào href
+  // only http(s): blocks javascript:/data: from catalog data before it goes into href
   const website = safeHttpUrl(place.venue?.website);
   const source = safeHttpUrl(place.venue?.sourceUrl);
   const params = new URLSearchParams({ api: '1', query: `${place.name}, ${place.area}, ${dest.name}, Việt Nam` });

@@ -9,38 +9,38 @@ import { EXPORT_COPY as C } from './export.copy.ts';
 import { PNG } from './export.const.ts';
 import type { ExportInput, TextBlock } from './Export.types.ts';
 
-/** Tiền D17/D18: null không thành 0, đã bao gồm không hiện giá tham khảo như tiền cần trả. */
+/** D17/D18 money: null does not become 0, included does not show the reference price as money to pay. */
 export function costLabel(item: TripItem): string {
   const cost = costCell(item);
   if (cost.kind === 'known') return formatVnd(cost.k * FORMAT.VND_PER_THOUSAND);
   return cost.kind === 'included' ? C.included : cost.kind === 'unknown' ? C.unknown : '';
 }
 
-/** Giờ tùy chọn hiển thị HH:mm kể cả khi API có phần giây. */
+/** The optional time shown as HH:mm even when the API has a seconds part. */
 export function timeLabel(time: string | null): string {
   return time ? time.split(':').slice(0, PNG.timeParts).join(':') : C.noTime;
 }
 
-/** Tên tải xuống an toàn cho Windows, không ký tự điều khiển, tên thiết bị hay dấu chấm cuối. */
+/** A download name safe for Windows, with no control characters, device names or trailing dot. */
 export function pngFilename(name: string, index: number, count: number): string {
   const clean = Array.from(name.normalize('NFC').replace(/[<>:"/\\|?*\p{Cc}]/gu, '-').trim().replace(/[. ]+$/u, '')).slice(0, PNG.maxFileName).join('');
   return `${C.fallbackName}-${clean || C.brand}${count > 1 ? `-${index + 1}` : ''}${PNG.extension}`;
 }
 
-/** Khoảng ngày không bịa ngày thật cho chuyến dự kiến hoặc dữ liệu thiếu ngày. */
+/** The date range does not invent real dates for a tentative trip or data missing dates. */
 export function dateLabel(trip: Trip): string {
   if (trip.datesTentative) return C.tentative;
   return trip.startDate && trip.endDate ? `${dayLabel(trip.startDate)} – ${dayLabel(trip.endDate)}` : C.noDates;
 }
 
-/** Dòng phụ của một mục: chỉ giờ và giá ĐÃ CÓ; mục chưa có gì thì không in dòng phụ (không lặp "Chưa đặt giờ · Chưa biết giá"). */
+/** The secondary line of an item: only the time and the price that EXIST; an item with nothing prints no secondary line (it does not repeat 'No time set - Price unknown'). */
 export function itemDetail(item: TripItem): string {
   const cost = costCell(item);
   const priced = cost.kind === 'known' || cost.kind === 'included' ? costLabel(item) : '';
   return [item.timeOfDay ? timeLabel(item.timeOfDay) : '', priced].filter(Boolean).join(' · ');
 }
 
-/** Các mục theo thứ tự thủ công, mỗi mục có số, tên và (nếu có) giờ/giá đã biết. */
+/** The items in manual order, each with a number, a name and (if any) the known time/price. */
 function itemBlocks(items: readonly TripItem[], input: ExportInput, section: string): TextBlock[] {
   const catalog = catalogOf(input.destination);
   return items.flatMap((item, i) => {
@@ -52,13 +52,13 @@ function itemBlocks(items: readonly TripItem[], input: ExportInput, section: str
   });
 }
 
-/** Kiểu tóm tắt: mỗi ngày một đoạn "A → B → C", không lặp thông tin phụ của từng mục. */
+/** The summary style: one paragraph 'A -> B -> C' per day, without repeating each item's secondary information. */
 function summaryBlocks(items: readonly TripItem[], input: ExportInput, section: string): TextBlock[] {
   const catalog = catalogOf(input.destination);
   return [{ text: items.map((i) => itemName(i, catalog)).join(' → '), role: 'body', section }];
 }
 
-/** Khối tổng chi phí đi liền nhau để không tách khỏi nhau khi chia ảnh. */
+/** The total-cost block stays together so it is not split apart when dividing the image. */
 function totalBlocks(trip: Trip, exported: readonly TripItem[]): TextBlock[] {
   const sum = summarizeCosts({ ...trip, items: exported });
   const notes: TextBlock[] = [];
@@ -68,7 +68,7 @@ function totalBlocks(trip: Trip, exported: readonly TripItem[]): TextBlock[] {
   return [lead, ...notes.map((n, i) => ({ ...n, keepNext: i < notes.length - 1 }))];
 }
 
-/** Dựng nội dung thuần cho các ngày của chuyến (kể cả ngày trống); mục chưa có ngày không xuất, tổng chỉ tính mục xuất ra. */
+/** Builds the pure content for the trip's days (including empty days); an item with no date is not exported, the total counts only the exported items. */
 export function exportBlocks(input: ExportInput): TextBlock[] {
   const { trip } = input;
   const style = input.style ?? 'days';
@@ -85,7 +85,7 @@ export function exportBlocks(input: ExportInput): TextBlock[] {
     else blocks.push(...(style === 'summary' ? summaryBlocks(items, input, section) : itemBlocks(items, input, section)));
   }
   const exported = trip.items.filter(i => i.day && days.includes(i.day));
-  const unassigned = trip.items.length - exported.length; // mục chưa có ngày không thuộc lịch: không xuất, chỉ ghi chú (đúng lời hứa của màn xem trước)
+  const unassigned = trip.items.length - exported.length; // an item with no date is not part of the schedule: not exported, only noted (keeping the promise of the preview screen)
   if (!exported.length) blocks.push({ text: C.empty, role: 'body' });
   if (unassigned) blocks.push({ text: `${unassigned} ${C.undatedNote}`, role: 'small' });
   blocks.push(...totalBlocks(trip, exported));

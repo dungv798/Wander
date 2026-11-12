@@ -1,15 +1,15 @@
 package com.wander.rating.application.input;
 
-/** Tên trường JSON và tham số của API rating. */
+/** JSON field names and parameters of the rating API. */
 public final class RatingFields {
 
-    /** Điểm 1–5. */
+    /** The score 1-5. */
     public static final String STARS = "stars";
 
-    /** Lời bình ngắn. */
+    /** A short comment. */
     public static final String COMMENT = "comment";
 
-    /** Mã quán. */
+    /** The venue id. */
     public static final String PLACE_REF = "placeRef";
 
     private RatingFields() {

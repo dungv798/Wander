@@ -11,7 +11,7 @@ import { Button } from '../../../shared/ui/Button.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
 import { filterDestinations } from '../model/destinationSelection.ts';
-import { firstPhotoUrl } from '../model/destinationQueries.ts';
+import { firstPhotoThumbUrl } from '../model/destinationQueries.ts';
 import type { DestinationDetail, DestinationSummary } from '../model/Catalog.types.ts';
 import { PLACE_SEARCH_LIMIT, searchPlaces } from '../model/placeSearch.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
@@ -19,10 +19,10 @@ import { DestinationGate } from './DestinationGate.tsx';
 import { COUNTRY_MAP_ID, DESTINATION_SEARCH_DEBOUNCE_MS, DESTINATION_SEARCH_ZOOM } from '../model/destination.const.ts';
 import '../destinations.css';
 
-/** Phạm vi tìm: điểm đến (thành phố/vùng) hoặc địa điểm bên trong thành phố đang chọn. */
+/** The search scope: a destination (city/region) or a place inside the currently selected city. */
 type SearchScope = 'destinations' | 'places';
 
-/** Màn chọn điểm đến toàn màn; camera chỉ đổi sau khi ngừng gõ một giây. */
+/** The full-screen destination picker; the camera changes only after typing stops for one second. */
 export default function DestinationPickerScreen({ initialScope }: { readonly initialScope?: string | null }) {
   const { destinations, status, retry, select, selectedId } = useCurrentDestination();
   const [scope, setScope] = useState<SearchScope>(initialScope === 'places' ? 'places' : 'destinations');
@@ -41,17 +41,17 @@ export default function DestinationPickerScreen({ initialScope }: { readonly ini
     const timer = window.setTimeout(() => setSettled(query), DESTINATION_SEARCH_DEBOUNCE_MS);
     return () => window.clearTimeout(timer);
   }, [query]);
-  /** Lưu điểm đến rồi mở trang khám phá của nơi đó; người dùng chọn danh sách/map hoặc quẹt theo flow B. */
+  /** Saves the destination then opens the explore page of that place; the user chooses list/map or swipes by flow B. */
   function choose(id: string): void {
     select(id);
     navigate(VIEW.DEST, id);
   }
-  /** Chọn thành phố từ tab Địa điểm: ở lại màn này và chuyển sang tìm bên trong thành phố đó, giữ truy vấn đang gõ. */
+  /** Choosing a city from the Places tab: stays on this screen and switches to searching inside that city, keeping the query being typed. */
   function pickCity(id: string): void {
     select(id);
     setScope('places');
   }
-  /** Mũi tên đi giữa ô tìm và các dòng; Escape trở về trang chủ. */
+  /** Arrow keys move between the search box and the rows; Escape returns to the home page. */
   function onKey(event: KeyboardEvent, index: number): void {
     if (event.key === 'Escape') { event.preventDefault(); goBack(); }
     if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
@@ -81,7 +81,7 @@ export default function DestinationPickerScreen({ initialScope }: { readonly ini
   );
 }
 
-/** Tab "Điểm đến": bản đồ cả nước, trạng thái tải và danh sách điểm đến khớp. */
+/** The 'Destinations' tab: the nationwide map, the loading state and the list of matching destinations. */
 function DestinationsPane({ matches, markers, fit, status, retry, rows, onChoose, onKey }: {
   readonly matches: readonly DestinationSummary[]; readonly markers: readonly MapMarker[]; readonly fit: MapFit; readonly status: string; readonly retry: () => void;
   readonly rows: MutableRefObject<(HTMLButtonElement | null)[]>; readonly onChoose: (id: string) => void; readonly onKey: (event: KeyboardEvent, index: number) => void;
@@ -105,7 +105,7 @@ function DestinationsPane({ matches, markers, fit, status, retry, rows, onChoose
   );
 }
 
-/** Tab "Địa điểm": chưa chọn thành phố thì hướng dẫn chọn (không tự mặc định); đã chọn thì tìm trong thành phố đó. */
+/** The 'Places' tab: if no city is chosen yet it guides the user to choose one (no automatic default); once chosen it searches in that city. */
 function PlacesPane({ selectedId, cityName, query, destinations, onPickCity }: {
   readonly selectedId: string | null; readonly cityName: string | null; readonly query: string; readonly destinations: readonly DestinationSummary[]; readonly onPickCity: (id: string) => void;
 }) {
@@ -127,7 +127,7 @@ function PlacesPane({ selectedId, cityName, query, destinations, onPickCity }: {
   );
 }
 
-/** Kết quả tìm địa điểm trong một điểm đến: ảnh, tên, loại · khu vực; chạm mở tờ chi tiết của địa điểm. */
+/** The results of a place search within a destination: photo, name, kind and area; tap opens the place's detail sheet. */
 function PlaceResults({ dest, query }: { readonly dest: DestinationDetail; readonly query: string }) {
   const { open } = usePlaceSheet();
   const hits = searchPlaces(dest.places, query);
@@ -137,7 +137,7 @@ function PlaceResults({ dest, query }: { readonly dest: DestinationDetail; reado
       {hits.slice(0, PLACE_SEARCH_LIMIT).map((place) => (
         <li key={place.id}>
           <button type="button" onClick={() => open(place.id)}>
-            <RevealImage src={firstPhotoUrl(place)} alt="" loading="lazy" />
+            <RevealImage src={firstPhotoThumbUrl(place)} alt="" loading="lazy" />
             <span><strong>{place.name}</strong><span>{place.categoryName} · {place.area}</span></span>
           </button>
         </li>
@@ -146,7 +146,7 @@ function PlaceResults({ dest, query }: { readonly dest: DestinationDetail; reado
   );
 }
 
-/** Hiện trạng thái tải, lỗi có thể thử lại hoặc thông điệp không khớp. */
+/** Shows the loading state, a retryable error or a no-match message. */
 function DestinationResults({ status, retry, count }: { readonly status: string; readonly retry: () => void; readonly count: number }) {
   if (status === 'error') return <div role="alert">{COPY.state.loadErrorTitle}<Button onClick={retry}>{COPY.common.retry}</Button></div>;
   return <p role="status" className="destination-picker-hint">{status === 'loading' ? COPY.common.loading : count ? COPY.destinations.hint : COPY.destinations.empty}</p>;

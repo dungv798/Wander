@@ -5,24 +5,24 @@ import { TRIPS_COPY } from './trips.copy.ts';
 import { fill } from '../../../shared/const/copy.vi.ts';
 import type { GeoPoint } from '../../../shared/lib/geo.ts';
 
-/** Điểm đến của chuyến cùng tra cứu địa điểm theo mã (địa điểm đã bị gỡ khỏi kho thì trả null, mục vẫn hiện được bằng tên trống). */
+/** The trip's destination along with a place lookup by id (a place removed from the catalog returns null, the item can still be shown with an empty name). */
 export interface TripCatalog {
   readonly dest: DestinationDetail;
   readonly place: (id: string | null) => PlaceView | null;
 }
 
-/** Dựng bộ tra cứu địa điểm cho một điểm đến. */
+/** Builds the place lookup for a destination. */
 export function catalogOf(dest: DestinationDetail): TripCatalog {
   const byId = new Map(dest.places.map((p) => [p.id, p]));
   return { dest, place: (id) => (id ? (byId.get(id) ?? null) : null) };
 }
 
-/** Tên hiển thị của mục: tên địa điểm trong kho, hoặc tên tự đặt, hoặc nhãn loại. */
+/** The display name of an item: the place name in the catalog, or a self-given name, or the kind label. */
 export function itemName(item: TripItem, cat: TripCatalog): string {
   return cat.place(item.placeId)?.name ?? (item.title || ITEM_KINDS[item.type].label);
 }
 
-/** Tọa độ của địa điểm trong kho (null nếu chưa có). */
+/** The coordinates of a place in the catalog (null if none yet). */
 export function coordOf(cat: TripCatalog): (placeId: string) => GeoPoint | null {
   return (id) => {
     const p = cat.place(id);
@@ -30,14 +30,14 @@ export function coordOf(cat: TripCatalog): (placeId: string) => GeoPoint | null 
   };
 }
 
-/** Dòng "n địa điểm · m mục khác" của một chuyến. */
+/** The line 'n places - m other items' of a trip. */
 export function countText(t: Pick<Trip, 'items'>): string {
   const places = t.items.filter((i) => i.placeId).length;
   const other = t.items.length - places;
   return other ? fill(TRIPS_COPY.list.countOther, { n: places, o: other }) : fill(TRIPS_COPY.list.count, { n: places });
 }
 
-/** Mốc chính của điểm đến (mốc đầu tiên có tọa độ), để gợi ý xếp ngày xuất phát từ đó. */
+/** The destination's main landmark (the first landmark that has coordinates), so day-scheduling suggestions start from it. */
 export function hubPoint(dest: DestinationDetail): GeoPoint | null {
   const r = dest.references[0];
   return r && r.lat !== undefined && r.lon !== undefined ? { lat: r.lat, lon: r.lon } : null;

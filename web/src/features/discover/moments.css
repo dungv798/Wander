@@ -1,4 +1,4 @@
-/* Ảnh vuông giữ bố cục, chú thích 14px trên nền sáng. */
+/* Square photos keep the layout, a 14px caption on a light background. */
 .moment-card { flex: 0 0 var(--home-card-width); overflow: hidden; border: var(--glass-border) solid var(--line); border-radius: var(--r-md); background: var(--surface); color: var(--ink); scroll-snap-align: start; }
 .moment-photo { display: block; width: 100%; padding: 0; border: 0; aspect-ratio: 1; background: var(--photo-bg); }
 .moment-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }

@@ -4,30 +4,30 @@ import { UI } from '../const/app.const.ts';
 import { COPY } from '../const/copy.vi.ts';
 
 interface ToastApi {
-  /** Hiện thông báo ngắn; có `undo` thì hiện nút "Hoàn tác" và giữ lâu hơn. */
+  /** Shows a short notice; with `undo` it shows an 'Undo' button and keeps it longer. */
   readonly show: (text: string, undo?: () => void) => void;
-  /** Hiện thông báo LỖI: ở lại cho tới khi người dùng bấm Đóng hoặc có thông báo mới (lỗi lưu không được biến mất sau vài giây; B-09). */
+  /** Shows an ERROR notice: it stays until the user taps Close or a new notice comes (a save error must not disappear after a few seconds; B-09). */
   readonly error: (text: string) => void;
-  /** Tắt thông báo hiện tại (một thay đổi mới làm "Hoàn tác" cũ hết nghĩa). */
+  /** Turns off the current notice (a new change makes the old 'Undo' meaningless). */
   readonly dismiss: () => void;
 }
 
 interface ToastState {
   readonly text: string;
   readonly undo: (() => void) | undefined;
-  /** Thông báo lỗi: không tự tắt. */
+  /** An error notice: it does not turn off by itself. */
   readonly sticky: boolean;
 }
 
 const ToastContext = createContext<ToastApi | null>(null);
 
-/** Cấp thông báo nổi (`role=status`) cho cả ứng dụng. Có nút Hoàn tác thì giữ 10 giây và dừng đếm khi focus vào (người dùng bàn phím). */
+/** Provides a floating notice (`role=status`) for the whole app. With an Undo button it keeps it 10 seconds and stops counting when focused (keyboard users). */
 export function ToastProvider({ children }: { readonly children: ReactNode }) {
   const [toast, setToast] = useState<ToastState | null>(null);
   const timer = useRef(0);
 
   const dismiss = useCallback(
-    /** Tắt thông báo và hủy hẹn giờ. */
+    /** Turns off the notice and cancels the timer. */
     () => {
       window.clearTimeout(timer.current);
       setToast(null);
@@ -35,7 +35,7 @@ export function ToastProvider({ children }: { readonly children: ReactNode }) {
     [],
   );
   const show = useCallback(
-    /** Hiện thông báo và hẹn giờ tự tắt. */
+    /** Shows a notice and schedules the timer to turn it off. */
     (text: string, undo?: () => void) => {
       window.clearTimeout(timer.current);
       setToast({ text, undo, sticky: false });
@@ -44,7 +44,7 @@ export function ToastProvider({ children }: { readonly children: ReactNode }) {
     [],
   );
   const error = useCallback(
-    /** Hiện lỗi và KHÔNG hẹn giờ tắt. */
+    /** Shows an error and does NOT schedule the timer to turn it off. */
     (text: string) => {
       window.clearTimeout(timer.current);
       setToast({ text, undo: undefined, sticky: true });
@@ -66,7 +66,7 @@ export function ToastProvider({ children }: { readonly children: ReactNode }) {
               type="button"
               className="glass-control undo-control"
               onClick={() => {
-                dismiss(); // tắt trước: hàm hoàn tác có thể hiện thông báo mới và không được bị xóa ngay
+                dismiss(); // turn off first: the undo function can show a new notice and must not be cleared at once
                 toast.undo?.();
               }}
             >
@@ -79,7 +79,7 @@ export function ToastProvider({ children }: { readonly children: ReactNode }) {
   );
 }
 
-/** Truy cập thông báo nổi; ném lỗi nếu quên bọc `ToastProvider`. */
+/** Access to the floating notice; throws if `ToastProvider` was forgotten. */
 export function useToast(): ToastApi {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToast phải nằm trong ToastProvider');

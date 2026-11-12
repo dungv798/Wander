@@ -1,62 +1,91 @@
 package com.wander.planning.application.command;
 
-import java.util.Map;
+import com.wander.planning.application.input.AssignmentInput;
+import com.wander.planning.application.input.CoverInput;
+import com.wander.shared.kernel.util.FlexibleNumber;
+import com.wander.shared.kernel.util.Patch;
+import java.util.List;
 import java.util.UUID;
 
 /**
- * Lệnh (phía ghi của CQRS). Mỗi lệnh là một ý định thay đổi; trả về định danh, còn dữ liệu hiển thị
- * lấy qua phía đọc ({@code PlanningQueries}).
+ * Commands of the write side (CQRS). Each command is one intent to change something and returns an id; what to display is read back
+ * through {@code PlanningQueries}.
  * <p>
- * {@code input} là đối tượng JSON thô của API: quy tắc định dạng (D17…) được kiểm tra trong handler,
- * sau khi đã nạp aggregate, để thứ tự lỗi khớp hợp đồng API (ví dụ mục đã xóa ⇒ ITEM_DELETED trước lỗi trường).
+ * Request values arrive typed but unvalidated: the input rules (D17 amounts, dates, codes) are applied inside the handler, after the
+ * aggregate has been loaded, so that errors appear in the order the API contract documents (for example a deleted item is reported as
+ * ITEM_DELETED before any field error). Partial updates carry {@link Patch} values: not sent, sent as null, or sent with a value.
  */
 public final class PlanningCommands {
 
     private PlanningCommands() {
     }
 
+    /** Soft-delete a whole trip. */
     public record DeleteTrip(UUID ownerId, UUID tripId) {
     }
 
-    /** Khôi phục một chuyến đã xóa mềm. */
+    /** Restore a soft-deleted trip. */
     public record RestoreTrip(UUID ownerId, UUID tripId) {
     }
 
-    public record CreateTrip(UUID ownerId, Map<String, Object> input) {
+    /** Create a trip; every value is optional except name, destination and the two dates (checked by the handler). */
+    public record CreateTrip(UUID ownerId, String name, String destination, String startDate, String endDate, FlexibleNumber budget,
+                             List<String> styles, String pace, Boolean datesTentative, String kind, List<String> interests) {
     }
 
-    public record UpdateTrip(UUID ownerId, UUID tripId, Map<String, Object> input) {
-    }
-
-    public record AddItem(UUID ownerId, UUID tripId, Map<String, Object> input) {
-    }
-
-    public record EditItem(UUID ownerId, UUID tripId, UUID itemId, Map<String, Object> input) {
-    }
-
-    public record ReorderDay(UUID ownerId, UUID tripId, String day, Object orderedIds) {
-    }
-
-    public record SoftDeleteItem(UUID ownerId, UUID tripId, UUID itemId) {
-    }
-
-    public record RestoreItem(UUID ownerId, UUID tripId, UUID itemId) {
-    }
-
-    public record PurgeItem(UUID ownerId, UUID tripId, UUID itemId) {
-    }
-
-    public record SetTaskDone(UUID ownerId, UUID tripId, UUID itemId, Object done) {
-    }
-
-    /** Thay toàn bộ sở thích theo danh tính (BE-10); {@code input} là thân JSON thô có khóa {@code interests}. */
-    public record SetInterestPreferences(UUID ownerId, Map<String, Object> input) {
+    /** Change trip details and options; a field that was not sent is left as it is. */
+    public record UpdateTrip(UUID ownerId, UUID tripId, Patch<String> name, Patch<String> destination, Patch<String> startDate,
+                             Patch<String> endDate, Patch<FlexibleNumber> budget, Patch<List<String>> styles, Patch<String> pace,
+                             Patch<Boolean> datesTentative, Patch<String> kind, Patch<List<String>> interests, Patch<CoverInput> cover) {
     }
 
     /**
-     * Lệnh "lịch": tùy chọn đổi khoảng ngày chuyến và gán ngày hàng loạt cho các mục, tất cả trong một giao dịch và một lần
-     * tăng phiên bản. Gửi lại trạng thái cũ là cách Hoàn tác (kể cả Hoàn tác đổi khoảng ngày).
+     * The values of an item as sent when adding or editing one. When adding, a field that was not sent takes its default; when editing,
+     * it keeps the current value (null is a value for {@code day}, {@code note}, {@code booking} and the cost fields).
      */
-    public record ApplySchedule(UUID ownerId, UUID tripId, Map<String, Object> input) {
+    public record ItemFields(Patch<String> type, Patch<String> title, Patch<String> day, Patch<String> timeOfDay,
+                             Patch<FlexibleNumber> durationMin, Patch<String> note, Patch<FlexibleNumber> cost, Patch<Boolean> included,
+                             Patch<FlexibleNumber> referenceCost, Patch<String> booking, Patch<String> placeId,
+                             Patch<FlexibleNumber> position) {
+    }
+
+    /** Add an item to a trip. */
+    public record AddItem(UUID ownerId, UUID tripId, ItemFields fields) {
+    }
+
+    /** Edit an item that has not been deleted. */
+    public record EditItem(UUID ownerId, UUID tripId, UUID itemId, ItemFields fields) {
+    }
+
+    /** Put the items of one day in a new order. */
+    public record ReorderDay(UUID ownerId, UUID tripId, String day, List<String> orderedIds) {
+    }
+
+    /** Soft-delete an item. */
+    public record SoftDeleteItem(UUID ownerId, UUID tripId, UUID itemId) {
+    }
+
+    /** Restore a soft-deleted item. */
+    public record RestoreItem(UUID ownerId, UUID tripId, UUID itemId) {
+    }
+
+    /** Permanently delete an item that is in "recently deleted". */
+    public record PurgeItem(UUID ownerId, UUID tripId, UUID itemId) {
+    }
+
+    /** Tick or untick a task (or "visited" on a place) for the calling member. */
+    public record SetTaskDone(UUID ownerId, UUID tripId, UUID itemId, Boolean done) {
+    }
+
+    /** Replace the interests of an identity; they must be sent ({@code interests} missing is REQUIRED), null or empty clears them. */
+    public record SetInterestPreferences(UUID ownerId, Patch<List<String>> interests) {
+    }
+
+    /**
+     * The "schedule" command: optionally change the trip's date range (sending only one end keeps the other) and assign items to days
+     * in bulk, all in one transaction and one version bump. Sending back the old state is how Undo works.
+     */
+    public record ApplySchedule(UUID ownerId, UUID tripId, Patch<String> startDate, Patch<String> endDate,
+                                Patch<List<AssignmentInput>> assignments) {
     }
 }

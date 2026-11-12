@@ -1,7 +1,7 @@
-﻿/* Sheet chi tiết: chỉ nội dung cuộn; thanh hành động nằm ngoài vùng cuộn. */
+﻿/* The detail sheet: only the content scrolls; the action bar sits outside the scroll area. */
 :root:not([data-look='classic']) .panel:has(> .place-content) { overflow: hidden; border-radius: var(--shell-sheet-radius); background: var(--sheet-surface); border: 1px solid var(--sheet-edge); box-shadow: var(--shell-panel-shadow); backdrop-filter: blur(var(--sheet-blur)); }
 .place-content { display: flex; flex-direction: column; max-height: 96dvh; }
-/* Chỉ cuộn dọc: một chip hoặc dòng không ngắt làm nội dung rộng hơn khung từng khiến hộp thoại cuộn ngang và cắt chữ. */
+/* Vertical scroll only: a chip or a non-breaking line that made the content wider than the frame once made the dialog scroll horizontally and cut the text. */
 .place-scroll { overflow-x: hidden; overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
 .place-scroll :is(.pp, .place-info-card, .chips) { min-width: 0; max-width: 100%; }
 .place-scroll .chip { max-width: 100%; white-space: normal; }
@@ -14,7 +14,7 @@
 .pd-photo-caption { display: block; margin-bottom: 4px; color: var(--ink); font: var(--text-secondary); }
 :root .place-actions:has(> .btn[aria-pressed]) { grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
 
-/* MỘT template chi tiết cho mọi nơi: đầu trang (đường dẫn + đóng + tên + loại), ảnh theo tỷ lệ gốc + 4 thông số, rồi nội dung. */
+/* ONE detail template for every place: the head (breadcrumb + close + name + kind), the photo at its original ratio + 4 facts, then the content. */
 .pd-head { display: grid; gap: var(--s-2); padding: var(--s-4) var(--s-4) var(--s-2); }
 .pd-crumb { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); min-width: 0; }
 .pd-crumb p { display: flex; align-items: center; gap: var(--s-1); min-width: 0; margin: 0; font: var(--text-secondary); color: var(--muted); }
@@ -24,7 +24,7 @@
 .pd-cat { flex: none; display: inline-flex; align-items: center; gap: var(--s-1); padding: var(--s-1) var(--s-3); border-radius: var(--r-pill); border: var(--glass-border) solid var(--line); background: var(--tint); color: var(--tint-ink); font: var(--text-secondary); font-weight: 700; }
 .pd-media { display: grid; gap: var(--s-3); padding: var(--s-2) var(--s-4) var(--s-3); }
 .pd-photo-col { display: grid; align-content: start; gap: var(--s-2); min-width: 0; }
-/* Ảnh giữ đúng tỷ lệ gốc: chiều cao theo chiều rộng, không crop, không letterbox, không nền mờ lấp chỗ. */
+/* The photo keeps its exact original ratio: the height follows the width, no crop, no letterbox, no blurred background filling the gap. */
 .pd-photo { position: relative; overflow: hidden; border-radius: var(--r-lg); background: var(--surface-2); }
 :root .panel .pd-photo .pd-original { position: absolute; left: var(--s-2); bottom: var(--s-2); padding-inline: var(--s-3); color: var(--ink); background: var(--glass-label-surface); font: var(--text-secondary); }
 .pd-photo img { display: block; width: 100%; height: auto; max-height: 70dvh; object-fit: contain; }
@@ -32,10 +32,10 @@
 .pd-photo:has(.photo-ph), .pd-photo:has(.pd-photo-failed) { animation: none; }
 .pd-photo .photo-ph { min-height: calc(var(--s-8) * 3); background: var(--surface-2); color: var(--muted); place-content: center; padding: var(--s-4); }
 .pd-photo-failed { display: grid; justify-items: center; gap: var(--s-2); padding: var(--s-5) var(--s-4); color: var(--muted); text-align: center; }
-/* Thanh ảnh nhẹ: Xem ảnh gốc ở trái, trước/số/sau ở phải. */
+/* The light photo bar: View original on the left, previous/number/next on the right. */
 .pd-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); flex-wrap: wrap; }
 :root #screen .pd-bar .pd-original, :root .panel .pd-bar .pd-original { padding-inline: var(--s-3); font: var(--text-secondary); font-weight: 700; }
-/* Một viên chứa trước / số / sau; các nút bên trong không viền riêng. */
+/* One pill that holds previous / number / next; the buttons inside have no border of their own. */
 .pd-pager { display: inline-flex; align-items: center; justify-content: space-between; width: 100%; border: var(--glass-border) solid var(--sheet-edge); border-radius: var(--r-md); background: var(--control-surface); }
 .pd-pager > button { flex: none; }
 :root .panel .pd-pager .pd-nav { border: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -49,12 +49,12 @@
 .place-source-link > span { display: grid; flex: 1; gap: var(--s-1); }
 .place-source-link small { font: var(--text-secondary); color: var(--muted); }
 .place-source-link > .ic { flex: none; }
-/* Ảnh dọc đứng cạnh thông số; ảnh ngang nằm trên thông số. */
+/* A portrait photo next to the facts; a landscape photo above the facts. */
 .pd-media[data-orient="portrait"] { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: stretch; }
 .pd-media[data-orient="portrait"] .place-facts { grid-template-columns: minmax(0, 1fr); align-content: space-evenly; }
 :root .place-content .pp { gap: var(--s-3); padding: var(--s-2) var(--s-4) var(--s-4); }
 
-/* Thẻ bên trong dùng nền đặc để giữ một lớp kính chính trên sheet. */
+/* The inner card uses a solid background to keep one main glass layer on the sheet. */
 .place-info-card { background: transparent; border: 0; border-radius: 0; padding: var(--s-2) 0; }
 .place-content .place-info-card.tipbox { background: transparent; color: var(--ink); padding: var(--s-2) 0; }
 .place-facts { list-style: none; margin: 0; padding: var(--s-3); display: grid; gap: var(--s-3); grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--sheet-inner-surface); border: 1px solid var(--sheet-edge); border-radius: var(--r-lg); }
@@ -87,7 +87,7 @@
   .pd-title { align-items: center; gap: var(--s-2); }
   .pd-cat { padding-inline: var(--s-2); font: var(--text-eyebrow); }
 }
-/* Điều khiển chi tiết dùng đúng chất liệu kính của app (không tô riêng một lớp trắng). */
+/* The detail controls use exactly the app's glass material (no separate white layer). */
 .place-content { --glass-saturation: .65; --glass-brightness: 1; }
 :root .place-content .place-more { text-shadow: none; }
 .place-disclosure > h4 { margin: 0; }
@@ -136,7 +136,7 @@
 .place-disclosure-toggle:active, .place-more:active { scale: var(--glass-pressed-scale); }
 .place-content :is(.place-disclosure-toggle, .place-more):focus-visible { outline: var(--focus-width) solid var(--ink); outline-offset: var(--s-1); }
 :root .place-content .minimap.tm-mini { height: calc(var(--s-8) * 4); }
-/* Khung cố định trước khi ảnh/WebGL tải xong: shimmer trung tính, không đẩy chữ xuống. */
+/* A fixed frame before the photo/WebGL has loaded: a neutral shimmer, it does not push the text down. */
 .place-content .tmroot[data-ready="0"] {
   background: linear-gradient(110deg, var(--surface-2) 25%, var(--surface) 45%, var(--surface-2) 65%);
   background-size: 300% 100%;
@@ -148,7 +148,7 @@
   .place-content .tmroot[data-ready="0"], .pd-photo:not(:has(img[data-image-ready="true"])) { animation: none; }
 }
 
-/* Ô giữ chỗ khi chưa có ảnh: dùng đúng khung ảnh, không làm ảnh vỡ */
+/* The placeholder when there is no photo: uses exactly the photo frame, without breaking the photo */
 .img-ph { display: block; background: var(--surface-2); }
 .place-venue-address { display: flex; align-items: start; gap: var(--s-2); color: var(--ink); overflow-wrap: anywhere; }
 .place-venue-address > .ic { flex: none; }
@@ -156,5 +156,5 @@
 .card .photo-ph.ph { position: absolute; inset: 0; }
 .gal .photo-ph { min-height: calc(var(--s-8) * 4); }
 
-/* Placeholder trong tờ chi tiết: nền tối như ảnh để tiêu đề trắng vẫn rõ; nội dung nằm phía trên tiêu đề */
+/* The placeholder in the detail sheet: a dark background like a photo so the white title stays clear; the content sits above the title */
 .gal .photo-ph { background: var(--photo-bg); color: var(--on-photo); place-content: start center; padding-top: calc(var(--tap) + var(--s-5)); }

@@ -1,122 +1,119 @@
 package com.wander.identity.api.constant;
 
-/** Hằng số của API và khung xác thực Identity (tầng CHỨC NĂNG): đường dẫn, khóa JSON, chuẩn Authorization. */
+/** Constants of the Identity API and its authentication framework (FEATURE tier): paths, JSON keys, Authorization scheme. */
 public final class IdentityApiConstants {
 
-    /** Đường dẫn gốc của mọi API. */
+    /** Base path of every API. */
     public static final String BASE_PATH = "/api";
 
-    /** Mẫu khớp mọi API. */
+    /** Pattern that matches every API path. */
     public static final String ALL_API_PATTERN = BASE_PATH + "/**";
 
-    /** Tạo danh tính. */
+    /** Create an identity. */
     public static final String IDENTITY_PATH = "/identity";
 
-    /** Bắt đầu khôi phục bằng mã. */
+    /** Start recovery with a code. */
     public static final String RECOVERY_START_PATH = "/recovery/start";
 
-    /** Hoàn tất khôi phục bằng mã. */
+    /** Complete recovery with a code. */
     public static final String RECOVERY_COMPLETE_PATH = "/recovery/complete";
 
-    /** Yêu cầu ghép thiết bị. */
+    /** Request to pair a device. */
     public static final String DEVICE_LINKS_PATH = "/device-links";
 
-    /** Trạng thái một yêu cầu ghép thiết bị. */
+    /** Status of a device pairing request. */
     public static final String DEVICE_LINK_BY_ID_PATH = DEVICE_LINKS_PATH + "/{id}";
 
-    /** Duyệt ghép thiết bị. */
+    /** Approve a device pairing. */
     public static final String DEVICE_LINK_APPROVE_PATH = DEVICE_LINKS_PATH + "/approve";
 
-    /** Danh sách phiên. */
+    /** List of sessions. */
     public static final String SESSIONS_PATH = "/sessions";
 
-    /** Xem trước một yêu cầu ghép ở máy duyệt (tên máy, thời điểm, các lựa chọn số khớp). */
+    /** Preview a pairing request on the approving device (device name, time, the matching-number choices). */
     public static final String DEVICE_LINK_PREVIEW_PATH = DEVICE_LINKS_PATH + "/preview";
 
-    /** Từ chối chủ động một yêu cầu ghép. */
+    /** Actively deny a pairing request. */
     public static final String DEVICE_LINK_DENY_PATH = DEVICE_LINKS_PATH + "/deny";
 
-    /** Nhật ký sự kiện bảo mật (BE-11). */
+    /** Security event log (BE-11). */
     public static final String EVENTS_PATH = "/events";
 
-    /** Đánh dấu đã xem nhật ký. */
+    /** Mark the event log as seen. */
     public static final String EVENTS_SEEN_PATH = "/events/seen";
 
-    /** Phiên của chính thiết bị đang gọi (đổi tên thiết bị). */
+    /** The session of the calling device itself (rename the device). */
     public static final String CURRENT_SESSION_PATH = SESSIONS_PATH + "/current";
 
-    /** Thu hồi mọi phiên khác của danh tính hiện tại. */
+    /** Revoke every other session of the current identity. */
     public static final String OTHER_SESSIONS_PATH = SESSIONS_PATH + "/others";
 
-    /** Một phiên theo mã. */
+    /** One session by id. */
     public static final String SESSION_BY_ID_PATH = SESSIONS_PATH + "/{id}";
 
-    /** Trạng thái mã khôi phục. */
+    /** Status of the recovery code. */
     public static final String RECOVERY_CODE_PATH = "/recovery-code";
 
-    /** Pha 1 tạo mã thay thế. */
+    /** Phase 1: create the replacement code. */
     public static final String RECOVERY_CODE_BEGIN_PATH = RECOVERY_CODE_PATH + "/begin";
 
-    /** Pha 2 xác nhận mã thay thế. */
+    /** Phase 2: confirm the replacement code. */
     public static final String RECOVERY_CODE_CONFIRM_PATH = RECOVERY_CODE_PATH + "/confirm";
 
-    /** Xin phê duyệt xác thực lại. */
+    /** Ask for a re-authentication approval. */
     public static final String STEP_UP_REQUESTS_PATH = "/step-up/requests";
 
-    /** Duyệt phê duyệt xác thực lại. */
+    /** Approve a re-authentication approval. */
     public static final String STEP_UP_APPROVE_PATH = "/step-up/approve";
 
-    /** Xem trước một yêu cầu xác thực lại ở máy duyệt. */
+    /** Preview a re-authentication request on the approving device. */
     public static final String STEP_UP_PREVIEW_PATH = "/step-up/preview";
 
-    /** Từ chối chủ động một yêu cầu xác thực lại. */
+    /** Actively deny a re-authentication request. */
     public static final String STEP_UP_DENY_PATH = "/step-up/deny";
 
-    /** Mẫu đường dẫn công khai: tạo danh tính. */
+    /** Public path pattern: create an identity. */
     public static final String PUBLIC_IDENTITY_PATTERN = BASE_PATH + IDENTITY_PATH;
 
-    /** Mẫu đường dẫn công khai: bắt đầu khôi phục. */
+    /** Public path pattern: start recovery. */
     public static final String PUBLIC_RECOVERY_START_PATTERN = BASE_PATH + RECOVERY_START_PATH;
 
-    /** Mẫu đường dẫn công khai: hoàn tất khôi phục. */
+    /** Public path pattern: complete recovery. */
     public static final String PUBLIC_RECOVERY_COMPLETE_PATTERN = BASE_PATH + RECOVERY_COMPLETE_PATH;
 
-    /** Mẫu đường dẫn công khai: tạo yêu cầu ghép thiết bị. */
+    /** Public path pattern: create a device pairing request. */
     public static final String PUBLIC_DEVICE_LINKS_PATTERN = BASE_PATH + DEVICE_LINKS_PATH;
 
-    /** Mẫu đường dẫn công khai: xem trạng thái yêu cầu ghép thiết bị. */
+    /** Public path pattern: read the status of a device pairing request. */
     public static final String PUBLIC_DEVICE_LINK_STATUS_PATTERN = BASE_PATH + DEVICE_LINKS_PATH + "/*";
 
     /**
-     * Mẫu đường dẫn công khai: đọc kho địa điểm (DR-008 Q-a), có giới hạn tốc độ theo địa chỉ ở controller catalog.
-     * Giá trị phải khớp đường dẫn gốc của module catalog; identity không import catalog nên lặp lại ở đây (SecurityIT kiểm kê).
+     * Public path pattern: read the place catalog (DR-008 Q-a), rate limited per address in the catalog controller.
+     * The value must match the base path of the catalog module; identity does not import catalog, so it is repeated here (checked by SecurityIT).
      */
     public static final String PUBLIC_CATALOG_PATTERN = BASE_PATH + "/catalog/**";
 
-    /** Khóa JSON của danh sách phiên. */
-    public static final String KEY_SESSIONS = "sessions";
-
-    /** Header chứa bí mật phiên. */
+    /** Header that carries the session secret. */
     public static final String HEADER_AUTHORIZATION = "Authorization";
 
-    /** Header báo kiểu xác thực khi trả 401. */
+    /** Header that announces the authentication scheme on a 401. */
     public static final String HEADER_WWW_AUTHENTICATE = "WWW-Authenticate";
 
-    /** Kiểu xác thực Bearer. */
+    /** The Bearer authentication scheme. */
     public static final String SCHEME_BEARER = "Bearer";
 
-    /** Dạng header Authorization hợp lệ; nhóm 1 là bí mật phiên. */
+    /** Valid shape of the Authorization header; group 1 is the session secret. */
     public static final String BEARER_HEADER_REGEX = "^Bearer ([A-Za-z0-9_-]{20,128})$";
 
-    /** Lời báo nội bộ: header Authorization sai dạng. */
+    /** Internal message: the Authorization header has the wrong shape. */
     public static final String AUTHORIZATION_FORMAT_INVALID = "Định dạng Authorization không hợp lệ.";
 
-    /** Lời báo nội bộ: bí mật phiên không khớp phiên nào còn hiệu lực. */
+    /** Internal message: the session secret matches no valid session. */
     public static final String SESSION_INVALID = "Phiên không hợp lệ.";
 
     private IdentityApiConstants() {
     }
 
-    /** Xem trước liên kết mời chuyến đi: công khai, có hạn mức theo địa chỉ (module planning, lặp lại như PUBLIC_CATALOG_PATTERN). */
+    /** Preview of a trip invite link: public, rate limited per address (planning module, repeated like PUBLIC_CATALOG_PATTERN). */
     public static final String PUBLIC_INVITE_PREVIEW_PATTERN = BASE_PATH + "/invites/preview";
 }

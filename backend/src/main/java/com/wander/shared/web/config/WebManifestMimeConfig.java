@@ -7,11 +7,11 @@ import org.springframework.boot.web.server.servlet.ConfigurableServletWebServerF
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** Đăng ký kiểu nội dung cho manifest ứng dụng web, vì máy chủ servlet không biết đuôi `.webmanifest` và mặc định trả `application/octet-stream`. */
+/** Registers the content type of the web app manifest, because the servlet container does not know the `.webmanifest` extension and answers `application/octet-stream` by default. */
 @Configuration
 public class WebManifestMimeConfig {
 
-    /** Thêm ánh xạ đuôi `.webmanifest` → `application/manifest+json` vào máy chủ servlet (giữ nguyên các ánh xạ mặc định). */
+    /** Adds the mapping `.webmanifest` -> `application/manifest+json` to the servlet container (keeping the default mappings). */
     @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> webManifestMimeCustomizer() {
         return factory -> {

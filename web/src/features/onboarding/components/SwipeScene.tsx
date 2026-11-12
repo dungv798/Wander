@@ -15,7 +15,7 @@ import { SelectedTrayView, SwipeControls } from './SwipeControls.tsx';
 import { SwipeCard } from './SwipeCard.tsx';
 import { TouchDot } from './TouchDot.tsx';
 
-/** Sân khấu quẹt: bộ bài, dấu chạm minh họa, chú thích, khay đã chọn, hai nút và "Xem lại". */
+/** The swipe stage: the deck, the illustrative touch dot, the caption, the selected tray, the two buttons and 'Watch again'. */
 function SwipeStage({ places, auto, onDone, onInteract, onCue }: Pick<SceneProps, 'auto' | 'onDone' | 'onInteract' | 'onCue'> & { readonly places: readonly PlaceView[] }) {
   const stage = useRef<HTMLDivElement | null>(null);
   const cardEls = useRef<(HTMLElement | null)[]>([]);
@@ -26,7 +26,7 @@ function SwipeStage({ places, auto, onDone, onInteract, onCue }: Pick<SceneProps
     clear();
   }, [reset, clear]);
   const commit = useCallback(
-    /** Quẹt thẻ trên cùng; nếu chọn thì ảnh thu nhỏ bay xuống khay. */
+    /** Swipes the top card; if chosen the shrunken photo flies down to the tray. */
     (kind: SwipeKind) => {
       const el = cardEls.current[state.cur];
       const place = places[state.cur];
@@ -38,7 +38,7 @@ function SwipeStage({ places, auto, onDone, onInteract, onCue }: Pick<SceneProps
   const { interrupt, setLit } = story;
   const drag = useCardDrag({ onStart: () => { interrupt(); setDragging(state.cur); }, onLean: setLit, onCommit: commit, onCancel: () => setDragging(null) });
   const act = useCallback(
-    /** Nút ✕/✓ hoặc phím mũi tên: người xem tự quẹt. */
+    /** The X/check buttons or the arrow keys: the viewer swipes by themself. */
     (kind: SwipeKind) => {
       interrupt();
       commit(kind);
@@ -64,7 +64,7 @@ function SwipeStage({ places, auto, onDone, onInteract, onCue }: Pick<SceneProps
   );
 }
 
-/** Cảnh 2: quẹt chọn. Demo tự chạy một lượt (kéo và nhả cả hai hướng); người xem chạm vào là dừng demo và tự quẹt thử. */
+/** Scene 2: swipe to choose. The demo runs one round by itself (dragging and releasing in both directions); the viewer touching it stops the demo and they try swiping themself. */
 export function SwipeScene({ dest, reduced, auto, onDone, onInteract, onCue }: SceneProps) {
   const places = useMemo(() => DECK_IDS.flatMap((id) => placeById(dest, id) ?? []), [dest]);
   if (reduced) return <StaticSwipe places={places} />;

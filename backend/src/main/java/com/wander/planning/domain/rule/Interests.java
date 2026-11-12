@@ -10,15 +10,15 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Quy tắc chuẩn hóa tập sở thích (ADR-014, BE-10), dùng chung cho sở thích của chuyến và sở thích theo danh tính:
- * bỏ trùng, sắp theo thứ tự khai báo của {@link TripInterest}, tối đa {@value PlanningConstants#MAX_INTERESTS}.
+ * The rule that normalizes a set of interests (ADR-014, BE-10), shared by trip interests and interests by identity:
+ * drop duplicates, sort by the declaration order of {@link TripInterest}, at most {@value PlanningConstants#MAX_INTERESTS}.
  */
 public final class Interests {
 
     private Interests() {
     }
 
-    /** Danh sách đã bỏ trùng và sắp theo thứ tự khai báo; null coi như rỗng; quá số tối đa thì TOO_MANY. */
+    /** The list with duplicates dropped and sorted by declaration order; null counts as empty; over the maximum is TOO_MANY. */
     public static List<TripInterest> normalize(List<TripInterest> interests) {
         List<TripInterest> distinct = ImmutableLists.copyOrEmpty(interests).stream()
                 .distinct().sorted(Comparator.comparingInt(Enum::ordinal)).toList();

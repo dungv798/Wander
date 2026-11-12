@@ -4,7 +4,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { TRIP_TIME as C } from '../model/tripTime.const.ts';
 import { normalizeTripTime, timeOptions } from '../model/tripTime.ts';
 
-/** Chọn giờ 24h độc lập locale; nhập nhanh 1430 và xóa đều giữ hợp đồng HH:mm. */
+/** Chooses a 24h time independent of locale; quick typing 1430 and clearing both keep the HH:mm contract. */
 export function TripTimeField({ value, onChange }: { readonly value: string; readonly onChange: (value: string) => void }) {
   const normalized = normalizeTripTime(value);
   const [hour = '', minute = ''] = normalized?.split(':') ?? [];

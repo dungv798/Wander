@@ -234,13 +234,13 @@ class RecoveryApiIT extends ApiTestSupport {
         Res invalid = start("khong phai ma").r();
         Res unknown = start(UNKNOWN_CODE).r();
         Res used = start(user.recoveryCode()).r();
-        Map<String, Object> expectedBody = Map.of("error", Map.of(
-                "code", "INVALID_CODE", "message", "Mã không hợp lệ hoặc đã được dùng."));
+        Map<String, Object> expectedBody = Map.of("type", "urn:wander:problem:invalid-code", "title", "Bad Request", "status", 400,
+                "detail", "Mã không hợp lệ hoặc đã được dùng.", "code", "INVALID_CODE", "instance", "/api/recovery/start");
 
         for (Res rejection : List.of(invalid, unknown, used)) {
             assertThat(rejection.status()).isEqualTo(400);
             assertThat(rejection.code()).isEqualTo("INVALID_CODE");
-            assertThat(rejection.body()).isEqualTo(expectedBody);
+            assertThat(withoutRequestId(rejection)).isEqualTo(expectedBody);
         }
     }
 
@@ -250,12 +250,12 @@ class RecoveryApiIT extends ApiTestSupport {
     void tripDetailsAreNeverRecoveryEvidence() {
         User user = newUser();
         newTrip(user.token());
-        Map<String, Object> expectedBody = Map.of("error", Map.of(
-                "code", "INVALID_CODE", "message", "Mã không hợp lệ hoặc đã được dùng."));
+        Map<String, Object> expectedBody = Map.of("type", "urn:wander:problem:invalid-code", "title", "Bad Request", "status", 400,
+                "detail", "Mã không hợp lệ hoặc đã được dùng.", "code", "INVALID_CODE", "instance", "/api/recovery/start");
         for (String guess : List.of("Hà Giang – Tà Xùa", "Hà Giang", "2026-08-29", "Hà Giang 2026-08-29 2026-09-06")) {
             Res rejection = start(guess).r();
             assertThat(rejection.status()).as(guess).isEqualTo(400);
-            assertThat(rejection.body()).as(guess).isEqualTo(expectedBody);
+            assertThat(withoutRequestId(rejection)).as(guess).isEqualTo(expectedBody);
         }
     }
 
@@ -267,7 +267,7 @@ class RecoveryApiIT extends ApiTestSupport {
         Res garbage = start("khong phai ma").r();
         Res missing = call("POST", "/api/recovery/start", null, map("attemptId", newAttemptId(), "sessionToken", newSessionToken()));
         assertThat(unknownButValid.status()).isEqualTo(400);
-        assertThat(unknownButValid.body()).isEqualTo(garbage.body()).isEqualTo(missing.body());
+        assertThat(withoutRequestId(unknownButValid)).isEqualTo(withoutRequestId(garbage)).isEqualTo(withoutRequestId(missing));
         Res weak = call("POST", "/api/recovery/start", null, map("code", u.recoveryCode(), "attemptId", newAttemptId(), "sessionToken", "ngan"));
         assertThat(weak.code()).isEqualTo("INVALID_SESSION_TOKEN");
         Res reuse = call("POST", "/api/recovery/start", null, map("code", u.recoveryCode(), "attemptId", newAttemptId(), "sessionToken", u.token()));

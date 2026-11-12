@@ -223,37 +223,43 @@
       ],
       "photos": [
         {
-          "file": "ta-xua-1.jpg",
+          "file": "ta-xua-1-w1280-e935c21120.webp",
+          "thumbFile": "ta-xua-1-w480-58912389aa.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%E1%BB%91ng_l%C6%B0ng_kh%E1%BB%A7ng_long_T%C3%A0_X%C3%B9a.jpg"
         },
         {
-          "file": "ta-xua-2.jpg",
+          "file": "ta-xua-2-w1280-a41cdea26e.webp",
+          "thumbFile": "ta-xua-2-w480-00cf578cdd.webp",
           "author": "Linh Pham linharex",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Man_alone_in_T%E1%BA%A3_X%C3%B9a_03-03-2017.jpg"
         },
         {
-          "file": "ta-xua-3.png",
+          "file": "ta-xua-3-w1280-2e9ef4fed4.webp",
+          "thumbFile": "ta-xua-3-w480-09b4b3463e.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tr%C3%AAn_m%C3%A2y_T%C3%A0_X%C3%B9a_-_NKS.png"
         },
         {
-          "file": "ta-xua-4.png",
+          "file": "ta-xua-4-w1280-58af14bdb1.webp",
+          "thumbFile": "ta-xua-4-w480-53a3ae12a1.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A0_X%C3%B9a_in_morning_mist.png"
         },
         {
-          "file": "ta-xua-5.jpg",
+          "file": "ta-xua-5-w1280-d42dfdf2cd.webp",
+          "thumbFile": "ta-xua-5-w480-2a293fd08c.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:N%C3%BAi_non_T%C3%A0_X%C3%B9a_1_-NKS.jpg"
         },
         {
-          "file": "ta-xua-6.jpg",
+          "file": "ta-xua-6-w1174-3a2fcf7abf.webp",
+          "thumbFile": "ta-xua-6-w480-2e72e573d8.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%91c_%C4%91%E1%BB%89nh_n%C3%BAi_T%C3%A0_X%C3%B9a.jpg"
@@ -295,7 +301,8 @@
       ],
       "photos": [
         {
-          "file": "bac-yen-1.jpg",
+          "file": "bac-yen-1-w1280-1a301c1f05.webp",
+          "thumbFile": "bac-yen-1-w480-84a799da7e.webp",
           "author": "Linh Pham linharex",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Man_alone_in_T%E1%BA%A3_X%C3%B9a_03-03-2017.jpg"
@@ -337,13 +344,15 @@
       ],
       "photos": [
         {
-          "file": "moc-chau-1.jpg",
+          "file": "moc-chau-1-w1280-38b9ce0419.webp",
+          "thumbFile": "moc-chau-1-w480-bb0cadab2a.webp",
           "author": "Linh Pham linharex",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%99c_Ch%C3%A2u_District,_Vietnam_(Unsplash).jpg"
         },
         {
-          "file": "moc-chau-2.png",
+          "file": "moc-chau-2-w1024-5901694b2e.webp",
+          "thumbFile": "moc-chau-2-w480-4e7c2e9bdf.webp",
           "author": "Bradstokes",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Between_Son_La_and_Moc_Chau.png"
@@ -444,7 +453,8 @@
       ],
       "photos": [
         {
-          "file": "food-tra-shan-tuyet-1.jpg",
+          "file": "food-tra-shan-tuyet-1-w1280-a940ee9448.webp",
+          "thumbFile": "food-tra-shan-tuyet-1-w480-5ea939fa0c.webp",
           "author": "VuThiAnh",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Che_Shan_tuyet.JPG"
@@ -480,13 +490,15 @@
       ],
       "photos": [
         {
-          "file": "dish-ta-xua-thit-gac-bep-2.jpg",
+          "file": "dish-ta-xua-thit-gac-bep-2-w1280-ef2dca1d7c.webp",
+          "thumbFile": "dish-ta-xua-thit-gac-bep-2-w480-c70d634f6b.webp",
           "author": "Phương Huy",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%E1%BB%85_h%E1%BB%99i_%E1%BA%A9m_th%E1%BB%B1c_C%E1%BB%ADa_Vi%E1%BB%87t_th4n2023_%C4%91%E1%BA%B7c_s%E1%BA%A3n_T%C3%A2y_B%E1%BA%AFc,_th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_m%E1%BA%AFc_kh%C3%A9n_(2).jpg"
         },
         {
-          "file": "dish-ta-xua-thit-gac-bep-3.jpg",
+          "file": "dish-ta-xua-thit-gac-bep-3-w1280-941c6cc045.webp",
+          "thumbFile": "dish-ta-xua-thit-gac-bep-3-w480-4b7e8e88bf.webp",
           "author": "Cabokho",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg"
@@ -638,7 +650,8 @@
       "id": "food-research-ta-xua",
       "theme": "mon-an",
       "caption": "Ngồi lại với trà Shan tuyết · một món muốn thử (ảnh minh họa)",
-      "file": "food-tra-shan-tuyet-1.jpg",
+      "file": "food-tra-shan-tuyet-1-w1280-a940ee9448.webp",
+      "thumbFile": "food-tra-shan-tuyet-1-w480-5ea939fa0c.webp",
       "author": "VuThiAnh",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Che_Shan_tuyet.JPG"
@@ -647,7 +660,8 @@
       "id": "wave-pexels-40742657",
       "theme": "hanh-trinh",
       "caption": "Ngồi lại bên khung cửa nhìn xuống thung lũng Tà Xùa",
-      "file": "wave-pexels-40742657.jpg",
+      "file": "wave-pexels-40742657-w1280-9d832f7a61.webp",
+      "thumbFile": "wave-pexels-40742657-w480-85224e1388.webp",
       "author": "Cá Bảo",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/scenic-view-of-ta-xua-valley-and-river-40742657/"
@@ -656,7 +670,8 @@
       "id": "wave-pexels-40549695",
       "theme": "nguoi",
       "caption": "Một khoảng nghỉ giữa cỏ và núi Tà Xùa",
-      "file": "wave-pexels-40549695.jpg",
+      "file": "wave-pexels-40549695-w1280-04ae143a34.webp",
+      "thumbFile": "wave-pexels-40549695-w480-74c6442ba9.webp",
       "author": "Mochi Mochi",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/young-woman-enjoying-nature-in-ta-xua-40549695/"

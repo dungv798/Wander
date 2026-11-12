@@ -2,7 +2,7 @@ import type { DestinationSummary } from '../model/Catalog.types.ts';
 import { matchesDiscoveryFilter } from '../model/discoveryFilters.ts';
 import type { CatalogRepository } from './CatalogRepository.ts';
 
-/** Lọc trên tóm tắt; chỉ tải bù chi tiết cho API cũ thiếu metadata, không tải cả kho ở mỗi lần đổi chủ đề. */
+/** Filters on the summary; only loads the detail to make up for an old API that lacks metadata, and does not load the whole catalog on every topic change. */
 export async function topicDestinations(destinations: readonly DestinationSummary[], topic: string, catalog: CatalogRepository, signal?: AbortSignal): Promise<DestinationSummary[]> {
   if (topic === 'all') return [...destinations];
   const matches = await Promise.all(destinations.map(async destination => {

@@ -9,18 +9,25 @@ import java.io.IOException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
- * Header bảo mật và cache. API: không cache. Giao diện: CSP chặt (không script ngoài), chống nhúng khung;
- * tệp có băm trong /assets/ được cache lâu, index.html thì không.
+ * Security and cache headers. API: no caching. UI: a strict CSP (no external scripts), anti-framing;
+ * files with a hash in /assets/ are cached for a long time, index.html is not.
  */
 public class ResponseHeadersFilter extends OncePerRequestFilter {
+
+    private final String contentSecurityPolicy;
+
+    /** @param contentSecurityPolicy value of the CSP header sent with UI responses (see {@link ContentSecurityPolicy}) */
+    public ResponseHeadersFilter(String contentSecurityPolicy) {
+        this.contentSecurityPolicy = contentSecurityPolicy;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         String path = request.getRequestURI();
         response.setHeader(HttpConstants.HEADER_X_CONTENT_TYPE_OPTIONS, HttpConstants.VALUE_NOSNIFF);
-        // HSTS: trình duyệt chỉ áp dụng khi nhận qua HTTPS (bỏ qua trên http://localhost). TLS kết thúc ở CloudFront nên
-        // header này do ứng dụng đặt cho mọi phản hồi; không includeSubDomains/preload để không ràng buộc tên miền khác.
+        // HSTS: the browser applies it only when received over HTTPS (ignored on http://localhost). TLS ends at CloudFront so
+        // the application sets this header on every response; no includeSubDomains/preload so it does not bind other domains.
         response.setHeader(HttpConstants.HEADER_STRICT_TRANSPORT_SECURITY, HttpConstants.VALUE_HSTS);
         if (path.startsWith(HttpConstants.API_PATH_PREFIX)) {
             response.setHeader(HttpConstants.HEADER_CACHE_CONTROL, HttpConstants.VALUE_CACHE_NO_STORE);
@@ -33,11 +40,21 @@ public class ResponseHeadersFilter extends OncePerRequestFilter {
         }
     }
 
-    /** Header cho giao diện: chống nhúng khung, CSP chặt, cache lâu cho tệp có băm, còn lại phải xác nhận lại. */
-    private static void applyUiHeaders(HttpServletResponse response, String path) {
+    /** Whether the path belongs to the API documentation (Swagger UI or the OpenAPI document). */
+    private static boolean isDocsPath(String path) {
+        for (String prefix : HttpConstants.DOCS_PATH_PREFIXES) {
+            if (path.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Headers for the UI: anti-framing, a strict CSP, long caching for hashed files, everything else must revalidate. */
+    private void applyUiHeaders(HttpServletResponse response, String path) {
         response.setHeader(HttpConstants.HEADER_X_FRAME_OPTIONS, HttpConstants.VALUE_DENY);
         response.setHeader(HttpConstants.HEADER_REFERRER_POLICY, HttpConstants.VALUE_NO_REFERRER);
-        response.setHeader(HttpConstants.HEADER_CONTENT_SECURITY_POLICY, HttpConstants.VALUE_CONTENT_SECURITY_POLICY);
+        response.setHeader(HttpConstants.HEADER_CONTENT_SECURITY_POLICY, isDocsPath(path) ? HttpConstants.VALUE_CONTENT_SECURITY_POLICY_DOCS : contentSecurityPolicy);
         boolean isHashedAsset = path.startsWith(HttpConstants.ASSETS_PATH_PREFIX);
         response.setHeader(HttpConstants.HEADER_CACHE_CONTROL,
                 isHashedAsset ? HttpConstants.VALUE_CACHE_IMMUTABLE_ASSET : HttpConstants.VALUE_CACHE_NO_CACHE);

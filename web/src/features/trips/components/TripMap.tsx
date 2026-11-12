@@ -16,24 +16,24 @@ import { SHELL_MAP } from '../../discover/index.ts';
 import { modeOfTab } from '../model/tripTabs.ts';
 
 interface TripMapProps {
-  /** Phần tờ kéo che bản đồ (px) để camera chừa chỗ; 0 khi tờ là cột bên (màn ≥ 1280 px). */
+  /** The part of the draggable sheet that covers the map (px) so the camera leaves room; 0 when the sheet is a side column (screen of at least 1280 px). */
   readonly coveredBottom: number;
 }
 
-/** Lề trên của bản đồ trên điện thoại: chừa chỗ cho thanh "wander" (≈68 px) và hàng nút nổi (lùi, thời tiết, chia sẻ, sửa; ≈52 px) để ghim và nhãn tuyến không nằm dưới chúng. */
+/** The top margin of the map on a phone: leaves room for the 'wander' bar (about 68 px) and the row of floating buttons (back, weather, share, edit; about 52 px) so pins and route labels do not sit under them. */
 const TOP_INSET = 132;
-/** Tuyến cần ít nhất hai điểm. */
+/** A route needs at least two points. */
 const MIN_ROUTE_POINTS = 2;
 
 /**
- * Bản đồ của chuyến: tổng quan = mọi mục có tọa độ (chưa có ngày thì mờ); tab ngày = mục của ngày đánh số, nối tuyến kèm km, mục khác mờ.
- * Đổi tab chỉ bay camera, không dựng lại bản đồ.
+ * The trip map: overview = every item that has coordinates (undated ones faded); a day tab = the day's numbered items, connected by a route with km, other items faded.
+ * Changing a tab only flies the camera, it does not rebuild the map.
  */
 export function TripMap({ coveredBottom }: TripMapProps) {
   const { trip, cat, days, tab, openItem } = useTripView();
   const wide = useMediaQuery(MEDIA.DRAWER);
   const [selection, setSelection] = useState<{ tab: string; pin?: string; segment?: string } | null>(null);
-  /** Đóng đối tượng đang chọn mà không thay đổi dữ liệu chuyến. */
+  /** Closes the selected object without changing the trip data. */
   const close = useCallback(() => setSelection(null), []);
   const dayIndex = modeOfTab(tab) === 'schedule' ? Number(tab) - 1 : -1;
   const day = days[dayIndex];

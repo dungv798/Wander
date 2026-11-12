@@ -275,13 +275,15 @@
       ],
       "photos": [
         {
-          "file": "ho-xuan-huong-1.jpg",
+          "file": "ho-xuan-huong-1-w1280-665b29fd65.webp",
+          "thumbFile": "ho-xuan-huong-1-w480-02b536f58e.webp",
           "author": "Diane Selwyn",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xuan_Huong_Lake_08.jpg"
         },
         {
-          "file": "ho-xuan-huong-2.jpg",
+          "file": "ho-xuan-huong-2-w1280-9d989b3de5.webp",
+          "thumbFile": "ho-xuan-huong-2-w480-64841afb5f.webp",
           "author": "Trần Huy Phương",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_Xuan_Huong_-_Huy_Phuong_1.jpg"
@@ -326,13 +328,15 @@
       ],
       "photos": [
         {
-          "file": "quang-truong-lam-vien-1.jpg",
+          "file": "quang-truong-lam-vien-1-w1280-bd688df966.webp",
+          "thumbFile": "quang-truong-lam-vien-1-w480-e45a6f7796.webp",
           "author": "EA",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A2m_Vi%C3%AAn_%C4%90%C3%A0_L%E1%BA%A1t.JPG"
         },
         {
-          "file": "quang-truong-lam-vien-2.jpg",
+          "file": "quang-truong-lam-vien-2-w1280-924c81dedd.webp",
+          "thumbFile": "quang-truong-lam-vien-2-w480-1bfbc5244b.webp",
           "author": "Damian Vo",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A2m_Vi%C3%AAn_square_(August_7,_2018)_(29079784067).jpg"
@@ -384,19 +388,22 @@
       ],
       "photos": [
         {
-          "file": "cho-da-lat-1.jpg",
+          "file": "cho-da-lat-1-w1280-bfaf6e48ae.webp",
+          "thumbFile": "cho-da-lat-1-w480-42a098ac23.webp",
           "author": "Roy Kim",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dalat_market,_Vietnam.jpg"
         },
         {
-          "file": "cho-da-lat-2.jpg",
+          "file": "cho-da-lat-2-w1280-14da33bfaa.webp",
+          "thumbFile": "cho-da-lat-2-w480-575e90d22f.webp",
           "author": "DHN",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BB%A3_%C4%90%C3%A0_L%E1%BA%A1t_to%C3%A0n_c%E1%BA%A3nh.jpg"
         },
         {
-          "file": "wave-pexels-20411011.jpg",
+          "file": "wave-pexels-20411011-w1280-10413878f9.webp",
+          "thumbFile": "wave-pexels-20411011-w480-90d9b902ba.webp",
           "author": "King Panther",
           "license": "Giấy phép Pexels",
           "sourceUrl": "https://www.pexels.com/photo/cho-da-lat-in-da-lat-city-in-vietnam-at-night-20411011/"
@@ -441,19 +448,22 @@
       ],
       "photos": [
         {
-          "file": "nha-tho-con-ga-1.jpg",
+          "file": "nha-tho-con-ga-1-w1280-123a4d455b.webp",
+          "thumbFile": "nha-tho-con-ga-1-w480-4792516a74.webp",
           "author": "qiv",
           "license": "CC BY-SA 2.5",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Da_Lat_(1).jpg"
         },
         {
-          "file": "nha-tho-con-ga-2.jpg",
+          "file": "nha-tho-con-ga-2-w1280-a1ffaede55.webp",
+          "thumbFile": "nha-tho-con-ga-2-w480-b4a8bde5b2.webp",
           "author": "qiv",
           "license": "CC BY-SA 2.5",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Da_Lat_(2).jpg"
         },
         {
-          "file": "nha-tho-con-ga-3.jpg",
+          "file": "nha-tho-con-ga-3-w1280-169f2b6f95.webp",
+          "thumbFile": "nha-tho-con-ga-3-w480-7eb97117e3.webp",
           "author": "Diane Selwyn ( talk )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_of_Da_Lat_05.JPG"
@@ -498,7 +508,8 @@
       ],
       "photos": [
         {
-          "file": "ga-da-lat-1.jpg",
+          "file": "ga-da-lat-1-w1280-dbb3c068e2.webp",
+          "thumbFile": "ga-da-lat-1-w480-07aad494e6.webp",
           "author": "Diane Selwyn",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Da_Lat_train_station_37.jpg"
@@ -543,19 +554,22 @@
       ],
       "photos": [
         {
-          "file": "biet-thu-hang-nga-1.jpg",
+          "file": "biet-thu-hang-nga-1-w1024-30730fccee.webp",
+          "thumbFile": "biet-thu-hang-nga-1-w480-d9ac158229.webp",
           "author": "Tom Ravenscroft",
           "license": "CC BY 1.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_Nga_guesthouse_02.jpg"
         },
         {
-          "file": "biet-thu-hang-nga-2.jpg",
+          "file": "biet-thu-hang-nga-2-w1280-a1867a9092.webp",
+          "thumbFile": "biet-thu-hang-nga-2-w480-2a657a7be2.webp",
           "author": "Diane Selwyn",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crazy_House_-_loi_vao.JPG"
         },
         {
-          "file": "biet-thu-hang-nga-3.jpg",
+          "file": "biet-thu-hang-nga-3-w1280-d0c1d7babb.webp",
+          "thumbFile": "biet-thu-hang-nga-3-w480-89f08e2be7.webp",
           "author": "Michael Karavanov",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crazy_House_in_Da_Lat_-_panoramio.jpg"
@@ -602,13 +616,15 @@
       ],
       "photos": [
         {
-          "file": "thac-prenn-1.jpg",
+          "file": "thac-prenn-1-w1280-e537313bbd.webp",
+          "thumbFile": "thac-prenn-1-w480-2cbb56ed3f.webp",
           "author": "Prenn",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1c_Prenn,_062015.jpg"
         },
         {
-          "file": "thac-prenn-2.jpg",
+          "file": "thac-prenn-2-w1280-68c728913c.webp",
+          "thumbFile": "thac-prenn-2-w480-84d8e0cb3a.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1c_prenn.jpg"
@@ -655,13 +671,15 @@
       ],
       "photos": [
         {
-          "file": "thac-datanla-1.jpg",
+          "file": "thac-datanla-1-w1280-8b64dce323.webp",
+          "thumbFile": "thac-datanla-1-w480-214de6a140.webp",
           "author": "thalling55",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1c_Datanla.jpg"
         },
         {
-          "file": "thac-datanla-2.jpg",
+          "file": "thac-datanla-2-w1280-7b0d95b11f.webp",
+          "thumbFile": "thac-datanla-2-w480-96e1a86278.webp",
           "author": "Du Tran",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Datanla_Waterfall_1.jpg"
@@ -706,19 +724,22 @@
       ],
       "photos": [
         {
-          "file": "thien-vien-truc-lam-1.jpg",
+          "file": "thien-vien-truc-lam-1-w1280-085f51570f.webp",
+          "thumbFile": "thien-vien-truc-lam-1-w480-dfa3b32aa3.webp",
           "author": "The original uploader was Liftold at Vietnamese Wikipedia .",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zen_Monastery_Truc_Lam_Da_Lat.JPG"
         },
         {
-          "file": "thien-vien-truc-lam-2.jpg",
+          "file": "thien-vien-truc-lam-2-w1280-d078821bb5.webp",
+          "thumbFile": "thien-vien-truc-lam-2-w480-854239fe29.webp",
           "author": "Nguyễn Thanh Quang 05:43, 20 April 2007 (UTC)",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThienVienTrucLamDaLat_main_hall.JPG"
         },
         {
-          "file": "thien-vien-truc-lam-3.jpg",
+          "file": "thien-vien-truc-lam-3-w1280-7cc0868c5a.webp",
+          "thumbFile": "thien-vien-truc-lam-3-w480-50f4e6a95a.webp",
           "author": "Nguyễn Thanh Quang 05:47, 20 April 2007 (UTC)",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThienVienTrucLamDaLat_main_building.JPG"
@@ -763,7 +784,8 @@
       ],
       "photos": [
         {
-          "file": "ho-tuyen-lam-1.jpg",
+          "file": "ho-tuyen-lam-1-w1280-0c24449240.webp",
+          "thumbFile": "ho-tuyen-lam-1-w480-cffc6ac2bb.webp",
           "author": "Diane Selwyn",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tuyen_Lam_Lake_01.jpg"
@@ -808,19 +830,22 @@
       ],
       "photos": [
         {
-          "file": "linh-phuoc-1.jpg",
+          "file": "linh-phuoc-1-w1280-804fb0c258.webp",
+          "thumbFile": "linh-phuoc-1-w480-880546f4cb.webp",
           "author": "Diane Selwyn",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Linh_Phuoc_Pagoda_01.jpg"
         },
         {
-          "file": "linh-phuoc-2.jpg",
+          "file": "linh-phuoc-2-w1280-1b656431e3.webp",
+          "thumbFile": "linh-phuoc-2-w480-18120180bb.webp",
           "author": "calflier001",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:BUDDIST_TEMPLE_TRAIMAT_VIETNAM_JAN_2012_(6818228324).jpg"
         },
         {
-          "file": "linh-phuoc-3.jpg",
+          "file": "linh-phuoc-3-w1280-233050a973.webp",
+          "thumbFile": "linh-phuoc-3-w480-e3313d0112.webp",
           "author": "calflier001",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:BUDDIST_TEMPLE_TRAIMAT_VIETNAM_JAN_2012_(6818230776).jpg"
@@ -865,19 +890,22 @@
       ],
       "photos": [
         {
-          "file": "lang-biang-1.jpg",
+          "file": "lang-biang-1-w1280-eba7818b4d.webp",
+          "thumbFile": "lang-biang-1-w480-6745f771a5.webp",
           "author": "Liftold ( thảo luận )",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%89nh_Langbiang.JPG"
         },
         {
-          "file": "lang-biang-2.jpg",
+          "file": "lang-biang-2-w1280-903cadd347.webp",
+          "thumbFile": "lang-biang-2-w480-e051f2dd10.webp",
           "author": "Liangu",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lang_biang_au_mois_d%27ao%C3%BBt.jpg"
         },
         {
-          "file": "lang-biang-3.jpg",
+          "file": "lang-biang-3-w1280-70bcb3892c.webp",
+          "thumbFile": "lang-biang-3-w480-dd63625118.webp",
           "author": "Tilamdong",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langbiang_Mountain.JPG"
@@ -922,13 +950,15 @@
       ],
       "photos": [
         {
-          "file": "thung-lung-tinh-yeu-1.jpg",
+          "file": "thung-lung-tinh-yeu-1-w1280-5d194af31a.webp",
+          "thumbFile": "thung-lung-tinh-yeu-1-w480-f401a48511.webp",
           "author": "Thienlt1993",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:TLTY2.jpg"
         },
         {
-          "file": "thung-lung-tinh-yeu-2.jpg",
+          "file": "thung-lung-tinh-yeu-2-w1280-687361ad58.webp",
+          "thumbFile": "thung-lung-tinh-yeu-2-w480-f2aec76a47.webp",
           "author": "Ho Tuan KIet",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thung_L%C5%A9ng_T%C3%ACnh_Y%C3%AAu.JPG"
@@ -973,13 +1003,15 @@
       ],
       "photos": [
         {
-          "file": "thac-pongour-1.jpg",
+          "file": "thac-pongour-1-w1280-5c9f0fb2f8.webp",
+          "thumbFile": "thac-pongour-1-w480-abf1fdde67.webp",
           "author": "Original uploader was Tú My at vi.wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThacPongour.jpg"
         },
         {
-          "file": "thac-pongour-2.jpg",
+          "file": "thac-pongour-2-w1280-3528e30740.webp",
+          "thumbFile": "thac-pongour-2-w480-86b78b7fe0.webp",
           "author": "Arian Zwegers",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pongour_Falls_(6226122698).jpg"
@@ -1015,13 +1047,15 @@
       ],
       "photos": [
         {
-          "file": "food-extra-0-1.jpg",
+          "file": "food-extra-0-1-w1280-abc91f16db.webp",
+          "thumbFile": "food-extra-0-1-w480-270db5cdb1.webp",
           "author": "Saigon Time",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
         },
         {
-          "file": "food-extra-0-2.jpg",
+          "file": "food-extra-0-2-w1280-bcc2228638.webp",
+          "thumbFile": "food-extra-0-2-w480-63e5c92ba9.webp",
           "author": "VinhNguyen.1257",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_(Vietnamese_mini_pancake)_clay_cooking_pots.jpg"
@@ -1057,7 +1091,8 @@
       ],
       "photos": [
         {
-          "file": "food-mi-quang-1.jpg",
+          "file": "food-mi-quang-1-w1280-9190a665ba.webp",
+          "thumbFile": "food-mi-quang-1-w480-19846c4041.webp",
           "author": "Jpatokal",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mi_Quang_1A_Danang.jpg"
@@ -1093,13 +1128,15 @@
       ],
       "photos": [
         {
-          "file": "venue-da-lat-dalat-palace-3.jpg",
+          "file": "venue-da-lat-dalat-palace-3-w1280-d1492e1fa5.webp",
+          "thumbFile": "venue-da-lat-dalat-palace-3-w480-89251015e2.webp",
           "author": "Trần Huy Phương",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khach_san_Dalat_Palace_-_Huy_Phuong_2.jpg"
         },
         {
-          "file": "venue-da-lat-dalat-palace-1.jpg",
+          "file": "venue-da-lat-dalat-palace-1-w1280-c5c8de53b0.webp",
+          "thumbFile": "venue-da-lat-dalat-palace-1-w480-58145820b9.webp",
           "author": "Diane Selwyn ( talk )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dalat_Palace_Hotel.jpg"
@@ -1370,7 +1407,8 @@
       "id": "cho-1",
       "theme": "cho",
       "caption": "Khung cảnh chợ Đà Lạt",
-      "file": "da-lat-moment-cho-1.jpg",
+      "file": "da-lat-moment-cho-1-w819-ab02d1aac7.webp",
+      "thumbFile": "da-lat-moment-cho-1-w480-07fd9a247c.webp",
       "author": "Catricorn",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/146122358@N02/48503722822"
@@ -1379,7 +1417,8 @@
       "id": "nguoi-3",
       "theme": "nguoi",
       "caption": "Khu chợ mới ở Đà Lạt",
-      "file": "da-lat-moment-nguoi-3.jpg",
+      "file": "da-lat-moment-nguoi-3-w769-a5e7bc3d67.webp",
+      "thumbFile": "da-lat-moment-nguoi-3-w480-49bb0e8be1.webp",
       "author": "tuey",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/21168473@N00/55061383"
@@ -1418,7 +1457,8 @@
       "id": "pexels-37223759",
       "theme": "mon-an",
       "caption": "Hơi ấm từ một hàng nướng trong đêm Đà Lạt",
-      "file": "pexels-37223759.jpg",
+      "file": "pexels-37223759-w1280-f6e815abc4.webp",
+      "thumbFile": "pexels-37223759-w480-6963005ebc.webp",
       "author": "Xuân Thống Trần",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/street-food-vendor-cooking-at-night-market-37223759/"
@@ -1427,7 +1467,8 @@
       "id": "food-research-da-lat",
       "theme": "mon-an",
       "caption": "Bánh căn Đà Lạt · một món muốn thử (ảnh minh họa)",
-      "file": "food-extra-0-1.jpg",
+      "file": "food-extra-0-1-w1280-abc91f16db.webp",
+      "thumbFile": "food-extra-0-1-w480-270db5cdb1.webp",
       "author": "Saigon Time",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
@@ -1436,7 +1477,8 @@
       "id": "wave-pexels-20411011",
       "theme": "cho",
       "caption": "Hẹn nhau trước cổng chợ Đà Lạt khi lên đèn",
-      "file": "wave-pexels-20411011.jpg",
+      "file": "wave-pexels-20411011-w1280-10413878f9.webp",
+      "thumbFile": "wave-pexels-20411011-w480-90d9b902ba.webp",
       "author": "King Panther",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/cho-da-lat-in-da-lat-city-in-vietnam-at-night-20411011/"
@@ -1445,7 +1487,8 @@
       "id": "wave-pexels-37130929",
       "theme": "hanh-trinh",
       "caption": "Đi bộ thêm một vòng phố đêm Đà Lạt",
-      "file": "wave-pexels-37130929.jpg",
+      "file": "wave-pexels-37130929-w1280-1168220042.webp",
+      "thumbFile": "wave-pexels-37130929-w480-646f28da23.webp",
       "author": "Pew Nguyen",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/bustling-night-street-scene-in-da-lat-vietnam-37130929/"

@@ -5,18 +5,18 @@ import { MAP } from './map.const.ts';
 import { mapThumbnailUrl } from './mapThumbnailUrl.ts';
 import type { MapMarker, MapMode } from './map.types.ts';
 
-/** Chọn ảnh catalog đã cấp cho ghim; thiếu ảnh dùng vòng tròn dự phòng, không đoán URL backend. */
+/** Chooses the catalog photo that was given to the pin; a missing photo uses a fallback circle, it does not guess a backend URL. */
 export function markerThumbnail(marker: MapMarker): string {
   return mapThumbnailUrl(marker.thumb?.trim() ?? '');
 }
 
-/** Cắt chính giữa ảnh ngang/dọc thành hình vuông 96 px, không kéo méo theo tỉ lệ nguồn. */
+/** Crops the center of a landscape/portrait photo into a 96 px square, not stretching by the source ratio. */
 export function thumbnailCrop(width: number, height: number): [number, number, number, number, number, number, number, number] {
   const side = Math.min(width, height);
   return [(width - side) / HALF, (height - side) / HALF, side, side, 0, 0, MAP.THUMB_PX, MAP.THUMB_PX];
 }
 
-/** Giữ ID ổn định và tọa độ kinh/vĩ độ; mốc hub luôn nằm ngoài nguồn gộp cụm. */
+/** Keeps a stable ID and the longitude/latitude coordinates; a hub landmark is always outside the clustered source. */
 export function markerFeatures(markers: readonly MapMarker[], mode: MapMode, clustered: boolean): FeatureCollection<Point> {
   return { type: 'FeatureCollection', features: markers
     .filter((marker) => (mode === 'browse' && marker.kind !== 'hub') === clustered)
@@ -24,7 +24,7 @@ export function markerFeatures(markers: readonly MapMarker[], mode: MapMode, clu
       properties: { id: marker.id, label: marker.label ?? '', num: marker.num == null ? '' : String(marker.num), muted: Boolean(marker.muted), hub: marker.kind === 'hub', ...(marker.kind === 'sticker' ? { sticker: true } : {}), image: markerThumbnail(marker) || MAP.EMPTY_IMAGE } })) };
 }
 
-/** Đếm ghim có symbol ảnh resolve đúng ID đã đăng ký; không đếm sprite rỗng, cụm hoặc bản sao tile. */
+/** Counts pins whose photo symbol resolves to the registered ID; it does not count an empty sprite, a cluster or a tile copy. */
 export function renderedImageCount(features: readonly Pick<MapGeoJSONFeature, 'properties' | 'layer'>[], hasImage: (id: string) => boolean): number {
   const ids = new Set<string>();
   features.forEach((feature) => {
@@ -37,12 +37,12 @@ export function renderedImageCount(features: readonly Pick<MapGeoJSONFeature, 'p
   return ids.size;
 }
 
-/** Tên đọc của nút thay thế canvas, giữ số thứ tự và mã khi thiếu nhãn. */
+/** The readable name of the canvas-replacement button, keeping the number and the id when the label is missing. */
 export function markerAccessibleName(marker: MapMarker): string {
   return (marker.num == null ? '' : `${marker.num}. `) + (marker.label || marker.id);
 }
 
-/** Điểm kiểm chỉ đọc từ feature đang vẽ; loại bản sao tile và giữ tâm để e2e chạm canvas thật. */
+/** The checkpoint is read only from the feature being drawn; it removes tile copies and keeps the center so e2e taps the real canvas. */
 export function markerSnapshot(features: readonly Pick<MapGeoJSONFeature, 'geometry' | 'properties'>[], project: (coordinates: [number, number]) => { x: number; y: number }, selected: string | null) {
   const seen = new Set<string>();
   const points = features.flatMap((feature) => {

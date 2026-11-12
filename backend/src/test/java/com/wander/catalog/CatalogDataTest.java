@@ -3,6 +3,7 @@ package com.wander.catalog;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.model.Destination;
 import com.wander.catalog.domain.model.ItineraryTemplate;
 import com.wander.catalog.domain.model.Place;
@@ -10,6 +11,10 @@ import com.wander.catalog.domain.model.Photo;
 import com.wander.catalog.domain.vocabulary.TemplateStatus;
 import com.wander.catalog.infrastructure.adapter.ClasspathPlaceCatalog;
 import java.io.IOException;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -24,6 +29,45 @@ class CatalogDataTest {
     private static final String REAL = "classpath*:catalog/*.json";
     private static final String REAL_TEMPLATES = "classpath*:catalog/templates/*.json";
     private static final Set<String> OPEN_LICENSES = Set.of("CC BY 1.0", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0", "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 3.0 de", "CC BY-SA 4.0", "CC0", "Public domain");
+
+    /**
+     * Every shipped photo file is content-hashed (so it can be cached as immutable), listed in the catalog JSON, and every file in the
+     * photos folder is referenced: no stale or oversized original can slip back into the jar.
+     */
+    @Test
+    @DisplayName("shipped photo files are hashed WebP, all referenced, none orphaned; every entry with two sizes has a smaller thumbnail")
+    void shippedPhotosAreHashedAndNothingIsOrphaned() throws IOException {
+        Pattern reference = Pattern.compile("\"(?:file|thumbFile)\"\\s*:\\s*\"([^\"]+\\.(?:webp|jpe?g|png))\"");
+        Pattern hashed = Pattern.compile(CatalogConstants.PHOTO_VARIANT_REGEX);
+        Path catalogDir = Path.of("src/main/resources/catalog");
+        Set<String> referenced = new TreeSet<>();
+        try (Stream<Path> files = Files.walk(catalogDir)) {
+            for (Path json : files.filter(p -> p.toString().endsWith(".json")).toList()) {
+                Matcher m = reference.matcher(Files.readString(json));
+                while (m.find()) referenced.add(m.group(1));
+            }
+        }
+        Set<String> onDisk = new TreeSet<>();
+        try (Stream<Path> files = Files.list(catalogDir.resolve("photos"))) {
+            files.forEach(p -> onDisk.add(p.getFileName().toString()));
+        }
+        assertThat(referenced).as("photo files referenced by the catalog JSON").isNotEmpty().allMatch(name -> hashed.matcher(name).matches());
+        assertThat(onDisk).as("files in catalog/photos").isEqualTo(referenced);
+
+        var catalog = new ClasspathPlaceCatalog(REAL);
+        for (Destination destination : catalog.searchDestinations("")) {
+            for (Place place : destination.places()) {
+                for (Photo photo : place.photos()) assertThumbnailIsSmaller(photo);
+            }
+            destination.moments().forEach(moment -> assertThumbnailIsSmaller(moment.photo()));
+        }
+    }
+
+    /** A thumbnail, when present, must be narrower than the main image. */
+    private static void assertThumbnailIsSmaller(Photo photo) {
+        if (photo.thumbFile() == null) return;
+        assertThat(photo.thumbWidth()).as(photo.file()).isNotNull().isLessThan(photo.width());
+    }
 
     /** Kiểm tra tọa độ địa điểm và giấy phép của mọi loại ảnh trong kho thật. */
     @Test
@@ -160,7 +204,7 @@ class CatalogDataTest {
     @DisplayName("dữ liệu hỏng làm ứng dụng không khởi động: thiếu ảnh, trường lạ, JSON sai")
     void brokenDataFailsFast(@TempDir Path dir) throws IOException {
         String valid = Files.readString(Path.of("src/main/resources/catalog/ha-giang.json"));
-        Files.writeString(dir.resolve("missing-photo.json"), valid.replace("hoang-su-phi-1.jpg", "khong-ton-tai.jpg"));
+        Files.writeString(dir.resolve("missing-photo.json"), valid.replaceFirst("\"file\": \"[^\"]+\"", "\"file\": \"khong-ton-tai-w1280-0123456789.webp\""));
         assertThatThrownBy(() -> new ClasspathPlaceCatalog("file:" + dir + "/missing-photo.json")).isInstanceOf(IllegalStateException.class).hasMessageContaining("Thiếu tệp ảnh");
 
         Files.writeString(dir.resolve("typo.json"), valid.replaceFirst("\\{", "{ \"truongLa\": 1,"));

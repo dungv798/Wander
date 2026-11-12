@@ -5,8 +5,8 @@ import com.wander.catalog.domain.rule.CatalogValidation;
 import com.wander.shared.kernel.util.Texts;
 
 /**
- * Mốc để tính "cách bao xa" (ví dụ thành phố Hà Giang). {@code approximate} = tọa độ chưa kiểm chứng,
- * giao diện luôn ghi là ước tính.
+ * A landmark for computing 'how far' (for example Ha Giang city). {@code approximate} = the coordinates are not verified,
+ * the UI always labels it an estimate.
  */
 public record ReferencePoint(String id, String name, GeoPoint location, boolean approximate) {
 

@@ -7,10 +7,10 @@ import { IconButton } from '../shared/ui/IconButton.tsx';
 import { useOnboarding } from '../features/onboarding/index.ts';
 
 const NEEDS_CLOSE: readonly ViewName[] = [VIEW.ONBOARD, VIEW.JOIN];
-/** Hiện thanh điều hướng không làm mất khả năng Escape về màn cha. */
+/** Showing the navigation bar does not remove the ability to Escape to the parent screen. */
 const ESCAPE_TO_PARENT: readonly ViewName[] = [VIEW.DEST, VIEW.TRIP];
 
-/** Escape thoát màn con khi không có hộp thoại; màn giới thiệu/liên kết có nút đóng độc lập. */
+/** Escape leaves a child screen when there is no dialog; the intro/link screens have their own independent close button. */
 export function RouteEscape({ view }: { readonly view: ViewName }) {
   const { finish } = useOnboarding();
   const close = useCallback(() => {
@@ -18,7 +18,7 @@ export function RouteEscape({ view }: { readonly view: ViewName }) {
     goBack();
   }, [view, finish]);
   useEffect(() => {
-    /** Để hộp thoại và ô đang soạn xử lý Escape trước, tránh thoát hai tầng cùng lúc. */
+    /** Lets a dialog and a field being edited handle Escape first, to avoid leaving two levels at once. */
     const escape = (event: KeyboardEvent): void => {
       if (event.key !== 'Escape' || event.defaultPrevented || document.querySelector('[role="dialog"]') || (event.target instanceof HTMLElement && event.target.matches('input, textarea, select'))) return;
       if (view !== VIEW.EXPIRED && (HIDE_TABBAR_ALWAYS.includes(view) || HIDE_TABBAR_ON_PHONE.includes(view) || ESCAPE_TO_PARENT.includes(view))) close();

@@ -19,16 +19,16 @@ interface FrontHandlers {
 
 interface SwipeCardProps {
   readonly place: PlaceView;
-  /** 0 = thẻ trên cùng (quẹt được); 1, 2 = thẻ phía sau. */
+  /** 0 = the top card (swipeable); 1, 2 = the cards behind it. */
   readonly depth: number;
   readonly photoIndex: number;
-  /** Bộ xử lý kéo; chỉ truyền cho thẻ trên cùng. */
+  /** The drag handler; passed only to the top card. */
   readonly handlers?: FrontHandlers;
   readonly onInfo?: () => void;
   readonly onPhoto?: (delta: number) => void;
 }
 
-/** Phần chữ nổi trên ảnh (gọn để ảnh là nhân vật chính): loại, nút nguồn ảnh (thẻ trên cùng), tên, khu vực kèm quãng đường, mùa đẹp và thời lượng. */
+/** The text floating on the photo (compact so the photo is the star): kind, the photo-source button (top card), name, area with the distance, the good season and the duration. */
 function CardInfo({ place }: { readonly place: PlaceView }) {
   return (
     <div className="card-info">
@@ -42,8 +42,8 @@ function CardInfo({ place }: { readonly place: PlaceView }) {
 }
 
 /**
- * Thẻ quẹt toàn màn (v6, PO 26/10/2026): ảnh của địa điểm là nền; tên, thông tin và dấu THÍCH/BỎ QUA nổi đè lên ảnh.
- * Thẻ trên cùng nhận cử chỉ kéo; các thẻ phía sau chỉ trang trí (`aria-hidden`).
+ * The full-screen swipe card (v6, PO 26/10/2026): the place's photo is the background; the name, the info and the LIKE/SKIP stamps float over the photo.
+ * The top card receives the drag gesture; the cards behind are only decoration (`aria-hidden`).
  */
 export function SwipeCard({ place, depth, photoIndex, handlers, onInfo, onPhoto }: SwipeCardProps) {
   const front = depth === 0;

@@ -1,22 +1,22 @@
-/** Mã HTTP và tên tiêu đề dùng ở lớp gọi API (một nơi, không rải số/chuỗi ra mã). */
+/** The HTTP status codes and header names used in the API call layer (one place, no numbers/strings scattered in code). */
 export const HTTP = {
   NO_CONTENT: 204,
   UNAUTHORIZED: 401,
   NOT_FOUND: 404,
 } as const;
 
-/** Tên tiêu đề và kiểu nội dung JSON. */
+/** The header names and the JSON content type. */
 export const HEADER = {
   ACCEPT: 'Accept',
   CONTENT_TYPE: 'Content-Type',
   JSON: 'application/json',
 } as const;
 
-/** Mã lỗi mà lớp gọi API tự đặt khi máy chủ không trả mã (khớp `docs/ux/error-codes.md`). */
+/** The error code that the API call layer sets itself when the server returns no code (matching `docs/ux/error-codes.md`). */
 export const CLIENT_ERROR = {
   NETWORK: 'NETWORK',
   INTERNAL: 'INTERNAL',
 } as const;
 
-/** Tên lỗi của `fetch` khi bị hủy bằng `AbortSignal`: không phải lỗi mạng, người gọi tự xử lý. */
+/** The `fetch` error name when cancelled by `AbortSignal`: not a network error, the caller handles it itself. */
 export const ABORT_ERROR_NAME = 'AbortError';

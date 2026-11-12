@@ -10,7 +10,7 @@ interface Counter {
 const INITIAL: Counter = { n: 0 };
 const sanitize: Sanitizer<Counter> = (raw) => (typeof raw === 'object' && raw !== null && typeof (raw as Record<string, unknown>)['n'] === 'number' ? { n: (raw as { n: number }).n } : null);
 
-/** Nơi lưu giả trong bộ nhớ. */
+/** A fake in-memory place to store. */
 function memory(initial: Record<string, string> = {}): KeyValueStorage & { data: Record<string, string> } {
   const data = { ...initial };
   return {

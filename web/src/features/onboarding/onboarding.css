@@ -1,5 +1,5 @@
-/* Giới thiệu 4 cảnh (02/11/2026, theo bản thử đã duyệt): trời + mây dựng sẵn, thẻ ảnh cao xòe lệch viền mảnh, câu chuyện tự chạy (quẹt mẫu → lịch trên bản đồ → chia sẻ).
-   Chỉ dùng token; chuyển động transform/opacity; giảm chuyển động thì JS dựng bản tĩnh và CSS tắt hoạt họa. */
+/* The 4-scene intro (02/11/2026, following the approved trial version): prebuilt sky + clouds, tall photo cards fanned out with a thin border, a self-running story (sample swipe -> itinerary on the map -> sharing).
+   Tokens only; motion is transform/opacity; under reduced motion JS builds the static version and CSS turns the animation off. */
 #screen[data-view="onboard"] { padding-bottom: 0; background: var(--sky-soft); overflow: hidden; }
 .ob { --ob-t: 420ms; --ob-day-1: var(--brand-2); --ob-day-2: var(--sky); position: relative; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; min-height: 100%; overflow: clip; color: var(--ink); background: linear-gradient(var(--sky-1) 0%, var(--sky-soft) 46%, var(--surface) 100%); }
 .ob-sky { position: absolute; inset: 0; pointer-events: none; overflow: clip; }
@@ -16,7 +16,7 @@
 .ob-title { margin: 44px 0 0; font: 700 clamp(22px, 6.4vw, 26px) / 1.22 var(--font-display); letter-spacing: -.2px; text-wrap: balance; animation: ob-rise var(--dur-scene) var(--ease-out) both; } .ob-title span { display: block; }
 .ob-skip { position: absolute; z-index: 5; right: 14px; top: max(12px, env(safe-area-inset-top, 0px)); min-height: var(--tap); padding: 0 16px; border: 1px solid var(--white); border-radius: var(--r-pill); font: 600 14px var(--font-body); color: var(--ink); background: var(--glass); backdrop-filter: blur(14px) saturate(1.4); cursor: pointer; }
 .ob-stage { position: relative; z-index: 3; min-height: 0; }
-/* chuyển cảnh: cảnh cũ trượt ra, cảnh mới trượt vào theo hướng đi (Tiếp = sang trái, Quay lại = sang phải) */
+/* scene change: the old scene slides out, the new scene slides in in the direction of travel (Next = to the left, Back = to the right) */
 .ob-layer { position: absolute; inset: 0; }
 .ob-layer.enter { animation: ob-in-r var(--ob-t) var(--ease-out) both; } .ob-layer.out { pointer-events: none; animation: ob-out-r calc(var(--ob-t) * .8) ease-in both; }
 .ob-stage[data-dir="-1"] .ob-layer.enter { animation-name: ob-in-l; } .ob-stage[data-dir="-1"] .ob-layer.out { animation-name: ob-out-l; }
@@ -36,13 +36,13 @@
 .ob-navbtn { display: inline-flex; align-items: center; gap: 2px; min-height: var(--tap); min-width: var(--tap); padding: 0; border: 0; background: none; font: 600 14px var(--font-body); color: var(--ink); cursor: pointer; } .ob-back { justify-self: start; } .ob-next { justify-self: end; } .ob-navbtn:disabled { opacity: 0; pointer-events: none; }
 .ob-dots { display: flex; gap: 0; } .ob-dots button { position: relative; flex: none; width: var(--tap); height: var(--tap); padding: 0; border: 0; background: transparent; cursor: pointer; }
 .ob-dots button::before { content: ""; position: absolute; left: 50%; top: 50%; width: var(--onboarding-dot-size); height: var(--onboarding-dot-size); transform: translate(-50%, -50%); border-radius: var(--r-pill); background: var(--border-ctrl); opacity: .4; transition: width var(--dur-med) var(--ease-out), opacity var(--dur-fast); } .ob-dots button.on::before { width: var(--s-5); background: var(--ink); opacity: 1; }
-/* sắp tự chuyển: chấm hiện tại chạy đầy đúng bằng thời gian còn lại, nút Tiếp nhúc nhích */
+/* about to change by itself: the current dot fills up in exactly the time left, the Next button nudges */
 .ob-dots button.on.cue::before { background-color: color-mix(in srgb, var(--ink) 25%, transparent); background-image: linear-gradient(var(--ink), var(--ink)); background-repeat: no-repeat; background-position: left center; background-size: 0% 100%; animation: ob-fill calc(var(--cue, 0) * 1ms) linear forwards; }
 @keyframes ob-fill { to { background-size: 100% 100%; } }
 .ob-next.cue .ic { animation: ob-nudge 1s ease-in-out infinite; } @keyframes ob-nudge { 50% { translate: 3px 0; } }
 .ob-cta.cue-end { animation: ob-cue 1.2s ease-out infinite; }
 
-/* cảnh 1: khám phá */
+/* scene 1: explore */
 .ob-fan { position: absolute; left: 50%; top: 50%; width: min(216px, 56%); aspect-ratio: .6; margin: 0; overflow: hidden; border-radius: 22px; background: var(--sky-soft); box-shadow: 0 22px 36px -22px var(--ink), 0 0 0 .5px var(--white); transform-origin: center; z-index: calc(3 - var(--k)); transform: translate3d(calc(-50% + var(--k) * 52px - 52px), calc(-50% + 18px - var(--k) * 44px), 0) rotate(calc(var(--k) * 7deg - 5deg)) scale(calc(1 - var(--k) * .08)); animation: ob-rise var(--dur-scene) var(--ease-out) both; animation-delay: calc(var(--k) * 90ms); }
 .ob-fan img, .ob-card img, .ob-staticcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(1.14) contrast(1.04); } .ob-fan img { filter: saturate(1.3) contrast(1.07); } .ob-fan:first-of-type img { filter: saturate(1.14) contrast(1.04); }
 .ob-fan::after, .ob-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 58%, var(--ink-fixed)); opacity: .62; pointer-events: none; }
@@ -51,7 +51,7 @@
 .ob-obj.plane { left: 4%; top: -4%; width: 46%; } .ob-obj.binoculars { left: 2%; bottom: 2%; width: 30%; animation-duration: 5.4s; } .ob-obj.compass { right: 4%; bottom: 3%; width: 29%; animation-duration: 6.4s; }
 @keyframes ob-bob { 50% { transform: translateY(-8px) rotate(1deg); } }
 
-/* cảnh 2: quẹt */
+/* scene 2: swipe */
 .ob-deck { position: absolute; inset: 0; --deck-y: -40px; }
 .ob-card { --dir: 1; --fy: 0px; position: absolute; left: 50%; top: 50%; width: min(216px, 56%); aspect-ratio: .6; margin: 0; overflow: hidden; border-radius: 22px; background: var(--sky-soft); box-shadow: 0 22px 36px -22px var(--ink), 0 0 0 .5px var(--white); pointer-events: none; touch-action: none; user-select: none; z-index: calc(10 - var(--k)); transform: translate3d(calc(-50% + var(--dx, 0) * 1px), calc(-50% + var(--deck-y) + var(--k) * 15px + var(--dy, 0) * 1px), 0) rotate(calc(var(--k) * -1.3deg + var(--dx, 0) * .055deg)) scale(calc(1 - var(--k) * .06)); transition: transform 780ms var(--ease-out), opacity 400ms ease; }
 .ob-card.is-top { pointer-events: auto; cursor: grab; } .ob-card.drag { transition: none; cursor: grabbing; } .ob-card.far { opacity: 0; }
@@ -79,14 +79,14 @@
 .ob-replay { position: absolute; z-index: 7; display: flex; align-items: center; gap: 6px; min-height: var(--tap); padding: 0 14px; border: 1px solid var(--white); border-radius: var(--r-pill); font: 600 12.5px var(--font-body); color: var(--ink); background: var(--glass); backdrop-filter: blur(12px); box-shadow: var(--sh-float); cursor: pointer; animation: ob-fade var(--dur-med) both; }
 .ob-swipe .ob-replay { left: 12px; bottom: 24px; } .ob-plan .ob-replay, .ob-share .ob-replay { right: 22px; top: calc(var(--ob-map-h) + 2px); }
 
-/* bản tĩnh của cảnh quẹt */
+/* the static version of the swipe scene */
 .ob-static { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 12px 14px; padding: 0 14px; }
 .ob-staticcol { width: calc(50% - 7px); max-width: 180px; text-align: center; } .ob-staticcol p { margin: 14px 0 0; font: 400 12px / 1.4 var(--font-body); color: var(--muted); } .ob-staticcol strong { display: block; margin-bottom: 2px; font: 700 13.5px var(--font-body); color: var(--ink); }
 .ob-staticcard { position: relative; width: 100%; aspect-ratio: .62; margin: 0; overflow: hidden; border-radius: 20px; background: var(--sky-soft); box-shadow: 0 20px 30px -20px var(--ink), 0 0 0 .5px var(--white); } .ob-staticcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } .ob-staticcard.skip { transform: rotate(-5deg); } .ob-staticcard.pick { transform: rotate(5deg); }
 .ob-staticcard figcaption { position: absolute; left: 12px; right: 10px; bottom: 12px; z-index: 2; color: var(--on-photo); font: 700 14px / 1.15 var(--font-body); text-align: left; } .ob-staticcard::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 58%, var(--ink-fixed)); opacity: .62; } .ob-staticcard .ob-stamp { opacity: 1; z-index: 3; } .ob-staticcard .ob-stamp.pick { transform: rotate(-8deg); } .ob-staticcard .ob-stamp.skip { transform: rotate(8deg); }
 .ob-staticnote { width: 100%; margin: 4px 0 0; text-align: center; font: 600 14px var(--font-body); }
 
-/* cảnh 3 và 4: bản đồ + tờ lịch */
+/* scenes 3 and 4: the map + the itinerary sheet */
 .ob-plan, .ob-share { --ob-map-h: min(41%, 262px); } .ob-share { --ob-map-h: min(37%, 236px); }
 .ob-map { position: absolute; left: 14px; right: 14px; top: 0; height: var(--ob-map-h); z-index: 2; overflow: clip; border-radius: 26px; background: var(--map-fallback); box-shadow: 0 18px 34px -20px var(--ink), 0 0 0 .5px var(--white); animation: ob-rise var(--dur-scene) var(--ease-out) both; } .ob-map > .tmroot { position: absolute; inset: 0; }
 .ob-maploading, .ob-mapnote { position: absolute; left: 50%; z-index: 5; margin: 0; padding: 7px 14px; border-radius: var(--r-pill); font: 600 12px var(--font-body); white-space: nowrap; color: var(--ink); background: var(--surface); box-shadow: var(--sh-float); transform: translateX(-50%); pointer-events: none; } .ob-maploading { top: 50%; margin-top: -16px; } .ob-mapnote { top: 8px; font-size: 10.5px; } .ob-share .ob-mapnote { top: 40px; }
@@ -105,7 +105,7 @@
 .ob-row.ob-sum { grid-template-columns: 14px 1fr auto; padding: 8px 12px; } .ob-row .ob-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ob-day-1); } .ob-row .ob-dot.d1 { background: var(--ob-day-2); } .ob-row .ob-faces { display: flex; padding-left: 10px; } .ob-row .ob-faces i { width: 30px; height: 30px; margin-right: -9px; border-radius: 50%; background: var(--sky-soft) center / cover; box-shadow: 0 0 0 2px var(--surface); }
 .ob-share .ob-badge, .ob-share .ob-row .ob-tx em { display: none; } .ob-share .ob-rows { gap: 5px; } .ob-share .ob-row { grid-template-columns: 36px 1fr; padding: 4px 10px 4px 4px; } .ob-share .ob-row .ob-th { width: 36px; height: 36px; }
 
-/* cảnh 4: chia sẻ (minh họa) */
+/* scene 4: share (illustrative) */
 .ob-concept { position: absolute; left: 10px; top: 10px; z-index: 30; margin: 0; padding: 6px 10px; border-radius: var(--r-pill); font: 600 11px var(--font-body); color: var(--white); background: var(--ink); }
 .ob-sharebtn { position: absolute; right: 10px; top: 10px; z-index: 30; display: flex; align-items: center; gap: 6px; min-height: var(--tap); padding: 0 14px; border: 1px solid var(--white); border-radius: var(--r-pill); font: 600 13px var(--font-body); color: var(--ink); background: var(--glass); backdrop-filter: blur(12px); cursor: pointer; }
 .ob-members { position: absolute; z-index: 4; top: calc(var(--ob-map-h) + 46px); right: 22px; display: flex; } .ob-av { display: inline-grid; place-items: center; min-width: 30px; height: 30px; margin-left: -8px; padding: 0 2px; border-radius: 15px; font: 700 13px var(--font-body); font-style: normal; color: var(--white); background: var(--muted); box-shadow: 0 0 0 2.5px var(--surface); animation: ob-pop var(--dur-med) var(--ease-spring) both; } .ob-av.me { margin-left: 0; padding: 0 10px; font-size: 12px; background: var(--brand-2); } .ob-av.a { background: var(--like); } .ob-av.b { background: var(--sky); }
@@ -118,7 +118,7 @@
 .ob-toast { position: absolute; z-index: 9; left: 14px; bottom: 14px; max-width: calc(100% - 28px); margin: 0; padding: 9px 16px; border-radius: var(--r-pill); font: 600 13px var(--font-body); color: var(--white); background: var(--ink); box-shadow: var(--sh-float); pointer-events: none; animation: ob-rise var(--dur-med) var(--ease-out) both; }
 
 
-/* dẫn mắt tinh tế: vùng đang kể sáng rõ, phần còn lại mờ nhẹ; vòng sáng nhắc đúng nút sắp được bấm */
+/* subtle guidance of the eye: the area being told is clear, the rest dims slightly; a glowing ring hints at the button about to be pressed */
 .ob-deck, .ob-controls, .ob-thumbs, .ob-counter, .ob-map, .ob-sheet { transition: opacity .35s ease; }
 .ob-swipe[data-focus="card"] :is(.ob-thumbs, .ob-counter), .ob-swipe[data-focus="tray"] :is(.ob-deck, .ob-controls), .ob-swipe[data-focus="buttons"] :is(.ob-deck, .ob-thumbs, .ob-counter) { opacity: .45; }
 .ob-swipe[data-focus="card"] .ob-controls { opacity: .7; }
@@ -130,8 +130,8 @@
 .ob-sharebtn.cue, .ob-panel .ob-btns .ok.cue { animation: ob-cue 1.1s ease-out infinite; }
 @keyframes ob-cue { from { box-shadow: 0 0 0 0 var(--tint); } to { box-shadow: 0 0 0 12px transparent; } }
 :root #screen[data-view='onboard'] .route-close { display: none; }
-/* màn rộng: giữ một cột kiểu điện thoại ở giữa, nền trời vẫn phủ cả khung */
+/* wide screen: keeps one phone-style column in the middle, the sky background still covers the whole frame */
 @media (min-width: 768px) { .ob-top, .ob-stage, .ob-bottom { width: 100%; max-width: 430px; justify-self: center; } .ob-cloud { max-width: 460px; } }
-/* màn thấp (điện thoại nhỏ, cửa sổ ngắn): gọn đầu trang, bản đồ nhỏ hơn, bỏ dòng ghi chú để đủ chỗ cho cả 4 dòng lịch */
+/* short screen (a small phone, a short window): a compact top, a smaller map, drops the note line to leave room for all 4 itinerary rows */
 @media (max-height: 700px) { .ob-sheet { overflow-y: auto; overscroll-behavior: contain; } .ob-grab { display: none; } .ob-top { min-height: 104px; } .ob-title { margin-top: 30px; } .ob-plan, .ob-share { --ob-map-h: 32%; } .ob-row .ob-tx em { display: none; } .ob-row { grid-template-columns: 34px 1fr; padding: 3px 8px 3px 4px; } .ob-row .ob-th { width: 34px; height: 34px; } .ob-rows { gap: 4px; } }
 @media (prefers-reduced-motion: reduce) { .ob *, .ob *::before, .ob *::after { animation: none !important; transition-duration: 1ms !important; } }

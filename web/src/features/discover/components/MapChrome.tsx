@@ -7,7 +7,7 @@ import { SearchBox } from './home/SearchBox.tsx';
 import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
 import type { ReactNode } from 'react';
 
-/** Thanh tìm kiếm nằm trên bản đồ, độc lập với vùng cuộn của tờ nội dung như bản B. */
+/** The search bar sits on the map, independent of the scroll region of the content sheet like version B. */
 export function MapChrome({ children }: { readonly children?: ReactNode }) {
   const route = useRoute();
   const { destinations } = useCurrentDestination();

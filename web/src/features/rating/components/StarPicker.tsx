@@ -8,7 +8,7 @@ interface StarPickerProps {
   readonly disabled?: boolean;
 }
 
-/** Chọn 1–5 sao bằng nhóm nút bật/tắt (aria-pressed; Tab đi qua từng nút, Enter/Space chọn); mỗi nút ≥ 44 px bằng CSS `.star-btn`. */
+/** Chooses 1-5 stars with a group of toggle buttons (aria-pressed; Tab goes through each button, Enter/Space chooses); each button is at least 44 px by CSS `.star-btn`. */
 export function StarPicker({ value, onChange, disabled }: StarPickerProps) {
   return (
     <div className="star-picker" role="group" aria-label={C.starsGroup}>

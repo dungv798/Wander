@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Wander autopilot state machine: checkpoint, resume verification, loop limits, validation.
-// Writes ONLY under docs/autopilot/. Never edits the master plan or product code.
+// Writes ONLY under .claude/autopilot/. Never edits the master plan or product code.
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import * as L from './autopilot-lib.mjs';
@@ -139,7 +139,7 @@ C.init = ({ opt }) => {
     resume: { count: 0, history: [] },
     acceptance: [
       { id: 'AC1', text: 'Master plan unchanged (sha256 equals baseline)', checks: ['plan_unchanged'] },
-      { id: 'AC2', text: 'Only files under docs/autopilot/ changed; no product code touched', checks: ['write_scope'] },
+      { id: 'AC2', text: 'Only files under .claude/autopilot/ changed; no product code touched', checks: ['write_scope'] },
       { id: 'AC3', text: 'Review rounds <= 2, dispatches <= 8, stage attempts within limits', checks: ['limits'] },
       { id: 'AC4', text: 'Every stage is done/skipped, or blocked with a precise blocker', checks: ['stages_complete', 'outputs_integrity'] },
       { id: 'AC5', text: 'Every cited ID/section exists in the plan; every quote is verbatim', checks: ['id_references', 'quotes_verbatim', 'path_references'] },

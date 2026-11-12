@@ -6,7 +6,7 @@ import { Icon } from '../../../shared/ui/Icon.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
-import { firstPhotoUrl } from '../../discover/index.ts';
+import { firstPhotoThumbUrl } from '../../discover/index.ts';
 import { useReportError } from '../../identity/index.ts';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { useTrips } from '../hooks/TripsProvider.tsx';
@@ -15,7 +15,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { PLACE_THUMB_SIZE } from '../list/list.const.ts';
 import '../list/tripList.css';
 
-/** Tờ chọn nơi chưa có trong chuyến; giữ lựa chọn khi tìm/lọc và chỉ ghi sau xác nhận. */
+/** The sheet to choose places that are not in the trip yet; it keeps the selection while searching/filtering and writes only after confirmation. */
 export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, cat, days, tab } = useTripView();
   const { actions } = useTrips();
@@ -31,7 +31,7 @@ export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
   const selected = available.filter(place => chosen.includes(place.id));
   const visible = filterAddPlaces(available, query, category);
   const categories = [...new Map(cat.dest.places.map(place => [place.category, place.categoryName])).entries()];
-  /** Tạo từng mục bằng lệnh có sẵn; lỗi giữa chừng vẫn có Hoàn tác và giữ các nơi còn lại để thử lại. */
+  /** Creates each item with the existing command; an error midway still has Undo and keeps the remaining places to retry. */
   const submit = async (): Promise<void> => {
     if (busy || !selected.length || !validAddDay(trip, day)) return;
     setBusy(true);
@@ -62,7 +62,7 @@ export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
       </div>
       <div className="add-many-list"><fieldset disabled={busy}>
         <legend className="sr">{T.addMany.open}</legend>
-        {visible.map(place => <CheckRow key={place.id} checked={chosen.includes(place.id)} onChange={() => setChosen(value => togglePlace(value, place.id))}><span className="add-many-place"><RevealImage src={firstPhotoUrl(place)} width={PLACE_THUMB_SIZE} height={PLACE_THUMB_SIZE} loading="lazy" /><span><b>{place.name}</b><br /><span className="note">{place.categoryName}</span></span></span></CheckRow>)}
+        {visible.map(place => <CheckRow key={place.id} checked={chosen.includes(place.id)} onChange={() => setChosen(value => togglePlace(value, place.id))}><span className="add-many-place"><RevealImage src={firstPhotoThumbUrl(place)} width={PLACE_THUMB_SIZE} height={PLACE_THUMB_SIZE} loading="lazy" /><span><b>{place.name}</b><br /><span className="note">{place.categoryName}</span></span></span></CheckRow>)}
         {!visible.length ? <p role="status" className="note">{T.addMany.empty}</p> : null}
       </fieldset></div>
       <div className="add-many-footer glass-control">

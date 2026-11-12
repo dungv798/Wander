@@ -1,8 +1,8 @@
 import type { Map as MlMap } from 'maplibre-gl';
 
 /**
- * Ảnh cùng origin dùng bộ tải MapLibre. Ảnh ngoài dùng Image + CORS ẩn danh, đi qua img-src đã cho phép,
- * không phát sinh fetch bị connect-src chặn và không gửi thông tin đăng nhập tới nhà cung cấp ảnh.
+ * A same-origin photo uses MapLibre's loader. An external photo uses an Image + anonymous CORS, going through the allowed img-src,
+ * it makes no fetch that connect-src would block and sends no login information to the photo provider.
  */
 export function loadThumbnailImage(map: Pick<MlMap, 'loadImage'>, url: string): Promise<HTMLImageElement | ImageBitmap> {
   if (!/^https?:\/\//i.test(url)) return map.loadImage(url).then(response => response.data);

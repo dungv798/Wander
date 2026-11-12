@@ -9,21 +9,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Truy vấn Spring Data cho checklist; luôn lọc theo chuyến để hạng mục của chuyến khác không lọt vào. */
+/** Spring Data queries for the checklist; always filtered by trip so an item of another trip cannot slip in. */
 public interface ChecklistItemJpaRepository extends JpaRepository<ChecklistItemEntity, UUID> {
 
-    /** Hạng mục của chuyến theo nhóm rồi vị trí. */
+    /** The trip's items by group then position. */
     @Query(PlanningQueryConstants.CHECKLIST_OF_TRIP)
     List<ChecklistItemEntity> findAllOfTrip(@Param("trip") UUID tripId);
 
-    /** Một hạng mục của đúng chuyến. */
+    /** One item of exactly this trip. */
     @Query(PlanningQueryConstants.CHECKLIST_ITEM_OF_TRIP)
     Optional<ChecklistItemEntity> findOfTrip(@Param("trip") UUID tripId, @Param("item") UUID itemId);
 
-    /** Vị trí lớn nhất hiện có (null nếu chưa có hạng mục). */
+    /** The largest existing position (null if there is no item). */
     @Query(PlanningQueryConstants.CHECKLIST_MAX_POSITION)
     Integer maxPosition(@Param("trip") UUID tripId);
 
-    /** Số hạng mục của chuyến. */
+    /** The number of items of the trip. */
     long countByTripId(UUID tripId);
 }

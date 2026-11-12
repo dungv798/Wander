@@ -5,25 +5,25 @@ import { FLUENT_ICONS, FLUENT_PATH, FLUENT_SUFFIX } from '../../../shared/ui/ico
 import { CATEGORY_ICON } from './discover.const.ts';
 import type { CategoryCode } from './Catalog.types.ts';
 
-/** Tái sử dụng ảnh icon của danh sách/chi tiết; loại chưa có sticker thì vẫn dùng ảnh thật. */
+/** Reuses the icon photo of the list/detail; a kind with no sticker still uses the real photo. */
 export function categorySticker(category: CategoryCode): string | undefined {
   const icon = FLUENT_ICONS[CATEGORY_ICON[category]];
   return icon ? `${FLUENT_PATH}${icon}${FLUENT_SUFFIX}` : undefined;
 }
 
-/** Ghim cho mọi địa điểm có tọa độ (ảnh tròn thật + tên). */
+/** A pin for every place that has coordinates (a round real photo + the name). */
 export function placeMarkers(places: readonly PlaceView[]): MapMarker[] {
   return places.filter((p) => p.lat != null && p.lon != null).map((p) => {
     return { id: p.id, lat: p.lat as number, lon: p.lon as number, label: p.name, thumb: firstPhotoUrl(p) };
   });
 }
 
-/** Ghim đánh số 1, 2, 3… cho danh sách địa điểm đã chọn (chỉ nơi có tọa độ). */
+/** A pin numbered 1, 2, 3... for the list of selected places (only places with coordinates). */
 export function numberedMarkers(places: readonly PlaceView[]): MapMarker[] {
   return placeMarkers(places).map((m, i) => ({ ...m, num: i + 1 }));
 }
 
-/** Mốc chính của điểm đến (ví dụ TP Hà Giang) dạng ghim `hub`; null nếu mốc chưa có tọa độ. */
+/** The main landmark of the destination (for example Ha Giang city) as a `hub` pin; null if the landmark has no coordinates. */
 export function hubMarker(dest: DestinationDetail): MapMarker | null {
   const r = dest.references[0];
   return r && r.lat != null && r.lon != null ? { id: 'hub', lat: r.lat, lon: r.lon, label: r.name, kind: 'hub' } : null;

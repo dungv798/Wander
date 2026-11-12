@@ -1,2 +1,2 @@
-/** Cổng tải lười giữ nguyên export công khai của tờ tạo chuyến. */
+/** The lazy-loading gate that keeps the public export of the trip-creating sheet. */
 export { LazyCreateTripSheet as CreateTripSheet } from './LazyTripSheets.tsx';

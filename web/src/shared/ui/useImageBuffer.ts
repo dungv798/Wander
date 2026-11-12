@@ -7,7 +7,7 @@ import { MOTION } from './motion.const.ts';
 interface ImageBuffer { readonly source: string | undefined; readonly previous: string | null; readonly ready: boolean }
 interface ImageCallbacks { readonly onVisible?: (source: string) => void; readonly onSourceError?: () => void }
 
-/** Giữ ảnh cũ trong lúc tải ảnh mới, bỏ kết quả lỗi thời khi bấm nhanh và giải phóng lớp crossfade sau một nhịp chung. */
+/** Keeps the old photo while the new photo loads, drops a stale result on fast taps and releases the crossfade layer after a shared beat. */
 export function useImageBuffer(source: string | undefined, callbacks: ImageCallbacks, imageRef: RefObject<HTMLImageElement | null>) {
   const reduced = usePrefersReducedMotion();
   const latest = useRef(callbacks);

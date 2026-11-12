@@ -15,6 +15,35 @@ import org.junit.jupiter.api.Test;
 
 class CatalogDomainTest {
     @Test
+    @DisplayName("optimized photos: stable id and widths come from the name; legacy names keep their basename as id")
+    void photoIdAndWidthsComeFromTheFileName() {
+        Photo optimized = new Photo("ho-xuan-huong-1-w1280-3fa9c1d2ab.webp", null, "A", "CC BY 4.0", "https://example.org/p", "", "", "ho-xuan-huong-1-w480-0123456789.webp");
+        assertThat(optimized.id()).isEqualTo("ho-xuan-huong-1");
+        assertThat(optimized.width()).isEqualTo(1280);
+        assertThat(optimized.thumbWidth()).isEqualTo(480);
+
+        Photo legacy = new Photo("ho-xuan-huong-1.jpg", "A", "CC BY 4.0", "https://example.org/p");
+        assertThat(legacy.id()).isEqualTo("ho-xuan-huong-1");
+        assertThat(legacy.width()).isNull();
+        assertThat(legacy.thumbFile()).isNull();
+        assertThat(legacy.thumbWidth()).isNull();
+
+        Photo external = new Photo(null, "https://images.unsplash.com/photo-1?w=800", "A", "Unsplash", "https://unsplash.com/photos/1");
+        assertThat(external.id()).isNull();
+        assertThat(external.width()).isNull();
+    }
+
+    @Test
+    @DisplayName("a thumbnail needs a local file and a valid name")
+    void thumbnailRules() {
+        assertThatThrownBy(() -> new Photo(null, "https://images.unsplash.com/photo-1?w=800", "A", "Unsplash", "https://unsplash.com/photos/1", "", "", "t-w480-0123456789.webp"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Photo("a.webp", null, "A", "CC BY 4.0", "https://example.org/p", "", "", "../etc/passwd"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(new Photo("a.webp", null, "A", "CC BY 4.0", "https://example.org/p", "", "", "  ").thumbFile()).isNull();
+    }
+
+    @Test
     void photographerProfileLinksAreOptionalAndSafe() {
         assertThat(new Photo("a.jpg", "Author", "CC BY 4.0", "https://example.org/photo").authorUrl()).isEmpty();
         assertThat(new Photo(null, "https://images.unsplash.com/photo-a", "Author", "Unsplash", "https://unsplash.com/photos/a", "", " https://unsplash.com/@author ").authorUrl())

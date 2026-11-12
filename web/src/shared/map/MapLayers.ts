@@ -11,10 +11,10 @@ import { nearestMapObject } from './routeSegments.ts';
 import { prefersReducedMotion } from './mapUtil.ts';
 import type { MapMarker, MapMode, Pt } from './map.types.ts';
 
-/** Biến đổi tọa độ bản đồ sang màn hình, chỉ dùng cho nhãn khoảng cách tuyến. */
+/** Transforms map coordinates to the screen, used only for the route distance labels. */
 export type Project = (p: Pt) => Pt;
 
-/** Ghim/cụm/nhãn native; HTML chỉ còn danh sách truy cập và nhãn khoảng cách tuyến. */
+/** Native pins/clusters/labels; HTML is only the accessibility list and the route distance labels. */
 export class MapLayers {
   private readonly host: HTMLElement;
   private readonly labels: HTMLElement;
@@ -33,7 +33,7 @@ export class MapLayers {
   private markerOrder: readonly string[] = [];
   private segMids: { el: HTMLElement; p: Pt }[] = [];
 
-  /** Giữ danh sách nút thay thế canvas trong vùng bản đồ; hiện khi bàn phím đi vào. */
+  /** Keeps the list of buttons that replace the canvas inside the map area; shown when the keyboard enters. */
   constructor(host: HTMLElement) {
     this.host = host;
     this.labels = Object.assign(document.createElement('div'), { className: 'tm-labels' });
@@ -54,7 +54,7 @@ export class MapLayers {
     Object.assign(host.dataset, { pins: '0', clusters: '0', selected: '', features: '[]', thumbnails: '0', numbered: '0', renderedImages: '0', moving: '1' });
   }
 
-  /** Gắn lớp khi nền tải xong; query native ưu tiên ghim trước cụm trên cùng điểm chạm. */
+  /** Attaches the layer when the base finishes loading; the native query prefers a pin over a cluster at the same touch point. */
   attach(map: MlMap, onCluster?: () => void, onEmpty?: (point: { x: number; y: number }) => void): void {
     this.map = map;
     this.onCluster = onCluster;
@@ -79,7 +79,7 @@ export class MapLayers {
     map.on('idle', () => { this.host.dataset['moving'] = '0'; this.snapshot(); });
   }
 
-  /** Hủy kết quả tải ảnh đến muộn trước khi GeoMap giải phóng WebGL. */
+  /** Cancels a photo-load result that arrives late before GeoMap releases WebGL. */
   destroy(): void {
     this.dead = true;
     if (this.entranceFrame) cancelAnimationFrame(this.entranceFrame);
@@ -88,7 +88,7 @@ export class MapLayers {
     this.images.clear();
   }
 
-  /** Nút thử lại nền nạp lại style nên phải đăng ký lại sprite đã tải, giữ nguyên camera. */
+  /** The base retry button reloads the style so the already loaded sprites must be registered again, keeping the camera. */
   restore(): void {
     const map = this.map;
     if (!map || this.dead) return;
@@ -99,7 +99,7 @@ export class MapLayers {
     });
   }
 
-  /** Chỉ cập nhật nguồn khi dữ liệu/chế độ đổi; không setData theo sự kiện camera. */
+  /** Updates the source only when the data/mode changes; it does no setData on camera events. */
   syncMarkers(markers: readonly MapMarker[], mode: MapMode, selected: string | null, onPin?: (id: string) => void): void {
     const map = this.map;
     if (!map) return;
@@ -118,18 +118,18 @@ export class MapLayers {
     this.select(selected);
   }
 
-  /** Cập nhật nguồn native, không dùng DOM marker và không đổi điểm kiểm e2e. */
+  /** Updates the native source, without DOM markers and without changing the e2e checkpoint. */
   private writeMarkers(markers: readonly MapMarker[], mode: MapMode): void {
     MAP.PIN_SOURCES.forEach((source, index) => (this.map?.getSource(source) as GeoJSONSource | undefined)?.setData(markerFeatures(markers, mode, index === 0)));
   }
 
-  /** Thêm feature theo nhịp khi script yêu cầu; hủy khi dữ liệu đổi hoặc destroy. */
+  /** Adds features on a beat when the script asks; cancels when the data changes or on destroy. */
   private enterMarkers(markers: readonly MapMarker[], mode: MapMode): void {
     cancelAnimationFrame(this.entranceFrame);
     if (prefersReducedMotion()) { this.writeMarkers(markers, mode); return; }
     let start: number | undefined;
     let previous = -1;
-    /** Chỉ ghi GeoJSON khi số ghim đổi, dừng hẳn sau ghim cuối. */
+    /** Writes GeoJSON only when the number of pins changes, stopping completely after the last pin. */
     const tick = (now: number) => {
       if (this.dead) return;
       start ??= now;
@@ -146,7 +146,7 @@ export class MapLayers {
     this.entranceFrame = requestAnimationFrame(tick);
   }
 
-  /** Nút giữ cùng phần tử khi đổi số/nhãn, tránh mất focus sau cập nhật dữ liệu. */
+  /** A button keeps the same element when the number/label changes, avoiding losing focus after a data update. */
   private syncAccessible(markers: readonly MapMarker[]): void {
     this.markerOrder = markers.map((marker) => marker.id);
     const keep = new Set(this.markerOrder);
@@ -174,7 +174,7 @@ export class MapLayers {
     this.accessible.hidden = !this.onPin;
   }
 
-  /** Vòng chọn dùng feature-state; nhãn ghim mờ chỉ hiện khi được chọn. */
+  /** The selection ring uses feature-state; a faded pin label only shows when it is selected. */
   select(id: string | null): void {
     const map = this.map;
     MAP.PIN_SOURCES.forEach((source, index) => {
@@ -188,7 +188,7 @@ export class MapLayers {
     this.buttons.forEach((button, key) => button.setAttribute('aria-pressed', String(key === id)));
   }
 
-  /** Cụm dùng độ phóng tách của nguồn native; lỗi/cụm cũ khi dữ liệu đổi thì bỏ qua. */
+  /** A cluster uses the native source's separate zoom; an error/old cluster when the data changes is ignored. */
   private async expandCluster(id: number, center: [number, number]): Promise<void> {
     const map = this.map;
     const revision = this.revision;
@@ -199,10 +199,10 @@ export class MapLayers {
       if (this.dead || this.map !== map || revision !== this.revision) return;
       this.onCluster?.();
       map.easeTo({ center, zoom: Math.min(MAP.GL_MAX_ZOOM, zoom), duration: prefersReducedMotion() ? 0 : MAP.FLY_MS });
-    } catch { /* Cụm có thể đã biến mất khi danh sách đổi trong lúc đợi worker. */ }
+    } catch { /* The cluster may have disappeared when the list changed while waiting for the worker. */ }
   }
 
-  /** Cắt ảnh catalog vào bitmap tròn 96×96, hiển thị 44 px độc lập zoom; lỗi giữ vòng ghim. */
+  /** Crops the catalog photo into a 96x96 round bitmap, shown at 44 px independent of zoom; on an error the pin ring is kept. */
   private async loadThumbnail(url: string): Promise<void> {
     const map = this.map;
     if (!map || !url || this.images.has(url) || this.loading.has(url)) return;
@@ -222,11 +222,11 @@ export class MapLayers {
       map.addImage(url, image, { pixelRatio: MAP.THUMB_PX / MAP.PIN_PX });
       this.images.set(url, image);
       this.host.dataset['thumbnails'] = String(this.images.size);
-    } catch { /* Ảnh lỗi không ngăn chọn ghim hoặc sử dụng bản đồ. */ }
+    } catch { /* A broken photo does not stop choosing a pin or using the map. */ }
     finally { this.loading.delete(url); }
   }
 
-  /** Đồng bộ điểm kiểm chỉ khi camera dừng/nguồn vẽ xong, không đọc hoặc ghi DOM cho từng ghim trên move. */
+  /** Syncs the checkpoint only when the camera stops/the source finishes drawing, reading or writing no DOM for each pin on move. */
   snapshot(): void {
     const map = this.map;
     if (!map || this.dead || !pinHitLayers().every((layer) => map.getLayer(layer))) return;
@@ -235,7 +235,7 @@ export class MapLayers {
     this.host.dataset['renderedImages'] = String(renderedImageCount(map.queryRenderedFeatures({ layers: photos }), (id) => map.hasImage(id)));
   }
 
-  /** Giữ nguyên nhãn khoảng cách tuyến; bước native tuyến được giao riêng. */
+  /** Keeps the route distance labels as they are; the native route step is given separately. */
   setSegmentLabels(labels: readonly string[], mids: readonly Pt[]): void {
     this.labels.replaceChildren();
     this.segMids = [];
@@ -248,7 +248,7 @@ export class MapLayers {
     });
   }
 
-  /** Chỉ nhãn khoảng cách tuyến còn cần chiếu HTML theo camera, không chạm ghim/cụm/nhãn tên. */
+  /** Only the route distance labels still need HTML projection by the camera, not touching pins/clusters/name labels. */
   place(project: Project): void {
     this.segMids.forEach(({ el, p }) => {
       const at = project(p);

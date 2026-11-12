@@ -12,16 +12,16 @@ interface PlanMapProps {
   readonly destId: string;
   readonly markers: readonly MapMarker[];
   readonly route: MapRoute | null;
-  /** Mã ghim cần vừa khung (null = cả chuyến). */
+  /** The pin ids that must fit the frame (null = the whole trip). */
   readonly focus: readonly string[] | null;
-  /** Khung chứa (để theo dõi bản đồ) và tình trạng bản đồ do cảnh theo dõi, vì kịch bản của cảnh cần chờ bản đồ sẵn sàng. */
+  /** The container (to watch the map) and the map status watched by the scene, because the scene's script needs to wait for the map to be ready. */
   readonly hostRef: RefObject<HTMLDivElement | null>;
   readonly health: MapHealth;
-  /** Lớp phủ riêng của cảnh (nút Chia sẻ, nhãn minh họa…). */
+  /** The scene's own overlay (the Share button, the illustrative label...). */
   readonly children?: ReactNode;
 }
 
-/** Bản đồ lịch trình: bản đồ thật của app (có ghim ảnh, số, tuyến), hiện "Đang tải…" trong lúc chờ và đổi sang sơ đồ minh họa khi nền lỗi; luôn kèm nhãn "Thứ tự ghé thăm". */
+/** The itinerary map: the app's real map (with photo pins, numbers, a route), shows 'Loading...' while waiting and switches to an illustrative diagram when the base fails; always with the label 'Order of visits'. */
 export function PlanMap({ destId, markers, route, focus, hostRef, health, children }: PlanMapProps) {
   const fit = useMemo<MapFit>(() => ({ ids: focus ? [...focus] : null, options: { animate: true, padding: MAP_PADDING } }), [focus]);
   return (

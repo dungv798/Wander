@@ -6,7 +6,7 @@ import com.wander.shared.kernel.constant.CommonConstants;
 import java.util.List;
 import java.util.Map;
 
-/** Nguồn đã gộp trong batch; giữ tag gốc để có thể review và tách lại. */
+/** The sources merged in the batch; the original tags are kept so they can be reviewed and split again. */
 public record OsmReference(String osmType, long osmId, String sourceUrl, List<Double> center, Map<String, String> tags) {
     public OsmReference {
         PoiValidation.requireOsmIdentity(osmType, osmId);

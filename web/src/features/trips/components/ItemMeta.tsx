@@ -7,12 +7,12 @@ import { isPlain } from '../model/tripMath.ts';
 import { COLLAB_COPY } from '../../collab/index.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Số tiền hiển thị đầy đủ VND từ nghìn đồng. Dùng cho cả TỔNG (có thể vượt trần 1 mục 1.000.000.000), nên không đi qua `Money` vốn chặn trần. */
+/** An amount shown in full VND from thousand VND. Used for the TOTAL too (which can exceed the 1,000,000,000 ceiling of one item), so it does not go through `Money` which enforces the ceiling. */
 export function money(k: number): string {
   return formatVnd(k * FORMAT.VND_PER_THOUSAND);
 }
 
-/** Các chip thông tin của một mục: giờ · thời lượng, chi phí (đã bao gồm / giá / chưa biết giá), đã đặt chỗ. Nghỉ và Việc cần làm không có giá. */
+/** The info chips of an item: time - duration, cost (included / price / unknown price), booked. Rest and To-do have no price. */
 export function ItemMeta({ item, people = 1 }: { readonly item: TripItem; readonly people?: number }) {
   const dur = item.durationMin !== null ? fill(T.row.minutes, { n: item.durationMin }) : '';
   const time = [item.timeOfDay ?? '', dur].filter(Boolean).join(' · ');

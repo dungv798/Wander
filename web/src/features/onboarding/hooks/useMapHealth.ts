@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import type { RefObject } from 'react';
 import { MAP_FALLBACK_MS } from '../model/onboarding.const.ts';
 
-/** Tình trạng bản đồ nền: đang tải, sẵn sàng, hoặc không tải được nên dùng sơ đồ minh họa thay thế. */
+/** The state of the base map: loading, ready, or could not load so the illustrative diagram is used instead. */
 export type MapState = 'loading' | 'ready' | 'fallback';
 
-/** Kết quả theo dõi: trạng thái hiện tại và một lời hứa hoàn tất khi không còn "đang tải" (để kịch bản chờ rồi chạy tiếp). */
+/** The watch result: the current state and a promise that completes when it is no longer 'loading' (so the script waits and then goes on). */
 export interface MapHealth {
   readonly state: MapState;
   readonly settled: Promise<void>;
@@ -15,8 +15,8 @@ const READY_SELECTOR = '.tmroot[data-ready="1"]';
 const DEGRADED_SELECTOR = '.tm-degraded';
 
 /**
- * Theo dõi bản đồ bên trong `host` (GeoMap đặt `data-ready="1"` khi kiểu bản đồ đã tải và dựng cảnh báo `.tm-degraded` khi nền lỗi).
- * Quá `MAP_FALLBACK_MS` mà chưa sẵn sàng, hoặc nền lỗi trước khi sẵn sàng, thì chuyển sang sơ đồ minh họa để cảnh không bao giờ trống.
+ * Watches the map inside `host` (GeoMap sets `data-ready="1"` when the map style has loaded and builds a `.tm-degraded` warning when the base fails).
+ * Past `MAP_FALLBACK_MS` while not ready, or the base failing before it is ready, switches to the illustrative diagram so the scene is never empty.
  */
 export function useMapHealth(host: RefObject<HTMLElement | null>): MapHealth {
   const [state, setState] = useState<MapState>('loading');
@@ -30,7 +30,7 @@ export function useMapHealth(host: RefObject<HTMLElement | null>): MapHealth {
   useEffect(() => {
     const el = host.current;
     if (!el) return undefined;
-    /** Đọc lại DOM của bản đồ và cập nhật trạng thái nếu đã rõ. */
+    /** Re-reads the map's DOM and updates the state if it is clear. */
     const check = (): void => {
       if (el.querySelector(READY_SELECTOR)) setState((s) => (s === 'loading' ? 'ready' : s));
       else if (el.querySelector(DEGRADED_SELECTOR)) setState((s) => (s === 'loading' ? 'fallback' : s));

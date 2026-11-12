@@ -6,7 +6,7 @@ import { mainAway } from './destinationQueries.ts';
 import { isTrek } from './trekking.ts';
 import { DISCOVER_COPY as C } from './discover.copy.ts';
 
-/** Một ô thông số nhanh của tờ chi tiết: biểu tượng, nhãn và giá trị. */
+/** One quick-fact cell of the detail sheet: an icon, a label and a value. */
 export interface PlaceFact {
   readonly icon: IconName;
   readonly label: string;
@@ -14,8 +14,8 @@ export interface PlaceFact {
 }
 
 /**
- * Bốn thông số nhanh của một nơi. Nơi thường: thời gian ghé, độ khó, khoảng cách và thời gian xe máy ước tính từ mốc.
- * Leo núi/trekking: KHÔNG có thời gian xe máy (không suy ra giờ lên đỉnh) và khoảng cách chỉ là "điểm tham chiếu"; ô cuối nói thẳng chưa có dữ liệu tuyến.
+ * The four quick facts of a place. An ordinary place: the visit time, the difficulty, the distance and the estimated motorbike time from the landmark.
+ * Hiking/trekking: NO motorbike time (the time to the summit is not inferred) and the distance is only a 'reference point'; the last cell says plainly that there is no route data.
  */
 export function placeFacts(place: PlaceView): readonly PlaceFact[] {
   const away = mainAway(place);

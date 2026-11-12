@@ -1,10 +1,10 @@
 import { fill } from '../const/copy.vi.ts';
 import { AGO_COPY as A } from '../const/time.copy.ts';
 
-/** Số mili giây của một phút/giờ/ngày. */
+/** The number of milliseconds in a minute/hour/day. */
 const MS = { MINUTE: 60_000, HOUR: 3_600_000, DAY: 86_400_000 } as const;
 
-/** "vừa xong / 5 phút trước / 2 giờ trước / 3 ngày trước" cho một thời điểm quá khứ; đồng hồ lệch về tương lai không âm. */
+/** 'just now / 5 minutes ago / 2 hours ago / 3 days ago' for a past instant; a clock skewed into the future is not negative. */
 export function agoText(at: number, now: number): string {
   const d = Math.max(0, now - at);
   if (d < MS.MINUTE) return A.now;

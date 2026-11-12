@@ -1,6 +1,30 @@
-# Cấu hình theo 12-factor: mọi giá trị môi trường lấy từ biến môi trường để chạy được cả máy cá nhân lẫn AWS
-# (ECS/App Runner đặt biến môi trường; mật khẩu DB lấy từ Secrets Manager — xem docs/architecture/aws-deployment.md).
+# 12-factor configuration: every environment value comes from an environment variable so it runs both on a personal machine and on AWS
+# (ECS/App Runner set the environment variables; the DB password comes from Secrets Manager - see docs/architecture/aws-deployment.md).
 spring:
+  modulith:
+    events:
+      jdbc:
+        # The event publication table is created by Flyway (V21), never by Modulith (ddl-auto is validate).
+        schema-initialization:
+          enabled: false
+      # Completed publications stay in the table (status COMPLETED) so they can be counted and inspected.
+      completion-mode: update
+      # After a restart, publications that were stored but not completed are delivered again (at-least-once delivery).
+      republish-outstanding-events-on-restart: true
+  task:
+    execution:
+      pool:
+        # One worker: listeners run in publication order and use little memory on a 512 MiB instance.
+        core-size: 1
+        max-size: 1
+        queue-capacity: 1000
+  jackson:
+    mapper:
+      # Strict request types: a number where a string is expected is an error, not silently converted (the API validates its own formats).
+      allow-coercion-of-scalars: false
+    deserialization:
+      # 4.5 where an integer is expected is an error, not 4.
+      accept-float-as-int: false
   application:
     name: wander-backend
   datasource:
@@ -10,17 +34,17 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      # Schema do Flyway quản lý; Hibernate chỉ kiểm tra entity khớp bảng.
+      # The schema is managed by Flyway; Hibernate only checks that the entities match the tables.
       ddl-auto: validate
     properties:
       hibernate:
-        # Nạp theo lô để tránh N+1 khi đọc mục và trạng thái hoàn thành.
+        # Batch loading to avoid N+1 when reading items and the completion state.
         default_batch_fetch_size: 64
         jdbc:
           time_zone: UTC
   web:
     resources:
-      # Tắt phục vụ tĩnh mặc định; giao diện được phục vụ có kiểm soát qua wander.web.dir (WebConfig).
+      # Default static serving is off; the UI is served in a controlled way through wander.web.dir (WebConfig).
       add-mappings: false
   flyway:
     locations: classpath:db/migration
@@ -31,10 +55,16 @@ server:
   shutdown: graceful
 
 management:
+  metrics:
+    distribution:
+      # Histogram buckets of request durations, so Prometheus can compute p95 per route (the Grafana dashboard uses them).
+      percentiles-histogram:
+        http.server.requests: true
   endpoints:
     web:
       exposure:
-        include: health
+        # /actuator/prometheus is for local and compose use (docs/operations/observability.md); the free profile exposes only health.
+        include: health,prometheus
   endpoint:
     health:
       probes:
@@ -42,31 +72,41 @@ management:
 
 wander:
   security:
-    # Khóa (pepper) của HMAC-SHA-256 băm mã khôi phục (DR-018 B3). KHÔNG có giá trị mặc định: thiếu hoặc ngắn hơn 32 byte thì ứng dụng
-    # không khởi động. Cục bộ: toolsdev.ps1 tự sinh; trên AWS: Secrets Manager (RG-5). Đổi khóa làm mọi mã khôi phục hiện có vô hiệu.
+    # The key (pepper) of the HMAC-SHA-256 that hashes recovery codes (DR-018 B3). There is NO default value: if missing or shorter than 32 bytes the application does
+    # not start. Locally: tools/dev.ps1 generates one; on AWS: Secrets Manager (RG-5). Changing the key invalidates every existing recovery code.
     recovery-pepper: ${WANDER_RECOVERY_PEPPER}
     recovery-key-version: ${WANDER_RECOVERY_KEY_VERSION:v1}
     recovery-previous-key-version: ${WANDER_RECOVERY_PREVIOUS_KEY_VERSION:}
     recovery-previous-pepper: ${WANDER_RECOVERY_PREVIOUS_PEPPER:}
   web:
-    # Thư mục giao diện đã build. Để trống thì chỉ chạy API (ví dụ khi giao diện nằm trên S3/CloudFront).
+    # The built UI directory. Leave empty to run the API only (for example when the UI is on S3/CloudFront).
     dir: ${WANDER_WEB_DIR:}
-    # Số proxy tin cậy trước ứng dụng để lấy địa chỉ người gọi từ X-Forwarded-For (AD-6). 0 = bỏ qua header.
-    # Sau CloudFront -> ALB đặt 2, chỉ khi ALB chỉ nhận lưu lượng từ CloudFront (ADR-006). Nền tảng khác (ví dụ Render):
-    # đo trước rồi mới đặt đúng số proxy thật; số lớn hơn thực tế khiến mục do client gửi được tin (runbook §4).
+    # The number of trusted proxies in front of the application, used to take the caller's address from X-Forwarded-For (AD-6). 0 = ignore the header.
+    # Behind CloudFront -> ALB set 2, only when the ALB accepts traffic only from CloudFront (ADR-006). Other platforms (for example Render):
+    # measure first and then set the real number of proxies; a number larger than reality makes an entry sent by the client trusted (runbook section 4).
     trusted-proxy-hops: ${WANDER_TRUSTED_PROXY_HOPS:0}
   limits:
     writes-per-minute: ${WANDER_LIMIT_WRITES:120}
     identity-per-hour: ${WANDER_LIMIT_IDENTITY:30}
     recovery-per-hour: ${WANDER_LIMIT_RECOVERY:30}
     approval-per-hour: ${WANDER_LIMIT_APPROVAL:20}
-    # Đọc kho địa điểm công khai (DR-008 Q-a), mỗi phút cho một địa chỉ.
+    # Reading the public venue catalog (DR-008 Q-a), per minute for one address.
     catalog-per-minute: ${WANDER_LIMIT_CATALOG:120}
-    # Số yêu cầu duyệt (ghép thiết bị theo địa chỉ, xin xác thực lại theo danh tính) mỗi 10 phút (DR-018 E1).
+    # The number of approval requests (device pairing by address, asking for re-authentication by identity) per 10 minutes (DR-018 E1).
     approval-requests-per-window: ${WANDER_LIMIT_APPROVAL_REQUESTS:3}
-    # Thiết bị mới hỏi trạng thái yêu cầu ghép (máy mới hỏi mỗi giây), mỗi phút cho một địa chỉ.
+    # A new device polling the pairing-request status (the new device polls every second), per minute for one address.
     link-poll-per-minute: ${WANDER_LIMIT_LINK_POLL:120}
 
 logging:
   level:
     org.hibernate.SQL: ${WANDER_LOG_SQL:info}
+
+# API contract (springdoc). Swagger UI and /v3/api-docs are served outside the "free" profile; sorted keys keep the committed backend/openapi.yaml stable.
+springdoc:
+  api-docs:
+    version: openapi_3_1
+  writer-with-order-by-keys: true
+  default-produces-media-type: application/json
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha

@@ -1,4 +1,4 @@
-/** Đường dẫn và mã lỗi API danh tính (khớp `IdentityApiConstants`/`IdentityErrorCodes` của backend). */
+/** Paths and error codes of the identity API (matching the backend's `IdentityApiConstants`/`IdentityErrorCodes`). */
 export const IDENTITY_API = {
   IDENTITY: '/api/identity',
   SESSIONS: '/api/sessions',
@@ -18,7 +18,7 @@ export const IDENTITY_API = {
   LINK_PREVIEW: '/api/device-links/preview',
   LINK_APPROVE: '/api/device-links/approve',
   LINK_DENY: '/api/device-links/deny',
-  /** Thao tác nhạy cảm cần xác thực lại. */
+  /** The sensitive action that needs re-authentication. */
   OPERATION_REGENERATE: 'regenerate_code',
   INVALID_PAIRING_CODE: 'INVALID_PAIRING_CODE',
   INVALID_APPROVAL_CODE: 'INVALID_APPROVAL_CODE',

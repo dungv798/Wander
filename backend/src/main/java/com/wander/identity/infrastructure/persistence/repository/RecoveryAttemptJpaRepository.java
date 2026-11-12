@@ -10,17 +10,17 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng lần thử khôi phục. */
+/** Spring Data JPA repository of the recovery-attempt table. */
 public interface RecoveryAttemptJpaRepository extends JpaRepository<RecoveryAttemptEntity, UUID> {
 
-    /** Đọc metadata trước khi khóa danh tính; không dùng kết quả này để commit. */
+    /** Reads the metadata before locking the identity; do not use this result to commit. */
     Optional<RecoveryAttemptEntity> findByAttemptKey(String attemptKey);
 
-    /** Lần thử theo mã nhận diện với khóa ghi (SELECT … FOR UPDATE). */
+    /** The attempt by its id with a write lock (SELECT ... FOR UPDATE). */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(IdentityQueryConstants.ATTEMPT_BY_KEY)
     Optional<RecoveryAttemptEntity> lockByAttemptKey(@Param("key") String key);
 
-    /** Có lần thử nào đang giữ băm bí mật này ở trạng thái đã cho. */
+    /** Whether an attempt holds this secret hash in the given state. */
     boolean existsBySessionTokenHashAndState(String sessionTokenHash, String state);
 }

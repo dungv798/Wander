@@ -8,15 +8,15 @@ import { parseMoments } from '../model/moments.ts';
 import { isVenueView } from '../model/venue.ts';
 import { loadCachedDestination, saveCachedDestination } from '../model/destinationCache.ts';
 
-/** Mã HTTP từ đây trở lên là máy chủ lỗi hoặc không sẵn sàng (cổng 502/503 khi máy chủ đang ngủ). */
+/** An HTTP status from here up means the server failed or is not ready (gateway 502/503 while the server is asleep). */
 const SERVER_ERROR_FROM = 500;
 
-/** Có phải đối tượng thường (không null, không mảng). */
+/** Whether it is a plain object (not null, not an array). */
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Tóm tắt hợp lệ tối thiểu: có mã, tên và vùng dạng chuỗi (đủ để danh sách và thẻ render mà không sập). */
+/** A minimally valid summary: it has an id, a name and a region as strings (enough for the list and the card to render without crashing). */
 function isSummary(v: unknown): v is DestinationSummary {
   return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string' && typeof v['region'] === 'string'
     && (v['lat'] === null || (typeof v['lat'] === 'number' && Number.isFinite(v['lat'])))
@@ -24,27 +24,27 @@ function isSummary(v: unknown): v is DestinationSummary {
     && (v['categories'] === undefined || (Array.isArray(v['categories']) && v['categories'].every(category => typeof category === 'string' && CATALOG_CATEGORIES.includes(category))));
 }
 
-/** Điểm đến đầy đủ hợp lệ tối thiểu: mã, tên là chuỗi; địa điểm, cẩm nang, mốc tham chiếu là mảng (màn hình lặp qua chúng khi render). */
+/** A minimally valid full destination: the id and name are strings; the places, guide and reference landmarks are arrays (the screens loop over them when rendering). */
 function isDetail(v: unknown): v is DestinationDetail {
   return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string'
     && Array.isArray(v['places']) && Array.isArray(v['guide']) && Array.isArray(v['references']);
 }
 
 /**
- * Kho đọc `/api/catalog/**` của backend (công khai, không cần phiên). Hợp đồng dữ liệu khớp `CatalogViews` nên trả thẳng, chỉ
- * kiểm hình dạng tối thiểu: thân sai thành `ApiError('INTERNAL')` thay vì để giá trị hỏng chảy vào giao diện rồi làm trắng màn.
- * Điểm đến được NHỚ theo mã (nhiều màn cùng cần một điểm đến); lỗi không được nhớ nên thử lại được.
+ * The repository that reads `/api/catalog/**` of the backend (public, no session needed). The data contract matches `CatalogViews` so it is returned as is, only
+ * the minimal shape is checked: a wrong body becomes `ApiError('INTERNAL')` instead of letting a broken value flow into the UI and blank the screen.
+ * A destination is REMEMBERED by id (several screens need the same destination); an error is not remembered so it can be retried.
  */
 export class HttpCatalogRepository implements CatalogRepository {
   private readonly client: ApiClient;
   private readonly cache = new Map<string, Promise<DestinationDetail>>();
 
-  /** Dùng máy khách HTTP đã cho (tiêm được khi test). */
+  /** Uses the given HTTP client (injectable in tests). */
   constructor(client: ApiClient) {
     this.client = client;
   }
 
-  /** Tìm điểm đến theo tên hoặc vùng; chuỗi rỗng (hoặc toàn khoảng trắng) không gửi tham số và trả tất cả. Không nhớ vì chuỗi tìm đổi liên tục. */
+  /** Finds destinations by name or region; an empty string (or only whitespace) sends no parameter and returns all. Not remembered because the search string changes constantly. */
   async searchDestinations(query: string, signal?: AbortSignal): Promise<DestinationSummary[]> {
     const q = query.trim();
     const path = q ? `${CATALOG_API.DESTINATIONS}?${CATALOG_API.QUERY_PARAM}=${encodeURIComponent(q)}` : CATALOG_API.DESTINATIONS;
@@ -55,8 +55,8 @@ export class HttpCatalogRepository implements CatalogRepository {
   }
 
   /**
-   * Một điểm đến đầy đủ theo mã; backend trả 404 `NOT_FOUND` khi không có. Yêu cầu được dùng chung giữa nhiều người gọi nên KHÔNG
-   * gắn tín hiệu hủy của một người gọi vào `fetch` (hủy sẽ làm hỏng yêu cầu của người khác); người gọi bị hủy chỉ nhận `AbortError`.
+   * One full destination by id; the backend returns 404 `NOT_FOUND` when there is none. The request is shared between several callers so it does NOT
+   * attach one caller's cancel signal to `fetch` (a cancel would break the other callers' request); a cancelled caller only receives `AbortError`.
    */
   async destination(id: string, signal?: AbortSignal): Promise<DestinationDetail> {
     const detail = await this.cached(id);
@@ -64,7 +64,7 @@ export class HttpCatalogRepository implements CatalogRepository {
     return detail;
   }
 
-  /** Lấy (hoặc tạo) yêu cầu dùng chung cho một điểm đến; lỗi bị xóa khỏi bộ nhớ để lần sau thử lại. */
+  /** Gets (or creates) the shared request for one destination; an error is removed from memory so the next call retries. */
   private cached(id: string): Promise<DestinationDetail> {
     const hit = this.cache.get(id);
     if (hit) return hit;
@@ -75,8 +75,8 @@ export class HttpCatalogRepository implements CatalogRepository {
   }
 
   /**
-   * Điểm đến mới nhất: gọi API và nhớ bản đó ở máy; khi máy chủ không trả lời (mất kết nối hoặc lỗi 5xx) mà có bản đã nhớ thì dùng nó để chuyến và màn "Hôm nay"
-   * vẫn mở được (B-09). Lỗi khác (không tìm thấy, thân sai dạng) không dùng bản nhớ.
+   * The latest destination: calls the API and remembers that copy on this device; when the server does not answer (lost connection or a 5xx error) and a remembered copy exists it is used so the trip and the 'Today' screen
+   * still open (B-09). Other errors (not found, a wrong-shaped body) do not use the remembered copy.
    */
   private async fetchDestination(id: string): Promise<DestinationDetail> {
     try {
@@ -91,7 +91,7 @@ export class HttpCatalogRepository implements CatalogRepository {
     }
   }
 
-  /** Gọi API một điểm đến và kiểm hình dạng. */
+  /** Calls the API for one destination and checks the shape. */
   private async requestDestination(id: string): Promise<DestinationDetail> {
     const body = await this.client.get<unknown>(`${CATALOG_API.DESTINATIONS}/${encodeURIComponent(id)}`);
     const detail = isRecord(body) ? body['destination'] : undefined;

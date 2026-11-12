@@ -10,7 +10,7 @@ interface DestinationCardProps {
   readonly onSelect: () => void;
 }
 
-/** Thẻ ảnh dùng chung cho lưới và hàng cuộn: tên đặt trên ảnh (lớp tối ở đáy), số nơi là nhãn phụ; cả thẻ là một nút ≥ 44 px. */
+/** A photo card shared by the grid and the scroll row: the name sits on the photo (a dark layer at the bottom), the number of places is a secondary label; the whole card is one button of at least 44 px. */
 export function DestinationCard({ destination, onSelect }: DestinationCardProps) {
   const photo = HOME_PHOTOS[destination.id];
   return (

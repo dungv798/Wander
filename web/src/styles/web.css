@@ -1,6 +1,6 @@
-/* Vòng điều chỉnh UX theo PO (25/10/2026, sau DG-2). Nạp SAU app.css và adaptive.css.
-   Gồm: hệ chuyển động, navbar trên cùng (≥ 768), sửa bố cục chuyến đi ở màn rộng, thẻ quẹt tỉ lệ dọc, giảm màu ở Tổng quan, onboarding, trang chủ web, bước "Đã lưu mã".
-   Quy tắc: chỉ dùng token; chuyển động chỉ transform/opacity; mọi thứ chuyển động tắt khi prefers-reduced-motion. */
+/* The UX adjustment round per the PO (25/10/2026, after DG-2). Loaded AFTER app.css and adaptive.css.
+   Includes: the motion system, the top navbar (>= 768), the trip layout fix on a wide screen, the portrait-ratio swipe card, less color in the Overview, onboarding, the web home page, the "Code saved" step.
+   Rules: tokens only; motion is only transform/opacity; all motion turns off under prefers-reduced-motion. */
 
 :root {
   --m-fast: 140ms; --m-med: 280ms; --m-slow: 520ms;
@@ -9,7 +9,7 @@
   --nav-h: 68px;
 }
 
-/* ---------- chuyển động nền ---------- */
+/* ---------- background motion ---------- */
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
@@ -22,7 +22,7 @@
 @keyframes tick { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
 @keyframes ripple { from { transform: scale(.6); opacity: .55; } to { transform: scale(2.4); opacity: 0; } }
 
-/* vào màn: các khối con hiện dần, so le (chỉ khi đổi màn, không khi vẽ lại cùng màn) */
+/* entering a screen: the child blocks fade in, staggered (only on a screen change, not on a redraw of the same screen) */
 #screen.enter > * { animation: rise var(--m-slow) var(--ease-out) both; }
 #screen.enter > *:nth-child(2) { animation-delay: 50ms; } #screen.enter > *:nth-child(3) { animation-delay: 100ms; }
 #screen.enter > *:nth-child(4) { animation-delay: 150ms; } #screen.enter > *:nth-child(5) { animation-delay: 200ms; }
@@ -33,24 +33,24 @@
 .irow, .tcard, .tile { animation: popIn var(--m-med) var(--ease-out) both; }
 .swipe:nth-child(2) .irow { animation-delay: 40ms; } .swipe:nth-child(3) .irow { animation-delay: 80ms; } .swipe:nth-child(n+4) .irow { animation-delay: 120ms; }
 
-/* hiện dần khi cuộn tới (JS thêm .in) */
+/* fade in when scrolled to (JS adds .in) */
 .rv { opacity: 0; transform: translateY(22px); transition: opacity var(--m-slow) var(--ease-out), transform var(--m-slow) var(--ease-out); transition-delay: var(--d, 0ms); }
 .rv.in { opacity: 1; transform: none; }
 
-/* phản hồi khi chạm/bấm */
+/* feedback on touch/press */
 .btn, .pill, .fchip, .tab, .iconbtn, .mini, .dcard, .tcard, .tile, .resume, .pack, .dchip, .grow, .opt { transition: transform var(--m-fast) var(--ease-out), background-color var(--m-fast) linear, box-shadow var(--m-fast) linear; }
 .btn:active, .pill:active, .fchip:active, .tab:active, .iconbtn:active, .mini:active, .dcard:active, .tcard:active, .tile:active, .resume:active, .dchip:active, .opt:active { transform: scale(.96); }
-/* nút chính: không còn vệt sáng quét (bảng màu B bỏ hiệu ứng bóng loáng) */
+/* main button: no more sweeping highlight (palette B drops the glossy effect) */
 .btn:not(.ghost):not(.danger):not(.sun), .pill:not(.warn):not(.cta) { position: relative; overflow: hidden; }
 
-/* tờ phủ, toast, tab gạch chân */
+/* overlay sheet, toast, underlined tab */
 .sheet:not([hidden]) { animation: fadeIn var(--m-fast) linear; }
 .panel { animation: sheetUp var(--m-med) var(--ease-spring) both; }
 @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(14px) scale(.96); } to { opacity: 1; transform: translateX(-50%); } }
 .toast:not([hidden]) { animation: toastIn var(--m-med) var(--ease-spring) both; }
 .dtab { transition: color var(--m-fast) linear, box-shadow var(--m-fast) linear; }
 
-/* hero trang chủ điện thoại: có sự sống */
+/* phone home hero: with life */
 .plane { animation: bob 6s ease-in-out infinite; }
 .cloud { animation: drift 24s ease-in-out infinite alternate; }
 .cloud:nth-child(2) { animation-duration: 32s; animation-direction: alternate-reverse; }
@@ -63,7 +63,7 @@
   .rv { opacity: 1; transform: none; }
 }
 
-/* ---------- U2: navbar trên cùng cho màn rộng (≥ 768); điện thoại giữ thanh tab nổi ở dưới ---------- */
+/* ---------- U2: the top navbar for a wide screen (>= 768); the phone keeps the floating tab bar at the bottom ---------- */
 .brand, .navr { display: none; }
 @media (min-width: 768px) {
   :root { --nav-h: 0px; }
@@ -97,7 +97,7 @@
   #tabbar, #tabbar[hidden] { width: var(--shell-rail-width); }
 }
 
-/* ---------- U1: chuyến đi ở màn rộng: cột phải cố định, bản đồ lấp đủ khung; vùng cuộn là .sheetbody ---------- */
+/* ---------- U1: the trip on a wide screen: a fixed right column, the map fills the frame; the scroll area is .sheetbody ---------- */
 @media (min-width: 1280px) {
   #screen[data-view="trip"] { grid-template-columns: minmax(0, 1fr) 520px; align-items: stretch; height: calc(100dvh - var(--nav-h)); }
   #screen[data-view="trip"] .mapbox { position: relative; height: 100%; aspect-ratio: auto; min-height: 0; }
@@ -105,7 +105,7 @@
   body:has(#screen[data-view="trip"]) .float { left: auto !important; right: 16px; width: 488px; }
 }
 
-/* ---------- U4: giảm màu ở Tổng quan: màu chỉ dành cho dữ liệu (loại, ngày) và MỘT nút chính ---------- */
+/* ---------- U4: less color in the Overview: color is only for data (kind, day) and ONE main button ---------- */
 .stats .stat, .stats .stat[class*="cat-"] { background: var(--surface); color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
 .stats .stat b { color: var(--ink); } .stats .stat span { color: var(--muted); }
 .tbody > .chips .chip.tint, .tbody > .chips .chip.tint[class*="cat-"] { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
@@ -118,15 +118,15 @@
 .float .pill.warn { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); box-shadow: var(--shadow); }
 .float .pill.warn::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--warn-line); flex: none; }
 
-/* Nút trong thẻ gợi ý "Xếp giúp tôi" là hành động phụ: nền nhạt, không gradient (mỗi màn chỉ một nút gradient) */
+/* The button in the 'Schedule for me' suggestion card is a secondary action: a light background, no gradient (each screen has only one gradient button) */
 .next .btn:not(.ghost):not(.danger):not(.sun), .next .btn:not(.ghost):not(.danger):not(.sun):hover { background: var(--brand-soft); background-image: none; color: var(--brand-ink); }
 .next .ib { background: var(--brand-soft); color: var(--brand-ink); }
 
-/* U7: bước "Đã lưu mã" */
+/* U7: the 'Code saved' step */
 .obx-ok { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--like); color: var(--white); margin-bottom: 10px; animation: popIn var(--m-med) var(--ease-spring) both; }
 .obx-ok .ic { stroke-width: 3; }
 
-/* ---------- U6: trang chủ màn rộng: hero ảnh thật chuyển mờ, "Nên đi tháng này", tường ảnh ---------- */
+/* ---------- U6: the wide-screen home: a real-photo hero that cross-fades, 'Go this month', the photo wall ---------- */
 @keyframes heroSlide { 0% { opacity: 0; } 6% { opacity: 1; } 33% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
 .hero-w { position: relative; height: min(620px, calc(100dvh - var(--nav-h) - 24px)); min-height: 460px; display: grid; align-items: end; overflow: hidden; color: var(--white); background: var(--photo-bg); }
 .hero-ph, .hero-ph .hs, .hero-scrim { position: absolute; inset: 0; margin: 0; }
@@ -147,7 +147,7 @@
 #screen[data-view="explore"] .wsec { max-width: 1180px; margin-inline: auto; width: 100%; }
 #screen.searching .hero-w { height: 280px; min-height: 0; }
 #screen.searching .hero-sub { display: none; }
-#screen.searching .hero-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }   /* tiêu đề trang vẫn có cho trình đọc màn hình khi đang tìm */
+#screen.searching .hero-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }   /* the page title is still there for screen readers while searching */
 .monthrow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
 .mcard { position: relative; aspect-ratio: 3 / 4; border: 0; padding: 0; border-radius: 24px; overflow: hidden; background: var(--photo-bg); box-shadow: var(--shadow); animation-delay: var(--d, 0ms); text-align: left; }
 .mcard img, .wcell img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--m-slow) var(--ease-out); }
@@ -164,7 +164,7 @@
 #screen[data-view="explore"] .wsec { padding-inline: 40px; }
 @media (max-width: 1100px) { .monthrow { grid-template-columns: repeat(3, minmax(0, 1fr)); } .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } .hero-in { padding-inline: 24px; } #screen[data-view="explore"] .wsec { padding-inline: 24px; } }
 
-/* Checklist chuẩn bị (Lát 1b): hàng gồm ô tích của chính mình, tên + tiến độ chung, nút xóa của Organizer. */
+/* The preparation checklist (Slice 1b): a row with one's own tick box, the name + shared progress, the Organizer's delete button. */
 .chklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .chk { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 12px; }
 .chk .taskchk { position: static; margin: 0; }

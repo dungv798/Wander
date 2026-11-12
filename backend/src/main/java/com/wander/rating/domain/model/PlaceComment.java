@@ -3,6 +3,6 @@ package com.wander.rating.domain.model;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Một lời bình hiển thị của một quán (đã loại lời bình bị ẩn); {@code identityId} chỉ để biết đó có phải của người xem không. */
+/** A displayed comment of a venue (hidden comments excluded); {@code identityId} is only to know whether it is the viewer's own. */
 public record PlaceComment(UUID ratingId, UUID identityId, int stars, String comment, Instant updatedAt) {
 }

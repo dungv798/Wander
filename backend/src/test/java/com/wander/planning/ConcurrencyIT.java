@@ -89,8 +89,7 @@ class ConcurrencyIT extends ApiTestSupport {
         }
         try {
             Res res = patch.get(15, TimeUnit.SECONDS);
-            assertThat(res.status()).as(String.valueOf(res.body())).isEqualTo(409);
-            assertThat(res.code()).isEqualTo("CONCURRENT_MODIFICATION");
+            assertProblem(res, 409, "CONCURRENT_MODIFICATION");
             assertThat(call("GET", "/api/trips/" + trip, u.token()).str("trip.name")).as("không ghi đè âm thầm").isEqualTo(originalName);
         } finally {
             pool.shutdownNow();

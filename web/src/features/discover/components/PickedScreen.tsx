@@ -10,13 +10,13 @@ import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
 import { useResource } from '../../../shared/hooks/useResource.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import type { DestinationDetail, PlaceView } from '../model/Catalog.types.ts';
-import { firstPhotoUrl } from '../model/destinationQueries.ts';
+import { firstPhotoThumbUrl } from '../model/destinationQueries.ts';
 import { pickedOf, savedPicksOf } from '../model/discoverState.ts';
 import { DestinationGate } from './DestinationGate.tsx';
 import { MapPeekButton } from './MapPeekButton.tsx';
 import { PlacePlaceholder } from './PlacePlaceholder.tsx';
 
-/** Đầu trang "Địa điểm đã chọn". */
+/** The top of the 'Selected places' page. */
 function PickedHead({ dest }: { readonly dest: DestinationDetail }) {
   return (
     <div className="pagehead pad-x">
@@ -26,14 +26,14 @@ function PickedHead({ dest }: { readonly dest: DestinationDetail }) {
   );
 }
 
-/** Một hàng nơi đã chọn: chạm để xem chi tiết, nút ✕ để bỏ chọn; `saved` thêm nhãn "Đã vào chuyến đi". */
+/** One row of a selected place: tap to see detail, the X button to deselect; `saved` adds the label 'Already in a trip'. */
 function PickedRow({ place, saved }: { readonly place: PlaceView; readonly saved: boolean }) {
   const { actions } = useDiscover();
   const sheet = usePlaceSheet();
   return (
     <div className={`tile picked-row cat-${place.category}`}>
       <button data-place-photo={place.id} className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: place.name })} onClick={() => sheet.open(place.id)}>
-        {place.photos.length ? <RevealImage alt="" src={firstPhotoUrl(place)} /> : <PlacePlaceholder place={place} />}
+        {place.photos.length ? <RevealImage alt="" src={firstPhotoThumbUrl(place)} /> : <PlacePlaceholder place={place} />}
         <span className="in">
           <h3>{place.name}</h3>
           <p>{place.area}</p>
@@ -47,7 +47,7 @@ function PickedRow({ place, saved }: { readonly place: PlaceView; readonly saved
   );
 }
 
-/** Lưới các nơi đã quẹt phải: nơi chờ lưu kèm nút "Lưu N địa điểm", rồi các nơi đã vào chuyến kèm nhãn (B-06). */
+/** The grid of places swiped right: places waiting to be saved with the 'Save N places' button, then the places already in a trip with a label (B-06). */
 function PickedContent({ dest, onSave, showEmpty }: { readonly dest: DestinationDetail; readonly onSave: (picked: readonly PlaceView[]) => void; readonly showEmpty: boolean }) {
   const { state } = useDiscover();
   const picked = useMemo(() => pickedOf(state, dest.places), [state, dest.places]);
@@ -82,7 +82,7 @@ function PickedContent({ dest, onSave, showEmpty }: { readonly dest: Destination
   );
 }
 
-/** Màn "Đã chọn": những nơi đã quẹt phải, chưa lưu thành chuyến đi (lưu trên máy). */
+/** The 'Selected' screen: the places swiped right that have not been saved into a trip yet (stored on this device). */
 export function PickedScreen({ destId, onSave }: { readonly destId: string; readonly onSave: (picked: readonly PlaceView[]) => void }) {
   const { destinations, select } = useCurrentDestination();
   const { catalog, state } = useDiscover();

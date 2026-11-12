@@ -10,7 +10,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Phía đọc checklist: mọi thành viên xem được, tiến độ theo mã THÀNH VIÊN (không lộ mã danh tính). */
+/** The read side of the checklist: every member can view it, progress is by MEMBER id (the identity id is not exposed). */
 @Service
 @Transactional(readOnly = true)
 public class ChecklistQueries {
@@ -18,13 +18,13 @@ public class ChecklistQueries {
     private final TripReadModel read;
     private final TripAccess access;
 
-    /** Nhận cổng đọc và cổng quyền. */
+    /** Takes the read port and the access port. */
     public ChecklistQueries(TripReadModel read, TripAccess access) {
         this.read = read;
         this.access = access;
     }
 
-    /** Checklist của chuyến theo nhóm rồi vị trí; người ngoài ⇒ 404. */
+    /** The trip's checklist by group then position; an outsider => 404. */
     public List<ChecklistItemView> list(UUID identityId, UUID tripId) {
         access.requireMember(tripId, identityId);
         Map<UUID, Integer> order = new HashMap<>();
@@ -36,13 +36,13 @@ public class ChecklistQueries {
         return read.checklist(tripId).stream().map(row -> view(row, identityId, order, memberOf)).toList();
     }
 
-    /** Dạng hiển thị một hạng mục. */
+    /** The display form of one item. */
     private static ChecklistItemView view(ChecklistRow row, UUID identityId, Map<UUID, Integer> order, Map<UUID, String> memberOf) {
         List<String> doneBy = row.doneBy().stream().filter(order::containsKey).sorted(Comparator.comparing(order::get)).map(memberOf::get).toList();
         return new ChecklistItemView(row.id().toString(), row.group(), row.title(), row.position(), row.doneBy().contains(identityId), doneBy);
     }
 
-    /** Một hạng mục (để trả sau khi ghi). */
+    /** One item (to return after a write). */
     public ChecklistItemView item(UUID identityId, UUID tripId, UUID itemId) {
         return list(identityId, tripId).stream().filter(v -> v.id().equals(itemId.toString())).findFirst().orElseThrow(com.wander.shared.kernel.error.WanderException::notFound);
     }

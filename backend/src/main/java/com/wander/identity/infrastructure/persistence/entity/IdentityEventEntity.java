@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code identity_events}: nhật ký sự kiện bảo mật của một danh tính (BE-11). Khóa chính số tự tăng để thứ tự ổn định. */
+/** Table {@code identity_events}: the security event log of one identity (BE-11). The primary key is an auto-increment number so the order is stable. */
 @Entity
 @Table(name = "identity_events")
 public class IdentityEventEntity {

@@ -1,10 +1,10 @@
 import type { DayAssignment, ItemChange, ScheduleChange, TripPatch } from '../api/TripsGateway.ts';
 import type { Trip, TripItem } from './trip.types.ts';
 
-/** Các trường nội dung của mục mà Hoàn tác khôi phục (ngày và thứ tự có lệnh lịch riêng). */
+/** The content fields of an item that Undo restores (the day and order have their own schedule command). */
 const CONTENT_FIELDS = ['type', 'title', 'timeOfDay', 'durationMin', 'note', 'costK', 'included', 'referenceK', 'booking'] as const;
 
-/** Lệnh sửa nội dung cho các mục chung: mỗi mục có trường nào khác trước/sau thì khôi phục đúng các trường đó. */
+/** The content-edit command for the shared items: for each item, whichever fields differ before/after, exactly those fields are restored. */
 function contentEdits(before: Trip, after: Trip): RevertStep[] {
   const afterById = new Map(after.items.map((i) => [i.id, i]));
   const steps: RevertStep[] = [];
@@ -18,7 +18,7 @@ function contentEdits(before: Trip, after: Trip): RevertStep[] {
   return steps;
 }
 
-/** Một lệnh ngược của Hoàn tác, thực hiện tuần tự trên máy chủ. */
+/** One inverse command of Undo, run in sequence on the server. */
 export type RevertStep =
   | { readonly kind: 'schedule'; readonly change: ScheduleChange }
   | { readonly kind: 'restore'; readonly itemId: string }
@@ -27,19 +27,19 @@ export type RevertStep =
   | { readonly kind: 'edit'; readonly itemId: string; readonly change: ItemChange }
   | { readonly kind: 'discard'; readonly itemId: string };
 
-/** Tập mã mục theo ngày (null = "Chưa có ngày"); dùng để biết ngày nào chỉ bị xếp lại thứ tự hay có mục ra/vào. */
+/** The set of item ids by day (null = 'No date yet'); used to know which day was only reordered or had items going in/out. */
 function idsByDay(items: readonly TripItem[]): Map<string | null, Set<string>> {
   const map = new Map<string | null, Set<string>>();
   for (const i of items) map.set(i.day, (map.get(i.day) ?? new Set<string>()).add(i.id));
   return map;
 }
 
-/** Hai tập có cùng phần tử không. */
+/** Whether two sets have the same elements. */
 function sameSet(a: ReadonlySet<string> | undefined, b: ReadonlySet<string> | undefined): boolean {
   return a !== undefined && b !== undefined && a.size === b.size && [...a].every((x) => b.has(x));
 }
 
-/** Lệnh gán lại ngày/vị trí cho các mục chung: đổi ngày thì gán lại; cùng ngày thì chỉ gán lại khi ngày đó thuần xếp lại thứ tự (có mục ra/vào thì thứ hạng đổi chỉ do dồn số, KHÔNG gán đè). */
+/** The command that re-assigns the day/position of the shared items: a day change re-assigns; the same day is re-assigned only when that day was purely reordered (with items going in/out the rank change is only from compaction, do NOT overwrite). */
 function assignmentsToRevert(before: Trip, after: Trip): DayAssignment[] {
   const afterById = new Map(after.items.map((i) => [i.id, i]));
   const beforeDays = idsByDay(before.items);
@@ -57,9 +57,9 @@ function assignmentsToRevert(before: Trip, after: Trip): DayAssignment[] {
 }
 
 /**
- * Lệnh ngược đưa chuyến `after` (đã đọc lại từ máy chủ) về `before`: khoảng ngày + gán ngày/thứ tự (một lệnh lịch nguyên tử), rồi khôi phục
- * nội dung các mục đã sửa, khôi phục các mục đã bị xóa mềm, xóa mềm lại các mục vừa được khôi phục (mục hoàn toàn mới thì bỏ hẳn), cuối cùng
- * PATCH tên và nhãn "chưa chắc". Trả danh sách rỗng nếu không có gì khác.
+ * The inverse command that puts the trip `after` (re-read from the server) back to `before`: the date range + the day/order assignment (one atomic schedule command), then restores
+ * the content of the edited items, restores the items that were soft-deleted, soft-deletes again the items that were just restored (a completely new item is dropped entirely), and finally
+ * the PATCH of the name and the 'tentative' label. Returns an empty list if nothing else differs.
  */
 export function revertPlan(before: Trip, after: Trip): RevertStep[] {
   const steps: RevertStep[] = [];

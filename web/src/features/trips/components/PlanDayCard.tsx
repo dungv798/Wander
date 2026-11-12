@@ -8,7 +8,7 @@ import { PlanItemRow } from './PlanItemRow.tsx';
 
 interface PlanDayCardProps { readonly day: PlanDayPreview; readonly number: number; readonly busy: boolean; readonly onDay: (id: string, day: string) => void }
 
-/** Thẻ ngày có mốc cũ, nơi mới và ước tính đường đi; không gọi lịch là khả thi khi thời lượng/giờ còn thiếu. */
+/** A day card with an old landmark, new places and a route estimate; it does not call the schedule feasible when the duration/time is still missing. */
 export function PlanDayCard({ day, number, busy, onDay }: PlanDayCardProps) {
   return <details className="plan-day-card" data-overloaded={day.overloaded} open={day.itemIds.length > 0 || day.empty}>
     <summary className="plan-day-head"><span className="plan-day-number"><Icon name="calendar-event" /></span><div><h3>{fill(T.view.day, { n: number + 1 })}</h3><p>{dayLabel(day.day)}{!day.itemIds.length && day.existingIds.length ? ` · ${fill(T.plan.keptCount, { n: day.existingIds.length })}` : ''}</p></div>{day.overloaded ? <span className="plan-day-alert"><Icon name="alert-triangle" size="s" /></span> : null}<span className="plan-day-count">{day.existingIds.length + day.itemIds.length}</span><Icon name="chevron-left" size="s" /></summary>

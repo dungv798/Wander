@@ -34,3 +34,14 @@ docs/research/photo-candidates/**/*.jpg
 docs/research/photo-candidates/**/*.jpeg
 docs/research/photo-candidates/**/*.png
 docs/research/photo-candidates/**/*.webp
+
+# Local-only tooling (kept on disk, archived at D:\wander-archive; not part of the portfolio)
+tools/claude-handoff/
+tools/codex-mcp/
+tools/codex-skills/
+
+# Autopilot run logs are local working state
+.claude/autopilot/runs/
+
+# Catalog tooling inputs and the photo manifest are source data, not build output (the generic data/ rule above would hide new files)
+!tools/catalog/data/

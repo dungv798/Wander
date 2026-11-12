@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readClassicLook } from './look.ts';
 import { LOOK } from '../shared/const/look.const.ts';
 
-/** Kho giả chỉ dành cho lựa chọn thử nghiệm, không đụng dữ liệu ứng dụng. */
+/** A fake store only for the experiment choice, touching no app data. */
 function memory() {
   const values = new Map<string, string>();
   return { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string, value: string) => { values.set(key, value); }, removeItem: (key: string) => { values.delete(key); } };

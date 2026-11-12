@@ -8,7 +8,7 @@ import { AddManyEntry } from './AddManyEntry.tsx';
 import { ChecklistSection } from './ChecklistSection.tsx';
 import { ItemRow } from './ItemRow.tsx';
 
-/** Tờ danh sách đầy đủ các nơi "Chưa xếp ngày": mỗi hàng có nút chọn ngày; Tổng quan chỉ hiện ba nơi đầu. */
+/** The sheet with the full list of places 'Not scheduled yet': each row has a day-choosing button; the Overview shows only the first three places. */
 export function UnassignedSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, setOverlay } = useTripView();
   const un = unassignedItems(trip);
@@ -24,7 +24,7 @@ export function UnassignedSheet({ onClose }: { readonly onClose: () => void }) {
   );
 }
 
-/** Tờ checklist đầy đủ: danh sách dài và biểu mẫu thêm hạng mục nằm ở đây thay vì trên Tổng quan. */
+/** The full checklist sheet: the long list and the add-item form are here instead of on the Overview. */
 export function ChecklistSheet({ onClose }: { readonly onClose: () => void }) {
   return (
     <Sheet label={T.view.checklistTitle} onClose={onClose}>

@@ -1,6 +1,7 @@
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
+import { thumbOrUrl } from '../../discover/index.ts';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
@@ -16,7 +17,7 @@ interface PlanItemRowProps {
   readonly onDay: (itemId: string, day: string) => void;
 }
 
-/** Hàng địa điểm cùng hệ ảnh/nút với lịch; chỉ mục đề nghị có chọn ngày, mục cũ và pending không bị chỉnh ngầm. */
+/** A place row with the same photo/button system as the schedule; only a suggested item has a day choice, old and pending items are not edited silently. */
 export function PlanItemRow({ itemId, day = '', index, existing = false, reason, disabled, onDay }: PlanItemRowProps) {
   const { trip, cat, days, openItem } = useTripView();
   const item = trip.items.find(candidate => candidate.id === itemId);
@@ -25,7 +26,7 @@ export function PlanItemRow({ itemId, day = '', index, existing = false, reason,
   const name = itemName(item, cat);
   return <li className="plan-stop" data-kept={existing}>
     <div className="plan-stop-photo">
-      {photo ? <RevealImage alt="" src={photo.url} loading="lazy" /> : <Icon semantic name="map-pin" />}
+      {photo ? <RevealImage alt="" src={thumbOrUrl(photo)} loading="lazy" /> : <Icon semantic name="map-pin" />}
       {index !== undefined ? <span>{index + 1}</span> : null}
     </div>
     <div className="plan-stop-main">

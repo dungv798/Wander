@@ -5,17 +5,17 @@ import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
 
 interface IntroProps {
-  /** Người dùng chọn tạo danh tính và nhận mã. */
+  /** The user chose to create an identity and get a code. */
   readonly onCreate: () => void;
-  /** Người dùng chọn "Để sau": lưu chuyến đi mà chưa có mã. */
+  /** The user chose 'Later': saves the trip without a code yet. */
   readonly onLater: () => void;
-  /** Có danh tính cũ không còn khôi phục được: hiện cảnh báo chuyến cũ mất vĩnh viễn. */
+  /** There is an old identity that can no longer be recovered: shows a warning that the old trips are lost for good. */
   readonly replacing?: boolean;
-  /** Đóng mà không tạo gì (Esc, chạm nền hoặc Hủy). */
+  /** Closes without creating anything (Esc, tapping the background or Cancel). */
   readonly onClose: () => void;
 }
 
-/** Tờ giải thích khi lưu lần đầu (S9): danh tính ẩn danh bằng chữ thường ngày, mã hiện một lần, MỘT dòng cảnh báo nhẹ dưới nút "Để sau". */
+/** The explanation sheet at the first save (S9): the anonymous identity in everyday words, the code shown once, ONE light warning line under the 'Later' button. */
 export function IntroSheet({ onCreate, onLater, replacing = false, onClose }: IntroProps) {
   return (
     <Sheet label={C.intro.title} onClose={onClose}>

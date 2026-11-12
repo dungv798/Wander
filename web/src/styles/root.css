@@ -1,2 +1,2 @@
-/* Phần tử gốc của React nằm giữa <body> và .app: cho nó đủ chiều cao để .app { height: 100% } hoạt động. */
+/* The React root element sits between <body> and .app: give it enough height so .app { height: 100% } works. */
 #root { height: 100%; }

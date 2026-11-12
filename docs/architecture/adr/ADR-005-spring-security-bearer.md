@@ -1,5 +1,8 @@
 # ADR-005 — Khung xác thực: Spring Security + token phiên Bearer (AD-1, phần 1)
 
+> **English title:** Authentication framework: Spring Security with opaque bearer session tokens
+> **Summary (EN):** Spring Security provides the filter chain; session tokens stay self-managed: random bearer tokens stored as SHA-256 hashes and checked on every request, so revocation is immediate (no JWT, no Keycloak). Anonymous identity, recovery codes and trusted-device approval remain custom domain logic.
+
 - **Trạng thái:** `APPROVED` — PO chọn "Chốt B: Spring Security + Bearer" ngày 24/10/2026, sau phiên `/wander-council AD-1` (security-reviewer, software-architect, skeptic-qa; 1 vòng).
 - **Phạm vi:** **khung xác thực** và (bổ sung 24/10/2026) **nơi lưu bí mật phiên cho Lát 1a** = Bearer + `localStorage`, xem mục "Nơi lưu bí mật phiên".
 - **Bổ sung cho:** ADR-002 (dòng "Bảo mật": "chưa dùng Spring Security/Keycloak" nay được thay bằng quyết định này).

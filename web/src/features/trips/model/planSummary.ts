@@ -6,7 +6,7 @@ import { dayItems, tripDays } from './tripMath.ts';
 import { itemPoint, planningCapacity, planningTravel, planningWeight, visitMinutes } from './planPolicy.ts';
 import { PLAN_DAYS as P } from './planDays.const.ts';
 
-/** Giữ chặng giữa các vị trí đã biết như ước tính tối thiểu; mục thiếu vị trí vẫn được đếm để không hứa đã tính đủ. */
+/** Keeps the leg between known positions as a minimum estimate; an item missing a position is still counted so it does not promise everything was computed. */
 export function measurePlanRoute(items: readonly TripItem[], coordinateOf: CoordinateOf, origin: GeoPoint | null) {
   let last = origin, minutes = 0, unknown = 0;
   for (const item of items) {
@@ -20,7 +20,7 @@ export function measurePlanRoute(items: readonly TripItem[], coordinateOf: Coord
   return { minutes, unknown, last };
 }
 
-/** Tính lại cả ghé thăm, chặng liên điểm, mục cố định và thiếu dữ liệu sau mỗi lần đổi ngày trong preview. */
+/** Recomputes the visits, the legs between points, the fixed items and the missing data after every day change in the preview. */
 export function summarizePlan(t: Trip, plan: DayPlan, durationOf: DurationOf, coordinateOf: CoordinateOf = () => null, hub: GeoPoint | null = null): PlanDayPreview[] {
   let origin = hub;
   let uncertainOrigin = false;

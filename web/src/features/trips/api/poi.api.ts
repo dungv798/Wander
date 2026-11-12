@@ -3,7 +3,7 @@ import { ApiError } from '../../../shared/api/ApiError.ts';
 import { apiClient } from '../../../shared/api/defaultClient.ts';
 import { MEAL_SUGGEST as R } from '../model/mealSuggest.const.ts';
 
-/** POI rộng chỉ dùng làm bản nháp tự do; distanceM là mét đường chim bay chưa làm tròn. */
+/** A broad POI is used only as a free-form draft; distanceM is the unrounded straight-line distance in meters. */
 export interface PoiSuggestion {
   readonly id: string;
   readonly name: string;
@@ -20,7 +20,7 @@ export interface PoiSuggestion {
   readonly attribution: { readonly sourceKind: string; readonly sourceUrl: string; readonly snapshotAt: string; readonly license: string; readonly licenseUrl: string; readonly credit: string };
 }
 
-/** Xác nhận hình dạng tối thiểu trước khi hiển thị; raw giờ và địa chỉ giữ nguyên, không parse. */
+/** Confirms the minimal shape before displaying; the raw hours and address are kept as they are, not parsed. */
 function isPoi(value: unknown): value is PoiSuggestion {
   if (!value || typeof value !== 'object') return false;
   const p = value as Record<string, unknown>;
@@ -33,14 +33,14 @@ function isPoi(value: unknown): value is PoiSuggestion {
     && !!attribution && ['sourceKind', 'sourceUrl', 'snapshotAt', 'license', 'licenseUrl', 'credit'].every(k => typeof attribution[k] === 'string');
 }
 
-/** Hợp đồng đọc POI công khai qua ApiClient chung; tiêm client để thử lỗi mạng và hủy. */
+/** The contract for reading POIs publicly through the shared ApiClient; the client is injected to try network errors and cancelling. */
 export class PoiApi {
   private readonly client: ApiClient;
 
-  /** Dùng máy khách chung, không tự tạo fetch hoặc cơ chế phiên mới. */
+  /** Uses the shared client, and creates no new fetch or session mechanism of its own. */
   constructor(client: ApiClient = apiClient) { this.client = client; }
 
-  /** Lấy tối đa 12 quán trong bán kính mét; phản hồi hỏng là lỗi rõ ràng thay vì danh sách rỗng giả. */
+  /** Gets at most 12 venues within a radius in meters; a broken response is a clear error instead of a fake empty list. */
   async nearby(destination: string, kind: 'food' | 'cafe' | 'rest' | 'all', near: { readonly lat: number; readonly lon: number }, radiusM: number = R.radiusM, signal?: AbortSignal): Promise<readonly PoiSuggestion[]> {
     const query = new URLSearchParams({ kind, near: `${near.lat},${near.lon}`, radiusM: String(radiusM), limit: String(R.limit) });
     const body = await this.client.get<{ poi?: unknown }>(`/api/catalog/destinations/${encodeURIComponent(destination)}/poi?${query}`, signal);

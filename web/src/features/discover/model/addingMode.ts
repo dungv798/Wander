@@ -1,11 +1,11 @@
-/** Chế độ "thêm địa điểm vào chuyến": bộ thẻ bỏ các nơi đã có trong chuyến; quẹt phải thêm thẳng vào chuyến thay vì vào "Đã chọn". Do lớp `app` nối với tính năng chuyến đi. */
+/** The 'add places to a trip' mode: the deck skips the places already in the trip; swiping right adds directly to the trip instead of to 'Selected'. Wired by the `app` layer to the trips feature. */
 export interface AddingMode {
-  /** Tên chuyến hiện ở đầu bộ thẻ. */
+  /** The trip name shown at the top of the deck. */
   readonly title: string;
-  /** Mã các địa điểm đã có trong chuyến (không hiện lại). */
+  /** The ids of the places already in the trip (not shown again). */
   readonly excludeIds: readonly string[];
-  /** Thêm một địa điểm vào chuyến. */
+  /** Adds one place to the trip. */
   readonly onAdd: (place: { readonly id: string; readonly category: string }) => void;
-  /** Xong: quay về chuyến đi. */
+  /** Done: back to the trip. */
   readonly onDone: () => void;
 }

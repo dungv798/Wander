@@ -1,0 +1,47 @@
+# CodeQL static analysis (Java and TypeScript). Findings appear in the repository's Security tab (code scanning); on a private repository
+# this needs GitHub Code Security, on a public one it is free. Runs on pull requests that touch code, on main, and weekly so that new queries
+# are applied to old code. Build mode "none" analyses the sources without compiling, so no Gradle or Node build is needed here.
+name: codeql
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ["backend/src/**", "web/src/**", "tools/**/*.mjs", ".github/workflows/codeql.yml"]
+  push:
+    branches: [main]
+    paths: ["backend/src/**", "web/src/**", "tools/**/*.mjs", ".github/workflows/codeql.yml"]
+  schedule:
+    - cron: "23 4 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: analyze (${{ matrix.language }})
+    # Code scanning is unavailable on a private repository without GitHub Code Security (the first run failed with "Code scanning is not
+    # enabled"). The job therefore runs once the repository is public, or when "Code Security" is enabled and this condition is removed.
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [java-kotlin, javascript-typescript]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          queries: security-extended
+      - uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:${{ matrix.language }}"

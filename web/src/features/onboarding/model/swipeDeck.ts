@@ -1,26 +1,26 @@
-/** Hướng quẹt: phải = chọn, trái = bỏ qua. */
+/** The swipe direction: right = choose, left = skip. */
 export type SwipeKind = 'pick' | 'skip';
 
-/** Trạng thái bộ bài: thẻ trên cùng và thẻ nào đã bay đi theo hướng nào. */
+/** The deck state: the top card and which card flew away in which direction. */
 export interface DeckState {
   readonly cur: number;
   readonly flights: Readonly<Record<number, SwipeKind>>;
 }
 
-/** Hành động lên bộ bài: quẹt thẻ trên cùng, hoặc đặt lại từ đầu. */
+/** The actions on the deck: swipe the top card, or reset from the start. */
 export type DeckAction = { readonly type: 'commit'; readonly kind: SwipeKind; readonly total: number } | { readonly type: 'reset' };
 
-/** Bộ bài chưa quẹt thẻ nào. */
+/** A deck where no card has been swiped. */
 export const EMPTY_DECK: DeckState = { cur: 0, flights: {} };
 
-/** Cập nhật bộ bài; quẹt khi đã hết thẻ thì bỏ qua (không vượt quá tổng số thẻ). */
+/** Updates the deck; swiping when the cards have run out is ignored (it does not exceed the total number of cards). */
 export function deckReducer(state: DeckState, action: DeckAction): DeckState {
   if (action.type === 'reset') return EMPTY_DECK;
   if (state.cur >= action.total) return state;
   return { cur: state.cur + 1, flights: { ...state.flights, [state.cur]: action.kind } };
 }
 
-/** Số nơi đã chọn (quẹt phải) trong bộ bài. */
+/** The number of places chosen (swiped right) in the deck. */
 export function pickedCount(state: DeckState): number {
   return Object.values(state.flights).filter((k) => k === 'pick').length;
 }

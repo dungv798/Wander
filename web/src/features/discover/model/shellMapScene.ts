@@ -7,10 +7,10 @@ import { numberedMarkers, placeMarkers } from './mapMarkers.ts';
 import { SHELL_MAP } from './shellMap.const.ts';
 import { VIETNAM_ARCHIPELAGO_LABELS } from '../../../shared/map/vietnamLabels.const.ts';
 
-/** Loại cảnh của bản đồ khung: cả nước, một điểm đến, các nơi đã chọn, các chuyến của bạn, hoặc ẩn (màn khác che hoặc có bản đồ riêng). */
+/** The scene kinds of the frame map: the whole country, one destination, the selected places, your trips, or hidden (another screen covers it or has its own map). */
 export type ShellSceneKind = 'overview' | 'destination' | 'picked' | 'trips' | 'hidden';
 
-/** Một cảnh bản đồ: ghim cần vẽ, cách vừa khung camera và khóa đổi khi camera phải bay lại. */
+/** One map scene: the pins to draw, how the camera fits the frame and the key that changes when the camera must fly again. */
 export interface ShellMapScene {
   readonly kind: ShellSceneKind;
   readonly markers: readonly MapMarker[];
@@ -18,14 +18,14 @@ export interface ShellMapScene {
   readonly key: string;
 }
 
-/** Phần dữ liệu của một chuyến mà bản đồ cần: mã, tên và điểm đến nó thuộc về. */
+/** The part of a trip's data that the map needs: the id, the name and the destination it belongs to. */
 export interface ShellTripRef {
   readonly id: string;
   readonly name: string;
   readonly destinationId: string;
 }
 
-/** Dữ liệu đầu vào để chọn cảnh: màn hiện tại và dữ liệu danh mục/lựa chọn/chuyến đã có. */
+/** The input data for choosing the scene: the current screen and the catalog/selection/trip data already available. */
 export interface ShellMapInput {
   readonly view: ViewName;
   readonly selectedId: string | null;
@@ -33,15 +33,15 @@ export interface ShellMapInput {
   readonly summaries: readonly DestinationSummary[];
   readonly detail: DestinationDetail | null;
   readonly pickedIds: ReadonlySet<string>;
-  /** Các chuyến của người dùng (đã tải); rỗng thì màn Chuyến đi quay về cảnh cả nước. */
+  /** The user's trips (loaded); empty makes the Trips screen go back to the whole-country scene. */
   readonly trips: readonly ShellTripRef[];
 }
 
-/** Yêu cầu vừa khung MỚI mỗi lần (TerrainMapView chạy lại vừa khung khi đối tượng đổi): camera bay lại khi cảnh được dựng lại, không phải khi chỉ render lại. */
+/** A NEW fit-to-frame request each time (TerrainMapView re-runs fit-to-frame when the object changes): the camera flies again when the scene is rebuilt, not when it only re-renders. */
 const overviewFit = (): MapFit => ({ ids: null, options: { padding: SHELL_MAP.OVERVIEW_PADDING_PX, maxZoom: SHELL_MAP.OVERVIEW_MAX_ZOOM, contextPoints: VIETNAM_ARCHIPELAGO_LABELS.map(label => label.coordinates) } });
 const destinationFit = (): MapFit => ({ ids: null, options: { padding: SHELL_MAP.FIT_PADDING_PX } });
 
-/** Ghim mỗi điểm đến có tọa độ (ảnh bìa + tên) cho cảnh cả nước; nơi chưa có tọa độ không bị bịa vị trí. */
+/** One pin per destination that has coordinates (cover photo + name) for the whole-country scene; a place with no coordinates is not given an invented position. */
 function destinationMarkers(summaries: readonly DestinationSummary[]): MapMarker[] {
   return summaries
     .filter((d) => d.lat != null && d.lon != null)
@@ -50,7 +50,7 @@ function destinationMarkers(summaries: readonly DestinationSummary[]): MapMarker
     });
 }
 
-/** Mỗi chuyến một ghim đặt tại tọa độ điểm đến của nó (ảnh bìa điểm đến + tên chuyến); chuyến của điểm đến chưa có tọa độ không có ghim. */
+/** One pin per trip placed at its destination's coordinates (the destination cover photo + the trip name); a trip of a destination with no coordinates has no pin. */
 function tripMarkers(trips: readonly ShellTripRef[], summaries: readonly DestinationSummary[]): MapMarker[] {
   const byId = new Map(summaries.map((d) => [d.id, d] as const));
   return trips.flatMap((trip) => {
@@ -60,20 +60,20 @@ function tripMarkers(trips: readonly ShellTripRef[], summaries: readonly Destina
   });
 }
 
-/** Dựng cảnh từ loại, mã điểm đến và ghim; khóa gồm cả tập ghim để camera vừa khung lại khi tập đổi. */
+/** Builds the scene from the kind, the destination id and the pins; the key includes the set of pins so the camera re-fits when the set changes. */
 function scene(kind: ShellSceneKind, scope: string, markers: readonly MapMarker[], fit: MapFit | null): ShellMapScene {
   return { kind, markers, fit, key: `${kind}|${scope}|${markers.map((m) => m.id).join(',')}` };
 }
 
-/** Cảnh của một điểm đến: ghim các nơi có tọa độ; chưa tải xong chi tiết thì chưa có ghim. */
+/** The scene of one destination: pins of the places that have coordinates; until the detail has finished loading there are no pins. */
 function destinationScene(input: ShellMapInput): ShellMapScene {
   const markers = input.detail ? placeMarkers(input.detail.places) : [];
   return scene('destination', input.destId, markers, input.view === VIEW.DECK ? { ids: null, options: { maxZoom: 10 } } : destinationFit());
 }
 
 /**
- * Chọn cảnh bản đồ khung theo màn. Bản đồ là MỘT thể hiện bền ở khung ứng dụng; màn chỉ đổi cảnh (ghim + camera), không tạo bản đồ mới.
- * Chuyến đi: ghim theo từng chuyến thật. Bộ thẻ, chuyến chi tiết, hôm nay, cài đặt… không dùng bản đồ khung (cảnh `hidden`; khung ứng dụng không dựng canvas cho các màn đó).
+ * Chooses the frame map scene by screen. The map is ONE persistent instance in the app frame; a screen only changes the scene (pins + camera), it does not create a new map.
+ * Trips: a pin per real trip. The deck, trip detail, today, settings... do not use the frame map (the `hidden` scene; the app frame builds no canvas for those screens).
  */
 export function shellMapScene(input: ShellMapInput): ShellMapScene {
   if (!SHELL_MAP.VISIBLE_VIEWS.includes(input.view)) return scene('hidden', '', [], null);

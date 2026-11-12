@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code place_ratings} (ánh xạ JPA; mô hình domain ở rating.domain.model.PlaceRating). */
+/** Table {@code place_ratings} (JPA mapping; the domain model is in rating.domain.model.PlaceRating). */
 @Entity
 @Table(name = "place_ratings")
 public class PlaceRatingEntity {

@@ -1,91 +1,91 @@
 package com.wander.identity.domain.constant;
 
-/** Lời báo lỗi riêng của module identity (tiếng Việt cho người dùng). Lời dùng chung ở {@code ErrorMessages}. */
+/** Error messages specific to the identity module (Vietnamese, for the user). Shared messages are in {@code ErrorMessages}. */
 public final class IdentityMessages {
 
-    /** Mã ghép thiết bị sai hoặc hết hạn. */
+    /** The device pairing code is wrong or expired. */
     public static final String INVALID_PAIRING_CODE = "Mã ghép thiết bị không hợp lệ hoặc đã hết hạn.";
 
-    /** Mã khôi phục sai hoặc đã dùng. */
+    /** The recovery code is wrong or already used. */
     public static final String INVALID_CODE = "Mã không hợp lệ hoặc đã được dùng.";
 
-    /** Mã thay thế nhập lại không đúng. */
+    /** The replacement code typed again is wrong. */
     public static final String INVALID_REPLACEMENT = "Mã thay thế không đúng.";
 
-    /** Mã nhận diện lần thử không hợp lệ. */
+    /** The attempt id is not valid. */
     public static final String INVALID_ATTEMPT = "Mã nhận diện lần thử không hợp lệ.";
 
-    /** Bí mật phiên không hợp lệ. */
+    /** The session secret is not valid. */
     public static final String INVALID_SESSION_TOKEN = "Bí mật phiên không hợp lệ.";
 
-    /** Bí mật phiên đã được dùng. */
+    /** The session secret was already used. */
     public static final String SESSION_TOKEN_IN_USE = "Bí mật phiên đã được dùng.";
 
-    /** Thao tác không cần xác thực lại. */
+    /** The action does not need re-authentication. */
     public static final String INVALID_OPERATION = "Thao tác không cần xác thực lại.";
 
-    /** Mã phê duyệt sai hoặc hết hạn. */
+    /** The approval code is wrong or expired. */
     public static final String INVALID_APPROVAL_CODE = "Mã phê duyệt không hợp lệ hoặc đã hết hạn.";
 
-    /** Lần khôi phục bằng mã đã hết hạn. */
+    /** The recovery attempt with a code has expired. */
     public static final String RECOVERY_EXPIRED = "Lần khôi phục đã hết hạn. Hãy bắt đầu lại; mã hiện tại của bạn vẫn dùng được.";
 
-    /** Mã thay thế đã hết hạn. */
+    /** The replacement code has expired. */
     public static final String REPLACEMENT_EXPIRED = "Mã thay thế đã hết hạn. Hãy tạo lại; mã hiện tại vẫn dùng được.";
 
-    /** Mã khôi phục đã dùng ở lần khác. */
+    /** The recovery code was used in another recovery. */
     public static final String CODE_ALREADY_USED = "Mã này đã được dùng ở một lần khôi phục khác.";
 
-    /** Mã khôi phục đổi trong lúc chờ. */
+    /** The recovery code changed while waiting. */
     public static final String CODE_CHANGED = "Mã khôi phục đã thay đổi trong lúc chờ. Hãy bắt đầu lại.";
 
-    /** Không có mã thay thế đang chờ. */
+    /** There is no pending replacement code. */
     public static final String NO_PENDING_REPLACEMENT = "Không có mã thay thế đang chờ.";
 
-    /** Cần xác thực lại để tạo mã mới. */
+    /** Re-authentication is needed to create a new code. */
     public static final String STEP_UP_REQUIRED_FOR_NEW_CODE = "Cần xác thực lại để tạo mã mới.";
 
-    /** Cần xác thực lại để thực hiện thao tác. */
+    /** Re-authentication is needed to perform the action. */
     public static final String STEP_UP_REQUIRED = "Cần xác thực lại để thực hiện thao tác này.";
 
-    /** Đổi tên thiết bị nhưng không nêu trường deviceName. */
+    /** The device was renamed but the deviceName field was not given. */
     public static final String DEVICE_NAME_REQUIRED = "Cần nêu tên thiết bị (để trống nếu muốn xóa tên).";
 
-    /** Số khớp nằm ngoài khoảng hai chữ số. */
+    /** The matching number is outside the two-digit range. */
     public static final String MATCH_NUMBER_OUT_OF_RANGE = "Số khớp phải là số hai chữ số";
 
-    /** Sai số lượng lựa chọn. */
+    /** Wrong number of choices. */
     public static final String MATCH_OPTIONS_COUNT = "Số lựa chọn của số khớp không đúng";
 
-    /** Lựa chọn trùng nhau. */
+    /** The choices repeat. */
     public static final String MATCH_OPTIONS_DUPLICATED = "Các lựa chọn của số khớp bị trùng";
 
-    /** Lựa chọn không chứa số thật. */
+    /** The choices do not contain the real number. */
     public static final String MATCH_OPTIONS_MISSING_REAL = "Các lựa chọn của số khớp không chứa số thật";
 
-    /** Chuỗi lựa chọn đã lưu không đọc được; tham số: chuỗi. */
+    /** The stored string of choices cannot be read; parameter: the string. */
     public static final String MATCH_OPTIONS_UNREADABLE = "Không đọc được các lựa chọn số khớp: %s";
 
-    /** Thiếu số khớp khi duyệt. */
+    /** The matching number is missing when approving. */
     public static final String MATCH_NUMBER_REQUIRED = "Cần chọn số khớp để duyệt.";
 
-    /** Chọn sai số khớp: yêu cầu bị từ chối. */
+    /** Wrong matching number chosen: the request is denied. */
     public static final String MATCH_MISMATCH = "Số đã chọn không khớp, yêu cầu đã bị từ chối.";
 
-    /** Khóa băm mã khôi phục thiếu hoặc quá ngắn (KHÔNG kèm giá trị khóa); tham số: số byte tối thiểu. */
+    /** The recovery-code hashing key is missing or too short (the message NEVER includes the key value); parameter: the minimum number of bytes. */
     public static final String RECOVERY_PEPPER_WEAK =
             "Thiếu hoặc quá ngắn khóa băm mã khôi phục: đặt WANDER_RECOVERY_PEPPER (thuộc tính wander.security.recovery-pepper) dài ít nhất %d byte";
 
-    /** Môi trường chạy không có HMAC-SHA-256. */
+    /** The runtime has no HMAC-SHA-256. */
     public static final String RECOVERY_HMAC_UNAVAILABLE = "Môi trường chạy không có HMAC-SHA-256 để băm mã khôi phục";
 
-    /** Cấu hình hai khóa không đầy đủ, trùng nhãn hoặc có nhãn không hợp lệ; không kèm giá trị secret. */
+    /** The two-key configuration is incomplete, has a duplicate label or an invalid label; never includes the secret value. */
     public static final String RECOVERY_KEY_CONFIGURATION_INVALID = "Cấu hình phiên bản khóa khôi phục không hợp lệ; kiểm tra nhãn và cặp khóa trước đó";
 
-    /** Giá trị pepper bị đổi mà nhãn khóa giữ nguyên: dừng khởi động thay vì để mọi mã cũ vô hiệu im lặng. */
+    /** The pepper value was changed but the key label stayed the same: stop at startup instead of silently invalidating every old code. */
     public static final String RECOVERY_KEY_FINGERPRINT_MISMATCH = "Giá trị khóa khôi phục (pepper) không khớp dấu vân tay đã lưu cho nhãn khóa này; không đổi giá trị mà giữ nhãn, hãy khôi phục khóa đúng hoặc dùng nhãn mới";
 
-    /** Không chạy với cấu hình bỏ mất khóa mà dữ liệu còn tham chiếu, tránh làm người dùng mất khả năng khôi phục. */
+    /** Do not run with a configuration that dropped a key the data still references, so users do not lose the ability to recover. */
     public static final String RECOVERY_KEY_STILL_REQUIRED = "Thiếu phiên bản khóa khôi phục còn được dữ liệu sử dụng; khôi phục cấu hình khóa trước khi deploy";
 
     private IdentityMessages() {

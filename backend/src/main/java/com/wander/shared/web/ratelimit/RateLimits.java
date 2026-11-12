@@ -5,18 +5,19 @@ import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.constant.ErrorMessages;
 import com.wander.shared.kernel.error.ErrorKind;
 import com.wander.shared.kernel.error.WanderException;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.time.Clock;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Các giới hạn chống lạm dụng của API (Q16 câu 6, MĐ-8). Giá trị mặc định khớp bản cài đặt cũ;
- * đổi qua cấu hình {@code wander.limits.*}. Con số cụ thể vẫn chờ rà soát cùng RG-1.
+ * The abuse-prevention limits of the API (Q16 question 6, MĐ-8). The default values match the old implementation;
+ * change them through the configuration {@code wander.limits.*}. The concrete numbers still wait for the review together with RG-1.
  */
 public final class RateLimits {
 
     /**
-     * Cấu hình các giới hạn: ba loại tính mỗi giờ và kho địa điểm công khai tính mỗi phút; thiếu giá trị thì dùng mặc định
-     * ở {@link RateLimitConstants}.
+     * Configuration of the limits: three kinds counted per hour and the public venue catalog counted per minute; a missing value uses the default
+     * in {@link RateLimitConstants}.
      */
     @ConfigurationProperties(ConfigConstants.LIMITS_PREFIX)
     public record Properties(Integer identityPerHour, Integer recoveryPerHour, Integer approvalPerHour, Integer catalogPerMinute,
@@ -41,9 +42,11 @@ public final class RateLimits {
     private final FixedWindowRateLimiter stepUpRequests;
     private final FixedWindowRateLimiter writes;
     private final FixedWindowRateLimiter linkPolls;
+    private final MeterRegistry meters;
 
-    /** Tạo các bộ đếm theo cấu hình: ba bộ cửa sổ một giờ và một bộ cửa sổ một phút cho kho địa điểm. */
-    public RateLimits(Properties props, Clock clock) {
+    /** Creates the counters from the configuration: three one-hour-window counters and one one-minute-window counter for the venue catalog. */
+    public RateLimits(Properties props, Clock clock, MeterRegistry meters) {
+        this.meters = meters;
         this.identity = newLimiter(props.identityPerHour(), clock);
         this.recovery = new FixedWindowRateLimiter(props.recoveryPerHour(), RateLimitConstants.WINDOW, clock, true);
         this.approval = newLimiter(props.approvalPerHour(), clock);
@@ -54,54 +57,55 @@ public final class RateLimits {
         this.linkPolls = new FixedWindowRateLimiter(props.linkPollPerMinute(), RateLimitConstants.CATALOG_WINDOW, clock, true);
     }
 
-    /** Tạo danh tính, theo địa chỉ. */
+    /** Identity creation, per address. */
     public void identity(String clientAddress) {
-        check(identity, clientAddress);
+        check(RateLimitConstants.NAME_IDENTITY, identity, clientAddress);
     }
 
-    /** Khôi phục / ghép thiết bị chưa xác thực, theo địa chỉ. */
+    /** Unauthenticated recovery / device pairing, per address. */
     public void recovery(String clientAddress) {
-        check(recovery, clientAddress);
+        check(RateLimitConstants.NAME_RECOVERY, recovery, clientAddress);
     }
 
-    /** Duyệt ghép thiết bị, xác thực lại, tái tạo mã: theo phiên. */
+    /** Approving a device pairing, re-authentication, code regeneration: per session. */
     public void approval(String sessionKey) {
-        check(approval, sessionKey);
+        check(RateLimitConstants.NAME_APPROVAL, approval, sessionKey);
     }
 
-    /** Tạo yêu cầu ghép thiết bị (DR-018 E1: tối đa 3 yêu cầu mỗi 10 phút), theo địa chỉ vì máy mới chưa có danh tính. */
+    /** Creating a device pairing request (DR-018 E1: at most 3 requests per 10 minutes), per address because a new device has no identity yet. */
     public void pairingRequest(String clientAddress) {
-        check(pairingRequests, clientAddress);
+        check(RateLimitConstants.NAME_PAIRING_REQUEST, pairingRequests, clientAddress);
     }
 
-    /** Xin xác thực lại (DR-018 E1: tối đa 3 yêu cầu mỗi 10 phút), theo danh tính. */
+    /** Asking for re-authentication (DR-018 E1: at most 3 requests per 10 minutes), per identity. */
     public void stepUpRequest(String identityKey) {
-        check(stepUpRequests, identityKey);
+        check(RateLimitConstants.NAME_STEP_UP_REQUEST, stepUpRequests, identityKey);
     }
 
-    /** Đọc kho địa điểm công khai (chưa cần phiên), theo địa chỉ. */
+    /** Reading the public venue catalog (no session needed yet), per address. */
     public void catalog(String clientAddress) {
-        check(catalog, clientAddress);
+        check(RateLimitConstants.NAME_CATALOG, catalog, clientAddress);
     }
 
-    /** Ghi API theo danh tính, không thể tăng ngân sách chỉ bằng việc ghép thêm thiết bị. */
+    /** API writes per identity; the budget cannot be raised just by pairing more devices. */
     public void write(String identityKey) {
-        check(writes, identityKey);
+        check(RateLimitConstants.NAME_WRITES, writes, identityKey);
     }
 
-    /** Thiết bị mới hỏi trạng thái yêu cầu ghép (hỏi lặp mỗi giây), theo địa chỉ; tách khỏi hạn mức khôi phục theo giờ. */
+    /** A new device polls the pairing-request status (it polls every second), per address; separate from the hourly recovery limit. */
     public void linkPoll(String clientAddress) {
-        check(linkPolls, clientAddress);
+        check(RateLimitConstants.NAME_LINK_POLL, linkPolls, clientAddress);
     }
 
-    /** Tạo bộ đếm cho phép {@code maxPerHour} lần mỗi cửa sổ chuẩn. */
+    /** Creates a counter that allows {@code maxPerHour} hits per standard window. */
     private static FixedWindowRateLimiter newLimiter(int maxPerHour, Clock clock) {
         return new FixedWindowRateLimiter(maxPerHour, RateLimitConstants.WINDOW, clock);
     }
 
-    /** Ghi nhận một lần gọi; vượt giới hạn thì ném lỗi RATE_LIMITED (429). */
-    private static void check(FixedWindowRateLimiter limiter, String key) {
+    /** Records one call; past the limit it counts into the metric {@code wander.ratelimit.rejected} (tag = limiter name) and throws RATE_LIMITED (429). */
+    private void check(String limiterName, FixedWindowRateLimiter limiter, String key) {
         if (!limiter.hit(key)) {
+            meters.counter(RateLimitConstants.REJECTED_METRIC, RateLimitConstants.LIMITER_TAG, limiterName).increment();
             throw new WanderException(ErrorKind.RATE_LIMITED, ErrorCodes.RATE_LIMITED, ErrorMessages.RATE_LIMITED, null, null);
         }
     }

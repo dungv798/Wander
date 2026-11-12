@@ -4,8 +4,8 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * Sở thích của chuyến (DR-018 F2, ADR-014): chọn nhiều, chỉ là nhãn. Planning không được import catalog nên tự định nghĩa tập này,
- * khớp với loại địa điểm của kho biên tập (cùng mã, nhãn, thứ tự); {@code VocabularyParityTest} canh cho hai tập không lệch.
+ * The interests of a trip (DR-018 F2, ADR-014): several can be chosen, only labels. Planning must not import catalog so it defines this set itself,
+ * matching the place types of the editorial catalog (same codes, labels, order); {@code VocabularyParityTest} guards the two sets against drifting apart.
  */
 public enum TripInterest implements CodedValue {
     CANH("canh", "Cảnh quan"),
@@ -28,12 +28,12 @@ public enum TripInterest implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Sở thích theo mã trong dữ liệu và API; mã lạ trả rỗng. */
+    /** The interest by code in data and API; an unknown code returns empty. */
     public static Optional<TripInterest> fromCode(String code) {
         return CodedValue.find(TripInterest.class, code);
     }

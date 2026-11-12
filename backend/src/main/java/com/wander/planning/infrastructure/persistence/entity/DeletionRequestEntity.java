@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Bảng {@code deletion_requests}: đề nghị xóa mục của thành viên. */
+/** Table {@code deletion_requests}: a member's request to delete an item. */
 @Entity
 @Table(name = "deletion_requests")
 public class DeletionRequestEntity {

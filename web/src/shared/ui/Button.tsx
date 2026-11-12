@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode, Ref } from 'react';
 import { Icon } from './Icon.tsx';
 import type { IconName } from './icons/iconPaths.const.ts';
 
-/** Kiểu nút: thêm biến thể = thêm một dòng ở bảng (mở rộng, không sửa chỗ khác). */
+/** The button kinds: adding a variant = adding one row to the table (extend, do not edit elsewhere). */
 const KIND_CLASS = { primary: 'g-primary', secondary: 'secondary', ghost: 'ghost', danger: 'danger', sun: 'sun' } as const;
 type ButtonKind = keyof typeof KIND_CLASS;
 
@@ -10,15 +10,15 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'cla
   readonly ref?: Ref<HTMLButtonElement>;
   readonly kind?: ButtonKind;
   readonly icon?: IconName;
-  /** Mũi tên cuối nhãn: dấu hiệu "đi tiếp" của hành động chính (cấp bậc bằng hình, không bằng mảng màu). */
+  /** The arrow at the end of the label: the 'go on' sign of the main action (hierarchy by shape, not by a color patch). */
   readonly arrow?: boolean;
   readonly block?: boolean;
-  /** Lớp bổ sung của màn dùng nút (ví dụ kích thước riêng); kiểu gốc vẫn do `kind`/`block`. */
+  /** An extra class from the screen that uses the button (for example its own size); the base style is still decided by `kind`/`block`. */
   readonly className?: string;
   readonly children: ReactNode;
 }
 
-/** Nút hành động chính/phụ của Wander (vùng chạm ≥ 44 px do CSS `.btn`). */
+/** Wander's primary/secondary action button (the touch area of at least 44 px comes from the CSS `.btn`). */
 export function Button({ kind = 'primary', icon, arrow, block, className, children, ...rest }: ButtonProps) {
   const cls = ['btn', 'glass-control', KIND_CLASS[kind], block ? 'block' : '', className].filter(Boolean).join(' ');
   return (

@@ -1,17 +1,17 @@
 import { STORAGE } from '../../../shared/const/app.const.ts';
 import type { Trip } from './trip.types.ts';
 
-/** Bản chỉ đọc của danh sách chuyến lần nạp thành công gần nhất, để xem được khi máy chủ không trả lời (B-09, DR-037). */
+/** The read-only copy of the trip list of the most recent successful load, to view when the server does not answer (B-09, DR-037). */
 export interface TripsCache {
   readonly trips: readonly Trip[];
-  /** Thời điểm lưu, mili giây từ epoch. */
+  /** The time it was saved, milliseconds since the epoch. */
   readonly savedAt: number;
 }
 
-/** Phần của `Storage` mà bộ nhớ đệm dùng. */
+/** The part of `Storage` that the cache uses. */
 export type CacheStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 
-/** Kho mặc định của trình duyệt; null khi bị chặn (chế độ riêng tư, kho vô hiệu). */
+/** The browser's default store; null when blocked (private mode, storage disabled). */
 function browserStorage(): CacheStorage | null {
   try {
     return typeof localStorage === 'undefined' ? null : localStorage;
@@ -20,29 +20,29 @@ function browserStorage(): CacheStorage | null {
   }
 }
 
-/** Có phải đối tượng thường. */
+/** Whether it is a plain object. */
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Một phần tử của bản đã lưu có đủ hình dạng tối thiểu của chuyến (mã, tên, danh sách mục) để giao diện dùng không vỡ. */
+/** An element of the saved copy has the minimal trip shape (id, name, item list) for the UI to use without breaking. */
 function looksLikeTrip(v: unknown): v is Trip {
   return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string' && Array.isArray(v['items']);
 }
 
 /**
- * Ghi bản chỉ đọc của các chuyến. Hết hạn mức hoặc không có kho thì bỏ qua im lặng (bản lưu chỉ là tiện ích, không được làm hỏng luồng chính).
- * Danh sách rỗng vẫn được ghi để bản cũ không sống lại sau khi người dùng xóa hết chuyến.
+ * Writes the read-only copy of the trips. Running out of quota or no store is ignored silently (the saved copy is only a convenience and must never break the main flow).
+ * An empty list is still written so an old copy does not come back to life after the user deletes every trip.
  */
 export function saveTripsCache(trips: readonly Trip[], now: number, storage: CacheStorage | null = browserStorage()): void {
   try {
     storage?.setItem(STORAGE.TRIPS_CACHE, JSON.stringify({ savedAt: now, trips }));
   } catch {
-    /* hết hạn mức hoặc kho bị chặn: không lưu */
+    /* out of quota or the store is blocked: not saved */
   }
 }
 
-/** Đọc bản chỉ đọc; null nếu chưa có, hỏng hoặc sai dạng (bản hỏng bị xóa để không đọc lại lần sau). */
+/** Reads the read-only copy; null if there is none, it is broken or wrongly shaped (a broken copy is deleted so it is not read again next time). */
 export function loadTripsCache(storage: CacheStorage | null = browserStorage()): TripsCache | null {
   if (!storage) return null;
   try {
@@ -53,17 +53,17 @@ export function loadTripsCache(storage: CacheStorage | null = browserStorage()):
       return { trips: parsed['trips'], savedAt: parsed['savedAt'] };
     }
   } catch {
-    /* JSON hỏng: rơi xuống dọn */
+    /* broken JSON: fall through to cleanup */
   }
   clearTripsCache(storage);
   return null;
 }
 
-/** Xóa bản chỉ đọc (khi hết phiên, khôi phục hoặc đổi danh tính: chuyến của người khác không được hiện). */
+/** Deletes the read-only copy (when the session ends, recovery or an identity change: another person's trips must not be shown). */
 export function clearTripsCache(storage: CacheStorage | null = browserStorage()): void {
   try {
     storage?.removeItem(STORAGE.TRIPS_CACHE);
   } catch {
-    /* bỏ qua */
+    /* ignore */
   }
 }

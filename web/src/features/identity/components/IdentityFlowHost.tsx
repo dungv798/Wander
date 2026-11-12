@@ -9,17 +9,17 @@ import { IntroSheet } from './IntroSheet.tsx';
 import { IssueCodeSheet } from './IssueCodeSheet.tsx';
 import { ReauthSheet } from './ReauthSheet.tsx';
 
-/** Tờ giới thiệu lưu lần đầu (F2) và luồng hiện mã đi sau nó; "Để sau" tạo danh tính chưa có mã rồi đi tiếp việc đang chờ. */
+/** The first-save intro sheet (F2) and the code-showing flow that follows it; 'Later' creates an identity without a code and then goes on with the pending action. */
 function IntroFlow({ onSaved, replacing }: { readonly onSaved: () => unknown; readonly replacing: boolean }) {
   const { actions, startFlow, closeFlow } = useIdentity();
   const toast = useToast();
   const report = useReportError();
-  /** Chỉ tạo danh tính (chưa có mã), đóng tờ, chạy việc đang chờ và nhắc tạo mã ở Bảo mật. */
+  /** Only creates the identity (no code yet), closes the sheet, runs the pending action and reminds to create a code in Security. */
   const saveLater = (): void => {
     actions.ensureIdentity().then(() => {
       closeFlow();
-      // việc đi tiếp (tạo chuyến) có thể mất một nhịp: nhắc "chưa có mã" sau khi nó xong để không bị thông báo khác đè
-      // chỉ nhắc khi việc đi tiếp thành công (false = đã báo lỗi; nhắc ngay sẽ đè mất thông báo lỗi)
+      // the follow-up action (creating a trip) can take a moment: remind 'no code yet' after it finishes so another notice does not cover it
+      // remind only when the follow-up action succeeds (false = an error was already reported; reminding at once would cover the error notice)
       return Promise.resolve(onSaved()).then((ok) => {
         if (ok !== false) toast.show(C.intro.skipSaved);
       }).catch(() => undefined);
@@ -44,7 +44,7 @@ function IntroFlow({ onSaved, replacing }: { readonly onSaved: () => unknown; re
   );
 }
 
-/** Hiện đúng tờ của luồng danh tính đang mở (mỗi lần một luồng). */
+/** Shows exactly the sheet of the identity flow that is open (one flow at a time). */
 export function IdentityFlowHost({ flow }: { readonly flow: Flow }) {
   const { closeFlow } = useIdentity();
   switch (flow.kind) {

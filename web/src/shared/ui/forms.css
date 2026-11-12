@@ -1,4 +1,4 @@
-/* Cùng một hệ ô nhập trên tạo chuyến, sửa lịch, thành viên và danh tính. */
+/* One input-box system across trip creation, schedule editing, members and identity. */
 :root:not([data-look='classic']) .field { gap: 7px; min-width: 0; color: var(--muted); font: 600 13px / 1.5 var(--font-body); }
 :root:not([data-look='classic']) .field :is(input, select, textarea) { width: 100%; min-width: 0; min-height: 48px; padding: 11px 13px; border: 1px solid var(--control-edge); border-radius: 14px; background: var(--sheet-inner-surface); color: var(--ink); box-shadow: var(--control-inner-light); font: 400 16px / 1.5 var(--font-body); transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
 :root:not([data-look='classic']) .field :is(input, select, textarea):focus { background: var(--btn-bg); border-color: var(--control-hover-edge); }

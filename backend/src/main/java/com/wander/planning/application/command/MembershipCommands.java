@@ -1,35 +1,34 @@
 package com.wander.planning.application.command;
 
-import java.util.Map;
 import java.util.UUID;
 
-/** Lệnh thành viên và liên kết mời (Lát 1b). {@code actor} luôn là danh tính từ phiên, KHÔNG BAO GIỜ lấy từ thân yêu cầu. */
+/** Membership and invite-link commands (slice 1b). {@code actor} is always the identity of the session, NEVER a value from the body. */
 public final class MembershipCommands {
 
     private MembershipCommands() {
     }
 
-    /** Organizer tạo liên kết mời mới. */
+    /** An organizer creates a new invite link. */
     public record CreateInvite(UUID actor, UUID tripId) {
     }
 
-    /** Organizer thu hồi liên kết đang dùng. */
+    /** An organizer revokes the active invite link. */
     public record RevokeInvite(UUID actor, UUID tripId) {
     }
 
-    /** Vào chuyến bằng liên kết; {@code input} là JSON thô ({@code code}, {@code displayName}). */
-    public record Join(UUID actor, Map<String, Object> input) {
+    /** Join a trip with an invite code and a display name. */
+    public record Join(UUID actor, String code, String displayName) {
     }
 
-    /** Organizer gỡ một thành viên. */
+    /** An organizer removes a member. */
     public record RemoveMember(UUID actor, UUID tripId, UUID memberId) {
     }
 
-    /** Thành viên rời chuyến. */
+    /** A member leaves a trip. */
     public record Leave(UUID actor, UUID tripId) {
     }
 
-    /** Đổi tên hiển thị của chính mình; {@code input} là JSON thô ({@code displayName}). */
-    public record RenameSelf(UUID actor, UUID tripId, Map<String, Object> input) {
+    /** Change one's own display name. */
+    public record RenameSelf(UUID actor, UUID tripId, String displayName) {
     }
 }

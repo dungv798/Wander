@@ -1,4 +1,4 @@
-/** Đường vẽ biểu tượng Tabler Icons (MIT), lưới 24 px, nét 2. TẠO TỰ ĐỘNG bởi scripts/gen-icons.mjs từ sprite của prototype; không sửa tay. */
+/** The drawing paths of Tabler Icons (MIT), a 24 px grid, stroke 2. GENERATED AUTOMATICALLY by scripts/gen-icons.mjs from the prototype's sprite; do not edit by hand. */
 export const ICON_PATHS = {
   "alert-triangle": "<path d=\"M12 9v4\" /> <path d=\"M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z\" /> <path d=\"M12 16h.01\" />",
   "arrow-back-up": "<path d=\"M9 14l-4 -4l4 -4\" /> <path d=\"M5 10h11a4 4 0 1 1 0 8h-1\" />",
@@ -60,5 +60,5 @@ export const ICON_PATHS = {
   "x": "<path d=\"M18 6l-12 12\" /> <path d=\"M6 6l12 12\" />",
 } as const;
 
-/** Tên biểu tượng hợp lệ (gõ sai bị chặn lúc biên dịch). */
+/** A valid icon name (a typo is blocked at compile time). */
 export type IconName = keyof typeof ICON_PATHS;

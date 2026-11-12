@@ -1,4 +1,4 @@
-/** Chữ hiển thị của tính năng danh tính ẩn danh (S9–S13, DR-001, DR-018). Giữ giọng "chữ thường ngày", không thuật ngữ mã hóa. */
+/** The display copy of the anonymous identity feature (S9-S13, DR-001, DR-018). Keeps the 'everyday words' voice, no cryptography jargon. */
 export const IDENTITY_COPY = {
   intro: {
     title: 'Lưu chuyến đi của bạn',

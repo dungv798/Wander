@@ -17,7 +17,7 @@ const ShareSheet = lazy(() => import('./ShareSheet.tsx').then(module => ({ defau
 const TrashSheet = lazy(() => import('./TrashSheet.tsx').then(module => ({ default: module.TrashSheet })));
 const MealSuggestSheet = lazy(() => import('./MealSuggestSheet.tsx').then(module => ({ default: module.MealSuggestSheet })));
 
-/** Hiện đúng tờ phủ đang mở trên màn chuyến đi (mỗi lần một cái). `key` buộc dựng lại biểu mẫu khi đổi sang mục khác. */
+/** Shows exactly the overlay sheet that is open on the trip screen (one at a time). `key` forces the form to be rebuilt when switching to another item. */
 export function TripOverlays({ overlay, onClose }: { readonly overlay: Overlay | MealGapEditor | null; readonly onClose: () => void }) {
   if (!overlay) return null;
   switch (overlay.kind) {

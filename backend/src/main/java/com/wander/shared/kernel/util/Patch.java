@@ -4,8 +4,8 @@ import com.wander.shared.kernel.constant.ErrorMessages;
 import java.util.function.Function;
 
 /**
- * Giá trị trong lệnh sửa một phần (PATCH): phân biệt "không gửi" với "gửi null".
- * Ví dụ: không gửi {@code note} thì giữ nguyên, gửi {@code note: null} thì xóa ghi chú.
+ * A value in a partial-update command (PATCH): distinguishes 'not sent' from 'sent as null'.
+ * Example: if {@code note} is not sent it stays unchanged, if {@code note: null} is sent the note is cleared.
  */
 public final class Patch<T> {
 
@@ -19,34 +19,34 @@ public final class Patch<T> {
         this.value = value;
     }
 
-    /** Giá trị "không gửi": lệnh sửa phải giữ nguyên trường này. */
+    /** The 'not sent' value: the update command must leave this field unchanged. */
     @SuppressWarnings("unchecked")
     public static <T> Patch<T> absent() {
         return (Patch<T>) ABSENT;
     }
 
-    /** Giá trị "có gửi" (kể cả null): lệnh sửa phải đặt trường theo giá trị này. */
+    /** The 'sent' value (even null): the update command must set the field to this value. */
     public static <T> Patch<T> of(T value) {
         return new Patch<>(true, value);
     }
 
-    /** Cho biết trường có được gửi lên hay không. */
+    /** Says whether the field was sent. */
     public boolean isPresent() {
         return present;
     }
 
-    /** Giá trị đã gửi (có thể null). Chỉ gọi khi {@link #isPresent()}. */
+    /** The value that was sent (may be null). Call only when {@link #isPresent()}. */
     public T value() {
         if (!present) throw new IllegalStateException(ErrorMessages.PATCH_VALUE_ABSENT);
         return value;
     }
 
-    /** Giá trị đã gửi nếu có, nếu không thì giữ giá trị hiện tại. */
+    /** The value that was sent if there is one, otherwise the current value is kept. */
     public T orElse(T current) {
         return present ? value : current;
     }
 
-    /** Biến đổi giá trị đã gửi; "không gửi" vẫn là "không gửi". */
+    /** Transforms the value that was sent; 'not sent' stays 'not sent'. */
     public <R> Patch<R> map(Function<T, R> mapper) {
         return present ? Patch.of(mapper.apply(value)) : absent();
     }

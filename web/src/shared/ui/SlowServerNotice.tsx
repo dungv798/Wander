@@ -4,8 +4,8 @@ import { COPY } from '../const/copy.vi.ts';
 import './slowNotice.css';
 
 /**
- * Dải báo chung "máy chủ đang thức dậy" (B-05): hiện khi có lời gọi API treo quá `SLOW_REQUEST_AFTER_MS`, biến mất khi lời gọi xong.
- * Là nguồn duy nhất của lời báo này, nên màn tải, lưu chuyến hay bất kỳ hành động nào đang chờ máy chủ đều được giải thích như nhau.
+ * The shared 'server is waking up' strip (B-05): shown when an API call hangs past `SLOW_REQUEST_AFTER_MS`, it disappears when the call is done.
+ * It is the single source of this notice, so the loading screen, saving a trip or any action waiting for the server is explained the same way.
  */
 export function SlowServerNotice() {
   const slow = useSyncExternalStore(pendingRequests.subscribe, () => pendingRequests.slow);

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Batch POI của một điểm đến, kiểm danh tính và phạm vi ngay khi nạp. */
+/** The POI batch of a destination, with identity and range checked as soon as it is loaded. */
 public record PoiCollection(String destinationId, GeoPoint center, double radiusM, List<PoiRecord> pois) {
     public PoiCollection {
         PoiValidation.requireText(destinationId, PoiConstants.DESTINATION_ID);
@@ -28,12 +28,12 @@ public record PoiCollection(String destinationId, GeoPoint center, double radius
         }
     }
 
-    /** Kiểm tra bán kính bằng haversine mét, nhận cả điểm đúng biên. */
+    /** Checks the radius with haversine in meters, accepting a point exactly on the boundary. */
     private static void requireLocation(GeoPoint center, GeoPoint location, double radiusM) {
         PoiValidation.require(TravelEstimate.airKm(center, location) * PoiConstants.METERS_PER_KM <= radiusM, PoiConstants.CENTER);
     }
 
-    /** Mỗi type/id chỉ thuộc một bản ghi hoặc một nguồn gộp trong batch. */
+    /** Each type/id belongs to only one record or one merged source in the batch. */
     private static void requireSource(Set<String> sources, String type, long id) {
         PoiValidation.require(sources.add(type + CommonConstants.SLASH + id), PoiConstants.OSM_ID);
     }

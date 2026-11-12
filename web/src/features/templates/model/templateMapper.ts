@@ -4,17 +4,17 @@ import type { TemplateDay, TemplateStatus, TemplateView } from './template.types
 
 type Rec = Record<string, unknown>;
 
-/** Có phải đối tượng thường. */
+/** Whether it is a plain object. */
 function isRec(v: unknown): v is Rec {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Chuỗi không rỗng đã cắt độ dài, hoặc null. */
+/** A non-empty string with its length cut, or null. */
 function text(v: unknown, max: number): string | null {
   return typeof v === 'string' && v.trim() ? v.trim().slice(0, max) : null;
 }
 
-/** Ghép một ngày với kho: địa điểm không có trong kho hoặc đã xuất hiện ở ngày trước bị bỏ (mỗi địa điểm chỉ một lần trong chuyến). */
+/** Joins a day with the catalog: a place not in the catalog or already seen in an earlier day is dropped (each place only once in a trip). */
 function toDay(raw: unknown, byId: ReadonlyMap<string, PlaceView>, used: Set<string>): TemplateDay {
   const rec = isRec(raw) ? raw : {};
   const ids = Array.isArray(rec['places']) ? rec['places'].filter((x): x is string => typeof x === 'string') : [];
@@ -27,7 +27,7 @@ function toDay(raw: unknown, byId: ReadonlyMap<string, PlaceView>, used: Set<str
   return { places, note: text(rec['note'], MAX_TEXT) };
 }
 
-/** Ghép một lịch mẫu thô với kho; trả null nếu thiếu mã/tên hoặc không còn địa điểm nào hợp lệ. */
+/** Joins a raw sample itinerary with the catalog; returns null if the id/name is missing or no valid place is left. */
 function toTemplate(raw: unknown, byId: ReadonlyMap<string, PlaceView>): TemplateView | null {
   if (!isRec(raw)) return null;
   const id = text(raw['id'], MAX_TITLE);
@@ -41,8 +41,8 @@ function toTemplate(raw: unknown, byId: ReadonlyMap<string, PlaceView>): Templat
 }
 
 /**
- * Biến JSON lịch mẫu thô (không tin cậy) thành view gắn với điểm đến. Lịch mẫu không hợp lệ hoặc trỏ tới địa điểm đã gỡ bị bỏ;
- * trạng thái lạ coi là bản nháp (an toàn: chưa được duyệt thì luôn có nhãn).
+ * Turns raw sample-itinerary JSON (untrusted) into a view tied to the destination. A sample itinerary that is invalid or points to a removed place is dropped;
+ * an unknown status counts as a draft (safe: while not approved it always has the label).
  */
 export function toTemplateViews(raw: unknown, dest: DestinationDetail): TemplateView[] {
   if (!isRec(raw) || !Array.isArray(raw['templates'])) return [];

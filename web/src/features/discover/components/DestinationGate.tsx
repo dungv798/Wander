@@ -12,13 +12,13 @@ import type { DestinationDetail } from '../model/Catalog.types.ts';
 
 interface DestinationGateProps {
   readonly destId: string;
-  /** Màn quẹt thẻ: tờ chi tiết là ngăn kéo bên phải trên máy tính rộng. */
+  /** The card-swipe screen: the detail sheet is a drawer on the right on a wide computer. */
   readonly inDeck?: boolean;
-  /** Dựng màn khi đã có dữ liệu điểm đến. */
+  /** Renders the screen once the destination data is available. */
   readonly children: (dest: DestinationDetail) => ReactNode;
 }
 
-/** Cổng tải điểm đến: khung xương khi đang tải, thông báo lỗi có "Thử lại" (không trắng trang), rồi mới dựng màn thật. */
+/** The destination loading gate: a skeleton while loading, an error notice with 'Retry' (no blank page), and only then the real screen. */
 export function DestinationGate({ destId, inDeck = false, children }: DestinationGateProps) {
   const { state, retry } = useDestination(destId);
   if (state.status === 'loading') return <ScreenSkeleton />;

@@ -8,36 +8,36 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Cổng băm mã khôi phục (DR-018 B3). Cài đặt dùng HMAC-SHA-256 với khóa (pepper) nằm ngoài cơ sở dữ liệu, để lộ bảng mã băm
- * mà không lộ khóa thì không dò ngược được mã. Domain chỉ biết "băm có khóa", không biết khóa lấy từ đâu.
+ * Port for hashing recovery codes (DR-018 B3). The implementation uses HMAC-SHA-256 with a key (pepper) kept outside the database, so a leaked table of hashes
+ * without the key cannot be reversed to find codes. The domain only knows 'keyed hash', not where the key comes from.
  */
 public interface RecoveryCodeHasher {
 
-    /** Băm mã đã chuẩn hóa (chữ hoa, không gạch ngang); trả 64 ký tự hex chữ thường. */
+    /** Hashes a normalized code (uppercase, no hyphens); returns 64 lowercase hex characters. */
     String hash(String normalizedCode);
 
-    /** Nhãn khóa dùng khi phát hành mã mới. */
+    /** Label of the key used when issuing a new code. */
     String currentKeyVersion();
 
-    /** Các nhãn còn hỗ trợ, ưu tiên khóa hiện hành. */
+    /** The labels still supported, the current key first. */
     List<String> keyVersions();
 
-    /** Băm bằng đúng nhãn đã lưu; không có khóa tương ứng thì không có kết quả. */
+    /** Hashes with exactly the stored label; with no matching key there is no result. */
     Optional<String> hashWithVersion(String normalizedCode, String keyVersion);
 
     /**
-     * Dấu vân tay của khóa ứng với nhãn (một phần HMAC của hằng số công khai, hex); không có khóa cho nhãn thì không có kết quả.
-     * Dùng để phát hiện đổi giá trị pepper mà giữ nhãn; không tiết lộ khóa.
+     * Fingerprint of the key for a label (part of the HMAC of a public constant, hex); no key for the label means no result.
+     * Used to detect a changed pepper value under an unchanged label; it does not reveal the key.
      */
     Optional<String> keyFingerprint(String keyVersion);
 
-    /** Kiểm tra bằng khóa đã lưu, so sánh digest với thời gian không phụ thuộc tiền tố khớp. */
+    /** Verifies with the stored key, comparing digests in time that does not depend on how long a prefix matches. */
     default boolean matches(String normalizedCode, String storedHash, String keyVersion) {
         return hashWithVersion(normalizedCode, keyVersion).map(candidate -> MessageDigest.isEqual(
                 candidate.getBytes(StandardCharsets.US_ASCII), storedHash.getBytes(StandardCharsets.US_ASCII))).orElse(false);
     }
 
-    /** Băm mã đang ở dạng hiển thị (có gạch ngang, chữ thường cũng được): chuẩn hóa rồi băm; dùng khi vừa phát hành mã. */
+    /** Hashes a code in display form (hyphens allowed, lowercase also fine): normalize, then hash; used right after issuing a code. */
     default String hashDisplayed(String displayedCode) {
         return hash(Secrets.normalize(displayedCode, IdentityConstants.RECOVERY_CODE_SYMBOLS));
     }

@@ -12,7 +12,7 @@ import { HOME_COPY } from '../../model/home.copy.ts';
 import { HomeHero } from './HomeHero.tsx';
 import { DestinationCard } from './DestinationCard.tsx';
 
-/** Thẻ "Tiếp tục chuyến của bạn" ở trang chủ khi chưa chọn điểm đến nhưng đã có chuyến; nằm trước các khối khám phá. */
+/** The 'Continue your trip' card on the home page when no destination is chosen but a trip exists; it sits before the explore blocks. */
 function TripResume() {
   const { state } = useTrips();
   const today = todayLocal();
@@ -30,13 +30,13 @@ function TripResume() {
 }
 
 /**
- * Trang chủ lần đầu (chưa chọn điểm đến): đầu trang gọn (dấu + thanh tìm), một hero điểm đến gợi ý có nút chính, rồi lưới thẻ ảnh để thấy ngay nhiều nơi.
- * Chọn hero hay một thẻ là lưu điểm đến và mở bộ thẻ quẹt của nơi đó.
+ * The first-time home page (no destination chosen): a compact top (mark + search bar), one suggested-destination hero with a main button, then a grid of photo cards so many places are visible at once.
+ * Choosing the hero or a card saves the destination and opens the swipe deck of that place.
  */
 export function NationalHome() {
   const { select } = useCurrentDestination();
   const { destinations, status, retry, topic, setTopic } = useDiscoveryTopic();
-  // Hiện MỌI điểm đến của kho danh mục (số lượng do backend quyết định, không hard-code).
+  // Shows EVERY destination of the catalog (the number is decided by the backend, not hard-coded).
   const featured = destinations.find((destination) => destination.id === HOME.FEATURED_ID) ?? destinations[0];
   const rank = new Map(HOME_DESTINATION_ORDER.map((id, index) => [id, index]));
   const list = destinations.filter(destination => destination.id !== featured?.id).sort((a, b) => (rank.get(a.id) ?? HOME_DESTINATION_ORDER.length) - (rank.get(b.id) ?? HOME_DESTINATION_ORDER.length));

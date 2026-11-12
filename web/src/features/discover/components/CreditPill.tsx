@@ -4,7 +4,7 @@ import { safeHttpUrl } from '../../../shared/lib/safeUrl.ts';
 
 const AUTHOR_MAX_LENGTH = 28;
 
-/** Nhãn nguồn ảnh nổi trên ảnh khi chạm nút ⓘ: tác giả, giấy phép và liên kết ảnh gốc (ghi công bắt buộc theo giấy phép). */
+/** The photo-source label floating on the photo when the (i) button is tapped: the author, the license and the original photo link (attribution required by the license). */
 export function CreditPill({ photo, fullAuthor = false }: { readonly photo: PhotoView | undefined; readonly fullAuthor?: boolean }) {
   if (!photo) return null;
   const name = photo.author || COPY.place.unknownAuthor;

@@ -16,20 +16,20 @@ import type { ReauthAttempt } from '../model/identityFlow.types.ts';
 interface ReauthProps {
   readonly title: string;
   readonly why: string;
-  /** Thử một bằng chứng; trả true khi đã xác thực xong (luồng kế tiếp đã mở), false khi chưa đủ (sai mã, chưa được duyệt). */
+  /** Tries one piece of evidence; returns true when authentication is done (the next flow has opened), false when it is not enough (wrong code, not approved yet). */
   readonly attempt: ReauthAttempt;
   readonly onClose: () => void;
 }
 
 type Mode = 'device' | 'code';
 
-/** Xác thực lại bằng MÃ KHÔI PHỤC: sai quá 5 lần ở máy này thì khóa tạm (D23); thông báo sai luôn chung, không nói còn mấy lần. */
+/** Re-authenticates with the RECOVERY CODE: more than 5 wrong attempts on this device lock it temporarily (D23); the wrong-code message is always generic and never says how many attempts are left. */
 function CodeMode({ attempt }: { readonly attempt: ReauthAttempt }) {
   const report = useReportError();
   const [value, setValue] = useState('');
   const [busy, setBusy] = useState(false);
   const { locked, failed, fail, reset } = useAttemptLock('reauth');
-  /** Gửi mã làm bằng chứng; sai thì đếm lần thử, đúng thì luồng kế tiếp đã mở. */
+  /** Sends the code as evidence; if wrong it counts the attempt, if right the next flow has opened. */
   const verify = (): void => {
     setBusy(true);
     attempt({ type: 'code', code: value })
@@ -49,8 +49,8 @@ function CodeMode({ attempt }: { readonly attempt: ReauthAttempt }) {
 }
 
 /**
- * Xác thực lại bằng THIẾT BỊ TIN CẬY KHÁC (DR-018 E1): máy này hiện mã duyệt + số khớp; thiết bị kia nhập mã ở "Thêm thiết bị mới"
- * rồi chọn đúng số. Máy này hỏi lại mỗi giây tới khi được duyệt hoặc mã hết hạn (5 phút).
+ * Re-authenticates with ANOTHER TRUSTED DEVICE (DR-018 E1): this device shows an approval code + the matching number; the other device types the code under 'Add a new device'
+ * and then chooses the right number. This device asks again every second until it is approved or the code expires (5 minutes).
  */
 function DeviceMode({ attempt }: { readonly attempt: ReauthAttempt }) {
   const { actions } = useIdentity();
@@ -60,7 +60,7 @@ function DeviceMode({ attempt }: { readonly attempt: ReauthAttempt }) {
   const [busy, setBusy] = useState(false);
   const finished = useRef(false);
 
-  /** Xin mã duyệt mới từ máy chủ. */
+  /** Asks the server for a new approval code. */
   const send = (): void => {
     setBusy(true);
     setExpired(false);
@@ -70,7 +70,7 @@ function DeviceMode({ attempt }: { readonly attempt: ReauthAttempt }) {
   useEffect(() => {
     if (!request) return undefined;
     finished.current = false;
-    let inFlight = false; // lời gọi trước chưa về thì không gọi chồng (tránh hai lần phát mã cùng lúc)
+    let inFlight = false; // if the previous call has not returned, do not call on top of it (avoids issuing two codes at the same time)
     const timer = window.setInterval(() => {
       if (finished.current || inFlight) return;
       if (Date.now() > request.expiresAt) {
@@ -116,14 +116,14 @@ function DeviceMode({ attempt }: { readonly attempt: ReauthAttempt }) {
   );
 }
 
-/** Tờ xác thực lại (S12) cho thao tác nhạy cảm: chọn thiết bị tin cậy khác hoặc mã khôi phục; mỗi thao tác cần một lần xác thực riêng. */
+/** The re-authentication sheet (S12) for a sensitive action: choose another trusted device or the recovery code; each action needs its own authentication. */
 export function ReauthSheet({ title, why, attempt, onClose }: ReauthProps) {
   const { identity, actions, startFlow, closeFlow } = useIdentity();
   const report = useReportError();
   const others = (identity?.devices ?? []).filter((d) => !d.current);
   const canCode = identity?.hasCode === true;
   const [mode, setMode] = useState<Mode>(others.length ? 'device' : 'code');
-  /** Chưa có mã và chưa có thiết bị khác: cho tạo mã đầu tiên (không cần bằng chứng vì chưa có mã hiện hành, MĐ-2). */
+  /** No code and no other device yet: allows creating the first code (no evidence needed because there is no current code, MĐ-2). */
   const issueFirst = (): void =>
     startFlow({
       kind: 'issue',

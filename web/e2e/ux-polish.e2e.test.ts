@@ -5,7 +5,7 @@ import { createServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser, Page } from 'playwright-core';
-import { mockApi, readCatalog } from '../../tools/look/capture-fixtures.mjs';
+import { mockApi, readCatalog } from './support/capture-fixtures.mjs';
 
 let server: ViteDevServer;
 let browser: Browser;

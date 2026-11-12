@@ -1,14 +1,14 @@
 import { LIMITS } from '../const/limits.const.ts';
 import { addDays, inclusiveDays, parseIsoDate } from '../lib/dates.ts';
 
-/** Mã lỗi khoảng ngày; trùng backend (`START_REQUIRED`, `END_BEFORE_START`…). */
+/** The date-range error code; the same as the backend (`START_REQUIRED`, `END_BEFORE_START`...). */
 export type DateRangeErrorCode = 'START_REQUIRED' | 'END_REQUIRED' | 'INVALID_DATE' | 'END_BEFORE_START' | 'TOO_MANY_DAYS';
 
-/** Lỗi khoảng ngày chuyến đi. */
+/** A trip date-range error. */
 export class DateRangeError extends Error {
   readonly code: DateRangeErrorCode;
 
-  /** Tạo lỗi với mã cụ thể. */
+  /** Creates an error with a specific code. */
   constructor(code: DateRangeErrorCode) {
     super(code);
     this.name = 'DateRangeError';
@@ -16,18 +16,18 @@ export class DateRangeError extends Error {
   }
 }
 
-/** Khoảng ngày của chuyến: ngày đi và ngày về (gồm hai đầu, R5), không quá 366 ngày. Bất biến. */
+/** The date range of a trip: the start and end dates (both ends included, R5), at most 366 days. Immutable. */
 export class DateRange {
   readonly start: string;
   readonly end: string;
 
-  /** Hàm tạo riêng tư: dùng `of` để kiểm bất biến. */
+  /** A private constructor: use `of` to check the invariant. */
   private constructor(start: string, end: string) {
     this.start = start;
     this.end = end;
   }
 
-  /** Tạo khoảng ngày từ hai chuỗi `yyyy-mm-dd`; ném `DateRangeError` khi thiếu, sai hoặc quá dài. */
+  /** Creates a date range from two `yyyy-mm-dd` strings; throws `DateRangeError` when missing, wrong or too long. */
   static of(start: string, end: string): DateRange {
     if (!start) throw new DateRangeError('START_REQUIRED');
     if (!end) throw new DateRangeError('END_REQUIRED');
@@ -38,17 +38,17 @@ export class DateRange {
     return new DateRange(start, end);
   }
 
-  /** Số ngày lịch, gồm hai đầu. */
+  /** The number of calendar days, both ends included. */
   get length(): number {
     return inclusiveDays(this.start, this.end);
   }
 
-  /** Danh sách mọi ngày `yyyy-mm-dd` từ ngày đi đến ngày về. */
+  /** The list of every `yyyy-mm-dd` day from the start date to the end date. */
   days(): string[] {
     return Array.from({ length: this.length }, (_, i) => addDays(this.start, i));
   }
 
-  /** Ngày `iso` có nằm trong khoảng không (so sánh chuỗi ISO đúng thứ tự thời gian). */
+  /** Whether the date `iso` is within the range (comparing ISO strings in the correct time order). */
   contains(iso: string): boolean {
     return iso >= this.start && iso <= this.end;
   }

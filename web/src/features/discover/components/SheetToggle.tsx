@@ -9,8 +9,8 @@ interface SheetToggleProps {
 }
 
 /**
- * Tay nắm ở mép trên của tờ nội dung (chỉ điện thoại): kéo xuống để thu tờ và xem bản đồ rộng hơn, kéo lên để mở lại; bấm cũng đổi trạng thái
- * (cho bàn phím và trình đọc màn hình).
+ * The handle on the top edge of the content sheet (phone only): drag down to collapse the sheet and see a wider map, drag up to open it again; tapping also toggles the state
+ * (for the keyboard and screen readers).
  */
 export function SheetToggle({ mode, onChange }: SheetToggleProps) {
   const handlers = useSheetDrag(mode, onChange);

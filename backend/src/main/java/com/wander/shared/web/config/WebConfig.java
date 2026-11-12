@@ -3,11 +3,14 @@ package com.wander.shared.web.config;
 import com.wander.shared.kernel.constant.CommonConstants;
 import com.wander.shared.kernel.constant.ConfigConstants;
 import com.wander.shared.web.constant.HttpConstants;
+import com.wander.shared.web.filter.ContentSecurityPolicy;
+import com.wander.shared.web.filter.RequestBodyLimitFilter;
+import com.wander.shared.web.filter.RequestIdFilter;
 import com.wander.shared.web.filter.ResponseHeadersFilter;
 import com.wander.shared.web.ratelimit.RateLimits;
 import com.wander.shared.web.request.ClientAddress;
 import com.wander.shared.web.request.CurrentPrincipal;
-import com.wander.shared.web.request.JsonBodyArgumentResolver;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,67 +31,80 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
-import tools.jackson.databind.ObjectMapper;
 
-/** Cấu hình web chung: đồng hồ, địa chỉ người gọi, giới hạn tần suất, header, bộ đọc tham số và phục vụ giao diện tĩnh. */
+/** Common web configuration: clock, caller address, rate limits, headers, argument resolvers and serving the static UI. */
 @Configuration
 @EnableConfigurationProperties(RateLimits.Properties.class)
 public class WebConfig implements WebMvcConfigurer {
 
-    private final ObjectMapper mapper;
     private final String webDir;
 
-    /** Nhận công cụ JSON và thư mục giao diện đã build (rỗng = chỉ chạy API). */
-    public WebConfig(ObjectMapper mapper, @Value(ConfigConstants.WEB_DIR_EXPRESSION) String webDir) {
-        this.mapper = mapper;
+    /** Takes the JSON tool and the built UI directory (empty = API only). */
+    public WebConfig(@Value(ConfigConstants.WEB_DIR_EXPRESSION) String webDir) {
         this.webDir = webDir;
     }
 
-    /** Đồng hồ hệ thống theo UTC; test thay bằng đồng hồ giả. */
+    /** The system clock in UTC; tests replace it with a fake clock. */
     @Bean
     public Clock clock() {
         return Clock.systemUTC();
     }
 
     /**
-     * Số proxy tin cậy trước ứng dụng (xem {@link ClientAddress}). 0 = chạy trực tiếp, bỏ qua X-Forwarded-For.
-     * Trên AWS sau CloudFront → ALB: đặt WANDER_TRUSTED_PROXY_HOPS=2 khi hạ tầng đã khóa ALB chỉ nhận từ CloudFront.
+     * The number of trusted proxies in front of the application (see {@link ClientAddress}). 0 = run directly, ignore X-Forwarded-For.
+     * On AWS behind CloudFront -> ALB: set WANDER_TRUSTED_PROXY_HOPS=2 once the infrastructure locks the ALB to accept only from CloudFront.
      */
     @Bean
     public ClientAddress clientAddress(@Value(ConfigConstants.TRUSTED_PROXY_HOPS_EXPRESSION) int trustedProxyHops) {
         return new ClientAddress(trustedProxyHops);
     }
 
-    /** Ba bộ giới hạn tần suất theo cấu hình. */
+    /** The rate limiters according to the configuration. */
     @Bean
-    public RateLimits rateLimits(RateLimits.Properties props, Clock clock) {
-        return new RateLimits(props, clock);
+    public RateLimits rateLimits(RateLimits.Properties props, Clock clock, MeterRegistry meters) {
+        return new RateLimits(props, clock, meters);
     }
 
-    /** Bộ lọc header bảo mật/cache, chạy đầu tiên trong chuỗi bộ lọc. */
+    /** Gives every request an id (header, logging context, error bodies) and logs one line when it is handled; runs first. */
     @Bean
-    public FilterRegistrationBean<ResponseHeadersFilter> responseHeadersFilter() {
-        FilterRegistrationBean<ResponseHeadersFilter> registration = new FilterRegistrationBean<>(new ResponseHeadersFilter());
+    public FilterRegistrationBean<RequestIdFilter> requestIdFilter() {
+        FilterRegistrationBean<RequestIdFilter> registration = new FilterRegistrationBean<>(new RequestIdFilter());
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return registration;
+    }
+
+    /** The security/cache header filter, running right after the request-id filter. */
+    @Bean
+    public FilterRegistrationBean<ResponseHeadersFilter> responseHeadersFilter(@Value(HttpConstants.PHOTO_BASE_URL_EXPRESSION) String photoBaseUrl) {
+        FilterRegistrationBean<ResponseHeadersFilter> registration =
+                new FilterRegistrationBean<>(new ResponseHeadersFilter(ContentSecurityPolicy.forPhotoBaseUrl(photoBaseUrl)));
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+        return registration;
+    }
+
+    /** Caps request bodies of the API (413 above the limit); runs right after the response-header filter. */
+    @Bean
+    public FilterRegistrationBean<RequestBodyLimitFilter> requestBodyLimitFilter() {
+        FilterRegistrationBean<RequestBodyLimitFilter> registration = new FilterRegistrationBean<>(new RequestBodyLimitFilter());
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
         return registration;
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new JsonBodyArgumentResolver(mapper));
         resolvers.add(new CurrentPrincipal());
     }
 
     /**
-     * Ảnh kho địa điểm (ADR-010) luôn được phục vụ từ classpath. Khi đặt {@code wander.web.dir} (ví dụ ../web/dist),
-     * phục vụ thêm giao diện đã build cùng nguồn gốc với API (chạy cục bộ và e2e). Trên AWS, giao diện dự kiến nằm ở
-     * S3 + CloudFront (đề xuất, chưa duyệt).
+     * The venue-catalog photos (ADR-010) are always served from the classpath. When {@code wander.web.dir} is set (for example ../web/dist),
+     * the built UI is also served from the same origin as the API (local runs and e2e). On AWS the UI is expected to be on
+     * S3 + CloudFront (a proposal, not yet approved).
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(StaticWebConstants.PHOTO_URL_PATTERN)
                 .addResourceLocations(StaticWebConstants.PHOTO_CLASSPATH_LOCATION)
-                .setCacheControl(CacheControl.maxAge(StaticWebConstants.PHOTO_CACHE_DURATION).cachePublic());
+                .setCacheControl(CacheControl.maxAge(StaticWebConstants.PHOTO_CACHE_DURATION).cachePublic().immutable());
         webRoot().ifPresent(root -> registry.addResourceHandler(StaticWebConstants.ALL_PATHS_PATTERN)
                 .addResourceLocations(new FileSystemResource(root + CommonConstants.SLASH))
                 .resourceChain(false)
@@ -96,8 +112,8 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     /**
-     * "/" có đường dẫn tài nguyên rỗng nên ResourceHttpRequestHandler trả 404 trước khi tới resolver;
-     * chuyển tiếp nội bộ sang /index.html.
+     * '/' has an empty resource path so ResourceHttpRequestHandler answers 404 before reaching the resolver;
+     * forward internally to /index.html.
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -105,18 +121,18 @@ public class WebConfig implements WebMvcConfigurer {
                 .setViewName(StaticWebConstants.INDEX_FORWARD_VIEW));
     }
 
-    /** Thư mục giao diện đã build nếu đã cấu hình và là thư mục thật; ngược lại không có (chỉ chạy API). */
+    /** The built UI directory if it is configured and is a real directory; otherwise none (API only). */
     private Optional<Path> webRoot() {
         if (webDir == null || webDir.isBlank()) return Optional.empty();
         Path root = Path.of(webDir).toAbsolutePath().normalize();
         return Files.isDirectory(root) ? Optional.of(root) : Optional.empty();
     }
 
-    /** Tệp có thật thì trả tệp; đường dẫn giao diện khác (không phải /api) trả index.html. */
+    /** If the file exists it is returned; any other UI path (not /api) returns index.html. */
     static final class SpaFallbackResolver extends PathResourceResolver {
         private final Path root;
 
-        /** Tạo bộ phân giải cho thư mục giao diện {@code root}. */
+        /** Creates the resolver for the UI directory {@code root}. */
         SpaFallbackResolver(Path root) {
             this.root = root;
         }

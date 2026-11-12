@@ -1,4 +1,4 @@
-/** Cổng công khai của tính năng "Cộng tác" (thành viên, liên kết mời, đề nghị xóa, checklist): chỉ phần API, hook dùng chung và chữ. */
+/** The public gate of the 'Collaboration' feature (members, invite links, deletion requests, checklist): only the API part, the shared hook and the copy. */
 export { collabGateway } from './api/collabClient.ts';
 export type { ChecklistItem, CreatedInvite, DeletionRequest, InvitePreview, InviteStatus, Joined, Member, MemberRole, RequestStatus } from './api/CollabGateway.ts';
 export { useLoaded } from './hooks/useLoaded.ts';

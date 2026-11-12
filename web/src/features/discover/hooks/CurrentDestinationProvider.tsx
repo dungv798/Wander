@@ -16,7 +16,7 @@ interface CurrentDestinationValue {
 const CurrentDestinationContext = createContext<CurrentDestinationValue | null>(null);
 const NO_DESTINATIONS: readonly DestinationSummary[] = [];
 
-/** Kho lựa chọn dùng chung; xác thực mã lưu trên máy bằng catalog khi tải xong. */
+/** The shared selection store; validates the code saved on this device against the catalog once it has loaded. */
 export function CurrentDestinationProvider({ children }: { readonly children: ReactNode }) {
   const { catalog } = useDiscover();
   const { state, retry } = useResource((signal) => catalog.searchDestinations('', signal), [catalog]);
@@ -25,7 +25,7 @@ export function CurrentDestinationProvider({ children }: { readonly children: Re
   const loadedDestinations = state.status === 'ready' ? state.data : undefined;
   const destId = resolveDestination(saved, loadedDestinations);
   const selectedId = selectedDestination(saved, loadedDestinations);
-  /** Chỉ chọn mã hợp lệ; lưu ngay trước khi chuyển màn hoặc tải lại. */
+  /** Only a valid code is chosen; it is saved right before switching screens or reloading. */
   function select(id: string): void {
     const valid = selectedDestination(id, loadedDestinations);
     if (!valid) return;
@@ -35,7 +35,7 @@ export function CurrentDestinationProvider({ children }: { readonly children: Re
   return <CurrentDestinationContext.Provider value={{ destId, selectedId, destinations, status: state.status, retry, select }}>{children}</CurrentDestinationContext.Provider>;
 }
 
-/** Đọc điểm đến hiện tại từ kho chung của ứng dụng. */
+/** Reads the current destination from the app's shared store. */
 export function useCurrentDestination(): CurrentDestinationValue {
   const context = useContext(CurrentDestinationContext);
   if (!context) throw new Error('CurrentDestinationProvider');

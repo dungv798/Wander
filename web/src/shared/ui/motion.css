@@ -1,4 +1,4 @@
-/* Kích thước nội tại của RevealImage giữ khung; các khung crop hiện có tiếp tục ưu tiên. */
+/* The intrinsic size of RevealImage keeps the frame; the existing crop frames still take priority. */
 img[data-image-ready] { object-fit: cover; }
 :root img[data-image-ready='false'] { opacity: 0; }
 .image-outgoing { position: absolute; inset: 0; pointer-events: none; background-position: center; background-repeat: no-repeat; background-size: cover; animation: imageCrossfade var(--dur-photo) var(--ease-photo) both; }

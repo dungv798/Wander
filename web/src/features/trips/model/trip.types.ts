@@ -1,92 +1,92 @@
-/** Mô hình chuyến đi ở FE. Tên trường bám hợp đồng backend (`TripDetail`/`Item` ở legacy/web-v1/src/api.ts, DR-018): `costK`, `referenceK`, `timeOfDay`, `durationMin`, `booking`, `done`. */
+/** The trip model on the front end. Field names follow the backend contract (`TripDetail`/`Item` in `web/src/api.ts`): `costK`, `referenceK`, `timeOfDay`, `durationMin`, `booking`, `done`. */
 
-/** Chín loại mục (D13), mã trùng `ItemType` của backend. */
+/** The nine item kinds (D13), codes the same as the backend's `ItemType`. */
 export type ItemKind = 'sightseeing' | 'food' | 'transport' | 'lodging' | 'car_rental' | 'shopping' | 'tour' | 'rest' | 'task';
 
-/** Trạng thái đặt chỗ (A-14, DR-003): chỉ loại mục có giá mới có; Nghỉ và Việc cần làm là `null`. */
+/** The booking status (A-14, DR-003): only an item kind that has a price has it; Rest and To-do are `null`. */
 export type BookingStatus = 'pending' | 'booked';
 
-/** Một mục trong chuyến: địa điểm từ kho (`placeId`) hoặc mục tự do. */
+/** One item in a trip: a place from the catalog (`placeId`) or a free-form item. */
 export interface TripItem {
   readonly id: string;
-  /** Mã địa điểm trong kho biên tập; null với mục tự do. */
+  /** The id of the place in the editorial catalog; null for a free-form item. */
   readonly placeId: string | null;
   readonly type: ItemKind;
-  /** Tên mục tự do (địa điểm lấy tên từ kho, để rỗng). */
+  /** The name of a free-form item (a place takes its name from the catalog, left empty). */
   readonly title: string;
-  /** Ngày `yyyy-mm-dd`; null = "Chưa có ngày" (DR-011 A1). */
+  /** The day `yyyy-mm-dd`; null = 'No date yet' (DR-011 A1). */
   readonly day: string | null;
-  /** Thứ tự trong ngày (0, 1, 2…); null khi chưa xếp. */
+  /** The order in the day (0, 1, 2...); null when not scheduled. */
   readonly position: number | null;
   readonly timeOfDay: string | null;
   readonly durationMin: number | null;
   readonly note: string;
-  /** Chi phí, nghìn đồng. null = chưa biết giá; 0 = biết bằng không (D18). */
+  /** The cost, in thousand VND. null = price unknown; 0 = known to be zero (D18). */
   readonly costK: number | null;
-  /** "Đã bao gồm": nằm trong giá khác, KHÔNG cộng vào tổng (D18). */
+  /** 'Included': it is inside another price, NOT added to the total (D18). */
   readonly included: boolean;
-  /** Giá tham khảo khi đã bao gồm (R4). */
+  /** The reference price when included (R4). */
   readonly referenceK: number | null;
   readonly booking: BookingStatus | null;
-  /** Bản thân người đang xem đã xong việc/ghé mục địa điểm chưa (theo từng người, D10/DR-029). */
+  /** Whether the viewer themself has finished the task/visited the place item (per person, D10/DR-029). */
   readonly done: boolean;
-  /** Mã thành viên đã thêm mục (null = Organizer/dữ liệu cũ); dùng cho quyền sửa/xóa mục của mình (H3). */
+  /** The id of the member who added the item (null = Organizer/old data); used for the permission to edit/delete one's own item (H3). */
   readonly addedBy: string | null;
-  /** Mã những thành viên hiện tại đã xong việc/ghé mục địa điểm; dùng cho tiến độ chung. */
+  /** The ids of the current members who have finished the task/visited the place item; used for the shared progress. */
   readonly doneBy: readonly string[];
 }
 
-/** Một mục đã xóa mềm (D19): giữ đến khi xóa vĩnh viễn, nhớ ngày và vị trí cũ để khôi phục về đúng chỗ. */
+/** A soft-deleted item (D19): kept until permanently deleted, remembering the old day and position so it can be restored to the exact place. */
 export interface TrashEntry {
   readonly id: string;
   readonly item: TripItem;
-  /** Thời điểm xóa (mili giây từ epoch). */
+  /** The time of deletion (milliseconds since the epoch). */
   readonly deletedAt: number;
-  /** Ngày của mục lúc xóa; null nếu lúc đó chưa có ngày. */
+  /** The item's day at deletion; null if it had no day then. */
   readonly day: string | null;
-  /** Vị trí trong ngày lúc xóa. */
+  /** The position in the day at deletion. */
   readonly position: number | null;
 }
 
-/** Bìa lưu máy chủ: mã ảnh catalog hoặc một trong sáu mã gradient (DR-031). */
+/** The cover saved on the server: a catalog photo id or one of the six gradient codes (DR-031). */
 export interface TripCover {
   readonly kind: 'photo' | 'gradient';
   readonly ref: string;
 }
 
-/** Một chuyến đi. */
+/** One trip. */
 export interface Trip {
-  /** null/không có ở dữ liệu cũ là ảnh mặc định của điểm đến. */
+  /** null/absent in old data is the destination's default photo. */
   readonly cover?: TripCover | null;
   readonly id: string;
-  /** Vai của người đang xem (Q6): Organizer là chủ chuyến, Thành viên vào bằng liên kết. */
+  /** The viewer's role (Q6): the Organizer is the trip owner, a Member joined by link. */
   readonly role: 'organizer' | 'member';
-  /** Số thành viên kể cả Organizer. */
+  /** The number of members including the Organizer. */
   readonly memberCount: number;
-  /** Mã thành viên của chính người đang xem (null nếu chưa biết). */
+  /** The member id of the viewer themself (null if not known). */
   readonly selfMemberId: string | null;
   readonly name: string;
   readonly destinationId: string;
   readonly startDate: string;
   readonly endDate: string;
-  /** "Dự kiến N ngày" (A3, DR-018): ngày chưa chốt, hiển thị "chưa chắc". */
+  /** 'Expected N days' (A3, DR-018): dates not fixed, displayed 'tentative'. */
   readonly datesTentative: boolean;
-  /** "Ai đi" (F2, DR-018): nhãn kiểu chuyến, chưa phải danh sách thành viên. */
+  /** 'Who is going' (F2, DR-018): the trip-kind label, not yet a member list. */
   readonly kind: string | null;
-  /** Sở thích (loại địa điểm) chọn lúc tạo (F2, DR-018). */
+  /** Interests (place kinds) chosen at creation (F2, DR-018). */
   readonly interests: readonly string[];
-  /** Mã kiểu chuyến (tối đa 5, Q11). */
+  /** The trip-style codes (at most 5, Q11). */
   readonly styles: readonly string[];
   readonly pace: string | null;
-  /** Ngân sách, nghìn đồng; null = chưa đặt. */
+  /** The budget, in thousand VND; null = not set. */
   readonly budgetK: number | null;
   readonly items: readonly TripItem[];
-  /** "Đã xóa gần đây" (D19): mục xóa mềm, mới nhất đứng đầu. */
+  /** 'Recently deleted' (D19): soft-deleted items, newest first. */
   readonly trash: readonly TrashEntry[];
   readonly createdAt: number;
 }
 
-/** Trạng thái kho chuyến đi (lưu trên máy ở pha FE; backend thay thế ở FE-10). */
+/** The state of the trip store (stored on the device in the FE phase; replaced by the backend in FE-10). */
 export interface TripsState {
   readonly trips: readonly Trip[];
 }

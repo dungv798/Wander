@@ -59,7 +59,7 @@ class PlanningApiIT extends ApiTestSupport {
         Res missing = call("GET", "/api/trips/00000000-0000-0000-0000-000000000000", b.token());
         Res foreign = call("GET", "/api/trips/" + trip, b.token());
         assertThat(foreign.status()).isEqualTo(404);
-        assertThat(foreign.body()).isEqualTo(missing.body());
+        assertThat(withoutInstance(foreign)).isEqualTo(withoutInstance(missing));
         assertThat(call("GET", "/api/trips/khong-phai-uuid", b.token()).status()).isEqualTo(404);
 
         assertThat(call("PATCH", "/api/trips/" + trip, b.token(), Map.of("name", "bị chiếm")).status()).isEqualTo(404);
@@ -249,7 +249,7 @@ class PlanningApiIT extends ApiTestSupport {
         assertThat(call("POST", path, u.token(), with(base, "cost", "1.5")).code()).isEqualTo("MALFORMED");
         assertThat(call("POST", path, u.token(), with(base, "cost", 1.5)).code()).isEqualTo("MALFORMED");
         assertThat(call("POST", path, u.token(), with(base, "cost", "150k")).code()).isEqualTo("MALFORMED");
-        assertThat(call("POST", path, u.token(), with(base, "cost", "abc")).str("error.field")).isEqualTo("cost");
+        assertThat(call("POST", path, u.token(), with(base, "cost", "abc")).str("field")).isEqualTo("cost");
         assertThat(call("POST", path, u.token(), with(base, "cost", 1_000_000_001L)).code()).isEqualTo("TOO_LARGE");
         assertThat(call("POST", path, u.token(), with(base, "cost", "00000000000150")).status()).isEqualTo(201);
         assertThat(call("POST", path, u.token(), map("day", DAY2, "type", "food", "title", "x", "cost", 100, "referenceCost", 5))

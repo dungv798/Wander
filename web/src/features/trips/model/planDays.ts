@@ -11,7 +11,7 @@ import { summarizePlan } from './planSummary.ts';
 export { summarizePlan } from './planSummary.ts';
 export type { PlanDayPreview, PlanPreview, DeferredPlanItem, DeferredReason } from './planDays.types.ts';
 
-/** Không đoán ngày cho booking/giờ hẹn, không hứa vị trí hay tự xử lý cung cần chốt. */
+/** It guesses no day for a booking/appointment time, promises no position and does not handle an arc that needs fixing by itself. */
 function holdReason(item: TripItem, coordinateOf: CoordinateOf, manualIds?: ReadonlySet<string>, protectedIds?: ReadonlySet<string>): DeferredReason | null {
   if (protectedIds?.has(item.id)) return 'pending';
   if (item.type === 'lodging') return 'stay';
@@ -23,8 +23,8 @@ function holdReason(item: TripItem, coordinateOf: CoordinateOf, manualIds?: Read
 }
 
 /**
- * Gợi ý có giới hạn cho mục chưa có ngày: ghé + di chuyển liên điểm, giữ cụm gần nhau và lịch cố định.
- * Phần chưa vừa vẫn trong Chưa có ngày; không chia đều, không ép ngày cuối, không tuyên bố đã kiểm giờ mở cửa/giờ hẹn.
+ * A bounded suggestion for an item with no day: visiting + travel between points, keeping close clusters and the fixed schedule.
+ * The part that does not fit stays in No date yet; no even splitting, no forcing into the last day, no claim that opening hours/appointment times were checked.
  */
 export function planPreview(t: Trip, coordinateOf: CoordinateOf, hub: GeoPoint | null, durationOf: DurationOf = () => null, manualIds?: ReadonlySet<string>, protectedIds?: ReadonlySet<string>): PlanPreview {
   const unassigned = unassignedItems(t);
@@ -44,12 +44,12 @@ export function planPreview(t: Trip, coordinateOf: CoordinateOf, hub: GeoPoint |
   };
 }
 
-/** Giữ hợp đồng cũ cho nơi chỉ cần kế hoạch, không tự ghi hay thay ngày của mục đã xếp. */
+/** Keeps the old contract for a place that only needs a plan, and does not write or change the day of an already scheduled item on its own. */
 export function planDays(t: Trip, coordinateOf: CoordinateOf, hub: GeoPoint | null, durationOf: DurationOf = () => null): DayPlan {
   return planPreview(t, coordinateOf, hub, durationOf).plan;
 }
 
-/** Lựa chọn ngày tường minh được nối sau mục có sẵn; bỏ ID/ngày không hợp lệ và không sửa mục đã xếp. */
+/** An explicit day choice is appended after the existing item; an invalid id/day is dropped and an already scheduled item is not edited. */
 export function withDayOverrides(t: Trip, plan: DayPlan, overrides: Readonly<Record<string, string>>): DayPlan {
   const result: Record<string, { day: string; position: number }> = {};
   const days = new Set(tripDays(t));

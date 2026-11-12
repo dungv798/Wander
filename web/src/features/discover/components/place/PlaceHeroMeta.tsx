@@ -3,7 +3,7 @@ import { Chip } from '../../../../shared/ui/Chip.tsx';
 import type { PlaceView } from '../../model/Catalog.types.ts';
 import { mainAway } from '../../model/destinationQueries.ts';
 
-/** Tên và thông tin quyết định nổi ở đáy ảnh; khoảng cách chỉ hiện khi có mốc thật. */
+/** The name and the deciding information float at the bottom of the photo; the distance shows only when there is a real landmark. */
 export function PlaceHeroMeta({ place }: { readonly place: PlaceView }) {
   const away = mainAway(place);
   return <div className="place-hero-meta">

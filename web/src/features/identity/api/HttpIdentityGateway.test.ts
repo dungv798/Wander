@@ -12,9 +12,9 @@ interface Call {
 }
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
-const err = (code: string, status: number): Response => json({ error: { code } }, status);
+const err = (code: string, status: number): Response => json({ code }, status);
 
-/** Cổng dựng trên fetch giả: `handler` nhận từng lời gọi và trả phản hồi; trả thêm danh sách lời gọi để kiểm. */
+/** A gateway built on a fake fetch: `handler` receives each call and returns the response; it also returns the list of calls for checking. */
 function gateway(handler: (c: Call) => Response): { readonly gw: HttpIdentityGateway; readonly calls: Call[] } {
   const calls: Call[] = [];
   const fetchImpl: FetchLike = (url, init) => {

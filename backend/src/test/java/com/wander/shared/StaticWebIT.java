@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -33,6 +35,24 @@ class StaticWebIT extends ApiTestSupport {
     @DynamicPropertySource
     static void web(DynamicPropertyRegistry r) {
         r.add("wander.web.dir", WEB::toString);
+    }
+
+    @Test
+    @DisplayName("catalog photos are served as WebP with a one-year immutable cache (file names carry a content hash)")
+    void servesHashedPhotosAsImmutableWebp() {
+        Res detail = call("GET", "/api/catalog/destinations/da-lat", null);
+        Map<?, ?> photo = detail.list("destination.places").stream().map(p -> (Map<?, ?>) p)
+                .flatMap(p -> ((List<?>) p.get("photos")).stream()).map(p -> (Map<?, ?>) p)
+                .filter(p -> String.valueOf(p.get("url")).startsWith("/catalog/photos/")).findFirst().orElseThrow();
+        for (String key : new String[] {"url", "thumbUrl"}) {
+            String url = (String) photo.get(key);
+            assertThat(url).as(key).matches("/catalog/photos/[a-z0-9-]+-w\\d+-[0-9a-f]{10}\\.webp");
+            Res image = call("GET", url, null);
+            assertThat(image.status()).as(url).isEqualTo(200);
+            assertThat(image.raw().headers().firstValue("Content-Type")).as(url).hasValue("image/webp");
+            assertThat(image.raw().headers().firstValue("Cache-Control").orElse("")).as(url)
+                    .contains("max-age=31536000").contains("public").contains("immutable");
+        }
     }
 
     @Test

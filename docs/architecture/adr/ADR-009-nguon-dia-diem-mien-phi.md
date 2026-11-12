@@ -1,5 +1,8 @@
 # ADR-009 — Nguồn dữ liệu địa điểm: miễn phí, biên tập theo điểm đến, qua cổng `PlaceCatalog`
 
+> **English title:** Place data: free, hand-curated per destination, behind a PlaceCatalog port
+> **Summary (EN):** Place data reaches the application through a domain port. The first adapter is a zero-cost, editorially curated catalog stored in the repository, with source, license and author on every field and photo; a Google Places adapter can be added later without changing business code.
+
 - **Trạng thái:** `APPROVED` — PO chọn "Bắt đầu miễn phí, thêm Google sau (cùng cổng PlaceCatalog)" ngày 24/10/2026, sau khi nói: "t ko có tiền và ko muốn tốn chi phí mà có cách nào tốt hơn ko".
 - **Liên quan:** DR-005 (khám phá bằng quẹt), DR-006, `docs/ux/product-spec-v1.md`, ADR-002/003 (Clean Architecture, cổng/adapter), D8/D14/Q15 (plan).
 

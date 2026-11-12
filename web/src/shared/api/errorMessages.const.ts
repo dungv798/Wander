@@ -1,19 +1,19 @@
-/** Bảng mã lỗi → lời nhắc tiếng Việt (docs/ux/error-codes.md, Tầng B: đổi được). Quy tắc: luôn hiện mã nhỏ; KHÔNG đếm "còn N lần thử" (MĐ-8). */
+/** The table error code -> Vietnamese hint (docs/ux/error-codes.md, Tier B: changeable). Rule: always show the small code; do NOT count 'N attempts left' (MĐ-8). */
 
-/** Lối đi của hộp lỗi: Thử lại · mở Bảo mật · về Chuyến đi · mở trên máy này · tải lại · đóng. */
+/** The ways out of the error box: Retry - open Security - go to Trips - open on this device - reload - close. */
 export type ErrorAction = 'retry' | 'security' | 'trips' | 'recover' | 'reload' | 'close';
 
-/** Nhóm lỗi có chung lời nhắc. */
+/** The error groups that share a hint. */
 export type ErrorKind = 'invalid' | 'cover' | 'referenceCost' | 'matchMismatch' | 'expired' | 'stepUp' | 'rate' | 'recovery' | 'conflict' | 'notFound' | 'inTrash' | 'trashFull' | 'invite' | 'denied' | 'rule' | 'tooLarge' | 'network' | 'internal';
 
-/** Lời nhắc của một nhóm lỗi. */
+/** The hint of an error group. */
 export interface ErrorInfo {
   readonly title: string;
   readonly text: string;
   readonly action: ErrorAction;
 }
 
-/** Lời nhắc theo nhóm. */
+/** The hints by group. */
 export const ERROR_INFO: Readonly<Record<ErrorKind, ErrorInfo>> = {
   invalid: { title: 'Dữ liệu chưa hợp lệ', text: 'Kiểm tra lại các ô vừa nhập rồi thử lại. Nếu vẫn lỗi, hãy báo kèm mã bên dưới.', action: 'close' },
   cover: { title: 'Bìa chưa hợp lệ', text: 'Hãy chọn ảnh hoặc màu bìa có sẵn rồi thử lại.', action: 'close' },
@@ -35,7 +35,7 @@ export const ERROR_INFO: Readonly<Record<ErrorKind, ErrorInfo>> = {
   internal: { title: 'Có lỗi ở phía Wander', text: 'Việc bạn vừa làm chưa được lưu. Thử lại sau ít phút.', action: 'retry' },
 };
 
-/** Mã máy chủ → nhóm lỗi. Mã không có trong bảng rơi về `internal`. */
+/** Server code -> error group. A code not in the table falls back to `internal`. */
 export const CODE_KIND: ReadonlyMap<string, ErrorKind> = new Map(
 
   (
@@ -61,13 +61,13 @@ export const CODE_KIND: ReadonlyMap<string, ErrorKind> = new Map(
   ).flatMap(([kind, codes]) => codes.map((c) => [c, kind] as const)),
 );
 
-/** Mã dùng khi lỗi không có mã (lỗi lạ). */
+/** The code used when an error has no code (an unknown error). */
 export const UNKNOWN_CODE = 'INTERNAL';
 
-/** Các mã minh họa ở khu "Giả lập" của Cài đặt (S20). */
+/** The sample codes in the 'Simulation' area of Settings (S20). */
 export const DEMO_ERROR_CODES: readonly string[] = ['RATE_LIMITED', 'NOT_FOUND', 'INTERNAL', 'STEP_UP_REQUIRED', 'BODY_TOO_LARGE'];
 
-/** Nhãn nút theo lối đi. */
+/** The button labels by way out. */
 export const ERROR_ACTION_LABEL: Readonly<Record<ErrorAction, string>> = {
   retry: 'Thử lại',
   security: 'Mở Bảo mật',
@@ -77,5 +77,5 @@ export const ERROR_ACTION_LABEL: Readonly<Record<ErrorAction, string>> = {
   close: 'Đóng',
 };
 
-/** Nhãn cho mã nhỏ trong hộp lỗi. */
+/** The labels for the small code in the error box. */
 export const ERROR_CODE_LABEL = 'Mã lỗi: {code}';

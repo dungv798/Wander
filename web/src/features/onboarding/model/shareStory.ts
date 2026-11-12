@@ -7,24 +7,24 @@ import { ONBOARD_COPY as T } from './onboarding.copy.ts';
 import type { ShareAction } from './shareState.ts';
 import type { TouchMark } from './swipeDemo.ts';
 
-/** Những nút mà câu chuyện "chạm" vào. */
+/** The buttons the story 'touches'. */
 export type ShareTarget = 'share' | 'copy' | 'accept';
 
-/** Cầu nối từ kịch bản chia sẻ sang giao diện (kịch bản không biết gì về React). */
+/** The bridge from the share script to the UI (the script knows nothing about React). */
 export interface ShareApi {
   readonly dispatch: (action: ShareAction) => void;
   readonly toast: (text: string) => void;
   readonly touch: (mark: TouchMark | null) => void;
-  /** Tâm của nút theo tọa độ sân khấu; null nếu chưa có trên màn hình. */
+  /** The center of a button in stage coordinates; null if it is not on the screen yet. */
   readonly center: (target: ShareTarget) => { x: number; y: number } | null;
 }
 
-/** Thông báo sau khi chủ chuyến chấp nhận: địa điểm và ngày được thêm vào. */
+/** The notice after the trip owner accepts: the place and the day that were added. */
 export function acceptedText(place: PlaceView): string {
   return fill(T.share.accepted, { place: place.name, day: fill(T.trip.day, { n: PROPOSAL.dayIndex + 1 }) });
 }
 
-/** Dấu chạm trượt tới nút, nhấn, thực hiện hành động rồi biến mất (người xem thấy rõ "ai bấm gì"). */
+/** The touch dot slides to a button, presses, performs the action and then disappears (the viewer clearly sees 'who pressed what'). */
 export async function tapOn(run: Run, api: ShareApi, target: ShareTarget, act: () => void): Promise<void> {
   const c = api.center(target);
   if (c) api.touch({ ...c, press: false });
@@ -36,7 +36,7 @@ export async function tapOn(run: Run, api: ShareApi, target: ShareTarget, act: (
   await run.wait(SHARE_TIMING.TAP_AFTER_MS);
 }
 
-/** Hai người bạn lần lượt vào bằng liên kết và đặt tên hiển thị. */
+/** Two friends join in turn by the link and set a display name. */
 export async function joinFriends(run: Run, api: ShareApi): Promise<void> {
   const friends = MEMBERS.filter((m) => m.id !== 'me');
   for (const [i, f] of friends.entries()) {
@@ -47,7 +47,7 @@ export async function joinFriends(run: Run, api: ShareApi): Promise<void> {
   await run.wait(SHARE_TIMING.JOIN_AFTER_MS);
 }
 
-/** Kịch bản cảnh chia sẻ: chia sẻ liên kết → sao chép → Mai/Bảo tham gia → Mai đề xuất → chủ chuyến chấp nhận. `ready` chờ bản đồ (hoặc sơ đồ thay thế). */
+/** The share scene script: share the link -> copy -> Mai/Bao join -> Mai suggests -> the trip owner accepts. `ready` waits for the map (or the replacement diagram). */
 export async function playShare(run: Run, api: ShareApi, ready: Promise<void>, place: PlaceView): Promise<void> {
   await run.wait(SHARE_TIMING.START_MS);
   await run.until(ready);
@@ -68,7 +68,7 @@ export async function playShare(run: Run, api: ShareApi, ready: Promise<void>, p
   await run.wait(SHARE_TIMING.END_MS);
 }
 
-/** Điểm giữa của một hình chữ nhật theo gốc `origin` (dùng để đổi tọa độ màn hình sang tọa độ sân khấu). */
+/** The midpoint of a rectangle relative to the origin `origin` (used to convert screen coordinates to stage coordinates). */
 export function centerIn(box: DOMRect, origin: DOMRect): { x: number; y: number } {
   return { x: box.left - origin.left + box.width / HALF, y: box.top - origin.top + box.height / HALF };
 }

@@ -1,0 +1,8 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.wander.catalog`
+|Bean references
+|* `c.w.s.web.ratelimit.RateLimits` (in Shared)
+* `c.w.s.web.request.ClientAddress` (in Shared)
+|===

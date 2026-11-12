@@ -1,0 +1,58 @@
+# End-to-end browser tests in CI: builds the jar and the web app, starts the real backend against a dedicated Postgres database and runs the
+# Playwright scenarios in web/e2e (126 at the time of writing) with the Chrome that the ubuntu runner image ships. It runs the same script
+# as a developer machine (`make e2e` -> tools/e2e.sh), so there is one definition of "e2e".
+# No secrets, no deploy: the recovery-code HMAC key is generated at random inside the job by tools/e2e.sh and never printed.
+name: e2e
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ["backend/**", "web/**", "e2e/**", "package.json", "package-lock.json", "docker-compose.yml", "tools/e2e.sh", ".github/workflows/e2e.yml"]
+  push:
+    branches: [main]
+    paths: ["backend/**", "web/**", "e2e/**", "package.json", "package-lock.json", "docker-compose.yml", "tools/e2e.sh", ".github/workflows/e2e.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    name: browser scenarios against the real backend
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+      - name: Check that Chrome (used through Playwright's channel) is present
+        run: google-chrome --version
+      # One scenario file (mobile-document-scroll) drives WebKit, which the runner image does not ship. playwright-core is a root
+      # dependency, so install the matching WebKit build and its system libraries (the first run showed the browser was missing).
+      - name: Install WebKit for Playwright
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright-core install --with-deps webkit
+      - name: Run the end-to-end suite
+        run: sh tools/e2e.sh
+      - name: Keep the logs when something failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-logs
+          path: .logs/
+          if-no-files-found: ignore
+          retention-days: 7

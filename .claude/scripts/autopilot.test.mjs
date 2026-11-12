@@ -1,6 +1,6 @@
 // Run: node --test .claude/scripts/autopilot.test.mjs
-// Each test works on a throw-away copy of the project, never on the real docs/autopilot state.
-import test from 'node:test';
+// Each test works on a throw-away copy of the project, never on the real .claude/autopilot state.
+import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -9,11 +9,21 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const REAL = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+/** Only what the autopilot reads or watches: copying the whole project (gigabytes of local data) filled the disk. */
+const SANDBOX_FILES = ['.claude', 'CLAUDE.md', 'docs/wander-master-plan.md', 'docs/agent-system.md'];
+const sandboxes = [];
 function sandbox() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wander-ap-'));
-  fs.cpSync(REAL, dir, { recursive: true, filter: (s) => !/[\\/](\.git|node_modules)([\\/]|$)/.test(s) && !/docs[\\/]autopilot[\\/](runs|ACTIVE\.json)/.test(s) });
+  sandboxes.push(dir);
+  for (const rel of SANDBOX_FILES) {
+    const from = path.join(REAL, rel);
+    if (!fs.existsSync(from)) continue;
+    fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    fs.cpSync(from, path.join(dir, rel), { recursive: true, filter: (s) => !/\.claude[\\/]autopilot[\\/](runs|ACTIVE\.json)/.test(s) });
+  }
   return dir;
 }
+after(() => { for (const dir of sandboxes) fs.rmSync(dir, { recursive: true, force: true }); });
 const cli = (dir, ...args) => { const r = spawnSync(process.execPath, [path.join(dir, '.claude/scripts/autopilot.mjs'), ...args], { cwd: dir, encoding: 'utf8' }); let j = null; try { j = JSON.parse(r.stdout); } catch { /* */ } return { code: r.status, json: j, err: r.stderr }; };
 const guard = (dir, payload) => { const r = spawnSync(process.execPath, [path.join(dir, '.claude/hooks/autopilot-guard.mjs')], { cwd: dir, input: typeof payload === 'string' ? payload : JSON.stringify({ cwd: dir, ...payload }), encoding: 'utf8' }); return { code: r.status, err: r.stderr }; };
 const w = (dir, rel, txt) => { fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true }); fs.writeFileSync(path.join(dir, rel), txt); };
@@ -33,12 +43,12 @@ test('guard: master plan is protected without any run', () => {
 });
 
 test('dry-run writes nothing and routes Q16', () => {
-  const d = sandbox(); const before = fs.existsSync(path.join(d, 'docs/autopilot/runs'));
+  const d = sandbox(); const before = fs.existsSync(path.join(d, '.claude/autopilot/runs'));
   const r = cli(d, 'dry-run', '--target', 'Q16 auth and recovery');
   assert.equal(r.code, 0); assert.equal(r.json.wrote_files, false);
   assert.deepEqual(r.json.route_hint.round1_agents.sort(), ['wander-security-reviewer', 'wander-skeptic-qa', 'wander-software-architect']);
   assert.ok(r.json.registry.open_questions.includes('Q16')); assert.ok(r.json.registry.approved_decisions.includes('D15'));
-  assert.equal(fs.existsSync(path.join(d, 'docs/autopilot/runs')), before); assert.equal(fs.existsSync(path.join(d, 'docs/autopilot/ACTIVE.json')), false);
+  assert.equal(fs.existsSync(path.join(d, '.claude/autopilot/runs')), before); assert.equal(fs.existsSync(path.join(d, '.claude/autopilot/ACTIVE.json')), false);
 });
 
 test('state machine: order, retry limit, round limit, single lease', () => {
@@ -62,7 +72,7 @@ test('state machine: order, retry limit, round limit, single lease', () => {
   assert.equal(cli(d, 'round', 'open', '--n', '1', '--agents', 'wander-skeptic-qa,general-purpose').json.code, 'BAD_AGENTS');
   assert.equal(cli(d, 'round', 'open', '--n', '1', '--agents', 'wander-skeptic-qa,wander-security-reviewer').code, 0);
   assert.equal(cli(d, 'round', 'close', '--n', '1').json.code, 'ROUND_INCOMPLETE');
-  for (const a of ['wander-skeptic-qa', 'wander-security-reviewer']) { assert.equal(cli(d, 'dispatch-manual', '--agent', a).code, 0); w(d, `docs/autopilot/runs/t2/agents/${a}-r1.md`, `report ${a}`); }
+  for (const a of ['wander-skeptic-qa', 'wander-security-reviewer']) { assert.equal(cli(d, 'dispatch-manual', '--agent', a).code, 0); w(d, `.claude/autopilot/runs/t2/agents/${a}-r1.md`, `report ${a}`); }
   assert.equal(cli(d, 'dispatch-manual', '--agent', 'wander-skeptic-qa').json.code, 'DUPLICATE_DISPATCH');
   assert.equal(cli(d, 'round', 'close', '--n', '1').code, 0);
   assert.equal(cli(d, 'round', 'open', '--n', '3', '--agents', 'wander-skeptic-qa').json.code, 'STOP_ROUND_LIMIT');
@@ -74,21 +84,21 @@ test('active-run guard: write scope, bash scope, agent rules', () => {
   const p = (id) => { cli(d, 'stage', 'start', id); return cli(d, 'stage', 'done', id, '--inputs', PLAN); };
   cli(d, 'stage', 'start', 'preflight'); cli(d, 'preflight'); p('scope'); p('route'); cli(d, 'stage', 'start', 'review-r1');
   const ok = (p) => assert.equal(guard(d, p).code, 0, JSON.stringify(p)); const no = (p) => assert.equal(guard(d, p).code, 2, JSON.stringify(p));
-  ok({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/runs/g1/stages/scope.md' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/runs/g1/checkpoint.json' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/authorizations.json' } });
+  ok({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/runs/g1/stages/scope.md' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/runs/g1/checkpoint.json' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/authorizations.json' } });
   no({ tool_name: 'Write', tool_input: { file_path: 'docs/agent-system.md' } });
   // case-insensitive filesystems (NTFS, default macOS): case variants must hit the same protection
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/active.json' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/ACTIVE.JSON' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/runs/g1/Checkpoint.JSON' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/Authorizations.json' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/active.json' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/ACTIVE.JSON' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/runs/g1/Checkpoint.JSON' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/Authorizations.json' } });
   no({ tool_name: 'Write', tool_input: { file_path: 'docs/AUTOPILOT/runs/g1/stages/x.md' } });
   no({ tool_name: 'Edit', tool_input: { file_path: '.CLAUDE/settings.json' } });
   // Windows-style separators and trailing dot/space (Win32 strips them)
   no({ tool_name: 'Write', tool_input: { file_path: 'docs\\autopilot\\ACTIVE.json' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/ACTIVE.json.' } });
-  no({ tool_name: 'Write', tool_input: { file_path: 'docs/autopilot/ACTIVE.json ' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/ACTIVE.json.' } });
+  no({ tool_name: 'Write', tool_input: { file_path: '.claude/autopilot/ACTIVE.json ' } });
   no({ tool_name: 'Write', tool_input: { file_path: 'src/app.js' } });
   no({ tool_name: 'Write', tool_input: { file_path: '../outside.md' } });
   no({ tool_name: 'Edit', tool_input: { file_path: '.claude/settings.json' } });
@@ -105,10 +115,10 @@ test('active-run guard: write scope, bash scope, agent rules', () => {
   cli(d, 'round', 'open', '--n', '1', '--agents', 'wander-skeptic-qa,wander-security-reviewer');
   no({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-product-analyst' } }); // not registered
   ok({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-skeptic-qa' }, session_id: 's', tool_use_id: 'u1' });
-  assert.match(fs.readFileSync(path.join(d, 'docs/autopilot/runs/g1/dispatch.log'), 'utf8'), /"source":"hook"/);
+  assert.match(fs.readFileSync(path.join(d, '.claude/autopilot/runs/g1/dispatch.log'), 'utf8'), /"source":"hook"/);
   ok({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-skeptic-qa' } });  // one retry allowed while no saved report
   no({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-skeptic-qa' } });  // third attempt denied
-  w(d, 'docs/autopilot/runs/g1/agents/wander-security-reviewer-r1.md', 'r');
+  w(d, '.claude/autopilot/runs/g1/agents/wander-security-reviewer-r1.md', 'r');
   ok({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-security-reviewer' } });
   no({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-security-reviewer' } }); // saved report => no redispatch
   no({ tool_name: 'Agent', tool_input: { subagent_type: 'wander-skeptic-qa' }, agent_id: 'sub1' }); // no nesting
@@ -118,14 +128,14 @@ test('active-run guard: write scope, bash scope, agent rules', () => {
 test('resume: reuses valid stages, re-does stale ones, hard-stops on plan change', () => {
   const d = sandbox();
   cli(d, 'init', '--target', 'Q16 resume', '--executor', 'emulated', '--run-id', 'r1');
-  const cpf = path.join(d, 'docs/autopilot/runs/r1/checkpoint.json'); const cpj = JSON.parse(fs.readFileSync(cpf, 'utf8')); cpj.limits.max_resumes = 20; fs.writeFileSync(cpf, JSON.stringify(cpj));
+  const cpf = path.join(d, '.claude/autopilot/runs/r1/checkpoint.json'); const cpj = JSON.parse(fs.readFileSync(cpf, 'utf8')); cpj.limits.max_resumes = 20; fs.writeFileSync(cpf, JSON.stringify(cpj));
   cli(d, 'stage', 'start', 'preflight'); cli(d, 'preflight');
-  w(d, 'docs/autopilot/runs/r1/stages/scope.md', '# scope\nD15 Q16 §15.1\n');
-  cli(d, 'stage', 'start', 'scope'); assert.equal(cli(d, 'stage', 'done', 'scope', '--inputs', PLAN, '--outputs', 'docs/autopilot/runs/r1/stages/scope.md').code, 0);
+  w(d, '.claude/autopilot/runs/r1/stages/scope.md', '# scope\nD15 Q16 §15.1\n');
+  cli(d, 'stage', 'start', 'scope'); assert.equal(cli(d, 'stage', 'done', 'scope', '--inputs', PLAN, '--outputs', '.claude/autopilot/runs/r1/stages/scope.md').code, 0);
   cli(d, 'stage', 'start', 'route'); cli(d, 'stage', 'fail', 'route', '--reason', 'interrupted');
   let r = cli(d, 'resume'); assert.equal(r.code, 0, JSON.stringify(r.json));
   assert.deepEqual(r.json.reuse, ['preflight', 'scope']); assert.ok(r.json.redo.some((x) => x.id === 'route'));
-  fs.appendFileSync(path.join(d, 'docs/autopilot/runs/r1/stages/scope.md'), 'edited\n');
+  fs.appendFileSync(path.join(d, '.claude/autopilot/runs/r1/stages/scope.md'), 'edited\n');
   r = cli(d, 'resume'); assert.ok(r.json.redo.some((x) => x.id === 'scope' && /output modified/.test(x.why.join())));
   assert.deepEqual(r.json.reuse, ['preflight']);
   w(d, 'docs/unrelated.md', 'x'); r = cli(d, 'resume'); assert.ok(r.json.drift_outside_autopilot.includes('docs/unrelated.md'));
@@ -140,7 +150,7 @@ test('resume: reuses valid stages, re-does stale ones, hard-stops on plan change
 
 function minimalRun(d, id, report) {
   cli(d, 'init', '--target', 'Q16 validate', '--executor', 'emulated', '--run-id', id);
-  const run = `docs/autopilot/runs/${id}`;
+  const run = `.claude/autopilot/runs/${id}`;
   cli(d, 'stage', 'start', 'preflight'); cli(d, 'preflight');
   for (const s of ['scope', 'route']) { w(d, `${run}/stages/${s}.md`, `# ${s}\nD15, Q16, §15.1\n`); cli(d, 'stage', 'start', s); cli(d, 'stage', 'done', s, '--inputs', PLAN, '--outputs', `${run}/stages/${s}.md`); }
   cli(d, 'stage', 'start', 'review-r1'); cli(d, 'round', 'open', '--n', '1', '--agents', 'wander-skeptic-qa');
@@ -178,8 +188,8 @@ test('validate + close: honest report passes; close writes script-generated bloc
   assert.equal(v.json.checks.find((c) => c.id === 'dispatch_evidence').status, 'WARN', 'emulated dispatches are flagged UNVERIFIED');
   const c = cli(d, 'close', '--outcome', 'complete'); assert.equal(c.code, 0, JSON.stringify(c.json));
   const rep = fs.readFileSync(path.join(d, run, 'report.md'), 'utf8');
-  assert.match(rep, /\| plan_unchanged \| PASS/); assert.match(rep, /docs\/autopilot\/runs\/v2\//);
-  assert.equal(fs.existsSync(path.join(d, 'docs/autopilot/ACTIVE.json')), false);
+  assert.match(rep, /\| plan_unchanged \| PASS/); assert.match(rep, /\.claude\/autopilot\/runs\/v2\//);
+  assert.equal(fs.existsSync(path.join(d, '.claude/autopilot/ACTIVE.json')), false);
   assert.equal(guard(d, { tool_name: 'Write', tool_input: { file_path: 'src/a.js' } }).code, 0, 'guard relaxes after close');
   assert.equal(cli(d, 'resume', '--run', 'v2').json.status, 'complete');
   const again = cli(d, 'validate'); assert.notEqual(again.json.overall, 'FAIL', 're-validating a closed run must not fail on its own validation.json: ' + JSON.stringify(again.json.checks.filter((x) => x.status === 'FAIL')));
@@ -223,19 +233,19 @@ test('amend: re-records a finished output with a logged reason; refuses state fi
   const d = sandbox();
   cli(d, 'init', '--target', 'Q16 amend', '--run-id', 'am1');
   cli(d, 'stage', 'start', 'preflight'); cli(d, 'preflight'); cli(d, 'stage', 'start', 'scope');
-  const f = 'docs/autopilot/runs/am1/stages/scope.md'; w(d, f, 'Q16 scope\n');
+  const f = '.claude/autopilot/runs/am1/stages/scope.md'; w(d, f, 'Q16 scope\n');
   assert.equal(cli(d, 'stage', 'done', 'scope', '--inputs', PLAN, '--outputs', f).code, 0);
   assert.equal(cli(d, 'amend', '--file', f, '--reason', 'unchanged file should be refused').json.code, 'UNCHANGED');
   w(d, f, 'Q16 scope, citation fixed\n');
   assert.equal(cli(d, 'amend', '--file', f, '--reason', 'short').json.code, 'NEED_REASON');
-  assert.equal(cli(d, 'amend', '--file', 'docs/autopilot/runs/am1/checkpoint.json', '--reason', 'try to rewrite state file').json.code, 'STATE_FILE');
-  assert.equal(cli(d, 'amend', '--file', 'docs/autopilot/runs/am1/Checkpoint.JSON', '--reason', 'case variant of state file').json.code, 'STATE_FILE');
+  assert.equal(cli(d, 'amend', '--file', '.claude/autopilot/runs/am1/checkpoint.json', '--reason', 'try to rewrite state file').json.code, 'STATE_FILE');
+  assert.equal(cli(d, 'amend', '--file', '.claude/autopilot/runs/am1/Checkpoint.JSON', '--reason', 'case variant of state file').json.code, 'STATE_FILE');
   assert.equal(cli(d, 'amend', '--file', PLAN, '--reason', 'attempt to touch the master plan').json.code, 'OUTSIDE_RUN');
-  assert.equal(cli(d, 'amend', '--file', 'docs/autopilot/runs/am1/stages/../../x.md', '--reason', 'path traversal attempt here').json.code, 'OUTSIDE_RUN');
-  w(d, 'docs/autopilot/runs/am1/stages/other.md', 'x'); assert.equal(cli(d, 'amend', '--file', 'docs/autopilot/runs/am1/stages/other.md', '--reason', 'file that no stage recorded').json.code, 'NOT_A_RECORDED_OUTPUT');
+  assert.equal(cli(d, 'amend', '--file', '.claude/autopilot/runs/am1/stages/../../x.md', '--reason', 'path traversal attempt here').json.code, 'OUTSIDE_RUN');
+  w(d, '.claude/autopilot/runs/am1/stages/other.md', 'x'); assert.equal(cli(d, 'amend', '--file', '.claude/autopilot/runs/am1/stages/other.md', '--reason', 'file that no stage recorded').json.code, 'NOT_A_RECORDED_OUTPUT');
   const ok = cli(d, 'amend', '--file', f, '--reason', 'fixed a wrong section number in a citation');
   assert.equal(ok.code, 0); assert.equal(ok.json.amendments, 1);
-  const cp = JSON.parse(fs.readFileSync(path.join(d, 'docs/autopilot/runs/am1/checkpoint.json'), 'utf8'));
+  const cp = JSON.parse(fs.readFileSync(path.join(d, '.claude/autopilot/runs/am1/checkpoint.json'), 'utf8'));
   assert.equal(cp.amendments.length, 1); assert.equal(cp.amendments[0].file, f); assert.notEqual(cp.amendments[0].old_sha256, cp.amendments[0].new_sha256);
   assert.equal(cli(d, 'resume').json.ok, true, 'resume sees no stale output after a logged amendment');
 });

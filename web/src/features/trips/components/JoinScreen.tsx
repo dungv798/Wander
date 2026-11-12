@@ -13,12 +13,12 @@ import { COLLAB_COPY as C, collabGateway } from '../../collab/index.ts';
 import { useIdentity, useReportError } from '../../identity/index.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 
-/** Mã lỗi máy chủ cho mọi liên kết mời không dùng được (hết hạn, thu hồi, sai): một thông điệp chung, không lộ lý do. */
+/** The server error code for every invite link that cannot be used (expired, revoked, wrong): one common message that does not reveal the reason. */
 const INVALID_INVITE = 'INVALID_INVITE';
 
 /**
- * Màn vào chuyến bằng liên kết mời `#/join/<mã>`: xem trước tên chuyến, hỏi tên hiển thị, rồi vào. Mã chỉ nằm trên địa chỉ (sau dấu #),
- * không lưu ở đâu khác, và bị gỡ khỏi địa chỉ ngay khi vào xong hoặc rời màn. Máy chưa có danh tính thì tạo danh tính ẩn danh trước (H1).
+ * The screen to join a trip by invite link `#/join/<code>`: previews the trip name, asks for a display name, then joins. The code lives only in the address (after the #),
+ * is stored nowhere else, and is removed from the address as soon as the join finishes or the screen is left. A device with no identity yet creates an anonymous identity first (H1).
  */
 export function JoinScreen({ code }: { readonly code: string }) {
   const toast = useToast();

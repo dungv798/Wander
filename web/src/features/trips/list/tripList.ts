@@ -19,21 +19,21 @@ export interface TripListOptions {
   readonly sort: TripSort;
 }
 
-/** Phân nhóm theo ngày địa phương yyyy-mm-dd; ngày chưa chốt luôn là một nhóm riêng. */
+/** Groups by local date yyyy-mm-dd; a trip with unconfirmed dates is always its own group. */
 export function tripStatus(trip: TripListEntry, today: string): TripStatus {
   if (trip.datesTentative || !trip.startDate || !trip.endDate) return 'tentative';
   if (trip.endDate < today) return 'past';
   return trip.startDate > today ? 'upcoming' : 'ongoing';
 }
 
-/** Đếm toàn bộ chuyến theo trạng thái, độc lập ô tìm để chip không đổi nghĩa khi gõ. */
+/** Counts every trip by status, independent of the search box so the chips do not change meaning while typing. */
 export function countTripStatuses(trips: readonly TripListEntry[], today: string): Record<TripStatus, number> {
   const counts = { upcoming: 0, ongoing: 0, past: 0, tentative: 0 };
   for (const trip of trips) counts[tripStatus(trip, today)]++;
   return counts;
 }
 
-/** Tìm không dấu theo tên/điểm đến và sắp ổn định bằng mã khi trùng ngày, tên hoặc thời điểm tạo. */
+/** Accent-insensitive search by name/destination and a stable sort by id when the date, name or creation time ties. */
 export function selectTrips<T extends TripListEntry>(trips: readonly T[], options: TripListOptions, today: string, destinations: Readonly<Record<string, string>> = {}): T[] {
   const query = normalizeSearch(options.query);
   return trips.filter(t => (!options.status || tripStatus(t, today) === options.status) && normalizeSearch(`${t.name} ${destinations[t.destinationId] ?? t.destinationId}`).includes(query)).sort((a, b) => {

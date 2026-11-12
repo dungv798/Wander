@@ -13,13 +13,13 @@ import { tripStatus } from '../list/tripList.ts';
 import { LIST_COPY } from '../list/list.copy.ts';
 import { gradientStyle } from '../model/cover.ts';
 
-/** "31/10 – 02/11", kèm "· chưa chắc" khi ngày mới là dự kiến. */
+/** '31/10 - 02/11', with '- tentative' when the dates are only expected. */
 export function dateRangeText(t: Pick<Trip, 'startDate' | 'endDate' | 'datesTentative'>): string {
   const range = `${dayMonth(t.startDate)} – ${dayMonth(t.endDate)}`;
   return t.datesTentative ? `${range} · ${T.list.tentativeTag}` : range;
 }
 
-/** Thẻ một chuyến trong danh sách: ảnh bìa (ảnh nơi đầu tiên), tên, ngày, số mục. */
+/** One trip card in the list: the cover photo (the photo of the first place), the name, the dates, the number of items. */
 export function TripCard({ trip, cover }: { readonly trip: Trip; readonly cover: string }) {
   const assigned = trip.items.filter(item => item.day !== null).length;
   return (

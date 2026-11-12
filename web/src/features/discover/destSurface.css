@@ -1,4 +1,4 @@
-/* Cấu trúc B: desktop lưới hai cột; mobile thẻ ngang, bộ lọc chủ đề và hành động nhẹ. */
+/* Structure B: desktop is a two-column grid; mobile has horizontal cards, a theme filter and light actions. */
 .dest-head { position: relative; display: flex; align-items: center; gap: 4px; padding: 16px 16px 0; background: transparent; color: var(--ink); }
 .dest-head > img { display: none; }
 .dh-top { flex: none; }

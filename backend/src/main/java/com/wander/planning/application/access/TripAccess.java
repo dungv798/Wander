@@ -9,25 +9,25 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 /**
- * Cổng quyền truy cập MỘT CHỖ cho các tính năng nhẹ gắn với chuyến nhưng không nạp aggregate (checklist…). Vai luôn được tra CSDL mỗi yêu cầu
- * (không cache): người bị gỡ mất quyền ngay. Người ngoài và chuyến đã xóa ⇒ 404 (INV-6); thành viên thường làm việc của Organizer ⇒ 403.
+ * The access gate in ONE PLACE for light trip-related features that do not load the aggregate (checklist...). The role is looked up in the DB on every request
+ * (no cache): a removed person loses access immediately. An outsider and a deleted trip => 404 (INV-6); a regular member doing an Organizer action => 403.
  */
 @Component
 public class TripAccess {
 
     private final TripReadModel read;
 
-    /** Nhận cổng đọc. */
+    /** Takes the read port. */
     public TripAccess(TripReadModel read) {
         this.read = read;
     }
 
-    /** Vai của người gọi; người ngoài ⇒ 404. */
+    /** The caller's role; an outsider => 404. */
     public MemberRole requireMember(UUID tripId, UUID identityId) {
         return read.roleIn(tripId, identityId).flatMap(MemberRole::fromCode).orElseThrow(WanderException::notFound);
     }
 
-    /** Chỉ Organizer: người ngoài ⇒ 404, thành viên thường ⇒ 403 NOT_ORGANIZER. */
+    /** Organizer only: an outsider => 404, a regular member => 403 NOT_ORGANIZER. */
     public void requireOrganizer(UUID tripId, UUID identityId) {
         if (requireMember(tripId, identityId) != MemberRole.ORGANIZER) {
             throw WanderException.forbidden(PlanningErrorCodes.NOT_ORGANIZER, PlanningMessages.NOT_ORGANIZER);

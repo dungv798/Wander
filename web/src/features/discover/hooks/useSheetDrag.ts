@@ -4,12 +4,12 @@ import { SHEET_DRAG } from '../model/shellMap.const.ts';
 import { clampDragOffset, decideSheetMode, isTap } from '../model/sheetDrag.ts';
 import type { SheetDragMode } from '../model/sheetDrag.ts';
 
-/** Tên biến CSS giữ độ dịch của tờ khi đang kéo (px); \`shell.css\` dùng nó để dịch tờ và tay nắm theo ngón tay. */
+/** The CSS variable name that holds the sheet's offset while dragging (px); \`shell.css\` uses it to move the sheet and the handle with the finger. */
 const DRAG_VAR = '--sheet-drag-y';
-/** Thuộc tính trên \`.app\` bật khi đang kéo (CSS tắt hoạt họa để tờ bám sát ngón tay). */
+/** The attribute on \`.app\` that is on while dragging (CSS turns off the animation so the sheet follows the finger closely). */
 const DRAGGING_ATTR = 'data-dragging';
 
-/** Trạng thái một lần kéo đang diễn ra. */
+/** The state of a drag that is in progress. */
 interface DragState {
   readonly startX: number;
   readonly startY: number;
@@ -19,17 +19,17 @@ interface DragState {
   moved: boolean;
 }
 
-/** Bộ xử lý sự kiện cho tay nắm của tờ. */
+/** The event handlers for the sheet's handle. */
 export interface SheetDragHandlers {
   readonly onPointerDown: (event: PointerEvent<HTMLElement>) => void;
   readonly onPointerMove: (event: PointerEvent<HTMLElement>) => void;
   readonly onPointerUp: (event: PointerEvent<HTMLElement>) => void;
   readonly onPointerCancel: (event: PointerEvent<HTMLElement>) => void;
-  /** Chặn lần "click" do trình duyệt sinh ngay sau một lần kéo, để kéo không bị tính là bấm đổi trạng thái. */
+  /** Blocks the 'click' the browser generates right after a drag, so a drag is not counted as a tap that toggles the state. */
   readonly onClickCapture: (event: MouseEvent<HTMLElement>) => void;
 }
 
-/** Đo quãng đường giữa hai trạng thái của tờ (px): từ vị trí mở tới vị trí thu (\`--shell-peek-height\` tính từ đáy khung). */
+/** Measures the distance between the two states of the sheet (px): from the open position to the collapsed position (\`--shell-peek-height\` counted from the bottom of the frame). */
 function measureTravel(app: HTMLElement, mode: SheetDragMode, openTop: { current: number | null }): number {
   const height = window.innerHeight;
   const screen = app.querySelector<HTMLElement>('#screen');
@@ -38,22 +38,22 @@ function measureTravel(app: HTMLElement, mode: SheetDragMode, openTop: { current
   return Math.max(1, height - peekHeight - (openTop.current ?? height * SHEET_DRAG.FALLBACK_OPEN_TOP_FRACTION));
 }
 
-/** Gỡ độ dịch và cờ kéo khỏi khung ứng dụng (tờ trượt về/đến vị trí cuối nhờ hoạt họa CSS). */
+/** Removes the offset and the drag flag from the app frame (the sheet slides to/from the final position thanks to the CSS animation). */
 function clearDragVisuals(app: HTMLElement): void {
   app.style.removeProperty(DRAG_VAR);
   app.removeAttribute(DRAGGING_ATTR);
 }
 
 /**
- * Kéo tờ nội dung ở điện thoại bằng tay nắm: kéo xuống để thu (xem bản đồ rộng hơn), kéo lên để mở lại; tờ bám theo ngón tay và
- * chuyển trạng thái khi thả nếu đủ xa hoặc đủ nhanh. Bấm (không kéo) vẫn do \`onClick\` của nút xử lý.
+ * Drags the content sheet on a phone with the handle: drag down to collapse (see a wider map), drag up to open it again; the sheet follows the finger and
+ * switches state on release if far enough or fast enough. A tap (no drag) is still handled by the button's \`onClick\`.
  */
 export function useSheetDrag(mode: SheetDragMode, setMode: (mode: SheetDragMode) => void): SheetDragHandlers {
   const drag = useRef<DragState | null>(null);
   const openTop = useRef<number | null>(null);
   const swallowClick = useRef(false);
   return {
-    /** Bắt đầu một lần kéo: ghi vị trí đầu, đo quãng đường giữa hai trạng thái và giữ con trỏ trên tay nắm. */
+    /** Starts a drag: records the start position, measures the distance between the two states and keeps the pointer on the handle. */
     onPointerDown(event) {
       if (event.pointerType === 'mouse' && event.button !== 0) return;
       const app = event.currentTarget.closest<HTMLElement>('.app');
@@ -61,7 +61,7 @@ export function useSheetDrag(mode: SheetDragMode, setMode: (mode: SheetDragMode)
       event.currentTarget.setPointerCapture(event.pointerId);
       drag.current = { startX: event.clientX, startY: event.clientY, startedAt: event.timeStamp, app, travel: measureTravel(app, mode, openTop), moved: false };
     },
-    /** Đang kéo: vượt ngưỡng bấm thì bật cờ kéo và dịch tờ theo ngón tay (bị chặn trong quãng đường hợp lệ). */
+    /** While dragging: past the tap threshold it turns on the drag flag and moves the sheet with the finger (clamped to the valid distance). */
     onPointerMove(event) {
       const state = drag.current;
       if (!state) return;
@@ -72,7 +72,7 @@ export function useSheetDrag(mode: SheetDragMode, setMode: (mode: SheetDragMode)
       state.app.setAttribute(DRAGGING_ATTR, '');
       state.app.style.setProperty(DRAG_VAR, `${clampDragOffset(mode, dy, state.travel)}px`);
     },
-    /** Thả tay: gỡ hiệu ứng kéo; nếu đã kéo thì chuyển trạng thái khi đủ xa/đủ nhanh và nuốt lần click kèm theo. */
+    /** On release: removes the drag effect; if it was dragged it switches state when far/fast enough and swallows the accompanying click. */
     onPointerUp(event) {
       const state = drag.current;
       drag.current = null;
@@ -80,17 +80,17 @@ export function useSheetDrag(mode: SheetDragMode, setMode: (mode: SheetDragMode)
       clearDragVisuals(state.app);
       if (!state.moved) return;
       swallowClick.current = true;
-      window.setTimeout(() => { swallowClick.current = false; }, 0); // nếu trình duyệt không sinh click thì không giữ cờ cho lần bấm sau
+      window.setTimeout(() => { swallowClick.current = false; }, 0); // if the browser generates no click the flag is not kept for the next tap
       const next = decideSheetMode(mode, event.clientY - state.startY, event.timeStamp - state.startedAt, state.travel);
       if (next !== mode) setMode(next);
     },
-    /** Hệ thống hủy cử chỉ (ví dụ cuộn): bỏ lần kéo, tờ trượt về chỗ cũ. */
+    /** The system cancels the gesture (for example scrolling): the drag is dropped, the sheet slides back to where it was. */
     onPointerCancel() {
       const state = drag.current;
       drag.current = null;
       if (state) clearDragVisuals(state.app);
     },
-    /** Nuốt lần click sinh ngay sau một lần kéo để kéo không bị tính là bấm đổi trạng thái. */
+    /** Swallows the click generated right after a drag so a drag is not counted as a tap that toggles the state. */
     onClickCapture(event) {
       if (!swallowClick.current) return;
       swallowClick.current = false;

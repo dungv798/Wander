@@ -1,106 +1,106 @@
 package com.wander.planning.domain.constant;
 
-/** Mã lỗi riêng của module planning (hợp đồng API, khớp {@code web/src/api.ts}). Mã dùng chung ở {@code ErrorCodes}. */
+/** Error codes specific to the planning module (the API contract, matching {@code web/src/api.ts}). Shared codes are in {@code ErrorCodes}. */
 public final class PlanningErrorCodes {
-    /** Bìa sai loại hoặc mã (DR-031). */
+    /** The cover has the wrong kind or code (DR-031). */
     public static final String INVALID_COVER = "INVALID_COVER";
 
-    /** Ngày không phải ngày lịch hợp lệ. */
+    /** The date is not a valid calendar date. */
     public static final String INVALID_DATE = "INVALID_DATE";
 
-    /** Thiếu ngày bắt đầu. */
+    /** The start date is missing. */
     public static final String START_REQUIRED = "START_REQUIRED";
 
-    /** Thiếu ngày kết thúc. */
+    /** The end date is missing. */
     public static final String END_REQUIRED = "END_REQUIRED";
 
-    /** Ngày kết thúc trước ngày bắt đầu. */
+    /** The end date is before the start date. */
     public static final String END_BEFORE_START = "END_BEFORE_START";
 
-    /** Loại mục không hợp lệ. */
+    /** The item type is not valid. */
     public static final String INVALID_TYPE = "INVALID_TYPE";
 
-    /** Trạng thái đặt chỗ không hợp lệ. */
+    /** The booking status is not valid. */
     public static final String INVALID_BOOKING = "INVALID_BOOKING";
 
-    /** Kiểu chuyến không hợp lệ. */
+    /** The trip kind is not valid. */
     public static final String INVALID_STYLE = "INVALID_STYLE";
 
-    /** "Ai đi" không hợp lệ. */
+    /** 'Who is going' is not valid. */
     public static final String INVALID_KIND = "INVALID_KIND";
 
-    /** Sở thích không hợp lệ. */
+    /** The interest is not valid. */
     public static final String INVALID_INTEREST = "INVALID_INTEREST";
 
-    /** Nhịp chuyến không hợp lệ. */
+    /** The trip pace is not valid. */
     public static final String INVALID_PACE = "INVALID_PACE";
 
-    /** Một mục xuất hiện hai lần trong cùng một lệnh gán ngày hàng loạt. */
+    /** An item appears twice in the same bulk date-assignment command. */
     public static final String DUPLICATE_ASSIGNMENT = "DUPLICATE_ASSIGNMENT";
 
-    /** Thứ tự sắp xếp không đúng tập mục đang hiện trong ngày. */
+    /** The sort order does not match the set of items visible in the day. */
     public static final String INVALID_ORDER = "INVALID_ORDER";
 
-    /** Ngày nằm ngoài khoảng ngày của chuyến. */
+    /** The date is outside the trip's date range. */
     public static final String DAY_OUT_OF_RANGE = "DAY_OUT_OF_RANGE";
 
-    /** Mục đã bị xóa nên không sửa được. */
+    /** The item has been deleted so it cannot be edited. */
     public static final String ITEM_DELETED = "ITEM_DELETED";
 
-    /** "Đã xóa gần đây" của chuyến đã đầy. */
+    /** The trip's 'Recently deleted' is full. */
     public static final String TRASH_FULL = "TRASH_FULL";
 
-    /** Mục đã bị xóa rồi. */
+    /** The item has already been deleted. */
     public static final String ALREADY_DELETED = "ALREADY_DELETED";
 
-    /** Mục chưa bị xóa nên không khôi phục được. */
+    /** The item has not been deleted so it cannot be restored. */
     public static final String NOT_DELETED = "NOT_DELETED";
 
-    /** Mục chưa nằm trong "Đã xóa gần đây" nên chưa xóa vĩnh viễn được. */
+    /** The item is not in 'Recently deleted' so it cannot be permanently deleted yet. */
     public static final String NOT_IN_TRASH = "NOT_IN_TRASH";
 
-    /** Chỉ mục "Việc cần làm" mới có ô tích. */
+    /** Only a 'To-do' item has a tick box. */
     public static final String NOT_A_TASK = "NOT_A_TASK";
 
-    /** Loại mục này không có trạng thái đặt chỗ. */
+    /** This item type has no booking status. */
     public static final String BOOKING_NOT_APPLICABLE = "BOOKING_NOT_APPLICABLE";
 
-    /** Giá tham khảo chỉ hợp lệ khi đã tick "đã bao gồm". */
+    /** A reference price is valid only when 'included' is ticked. */
     public static final String REFERENCE_REQUIRES_INCLUDED = "REFERENCE_REQUIRES_INCLUDED";
 
     private PlanningErrorCodes() {
     }
 
-    /** Liên kết mời sai, hết hạn, đã thu hồi hoặc chuyến đã xóa: MỘT lỗi chung, không lộ loại. */
+    /** A wrong, expired or revoked invite link or a deleted trip: ONE common error, it does not reveal which. */
     public static final String INVALID_INVITE = "INVALID_INVITE";
 
-    /** Chuyến đã đủ số thành viên tối đa. */
+    /** The trip has reached its maximum number of members. */
     public static final String TRIP_FULL = "TRIP_FULL";
 
-    /** Việc này chỉ Organizer làm được. */
+    /** Only the Organizer can do this. */
     public static final String NOT_ORGANIZER = "NOT_ORGANIZER";
 
-    /** Thành viên chỉ sửa/xóa được mục do chính mình thêm. */
+    /** A member can edit/delete only the items they added themself. */
     public static final String NOT_YOUR_ITEM = "NOT_YOUR_ITEM";
 
-    /** Organizer không rời hay bị gỡ khỏi chuyến của mình (muốn bỏ thì xóa chuyến). */
+    /** The Organizer neither leaves nor is removed from their own trip (to get rid of it, delete the trip). */
     public static final String ORGANIZER_CANNOT_LEAVE = "ORGANIZER_CANNOT_LEAVE";
 
-    /** Mục của chính mình thì xóa thẳng, không cần đề nghị. */
+    /** One's own item is deleted directly, no request needed. */
     public static final String OWN_ITEM_DELETE_DIRECTLY = "OWN_ITEM_DELETE_DIRECTLY";
 
-    /** Organizer xóa thẳng, không cần đề nghị. */
+    /** The Organizer deletes directly, no request needed. */
     public static final String ORGANIZER_DELETES_DIRECTLY = "ORGANIZER_DELETES_DIRECTLY";
 
-    /** Mục này đã có đề nghị xóa đang chờ. */
+    /** This item already has a pending deletion request. */
     public static final String REQUEST_EXISTS = "REQUEST_EXISTS";
 
-    /** Quá nhiều đề nghị đang chờ của cùng một thành viên. */
+    /** Too many pending requests of the same member. */
     public static final String TOO_MANY_REQUESTS = "TOO_MANY_REQUESTS";
 
-    /** Đề nghị đã được quyết định rồi. */
+    /** The request has already been decided. */
     public static final String ALREADY_DECIDED = "ALREADY_DECIDED";
 
-    /** Checklist của chuyến đã đủ số hạng mục tối đa. */
+    /** The trip's checklist has reached its maximum number of items. */
     public static final String CHECKLIST_FULL = "CHECKLIST_FULL";
 }

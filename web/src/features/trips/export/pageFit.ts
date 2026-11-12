@@ -2,21 +2,21 @@ import { PNG } from './export.const.ts';
 import { LINE_HEIGHT, paginateBlocks } from './textLayout.ts';
 import type { LayoutPage, MeasureText, TextBlock } from './Export.types.ts';
 
-/** Một ảnh đã có chiều cao riêng theo nội dung (không còn trang 1920 px gần như trắng). */
+/** An image that already has its own height by content (no more almost-blank 1920 px page). */
 export interface SizedPage extends LayoutPage { readonly height: number }
 
-/** Đáy của dòng cuối trong ảnh; ảnh rỗng thì trả `fallback`. */
+/** The bottom of the last line in an image; an empty image returns `fallback`. */
 function contentBottom(page: LayoutPage, fallback: number): number {
   const last = page.lines.at(-1);
   return last ? last.y + LINE_HEIGHT[last.role] : fallback;
 }
 
-/** Tham số chia ảnh: vùng đầu (có bìa), lề đầu các ảnh sau, phần chân trang giữ chỗ (ghi công + nhãn trang). */
+/** The image-splitting parameters: the head area (with the cover), the top margin of the later images, the reserved footer (attribution + page label). */
 export interface FitOptions { readonly top: number; readonly nextTop: number; readonly footer: number }
 
 /**
- * Chia nội dung thành ít ảnh nhất có thể rồi CÂN các ảnh cho đều nhau, mỗi ảnh cao đúng bằng nội dung của nó (tối thiểu `PNG.minHeight`,
- * tối đa `PNG.maxHeight`). Việc cân tránh ảnh cuối chỉ có vài dòng; không cắt dòng nào và không tách tiêu đề ngày khỏi mục đầu.
+ * Splits the content into as few images as possible and then BALANCES the images evenly, each image exactly as tall as its content (at least `PNG.minHeight`,
+ * at most `PNG.maxHeight`). The balancing avoids a last image with only a few lines; no line is cut and a day title is not separated from its first item.
  */
 export function fitPages(blocks: readonly TextBlock[], measure: MeasureText, options: FitOptions): SizedPage[] {
   const { top, nextTop, footer } = options;

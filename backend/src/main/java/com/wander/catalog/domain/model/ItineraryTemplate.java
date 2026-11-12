@@ -12,9 +12,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Lịch mẫu (N-2, DR-018): gợi ý đi một điểm đến theo ngày, chỉ gồm địa điểm có thật trong kho, không giờ/giá/đánh giá.
- * Mỗi địa điểm xuất hiện đúng một lần trong cả lịch (để thêm vào chuyến không bị trùng mục). {@code status} cho biết PO đã duyệt
- * nội dung chưa; giao diện luôn gắn nhãn "Bản nháp" khi chưa duyệt.
+ * A sample itinerary (N-2, DR-018): a suggestion for visiting a destination day by day, made only of places that really exist in the catalog, with no times/prices/ratings.
+ * Each place appears exactly once in the whole itinerary (so adding it to a trip does not create duplicate items). {@code status} says whether the PO has approved
+ * the content yet; the UI always labels it 'Draft' while it is not approved.
  */
 public record ItineraryTemplate(String id, String title, String summary, TemplateStatus status, List<TemplateDay> days) {
 
@@ -36,12 +36,12 @@ public record ItineraryTemplate(String id, String title, String summary, Templat
         requireUniquePlaces(id, days);
     }
 
-    /** Số địa điểm khác nhau trong cả lịch. */
+    /** The number of different places in the whole itinerary. */
     public int placeCount() {
         return (int) days.stream().mapToLong(day -> day.placeIds().size()).sum();
     }
 
-    /** Mọi địa điểm của lịch phải có trong điểm đến {@code destinationId}; mã lạ thì ném lỗi nêu rõ mã. */
+    /** Every place of the itinerary must exist in the destination {@code destinationId}; an unknown id throws an error that names the id. */
     public void requirePlacesIn(Set<String> destinationPlaceIds, String destinationId) {
         for (TemplateDay day : days) {
             for (String placeId : day.placeIds()) {
@@ -51,7 +51,7 @@ public record ItineraryTemplate(String id, String title, String summary, Templat
         }
     }
 
-    /** Mỗi địa điểm đúng một lần trong cả lịch và lịch có ít nhất một địa điểm. */
+    /** Each place exactly once in the whole itinerary and the itinerary has at least one place. */
     private static void requireUniquePlaces(String templateId, List<TemplateDay> days) {
         Set<String> seen = new HashSet<>();
         for (TemplateDay day : days) {

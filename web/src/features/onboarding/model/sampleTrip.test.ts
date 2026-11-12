@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import type { PlaceView } from '../../discover/index.ts';
 import { applyProposal, buildTrip, dayOfPlace, dayPlaces } from './sampleTrip.ts';
 
-/** Địa điểm giả tối thiểu cho kiểm thử (chỉ các trường lịch mẫu dùng). */
+/** A minimal fake place for the tests (only the fields the sample itinerary uses). */
 function place(id: string, withCoords = true): PlaceView {
   return { id, name: id, lat: withCoords ? 11.9 : null, lon: withCoords ? 108.4 : null, photos: [] } as unknown as PlaceView;
 }

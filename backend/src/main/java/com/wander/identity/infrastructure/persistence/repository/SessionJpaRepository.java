@@ -11,32 +11,32 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của bảng phiên. */
+/** Spring Data JPA repository of the session table. */
 public interface SessionJpaRepository extends JpaRepository<SessionEntity, UUID> {
 
-    /** Phiên theo băm bí mật. */
+    /** The session by secret hash. */
     Optional<SessionEntity> findByTokenHash(String tokenHash);
 
-    /** Băm bí mật đã thuộc về một phiên nào đó (kể cả đã thu hồi). */
+    /** Whether the secret hash already belongs to some session (even a revoked one). */
     boolean existsByTokenHash(String tokenHash);
 
-    /** Các phiên chưa bị thu hồi của danh tính. */
+    /** The identity's sessions that are not revoked. */
     List<SessionEntity> findByIdentityIdAndRevokedAtIsNull(UUID identityId);
 
-    /** Phiên chưa bị thu hồi theo mã, của đúng danh tính. */
+    /** A session that is not revoked, by id, of exactly this identity. */
     Optional<SessionEntity> findByIdAndIdentityIdAndRevokedAtIsNull(UUID id, UUID identityId);
 
-    /** Ghi thời điểm phiên được dùng gần nhất. */
+    /** Records the time the session was last used. */
     @Modifying
     @Query(IdentityQueryConstants.TOUCH_SESSION)
     void touch(@Param("id") UUID id, @Param("now") Instant now);
 
-    /** Đặt hoặc xóa tên thiết bị của phiên chưa bị thu hồi. */
+    /** Sets or clears the device name of a session that is not revoked. */
     @Modifying
     @Query(IdentityQueryConstants.RENAME_SESSION)
     void rename(@Param("id") UUID id, @Param("name") String name);
 
-    /** Thu hồi phiên nếu chưa bị thu hồi. */
+    /** Revokes the session if it is not already revoked. */
     @Modifying
     @Query(IdentityQueryConstants.REVOKE_SESSION)
     void revoke(@Param("id") UUID id, @Param("now") Instant now);

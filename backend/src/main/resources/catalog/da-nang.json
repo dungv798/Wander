@@ -625,13 +625,15 @@
       ],
       "photos": [
         {
-          "file": "cau-rong-1.jpg",
+          "file": "cau-rong-1-w1280-50d05f482d.webp",
+          "thumbFile": "cau-rong-1-w480-d2a79c8fa1.webp",
           "author": "Somerset999",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dragon_Bridge,_Da_Nang_during_day_-_20230819_(cropped).jpg"
         },
         {
-          "file": "cau-rong-2.jpg",
+          "file": "cau-rong-2-w1280-5b6ace626a.webp",
+          "thumbFile": "cau-rong-2-w480-19e8b64538.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BA%A7u_R%E1%BB%93ng.jpg"
@@ -673,13 +675,15 @@
       ],
       "photos": [
         {
-          "file": "cau-quay-song-han-1.jpg",
+          "file": "cau-quay-song-han-1-w1280-9edbc78a8c.webp",
+          "thumbFile": "cau-quay-song-han-1-w480-2ea4a8e3b1.webp",
           "author": "Gene Bromberg",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Han_River_Bridge_Apr08.jpg"
         },
         {
-          "file": "cau-quay-song-han-2.jpg",
+          "file": "cau-quay-song-han-2-w1280-3924c88a6d.webp",
+          "thumbFile": "cau-quay-song-han-2-w480-680e9f8c82.webp",
           "author": "Gary Todd from Xinzheng, China",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Han_River,_Da_Nang,_Vietnam_(15428173695).jpg"
@@ -721,19 +725,22 @@
       ],
       "photos": [
         {
-          "file": "ba-na-1.jpg",
+          "file": "ba-na-1-w1280-bd725e3763.webp",
+          "thumbFile": "ba-na-1-w480-0dd42738ee.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:84105-Da-Nang_(48951154208).jpg"
         },
         {
-          "file": "ba-na-2.jpg",
+          "file": "ba-na-2-w1280-8bc82ea759.webp",
+          "thumbFile": "ba-na-2-w480-ceb5485e19.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:84113-Da-Nang_(48719931078).jpg"
         },
         {
-          "file": "ba-na-3.jpg",
+          "file": "ba-na-3-w1280-c63a31f03a.webp",
+          "thumbFile": "ba-na-3-w480-b669f912e5.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:84114-Da-Nang_(48951696801).jpg"
@@ -776,13 +783,15 @@
       ],
       "photos": [
         {
-          "file": "ngu-hanh-son-1.jpg",
+          "file": "ngu-hanh-son-1-w1280-d35126900f.webp",
+          "thumbFile": "ngu-hanh-son-1-w480-e3b92b7eeb.webp",
           "author": "Viethavvh at vi.wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ngu_hanh_son_toan_canh.jpg"
         },
         {
-          "file": "ngu-hanh-son-2.jpg",
+          "file": "ngu-hanh-son-2-w1280-40ab1088db.webp",
+          "thumbFile": "ngu-hanh-son-2-w480-c42bec4bf8.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marble_Mountains_View_3.JPG"
@@ -825,7 +834,8 @@
       ],
       "photos": [
         {
-          "file": "son-tra-1.jpg",
+          "file": "son-tra-1-w1024-905878f9ee.webp",
+          "thumbFile": "son-tra-1-w480-f9462144b5.webp",
           "author": "Phó Nháy ( talk )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ban_dao_Son_Tra.jpg"
@@ -868,13 +878,15 @@
       ],
       "photos": [
         {
-          "file": "bai-bien-my-khe-1.jpg",
+          "file": "bai-bien-my-khe-1-w1280-c0d08d58e7.webp",
+          "thumbFile": "bai-bien-my-khe-1-w480-bab671009e.webp",
           "author": "Viethavvh at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bai_bien_My_Khe.jpg"
         },
         {
-          "file": "bai-bien-my-khe-2.jpg",
+          "file": "bai-bien-my-khe-2-w1280-b244125b7f.webp",
+          "thumbFile": "bai-bien-my-khe-2-w480-67a73fc969.webp",
           "author": ". Ray in Manila",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:My_Khe_Beach,_Da_Nang,_Vietnam.jpg"
@@ -922,7 +934,8 @@
       ],
       "photos": [
         {
-          "file": "chua-linh-ung-1.jpg",
+          "file": "chua-linh-ung-1-w1280-7fff67a4a3.webp",
+          "thumbFile": "chua-linh-ung-1-w480-b3367561b8.webp",
           "author": "CEphoto, Uwe Aranas",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Son-Tra-Peninsula_Da-Nang_Vietnam_Linh-Ung-Pagoda-01.jpg"
@@ -964,13 +977,15 @@
       ],
       "photos": [
         {
-          "file": "deo-hai-van-1.jpg",
+          "file": "deo-hai-van-1-w1280-f51d679afa.webp",
+          "thumbFile": "deo-hai-van-1-w480-2eae23b76c.webp",
           "author": "Viethavvh at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Haivan2.jpg"
         },
         {
-          "file": "deo-hai-van-2.jpg",
+          "file": "deo-hai-van-2-w1280-a5b164e085.webp",
+          "thumbFile": "deo-hai-van-2-w480-dc1d6b7bcc.webp",
           "author": "Vyacheslav Argenberg",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hai_Van_Pass_under_fog,_Vietnam.jpg"
@@ -1018,13 +1033,15 @@
       ],
       "photos": [
         {
-          "file": "nha-tho-da-nang-1.jpg",
+          "file": "nha-tho-da-nang-1-w1280-ddd17666f0.webp",
+          "thumbFile": "nha-tho-da-nang-1-w480-303ea27698.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_Tet_DN_1.JPG"
         },
         {
-          "file": "nha-tho-da-nang-2.jpg",
+          "file": "nha-tho-da-nang-2-w1280-bda15f0b0e.webp",
+          "thumbFile": "nha-tho-da-nang-2-w480-fc91471ced.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cathedral_Tet_DN_2.JPG"
@@ -1072,7 +1089,8 @@
       ],
       "photos": [
         {
-          "file": "thanh-dien-hai-1.jpg",
+          "file": "thanh-dien-hai-1-w1280-010fa9bab5.webp",
+          "thumbFile": "thanh-dien-hai-1-w480-c16d04daf8.webp",
           "author": "Botminh24",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Hai_Citadel_South_Gate.jpg"
@@ -1119,19 +1137,22 @@
       ],
       "photos": [
         {
-          "file": "cho-han-1.jpg",
+          "file": "cho-han-1-w1280-d7ecb4eec7.webp",
+          "thumbFile": "cho-han-1-w480-0b7e1b5f96.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cho_Han_Entrance.JPG"
         },
         {
-          "file": "cho-han-2.jpg",
+          "file": "cho-han-2-w1280-98eca8b565.webp",
+          "thumbFile": "cho-han-2-w480-2f1ee25e35.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cho_Han_Da_Nang.JPG"
         },
         {
-          "file": "cho-han-3.jpg",
+          "file": "cho-han-3-w1280-a82331d4f7.webp",
+          "thumbFile": "cho-han-3-w480-aa0440f99f.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cho_Han_Rau_Qua.JPG"
@@ -1167,7 +1188,8 @@
       ],
       "photos": [
         {
-          "file": "food-mi-quang-1.jpg",
+          "file": "food-mi-quang-1-w1280-9190a665ba.webp",
+          "thumbFile": "food-mi-quang-1-w480-19846c4041.webp",
           "author": "Jpatokal",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mi_Quang_1A_Danang.jpg"
@@ -1203,7 +1225,8 @@
       ],
       "photos": [
         {
-          "file": "food-bun-cha-ca-1.jpg",
+          "file": "food-bun-cha-ca-1-w1280-8a168fbfc2.webp",
+          "thumbFile": "food-bun-cha-ca-1-w480-65b6e3a352.webp",
           "author": "Phương Huy ( thảo luận )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_c%C3%A1,_th%C3%A1ng_8_n%C4%83m_2018.JPG"
@@ -1241,7 +1264,8 @@
       ],
       "photos": [
         {
-          "file": "wave-da-nang-bao-tang-cham-1.jpg",
+          "file": "wave-da-nang-bao-tang-cham-1-w1280-3bf2e04d25.webp",
+          "thumbFile": "wave-da-nang-bao-tang-cham-1-w480-8bb0dedf93.webp",
           "author": "Phó Nháy ( talk ) 04:57, 27 August 2011 (UTC)",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museum_of_Cham_Sculpture.jpg"
@@ -1388,13 +1412,15 @@
       ],
       "photos": [
         {
-          "file": "dish-da-nang-banh-trang-thit-heo-1.jpg",
+          "file": "dish-da-nang-banh-trang-thit-heo-1-w1280-c13a864f38.webp",
+          "thumbFile": "dish-da-nang-banh-trang-thit-heo-1-w480-fb4410db8f.webp",
           "author": "Lê Huỳnh Bộ",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo.jpg"
         },
         {
-          "file": "dish-da-nang-banh-trang-thit-heo-2.jpg",
+          "file": "dish-da-nang-banh-trang-thit-heo-2-w1280-fff1231c4a.webp",
+          "thumbFile": "dish-da-nang-banh-trang-thit-heo-2-w480-887b89f8f4.webp",
           "author": "Lê Huỳnh Bộ",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_th%E1%BB%8Bt_heo_(18521).jpg"
@@ -1473,7 +1499,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-c41460650b9db501e2.jpg",
+          "file": "venue-fill-c41460650b9db501e2-w1280-bb42d63f60.webp",
+          "thumbFile": "venue-fill-c41460650b9db501e2-w480-cfe3cdfa68.webp",
           "author": "LVa2013",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Private_Beach_of_InterContinental_Danang_Sun_Peninsula.jpg",
@@ -2505,7 +2532,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-52612e6adef9576dc4.jpg",
+          "file": "venue-fill-52612e6adef9576dc4-w1280-9190a665ba.webp",
+          "thumbFile": "venue-fill-52612e6adef9576dc4-w480-19846c4041.webp",
           "author": "Jpatokal",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=119843025"
@@ -3295,7 +3323,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-13febb900df9da5049.jpg",
+          "file": "venue-fill-13febb900df9da5049-w1280-d9208496f8.webp",
+          "thumbFile": "venue-fill-13febb900df9da5049-w480-4b5888a58a.webp",
           "author": "Raita Futo from Tokyo, Japan",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg"
@@ -3345,7 +3374,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-13febb900df9da5049.jpg",
+          "file": "venue-fill-13febb900df9da5049-w1280-d9208496f8.webp",
+          "thumbFile": "venue-fill-13febb900df9da5049-w480-4b5888a58a.webp",
           "author": "Raita Futo from Tokyo, Japan",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
@@ -3395,7 +3425,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-13febb900df9da5049.jpg",
+          "file": "venue-fill-13febb900df9da5049-w1280-d9208496f8.webp",
+          "thumbFile": "venue-fill-13febb900df9da5049-w480-4b5888a58a.webp",
           "author": "Raita Futo from Tokyo, Japan",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
@@ -3445,7 +3476,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-13febb900df9da5049.jpg",
+          "file": "venue-fill-13febb900df9da5049-w1280-d9208496f8.webp",
+          "thumbFile": "venue-fill-13febb900df9da5049-w480-4b5888a58a.webp",
           "author": "Raita Futo from Tokyo, Japan",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
@@ -3495,7 +3527,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-13febb900df9da5049.jpg",
+          "file": "venue-fill-13febb900df9da5049-w1280-d9208496f8.webp",
+          "thumbFile": "venue-fill-13febb900df9da5049-w480-4b5888a58a.webp",
           "author": "Raita Futo from Tokyo, Japan",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A0_N%C3%A0_Hills_Western_Part_(45485210392).jpg",
@@ -3549,19 +3582,22 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-9b385fbf5387809f68.jpg",
+          "file": "venue-fill-9b385fbf5387809f68-w1280-b257e072b9.webp",
+          "thumbFile": "venue-fill-9b385fbf5387809f68-w480-5d5f679ebc.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02282.JPG"
         },
         {
-          "file": "venue-fill-6822eec110115f3c6a.jpg",
+          "file": "venue-fill-6822eec110115f3c6a-w1280-8cb01cf9a9.webp",
+          "thumbFile": "venue-fill-6822eec110115f3c6a-w480-ee38953443.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02270.JPG"
         },
         {
-          "file": "venue-fill-61d93dba2c87f0253a.jpg",
+          "file": "venue-fill-61d93dba2c87f0253a-w640-3b7e80a1d0.webp",
+          "thumbFile": "venue-fill-61d93dba2c87f0253a-w480-b42c4f5c64.webp",
           "author": "Blowing Puffer Fish",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/83128028@N00/27093077560"
@@ -3611,7 +3647,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-9b385fbf5387809f68.jpg",
+          "file": "venue-fill-9b385fbf5387809f68-w1280-b257e072b9.webp",
+          "thumbFile": "venue-fill-9b385fbf5387809f68-w480-5d5f679ebc.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02282.JPG",
@@ -3837,13 +3874,15 @@
       ],
       "photos": [
         {
-          "file": "completion-74f1ff29a549a581.jpg",
+          "file": "completion-74f1ff29a549a581-w1024-d25989e7b1.webp",
+          "thumbFile": "completion-74f1ff29a549a581-w480-fdf19a69e1.webp",
           "author": "hotu101191",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/109638663@N05/15415333351"
         },
         {
-          "file": "completion-966c91e930e42cdd.jpg",
+          "file": "completion-966c91e930e42cdd-w1024-71c65c5e53.webp",
+          "thumbFile": "completion-966c91e930e42cdd-w480-792ddbcd93.webp",
           "author": "hotu101191",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/109638663@N05/15231975047"
@@ -3894,7 +3933,8 @@
       ],
       "photos": [
         {
-          "file": "completion-74f1ff29a549a581.jpg",
+          "file": "completion-74f1ff29a549a581-w1024-d25989e7b1.webp",
+          "thumbFile": "completion-74f1ff29a549a581-w480-fdf19a69e1.webp",
           "author": "hotu101191",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/109638663@N05/15415333351",
@@ -3944,13 +3984,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-c41460650b9db501e2.jpg",
+          "file": "venue-fill-c41460650b9db501e2-w1280-bb42d63f60.webp",
+          "thumbFile": "venue-fill-c41460650b9db501e2-w480-cfe3cdfa68.webp",
           "author": "LVa2013",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Private_Beach_of_InterContinental_Danang_Sun_Peninsula.jpg"
         },
         {
-          "file": "venue-fill-42a4ed8cf1a73c8a1b.jpg",
+          "file": "venue-fill-42a4ed8cf1a73c8a1b-w1280-69e279c60c.webp",
+          "thumbFile": "venue-fill-42a4ed8cf1a73c8a1b-w480-405967d675.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Danang_Sun_Peninsula_Resort_-_Da_Nang,_Vietnam_-_DSC02351.JPG"
@@ -3999,7 +4041,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-aa271126d4f2df4c34.jpg",
+          "file": "venue-fill-aa271126d4f2df4c34-w1280-a7d9af8145.webp",
+          "thumbFile": "venue-fill-aa271126d4f2df4c34-w480-6fa4164021.webp",
           "author": "Tungnguyen47",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyatt_Regency_Danang,_Beach_View,_March_2014.jpg"
@@ -4130,7 +4173,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-9b385fbf5387809f68.jpg",
+          "file": "venue-fill-9b385fbf5387809f68-w1280-b257e072b9.webp",
+          "thumbFile": "venue-fill-9b385fbf5387809f68-w480-5d5f679ebc.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pullman_Danang_Beach_Resort_-_Da_Nang,_Vietnam_-_DSC02282.JPG",
@@ -4318,7 +4362,8 @@
       "id": "cho-1",
       "theme": "cho",
       "caption": "Chợ Con ở Đà Nẵng",
-      "file": "da-nang-moment-cho-1.jpg",
+      "file": "da-nang-moment-cho-1-w1024-c3a08cb1b7.webp",
+      "thumbFile": "da-nang-moment-cho-1-w480-439db6bc9e.webp",
       "author": "Christopher Crouzet",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/25338288@N05/15020501734"
@@ -4327,7 +4372,8 @@
       "id": "mon-an-2",
       "theme": "mon-an",
       "caption": "Món ăn ở Đà Nẵng",
-      "file": "da-nang-moment-mon-an-2.jpg",
+      "file": "da-nang-moment-mon-an-2-w1024-a07e829af5.webp",
+      "thumbFile": "da-nang-moment-mon-an-2-w480-b5b78b5edd.webp",
       "author": "JingKe888",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/96214671@N08/25977412085"
@@ -4366,7 +4412,8 @@
       "id": "pexels-36123440",
       "theme": "nghe",
       "caption": "Đón bình minh cùng nhịp chài lưới Đà Nẵng",
-      "file": "pexels-36123440.jpg",
+      "file": "pexels-36123440-w1280-1c3536a5af.webp",
+      "thumbFile": "pexels-36123440-w480-7e0f04c907.webp",
       "author": "nhavantuonglai",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/peaceful-sunrise-at-da-n-ng-fishing-beach-36123440/"
@@ -4375,7 +4422,8 @@
       "id": "food-research-da-nang",
       "theme": "mon-an",
       "caption": "Mì Quảng · một món muốn thử (ảnh minh họa)",
-      "file": "food-mi-quang-1.jpg",
+      "file": "food-mi-quang-1-w1280-9190a665ba.webp",
+      "thumbFile": "food-mi-quang-1-w480-19846c4041.webp",
       "author": "Jpatokal",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mi_Quang_1A_Danang.jpg"
@@ -4384,7 +4432,8 @@
       "id": "wave-pexels-37578543",
       "theme": "mon-an",
       "caption": "Giữ lại một bữa ăn đáng nhớ ở Đà Nẵng",
-      "file": "wave-pexels-37578543.jpg",
+      "file": "wave-pexels-37578543-w1280-e7734482c0.webp",
+      "thumbFile": "wave-pexels-37578543-w480-560266d074.webp",
       "author": "Nhà văn",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/candid-dining-experience-in-da-nang-vietnam-37578543/"

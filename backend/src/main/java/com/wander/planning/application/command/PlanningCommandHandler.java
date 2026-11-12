@@ -1,6 +1,6 @@
 package com.wander.planning.application.command;
 
-import com.wander.planning.application.input.RawInput;
+import com.wander.planning.application.input.PlanningInput;
 import com.wander.planning.domain.constant.PlanningConstants;
 import com.wander.planning.domain.constant.PlanningErrorCodes;
 import com.wander.planning.domain.constant.PlanningFields;
@@ -39,8 +39,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Xử lý lệnh của bounded context Planning. Mỗi phương thức = một giao dịch:
- * nạp aggregate → gọi hành vi domain → lưu. Không chứa quy tắc nghiệp vụ; quy tắc nằm trong {@link Trip}.
+ * Handles the commands of the Planning bounded context. Each method = one transaction:
+ * load the aggregate -> call the domain behavior -> save. Contains no business rules; the rules live in {@link Trip}.
  */
 @Service
 @Transactional
@@ -50,7 +50,7 @@ public class PlanningCommandHandler {
     private final PreferencesStore preferences;
     private final Clock clock;
 
-    /** Nhận cổng lưu chuyến, cổng lưu sở thích theo danh tính và đồng hồ (test thay bằng đồng hồ giả). */
+    /** Takes the trip storage port, the preferences-by-identity storage port and the clock (tests replace it with a fake). */
     public PlanningCommandHandler(TripRepository trips, PreferencesStore preferences, Clock clock) {
         this.trips = trips;
         this.preferences = preferences;
@@ -58,138 +58,134 @@ public class PlanningCommandHandler {
     }
 
     /**
-     * Thay toàn bộ sở thích theo danh tính (BE-10). Phải nêu khóa {@code interests} (thiếu ⇒ REQUIRED); null hoặc rỗng = xóa;
-     * mã lạ hoặc sai kiểu ⇒ INVALID_INTEREST và không đổi gì.
+     * Replaces all preferences by identity (BE-10). The {@code interests} key must be present (missing => REQUIRED); null or empty = clear;
+     * an unknown code or a wrong type => INVALID_INTEREST and nothing changes.
      */
     public void setInterestPreferences(PlanningCommands.SetInterestPreferences command) {
-        Map<String, Object> input = command.input();
-        if (!input.containsKey(PlanningFields.INTERESTS)) {
+        if (!command.interests().isPresent()) {
             throw WanderException.invalid(ErrorCodes.REQUIRED, PlanningMessages.FIELD_REQUIRED, PlanningFields.INTERESTS);
         }
-        List<TripInterest> interests = Interests.normalize(RawInput.interests(input.get(PlanningFields.INTERESTS)));
+        List<TripInterest> interests = Interests.normalize(PlanningInput.interests(command.interests().value()));
         preferences.saveInterests(command.ownerId(), interests, Timestamps.now(clock));
     }
 
-    /** Tạo chuyến mới của chủ; trả mã chuyến. */
+    /** Creates a new trip for the owner; returns the trip id. */
     public UUID createTrip(PlanningCommands.CreateTrip command) {
-        Map<String, Object> input = command.input();
-        String requestedName = RawInput.requiredText(input.get(PlanningFields.NAME), PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME);
-        String destination = RawInput.requiredText(input.get(PlanningFields.DESTINATION), PlanningConstants.MAX_DESTINATION,
+        String requestedName = PlanningInput.requiredText(command.name(), PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME);
+        String destination = PlanningInput.requiredText(command.destination(), PlanningConstants.MAX_DESTINATION,
                 PlanningFields.DESTINATION);
         String name = uniqueTripName(command.ownerId(), null, requestedName);
-        DateRange range = range(input.get(PlanningFields.START_DATE), input.get(PlanningFields.END_DATE));
-        TripOptions options = new TripOptions(RawInput.budget(input.get(PlanningFields.BUDGET)),
-                RawInput.styles(input.get(PlanningFields.STYLES)), RawInput.pace(input.get(PlanningFields.PACE)),
-                RawInput.datesTentative(input.get(PlanningFields.DATES_TENTATIVE)), RawInput.kind(input.get(PlanningFields.KIND)),
-                RawInput.interests(input.get(PlanningFields.INTERESTS)));
+        DateRange range = range(command.startDate(), command.endDate());
+        TripOptions options = new TripOptions(PlanningInput.budget(command.budget()),
+                PlanningInput.styles(command.styles()), PlanningInput.pace(command.pace()),
+                PlanningInput.datesTentative(command.datesTentative()), PlanningInput.kind(command.kind()),
+                PlanningInput.interests(command.interests()));
         Trip trip = Trip.plan(command.ownerId(), name, destination, range, options, Timestamps.now(clock));
         trips.save(trip);
         return trip.id();
     }
 
-    /** Sửa tên, điểm đến, khoảng ngày và tùy chọn của chuyến; trường không nêu thì giữ nguyên. */
+    /** Edits the name, destination, date range and options of a trip; a field that is not given stays unchanged. */
     public void updateTrip(PlanningCommands.UpdateTrip command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
-        Map<String, Object> input = command.input();
-        String name = valueOrCurrent(input, PlanningFields.NAME,
+        String name = valueOrCurrent(command.name(),
                 value -> uniqueTripName(command.ownerId(), trip.id(),
-                        RawInput.requiredText(value, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME)), trip.name());
-        String destination = valueOrCurrent(input, PlanningFields.DESTINATION,
-                value -> RawInput.requiredText(value, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION), trip.destination());
-        DateRange range = rangeFromInput(input, trip);
-        // Tùy chọn chuyến (Q11): không nêu ⇒ giữ nguyên; nêu null hoặc "" ⇒ xóa (chưa đặt).
+                        PlanningInput.requiredText(value, PlanningConstants.MAX_TRIP_NAME, PlanningFields.NAME)), trip.name());
+        String destination = valueOrCurrent(command.destination(),
+                value -> PlanningInput.requiredText(value, PlanningConstants.MAX_DESTINATION, PlanningFields.DESTINATION), trip.destination());
+        DateRange range = rangeFromInput(command.startDate(), command.endDate(), trip);
+        // Trip options (Q11): not given => unchanged; given as null or an empty string => cleared (not set).
         TripOptions current = trip.options();
         TripOptions options = new TripOptions(
-                valueOrCurrent(input, PlanningFields.BUDGET, RawInput::budget, current.budgetK()),
-                valueOrCurrent(input, PlanningFields.STYLES, RawInput::styles, current.styles()),
-                valueOrCurrent(input, PlanningFields.PACE, RawInput::pace, current.pace()),
-                valueOrCurrent(input, PlanningFields.DATES_TENTATIVE, RawInput::datesTentative, current.datesTentative()),
-                valueOrCurrent(input, PlanningFields.KIND, RawInput::kind, current.kind()),
-                valueOrCurrent(input, PlanningFields.INTERESTS, RawInput::interests, current.interests()));
+                valueOrCurrent(command.budget(), PlanningInput::budget, current.budgetK()),
+                valueOrCurrent(command.styles(), PlanningInput::styles, current.styles()),
+                valueOrCurrent(command.pace(), PlanningInput::pace, current.pace()),
+                valueOrCurrent(command.datesTentative(), PlanningInput::datesTentative, current.datesTentative()),
+                valueOrCurrent(command.kind(), PlanningInput::kind, current.kind()),
+                valueOrCurrent(command.interests(), PlanningInput::interests, current.interests()));
         Instant now = Timestamps.now(clock);
         trip.changeDetails(name, destination, range, now);
         trip.changeOptions(options, now);
-        if (input.containsKey(PlanningFields.COVER)) trip.changeCover(RawInput.cover(input.get(PlanningFields.COVER)), now);
+        if (command.cover().isPresent()) trip.changeCover(PlanningInput.cover(command.cover().value()), now);
         trips.save(trip);
     }
 
     /**
-     * Lệnh "lịch": tùy chọn đổi khoảng ngày (chỉ nêu một đầu thì đầu kia giữ nguyên) rồi gán ngày hàng loạt, tất cả trong một
-     * giao dịch và một lần tăng phiên bản; lỗi ở bất kỳ bước nào thì không đổi gì. Gửi lại khoảng ngày và ngày cũ của từng mục
-     * là cách Hoàn tác một lần đổi ngày chuyến hay một lần xếp lịch.
+     * The 'schedule' command: optionally change the date range (if only one end is given the other stays) then assign dates in bulk, all in one
+     * transaction and one version increment; an error at any step changes nothing. Sending back the date range and each item's old date
+     * is how a change of trip dates or one scheduling action is undone.
      */
     public void applySchedule(PlanningCommands.ApplySchedule command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
-        Map<String, Object> input = command.input();
-        boolean changesRange = input.containsKey(PlanningFields.START_DATE) || input.containsKey(PlanningFields.END_DATE);
-        boolean hasAssignments = input.containsKey(PlanningFields.ASSIGNMENTS);
+        boolean changesRange = command.startDate().isPresent() || command.endDate().isPresent();
+        boolean hasAssignments = command.assignments().isPresent();
         if (!changesRange && !hasAssignments) {
             throw WanderException.invalid(ErrorCodes.REQUIRED, PlanningMessages.FIELD_REQUIRED, PlanningFields.ASSIGNMENTS);
         }
-        List<DayAssignment> assignments = hasAssignments ? RawInput.assignments(input.get(PlanningFields.ASSIGNMENTS)) : List.of();
+        List<DayAssignment> assignments = hasAssignments ? PlanningInput.assignments(command.assignments().value()) : List.of();
         Instant now = Timestamps.now(clock);
-        if (changesRange) trip.changeDetails(trip.name(), trip.destination(), rangeFromInput(input, trip), now);
+        if (changesRange) trip.changeDetails(trip.name(), trip.destination(), rangeFromInput(command.startDate(), command.endDate(), trip), now);
         trip.assignDays(assignments, now);
         trips.save(trip);
     }
 
     /**
-     * Thêm mục vào một ngày của chuyến (mặc định cuối ngày); không nêu ngày hoặc ngày null ⇒ "Chưa có ngày" (DR-011 A1).
-     * Trả mã mục.
+     * Adds an item to a day of the trip (by default at the end of the day); no day, or a null day => 'no date yet' (DR-011 A1).
+     * Returns the item id.
      */
     public UUID addItem(PlanningCommands.AddItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         UUID addedBy = trip.requireMember(command.ownerId()).id();
-        Map<String, Object> input = command.input();
-        LocalDate day = RawInput.dayOrNull(input.get(PlanningFields.DAY));
+        PlanningCommands.ItemFields fields = command.fields();
+        LocalDate day = PlanningInput.dayOrNull(fields.day().orElse(null));
         if (day != null) trip.requireDayInRange(day);
-        ItemDetails details = new ItemDetails(RawInput.type(input.get(PlanningFields.TYPE)), RawInput.title(input.get(PlanningFields.TITLE)),
-                RawInput.timeOfDay(input.get(PlanningFields.TIME_OF_DAY)), RawInput.durationMin(input.get(PlanningFields.DURATION_MIN)),
-                RawInput.note(input.get(PlanningFields.NOTE)), cost(input, ItemCost.UNKNOWN),
-                RawInput.booking(input.get(PlanningFields.BOOKING)), RawInput.placeId(input.get(PlanningFields.PLACE_ID)));
-        Item item = trip.addItem(day, details, RawInput.position(input.get(PlanningFields.POSITION)), addedBy, Timestamps.now(clock));
+        ItemDetails details = new ItemDetails(PlanningInput.type(fields.type().orElse(null)), PlanningInput.title(fields.title().orElse(null)),
+                PlanningInput.timeOfDay(fields.timeOfDay().orElse(null)), PlanningInput.durationMin(fields.durationMin().orElse(null)),
+                PlanningInput.note(fields.note().orElse(null)), cost(fields, ItemCost.UNKNOWN),
+                PlanningInput.booking(fields.booking().orElse(null)), PlanningInput.placeId(fields.placeId().orElse(null)));
+        Item item = trip.addItem(day, details, PlanningInput.position(fields.position().orElse(null)), addedBy, Timestamps.now(clock));
         trips.save(trip);
         return item.id();
     }
 
-    /** Sửa một mục chưa bị xóa; trường không nêu thì giữ nguyên, có thể đổi ngày và vị trí. */
+    /** Edits an item that is not deleted; a field that is not given stays unchanged; the date and position can change. */
     public void editItem(PlanningCommands.EditItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
         ItemDetails current = trip.editableItem(command.itemId()).details();
-        Map<String, Object> input = command.input();
-        // Thứ tự kiểm tra cố định theo hợp đồng API: loại, tiêu đề, giờ, thời lượng, ghi chú, chi phí, đặt chỗ, ngày.
-        ItemType type = valueOrCurrent(input, PlanningFields.TYPE, RawInput::type, current.type());
-        String title = valueOrCurrent(input, PlanningFields.TITLE, RawInput::title, current.title());
-        LocalTime timeOfDay = valueOrCurrent(input, PlanningFields.TIME_OF_DAY, RawInput::timeOfDay, current.timeOfDay());
-        Integer durationMin = valueOrCurrent(input, PlanningFields.DURATION_MIN, RawInput::durationMin, current.durationMin());
-        String note = valueOrCurrent(input, PlanningFields.NOTE, RawInput::note, current.note());
-        ItemCost cost = cost(input, current.cost());
-        // Không nêu trạng thái đặt chỗ ⇒ giữ nguyên; đổi sang loại không có đặt chỗ (Nghỉ, Việc cần làm) ⇒ tự bỏ trạng thái.
-        BookingStatus booking = input.containsKey(PlanningFields.BOOKING) ? RawInput.booking(input.get(PlanningFields.BOOKING))
+        PlanningCommands.ItemFields fields = command.fields();
+        // The order of the checks is fixed by the API contract: type, title, time, duration, note, cost, booking, day.
+        ItemType type = valueOrCurrent(fields.type(), PlanningInput::type, current.type());
+        String title = valueOrCurrent(fields.title(), PlanningInput::title, current.title());
+        LocalTime timeOfDay = valueOrCurrent(fields.timeOfDay(), PlanningInput::timeOfDay, current.timeOfDay());
+        Integer durationMin = valueOrCurrent(fields.durationMin(), PlanningInput::durationMin, current.durationMin());
+        String note = valueOrCurrent(fields.note(), PlanningInput::note, current.note());
+        ItemCost cost = cost(fields, current.cost());
+        // No booking status given => unchanged; changing to a type with no booking (Rest, To-do) => the status is cleared automatically.
+        BookingStatus booking = fields.booking().isPresent() ? PlanningInput.booking(fields.booking().value())
                 : (type.supportsBooking() ? current.booking() : null);
-        String placeId = valueOrCurrent(input, PlanningFields.PLACE_ID, RawInput::placeId, current.placeId());
+        String placeId = valueOrCurrent(fields.placeId(), PlanningInput::placeId, current.placeId());
         ItemDetails details = new ItemDetails(type, title, timeOfDay, durationMin, note, cost, booking, placeId);
-        // Ngày: không nêu ⇒ giữ nguyên; nêu null ⇒ về "Chưa có ngày"; nêu ngày ⇒ chuyển sang ngày đó.
-        Patch<LocalDate> newDay = input.containsKey(PlanningFields.DAY) ? Patch.of(RawInput.dayOrNull(input.get(PlanningFields.DAY))) : Patch.absent();
-        trip.editItem(command.itemId(), details, newDay, RawInput.position(input.get(PlanningFields.POSITION)), Timestamps.now(clock));
+        // Day: not given => unchanged; given as null => back to 'no date yet'; given a date => moves to that day.
+        Patch<LocalDate> newDay = fields.day().map(PlanningInput::dayOrNull);
+        trip.editItem(command.itemId(), details, newDay, PlanningInput.position(fields.position().orElse(null)), Timestamps.now(clock));
         trips.save(trip);
     }
 
-    /** Sắp xếp lại các mục đang hiện trong một ngày theo thứ tự mới; trả ngày đã sắp xếp. */
+    /** Reorders the items currently shown in a day into the new order; returns the reordered day. */
     public LocalDate reorderDay(PlanningCommands.ReorderDay command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
-        LocalDate day = RawInput.day(command.day());
+        LocalDate day = PlanningInput.day(command.day());
         trip.requireDayInRange(day);
         trip.reorderDay(day, parseOrderedIds(command.orderedIds()));
         trips.save(trip);
         return day;
     }
 
-    /** Xóa mềm một mục (vào "Đã xóa gần đây"). */
+    /** Soft-deletes an item (into 'Recently deleted'). */
     public void softDeleteItem(PlanningCommands.SoftDeleteItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
@@ -197,7 +193,7 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Khôi phục một mục đã xóa mềm về đúng ngày và vị trí cũ. */
+    /** Restores a soft-deleted item to its exact old day and position. */
     public void restoreItem(PlanningCommands.RestoreItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMayChange(command.ownerId(), trip.item(command.itemId()));
@@ -205,7 +201,7 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Xóa vĩnh viễn một mục đã nằm trong "Đã xóa gần đây". */
+    /** Permanently deletes an item that is already in 'Recently deleted'. */
     public void purgeItem(PlanningCommands.PurgeItem command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
@@ -213,18 +209,17 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Tích/bỏ tích việc cần làm hoặc Đã ghé địa điểm cho chính thành viên đang gọi, không phụ thuộc người thêm mục. */
+    /** Ticks/unticks a to-do or 'Visited' for the calling member themself, regardless of who added the item. */
     public void setTaskDone(PlanningCommands.SetTaskDone command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireMember(command.ownerId());
-        Boolean done = command.done() instanceof Boolean flag ? flag : null;
-        trip.setTaskDone(command.itemId(), command.ownerId(), done, Timestamps.now(clock));
+        trip.setTaskDone(command.itemId(), command.ownerId(), command.done(), Timestamps.now(clock));
         trips.save(trip);
     }
 
-    // ---- hỗ trợ ----
+    // ---- helpers ----
 
-    /** Xóa mềm cả chuyến (PO 28/10/2026): chuyến rời danh sách, mục giữ nguyên để khôi phục. */
+    /** Soft-deletes a whole trip (PO 28/10/2026): the trip leaves the list, the items stay so it can be restored. */
     public void deleteTrip(PlanningCommands.DeleteTrip command) {
         Trip trip = load(command.ownerId(), command.tripId());
         trip.requireOrganizer(command.ownerId());
@@ -232,21 +227,21 @@ public class PlanningCommandHandler {
         trips.save(trip);
     }
 
-    /** Khôi phục chuyến từ "Chuyến đã xóa gần đây". */
+    /** Restores a trip from 'Recently deleted trips'. */
     public void restoreTrip(PlanningCommands.RestoreTrip command) {
         Trip trip = trips.findOwnedDeleted(command.tripId(), command.ownerId()).orElseThrow(WanderException::notFound);
         trip.recoverFromTrash(Timestamps.now(clock));
         trips.save(trip);
     }
 
-    /** Nạp chuyến mà người gọi là thành viên (mọi vai); người ngoài và chuyến đã xóa coi như không có (404). Quyền theo vai kiểm ở từng lệnh. */
+    /** Loads a trip of which the caller is a member (any role); an outsider and a deleted trip count as absent (404). Role permissions are checked in each command. */
     private Trip load(UUID actorId, UUID tripId) {
         return trips.findAccessible(tripId, actorId).orElseThrow(WanderException::notFound);
     }
 
     /**
-     * Tên không trùng với tên chuyến khác của cùng chủ (DR-006): trùng thì thêm hậu tố " - 2", " - 3"… Chuyến {@code exceptTripId}
-     * (chính chuyến đang đổi tên, null khi tạo mới) không tính là trùng.
+     * A name that does not clash with another trip's name of the same owner (DR-006): on a clash a suffix ' - 2', ' - 3'... is added. The trip {@code exceptTripId}
+     * (the trip being renamed, null when creating) does not count as a clash.
      */
     private String uniqueTripName(UUID ownerId, UUID exceptTripId, String requestedName) {
         Map<UUID, String> names = new HashMap<>(trips.tripNamesOf(ownerId));
@@ -254,41 +249,39 @@ public class PlanningCommandHandler {
         return TripNaming.uniqueName(new HashSet<>(names.values()), requestedName);
     }
 
-    /** Khoảng ngày từ đầu vào: đầu nào không nêu thì lấy của chuyến hiện tại. */
-    private static DateRange rangeFromInput(Map<String, Object> input, Trip trip) {
-        Object start = input.containsKey(PlanningFields.START_DATE) ? input.get(PlanningFields.START_DATE) : trip.range().start().toString();
-        Object end = input.containsKey(PlanningFields.END_DATE) ? input.get(PlanningFields.END_DATE) : trip.range().end().toString();
-        return range(start, end);
+    /** The date range from the input: an end that is not given is taken from the current trip. */
+    private static DateRange rangeFromInput(Patch<String> startDate, Patch<String> endDate, Trip trip) {
+        return range(startDate.orElse(trip.range().start().toString()), endDate.orElse(trip.range().end().toString()));
     }
 
-    /** Giá trị đã kiểm tra của trường nếu được nêu trong đầu vào, nếu không thì giữ giá trị hiện tại. */
-    private static <T> T valueOrCurrent(Map<String, Object> input, String field, Function<Object, T> parse, T current) {
-        return input.containsKey(field) ? parse.apply(input.get(field)) : current;
+    /** The validated value of a field if it is given in the input, otherwise the current value is kept. */
+    private static <A, T> T valueOrCurrent(Patch<A> sent, Function<A, T> parse, T current) {
+        return sent.isPresent() ? parse.apply(sent.value()) : current;
     }
 
-    /** Danh sách mã mục theo thứ tự mới từ đầu vào thô; không phải danh sách chuỗi mã hợp lệ thì báo lỗi thứ tự. */
-    private static List<UUID> parseOrderedIds(Object raw) {
-        if (!(raw instanceof List<?> list) || !list.stream().allMatch(String.class::isInstance)) {
+    /** The list of item ids in the new order from the raw input; if it is not a list of valid id strings, an order error is reported. */
+    private static List<UUID> parseOrderedIds(List<String> list) {
+        if (list == null || list.stream().anyMatch(java.util.Objects::isNull)) {
             throw WanderException.invalid(ErrorCodes.MALFORMED, PlanningMessages.ORDER_MALFORMED, PlanningFields.ORDERED_IDS);
         }
         List<UUID> ids = new ArrayList<>();
-        for (Object element : list) {
-            ids.add(Ids.parse((String) element).orElseThrow(() -> WanderException.invalid(
+        for (String element : list) {
+            ids.add(Ids.parse(element).orElseThrow(() -> WanderException.invalid(
                     PlanningErrorCodes.INVALID_ORDER, PlanningMessages.ORDER_MISMATCH, PlanningFields.ORDERED_IDS)));
         }
         return ids;
     }
 
-    /** Khoảng ngày theo thứ tự lỗi của hợp đồng API: START_REQUIRED, END_REQUIRED, INVALID_DATE, END_BEFORE_START, TOO_LONG. */
-    static DateRange range(Object start, Object end) {
-        if (RawInput.isMissing(start)) {
+    /** The date range in the error order of the API contract: START_REQUIRED, END_REQUIRED, INVALID_DATE, END_BEFORE_START, TOO_LONG. */
+    static DateRange range(String start, String end) {
+        if (PlanningInput.isMissing(start)) {
             throw WanderException.invalid(PlanningErrorCodes.START_REQUIRED, PlanningMessages.TRIP_RANGE_INVALID, PlanningFields.START_DATE);
         }
-        if (RawInput.isMissing(end)) {
+        if (PlanningInput.isMissing(end)) {
             throw WanderException.invalid(PlanningErrorCodes.END_REQUIRED, PlanningMessages.TRIP_RANGE_INVALID, PlanningFields.END_DATE);
         }
-        LocalDate startDate = RawInput.isoDateOrNull(start);
-        LocalDate endDate = RawInput.isoDateOrNull(end);
+        LocalDate startDate = PlanningInput.isoDateOrNull(start);
+        LocalDate endDate = PlanningInput.isoDateOrNull(end);
         if (startDate == null || endDate == null) {
             throw WanderException.invalid(PlanningErrorCodes.INVALID_DATE, PlanningMessages.TRIP_RANGE_INVALID, PlanningFields.END_DATE);
         }
@@ -296,16 +289,16 @@ public class PlanningCommandHandler {
     }
 
     /**
-     * Ba trường chi phí theo thứ tự kiểm tra: "đã bao gồm" (kiểu boolean), chi phí, giá tham khảo,
-     * rồi quy tắc giá tham khảo chỉ hợp lệ khi đã tick (trong {@link ItemCost}).
+     * The three cost fields in validation order: 'included' (a boolean), cost, reference price,
+     * then the rule that a reference price is valid only when ticked (in {@link ItemCost}).
      */
-    static ItemCost cost(Map<String, Object> input, ItemCost current) {
-        boolean included = input.containsKey(PlanningFields.INCLUDED)
-                ? RawInput.bool(input.get(PlanningFields.INCLUDED), PlanningFields.INCLUDED) : current.included();
-        Long costK = input.containsKey(PlanningFields.COST)
-                ? RawInput.amountK(input.get(PlanningFields.COST), PlanningFields.COST) : current.costK();
-        boolean referenceSent = input.containsKey(PlanningFields.REFERENCE_COST);
-        Long reference = referenceSent ? RawInput.amountK(input.get(PlanningFields.REFERENCE_COST), PlanningFields.REFERENCE_COST) : null;
+    static ItemCost cost(PlanningCommands.ItemFields fields, ItemCost current) {
+        boolean included = fields.included().isPresent()
+                ? PlanningInput.bool(fields.included().value(), PlanningFields.INCLUDED) : current.included();
+        Long costK = fields.cost().isPresent()
+                ? PlanningInput.amountK(fields.cost().value(), PlanningFields.COST) : current.costK();
+        boolean referenceSent = fields.referenceCost().isPresent();
+        Long reference = referenceSent ? PlanningInput.amountK(fields.referenceCost().value(), PlanningFields.REFERENCE_COST) : null;
         return current.change(costK, included, referenceSent, reference);
     }
 }

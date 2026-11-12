@@ -1,60 +1,60 @@
 import type { DestinationDetail, PlaceView } from '../../discover/index.ts';
 
-/** Bốn cảnh giới thiệu: khám phá, quẹt chọn, lịch trình trên bản đồ, chia sẻ cho nhóm. */
+/** The four intro scenes: explore, swipe to choose, the itinerary on the map, share with a group. */
 export type SceneKind = 'discover' | 'swipe' | 'plan' | 'share';
 
-/** Khung buổi dự kiến của một mục trong lịch mẫu (không phải giờ chính xác). */
+/** The expected part of day of an item in the sample itinerary (not an exact time). */
 export type SlotKey = 'morning' | 'noon' | 'afternoon' | 'lateAfternoon' | 'dusk' | 'evening';
 
-/** Một mục của lịch mẫu theo mã địa điểm trong kho; `note` là khóa của ghi chú ngắn trong chữ hiển thị. */
+/** An item of the sample itinerary by place id in the catalog; `note` is the key of a short note in the display copy. */
 export interface SampleStop {
   readonly placeId: string;
   readonly slot: SlotKey;
   readonly note: string;
 }
 
-/** Một ngày của lịch mẫu: khóa chủ đề và các mục theo thứ tự ghé thăm (`lunch` là khoảng nghỉ, không phải địa điểm). */
+/** One day of the sample itinerary: the theme key and the items in visiting order (`lunch` is a break, not a place). */
 export interface SampleDay {
   readonly theme: string;
   readonly items: readonly (SampleStop | 'lunch')[];
 }
 
-/** Một địa điểm trên lịch đã dựng: số thứ tự trong ngày (1, 2, 3…) khớp với số ghim trên bản đồ. */
+/** A place on the built itinerary: the ordinal number in the day (1, 2, 3...) matching the pin number on the map. */
 export interface TripStop {
   readonly kind: 'stop';
   readonly place: PlaceView;
   readonly slot: SlotKey;
   readonly note: string;
   readonly num: number;
-  /** Tên người đề xuất nếu mục này vừa được chủ chuyến chấp nhận; null với lịch gốc. */
+  /** The proposer's name if this item was just accepted by the trip owner; null for the original itinerary. */
   readonly proposedBy: string | null;
 }
 
-/** Khoảng nghỉ trong ngày (ăn trưa): có dòng trong danh sách nhưng không có ghim. */
+/** A break in the day (lunch): it has a line in the list but no pin. */
 export interface TripBreak {
   readonly kind: 'break';
   readonly slot: SlotKey;
 }
 
-/** Mục của lịch đã dựng. */
+/** An item of the built itinerary. */
 export type TripItem = TripStop | TripBreak;
 
-/** Một ngày của lịch đã dựng từ dữ liệu thật. */
+/** One day of the itinerary built from real data. */
 export interface TripDay {
   readonly index: number;
   readonly theme: string;
   readonly items: readonly TripItem[];
 }
 
-/** Thuộc tính chung của mọi cảnh: dữ liệu điểm đến, giảm chuyển động, còn tự chạy không, và hai cách báo lên khung (xong cảnh / người xem chạm vào). */
+/** The props shared by every scene: the destination data, reduced motion, whether it still runs by itself, and two ways to report to the frame (scene done / the viewer touched). */
 export interface SceneProps {
   readonly dest: DestinationDetail;
   readonly reduced: boolean;
   readonly auto: boolean;
-  /** Cảnh đã kể xong và muốn tự sang cảnh kế (khung chỉ làm khi còn tự chạy). */
+  /** The scene has finished its story and wants to go to the next by itself (the frame does it only while it still runs by itself). */
   readonly onDone: () => void;
-  /** Người xem chạm vào nội dung cảnh: dừng tự chuyển cảnh. */
+  /** The viewer touches the scene's content: stops auto-advancing the scene. */
   readonly onInteract: () => void;
-  /** Báo trước cho người xem: sắp tự chuyển sau `ms` mili-giây (0 = cảnh cuối đã kể xong, nhắc nút bắt đầu). Khung vẽ dấu hiệu trên chấm tiến độ. */
+  /** A heads-up to the viewer: it will change by itself after `ms` milliseconds (0 = the last scene has finished, hints at the start button). The frame draws the sign on the progress dot. */
   readonly onCue: (ms: number) => void;
 }

@@ -4,12 +4,12 @@ import { IDENTITY } from './identity.const.ts';
 import { PAIRING_POLL as P } from './pairingPoll.const.ts';
 import type { PairingStatus } from './identity.types.ts';
 
-/** Lỗi mạng hoặc HTTP 429 được tự thử im lặng; lỗi khác phải được báo qua cổng lỗi hiện có. */
+/** A network error or HTTP 429 is retried silently; any other error must be reported through the existing error gate. */
 export function isRetryablePairingError(error: unknown): boolean {
   return error instanceof ApiError && (error.isNetwork || error.status === P.RATE_LIMIT_STATUS);
 }
 
-/** Nhân đôi khoảng chờ liên tiếp, có trần; một phản hồi thành công đưa về nhịp gốc. */
+/** Doubles the consecutive wait, with a ceiling; one successful response brings it back to the base rhythm. */
 export function nextPairingDelay(current: number): number {
   return Math.min(current * P.BACKOFF_FACTOR, P.MAX_DELAY_MS);
 }
@@ -25,7 +25,7 @@ interface PollOptions {
 
 type Visibility = Pick<Document, 'hidden' | 'addEventListener' | 'removeEventListener'>;
 
-/** Một vòng poll sở hữu HTTP, bộ hẹn và bộ nghe của đúng lần dựng màn. */
+/** One poll loop owns the HTTP, the timer and the listener of exactly one screen build. */
 class PairingPoll {
   private disposed = false;
   private stopped = false;
@@ -39,7 +39,7 @@ class PairingPoll {
   private readonly options: PollOptions;
   private readonly visibility: Visibility;
 
-  /** Hạn cục bộ chạy độc lập với HTTP chậm; không đổi bước duyệt của máy chủ. */
+  /** The local time limit runs independently of a slow HTTP; it does not change the server's approval step. */
   constructor(options: PollOptions, visibility: Visibility) {
     this.options = options;
     this.visibility = visibility;
@@ -48,7 +48,7 @@ class PairingPoll {
     this.schedule();
   }
 
-  /** Gỡ bộ hẹn, bộ nghe và hủy HTTP; mọi kết quả đến muộn đều bị bỏ qua. */
+  /** Removes the timer and the listener and cancels the HTTP; any result that arrives late is ignored. */
   stop = (): void => {
     this.disposed = true;
     clearTimeout(this.timer);
@@ -57,14 +57,14 @@ class PairingPoll {
     this.visibility.removeEventListener(P.VISIBILITY_EVENT, this.onVisibility);
   };
 
-  /** Chặn mọi lần hỏi tiếp sau trạng thái cuối nhưng vẫn cho phép hoàn tất nhận phiên. */
+  /** Blocks every further ask after the final state but still lets the session receipt finish. */
   private finish(): void {
     this.stopped = true;
     clearTimeout(this.timer);
     clearTimeout(this.expiryTimer);
   }
 
-  /** Hết hạn ngay cả khi HTTP chưa trả về; không báo lỗi hủy do chính vòng poll tạo ra. */
+  /** Expires even when the HTTP has not returned; does not report the cancel error created by the poll loop itself. */
   private expire(): void {
     if (this.disposed || this.stopped) return;
     this.finish();
@@ -72,19 +72,19 @@ class PairingPoll {
     this.options.finish('expired');
   }
 
-  /** Đặt lần hỏi tiếp theo, không tạo bộ hẹn HTTP khi màn ẩn. */
+  /** Schedules the next ask, creating no HTTP timer while the screen is hidden. */
   private schedule(): void {
     if (this.disposed || this.stopped || this.visibility.hidden) return;
     this.timer = setTimeout(() => { void this.poll(); }, Math.max(0, this.nextAt - Date.now()));
   }
 
-  /** Hiện lại kiểm ngay nếu đã tới nhịp, vẫn giữ backoff và không gọi chồng HTTP đang chạy. */
+  /** When shown again it checks at once if the rhythm is due, still keeping the backoff and not stacking on an HTTP call in progress. */
   private readonly onVisibility = (): void => {
     clearTimeout(this.timer);
     if (!this.inFlight) this.schedule();
   };
 
-  /** Mỗi lượt chỉ gửi một HTTP; mọi lỗi lùi có trần, thành công reset nhịp và chuỗi lỗi đã báo. */
+  /** Each round sends only one HTTP; every error backs off with a ceiling, success resets the rhythm and the reported error chain. */
   private async poll(): Promise<void> {
     if (this.disposed || this.stopped || this.inFlight || this.visibility.hidden) return;
     if (Date.now() > this.options.expiresAt) { this.expire(); return; }
@@ -119,7 +119,7 @@ class PairingPoll {
   }
 }
 
-/** Poll tuần tự, ngủ khi ẩn; trả cổng hủy để effect dọn sạch lúc gỡ hoặc đổi yêu cầu. */
+/** Polls sequentially, sleeps when hidden; returns a cancel handle so the effect cleans up fully on removal or when the request changes. */
 export function startPairingPoll(options: PollOptions, visibility: Visibility = document): () => void {
   return new PairingPoll(options, visibility).stop;
 }

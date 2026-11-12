@@ -6,8 +6,8 @@ const ROOT_MARGIN = '0px 0px -8% 0px';
 const THRESHOLD = 0.08;
 
 /**
- * Hiện dần các khối `.rv` bên trong vùng gắn ref khi cuộn tới (thêm lớp `in` một lần).
- * Giảm chuyển động hoặc không có IntersectionObserver thì hiện ngay. `rootSelector` là vùng cuộn (mặc định `#screen`).
+ * Fades in the `.rv` blocks inside the region that holds the ref when scrolled to (adds the `in` class once).
+ * Reduced motion or no IntersectionObserver shows them at once. `rootSelector` is the scroll region (default `#screen`).
  */
 export function useReveal<E extends HTMLElement>(rootSelector = '#screen'): React.RefObject<E | null> {
   const ref = useRef<E | null>(null);

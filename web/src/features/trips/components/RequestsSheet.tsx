@@ -15,12 +15,12 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { itemName } from '../model/tripView.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 
-/** Nhãn trạng thái của một đề nghị (Q9: người đề nghị thấy "Đã từ chối", không có lý do). */
+/** The status label of a request (Q9: the requester sees 'Rejected', with no reason). */
 function statusLabel(r: DeletionRequest): string {
   return r.status === 'pending' ? C.requests.pending : r.status === 'approved' ? C.requests.approved : C.requests.rejected;
 }
 
-/** Tờ danh sách đề nghị xóa: Organizer thấy mọi đề nghị và Đồng ý/Từ chối; thành viên thấy đề nghị của mình (và hủy được khi còn chờ). */
+/** The deletion-request list sheet: the Organizer sees every request and Approve/Reject; a member sees their own requests (and can cancel while pending). */
 export function RequestsSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, cat } = useTripView();
   const { actions } = useTrips();
@@ -72,7 +72,7 @@ export function RequestsSheet({ onClose }: { readonly onClose: () => void }) {
   );
 }
 
-/** Tờ gửi đề nghị xóa một mục của người khác (lý do không bắt buộc). */
+/** The sheet to send a request to delete someone else's item (the reason is optional). */
 export function RequestDeleteSheet({ itemId, onClose }: { readonly itemId: string; readonly onClose: () => void }) {
   const { trip, cat } = useTripView();
   const toast = useToast();

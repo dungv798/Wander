@@ -1,4 +1,4 @@
-# Một JVM 512 MiB, một instance. Giữ mặc định local trong application.yml.
+# One 512 MiB JVM, one instance. Keeps the local defaults of application.yml.
 spring:
   datasource:
     hikari:
@@ -6,11 +6,11 @@ spring:
       minimum-idle: 0
       idle-timeout: 60000
       keepalive-time: 0
-      # Neon thức dậy mất vài giây; 15 s đủ cho cold start mà không giữ tới 17 thread chờ 30 s (rà kiến trúc 08/11/2026).
+      # Neon takes a few seconds to wake up; 15 s is enough for a cold start without holding up to 17 threads waiting 30 s (architecture review 08/11/2026).
       connection-timeout: 15000
   jpa:
     properties:
-      # Truy vấn không bao giờ treo vô hạn trên DB chia sẻ (mili giây).
+      # A query never hangs forever on a shared DB (milliseconds).
       jakarta.persistence.query.timeout: 15000
 server:
   tomcat:
@@ -21,7 +21,19 @@ server:
     enabled: true
     min-response-size: 1024
     mime-types: application/json,application/javascript,text/javascript,text/css,text/html,text/plain,image/svg+xml
+# One JSON object per log line on the public deployment (Spring Boot structured logging, ECS format): the request id, route, status and
+# duration of every API call are separate fields, so Render's log search can filter on them. Local runs keep readable text logs.
+logging:
+  structured:
+    format:
+      console: ecs
+
 management:
+  endpoints:
+    web:
+      exposure:
+        # Metrics are not published on the public instance (the Prometheus endpoint would be reachable by anyone).
+        include: health
   endpoint:
     health:
       show-details: never
@@ -31,6 +43,13 @@ management:
         readiness:
           include: readinessState
   health:
-    # Endpoint tổng hợp /actuator/health là công khai; chỉ báo DB sẽ truy vấn Neon mỗi lần gọi và giữ DB thức (N5, rà an ninh 02/11/2026).
+    # The aggregate endpoint /actuator/health is public; a DB indicator would query Neon on every call and keep the DB awake (N5, security review 02/11/2026).
     db:
       enabled: false
+
+# No API documentation endpoints on the public free-tier deployment.
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

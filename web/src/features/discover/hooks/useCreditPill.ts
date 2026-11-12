@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-/** Thời gian hiện nhãn nguồn ảnh trước khi tự ẩn, ms. */
+/** How long the photo-source label shows before hiding by itself, ms. */
 const CREDIT_PILL_MS = 6000;
 
 /**
- * Trạng thái hiện/ẩn nhãn nguồn ảnh. Nhãn gắn với ảnh đang xem (`photoKey`): đổi ảnh thì nhãn tự coi như đã đóng
- * (không cần đặt lại trạng thái trong effect), và tự ẩn sau 6 giây.
+ * The show/hide state of the photo-source label. The label is tied to the photo being viewed (`photoKey`): when the photo changes the label counts as closed
+ * (no need to reset the state in an effect), and hides itself after 6 seconds.
  */
 export function useCreditPill(photoKey: number): { open: boolean; toggle: () => void } {
   const [openFor, setOpenFor] = useState<number | null>(null);

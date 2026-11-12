@@ -1,4 +1,4 @@
-/* Trang chủ ảnh thật; dùng token và vật liệu kính chung. */
+/* The home page with real photos; uses the shared tokens and glass material. */
 .home-hero { position: relative; isolation: isolate; height: var(--home-hero-height); overflow: hidden; color: var(--on-photo); background: var(--photo-bg); }
 #screen[data-view="explore"] > .home-hero { max-width: none; width: 100%; margin-inline: 0; }
 .home-hero-photos, .home-hero-photos::after, .home-hero-link { position: absolute; inset: 0; }
@@ -36,7 +36,7 @@
 .home-hero .search { position: absolute; top: calc(var(--s-8) + var(--s-4)); left: var(--gutter); right: var(--gutter); margin: 0; width: auto; min-height: var(--tap); }
 .home-hero.national-hero .search { top: var(--s-8); left: 0; right: 0; }
 .home-hero .btn { width: 100%; }
-/* Clip có sân khấu riêng; nội dung trên kính đặc bên dưới, giữ hero ảnh cũ. */
+/* The clip has its own stage; the content sits on a solid glass below, keeping the old photo hero. */
 .home-hero:has(video) { height: auto; padding-top: var(--s-4); background: var(--surface-2); color: var(--ink); }
 .home-hero:has(video) .home-hero-photos, .home-hero:has(video) .home-hero-link { display: none; }
 .home-hero:has(video) .home-video-host { position: relative; width: calc(100% - var(--s-6) * 2); max-width: calc(var(--s-8) * 6); aspect-ratio: 9 / 14; margin-inline: auto; overflow: hidden; border: var(--focus-width) solid var(--white); border-radius: var(--r-xl); box-shadow: var(--card-shadow); background: var(--surface-2); }
@@ -66,13 +66,13 @@
 .home-body .mood-in { position: absolute; z-index: 1; inset: auto var(--s-3) var(--s-3); display: grid; gap: var(--s-1); }
 .home-body .mood b { font: var(--text-body); font-weight: 800; }
 .home-body .mood-in > span { font: var(--text-secondary); }
-/* Giữ toàn bộ lịch mẫu có thể truy cập, nhưng thu thẻ thành một hàng thấp. */
+/* Keeps the whole sample itinerary reachable, but collapses the card into one low row. */
 .home-body .tplcard { display: flex; flex-basis: calc(var(--s-8) * 4); min-height: calc(var(--tap) * 2); }
 .home-body .tplimg { width: var(--s-8); flex-shrink: 0; aspect-ratio: auto; }
 .home-body .tpltx { padding: var(--s-2); }
 .home-body .tpltx b { font: var(--text-body); font-weight: 800; }
 .home-body .tplrow { padding-block: 0 var(--s-2); }
-/* Khi clip đã kể hành trình, các lối vào phụ xếp gọn mà vẫn giữ đủ thao tác. */
+/* When the clip already tells the journey, the secondary entry points are laid out compactly while keeping every action. */
 .home-hero:has(video) + .home-body { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
 .home-hero:has(video) + .home-body > * { min-width: 0; }
 .home-hero:has(video) + .home-body .home-resume { order: 0; }
@@ -92,7 +92,7 @@
 .mapcard { position: relative; height: 320px; border-radius: var(--r-xl); border: 3px solid var(--white); box-shadow: var(--card-shadow); }
 .dfacts .ib, .facts .ib { background: var(--gem-grad); color: var(--on-gem, var(--white)); }
 
-/* Giữ nguyên kiểu màn điểm đến và bản đồ ngoài trang chủ. */
+/* Keeps the destination-screen style and the map outside the home page unchanged. */
 .dhero { height: 270px; }
 .dhero > img { transform-origin: 50% 82%; animation: kenburns 24s ease-in-out infinite alternate; view-transition-name: cover; }
 .dhero::after { background: linear-gradient(to top, var(--scrim) 4%, transparent 62%), linear-gradient(var(--scrim), transparent 28%); opacity: 0.92; }
@@ -116,7 +116,7 @@
   .mapcard { height: 420px; }
 }
 
-/* ===== Bản đồ toàn màn trong tờ phủ ===== */
+/* ===== Full-screen map inside the overlay sheet ===== */
 .mapfull { position: relative; flex: 1; min-height: 0; border-radius: inherit; overflow: hidden; }
 .mapbig { position: absolute; inset: 0; }
 .mapfull .close { position: absolute; top: 14px; right: 14px; z-index: 5; }

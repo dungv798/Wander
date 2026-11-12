@@ -5,7 +5,7 @@ import { SHELL_MAP } from './shellMap.const.ts';
 
 const TOKENS = fs.readFileSync(new URL('../../../styles/tokens.css', import.meta.url), 'utf8');
 
-/** Đọc một token số (đơn vị tùy ý) từ tokens.css. */
+/** Reads a numeric token (any unit) from tokens.css. */
 function token(name: string, unit: string): number {
   const match = new RegExp(`${name}:\\s*(\\d+)${unit}`).exec(TOKENS);
   assert.ok(match, `thiếu token ${name}`);

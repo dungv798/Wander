@@ -12,44 +12,44 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-/** Spring Data JPA repository của điểm rating quán. */
+/** Spring Data JPA repository of the venue rating scores. */
 public interface PlaceRatingJpaRepository extends JpaRepository<PlaceRatingEntity, UUID> {
 
-    /** Điểm của danh tính cho quán. */
+    /** The identity's score for the venue. */
     Optional<PlaceRatingEntity> findByIdentityIdAndPlaceRef(UUID identityId, String placeRef);
 
-    /** Danh tính đã chấm quán này chưa (không nạp entity vào bộ nhớ phiên). */
+    /** Whether the identity has rated this venue (without loading the entity into the session). */
     boolean existsByIdentityIdAndPlaceRef(UUID identityId, String placeRef);
 
-    /** Số lượt chấm của quán. */
+    /** The number of ratings of the venue. */
     long countByPlaceRef(String placeRef);
 
-    /** Số quán danh tính đã chấm. */
+    /** The number of venues the identity has rated. */
     long countByIdentityId(UUID identityId);
 
-    /** Xóa điểm của danh tính cho quán; trả số dòng đã xóa. */
+    /** Deletes the identity's score for the venue; returns the number of rows deleted. */
     long deleteByIdentityIdAndPlaceRef(UUID identityId, String placeRef);
 
-    /** Điểm trung bình của quán (null khi chưa có lượt). */
+    /** The average score of the venue (null when there are no ratings yet). */
     @Query(RatingQueryConstants.AVERAGE_STARS)
     Double averageStars(@Param("ref") String placeRef);
 
-    /** Lời bình chưa bị ẩn, mới nhất trước, giới hạn theo trang. */
+    /** Comments that are not hidden, newest first, limited by page. */
     @Query(RatingQueryConstants.VISIBLE_COMMENTS)
     List<PlaceRatingEntity> visibleComments(@Param("ref") String placeRef, @Param("threshold") long threshold, Pageable page);
 
-    /** Ghi hoặc cập nhật điểm trong một câu lệnh. */
+    /** Writes or updates the score in one statement. */
     @Modifying(clearAutomatically = true)
     @Query(value = RatingQueryConstants.UPSERT_RATING, nativeQuery = true)
     void upsert(@Param("id") UUID id, @Param("identity") UUID identity, @Param("ref") String placeRef, @Param("stars") int stars,
                 @Param("comment") String comment, @Param("now") Instant now);
 
-    /** Xóa báo cáo của điểm khi lời bình mới khác lời bình đang lưu (gọi TRƯỚC khi ghi). */
+    /** Deletes the reports of the rating when the new comment differs from the stored one (called BEFORE writing). */
     @Modifying
     @Query(value = RatingQueryConstants.CLEAR_REPORTS_OF_RATING, nativeQuery = true)
     void clearReports(@Param("identity") UUID identity, @Param("ref") String placeRef, @Param("comment") String comment);
 
-    /** Ghi báo cáo, bỏ qua nếu đã có. */
+    /** Records a report, ignored if it already exists. */
     @Modifying
     @Query(value = RatingQueryConstants.INSERT_REPORT, nativeQuery = true)
     void insertReport(@Param("rating") UUID rating, @Param("reporter") UUID reporter, @Param("now") Instant now);

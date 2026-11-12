@@ -1,4 +1,4 @@
-/** Chữ của tính năng cộng tác (Lát 1b). Tên hiển thị của người khác là nhãn TỰ KHAI, chưa xác minh. */
+/** The copy of the collaboration feature (Slice 1b). The display name of others is a SELF-DECLARED label, not verified. */
 export const COLLAB_COPY = {
   roles: { organizer: 'Người tổ chức', member: 'Thành viên', you: 'Bạn' },
   people: {

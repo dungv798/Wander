@@ -1,4 +1,4 @@
-/** Hằng số bản đồ MapLibre và lớp ghim native (đơn vị px trừ khi ghi khác). */
+/** Constants of the MapLibre map and the native pin layer (unit px unless noted). */
 export const MAP = {
   THUMB_PX: 96,
   PIN_PX: 44,
@@ -35,50 +35,50 @@ export const MAP = {
   FIT_CITY_ZOOM: 15,
   FIT_REGION_ZOOM: 14,
   FLY_MS: 750,
-  /** Quá thời gian này mà bản đồ chưa sẵn sàng thì báo "chưa mở được" kèm lối thay thế (mạng chậm/chặn, không có WebGL). */
+  /** Past this time if the map is not ready, it reports 'could not open yet' with an alternative (slow/blocked network, no WebGL). */
   LOAD_TIMEOUT_MS: 15000,
-  /** Mức thu phóng của liên kết bản đồ ngoài. */
+  /** The zoom level of the external map link. */
   EXTERNAL_ZOOM: 13,
-  /** Tâm và mức thu phóng cho liên kết cả nước khi chưa có ghim. */
+  /** The center and zoom level for the nationwide link when there is no pin. */
   EXTERNAL_COUNTRY: '6/16.2/106.0',
-  /** Hai ghim gần hơn mức này thì gộp thành cụm (chế độ duyệt). */
+  /** Two pins closer than this are merged into a cluster (browse mode). */
   CLUSTER_PX: 34,
   CLUSTER_BADGE_RADIUS: 10,
   CLUSTER_BADGE_OFFSET: 17,
   CLUSTER_BADGE_TEXT: 10,
   LABEL_GAP: 4,
-  /** Độ cong của đường nối (tỉ lệ độ dài). */
+  /** The curvature of the connecting line (a ratio of the length). */
   ARC_CURVE: 0.18,
-  /** Nửa cạnh ô chiếm chỗ của một ghim / ghim cụm (dùng khi đặt nhãn). */
+  /** Half the side of the cell a pin / cluster pin occupies (used when placing labels). */
   PIN_HALF: 20,
   CLUSTER_HALF: 18,
   LABEL_X: 24,
   LABEL_Y: 22,
   EDGE_PAD: 4,
   CLUSTER_FIT_PADDING: 60,
-  /** Lề (px) quanh vùng nhìn thấy khi kiểm "điểm đã nằm trong tầm nhìn" để không vừa khung lại (ghim sát mép coi như chưa thấy rõ). */
+  /** The margin (px) around the visible area when checking 'the point is already in view' so it does not re-fit (a pin right at the edge counts as not clearly seen). */
   KEEP_VISIBLE_MARGIN: 40,
-  /** Kiểu nền vector OpenFreeMap (ADR-015); công cộng, không khóa API, không SLA. */
+  /** The OpenFreeMap vector base style (ADR-015); public, no API key, no SLA. */
   STYLE_URL: 'https://tiles.openfreemap.org/styles/liberty',
-  /** Khung nhìn cả nước [tây, nam, đông, bắc] theo độ (bản đồ Việt Nam khi chưa có ghim). */
+  /** The whole-country view [west, south, east, north] in degrees (the map of Vietnam when there is no pin). */
   VIETNAM_BOUNDS: [102.1, 8.4, 115.5, 23.4],
-  /** Giới hạn zoom của MapLibre: xa nhất thấy cả nước, gần nhất thấy phố. */
+  /** The MapLibre zoom limits: the farthest sees the whole country, the nearest sees the street. */
   GL_MIN_ZOOM: 3.4,
   GL_MAX_ZOOM: 17,
-  /** Trần zoom ghim đơn; cặp ghim còn điều chỉnh theo khoảng cách trong geoMapPolicy. */
+  /** The zoom ceiling of a single pin; a pair of pins is still adjusted by distance in geoMapPolicy. */
   GL_FIT_MAX_ZOOM: 16,
-  /** Số chữ số thập phân của điểm kiểm mức zoom. */
+  /** The number of decimal places of the zoom-level checkpoint. */
   ZOOM_DIGITS: 2,
   GESTURE_LOCALE: {
     'CooperativeGesturesHandler.WindowsHelpText': 'Giữ Ctrl và cuộn để thu phóng bản đồ',
     'CooperativeGesturesHandler.MacHelpText': 'Giữ ⌘ và cuộn để thu phóng bản đồ',
     'CooperativeGesturesHandler.MobileHelpText': 'Dùng hai ngón để di chuyển bản đồ',
   },
-  /** Bề rộng nét tuyến và viền sáng quanh nó (px). */
+  /** The route stroke width and the light outline around it (px). */
   ROUTE_WIDTH: 4.5,
   ROUTE_HALO_WIDTH: 9,
   ROUTE_HALO_OPACITY: 0.9,
-  /** Nền phẳng theo PO 29/10; màu pha từ token hiện có, không thêm bảng màu riêng. */
+  /** A flat background per PO 29/10; the colors are mixed from existing tokens, no separate palette is added. */
   BASE_TOKENS: { water: '--map-water', land: '--map-land', park: '--map-low', road: '--map-road', mainRoad: '--map-main-road', casing: '--map-road-casing', label: '--map-label', halo: '--surface', boundary: '--map-boundary' },
   LAND_TINT: 1,
   PARK_TINT: 1,
@@ -88,9 +88,9 @@ export const MAP = {
   MINOR_ROAD_ZOOM: 11,
   SMALL_LABEL_ZOOM: 13,
   DETAIL_FADE_ZOOMS: 1,
-  /** Chiều cao (px) dải ghi công đè đáy bản đồ: vùng vừa khung chừa thêm chừng này ở đáy. */
+  /** The height (px) of the attribution strip overlaying the bottom of the map: the fit-to-frame area leaves this much extra at the bottom. */
   CREDIT_BAND: 44,
-  /** Tên nguồn/lớp do Wander thêm vào kiểu bản đồ. */
+  /** The names of the sources/layers that Wander adds to the map style. */
   ROUTE_SOURCE_ID: 'wander-route',
   ROUTE_HALO_LAYER_ID: 'wander-route-halo',
   ROUTE_LINE_LAYER_ID: 'wander-route-line',

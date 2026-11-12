@@ -38,5 +38,38 @@ services:
     ports:
       - "127.0.0.1:8787:8787"
 
+  # Local metrics stack (docs/operations/observability.md): docker compose --profile observability up -d
+  prometheus:
+    profiles: ["observability"]
+    image: prom/prometheus:v3.5.0
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=2d"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "127.0.0.1:9090:9090"
+
+  grafana:
+    profiles: ["observability"]
+    image: grafana/grafana:12.1.0
+    depends_on:
+      - prometheus
+    environment:
+      # Local only, bound to 127.0.0.1 below.
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: wander
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      # Read-only dashboards without a login (the port is bound to 127.0.0.1); editing still needs the admin account above.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "127.0.0.1:3000:3000"
+
 volumes:
   wander-pg:

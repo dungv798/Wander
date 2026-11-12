@@ -10,7 +10,7 @@ const validDestination = (id = 'ha-giang'): Record<string, unknown> => ({ id, na
 const validSummary = (id = 'ha-giang'): Record<string, unknown> => ({ id, name: 'Hà Giang', region: 'Đông Bắc', lat: 23, lon: 105 });
 const isInternal = (e: unknown): boolean => e instanceof ApiError && e.code === 'INTERNAL';
 
-/** Kho dựng trên fetch giả; trả thêm danh sách lời gọi (URL và tín hiệu hủy). */
+/** A repository built on a fake fetch; also returns the list of calls (URL and cancel signal). */
 function repo(handler: (url: string) => Response | Promise<Response>): {
   readonly repository: HttpCatalogRepository;
   readonly urls: string[];
@@ -62,7 +62,7 @@ test('metadata chủ đề additive: giữ mã thật, từ chối mảng sai đ
 });
 
 test('mã lạ: 404 của máy chủ thành ApiError NOT_FOUND để giao diện hiện đúng lời nhắc', async () => {
-  const r = repo(() => json({ error: { code: 'NOT_FOUND', message: 'x' } }, 404));
+  const r = repo(() => json({ code: 'NOT_FOUND' }, 404));
   await assert.rejects(r.repository.destination('khong-co'), (e: unknown) => e instanceof ApiError && e.code === 'NOT_FOUND' && e.status === 404);
 });
 
@@ -91,7 +91,7 @@ test('thân sai hình dạng thành INTERNAL, không để lọt giá trị hỏ
 
 test('điểm đến được nhớ: nhiều nơi cùng tải chỉ gọi MỘT lần; lỗi không được nhớ nên thử lại được', async () => {
   let fail = true;
-  const r = repo(() => (fail ? json({ error: { code: 'INTERNAL' } }, 500) : json({ destination: validDestination() })));
+  const r = repo(() => (fail ? json({ code: 'INTERNAL' }, 500) : json({ destination: validDestination() })));
   await assert.rejects(r.repository.destination('ha-giang'));
   fail = false;
   const [a, b, c] = await Promise.all([r.repository.destination('ha-giang'), r.repository.destination('ha-giang'), r.repository.destination('ha-giang')]);
@@ -112,7 +112,7 @@ test('người gọi hủy thì nhận AbortError nhưng yêu cầu dùng chung 
   assert.equal(r.signals[0], undefined, 'không gắn tín hiệu của một người gọi vào yêu cầu dùng chung');
 });
 
-/** Cài `localStorage` giả toàn cục trong lúc chạy `body`, rồi gỡ (kho bản lưu dùng kho mặc định của trình duyệt). */
+/** Installs a fake global `localStorage` while `body` runs, then removes it (the saved-copy store uses the browser's default store). */
 async function withLocalStorage(body: () => Promise<void>): Promise<void> {
   const data = new Map<string, string>();
   const fake = { getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => { data.set(k, v); }, removeItem: (k: string) => { data.delete(k); } };
@@ -126,10 +126,10 @@ test('B-09: máy chủ không trả lời (lỗi mạng hoặc 5xx) thì dùng b
     const handler = (): Response => {
       if (mode === 'down') throw new TypeError('Failed to fetch');
       if (mode === 'bad-gateway') return json({}, 502);
-      if (mode === 'missing') return json({ error: { code: 'NOT_FOUND' } }, 404);
+      if (mode === 'missing') return json({ code: 'NOT_FOUND' }, 404);
       return json({ destination: validDestination() });
     };
-    // mỗi lần dùng kho mới để bỏ bản nhớ trong bộ nhớ, chỉ còn bản ở localStorage
+    // each time use a new store to drop the in-memory copy, leaving only the copy in localStorage
     await repo(handler).repository.destination('ha-giang');
     mode = 'down';
     assert.equal((await repo(handler).repository.destination('ha-giang')).id, 'ha-giang');

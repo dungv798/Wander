@@ -3,33 +3,33 @@ import type { ApiClient } from '../../../shared/api/ApiClient.ts';
 import { CLIENT_ERROR } from '../../../shared/api/http.const.ts';
 import { PREFERENCES_API as P } from './preferencesApi.const.ts';
 
-/** Mã trong một phần tử `{code,label}`; phần tử hỏng thì null. */
+/** The code in a `{code,label}` element; a broken element gives null. */
 function codeOf(v: unknown): string | null {
   return typeof v === 'object' && v !== null && typeof (v as { code?: unknown }).code === 'string' ? (v as { code: string }).code : null;
 }
 
-/** Danh sách mã sở thích từ thân phản hồi `{interests:[{code,label}]}`; thiếu/sai dạng là lỗi nội bộ, phần tử hỏng bị bỏ. */
+/** The list of interest codes from the response body `{interests:[{code,label}]}`; missing/wrong shape is an internal error, a broken element is dropped. */
 function interestCodes(body: unknown): string[] {
   const list = typeof body === 'object' && body !== null ? (body as Record<string, unknown>)[P.KEY_INTERESTS] : undefined;
   if (!Array.isArray(list)) throw new ApiError(CLIENT_ERROR.INTERNAL);
   return list.map(codeOf).filter((c): c is string => c !== null);
 }
 
-/** Đọc/ghi sở thích "Bạn mê gì?" của chủ danh tính (lưu theo danh tính để sang máy khác vẫn còn). Mọi thất bại là `ApiError` có mã của backend. */
+/** Reads/writes the 'What are you into?' interests of the identity owner (stored per identity so they remain on another device). Every failure is an `ApiError` with the backend's code. */
 export class HttpPreferencesGateway {
   private readonly client: ApiClient;
 
-  /** Dùng máy khách HTTP đã cho (tiêm được khi test). */
+  /** Uses the given HTTP client (injectable in tests). */
   constructor(client: ApiClient) {
     this.client = client;
   }
 
-  /** Mã các loại sở thích đang lưu (rỗng nếu chưa chọn). */
+  /** The codes of the interest kinds currently stored (empty if none chosen). */
   async interests(): Promise<string[]> {
     return interestCodes(await this.client.get<unknown>(P.ROOT));
   }
 
-  /** Thay TOÀN BỘ sở thích bằng `codes` (rỗng = xóa) và trả danh sách máy chủ đã chuẩn hóa (bỏ trùng, sắp xếp). */
+  /** Replaces ALL interests with `codes` (empty = clear) and returns the list normalized by the server (duplicates dropped, sorted). */
   async saveInterests(codes: readonly string[]): Promise<string[]> {
     return interestCodes(await this.client.send<unknown>('PUT', P.INTERESTS, { [P.KEY_INTERESTS]: codes }));
   }

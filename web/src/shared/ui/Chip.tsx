@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Icon } from './Icon.tsx';
 import type { IconName } from './icons/iconPaths.const.ts';
 
-/** Kiểu nhãn: tint (nền nhạt theo loại), glass (kính tối trên ảnh), cat (màu loại đặc), sun (vàng), warn. */
+/** The label kinds: tint (a light background by kind), glass (a dark glass on a photo), cat (a solid kind color), sun (yellow), warn. */
 export type ChipTone = 'tint' | 'glass' | 'cat' | 'sun' | 'warn' | 'on';
 
 interface ChipProps {
@@ -12,7 +12,7 @@ interface ChipProps {
   readonly children: ReactNode;
 }
 
-/** Nhãn nhỏ (viên thuốc) cho loại, mùa, thời lượng… Chỉ để đọc, không phải nút. */
+/** A small label (a pill) for kind, season, duration... Only for reading, not a button. */
 export function Chip({ tone, icon, className, children }: ChipProps) {
   const cls = ['chip', tone, className].filter(Boolean).join(' ');
   return (

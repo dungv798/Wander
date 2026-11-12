@@ -13,13 +13,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/** Giới hạn request ghi đã xác thực trước khi MVC đọc body và chạy lệnh; lỗi dùng cùng advice trả JSON 429. */
+/** Limits authenticated write requests before MVC reads the body and runs the command; the error uses the same advice that returns the JSON 429. */
 @Configuration
 public class ApiWriteLimitConfig implements WebMvcConfigurer {
 
     private final RateLimits limits;
 
-    /** Dùng bộ đếm chung của một instance, tách khỏi quota công khai và quota xác thực. */
+    /** Uses the counter shared by one instance, separate from the public quota and the authentication quota. */
     public ApiWriteLimitConfig(RateLimits limits) {
         this.limits = limits;
     }
@@ -41,14 +41,14 @@ public class ApiWriteLimitConfig implements WebMvcConfigurer {
     }
 
     /**
-     * Thu hồi phiên (DELETE /api/sessions/{id}) không tốn ngân sách ghi: đây là phản ứng phòng vệ của chủ, kẻ giữ một phiên
-     * không được dùng ngân sách chung để chặn chủ thu hồi phiên đó.
+     * Revoking a session (DELETE /api/sessions/{id}) costs no write budget: it is the owner's defensive reaction, and someone holding a session
+     * must not be able to use the shared budget to stop the owner from revoking that session.
      */
     private static boolean isSessionRevocation(HttpServletRequest request) {
         return HttpMethod.DELETE.matches(request.getMethod()) && request.getRequestURI().startsWith(HttpConstants.SESSIONS_PATH_PREFIX);
     }
 
-    /** GET, HEAD và OPTIONS không bị đếm vào ngân sách thao tác ghi. */
+    /** GET, HEAD and OPTIONS are not counted into the write-operation budget. */
     private static boolean isReadOnly(String method) {
         return HttpMethod.GET.matches(method) || HttpMethod.HEAD.matches(method) || HttpMethod.OPTIONS.matches(method);
     }

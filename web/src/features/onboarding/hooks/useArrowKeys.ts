@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import type { SwipeKind } from '../model/swipeDeck.ts';
 
-/** Phím ← bỏ qua, → chọn: tương đương hai nút ✕/✓ (cho người dùng bàn phím). */
+/** The left key skips, the right key chooses: equivalent to the two buttons X/check (for keyboard users). */
 export function useArrowKeys(onAct: (kind: SwipeKind) => void): void {
   useEffect(() => {
-    /** Chuyển phím mũi tên thành hành động quẹt. */
+    /** Turns the arrow keys into a swipe action. */
     const onKey = (e: KeyboardEvent): void => {
       if (e.key === 'ArrowRight') onAct('pick');
       else if (e.key === 'ArrowLeft') onAct('skip');

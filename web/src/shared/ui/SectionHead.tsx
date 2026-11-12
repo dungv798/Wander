@@ -2,11 +2,11 @@ import type { ReactNode } from 'react';
 
 interface SectionHeadProps {
   readonly title: string;
-  /** Nhãn hoặc nút bên phải tiêu đề. */
+  /** A label or a button to the right of the title. */
   readonly right?: ReactNode;
 }
 
-/** Tiêu đề một khối trên trang: tên khối + (tùy chọn) nhãn/nút bên phải. */
+/** The title of a block on a page: the block name + (optional) a label/button on the right. */
 export function SectionHead({ title, right }: SectionHeadProps) {
   return (
     <div className="sec-head">

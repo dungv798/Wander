@@ -1,4 +1,4 @@
-/* Màn chuyến đi (v6, 26/10/2026): bản đồ địa hình chiếm cả màn, danh sách là tờ kéo được ba nấc. Chỉ dùng token. */
+/* The trip screen (v6, 26/10/2026): the terrain map fills the screen, the list is a sheet that can be dragged to three steps. Tokens only. */
 .mapbox { position: relative; height: 330px; background: var(--map-low); }
 .tmap { position: absolute; inset: 0; }
 .sheet-head { flex: none; touch-action: none; cursor: grab; }
@@ -20,12 +20,12 @@
   #screen[data-view="trip"] .sheet-scroll { flex: 1; overflow-y: auto; padding-bottom: 150px; }
 }
 
-/* vào màn: tờ trồi lên bằng thuộc tính `translate` (không đụng `transform` đang dùng cho nấc kéo) */
+/* entering the screen: the sheet rises using the `translate` property (it does not touch the `transform` used for the drag steps) */
 @keyframes sheetRise { from { opacity: 0; translate: 0 48px; } to { opacity: 1; translate: 0 0; } }
 #screen[data-view="trip"].enter > .sheetbody { animation: sheetRise var(--dur-scene) var(--ease-out) both; }
 #screen[data-view="trip"].enter > .mapbox { animation: fadeIn var(--dur-scene) linear both; }
 
-/* đầu tờ gọn hơn; tab ngày là viên thuốc (một màu nhấn); chip chọn ngày trung tính */
+/* a more compact sheet head; the day tab is a pill (one accent color); the day-choosing chip is neutral */
 .thead { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; padding-bottom: 8px; }
 .thead img { width: 52px; height: 52px; border-radius: var(--r-md); }
 .thead h1 { font-size: 24px; }
@@ -33,7 +33,7 @@
 .dtabs { gap: 8px; border-bottom: 0; margin: 0 -16px; padding: 4px 16px 12px; }
 .dtab { min-height: var(--tap); padding: 8px 16px; border: 0; border-radius: var(--r-pill); background: var(--surface); color: var(--ink); box-shadow: var(--sh-1); }
 
-/* Bìa chuyến: ảnh phủ, tên + ngày, nhóm Chia sẻ / Người đi cùng nằm ngay trên bìa. */
+/* The trip cover: a covering photo, the name + dates, the Share / Travel companions group sits right on the cover. */
 .trip-cover-card { position: relative; isolation: isolate; display: grid; align-content: end; gap: var(--s-2); min-height: calc(var(--s-8) * 2 + var(--s-7)); padding: var(--s-4); border-radius: var(--r-lg); overflow: hidden; background: var(--photo-bg); color: var(--on-photo); }
 .trip-cover-card > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
 .trip-cover-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--hero-bottom-scrim), var(--trip-cover-top-scrim) 85%); }
@@ -44,7 +44,7 @@
 .tcc-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; background: var(--glass-label-surface); border: 1px solid var(--sheet-edge); border-radius: var(--r-md); }
 :root:not([data-look='classic']) .tcc-actions .btn { color: var(--ink); background: transparent; border: 0; border-radius: var(--r-md); box-shadow: none; backdrop-filter: none; text-shadow: none; padding-inline: var(--s-2); font: var(--text-secondary); font-weight: 700; }
 
-/* Bìa gọn (tab Lịch, Chưa xếp, Chi phí): tên + ngày một hàng, hai nút chỉ còn biểu tượng 44 px; nhãn giữ cho trình đọc màn hình. Mục lịch lên cao ~100 px. */
+/* The compact cover (Schedule, Not scheduled, Cost tabs): the name + dates on one row, two buttons with only 44 px icons; the label is kept for screen readers. The schedule items rise by about 100 px. */
 .trip-cover-card[data-compact] { grid-template-columns: minmax(0, 1fr) auto; align-items: center; align-content: center; min-height: 0; padding: var(--s-3) var(--s-4); column-gap: var(--s-3); }
 .trip-cover-card[data-compact] .tcc-in h1 { overflow: hidden; font-size: var(--fs-lg); text-overflow: ellipsis; white-space: nowrap; }
 .trip-cover-card[data-compact] .tcc-in p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -52,7 +52,7 @@
 .trip-cover-card[data-compact] .tcc-actions .btn { min-width: var(--tap); padding-inline: 0; }
 .trip-cover-card[data-compact] .tcc-label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-/* Hai tầng điều khiển: CHẾ ĐỘ (4 tab chia đều) ở trên; CHỌN NGÀY (chip nhẹ, chỉ ở Lịch) ở dưới, khác cấp về kích thước và chất liệu. */
+/* Two control levels: the MODE (4 evenly divided tabs) on top; the DAY CHOICE (a light chip, only in Schedule) below, different in level of size and material. */
 .trip-nav { display: grid; gap: var(--s-2); padding-block: var(--s-3) var(--s-2); }
 .tmodes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-1); padding: var(--s-1); border: var(--glass-border) solid var(--sheet-edge); border-radius: var(--r-md); background: var(--surface-2); }
 .tmode { min-height: var(--tap); padding: 0 var(--s-1); border: 0; border-radius: var(--r-sm); background: none; color: var(--muted); font: var(--text-secondary); white-space: nowrap; cursor: pointer; }
@@ -64,7 +64,7 @@
 :root #screen .tdays .dtab[aria-selected="true"]::after { content: ''; position: absolute; bottom: 0; left: var(--s-4); right: var(--s-4); height: var(--focus-width); background: var(--accent); border-radius: var(--r-pill); }
 .dtab small { font: var(--text-secondary); color: var(--muted); }
 
-/* Chân thẻ mục: Ngày / Giờ bấm đổi ngay, gắn dưới thẻ chứ không trôi nổi. */
+/* The item card footer: Day / Time tap to change at once, attached under the card, not floating. */
 .itinerary-stop { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--sheet-inner-surface); }
 .itinerary-stop .swipe { border-radius: 0; box-shadow: none; background: transparent; }
 :root #screen .itinerary-stop .irow { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
@@ -89,14 +89,14 @@
 
 @media (min-width: 1280px) { #screen[data-view="trip"] .grab { display: none; } }
 
-/* thanh nắm là nút (bàn phím, đọc màn hình): vùng chạm 44 px, thanh nhìn thấy nhỏ ở giữa */
+/* the grab bar is a button (keyboard, screen reader): a 44 px touch area, a small visible bar in the middle */
 .grab { display: grid; place-items: center; width: 96px; height: var(--tap); margin: -14px auto -6px; padding: 0; border: 0; background: none; cursor: grab; }
 .grab::before { content: ""; width: 44px; height: 5px; border-radius: 3px; background: var(--line); }
 
-/* Danh sách "Đã xóa gần đây": bỏ dấu đầu dòng mặc định của ul. */
+/* The 'Recently deleted' list: drops the default bullet of the ul. */
 .trashlist { list-style: none; padding: 0; margin: 0; }
 
-/* "Hôm nay": danh sách mục theo giờ, liên kết mở bản đồ ngoài. */
+/* 'Today': the list of items by time, links that open an external map. */
 .todaylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .todayrow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
 .todayrow.done .tdbody b { text-decoration: line-through; opacity: 0.7; }
@@ -104,7 +104,7 @@
 .todayrow .tdbody { display: grid; gap: 4px; }
 .todayrow .tdbody b { display: flex; align-items: center; gap: 6px; font-size: 16px; }
 .maplink { width: fit-content; min-height: var(--tap); text-decoration: none; }
-/* Xem trước lưu/gửi lịch trình. */
+/* The preview of saving/sending the itinerary. */
 .expcard { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
 .expcard h3 { margin: 0; }
 .exptable { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -115,11 +115,11 @@
 .exptable td:first-child { white-space: nowrap; }
 .exp-gap { margin-top: 16px; }
 .todayrow .taskchk { position: static; margin: 0; }
-/* Cột chữ của hàng mục co được ở màn hẹp (320 px): chip dài tự xuống dòng thay vì đẩy cả hàng ra ngoài mép. */
+/* The text column of an item row shrinks on a narrow screen (320 px): a long chip wraps by itself instead of pushing the whole row past the edge. */
 .irow .tx { min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .mchip { max-width: 100%; }
 
-/* Thông báo nằm dưới hàng điều hướng bản đồ, trước nội dung và ngoài vùng CTA ở mọi nấc kéo (đặt ở đáy sẽ che nút Xếp / Thêm). */
+/* The notice sits under the map navigation row, before the content and outside the CTA area at every drag step (placing it at the bottom would cover the Schedule / Add buttons). */
 body:has(#screen[data-view="trip"]) .toast {
   top: calc(var(--s-8) + var(--s-2) + env(safe-area-inset-top, 0px));
   bottom: auto;
@@ -137,11 +137,11 @@ body:has(#screen[data-view="trip"]) .toast {
 .pending-selection h2 { font: var(--text-card); margin-bottom: var(--s-4); }
 :root #screen[data-view='trip'] .sheetbody > div.sheet-scroll { margin-bottom: var(--hide, 0px); }
 
-/* Form trung tính: chỉ radio/chip đang chọn nhận màu nhấn của bộ token hiện có. */
+/* A neutral form: only the selected radio/chip receives the accent color of the existing token set. */
 .panel:has([data-trip-form]) .fchip { box-shadow: none; text-decoration: none; }
 .panel:has([data-trip-form]) .opt { background: var(--surface); box-shadow: none; text-decoration: none; }
 .panel:has([data-trip-form]) summary { min-height: var(--tap); display: flex; align-items: center; }
-/* Bề mặt lịch trình sát mép; selector riêng thắng inset của giao diện chung. */
+/* The itinerary surface hugs the edge; a specific selector wins over the shared UI's inset. */
 @media (max-width: 1279px) {
   :root #screen[data-view='trip'] .sheetbody,
   :root:not([data-look='classic']) #screen[data-view='trip'] > section.sheetbody {
@@ -192,7 +192,7 @@ body:has(#screen[data-view="trip"]) .toast {
 .trip-booking .fchip { width: 100%; min-width: 0; font-weight: 700; padding-inline: var(--s-2); }
 .trip-booking .fchip .ic { flex: none; }
 
-/* Bìa DR-031: ảnh chọn có kích thước cố định, dấu check tách khỏi màu nền. */
+/* The DR-031 cover: the chosen photo has a fixed size, the check mark is separated from the background color. */
 .trip-head-cover { width: calc(var(--s-7) + var(--s-1)); height: calc(var(--s-7) + var(--s-1)); overflow: hidden; border-radius: var(--r-md); }
 .trip-head-cover img { width: 100%; height: 100%; object-fit: cover; }
 .trip-cover-grid { display: grid; grid-template-columns: repeat(3, 96px); gap: var(--s-2); justify-content: center; }
@@ -221,14 +221,14 @@ body:has(#screen[data-view="trip"]) .toast {
   .app #screen[data-view='trip'] .sheet-head, .app #screen[data-view='trip'] .sheet-scroll > .pad-x { padding-inline: var(--s-4); }
 }
 
-/* Ký hiệu đồng có nét gạch trong glyph; giữ ký tự ₫ để sao chép/đọc màn hình nhưng cắt nét chân của glyph. */
+/* The dong sign has a stroke inside the glyph; it keeps the character for copying/screen readers but cuts the glyph's foot stroke. */
 #screen[data-view='trip'] .bigmoney, #screen[data-view='trip'] .bigmoney b { text-decoration: none; border-bottom: 0; box-shadow: none; }
 #screen[data-view='trip'] .bigmoney .trip-money-currency { display: inline-block; font: inherit; color: inherit; line-height: 1; clip-path: inset(0 0 var(--s-1)); text-decoration: none; }
 
-/* Nút thêm đã ở đầu tờ; phần khuất theo nấc kéo được trừ bằng margin của vùng cuộn. */
+/* The add button is already at the top of the sheet; the part hidden by the drag step is subtracted by the scroll area's margin. */
 :root #screen[data-view='trip'] .sheetbody > div.sheet-scroll { padding-bottom: calc(var(--safe-bottom) + var(--s-6)); }
 
-/* Gợi ý xếp ngày: hàng nơi + chọn ngày, dòng báo thiếu nơi */
+/* Day-scheduling suggestions: a row with a place + a day choice, a line reporting missing places */
 .plan-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; }
 .plan-row > span { min-width: 0; overflow-wrap: anywhere; }
 .plan-row select { min-height: 44px; max-width: 45%; border-radius: 12px; border: 1px solid var(--border-ctrl); background: var(--surface); color: inherit; padding: 0 10px; font: inherit; }
@@ -236,15 +236,15 @@ body:has(#screen[data-view="trip"]) .toast {
 .plan-manual { padding: var(--s-3); border: var(--glass-border) solid var(--line); border-radius: var(--r-md); background: var(--surface-2); }
 .plan-manual ul { margin: var(--s-2) 0 0; padding-left: var(--s-4); font: var(--text-body); }
 
-/* Thẻ chi phí gọn: vài dòng ngày; chi tiết ở tờ riêng */
+/* The compact cost card: a few day rows; the detail is in its own sheet */
 .cost-days { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-1); font: var(--text-secondary); color: var(--muted); }
 
-/* Tổng quan gọn: thẻ chưa xếp ngày, chuẩn bị, khu quản lý gập sẵn */
+/* The compact Overview: the unscheduled card, preparation, the collapsed management area */
 .unassigned-preview { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-1); font: var(--text-secondary); }
 .unassigned-preview li { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .manage-menu { border-top: var(--glass-border) solid var(--line); padding-top: var(--s-2); }
 .manage-menu summary { min-height: var(--tap); display: flex; align-items: center; gap: var(--s-2); cursor: pointer; font: var(--text-card); }
 .manage-menu[open] summary > .ic { rotate: 180deg; }
 
-/* Thu gọn đầu tờ khi cuộn danh sách lịch (B-01, DR-037): bỏ bìa, giữ tay nắm, hàng chế độ (Tổng quan/Lịch/…) và hàng chọn ngày để vẫn đổi tab được để dành chỗ cho các thẻ. Cuộn về đầu thì hiện lại. */
+/* Collapses the sheet head when scrolling the schedule list (B-01, DR-037): drops the cover, keeps the handle, the mode row (Overview/Schedule/...) and the day-choosing row so the tab can still be changed, to leave room for the cards. Scrolling back to the top shows it again. */
 .sheet-head[data-collapsed] .trip-cover-card { display: none; }

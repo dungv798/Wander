@@ -9,10 +9,10 @@ export const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(SCRIPT_DIR, '..', '..'); // <root>/.claude/scripts -> <root>
 export const PLAN = 'docs/wander-master-plan.md';
 export const RULE_CONTEXT = '.claude/rules/wander-product-context.md';
-export const AP_DIR = 'docs/autopilot';
-export const RUNS_DIR = 'docs/autopilot/runs';
-export const LEASE = 'docs/autopilot/ACTIVE.json';
-export const AUTH = 'docs/autopilot/authorizations.json';
+export const AP_DIR = '.claude/autopilot';
+export const RUNS_DIR = '.claude/autopilot/runs';
+export const LEASE = '.claude/autopilot/ACTIVE.json';
+export const AUTH = '.claude/autopilot/authorizations.json';
 export const CLI_REL = '.claude/scripts/autopilot.mjs';
 export const GUARD_REL = '.claude/hooks/autopilot-guard.mjs';
 
@@ -40,7 +40,7 @@ export const STAGES = [
   { id: 'reconcile', title: 'Reconcile: cite-check, disagreement and evidence-gap list', deps: ['review-r1'], kind: 'synthesis' },
   { id: 'review-r2', title: 'Round 2 (optional, targeted rebuttal of material disagreements only)', deps: ['reconcile'], kind: 'agents', optional: true },
   { id: 'consolidate', title: 'Consolidate: decision records, options, recommendation (no promotion)', deps: ['reconcile', 'review-r2'], kind: 'synthesis' },
-  { id: 'apply', title: 'Apply reversible documentation deliverables inside docs/autopilot (optional)', deps: ['consolidate'], kind: 'write', optional: true },
+  { id: 'apply', title: 'Apply reversible documentation deliverables inside .claude/autopilot (optional)', deps: ['consolidate'], kind: 'write', optional: true },
   { id: 'report', title: 'Draft final report (Vietnamese) with decisions block', deps: ['consolidate', 'apply'], kind: 'write' },
   { id: 'validate', title: 'Validate: consistency, references, acceptance, diff', deps: ['report'], kind: 'script' },
 ];
@@ -112,7 +112,8 @@ export function watchedSet() {
   const w = {};
   const add = (rel) => { if (exists(rel)) w[rel] = sha256File(abs(rel)); };
   [PLAN, 'CLAUDE.md', '.claude/settings.json', AUTH, 'docs/agent-system.md'].forEach(add);
-  for (const rel of walk('.claude')) if (/\.(md|json|mjs)$/.test(rel) && !rel.endsWith('.test.mjs')) add(rel);
+  // The autopilot's own state (lease, run logs, checkpoints) changes by design; only the authorizations file is watched.
+  for (const rel of walk('.claude')) if (/\.(md|json|mjs)$/.test(rel) && !rel.endsWith('.test.mjs') && !(isUnder(rel, AP_DIR) && rel !== AUTH)) add(rel);
   return w;
 }
 
@@ -213,7 +214,7 @@ export function evaluate(input) {
   if (FILE_TOOLS.has(tool)) {
     const p = ti.file_path ?? ti.notebook_path;
     const rel = relFromRoot(p, base);
-    if (isPlan(rel)) return deny('PLAN_PROTECTED', 'docs/wander-master-plan.md is read-only. Propose a patch file under docs/autopilot/ instead.');
+    if (isPlan(rel)) return deny('PLAN_PROTECTED', 'docs/wander-master-plan.md is read-only. Propose a patch file under .claude/autopilot/ instead.');
     if (!active) return allow();
     if (rel === null) return deny('OUTSIDE_ROOT', 'writes outside the project are not allowed during an autopilot run.');
     if (PROTECTED_NAMES.has(path.posix.basename(fold(rel)))) return deny('STATE_FILE', `${rel} is managed by the autopilot CLI/hook; use \`node ${CLI_REL}\` commands.`);

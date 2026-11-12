@@ -4,8 +4,8 @@ import com.wander.shared.kernel.util.CodedValue;
 import java.util.Optional;
 
 /**
- * "Ai đi" của chuyến (DR-018 F2, ADR-014): chọn một, có thể trống. Chỉ là nhãn, chưa phải danh sách thành viên (Q6–Q9 là 1b).
- * Thứ tự khai báo là thứ tự hiển thị. Đổi mã hoặc bỏ giá trị phải kèm migration dữ liệu cho cột {@code trips.kind}.
+ * 'Who is going' of a trip (DR-018 F2, ADR-014): choose one, may be empty. Only a label, not yet a member list (Q6-Q9 are 1b).
+ * The declaration order is the display order. Changing a code or dropping a value must come with a data migration for the column {@code trips.kind}.
  */
 public enum TripKind implements CodedValue {
     SOLO("solo", "Một mình"),
@@ -27,12 +27,12 @@ public enum TripKind implements CodedValue {
         return code;
     }
 
-    /** Nhãn tiếng Việt hiển thị cho người dùng. */
+    /** The Vietnamese label shown to the user. */
     public String label() {
         return label;
     }
 
-    /** Kiểu theo mã trong dữ liệu và API; mã lạ trả rỗng. */
+    /** The kind by code in data and API; an unknown code returns empty. */
     public static Optional<TripKind> fromCode(String code) {
         return CodedValue.find(TripKind.class, code);
     }

@@ -6,13 +6,13 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Tải tờ chọn trước thao tác mở, không dựng danh sách nơi ở màn đầu. */
+/** Loads the picker sheet before the open action, and does not build the place list on the first screen. */
 function loadSheet() { return import('./AddManySheet.tsx'); }
 const AddManySheet = lazy(() => loadSheet().then(module => ({ default: module.AddManySheet })));
-/** Làm ấm chunk cho chuột, bàn phím và thao tác chạm. */
+/** Warms the chunk for the mouse, the keyboard and a touch action. */
 function preload() { void loadSheet().catch(() => undefined); }
 
-/** Lối vào tự quản lý tờ chọn; chỉ người có quyền xếp lịch được thêm lô vào ngày. */
+/** The entry point manages the picker sheet itself; only someone with permission to schedule can add in bulk to a day. */
 export function AddManyEntry() {
   const { trip } = useTripView();
   const [open, setOpen] = useState(false);

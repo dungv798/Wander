@@ -1,148 +1,148 @@
 package com.wander.planning.domain.constant;
 
-/** Lời báo lỗi riêng của module planning (tiếng Việt cho người dùng). Lời dùng chung ở {@code ErrorMessages}. */
+/** Error messages specific to the planning module (Vietnamese, for the user). Shared messages are in {@code ErrorMessages}. */
 public final class PlanningMessages {
-    /** Bìa không đúng hợp đồng mã có sẵn. */
+    /** The cover does not match the existing code contract. */
     public static final String INVALID_COVER = "Bìa không hợp lệ. Hãy chọn ảnh hoặc màu có sẵn.";
 
-    /** Khoảng ngày của chuyến sai (thiếu, sai định dạng, ngược, quá dài). */
+    /** The trip's date range is wrong (missing, wrong format, reversed, too long). */
     public static final String TRIP_RANGE_INVALID = "Khoảng ngày của chuyến không hợp lệ.";
 
-    /** Ngày của mục không hợp lệ. */
+    /** The item's date is not valid. */
     public static final String DAY_INVALID = "Ngày không hợp lệ.";
 
-    /** Loại mục không hợp lệ. */
+    /** The item type is not valid. */
     public static final String TYPE_INVALID = "Loại mục không hợp lệ.";
 
-    /** Trạng thái đặt chỗ không hợp lệ. */
+    /** The booking status is not valid. */
     public static final String BOOKING_INVALID = "Trạng thái đặt chỗ không hợp lệ.";
 
-    /** Kiểu chuyến không hợp lệ. */
+    /** The trip kind is not valid. */
     public static final String STYLE_INVALID = "Kiểu chuyến không hợp lệ.";
 
-    /** "Ai đi" không hợp lệ. */
+    /** 'Who is going' is not valid. */
     public static final String KIND_INVALID = "Kiểu người đi không hợp lệ.";
 
-    /** Sở thích không hợp lệ. */
+    /** The interest is not valid. */
     public static final String INTEREST_INVALID = "Sở thích không hợp lệ.";
 
-    /** Nhịp chuyến không hợp lệ. */
+    /** The trip pace is not valid. */
     public static final String PACE_INVALID = "Nhịp chuyến không hợp lệ.";
 
-    /** Trường bắt buộc nhưng trống. */
+    /** A field is required but empty. */
     public static final String FIELD_REQUIRED = "Trường này là bắt buộc.";
 
-    /** Danh sách gán ngày sai dạng (không phải danh sách đối tượng). */
+    /** The date-assignment list has the wrong shape (not a list of objects). */
     public static final String ASSIGNMENTS_MALFORMED = "Danh sách gán ngày không hợp lệ.";
 
-    /** Một mục xuất hiện hai lần trong lệnh gán ngày. */
+    /** An item appears twice in the date-assignment command. */
     public static final String ASSIGNMENT_DUPLICATED = "Mỗi mục chỉ được xuất hiện một lần trong lệnh gán ngày.";
 
-    /** Thứ tự gửi lên sai dạng (không phải danh sách chuỗi). */
+    /** The submitted order has the wrong shape (not a list of strings). */
     public static final String ORDER_MALFORMED = "Thứ tự không hợp lệ.";
 
-    /** Thứ tự gửi lên không đúng tập mục đang hiện trong ngày. */
+    /** The submitted order does not match the set of items visible in the day. */
     public static final String ORDER_MISMATCH = "Thứ tự phải gồm đúng các mục đang hiện trong ngày.";
 
-    /** Ngày nằm ngoài khoảng ngày của chuyến. */
+    /** The date is outside the trip's date range. */
     public static final String DAY_OUT_OF_RANGE = "Ngày nằm ngoài khoảng ngày của chuyến.";
 
-    /** Mục đã bị xóa nên không sửa được. */
+    /** The item has been deleted so it cannot be edited. */
     public static final String ITEM_DELETED_EDIT = "Mục đã bị xóa. Hãy khôi phục trước khi sửa.";
 
-    /** Chuyến đã bị xóa rồi. */
+    /** The trip has already been deleted. */
     public static final String TRIP_DELETED = "Chuyến đi đã bị xóa.";
 
-    /** Chuyến chưa bị xóa nên không khôi phục được. */
+    /** The trip has not been deleted so it cannot be restored. */
     public static final String TRIP_NOT_DELETED = "Chuyến đi chưa bị xóa.";
 
-    /** "Đã xóa gần đây" của chuyến đã đầy (DR-020). */
+    /** The trip's 'Recently deleted' is full (DR-020). */
     public static final String TRASH_FULL = "Đã xóa gần đây đã đầy. Hãy xóa vĩnh viễn bớt mục rồi thử lại.";
 
-    /** Mục đã bị xóa (thông báo chung). */
+    /** The item has been deleted (a general message). */
     public static final String ITEM_DELETED = "Mục đã bị xóa.";
 
-    /** Mục chưa bị xóa. */
+    /** The item has not been deleted. */
     public static final String NOT_DELETED = "Mục này chưa bị xóa.";
 
-    /** Chỉ xóa vĩnh viễn được mục đã nằm trong "Đã xóa gần đây". */
+    /** Only an item that is already in 'Recently deleted' can be permanently deleted. */
     public static final String NOT_IN_TRASH = "Chỉ xóa vĩnh viễn được mục đã nằm trong \"Đã xóa gần đây\".";
 
-    /** Mục không phải việc cần làm hoặc địa điểm nên không nhận thao tác hoàn thành. */
+    /** The item is not a to-do or a place so it does not accept a completion action. */
     public static final String NOT_A_TASK = "Chỉ việc cần làm và mục địa điểm mới có thể đánh dấu hoàn thành.";
 
-    /** Loại mục này không có trạng thái đặt chỗ. */
+    /** This item type has no booking status. */
     public static final String BOOKING_NOT_APPLICABLE = "Loại mục này không có trạng thái đặt chỗ.";
 
-    /** Lỗi lập trình: DateRange phải tạo qua {@code DateRange.of}. */
+    /** Programming error: DateRange must be created through {@code DateRange.of}. */
     public static final String DATE_RANGE_FACTORY_REQUIRED = "DateRange must be created through DateRange.of";
 
-    /** Lỗi dữ liệu: kiểu chuyến lạ trong cơ sở dữ liệu; tham số: mã. */
+    /** Data error: an unknown trip kind in the database; parameter: the code. */
     public static final String UNKNOWN_TRIP_STYLE = "Unknown trip style in database: %s";
 
-    /** Lỗi dữ liệu: "ai đi" lạ trong cơ sở dữ liệu; tham số: mã. */
+    /** Data error: an unknown 'who is going' in the database; parameter: the code. */
     public static final String UNKNOWN_TRIP_KIND = "Unknown trip kind in database: %s";
 
-    /** Lỗi dữ liệu: sở thích lạ trong cơ sở dữ liệu; tham số: mã. */
+    /** Data error: an unknown interest in the database; parameter: the code. */
     public static final String UNKNOWN_TRIP_INTEREST = "Unknown trip interest in database: %s";
 
-    /** Lỗi dữ liệu: nhịp chuyến lạ trong cơ sở dữ liệu; tham số: mã. */
+    /** Data error: an unknown trip pace in the database; parameter: the code. */
     public static final String UNKNOWN_TRIP_PACE = "Unknown trip pace in database: %s";
 
-    /** Lỗi dữ liệu: loại mục lạ trong cơ sở dữ liệu; tham số: mã. */
+    /** Data error: an unknown item type in the database; parameter: the code. */
     public static final String UNKNOWN_ITEM_TYPE = "Unknown item type in database: %s";
 
-    /** Lỗi dữ liệu: trạng thái đặt chỗ lạ trong cơ sở dữ liệu; tham số: mã. */
+    /** Data error: an unknown booking status in the database; parameter: the code. */
     public static final String UNKNOWN_BOOKING_STATUS = "Unknown booking status in database: %s";
 
     private PlanningMessages() {
     }
 
-    /** Vai lạ trong dữ liệu (lỗi dữ liệu, không phải lỗi người dùng). */
+    /** An unknown role in the data (a data error, not a user error). */
     public static final String UNKNOWN_MEMBER_ROLE = "Unknown member role in database: %s";
 
-    /** Liên kết mời không dùng được (một thông báo chung). */
+    /** The invite link cannot be used (one common message). */
     public static final String INVALID_INVITE = "Liên kết mời không hợp lệ hoặc đã hết hạn.";
 
-    /** Chuyến đã đủ người. */
+    /** The trip is full. */
     public static final String TRIP_FULL = "Chuyến đi đã đủ số người tối đa.";
 
-    /** Chỉ Organizer. */
+    /** Organizer only. */
     public static final String NOT_ORGANIZER = "Chỉ Organizer của chuyến làm được việc này.";
 
-    /** Chỉ sửa được mục của mình. */
+    /** You can edit only your own item. */
     public static final String NOT_YOUR_ITEM = "Bạn chỉ sửa hay xóa được mục do chính bạn thêm.";
 
-    /** Organizer không rời chuyến. */
+    /** The Organizer does not leave the trip. */
     public static final String ORGANIZER_CANNOT_LEAVE = "Organizer không rời hay bị gỡ khỏi chuyến của mình.";
 
-    /** Tên hiển thị trống. */
+    /** The display name is empty. */
     public static final String DISPLAY_NAME_REQUIRED = "Hãy nhập tên hiển thị.";
 
-    /** Mục của mình thì xóa thẳng. */
+    /** Your own item is deleted directly. */
     public static final String OWN_ITEM_DELETE_DIRECTLY = "Mục do bạn thêm thì bạn xóa thẳng được, không cần đề nghị.";
 
-    /** Organizer xóa thẳng. */
+    /** The Organizer deletes directly. */
     public static final String ORGANIZER_DELETES_DIRECTLY = "Organizer xóa thẳng được, không cần đề nghị.";
 
-    /** Đã có đề nghị. */
+    /** A request already exists. */
     public static final String REQUEST_EXISTS = "Mục này đã có đề nghị xóa đang chờ duyệt.";
 
-    /** Quá nhiều đề nghị chờ. */
+    /** Too many pending requests. */
     public static final String TOO_MANY_REQUESTS = "Bạn đang có quá nhiều đề nghị xóa chờ duyệt.";
 
-    /** Đã quyết định. */
+    /** Already decided. */
     public static final String ALREADY_DECIDED = "Đề nghị này đã được xử lý.";
 
-    /** Trạng thái đề nghị lạ trong dữ liệu (lỗi dữ liệu). */
+    /** An unknown request status in the data (a data error). */
     public static final String UNKNOWN_REQUEST_STATUS = "Unknown deletion request status in database: %s";
 
-    /** Thiếu mã mục trong đề nghị. */
+    /** The item id is missing from the request. */
     public static final String ITEM_REQUIRED = "Hãy chọn mục cần đề nghị xóa.";
 
-    /** Checklist đầy. */
+    /** The checklist is full. */
     public static final String CHECKLIST_FULL = "Checklist đã đủ số hạng mục tối đa.";
 
-    /** Tên hạng mục trống. */
+    /** The item name is empty. */
     public static final String CHECKLIST_TITLE_REQUIRED = "Hãy nhập tên hạng mục.";
 }

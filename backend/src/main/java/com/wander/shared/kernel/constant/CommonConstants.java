@@ -1,32 +1,32 @@
 package com.wander.shared.kernel.constant;
 
 /**
- * Hằng số tầng NỀN (common base): giá trị chung không mang nghĩa nghiệp vụ, mọi module được dùng.
- * Quy ước: docs/architecture/backend-conventions.md (CON-1). Giá trị mang nghĩa hệ thống nằm ở {@link SystemConstants},
- * giá trị riêng của một chức năng nằm ở tệp {@code *Constants} cạnh chức năng đó.
+ * Constants of the BASE tier (common base): shared values with no business meaning, usable by every module.
+ * Convention: docs/architecture/backend-conventions.md (CON-1). Values with a system meaning are in {@link SystemConstants},
+ * values specific to one feature are in a {@code *Constants} file next to that feature.
  */
 public final class CommonConstants {
 
-    /** Số byte trong một kilobyte. */
+    /** Number of bytes in a kilobyte. */
     public static final int BYTES_PER_KILOBYTE = 1024;
 
-    /** Dấu phẩy dùng để tách danh sách chuỗi. */
+    /** The comma used to split a list of strings. */
     public static final String COMMA = ",";
 
-    /** Dấu gạch chéo dùng để nối đường dẫn. */
+    /** The slash used to join paths. */
     public static final String SLASH = "/";
 
-    /** Chuỗi UUID dạng chữ: tám-bốn-bốn-bốn-mười hai ký tự hex. */
+    /** A UUID string: eight-four-four-four-twelve hex characters. */
     public static final String UUID_TEXT_REGEX =
             "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
 
-    /** Mẫu ISO-8601 UTC luôn có mili-giây, ví dụ 2026-10-24T01:02:03.000Z. */
+    /** ISO-8601 UTC pattern that always has milliseconds, for example 2026-10-24T01:02:03.000Z. */
     public static final String ISO_INSTANT_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-    /** Mọi chuỗi khoảng trắng (kể cả khoảng trắng Unicode) trong nhãn tự khai. */
+    /** Every whitespace string (including Unicode whitespace) in a self-declared label. */
     public static final String LABEL_WHITESPACE_REGEX = "[\\p{Zs}\\s]+";
 
-    /** Một dấu cách. */
+    /** A single space. */
     public static final String SINGLE_SPACE = " ";
 
     private CommonConstants() {

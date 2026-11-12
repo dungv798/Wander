@@ -2,11 +2,11 @@ import type { LngLatBounds, Map as MlMap, PaddingOptions } from 'maplibre-gl';
 import { MAP } from './map.const.ts';
 
 /**
- * Đưa camera vào khung vừa các điểm. Khi vùng nhìn thấy nhỏ hơn cả khung ở mức zoom xa nhất cho phép, `fitBounds` tính tâm theo mức
- * zoom CHƯA bị kẹp nên tâm lệch hẳn khỏi các điểm (ví dụ tờ đáy che phần lớn màn nhỏ); khi đó đứng ở mức xa nhất và để `padding` dịch tâm.
+ * Puts the camera into a frame that fits the points. When the visible area is smaller than the whole frame at the farthest allowed zoom, `fitBounds` computes the center at the
+ * zoom that has NOT been clamped so the center shifts far from the points (for example a bottom sheet covers most of a small screen); then it stays at the farthest level and lets `padding` shift the center.
  */
 export function flyToBounds(gl: MlMap, bounds: LngLatBounds, padding: PaddingOptions, maxZoom: number, duration: number): void {
-  // MapLibre 6 cộng padding tương đối vào padding đang giữ; inset của app là giá trị tuyệt đối cho từng màn.
+  // MapLibre 6 adds the padding relatively to the padding it already holds; the app's inset is an absolute value for each screen.
   const camera = gl.cameraForBounds(bounds, { padding, maxZoom, absolutePadding: true });
   if (camera?.zoom !== undefined && camera.zoom < MAP.GL_MIN_ZOOM) {
     gl.easeTo({ center: bounds.getCenter(), zoom: MAP.GL_MIN_ZOOM, padding, duration, essential: true });

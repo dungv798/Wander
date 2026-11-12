@@ -19,14 +19,14 @@ const TABS: readonly TabSpec[] = [
 
 interface TabBarProps {
   readonly current: ViewName;
-  /** Màn rộng: thêm logo ở đầu thanh bên. */
+  /** Wide screen: adds the logo at the top of the side bar. */
   readonly wide: boolean;
-  /** Số nơi đã chọn (hiện chấm số ở tab "Đã chọn"); 0 = không hiện. */
+  /** The number of selected places (shows a number badge on the 'Selected' tab); 0 = not shown. */
   readonly pickedCount: number;
   readonly onCreate: () => void;
 }
 
-/** Logo Wander (máy bay giấy) ở đầu thanh bên màn rộng; bấm về Khám phá. */
+/** The Wander logo (a paper plane) at the top of the wide-screen side bar; tapping it returns to Discover. */
 function Brand() {
   return (
     <button className="brand" type="button" aria-label={COPY.brand.ariaHome} onClick={() => navigate(VIEW.EXPLORE)}>
@@ -35,7 +35,7 @@ function Brand() {
   );
 }
 
-/** Thanh điều hướng chính: thanh tab nổi ở điện thoại, thanh bên ở màn rộng. */
+/** The main navigation bar: a floating tab bar on a phone, a side bar on a wide screen. */
 export function TabBar({ current, wide, pickedCount, onCreate }: TabBarProps) {
   const active = current === VIEW.DEST || current === VIEW.DECK || current === VIEW.DESTINATIONS ? VIEW.EXPLORE : current === VIEW.TRIP || current === VIEW.TODAY || current === VIEW.EXPORT ? VIEW.TRIPS : current;
   return (

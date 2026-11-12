@@ -20,7 +20,7 @@ const ELEMENTS = [
 
 export default tseslint.config(
   // spike/ là mã thử nghiệm không vào bản dựng (gồm bản vendor three.js): không lint (quy ước spike, ghi ở NOTES.md của từng spike).
-  { ignores: ['dist', 'node_modules', 'scripts', 'spike', 'public'] },
+  { ignores: ['dist', 'node_modules', 'scripts', 'spike', 'public', 'src/**/*.generated.ts'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -82,4 +82,6 @@ export default tseslint.config(
     rules: { 'no-magic-numbers': 'off', 'max-lines-per-function': 'off' },
   },
   { files: ['*.config.{js,ts}'], languageOptions: { globals: { ...globals.node } } },
+  // Node-run helpers shared by the browser e2e scenarios (not bundled into the app).
+  { files: ['e2e/support/**/*.mjs'], languageOptions: { globals: { ...globals.node } } },
 );

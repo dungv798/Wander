@@ -62,7 +62,7 @@ class CoverApiIT extends ApiTestSupport {
             Res response = call("PATCH", path, organizer.token(), map("cover", invalid, "name", "Không được lưu"));
             assertThat(response.status()).isEqualTo(400);
             assertThat(response.code()).isEqualTo("INVALID_COVER");
-            assertThat(response.str("error.field")).isEqualTo("cover");
+            assertThat(response.str("field")).isEqualTo("cover");
             Res unchanged = call("GET", path, organizer.token());
             assertThat(unchanged.at("trip.cover")).isEqualTo(valid);
             assertThat(unchanged.str("trip.name")).isEqualTo(name);
@@ -82,12 +82,30 @@ class CoverApiIT extends ApiTestSupport {
         Map<String, Object> cover = map("kind", "gradient", "ref", "cover-4");
         call("PATCH", path, organizer.token(), map("cover", cover));
         assertThat(call("GET", path, member.token()).at("trip.cover")).isEqualTo(cover);
-        for (Object value : new Object[] {cover, null, "sai"}) {
+        for (Object value : new Object[] {cover, null}) {
             Res denied = call("PATCH", path, member.token(), map("cover", value));
             assertThat(denied.status()).isEqualTo(403);
             assertThat(denied.code()).isEqualTo("NOT_ORGANIZER");
             assertThat(call("PATCH", path, outsider.token(), map("cover", value)).status()).isEqualTo(404);
         }
         assertThat(call("PATCH", "/api/trips/" + UUID.randomUUID(), organizer.token(), map("cover", cover)).status()).isEqualTo(404);
+    }
+
+    /**
+     * A cover of the wrong JSON type (a string where an object is expected) is rejected while the body is read, before the trip is
+     * loaded or the caller is authorized, so it is the same 400 for everyone. Well-typed but invalid covers still go through the
+     * organizer check first (see {@link #organizerOnly}).
+     */
+    @Test
+    @DisplayName("a cover of the wrong JSON type is INVALID_COVER on the field cover, before any authorization")
+    void wrongTypedCoverIsRejectedWhileReadingTheBody() {
+        User organizer = newUser();
+        User outsider = newUser();
+        String path = "/api/trips/" + newTrip(organizer.token());
+        for (User caller : new User[] {organizer, outsider}) {
+            Res res = call("PATCH", path, caller.token(), map("cover", "sai"));
+            assertProblem(res, 400, "INVALID_COVER");
+            assertThat(res.str("field")).isEqualTo("cover");
+        }
     }
 }

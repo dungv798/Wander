@@ -23,7 +23,7 @@ import type { IdentityValue } from './identityContext.ts';
 import { createIdentityActions } from './useIdentityActions.ts';
 import { useIdentitySnapshot } from './useIdentitySnapshot.ts';
 
-/** Cấp danh tính ẩn danh thật (phiên Bearer + ảnh chụp từ API) và các luồng tờ phủ cho cây giao diện. */
+/** Provides the real anonymous identity (the Bearer session + the snapshot from the API) and the overlay-sheet flows to the UI tree. */
 export function IdentityProvider({ children }: { readonly children: ReactNode }) {
   const [sessionKv] = useState(() => new PersistentStore<SessionState>(STORAGE.SESSION, NO_SESSION, sanitizeSession));
   const [locksKv] = useState(() => new PersistentStore<LockState>(STORAGE.LOCKS, NO_LOCKS, sanitizeLocks));
@@ -40,14 +40,14 @@ export function IdentityProvider({ children }: { readonly children: ReactNode })
     [gateway, sessionKv, locksKv, refresh],
   );
   const closeFlow = useCallback(() => setFlow(null), []);
-  // "mất phiên": máy chủ không nhận nữa, hoặc đã rời màn hết phiên nhưng vẫn nhớ từng có danh tính
+  // 'lost session': the server no longer accepts it, or it left the session-ended screen but still remembers it once had an identity
   const lost = status === 'expired' || (status === 'anonymous' && session.known !== null);
   const requireIdentity = useCallback(
     (then: () => unknown) => {
       if (status === 'ready') then();
       else if (status === 'loading' || status === 'error') toast.show(C.intro.notReady);
       else if (lost && expiredBranch(session.known) === 'A') {
-        // còn mã hoặc thiết bị khác: khôi phục được nên KHÔNG tạo danh tính mới đè lên
+        // there is still a code or another device: it can be recovered so do NOT create a new identity over it
         toast.show(C.intro.needRecover);
         navigate(VIEW.RECOVER);
       } else setFlow({ kind: 'intro', onSaved: then, replacing: lost });

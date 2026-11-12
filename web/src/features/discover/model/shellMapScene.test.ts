@@ -15,7 +15,7 @@ const detail = (places: PlaceView[]): DestinationDetail => ({ id: 'a', name: 'A'
 
 const SUMMARIES = [summary('a', 10, 100), summary('b', 20, 105), summary('c', null, null)];
 
-/** Đầu vào mặc định; mỗi ca chỉ ghi đè phần nó kiểm. */
+/** The default input; each case overrides only the part it checks. */
 const input = (over: Partial<ShellMapInput>): ShellMapInput => ({ view: VIEW.EXPLORE, selectedId: null, destId: 'a', summaries: SUMMARIES, detail: null, pickedIds: new Set(), trips: [], ...over });
 
 test('Khám phá chưa chọn điểm đến: cảnh tổng quan, ghim điểm đến có tọa độ, không ghim nơi thiếu tọa độ', () => {

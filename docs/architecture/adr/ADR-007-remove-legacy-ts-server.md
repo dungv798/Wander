@@ -1,5 +1,8 @@
 # ADR-007 — Xóa `legacy/ts-server/` (AD-10)
 
+> **English title:** Remove the legacy TypeScript server
+> **Summary (EN):** The first Node/SQLite server is deleted (it stays in git history); the Java backend is the only server.
+
 - **Trạng thái:** `APPROVED` — PO chọn "Xóa hẳn" ngày 24/10/2026 sau phiên `/wander-council AD-10` (không gọi agent: câu hỏi nhỏ, dữ kiện đọc trực tiếp).
 - **Thực hiện:** 24/10/2026, theo yêu cầu "làm luôn việc dọn legacy" của PO (ngoài phiên hội đồng). Kết quả `verify` 24/10 12:45: PASS (`.logs/verify.log`) — doctor, tools-check, backend-test, e2e 4/4 đều PASS.
 

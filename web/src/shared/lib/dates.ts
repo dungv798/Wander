@@ -6,7 +6,7 @@ const DAY_OF_MONTH_START = 8;
 const MONTH_START = 5;
 const YEAR_END = 4;
 
-/** Đọc chuỗi ngày `yyyy-mm-dd` thành mốc UTC nửa đêm; trả null khi sai định dạng hoặc ngày không có thật (ví dụ 2026-02-30). */
+/** Reads a `yyyy-mm-dd` date string as a UTC midnight instant; returns null when the format is wrong or the date does not exist (for example 2026-02-30). */
 export function parseIsoDate(iso: string): Date | null {
   const m = ISO_PATTERN.exec(iso);
   if (!m) return null;
@@ -14,12 +14,12 @@ export function parseIsoDate(iso: string): Date | null {
   return toIsoDate(d) === iso ? d : null;
 }
 
-/** Đổi mốc UTC sang chuỗi `yyyy-mm-dd` (ngày lịch, không phụ thuộc múi giờ máy). */
+/** Turns a UTC instant into a `yyyy-mm-dd` string (a calendar date, independent of the device time zone). */
 export function toIsoDate(d: Date): string {
   return d.toISOString().slice(0, 'yyyy-mm-dd'.length);
 }
 
-/** Cộng (hoặc trừ) số ngày lịch vào một ngày `yyyy-mm-dd`. */
+/** Adds (or subtracts) a number of calendar days to a `yyyy-mm-dd` date. */
 export function addDays(iso: string, n: number): string {
   const d = parseIsoDate(iso);
   if (!d) throw new RangeError(`Ngày không hợp lệ: ${iso}`);
@@ -27,7 +27,7 @@ export function addDays(iso: string, n: number): string {
   return toIsoDate(d);
 }
 
-/** Số ngày lịch từ `a` đến `b`, tính cả hai đầu (R5: chuyến 29/08–06/09 là 9 ngày). */
+/** The number of calendar days from `a` to `b`, both ends counted (R5: a trip 29/08-06/09 is 9 days). */
 export function inclusiveDays(a: string, b: string): number {
   const da = parseIsoDate(a);
   const db = parseIsoDate(b);
@@ -35,30 +35,30 @@ export function inclusiveDays(a: string, b: string): number {
   return Math.round((db.getTime() - da.getTime()) / FORMAT.MS_PER_DAY) + 1;
 }
 
-/** "dd/mm" của một ngày `yyyy-mm-dd`. */
+/** The 'dd/mm' of a `yyyy-mm-dd` date. */
 export function dayMonth(iso: string): string {
   return `${iso.slice(DAY_OF_MONTH_START)}/${iso.slice(MONTH_START, DAY_OF_MONTH_START - 1)}`;
 }
 
-/** Nhãn ngắn kiểu "T7 31/10" (thứ theo ngày lịch UTC). */
+/** A short label like 'Sat 31/10' (the weekday by the UTC calendar date). */
 export function dayLabel(iso: string): string {
   const d = parseIsoDate(iso);
   return d ? `${FORMAT.WEEKDAYS[d.getUTCDay()] ?? ''} ${dayMonth(iso)}` : '';
 }
 
-/** Nhãn đầy đủ kiểu "T7, 31/10/2026"; chuỗi rỗng khi không có ngày. */
+/** A full label like 'Sat, 31/10/2026'; an empty string when there is no date. */
 export function fullDate(iso: string | null | undefined): string {
   const d = iso ? parseIsoDate(iso) : null;
   if (!iso || !d) return '';
   return `${FORMAT.WEEKDAYS[d.getUTCDay()] ?? ''}, ${dayMonth(iso)}/${iso.slice(0, YEAR_END)}`;
 }
 
-/** Hôm nay theo lịch của máy người dùng, dạng `yyyy-mm-dd` (Tầng B: "hôm nay" theo múi giờ thiết bị). */
+/** Today by the user's device calendar, as `yyyy-mm-dd` (Tier B: 'today' by the device time zone). */
 export function todayLocal(now: Date = new Date()): string {
   return toIsoDate(new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())));
 }
 
-/** Ngày gần nhất SAU `from` (không tính `from`) rơi vào thứ `weekday` (0 = Chủ nhật … 6 = Thứ bảy), dạng `yyyy-mm-dd`. Dùng để gợi ý "thứ Bảy tới". */
+/** The nearest date AFTER `from` (not counting `from`) that falls on weekday `weekday` (0 = Sunday ... 6 = Saturday), as `yyyy-mm-dd`. Used to suggest 'next Saturday'. */
 export function nextWeekday(from: string, weekday: number): string {
   const d = parseIsoDate(from);
   if (!d) throw new RangeError(`Ngày không hợp lệ: ${from}`);

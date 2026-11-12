@@ -8,11 +8,15 @@
       "status": "reference",
       "days": [
         {
-          "places": ["bac-yen"],
+          "places": [
+            "bac-yen"
+          ],
           "note": "Xuất phát đến Bắc Yên, nghỉ qua đêm tại khu Bắc Yên hoặc Tà Xùa. Chuẩn bị áo ấm, đèn pin, giày bám tốt. Nhịp nhẹ."
         },
         {
-          "places": ["ta-xua"],
+          "places": [
+            "ta-xua"
+          ],
           "note": "Khởi hành rất sớm từ nơi nghỉ; kết thúc quay lại Bắc Yên trong ngày. Đường lên dốc và trơn khi mưa, không nên đi một mình. Phương tiện và thời gian leo chưa xác minh; dựa vào dự báo trước khi đi."
         }
       ]
@@ -24,7 +28,10 @@
       "status": "reference",
       "days": [
         {
-          "places": ["moc-chau", "thac-dai-yem"],
+          "places": [
+            "moc-chau",
+            "thac-dai-yem"
+          ],
           "note": "Xuất phát và kết thúc ở thị trấn Mộc Châu. Phương tiện giả định: xe máy hoặc ô tô. Nhịp nhẹ, 2 điểm; giờ mở cửa và giá chưa xác minh."
         }
       ]

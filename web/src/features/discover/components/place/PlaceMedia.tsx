@@ -9,21 +9,21 @@ import type { PhotoView, PlaceView } from '../../model/Catalog.types.ts';
 import { PlacePlaceholder } from '../PlacePlaceholder.tsx';
 import { QuickFacts } from './PlaceBody.tsx';
 
-/** Hướng ảnh quyết định bố cục: dọc đứng cạnh các thông số, ngang nằm trên chúng. */
+/** The photo orientation decides the layout: portrait next to the facts, landscape above them. */
 type Orientation = 'portrait' | 'landscape';
 
-/** Cho màn cha gắn phím ←/→ vào đúng thanh ảnh. */
+/** Lets the parent screen attach the left/right keys to the right photo bar. */
 interface PlaceMediaProps {
   readonly place: PlaceView;
   readonly registerGo: (go: (delta: number) => void) => void;
 }
 
-/** Hướng theo kích thước thật của ảnh đã tải; vuông coi là ngang. */
+/** The orientation by the real size of the loaded photo; square counts as landscape. */
 function orientationOf(image: HTMLImageElement): Orientation {
   return image.naturalHeight > image.naturalWidth ? 'portrait' : 'landscape';
 }
 
-/** Đưa ảnh đang mở (từ thẻ/ghim đã chạm) lên đầu danh sách, giữ nguyên thứ tự còn lại. */
+/** Moves the photo being opened (from a tapped card/pin) to the front of the list, keeping the rest of the order. */
 function orderedPhotos(place: PlaceView, opening: string | null): PhotoView[] {
   const photos = [...place.photos];
   const start = photos.findIndex((photo) => photo.url === opening);
@@ -32,8 +32,8 @@ function orderedPhotos(place: PlaceView, opening: string | null): PhotoView[] {
 }
 
 /**
- * Một ảnh ở ĐÚNG tỷ lệ gốc (không crop, không letterbox, không nền mờ lấp chỗ): khung giữ chỗ trung tính tới khi ảnh sẵn sàng.
- * Báo hướng ảnh lên trên khi đã biết kích thước; ảnh lỗi hiện dòng "chưa tải được" kèm nút thử lại thay vì khung vỡ.
+ * One photo at EXACTLY its original ratio (no crop, no letterbox, no blurred background filling the gap): a neutral placeholder frame until the photo is ready.
+ * Reports the photo orientation upward once the size is known; a failed photo shows a 'could not load' line with a retry button instead of a broken frame.
  */
 function PhotoFrame({ photo, name, onOrientation, onVisible }: { readonly photo: PhotoView; readonly name: string; readonly onOrientation: (o: Orientation) => void; readonly onVisible: (source: string) => void }) {
   const [failedFor, setFailedFor] = useState<string | null>(null);
@@ -50,7 +50,7 @@ function PhotoFrame({ photo, name, onOrientation, onVisible }: { readonly photo:
   return <RevealImage key={attempt} src={photo.url} alt={name} decoding="async" transitionFit="contain" onVisible={onVisible} onSourceError={() => setFailedFor(photo.url)} onLoad={event => onOrientation(orientationOf(event.currentTarget))} />;
 }
 
-/** Dòng ghi công ảnh đang xem (tác giả, giấy phép, nguồn): bắt buộc theo giấy phép nên luôn hiện dưới ảnh. */
+/** The attribution line of the photo being viewed (author, license, source): required by the license so it always shows under the photo. */
 function PhotoCredit({ photo }: { readonly photo: PhotoView }) {
   return (
     <p className="pd-credit">
@@ -63,8 +63,8 @@ function PhotoCredit({ photo }: { readonly photo: PhotoView }) {
 }
 
 /**
- * Phần ảnh của tờ chi tiết, một template cho mọi nơi: ảnh chính theo tỷ lệ gốc, thanh nhẹ (Xem ảnh gốc, trước/sau, số thứ tự), và 4 thông số.
- * Ảnh dọc đứng CẠNH thông số; ảnh ngang nằm TRÊN thông số. Chưa có ảnh thì dùng ô giữ chỗ có tên loại thật. Phím ←/→ do màn cha chuyển qua `registerGo`.
+ * The photo part of the detail sheet, one template for every place: the main photo at its original ratio, a light bar (View original, previous/next, ordinal number), and 4 facts.
+ * A portrait photo goes NEXT TO the facts; a landscape photo goes ABOVE the facts. With no photo a placeholder with the real kind name is used. The left/right keys are passed by the parent screen through `registerGo`.
  */
 export function PlaceMedia({ place, registerGo }: PlaceMediaProps) {
   const { openingPhoto } = usePlaceSheet();
@@ -75,7 +75,7 @@ export function PlaceMedia({ place, registerGo }: PlaceMediaProps) {
   const current = photos[index];
   const [shownSource, setShownSource] = useState(current?.url);
   const shown = photos.find(photo => photo.url === shownSource) ?? current;
-  /** Sang ảnh kề (delta ±1); dừng ở đầu/cuối. */
+  /** Goes to the adjacent photo (delta +/-1); stops at the first/last. */
   const go = useCallback((delta: number): void => {
     setIndex((value) => Math.max(0, Math.min(count - 1, value + delta)));
   }, [count, setIndex]);

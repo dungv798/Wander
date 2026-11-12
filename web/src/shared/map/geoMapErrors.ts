@@ -2,7 +2,7 @@ import type { Map as MlMap } from 'maplibre-gl';
 import { COPY } from '../const/copy.vi.ts';
 import { isBasemapError } from './geoMapPolicy.ts';
 
-/** Hiện tối đa một cảnh báo nguồn/ô nền; thử lại kiểu hiện tại để nạp lại cả TileJSON lẫn ô, giữ camera và tuyến. */
+/** Shows at most one source/base-tile warning; retrying the current style reloads both the TileJSON and the tiles, keeping the camera and the route. */
 export function showBasemapError(map: MlMap, host: HTMLElement, event: Parameters<typeof isBasemapError>[0]): void {
   if (!isBasemapError(event) || host.querySelector('.tm-degraded')) return;
   const box = Object.assign(document.createElement('div'), { className: 'tm-err tm-degraded' });

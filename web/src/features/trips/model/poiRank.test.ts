@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { dayAnchors, displayKind, formatDistance, rankPoi } from './poiRank.ts';
 import type { PoiSuggestion } from '../api/poi.api.ts';
 
-/** Quán mẫu với các trường tối thiểu. */
+/** A sample venue with the minimal fields. */
 function poi(id: string, name: string, kind: PoiSuggestion['kind'], distanceM: number): PoiSuggestion {
   return { id, name, kind, lat: 0, lon: 0, distanceM, address: null, openingHoursRaw: null, openingHoursStatus: 'UNKNOWN', phone: null, website: null, verificationStatus: 'SNAPSHOT_UNVERIFIED', attribution: { sourceKind: 'osm', sourceUrl: '', snapshotAt: '', license: '', licenseUrl: '', credit: '' } };
 }

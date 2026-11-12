@@ -61,7 +61,7 @@ class TripOptionsApiIT extends ApiTestSupport {
 
         Res negative = createWith(u, map("budget", -1));
         assertThat(negative.code()).isEqualTo("NEGATIVE");
-        assertThat(negative.str("error.field")).isEqualTo("budget");
+        assertThat(negative.str("field")).isEqualTo("budget");
         assertThat(createWith(u, map("budget", 1.5)).code()).isEqualTo("MALFORMED");
         assertThat(createWith(u, map("budget", "150k")).code()).isEqualTo("MALFORMED");
         assertThat(createWith(u, map("budget", 1_000_000_001L)).code()).isEqualTo("TOO_LARGE");

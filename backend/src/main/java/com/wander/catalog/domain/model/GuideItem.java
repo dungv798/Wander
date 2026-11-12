@@ -4,7 +4,7 @@ import com.wander.catalog.domain.constant.CatalogMessages;
 import com.wander.catalog.domain.rule.CatalogValidation;
 import com.wander.shared.kernel.util.Texts;
 
-/** Một dòng trong khối cẩm nang. {@code placeId} chỉ có khi dòng trỏ tới một địa điểm trong cùng điểm đến. */
+/** One line in a guide block. {@code placeId} is present only when the line points to a place in the same destination. */
 public record GuideItem(String icon, String title, String text, String placeId) {
 
     public GuideItem {

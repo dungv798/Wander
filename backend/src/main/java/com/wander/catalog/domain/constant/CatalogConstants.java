@@ -3,127 +3,148 @@ package com.wander.catalog.domain.constant;
 import java.util.Set;
 
 /**
- * Hằng số của module catalog (tầng CHỨC NĂNG): giới hạn nội dung biên tập, định dạng, đường dẫn ảnh, hệ số ước tính.
- * Lời báo lỗi nằm ở {@link CatalogMessages}.
+ * Constants of the catalog module (FEATURE tier): editorial content limits, formats, photo paths, estimation factors.
+ * Error messages are in {@link CatalogMessages}.
  */
 public final class CatalogConstants {
 
-    /** Mã dạng slug: chữ thường, số, nối nhau bằng gạch ngang. */
+    /** A slug id: lowercase, digits, joined by hyphens. */
     public static final String SLUG_REGEX = "[a-z0-9]+(-[a-z0-9]+)*";
 
-    /** Độ dài tối đa của mã địa điểm. */
+    /** Maximum length of a place id. */
     public static final int PLACE_ID_MAX_LENGTH = 60;
 
-    /** Độ dài tối đa của tên địa điểm. */
+    /** Maximum length of a place name. */
     public static final int NAME_MAX_LENGTH = 120;
 
-    /** Độ dài tối đa của tên khu vực. */
+    /** Maximum length of an area name. */
     public static final int AREA_MAX_LENGTH = 80;
 
-    /** Địa chỉ dịch vụ đọc từ nguồn, không rút gọn thành một tâm vùng. */
+    /** The address of a service read from the source, not shortened to a regional center. */
     public static final int VENUE_ADDRESS_MAX_LENGTH = 240;
 
-    /** Giới hạn thông tin liên hệ và lịch phục vụ được cơ sở hoặc nguồn hồ sơ công bố. */
+    /** The limits of contact information and opening schedule that the establishment or the profile source published. */
     public static final int VENUE_PHONE_MAX_LENGTH = 60;
     public static final int VENUE_HOURS_MAX_LENGTH = 1000;
     public static final int VENUE_PRICE_NOTE_MAX_LENGTH = 240;
 
-    /** Độ dài tối đa của câu điểm nhấn. */
+    /** Maximum length of the highlight sentence. */
     public static final int HOOK_MAX_LENGTH = 240;
 
-    /** Độ dài tối đa của nhãn mùa. */
+    /** Maximum length of the season label. */
     public static final int BEST_LABEL_MAX_LENGTH = 60;
 
-    /** Độ dài tối đa của thời lượng ghé thăm. */
+    /** Maximum length of the visit duration. */
     public static final int DURATION_MAX_LENGTH = 40;
 
-    /** Độ dài tối đa của nhãn độ khó. */
+    /** Maximum length of the difficulty label. */
     public static final int DIFFICULTY_MAX_LENGTH = 20;
 
-    /** Độ dài tối đa của lý do (nhãn gợi ý, buổi nên đi). */
+    /** Maximum length of a reason (suggestion label, best time of day). */
     public static final int REASON_MAX_LENGTH = 240;
 
-    /** Số ảnh tối đa của một địa điểm. */
+    /** Maximum number of photos of a place. */
     public static final int MAX_PHOTOS_PER_PLACE = 8;
 
-    /** Chú thích ảnh ghi rõ năm chụp hoặc ảnh khách sạn chứa nhà hàng. */
+    /** A photo caption that states the year taken or a hotel photo that contains a restaurant. */
     public static final int PHOTO_CAPTION_MAX_LENGTH = 240;
 
-    /** Máy chủ ảnh ngoài được phép hotlink (DR-034); phải khớp CSP img-src ở HttpConstants. */
+    /** The external photo servers allowed to be hotlinked (DR-034); must match the CSP img-src in HttpConstants. */
     public static final Set<String> EXTERNAL_PHOTO_HOSTS = Set.of("images.unsplash.com");
 
-    /** Số khoảnh khắc tối đa của một điểm đến (DR-034). */
+    /** Maximum number of moments of a destination (DR-034). */
     public static final int MAX_MOMENTS_PER_DESTINATION = 24;
 
-    /** Máy chủ được phép cho liên kết hồ sơ tác giả của khoảnh khắc. */
+    /** The server allowed for the moment author's profile link. */
     public static final String MOMENT_AUTHOR_HOST = "unsplash.com";
 
-    /** Tháng nhỏ nhất. */
+    /** The smallest month. */
     public static final int MONTH_MIN = 1;
 
-    /** Tháng lớn nhất. */
+    /** The largest month. */
     public static final int MONTH_MAX = 12;
 
-    /** Vĩ độ lớn nhất theo giá trị tuyệt đối. */
+    /** The largest latitude in absolute value. */
     public static final double LATITUDE_LIMIT = 90;
 
-    /** Kinh độ lớn nhất theo giá trị tuyệt đối. */
+    /** The largest longitude in absolute value. */
     public static final double LONGITUDE_LIMIT = 180;
 
-    /** Tên tệp ảnh hợp lệ: chữ thường, số, gạch ngang và đuôi ảnh phổ biến. */
+    /** A valid photo file name: lowercase, digits, hyphens and a common image extension. */
     public static final String PHOTO_FILE_REGEX = "[a-z0-9][a-z0-9-]*\\.(jpg|jpeg|png|webp)";
 
-    /** Liên kết nguồn ảnh phải bắt đầu bằng tiền tố này. */
+    /** Optimized variant name {@code <slug>-w<width>-<hash10>.webp}: group 1 = slug (stable photo id), group 2 = pixel width. */
+    public static final String PHOTO_VARIANT_REGEX = "^([a-z0-9][a-z0-9-]*)-w(\\d+)-[0-9a-f]{10}\\.webp$";
+
+    /** Property holding the optional origin that serves the catalog photos (empty = this application). */
+    public static final String PHOTO_BASE_URL_EXPRESSION = "${wander.catalog.photo-base-url:}";
+
+    /** Accepted photo origin: https host with optional port and path, no query, fragment or credentials. */
+    public static final String PHOTO_BASE_URL_REGEX = "^https://[a-z0-9]([a-z0-9.-]*[a-z0-9])?(:\\d{1,5})?(/[A-Za-z0-9._~/-]*)?$";
+
+    /** Startup error for a photo origin that does not match {@link #PHOTO_BASE_URL_REGEX}; parameter: the value. */
+    public static final String PHOTO_BASE_URL_INVALID = "wander.catalog.photo-base-url phải là địa chỉ https gốc (ví dụ https://photos.example.com): %s";
+
+    /** URL path separator. */
+    public static final String URL_SEPARATOR = "/";
+
+    /** One {@code srcset} entry: URL and its pixel width descriptor. */
+    public static final String SRCSET_ENTRY_FORMAT = "%s %dw";
+
+    /** Separator between {@code srcset} entries. */
+    public static final String SRCSET_SEPARATOR = ", ";
+
+    /** A photo source link must start with this prefix. */
     public static final String HTTPS_PREFIX = "https://";
-    /** Giao thức bắt buộc của liên kết ghi công. */
+    /** The required protocol of an attribution link. */
     public static final String HTTPS_SCHEME = "https";
 
-    /** Đường dẫn công khai của ảnh (ADR-010 mục 6). */
+    /** The public path of a photo (ADR-010 section 6). */
     public static final String PHOTO_URL_PREFIX = "/catalog/photos/";
 
-    /** Thư mục ảnh trong classpath. */
+    /** The photo directory on the classpath. */
     public static final String PHOTO_CLASSPATH_DIR = "catalog/photos/";
 
-    /** Vị trí tệp điểm đến trong classpath và mặc định của cấu hình {@code wander.catalog.location}. */
+    /** The location of the destination files on the classpath and the default of the configuration {@code wander.catalog.location}. */
     public static final String LOCATION_EXPRESSION = "${wander.catalog.location:classpath*:catalog/*.json}";
 
-    /** Số địa điểm xem trước tối đa trên thẻ điểm đến. */
+    /** The maximum number of places previewed on a destination card. */
     public static final int PREVIEW_PLACE_COUNT = 3;
 
-    /** Nơi tìm tệp lịch mẫu (mỗi điểm đến một tệp {@code catalog/templates/<id>.json}); cấu hình được để test dùng dữ liệu riêng. */
+    /** Where to look for the sample-itinerary files (one file per destination {@code catalog/templates/<id>.json}); configurable so tests use their own data. */
     public static final String TEMPLATES_LOCATION_EXPRESSION = "${wander.catalog.templates-location:classpath*:catalog/templates/*.json}";
 
-    /** Mã lịch mẫu: slug chữ thường, số và dấu gạch ngang. */
+    /** A sample-itinerary id: a slug of lowercase letters, digits and hyphens. */
     public static final String TEMPLATE_ID_REGEX = "^[a-z0-9]+(-[a-z0-9]+)*$";
 
-    /** Độ dài tối đa mã lịch mẫu. */
+    /** Maximum length of a sample-itinerary id. */
     public static final int TEMPLATE_ID_MAX_LENGTH = 60;
 
-    /** Độ dài tối đa tên lịch mẫu. */
+    /** Maximum length of a sample-itinerary name. */
     public static final int TEMPLATE_TITLE_MAX_LENGTH = 120;
 
-    /** Độ dài tối đa đoạn mô tả và ghi chú của lịch mẫu. */
+    /** Maximum length of the description and notes of a sample itinerary. */
     public static final int TEMPLATE_TEXT_MAX_LENGTH = 400;
 
-    /** Số ngày tối đa của một lịch mẫu (khớp trần phòng thủ của giao diện). */
+    /** The maximum number of days of a sample itinerary (matches the UI's defensive ceiling). */
     public static final int TEMPLATE_MAX_DAYS = 30;
 
-    /** Độ dài tối đa của chuỗi tìm kiếm điểm đến; phần dư bị cắt. */
+    /** The maximum length of a destination search string; the excess is cut. */
     public static final int SEARCH_QUERY_MAX_LENGTH = 80;
 
-    /** Mẫu Unicode của dấu kết hợp, bỏ đi khi chuẩn hóa chuỗi tìm kiếm. */
+    /** The Unicode pattern of combining marks, removed when normalizing the search string. */
     public static final String COMBINING_MARKS_REGEX = "\\p{M}+";
 
-    /** Hệ số đường đi thực tế so với đường chim bay (đường núi quanh co); giả định chưa kiểm chứng. */
+    /** The factor of the real route against the straight line (winding mountain roads); an unverified assumption. */
     public static final double ROAD_FACTOR = 1.5;
 
-    /** Tốc độ xe máy giả định, km/h; giả định chưa kiểm chứng. */
+    /** The assumed motorbike speed, km/h; an unverified assumption. */
     public static final double SPEED_KMH = 25;
 
-    /** Bán kính Trái Đất, km, cho công thức haversine. */
+    /** The Earth's radius, km, for the haversine formula. */
     public static final double EARTH_RADIUS_KM = 6371.0;
 
-    /** Số phút trong một giờ. */
+    /** The number of minutes in an hour. */
     public static final int MINUTES_PER_HOUR = 60;
 
     private CatalogConstants() {

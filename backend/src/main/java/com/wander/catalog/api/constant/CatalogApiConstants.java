@@ -1,31 +1,22 @@
 package com.wander.catalog.api.constant;
 
-/** Hằng số của API catalog (tầng CHỨC NĂNG): đường dẫn, tên tham số và tên khóa JSON của phản hồi (khớp {@code web/src/api.ts}). */
+/** Constants of the catalog API (FEATURE tier): paths, parameter names and the JSON key names of the response (matching {@code web/src/api.ts}). */
 public final class CatalogApiConstants {
 
-    /** Đường dẫn gốc của API catalog. */
+    /** Base path of the catalog API. */
     public static final String BASE_PATH = "/api/catalog";
 
-    /** Danh sách điểm đến (có thể lọc bằng tham số tìm kiếm). */
+    /** List of destinations (can be filtered by the search parameter). */
     public static final String DESTINATIONS_PATH = "/destinations";
 
-    /** Một điểm đến theo mã. */
+    /** One destination by id. */
     public static final String DESTINATION_PATH = "/destinations/{id}";
 
-    /** Lịch mẫu của một điểm đến (N-2). */
+    /** The sample itineraries of a destination (N-2). */
     public static final String TEMPLATES_PATH = DESTINATION_PATH + "/templates";
 
-    /** Khóa JSON của danh sách lịch mẫu. */
-    public static final String KEY_TEMPLATES = "templates";
-
-    /** Tên tham số tìm kiếm. */
+    /** Name of the search parameter. */
     public static final String QUERY_PARAM = "q";
-
-    /** Khóa JSON của danh sách điểm đến. */
-    public static final String KEY_DESTINATIONS = "destinations";
-
-    /** Khóa JSON của một điểm đến. */
-    public static final String KEY_DESTINATION = "destination";
 
     private CatalogApiConstants() {
     }

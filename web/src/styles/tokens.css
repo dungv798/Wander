@@ -1,15 +1,15 @@
-/* Token thiết kế Wander: NGUỒN DUY NHẤT của bộ màu và thang đo (PO 26/10/2026: "một bộ màu nhận diện thương hiệu, tái sử dụng toàn hệ thống").
-   Quy ước:
-   - Tên theo VAI TRÒ (không theo màu). Thành phần và màn hình chỉ dùng token, không viết màu hex.
-   - Nền gần trắng mát; NẮNG VÀNG chỉ nhấn CTA, lựa chọn, chấm và huy hiệu (PO 29/10/2026).
-     Hai màu trạng thái dùng riêng cho ý nghĩa: XANH LÁ = đã chọn/đã xong, ĐỎ = xóa/lỗi. Không thêm họ màu thứ sáu.
-   - LOẠI địa điểm không còn màu riêng: phân biệt bằng biểu tượng và chữ (6 token --cat-* cùng một giá trị, giữ tên để mã cũ không vỡ).
-   - NGÀY trong chuyến xoay vòng 3 màu thương hiệu (cam, trời, mực); số ngày luôn ghi bằng chữ nên màu chỉ là điểm nhấn.
-   - Sáng là mặc định và là bản được tinh chỉnh. Tối: giữ khung để dùng sau, CHƯA tinh chỉnh (PO: "nền tối để sau").
-   Mọi cặp chữ/nền được kiểm bằng `node docs/ux/tools/contrast.mjs` (cặp ở contrast-pairs.json). */
+/* Wander design tokens: the SINGLE SOURCE of the palette and the scales (PO 26/10/2026: 'one brand-identity palette, reused across the whole system').
+   Conventions:
+   - Names by ROLE (not by color). Components and screens use tokens only, no hex colors.
+   - A cool near-white background; SUNNY YELLOW only accents the CTA, choices, dots and badges (PO 29/10/2026).
+     Two state colors are used only for their meaning: GREEN = selected/done, RED = delete/error. No sixth color family is added.
+   - Place KIND no longer has its own color: told apart by icon and text (6 --cat-* tokens with the same value, the names kept so old code does not break).
+   - The DAYS of a trip cycle through 3 brand colors (orange, sky, ink); the day number is always written in text so the color is only an accent.
+   - Light is the default and the fine-tuned version. Dark: the frame is kept for later, NOT fine-tuned yet (PO: "dark later").
+   Every text/background pair is checked with `node docs/ux/tools/contrast.mjs` (the pairs are in contrast-pairs.json). */
 
 :root {
-  /* Nền liền mạch và kích thước bố cục cuộn trang trên Safari điện thoại. */
+  /* A seamless background and the page-scroll layout size on a phone Safari. */
   --mobile-canvas: #f2f4f5;
   --mobile-sheet: #fafbfc;
   --mobile-divider: rgb(36 55 64 / .12);
@@ -18,8 +18,8 @@
   --mobile-dock-height: 68px;
   --mobile-header-total: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px));
   --mobile-dock-total: calc(var(--mobile-dock-height) + max(var(--s-3), env(safe-area-inset-bottom, 0px)));
-  /* Bề mặt điều khiển theo mẫu của PO (docs/UI-sample): gần đặc + viền mảnh + bóng mềm, KHÔNG blur trên nội dung đang cuộn.
-     Lý do: Safari 26 có lỗi lấy màu thanh khi phần tử cố định ở mép có backdrop-filter (WebKit 319479); chi phí blur trên iPhone chưa có số đo. */
+  /* The control surface per the PO's sample (the PO's UI sample): nearly solid + a thin border + a soft shadow, NO blur over scrolling content.
+     Reason: Safari 26 has a bug taking the bar color when a fixed element at the edge has a backdrop-filter (WebKit 319479); the blur cost on iPhone has not been measured. */
   --mobile-glass: rgb(255 255 255 / .98);
   --mobile-nav-glass: rgb(255 255 255 / .985);
   --mobile-glass-edge: rgb(36 55 64 / .12);
@@ -28,7 +28,7 @@
   --mobile-glass-selected-shadow: inset 0 1px 2px rgb(36 55 64 / .10);
   --mobile-glass-fallback: #ffffff;
   --mobile-header-scrim: var(--mobile-canvas);
-  /* Thanh trên/dưới trượt ra khi cuộn xuống để nhường chỗ cho ảnh (full màn). */
+  /* The top/bottom bars slide out when scrolling down to make room for the photo (full screen). */
   --mobile-chrome-dur: 220ms;
   --mobile-chrome-ease: cubic-bezier(.2, .8, .2, 1);
   --mobile-create-size: 64px;
@@ -50,7 +50,7 @@
   --dur-photo: 240ms;
   --ease-photo: cubic-bezier(.2, .8, .2, 1);
   --sheet-cta-clearance: 150px;
-  /* Kính trung tính: màu cảnh đến từ ảnh/bản đồ phía sau. */
+  /* Neutral glass: the scene color comes from the photo/map behind it. */
   --glass-rgb: 255 255 255; --glass-sheet-rgb: 255 255 255;
   --glass-fab-alpha: .08; --glass-tab-alpha: .12; --glass-chip-alpha: .10;
   --glass-search-alpha: .08; --glass-sheet-alpha: .94;
@@ -87,7 +87,7 @@
   --glass-photo-shadow: 0 1px 2px rgb(20 35 42/ .55);
   --glass-glyph-halo: 0 0 0 4px var(--glass-photo-scrim);
   --glass-active-edge: var(--control-accent);
-  /* Nút chính = kính trắng mát, chữ mực, viền/bóng mực mảnh (PO bác nút mực đặc, đồng/bevel). Cấp bậc bằng chữ đậm, vị trí, mũi tên; cam chỉ nhấn nhỏ. */
+  /* The main button = cool white glass, ink text, a thin ink border/shadow (the PO rejected the solid ink button, the copper/bevel). Hierarchy by bold text, position, an arrow; orange is only a small accent. */
   --btn-bg: rgb(255 255 255 / .94);
   --btn-ink: var(--ink);
   --btn-edge: rgb(255 255 255 / .96);
@@ -114,7 +114,7 @@
   --modal-backdrop-blur: 8px;
   --onboarding-dot-size: 8px;
   --sheet-radius: 32px; --sheet-inset: 8px;
-  /* Bản đồ khung + tờ kính (bảng màu B): chất liệu tờ dùng chung cho mọi màn nằm trên bản đồ, hộp thoại chi tiết và thanh chân. */
+  /* The frame map + the glass sheet (palette B): the sheet material is shared by every screen that sits above the map, the detail dialog and the foot bar. */
   --shell-sheet-top: 30%; --shell-peek-height: 140px; --shell-sheet-radius: 28px;
   --shell-panel-width: 424px; --shell-panel-gap: 24px;
   --shell-detail-panel-width: 480px;
@@ -137,7 +137,7 @@
   --layout-photo-card-ratio: 1.6; --layout-tile-ratio: 1.2;
   --layout-item-thumb: 80px;
   --fluent-sm: 24px; --fluent-md: 32px; --fluent-lg: 40px;
-  /* Chữ quy đổi từ ảnh 390 px; rem cho phép tăng chữ và đủ chiều cao dấu Việt. */
+  /* Text converted from the 390 px picture; rem lets the text scale up and leaves enough height for Vietnamese accents. */
   --text-screen: 700 1.375rem / 1.75rem var(--font-display);
   --text-place: 700 1.3125rem / 1.6875rem var(--font-display);
   --text-section: 700 1.125rem / 1.5rem var(--font-display);
@@ -146,7 +146,7 @@
   --text-secondary: 400 .75rem / 1.125rem var(--font-body);
   --text-button: 700 .875rem / 1.25rem var(--font-body);
   --text-tab: 700 .6875rem / .875rem var(--font-body);
-  /* Home: chữ trên nền đặc, dòng đủ thoáng cho dấu tiếng Việt. */
+  /* Home: text on a solid background, lines airy enough for Vietnamese accents. */
   --text-home-title: 700 1.625rem / 2.125rem var(--font-display);
   --text-home-card: 700 1.0625rem / 1.5rem var(--font-display);
   --text-home-description: 400 .875rem / 1.375rem var(--font-body);
@@ -166,51 +166,51 @@
   --tracking-screen: -.35px; --tracking-place: -.3px; --tracking-section: -.2px;
   --tracking-card: -.1px; --tracking-eyebrow: .7px;
   --destination-map-height: 24dvh;
-  /* ---- Nền và chữ ---- */
-  /* BẢNG MÀU B (PO duyệt 05/11/2026, docs/design/liquid-review-2026-11-05/APPROVED-LOOK.md): mực xám xanh + kính trắng ngả xanh + cam nhấn NHỎ.
-     Không còn mảng cam/vàng lớn: nút chính đặc màu mực (chữ trắng 13:1), cam chỉ cho chấm, viền chọn, mũi tên, tuyến đường. */
-  --bg: #eaf2f3;             /* nền mát bảng B */
-  --surface: #ffffff;        /* thẻ, tờ phủ, ô nhập */
-  --surface-2: #e6eff2;      /* nền phụ */
-  --ink: #243740;            /* mực B */
+  /* ---- Background and text ---- */
+  /* PALETTE B (PO approved 05/11/2026, docs/design/liquid-review-2026-11-05/APPROVED-LOOK.md): blue-gray ink + blue-tinted white glass + a SMALL orange accent.
+     No more large orange/yellow areas: the main button is solid ink (white text 13:1), orange is only for dots, selection borders, arrows, routes. */
+  --bg: #eaf2f3;             /* cool background of palette B */
+  --surface: #ffffff;        /* cards, overlay sheets, input boxes */
+  --surface-2: #e6eff2;      /* secondary background */
+  --ink: #243740;            /* ink B */
   --ink-b: #243740;
-  --muted-b: #637b84;        /* chữ phụ đúng màu B: chỉ cho chữ lớn/trang trí (4,47:1 trên trắng) */
-  --muted: #587079;          /* chữ phụ cỡ nhỏ: cùng họ B, đậm hơn để đạt ≥ 4,5:1 */
-  --line: #d3e0e5;           /* viền trang trí; điều khiển dùng --border-ctrl */
-  --border-ctrl: #6a838d;    /* viền ô nhập, track công tắc: ≥ 3:1 so với nền liền kề */
+  --muted-b: #637b84;        /* secondary text in the exact color of B: only for large/decorative text (4.47:1 on white) */
+  --muted: #587079;          /* small secondary text: the same family B, bolder to reach at least 4.5:1 */
+  --line: #d3e0e5;           /* a decorative border; controls use --border-ctrl */
+  --border-ctrl: #6a838d;    /* input-box border, switch track: at least 3:1 against the adjacent background */
 
-  /* ---- Cam nhấn NHỎ (cam B #f57932) và mực: hành động chính là mực, cam chỉ là điểm nhấn ---- */
-  --accent: #f57932;         /* chấm, viền chọn, mũi tên, tuyến đường: không làm nền chữ nhỏ */
+  /* ---- SMALL orange accent (orange B #f57932) and ink: the main action is ink, orange is only an accent ---- */
+  --accent: #f57932;         /* dots, selection borders, arrows, routes: not a background for small text */
   --brand: var(--accent);
-  --brand-ink: #a8400a;      /* chữ nhấn trên nền sáng (6,2:1) */
-  --brand-soft: #e1eef2;     /* nền chọn/bật nhẹ ngả xanh */
-  --tint: #e4eff3; --tint-ink: #243740;   /* nền nhạt + chữ cho chip loại/nhãn */
-  --cta-1: #243740;          /* nút chính: mực; gradient đi từ --cta-g1 sang --cta-2 */
+  --brand-ink: #a8400a;      /* accent text on a light background (6.2:1) */
+  --brand-soft: #e1eef2;     /* a light selected/on background tinted blue */
+  --tint: #e4eff3; --tint-ink: #243740;   /* a light background + text for kind/label chips */
+  --cta-1: #243740;          /* the main button: ink; the gradient goes from --cta-g1 to --cta-2 */
   --cta-2: #243740;
   --cta-g1: #34505d;
   --cta-1-hover: #1a2a31;
   --cta-2-hover: #1a2a31;
   --on-cta: #ffffff;
-  --sun: #f57932;            /* nhãn "Nên ghé": cam nhấn nhỏ */
+  --sun: #f57932;            /* the 'Worth a stop' label: a small orange accent */
   --on-sun: #1b2a31;
 
-  /* ---- Họ XANH NƯỚC: liên kết, thông tin, trạng thái "chờ duyệt" ---- */
+  /* ---- WATER BLUE family: links, information, the 'pending approval' state ---- */
   --sky: #2b6f86;
   --sky-soft: #dcecf1;
-  --sky-1: #bfe3ee;          /* bầu trời minh họa (màn mở đầu, khung quẹt) */
+  --sky-1: #bfe3ee;          /* the illustrated sky (the opening screen, the swipe frame) */
   --sky-2: #e8f4f2;
 
-  /* ---- Trạng thái (chỉ dùng cho đúng ý nghĩa) ---- */
-  --like: #0b7a47;           /* đã chọn, đã xong */
+  /* ---- State (used only for the right meaning) ---- */
+  --like: #0b7a47;           /* selected, done */
   --on-like: #ffffff;
-  --skip: #c62828;           /* bỏ qua, xóa, lỗi */
+  --skip: #c62828;           /* skip, delete, error */
   --on-skip: #ffffff;
-  --warn-bg: #d9eefc;        /* "chờ duyệt", cần chú ý: dùng họ trời xanh, không còn màu tím riêng */
+  --warn-bg: #d9eefc;        /* 'pending approval', needs attention: uses the sky-blue family, no separate purple any more */
   --warn-line: #0b58b8;
   --warn-ink: #08407f;
   --on-warn: #ffffff;
 
-  /* ---- LOẠI địa điểm: một bộ giá trị cho cả sáu loại (khác nhau bằng biểu tượng + chữ) ---- */
+  /* ---- Place KIND: one set of values for all six kinds (told apart by icon + text) ---- */
   --cat-canh: var(--brand-2);  --on-cat-canh: var(--on-brand-2);  --cat-canh-tint: var(--tint);  --cat-canh-ink: var(--tint-ink);
   --cat-van: var(--brand-2);   --on-cat-van: var(--on-brand-2);   --cat-van-tint: var(--tint);   --cat-van-ink: var(--tint-ink);
   --cat-am: var(--brand-2);    --on-cat-am: var(--on-brand-2);    --cat-am-tint: var(--tint);    --cat-am-ink: var(--tint-ink);
@@ -218,96 +218,96 @@
   --cat-luu: var(--brand-2);   --on-cat-luu: var(--on-brand-2);   --cat-luu-tint: var(--tint);   --cat-luu-ink: var(--tint-ink);
   --cat-cho: var(--brand-2);   --on-cat-cho: var(--on-brand-2);   --cat-cho-tint: var(--tint);   --cat-cho-ink: var(--tint-ink);
 
-  /* ---- NGÀY trong chuyến: xoay vòng cam, trời, mực; chữ trắng trên nền ngày ---- */
+  /* ---- Trip DAY: cycles orange, sky, ink; white text on the day background ---- */
   --day-1: var(--day-accent); --day-2: var(--day-accent); --day-3: var(--day-accent); --day-4: var(--day-accent); --day-5: var(--day-accent); --day-6: var(--day-accent); --day-7: var(--day-accent);
   --on-day: #ffffff;
-  --ink-fixed: #1d2f37;     /* chữ/viền luôn tối, không đổi theo giao diện (vòng focus trên ảnh) */
+  --ink-fixed: #1d2f37;     /* text/border always dark, not changing with the UI (the focus ring on a photo) */
   --white: #ffffff;
 
-  /* ---- Phủ trên ảnh (thẻ ảnh luôn có lớp tối phía dưới để chữ trắng đọc được) ---- */
-  --scrim: rgba(10, 14, 20, 0.88);   /* trung tính (Taste: scrim chỉ hợp lệ khi gần trung tính) */
+  /* ---- Overlay on a photo (a photo card always has a dark layer at the bottom so white text is readable) ---- */
+  --scrim: rgba(10, 14, 20, 0.88);   /* neutral (Taste: a scrim is only valid when close to neutral) */
   --on-photo: #ffffff;
-  --photo-bg: #14232a;              /* nền tối đặt sau ảnh trong lúc ảnh tải */
+  --photo-bg: #14232a;              /* a dark background placed behind a photo while the photo loads */
 
-  /* Token bổ sung khi chuyển CSS prototype sang web/ (thay mã hex rải trong CSS). */
-  --navy-fixed: #14232a;            /* chữ tối cố định trên nút sáng ở giao diện tối */
-  --map-fallback: #eef2f7;           /* nền bản đồ trong lúc ảnh địa hình tải */
-  --tip-bg: #eef2f7; --tip-ink: var(--ink);   /* khung mẹo */
-  --link-on-dark: #ffd9b8;           /* liên kết trên nền ảnh tối */
-  --paper-ink: #14213a; --paper-note: #45506a; --paper-line: #dce3ec;   /* tờ xuất luôn trắng */
-  --ok-ink: #1f7a45;                 /* chữ "xong" trên nền sáng */
+  /* Additional tokens when moving the prototype CSS to web/ (replacing hex codes scattered in the CSS). */
+  --navy-fixed: #14232a;            /* fixed dark text on a light button in the dark UI */
+  --map-fallback: #eef2f7;           /* the map background while the terrain image loads */
+  --tip-bg: #eef2f7; --tip-ink: var(--ink);   /* the tip frame */
+  --link-on-dark: #ffd9b8;           /* a link on a dark photo background */
+  --paper-ink: #14213a; --paper-note: #45506a; --paper-line: #dce3ec;   /* the export sheet is always white */
+  --ok-ink: #1f7a45;                 /* the 'done' text on a light background */
   --glass: rgb(255 255 255 / .88);
-  --chip-photo: rgba(7, 19, 38, 0.78);   /* nền chip nằm trên ảnh */
+  --chip-photo: rgba(7, 19, 38, 0.78);   /* the chip background that sits on a photo */
   --backdrop: rgb(37 62 70 / .22);
 
-  /* ---- Nền cảnh dùng chung (màn quẹt, tờ phủ): trời nắng sang bơ ---- */
+  /* ---- Shared scene background (swipe screen, overlay sheet): sunny sky to butter ---- */
   --scene: linear-gradient(var(--surface-2), var(--bg) 40%);
   --scene-top: #f0f5fc;
 
-  /* ---- Khoảng cách (thang 4 px) ---- */
+  /* ---- Spacing (4 px scale) ---- */
   --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
   --gutter: max(16px, env(safe-area-inset-left, 0px));
 
-  /* ---- Bán kính ---- */
+  /* ---- Radius ---- */
   --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-xl: 30px; --r-pill: 999px;
 
-  /* ---- Độ nổi ---- */
-  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.08);          /* tấm tĩnh: bóng rất nhẹ (< 8% đen, mờ nhỏ) */
+  /* ---- Elevation ---- */
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.08);          /* a static panel: a very light shadow (< 8% black, a small blur) */
   --sh-2: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --sh-float: 0 16px 34px -18px rgba(18, 35, 61, 0.5);   /* chỉ lớp nổi thật: hộp thoại, tờ phủ, toast, thanh tab nổi */
+  --sh-float: 0 16px 34px -18px rgba(18, 35, 61, 0.5);   /* only real floating layers: dialog, overlay sheet, toast, floating tab bar */
 
-  /* ---- Tầng (z-index) ---- */
+  /* ---- Layers (z-index) ---- */
   --z-raised: 2; --z-sticky: 10; --z-nav: 20; --z-sheet: 30; --z-popover: 40; --z-dialog: 50; --z-toast: 60;
-  --tabbar-h: 112px;   /* chiều cao vùng thanh tab nổi + khoảng trống để nội dung không bị che */
+  --tabbar-h: 112px;   /* the height of the floating tab bar area + empty space so content is not covered */
 
-  /* ---- Chuyển động: chọn theo quãng đường và ngữ cảnh, không một thời lượng cho mọi thứ ---- */
-  --dur-press: 140ms;   /* phản hồi chạm (khớp MOTION.PRESS_MS) */
-  --dur-fast: 140ms;    /* đổi màu, bật/tắt nhỏ */
-  --dur-med: 240ms;     /* mở tờ phủ, lật thẻ */
-  --dur-slow: 360ms;    /* thẻ bay khỏi màn hình */
-  --dur-scene: 520ms;   /* vào màn, hiện dần khi cuộn */
+  /* ---- Motion: chosen by distance and context, not one duration for everything ---- */
+  --dur-press: 140ms;   /* touch feedback (matches MOTION.PRESS_MS) */
+  --dur-fast: 140ms;    /* a color change, a small on/off */
+  --dur-med: 240ms;     /* opening an overlay sheet, flipping a card */
+  --dur-slow: 360ms;    /* a card flying off the screen */
+  --dur-scene: 520ms;   /* entering a screen, fading in on scroll */
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
 
-  /* ---- Chữ ---- */
+  /* ---- Text ---- */
   --font-body: ui-rounded, 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, 'Nunito', system-ui, sans-serif;
   --font-display: var(--font-body);
   --fs-xs: 12px; --fs-sm: 14px; --fs-md: 16px; --fs-lg: 18px; --fs-xl: 22px; --fs-2xl: 28px; --fs-3xl: 36px; --fs-hero: 42px;
-  --lh-body: 1.55; --lh-tight: 1.25; /* Dòng cao đủ cho dấu tiếng Việt (Ệ, Ầ). */
+  --lh-body: 1.55; --lh-tight: 1.25; /* A line tall enough for Vietnamese accents. */
 
-  /* ---- Biểu tượng và vùng chạm ---- */
+  /* ---- Icons and touch area ---- */
   --icon-s: 16px; --icon-m: 20px; --icon-l: 26px; --icon-xl: 30px;
   --tap: 44px;
-  --reading-width: 640px;   /* độ rộng tối đa của cột đọc/hành động trên màn rộng (Hôm nay): nút và chữ không kéo ra hết bề ngang */
+  --reading-width: 640px;   /* the maximum width of the reading/action column on a wide screen (Today): buttons and text do not stretch across the whole width */
   --focus: var(--sky);
 
-  /* ---- Điểm ngắt (dùng trong @media, ghi ở đây để tra) ---- */
+  /* ---- Breakpoints (used in @media, written here for lookup) ---- */
   --bp-tablet: 768px; --bp-desktop: 1280px;
 
-  /* ---- Vòng 26/10/2026 (v6): nút/gradient, ngày, nền sinh động, bản đồ, vật thể 3D. Đổi bộ màu = đổi các token này. ---- */
+  /* ---- Round of 26/10/2026 (v6): button/gradient, day, lively background, map, 3D objects. Changing the palette = changing these tokens. ---- */
   --cta-grad: linear-gradient(90deg, var(--cta-g1), var(--cta-2));
   --cta-grad-hover: linear-gradient(90deg, var(--cta-g1), var(--cta-1-hover));
-  --card-shadow: 0 18px 34px -20px rgba(20, 33, 58, 0.45);   /* bóng thẻ: đổ nhẹ, đổi theo bộ màu */
-  --cta-glow: 0 10px 22px -12px rgba(36, 55, 64, 0.55);   /* bóng mực dưới nút chính */
-  --day-accent: var(--brand-2);    /* MỌI ngày dùng một màu nhấn; số ngày/nhãn mới là thứ phân biệt (PO 26/10: nhiều màu gây rối) */
-  --day-muted: var(--border-ctrl); /* ngày không đang xem (bản đồ, danh sách) */
-  --ambient-a: #cfe6ea; --ambient-b: #bfe3ee; --ambient-c: #dfeee0;   /* ba đốm sáng nền trôi chậm (xanh nước, xanh lá dịu) */
+  --card-shadow: 0 18px 34px -20px rgba(20, 33, 58, 0.45);   /* the card shadow: a light drop, changing with the palette */
+  --cta-glow: 0 10px 22px -12px rgba(36, 55, 64, 0.55);   /* the ink shadow under the main button */
+  --day-accent: var(--brand-2);    /* EVERY day uses one accent color; the day number/label is what tells them apart (PO 26/10: many colors cause confusion) */
+  --day-muted: var(--border-ctrl); /* a day not being viewed (map, list) */
+  --ambient-a: #cfe6ea; --ambient-b: #bfe3ee; --ambient-c: #dfeee0;   /* three light background blobs drifting slowly (water blue, soft green) */
   --sun-hi: #ffe2cf;
-  --gem-like: linear-gradient(150deg, #3ee08b, #0b8f4e);   /* huy hiệu bóng kính: chọn */
-  --gem-skip: linear-gradient(150deg, #ff7a7a, #d62839);   /* huy hiệu bóng kính: bỏ qua */
-  --gem-grad: linear-gradient(150deg, var(--cta-g1), var(--cta-2));    /* ô biểu tượng bóng kính */
-  --obj-hi: #ffffff; --obj-mid: #ffe6d6; --obj-lo: #ffb98a; --obj-edge: #f0a070; --obj-accent: #ff6a2a;   /* vật thể minh họa (máy bay, la bàn…) */
-  /* Bản đồ hướng B đã duyệt: biển xanh trong, đất xanh/vàng nhạt, núi có relief rõ hơn (không xám). */
+  --gem-like: linear-gradient(150deg, #3ee08b, #0b8f4e);   /* glossy badge: selected */
+  --gem-skip: linear-gradient(150deg, #ff7a7a, #d62839);   /* glossy badge: skipped */
+  --gem-grad: linear-gradient(150deg, var(--cta-g1), var(--cta-2));    /* glossy icon cell */
+  --obj-hi: #ffffff; --obj-mid: #ffe6d6; --obj-lo: #ffb98a; --obj-edge: #f0a070; --obj-accent: #ff6a2a;   /* illustration objects (plane, compass...) */
+  /* The approved direction B map: clear blue sea, light green/yellow land, mountains with a clearer relief (not gray). */
   --map-land: #f9fce9; --map-low: #d3efbf; --map-mid: #d9e7c8; --map-high: #cadcb8; --map-peak: #b9cfa8;
-  --map-shade: 0.5;                /* độ đậm lớp bóng núi */
+  --map-shade: 0.5;                /* the strength of the mountain shadow layer */
   --map-water: #8cdbf5; --map-water-line: #c0e9f3; --map-road: #ffffff; --map-road-casing: #dfe7cd;
   --map-main-road: #eee4c5; --map-boundary: #d9e2cf; --map-label: #809985;
   --map-route: var(--accent); --map-route-halo: #ffffff; --map-pin: var(--ink); --map-pin-muted: var(--border-ctrl);
 
-  /* ---- Tên cũ của mã prototype (alias, KHÔNG thêm tên mới ở đây; gỡ khi web thật dùng token chuẩn) ---- */
+  /* ---- Old names of the prototype code (aliases, do NOT add new names here; remove when the real web uses the standard tokens) ---- */
   --cta: var(--cta-1); --cta-hover: var(--cta-1-hover); --cta-g2: var(--cta-2);
-  --brand-2: #243740;        /* mực: nút chính, huy hiệu đếm, số ngày (chữ trắng 13:1); tên cũ giữ cho mã đang dùng */
+  --brand-2: #243740;        /* ink: the main button, the count badge, the day number (white text 13:1); the old name is kept for the code in use */
   --on-brand-2: #ffffff;
   --shadow: var(--sh-2); --shadow-float: var(--sh-float);
   --d1: var(--day-1); --d2: var(--day-2); --d3: var(--day-3); --d4: var(--day-4); --d5: var(--day-5); --d6: var(--day-6); --d7: var(--day-7); --on-d: var(--on-day);
@@ -321,7 +321,7 @@
   color-scheme: light;
 }
 
-/* Bản đối chiếu giữ nền Nắng vàng trước LOOK V2. */
+/* A comparison copy that keeps the Sunny Yellow background before LOOK V2. */
 :root[data-look='classic'] {
   --bg: #fff8d8; --surface-2: #fff2c2; --line: #f0dc8a;
   --map-fallback: #fff1c6; --tip-bg: #fff1d6; --tip-ink: #5a3b00;
@@ -331,7 +331,7 @@
   --map-land: #fff3cf; --map-low: #fff8e0;
 }
 
-/* ---- TỐI: khung dự phòng, chưa tinh chỉnh (PO 26/10/2026). Hai khối dưới phải giống hệt nhau (contrast.mjs kiểm). ---- */
+/* ---- DARK: a fallback frame, not fine-tuned yet (PO 26/10/2026). The two blocks below must be identical (contrast.mjs checks). ---- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
 

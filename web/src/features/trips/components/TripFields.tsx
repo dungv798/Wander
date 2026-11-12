@@ -5,7 +5,7 @@ import { Field } from '../../../shared/ui/Field.tsx';
 import { TRIP_PACES, TRIP_STYLES } from '../model/trip.const.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Giá trị biểu mẫu chuyến đi (chuỗi thô, kiểm ở `tripForms.ts`). */
+/** The values of the trip form (raw strings, checked in `tripForms.ts`). */
 export interface TripFormValues {
   readonly name: string;
   readonly start: string;
@@ -22,11 +22,11 @@ interface TripFieldsProps {
   readonly v: TripFormValues;
   readonly set: (p: Partial<TripFormValues>) => void;
   readonly budgetHint: string;
-  /** Tên gợi ý hiện mờ khi chưa gõ (tên mặc định không trùng). */
+  /** The suggested name shown faded when nothing is typed (the default name that does not clash). */
   readonly namePlaceholder?: string;
 }
 
-/** Các ô của biểu mẫu tạo chuyến: tên, ngày đi/về (hoặc số ngày dự kiến khi chưa chắc), phong cách (tối đa 5), nhịp, ngân sách. */
+/** The boxes of the trip-creating form: name, start/end dates (or the expected number of days when tentative), style (at most 5), pace, budget. */
 export function TripFields({ v, set, budgetHint, namePlaceholder, suggestedDates = false }: TripFieldsProps) {
   const toggleStyle = (code: string): void => {
     const has = v.styles.includes(code);

@@ -11,8 +11,8 @@ interface PlaceHeadProps {
 }
 
 /**
- * Đầu tờ chi tiết dùng chung: đường dẫn "Điểm đến / Khu vực", nút đóng, tên nơi và nhãn loại (sticker Fluent 3D).
- * Chrome này cùng chất liệu kính của app; không có ảnh làm nền nên tên luôn đọc được trên nền sáng.
+ * The shared head of the detail sheet: the 'Destination / Area' breadcrumb, a close button, the place name and the kind label (a Fluent 3D sticker).
+ * This chrome has the same glass material as the app; there is no photo behind it so the name is always readable on a light background.
  */
 export function PlaceHead({ dest, place, onClose }: PlaceHeadProps) {
   return (

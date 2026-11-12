@@ -1,45 +1,45 @@
 import { IDENTITY } from './identity.const.ts';
 
-/** Nơi đếm lần nhập sai: khôi phục trên máy mới, xác thực lại, nhập mã ghép (mỗi nơi đếm riêng). */
+/** Where wrong entries are counted: recovery on a new device, re-authentication, typing a pairing code (each place counts separately). */
 export type LockScope = 'recover' | 'reauth' | 'pair';
 
-/** Số lần sai và thời điểm hết khóa (0 = chưa khóa) của một nơi. */
+/** The number of wrong entries and the time the lock ends (0 = not locked) for one place. */
 export interface Attempts {
   readonly tries: number;
   readonly until: number;
 }
 
-/** Trạng thái đếm lần sai của máy này. Lưu bền (tải lại, đổi chế độ, đóng/mở tờ KHÔNG xóa); khóa thật theo thiết bị là việc của backend (D23). */
+/** The wrong-attempt count state of this device. Persistent (reloading, changing mode, closing/opening a sheet does NOT clear it); the real per-device lock is the backend's job (D23). */
 export type LockState = Readonly<Partial<Record<LockScope, Attempts>>>;
 
-/** Trạng thái ban đầu: chưa sai lần nào. */
+/** The initial state: no wrong entry yet. */
 export const NO_LOCKS: LockState = {};
 
-/** Đang bị khóa tạm ở nơi này không. */
+/** Whether this place is temporarily locked. */
 export function isLocked(s: LockState, scope: LockScope, now: number): boolean {
   return (s[scope]?.until ?? 0) > now;
 }
 
-/** Số lần sai còn hiệu lực (hết khóa thì tính lại từ 0). */
+/** The number of wrong entries still in effect (once the lock ends it counts from 0 again). */
 export function triesOf(s: LockState, scope: LockScope, now: number): number {
   const a = s[scope];
   return !a || (a.until > 0 && a.until <= now) ? 0 : a.tries;
 }
 
-/** Ghi một lần nhập sai; đủ `MAX_ATTEMPTS` lần thì khóa tạm `LOCK_MS`. Khóa cũ đã hết hạn thì đếm lại từ đầu. */
+/** Records one wrong entry; `MAX_ATTEMPTS` of them lock temporarily for `LOCK_MS`. An old lock that has expired counts from the start again. */
 export function recordFailure(s: LockState, scope: LockScope, now: number): LockState {
-  if (isLocked(s, scope, now)) return s; // đang khóa: không cộng thêm, không gia hạn
+  if (isLocked(s, scope, now)) return s; // locked: no more is added, no extension
   const tries = triesOf(s, scope, now) + 1;
   return { ...s, [scope]: { tries, until: tries >= IDENTITY.MAX_ATTEMPTS ? now + IDENTITY.LOCK_MS : 0 } };
 }
 
-/** Xóa đếm sai của một nơi (sau khi nhập đúng). */
+/** Clears the wrong-entry count of one place (after a correct entry). */
 export function clearFailures(s: LockState, scope: LockScope): LockState {
   const { [scope]: _drop, ...rest } = s;
   return rest;
 }
 
-/** Làm sạch trạng thái khóa đọc từ localStorage (không tin cậy). */
+/** Cleans the lock state read from localStorage (untrusted). */
 export function sanitizeLocks(raw: unknown): LockState | null {
   if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) return null;
   const out: Partial<Record<LockScope, Attempts>> = {};

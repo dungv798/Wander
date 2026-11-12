@@ -7,7 +7,7 @@ import com.wander.shared.kernel.error.WanderException;
 import java.time.DateTimeException;
 import java.time.Instant;
 
-/** Bằng chứng cho một trường trong snapshot; ngày chụp dữ liệu khác ngày xác minh hiện trạng. */
+/** The evidence for a field in the snapshot; the date the data was captured differs from the date the current state was verified. */
 public record FieldProvenance(String sourceKind, String sourceUrl, String snapshotAt, String osmTimestamp,
                               String license, String licenseUrl, String attribution) {
     public FieldProvenance {
@@ -20,7 +20,7 @@ public record FieldProvenance(String sourceKind, String sourceUrl, String snapsh
         PoiValidation.requireText(osmTimestamp, PoiConstants.PROVENANCE);
         requireTimestamp(snapshotAt);
         requireTimestamp(osmTimestamp);
-        // Đã kiểm bằng hằng số: dùng lại đúng một đối tượng thay vì hàng trăm nghìn bản sao do trình đọc JSON tạo ra (tiết kiệm heap).
+        // Checked against a constant: reuses exactly one object instead of hundreds of thousands of copies made by the JSON reader (saves heap).
         sourceKind = PoiConstants.OSM;
         license = PoiConstants.LICENSE;
         licenseUrl = PoiConstants.LICENSE_URL;
@@ -29,7 +29,7 @@ public record FieldProvenance(String sourceKind, String sourceUrl, String snapsh
         osmTimestamp = osmTimestamp.intern();
     }
 
-    /** Từ chối ngày snapshot sai bằng lỗi miền thay vì tự dùng thời gian hiện tại. */
+    /** Rejects a wrong snapshot date with a domain error instead of silently using the current time. */
     private static void requireTimestamp(String value) {
         try {
             Instant.parse(value);

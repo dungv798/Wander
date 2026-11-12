@@ -1,19 +1,25 @@
 package com.wander.rating.api.constant;
 
-/** Đường dẫn và khóa JSON của API rating. */
+/** Paths and JSON keys of the rating API. */
 public final class RatingApiConstants {
 
-    /** Tiền tố đường dẫn của một quán. */
+    /** Path prefix of one venue. */
     public static final String PLACE_PATH = "/api/places/{placeRef}";
 
-    /** Rating của quán (xem, chấm, xóa). */
+    /** The rating of a venue (view, rate, delete). */
     public static final String RATING_PATH = "/rating";
 
-    /** Báo cáo một lời bình. */
+    /** Report a comment. */
     public static final String REPORT_PATH = "/ratings/{ratingId}/report";
 
-    /** Khóa JSON của read model rating trong phản hồi. */
-    public static final String KEY_RATING = "rating";
+    /** Lowest star value, as documented in the OpenAPI schema. */
+    public static final String STARS_MIN = "1";
+
+    /** Highest star value, as documented in the OpenAPI schema. */
+    public static final String STARS_MAX = "5";
+
+    /** Maximum comment length, as documented in the OpenAPI schema (the rating rules enforce it). */
+    public static final int COMMENT_MAX = 280;
 
     private RatingApiConstants() {
     }

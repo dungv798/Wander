@@ -9,21 +9,21 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), selec
 const DRAWER_BODY_CLASS = 'has-drawer';
 
 interface SheetProps {
-  /** Nhãn cho trình đọc màn hình (tiêu đề hộp thoại). */
+  /** The label for screen readers (the dialog title). */
   readonly label: string;
   readonly onClose: () => void;
-  /** Màn rộng ≥ 1280 px thì dạng ngăn kéo bên phải, KHÔNG che nội dung (`aria-modal=false`). */
+  /** A wide screen of at least 1280 px is a right-hand drawer, which does NOT cover the content (`aria-modal=false`). */
   readonly asDrawer?: boolean;
   readonly full?: boolean;
   readonly children: ReactNode;
 }
 
-/** Các phần tử nhận focus đang hiển thị trong hộp thoại (dùng cho bẫy focus). */
+/** The focusable elements being shown in the dialog (used for the focus trap). */
 function focusableIn(panel: HTMLElement): HTMLElement[] {
   return [...panel.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((el) => el.offsetParent !== null);
 }
 
-/** Xử lý bàn phím của đúng tờ chứa DOM đích; portal con có bẫy focus riêng. */
+/** Handles the keyboard of exactly the sheet that holds the target DOM; a child portal has its own focus trap. */
 function sheetKey(event: KeyboardEvent<HTMLDivElement>, panel: HTMLElement | null, drawer: boolean, onClose: () => void): void {
   if (!(event.target instanceof Node) || !event.currentTarget.contains(event.target)) return;
   if (event.key === 'Escape') {
@@ -40,8 +40,8 @@ function sheetKey(event: KeyboardEvent<HTMLDivElement>, panel: HTMLElement | nul
 }
 
 /**
- * Tờ phủ dưới/hộp thoại giữa/ngăn kéo phải. Có bẫy focus, Esc đóng, chạm nền đóng và trả focus về nơi mở (a11y, chuẩn FE §2).
- * Ngăn kéo không chặn nền nên không bẫy focus và không đóng khi chạm nền.
+ * A bottom overlay sheet / a center dialog / a right drawer. It has a focus trap, Esc closes, tapping the background closes and returns the focus to where it was opened (a11y, FE standard section 2).
+ * The drawer does not block the background so it has no focus trap and does not close on a background tap.
  */
 export function Sheet({ label, onClose, asDrawer = false, full = false, children }: SheetProps) {
   const drawerOk = useMediaQuery(MEDIA.DRAWER);
@@ -62,7 +62,7 @@ export function Sheet({ label, onClose, asDrawer = false, full = false, children
     };
   }, [drawer]);
 
-  /** Esc đóng; Tab xoay vòng trong hộp thoại (không áp dụng cho ngăn kéo). */
+  /** Esc closes; Tab cycles within the dialog (not applied to the drawer). */
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
     sheetKey(e, panelRef.current, drawer, onClose);
   };
@@ -75,7 +75,7 @@ export function Sheet({ label, onClose, asDrawer = false, full = false, children
         downOnOverlay.current = e.target === e.currentTarget;
       }}
       onClick={(e) => {
-        // chọn chữ rồi nhả chuột ngoài hộp thoại không được tính là bấm nền
+        // selecting text and releasing the mouse outside the dialog must not count as a tap on the background
         if (!drawer && downOnOverlay.current && e.target === e.currentTarget) onClose();
         downOnOverlay.current = false;
       }}

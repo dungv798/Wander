@@ -4,8 +4,8 @@ import { BottomSheet } from './BottomSheet.ts';
 import type { Snap } from './bottomSheet.const.ts';
 
 /**
- * Gắn tờ kéo ba nấc vào hai phần tử (thân tờ và vùng nắm kéo) khi `enabled`; gỡ khi tắt hoặc rời màn.
- * `onChange` luôn là bản mới nhất (không buộc dựng lại tờ khi hàm gọi lại đổi).
+ * Attaches the three-step draggable sheet to two elements (the sheet body and the drag handle area) when `enabled`; removes it when turned off or on leaving the screen.
+ * `onChange` is always the latest copy (it does not force rebuilding the sheet when the callback changes).
  */
 export function useBottomSheet(sheetRef: RefObject<HTMLElement | null>, handleRef: RefObject<HTMLElement | null>, enabled: boolean, initial: Snap, onChange: (snap: Snap, visiblePx: number) => void): void {
   const cb = useRef(onChange);
@@ -18,7 +18,7 @@ export function useBottomSheet(sheetRef: RefObject<HTMLElement | null>, handleRe
     if (!enabled || !el || !handle) return undefined;
     const sheet = new BottomSheet(el, handle, { initial, onChange: (s, v) => cb.current(s, v) });
     return () => sheet.destroy();
-    // chỉ dựng lại khi bật/tắt; nấc khởi tạo chỉ dùng lần đầu
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Hai ref giữ nguyên phần tử; initial chỉ dùng lúc dựng, onChange luôn lấy qua cb.
+    // rebuilds only on on/off; the initial step is used only the first time
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- The two refs keep the elements; initial is used only at build time, onChange is always taken through cb.
   }, [enabled]);
 }

@@ -8,7 +8,7 @@ import { RatingApi } from './RatingApi.ts';
 const ok = { rating: { summary: { average: 4.5, count: 2 }, mine: { stars: 5, comment: null, updatedAt: '2026-11-02T00:00:00.000Z' },
   comments: [{ id: 'c1', stars: 4, comment: 'Ngon', updatedAt: '2026-11-02T00:00:00.000Z', mine: false }] } };
 
-/** API dựng trên fetch giả; ghi lại lời gọi (phương thức, URL, thân). */
+/** An API built on a fake fetch; it records the calls (method, URL, body). */
 function api(handler: () => Response): { readonly api: RatingApi; readonly calls: { method: string; url: string; body: unknown }[] } {
   const calls: { method: string; url: string; body: unknown }[] = [];
   const fetchImpl: FetchLike = (url, init) => {

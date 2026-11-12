@@ -4,17 +4,17 @@ import type { SwipeKind } from '../model/swipeDeck.ts';
 import { SWIPE } from '../model/onboarding.const.ts';
 
 interface CardDragOptions {
-  /** Người xem bắt đầu kéo: dừng demo, khóa bộ bài vào chế độ kéo. */
+  /** The viewer starts dragging: stops the demo, locks the deck into drag mode. */
   readonly onStart: () => void;
-  /** Kéo qua ngưỡng (±) thì nhấn sáng nút tương ứng; về lại giữa thì tắt. */
+  /** Dragging past the threshold (+/-) lights up the matching button; going back to the middle turns it off. */
   readonly onLean: (kind: SwipeKind | null) => void;
-  /** Thả tay quá ngưỡng quẹt. */
+  /** Released past the swipe threshold. */
   readonly onCommit: (kind: SwipeKind) => void;
-  /** Thả tay chưa đủ ngưỡng: thẻ trở về giữa. */
+  /** Released before reaching the threshold: the card returns to the middle. */
   readonly onCancel: () => void;
 }
 
-/** Bộ xử lý con trỏ gắn vào thẻ trên cùng. */
+/** The pointer handlers attached to the top card. */
 export interface CardDragHandlers {
   readonly onPointerDown: (e: PointerEvent<HTMLElement>) => void;
   readonly onPointerMove: (e: PointerEvent<HTMLElement>) => void;
@@ -22,17 +22,17 @@ export interface CardDragHandlers {
   readonly onPointerCancel: (e: PointerEvent<HTMLElement>) => void;
 }
 
-/** Kéo thẻ bằng ngón tay/chuột: thẻ nghiêng theo hướng kéo (biến CSS `--dx`, `--dy`), nhãn CHỌN/BỎ QUA hiện dần bằng CSS. */
+/** Drags the card with a finger/mouse: the card tilts in the drag direction (CSS variables `--dx`, `--dy`), the CHOOSE/SKIP labels fade in by CSS. */
 export function useCardDrag({ onStart, onLean, onCommit, onCancel }: CardDragOptions): CardDragHandlers {
   const start = useRef<{ x: number; y: number } | null>(null);
   const lean = useRef<SwipeKind | null>(null);
-  /** Cập nhật hướng nghiêng và báo khi đổi. */
+  /** Updates the tilt direction and reports when it changes. */
   const setLean = (next: SwipeKind | null): void => {
     if (lean.current === next) return;
     lean.current = next;
     onLean(next);
   };
-  /** Trả thẻ về trạng thái nghỉ (xóa độ lệch). */
+  /** Returns the card to the resting state (clears the offset). */
   const rest = (el: HTMLElement): void => {
     el.style.removeProperty('--dx');
     el.style.removeProperty('--dy');

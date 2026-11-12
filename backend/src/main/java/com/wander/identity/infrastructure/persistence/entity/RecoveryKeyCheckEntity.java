@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
 
-/** Bảng {@code recovery_key_checks}: dấu vân tay của khóa ứng với từng nhãn khóa khôi phục. */
+/** Table {@code recovery_key_checks}: the key fingerprint for each recovery key label. */
 @Entity
 @Table(name = "recovery_key_checks")
 public class RecoveryKeyCheckEntity {

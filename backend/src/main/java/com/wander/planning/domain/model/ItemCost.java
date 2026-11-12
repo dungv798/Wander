@@ -7,45 +7,45 @@ import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 
 /**
- * Chi phí của một mục (D17, D18; R2–R4). Đơn vị: nghìn đồng, số nguyên không âm.
+ * The cost of an item (D17, D18; R2-R4). Unit: thousand VND, a non-negative integer.
  * <ul>
- *   <li>{@code costK == null}: chưa biết; {@code 0}: đã biết bằng 0.</li>
- *   <li>{@code included}: đã bao gồm (ví dụ trong tour), có giá tham khảo tùy chọn và KHÔNG cộng vào "tổng phải trả thêm".</li>
+ *   <li>{@code costK == null}: unknown; {@code 0}: known to be zero.</li>
+ *   <li>{@code included}: included (for example in a tour), with an optional reference price, and NOT added to 'extra to pay'.</li>
  * </ul>
  */
 public record ItemCost(Long costK, boolean included, Long referenceK) {
 
-    /** Chi phí chưa biết, chưa bao gồm, không có giá tham khảo. */
+    /** Unknown cost, not included, no reference price. */
     public static final ItemCost UNKNOWN = new ItemCost(null, false, null);
 
     public ItemCost {
         requireValidAmount(costK, PlanningFields.COST);
         requireValidAmount(referenceK, PlanningFields.REFERENCE_COST);
-        // Mặc định Q18(f): giá tham khảo chỉ có nghĩa khi đã tick "đã bao gồm".
+        // Default of Q18(f): a reference price only has meaning when 'included' is ticked.
         if (!included && referenceK != null) {
             throw WanderException.invalidValue(PlanningErrorCodes.REFERENCE_REQUIRES_INCLUDED, PlanningFields.REFERENCE_COST);
         }
     }
 
     /**
-     * Áp dụng thay đổi theo R4: bỏ tick "đã bao gồm" mà không gửi giá tham khảo mới thì giá tham khảo bị xóa.
+     * Applies a change per R4: unticking 'included' without sending a new reference price clears the reference price.
      *
-     * @param newCost       chi phí mới, hoặc {@code current.costK} nếu không đổi
-     * @param newIncluded   trạng thái "đã bao gồm" mới
-     * @param referenceSent người dùng có gửi giá tham khảo không
-     * @param newReference  giá tham khảo đã gửi (chỉ dùng khi {@code referenceSent})
+     * @param newCost       the new cost, or {@code current.costK} if unchanged
+     * @param newIncluded   the new 'included' state
+     * @param referenceSent whether the user sent a reference price
+     * @param newReference  the reference price that was sent (used only when {@code referenceSent})
      */
     public ItemCost change(Long newCost, boolean newIncluded, boolean referenceSent, Long newReference) {
         Long reference = referenceSent ? newReference : (newIncluded ? referenceK : null);
         return new ItemCost(newCost, newIncluded, reference);
     }
 
-    /** Phần được cộng vào tổng phải trả thêm (R2): 0 nếu đã bao gồm hoặc chưa biết. */
+    /** The part added to the extra amount to pay (R2): 0 if included or unknown. */
     public long countedK() {
         return included || costK == null ? 0 : costK;
     }
 
-    /** Một khoản tiền (nếu có) phải không âm và không vượt mức tối đa; sai thì báo lỗi ở trường {@code field}. */
+    /** An amount of money (if any) must be non-negative and not above the maximum; otherwise an error is reported on the field {@code field}. */
     private static void requireValidAmount(Long amountK, String field) {
         if (amountK == null) return;
         if (amountK < 0) throw WanderException.invalidValue(ErrorCodes.NEGATIVE, field);

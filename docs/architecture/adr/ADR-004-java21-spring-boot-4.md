@@ -1,5 +1,8 @@
 # ADR-004 — Java 21 + Spring Boot 4.1 (AD-11)
 
+> **English title:** Java 21 + Spring Boot 4.1
+> **Summary (EN):** Build on Java 21 (LTS) and Spring Boot 4.1 (Spring Framework 7, Jackson 3).
+
 - **Trạng thái:** `APPROVED` — PO chọn phương án A ngày 24/10/2026 ("A. Java 21 + Boot 4.1").
 - **Bổ sung cho:** ADR-002 (dòng "Phiên bản" chuyển từ `DEFAULTED` sang `APPROVED`).
 

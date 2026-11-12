@@ -4,7 +4,7 @@ import { mealGapEditor } from '../model/mealGaps.ts';
 import type { MealGap } from '../model/mealGaps.ts';
 import { MEAL_SUGGEST_ENTRY_COPY as C } from '../model/mealSuggest.copy.ts';
 
-/** Tải lựa chọn và copy sau khi người dùng mở nhắc; chưa nạp danh sách POI. */
+/** Loads the choice and the copy after the user opens the reminder; the POI list is not loaded yet. */
 export function MealSuggestEntry({ day, gap }: { readonly day: string; readonly gap: MealGap }) {
   const { setOverlay } = useTripView();
   return <>

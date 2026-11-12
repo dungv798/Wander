@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * Giá trị liệt kê có mã ngắn ổn định (dùng trong dữ liệu và API). Enum nào cài giao diện này dùng chung
- * {@link #find(Class, String)} thay vì tự viết lại vòng tìm theo mã.
+ * An enumeration value with a short stable code (used in data and the API). Every enum that implements this interface uses the shared
+ * {@link #find(Class, String)} instead of rewriting a lookup loop by code.
  */
 public interface CodedValue {
 
-    /** Mã ngắn ổn định của giá trị. */
+    /** The short stable code of the value. */
     String code();
 
-    /** Tìm giá trị liệt kê theo mã; mã không có thì trả rỗng. */
+    /** Finds an enumeration value by code; returns empty if there is no such code. */
     static <E extends Enum<E> & CodedValue> Optional<E> find(Class<E> type, String code) {
         return Arrays.stream(type.getEnumConstants()).filter(value -> value.code().equals(code)).findFirst();
     }

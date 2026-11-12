@@ -325,7 +325,7 @@ async function resolvePage(seed, ref) {
 /** Ứng viên OSM đã khảo sát (probe-osm-candidates.mjs, ODbL); nguồn tọa độ cho nơi không có bài Wikipedia (DR-033, D-A). Vị trí = OSM_UNVERIFIED. */
 const OSM_PROBE = (() => {
   try {
-    return JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/research/osm-candidates', `${DEST}.json`), 'utf8')).places;
+    return JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/catalog/data/osm-candidates', `${DEST}.json`), 'utf8')).places;
   } catch {
     return [];
   }

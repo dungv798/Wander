@@ -17,12 +17,12 @@ interface ShowProps {
   readonly purpose: IssuePurpose;
   readonly onCopy: () => void;
   readonly onNext: () => void;
-  /** Chỉ luồng lần đầu: "Để sau". */
+  /** First-time flow only: 'Later'. */
   readonly onSkip?: () => void;
   readonly onCancel: () => void;
 }
 
-/** Bước 1: hiện mã MỘT lần, cảnh báo cách giữ, sao chép; "Để sau" chỉ có ở luồng lần đầu (khôi phục KHÔNG có nút này, QĐ-6). */
+/** Step 1: shows the code ONCE, warns how to keep it, copy; 'Later' exists only in the first-time flow (recovery does NOT have this button, QĐ-6). */
 export function ShowStep({ code, purpose, onCopy, onNext, onSkip, onCancel }: ShowProps) {
   const first = purpose === 'first';
   const heading = useFocusOnMount<HTMLHeadingElement>();
@@ -56,15 +56,15 @@ export function ShowStep({ code, purpose, onCopy, onNext, onSkip, onCancel }: Sh
 
 interface CheckProps {
   readonly code: RecoveryCode;
-  /** Chỉ số (0..5) hai nhóm hệ thống chọn ngẫu nhiên. */
+  /** The indexes (0..5) of the two groups the system picks at random. */
   readonly indexes: readonly number[];
   readonly onConfirm: () => void;
   readonly onBack: () => void;
-  /** Đang chờ máy chủ chốt mã: khóa nút để không bấm hai lần. */
+  /** Waiting for the server to commit the code: locks the button so it is not pressed twice. */
   readonly busy?: boolean;
 }
 
-/** Bước 2: nhập lại 2 trong 6 nhóm do hệ thống chọn (DR-018 B3); sai thì báo "chưa khớp", không lộ nhóm nào sai. */
+/** Step 2: type again 2 of the 6 groups chosen by the system (DR-018 B3); a wrong one reports 'does not match yet', without revealing which group is wrong. */
 export function CheckStep({ code, indexes, onConfirm, onBack, busy = false }: CheckProps) {
   const [answers, setAnswers] = useState<string[]>(() => indexes.map(() => ''));
   const [wrong, setWrong] = useState(false);
@@ -115,7 +115,7 @@ interface DoneProps {
   readonly onFinish: () => void;
 }
 
-/** Bước 3: mã đã có hiệu lực; cho xem lại một lần cuối, sao chép, tải về, in. */
+/** Step 3: the code is in effect; allows a last review, copy, download, print. */
 export function DoneStep({ code, onCopy, onDownload, onPrint, onFinish }: DoneProps) {
   const heading = useFocusOnMount<HTMLHeadingElement>();
   return (

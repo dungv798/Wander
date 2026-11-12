@@ -5,9 +5,9 @@ import type { DestinationDetail } from '../../model/Catalog.types.ts';
 import { HOME } from '../../model/home.const.ts';
 import { DestMapSection } from '../map/DestMapSection.tsx';
 
-/** Chỉ khởi tạo bản đồ khi nửa thẻ lộ trên thanh tab; giữ chỗ để dữ liệu đến muộn không kích hoạt sớm. */
+/** Initializes the map only when half of the card shows above the tab bar; reserves space so data arriving late does not trigger it early. */
 export function HomeMap({ dest }: { readonly dest: DestinationDetail }) {
-  // HomeScreen không có observer reveal; quét cục bộ cả khi nhánh lazy vừa xuất hiện.
+  // HomeScreen has no reveal observer; scans locally even when the lazy branch has just appeared.
   const ref = useReveal<HTMLDivElement>();
   const [visible, setVisible] = useState(false);
   useEffect(() => {

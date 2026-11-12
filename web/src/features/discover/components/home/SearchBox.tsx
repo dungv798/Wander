@@ -5,12 +5,12 @@ import { Icon } from '../../../../shared/ui/Icon.tsx';
 
 interface SearchBoxProps {
   readonly className?: string;
-  /** `destinations`: tìm thành phố/vùng; `places`: tìm địa điểm bên trong thành phố đang chọn (cần `city`). */
+  /** `destinations`: searches cities/regions; `places`: searches places inside the currently selected city (needs `city`). */
   readonly scope?: 'destinations' | 'places';
   readonly city?: string;
 }
 
-/** Nút tìm có nhãn truy cập: nói rõ đang tìm điểm đến hay địa điểm trong thành phố nào, rồi mở màn tìm đúng phạm vi. */
+/** The search button has an accessible label: it says whether it is searching destinations or places in which city, then opens the search screen with the right scope. */
 export function SearchBox({ className, scope = 'destinations', city }: SearchBoxProps) {
   const places = scope === 'places' && city;
   const label = places ? fill(COPY.destinations.placesSearch, { dest: city }) : COPY.home.searchDestinations;
