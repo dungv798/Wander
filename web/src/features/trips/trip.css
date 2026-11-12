@@ -245,3 +245,6 @@ body:has(#screen[data-view="trip"]) .toast {
 .manage-menu { border-top: var(--glass-border) solid var(--line); padding-top: var(--s-2); }
 .manage-menu summary { min-height: var(--tap); display: flex; align-items: center; gap: var(--s-2); cursor: pointer; font: var(--text-card); }
 .manage-menu[open] summary > .ic { rotate: 180deg; }
+
+/* Thu gọn đầu tờ khi cuộn danh sách lịch (B-01, DR-037): bỏ bìa, giữ tay nắm, hàng chế độ (Tổng quan/Lịch/…) và hàng chọn ngày để vẫn đổi tab được để dành chỗ cho các thẻ. Cuộn về đầu thì hiện lại. */
+.sheet-head[data-collapsed] .trip-cover-card { display: none; }

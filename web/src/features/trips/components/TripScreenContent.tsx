@@ -30,9 +30,12 @@ import { UnassignedTab } from './UnassignedTab.tsx';
 import { TripMap } from './TripMap.tsx';
 import { TripOverlays } from './TripOverlays.tsx';
 import { modeOfTab, validTab } from '../model/tripTabs.ts';
+import { useScrollCollapse } from '../hooks/useScrollCollapse.ts';
 
 const ANNOUNCE_DELAY_MS = 30;
+/** Nấc mở mặc định của tờ: vào thẳng Lịch (việc chính là xếp thứ tự các nơi) thì mở nấc cao nhất để thấy nhiều thẻ; các tab khác mở nấc vừa (B-01). */
 const DEFAULT_SNAP: Snap = 'half';
+const SCHEDULE_SNAP: Snap = 'full';
 
 /** Thông báo cho trình đọc màn hình: trả [nội dung hiện tại, hàm đọc]; xóa rồi đặt lại để cùng một câu vẫn được đọc lần nữa. */
 function useAnnouncer(): readonly [string, (text: string) => void] {
@@ -95,7 +98,8 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
   const headRef = useRef<HTMLDivElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const drawer = useMediaQuery(MEDIA.DRAWER);
-  useBottomSheet(sheetRef, headRef, !drawer, DEFAULT_SNAP, (_snap, visible) => setCovered(visible));
+  const collapsed = useScrollCollapse(scrollRef, mode === 'schedule' && !drawer);
+  useBottomSheet(sheetRef, headRef, !drawer, mode === 'schedule' ? SCHEDULE_SNAP : DEFAULT_SNAP, (_snap, visible) => setCovered(visible));
 
   // Đổi tab (Tổng quan ↔ Ngày n) luôn bắt đầu từ đầu danh sách, không giữ vị trí cuộn của tab trước.
   useEffect(() => {
@@ -122,7 +126,7 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
     <TripViewProvider value={value}>
       <MapBox covered={drawer ? 0 : covered} tripId={trip.id} onEdit={permissionsOf(trip).manageTrip ? () => setOverlay({ kind: 'editTrip' }) : null} />
       <section className="sheetbody" ref={sheetRef}>
-        <div className="sheet-head pad-x" ref={headRef}>
+        <div className="sheet-head pad-x" ref={headRef} data-collapsed={collapsed || undefined}>
           <TripHead trip={trip} dest={dest} days={days} tab={tab} lastDay={lastDay} onTab={setTab} onPeople={() => setOverlay({ kind: 'people' })} />
         </div>
         <div className="sheet-scroll" ref={scrollRef}>
