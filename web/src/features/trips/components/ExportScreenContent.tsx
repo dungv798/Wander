@@ -10,7 +10,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 const PngPreview = lazy(() => import('../export/PngPreview.tsx'));
 
-/** Màn xuất ảnh PNG, tải lười phần vẽ. Chưa có PDF/Lịch nên không hiện nút giả (B-07). */
+/** The PNG export screen, with the drawing part lazy loaded. There is no PDF/Calendar yet so no fake button is shown (B-07). */
 export function ExportScreen({ tripId }: { readonly tripId: string }) {
   const { trip: find } = useTrips();
   const trip = find(tripId);

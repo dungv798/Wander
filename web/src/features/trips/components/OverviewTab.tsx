@@ -15,10 +15,10 @@ import { CostBox } from './CostBox.tsx';
 import { money } from './ItemMeta.tsx';
 import { COVER_COPY } from '../model/cover.copy.ts';
 
-/** Số việc chưa xong hiện trong thẻ chuẩn bị. */
+/** The number of unfinished tasks shown in the preparation card. */
 const PREPARE_PREVIEW = 3;
 
-/** Một ô số liệu (đếm lên từ 0 khi hiện). */
+/** One stat cell (counts up from 0 when shown). */
 function Stat({ value, label, cls, prefix = '' }: { readonly value: number; readonly label: string; readonly cls: string; readonly prefix?: string }) {
   return (
     <div className={`stat ${cls}`}>
@@ -28,7 +28,7 @@ function Stat({ value, label, cls, prefix = '' }: { readonly value: number; read
   );
 }
 
-/** Thẻ gợi ý việc kế tiếp: xếp ngày giúp, thêm địa điểm hoặc (khi đã xếp xong) nhắc việc tiếp theo. */
+/** The next-step suggestion card: help schedule a day, add a place or (when scheduling is done) remind the next task. */
 function NextStep() {
   const { trip, addMore } = useTripView();
   if (unassignedItems(trip).length) return null;
@@ -55,7 +55,7 @@ function NextStep() {
   );
 }
 
-/** Ba số liệu (địa điểm, ngày, km ước tính) và các chip tuyến theo ngày. */
+/** The three stats (places, days, estimated km) and the route chips by day. */
 function StatsAndRoutes() {
   const { trip, cat, days, setTab } = useTripView();
   const coord = coordOf(cat);
@@ -86,7 +86,7 @@ function StatsAndRoutes() {
   );
 }
 
-/** Các nhãn tùy chọn của chuyến (kiểu, sở thích, phong cách, nhịp, ngân sách); không hiện khi trống. */
+/** The optional labels of the trip (kind, interests, style, pace, budget); not shown when empty. */
 function TripOptions() {
   const { trip, cat } = useTripView();
   const names = new Map<string, string>(cat.dest.places.map((p) => [p.category, p.categoryName]));
@@ -105,10 +105,10 @@ function TripOptions() {
   );
 }
 
-/** Số nơi xem trước trong thẻ "Chưa xếp ngày"; phần còn lại mở trong tờ danh sách. */
+/** The number of places previewed in the 'Not scheduled yet' card; the rest open in the list sheet. */
 const UNASSIGNED_PREVIEW = 3;
 
-/** Thẻ "Chưa xếp ngày": số lượng, tối đa ba nơi xem trước và nút "Xếp N nơi"; không bung trình sửa hay dòng chọn ngày ở Tổng quan. */
+/** The 'Not scheduled yet' card: the count, at most three places previewed and the 'Schedule N places' button; it does not expand the editor or a day-choosing row in the Overview. */
 function UnassignedCard() {
   const { trip, cat, setOverlay } = useTripView();
   const un = unassignedItems(trip);
@@ -132,7 +132,7 @@ function UnassignedCard() {
   );
 }
 
-/** Thẻ "Chuẩn bị & nhóm": tiến độ checklist của mình, vài việc kế tiếp, một lối mời bạn; danh sách đầy đủ mở trong tờ riêng. */
+/** The 'Preparation & group' card: the progress of one's own checklist, a few next tasks, an entry to invite friends; the full list opens in its own sheet. */
 function PrepareCard() {
   const { trip, setOverlay } = useTripView();
   const list = useLoaded(() => collabGateway.checklist(trip.id), [trip.id]);
@@ -159,7 +159,7 @@ function PrepareCard() {
   );
 }
 
-/** Lối vào "Đã xóa gần đây (n)" ở cuối tab Tổng quan. */
+/** The 'Recently deleted (n)' entry at the bottom of the Overview tab. */
 function TrashLink() {
   const { trip, setOverlay } = useTripView();
   const toast = useToast();
@@ -169,7 +169,7 @@ function TrashLink() {
       block
       icon="trash"
       onClick={() => {
-        toast.dismiss(); // thông báo "Đã xóa … Hoàn tác" không che danh sách; danh sách này chính là nơi khôi phục
+        toast.dismiss(); // the notice 'Deleted ... Undo' does not cover the list; this list is exactly where restoring happens
         setOverlay({ kind: 'trash' });
       }}
     >
@@ -178,7 +178,7 @@ function TrashLink() {
   );
 }
 
-/** Nút "Xóa chuyến đi" (xóa mềm, có Hoàn tác) ở cuối tab Tổng quan; chỉ Organizer. */
+/** The 'Delete trip' button (soft delete, with Undo) at the bottom of the Overview tab; Organizer only. */
 function DeleteTripLink() {
   const { trip, setOverlay } = useTripView();
   if (!permissionsOf(trip).manageTrip) return null;
@@ -189,7 +189,7 @@ function DeleteTripLink() {
   );
 }
 
-/** Khu quản lý ít dùng, gập sẵn: tùy chỉnh bìa, đã xóa gần đây, xóa chuyến. */
+/** The rarely used management area, collapsed by default: customize the cover, recently deleted, delete the trip. */
 function ManageMenu() {
   const { trip, setOverlay } = useTripView();
   return (
@@ -207,7 +207,7 @@ function ManageMenu() {
   );
 }
 
-/** Tab "Tổng quan" dạng bảng gọn: việc kế tiếp, tóm tắt chuyến + lịch từng ngày, chưa xếp ngày, chi phí, chuẩn bị/nhóm, rồi khu quản lý gập sẵn. */
+/** The 'Overview' tab as a compact board: the next task, the trip summary + the schedule of each day, not scheduled yet, cost, preparation/group, then the collapsed management area. */
 export function OverviewTab() {
   return (
     <>

@@ -17,12 +17,12 @@ import { useTrips } from '../hooks/TripsProvider.tsx';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { permissionsOf } from '../model/tripPermissions.ts';
 
-/** Liên kết mời đầy đủ từ mã (mã nằm sau dấu # nên không bao giờ đến máy chủ web hay vào nhật ký truy cập). */
+/** The full invite link from the code (the code is after the # so it never reaches the web server or the access log). */
 function inviteLink(code: string): string {
   return `${window.location.origin}${window.location.pathname}#/join/${code}`;
 }
 
-/** Danh sách thành viên: tên (tự khai), huy hiệu vai theo \`role\` của máy chủ (không dựa vào tên) và nút Gỡ cho Organizer. */
+/** The member list: the name (self-declared), the role badge by the server's \`role\` (not by the name) and a Remove button for the Organizer. */
 function MemberList({ members, canRemove, onRemove }: { readonly members: readonly Member[]; readonly canRemove: boolean; readonly onRemove: (m: Member) => void }) {
   return (
     <ul className="evlist">
@@ -41,7 +41,7 @@ function MemberList({ members, canRemove, onRemove }: { readonly members: readon
   );
 }
 
-/** Mục mời người của Organizer: tạo/thu hồi liên kết, hiện liên kết MỚI đúng một lần kèm nút sao chép. */
+/** The Organizer's invite section: create/revoke a link, show the NEW link exactly once with a copy button. */
 function InvitePanel({ tripId }: { readonly tripId: string }) {
   const toast = useToast();
   const report = useReportError();
@@ -78,7 +78,7 @@ function InvitePanel({ tripId }: { readonly tripId: string }) {
   );
 }
 
-/** Mục của thành viên thường: đổi tên hiển thị và rời chuyến (hỏi lại một lần). */
+/** The regular member's section: change the display name and leave the trip (asks again once). */
 function SelfPanel({ tripId, current, onRenamed }: { readonly tripId: string; readonly current: string; readonly onRenamed: () => void }) {
   const toast = useToast();
   const report = useReportError();
@@ -122,7 +122,7 @@ function SelfPanel({ tripId, current, onRenamed }: { readonly tripId: string; re
   );
 }
 
-/** Tờ "Người đi cùng": danh sách thành viên; Organizer thêm mời người và gỡ người; thành viên đổi tên/rời chuyến. */
+/** The 'Travel companions' sheet: the member list; the Organizer invites people and removes people; a member renames/leaves the trip. */
 export function PeopleSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, setOverlay } = useTripView();
   const perms = permissionsOf(trip);
@@ -135,7 +135,7 @@ export function PeopleSheet({ onClose }: { readonly onClose: () => void }) {
   const { refreshTrip } = useTrips().actions;
   const count = members.data?.length;
   useEffect(() => {
-    if (count !== undefined && count !== trip.memberCount) void refreshTrip(trip.id).catch(() => undefined); // người mới vào/rời từ máy khác
+    if (count !== undefined && count !== trip.memberCount) void refreshTrip(trip.id).catch(() => undefined); // a new person joined/left from another device
   }, [count, trip.id, trip.memberCount, refreshTrip]);
   const self = members.data?.find((m) => m.self);
   const remove = (m: Member): void => {

@@ -6,7 +6,7 @@ import type { Pt } from './map.types.ts';
 import { markerFeatures, markerThumbnail } from './nativeMarkers.ts';
 import { PIN_ENTRANCE } from './pinEntrance.const.ts';
 
-/** DOM tối thiểu để kiểm hành vi nút thay thế canvas bằng bàn phím/click mà không cần dependency. */
+/** A minimal DOM to check the behavior of the button that replaces the canvas by keyboard/click without a dependency. */
 class Element extends EventTarget {
   dataset: Record<string, string> = {};
   attrs = new Map<string, string>();

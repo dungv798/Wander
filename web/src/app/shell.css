@@ -1,15 +1,15 @@
-/* Khung ứng dụng: bản đồ bền sau các màn + tờ kính chứa nội dung. Chủ sở hữu: app/ShellMap + app/App.tsx.
-   Màn nằm trên bản đồ (`data-surface="sheet"`): Khám phá, Điểm đến, Đã chọn, Chuyến đi.
-   Điện thoại: tờ đáy, kéo thu (`data-sheet="peek"`) để xem bản đồ. Màn rộng: bảng nổi bên trái, bản đồ phủ phần còn lại. */
+/* The app frame: the persistent map behind the screens + the glass sheet that holds the content. Owner: app/ShellMap + app/App.tsx.
+   Screens that sit on the map (`data-surface="sheet"`): Discover, Destination, Selected, Trips.
+   Phone: a bottom sheet, drag to collapse (`data-sheet="peek"`) to see the map. Wide screen: a floating panel on the left, the map covers the rest. */
 
 .shell-map { position: absolute; inset: 0; z-index: 0; background: var(--map-low); }
 .shell-map[data-scene="hidden"] { visibility: hidden; pointer-events: none; }
 .shell-map-view { position: absolute; inset: 0; }
-/* Dải ghi công nằm dưới dock, luôn có liên kết nguồn nhưng không chen vào khoảng bản đồ phía trên. */
+/* The attribution strip sits under the dock, always has the source links but does not squeeze into the map area above. */
 .shell-map .maplibregl-ctrl-bottom-right, .shell-map .maplibregl-ctrl-bottom-left { top: auto; bottom: 0; max-width: 100%; }
 .shell-map .maplibregl-ctrl-attrib { margin-bottom: 0; font: 400 9px / 1.4 var(--font-body); }
-/* Điện thoại: MapLibre 6.16 mở sẵn khung ghi công thành dải chữ (thuộc tính `open` kèm lớp `compact-show`, trạng thái chỉ có lúc khởi tạo) và dải đó chui xuống dưới thanh tab.
-   Ẩn phần chữ ở đúng trạng thái đầu; bấm nút "i" vẫn mở/đóng bình thường (MapLibre gỡ lớp `compact-show`), và sau lần kéo đầu tiên nó tự thu như mặc định. Phiên bản MapLibre được ghim chính xác. */
+/* Phone: MapLibre 6.16 opens the attribution box as a text strip by default (the `open` attribute with the `compact-show` class, a state that exists only at initialization) and that strip slides under the tab bar.
+   Hides the text part in exactly the initial state; tapping the "i" button still opens/closes normally (MapLibre removes the `compact-show` class), and after the first drag it collapses by itself as the default. The MapLibre version is pinned exactly. */
 @media (max-width: 767px) { .maplibregl-ctrl-attrib.maplibregl-compact-show[open] .maplibregl-ctrl-attrib-inner { display: none; } }
 .map-chrome { position: absolute; z-index: var(--z-nav); top: calc(var(--s-4) + env(safe-area-inset-top, 0px)); left: var(--s-4); right: var(--s-4); min-height: var(--shell-chrome-height); display: flex; align-items: center; gap: var(--s-3); padding: var(--s-2) var(--s-4); border: 1px solid var(--sheet-edge); border-radius: var(--r-pill); background: var(--sheet-surface); box-shadow: var(--btn-shadow); backdrop-filter: blur(var(--sheet-blur)); }
 .map-chrome-brand { display: inline-flex; align-items: center; min-width: var(--tap); min-height: var(--tap); padding: 0; color: var(--ink); font: var(--text-screen); letter-spacing: var(--tracking-screen); text-transform: lowercase; }
@@ -37,10 +37,10 @@
   transform: translateY(var(--sheet-drag-y, 0px));
   transition: top var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
 }
-/* Thu lại: chỉ còn dải tiêu đề phía trên thanh tab; phần còn lại mờ dần để không lộ nửa nội dung sau thanh tab. */
+/* Collapsed: only the title strip above the tab bar remains; the rest fades so half of the content does not show behind the tab bar. */
 .app[data-surface="sheet"][data-sheet="peek"] #screen { top: calc(100% - var(--shell-peek-height)); overflow: hidden; -webkit-mask-image: linear-gradient(black var(--s-6), transparent var(--s-8)); mask-image: linear-gradient(black var(--s-6), transparent var(--s-8)); }
 
-/* Tay nắm thu/mở tờ (chỉ điện thoại): dải 44 px dọc mép trên của tờ; KÉO xuống/lên để thu/mở (useSheetDrag), bấm cũng đổi. `touch-action: none` để trình duyệt không cuộn trang thay cho cử chỉ kéo. */
+/* The sheet collapse/expand handle (phone only): a 44 px strip along the top edge of the sheet; DRAG down/up to collapse/expand (useSheetDrag), tapping also toggles it. `touch-action: none` so the browser does not scroll the page in place of the drag gesture. */
 .sheet-toggle {
   position: absolute; z-index: var(--z-nav); left: 7px; right: 7px; top: calc(var(--shell-sheet-top) - var(--tap) / 2);
   translate: 0 var(--sheet-drag-y, 0px); touch-action: none; -webkit-user-select: none; user-select: none;
@@ -48,7 +48,7 @@
   border: 0; border-radius: var(--r-pill); background: transparent; color: var(--ink); box-shadow: none;
   transition: top var(--dur-med) var(--ease-out), translate var(--dur-med) var(--ease-out), transform var(--dur-press) var(--ease-out);
 }
-/* Đang kéo: tờ và tay nắm bám sát ngón tay, không hoạt họa. */
+/* While dragging: the sheet and the handle follow the finger closely, with no animation. */
 .app[data-dragging] #screen, .app[data-dragging] .sheet-toggle { transition: none; }
 .sheet-toggle .ic { display: none; }
 .sheet-toggle::after { content: ''; position: absolute; left: 50%; translate: -50% 0; top: calc(var(--tap) / 2 + var(--s-2)); width: var(--handle-width); height: var(--handle-height); border-radius: var(--r-pill); background: var(--control-hover-edge); }
@@ -56,7 +56,7 @@
 .app[data-sheet="peek"] .sheet-toggle .ic { transform: rotate(180deg); }
 .sheet-toggle:active { transform: scale(var(--glass-pressed-scale)); }
 .app:not([data-surface="sheet"]) .sheet-toggle { display: none; }
-/* Điện thoại: chụm hai ngón để phóng; nút +/− chỉ để lại ở màn rộng cho khỏi chồng lên ghi công. */
+/* Phone: pinch with two fingers to zoom; the +/- buttons are left only on a wide screen so they do not overlap the attribution. */
 @media (max-width: 767px) { .shell-map .maplibregl-ctrl-group { display: none; } }
 @media (max-width: 767px) {
   .app { --shell-chrome-height: 52px; }
@@ -87,7 +87,7 @@
   .brand-mark { font: 800 32px / 1 var(--font-display); letter-spacing: -3px; }
   .brand-mark > span { color: var(--accent); }
   .sheet-toggle { display: none; }
-  /* Bảng nổi bên trái; `left` của #screen bị web.css ép `!important` nên dùng lề và bề rộng. */
+  /* The floating panel on the left; `left` of #screen is forced with `!important` by web.css so margin and width are used. */
   .app[data-surface="sheet"] #screen,
   .app[data-surface="sheet"][data-sheet="peek"] #screen {
     top: calc(var(--shell-chrome-top) + var(--shell-chrome-height) + var(--shell-panel-gap)); bottom: auto; max-height: calc(100% - var(--shell-chrome-top) - var(--shell-chrome-height) - 2 * var(--shell-panel-gap)); right: auto; left: var(--shell-panel-left);
@@ -96,9 +96,9 @@
     box-shadow: var(--shell-panel-shadow);
     overflow-y: auto; padding-bottom: var(--s-5);
   }
-  /* Nội dung trong bảng không bị ép khung 1120/860 px của bố cục trang rộng cũ. */
+  /* The content in the panel is not forced into the 1120/860 px frame of the old wide page layout. */
   .app[data-surface="sheet"] #screen > * { max-width: none; }
-  /* Bảng 440 px chỉ đủ hai cột thẻ điểm đến. */
+  /* A 440 px panel fits only two columns of destination cards. */
   .app[data-surface="sheet"] .nh-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4) var(--s-3); }
   .app[data-surface="sheet"] .national-home { padding-inline: var(--s-5); }
 }

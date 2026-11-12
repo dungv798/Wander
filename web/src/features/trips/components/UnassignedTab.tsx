@@ -8,8 +8,8 @@ import { AddManyEntry } from './AddManyEntry.tsx';
 import { ItemRow } from './ItemRow.tsx';
 
 /**
- * Chế độ "Chưa xếp": MỌI nơi chưa có ngày, mỗi hàng có chọn nhanh ngày; "Xếp giúp tôi" mở xem trước gợi ý
- * (áp dụng được và Hoàn tác được ở tờ gợi ý hiện có). Cùng dữ liệu và quyền với tờ danh sách cũ, nhưng nằm ngay trong chuyến thay vì trong tờ phủ.
+ * The 'Not scheduled' mode: EVERY place with no date, each row has a quick day choice; 'Schedule for me' opens a preview of suggestions
+ * (applicable and undoable in the existing suggestion sheet). The same data and permissions as the old list sheet, but right inside the trip instead of an overlay sheet.
  */
 export function UnassignedTab() {
   const { trip, setOverlay } = useTripView();

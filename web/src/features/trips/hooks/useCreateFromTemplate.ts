@@ -4,16 +4,16 @@ import type { DayPlan, PlaceRef } from '../model/tripState.ts';
 import type { Trip } from '../model/trip.types.ts';
 import { useTrips } from './TripsProvider.tsx';
 
-/** Yêu cầu tạo chuyến từ một lịch mẫu: tên, điểm đến, ngày đi và các địa điểm của từng ngày (theo thứ tự đi). */
+/** The request to create a trip from a sample itinerary: the name, the destination, the start date and the places of each day (in visiting order). */
 export interface TemplateTripSpec {
   readonly name: string;
   readonly destinationId: string;
-  /** Ngày đi `yyyy-mm-dd`; ngày về = ngày đi + (số ngày − 1). */
+  /** The start date `yyyy-mm-dd`; the end date = the start date + (number of days - 1). */
   readonly startDate: string;
   readonly days: readonly (readonly PlaceRef[])[];
 }
 
-/** Tạo chuyến mới có sẵn các địa điểm xếp vào đúng ngày và thứ tự của lịch mẫu. Trả chuyến đã xếp (mã do máy chủ cấp). Gọi sau cổng danh tính; thất bại ném `ApiError`. */
+/** Creates a new trip that already has the places arranged into the exact days and order of the sample itinerary. Returns the arranged trip (the id issued by the server). Called after the identity gate; a failure throws `ApiError`. */
 export function useCreateFromTemplate(): (spec: TemplateTripSpec) => Promise<Trip> {
   const { actions } = useTrips();
   return useCallback(

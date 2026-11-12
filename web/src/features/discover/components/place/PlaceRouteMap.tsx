@@ -9,7 +9,7 @@ import { mainAway } from '../../model/destinationQueries.ts';
 import { hubMarker, placeMarkers } from '../../model/mapMarkers.ts';
 import { isTrek } from '../../model/trekking.ts';
 
-/** Đường nối ước tính và ghim lân cận; hai ngón tương tác, một ngón cuộn sheet, chạm ghim mở chi tiết. */
+/** The estimated connecting line and the nearby pins; two fingers interact, one finger scrolls the sheet, tapping a pin opens the detail. */
 export function PlaceRouteMap({ dest, place }: { readonly dest: DestinationDetail; readonly place: PlaceView }) {
   const sheet = usePlaceSheet();
   const hub = useMemo(() => hubMarker(dest), [dest]);
@@ -20,7 +20,7 @@ export function PlaceRouteMap({ dest, place }: { readonly dest: DestinationDetai
   );
   const fit = useMemo<MapFit>(() => ({ ids: hub ? ['hub', place.id] : [place.id], options: { animate: false } }), [hub, place.id]);
   const trek = isTrek(place);
-  // Leo núi: đường nối chỉ là tham chiếu, không gắn nhãn km như thể đó là tuyến leo.
+  // Hiking: the connecting line is only a reference, with no km label as if it were a hiking route.
   const route = useMemo(() => ({ ids: ['hub', place.id], labels: [away && !trek ? fill(COPY.units.kmApprox, { km: away.km }) : ''] }), [place.id, away, trek]);
   if (place.lat == null || place.lon == null) return null;
   return (

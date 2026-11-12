@@ -1,23 +1,23 @@
 import type { Trip, TripItem } from './trip.types.ts';
 
 /**
- * Điều người đang xem được làm trên một chuyến (H3/H4, DR-021). Đây CHỈ để ẩn nút cho đỡ rối: quyền thật do máy chủ quyết định và vẫn
- * trả 403 nếu giao diện lỡ cho bấm.
+ * What the viewer may do on a trip (H3/H4, DR-021). This is ONLY to hide buttons to reduce clutter: the real permission is decided by the server and it still
+ * returns 403 if the UI lets a button be pressed by mistake.
  */
 export interface TripPermissions {
-  /** Là Organizer (chủ chuyến). */
+  /** Is the Organizer (the trip owner). */
   readonly organizer: boolean;
-  /** Sửa chuyến, mời người, gỡ người, xóa chuyến, duyệt đề nghị. */
+  /** Edit the trip, invite people, remove people, delete the trip, approve requests. */
   readonly manageTrip: boolean;
-  /** Xếp ngày/thứ tự (lệnh lịch): chỉ Organizer. */
+  /** Schedule days/order (the schedule command): Organizer only. */
   readonly schedule: boolean;
-  /** Xóa vĩnh viễn mục ở "Đã xóa gần đây": chỉ Organizer. */
+  /** Permanently delete an item in 'Recently deleted': Organizer only. */
   readonly purge: boolean;
-  /** Sửa/xóa/khôi phục một mục: Organizer mọi mục, thành viên chỉ mục do mình thêm. */
+  /** Edit/delete/restore an item: the Organizer any item, a member only the items they added. */
   readonly canChange: (item: TripItem) => boolean;
 }
 
-/** Quyền của người đang xem chuyến; thiếu mã thành viên của mình thì thành viên không sửa được mục nào. */
+/** The permissions of the person viewing the trip; without their own member id a member can edit no item. */
 export function permissionsOf(trip: Pick<Trip, 'role' | 'selfMemberId'>): TripPermissions {
   const organizer = trip.role === 'organizer';
   return {

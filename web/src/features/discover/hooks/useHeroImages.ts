@@ -3,7 +3,7 @@ import { MEDIA } from '../../../shared/const/app.const.ts';
 import { useMediaQuery } from '../../../shared/hooks/useMediaQuery.ts';
 import { HOME } from '../model/home.const.ts';
 
-/** Đổi ảnh nhẹ theo nhịp, dừng khi giảm chuyển động hoặc trỏ/focus vào hero để không làm lệch thao tác. */
+/** Changes the photo gently on a rhythm, stops under reduced motion or when the pointer/focus is on the hero so it does not disturb the action. */
 export function useHeroImages(count: number) {
   const reduced = useMediaQuery(MEDIA.REDUCED_MOTION);
   const [index, setIndex] = useState(0);

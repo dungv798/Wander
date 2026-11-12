@@ -8,13 +8,13 @@ import { playSwipeDemo } from '../model/swipeDemo.ts';
 import type { Caption, DemoApi, LitButton, SwipeFocus, TouchMark } from '../model/swipeDemo.ts';
 import type { SwipeKind } from '../model/swipeDeck.ts';
 
-/** Giai đoạn của cảnh: demo đang chạy, demo đã xong, hoặc người xem đã tự quẹt. */
+/** The phase of the scene: the demo is running, the demo has finished, or the viewer has swiped by themself. */
 export type SwipePhase = 'playing' | 'ended' | 'user';
 
 interface SwipeStoryDeps {
   readonly stage: RefObject<HTMLElement | null>;
   readonly cardEls: RefObject<(HTMLElement | null)[]>;
-  /** Chỉ số thẻ trên cùng hiện tại. */
+  /** The index of the current top card. */
   readonly cur: number;
   readonly commit: (kind: SwipeKind) => void;
   readonly setDragging: (index: number | null) => void;
@@ -25,7 +25,7 @@ interface SwipeStoryDeps {
   readonly onCue: (ms: number) => void;
 }
 
-/** Trạng thái giao diện do câu chuyện điều khiển và các thao tác của người xem lên nó. */
+/** The UI state driven by the story and the viewer's actions on it. */
 export interface SwipeStory {
   readonly caption: Caption | null;
   readonly lit: LitButton;
@@ -34,19 +34,19 @@ export interface SwipeStory {
   readonly focus: SwipeFocus;
   readonly hint: string;
   readonly setLit: (button: LitButton) => void;
-  /** Người xem chạm vào bộ thẻ: dừng demo ngay, trả thẻ đang diễn dở về giữa, hiện "Xem lại". */
+  /** The viewer touches the deck: stops the demo at once, returns a half-done card to the middle, shows 'Watch again'. */
   readonly interrupt: () => void;
-  /** Chạy lại demo từ đầu (người xem chủ động nên không tự chuyển cảnh sau đó). */
+  /** Re-runs the demo from the start (the viewer did it on purpose so the scene does not advance by itself afterwards). */
   readonly replay: () => void;
 }
 
-/** Chọn dòng gợi ý dưới nút theo giai đoạn. */
+/** Chooses the hint line under the buttons by phase. */
 function hintFor(phase: SwipePhase): string {
   if (phase === 'user') return T.swipe.hintSelf;
   return phase === 'ended' ? T.swipe.hintTry : T.swipe.hint;
 }
 
-/** Câu chuyện của cảnh quẹt: tự chạy demo ngay khi vào cảnh, dừng ngay khi người xem chạm, cho xem lại. */
+/** The swipe scene story: runs the demo by itself on entering the scene, stops as soon as the viewer touches, allows watching again. */
 export function useSwipeStory(deps: SwipeStoryDeps): SwipeStory {
   const { stage, cardEls, cur, commit, setDragging, resetAll, auto, onDone, onInteract, onCue } = deps;
   const scope = useRunScope();

@@ -12,7 +12,7 @@ import { discoveryFilters, DISCOVERY_FILTER_LABELS } from '../../model/discovery
 import { pickedOf } from '../../model/discoverState.ts';
 import { DEST_COPY } from '../../model/dest.copy.ts';
 
-/** Thanh trên của bộ thẻ: quay lại, tên điểm đến + tiến độ, nút xem các nơi đã chọn. */
+/** The top bar of the deck: back, the destination name + progress, the button to see the selected places. */
 export function DeckBar({ dest, adding, remaining }: { readonly dest: DestinationDetail; readonly adding?: AddingMode; readonly remaining: number }) {
   const { state } = useDiscover();
   const [filterOpen, setFilterOpen] = useState(false);
@@ -33,7 +33,7 @@ export function DeckBar({ dest, adding, remaining }: { readonly dest: Destinatio
   );
 }
 
-/** Bộ lọc theo loại (chọn một loại hoặc tất cả); mỗi nút là công tắc `aria-pressed`. */
+/** The filter by kind (choose one kind or all); each button is an `aria-pressed` toggle. */
 export function DeckFilters({ dest }: { readonly dest: DestinationDetail }) {
   const { state, actions } = useDiscover();
   return (

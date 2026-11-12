@@ -5,8 +5,8 @@ import { HOME_COPY } from '../../model/home.copy.ts';
 import { SearchBox } from './SearchBox.tsx';
 
 /**
- * Đầu trang chủ gọn: dấu Wander + tên điểm đến (nếu đã chọn, kèm nút đổi) rồi thanh tìm.
- * Chưa chọn điểm đến thì tiêu đề chỉ dành cho trình đọc màn hình (hero ngay dưới mới là tiêu điểm thị giác).
+ * The compact top of the home page: the Wander mark + the destination name (if chosen, with a change button) then the search bar.
+ * If no destination is chosen the title is only for screen readers (the hero right below is the visual focus).
  */
 export function HomeHeader({ city }: { readonly city?: string }) {
   return <>

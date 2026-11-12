@@ -6,7 +6,7 @@ import type { SwipeStory } from '../hooks/useSwipeStory.ts';
 import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
 import type { Caption } from '../model/swipeDemo.ts';
 
-/** Bản tĩnh khi giảm chuyển động: hai trạng thái chọn / bỏ qua bằng hình và chữ, không chạy hoạt họa. */
+/** The static version under reduced motion: the two states choose / skip by picture and text, with no animation. */
 export function StaticSwipe({ places }: { readonly places: readonly PlaceView[] }) {
   const cases = [
     { kind: 'skip', place: places[1], copy: T.swipe.staticSkip, stamp: T.skipStamp },
@@ -31,7 +31,7 @@ export function StaticSwipe({ places }: { readonly places: readonly PlaceView[] 
   );
 }
 
-/** Tổng kết khi người xem tự quẹt hết bộ bài: các nơi đã chọn và lời mời xem lịch mẫu (lịch không phụ thuộc lựa chọn của họ). */
+/** The summary when the viewer swipes through the whole deck themself: the chosen places and an invitation to see the sample itinerary (the itinerary does not depend on their choices). */
 export function DeckDone({ picks }: { readonly picks: readonly PlaceView[] }) {
   return (
     <div className="ob-done">
@@ -45,7 +45,7 @@ export function DeckDone({ picks }: { readonly picks: readonly PlaceView[] }) {
   );
 }
 
-/** Chú thích nổi phía trên bộ thẻ (kèm mũi tên theo chiều quẹt). */
+/** A caption floating above the deck (with an arrow in the swipe direction). */
 export function CaptionPill({ caption }: { readonly caption: Caption | null }) {
   if (!caption) return null;
   return (
@@ -56,7 +56,7 @@ export function CaptionPill({ caption }: { readonly caption: Caption | null }) {
   );
 }
 
-/** Nút "Xem lại" của một cảnh; chỉ hiện khi cảnh không còn đang tự chạy. */
+/** The 'Watch again' button of a scene; shown only when the scene is no longer running by itself. */
 export function ReplayButton({ story, onClick }: { readonly story: Pick<SwipeStory, 'phase'>; readonly onClick: () => void }) {
   if (story.phase === 'playing') return null;
   return (

@@ -11,7 +11,7 @@ import type { NewTrip } from '../model/tripState.ts';
 import { useTrips } from './TripsProvider.tsx';
 import { TRIP_TAB } from '../model/tripTabs.ts';
 
-/** Tạo một chuyến trống qua máy chủ: khi xong đóng tờ, mở chuyến và báo; thất bại báo lỗi. Trả true nếu tạo được. `busy` để khóa nút trong lúc chờ. */
+/** Creates an empty trip through the server: when done it closes the sheet, opens the trip and notifies; a failure reports an error. Returns true if it was created. `busy` locks the button while waiting. */
 export function useCreateTripFlow(onClose: () => void): { readonly busy: boolean; readonly create: (n: NewTrip, picked?: readonly PlaceRef[]) => Promise<boolean> } {
   const { actions } = useTrips();
   const { actions: discover } = useDiscover();

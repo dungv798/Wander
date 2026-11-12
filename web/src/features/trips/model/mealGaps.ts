@@ -4,7 +4,7 @@ import type { TripItem } from './trip.types.ts';
 
 export type MealGap = 'lunch' | 'dinner' | 'rest';
 
-/** Dữ liệu mở trình sửa từ nhắc; không phải lệnh tạo hoặc lưu mục. */
+/** The data that opens the editor from a reminder; not a command to create or save an item. */
 export interface MealGapEditor {
   readonly kind: 'editor';
   readonly itemId: null;
@@ -12,26 +12,26 @@ export interface MealGapEditor {
   readonly initial: { readonly day: string; readonly title: string; readonly note?: string };
 }
 
-/** Gắn ngày và tên bữa/nghỉ vào bản nháp, không suy diễn giờ hay giá. */
+/** Attaches the day and the meal/rest name to the draft, inferring no time or price. */
 export function mealGapEditor(gap: MealGap, day: string): MealGapEditor {
   return { kind: 'editor', itemId: null, preset: gap === 'rest' ? 'rest' : 'food', initial: { day, title: M[gap].suggestedTitle } };
 }
 type GapItem = Pick<TripItem, 'day' | 'type' | 'title' | 'placeId' | 'timeOfDay' | 'durationMin'>;
 type PlaceLookup = (id: string | null) => { readonly category: string; readonly name: string; readonly venue?: { readonly kind: string } | null } | null;
 
-/** Bỏ dấu tiếng Việt, giữ ranh giới từ để không nhận nhầm “An” trong “Hoàng”. */
+/** Removes Vietnamese accents, keeping word boundaries so 'An' inside another word is not mistaken. */
 function normalize(text: string): string {
   return text.normalize('NFD').replace(/\p{M}/gu, '').replace(/[đĐ]/g, 'd').toLowerCase();
 }
 
-/** Đọc giờ đã nhập thành phút, không suy diễn giờ khi rỗng hay sai định dạng. */
+/** Reads an entered time as minutes, inferring no time when empty or in the wrong format. */
 function minutes(time: string | null): number | null {
   if (!time || !/^([01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(time)) return null;
   const [hour, minute] = time.split(':').map(Number);
   return hour! * R.minutesPerHour + minute!;
 }
 
-/** Nhận diện nhẹ theo loại, catalog hoặc tên; bữa rõ trưa/tối không che bữa còn lại. */
+/** Light recognition by kind, catalog or name; a clear lunch/dinner does not hide the other meal. */
 function recognized(item: GapItem, place: PlaceLookup): readonly MealGap[] {
   const p = item.placeId ? place(item.placeId) : null;
   const text = normalize(`${item.title} ${p?.name ?? ''}`);
@@ -53,7 +53,7 @@ function recognized(item: GapItem, place: PlaceLookup): readonly MealGap[] {
   return result;
 }
 
-/** Tìm khoảng còn thiếu của đúng ngày; chỉ đọc giờ/thời lượng thật, không thêm hay xếp mục. */
+/** Finds the missing gap of exactly that day; it only reads the real time/duration, and adds or schedules no item. */
 export function mealGaps(items: readonly GapItem[], day: string, place: PlaceLookup, dismissed: readonly MealGap[] = []): MealGap[] {
   const selected = items.filter((i) => i.day === day);
   const occupied = new Set(selected.flatMap((i) => recognized(i, place)));
@@ -69,12 +69,12 @@ export function mealGaps(items: readonly GapItem[], day: string, place: PlaceLoo
   return candidates.filter((gap) => !occupied.has(gap) && !dismissed.includes(gap));
 }
 
-/** Khóa riêng theo chuyến và ngày; không lưu danh tính hay dữ liệu lịch. */
+/** A key specific to the trip and the day; it stores no identity or schedule data. */
 export function mealGapStorageKey(tripId: string, day: string): string {
   return `${R.storagePrefix}:${tripId}:${day}`;
 }
 
-/** Đọc trạng thái đóng; lưu trữ hỏng hoặc bị chặn không cản xem lịch. */
+/** Reads the closed state; broken or blocked storage does not stop viewing the schedule. */
 export function readMealGapDismissals(key: string): MealGap[] {
   try {
     const saved: unknown = JSON.parse(PersistentStore.readRaw(key) ?? '[]');
@@ -82,7 +82,7 @@ export function readMealGapDismissals(key: string): MealGap[] {
   } catch { return []; }
 }
 
-/** Lưu lựa chọn đóng; vẫn cho đóng trong phiên nếu trình duyệt không cho ghi. */
+/** Stores the choice to close; it can still be closed within the session if the browser does not allow writing. */
 export function saveMealGapDismissals(key: string, gaps: readonly MealGap[]): void {
-  try { PersistentStore.writeRaw(key, JSON.stringify(gaps)); } catch { /* Nhắc nhẹ không chặn lịch. */ }
+  try { PersistentStore.writeRaw(key, JSON.stringify(gaps)); } catch { /* A light reminder does not block the schedule. */ }
 }

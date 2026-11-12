@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { PairingCode } from './PairingCode.ts';
 import type { RandomSource } from './RecoveryCode.ts';
 
-/** Nguồn ngẫu nhiên cố định cho test. */
+/** A fixed random source for tests. */
 const fixed = (values: number[]): RandomSource => ({
   fill(bytes) {
     bytes.forEach((_, i) => {

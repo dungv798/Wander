@@ -4,7 +4,7 @@ import { ApiError } from './ApiError.ts';
 import { ApiClient } from './ApiClient.ts';
 import type { FetchLike } from './ApiClient.ts';
 
-/** Fetch giả ghi lại lời gọi và trả phản hồi định sẵn. */
+/** A fake fetch that records calls and returns preset responses. */
 function fakeFetch(res: () => Response | Promise<Response>): { readonly fetchImpl: FetchLike; readonly calls: { url: string; init: RequestInit | undefined }[] } {
   const calls: { url: string; init: RequestInit | undefined }[] = [];
   return {

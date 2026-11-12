@@ -1,47 +1,47 @@
-/** Lỗi báo một lượt chạy đã bị thay thế hoặc hủy; chỉ dùng để dừng chuỗi bất đồng bộ cũ, không phải lỗi thật. */
+/** An error that says a run was replaced or cancelled; used only to stop an old asynchronous chain, it is not a real error. */
 export class RunCancelled extends Error {
-  /** Tạo lỗi hủy với thông điệp cố định. */
+  /** Creates a cancel error with a fixed message. */
   constructor() {
     super('run-cancelled');
     this.name = 'RunCancelled';
   }
 }
 
-/** Một lượt chạy: các hàm chờ/tween ném `RunCancelled` ngay khi lượt không còn hiệu lực. */
+/** One run: the wait/tween functions throw `RunCancelled` as soon as the run is no longer valid. */
 export interface Run {
-  /** Lượt này còn là lượt mới nhất chưa bị hủy. */
+  /** This run is still the latest one that has not been cancelled. */
   readonly alive: () => boolean;
-  /** Chờ `ms` mili-giây. */
+  /** Waits `ms` milliseconds. */
   readonly wait: (ms: number) => Promise<void>;
-  /** Chờ một lời hứa ngoài rồi kiểm lượt còn hiệu lực. */
+  /** Waits for an outside promise and then checks the run is still valid. */
   readonly until: (promise: Promise<unknown>) => Promise<void>;
-  /** Chạy hàm vẽ theo từng khung hình trong `ms`, đối số là tiến độ 0..1 đã làm mượt. */
+  /** Runs a drawing function every frame for `ms`, the argument is the eased progress 0..1. */
   readonly tween: (ms: number, draw: (progress: number) => void) => Promise<void>;
 }
 
 const SMOOTH_A = 3;
 const SMOOTH_B = 2;
 
-/** Làm mượt hai đầu (smoothstep) của tiến độ 0..1. */
+/** Smooths both ends (smoothstep) of a 0..1 progress. */
 export function smoothstep(t: number): number {
   const k = Math.min(1, Math.max(0, t));
   return k * k * (SMOOTH_A - SMOOTH_B * k);
 }
 
 /**
- * Bộ quản lý "lượt chạy" cho hoạt họa kể chuyện: mở lượt mới là hủy lượt cũ, hủy là dọn sạch timer và khung hình đang chờ,
- * nên đổi cảnh hoặc người dùng chạm vào thì callback cũ không còn sửa được trạng thái mới.
+ * A 'run' manager for storytelling animation: opening a new run cancels the old run, cancelling cleans up the pending timers and frames,
+ * so when the scene changes or the user touches, an old callback can no longer change the new state.
  */
 export class RunScope {
   private current = 0;
   private readonly pending = new Set<() => void>();
 
-  /** Mở lượt mới (hủy lượt đang chạy, nếu có) và trả các hàm chờ gắn với lượt này. */
+  /** Opens a new run (cancelling the running one, if any) and returns the wait functions tied to this run. */
   begin(): Run {
     this.cancel();
     const id = this.current;
     const alive = (): boolean => id === this.current;
-    /** Đăng ký một việc chờ; hủy lượt sẽ gọi `abort` để việc chờ bị từ chối ngay. */
+    /** Registers a pending wait; cancelling the run calls `abort` so the wait is rejected at once. */
     const track = (start: (settle: () => void, abort: () => void) => () => void): Promise<void> =>
       new Promise<void>((resolve, reject) => {
         let stop: () => void = () => undefined;
@@ -83,13 +83,13 @@ export class RunScope {
     return { alive, wait, until, tween };
   }
 
-  /** Hủy lượt hiện tại: mọi việc đang chờ bị từ chối bằng `RunCancelled`. */
+  /** Cancels the current run: every pending wait is rejected with `RunCancelled`. */
   cancel(): void {
     this.current += 1;
     for (const abort of [...this.pending]) abort();
   }
 
-  /** Chạy `script` trong một lượt mới; `RunCancelled` bị nuốt, lỗi khác được ném lại. */
+  /** Runs `script` in a new run; `RunCancelled` is swallowed, any other error is rethrown. */
   async start(script: (run: Run) => Promise<void>): Promise<void> {
     try {
       await script(this.begin());

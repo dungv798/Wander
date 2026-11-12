@@ -14,7 +14,7 @@ import { unassignedItems } from '../model/tripMath.ts';
 import { itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Một lựa chọn lớn trong tờ "Thêm vào chuyến đi". */
+/** One large choice in the 'Add to trip' sheet. */
 function AddOption({ icon, title, note, onClick }: { readonly icon: IconName; readonly title: string; readonly note: string; readonly onClick: () => void }) {
   return (
     <button className="opt addopt" type="button" onClick={onClick}>
@@ -27,7 +27,7 @@ function AddOption({ icon, title, note, onClick }: { readonly icon: IconName; re
   );
 }
 
-/** Tờ "Thêm vào chuyến đi": địa điểm từ bộ thẻ, mục tự do, nghỉ, việc cần làm. Mục mới vào ngày đang xem (nếu có). */
+/** The 'Add to trip' sheet: a place from the deck, a free-form item, rest, a to-do. A new item goes into the day being viewed (if any). */
 export function AddItemSheet({ onClose }: { readonly onClose: () => void }) {
   const { cat, tab, setOverlay, addMore } = useTripView();
   const dayNo = tab === 'ov' ? null : Number(tab);
@@ -50,7 +50,7 @@ export function AddItemSheet({ onClose }: { readonly onClose: () => void }) {
   );
 }
 
-/** Tờ chọn ngày cho một mục ("Chưa có ngày" hoặc Ngày n); có Hoàn tác. */
+/** The sheet to choose a day for an item ('No date yet' or Day n); it has Undo. */
 export function PickDaySheet({ itemId, onClose }: { readonly itemId: string; readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
@@ -84,7 +84,7 @@ export function PickDaySheet({ itemId, onClose }: { readonly itemId: string; rea
   );
 }
 
-/** Tờ "Thêm vào Ngày n": chọn nhiều mục chưa có ngày để xếp vào ngày đang xem. */
+/** The 'Add to Day n' sheet: choose several items with no date to schedule into the day being viewed. */
 export function AddToDaySheet({ onClose }: { readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();

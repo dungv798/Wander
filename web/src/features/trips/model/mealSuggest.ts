@@ -9,14 +9,14 @@ import { MEAL_SUGGEST_COPY as C } from './mealSuggest.copy.ts';
 export interface MealAnchor { readonly lat: number; readonly lon: number; readonly name: string }
 type AnchorItem = Pick<TripItem, 'day' | 'placeId' | 'position' | 'timeOfDay'>;
 
-/** Chỉ đọc giờ lịch hợp lệ; không suy diễn giờ mở cửa hay giờ chưa nhập. */
+/** Only reads a valid schedule time; infers no opening hours or time not entered. */
 function timeMinutes(time: string | null): number | null {
   if (!time || !/^([01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(time)) return null;
   const [hour, minute] = time.split(':').map(Number);
   return hour! * R.minutesPerHour + minute!;
 }
 
-/** Chọn mốc có tọa độ theo thứ tự lịch: tối cuối ngày, nghỉ giữa ngày, trưa gần 12h hoặc trọng tâm. */
+/** Chooses a landmark with coordinates in the schedule order: the last in the evening, a mid-day rest, lunch near 12h, or the centroid. */
 export function mealAnchor(items: readonly AnchorItem[], day: string, gap: MealGap, place: TripCatalog['place']): MealAnchor | null {
   const points = items.filter(i => i.day === day).slice().sort((a, b) => (a.position ?? Number.MAX_SAFE_INTEGER) - (b.position ?? Number.MAX_SAFE_INTEGER)).flatMap(i => {
     const p = place(i.placeId);
@@ -32,12 +32,12 @@ export function mealAnchor(items: readonly AnchorItem[], day: string, gap: MealG
   return { lat: points.reduce((sum, p) => sum + p.lat, 0) / points.length, lon: points.reduce((sum, p) => sum + p.lon, 0) / points.length, name: C.centroid };
 }
 
-/** Nghỉ ưu tiên cafe; bữa chính chỉ tìm food, không mặc định cafe phục vụ cơm. */
+/** Rest prefers cafe; a main meal searches only food, cafe is not assumed to serve rice meals. */
 export function mealPoiKind(gap: MealGap): 'food' | 'cafe' {
   return gap === 'rest' ? 'cafe' : 'food';
 }
 
-/** Điền bản nháp tự do có nguồn; không gắn placeId POI vào catalog Discover và không lưu. */
+/** Fills a free-form draft that has a source; it does not attach a POI placeId to the Discover catalog and does not save. */
 export function poiEditor(gap: MealGap, day: string, poi: PoiSuggestion): MealGapEditor {
   return { ...mealGapEditor(gap, day), initial: { day, title: poi.name, note: [C.sourceNote, poi.address].filter(Boolean).join('\n') } };
 }

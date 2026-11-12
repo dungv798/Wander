@@ -26,7 +26,7 @@ import { StaleTripsNotice } from './StaleTripsNotice.tsx';
 
 const DeletedTripsSheet = lazy(() => import('./DeletedTripsSheet.tsx').then(module => ({ default: module.DeletedTripsSheet })));
 
-/** Nhắc các nơi chọn dở theo điểm đến và mở đúng hộp thoại lưu dùng ở màn Đã chọn. */
+/** Reminds the half-chosen places by destination and opens exactly the save dialog used on the Selected screen. */
 function PendingSelection({ dest, onSave }: { readonly dest: DestinationDetail; readonly onSave: (picked: readonly PlaceView[]) => void }) {
   const { state } = useDiscover();
   const picked = pickedOf(state, dest.places);
@@ -37,7 +37,7 @@ function PendingSelection({ dest, onSave }: { readonly dest: DestinationDetail; 
   </section>;
 }
 
-/** Ảnh bìa của điểm đến trong catalog; không tạo dữ liệu ảnh riêng cho chuyến. */
+/** The cover photo of a destination in the catalog; it creates no separate photo data for a trip. */
 function DestinationTripCard({ trip }: { readonly trip: Trip }) {
   const { state } = useDestination(trip.destinationId);
   const dest = state.status === 'ready' ? state.data : null;
@@ -46,7 +46,7 @@ function DestinationTripCard({ trip }: { readonly trip: Trip }) {
   return <TripCard trip={trip} cover={coverUrl(trip.cover, dest, cover)} />;
 }
 
-/** Đầu danh sách chuyến với lối quay lại khám phá và mở bảo mật. */
+/** The head of the trip list with the way back to discover and opening security. */
 function TripsHeading() {
   return <div className="pagehead pad-x"><div className="headrow">
     <IconButton icon="chevron-left" label={COPY.nav.explore} onClick={() => navigate(VIEW.EXPLORE)} />
@@ -55,7 +55,7 @@ function TripsHeading() {
   </div></div>;
 }
 
-/** Màn "Chuyến đi": danh sách chuyến của bạn, nút tạo mới (nhanh hoặc theo bước), hoặc trạng thái rỗng dẫn tới Khám phá. */
+/** The 'Trips' screen: the list of your trips, the create button (quick or step by step), or an empty state that leads to Discover. */
 export function TripsScreen({ destId }: { readonly destId: string }) {
   const { state, status, reload } = useTrips();
   const [sheet, setSheet] = useState<'create' | 'wizard' | 'deleted' | null>(null);

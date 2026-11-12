@@ -1,8 +1,8 @@
-/* Nguồn: bản v4 đã duyệt (artifact "Wander Khám Phá"), chuyển 25/10/2026. Lai theo PO: giữ minh họa (trời, máy bay, quạt thẻ, la bàn, huy hiệu tròn theo loại), nút CTA phẳng, bóng tĩnh nhẹ, bóng nổi chỉ cho lớp nổi. Phần thích ứng: adaptive.css. */
-/* Hướng thiết kế: ngày nghỉ rực rỡ. Bộ màu NẮNG VÀNG v2 (DR-013, 25/10/2026): nền bơ nhạt, trời xanh sang vàng chanh, bản tối navy; nút chính gradient hổ phách sang cam (adaptive.css), mỗi LOẠI địa điểm một màu + một biểu tượng, mỗi NGÀY một màu tuyến.
-   Cam/hổ phách chỉ dành cho hành động chính. Vàng "nắng" cho nhãn gợi ý. Khung "chờ duyệt" dùng họ trời xanh. Biểu tượng: Tabler Icons (MIT).
-   Khoảng cách: 4 · 8 · 12 · 16 · 24 · 32. Cơ chế học từ Roameo, không dùng lại logo, minh họa hay chữ của họ. */
-/* Màu, chữ, khoảng cách, chuyển động: xem ../tokens.css (nguồn duy nhất). Tệp này không định nghĩa màu mới. */
+/* Source: the approved v4 version (the artifact 'Wander Discover'), moved on 25/10/2026. A hybrid per the PO: keeps the illustrations (sky, plane, fanned cards, compass, round badges by kind), a flat CTA button, a light static shadow, a floating shadow only for floating layers. Adaptive part: adaptive.css. */
+/* Design direction: a vivid holiday. The SUNNY YELLOW v2 palette (DR-013, 25/10/2026): a pale butter background, a blue sky turning lime yellow, a navy dark version; the main button an amber-to-orange gradient (adaptive.css), each place KIND has one color + one icon, each DAY has one route color.
+   Orange/amber is only for the main action. A "sunny" yellow is for the suggestion label. The "pending approval" frame uses the sky-blue family. Icons: Tabler Icons (MIT).
+   Spacing: 4 - 8 - 12 - 16 - 24 - 32. The mechanics were learned from Roameo; their logo, illustrations and text are not reused. */
+/* Colors, text, spacing, motion: see ../tokens.css (the single source). This file defines no new color. */
 .cat-canh { --cb: var(--cat-canh-b); --ct: var(--cat-canh-t); --ci: var(--cat-canh-i); --con: var(--cat-canh-on); }
 .cat-van { --cb: var(--cat-van-b); --ct: var(--cat-van-t); --ci: var(--cat-van-i); --con: var(--cat-van-on); }
 .cat-am { --cb: var(--cat-am-b); --ct: var(--cat-am-t); --ci: var(--cat-am-i); --con: var(--cat-am-on); }
@@ -60,7 +60,7 @@ img { display: block; }
 .av:first-child { margin-left: 0; }
 .catbadge { width: 36px; height: 36px; border-radius: 50%; background: var(--cb); color: var(--con, var(--white)); display: grid; place-items: center; flex: none; }
 
-/* khám phá */
+/* discover */
 .sky { position: relative; height: 500px; overflow: hidden; background: linear-gradient(var(--sky-1), var(--sky-2) 66%, var(--bg)); }
 .cloud { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.95), rgba(255,255,255,0)); }
 .logo { position: absolute; top: 20px; left: 0; right: 0; text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 42px; line-height: 1; letter-spacing: -.02em; color: var(--brand-2); }
@@ -102,7 +102,7 @@ img { display: block; }
 .resume img { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; }
 .resume h3 { font-size: 16px; font-weight: 700; } .resume p { font-size: 14px; color: var(--muted); }
 
-/* cẩm nang điểm đến */
+/* destination guide */
 .dhero { position: relative; height: 300px; color: var(--white); overflow: hidden; }
 .dhero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .dhero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,19,38,.88) 6%, rgba(7,19,38,.08) 62%, rgba(7,19,38,.35)); }
@@ -142,7 +142,7 @@ img { display: block; }
 .grow .ib { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: var(--ct); color: var(--ci); }
 .gfoot { font-size: 12.5px; color: var(--muted); }
 
-/* bộ thẻ */
+/* the deck */
 .deckbar { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; gap: 12px; align-items: center; }
 .deckbar .mid { text-align: center; }
 .deckbar h1 { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.1; }
@@ -162,7 +162,7 @@ img { display: block; }
 .banner-top { position: absolute; z-index: 3; top: 30px; left: 14px; right: 14px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 16px; padding: 10px 14px; font-size: 14px; line-height: 1.4; }
 .banner-top b { display: block; }
 
-/* đã chọn */
+/* selected */
 .pagehead { padding-block: 28px 16px; display: grid; gap: 4px; }
 .pagehead h1 { font-family: var(--font-display); font-weight: 800; font-size: 36px; line-height: 1.05; }
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -177,7 +177,7 @@ img { display: block; }
 .tile .x { position: absolute; z-index: 2; top: 8px; right: 8px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(7,19,38,.55); color: var(--white); display: grid; place-items: center; }
 .stickybar { position: sticky; bottom: 0; padding-block: 16px; background: linear-gradient(to top, var(--bg) 60%, transparent); }
 
-/* chuyến đi: danh sách */
+/* trip: list */
 .tcard { position: relative; display: block; width: 100%; padding: 0; border: 0; text-align: left; border-radius: 26px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
 .tcard .cov { position: relative; height: 160px; }
 .tcard .cov img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -185,7 +185,7 @@ img { display: block; }
 .tcard h3 { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.1; }
 .tcard .meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: 14px; color: var(--muted); }
 
-/* chuyến đi: chi tiết */
+/* trip: detail */
 .mapbox { position: relative; height: 330px; background: var(--map-fallback); }
 .mapbox svg.map { position: absolute; inset: 0; width: 100%; height: 100%; }
 .mapbox .top { position: absolute; z-index: 2; top: calc(12px + env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); display: flex; justify-content: space-between; }
@@ -246,7 +246,7 @@ img { display: block; }
 .float[hidden] { display: none; }
 .float .pill { flex: 1 1 0; justify-content: center; white-space: nowrap; min-height: 52px; font-size: 15px; padding-inline: 14px; box-shadow: 0 12px 24px -10px rgba(18,35,61,.55); }
 
-/* tờ phủ */
+/* overlay sheet */
 .sheet { position: fixed; inset: 0; z-index: 30; background: rgba(6,16,32,.58); display: grid; align-items: end; justify-items: center; }
 .sheet[hidden] { display: none; }
 .panel { position: relative; width: min(480px, 100%); max-height: 94%; overflow-y: auto; background: var(--surface); color: var(--ink); border-radius: 30px 30px 0 0; box-shadow: var(--shadow-float); animation: up .3s cubic-bezier(.2,.8,.2,1); padding-bottom: env(safe-area-inset-bottom, 0px); }
@@ -329,21 +329,21 @@ details:not(.maplibregl-ctrl-attrib) > summary { cursor: pointer; font-weight: 7
 .toast button { background: none; border: 0; color: inherit; font-weight: 700; text-decoration: none; padding: 4px 8px; min-height: 44px; white-space: nowrap; flex: none; }
 @media (prefers-reduced-motion: reduce) { .card, .panel, .irow, .ghead .chev { transition: none !important; animation: none !important; } }
 
-/* ===== Thanh tiến độ (trình tạo chuyến và onboarding) ===== */
+/* ===== Progress bar (trip wizard and onboarding) ===== */
 .obar { flex: 1; height: 10px; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
 .obar i { display: block; height: 100%; border-radius: 999px; background: var(--brand-2); transition: width .3s cubic-bezier(.2, .8, .2, 1); }
 
-/* ===== Tạo chuyến theo bước (DG-2 A3, khung) ===== */
+/* ===== Step-by-step trip creation (DG-2 A3, frame) ===== */
 .wzsum { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
 .wzsum li { background: var(--surface-2); border-radius: 14px; padding: 10px 14px; color: var(--ink); }
 .wzsum b { display: block; font-size: 13px; color: var(--muted); font-weight: 600; }
 
-/* ===== Tuyến theo ngày ở Tổng quan (DG-2 A4, khung) ===== */
+/* ===== Route by day in the Overview (DG-2 A4, frame) ===== */
 .dayroutes { margin: 16px 0; }
 .dayroutes .h3 { font-family: var(--font-display); font-size: 18px; margin: 0 0 8px; color: var(--ink); }
 .dayroutes small { display: block; font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
 
-/* ===== "Hôm nay" khi đang đi (DG-2 A5, khung) ===== */
+/* ===== 'Today' while traveling (DG-2 A5, frame) ===== */
 .tlist { display: grid; gap: 12px; margin-top: 12px; }
 .trow { display: flex; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--cb, var(--brand)); border-radius: 22px; padding: 14px; box-shadow: var(--shadow); }
 .trow .tm { flex: none; width: 48px; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--brand-ink); }
@@ -353,11 +353,11 @@ details:not(.maplibregl-ctrl-attrib) > summary { cursor: pointer; font-weight: 7
 .trow .acts .btn { min-height: 44px; padding: 8px 16px; font-size: 15px; text-decoration: none; }
 .trow .acts [aria-pressed="true"] { background: var(--like); color: var(--white); border-color: transparent; }
 
-/* ===== Cài đặt, hết phiên, lỗi theo mã (DG-2 A6/A7, khung) ===== */
+/* ===== Settings, session ended, errors by code (DG-2 A6/A7, frame) ===== */
 .hdract { display: inline-flex; gap: 8px; }
 .seccard code { font-family: ui-monospace, Consolas, monospace; background: var(--surface-2); border-radius: 8px; padding: 2px 8px; }
 
-/* ===== Xuất / chia sẻ: xem trước (DG-2 A8, khung) ===== */
+/* ===== Export / share: preview (DG-2 A8, frame) ===== */
 .xcard { background: linear-gradient(var(--sky-1), var(--sky-2)); border-radius: 28px; padding: 18px; display: grid; gap: 12px; box-shadow: var(--shadow-float); }
 .xcard h2 { font-family: var(--font-display); font-size: 26px; line-height: 1.1; color: var(--ink); }
 .xlogo { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--brand-2); }

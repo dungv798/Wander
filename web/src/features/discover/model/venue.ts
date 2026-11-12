@@ -1,12 +1,12 @@
 import type { VenueView } from './Catalog.types.ts';
 
-/** Chỉ URL HTTPS công khai mới được dùng làm liên kết tới cơ sở, không nhận URL nhúng thông tin đăng nhập. */
+/** Only a public HTTPS URL may be used as a link to an establishment; a URL with embedded login information is not accepted. */
 function safeWeb(value: unknown): value is string {
   if (typeof value !== 'string') return false;
   try { const url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password; } catch { return false; }
 }
 
-/** Metadata additive phải đủ nguồn/địa chỉ và mã loại, tránh biến dữ liệu lỗi thành một nút website tùy ý. */
+/** Additive metadata must have a full source/address and a kind code, to avoid turning bad data into an arbitrary website button. */
 export function isVenueView(value: unknown): value is VenueView {
   if (!value || typeof value !== 'object') return false;
   const v = value as Record<string, unknown>;

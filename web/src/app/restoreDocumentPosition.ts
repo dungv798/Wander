@@ -1,13 +1,13 @@
-/** Chờ nội dung bất đồng bộ đủ cao để khôi phục vị trí; dừng ngay khi người dùng tự thao tác. */
+/** Waits for asynchronous content to become tall enough to restore the position; stops immediately when the user acts on their own. */
 export function restoreDocumentPosition(top: number): () => void {
   const observer = new ResizeObserver(sync);
   const events = ['touchstart', 'wheel', 'keydown', 'pointerdown'] as const;
-  /** Không tiếp tục kéo trang về vị trí cũ sau khi đã khôi phục hoặc có thao tác mới. */
+  /** Does not keep pulling the page to the old position after it was restored or a new action happened. */
   function stop(): void {
     observer.disconnect();
     for (const event of events) window.removeEventListener(event, stop);
   }
-  /** Nạp thêm nội dung có thể làm trang đủ cao để trở lại đúng thẻ đã xem. */
+  /** Loading more content can make the page tall enough to return to exactly the card that was viewed. */
   function sync(): void {
     window.scrollTo({ top, behavior: 'instant' });
     if (Math.abs(window.scrollY - top) < 1) stop();

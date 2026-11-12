@@ -14,7 +14,7 @@ interface RatingFormProps {
   readonly onRemove: () => void;
 }
 
-/** Biểu mẫu "Bạn chấm": chọn sao, lời bình tùy chọn, gửi/cập nhật và xóa. Dùng với `key` đổi theo bản đã lưu để nạp lại giá trị ban đầu. */
+/** The 'You rate' form: choose stars, an optional comment, submit/update and delete. Used with a `key` that changes with the saved copy to reload the initial values. */
 export function RatingForm({ mine, busy, onSave, onRemove }: RatingFormProps) {
   const [stars, setStars] = useState(mine?.stars ?? 0);
   const [comment, setComment] = useState(mine?.comment ?? '');

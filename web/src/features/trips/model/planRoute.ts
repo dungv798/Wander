@@ -4,7 +4,7 @@ import type { CoordinateOf } from './planDays.types.ts';
 import type { TripItem } from './trip.types.ts';
 import { itemPoint } from './planPolicy.ts';
 
-/** Thứ tự gần nhất tiếp theo, cache tọa độ một lần; không phải thuật toán tối ưu tuyến đường thực tế. */
+/** The next-nearest order, caching coordinates once; not an algorithm that optimizes a real route. */
 export function visitOrder(items: readonly TripItem[], coordinateOf: CoordinateOf, hub: GeoPoint | null): TripItem[] {
   const pool = items.map(item => ({ item, point: itemPoint(item, coordinateOf) }));
   const order: TripItem[] = [];

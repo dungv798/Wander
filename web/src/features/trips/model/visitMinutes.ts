@@ -1,18 +1,18 @@
-/** Số phút của một "ngày" tham quan khi catalog ghi theo ngày (GIẢ ĐỊNH 8 giờ, chỉ dùng để xếp lịch gợi ý). */
+/** The number of minutes of a sightseeing 'day' when the catalog gives it per day (an ASSUMPTION of 8 hours, used only to arrange the suggested schedule). */
 const DAY_MINUTES = 480;
 const HALF_DAY_MINUTES = 240;
 const HOUR_MINUTES = 60;
 const MID = 2;
 
-/** Đọc số (dấu phẩy thập phân kiểu Việt); không phải số thì null. */
+/** Reads a number (Vietnamese-style decimal comma); not a number gives null. */
 function num(text: string): number | null {
   const value = Number(text.trim().replace(',', '.'));
   return Number.isFinite(value) ? value : null;
 }
 
 /**
- * Đọc thời lượng tham quan từ nhãn của catalog ("1–2 giờ", "30–45 phút", "Nửa ngày", "1–2 ngày") thành số phút đại diện (trung điểm).
- * Nhãn lạ hoặc rỗng trả null: bên gọi nói rõ là thiếu căn cứ thay vì tự gán thời lượng.
+ * Reads the sightseeing duration from the catalog label ('1-2 hours', '30-45 minutes', 'Half a day', '1-2 days') into a representative number of minutes (the midpoint).
+ * An unknown or empty label returns null: the caller says plainly that there is no basis instead of assigning a duration itself.
  */
 export function parseVisitMinutes(label: string | null | undefined): number | null {
   const text = (label ?? '').trim().toLowerCase().replace(/\s*\(tham khảo\)$/, '');

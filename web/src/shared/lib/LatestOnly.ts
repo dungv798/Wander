@@ -1,14 +1,14 @@
-/** Bộ đếm "chỉ kết quả của lần gọi mới nhất được dùng": mỗi lần gọi lấy một số phiếu, kết quả mang phiếu cũ thì bị bỏ (tránh đua). */
+/** A counter 'only the result of the latest call is used': each call takes a ticket number, a result that carries an old ticket is dropped (avoiding a race). */
 export class LatestOnly {
   private latest = 0;
 
-  /** Bắt đầu một lần gọi mới và trả phiếu của nó; mọi phiếu trước đó hết hiệu lực. */
+  /** Starts a new call and returns its ticket; every earlier ticket becomes invalid. */
   begin(): number {
     this.latest += 1;
     return this.latest;
   }
 
-  /** Phiếu này còn là của lần gọi mới nhất không. */
+  /** Whether this ticket still belongs to the latest call. */
   isCurrent(ticket: number): boolean {
     return ticket === this.latest;
   }

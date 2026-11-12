@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import type { DestinationDetail } from '../../discover/index.ts';
 import { toTemplateViews } from './templateMapper.ts';
 
-/** Điểm đến giả chỉ có mã địa điểm (mapper chỉ tra theo mã). */
+/** A fake destination with only place ids (the mapper looks up by id only). */
 const DEST = { places: ['a', 'b', 'c'].map((id) => ({ id, name: id.toUpperCase() })) } as unknown as DestinationDetail;
 
 const RAW = {

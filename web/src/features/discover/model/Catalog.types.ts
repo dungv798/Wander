@@ -1,18 +1,18 @@
-/** Hợp đồng dữ liệu kho biên tập, khớp `CatalogViews` của backend (backend/src/main/java/com/wander/catalog/application/query). */
+/** The data contract of the editorial catalog, matching the backend's `CatalogViews` (backend/src/main/java/com/wander/catalog/application/query). */
 
-/** Mã loại địa điểm (`PlaceCategory`). */
+/** The place kind code (`PlaceCategory`). */
 export type CategoryCode = 'canh' | 'van' | 'am' | 'leo' | 'luu' | 'cho';
 
-/** Mã nhãn biên tập thay điểm sao (`Verdict`, DR-007): ý kiến của Wander, KHÔNG phải đánh giá người dùng. */
+/** The editorial label code in place of a star score (`Verdict`, DR-007): Wander's opinion, NOT a user rating. */
 export type VerdictCode = 'must' | 'worth' | 'ifconv';
 
-/** Buổi nên đi (`TimeSlot`). */
+/** The best time to go (`TimeSlot`). */
 export type SlotCode = 'sang' | 'trua' | 'chieu' | 'toi';
 
-/** Kiểu bố cục của một khối cẩm nang. */
+/** The layout kind of a guide block. */
 export type GuideLayout = 'months' | 'checklist' | 'cards' | 'places' | 'rows';
 
-/** Một ảnh kèm ghi công tác giả và giấy phép (bắt buộc hiển thị). */
+/** A photo with the author's attribution and the license (required to be shown). */
 export interface PhotoView {
   /** Stable photo id (file name without width/hash suffix); trip covers persist it. Null for external photos. */
   readonly id?: string | null;
@@ -28,10 +28,10 @@ export interface PhotoView {
   readonly sourceUrl: string;
 }
 
-/** Chủ đề đời sống được backend biên tập. */
+/** A life theme edited by the backend. */
 export type MomentTheme = 'cho' | 'mon-an' | 'nguoi' | 'le-hoi' | 'nghe' | 'hanh-trinh';
 
-/** Ảnh không khí ở cấp điểm đến, kèm đầy đủ thông tin ghi công. */
+/** An atmosphere photo at destination level, with full attribution information. */
 export interface MomentView {
   readonly id: string;
   readonly theme: MomentTheme;
@@ -40,7 +40,7 @@ export interface MomentView {
   readonly photo: PhotoView;
 }
 
-/** "Cách bao xa" từ một mốc (ước tính đường núi, không phải chỉ đường). */
+/** 'How far' from a landmark (a mountain-road estimate, not directions). */
 export interface Away {
   readonly refId: string;
   readonly refName: string;
@@ -49,7 +49,7 @@ export interface Away {
   readonly approximate: boolean;
 }
 
-/** Một địa điểm trong kho biên tập. */
+/** A place in the editorial catalog. */
 export interface PlaceView {
   readonly venue?: VenueView | null;
   readonly id: string;
@@ -77,7 +77,7 @@ export interface PlaceView {
   readonly wikipediaTitle: string | null;
 }
 
-/** Cơ sở có nguồn đối chiếu; không đồng nghĩa giá/giờ/phòng trống đã xác minh. */
+/** An establishment with a cross-check source; it does not mean the price/hours/vacancy have been verified. */
 export interface VenueView {
   readonly kind: 'restaurant' | 'cafe' | 'bar' | 'lodging';
   readonly kindName: string;
@@ -90,7 +90,7 @@ export interface VenueView {
   readonly priceNote?: string;
 }
 
-/** Một mục trong khối cẩm nang (biểu tượng, tiêu đề, mô tả, tùy chọn trỏ tới địa điểm). */
+/** One item in a guide block (an icon, a title, a description, optionally pointing to a place). */
 export interface GuideItemView {
   readonly icon: string;
   readonly title: string;
@@ -98,7 +98,7 @@ export interface GuideItemView {
   readonly placeId: string | null;
 }
 
-/** Một khối cẩm nang của điểm đến. */
+/** One guide block of a destination. */
 export interface GuideSectionView {
   readonly id: string;
   readonly layout: GuideLayout;
@@ -112,24 +112,24 @@ export interface GuideSectionView {
   readonly items: readonly GuideItemView[];
 }
 
-/** Mốc tham chiếu để tính khoảng cách (ví dụ TP Hà Giang). */
+/** A reference landmark for computing distance (for example Ha Giang city). */
 export interface ReferenceView {
   readonly id: string;
   readonly name: string;
   readonly approximate: boolean;
-  /** Tọa độ mốc: CHƯA có ở backend (`ReferenceView`); kho giả điền sẵn, backend phải thêm trước khi nối (todo FE-10). */
+  /** The landmark coordinates: NOT in the backend yet (`ReferenceView`); the fake catalog fills them in, the backend must add them before connecting (todo FE-10). */
   readonly lat?: number;
   readonly lon?: number;
 }
 
-/** Điểm đến đầy đủ: cẩm nang + mọi địa điểm. */
+/** A full destination: the guide + every place. */
 export interface DestinationDetail {
   readonly id: string;
   readonly name: string;
   readonly region: string;
   readonly tagline: string;
   readonly coverUrl: string;
-  /** Ghi công bìa độc lập; API cũ hoặc dữ liệu thử có thể chưa trả. */
+  /** The cover attribution is separate; an old API or test data may not return it yet. */
   readonly coverPhoto?: PhotoView;
   readonly references: readonly ReferenceView[];
   readonly guide: readonly GuideSectionView[];
@@ -137,16 +137,16 @@ export interface DestinationDetail {
   readonly moments: readonly MomentView[];
 }
 
-/** Ảnh xem trước trong danh sách điểm đến. */
+/** A preview photo in the destination list. */
 export interface Preview {
   readonly placeId: string;
   readonly name: string;
   readonly url: string;
 }
 
-/** Tóm tắt điểm đến cho danh sách và tìm kiếm. */
+/** The destination summary for the list and the search. */
 export interface DestinationSummary {
-  /** Loại trải nghiệm có thật; API cũ chưa có thì chỉ tải bù khi người xem lọc. */
+  /** A real experience kind; an old API does not have it yet so it is only loaded to make up for it when the viewer filters. */
   readonly categories?: readonly CategoryCode[];
   readonly lat: number | null;
   readonly lon: number | null;

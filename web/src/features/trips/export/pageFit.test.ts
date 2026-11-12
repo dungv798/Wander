@@ -15,7 +15,7 @@ test('ít nội dung: một ảnh, cao đúng nội dung nhưng không dưới m
 });
 
 test('ảnh cuối không còn gần như trống: các ảnh được cân và cao tương đương', () => {
-  // 1 ảnh đầy + vài dòng thừa sẽ tạo ảnh cuối rất ngắn nếu không cân
+  // 1 full image + a few extra lines would create a very short last image if not balanced
   const per = Math.floor((PNG.maxHeight - FOOTER - PNG.gap - PNG.margin) / (PNG.bodyLine + PNG.gap));
   const pages = fitPages(body(per + 3), measure, { top: PNG.margin, nextTop: PNG.margin, footer: FOOTER });
   assert.equal(pages.length, 2);

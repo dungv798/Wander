@@ -2,18 +2,18 @@ import type { Map as MlMap, FilterSpecification } from 'maplibre-gl';
 import { MAP } from './map.const.ts';
 import { cssColorToRgb } from './mapUtil.ts';
 
-/** Đọc token hiện tại thành màu RGB cho lớp GL, không sao chép bảng màu CSS. */
+/** Reads the current token into an RGB color for the GL layer, without copying the CSS palette. */
 export function pinColor(host: HTMLElement, token: string): string {
   const rgb = cssColorToRgb(getComputedStyle(host).getPropertyValue(token).trim());
   return `rgb(${rgb.map((value) => Math.round(value * MAP.RGB_MAX)).join(',')})`;
 }
 
-/** Các lớp hình học để query hit và điểm kiểm; nhãn không mở thêm một đối tượng. */
+/** The geometry layers for the hit query and the checkpoint; a label does not open an extra object. */
 export function pinHitLayers(): string[] {
   return [MAP.CLUSTER_LAYER, ...MAP.PIN_SOURCES.map((_, index) => `${MAP.PIN_LAYER_PREFIX}${index}-hit`)];
 }
 
-/** Dựng ghim native; giữ ID ảnh chưa tải làm phụ thuộc tile, không coalesce sang sprite rỗng làm mất ảnh đến muộn. */
+/** Builds the native pins; keeps the ID of a photo not yet loaded as a tile dependency, and does not coalesce into an empty sprite which would lose a late-arriving photo. */
 function addPinSourceLayers(map: MlMap, host: HTMLElement, source: string, index: number): void {
   const prefix = `${MAP.PIN_LAYER_PREFIX}${index}`;
   const filter: FilterSpecification = ['!', ['has', 'point_count']];
@@ -39,7 +39,7 @@ function addPinSourceLayers(map: MlMap, host: HTMLElement, source: string, index
   }, paint: { 'text-color': pinColor(host, '--map-label'), 'text-halo-color': white, 'text-halo-width': MAP.TEXT_HALO } });
 }
 
-/** Nguồn gộp cụm dùng riêng cho duyệt; nguồn thường dành cho hub và chế độ tuyến. */
+/** The clustered source is used only for browse; the ordinary source is for hubs and route mode. */
 export function addNativePinLayers(map: MlMap, host: HTMLElement): void {
   if (!map.hasImage(MAP.EMPTY_IMAGE)) map.addImage(MAP.EMPTY_IMAGE, { width: 1, height: 1, data: new Uint8Array(MAP.IMAGE_CHANNELS) });
   MAP.PIN_SOURCES.forEach((source, index) => {

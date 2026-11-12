@@ -2,10 +2,10 @@ import { fill } from '../../../shared/const/copy.vi.ts';
 import { IDENTITY } from './identity.const.ts';
 import { IDENTITY_COPY as C } from './identity.copy.ts';
 
-/** Kết quả kiểm tên thiết bị. */
+/** The result of checking a device name. */
 export type DeviceNameResult = { readonly ok: true; readonly value: string } | { readonly ok: false; readonly error: string };
 
-/** Kiểm tên thiết bị người dùng đặt: bỏ khoảng trắng hai đầu, không rỗng, tối đa `MAX_DEVICE_NAME` ký tự. */
+/** Checks the device name the user set: trims both ends, not empty, at most `MAX_DEVICE_NAME` characters. */
 export function parseDeviceName(text: string): DeviceNameResult {
   const value = text.trim();
   if (!value) return { ok: false, error: C.settings.nameEmpty };

@@ -22,7 +22,7 @@ import { money } from './ItemMeta.tsx';
 
 const PERCENT = 100;
 
-/** Dữ liệu qua các bước. */
+/** The data across the steps. */
 interface Draft {
   readonly start: string;
   readonly end: string;
@@ -34,13 +34,13 @@ interface Draft {
   readonly name: string;
 }
 
-/** Giá trị ban đầu: thứ Bảy tới, 3 ngày. */
+/** The initial value: next Saturday, 3 days. */
 function initialDraft(): Draft {
   const start = nextWeekday(todayLocal(), DEFAULT_START_WEEKDAY);
   return { start, end: addDays(start, DEFAULT_TRIP_DAYS - 1), tentative: false, days: String(DEFAULT_TRIP_DAYS), kind: null, interests: [], budget: '', name: '' };
 }
 
-/** Lỗi của bước hiện tại (rỗng nếu ổn): ngày ở bước "Khi nào", ngân sách ở bước "Ngân sách". */
+/** The error of the current step (empty if fine): the date at the 'When' step, the budget at the 'Budget' step. */
 function stepError(step: WizardStep, d: Draft): string {
   if (step === 'when') {
     const r = parseDates({ start: d.start, end: d.end, tentative: d.tentative, days: d.days });
@@ -53,7 +53,7 @@ function stepError(step: WizardStep, d: Draft): string {
   return '';
 }
 
-/** Thân từng bước của trình tạo chuyến. */
+/** The body of each step of the trip wizard. */
 function StepBody({ step, d, set, dest, defaultName }: { readonly step: WizardStep; readonly d: Draft; readonly set: (p: Partial<Draft>) => void; readonly dest: DestinationDetail | null; readonly defaultName: string }) {
   const cats = [...new Map((dest?.places ?? []).map((p) => [p.category, p.categoryName])).entries()];
   if (step === 'where') {
@@ -110,7 +110,7 @@ function StepBody({ step, d, set, dest, defaultName }: { readonly step: WizardSt
   return <Summary d={d} set={set} dest={dest} defaultName={defaultName} cats={cats} />;
 }
 
-/** Bước cuối: tóm tắt các lựa chọn và ô đặt tên. */
+/** The last step: a summary of the choices and the naming box. */
 function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; readonly set: (p: Partial<Draft>) => void; readonly dest: DestinationDetail | null; readonly defaultName: string; readonly cats: readonly (readonly [string, string])[] }) {
   const names = new Map(cats);
   const budget = parseMoneyField(d.budget, '');
@@ -129,8 +129,8 @@ function Summary({ d, set, dest, defaultName, cats }: { readonly d: Draft; reado
 }
 
 /**
- * Trình tạo chuyến theo 6 bước (Đi đâu → Khi nào → Ai đi → Sở thích → Ngân sách → Xem lại). "Ai đi" là kiểu chuyến, chưa phải thành viên;
- * kiểu chuyến và sở thích LƯU vào chuyến (DR-018 F2). Mỗi bước kiểm lỗi trước khi sang bước sau; tiêu đề bước nhận focus để đọc màn hình.
+ * The 6-step trip wizard (Where -> When -> Who -> Interests -> Budget -> Review). 'Who' is a trip kind, not a member list yet;
+ * the trip kind and interests are SAVED into the trip (DR-018 F2). Each step checks errors before the next step; the step title gets focus so screen readers read it.
  */
 export function TripWizard({ destId, onClose, picked = [], values, onValues, onBackToForm, suggestedDates = true }: { readonly destId: string; readonly onClose: () => void; readonly picked?: readonly (PlaceRef & { readonly name: string })[]; readonly values?: TripFormValues; readonly onValues?: (p: Partial<TripFormValues>) => void; readonly onBackToForm?: () => void; readonly suggestedDates?: boolean }) {
   const { state } = useTrips();

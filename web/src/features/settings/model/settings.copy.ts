@@ -1,4 +1,4 @@
-/** Chữ của màn Cài đặt (S21). Phần Quyền riêng tư là BẢN NHÁP, chưa phải chính sách pháp lý. */
+/** The copy of the Settings screen (S21). The Privacy part is a DRAFT, not a legal policy. */
 export const SETTINGS_COPY = {
   eyebrow: 'Wander',
   title: 'Cài đặt',

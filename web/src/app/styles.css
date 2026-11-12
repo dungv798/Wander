@@ -1,4 +1,4 @@
-/* Thứ tự nạp = thứ tự cascade của prototype đã duyệt (docs/ux/prototype/index.html). Đổi thứ tự có thể đổi giao diện. */
+/* Load order = the cascade order of the approved prototype (docs/ux/prototype/index.html). Changing the order can change the look. */
 @import '../styles/fonts.css';
 @import '../styles/tokens.css';
 @import '../styles/base.css';
@@ -27,7 +27,7 @@
 @import '../features/onboarding/onboardingSurface.css';
 @import './mobile.css';
 
-/* Chi tiết lỗi dưới màn "Có lỗi ở phía Wander": gập sẵn, cuộn ngang được, chữ nhỏ nhưng ≥ 12 px. */
+/* The error detail under the 'Something went wrong on Wander's side' screen: collapsed by default, scrolls horizontally, small text but at least 12 px. */
 .crash-detail { width: min(100%, 420px); margin: var(--s-4) auto 0; text-align: left; color: var(--muted); font: var(--text-secondary); }
 .crash-detail summary { min-height: var(--tap); display: flex; align-items: center; cursor: pointer; }
 .crash-detail pre { margin: 0; padding: var(--s-3); overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); color: var(--ink); font: var(--text-secondary); white-space: pre-wrap; overflow-wrap: anywhere; }

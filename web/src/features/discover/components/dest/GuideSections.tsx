@@ -8,7 +8,7 @@ import { CATEGORY_ICON } from '../../model/discover.const.ts';
 import type { DestinationDetail, GuideItemView, GuideSectionView } from '../../model/Catalog.types.ts';
 import { placeById } from '../../model/destinationQueries.ts';
 
-/** Lưới 12 tháng: tháng đẹp nhất (`best`), mưa nhiều (`rain`), tháng đi của chuyến (`mine`, nếu có). */
+/** The 12-month grid: the best months (`best`), the rainy months (`rain`), the trip's months (`mine`, if any). */
 export function MonthsGrid({ section, mine }: { readonly section: GuideSectionView; readonly mine?: number | null }) {
   const months = Array.from({ length: UI.MONTHS_IN_YEAR }, (_, i) => i + 1);
   return (
@@ -32,7 +32,7 @@ export function MonthsGrid({ section, mine }: { readonly section: GuideSectionVi
   );
 }
 
-/** Danh sách "mang gì": bấm để đánh dấu đã chuẩn bị (lưu trên máy). */
+/** The 'what to bring' list: tap to mark as prepared (saved on this device). */
 function Checklist({ section }: { readonly section: GuideSectionView }) {
   const { state, actions } = useDiscover();
   return (
@@ -50,7 +50,7 @@ function Checklist({ section }: { readonly section: GuideSectionView }) {
   );
 }
 
-/** Thẻ thông tin ngắn (ví dụ món ăn): biểu tượng, tên, mô tả. */
+/** A short info card (for example a dish): an icon, a name, a description. */
 function Cards({ items }: { readonly items: readonly GuideItemView[] }) {
   return (
     <div className="foods">
@@ -68,7 +68,7 @@ function Cards({ items }: { readonly items: readonly GuideItemView[] }) {
   );
 }
 
-/** Danh sách địa điểm trong cẩm nang: chạm để mở chi tiết (mục trỏ tới địa điểm có trong kho). */
+/** The list of places in the guide: tap to open the detail (an item that points to a place that is in the catalog). */
 function PlaceRows({ dest, section }: { readonly dest: DestinationDetail; readonly section: GuideSectionView }) {
   const { open } = usePlaceSheet();
   return (
@@ -93,7 +93,7 @@ function PlaceRows({ dest, section }: { readonly dest: DestinationDetail; readon
   );
 }
 
-/** Các dòng thông tin (dịch vụ, di chuyển): biểu tượng, tiêu đề, mô tả. */
+/** The info rows (services, getting around): an icon, a title, a description. */
 function InfoRows({ section }: { readonly section: GuideSectionView }) {
   return (
     <>
@@ -114,7 +114,7 @@ function InfoRows({ section }: { readonly section: GuideSectionView }) {
   );
 }
 
-/** Thân một khối cẩm nang theo bố cục dữ liệu (months, checklist, cards, places, rows). */
+/** The body of one guide block by data layout (months, checklist, cards, places, rows). */
 function SectionBody({ dest, section }: { readonly dest: DestinationDetail; readonly section: GuideSectionView }) {
   switch (section.layout) {
     case 'months':
@@ -135,7 +135,7 @@ function SectionBody({ dest, section }: { readonly dest: DestinationDetail; read
   }
 }
 
-/** Cẩm nang điểm đến dạng các khối mở/đóng (accordion), dựng hoàn toàn từ dữ liệu biên tập. */
+/** The destination guide as open/close blocks (accordion), built entirely from the editorial data. */
 export function GuideSections({ dest }: { readonly dest: DestinationDetail }) {
   const { state, actions } = useDiscover();
   return (

@@ -6,12 +6,12 @@ import { useTrips } from '../hooks/TripsProvider.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import './staleNotice.css';
 
-/** Làm mới nhãn "… phút trước" mỗi phút (mili giây). */
+/** Refreshes the '... minutes ago' label every minute (milliseconds). */
 const REFRESH_MS = 60_000;
 
 /**
- * Dải báo "đang xem bản đã lưu lúc …" khi máy chủ không trả lời mà vẫn có bản chuyến lần trước (B-09): người dùng biết dữ liệu có thể cũ và
- * chưa sửa được, kèm nút Thử lại. Không hiện khi dữ liệu là bản mới nhất từ máy chủ.
+ * The strip 'viewing the copy saved at ...' when the server does not answer but a previous copy of the trip exists (B-09): the user knows the data may be old and
+ * cannot edit yet, with a Retry button. Not shown when the data is the latest copy from the server.
  */
 export function StaleTripsNotice() {
   const { staleSince, reload } = useTrips();

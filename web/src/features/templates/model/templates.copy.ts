@@ -1,4 +1,4 @@
-/** Chữ của tính năng "Lịch mẫu" (N-2, DR-018): nội dung là BẢN NHÁP có nhãn cho tới khi PO duyệt từng lịch. */
+/** The copy of the 'Sample itineraries' feature (N-2, DR-018): the content is a labelled DRAFT until the PO approves each itinerary. */
 export const TEMPLATES_COPY = {
   section: 'Lịch mẫu để bắt đầu',
   sectionNote: 'Gợi ý ghép sẵn từ các nơi có trong cẩm nang. Bạn chỉnh được mọi thứ.',

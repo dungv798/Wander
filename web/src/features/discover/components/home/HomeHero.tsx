@@ -9,18 +9,18 @@ import { COPY } from '../../../../shared/const/copy.vi.ts';
 import { IconButton } from '../../../../shared/ui/IconButton.tsx';
 
 interface HomeHeroProps {
-  /** Điểm đến được nhấn mạnh: chỉ cần mã, tên, câu giới thiệu và ảnh bìa dự phòng. */
+  /** The destination being highlighted: only the id, the name, the tagline and the fallback cover photo are needed. */
   readonly destination: Pick<DestinationSummary, 'id' | 'name' | 'tagline' | 'coverUrl' | 'coverPhoto'>;
-  /** Dòng nhỏ phía trên tên (ví dụ "Điểm đến gợi ý"). */
+  /** The small line above the name (for example 'Suggested destination'). */
   readonly eyebrow: string;
-  /** Nhãn nút chính; nút luôn có mũi tên "đi tiếp". */
+  /** The label of the main button; the button always has a 'go on' arrow. */
   readonly cta: string;
   readonly onOpen: () => void;
 }
 
 /**
- * Thẻ hero một điểm đến: ảnh thật phủ thẻ, tên lớn và MỘT nút chính; dùng cho cả Trang chủ lần đầu (điểm đến gợi ý) lẫn Trang chủ đã chọn điểm đến.
- * Ảnh lấy từ bộ ảnh hero đã tuyển, không có thì dùng ảnh bìa danh mục; chữ nằm trên lớp tối ở đáy để đọc được trên ảnh bất kỳ.
+ * The hero card of one destination: a real photo covers the card, a large name and ONE main button; used for both the first-time Home page (a suggested destination) and the Home page with a destination chosen.
+ * The photo comes from the curated hero photo set, and falls back to the catalog cover photo; the text sits on a dark layer at the bottom to be readable on any photo.
  */
 export function HomeHero({ destination, eyebrow, cta, onOpen }: HomeHeroProps) {
   const src = destination.coverUrl;

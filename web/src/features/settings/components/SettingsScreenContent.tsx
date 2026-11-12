@@ -10,7 +10,7 @@ import { parseDeviceName, useIdentity, useReportError } from '../../identity/ind
 import { InterestsSection } from './InterestsSection.tsx';
 import { SETTINGS_COPY as T } from '../model/settings.copy.ts';
 
-/** Biểu mẫu đổi tên: dựng khi đã biết tên hiện tại nên ô nhập không bao giờ khởi đầu rỗng rồi lưu đè tên thật. */
+/** The rename form: built once the current name is known so the input never starts empty and then overwrites the real name when saved. */
 function DeviceForm({ initial }: { readonly initial: string }) {
   const { actions } = useIdentity();
   const report = useReportError();
@@ -36,7 +36,7 @@ function DeviceForm({ initial }: { readonly initial: string }) {
   );
 }
 
-/** Mục "Thiết bị này": đổi tên thiết bị (có danh tính mới đổi được). */
+/** The 'This device' section: rename the device (it can only be renamed once there is an identity). */
 function DeviceSection() {
   const { identity } = useIdentity();
   const current = identity?.devices.find((d) => d.current);
@@ -55,7 +55,7 @@ function DeviceSection() {
   );
 }
 
-/** Màn Cài đặt (S21): tên thiết bị, Bảo mật, Về Wander, Quyền riêng tư (bản nháp), chuyến đi tạo nhầm (DR-004), xem lại giới thiệu. */
+/** The Settings screen (S21): the device name, Security, About Wander, Privacy (a draft), trips created by mistake (DR-004), replay the intro. */
 export function SettingsScreen() {
   return (
     <>

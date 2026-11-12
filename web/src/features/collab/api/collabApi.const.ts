@@ -1,4 +1,4 @@
-/** Đường dẫn API cộng tác (khớp `PlanningApiConstants` của backend). */
+/** Paths of the collaboration API (matching the backend's `PlanningApiConstants`). */
 export const COLLAB_API = {
   TRIPS: '/api/trips',
   INVITES: '/invites',

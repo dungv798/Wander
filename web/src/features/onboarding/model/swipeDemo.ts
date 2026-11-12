@@ -4,40 +4,40 @@ import { SWIPE } from './onboarding.const.ts';
 import { ONBOARD_COPY as T } from './onboarding.copy.ts';
 import type { SwipeKind } from './swipeDeck.ts';
 
-/** Nút ✕/✓ đang được nhấn sáng ("both" = cả hai, dùng khi gợi ý hai nút tương đương). */
+/** The X/check button being lit ('both' = both, used when hinting that the two buttons are equivalent). */
 export type LitButton = SwipeKind | 'both' | null;
 
-/** Vùng đang cần người xem nhìn vào: thẻ đang quẹt, khay "đã chọn" (số tăng), hai nút ✕/✓; null = không nhấn mạnh gì. Phần còn lại mờ nhẹ để mắt đi đúng chỗ. */
+/** The area the viewer needs to look at: the card being swiped, the 'selected' tray (the number goes up), the two X/check buttons; null = nothing emphasized. The rest dims slightly so the eye goes to the right place. */
 export type SwipeFocus = 'card' | 'tray' | 'buttons' | null;
 
-/** Dấu chạm minh họa trên sân khấu (px); `press` = đang nhấn giữ. */
+/** The illustrative touch dot on the stage (px); `press` = being held down. */
 export interface TouchMark {
   readonly x: number;
   readonly y: number;
   readonly press: boolean;
 }
 
-/** Chú thích nổi trên bộ thẻ: nội dung và chiều mũi tên. */
+/** The caption floating on the deck: the content and the arrow direction. */
 export interface Caption {
   readonly text: string;
   readonly dir: 'l' | 'r' | null;
 }
 
-/** Cầu nối từ kịch bản demo sang giao diện: kịch bản chỉ gọi các hàm này, không biết gì về React. */
+/** The bridge from the demo script to the UI: the script only calls these functions and knows nothing about React. */
 export interface DemoApi {
-  /** Thẻ trên cùng (phần tử DOM) và khung sân khấu, cùng hệ tọa độ màn hình. */
+  /** The top card (a DOM element) and the stage frame, in the same screen coordinate system. */
   readonly card: () => HTMLElement | null;
   readonly stage: () => DOMRect | null;
   readonly caption: (caption: Caption | null) => void;
   readonly lit: (button: LitButton) => void;
   readonly touch: (mark: TouchMark | null) => void;
-  /** Bật/tắt chế độ kéo của thẻ trên cùng (tắt = thẻ được phép bay đi bằng chuyển động). */
+  /** Turns the top card's drag mode on/off (off = the card may fly away by motion). */
   readonly drag: (on: boolean) => void;
   readonly commit: (kind: SwipeKind) => void;
   readonly focus: (area: SwipeFocus) => void;
 }
 
-/** Một lượt quẹt mẫu: dấu chạm đặt lên thẻ, kéo chậm theo hướng, giữ, rồi nhả để thẻ bay đi. */
+/** One sample swipe: the touch dot is placed on the card, drags slowly in a direction, holds, and then releases so the card flies away. */
 export async function swipeOnce(run: Run, api: DemoApi, kind: SwipeKind): Promise<void> {
   const card = api.card();
   const stage = api.stage();
@@ -71,7 +71,7 @@ export async function swipeOnce(run: Run, api: DemoApi, kind: SwipeKind): Promis
   api.lit(null);
 }
 
-/** Demo một lượt: giới thiệu, chọn thẻ 1, bỏ qua thẻ 2, nhắc hai nút ✕/✓ cùng tác dụng. Kết thúc bằng thẻ 3 đứng yên cho người xem thử. */
+/** A one-round demo: intro, choose card 1, skip card 2, hint that the two X/check buttons do the same. It ends with card 3 standing still for the viewer to try. */
 export async function playSwipeDemo(run: Run, api: DemoApi): Promise<void> {
   api.caption({ text: T.swipe.caption.intro, dir: null });
   await run.wait(SWIPE.INTRO_MS);

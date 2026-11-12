@@ -7,13 +7,13 @@ interface MobileMapControlsProps {
   readonly onToggle: () => void;
 }
 
-/** Chuyển rõ ràng giữa đọc danh sách và thao tác bản đồ, bằng cùng một nút luôn trong tầm tay. */
+/** A clear switch between reading the list and working the map, with the same button that is always within reach. */
 export function MobileMapControls({ open, onToggle }: MobileMapControlsProps) {
   const ref = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!open) return undefined;
     ref.current?.focus({ preventScroll: true });
-    /** Esc đóng chế độ bản đồ; hộp thoại phía trên có thể chặn trước. */
+    /** Esc closes the map mode; a dialog above it may intercept first. */
     const escape = (event: KeyboardEvent): void => {
       if (event.key === 'Escape' && !event.defaultPrevented) { event.preventDefault(); onToggle(); }
     };

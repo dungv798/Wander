@@ -11,25 +11,25 @@ interface ErrorBoundaryProps {
 
 interface ErrorBoundaryState {
   readonly failed: boolean;
-  /** Thông điệp + vài dòng đầu dấu vết ngăn xếp, để người thử trên điện thoại gửi lại (không có console). */
+  /** The message + a few leading stack-trace lines, so someone testing on a phone can send them back (there is no console). */
   readonly detail: string;
 }
 
-/** Ranh giới lỗi ở gốc ứng dụng: lỗi dựng giao diện hiện thông báo có nút tải lại thay vì để cả trang trắng. */
+/** The error boundary at the app root: a UI rendering error shows a notice with a reload button instead of leaving the whole page blank. */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   override state: ErrorBoundaryState = { failed: false, detail: '' };
 
-  /** Đánh dấu đã lỗi (kèm chi tiết rút gọn) để lần dựng tiếp theo hiện màn thông báo. */
+  /** Marks it as failed (with the shortened detail) so the next render shows the notice screen. */
   static getDerivedStateFromError(error: unknown): ErrorBoundaryState {
     return { failed: true, detail: describeError(error) };
   }
 
-  /** Ghi lỗi ra console cho người phát triển (chưa có dịch vụ thu lỗi). */
+  /** Writes the error to the console for the developer (there is no error-collection service yet). */
   override componentDidCatch(error: Error, info: ErrorInfo): void {
     console.error('Lỗi dựng giao diện', error, info.componentStack);
   }
 
-  /** Dựng con bình thường, hoặc màn thông báo lỗi khi đã hỏng. */
+  /** Renders the child normally, or the error notice screen once it has failed. */
   override render(): ReactNode {
     if (!this.state.failed) return this.props.children;
     return <EmptyState role="alert" icon="alert-triangle" title={COPY.state.crashTitle} text={COPY.state.crashText} actions={<><Button onClick={() => location.reload()}>{COPY.state.reload}</Button>{this.state.detail ? <details className="crash-detail"><summary>{COPY.state.crashDetail}</summary><pre>{this.state.detail}</pre></details> : null}</>} />;

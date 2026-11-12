@@ -10,7 +10,7 @@ interface RatingCommentsProps {
   readonly onReport: (ratingId: string) => void;
 }
 
-/** Danh sách lời bình ẩn danh gần đây; lời bình của người xem có nhãn "Của bạn" và không có nút báo cáo. */
+/** The list of recent anonymous comments; the viewer's own comment has the label 'Yours' and no report button. */
 export function RatingComments({ comments, busy, onReport }: RatingCommentsProps) {
   if (comments.length === 0) return null;
   return (

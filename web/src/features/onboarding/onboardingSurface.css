@@ -1,4 +1,4 @@
-/* Cùng vật liệu B với app; chỉ bố trí cảnh và nội dung, nút dùng primitive chung. */
+/* The same B material as the app; it only lays out the scenes and the content, buttons use the shared primitive. */
 .ob {
   background: radial-gradient(ellipse at 90% 15%, var(--map-water-line), transparent 65%), linear-gradient(145deg, var(--map-land), var(--sky-2) 60%, var(--bg));
 }

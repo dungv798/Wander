@@ -1,4 +1,4 @@
-/** Cổng công khai của tính năng "Khám phá": bên ngoài chỉ được dùng những gì xuất ở đây. */
+/** The public gate of the 'Discover' feature: from the outside only what is exported here may be used. */
 export { DiscoverProvider, useDiscover } from './hooks/DiscoverProvider.tsx';
 export { CurrentDestinationProvider, useCurrentDestination } from './hooks/CurrentDestinationProvider.tsx';
 export type { DestinationSummary } from './model/Catalog.types.ts';

@@ -6,15 +6,15 @@ interface EmptyStateProps {
   readonly title: string;
   readonly text: string;
   readonly icon?: IconName;
-  /** `alert` cho lỗi (đọc ngay), `status` cho trạng thái rỗng thông thường. */
+  /** `alert` for an error (read at once), `status` for an ordinary empty state. */
   readonly role?: 'alert' | 'status';
   readonly actions?: ReactNode;
   readonly className?: string;
-  /** Màn chỉ có hộp này (không có tiêu đề trang khác) thì dùng `h1`; mặc định `h2`. */
+  /** A screen that has only this box (no other page title) uses `h1`; `h2` by default. */
   readonly pageTitle?: boolean;
 }
 
-/** Trạng thái rỗng/lỗi dùng chung: biểu tượng, tiêu đề, lời giải thích và nút hành động. */
+/** A shared empty/error state: an icon, a title, an explanation and an action button. */
 export function EmptyState({ title, text, icon, role, actions, className, pageTitle = false }: EmptyStateProps) {
   const Heading = pageTitle ? 'h1' : 'h2';
   return (

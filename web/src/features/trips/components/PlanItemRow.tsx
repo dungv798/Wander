@@ -17,7 +17,7 @@ interface PlanItemRowProps {
   readonly onDay: (itemId: string, day: string) => void;
 }
 
-/** Hàng địa điểm cùng hệ ảnh/nút với lịch; chỉ mục đề nghị có chọn ngày, mục cũ và pending không bị chỉnh ngầm. */
+/** A place row with the same photo/button system as the schedule; only a suggested item has a day choice, old and pending items are not edited silently. */
 export function PlanItemRow({ itemId, day = '', index, existing = false, reason, disabled, onDay }: PlanItemRowProps) {
   const { trip, cat, days, openItem } = useTripView();
   const item = trip.items.find(candidate => candidate.id === itemId);

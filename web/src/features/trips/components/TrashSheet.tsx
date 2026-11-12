@@ -20,13 +20,13 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 interface RowProps {
   readonly entry: TrashEntry;
-  /** Giờ hiện tại lúc mở tờ (chữ "x phút trước" không đổi mỗi lần vẽ lại). */
+  /** The current time when the sheet opens (the 'x minutes ago' text does not change on each redraw). */
   readonly now: number;
   readonly onRestore: (entry: TrashEntry) => void;
   readonly onPurge: (entry: TrashEntry) => void;
 }
 
-/** Một mục đã xóa: ảnh/biểu tượng, loại, tên, "Bạn xóa … trước" và hai nút Khôi phục / Xóa vĩnh viễn. */
+/** One deleted item: photo/icon, kind, name, 'You deleted ... ago' and two buttons Restore / Delete permanently. */
 function TrashRow({ entry, now, onRestore, onPurge }: RowProps) {
   const { cat, trip } = useTripView();
   const perms = permissionsOf(trip);
@@ -62,7 +62,7 @@ function TrashRow({ entry, now, onRestore, onPurge }: RowProps) {
   );
 }
 
-/** Hộp xác nhận xóa vĩnh viễn một mục (chỉ cần xác nhận, không xác thực lại: DR-011 B1). */
+/** The confirmation box for permanently deleting an item (only confirmation, no re-authentication: DR-011 B1). */
 function PurgeConfirm({ name, onYes, onNo }: { readonly name: string; readonly onYes: () => void; readonly onNo: () => void }) {
   return (
     <div className="pp">
@@ -82,7 +82,7 @@ function PurgeConfirm({ name, onYes, onNo }: { readonly name: string; readonly o
   );
 }
 
-/** Tờ "Đã xóa gần đây": các mục xóa mềm của chuyến, giữ đến khi xóa vĩnh viễn (D19). Khôi phục có Hoàn tác; xóa vĩnh viễn hỏi xác nhận. */
+/** The 'Recently deleted' sheet: the trip's soft-deleted items, kept until permanently deleted (D19). Restore has Undo; permanent deletion asks for confirmation. */
 export function TrashSheet({ onClose }: { readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();
@@ -93,7 +93,7 @@ export function TrashSheet({ onClose }: { readonly onClose: () => void }) {
   const [busy, setBusy] = useState(false);
   const [now] = useState(() => Date.now());
 
-  /** Khôi phục một mục (có Hoàn tác); nói rõ khi ngày cũ không còn nên mục về "Chưa có ngày". */
+  /** Restores an item (with Undo); says so clearly when the old day no longer exists so the item goes to 'No date yet'. */
   const restore = (entry: TrashEntry): void => {
     const name = itemName(entry.item, cat);
     if (isDuplicateRestore(trip, entry)) {
@@ -105,7 +105,7 @@ export function TrashSheet({ onClose }: { readonly onClose: () => void }) {
     setBusy(true);
     undoable(trip.id, () => actions.restoreItem(trip.id, entry.id).finally(() => setBusy(false)), fill(dayLost ? T.trash.restoredNoDay : T.trash.restored, { name }));
   };
-  /** Xóa vĩnh viễn rồi quay lại danh sách. */
+  /** Permanently deletes and then returns to the list. */
   const purge = (entry: TrashEntry): void => {
     if (busy) return;
     setBusy(true);

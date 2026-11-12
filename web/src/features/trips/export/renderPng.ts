@@ -9,7 +9,7 @@ import type { ExportInput, LayoutPage, PngFile, TextRole } from './Export.types.
 
 const FONT_SIZE: Readonly<Record<TextRole, number>> = { title: PNG.titleSize, heading: PNG.headingSize, body: PNG.bodySize, small: PNG.smallSize };
 
-/** Tìm đúng ảnh hero đã tuyển cùng tác giả/giấy phép; không có ghi công thì bỏ ảnh. */
+/** Finds exactly the curated hero photo with its author/license; with no attribution the photo is dropped. */
 export function heroPhoto(destination: DestinationDetail) {
   const photos = destination.places.flatMap(p => p.photos);
   for (const file of HERO_PHOTOS[destination.id] ?? []) {
@@ -19,7 +19,7 @@ export function heroPhoto(destination: DestinationDetail) {
   return undefined;
 }
 
-/** Chỉ tải cùng nguồn gốc; ảnh hỏng hoặc hết thời gian trả null để vẫn xuất được bản chữ. */
+/** Loads only from the same origin; a broken or timed-out photo returns null so a text version can still be exported. */
 async function loadCover(url: string | undefined): Promise<HTMLImageElement | null> {
   if (!url || new URL(url, location.href).origin !== location.origin) return null;
   return new Promise(resolve => {
@@ -31,13 +31,13 @@ async function loadCover(url: string | undefined): Promise<HTMLImageElement | nu
   });
 }
 
-/** Đặt font đã nạp của ứng dụng, dùng cùng cách đo và vẽ cho mọi dòng. */
+/** Sets the app's loaded font, using the same measuring and drawing for every line. */
 function setFont(ctx: CanvasRenderingContext2D, role: TextRole, family: string): void {
   const weight = role === 'heading' || role === 'title' ? '700' : '400';
   ctx.font = `${weight} ${FONT_SIZE[role]}px ${family}`;
 }
 
-/** Cắt ảnh theo tâm để lấp vùng bìa, không làm méo tỷ lệ ảnh gốc. */
+/** Crops the photo around its center to fill the cover area, without distorting the original photo ratio. */
 function drawCover(ctx: CanvasRenderingContext2D, image: HTMLImageElement): void {
   const scale = Math.max(PNG.width / image.naturalWidth, PNG.coverHeight / image.naturalHeight);
   const width = PNG.width / scale;
@@ -45,7 +45,7 @@ function drawCover(ctx: CanvasRenderingContext2D, image: HTMLImageElement): void
   ctx.drawImage(image, (image.naturalWidth - width) / PNG.centerDivisor, (image.naturalHeight - height) / PNG.centerDivisor, width, height, 0, 0, PNG.width, PNG.coverHeight);
 }
 
-/** Mã hóa canvas thành PNG thật, báo lỗi nếu trình duyệt thiếu bộ nhớ hoặc không tạo được blob. */
+/** Encodes the canvas into a real PNG, reporting an error if the browser lacks memory or cannot create the blob. */
 function toPng(canvas: HTMLCanvasElement): Promise<Blob> {
   return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error(C.error)), PNG.mime));
 }
@@ -57,7 +57,7 @@ interface PaintOptions {
   readonly credit: readonly string[];
 }
 
-/** Vẽ một phân đoạn bằng token ứng dụng; ghi công riêng không bị cắt và nhãn ảnh nhỏ ở chân. */
+/** Draws one segment with the app's tokens; the separate attribution is not cut and the small photo label is at the foot. */
 async function paintPage(page: LayoutPage, index: number, count: number, options: PaintOptions): Promise<Blob> {
   const canvas = document.createElement('canvas');
   const height = page.height ?? PNG.maxHeight;
@@ -81,7 +81,7 @@ async function paintPage(page: LayoutPage, index: number, count: number, options
   return toPng(canvas);
 }
 
-/** Chờ font, đo bố cục rồi vẽ PNG; mọi URL xem trước dùng chính blob sẽ tải và được bên gọi thu hồi. */
+/** Waits for the font, measures the layout and then draws the PNG; every preview URL uses the very blob that will be downloaded and is revoked by the caller. */
 export async function renderPng(input: ExportInput): Promise<PngFile[]> {
   const blocks = exportBlocks(input);
   const photo = heroPhoto(input.destination);
@@ -93,7 +93,7 @@ export async function renderPng(input: ExportInput): Promise<PngFile[]> {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error(C.error);
-  /** Đo theo đúng font vai trò, không ước lượng theo số ký tự. */
+  /** Measures by exactly the role font, not estimated by the number of characters. */
   const measure = (text: string, role: TextRole): number => { setFont(ctx, role, family); return ctx.measureText(text).width; };
   const creditText = image && photo ? `${C.photo}: ${photo.author} · ${photo.license}` : C.photoMissing;
   const credit = wrapText(creditText, PNG.width - PNG.margin * PNG.edgeCount, text => measure(text, 'small'));

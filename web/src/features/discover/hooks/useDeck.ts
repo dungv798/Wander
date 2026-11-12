@@ -15,14 +15,14 @@ import { useSwipeDrag } from './useSwipeDrag.ts';
 import { matchesDiscoveryFilter } from '../model/discoveryFilters.ts';
 import { usePublishDeckSpotlight } from './DeckSpotlightProvider.tsx';
 
-/** Tờ chi tiết ở chế độ thêm vào chuyến: không có nút chọn/bỏ qua riêng (bộ thẻ đã có). */
+/** The detail sheet in add-to-trip mode: it has no choose/skip buttons of its own (the deck already has them). */
 const NO_DECIDE: PlaceSlot = { noDecide: true };
 
-/** Phím tắt của bộ thẻ: ←/→ bỏ qua/chọn, ↑ chi tiết, Backspace hoặc Z hoàn tác. Bỏ qua khi đang mở chi tiết hoặc đang gõ. */
+/** The deck's shortcut keys: left/right skip/choose, up detail, Backspace or Z undo. Ignored while the detail is open or while typing. */
 function useDeckKeys(swipeTop: (dir: SwipeDir) => void, openFront: () => void, undo: () => void): void {
   const sheet = usePlaceSheet();
   useEffect(() => {
-    /** Xử lý một lần nhấn phím. */
+    /** Handles one key press. */
     const onKey = (e: KeyboardEvent): void => {
       if (e.altKey || e.ctrlKey || e.metaKey || e.defaultPrevented || sheet.placeId || (e.target as HTMLElement).closest('input, textarea, select')) return;
       if (e.key === 'ArrowRight') swipeTop('r');
@@ -37,7 +37,7 @@ function useDeckKeys(swipeTop: (dir: SwipeDir) => void, openFront: () => void, u
   });
 }
 
-/** Tải trước ảnh của vài thẻ kế tiếp để thẻ mới hiện ra không khựng vì chờ giải mã ảnh. */
+/** Preloads the photos of the next few cards so a new card appears without stalling to wait for photo decoding. */
 function usePreloadPhotos(urls: readonly (string | undefined)[]): void {
   const key = urls.join('|');
   useEffect(() => {
@@ -46,8 +46,8 @@ function usePreloadPhotos(urls: readonly (string | undefined)[]): void {
 }
 
 /**
- * Điều khiển bộ thẻ quẹt: thẻ còn lại, thẻ trên cùng, cử chỉ kéo, bay thẻ bằng nút/phím, ảnh nền mờ và ngăn kéo chi tiết
- * bám theo thẻ trên cùng ở màn ≥ 1280 px.
+ * Controls the swipe deck: the remaining cards, the top card, the drag gesture, flying a card by button/key, the blurred background photo and the detail drawer
+ * that follows the top card on a screen of at least 1280 px.
  */
 export function useDeck(dest: DestinationDetail, adding?: AddingMode) {
   const { state, actions } = useDiscover();
@@ -67,19 +67,19 @@ export function useDeck(dest: DestinationDetail, adding?: AddingMode) {
   usePreloadPhotos(left.slice(SWIPE.VISIBLE_CARDS, SWIPE.VISIBLE_CARDS + SWIPE.PRELOAD_CARDS).map((p) => photoAt(p, 0)?.url));
   useScreenVar('stage', frontPhoto ? `url("${encodeURI(frontPhoto)}")` : null);
 
-  /** Quyết định cho thẻ trên cùng theo hướng quẹt (phải = thích). */
+  /** Decides for the top card by the swipe direction (right = like). */
   const decideFront = (dir: SwipeDir): void => {
     if (!front) return;
     if (!adding) actions.decide(front.id, dir === 'r' ? 'like' : 'skip');
     else if (dir === 'r') adding.onAdd({ id: front.id, category: front.category });
     else setSkippedHere((ids) => [...ids, front.id]);
   };
-  /** Bay thẻ trên cùng rồi quyết định (dùng cho nút và phím). */
+  /** Flies the top card away and then decides (used by the buttons and keys). */
   const swipeTop = (dir: SwipeDir): void => {
     const card = deckRef.current?.querySelector<HTMLElement>('.card.front');
     if (card) fling(card, dir, reduced, () => decideFront(dir));
   };
-  /** Mở chi tiết thẻ trên cùng. */
+  /** Opens the detail of the top card. */
   const openFront = (): void => {
     if (front) sheet.open(front.id, adding ? NO_DECIDE : undefined);
   };
@@ -93,7 +93,7 @@ export function useDeck(dest: DestinationDetail, adding?: AddingMode) {
     onTap: openFront,
     multiPhoto: (front?.photos.length ?? 0) > 1,
   });
-  /** Hoàn tác thẻ cuối, trừ khi một thẻ đang bay (tránh ghi quyết định cho thẻ đã được hoàn tác). */
+  /** Undoes the last card, unless a card is flying (to avoid recording a decision for a card that has been undone). */
   const undo = (): void => {
     if (!adding && !deckRef.current?.querySelector('[data-gone]')) actions.undo();
   };
@@ -111,7 +111,7 @@ export function useDeck(dest: DestinationDetail, adding?: AddingMode) {
         else sheet.close();
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ đồng bộ khi thẻ trên cùng đổi
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- sync only when the top card changes
   }, [front?.id]);
 
   return { state, actions, left, front, deckRef, handlers, swipeTop, openFront, undo };

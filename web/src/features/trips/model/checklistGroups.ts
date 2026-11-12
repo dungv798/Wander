@@ -1,14 +1,14 @@
 import type { ChecklistItem } from '../../collab/index.ts';
 
-/** Một nhóm hạng mục chuẩn bị; {@code group} rỗng là các hạng mục chưa có nhóm. */
+/** A group of preparation items; an empty {@code group} means the items that have no group yet. */
 export interface ChecklistGroup {
   readonly group: string;
   readonly items: readonly ChecklistItem[];
 }
 
 /**
- * Gom checklist theo nhóm: nhóm theo thứ tự xuất hiện đầu tiên của hạng mục nhỏ vị trí nhất, hạng mục trong nhóm theo vị trí,
- * nhóm rỗng ("Khác") xếp cuối.
+ * Groups the checklist: groups in the order of first appearance of the item with the smallest position, items inside a group by position,
+ * the empty group ('Other') last.
  */
 export function groupChecklist(items: readonly ChecklistItem[]): ChecklistGroup[] {
   const sorted = [...items].sort((a, b) => a.position - b.position);

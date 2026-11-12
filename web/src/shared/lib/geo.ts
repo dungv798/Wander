@@ -2,20 +2,20 @@ import { COPY } from '../const/copy.vi.ts';
 import { DISTANCE_COPY } from '../const/distance.copy.ts';
 import { fill } from '../const/copy.vi.ts';
 
-/** Quãng đường dưới một km giữ nhãn riêng để không làm tròn thành 0 km. */
+/** A distance under one km keeps its own label so it is not rounded to 0 km. */
 export function formatTravelDistance(km: number): string {
   return km < 1 ? DISTANCE_COPY.underOne : fill(DISTANCE_COPY.kilometers, { km: Math.round(km) });
 }
 
-/** Tọa độ địa lý (độ). */
+/** Geographic coordinates (degrees). */
 export interface GeoPoint {
   readonly lat: number;
   readonly lon: number;
 }
 
-/** Hệ số quanh co của đường núi nhân với đường chim bay; GIẢ ĐỊNH chưa kiểm chứng, khớp `TravelEstimate` của backend. */
+/** The winding factor of a mountain road multiplied with the straight-line distance; an UNVERIFIED ASSUMPTION, matching the backend's `TravelEstimate`. */
 export const ROAD_FACTOR = 1.5;
-/** Tốc độ xe máy giả định (km/h), khớp backend. */
+/** The assumed motorbike speed (km/h), matching the backend. */
 export const SPEED_KMH = 25;
 
 const EARTH_RADIUS_KM = 6371;
@@ -24,7 +24,7 @@ const MINUTES_PER_HOUR = 60;
 const HALF_TURN_DEG = 180;
 const DEG_TO_RAD = Math.PI / HALF_TURN_DEG;
 
-/** Khoảng cách chim bay (haversine) giữa hai điểm, đơn vị km. */
+/** The straight-line distance (haversine) between two points, in km. */
 export function airKm(a: GeoPoint, b: GeoPoint): number {
   const dLat = (b.lat - a.lat) * DEG_TO_RAD;
   const dLon = (b.lon - a.lon) * DEG_TO_RAD;
@@ -32,18 +32,18 @@ export function airKm(a: GeoPoint, b: GeoPoint): number {
   return EARTH_RADIUS_KM * HALF * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
 }
 
-/** Ước tính đường bộ giữa hai điểm: km (tối thiểu 1) và phút đi xe máy. KHÔNG phải chỉ đường; giao diện luôn ghi "ước tính". */
+/** A road estimate between two points: km (at least 1) and motorbike minutes. NOT directions; the UI always says 'estimate'. */
 export function travelEstimate(a: GeoPoint, b: GeoPoint): { km: number; minutes: number } {
   const road = airKm(a, b) * ROAD_FACTOR;
   return { km: Math.max(1, Math.round(road)), minutes: Math.round((road / SPEED_KMH) * MINUTES_PER_HOUR) };
 }
 
-/** Quãng đường bộ ước tính (km, chưa làm tròn) giữa hai điểm: chim bay × hệ số đường núi. */
+/** The estimated road distance (km, unrounded) between two points: straight line x the mountain-road factor. */
 export function roadKmBetween(a: GeoPoint, b: GeoPoint): number {
   return airKm(a, b) * ROAD_FACTOR;
 }
 
-/** Số phút đi xe máy cho một quãng đường (km) theo tốc độ giả định. */
+/** The motorbike minutes for a distance (km) at the assumed speed. */
 export function minutesForKm(km: number): number {
   return (km / SPEED_KMH) * MINUTES_PER_HOUR;
 }
@@ -52,8 +52,8 @@ const QUARTER_HOUR_MIN = 15;
 const HALF_HOUR_MIN = 30;
 
 /**
- * Số phút đi đã làm tròn để HIỂN THỊ: dưới 1 giờ làm tròn 15 phút (tối thiểu 15); từ 1 giờ làm tròn nửa giờ.
- * Một phương pháp duy nhất cho từng chặng và cho tổng, để tổng luôn khớp với các chặng bên dưới.
+ * The travel minutes rounded for DISPLAY: under 1 hour rounds to 15 minutes (at least 15); from 1 hour rounds to a half hour.
+ * One single method for each leg and for the total, so the total always matches the legs below it.
  */
 export function roundTravelMinutes(minutes: number): number {
   const quarter = Math.round(minutes / QUARTER_HOUR_MIN) * QUARTER_HOUR_MIN;
@@ -61,12 +61,12 @@ export function roundTravelMinutes(minutes: number): number {
   return Math.round(minutes / HALF_HOUR_MIN) * HALF_HOUR_MIN;
 }
 
-/** Tổng các chặng đã làm tròn để hiển thị; không làm tròn lại từ tổng km. */
+/** The sum of the legs already rounded for display; it is not rounded again from the total km. */
 export function sumRoundedMinutes(legMinutes: readonly number[]): number {
   return legMinutes.reduce((sum, m) => sum + roundTravelMinutes(m), 0);
 }
 
-/** Số phút ĐÃ làm tròn thành chữ chính xác: "45 phút", "2 giờ", "2 giờ 15 phút". Dùng cho tổng cộng các chặng. */
+/** The ALREADY rounded minutes as exact text: '45 minutes', '2 hours', '2 hours 15 minutes'. Used for the sum of the legs. */
 export function formatTravelMinutes(minutes: number): string {
   if (minutes < MINUTES_PER_HOUR) return `${minutes} ${COPY.time.minutes}`;
   const hours = Math.floor(minutes / MINUTES_PER_HOUR);
@@ -75,8 +75,8 @@ export function formatTravelMinutes(minutes: number): string {
 }
 
 /**
- * Thời gian đi dạng dễ đọc cho MỘT chặng: dưới 1 giờ làm tròn 15 phút ("45 phút", tối thiểu 15); từ 1 giờ làm tròn nửa giờ ("2 giờ", "2,5 giờ").
- * Đây là con số ước tính; giao diện luôn ghi "ước tính".
+ * A readable travel time for ONE leg: under 1 hour rounds to 15 minutes ('45 minutes', at least 15); from 1 hour rounds to a half hour ('2 hours', '2.5 hours').
+ * This is an estimated number; the UI always says 'estimate'.
  */
 export function formatTravelTime(minutes: number): string {
   const rounded = roundTravelMinutes(minutes);

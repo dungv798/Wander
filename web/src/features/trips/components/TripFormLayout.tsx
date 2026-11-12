@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Button } from '../../../shared/ui/Button.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Giữ phần hành động ngoài vùng cuộn và giới hạn sheet theo bàn phím, kể cả viewport bị dịch trên iOS. */
+/** Keeps the action part outside the scroll area and limits the sheet by the keyboard, even when the viewport is shifted on iOS. */
 export function TripFormLayout({ children, actions }: { readonly children: ReactNode; readonly actions: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -12,7 +12,7 @@ export function TripFormLayout({ children, actions }: { readonly children: React
     if (!sheet || !panel) return;
     const sheetStyle = sheet.getAttribute('style');
     const panelStyle = panel.getAttribute('style');
-    /** Đồng bộ vùng chứa với phần màn hình còn nhìn thấy khi bàn phím thay đổi. */
+    /** Syncs the container with the part of the screen still visible when the keyboard changes. */
     const sync = (): void => {
       const viewport = window.visualViewport;
       sheet.style.height = String(viewport?.height ?? window.innerHeight) + 'px';
@@ -42,7 +42,7 @@ export function TripFormLayout({ children, actions }: { readonly children: React
   );
 }
 
-/** Bộ nút chung của form nhanh và trình từng bước, nằm ngoài phần nội dung cuộn. */
+/** The shared button group of the quick form and the wizard, outside the scrolling content. */
 export function TripFormActions({ label, busy, onSubmit, onClose, onBack }: { readonly label: string; readonly busy: boolean; readonly onSubmit: () => void; readonly onClose: () => void; readonly onBack?: () => void }) {
   return <>
     <Button block disabled={busy} onClick={onSubmit}>{label}</Button>

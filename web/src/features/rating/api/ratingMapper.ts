@@ -5,22 +5,22 @@ import type { MyRating, PlaceRating, RatingComment } from '../model/rating.types
 
 type Body = Record<string, unknown>;
 
-/** Có phải đối tượng thường. */
+/** Whether it is a plain object. */
 function isRecord(v: unknown): v is Body {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Điểm hợp lệ: số nguyên 1–5. */
+/** A valid score: an integer 1-5. */
 function isStars(v: unknown): v is number {
   return typeof v === 'number' && Number.isInteger(v) && v >= 1 && v <= RATING.MAX_STARS;
 }
 
-/** Phản hồi hỏng ⇒ lỗi nội bộ (không để giao diện dùng dữ liệu sai dạng). */
+/** A broken response => an internal error (the UI never uses wrongly shaped data). */
 function broken(): never {
   throw new ApiError(CLIENT_ERROR.INTERNAL);
 }
 
-/** Đọc điểm của chính người xem; thiếu ⇒ null. */
+/** Reads the viewer's own score; missing => null. */
 function toMine(v: unknown): MyRating | null {
   if (v === null || v === undefined) return null;
   if (!isRecord(v) || !isStars(v['stars']) || typeof v['updatedAt'] !== 'string') return broken();
@@ -29,14 +29,14 @@ function toMine(v: unknown): MyRating | null {
   return { stars: v['stars'], comment: comment ?? null, updatedAt: v['updatedAt'] };
 }
 
-/** Đọc một lời bình. */
+/** Reads one comment. */
 function toComment(v: unknown): RatingComment {
   if (!isRecord(v) || typeof v['id'] !== 'string' || !isStars(v['stars']) || typeof v['comment'] !== 'string'
     || typeof v['updatedAt'] !== 'string' || typeof v['mine'] !== 'boolean') return broken();
   return { id: v['id'], stars: v['stars'], comment: v['comment'], updatedAt: v['updatedAt'], mine: v['mine'] };
 }
 
-/** Biến phản hồi `{rating:{summary,mine,comments}}` thành `PlaceRating`; sai dạng ⇒ `ApiError('INTERNAL')`. */
+/** Turns the response `{rating:{summary,mine,comments}}` into `PlaceRating`; a wrong shape => `ApiError('INTERNAL')`. */
 export function toPlaceRating(body: unknown): PlaceRating {
   const rating = isRecord(body) ? body['rating'] : undefined;
   if (!isRecord(rating) || !isRecord(rating['summary']) || !Array.isArray(rating['comments'])) return broken();

@@ -1,4 +1,4 @@
-/* Be Vietnam Pro tự lưu, SIL OFL 1.1; bỏ Baloo 2 theo DR-024 kể cả khi đối chiếu bố cục cũ. */
+/* Be Vietnam Pro self-hosted, SIL OFL 1.1; Baloo 2 is dropped per DR-024 even when comparing the old layout. */
 @font-face {
   font-family: 'Be Vietnam Pro';
   font-style: normal;
@@ -68,7 +68,7 @@
   --font-display: 'Be Vietnam Pro', system-ui, sans-serif;
   --font-body: 'Be Vietnam Pro', system-ui, sans-serif;
 }
-/* So sánh không kính, kể cả các lớp blur có sẵn ở giao diện trước. */
+/* Comparison without glass, including the existing blur layers of the previous UI. */
 :root[data-look='classic'] :is(#tabbar, .iconbtn, .round.small, .gnav, .search, .fchip, .panel, .sheetbody, .sheet, .maplibregl-ctrl-group) {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;

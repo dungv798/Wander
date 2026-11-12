@@ -8,15 +8,15 @@ import { useIdentity, useReportError } from '../../identity/index.ts';
 import { HttpPreferencesGateway } from '../api/HttpPreferencesGateway.ts';
 import { SETTINGS_COPY as T } from '../model/settings.copy.ts';
 
-/** Kho dùng chung của màn: gọi API sở thích của backend. Danh mục loại sở thích là từ vựng cố định (`TripInterest` ở backend), không phụ thuộc điểm đến. */
+/** The screen's shared store: calls the backend's preferences API. The catalog of interest kinds is a fixed vocabulary (`TripInterest` in the backend), independent of the destination. */
 const GATEWAY = new HttpPreferencesGateway(apiClient);
 
-/** Chọn/bỏ một mã trong danh sách (giữ thứ tự chọn). */
+/** Chooses/clears a code in the list (keeping the order of choosing). */
 function toggled(list: readonly string[], code: string): string[] {
   return list.includes(code) ? list.filter((c) => c !== code) : [...list, code];
 }
 
-/** Biểu mẫu chọn sở thích: nạp giá trị đang lưu ở máy chủ rồi cho chọn/bỏ và lưu (thay toàn bộ). Chỉ dựng khi đã có danh tính. */
+/** The interest-choosing form: loads the value stored on the server, then lets the user choose/clear and save (replacing everything). Built only once there is an identity. */
 function InterestsForm() {
   const report = useReportError();
   const toast = useToast();
@@ -35,7 +35,7 @@ function InterestsForm() {
     };
   }, [report]);
 
-  /** Lưu lên máy chủ; thành công thì lấy lại danh sách đã chuẩn hóa. */
+  /** Saves to the server; on success it takes back the normalized list. */
   const save = (): void => {
     setBusy(true);
     GATEWAY.saveInterests(chosen ?? []).then((codes) => {
@@ -61,7 +61,7 @@ function InterestsForm() {
   );
 }
 
-/** Mục "Bạn mê gì?" ở Cài đặt: sở thích lưu THEO DANH TÍNH (sang máy khác vẫn còn), dùng để gợi ý về sau. Chưa có danh tính thì nói rõ cách có. */
+/** The 'What are you into?' section in Settings: interests stored PER IDENTITY (they remain on another device), used for later suggestions. With no identity yet it says plainly how to get one. */
 export function InterestsSection() {
   const { identity } = useIdentity();
   return (

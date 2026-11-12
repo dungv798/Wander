@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { budgetStatus, costSummaryText, dayItems, roadKm, roadMinutes, summarizeCosts, tripDays, unassignedItems } from './tripMath.ts';
 import type { TripItem } from './trip.types.ts';
 
-/** Tạo một mục mẫu, ghi đè các trường cần thử. */
+/** Creates a sample item, overriding the fields to try. */
 function item(over: Partial<TripItem>): TripItem {
   return { id: 'x', placeId: null, type: 'food', title: 't', day: null, position: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: null, done: false, addedBy: null, doneBy: [], ...over };
 }
@@ -81,7 +81,7 @@ for (const fixture of [
 }
 
 test('tổng thời gian đi ngày = cộng các chặng hiển thị: ba chặng ngắn là 45 phút, không phải 15', () => {
-  // bốn điểm sát nhau (~0,3 km) ⇒ mỗi chặng hiển thị tối thiểu 15 phút ⇒ tổng 45
+  // four close points (about 0.3 km) => each leg shows at least 15 minutes => total 45
   const coords: Record<string, { lat: number; lon: number }> = {
     a: { lat: 11.94, lon: 108.44 }, b: { lat: 11.9425, lon: 108.44 }, c: { lat: 11.945, lon: 108.44 }, d: { lat: 11.9475, lon: 108.44 },
   };

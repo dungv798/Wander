@@ -9,15 +9,15 @@ import { DEST_COPY } from '../../model/dest.copy.ts';
 
 interface PlaceRowProps {
   readonly place: PlaceView;
-  /** Đã nằm trong tập "Đã chọn" của người dùng. */
+  /** Already in the user's 'Selected' set. */
   readonly chosen: boolean;
   readonly onOpen: () => void;
   readonly onToggle: () => void;
 }
 
 /**
- * Thẻ ngang của một nơi/trải nghiệm: ảnh thật bên trái (chạm = xem chi tiết), tên, khu vực, rồi "Xem chi tiết" và "Chọn".
- * "Chọn" là nút bật/tắt (`aria-pressed`): chọn rồi thì thành "Đã chọn" và chạm lại sẽ bỏ chọn. Mọi nút cao ≥ 44 px, không phụ thuộc hover.
+ * The horizontal card of a place/experience: a real photo on the left (tap = see detail), the name, the area, then 'See detail' and 'Select'.
+ * 'Select' is a toggle button (`aria-pressed`): once selected it becomes 'Selected' and tapping again deselects. Every button is at least 44 px high, not dependent on hover.
  */
 export function PlaceRow({ place, chosen, onOpen, onToggle }: PlaceRowProps) {
   return (

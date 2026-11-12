@@ -1,10 +1,10 @@
-/** Thời gian chờ ngừng gõ trước khi bay camera, mili giây. */
+/** The wait after typing stops before the camera flies, in milliseconds. */
 export const DESTINATION_SEARCH_DEBOUNCE_MS = 1000;
-/** Khóa lựa chọn điểm đến công khai, không chứa bí mật. */
+/** The key of the destination choice, public and holding no secret. */
 export const DESTINATION_STORAGE_KEY = 'wander.web.destination.v1';
-/** Trần zoom khi tìm tâm điểm đến. */
+/** The zoom ceiling when finding a destination's center. */
 export const DESTINATION_SEARCH_ZOOM = 10;
-/** Mã nền toàn quốc cho bộ bản đồ dùng chung. */
+/** The nationwide base id for the shared map set. */
 export const COUNTRY_MAP_ID = 'vietnam';
-/** Cùng dạng mã tuyến: chữ thường, số, gạch ngang; tối đa 64 ký tự. */
+/** The same shape as a route id: lowercase, digits, hyphens; at most 64 characters. */
 export const DESTINATION_ID_PATTERN = /^[a-z0-9-]{1,64}$/;

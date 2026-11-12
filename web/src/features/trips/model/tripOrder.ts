@@ -1,14 +1,14 @@
 import type { Trip, TripsState } from './trip.types.ts';
 
-/** Sắp xếp danh sách chuyến như máy chủ (`startDate` mới nhất trước, bằng nhau thì tạo sau trước) để thứ tự trong phiên khớp sau khi tải lại. */
+/** Sorts the trip list like the server (`startDate` newest first, ties by later creation first) so the order within the session matches after a reload. */
 export function sortTrips(trips: readonly Trip[]): Trip[] {
   return [...trips].sort((a, b) => (a.startDate === b.startDate ? b.createdAt - a.createdAt : a.startDate < b.startDate ? 1 : -1));
 }
 
 /**
- * Hợp nhất bản nạp cả danh sách (`loaded`, bắt đầu từ lúc kho là `started`) với kho hiện tại (`current`) sau khi có thao tác ghi xen giữa:
- * chuyến đã được đọc lại sau lúc `started` (hoặc mới tạo) giữ bản trong kho vì nó mới hơn; chuyến còn lại lấy từ bản nạp. Chuyến đã có ở
- * `started` mà không còn trong `loaded` (bị xóa ở máy khác) thì bỏ.
+ * Merges the loaded whole list (`loaded`, starting from when the store was `started`) with the current store (`current`) after a write action came in between:
+ * a trip that was re-read after `started` (or newly created) keeps the copy in the store because it is newer; the other trips are taken from the loaded copy. A trip that was in
+ * `started` but is no longer in `loaded` (deleted on another device) is dropped.
  */
 export function mergeLoaded(started: TripsState, current: TripsState, loaded: readonly Trip[]): Trip[] {
   const startedById = new Map(started.trips.map((t) => [t.id, t]));

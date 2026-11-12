@@ -5,7 +5,7 @@ import { NO_LOCKS, clearFailures, isLocked, recordFailure, sanitizeLocks, triesO
 
 const T0 = 1_000_000;
 
-/** Ghi `n` lần sai liên tiếp. */
+/** Records `n` consecutive wrong attempts. */
 function fail(n: number, scope: 'recover' | 'reauth' | 'pair' = 'recover') {
   let s = NO_LOCKS;
   for (let i = 0; i < n; i += 1) s = recordFailure(s, scope, T0 + i);

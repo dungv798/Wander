@@ -12,7 +12,7 @@ interface RowProps {
   readonly shown: boolean;
 }
 
-/** Một dòng của ngày: ảnh + số (khớp số ghim), khung buổi, tên và ghi chú ngắn; dòng nghỉ trưa không có số. */
+/** One row of the day: a photo + a number (matching the pin number), the part of day, the name and a short note; the lunch-break row has no number. */
 function TripRow({ item, hot, shown }: RowProps) {
   const cls = ['ob-row', item.kind === 'break' ? 'ob-brk' : '', hot ? 'hot' : '', shown ? 'shown' : ''].filter(Boolean).join(' ');
   if (item.kind === 'break') {
@@ -47,15 +47,15 @@ function TripRow({ item, hot, shown }: RowProps) {
 interface DaySheetProps {
   readonly accessory?: ReactNode;
   readonly days: readonly TripDay[];
-  /** 0 = tổng quan, 1.. = số ngày. */
+  /** 0 = overview, 1.. = the day number. */
   readonly tab: number;
-  /** Số dòng đã hiện của ngày đang xem (Infinity = tất cả). */
+  /** The number of rows already shown of the day being viewed (Infinity = all). */
   readonly rowsShown: number;
   readonly hot: number;
   readonly onTab: (tab: number) => void;
 }
 
-/** Tổng quan hai ngày: mỗi ngày một dòng với ảnh các nơi. */
+/** The two-day overview: one row per day with the photos of the places. */
 function Overview({ days }: { readonly days: readonly TripDay[] }) {
   return (
     <ul className="ob-rows">
@@ -77,7 +77,7 @@ function Overview({ days }: { readonly days: readonly TripDay[] }) {
   );
 }
 
-/** Tờ lịch dưới bản đồ: tab Tổng quan / Ngày 1 / Ngày 2, tiêu đề (kèm nhãn "Lịch trình minh họa") và danh sách đồng bộ với ghim. */
+/** The itinerary sheet under the map: Overview / Day 1 / Day 2 tabs, a title (with the 'Illustrative itinerary' label) and a list synchronized with the pins. */
 export function DaySheet({ days, tab, rowsShown, hot, onTab, accessory }: DaySheetProps) {
   const day = tab > 0 ? days[tab - 1] : undefined;
   return (

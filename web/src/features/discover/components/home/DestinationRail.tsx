@@ -6,7 +6,7 @@ import { useCurrentDestination } from '../../hooks/CurrentDestinationProvider.ts
 import { HOME } from '../../model/home.const.ts';
 import { DestinationCard } from './DestinationCard.tsx';
 
-/** Hàng ngắn các điểm đến khác (khi đã chọn một điểm đến); trang chủ lần đầu dùng `NationalHome`. */
+/** A short row of other destinations (once a destination has been chosen); the first-time home page uses `NationalHome`. */
 export function DestinationRail() {
   const { destinations, selectedId, select, status, retry } = useCurrentDestination();
   const list = destinations.filter(destination => destination.id !== selectedId).slice(0, HOME.OTHER_DESTINATIONS);

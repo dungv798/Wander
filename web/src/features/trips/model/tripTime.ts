@@ -1,6 +1,6 @@
 import { TRIP_TIME as C } from './tripTime.const.ts';
 
-/** Nhận HH:mm hoặc bốn chữ số; chuỗi rỗng xóa giờ, sai trả null để chặn lưu. */
+/** Accepts HH:mm or four digits; an empty string clears the time, a wrong one returns null to block saving. */
 export function normalizeTripTime(raw: string): string | null {
   const text = raw.trim();
   if (!text) return '';
@@ -9,7 +9,7 @@ export function normalizeTripTime(raw: string): string | null {
   return `${match[1]}:${match[2]}`;
 }
 
-/** Tạo lựa chọn có số 0 đầu, dùng cùng quy tắc cho giờ và phút. */
+/** Creates choices with a leading zero, using the same rule for hours and minutes. */
 export function timeOptions(count: number, step = 1): string[] {
   return Array.from({ length: count / step }, (_, i) => String(i * step).padStart(C.PART_DIGITS, '0'));
 }

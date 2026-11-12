@@ -1,5 +1,5 @@
-/* Phản hồi chung cho nút và thẻ có ngữ nghĩa tương tác, không tác động thẻ chỉ đọc.
-   scale riêng giữ nguyên transform định vị của điều khiển nổi và thẻ quẹt. */
+/* Shared feedback for buttons and cards that have interactive semantics, with no effect on a read-only card.
+   its own scale keeps the positioning transform of floating controls and the swipe card. */
 :root:not([data-look='classic']) :is(button, a[href], [role='button'], summary) {
   transition: scale var(--dur-press) var(--ease-out), filter var(--dur-press) var(--ease-out);
 }
@@ -7,7 +7,7 @@
   scale: var(--glass-pressed-scale);
   filter: brightness(var(--glass-pressed-brightness));
 }
-/* Gỡ scale cũ để tránh nhân đôi mức co của nút kính. */
+/* Removes the old scale to avoid doubling the shrink of a glass button. */
 :root:not([data-look='classic']) :is(.btn, .pill, .fchip, .tab, .iconbtn, .mini, .dcard, .tcard, .tile, .resume, .dchip, .opt, .round):active { transform: none; }
 @media (prefers-reduced-motion: reduce) {
   :root:not([data-look='classic']) :is(button, a[href], [role='button'], summary) { transition: none; }

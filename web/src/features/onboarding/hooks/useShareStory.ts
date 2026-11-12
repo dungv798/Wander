@@ -17,11 +17,11 @@ import type { SwipePhase } from './useSwipeStory.ts';
 
 interface ShareStoryDeps {
   readonly baseDays: readonly TripDay[];
-  /** Địa điểm được đề xuất (null nếu kho thiếu: cảnh vẫn dựng nhưng bỏ phần đề xuất). */
+  /** The suggested place (null if the catalog lacks it: the scene is still built but the suggestion part is dropped). */
   readonly proposal: PlaceView | null;
   readonly settled: Promise<void>;
   readonly reduced: boolean;
-  /** Còn tự chạy không: chỉ khi còn tự chạy mới nhắc nút bắt đầu lúc kể xong. */
+  /** Whether it still runs by itself: only while it still runs by itself does it hint at the start button when the story is told. */
   readonly auto: boolean;
   readonly onInteract: () => void;
   readonly onCue: (ms: number) => void;
@@ -29,9 +29,9 @@ interface ShareStoryDeps {
   readonly buttons: Readonly<Record<ShareTarget, RefObject<HTMLElement | null>>>;
 }
 
-/** Các thao tác thật của người xem lên cảnh chia sẻ. */
+/** The viewer's real actions on the share scene. */
 export interface ShareActions {
-  /** Người xem chạm vào cảnh (ví dụ đổi tab): dừng phần tự chạy. */
+  /** The viewer touches the scene (for example changes a tab): stops the self-running part. */
   readonly interrupt: () => void;
   readonly share: () => void;
   readonly copy: () => void;
@@ -39,7 +39,7 @@ export interface ShareActions {
   readonly reject: () => void;
 }
 
-/** Kết quả của câu chuyện chia sẻ: trạng thái, dấu chạm, thông báo, giai đoạn, thao tác và "Xem lại". */
+/** The result of the share story: the state, the touch dot, the notice, the stage, the actions and 'Watch again'. */
 export interface ShareStory extends ShareActions {
   readonly state: ShareState;
   readonly touch: TouchMark | null;
@@ -48,7 +48,7 @@ export interface ShareStory extends ShareActions {
   readonly replay: () => void;
 }
 
-/** Trạng thái hoàn chỉnh cho bản tĩnh: đã chấp nhận đề xuất, đủ ba thành viên. */
+/** The full state for the static version: the suggestion accepted, all three members. */
 function finalState(base: ShareState, place: PlaceView | null): ShareState {
   const joined = MEMBERS.filter((m) => m.id !== 'me').reduce((s, m) => shareReducer(s, { type: 'join', member: m.id }), base);
   if (!place) return joined;
@@ -66,7 +66,7 @@ interface ActionDeps {
   readonly setPhase: (phase: SwipePhase) => void;
 }
 
-/** Thao tác của người xem: mỗi thao tác dừng phần tự chạy; sao chép sẽ kéo theo bạn bè vào rồi hiện đề xuất (chuỗi thủ công). */
+/** The viewer's actions: each action stops the self-running part; copying brings the friends in and then shows the suggestion (a manual chain). */
 function useShareActions({ scope, api, dispatch, proposal, onInteract, setTouch, setPhase }: ActionDeps): ShareActions {
   const interrupt = useCallback(() => {
     scope.cancel();
@@ -103,7 +103,7 @@ function useShareActions({ scope, api, dispatch, proposal, onInteract, setTouch,
   return { interrupt, share, copy, accept, reject };
 }
 
-/** Câu chuyện cảnh chia sẻ (minh họa): tự chạy cả chuỗi, hoặc người xem tự bấm từng nút (dừng phần tự chạy ngay khi họ chạm). Không tạo liên kết thật, không gửi dữ liệu. */
+/** The share scene story (illustrative): runs the whole chain by itself, or the viewer presses each button themself (the self-running part stops as soon as they touch). It creates no real link and sends no data. */
 export function useShareStory(deps: ShareStoryDeps): ShareStory {
   const { baseDays, proposal, settled, reduced, auto, onInteract, onCue, stage, buttons } = deps;
   const scope = useRunScope();

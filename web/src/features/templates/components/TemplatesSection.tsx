@@ -7,13 +7,13 @@ import type { TemplateView } from '../model/template.types.ts';
 import { TEMPLATES_COPY as T } from '../model/templates.copy.ts';
 import { TemplateSheet } from './TemplateSheet.tsx';
 
-/** Ảnh bìa của lịch mẫu: ảnh nơi đầu tiên của lịch. */
+/** The cover photo of a sample itinerary: the photo of the first place of the itinerary. */
 function coverOf(t: TemplateView): string | undefined {
   const first = t.days.flatMap((d) => d.places)[0];
   return first ? firstPhotoUrl(first) : undefined;
 }
 
-/** Một thẻ lịch mẫu: ảnh nơi đầu tiên, tên, số ngày/số nơi và nhãn "Bản nháp" khi chưa duyệt. */
+/** One sample-itinerary card: the photo of the first place, the name, the number of days/places and the 'Draft' label when not approved. */
 function TemplateCard({ template, onOpen }: { readonly template: TemplateView; readonly onOpen: () => void }) {
   const cover = coverOf(template);
   return (
@@ -29,7 +29,7 @@ function TemplateCard({ template, onOpen }: { readonly template: TemplateView; r
   );
 }
 
-/** Khối "Lịch mẫu để bắt đầu" ở trang Khám phá: hàng thẻ cuộn ngang; ẩn đi khi chưa có lịch mẫu hoặc đang tải/lỗi (không chặn trang). */
+/** The 'Sample itineraries to start with' block on the Discover page: a horizontally scrolling row of cards; hidden when there is no sample itinerary or while loading/error (it does not block the page). */
 export function TemplatesSection({ destId }: { readonly destId: string }) {
   const { state } = useTemplates(destId);
   const [openId, setOpenId] = useState<string | null>(null);

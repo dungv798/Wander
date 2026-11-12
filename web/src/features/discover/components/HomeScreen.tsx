@@ -1,7 +1,7 @@
 import { NationalHome } from './home/NationalHome.tsx';
 
 /**
- * Khám phá luôn mở toàn cảnh Việt Nam như bản B; điểm đến đã chọn vẫn được nhớ cho khay và tạo chuyến.
+ * Discover always opens the whole-Vietnam view like version B; the chosen destination is still remembered for the tray and for creating a trip.
  */
 export function HomeScreen() {
   return <NationalHome />;

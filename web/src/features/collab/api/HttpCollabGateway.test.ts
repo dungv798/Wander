@@ -13,7 +13,7 @@ interface Call {
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
 
-/** Cổng dựng trên fetch giả; `calls` để kiểm đường dẫn và thân. */
+/** A gateway built on a fake fetch; `calls` is used to check the path and the body. */
 function gateway(handler: (c: Call) => Response): { readonly gw: HttpCollabGateway; readonly calls: Call[] } {
   const calls: Call[] = [];
   const fetchImpl: FetchLike = (url, init) => {

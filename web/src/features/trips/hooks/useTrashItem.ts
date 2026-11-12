@@ -7,7 +7,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { useTrips } from './TripsProvider.tsx';
 import { useUndoable } from './useUndoable.ts';
 
-/** Xóa mềm một mục có Hoàn tác (D19). Thùng rác đầy thì KHÔNG xóa và nói rõ (không tự xóa vĩnh viễn mục cũ). Trả true nếu đã xóa. */
+/** Soft-deletes an item with Undo (D19). When the trash is full it does NOT delete and says so plainly (it never permanently deletes an old item on its own). Returns true if it was deleted. */
 export function useTrashItem(): (tripId: string, itemId: string, name: string) => boolean {
   const { actions } = useTrips();
   const undoable = useUndoable();

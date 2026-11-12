@@ -1,2 +1,2 @@
-/** Cổng công khai của tính năng "Cài đặt". */
+/** The public gate of the 'Settings' feature. */
 export { SettingsScreen } from './components/SettingsScreen.tsx';

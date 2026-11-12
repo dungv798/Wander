@@ -1,17 +1,17 @@
-/** Điểm tổng hợp của một quán: trung bình một chữ số thập phân (null khi chưa có lượt) và số lượt. */
+/** The aggregate score of a venue: the average to one decimal place (null when there are no ratings yet) and the number of ratings. */
 export interface RatingSummary {
   readonly average: number | null;
   readonly count: number;
 }
 
-/** Đánh giá của chính người xem. */
+/** The viewer's own rating. */
 export interface MyRating {
   readonly stars: number;
   readonly comment: string | null;
   readonly updatedAt: string;
 }
 
-/** Một lời bình hiển thị (ẩn danh); `mine` cho biết đó là của người xem. */
+/** A displayed comment (anonymous); `mine` says it is the viewer's. */
 export interface RatingComment {
   readonly id: string;
   readonly stars: number;
@@ -20,7 +20,7 @@ export interface RatingComment {
   readonly mine: boolean;
 }
 
-/** Rating của một quán dưới góc nhìn của người xem. */
+/** The rating of a venue from the viewer's point of view. */
 export interface PlaceRating {
   readonly summary: RatingSummary;
   readonly mine: MyRating | null;

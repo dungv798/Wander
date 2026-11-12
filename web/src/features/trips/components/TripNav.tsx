@@ -9,7 +9,7 @@ const MODE_ID = 'trip-mode';
 const DAY_ID = 'trip-tab';
 export const TRIP_PANEL_ID = 'trip-panel';
 
-/** Nhãn của từng chế độ (chế độ Chưa xếp kèm số nơi chưa có ngày). */
+/** The label of each mode (the Not scheduled mode with the number of places with no date). */
 function modeLabel(mode: TripMode, unassigned: number): string {
   if (mode === 'overview') return T.view.overview;
   if (mode === 'schedule') return T.view.modeSchedule;
@@ -17,7 +17,7 @@ function modeLabel(mode: TripMode, unassigned: number): string {
   return unassigned ? `${T.view.modeUnassigned} · ${unassigned}` : T.view.modeUnassigned;
 }
 
-/** Mũi tên trái/phải, Home, End đổi tab trong MỘT danh sách tab (mẫu WAI-ARIA); trả khóa mới hoặc null nếu phím không liên quan. */
+/** Left/right arrows, Home, End change the tab within ONE tab list (the WAI-ARIA pattern); returns the new key or null if the key is unrelated. */
 function nextKey(event: KeyboardEvent, keys: readonly string[], current: string): string | null {
   const at = keys.indexOf(current);
   const next = event.key === 'ArrowRight' ? at + 1 : event.key === 'ArrowLeft' ? at - 1 : event.key === 'Home' ? 0 : event.key === 'End' ? keys.length - 1 : null;
@@ -27,19 +27,19 @@ function nextKey(event: KeyboardEvent, keys: readonly string[], current: string)
 }
 
 interface TripNavProps {
-  /** Phần phụ địa chỉ hiện tại, đã qua `validTab`. */
+  /** The current address suffix, already passed through `validTab`. */
   readonly tab: string;
-  /** Các ngày của chuyến (yyyy-mm-dd). */
+  /** The days of the trip (yyyy-mm-dd). */
   readonly days: readonly string[];
   readonly unassigned: number;
-  /** Ngày đang xem gần nhất, để chế độ Lịch quay lại đúng ngày đó. */
+  /** The day most recently viewed, so the Schedule mode goes back to exactly that day. */
   readonly lastDay: string;
   readonly onTab: (tab: string) => void;
 }
 
 /**
- * Hai tầng điều khiển tách bạch: thanh CHẾ ĐỘ (Tổng quan / Lịch / Chưa xếp / Chi phí) ở trên, và chỉ khi ở Lịch mới có hàng CHỌN NGÀY nhẹ hơn.
- * Mỗi tầng là một tablist riêng (chỉ tab đang chọn nằm trong thứ tự Tab, phím mũi tên đổi tab); cả hai cùng điều khiển `trip-panel`.
+ * Two clearly separated control levels: the MODE bar (Overview / Schedule / Not scheduled / Cost) on top, and only in Schedule is there a lighter DAY-CHOOSING row.
+ * Each level is its own tablist (only the selected tab is in the Tab order, the arrow keys change the tab); both control `trip-panel`.
  */
 export function TripNav({ tab, days, unassigned, lastDay, onTab }: TripNavProps) {
   const mode = modeOfTab(tab);
@@ -47,7 +47,7 @@ export function TripNav({ tab, days, unassigned, lastDay, onTab }: TripNavProps)
   const dayKeys = days.map((_, k) => String(k + 1));
   return (
     <div className="trip-nav">
-      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- các tab là nút con; phím mũi tên xử lý ở đây theo mẫu WAI-ARIA */}
+      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- the tabs are child buttons; the arrow keys are handled here per the WAI-ARIA pattern */}
       <div className="tmodes" role="tablist" aria-label={T.view.modesLabel} onKeyDown={(e) => {
         const key = nextKey(e, modeKeys, mode);
         if (!key) return;
@@ -61,7 +61,7 @@ export function TripNav({ tab, days, unassigned, lastDay, onTab }: TripNavProps)
         ))}
       </div>
       {mode === 'schedule' ? (
-        // eslint-disable-next-line jsx-a11y/interactive-supports-focus -- các tab là nút con; phím mũi tên xử lý ở đây theo mẫu WAI-ARIA
+        // eslint-disable-next-line jsx-a11y/interactive-supports-focus -- the tabs are child buttons; the arrow keys are handled here per the WAI-ARIA pattern
         <div className="tdays" role="tablist" aria-label={T.view.daysTabs} onKeyDown={(e) => {
           const key = nextKey(e, dayKeys, tab);
           if (!key) return;
@@ -83,7 +83,7 @@ export function TripNav({ tab, days, unassigned, lastDay, onTab }: TripNavProps)
   );
 }
 
-/** Mã phần tử của tab đang chọn, để `tabpanel` trỏ `aria-labelledby` đúng tầng. */
+/** The element id of the selected tab, so the `tabpanel` points `aria-labelledby` at the right level. */
 export function activeTabId(tab: string): string {
   const mode = modeOfTab(tab);
   return mode === 'schedule' ? `${DAY_ID}-${tab}` : `${MODE_ID}-${mode}`;

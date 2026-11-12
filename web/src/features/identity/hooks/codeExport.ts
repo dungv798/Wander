@@ -7,12 +7,12 @@ const REVOKE_URL_DELAY_MS = 4000;
 const SECTION_BREAK = '\r\n\r\n';
 const LINE_BREAK = '\r\n';
 
-/** Nội dung tệp mã khôi phục tải về/in ra. */
+/** The content of the recovery-code file to download/print. */
 export function codeFileText(code: RecoveryCode, now: Date = new Date()): string {
   return [C.code.fileTitle, code.format(), fill(C.code.fileCreated, { when: now.toLocaleString('vi-VN') }), C.code.fileKeep].join(SECTION_BREAK) + LINE_BREAK;
 }
 
-/** Tải mã về thành tệp .txt; trả false khi không tạo được tệp. */
+/** Downloads the code as a .txt file; returns false when the file cannot be created. */
 export function downloadCode(code: RecoveryCode): boolean {
   try {
     const url = URL.createObjectURL(new Blob([codeFileText(code)], { type: 'text/plain;charset=utf-8' }));
@@ -29,7 +29,7 @@ export function downloadCode(code: RecoveryCode): boolean {
   }
 }
 
-/** Mở hộp thoại in cho mã (qua khung ẩn); trả false khi không in được. */
+/** Opens the print dialog for the code (through a hidden frame); returns false when it cannot be printed. */
 export function printCode(code: RecoveryCode): boolean {
   try {
     const frame = document.createElement('iframe');

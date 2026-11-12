@@ -1,18 +1,18 @@
 const OVERLAY_KEY = 'wanderOverlayRoute';
 
-/** Nhận diện mục lịch sử của tờ phủ trên đúng URL, giữ Back của màn nền độc lập. */
+/** Recognizes the history entry of an overlay sheet on the same URL, keeping the background screen's Back independent. */
 export function isOverlayEntry(state: unknown, hash: string): boolean {
   return !!state && typeof state === 'object' && OVERLAY_KEY in state && state[OVERLAY_KEY] === hash;
 }
 
-/** Gỡ dấu tờ phủ nhưng giữ state của màn nền và độ sâu điều hướng. */
+/** Removes the overlay mark but keeps the background screen's state and the navigation depth. */
 export function withoutOverlay(state: unknown): Record<string, unknown> {
   const result: Record<string, unknown> = { ...(state && typeof state === 'object' ? state : {}) };
   delete result[OVERLAY_KEY];
   return result;
 }
 
-/** Thêm mục cho tờ phủ mà không tăng độ sâu của tuyến hoặc thay state sẵn có. */
+/** Adds an entry for an overlay sheet without increasing the route depth or replacing the existing state. */
 export function withOverlay(state: unknown, hash: string): Record<string, unknown> {
   return { ...withoutOverlay(state), [OVERLAY_KEY]: hash };
 }

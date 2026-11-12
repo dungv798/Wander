@@ -4,33 +4,33 @@ import type { MealAnchor } from './mealSuggest.ts';
 import type { TripItem } from './trip.types.ts';
 import type { TripCatalog } from './tripView.ts';
 
-/** Loại hiển thị của một quán sau khi đối chiếu tên: nguồn gắn nhãn quán ăn nhưng tên là cà phê/trà thì coi là cà phê. */
+/** The display kind of a venue after cross-checking the name: the source labels it a restaurant but the name is a coffee/tea shop, so it counts as a coffee shop. */
 export type PoiKind = PoiSuggestion['kind'];
 
-/** Tên chuỗi cà phê/trà phổ biến; chỉ để sửa nhãn loại hiển thị, không bịa thông tin quán. */
+/** Names of common coffee/tea chains; only to correct the display kind label, not to invent venue information. */
 const COFFEE_NAME = /\b(coffee|cafe|caphe|ca phe|cà phê|highland|highlands|trà|tra sua|trà sữa|tea|milk tea|phuc long|the coffee house)\b/iu;
 
-/** Bỏ dấu để so tên ("Cà phê" ~ "ca phe"). */
+/** Removes accents to compare names ('Ca phe' matches the accented form). */
 function plain(text: string): string {
   return text.normalize('NFD').replace(/\p{M}/gu, '').replace(/đ/gi, 'd').toLowerCase();
 }
 
-/** Nhãn loại hiển thị: tên cà phê/trà thì là cà phê dù nguồn ghi quán ăn; còn lại giữ loại nguồn. */
+/** The display kind label: a coffee/tea name is a coffee shop even if the source says restaurant; otherwise the source kind is kept. */
 export function displayKind(poi: Pick<PoiSuggestion, 'kind' | 'name'>): PoiKind {
   if (poi.kind === 'food' && COFFEE_NAME.test(plain(poi.name))) return 'cafe';
   return poi.kind;
 }
 
-/** Thứ tự loại quán ưu tiên theo bữa: bữa chính ưu tiên quán ăn, nghỉ ưu tiên cà phê. Loại không có trong danh sách xếp cuối. */
+/** The order of venue kinds preferred by meal: a main meal prefers restaurants, rest prefers coffee. A kind not in the list goes last. */
 const KIND_ORDER: Readonly<Record<MealGap, readonly PoiKind[]>> = { lunch: ['food', 'fast_food', 'cafe'], dinner: ['food', 'fast_food', 'cafe'], rest: ['cafe', 'food', 'fast_food'] };
 
-/** Thứ hạng của một loại cho một bữa; thấp hơn = lên trước. */
+/** The rank of a kind for a meal; lower = earlier. */
 function kindRank(kind: PoiKind, gap: MealGap): number {
   const index = KIND_ORDER[gap].indexOf(kind);
   return index < 0 ? KIND_ORDER[gap].length : index;
 }
 
-/** Sắp quán cho một bữa: đúng loại trước, rồi gần trước; không loại bỏ quán nào (chỉ xếp lại). */
+/** Sorts the venues for a meal: the right kind first, then the nearer; it removes no venue (only reorders). */
 export function rankPoi(list: readonly PoiSuggestion[], gap: MealGap): PoiSuggestion[] {
   return [...list].sort((a, b) => kindRank(displayKind(a), gap) - kindRank(displayKind(b), gap) || a.distanceM - b.distanceM || a.id.localeCompare(b.id));
 }
@@ -40,7 +40,7 @@ const ROUND_METERS = 10;
 const TENTH_KM_METERS = 100;
 const MIN_METERS = 10;
 
-/** Khoảng cách dễ đọc: dưới 1 km là mét làm tròn 10, từ 1 km là km một chữ số thập phân (dấu phẩy). */
+/** A readable distance: under 1 km it is meters rounded to 10, from 1 km it is km with one decimal place (a comma). */
 export function formatDistance(meters: number): string {
   if (meters < METERS_PER_KM) return `${Math.max(MIN_METERS, Math.round(meters / ROUND_METERS) * ROUND_METERS)} m`;
   return `${(Math.round(meters / TENTH_KM_METERS) / ROUND_METERS).toString().replace('.', ',')} km`;
@@ -48,10 +48,10 @@ export function formatDistance(meters: number): string {
 
 const MIN_FOR_CENTROID = 2;
 
-/** Một mốc có thể chọn để tìm quán gần đó. */
+/** A landmark that can be chosen to look for venues nearby. */
 export interface AnchorOption extends MealAnchor { readonly key: string }
 
-/** Các mốc có tọa độ trong ngày theo thứ tự lịch, để người dùng chọn "gần điểm nào"; `centroid` là trọng tâm các điểm đó (nếu hơn một điểm). */
+/** The landmarks with coordinates in the day in schedule order, for the user to choose 'near which point'; `centroid` is the centroid of those points (if more than one). */
 export function dayAnchors(items: readonly Pick<TripItem, 'day' | 'placeId' | 'position'>[], day: string, place: TripCatalog['place'], centroidName: string): AnchorOption[] {
   const points = items.filter((i) => i.day === day).slice().sort((a, b) => (a.position ?? Number.MAX_SAFE_INTEGER) - (b.position ?? Number.MAX_SAFE_INTEGER)).flatMap((i) => {
     const p = place(i.placeId);

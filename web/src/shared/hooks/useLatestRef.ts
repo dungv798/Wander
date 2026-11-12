@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { RefObject } from 'react';
 
-/** Ô tham chiếu luôn giữ giá trị mới nhất: để chuỗi bất đồng bộ dài đọc trạng thái hiện tại mà không phải tạo lại. */
+/** A reference cell that always holds the latest value: so a long asynchronous chain reads the current state without being recreated. */
 export function useLatestRef<T>(value: T): RefObject<T> {
   const ref = useRef(value);
   useEffect(() => {

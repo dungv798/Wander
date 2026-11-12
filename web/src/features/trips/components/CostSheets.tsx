@@ -15,7 +15,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { dayCostText } from './CostBox.tsx';
 import { money } from './ItemMeta.tsx';
 
-/** Dòng một khoản: tên, loại, giá (hoặc "Chưa biết giá"/"Đã bao gồm"); chạm mở trình sửa mục. */
+/** One cost row: the name, the kind, the price (or 'Price unknown'/'Included'); tapping opens the item editor. */
 function CostRow({ item }: { readonly item: TripItem }) {
   const { cat, setOverlay } = useTripView();
   const kind = ITEM_KINDS[item.type];
@@ -31,13 +31,13 @@ function CostRow({ item }: { readonly item: TripItem }) {
   );
 }
 
-/** Tờ chi tiết chi phí: chuyển Theo ngày / Theo loại, các nhóm thu gọn mặc định, chạm khoản để sửa. Có dòng đặt chỗ riêng. */
+/** The cost detail sheet: switch By day / By kind, the groups collapsed by default, tap a cost to edit. It has a separate booking row. */
 export function CostDetailSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, days } = useTripView();
   const [by, setBy] = useState<CostGrouping>('day');
   const cs = summarizeCosts(trip);
   const groups = groupCosts(trip.items, by, days);
-  /** Nhãn nhóm: "Ngày n", "Chưa có ngày" hoặc tên loại. */
+  /** The group label: 'Day n', 'No date yet' or the kind name. */
   const label = (key: string): string => {
     if (by === 'kind') return ITEM_KINDS[key as ItemKind].label;
     return key ? fill(T.view.day, { n: days.indexOf(key) + 1 }) : T.view.unassigned;
@@ -64,10 +64,10 @@ export function CostDetailSheet({ onClose }: { readonly onClose: () => void }) {
   );
 }
 
-/** Loại khoản mới chọn được khi thêm chi phí: loại có giá, trừ tham quan (nơi tham quan thêm từ Khám phá). */
+/** The new cost kinds that can be chosen when adding a cost: kinds that have a price, except sightseeing (sightseeing places are added from Discover). */
 const NEW_COST_KINDS = KIND_ORDER.filter((k) => !isPlain(k) && k !== 'sightseeing');
 
-/** Tờ "Thêm chi phí": hoặc tạo khoản mới (chọn loại rõ ràng), hoặc nhập giá cho mục đã có để không tạo mục trùng. */
+/** The 'Add a cost' sheet: either create a new cost (choosing the kind clearly), or enter a price for an existing item so no duplicate item is created. */
 export function CostAddSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, setOverlay } = useTripView();
   const [mode, setMode] = useState<'new' | 'existing' | null>(null);

@@ -11,7 +11,7 @@ import { PlanDayCard } from './PlanDayCard.tsx';
 import { PlanItemRow } from './PlanItemRow.tsx';
 import './autoPlan.css';
 
-/** Preview dùng cùng ngôn ngữ kính/ảnh của lịch; mọi thay đổi còn là bản nháp đến khi server xác nhận Áp dụng. */
+/** The preview uses the same glass/photo language as the schedule; every change is still a draft until the server confirms Apply. */
 export function AutoPlanSheet({ onClose }: { readonly onClose: () => void }) {
   const model = useAutoPlan(onClose);
   const { trip, cat, requests, busy, plannedCount, deferred, summaries, chooseDay, apply } = model;

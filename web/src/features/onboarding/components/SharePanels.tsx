@@ -13,7 +13,7 @@ interface InvitePanelProps {
   readonly copyRef: RefObject<HTMLButtonElement | null>;
 }
 
-/** Bảng mời bạn đồng hành: liên kết minh họa (không có thật) và nút Sao chép. */
+/** The panel that invites travel companions: an illustrative link (not real) and the Copy button. */
 export function InvitePanel({ open, copied, onCopy, copyRef }: InvitePanelProps) {
   return (
     <div className={`ob-panel invite${open ? ' on' : ''}`} aria-hidden={!open}>
@@ -35,11 +35,11 @@ interface ProposalPanelProps {
   readonly onAccept: () => void;
   readonly onReject: () => void;
   readonly acceptRef: RefObject<HTMLButtonElement | null>;
-  /** Nhắc nhẹ (vòng sáng) vào nút Chấp nhận khi câu chuyện sắp bấm nó. */
+  /** A light hint (a glowing ring) on the Accept button when the story is about to press it. */
   readonly cue: boolean;
 }
 
-/** Nơi thành viên muốn ghé đang chưa xếp ngày; chủ chuyến minh họa chọn ngày hoặc để lại sau, không hứa một luồng duyệt thêm địa điểm. */
+/** The place a member wants to visit has no day yet; the illustrative trip owner chooses a day or leaves it for later, and promises no flow for approving extra places. */
 export function ProposalPanel({ open, place, onAccept, onReject, acceptRef, cue }: ProposalPanelProps) {
   const member = MEMBERS.find((m) => m.name === PROPOSAL.by);
   return (
@@ -68,7 +68,7 @@ export function ProposalPanel({ open, place, onAccept, onReject, acceptRef, cue 
   );
 }
 
-/** Các thành viên đã vào chuyến (chấm tròn theo tên hiển thị) và số người. */
+/** The members who have joined the trip (a round dot by display name) and the count. */
 export function Members({ ids }: { readonly ids: readonly string[] }) {
   const list = MEMBERS.filter((m) => ids.includes(m.id));
   return (

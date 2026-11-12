@@ -1,27 +1,27 @@
 import type { CategoryCode, SlotCode } from './Catalog.types.ts';
 import type { IconName } from '../../../shared/ui/icons/iconPaths.const.ts';
 
-/** Biểu tượng của từng loại địa điểm; tên loại do kho biên tập (`categoryName`) quyết định. */
+/** The icon of each place kind; the kind name is decided by the editorial catalog (`categoryName`). */
 export const CATEGORY_ICON: Readonly<Record<CategoryCode, IconName>> = {
   canh: 'trees', van: 'columns', am: 'tools-kitchen-2', leo: 'mountain', luu: 'bed', cho: 'building-store',
 };
 
-/** Tên loại theo mã (khớp `PlaceCategory`/`TripInterest` của backend); dùng cho danh mục sở thích. */
+/** The kind name by code (matching the backend's `PlaceCategory`/`TripInterest`); used for the interests catalog. */
 export const CATEGORY_NAME: Readonly<Record<CategoryCode, string>> = {
   canh: 'Cảnh quan', van: 'Văn hóa', am: 'Ẩm thực', leo: 'Leo núi', luu: 'Lưu trú', cho: 'Chợ',
 };
 
-/** Nhãn biên tập thay điểm sao (DR-007; KHÔNG bịa số sao, G1). */
+/** The editorial label in place of a star score (DR-007; NO invented star numbers, G1). */
 export const VERDICT_LABEL = { must: 'Nên ghé', worth: 'Đáng đi', ifconv: 'Chỉ ghé nếu tiện' } as const;
 
-/** Kiểu hiển thị khối nhãn biên tập: mức nhấn và biểu tượng. */
+/** The display style of the editorial label block: the emphasis level and the icon. */
 export const VERDICT_STYLE = {
   must: { cls: '', icon: 'rosette-discount-check' },
   worth: { cls: 'mid', icon: 'heart' },
   ifconv: { cls: 'low', icon: 'info-circle' },
 } as const;
 
-/** Buổi trong ngày: mã, biểu tượng. Nhãn ở `COPY.slots`. */
+/** The part of day: code, icon. The label is in `COPY.slots`. */
 export const SLOTS: readonly { readonly code: SlotCode; readonly icon: IconName }[] = [
   { code: 'sang', icon: 'sunrise' },
   { code: 'trua', icon: 'sun' },
@@ -29,10 +29,10 @@ export const SLOTS: readonly { readonly code: SlotCode; readonly icon: IconName 
   { code: 'toi', icon: 'moon-stars' },
 ];
 
-/** Điểm đến khác "sắp ra mắt" (chưa có dữ liệu thật; chỉ là danh sách chữ). */
+/** Other destinations 'coming soon' (no real data yet; only a list of text). */
 export const COMING_SOON: readonly string[] = ['Sa Pa', 'Hội An', 'Đà Lạt', 'Ninh Bình', 'Phú Quốc', 'Đà Nẵng'];
 
-/** Địa điểm dùng làm ảnh và minh họa ở màn mở đầu (id có thật trong kho biên tập). */
+/** The places used for the photo and illustration on the opening screen (ids that really exist in the editorial catalog). */
 export const HOME_PLACES = {
   PASS: 'deo-ma-pi-leng',
   COVER: 'hoang-su-phi',
@@ -44,12 +44,12 @@ export const HOME_PLACES = {
   HIGHLIGHTS: ['deo-ma-pi-leng', 'hoang-su-phi', 'cot-co-lung-cu', 'cao-nguyen-da', 'dinh-vuong'],
 } as const;
 
-/** Điểm lấy nét của ảnh bìa trên khung ngắn: cắt bớt trời trống, giữ phần có nội dung. */
+/** The focal point of the cover photo on a short frame: cuts the empty sky, keeps the part with content. */
 export const COVER_FOCAL: Readonly<Record<string, string>> = { 'hoang-su-phi': '50% 78%' };
 export const DEFAULT_FOCAL = '50% 50%';
 
-/** Cỡ tối đa của đoạn "Về nơi này" khi thu gọn (số dòng do CSS `.clamp`). */
+/** The maximum size of the 'About this place' paragraph when collapsed (the number of lines is by CSS `.clamp`). */
 export const ABOUT_MIN_LENGTH = 1;
 
-/** Số ảnh lấy từ catalog cho từng khối trang chủ. */
+/** The number of photos taken from the catalog for each home block. */
 export const HOME_PREVIEW = { HERO: 3, WALL: 6, HIGHLIGHTS: 3, LIVE: 3, RIGHT: 2 } as const;

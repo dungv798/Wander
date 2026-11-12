@@ -1,19 +1,19 @@
 import { MAP } from './map.const.ts';
 import type { Pt, Size } from './map.types.ts';
 
-/** Hình chữ nhật [x, y, rộng, cao] trên màn hình. */
+/** A rectangle [x, y, width, height] on the screen. */
 export type Box = readonly [number, number, number, number];
 
 const HALF = 2;
 
-/** Một ghim trên màn hình, đầu vào của việc gộp cụm. */
+/** A pin on the screen, the input of clustering. */
 export interface ScreenPin {
   readonly id: string;
   readonly p: Pt;
   readonly s: Pt;
 }
 
-/** Nhóm ghim gần nhau (< `thresholdPx` trên màn hình): chỉ trả nhóm có ≥ 2 ghim, kèm tâm theo tọa độ bản đồ. */
+/** Groups close pins (< `thresholdPx` on screen): returns only groups with at least 2 pins, with the center in map coordinates. */
 export function clusterPins(pins: readonly ScreenPin[], thresholdPx: number = MAP.CLUSTER_PX): { ids: string[]; p: Pt }[] {
   const used = new Set<string>();
   const out: { ids: string[]; p: Pt }[] = [];
@@ -27,12 +27,12 @@ export function clusterPins(pins: readonly ScreenPin[], thresholdPx: number = MA
   return out;
 }
 
-/** Hai hình chữ nhật có chồng nhau (kể cả khoảng đệm `gap`) không. */
+/** Whether two rectangles overlap (including the padding `gap`). */
 function overlaps(a: Box, b: Box, gap: number): boolean {
   return a[0] < b[0] + b[2] + gap && a[0] + a[2] + gap > b[0] && a[1] < b[1] + b[3] + gap && a[1] + a[3] + gap > b[1];
 }
 
-/** Nhãn cần đặt: tâm ghim trên màn hình và kích thước nhãn đã đo. */
+/** A label to place: the pin's center on the screen and the measured label size. */
 export interface LabelRequest {
   readonly id: string;
   readonly at: Pt;
@@ -41,8 +41,8 @@ export interface LabelRequest {
 }
 
 /**
- * Đặt nhãn không chồng nhau theo thứ tự ưu tiên: thử bên phải, bên trái, dưới, trên ghim; vị trí nào nằm trong khung và không
- * chạm ghim/nhãn đã đặt thì nhận. Nhãn không có chỗ thì không có mục trong kết quả (bị ẩn).
+ * Places non-overlapping labels by priority: tries right, left, below, above the pin; a position that is inside the frame and does not
+ * touch a pin/label already placed is accepted. A label with no room has no entry in the result (hidden).
  */
 export function placeLabels(requests: readonly LabelRequest[], pinBoxes: readonly Box[], size: Size): { placed: Map<string, Pt>; boxes: Box[] } {
   const placed = new Map<string, Pt>();
@@ -64,7 +64,7 @@ export function placeLabels(requests: readonly LabelRequest[], pinBoxes: readonl
   return { placed, boxes };
 }
 
-/** Hộp chiếm chỗ của một ghim hoặc ghim cụm quanh tâm màn hình. */
+/** The box occupied by a pin or a cluster pin around the screen center. */
 export function pinBox(at: Pt, half: number): Box {
   return [at[0] - half, at[1] - half, half * HALF, half * HALF];
 }

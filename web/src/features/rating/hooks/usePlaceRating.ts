@@ -7,10 +7,10 @@ import type { PlaceRating } from '../model/rating.types.ts';
 
 const ratingApi = new RatingApi();
 
-/** Trạng thái tải: `off` = máy này chưa có phiên (không hiện thẻ), `error` kèm lỗi để hiện hộp lỗi. */
+/** The loading state: `off` = this device has no session yet (the card is not shown), `error` with the error to show an error box. */
 export type RatingStatus = 'loading' | 'ready' | 'error' | 'off';
 
-/** Kết quả của hook rating một quán. */
+/** The result of the one-venue rating hook. */
 export interface PlaceRatingState {
   readonly status: RatingStatus;
   readonly data: PlaceRating | null;
@@ -23,8 +23,8 @@ export interface PlaceRatingState {
 }
 
 /**
- * Rating Wander của một quán (dùng với `key={placeId}` để đổi quán là trạng thái mới): tải khi mở, hủy yêu cầu cũ khi đổi quán, và các thao tác chấm/xóa/báo cáo trả `true` khi thành công.
- * Lỗi thao tác được giữ ở `error` (hộp lỗi hiện theo mã); thiếu phiên thì không gọi mạng.
+ * The Wander rating of a venue (used with `key={placeId}` so changing venue is a new state): loads on open, cancels the old request when the venue changes, and the rate/delete/report actions return `true` on success.
+ * An action error is kept in `error` (the error box shows by code); with no session no network call is made.
  */
 export function usePlaceRating(placeId: string): PlaceRatingState {
   const [status, setStatus] = useState<RatingStatus>(currentToken() ? 'loading' : 'off');
@@ -44,7 +44,7 @@ export function usePlaceRating(placeId: string): PlaceRatingState {
     return () => abort.abort();
   }, [placeId, tick]);
 
-  /** Chạy một thao tác ghi: đặt `busy`, cập nhật dữ liệu khi trả về `PlaceRating`, giữ lỗi để hiện. */
+  /** Runs one write action: sets `busy`, updates the data when a `PlaceRating` comes back, keeps the error to show. */
   const run = useCallback(async (action: () => Promise<PlaceRating | void>): Promise<boolean> => {
     setBusy(true);
     try {

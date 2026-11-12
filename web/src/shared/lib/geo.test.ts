@@ -26,7 +26,7 @@ test('thời gian đi dễ đọc', () => {
 });
 
 test('tổng thời gian đi bằng tổng các chặng đã hiển thị, không làm tròn lại từ tổng km', () => {
-  // ba chặng ngắn: mỗi chặng hiển thị tối thiểu 15 phút ⇒ tổng phải là 45 phút, không phải 15
+  // three short legs: each leg shows at least 15 minutes => the total must be 45 minutes, not 15
   const km = 1;
   const legs = [km, km, km].map(minutesForKm);
   assert.equal(roundTravelMinutes(legs[0]!), 15);

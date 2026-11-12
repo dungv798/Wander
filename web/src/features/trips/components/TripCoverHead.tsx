@@ -14,16 +14,16 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 interface TripCoverHeadProps {
   readonly trip: Trip;
   readonly dest: DestinationDetail;
-  /** Mở tờ "Người đi cùng" (mời, thành viên, quyền). */
+  /** Opens the 'Travel companions' sheet (invite, members, permissions). */
   readonly onPeople: () => void;
-  /** Gọn: tên + ngày một hàng, hai nút chỉ còn biểu tượng (nhãn vẫn có cho trình đọc màn hình). Dùng ở các tab danh sách để mục lịch lên cao hơn. */
+  /** Compact: the name + dates on one row, two buttons with only icons (the label is still there for screen readers). Used in the list tabs so the schedule items sit higher. */
   readonly compact?: boolean;
 }
 
 /**
- * Bìa chuyến ở đầu tờ: ảnh (hoặc màu bìa đã chọn), tên, ngày, số mục, và nhóm hành động chia sẻ ngay trên bìa:
- * "Người đi cùng" (mời bằng liên kết, thành viên, đề nghị) và "Chia sẻ lịch" (lưu/gửi lịch trình).
- * `compact` thu bìa còn một dải thấp (tab Lịch/Chưa xếp/Chi phí); tab Tổng quan giữ bìa đầy đủ.
+ * The trip cover at the top of the sheet: the photo (or the chosen cover color), the name, the dates, the number of items, and the group of sharing actions right on the cover:
+ * 'Travel companions' (invite by link, members, requests) and 'Share the schedule' (save/send the itinerary).
+ * `compact` shrinks the cover to a low strip (Schedule/Not scheduled/Cost tabs); the Overview tab keeps the full cover.
  */
 export function TripCoverHead({ trip, dest, onPeople, compact = false }: TripCoverHeadProps) {
   const { setOverlay } = useTripView();
@@ -31,7 +31,7 @@ export function TripCoverHead({ trip, dest, onPeople, compact = false }: TripCov
   const image = coverUrl(trip.cover, dest, first ? firstPhotoUrl(first) : dest.coverUrl);
   return (
     <div className="trip-cover-card" data-compact={compact || undefined} data-cover={gradientStyle(trip.cover) ? 'gradient' : 'photo'} style={gradientStyle(trip.cover)}>
-      {/* Bìa ở đầu màn có thể là LCP, giữ tải ngay thay vì lazy. */}
+      {/* The cover at the top of the screen can be the LCP, keep it loading at once instead of lazy. */}
       {image ? <img decoding="async" width={TRIP_IMAGES.COVER.width} height={TRIP_IMAGES.COVER.height} alt="" src={image} /> : null}
       <div className="tcc-in">
         <h1>{trip.name}</h1>

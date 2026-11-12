@@ -1,8 +1,8 @@
 /**
- * Cổng đọc lịch mẫu (nguyên lý D của SOLID): giao diện không biết dữ liệu đến từ tệp giả hay API thật.
- * Trả JSON THÔ (không tin cậy); `toTemplateViews` kiểm tra và ghép với kho địa điểm.
+ * The read port of the sample itineraries (the D of SOLID): the UI does not know whether the data comes from a fake file or the real API.
+ * Returns RAW JSON (untrusted); `toTemplateViews` checks it and joins it with the place catalog.
  */
 export interface TemplateRepository {
-  /** Lịch mẫu của một điểm đến; chưa có thì trả đối tượng rỗng (không phải lỗi). Không nhận tín hiệu hủy vì yêu cầu được dùng chung. */
+  /** The sample itineraries of a destination; if there is none it returns an empty object (not an error). It does not accept a cancel signal because the request is shared. */
   templates(destId: string): Promise<unknown>;
 }

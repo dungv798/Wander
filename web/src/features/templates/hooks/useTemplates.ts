@@ -8,10 +8,10 @@ import type { TemplateRepository } from '../api/TemplateRepository.ts';
 import type { TemplateView } from '../model/template.types.ts';
 import { toTemplateViews } from '../model/templateMapper.ts';
 
-/** Kho dùng chung của ứng dụng: gọi API lịch mẫu của backend. */
+/** The app's shared store: calls the backend's sample-itinerary API. */
 const DEFAULT_REPOSITORY: TemplateRepository = new HttpTemplateRepository(apiClient);
 
-/** Lịch mẫu của một điểm đến đã ghép với kho địa điểm (đợi cả hai tải xong). Lỗi mạng trả `error` để màn tự quyết (khối ẩn đi, không chặn trang). */
+/** The sample itineraries of a destination joined with the place catalog (waits for both to load). A network error returns `error` so the screen decides (the block hides, it does not block the page). */
 export function useTemplates(destId: string, repo: TemplateRepository = DEFAULT_REPOSITORY): { state: ResourceState<TemplateView[]>; retry: () => void } {
   const dest = useDestination(destId).state;
   const raw = useResource(() => repo.templates(destId), [repo, destId]);

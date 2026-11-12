@@ -8,16 +8,16 @@ test('lỗi nền liên tiếp chỉ hiện một cảnh báo; thử lại giữ
   let click: (() => void) | undefined;
   const original = Object.getOwnPropertyDescriptor(globalThis, 'document');
   Object.defineProperty(globalThis, 'document', { configurable: true, value: {
-    /** Dựng phần tử tối thiểu để kiểm tra cảnh báo và nút thử lại không cần trình duyệt. */
+    /** Builds a minimal element to check the warning and the retry button without a browser. */
     createElement() {
       return {
-        /** Ghi nhận vùng thông báo lịch sự, không giành focus của ghim. */
+        /** Records a polite notice region that does not take the pin's focus. */
         setAttribute(name: string, value: string) { assert.equal(name, 'role'); assert.equal(value, 'status'); },
-        /** Ghi nhận thao tác thử lại thay vì tự kích hoạt trong lúc báo lỗi. */
+        /** Records the retry action instead of triggering it by itself while an error is shown. */
         addEventListener(_event: string, callback: () => void) { click = callback; },
-        /** Chấp nhận nội dung thông báo và nút được ghép vào hộp. */
+        /** Accepts the notice content and the button that are put together into the box. */
         append() {},
-        /** Mô phỏng gỡ hộp trước khi tải lại để lần lỗi sau có thể báo tiếp. */
+        /** Simulates removing the box before reloading so the next error can be reported again. */
         remove() { notices.pop(); },
       };
     },
@@ -27,17 +27,17 @@ test('lỗi nền liên tiếp chỉ hiện một cảnh báo; thử lại giữ
     else Reflect.deleteProperty(globalThis, 'document');
   });
   const host = {
-    /** Trả cảnh báo hiện có để chống báo lặp. */
+    /** Returns the warning currently shown to prevent duplicate reports. */
     querySelector() { return notices[0]; },
-    /** Ghi lại số cảnh báo đang hiện trên bản đồ. */
+    /** Records the number of warnings currently shown on the map. */
     appendChild(node: unknown) { notices.push(node); },
   } as unknown as HTMLElement;
   const style = { sources: { 'wander-route': { type: 'geojson', data: { type: 'FeatureCollection', features: [] } } } };
   let reloads = 0;
   const map = {
-    /** Giữ cả nguồn tuyến khi tải lại kiểu nền. */
+    /** Keeps the route source too when the base style reloads. */
     getStyle() { return style; },
-    /** Kiểm tra nạp lại nguồn thay vì khởi tạo camera/bản đồ mới. */
+    /** Checks that the source is reloaded instead of creating a new camera/map. */
     setStyle(next: unknown, options: unknown) { assert.equal(next, style); assert.deepEqual(options, { diff: false }); reloads++; },
   } as unknown as MlMap;
   showBasemapError(map, host, { sourceId: 'openmaptiles' });

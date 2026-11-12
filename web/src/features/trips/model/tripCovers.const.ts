@@ -1,4 +1,4 @@
-/** Ảnh bìa tuyển từ discover/model/heroPhotos.const.ts; chỉ tham chiếu tệp còn trong catalog, không lưu theo chuyến. */
+/** The cover photos curated from discover/model/heroPhotos.const.ts; it only references files still in the catalog, not stored per trip. */
 export const TRIP_COVERS: Readonly<Record<string, string>> = {
   "da-lat": "ho-tuyen-lam-1-w1280-0c24449240.webp",
   "da-nang": "bai-bien-my-khe-2-w1280-b244125b7f.webp",

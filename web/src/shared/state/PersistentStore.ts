@@ -1,12 +1,12 @@
-/** Nơi lưu trữ khóa-giá trị (localStorage ở trình duyệt, bản giả trong test): nguyên lý D của SOLID. */
+/** A key-value storage place (localStorage in the browser, a fake in tests): the D principle of SOLID. */
 export interface KeyValueStorage {
-  /** Đọc giá trị của khóa; null nếu chưa có hoặc không đọc được. */
+  /** Reads the value of a key; null if there is none or it cannot be read. */
   getItem(key: string): string | null;
-  /** Ghi giá trị; có thể ném lỗi khi hết dung lượng hoặc bị chặn. */
+  /** Writes a value; it can throw when out of space or blocked. */
   setItem(key: string, value: string): void;
 }
 
-/** Nơi lưu mặc định: localStorage của trình duyệt, hoặc null khi bị chặn (chế độ riêng tư, thumbnail). */
+/** The default storage place: the browser's localStorage, or null when blocked (private mode, thumbnail). */
 export function browserStorage(): KeyValueStorage | null {
   try {
     return typeof localStorage === 'undefined' ? null : localStorage;
@@ -15,23 +15,23 @@ export function browserStorage(): KeyValueStorage | null {
   }
 }
 
-/** Biến dữ liệu đọc từ nơi lưu (không tin cậy: có thể hỏng, cũ hoặc do người dùng sửa tay) thành trạng thái hợp lệ; trả `null` nếu không cứu được. */
+/** Turns data read from storage (untrusted: it may be broken, old or edited by the user by hand) into a valid state; returns `null` if it cannot be rescued. */
 export type Sanitizer<T> = (raw: unknown) => T | null;
 
 /**
- * Kho trạng thái nhỏ có lưu trữ, tương thích `useSyncExternalStore` (một nguồn sự thật cho mỗi loại dữ liệu, chuẩn FE §6).
- * Trạng thái bất biến: mỗi lần đổi tạo đối tượng mới. Dữ liệu đã lưu LUÔN qua `sanitize` trước khi dùng; hỏng thì rơi về mặc định
- * để ứng dụng không trắng trang vì một khóa localStorage sai. Có thay đổi từ tab khác thì nạp lại (không ghi đè lên nhau).
+ * A small store of state with persistence, compatible with `useSyncExternalStore` (one source of truth for each kind of data, FE standard section 6).
+ * An immutable state: each change creates a new object. Stored data ALWAYS goes through `sanitize` before use; if broken it falls back to the default
+ * so the app does not go blank because of one wrong localStorage key. A change from another tab reloads it (they do not overwrite each other).
  */
 export class PersistentStore<T extends object> {
-  /** Đọc nguyên văn khóa cũ; chuỗi thuần và JSON đều giữ định dạng, kho bị chặn trả null. */
+  /** Reads the old key verbatim; a plain string and JSON both keep their format, a blocked store returns null. */
   static readRaw(key: string, storage: Pick<KeyValueStorage, 'getItem'> | null = browserStorage()): string | null {
     try { return storage?.getItem(key) ?? null; } catch { return null; }
   }
 
-  /** Ghi nguyên văn cho khóa có sẵn; hết dung lượng không cản thao tác trong phiên. */
+  /** Writes verbatim for an existing key; running out of space does not block an action within the session. */
   static writeRaw(key: string, value: string, storage: Pick<KeyValueStorage, 'setItem'> | null = browserStorage()): void {
-    try { storage?.setItem(key, value); } catch { /* Vẫn dùng trạng thái trong phiên hiện tại. */ }
+    try { storage?.setItem(key, value); } catch { /* The state is still used in the current session. */ }
   }
 
   private state: T;
@@ -41,7 +41,7 @@ export class PersistentStore<T extends object> {
   private readonly storage: KeyValueStorage | null;
   private readonly sanitize: Sanitizer<T>;
 
-  /** Tạo kho với trạng thái mặc định và bộ làm sạch; nạp giá trị đã lưu và lắng nghe tab khác. */
+  /** Creates the store with a default state and a sanitizer; loads the stored value and listens to other tabs. */
   constructor(key: string, initial: T, sanitize: Sanitizer<T>, storage: KeyValueStorage | null = browserStorage()) {
     this.key = key;
     this.initial = initial;
@@ -50,7 +50,7 @@ export class PersistentStore<T extends object> {
     this.state = this.read();
   }
 
-  /** Đọc và làm sạch giá trị đã lưu; mọi lỗi (JSON hỏng, kiểu sai, bị chặn) trả về mặc định. */
+  /** Reads and cleans the stored value; any error (broken JSON, wrong type, blocked) returns the default. */
   private read(): T {
     try {
       const raw = this.storage?.getItem(this.key);
@@ -60,19 +60,19 @@ export class PersistentStore<T extends object> {
     }
   }
 
-  /** Tab khác đổi đúng khóa này: nạp lại để không ghi đè lên thay đổi của tab đó. */
+  /** Another tab changed exactly this key: reload so it does not overwrite that tab's change. */
   private readonly onStorage = (e: StorageEvent): void => {
     if (e.key !== this.key) return;
     this.state = this.read();
     this.listeners.forEach((l) => l());
   };
 
-  /** Ảnh chụp trạng thái hiện tại (tham chiếu ổn định giữa hai lần đổi, đúng yêu cầu của `useSyncExternalStore`). */
+  /** The snapshot of the current state (a stable reference between two changes, exactly as `useSyncExternalStore` requires). */
   getSnapshot = (): T => this.state;
 
-  /** Đăng ký nghe thay đổi; trả hàm hủy đăng ký. */
+  /** Subscribes to changes; returns an unsubscribe function. */
   subscribe = (listener: () => void): (() => void) => {
-    // chỉ nghe tab khác khi có người đăng ký (không để lại bộ nghe mồ côi khi kho bị bỏ, ví dụ StrictMode dựng hai lần)
+    // listens to other tabs only when someone is subscribed (leaving no orphan listener when the store is abandoned, for example StrictMode building twice)
     if (!this.listeners.size && typeof window !== 'undefined') window.addEventListener('storage', this.onStorage);
     this.listeners.add(listener);
     return () => {
@@ -81,13 +81,13 @@ export class PersistentStore<T extends object> {
     };
   };
 
-  /** Cập nhật trạng thái bằng hàm thuần (nhận trạng thái cũ, trả trạng thái mới), lưu rồi báo cho người nghe. */
+  /** Updates the state with a pure function (takes the old state, returns the new state), saves and then notifies the listeners. */
   update(change: (current: T) => T): void {
     this.state = change(this.state);
     try {
       this.storage?.setItem(this.key, JSON.stringify(this.state));
     } catch {
-      /* chạy không lưu: thiết bị đầy hoặc chặn lưu trữ */
+      /* run without saving: the device is full or blocks storage */
     }
     this.listeners.forEach((l) => l());
   }

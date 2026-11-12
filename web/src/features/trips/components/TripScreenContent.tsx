@@ -34,15 +34,15 @@ import { StaleTripsNotice } from './StaleTripsNotice.tsx';
 import { useScrollCollapse } from '../hooks/useScrollCollapse.ts';
 
 const ANNOUNCE_DELAY_MS = 30;
-/** Nấc mở mặc định của tờ: vào thẳng Lịch (việc chính là xếp thứ tự các nơi) thì mở nấc cao nhất để thấy nhiều thẻ; các tab khác mở nấc vừa (B-01). */
+/** The default open step of the sheet: going straight to Schedule (the main job is ordering the places) opens the highest step to see many cards; the other tabs open at the middle step (B-01). */
 const DEFAULT_SNAP: Snap = 'half';
 const SCHEDULE_SNAP: Snap = 'full';
 
-/** Thông báo cho trình đọc màn hình: trả [nội dung hiện tại, hàm đọc]; xóa rồi đặt lại để cùng một câu vẫn được đọc lần nữa. */
+/** An announcement for screen readers: returns [the current content, the read function]; clears and sets again so the same sentence is read once more. */
 function useAnnouncer(): readonly [string, (text: string) => void] {
   const [text, setText] = useState('');
   const announce = useCallback(
-    /** Đặt nội dung mới sau một nhịp ngắn. */
+    /** Sets the new content after a short beat. */
     (next: string) => {
       setText('');
       window.setTimeout(() => setText(next), ANNOUNCE_DELAY_MS);
@@ -52,7 +52,7 @@ function useAnnouncer(): readonly [string, (text: string) => void] {
   return [text, announce];
 }
 
-/** Đầu tờ: tay nắm kéo, bìa chuyến (kèm nhóm Chia sẻ/Người đi cùng) và hai tầng điều khiển chế độ xem + chọn ngày. */
+/** The head of the sheet: the drag handle, the trip cover (with the Share/Travel companions group) and the two control levels for the view mode + day choice. */
 function TripHead({ trip, dest, days, tab, lastDay, onTab, onPeople }: { readonly trip: Trip; readonly dest: DestinationDetail; readonly days: readonly string[]; readonly tab: string; readonly lastDay: string; readonly onTab: (t: string) => void; readonly onPeople: () => void }) {
   return (
     <>
@@ -63,7 +63,7 @@ function TripHead({ trip, dest, days, tab, lastDay, onTab, onPeople }: { readonl
   );
 }
 
-/** Khung bản đồ ở đầu màn chuyến đi kèm nút quay lại và nút sửa chuyến. */
+/** The map frame at the top of the trip screen with a back button and an edit-trip button. */
 function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonly tripId: string; readonly onEdit: (() => void) | null }) {
   return (
     <section className="mapbox">
@@ -80,13 +80,13 @@ function MapBox({ covered, tripId, onEdit }: { readonly covered: number; readonl
   );
 }
 
-/** Nội dung màn chuyến đi khi đã có chuyến và điểm đến: bản đồ, tờ kéo (đầu + thân), nút nổi, các tờ phủ. */
+/** The content of the trip screen once there is a trip and a destination: the map, the draggable sheet (head + body), floating buttons, the overlay sheets. */
 function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: DestinationDetail; readonly sub: string | null }) {
   useTripToast();
   const days = useMemo(() => tripDays(trip), [trip]);
   const tab = validTab(sub, days.length);
   const mode = modeOfTab(tab);
-  // Ngày đang xem gần nhất: vào lại chế độ Lịch sẽ trở về đúng ngày đó.
+  // The day most recently viewed: going back into Schedule mode returns to exactly that day.
   const [lastDay, setLastDay] = useState('1');
   if (mode === 'schedule' && tab !== lastDay) setLastDay(tab);
   const cat = useMemo(() => catalogOf(dest), [dest]);
@@ -102,14 +102,14 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
   const collapsed = useScrollCollapse(scrollRef, mode === 'schedule' && !drawer);
   useBottomSheet(sheetRef, headRef, !drawer, mode === 'schedule' ? SCHEDULE_SNAP : DEFAULT_SNAP, (_snap, visible) => setCovered(visible));
 
-  // Đổi tab (Tổng quan ↔ Ngày n) luôn bắt đầu từ đầu danh sách, không giữ vị trí cuộn của tab trước.
+  // Changing tabs (Overview <-> Day n) always starts from the top of the list, keeping no scroll position of the previous tab.
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 });
   }, [tab]);
 
   const setTab = useCallback((t: string) => replaceRoute(VIEW.TRIP, trip.id, t), [trip.id]);
   const openItem = useCallback(
-    /** Địa điểm → tờ chi tiết kèm tóm tắt và nút của chuyến; mục tự do → trình sửa. */
+    /** A place -> the detail sheet with a summary and the trip's buttons; a free-form item -> the editor. */
     (itemId: string) => {
       const item = trip.items.find((i) => i.id === itemId);
       if (!item) return;
@@ -147,7 +147,7 @@ function TripContent({ trip, dest, sub }: { readonly trip: Trip; readonly dest: 
   );
 }
 
-/** Màn chuyến đi theo mã trong địa chỉ; không có chuyến thì báo rõ và cho đường về danh sách. */
+/** The trip screen by the id in the address; with no trip it says so plainly and gives the way back to the list. */
 export function TripScreen({ tripId, sub }: { readonly tripId: string; readonly sub: string | null }) {
   const { trip: find } = useTrips();
   useGoneGuard(tripId);

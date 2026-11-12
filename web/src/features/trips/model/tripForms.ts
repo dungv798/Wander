@@ -7,19 +7,19 @@ import type { ItemKind, TripItem } from './trip.types.ts';
 import { isPlain } from './tripMath.ts';
 import { TRIPS_COPY as COPY } from './trips.copy.ts';
 
-/** Kết quả kiểm biểu mẫu: giá trị hợp lệ hoặc lời nhắc tiếng Việt để hiện cạnh ô/ở khung cảnh báo. */
+/** The result of checking a form: a valid value or a Vietnamese hint to show beside the box/in the warning frame. */
 export type Parsed<T> = { readonly ok: true; readonly value: T } | { readonly ok: false; readonly error: string };
 
-/** Giá trị hợp lệ. */
+/** A valid value. */
 function ok<T>(value: T): Parsed<T> {
   return { ok: true, value };
 }
-/** Lỗi kèm lời nhắc. */
+/** An error with a hint. */
 function fail<T>(error: string): Parsed<T> {
   return { ok: false, error };
 }
 
-/** Đọc ô tiền (nghìn đồng): rỗng → null (chưa biết); sai thì trả lời nhắc theo mã lỗi của `Money`. */
+/** Reads a money box (thousand VND): empty -> null (unknown); wrong returns a hint by the error code of `Money`. */
 export function parseMoneyField(text: string, field: string): Parsed<number | null> {
   try {
     return ok(Money.parse(text)?.thousand ?? null);
@@ -29,23 +29,23 @@ export function parseMoneyField(text: string, field: string): Parsed<number | nu
   }
 }
 
-/** Dữ liệu ngày của biểu mẫu chuyến đi. */
+/** The date data of the trip form. */
 export interface DatesInput {
   readonly start: string;
   readonly end: string;
   readonly tentative: boolean;
-  /** Số ngày dự kiến (chuỗi nhập) khi chưa chắc ngày. */
+  /** The expected number of days (the typed string) when the dates are tentative. */
   readonly days: string;
 }
 
-/** Ngày hợp lệ của chuyến. */
+/** The valid dates of the trip. */
 export interface TripDates {
   readonly startDate: string;
   readonly endDate: string;
   readonly datesTentative: boolean;
 }
 
-/** Kiểm ngày: chưa chắc thì tính ngày về từ số ngày dự kiến (1–366); chắc thì cần ngày về ≥ ngày đi, tối đa 366 ngày. */
+/** Checks the dates: tentative computes the end date from the expected number of days (1-366); confirmed needs an end date >= the start date, at most 366 days. */
 export function parseDates(d: DatesInput): Parsed<TripDates> {
   if (!d.start) return fail(COPY.errors.startRequired);
   let end = d.end;
@@ -63,7 +63,7 @@ export function parseDates(d: DatesInput): Parsed<TripDates> {
   }
 }
 
-/** Dữ liệu biểu mẫu mục (chuỗi nhập thô). */
+/** The item form data (raw typed strings). */
 export interface ItemForm {
   readonly title: string;
   readonly type: ItemKind;
@@ -78,12 +78,12 @@ export interface ItemForm {
   readonly booked: boolean;
 }
 
-/** Phần sửa của một mục sau khi kiểm; `clearsPrice` cho biết đổi sang Nghỉ/Việc cần làm sẽ xóa dữ liệu giá (cần xác nhận). */
+/** The edit part of an item after checking; `clearsPrice` says that changing to Rest/To-do will clear the price data (needs confirmation). */
 export interface ItemValues {
   readonly patch: Pick<TripItem, 'title' | 'type' | 'day' | 'timeOfDay' | 'durationMin' | 'note' | 'costK' | 'included' | 'referenceK' | 'booking'>;
 }
 
-/** Kiểm biểu mẫu mục theo D17/D18 và giới hạn backend (tên ≤ 200, thời lượng ≤ 7 ngày, ghi chú ≤ 2000). */
+/** Checks the item form by D17/D18 and the backend limits (name <= 200, duration <= 7 days, note <= 2000). */
 export function parseItemForm(f: ItemForm): Parsed<ItemValues> {
   const title = f.title.trim();
   if (!f.isPlace && !title) return fail(COPY.errors.itemTitle);
@@ -113,7 +113,7 @@ export function parseItemForm(f: ItemForm): Parsed<ItemValues> {
   return ok({ patch: { title: f.isPlace ? '' : title, type: f.type, day: f.day || null, timeOfDay: time || null, durationMin, note: f.note.trim(), costK, included: !plain && f.included, referenceK, booking: plain ? null : f.booked ? 'booked' : 'pending' } });
 }
 
-/** Kiểm tên chuyến (bắt buộc, ≤ 120 ký tự; vượt thì cắt). */
+/** Checks the trip name (required, <= 120 characters; longer is cut). */
 export function parseTripName(text: string): Parsed<string> {
   const name = text.trim();
   return name ? ok(name.slice(0, LIMITS.MAX_TRIP_NAME)) : fail(COPY.errors.tripName);

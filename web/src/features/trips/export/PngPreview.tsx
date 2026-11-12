@@ -10,14 +10,14 @@ import './export.css';
 
 type RenderState = { readonly status: 'loading' } | { readonly status: 'error' } | { readonly status: 'ready'; readonly files: readonly PngFile[] };
 
-/** Tải đúng blob của ảnh đang hiển thị; URL được giữ đến khi rời hoặc thay dữ liệu màn. */
+/** Loads exactly the blob of the image being shown; the URL is kept until it leaves or the screen data is replaced. */
 function download(file: PngFile): void {
   const link = document.createElement('a');
   link.href = file.url; link.download = file.filename;
   document.body.append(link); link.click(); link.remove();
 }
 
-/** Hủy kết quả cũ khi đổi chuyến hoặc rời màn; không giữ blob URL sau khi hết dùng. */
+/** Cancels the old result when the trip changes or the screen is left; no blob URL is kept once it is no longer used. */
 function usePng(input: ExportInput, round: number): RenderState {
   const style = input.style ?? 'days';
   const [result, setResult] = useState<{ readonly state: RenderState; readonly input: ExportInput; readonly round: number } | null>(null);
@@ -35,12 +35,12 @@ function usePng(input: ExportInput, round: number): RenderState {
   return result?.input.trip === trip && result.input.destination === destination && result.input.style === style && result.round === round ? result.state : { status: 'loading' };
 }
 
-/** Máy có màn cảm ứng chính (điện thoại, máy tính bảng): chỉ ở đó mới gợi ý "nhấn giữ ảnh để lưu". */
+/** A device whose main screen is touch (phone, tablet): only there is 'press and hold the image to save' hinted. */
 function isTouchDevice(): boolean {
   return typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
 }
 
-/** Một ảnh xem trước kèm nút gửi (bảng chia sẻ của hệ thống nếu nhận tệp) và nút tải; ảnh PNG đã tạo sẵn thành `File` để `share` chạy ngay trong cử chỉ bấm. */
+/** One preview image with a send button (the system share sheet if it accepts files) and a download button; the PNG image is already made into a `File` so `share` runs right inside the tap gesture. */
 function ImageSection({ file, index, total, title }: { readonly file: PngFile; readonly index: number; readonly total: number; readonly title: string }) {
   const toast = useToast();
   const shareable = useMemo(() => pngToFile(file), [file]);
@@ -57,7 +57,7 @@ function ImageSection({ file, index, total, title }: { readonly file: PngFile; r
   );
 }
 
-/** Xem trước ảnh PNG thật; gửi bằng bảng chia sẻ của điện thoại hoặc tải từng phân đoạn, không phát nhiều download tự động bị trình duyệt chặn. */
+/** A preview of the real PNG image; send by the phone's share sheet or download segment by segment, without firing several automatic downloads that the browser blocks. */
 export default function PngPreview(input: ExportInput) {
   const [round, setRound] = useState(0);
   const [style, setStyle] = useState<ExportStyle>('summary');

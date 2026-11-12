@@ -1,4 +1,4 @@
-/** Chữ và mặc định của nhắc nhẹ; không phải giờ bữa hay dữ kiện về quán. */
+/** The copy and defaults of the light reminder; not a meal time or a fact about a venue. */
 export const MEAL_GAPS_COPY = {
   note: 'Chỉ là gợi ý; Wander không tự thêm gì vào lịch của bạn.',
   addEntry: 'Thêm ăn uống / nghỉ',

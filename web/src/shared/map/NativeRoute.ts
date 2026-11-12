@@ -8,7 +8,7 @@ import { drawProgress, drawRouteFeatures } from './routeDraw.ts';
 import { prefersReducedMotion } from './mapUtil.ts';
 import type { MapMarker, MapRoute, Pt } from './map.types.ts';
 
-/** Vòng đời tuyến native, danh sách truy cập và hiệu ứng hữu hạn, độc lập với camera. */
+/** The lifecycle of the native route, the access list and the finite effect, independent of the camera. */
 export class NativeRoute {
   private readonly host: HTMLElement;
   private map: MlMap | null = null;
@@ -20,13 +20,13 @@ export class NativeRoute {
   private items: HTMLElement[] = [];
   private onSegment?: (id: string) => void;
 
-  /** Chỉ giữ host; nguồn GL được tạo khi kiểu bản đồ đã sẵn sàng. */
+  /** Only keeps the host; the GL source is created once the map style is ready. */
   constructor(host: HTMLElement) { this.host = host; host.dataset['selectedSegment'] = ''; }
 
-  /** Gắn hoặc khôi phục nguồn sau khi đổi style, không tạo lại bộ nhớ tab đã xem. */
+  /** Attaches or restores the source after a style change, without recreating the memory of the tabs already viewed. */
   attach(map: MlMap): void { this.map = map; addRouteLayers(map, this.host); this.signature = ''; }
 
-  /** Thay tuyến khi dữ liệu/tab đổi; lần đầu mở tab ngày mới chạy hiệu ứng, giảm chuyển động thì bỏ qua. */
+  /** Replaces the route when the data/tab changes; the effect runs only the first time a new day tab is opened, and is skipped under reduced motion. */
   update(route: MapRoute | null, markers: readonly MapMarker[], onSegment?: (id: string) => void): void {
     const map = this.map;
     if (!map) return;
@@ -47,10 +47,10 @@ export class NativeRoute {
     if (animate) this.animate(features);
   }
 
-  /** Vẽ dần hình học trong thời lượng hữu hạn; hit source không đổi nên vẫn chạm được ngay. */
+  /** Draws the geometry gradually over a finite duration; the hit source does not change so it can still be tapped at once. */
   private animate(features: SegmentFeature[]): void {
     let start: number | undefined;
-    /** Cắt hình học ở tiến độ hiện tại; không giữ vòng lặp sau khi hoàn tất hoặc hủy bản đồ. */
+    /** Cuts the geometry at the current progress; it keeps no loop after finishing or after the map is cancelled. */
     const tick = (now: number) => {
       start ??= now;
       const progress = drawProgress(now - start, ROUTE.DRAW_MS, prefersReducedMotion());
@@ -61,12 +61,12 @@ export class NativeRoute {
     this.frame = requestAnimationFrame(tick);
   }
 
-  /** Nhãn lấy từ chính feature nên không bị lệch khi thiếu ghim hoặc có nhiều ngày. */
+  /** The label comes from the feature itself so it does not drift when a pin is missing or there are several days. */
   labels(): { labels: string[]; mids: Pt[] } {
     return { labels: this.labelTexts, mids: this.features.map((feature) => feature.geometry.coordinates[Math.floor(feature.geometry.coordinates.length / ROUTE.HALF)] as unknown as Pt) };
   }
 
-  /** Chỉ đọc hit line native, rồi chọn đoạn gần tâm chạm nhất khi nhiều đường chồng nhau. */
+  /** Only reads the native hit line, and then picks the segment nearest the touch center when several lines overlap. */
   hit(point: { x: number; y: number }): boolean {
     const map = this.map;
     if (!map?.getLayer(ROUTE.HIT_LAYER) || !this.onSegment) return false;
@@ -78,14 +78,14 @@ export class NativeRoute {
     return id !== null;
   }
 
-  /** Cập nhật điểm kiểm chỉ đọc để e2e chạm tọa độ thật; không lộ cổng chọn đối tượng bằng mã. */
+  /** Updates the read-only checkpoint so e2e taps the real coordinates; it does not expose a gate that selects an object by id. */
   snapshot(): void {
     const map = this.map;
     if (!map) return;
     this.host.dataset['segments'] = JSON.stringify(this.features.map((feature) => ({ ...feature.properties, points: feature.geometry.coordinates.map((p) => { const at = map.project(p as [number, number]); return { x: at.x, y: at.y }; }) })));
   }
 
-  /** Nút đoạn nối tiếp nút ghim trong danh sách đã có; tên gồm thứ tự, hai đầu mút và km. */
+  /** The segment button follows the pin button in the existing list; the name includes the order, the two endpoints and the km. */
   private syncAccessible(markers: readonly MapMarker[]): void {
     this.items.forEach((item) => item.remove());
     this.items = [];
@@ -100,6 +100,6 @@ export class NativeRoute {
     });
   }
 
-  /** Hủy frame trước khi WebGL bị giải phóng để không ghi nguồn đã mất. */
+  /** Cancels the frame before WebGL is released so a source that is gone is not written. */
   destroy(): void { cancelAnimationFrame(this.frame); this.map = null; }
 }

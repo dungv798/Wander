@@ -18,7 +18,7 @@ const BADGE_OFFSET = 0.8;
 interface SchematicMapProps {
   readonly markers: readonly MapMarker[];
   readonly route: MapRoute | null;
-  /** Các ghim cần vừa khung (null = tất cả). */
+  /** The pins that must fit the frame (null = all). */
   readonly focus: readonly string[] | null;
   readonly label: string;
 }
@@ -29,13 +29,13 @@ interface Placed {
   readonly y: number;
 }
 
-/** Chiếu kinh/vĩ độ sang mét phẳng quanh vĩ độ gốc (đủ chính xác cho khoảng cách vài chục km của một chuyến đi). */
+/** Projects longitude/latitude to flat meters around a base latitude (accurate enough for the distance of a few tens of km of a trip). */
 function place(markers: readonly MapMarker[]): Placed[] {
   const lat0 = markers.reduce((s, m) => s + m.lat, 0) / Math.max(1, markers.length);
   return markers.map((m) => ({ marker: m, x: m.lon * M_PER_DEG_LON * Math.cos(lat0 * RAD), y: -m.lat * M_PER_DEG_LAT }));
 }
 
-/** Khung nhìn (viewBox) ôm các điểm cần vừa khung, có đệm; khung tối thiểu để điểm đơn không bị phóng quá đà. */
+/** The view (viewBox) that hugs the points that must fit, with padding; a minimum frame so a single point is not zoomed too far. */
 function viewBoxOf(points: readonly Placed[]): { x: number; y: number; w: number; h: number } {
   const xs = points.map((p) => p.x);
   const ys = points.map((p) => p.y);
@@ -46,7 +46,7 @@ function viewBoxOf(points: readonly Placed[]): { x: number; y: number; w: number
   return { x: cx - (w * (1 + PAD_RATIO)) / HALF, y: cy - (h * (1 + PAD_RATIO)) / HALF, w: w * (1 + PAD_RATIO), h: h * (1 + PAD_RATIO) };
 }
 
-/** Sơ đồ minh họa thay bản đồ nền khi tile không tải được: nền lưới, ghim ảnh có số và đường nối theo thứ tự ghé thăm (không phải tuyến đường). */
+/** An illustrative diagram that replaces the base map when tiles cannot load: a grid background, numbered photo pins and a line in the order of visits (not a route). */
 export function SchematicMap({ markers, route, focus, label }: SchematicMapProps) {
   const uid = useId();
   const all = place(markers);

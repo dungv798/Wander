@@ -9,12 +9,12 @@ import { TRIPS_API as P } from './tripsApi.const.ts';
 
 type Body = Record<string, unknown>;
 
-/** Có phải đối tượng thường. */
+/** Whether it is a plain object. */
 function isRecord(v: unknown): v is Body {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Chép các khóa có mặt (kể cả `null`, nghĩa là "xóa") từ `source` sang thân yêu cầu theo bản đồ tên trường; khóa `undefined` bị bỏ. */
+/** Copies the keys that are present (including `null`, meaning 'clear') from `source` into the request body by a field-name map; an `undefined` key is dropped. */
 function pick(source: object, names: Readonly<Record<string, string>>): Body {
   const from = source as Body;
   const body: Body = {};
@@ -22,57 +22,57 @@ function pick(source: object, names: Readonly<Record<string, string>>): Body {
   return body;
 }
 
-/** Tên trường FE → tên trường API của chuyến. */
+/** The FE field name -> the API field name of a trip. */
 const TRIP_FIELDS = { name: 'name', destinationId: 'destination', startDate: 'startDate', endDate: 'endDate', budgetK: 'budget', styles: 'styles', pace: 'pace', datesTentative: 'datesTentative', kind: 'kind', interests: 'interests', cover: 'cover' } as const satisfies Readonly<Record<string, ApiMember<'UpdateTripRequest'>>>;
-/** Tên trường FE → tên trường API của mục. */
+/** The FE field name -> the API field name of an item. */
 const ITEM_FIELDS = { type: 'type', title: 'title', placeId: 'placeId', day: 'day', position: 'position', timeOfDay: 'timeOfDay', durationMin: 'durationMin', note: 'note', costK: 'cost', included: 'included', referenceK: 'referenceCost', booking: 'booking' } as const satisfies Readonly<Record<string, ApiMember<'ItemRequest'>>>;
 
-/** Lấy phần tử `key` của thân phản hồi; thiếu hoặc sai dạng là lỗi nội bộ (không để giao diện dùng dữ liệu hỏng). */
+/** Gets the `key` element of the response body; missing or a wrong shape is an internal error (so the UI never uses broken data). */
 function part(body: unknown, key: string): Body {
   const value = isRecord(body) ? body[key] : undefined;
   if (!isRecord(value)) throw new ApiError(CLIENT_ERROR.INTERNAL);
   return value;
 }
 
-/** Mã (chuỗi) của một đối tượng phản hồi. */
+/** The id (a string) of a response object. */
 function idOf(obj: Body): string {
   if (typeof obj['id'] !== 'string') throw new ApiError(CLIENT_ERROR.INTERNAL);
   return obj['id'];
 }
 
-/** Cài đặt `TripsGateway` bằng API thật; bí mật phiên do `ApiClient` gắn. */
+/** Implements `TripsGateway` with the real API; the session secret is attached by `ApiClient`. */
 export class HttpTripsGateway implements TripsGateway {
   private readonly client: ApiClient;
 
-  /** Dùng máy khách HTTP đã cho (tiêm được khi test). */
+  /** Uses the given HTTP client (injectable in tests). */
   constructor(client: ApiClient) {
     this.client = client;
   }
 
-  /** Đường dẫn của một chuyến, tùy chọn kèm hậu tố. */
+  /** The path of a trip, optionally with a suffix. */
   private path(tripId: string, suffix = ''): string {
     return `${P.TRIPS}/${encodeURIComponent(tripId)}${suffix}`;
   }
 
-  /** Đường dẫn của một mục, tùy chọn kèm hậu tố. */
+  /** The path of an item, optionally with a suffix. */
   private itemPath(tripId: string, itemId: string, suffix = ''): string {
     return this.path(tripId, `${P.ITEMS}/${encodeURIComponent(itemId)}${suffix}`);
   }
 
-  /** Mọi chuyến của chủ kèm mục và thùng rác (mỗi chuyến đọc song song). */
+  /** Every trip of the owner with the items and the trash (each trip is read in parallel). */
   async loadAll(): Promise<Trip[]> {
     const body = await this.client.get<unknown>(P.TRIPS);
     const list = isRecord(body) ? body[P.KEY_TRIPS] : undefined;
     if (!Array.isArray(list)) throw new ApiError(CLIENT_ERROR.INTERNAL);
     const loaded = await Promise.all(list.map((view) => this.load(idOf(isRecord(view) ? view : {})).catch((e: unknown) => {
-      // chuyến biến mất giữa lúc liệt kê và lúc đọc (xóa ở máy khác): bỏ qua; lỗi khác vẫn báo
+      // a trip disappeared between listing and reading (deleted on another device): skip it; other errors are still reported
       if (e instanceof ApiError && e.status === HTTP.NOT_FOUND) return null;
       throw e;
     })));
     return loaded.filter((t): t is Trip => t !== null);
   }
 
-  /** Một chuyến đầy đủ: chi tiết (lịch theo ngày) và thùng rác đọc song song. */
+  /** One full trip: the detail (the schedule by day) and the trash are read in parallel. */
   async load(tripId: string): Promise<Trip> {
     const [detail, trash] = await Promise.all([this.client.get<unknown>(this.path(tripId)), this.client.get<unknown>(this.path(tripId, P.TRASH))]);
     const rawTrash: unknown = isRecord(trash) ? trash[P.KEY_ITEMS] : undefined;
@@ -82,62 +82,62 @@ export class HttpTripsGateway implements TripsGateway {
     return trip;
   }
 
-  /** Tạo chuyến và trả mã mới. */
+  /** Creates a trip and returns the new id. */
   async create(input: NewTripInput): Promise<string> {
     return idOf(part(await this.client.send<unknown>('POST', P.TRIPS, pick(input, TRIP_FIELDS)), P.KEY_TRIP));
   }
 
-  /** Sửa chuyến: chỉ trường được nêu. */
+  /** Edits a trip: only the fields that are given. */
   async update(tripId: string, patch: TripPatch): Promise<void> {
     await this.client.send('PATCH', this.path(tripId), pick(patch, TRIP_FIELDS));
   }
 
-  /** Thêm mục và trả mã mới. */
+  /** Adds an item and returns the new id. */
   async addItem(tripId: string, input: ItemInput): Promise<string> {
     return idOf(part(await this.client.send<unknown>('POST', this.path(tripId, P.ITEMS), pick(input, ITEM_FIELDS)), P.KEY_ITEM));
   }
 
-  /** Sửa mục: chỉ trường được nêu (`null` xóa giá/giờ…). */
+  /** Edits an item: only the fields that are given (`null` clears the price/time...). */
   async editItem(tripId: string, itemId: string, change: ItemChange): Promise<void> {
     await this.client.send('PATCH', this.itemPath(tripId, itemId), pick(change, ITEM_FIELDS));
   }
 
-  /** Xóa mềm một mục. */
+  /** Soft-deletes an item. */
   async trash(tripId: string, itemId: string): Promise<void> {
     await this.client.send('DELETE', this.itemPath(tripId, itemId));
   }
 
-  /** Khôi phục một mục từ thùng rác. */
+  /** Restores an item from the trash. */
   async restore(tripId: string, itemId: string): Promise<void> {
     await this.client.send('POST', this.itemPath(tripId, itemId, P.RESTORE));
   }
 
-  /** Xóa vĩnh viễn một mục ở thùng rác (không hoàn tác được). */
+  /** Permanently deletes an item in the trash (it cannot be undone). */
   async purge(tripId: string, itemId: string): Promise<void> {
     await this.client.send('DELETE', this.itemPath(tripId, itemId, P.PERMANENT));
   }
 
-  /** Đánh dấu hoặc bỏ đánh dấu xong một việc cần làm. */
+  /** Marks or unmarks a to-do as done. */
   async setDone(tripId: string, itemId: string, done: boolean): Promise<void> {
     await this.client.send('PUT', this.itemPath(tripId, itemId, P.DONE), { done });
   }
 
-  /** Sắp xếp lại các mục đang hiện của một ngày. */
+  /** Reorders the visible items of a day. */
   async reorderDay(tripId: string, day: string, orderedIds: readonly string[]): Promise<void> {
     await this.client.send('POST', this.path(tripId, `${P.DAYS}/${encodeURIComponent(day)}${P.REORDER}`), { orderedIds });
   }
 
-  /** Xóa mềm cả chuyến. */
+  /** Soft-deletes a whole trip. */
   async deleteTrip(tripId: string): Promise<void> {
     await this.client.send('DELETE', this.path(tripId));
   }
 
-  /** Khôi phục một chuyến đã xóa mềm. */
+  /** Restores a soft-deleted trip. */
   async restoreTrip(tripId: string): Promise<void> {
     await this.client.send('POST', this.path(tripId, P.RESTORE));
   }
 
-  /** Các chuyến đã xóa mềm (phần tóm tắt); phần tử hỏng bị bỏ, thân sai dạng là lỗi nội bộ. */
+  /** The soft-deleted trips (the summary part); a broken element is dropped, a wrongly shaped body is an internal error. */
   async loadDeleted(): Promise<DeletedTrip[]> {
     const body = await this.client.get<unknown>(`${P.TRIPS}${P.DELETED}`);
     const list: unknown = isRecord(body) ? body[P.KEY_TRIPS] : undefined;
@@ -150,7 +150,7 @@ export class HttpTripsGateway implements TripsGateway {
     });
   }
 
-  /** Lệnh lịch nguyên tử (đổi khoảng ngày và/hoặc gán ngày hàng loạt). */
+  /** The atomic schedule command (change the date range and/or assign dates in bulk). */
   async schedule(tripId: string, change: ScheduleChange): Promise<void> {
     await this.client.send('POST', this.path(tripId, P.SCHEDULE), change);
   }

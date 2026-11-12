@@ -5,8 +5,8 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { useTrips } from './TripsProvider.tsx';
 
 /**
- * Chạy một thay đổi trên chuyến (qua máy chủ) rồi hiện thông báo có "Hoàn tác". Hoàn tác gửi các lệnh ngược lên máy chủ và chỉ chạy nếu chuyến
- * CHƯA đổi gì kể từ thay đổi này; nếu đã có thao tác khác xen giữa (đổi chỗ, tích việc, tab khác…) thì báo thay vì ghi đè mất chúng.
+ * Runs a change on the trip (through the server) and then shows a notice with 'Undo'. Undo sends inverse commands to the server and only runs if the trip has
+ * NOT changed since this change; if another action came in between (reorder, tick a task, another tab...) it reports that instead of overwriting them.
  */
 export function useUndoable(): (tripId: string, change: () => Promise<unknown>, message: string) => Promise<boolean> {
   const { actions } = useTrips();
@@ -14,7 +14,7 @@ export function useUndoable(): (tripId: string, change: () => Promise<unknown>, 
   const report = useReportError();
   return useCallback(
     async (tripId, change, message) => {
-      // đợi các việc đang chạy của chuyến xong để "trước" không lẫn thay đổi chưa đọc lại (hai lần xóa liền nhau không hoàn tác quá tay)
+      // waits for the trip's running jobs to finish so the 'before' does not mix in changes not yet re-read (two deletes in a row are not undone too far)
       try {
         await actions.idle(tripId);
         const before = actions.current(tripId);

@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useToast } from '../../../shared/ui/Toast.tsx';
 
 /**
- * Thu thông báo thuần thông tin khi người dùng bắt đầu thao tác. Thông báo có nút hành động (như Hoàn tác, D19)
- * giữ nguyên tới hết thời gian của nó, nếu không người dùng chạm sang chỗ khác là mất cơ hội hoàn tác.
+ * Collects a purely informational notice when the user starts acting. A notice with an action button (like Undo, D19)
+ * stays until its own time runs out, otherwise tapping elsewhere would lose the chance to undo.
  */
 export function useTripToast(): void {
   const { dismiss } = useToast();
   useEffect(() => {
-    /** Không đóng khi người dùng đang chọn nội dung hay nút trong thông báo, hoặc thông báo có nút hành động. */
+    /** Does not close while the user is selecting content or a button in the notice, or when the notice has an action button. */
     const interact = (event: Event): void => {
       if (!(event.target instanceof Element) || event.target.closest('.toast')) return;
       if (document.querySelector('.toast button')) return;

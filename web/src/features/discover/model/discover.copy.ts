@@ -1,4 +1,4 @@
-/** Chữ riêng cho cấu trúc thẻ/chi tiết; không thay kho chữ dùng chung của các job khác. */
+/** Copy specific to the card/detail structure; it does not replace the shared copy store of the other jobs. */
 export const DISCOVER_COPY = {
   map: 'Mở bản đồ',
   pick: 'Chọn',

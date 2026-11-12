@@ -2,22 +2,22 @@ import { KIND_ORDER } from './trip.const.ts';
 import type { ItemKind, TripItem } from './trip.types.ts';
 import { isPlain } from './tripMath.ts';
 
-/** Cách nhóm chi phí trong tờ chi tiết. */
+/** How costs are grouped in the detail sheet. */
 export type CostGrouping = 'day' | 'kind';
 
-/** Một nhóm khoản chi: tổng đã biết, số mục chưa biết giá và các mục (để mở sửa). */
+/** A group of expense items: the known total, the number of items with an unknown price and the items (to open for editing). */
 export interface CostGroup {
-  /** Ngày ('' = chưa có ngày) hoặc mã loại. */
+  /** A day ('' = no date yet) or a kind code. */
   readonly key: string;
   readonly items: readonly TripItem[];
-  /** Tổng nghìn đồng của mục đã biết giá, không tính "đã bao gồm". */
+  /** The total in thousand VND of items with a known price, not counting 'included'. */
   readonly knownK: number;
   readonly knownCount: number;
   readonly unknownCount: number;
   readonly includedCount: number;
 }
 
-/** Tạo nhóm từ danh sách mục: trống = chưa biết, 0 = biết bằng không, "đã bao gồm" không cộng (D17/D18). */
+/** Builds a group from a list of items: empty = unknown, 0 = known to be zero, 'included' is not added (D17/D18). */
 function toGroup(key: string, items: readonly TripItem[]): CostGroup {
   let knownK = 0;
   let knownCount = 0;
@@ -32,8 +32,8 @@ function toGroup(key: string, items: readonly TripItem[]): CostGroup {
 }
 
 /**
- * Gom các mục có thể có giá (bỏ Nghỉ/Việc cần làm) theo ngày hoặc theo loại. Theo ngày: đúng thứ tự ngày của chuyến, "chưa có ngày" (khóa '') ở cuối.
- * Theo loại: thứ tự cố định của `KIND_ORDER`. Nhóm rỗng không xuất hiện.
+ * Groups the items that can have a price (dropping Rest/To-do) by day or by kind. By day: exactly the trip's day order, 'no date yet' (key '') last.
+ * By kind: the fixed order of `KIND_ORDER`. An empty group does not appear.
  */
 export function groupCosts(items: readonly TripItem[], by: CostGrouping, days: readonly string[]): CostGroup[] {
   const priced = items.filter((i) => !isPlain(i.type));

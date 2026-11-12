@@ -8,12 +8,12 @@ import { discoveryFilters, DISCOVERY_FILTER_LABELS, matchesDiscoveryFilter } fro
 import { DEST_COPY } from '../../model/dest.copy.ts';
 import { PlaceRow } from './PlaceRow.tsx';
 
-/** Bộ lọc loại đang chọn: `all` hoặc một mã loại có thật trong điểm đến. */
+/** The selected kind filter: `all` or a kind code that really exists in the destination. */
 type Filter = 'all' | CategoryCode;
 
 /**
- * "Những nơi & trải nghiệm" của một điểm đến: hàng lọc theo loại (độ rộng theo chữ, cao ≥ 44 px) rồi danh sách thẻ nơi.
- * Dữ liệu là kho biên tập thật; "Chọn" ghi vào cùng trạng thái "Đã chọn" với bộ thẻ quẹt, nên hai nơi luôn khớp nhau.
+ * 'Places & experiences' of a destination: a filter row by kind (width by text, height at least 44 px) then the list of place cards.
+ * The data is the real editorial catalog; 'Select' writes into the same 'Selected' state as the swipe deck, so the two places always match.
  */
 export function PlaceList({ dest }: { readonly dest: DestinationDetail }) {
   const { state, actions } = useDiscover();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-/** Giờ hiện tại (mili giây) cập nhật mỗi `intervalMs`; dùng cho đếm ngược/hết hạn mà không gọi `Date.now()` trong lúc render. */
+/** The current time (milliseconds) updated every `intervalMs`; used for countdowns/expiry without calling `Date.now()` during render. */
 export function useNow(intervalMs: number): number {
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {

@@ -3,7 +3,7 @@ import type { ItemKind, Trip } from '../model/trip.types.ts';
 import type { TripCatalog } from '../model/tripView.ts';
 import type { MealGap } from '../model/mealGaps.ts';
 
-/** Tờ phủ đang mở trên màn chuyến đi (chỉ một cái một lúc). */
+/** The overlay sheet open on the trip screen (only one at a time). */
 export type Overlay =
   | { readonly kind: 'mealSuggest'; readonly day: string; readonly gap: MealGap }
   | { readonly kind: 'add' }
@@ -24,32 +24,32 @@ export type Overlay =
   | { readonly kind: 'requests' }
   | { readonly kind: 'requestDelete'; readonly itemId: string };
 
-/** Mọi thứ các thành phần con của màn chuyến đi cần: dữ liệu chuyến + điểm đến, tab, tờ phủ, chế độ sắp xếp và các hành động chung. */
+/** Everything the child components of the trip screen need: the trip + destination data, the tab, the overlay sheets, the reorder mode and the shared actions. */
 export interface TripViewValue {
   readonly trip: Trip;
   readonly cat: TripCatalog;
-  /** Mọi ngày của chuyến theo thứ tự. */
+  /** Every day of the trip in order. */
   readonly days: readonly string[];
-  /** `ov` (tổng quan) hoặc số ngày 1..n dạng chuỗi. */
+  /** `ov` (overview) or the day number 1..n as a string. */
   readonly tab: string;
   readonly setTab: (tab: string) => void;
   readonly setOverlay: (o: Overlay | null) => void;
   readonly sorting: boolean;
   readonly setSorting: (v: boolean) => void;
-  /** Mở một mục: địa điểm → tờ chi tiết kèm nút của chuyến; mục tự do → trình sửa. */
+  /** Opens an item: a place -> the detail sheet with the trip's buttons; a free-form item -> the editor. */
   readonly openItem: (itemId: string) => void;
-  /** Sang bộ thẻ để thêm địa điểm vào chuyến này. */
+  /** Goes to the deck to add places to this trip. */
   readonly addMore: () => void;
-  /** Đọc to một thông báo cho trình đọc màn hình. */
+  /** Reads a notice aloud for screen readers. */
   readonly announce: (text: string) => void;
 }
 
 const TripViewContext = createContext<TripViewValue | null>(null);
 
-/** Nhà cung cấp ngữ cảnh màn chuyến đi. */
+/** The context provider of the trip screen. */
 export const TripViewProvider = TripViewContext.Provider;
 
-/** Truy cập ngữ cảnh màn chuyến đi; ném lỗi nếu dùng ngoài `TripViewProvider`. */
+/** Access to the trip-screen context; throws if used outside `TripViewProvider`. */
 export function useTripView(): TripViewValue {
   const ctx = useContext(TripViewContext);
   if (!ctx) throw new Error('useTripView phải nằm trong TripViewProvider');

@@ -6,14 +6,14 @@ import type { ChecklistItem } from '../../collab/index.ts';
 import { useReportError } from '../../identity/index.ts';
 import { TODAY_COPY as C } from './today.copy.ts';
 
-/** Checklist của chính người xem mở trong một chạm, không báo hoàn tất khi API chưa trả dữ liệu. */
+/** The viewer's own checklist opened with one tap, it does not report completion while the API has not returned data. */
 export function Preparation({ tripId }: { readonly tripId: string }) {
   const list = useLoaded(() => collabGateway.checklist(tripId), [tripId]);
   const [expanded, setExpanded] = useState(false);
   const [busy, setBusy] = useState(false);
   const report = useReportError();
   const missing = list.data?.filter((item) => !item.done) ?? [];
-  /** Chờ máy chủ xác nhận rồi nạp lại; lỗi giữ nguyên ô tích và thông báo bằng cơ chế chung. */
+  /** Waits for the server to confirm and then reloads; an error keeps the tick box and notifies through the shared mechanism. */
   const toggle = async (item: ChecklistItem): Promise<void> => {
     setBusy(true);
     try {

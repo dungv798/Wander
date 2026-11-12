@@ -7,8 +7,8 @@ import { isTripGone } from '../model/tripGone.ts';
 import { useTrips } from './TripsProvider.tsx';
 
 /**
- * Giữ cho màn chuyến đi không "sống" sau khi người xem mất quyền: mỗi khi quay lại tab/ứng dụng, đọc lại chuyến; máy chủ trả 404
- * (bị Organizer gỡ hoặc chuyến đã xóa) thì báo một lần, nạp lại danh sách và đẩy về danh sách chuyến (DR-021: mất quyền là một trạng thái).
+ * Keeps the trip screen from staying 'alive' after the viewer loses access: each time the tab/app is returned to, the trip is re-read; if the server returns 404
+ * (removed by the Organizer or the trip was deleted) it notifies once, reloads the list and pushes back to the trip list (DR-021: losing access is a state).
  */
 export function useGoneGuard(tripId: string): void {
   const { actions, reload } = useTrips();

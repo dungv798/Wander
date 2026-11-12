@@ -1,4 +1,4 @@
-/** Chữ giao diện bìa nằm trong phạm vi tính năng được giao. */
+/** The cover UI copy is inside the assigned feature scope. */
 export const COVER_COPY = {
   title: 'Tuỳ chỉnh bìa', photos: 'Ảnh điểm đến', gradients: 'Màu chuyển sắc', auto: 'Tự động',
   hint: 'Chọn ảnh có sẵn của điểm đến hoặc một màu chuyển sắc.',

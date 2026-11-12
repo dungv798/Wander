@@ -10,17 +10,17 @@ export interface PhotoOrigin {
 
 let cancelCurrent = (): void => undefined;
 
-/** Chọn chiến lược theo khả năng thực tế; giảm chuyển động luôn cập nhật tức thời. */
+/** Chooses the strategy by real capability; reduced motion always updates instantly. */
 export function photoTransitionMode(reduced: boolean, viewTransitions: boolean, waapi: boolean): 'none' | 'view' | 'flip' {
   return reduced ? 'none' : viewTransitions ? 'view' : waapi ? 'flip' : 'none';
 }
 
-/** Chụp khung ảnh đang xem trước khi React thay DOM, không đổi focus của nút mở. */
+/** Captures the photo frame being viewed before React replaces the DOM, without changing the focus of the open button. */
 export function photoOrigin(image: HTMLImageElement | null): PhotoOrigin | null {
   return image ? { element: image, rect: image.getBoundingClientRect(), url: image.getAttribute('src') ?? '', position: getComputedStyle(image).objectPosition } : null;
 }
 
-/** Chọn đúng ảnh đang nằm trong khung cuộn khi đóng, kể cả người dùng đã chuyển ảnh. */
+/** Picks exactly the photo that is in the scroll frame when closing, even if the user has switched photos. */
 export function galleryPhotoOrigin(): PhotoOrigin | null {
   const gallery = document.querySelector<HTMLElement>('.panel .gallery');
   if (!gallery) return null;
@@ -28,7 +28,7 @@ export function galleryPhotoOrigin(): PhotoOrigin | null {
   return photoOrigin(gallery.querySelectorAll('img')[index] ?? null);
 }
 
-/** Dựng ảnh bay độc lập để FLIP và ghim canvas dùng chung đúng hình học nguồn. */
+/** Builds an independent flying photo so FLIP and the canvas pin share the exact source geometry. */
 function proxy(origin: PhotoOrigin): HTMLImageElement {
   const image = document.createElement('img');
   image.src = origin.url;
@@ -40,13 +40,13 @@ function proxy(origin: PhotoOrigin): HTMLImageElement {
   return image;
 }
 
-/** Thu phóng ảnh nguồn sang đích; cập nhật DOM đồng bộ để cơ chế focus của Sheet giữ nguyên. */
+/** Scales the source photo to the target; updates the DOM synchronously so the Sheet's focus mechanism is kept. */
 export function transitionPhoto(origin: PhotoOrigin | null, update: () => void, destination: () => PhotoOrigin | null): void {
   cancelCurrent();
   const mode = photoTransitionMode(window.matchMedia(MOTION.REDUCED_QUERY).matches, typeof document.startViewTransition === 'function', typeof Element.prototype.animate === 'function');
   if (!origin || mode === 'none' || origin.rect.width <= 0) { update(); return; }
   const source = origin.element?.isConnected ? origin.element : proxy(origin);
-  /** Gỡ mọi dấu chuyển tiếp dù API bị bỏ qua hoặc người dùng đóng liên tiếp. */
+  /** Removes every transition mark even if the API is skipped or the user closes in quick succession. */
   const cleanup = (): void => { source.style.viewTransitionName = ''; if (source.classList.contains('photo-flight')) source.remove(); };
   if (mode === 'view') {
     source.style.viewTransitionName = MOTION.NAME;
@@ -64,7 +64,7 @@ export function transitionPhoto(origin: PhotoOrigin | null, update: () => void, 
       }
     });
     let cleaned = false;
-    /** Chỉ dọn một lần để thao tác đóng nhanh không xóa dấu của chuyển tiếp kế tiếp. */
+    /** Cleans up only once so a fast close action does not erase the mark of the next transition. */
     const finish = (): void => {
       if (cleaned) return;
       cleaned = true;
@@ -87,7 +87,7 @@ export function transitionPhoto(origin: PhotoOrigin | null, update: () => void, 
     { transform: 'none' },
     { transform: `translate(${next.rect.left - origin.rect.left}px, ${next.rect.top - origin.rect.top}px) scale(${next.rect.width / origin.rect.width}, ${next.rect.height / origin.rect.height})` },
   ], { duration: MOTION.DURATION_MS, easing: MOTION.EASING });
-  /** Trả ảnh đích về luồng hiển thị cả khi người dùng đổi hướng giữa chừng. */
+  /** Returns the target photo to the display flow even if the user changes direction midway. */
   const finish = (): void => { flying.remove(); if (target) target.style.visibility = ''; cleanup(); };
   cancelCurrent = () => { animation.cancel(); finish(); };
   void animation.finished.catch(() => undefined).finally(finish);

@@ -12,7 +12,7 @@ interface SlotProps {
   readonly itemId: string;
 }
 
-/** Phần thêm trong tờ chi tiết địa điểm khi mở từ chuyến đi: tóm tắt giờ/giá/đặt chỗ của mục và nút "Giờ, chi phí, đặt chỗ". Đọc dữ liệu mới nhất của mục. */
+/** The extra part of the place detail sheet when opened from a trip: a summary of the item's time/price/booking and the 'Time, cost, booking' button. Reads the latest data of the item. */
 export function ItemInfoSlot({ tripId, itemId, onEdit }: SlotProps & { readonly onEdit: () => void }) {
   const { trip } = useTrips();
   const item = trip(tripId)?.items.find((i) => i.id === itemId);
@@ -36,7 +36,7 @@ export function ItemInfoSlot({ tripId, itemId, onEdit }: SlotProps & { readonly 
   );
 }
 
-/** Thanh nút cuối tờ chi tiết khi mở từ chuyến đi: "Chọn ngày" và "Xóa khỏi chuyến đi" (xóa mềm, có Hoàn tác). */
+/** The button bar at the bottom of the detail sheet when opened from a trip: 'Choose day' and 'Remove from the trip' (soft delete, with Undo). */
 export function ItemCtaSlot({ tripId, itemId, name, onPickDay, onRequestDelete }: SlotProps & { readonly name: string; readonly onPickDay: () => void; readonly onRequestDelete: () => void }) {
   const place = usePlaceSheet();
   const { trip } = useTrips();

@@ -27,20 +27,20 @@ void initializeLook();
 
 const DestinationPickerScreen = lazy(() => import('../features/discover/components/DestinationPickerScreen.tsx'));
 
-/** Số nơi đã quẹt phải và chưa vào chuyến nào, để hiện trên tab "Đã chọn". */
+/** The number of places swiped right that are not in any trip yet, shown on the 'Selected' tab. */
 function usePickedCount(): number {
   const { state } = useDiscover();
   return pendingPickCount(state);
 }
 
-/** Các nơi chờ lưu của điểm đến hiện tại; nút "+" ở thanh dưới mở thẳng "Lưu N địa điểm" khi danh sách này không rỗng (B-06, UX-1). */
+/** The places of the current destination waiting to be saved; the '+' button in the bottom bar opens 'Save N places' directly when this list is not empty (B-06, UX-1). */
 function useCurrentPending(destId: string): readonly PlaceView[] {
   const { state } = useDiscover();
   const { state: destination } = useDestination(destId);
   return useMemo(() => (destination.status === 'ready' ? pickedOf(state, destination.data.places) : []), [state, destination]);
 }
 
-/** Chế độ "thêm địa điểm vào chuyến" của bộ thẻ khi địa chỉ có mã chuyến; null nếu không có chuyến đó. */
+/** The deck's 'add places to a trip' mode when the address has a trip id; null if there is no such trip. */
 function useAddingMode(tripId: string | null): AddingMode | undefined {
   const { trip, actions } = useTrips();
   const toast = useToast();
@@ -57,13 +57,13 @@ function useAddingMode(tripId: string | null): AddingMode | undefined {
   };
 }
 
-/** Màn bộ thẻ: thêm vào chuyến khi có mã chuyến ở địa chỉ, ngược lại là khám phá bình thường. */
+/** The deck screen: adds to a trip when the address has a trip id, otherwise ordinary exploring. */
 function DeckRoute({ destId, tripId }: { readonly destId: string; readonly tripId: string | null }) {
   const adding = useAddingMode(tripId);
   return <DeckScreen destId={destId} adding={adding} />;
 }
 
-/** Lần đầu mở ứng dụng ở trang Khám phá thì chuyển sang giới thiệu (một lần; `?intro=0` bỏ qua cho kiểm thử/liên kết sâu). Dùng `replaceState` để nút Back không quay lại vòng lặp. */
+/** On the first open of the app on the Discover page, switch to the intro (once; `?intro=0` skips it for tests/deep links). Uses `replaceState` so the Back button does not return to a loop. */
 function useFirstRunIntro(view: string): void {
   const { state } = useOnboarding();
   const skip = /[?&]intro=0(&|$)/.test(window.location.search);
@@ -72,7 +72,7 @@ function useFirstRunIntro(view: string): void {
   }, [view, state.done, skip]);
 }
 
-/** Máy này bị thu hồi từ nơi khác (từng có phiên nhưng không còn trong danh sách thiết bị tin cậy): chuyển sang màn hết phiên (S19). */
+/** This device was revoked from elsewhere (it had a session but is no longer in the list of trusted devices): switch to the session-ended screen (S19). */
 function useExpiredGate(view: string): void {
   const expired = useSessionExpired();
   useEffect(() => {
@@ -80,7 +80,7 @@ function useExpiredGate(view: string): void {
   }, [expired, view]);
 }
 
-/** Khung ứng dụng: chọn màn theo địa chỉ, ẩn/hiện thanh điều hướng theo cỡ màn và màn hiện tại; giữ tờ "Tạo chuyến đi" dùng chung. */
+/** The app frame: chooses the screen by address, shows/hides the navigation bar by screen size and current screen; keeps the shared 'Create trip' sheet. */
 function Shell() {
   const route = useRoute();
   useFirstRunIntro(route.view);
@@ -94,11 +94,11 @@ function Shell() {
   const onMap = SHELL_MAP.VISIBLE_VIEWS.includes(route.view);
   const mapSheet = onMap && route.view !== VIEW.DECK;
   const documentScroll = !wide && (mapSheet || route.view === VIEW.DESTINATIONS);
-  // Bản đồ khung chỉ tồn tại ở các màn nằm trên nó (Khám phá/Điểm đến/Đã chọn/Chuyến đi): bộ thẻ, chuyến chi tiết, Hôm nay, cài đặt… không giữ canvas WebGL ẩn.
-  // Chế độ tờ chỉ có nghĩa trong màn đã đặt nó: đổi màn thì tờ tự mở lại (không cần effect).
+  // The frame map exists only on the screens that sit above it (Discover/Destination/Selected/Trips): the deck, trip detail, Today, settings... do not keep a hidden WebGL canvas.
+  // The sheet mode only means something in the screen that set it: when the screen changes the sheet re-opens by itself (no effect needed).
   const routeKey = `${route.view}|${route.id ?? ''}`;
   const [sheetChoice, setSheetChoice] = useState<{ readonly view: string; readonly mode: SheetMode }>({ view: routeKey, mode: 'open' });
-  // Xóa lựa chọn của màn cũ cả khi quay lại bằng Back, tránh mang trạng thái bản đồ mở về danh sách.
+  // Clears the previous screen's selection even when returning with Back, so an open-map state is not carried back to the list.
   if (sheetChoice.view !== routeKey) setSheetChoice({ view: routeKey, mode: 'open' });
   const sheet: SheetMode = sheetChoice.view === routeKey ? sheetChoice.mode : 'open';
   const setSheet = useCallback((mode: SheetMode): void => setSheetChoice({ view: routeKey, mode }), [routeKey]);
@@ -140,7 +140,7 @@ function Shell() {
   );
 }
 
-/** Gốc ứng dụng: cấp kho biên tập, trạng thái khám phá, kho chuyến đi, thông báo và tờ chi tiết cho mọi màn. */
+/** The app root: provides the editorial catalog, the discover state, the trip store, notices and the detail sheet to every screen. */
 export function App() {
   return (
     <ErrorBoundary>

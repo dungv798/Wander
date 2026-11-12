@@ -29,9 +29,9 @@ import { StaleTripsNotice } from './StaleTripsNotice.tsx';
 
 const MINUTE_MS = 60_000;
 
-/** Nội dung theo từng trạng thái của "Hôm nay" (S17). */
+/** The content by each state of 'Today' (S17). */
 function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: TripCatalog; readonly view: TodayState }) {
-  /** Mở cả chuyến với danh sách là lối về, kể cả khi Hôm nay được mở bằng URL trực tiếp. */
+  /** Opens the whole trip with the list as the way back, even when Today was opened by a direct URL. */
   const openTrip = (): void => {
     replaceRoute(VIEW.TRIPS);
     navigate(VIEW.TRIP, trip.id, 'ov');
@@ -46,13 +46,13 @@ function TodayBody({ trip, cat, view }: { readonly trip: Trip; readonly cat: Tri
   return <TodayDay key={view.day} trip={trip} cat={cat} view={view} all={all} />;
 }
 
-/** Tóm tắt riêng của người xem từ mục còn hiện; không có địa điểm thì nêu rõ thay vì suy đoán. */
+/** The viewer's own summary from the visible items; with no place it says so plainly instead of guessing. */
 function VisitedSummary({ items }: { readonly items: Trip['items'] }) {
   const progress = visitedProgress(items);
   return <p className="note" role="status">{C.personal}{': '}{progress.total ? fill(C.visited, { n: progress.visited, m: progress.total }) : C.noPlaces}</p>;
 }
 
-/** Tách điểm kế tiếp khỏi danh sách gọn; mở phần đã xong sau thao tác để người dùng thấy kết quả. */
+/** Separates the next point from the compact list; opens the done part after an action so the user sees the result. */
 function TodayDay({ trip, cat, view, all }: { readonly trip: Trip; readonly cat: TripCatalog; readonly view: Extract<TodayState, { kind: 'day' }>; readonly all: React.ReactNode }) {
   const selected = nextStop(view.items);
   const [showDone, setShowDone] = useState(false);
@@ -79,7 +79,7 @@ function TodayDay({ trip, cat, view, all }: { readonly trip: Trip; readonly cat:
   );
 }
 
-/** Khung "Hôm nay" của một chuyến: tiêu đề, (bản thử) ô giả lập ngày, nội dung theo trạng thái. */
+/** The 'Today' frame of a trip: the title, (trial version) a fake day box, the content by state. */
 function TodayFor({ trip }: { readonly trip: Trip }) {
   const now = useNow(MINUTE_MS);
   const [fake, setFake] = useState('');
@@ -111,7 +111,7 @@ function TodayFor({ trip }: { readonly trip: Trip }) {
   );
 }
 
-/** Màn "Hôm nay" (`#/today[/<mã chuyến>]`): chuyến theo địa chỉ, hoặc chuyến đang diễn ra/sắp tới gần nhất. Chưa có chuyến thì nói rõ. */
+/** The 'Today' screen (`#/today[/<trip id>]`): the trip by address, or the nearest trip in progress/upcoming. With no trip it says so plainly. */
 export function TodayScreen({ tripId }: { readonly tripId: string | null }) {
   const { state, trip: find } = useTrips();
   const now = useNow(MINUTE_MS);

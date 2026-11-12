@@ -1,4 +1,4 @@
-/** Chữ riêng của xuất PNG; chỉ có ảnh PNG (PDF/Lịch chưa làm nên không hiện, B-07). */
+/** The copy specific to the PNG export; only a PNG image exists (PDF/Calendar are not built so they are not shown, B-07). */
 export const EXPORT_COPY = {
   image: 'Ảnh PNG',
   share: 'Gửi ảnh', shareFailed: 'Chưa mở được bảng chia sẻ. Bạn tải ảnh rồi gửi từ máy nhé.',

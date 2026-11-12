@@ -6,7 +6,7 @@ import type { TripListOptions } from './tripList.ts';
 
 export const DEFAULT_TRIP_LIST: TripListOptions = { query: '', status: null, sort: 'departure' };
 
-/** Đọc tùy chọn hợp lệ; bộ nhớ bị chặn hoặc dữ liệu cũ hỏng thì dùng mặc định. */
+/** Reads the valid options; blocked storage or broken old data uses the defaults. */
 export function readTripListOptions(): TripListOptions {
   try {
     const saved = JSON.parse(PersistentStore.readRaw(TRIP_LIST_STORAGE) ?? 'null') as Partial<TripListOptions> | null;
@@ -18,7 +18,7 @@ export function readTripListOptions(): TripListOptions {
   } catch { return DEFAULT_TRIP_LIST; }
 }
 
-/** Nhớ lựa chọn mà không làm hỏng màn hình khi localStorage đầy hoặc bị chặn. */
+/** Remembers the choice without breaking the screen when localStorage is full or blocked. */
 export function useTripList() {
   const [options, setOptions] = useState(readTripListOptions);
   const [query, setQuery] = useState(options.query);
@@ -27,7 +27,7 @@ export function useTripList() {
     return () => window.clearTimeout(timer);
   }, [options.query]);
   useEffect(() => {
-    try { PersistentStore.writeRaw(TRIP_LIST_STORAGE, JSON.stringify(options)); } catch { /* Vẫn dùng bộ lọc trong phiên hiện tại. */ }
+    try { PersistentStore.writeRaw(TRIP_LIST_STORAGE, JSON.stringify(options)); } catch { /* The filter is still used in the current session. */ }
   }, [options]);
   return { options, searchOptions: { ...options, query }, setOptions };
 }

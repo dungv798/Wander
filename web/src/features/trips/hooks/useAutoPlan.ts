@@ -16,7 +16,7 @@ import { permissionsOf } from '../model/tripPermissions.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import type { DeferredPlanItem } from '../model/planDays.ts';
 
-/** Chỉ tính lại phương án gốc khi lịch/catalog/đề nghị đổi, không chạy nearest-neighbour lại theo từng lần đổi select. */
+/** Recomputes the base plan only when the schedule/catalog/requests change, not re-running nearest-neighbour on every select change. */
 function usePlanData() {
   const { trip, cat, days } = useTripView();
   const requests = useLoaded(() => collabGateway.requests(trip.id), [trip.id]);
@@ -32,14 +32,14 @@ function usePlanData() {
   const allowed = Object.fromEntries(Object.entries(overrides).filter(([id]) => !base.protectedIds.has(id)));
   const plan = withDayOverrides(trip, base.plan, allowed);
   const summaries = summarizePlan(trip, plan, base.durationOf, coordOf(cat), hubPoint(cat.dest));
-  /** Đổi ngày là lựa chọn tường minh, không ghi server; thay lịch ở tab khác thì bỏ bản nháp cũ. */
+  /** Changing a day is an explicit choice, not written to the server; changing the schedule in another tab drops the old draft. */
   const chooseDay = (id: string, day: string): void => setChoices({ inputKey, values: { ...overrides, [id]: day } });
   const reasons = new Map(base.deferred.map(item => [item.itemId, item.reason]));
   const deferred: DeferredPlanItem[] = unassignedItems(trip).filter(item => !plan[item.id]).map(item => ({ itemId: item.id, reason: reasons.get(item.id) ?? 'choice' }));
   return { trip, cat, days, requests, base, plan, summaries, chooseDay, deferred, plannedCount: Object.keys(plan).length };
 }
 
-/** Kiểm lại lịch/đề nghị trước một lần schedule nguyên tử; lỗi giữ nguyên preview, thành công mới đóng và có Undo. */
+/** Re-checks the schedule/requests before one atomic schedule; an error keeps the preview, only success closes it and has Undo. */
 function usePlanApply(model: ReturnType<typeof usePlanData>, onClose: () => void) {
   const { actions } = useTrips();
   const undoable = useUndoable();
@@ -66,7 +66,7 @@ function usePlanApply(model: ReturnType<typeof usePlanData>, onClose: () => void
   return { busy, apply };
 }
 
-/** Nối preview thuần với quyền, vòng đời request và hành động lưu; component chỉ lo trình bày. */
+/** Joins the pure preview with permissions, the request lifecycle and the save action; the component only handles presentation. */
 export function useAutoPlan(onClose: () => void) {
   const model = usePlanData();
   return { ...model, ...usePlanApply(model, onClose) };

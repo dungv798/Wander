@@ -1,7 +1,7 @@
-/* Thích ứng cho bản v4 (DG-1, PO chọn "thiết kế thích ứng thật cho máy tính").
-   < 768: nguyên bản v4 (cột điện thoại, thanh tab nổi, tờ dưới).
-   768–1279: thanh bên thu gọn 96 px, nội dung rộng, chi tiết là hộp thoại giữa.
-   ≥ 1280: thanh bên 264 px, chi tiết là ngăn kéo phải 440 px KHÔNG che nội dung (nội dung co lại). */
+/* Adaptive for version v4 (DG-1, the PO chose 'a truly adaptive design for computers').
+   < 768: the original v4 (a phone column, a floating tab bar, a bottom sheet).
+   768-1279: a 96 px collapsed side bar, wide content, the detail is a center dialog.
+   >= 1280: a 264 px side bar, the detail is a 440 px right drawer that does NOT cover the content (the content shrinks). */
 html, body { margin: 0; height: 100%; }
 
 .skeleton { position: relative; overflow: hidden; border-radius: 22px; background: var(--surface-2); }
@@ -14,7 +14,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .chip.on, .dot, .next .ib { background: var(--cta); color: var(--on-cta); }
 .btn, .pill { background: var(--btn-bg); color: var(--btn-ink); border: 1px solid var(--btn-edge); }
 
-/* hover chỉ ở máy có chuột; nút chính kính trắng nên hover chỉ sáng lên */
+/* hover only on a device with a mouse; the main button is white glass so hover only lights it up */
 @media (hover: hover) {
   .btn:not(.ghost):not(.danger):not(.sun):hover, .pill:not(.warn):hover { background: var(--btn-hover-bg); }
   .btn.ghost:hover, .tab:hover:not([aria-current="page"]), .fchip:hover:not([aria-pressed="true"]), .pack:hover:not([aria-pressed="true"]) { background: var(--surface-2); }
@@ -39,7 +39,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
   .float { left: calc(96px + 16px); right: 16px; max-width: 640px; margin-inline: auto; }
   #screen[data-view="trip"] .sheetbody { max-width: 720px; margin-inline: auto; }
 
-  /* nội dung rộng: các khối nhận chiều rộng tối đa và căn giữa; ảnh nền trời/ảnh bìa tràn hết khung */
+  /* wide content: the blocks take the maximum width and are centered; the sky background/cover photo spill over the whole frame */
   #screen[data-view="explore"] > :not(.sky), #screen[data-view="picked"] > *, #screen[data-view="trips"] > * { max-width: 1120px; margin-inline: auto; width: 100%; }
   #screen[data-view="explore"] > .search { width: min(720px, calc(100% - 48px)); }
   #screen[data-view="dest"] > .dbody { max-width: 860px; margin-inline: auto; }
@@ -56,7 +56,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
   #screen[data-view="trips"] .stack > .btn { min-height: 52px; }
   .toast { bottom: 24px; }
 
-  /* tờ phủ: hộp thoại giữa */
+  /* overlay sheet: a center dialog */
   .sheet { align-items: center; }
   .panel { border-radius: 30px; max-height: 88%; width: min(560px, 100%); }
   .panel.full { height: 88%; max-height: 88%; border-radius: 30px; }
@@ -74,7 +74,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
   .grid { grid-template-columns: repeat(4, 1fr); }
   body.has-drawer .grid { grid-template-columns: repeat(3, 1fr); }
 
-  /* chi tiết là ngăn kéo phải 440 px, không che nội dung: nội dung co lại */
+  /* the detail is a 440 px right drawer that does not cover the content: the content shrinks */
   body.has-drawer #screen { right: 440px; }
   body.has-drawer .toast { left: calc(50% - 220px); }
   .sheet.drawer { background: transparent; pointer-events: none; justify-items: end; align-items: stretch; }
@@ -82,7 +82,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
   .sheet.drawer .gallery { border-radius: 30px 0 0 0; }
   @keyframes slidein { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 
-  /* chuyến đi: bản đồ bên trái cố định, danh sách bên phải */
+  /* trip: the map on the left is fixed, the list on the right */
   #screen[data-view="trip"] { display: grid; grid-template-columns: minmax(0, 1fr) minmax(440px, 520px); overflow: hidden; padding-bottom: 0; }
   #screen[data-view="trip"] { background: var(--map-fallback); align-items: start; }
   #screen[data-view="trip"] .mapbox { position: sticky; top: 0; height: auto; aspect-ratio: 390 / 360; min-height: 0; }
@@ -91,29 +91,29 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 }
 @media (prefers-reduced-motion: reduce) { .sheet.drawer .panel { animation: none; } }
 
-/* Sửa lỗi truy cập của v4 ở giao diện tối: tagline ghi cứng màu tối nên tàng hình trên nền trời tối; mây trắng thành đốm chói */
+/* Fixes v4's accessibility bugs in the dark UI: the tagline has a hard-coded dark color so it is invisible on the dark sky; the white clouds become glaring spots */
 .tagline { color: var(--ink); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cloud { opacity: .14; } }
 :root[data-theme="dark"] .cloud { opacity: .14; }
 
-/* Sửa theo Taste/kiểm tra: tiêu đề h1 (đã đổi ở app.js), không text-shadow, chú thích thẻ xòe không bị thẻ khác che, máy bay không đè khẩu hiệu */
+/* Fixed per Taste/the check: the h1 title (changed in app.js), no text-shadow, the fanned card's caption is not covered by another card, the plane does not overlap the slogan */
 .plane { top: 120px; }
 .fan figure span { text-shadow: none; z-index: 1; }
 .fan figure::after { content: ""; position: absolute; inset: auto 0 0 0; height: 55%; background: linear-gradient(to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0)); }
 .fan .f1 span, .fan .f3 span { display: none; }
 @media (min-width: 768px) { .plane { top: 132px; } }
 
-/* thuộc tính hidden phải thắng display của .field/.checkrow (bản artifact có reset này, trang của prototype thì không) */
+/* the hidden attribute must beat the display of .field/.checkrow (the artifact version has this reset, the prototype page does not) */
 .field[hidden], .checkrow[hidden] { display: none !important; }
 
-/* Tờ phủ không được rộng hơn khung: ô ngày (min-content ~191 px) làm lưới 2 cột tràn 24 px ở 390 và tờ bị cuộn ngang khi focus */
+/* The overlay sheet must not be wider than the frame: the date box (min-content about 191 px) made the 2-column grid overflow by 24 px at 390 and the sheet scrolled horizontally on focus */
 .two > * { min-width: 0; }
 .field input, .field select { min-width: 0; max-width: 100%; }
 .panel { overflow-x: hidden; }
-/* chip lựa chọn trong tờ phủ cần nền riêng (nền tờ là màu thẻ nên chip nền thẻ thành vô hình) */
+/* the choice chip in the overlay sheet needs its own background (the sheet background is the card color so a chip with a card background becomes invisible) */
 .panel .fchip[aria-pressed="false"] { background: var(--surface-2); color: var(--ink); }
 
-/* ===== T6: mục tự do, nghỉ, việc cần làm; chi phí; đặt chỗ; sắp xếp thủ công ===== */
+/* ===== T6: free-form item, rest, to-do; cost; booking; manual ordering ===== */
 .sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .field textarea { border: 1.5px solid var(--line); background: var(--surface-2); border-radius: 14px; padding: 12px 14px; font-size: 16px; color: var(--ink); width: 100%; min-width: 0; max-width: 100%; resize: vertical; font: inherit; }
 .ktile { display: grid; place-items: center; background: var(--ct); color: var(--ci); min-height: 100px; }
@@ -145,18 +145,18 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .addopt strong { display: block; }
 @media (hover: hover) { .taskchk:hover:not([aria-pressed="true"]) { background: var(--surface-2); } .addopt:hover { background: var(--surface-2); } }
 
-/* Chip đang bật không có màu loại: nền = --ink nên chữ phải = --bg (v4 để chữ trắng, ở giao diện tối thành trắng trên nền sáng) */
+/* An active chip has no kind color: background = --ink so the text must be --bg (v4 left the text white, which on the dark UI becomes white on a light background) */
 .fchip[aria-pressed="true"] { color: var(--con, var(--bg)); }
-/* ô biểu tượng của mục không phải địa điểm: quy tắc .irow .im của v4 (nền navy) mạnh hơn .ktile */
+/* the icon box of an item that is not a place: v4's .irow .im rule (navy background) is stronger than .ktile */
 .irow .im.ktile { background: var(--ct); color: var(--ci); }
 
-/* ===== Sửa lỗi truy cập tìm thấy bằng a11y-scan (25/10/2026) ===== */
-/* tháng đẹp: chữ trắng trên xanh --like chỉ 4,15:1 (sáng) và 2,14:1 (tối) */
+/* ===== Accessibility fixes found by the a11y scan (25/10/2026) ===== */
+/* good months: white text on --like green is only 4.15:1 (light) and 2.14:1 (dark) */
 .months i.best { background: var(--pick-surface); color: var(--ink); border: 1px solid var(--pick-edge); }
-/* nút xóa và nền vuốt: màu đỏ cố định, chữ trắng ≥ 4,5:1 ở cả hai giao diện (--skip sáng lên ở giao diện tối) */
+/* the delete button and the swipe background: a fixed red, white text at least 4.5:1 in both UIs (--skip brightens in the dark UI) */
 .btn.danger, .swbg.go-l { background: var(--skip); color: var(--on-skip); }
 .swbg.go-r { background: var(--like); } .swbg.go-day { background: var(--sky); }
-/* vùng chạm tối thiểu 44 px */
+/* a minimum 44 px touch area */
 .fchip { min-height: 44px; }
 .tile .x { width: 44px; height: 44px; top: 4px; right: 4px; }
 @media (prefers-color-scheme: dark) {
@@ -165,7 +165,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 :root[data-theme="dark"] .taskchk[aria-pressed="true"], :root[data-theme="dark"] .round.r { color: var(--navy-fixed); }
 .more { min-height: 44px; }
 
-/* ===== T7: Đã xóa gần đây; xác thực lại; mã khôi phục ===== */
+/* ===== T7: Recently deleted; re-authentication; recovery code ===== */
 .trashrow { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; text-align: left; width: 100%; }
 .trashrow .im { position: relative; border-radius: 16px; overflow: hidden; min-height: 100px; background: var(--photo-bg); }
 .trashrow .im img { width: 100%; height: 100%; object-fit: cover; }
@@ -179,7 +179,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .protobox b { font-size: 12.5px; color: var(--muted); letter-spacing: .06em; }
 @media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
 
-/* ===== T8/T9: danh tính, bảo mật, khôi phục ===== */
+/* ===== T8/T9: identity, security, recovery ===== */
 .headrow { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .keybox { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .keybox li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 15px; line-height: 1.45; }
@@ -196,7 +196,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .infobox { background: var(--sky-soft); color: var(--ink); border-radius: 20px; padding: 14px 16px; display: grid; gap: 6px; }
 @media (min-width: 768px) { #screen[data-view="security"] > *, #screen[data-view="recover"] > *, #screen[data-view="trash"] > * { max-width: 720px; margin-inline: auto; width: 100%; } }
 
-/* ===== Sửa sau phản biện ===== */
+/* ===== Fixes after review ===== */
 .codebox { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px; font-size: 22px; letter-spacing: .04em; }
 .codebox.blur { filter: blur(10px); }
 .udot { position: absolute; top: 8px; right: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--cta); box-shadow: 0 0 0 2px var(--surface); }
@@ -205,12 +205,12 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .evlist li { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; line-height: 1.4; }
 .evlist .note { flex: none; }
 
-/* mã khôi phục: 6 nhóm × 5 ký hiệu, 3 nhóm mỗi hàng (dễ chép tay, không ngắt giữa nhóm); dấu gạch vẫn có trong văn bản để sao chép */
+/* recovery code: 6 groups x 5 symbols, 3 groups per row (easy to copy by hand, not breaking in the middle of a group); the hyphens are still in the text for copying */
 .codebox { display: grid; grid-template-columns: repeat(3, auto); justify-content: center; gap: 10px 18px; font-size: 24px; letter-spacing: .06em; }
 .codebox span { white-space: nowrap; }
 .codebox .sep { display: none; }
 
-/* ===== T10–T12: nhóm (BẢN THỬ 1b) ===== */
+/* ===== T10-T12: group (TRIAL VERSION 1b) ===== */
 .rights { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .rights li { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; line-height: 1.45; }
 .rights li svg { flex: none; margin-top: 3px; }
@@ -222,7 +222,7 @@ body:has(.offline-bar) .app { height: calc(100% - 38px); }
 .field textarea { width: 100%; box-sizing: border-box; min-height: 88px; padding: 12px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; resize: vertical; }
 .row { display: flex; flex-wrap: wrap; gap: 8px; }
 
-/* ===== T13: ảnh lỗi ===== */
+/* ===== T13: broken photo ===== */
 img.imgfail { background: linear-gradient(135deg, var(--surface-2), var(--line)); object-fit: none; }
 .empty { display: grid; justify-items: center; gap: 10px; text-align: center; padding: 28px 8px; }
 .empty .ib { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--surface-2); }
@@ -231,6 +231,6 @@ img.imgfail { background: linear-gradient(135deg, var(--surface-2), var(--line))
 @media (prefers-reduced-motion: no-preference) { .sky { transition: height .2s ease; } }
 #screen.searching .compass { display: none; }
 
-/* Onboarding: toàn khung, không thanh bên (DG-2 A2) */
+/* Onboarding: full frame, no side bar (DG-2 A2) */
 body:has(#screen[data-view="onboard"]) #tabbar { display: none !important; }
 #screen[data-view="onboard"] { left: 0 !important; }

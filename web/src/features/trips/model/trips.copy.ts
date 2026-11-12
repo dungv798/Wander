@@ -1,4 +1,4 @@
-/** Chữ hiển thị của tính năng "Chuyến đi" (tiếng Việt). Chuẩn FE §8: chữ nằm ở tệp `*.copy.ts`, không viết cứng trong thành phần. */
+/** The display copy of the 'Trips' feature (Vietnamese). FE standard section 8: copy lives in a `*.copy.ts` file, not hard-coded in a component. */
 export const TRIPS_COPY = {
   addMany: {
     open: 'Thêm nhiều nơi',

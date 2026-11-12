@@ -10,7 +10,7 @@ import { Icon } from '../../../shared/ui/Icon.tsx';
 import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
 import type { SceneProps } from '../model/onboarding.types.ts';
 
-/** Ba thẻ ảnh thật cùng gợi ý trải nghiệm; giữ thẻ Đà Lạt làm điểm nối sang cảnh quẹt, không bắt người xem thao tác. */
+/** Three real photo cards with an experience hint; keeps the Da Lat card as the link to the swipe scene, and does not require the viewer to act. */
 export function DiscoverScene({ auto, reduced, onDone, onCue }: SceneProps) {
   const scope = useRunScope();
   const autoRef = useLatestRef(auto);

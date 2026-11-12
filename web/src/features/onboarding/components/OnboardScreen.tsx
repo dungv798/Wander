@@ -7,7 +7,7 @@ import { ONBOARD_DESTINATION } from '../model/onboarding.const.ts';
 import { ONBOARD_COPY as T } from '../model/onboarding.copy.ts';
 import { OnboardStory } from './OnboardStory.tsx';
 
-/** Màn giới thiệu lần đầu (`#/onboard`): tải điểm đến Đà Lạt rồi dựng bốn cảnh; nếu tải lỗi vẫn cho Bỏ qua để vào app. */
+/** The first-time intro screen (`#/onboard`): loads the Da Lat destination then builds four scenes; if loading fails it still lets the user Skip into the app. */
 export function OnboardScreen() {
   const { finish } = useOnboarding();
   const { state } = useDestination(ONBOARD_DESTINATION);

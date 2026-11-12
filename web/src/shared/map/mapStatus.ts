@@ -2,7 +2,7 @@ import { COPY } from '../const/copy.vi.ts';
 import type { MapMarker } from './map.types.ts';
 import { externalMapHref } from './mapUtil.ts';
 
-/** Dòng "Đang tải bản đồ…" hiện ngay từ đầu để khung không trống không lời giải thích. */
+/** The 'Loading the map...' line shows right from the start so the frame is not empty without an explanation. */
 export function showMapLoading(host: HTMLElement): void {
   clearMapStatus(host);
   host.dataset['ready'] = '0';
@@ -11,15 +11,15 @@ export function showMapLoading(host: HTMLElement): void {
   host.appendChild(box);
 }
 
-/** Gỡ dòng đang tải và hộp lỗi toàn khung (không gỡ cảnh báo nền suy giảm). */
+/** Removes the loading line and the full-frame error box (it does not remove the degraded-base warning). */
 export function clearMapStatus(host: HTMLElement): void {
   host.querySelector('.tm-loading')?.remove();
   host.querySelector('.tm-err:not(.tm-degraded)')?.remove();
 }
 
 /**
- * Báo bản đồ chưa mở được: nói lý do, có nút "Thử lại" và liên kết bản đồ ngoài tới ghim đầu tiên.
- * Danh sách địa điểm của màn vẫn dùng được; khung không bao giờ để trống mà không có lời giải thích.
+ * Reports that the map could not open: gives the reason, a 'Retry' button and an external map link to the first pin.
+ * The screen's place list is still usable; the frame is never left empty without an explanation.
  */
 export function showMapUnavailable(host: HTMLElement, reason: string, markers: readonly MapMarker[], onRetry: () => void): void {
   clearMapStatus(host);

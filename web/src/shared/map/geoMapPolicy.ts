@@ -2,16 +2,16 @@ import { MAP } from './map.const.ts';
 import { airKm } from '../lib/geo.ts';
 import type { FitOptions, Insets, Pt, Size } from './map.types.ts';
 
-/** Vùng nhìn thấy tối thiểu (px) mỗi trục sau khi trừ hai lề, để MapLibre không tính ra kích thước âm. */
+/** The minimum visible area (px) on each axis after subtracting the two margins, so MapLibre does not compute a negative size. */
 const MIN_VISIBLE_PX = 2;
 
-/** Chỉ vừa lại khi inset thực sự đổi và camera chưa do người dùng chỉnh hoặc ghim đã bị che. */
+/** Re-fits only when the inset really changed and the camera has not been adjusted by the user or a pin has been covered. */
 export function needsInsetRefit(before: Insets, after: Insets, touched: boolean, visible: boolean): boolean {
   const changed = before.top !== after.top || before.right !== after.right || before.bottom !== after.bottom || before.left !== after.left;
   return changed && (!touched || !visible);
 }
 
-/** Cặp điểm càng gần càng được phóng lớn; fitBounds vẫn giữ đủ hai điểm, cụm giữ trần riêng. */
+/** The closer a pair of points, the larger the zoom; fitBounds still keeps both points, a cluster keeps its own ceiling. */
 export function fitMaxZoom(options: FitOptions, points: readonly Pt[] = []): number {
   const [a, b] = points;
   let limit: number = points.length > MAP.FIT_SMALL_COUNT ? MAP.FIT_REGION_ZOOM : MAP.GL_FIT_MAX_ZOOM;
@@ -22,7 +22,7 @@ export function fitMaxZoom(options: FitOptions, points: readonly Pt[] = []): num
   return Math.max(MAP.GL_MIN_ZOOM, Math.min(MAP.GL_MAX_ZOOM, options.maxZoom ?? limit));
 }
 
-/** Lề px giữ ghim và tên khỏi mép/ghi công; khung đang co vẫn còn vùng nhìn dương. */
+/** The px margin that keeps pins and names away from the edge/attribution; a shrinking frame still has a positive visible area. */
 export function fitPadding(size: Size, inset: Insets, pad: number = MAP.FIT_PADDING, credit = false): Insets {
   const side = Math.max(pad, MAP.FIT_LABEL_SIDE);
   const [top, bottom] = fitAxis(inset.top + pad, inset.bottom + pad + MAP.FIT_LABEL_SPACE + (credit ? MAP.CREDIT_BAND : 0), size.h);
@@ -31,8 +31,8 @@ export function fitPadding(size: Size, inset: Insets, pad: number = MAP.FIT_PADD
 }
 
 /**
- * Hai lề đối diện trên một trục: giữ nguyên khi tổng còn chừa vùng nhìn dương, quá thì co theo tỉ lệ để tổng < chiều dài.
- * (Trước kia mỗi lề bị kẹp ở nửa chiều dài nên tờ đáy che 60% khung làm camera vừa khung xuống dưới tờ.)
+ * The two opposite margins on an axis: kept as they are while their sum still leaves a positive visible area, otherwise scaled proportionally so the sum < the length.
+ * (Before, each margin was clamped at half the length so a bottom sheet covering 60% of the frame made the camera fit under the sheet.)
  */
 function fitAxis(near: number, far: number, length: number): [number, number] {
   const room = Math.max(0, length - MIN_VISIBLE_PX);
@@ -42,7 +42,7 @@ function fitAxis(near: number, far: number, length: number): [number, number] {
   return [Math.floor(near * scale), Math.floor(far * scale)];
 }
 
-/** Nhận lỗi nguồn/ô nền; dữ liệu tuyến và ghim của ứng dụng không phải nguồn nền. */
+/** Accepts base source/tile errors; the app's route and pin data are not a base source. */
 export function isBasemapError(event: { error?: unknown; sourceId?: string; source?: unknown; tile?: unknown }): boolean {
   return event.sourceId !== MAP.ROUTE_SOURCE_ID && !MAP.PIN_SOURCES.some((source) => source === event.sourceId) && Boolean(event.sourceId || event.source || event.tile);
 }

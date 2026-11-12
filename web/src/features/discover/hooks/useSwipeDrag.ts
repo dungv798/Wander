@@ -5,23 +5,23 @@ import { usePrefersReducedMotion } from '../../../shared/hooks/useMediaQuery.ts'
 import { fling, paintDrag, resetDrag, shouldCommit } from '../model/swipeGesture.ts';
 import type { SwipeDir } from '../model/swipeGesture.ts';
 
-/** Phần tử bên trong thẻ KHÔNG bắt đầu cử chỉ kéo (nút nguồn ảnh…). */
+/** Elements inside the card do NOT start a drag gesture (the photo-source button...). */
 const NO_DRAG_SELECTOR = '.more, .credit-btn, .credit-pill';
 
 interface SwipeHandlers {
-  /** Quẹt đủ ngưỡng (hoặc bấm nút): bay thẻ rồi quyết định. */
+  /** A swipe past the threshold (or a button press): the card flies away and then a decision is made. */
   readonly onDecide: (dir: SwipeDir) => void;
-  /** Chạm nửa trái/phải của thẻ nhiều ảnh: ảnh trước/sau. */
+  /** Tapping the left/right half of a multi-photo card: the previous/next photo. */
   readonly onShiftPhoto: (delta: number) => void;
-  /** Chạm khối tên-thông tin (hoặc thẻ chỉ một ảnh): mở chi tiết. */
+  /** Tapping the name-info block (or a single-photo card): opens the detail. */
   readonly onTap: () => void;
-  /** Thẻ có nhiều ảnh (bật vùng chạm đổi ảnh ở hai cạnh). */
+  /** A card with several photos (turns on the photo-switch tap zones at the two edges). */
   readonly multiPhoto: boolean;
 }
 
 /**
- * Cử chỉ kéo cho thẻ quẹt, dùng pointer events (chuột, cảm ứng, bút) và sửa style trực tiếp để không render lại mỗi lần di chuyển.
- * Trả bộ xử lý gắn vào thẻ ở đầu bộ bài.
+ * The drag gesture for the swipe card, using pointer events (mouse, touch, pen) and editing the style directly so it does not re-render on every move.
+ * Returns the handler attached to the card at the top of the deck.
  */
 export function useSwipeDrag({ onDecide, onShiftPhoto, onTap, multiPhoto }: SwipeHandlers) {
   const reduced = usePrefersReducedMotion();
@@ -35,7 +35,7 @@ export function useSwipeDrag({ onDecide, onShiftPhoto, onTap, multiPhoto }: Swip
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
     } catch {
-      /* không bắt được con trỏ: vẫn kéo được trong thẻ */
+      /* the pointer could not be captured: it can still be dragged inside the card */
     }
   };
 
@@ -63,15 +63,15 @@ export function useSwipeDrag({ onDecide, onShiftPhoto, onTap, multiPhoto }: Swip
     if (d.moved || e.type !== 'pointerup') return;
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
-    // con trỏ đã bị thẻ "bắt" nên e.target luôn là thẻ: xét vị trí chạm so với khung khối thông tin
+    // the pointer was 'captured' by the card so e.target is always the card: judge by the tap position against the info block's frame
     const info = card.querySelector(SWIPE.DETAIL_TAP_SELECTOR)?.getBoundingClientRect();
     const onInfo = Boolean(info && e.clientY >= info.top && e.clientY <= info.bottom);
-    // thẻ nhiều ảnh: nửa trái/phải đổi ảnh; chạm khối tên-thông tin (hoặc thẻ một ảnh) thì mở chi tiết
+    // a multi-photo card: the left/right half switches the photo; tapping the name-info block (or a single-photo card) opens the detail
     if (multiPhoto && !onInfo) onShiftPhoto(x < SWIPE.PHOTO_SPLIT ? -1 : 1);
     else onTap();
   };
 
-  /** Hệ thống hủy con trỏ (thanh thông báo kéo xuống…): đưa thẻ về chỗ cũ, KHÔNG chốt quyết định. */
+  /** The system cancels the pointer (a notification bar pulled down...): puts the card back, does NOT commit a decision. */
   const cancel = (e: PointerEvent<HTMLElement>): void => {
     if (!drag.current.down) return;
     drag.current.down = false;

@@ -7,9 +7,9 @@ const HALF_TURN_DEG = 180;
 const DEG_TO_RAD = Math.PI / HALF_TURN_DEG;
 
 /**
- * Cung nhẹ nối hai điểm [kinh độ, vĩ độ]: đường cong bậc hai có điểm điều khiển lệch vuông góc `MAP.ARC_CURVE` × độ dài, lấy mẫu `steps` đoạn.
- * Tính trong mặt phẳng địa phương (kinh độ nhân cos vĩ độ) để độ cong không méo ở vĩ độ Việt Nam. Trả cả điểm giữa cung (đặt nhãn km).
- * Hai điểm trùng nhau cho đường suy biến nhưng hữu hạn (không chia cho 0).
+ * A gentle arc connecting two points [longitude, latitude]: a quadratic curve whose control point is offset perpendicular by `MAP.ARC_CURVE` x the length, sampled in `steps` segments.
+ * Computed in the local plane (longitude multiplied by cos latitude) so the curvature is not distorted at Vietnam's latitude. Also returns the arc's midpoint (to place the km label).
+ * Two coincident points give a degenerate but finite line (no division by 0).
  */
 export function arcBetween(a: Pt, b: Pt, steps: number = ARC_STEPS): { line: Pt[]; mid: Pt } {
   const k = Math.cos(((a[1] + b[1]) / HALF) * DEG_TO_RAD);
@@ -19,7 +19,7 @@ export function arcBetween(a: Pt, b: Pt, steps: number = ARC_STEPS): { line: Pt[
   const offset = MAP.ARC_CURVE * len;
   const cx = (ax + bx) / HALF - (dy / len) * offset;
   const cy = (ay + by) / HALF + (dx / len) * offset;
-  /** Điểm trên cung ở tham số t trong [0, 1], quy lại kinh độ/vĩ độ. */
+  /** The point on the arc at parameter t in [0, 1], converted back to longitude/latitude. */
   const at = (t: number): Pt => {
     const u = 1 - t;
     return [(u * u * ax + HALF * u * t * cx + t * t * bx) / k, u * u * ay + HALF * u * t * cy + t * t * by];
@@ -27,7 +27,7 @@ export function arcBetween(a: Pt, b: Pt, steps: number = ARC_STEPS): { line: Pt[
   return { line: Array.from({ length: steps + 1 }, (_, i) => at(i / steps)), mid: at(1 / HALF) };
 }
 
-/** Tuyến qua nhiều điểm [kinh độ, vĩ độ]: các cung nối tiếp; `mids[i]` là điểm giữa cung thứ i. Ít hơn hai điểm thì rỗng. */
+/** A route through several points [longitude, latitude]: consecutive arcs; `mids[i]` is the midpoint of the i-th arc. Fewer than two points gives empty. */
 export function routeArcs(points: readonly Pt[]): { lines: Pt[][]; mids: Pt[] } {
   const lines: Pt[][] = [];
   const mids: Pt[] = [];

@@ -9,7 +9,7 @@ import { HOME_COPY } from '../../model/home.copy.ts';
 import { HOME_BANNER } from '../../model/homePhotos.const.ts';
 import { HERO_PHOTOS } from '../../model/heroPhotos.const.ts';
 
-/** Một câu mời trên mảng nền riêng; banner đã chọn thấp hơn và mở đúng bộ thẻ. */
+/** One invitation line on its own background; the chosen banner is lower and opens the right deck. */
 export function HomeBanner({ dest }: { readonly dest?: DestinationDetail }) {
   const file = dest ? HERO_PHOTOS[dest.id]?.[0] : HOME_BANNER.file;
   const src = file ? `/catalog/photos/${file}` : dest?.coverUrl;

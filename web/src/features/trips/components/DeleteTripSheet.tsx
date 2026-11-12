@@ -11,8 +11,8 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 /**
- * Hộp xác nhận xóa cả chuyến (xóa MỀM, PO 28/10/2026): chuyến vào "Chuyến đã xóa gần đây" và khôi phục được; thông báo sau khi xóa có
- * "Hoàn tác". Xóa xong quay về danh sách chuyến. Xóa vĩnh viễn chuyến cần xác thực lại (D25) nên chưa có.
+ * The confirmation box for deleting a whole trip (a SOFT delete, PO 28/10/2026): the trip goes into 'Recently deleted trips' and can be restored; the notice after deleting has
+ * 'Undo'. After deleting it returns to the trip list. Permanently deleting a trip needs re-authentication (D25) so it does not exist yet.
  */
 export function DeleteTripSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip } = useTripView();
@@ -20,7 +20,7 @@ export function DeleteTripSheet({ onClose }: { readonly onClose: () => void }) {
   const toast = useToast();
   const report = useReportError();
   const [busy, setBusy] = useState(false);
-  /** Xóa mềm chuyến, về danh sách và hiện "Hoàn tác" (khôi phục rồi mở lại chuyến). */
+  /** Soft-deletes the trip, goes to the list and shows 'Undo' (restore and then re-open the trip). */
   const remove = (): void => {
     setBusy(true);
     actions.deleteTrip(trip.id).then(() => {

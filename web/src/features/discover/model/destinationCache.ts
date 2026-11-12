@@ -1,13 +1,13 @@
 import type { DestinationDetail } from './Catalog.types.ts';
 
-/** Giới hạn của bản lưu điểm đến: khóa, số điểm đến giữ lại và cỡ tối đa của một bản (ký tự JSON). */
+/** The limits of the saved destination copy: the key, the number of destinations kept and the maximum size of one copy (JSON characters). */
 export const DESTINATION_CACHE_LIMITS = {
   KEY: 'wander.web.catalog.destinations.v1',
   MAX_ENTRIES: 4,
   MAX_CHARS: 600_000,
 } as const;
 
-/** Phần của `Storage` mà bản lưu dùng. */
+/** The part of `Storage` that the saved copy uses. */
 export type DestinationStorage = Pick<Storage, 'getItem' | 'setItem'>;
 
 interface Entry {
@@ -16,7 +16,7 @@ interface Entry {
   readonly data: DestinationDetail;
 }
 
-/** Kho mặc định của trình duyệt; null khi bị chặn. */
+/** The browser's default store; null when it is blocked. */
 function browserStorage(): DestinationStorage | null {
   try {
     return typeof localStorage === 'undefined' ? null : localStorage;
@@ -25,18 +25,18 @@ function browserStorage(): DestinationStorage | null {
   }
 }
 
-/** Có phải đối tượng thường. */
+/** Whether it is a plain object. */
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Một điểm đến đủ hình dạng tối thiểu để màn hình dùng không vỡ (cùng tiêu chí với kiểm tra khi tải từ API). */
+/** A destination with the minimum shape for the screens to use without breaking (the same criterion as the check when loading from the API). */
 function looksLikeDetail(v: unknown): v is DestinationDetail {
   return isRecord(v) && typeof v['id'] === 'string' && typeof v['name'] === 'string'
     && Array.isArray(v['places']) && Array.isArray(v['guide']) && Array.isArray(v['references']);
 }
 
-/** Đọc các mục đã lưu; mục hỏng bị bỏ, kho hỏng coi như rỗng. */
+/** Reads the saved entries; a broken entry is dropped, a broken store counts as empty. */
 function readEntries(storage: DestinationStorage | null): Entry[] {
   if (!storage) return [];
   try {
@@ -50,8 +50,8 @@ function readEntries(storage: DestinationStorage | null): Entry[] {
 }
 
 /**
- * Lưu bản điểm đến gần nhất tải được để vẫn xem lịch/chi tiết khi máy chủ không trả lời (B-09, DR-037). Giữ vài điểm đến mới nhất, bỏ bản quá lớn,
- * và im lặng khi hết hạn mức: đây chỉ là tiện ích, không được làm hỏng luồng chính.
+ * Saves the latest destination copy that could be loaded so the schedule/detail can still be viewed when the server does not answer (B-09, DR-037). Keeps a few of the newest destinations, drops a copy that is too large,
+ * and stays silent when the quota runs out: this is only a convenience and must never break the main flow.
  */
 export function saveCachedDestination(detail: DestinationDetail, now: number, storage: DestinationStorage | null = browserStorage()): void {
   const text = JSON.stringify({ id: detail.id, savedAt: now, data: detail });
@@ -63,11 +63,11 @@ export function saveCachedDestination(detail: DestinationDetail, now: number, st
   try {
     storage.setItem(DESTINATION_CACHE_LIMITS.KEY, JSON.stringify({ entries }));
   } catch {
-    /* hết hạn mức: không lưu */
+    /* out of quota: not saved */
   }
 }
 
-/** Bản đã lưu của một điểm đến; null nếu chưa có hoặc hỏng. */
+/** The saved copy of a destination; null if there is none or it is broken. */
 export function loadCachedDestination(id: string, storage: DestinationStorage | null = browserStorage()): DestinationDetail | null {
   return readEntries(storage).find((e) => e.id === id)?.data ?? null;
 }

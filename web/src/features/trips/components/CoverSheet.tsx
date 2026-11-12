@@ -12,14 +12,14 @@ import { COVER_COPY as C } from '../model/cover.copy.ts';
 import { coverPhotos } from '../model/cover.ts';
 import type { TripCover } from '../model/trip.types.ts';
 
-/** Tờ chọn bìa từ catalog chuyến, sáu gradient hoặc tự động; chỉ Organizer được mở. */
+/** The cover-choosing sheet from the trip catalog, six gradients or automatic; only the Organizer may open it. */
 export function CoverSheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, cat } = useTripView();
   const { actions } = useTrips();
   const undoable = useUndoable();
   const [selected, setSelected] = useState<TripCover | null>(trip.cover ?? null);
   const photos = coverPhotos(cat.dest);
-  /** Đóng tờ ngay để thấy bìa lạc quan; thông báo Hoàn tác chỉ hiện sau khi máy chủ ghi thành công. */
+  /** Closes the sheet at once to show the optimistic cover; the Undo notice shows only after the server has written successfully. */
   const save = (): void => {
     onClose();
     undoable(trip.id, () => actions.updateCover(trip.id, selected), C.changed);

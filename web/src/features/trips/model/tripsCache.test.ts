@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { clearTripsCache, loadTripsCache, saveTripsCache } from './tripsCache.ts';
 import type { Trip } from './trip.types.ts';
 
-/** Kho giả có đủ ba hàm mà bộ nhớ đệm dùng; `failSet` mô phỏng hết hạn mức. */
+/** A fake store with the three functions the cache uses; `failSet` simulates running out of quota. */
 function fakeStorage(failSet = false) {
   const data = new Map<string, string>();
   return {

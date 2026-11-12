@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { DESTINATION_CACHE_LIMITS, loadCachedDestination, saveCachedDestination } from './destinationCache.ts';
 import type { DestinationDetail } from './Catalog.types.ts';
 
-/** Kho giả; `failSet` mô phỏng hết hạn mức. */
+/** A fake store; `failSet` simulates running out of quota. */
 function fakeStorage(failSet = false) {
   const data = new Map<string, string>();
   return {
@@ -14,7 +14,7 @@ function fakeStorage(failSet = false) {
   };
 }
 
-/** Điểm đến tối thiểu đủ qua kiểm hình dạng; `pad` làm nó nặng hơn. */
+/** A minimal destination that passes the shape check; `pad` makes it heavier. */
 function dest(id: string, pad = ''): DestinationDetail {
   return { id, name: id, places: [], guide: [], references: [], pad } as unknown as DestinationDetail;
 }

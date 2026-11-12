@@ -12,7 +12,7 @@ import { useTripView } from '../hooks/TripViewContext.tsx';
 import { groupChecklist } from '../model/checklistGroups.ts';
 import { permissionsOf } from '../model/tripPermissions.ts';
 
-/** Một hạng mục: ô tích của chính mình, tiến độ chung "x/y người" và (Organizer) nút xóa hai chạm. */
+/** One item: the tick box of oneself, the shared progress 'x/y people' and (Organizer) a two-tap delete button. */
 function ChecklistRow({ item, people, organizer, busy, onToggle, onRemove }: {
   readonly item: ChecklistItem;
   readonly people: number;
@@ -48,7 +48,7 @@ function ChecklistRow({ item, people, organizer, busy, onToggle, onRemove }: {
   );
 }
 
-/** Biểu mẫu thêm hạng mục (chỉ Organizer): nhóm tùy chọn và tên hạng mục. */
+/** The form that adds an item (Organizer only): an optional group and the item name. */
 function AddChecklist({ onAdd, busy }: { readonly onAdd: (group: string, title: string) => Promise<boolean>; readonly busy: boolean }) {
   const [group, setGroup] = useState('');
   const [title, setTitle] = useState('');
@@ -69,7 +69,7 @@ function AddChecklist({ onAdd, busy }: { readonly onAdd: (group: string, title: 
   );
 }
 
-/** Mục "Chuẩn bị trước chuyến đi": mỗi người tự tích phần của mình (D10), ai cũng thấy tiến độ; Organizer thêm/xóa hạng mục. */
+/** The 'Prepare before the trip' section: each person ticks their own part (D10), everyone sees the progress; the Organizer adds/deletes items. */
 export function ChecklistSection() {
   const { trip } = useTripView();
   const toast = useToast();

@@ -16,35 +16,35 @@ import { PlaceInformation } from './place/PlaceInformation.tsx';
 import { PlaceTripAction } from './place/PlaceTripAction.tsx';
 import '../place.css';
 
-/** Nội dung chi tiết một địa điểm, thông tin thực dụng trước: ảnh, về nơi này, thông số, có gì, buổi/mùa/mẹo (gập), đường đi, rồi ý kiến biên tập, đánh giá và ghi công. */
+/** The detail content of one place, practical information first: the photo, about this place, the facts, what is there, part of day/season/tip (collapsed), the route, then the editorial opinion, the rating and the attribution. */
 function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDetail; readonly placeId: string; readonly inDeck: boolean }) {
   const { state, actions } = useDiscover();
   const sheet = usePlaceSheet();
   const goRef = useRef<(delta: number) => void>(() => undefined);
-  /** Thanh ảnh đăng ký hàm chuyển ảnh để phím ←/→ của tờ dùng được. */
+  /** The photo bar registers the photo-switch function so the sheet's left/right keys work. */
   const registerGo = useCallback((go: (delta: number) => void): void => { goRef.current = go; }, []);
   const place = placeById(dest, placeId);
   if (!place) return null;
   const slot = sheet.slot;
   const canDecide = inDeck && !slot?.noDecide && !slot?.cta && !state.decisions[place.id];
-  /** Ngoài bộ thẻ (Điểm đến, Đã chọn, ghim bản đồ) mà không có hành động riêng của chuyến: nút "Chọn"/"Đã chọn" bật/tắt như thẻ ở danh sách. */
+  /** Outside the deck (Destination, Selected, map pin) and without a trip-specific action: the 'Select'/'Selected' button toggles like the card in the list. */
   const canToggle = !inDeck && !slot?.noDecide && !slot?.cta;
   const chosen = state.decisions[place.id] === 'like';
 
-  /** ←/→ chuyển ảnh khi đang xem chi tiết (người dùng bàn phím). */
+  /** Left/right switch the photo while viewing the detail (keyboard users). */
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
     if ((e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, textarea, select, [contenteditable="true"], .tmroot')) return;
     e.preventDefault();
     goRef.current(e.key === 'ArrowRight' ? 1 : -1);
   };
-  /** Quyết định cho nơi đang xem rồi đóng (từ nút trong tờ chi tiết ở màn quẹt). */
+  /** Decides for the place being viewed and then closes (from the button in the detail sheet on the swipe screen). */
   const decide = (d: 'like' | 'skip'): void => {
     actions.decide(place.id, d);
     sheet.close();
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- bắt phím mũi tên nổi lên từ phần tử đang focus bên trong tờ chi tiết
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- catches the arrow keys bubbling up from the focused element inside the detail sheet
     <div className="place-content" onKeyDown={onKeyDown}>
       <div className="place-scroll">
         <PlaceHead dest={dest} place={place} onClose={sheet.close} />
@@ -76,7 +76,7 @@ function PlaceContent({ dest, placeId, inDeck }: { readonly dest: DestinationDet
   );
 }
 
-/** Tờ chi tiết địa điểm dùng chung cho mọi màn khám phá; ở màn quẹt trên máy tính rộng thì là ngăn kéo bên phải. */
+/** The place detail sheet shared by every discovery screen; on a wide computer's swipe screen it is the right-hand drawer. */
 export function PlaceSheet({ dest, inDeck }: { readonly dest: DestinationDetail; readonly inDeck: boolean }) {
   const { placeId, close } = usePlaceSheet();
   if (!placeId) return null;

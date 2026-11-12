@@ -1,7 +1,7 @@
-/* Lớp "sức sống" dùng chung (v6, 26/10/2026): nền sinh động, nút bóng kính, thẻ nổi nhẹ, hiện dần, chuyển màn. Nạp SAU các tệp màn hình. Chỉ dùng token. */
+/* The shared 'vitality' layer (v6, 26/10/2026): a lively background, glossy glass buttons, lightly floating cards, fade-in, screen transitions. Loaded AFTER the screen files. Tokens only. */
 
-/* ---- nền: ba đốm sáng trôi chậm sau nội dung (màu theo bộ màu) ---- */
-.app { isolation: isolate; overflow: clip; }   /* clip (không phải hidden): đốm sáng nền trôi ra ngoài không làm khung cuộn lệch được */
+/* ---- background: three light blobs drifting slowly behind the content (colors follow the palette) ---- */
+.app { isolation: isolate; overflow: clip; }   /* clip (not hidden): the background blobs drifting out cannot make the scroll frame shift */
 .app::before, .app::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(64px); opacity: 0.5; pointer-events: none; }
 .app::before { width: 340px; height: 340px; left: -140px; top: 24%; background: var(--ambient-a); animation: blobA 24s ease-in-out infinite alternate; }
 .app::after { width: 320px; height: 320px; right: -130px; bottom: 16%; background: var(--ambient-b); animation: blobB 28s ease-in-out infinite alternate; }
@@ -9,12 +9,12 @@
 @keyframes blobB { to { translate: -80px 60px; scale: 1.15; } }
 @media (prefers-reduced-motion: reduce) { .app::before, .app::after { animation: none; } }
 
-/* ---- nút chính (bảng màu B): kính trắng mát, chữ mực đậm, bóng mực mảnh; không bevel, không vệt sáng quét ---- */
+/* ---- the main button (palette B): cool white glass, bold ink text, a thin ink shadow; no bevel, no sweeping highlight ---- */
 .btn:not(.ghost):not(.danger):not(.sun), .pill:not(.warn) { font-weight: 800; box-shadow: var(--btn-shadow); }
 .btn.ghost { box-shadow: var(--sh-1); }
 @media (prefers-reduced-motion: reduce) { .dcta .btn::after, .obx-cta::after, .tpl .btn::after { animation: none; } }
 
-/* ---- thẻ và khối: bóng màu nhẹ, nảy khi chạm ---- */
+/* ---- cards and blocks: a light colored shadow, a bounce on touch ---- */
 .tcard, .resume, .gblock, .tile, .opt, .seccard { box-shadow: var(--card-shadow); border-color: transparent; }
 .gblock { border: 0; }
 .ghead .ib, .grow .ib, .devrow .ib, .addopt .ib, .next .ib { background: var(--gem-grad); color: var(--on-gem, var(--white)); box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.55), inset 0 -4px 6px rgba(0, 0, 0, 0.16), 0 8px 14px -8px rgba(20, 33, 58, 0.5); }
@@ -22,11 +22,11 @@
 .h2 { font-weight: 800; letter-spacing: -0.005em; }
 .chip.tint { background: var(--tint); color: var(--tint-ink); }
 
-/* ---- thanh tab nổi: kính, viên chọn có bóng ---- */
+/* ---- the floating tab bar: glass, the selected pill has a shadow ---- */
 #tabbar { box-shadow: 0 18px 36px -16px rgba(20, 33, 58, 0.55); border-color: rgba(255, 255, 255, 0.7); }
 .tab[aria-current="page"] { box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.6), 0 6px 14px -8px rgba(20, 33, 58, 0.45); }
 
-/* ---- chuyển màn bằng View Transitions (nếu trình duyệt hỗ trợ): ảnh bìa trượt từ thẻ sang đầu trang ---- */
+/* ---- screen transition with View Transitions (if the browser supports it): the cover photo slides from the card to the top of the page ---- */
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.38s; animation-timing-function: var(--ease-out); }
 ::view-transition-group(cover) { animation-duration: 0.5s; animation-timing-function: var(--ease-out); }
 @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }

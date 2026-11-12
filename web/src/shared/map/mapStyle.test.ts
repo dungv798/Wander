@@ -7,7 +7,7 @@ import { MAP } from './map.const.ts';
 
 const COLORS = { water: 'rgb(143,211,251)', land: 'rgb(255,252,243)', park: 'rgb(226,239,233)', road: 'rgb(255,255,255)', mainRoad: 'rgb(255,230,138)', casing: 'rgb(244,229,203)', label: 'rgb(69,80,106)', halo: 'rgb(255,255,255)', boundary: 'rgb(167,181,194)' };
 
-/** Mẫu cấu trúc Liberty/OpenMapTiles ngoại tuyến; không giả làm bản Liberty tải thật. */
+/** An offline sample of the Liberty/OpenMapTiles structure; it does not pretend to be the real downloaded Liberty. */
 function baseStyle(): StyleSpecification {
   return {
     version: 8, glyphs: 'https://example.test/{fontstack}/{range}.pbf',
@@ -113,7 +113,7 @@ test('nhãn song ngữ của Liberty chỉ hiển thị một tên sau khi ưu t
 
 test('biểu thức case/concat thật của Liberty không lặp tên quốc gia và thành phố', () => {
   const original = baseStyle();
-  // JSON nền Liberty đọc ngày 06/11/2026: label_city và label_country_1 dùng biểu thức này.
+  // The Liberty base JSON read on 06/11/2026: label_city and label_country_1 use this expression.
   original.layers.push({ id: 'label_country_1', type: 'symbol', source: 'openmaptiles', 'source-layer': 'place', layout: { 'text-field': ['case', ['has', 'name:nonlatin'], ['concat', ['get', 'name:latin'], '\n', ['get', 'name:nonlatin']], ['coalesce', ['get', 'name_en'], ['get', 'name']]] } });
   const layer = restyleMap(original, COLORS).layers.find(layer => layer.id === 'label_country_1');
   assert.ok(layer?.type === 'symbol');

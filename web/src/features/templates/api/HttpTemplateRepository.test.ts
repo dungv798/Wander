@@ -7,7 +7,7 @@ import { HttpTemplateRepository } from './HttpTemplateRepository.ts';
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
 
-/** Kho dựng trên fetch giả; trả thêm danh sách URL đã gọi. */
+/** A repository built on a fake fetch; it also returns the list of URLs that were called. */
 function repo(handler: (url: string) => Response): { readonly repository: HttpTemplateRepository; readonly urls: string[] } {
   const urls: string[] = [];
   const fetchImpl: FetchLike = (url) => {

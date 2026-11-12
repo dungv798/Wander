@@ -11,91 +11,91 @@ import type { DayPlan, EditResult, ItemPatch, NewTrip, PlaceRef, TripEdit } from
 import { missingPlaces, validAddDay } from '../model/addMany.ts';
 import { createCoverAction } from './coverActions.ts';
 
-/** Các thao tác trên kho chuyến đi. Máy chủ là nguồn sự thật: mỗi thao tác gọi API rồi ĐỌC LẠI chuyến đó vào kho (không đoán kết quả). Thất bại ném `ApiError`. */
+/** The actions on the trip store. The server is the source of truth: each action calls the API and then RE-READS that trip into the store (it does not guess the result). A failure throws `ApiError`. */
 export interface TripsActions {
-  /** Đổi bìa lạc quan; lỗi mạng hoàn lại bìa trước khi ghi. */
+  /** Changes the cover optimistically; a network error restores the previous cover before writing. */
   readonly updateCover: (tripId: string, cover: TripCover | null) => Promise<void>;
-  /** Tạo chuyến (mã do máy chủ cấp) và thêm lần lượt các địa điểm đã chọn; trả chuyến đã đọc lại. */
+  /** Creates a trip (the id is issued by the server) and adds the chosen places one by one; returns the re-read trip. */
   readonly create: (n: NewTrip, places: readonly PlaceRef[]) => Promise<Trip>;
   readonly addPlaces: (tripId: string, places: readonly PlaceRef[], day?: string | null) => Promise<void>;
   readonly addItem: (tripId: string, item: ItemInput) => Promise<void>;
   readonly updateItem: (tripId: string, itemId: string, patch: ItemPatch) => Promise<void>;
-  /** Gán ngày cho một mục (null = "Chưa có ngày"); xuống cuối ngày mới. */
+  /** Assigns a day to an item (null = 'No date yet'); it goes to the end of the new day. */
   readonly assignDay: (tripId: string, itemId: string, day: string | null) => Promise<void>;
-  /** Đổi chỗ với mục kề trên/dưới cùng ngày; ở đầu/cuối hoặc chưa có ngày thì không làm gì. */
+  /** Swaps with the adjacent item above/below in the same day; at the start/end or with no date it does nothing. */
   readonly moveItem: (tripId: string, itemId: string, dir: 'up' | 'down') => Promise<void>;
-  /** Gán nhiều mục vào cuối một ngày trong một lệnh lịch nguyên tử. */
+  /** Assigns several items to the end of a day in one atomic schedule command. */
   readonly assignMany: (tripId: string, itemIds: readonly string[], day: string) => Promise<void>;
   readonly toggleDone: (tripId: string, itemId: string) => Promise<void>;
-  /** Áp dụng gợi ý xếp ngày: chỉ cho mục đang "Chưa có ngày" và ngày thuộc chuyến. */
+  /** Applies the day-scheduling suggestion: only for items that are 'No date yet' and a day that belongs to the trip. */
   readonly applyPlan: (tripId: string, plan: DayPlan) => Promise<void>;
-  /** Sửa tên/ngày chuyến; mục rơi khỏi khoảng ngày về "Chưa có ngày" (DR-011 A1) và được đếm ở kết quả. Null nếu không có chuyến. */
+  /** Edits the trip name/dates; an item that falls out of the date range goes back to 'No date yet' (DR-011 A1) and is counted in the result. Null if there is no trip. */
   readonly editTrip: (tripId: string, e: TripEdit) => Promise<EditResult | null>;
-  /** Xóa mềm một mục (vào "Đã xóa gần đây"). */
+  /** Soft-deletes an item (into 'Recently deleted'). */
   readonly trashItem: (tripId: string, itemId: string) => Promise<void>;
-  /** Khôi phục từ thùng rác; trả `dayLost` (ngày cũ không còn nên về "Chưa có ngày") hoặc null nếu không có mục. */
+  /** Restores from the trash; returns `dayLost` (the old day no longer exists so it goes to 'No date yet') or null if there is no item. */
   readonly restoreItem: (tripId: string, entryId: string) => Promise<{ readonly dayLost: boolean } | null>;
-  /** Xóa vĩnh viễn một mục khỏi thùng rác (không hoàn tác được). */
+  /** Permanently deletes an item from the trash (it cannot be undone). */
   readonly purgeItem: (tripId: string, entryId: string) => Promise<void>;
-  /** Xóa mềm cả chuyến: gỡ khỏi kho (chuyến đã xóa không còn đọc được nên không đọc lại). */
+  /** Soft-deletes a whole trip: removes it from the store (a deleted trip can no longer be read so it is not re-read). */
   readonly deleteTrip: (tripId: string) => Promise<void>;
-  /** Khôi phục chuyến đã xóa mềm và đưa lại vào kho. */
+  /** Restores a soft-deleted trip and puts it back into the store. */
   readonly restoreTrip: (tripId: string) => Promise<void>;
-  /** Đọc lại một chuyến từ máy chủ (sau việc ghi ngoài kho, ví dụ duyệt đề nghị xóa), không làm danh sách nháy "đang tải". */
+  /** Re-reads a trip from the server (after a write outside the store, for example approving a deletion request), without making the list flash 'loading'. */
   readonly refreshTrip: (tripId: string) => Promise<void>;
-  /** Hoàn tác: đưa chuyến trở lại `before` bằng các lệnh ngược trên máy chủ. */
+  /** Undo: puts the trip back to `before` with inverse commands on the server. */
   readonly revert: (before: Trip) => Promise<void>;
-  /** Chuyến hiện tại theo mã (đọc thẳng kho, không qua render); dùng để so sánh khi Hoàn tác. */
+  /** The current trip by id (read straight from the store, not through render); used for comparison when Undoing. */
   readonly current: (tripId: string) => Trip | undefined;
-  /** Chờ các việc đang chạy của chuyến xong (để chụp "trước" của Hoàn tác sau khi việc trước đã đọc lại). */
+  /** Waits for the trip's running jobs to finish (so the Undo 'before' snapshot is taken after the earlier job has re-read). */
   readonly idle: (tripId: string) => Promise<void>;
 }
 
-/** Những thứ thao tác kho cần: cổng API và kho trạng thái trong bộ nhớ. */
+/** What the store actions need: the API gateway and the in-memory state store. */
 export interface TripsActionDeps {
   readonly gateway: TripsGateway;
   readonly store: PersistentStore<TripsState>;
 }
 
-/** Mã lỗi (HTTP 409) khi chuyến đã đổi ở nơi khác nên không hoàn tác được. */
+/** The error code (HTTP 409) when the trip changed elsewhere so it cannot be undone. */
 const CONFLICT_CODE = 'CONCURRENT_MODIFICATION';
 const CONFLICT_STATUS = 409;
-/** Lỗi lập trình: thao tác nhắm vào chuyến không có trong kho. */
+/** Programming error: an action targets a trip that is not in the store. */
 const MISSING_TRIP = 'Không có chuyến trong kho:';
 
-/** Thông tin một mục mới từ địa điểm trong kho: chưa có ngày, loại suy ra từ loại địa điểm, chưa biết giá, chờ xác nhận. */
+/** The data of a new item from a place in the catalog: no date yet, the kind inferred from the place kind, price unknown, awaiting confirmation. */
 export function placeInput(place: PlaceRef): ItemInput {
   const type = placeItemKind(place);
   return { type, title: place.name ?? place.id, placeId: place.id, day: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: type === 'rest' ? null : 'pending' };
 }
 
-/** Mục tự do (hoặc Nghỉ, Việc cần làm) từ các trường của biểu mẫu; giá/đặt chỗ chỉ có ở loại có giá, mặc định chờ xác nhận. */
+/** A free-form item (or Rest, To-do) from the form fields; price/booking exist only for a kind that has a price, awaiting confirmation by default. */
 export function freeInput(type: ItemKind, patch: ItemPatch): ItemInput {
   const { done: _done, position: _position, ...rest } = patch;
   return { type, title: '', placeId: null, day: null, timeOfDay: null, durationMin: null, note: '', costK: null, included: false, referenceK: null, booking: isPlain(type) ? null : 'pending', ...rest };
 }
 
-/** Những thứ dùng chung của các nhóm thao tác: cổng API, đọc kho và hàm chạy một việc trong hàng đợi của chuyến. */
+/** What the action groups share: the API gateway, the store read and the function that runs a job in the trip's queue. */
 interface Ctx {
   readonly gateway: TripsGateway;
   readonly current: (id: string) => Trip | undefined;
-  /** Chuyến trong kho; ném lỗi nếu không có (mọi việc gọi nó chạy trong hàng đợi nên lỗi trở thành Promise bị từ chối). */
+  /** The trip in the store; throws if there is none (every job that calls it runs in the queue so the error becomes a rejected Promise). */
   readonly need: (id: string) => Trip;
-  /** Chạy `work` NỐI TIẾP các việc trước của cùng chuyến rồi đọc lại chuyến; đầu vào phải tính BÊN TRONG `work` (từ kho đã đọc lại sau việc trước). */
+  /** Runs `work` IN SEQUENCE after the earlier jobs of the same trip and then re-reads the trip; the input must be computed INSIDE `work` (from the store re-read after the earlier job). */
   readonly run: <T>(tripId: string, work: () => Promise<T>) => Promise<T>;
-  /** Như `run` nhưng KHÔNG đọc lại chuyến sau đó (dùng khi chuyến không còn đọc được, ví dụ vừa xóa mềm). */
+  /** Like `run` but does NOT re-read the trip afterward (used when the trip can no longer be read, for example just soft-deleted). */
   readonly after: <T>(tripId: string, work: () => Promise<T>) => Promise<T>;
-  /** Đọc lại một chuyến từ máy chủ vào kho. */
+  /** Re-reads a trip from the server into the store. */
   readonly refresh: (tripId: string) => Promise<Trip>;
   readonly addEach: (tripId: string, places: readonly PlaceRef[], day?: string | null) => Promise<void>;
 }
 
-/** Hai chuyến (đã đọc từ máy chủ) có giống hệt nhau không; so theo nội dung vì mỗi lần đọc là một đối tượng mới. */
+/** Whether two trips (read from the server) are identical; compared by content because each read is a new object. */
 function sameTrip(a: Trip, b: Trip): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
-/** Thao tác cấp chuyến: tạo, thêm địa điểm, sửa tên/ngày, hoàn tác. */
+/** Trip-level actions: create, add places, edit name/dates, undo. */
 function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsActions, 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip'> {
   const { gateway, current, need, run, addEach } = ctx;
   return {
@@ -128,7 +128,7 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
       }).then((r) => (r ? { trip: need(tripId), lost: r.lost, lostIds: r.lostIds } : null)),
     revert: (before) =>
       run(before.id, async () => {
-        // chuyến đã đổi từ nơi khác (hoặc việc khác) kể từ lúc kho đọc lần cuối: hoàn tác sẽ ghi đè mất thay đổi đó, nên từ chối
+        // the trip changed from elsewhere (or another job) since the store last read: undoing would overwrite that change, so it is refused
         const fresh = await gateway.load(before.id);
         if (!sameTrip(fresh, need(before.id))) {
           store.update((s) => ({ trips: sortTrips(s.trips.map((t) => (t.id === fresh.id ? fresh : t))) }));
@@ -148,10 +148,10 @@ function tripActions(ctx: Ctx, store: PersistentStore<TripsState>): Pick<TripsAc
   };
 }
 
-/** Thao tác cấp mục: thêm/sửa, gán ngày, đổi chỗ, tích xong, kế hoạch ngày, thùng rác. */
+/** Item-level actions: add/edit, assign a day, reorder, tick done, day plan, trash. */
 function itemActions(ctx: Ctx): Omit<TripsActions, 'updateCover' | 'create' | 'addPlaces' | 'editTrip' | 'revert' | 'deleteTrip' | 'restoreTrip' | 'refreshTrip' | 'current' | 'idle'> {
   const { gateway, need, run } = ctx;
-  /** Phần của `ItemPatch` mà API sửa mục nhận: bỏ `done`/`position` (có lệnh riêng) và tiêu đề rỗng (mục từ kho giữ tiêu đề đã lưu; backend bắt buộc tiêu đề). */
+  /** The part of `ItemPatch` that the item-edit API accepts: drops `done`/`position` (they have their own commands) and an empty title (an item from the catalog keeps its stored title; the backend requires a title). */
   const toChange = (patch: ItemPatch): ItemChange => {
     const { done: _done, position: _position, title, ...rest } = patch;
     return title ? { ...rest, title } : rest;
@@ -201,24 +201,24 @@ function itemActions(ctx: Ctx): Omit<TripsActions, 'updateCover' | 'create' | 'a
   };
 }
 
-/** Dựng các thao tác kho trên API thật (server-first). Các việc của CÙNG một chuyến chạy nối tiếp nhau (không có hai yêu cầu cùng bay). */
+/** Builds the store actions on the real API (server-first). The jobs of the SAME trip run one after another (no two requests in flight). */
 export function createTripsActions({ gateway, store }: TripsActionDeps): TripsActions {
-  /** Chuyến hiện tại trong kho theo mã. */
+  /** The current trip in the store by id. */
   const current = (id: string): Trip | undefined => store.getSnapshot().trips.find((t) => t.id === id);
-  /** Chuyến trong kho; không có thì ném lỗi. */
+  /** The trip in the store; if there is none it throws. */
   const need = (id: string): Trip => {
     const trip = current(id);
     if (!trip) throw new Error(`${MISSING_TRIP} ${id}`);
     return trip;
   };
-  /** Đọc lại một chuyến từ máy chủ và đặt vào kho (thay chuyến cùng mã, hoặc thêm mới), giữ thứ tự như máy chủ. */
+  /** Re-reads a trip from the server and puts it into the store (replacing the trip with the same id, or adding a new one), keeping the order as the server has it. */
   const refresh = async (tripId: string): Promise<Trip> => {
     const trip = await gateway.load(tripId);
     store.update((s) => ({ trips: sortTrips(s.trips.some((t) => t.id === trip.id) ? s.trips.map((t) => (t.id === trip.id ? trip : t)) : [...s.trips, trip]) }));
     return trip;
   };
   const tails = new Map<string, Promise<unknown>>();
-  /** Hàng đợi theo chuyến: nối `work` sau việc trước, rồi đọc lại. `work` lỗi thì đọc lại hết sức rồi ném lỗi gốc; `work` ổn mà đọc lại lỗi thì báo lỗi đọc lại. */
+  /** The per-trip queue: chains `work` after the earlier job and then re-reads. If `work` fails it re-reads as best it can and then throws the original error; if `work` is fine but the re-read fails it reports the re-read error. */
   const run = <T,>(tripId: string, work: () => Promise<T>): Promise<T> => {
     const job = (tails.get(tripId) ?? Promise.resolve()).then(async () => {
       let result: T;
@@ -234,7 +234,7 @@ export function createTripsActions({ gateway, store }: TripsActionDeps): TripsAc
     tails.set(tripId, job.catch(() => undefined));
     return job;
   };
-  /** Đọc máy chủ trước khi thử lại, bỏ mã đã thêm kể cả khi lần trước mất phản hồi; gán ngày ngay trong lệnh tạo mục. */
+  /** Reads the server before retrying, dropping an id that was already added even when the previous attempt lost its response; assigns the day right in the create-item command. */
   const addEach = async (tripId: string, places: readonly PlaceRef[], day: string | null = null): Promise<void> => {
     if (!places.length) return;
     const fresh = await refresh(tripId);
@@ -242,7 +242,7 @@ export function createTripsActions({ gateway, store }: TripsActionDeps): TripsAc
     for (const place of missingPlaces(places, fresh)) await gateway.addItem(tripId, { ...placeInput(place), day });
   };
   const idle = (tripId: string): Promise<void> => (tails.get(tripId) ?? Promise.resolve()).then(() => undefined);
-  /** Nối `work` vào hàng đợi của chuyến, không đọc lại. */
+  /** Chains `work` into the trip's queue, without re-reading. */
   const after = <T,>(tripId: string, work: () => Promise<T>): Promise<T> => {
     const job = (tails.get(tripId) ?? Promise.resolve()).then(work);
     tails.set(tripId, job.catch(() => undefined));

@@ -14,8 +14,8 @@ import { editTrip } from '../model/tripState.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
 /**
- * Tờ "Sửa chuyến đi": tên, ngày đi/về, chốt ngày (bỏ nhãn "chưa chắc"), dời lịch theo ngày mới. Mục ở ngày bị cắt về "Chưa có ngày"
- * thay vì chặn (DR-011 A1); báo số mục bị ảnh hưởng và yêu cầu bấm Lưu lần nữa để xác nhận; có Hoàn tác.
+ * The 'Edit trip' sheet: name, start/end dates, confirming the dates (drop the 'tentative' label), moving the schedule to the new dates. Items on a day that is cut go back to 'no date yet'
+ * instead of blocking (DR-011 A1); it reports the number of items affected and requires pressing Save once more to confirm; it has Undo.
  */
 export function EditTripSheet({ onClose }: { readonly onClose: () => void }) {
   const { actions } = useTrips();

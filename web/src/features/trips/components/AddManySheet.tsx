@@ -15,7 +15,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { PLACE_THUMB_SIZE } from '../list/list.const.ts';
 import '../list/tripList.css';
 
-/** Tờ chọn nơi chưa có trong chuyến; giữ lựa chọn khi tìm/lọc và chỉ ghi sau xác nhận. */
+/** The sheet to choose places that are not in the trip yet; it keeps the selection while searching/filtering and writes only after confirmation. */
 export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
   const { trip, cat, days, tab } = useTripView();
   const { actions } = useTrips();
@@ -31,7 +31,7 @@ export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
   const selected = available.filter(place => chosen.includes(place.id));
   const visible = filterAddPlaces(available, query, category);
   const categories = [...new Map(cat.dest.places.map(place => [place.category, place.categoryName])).entries()];
-  /** Tạo từng mục bằng lệnh có sẵn; lỗi giữa chừng vẫn có Hoàn tác và giữ các nơi còn lại để thử lại. */
+  /** Creates each item with the existing command; an error midway still has Undo and keeps the remaining places to retry. */
   const submit = async (): Promise<void> => {
     if (busy || !selected.length || !validAddDay(trip, day)) return;
     setBusy(true);

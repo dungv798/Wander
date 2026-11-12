@@ -1,4 +1,4 @@
-/** Ảnh hero xếp hạng offline theo sáng, sắc, tương phản và ổn định vùng chữ. */
+/** Hero photos ranked offline by brightness, color, contrast and stability of the text area. */
 export const HERO_PHOTOS: Readonly<Record<string, readonly string[]>> = {
   "da-lat": [
     "ho-tuyen-lam-1-w1280-0c24449240.webp",

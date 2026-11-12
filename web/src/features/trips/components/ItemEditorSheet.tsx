@@ -23,7 +23,7 @@ import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { money } from './ItemMeta.tsx';
 import { TripTimeField } from './TripTimeField.tsx';
 
-/** Biểu mẫu ban đầu: từ mục đang sửa, hoặc mục mới với ngày của tab đang xem. */
+/** The initial form: from the item being edited, or a new item with the day of the tab being viewed. */
 function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaultDay: string, initial?: Pick<ItemForm, 'title' | 'day'> & Partial<Pick<ItemForm, 'note'>>): ItemForm {
   return {
     title: item?.title ?? initial?.title ?? '', type: item?.type ?? preset ?? 'sightseeing', isPlace: Boolean(item?.placeId), day: item ? (item.day ?? '') : (initial?.day ?? defaultDay), time: item?.timeOfDay ?? '',
@@ -32,26 +32,26 @@ function initialForm(item: TripItem | undefined, preset: ItemKind | null, defaul
   };
 }
 
-/** Gợi ý dưới ô tiền: "= 150.000 ₫", hoặc nhắc quy tắc khi sai/rỗng. */
+/** The hint under the money box: '= 150,000 VND', or a reminder of the rule when wrong/empty. */
 function moneyHint(text: string, emptyHint: string): string {
   if (!text.trim()) return emptyHint;
   const r = parseMoneyField(text, '');
   return r.ok && r.value !== null ? fill(T.editor.moneyHint, { money: money(r.value) }) : T.editor.moneyBad;
 }
 
-/** Mục đã có dữ liệu giá/đặt chỗ (đổi sang Nghỉ/Việc cần làm sẽ xóa nên cần xác nhận). */
+/** An item that already has price/booking data (changing to Rest/To-do clears it so confirmation is needed). */
 function hasPriceData(item: TripItem): boolean {
   return item.costK !== null || item.included || item.referenceK !== null || item.booking === 'booked';
 }
 
-/** Tiêu đề tờ theo ngữ cảnh. */
+/** The sheet title by context. */
 function titleOf(isEdit: boolean, isPlace: boolean, type: ItemKind): string {
   if (isPlace) return T.editor.placeTitle;
   if (isEdit) return T.editor.editTitle;
   return type === 'rest' ? T.editor.addRest : type === 'task' ? T.editor.addTask : T.editor.addFree;
 }
 
-/** Phần giá và đặt chỗ của biểu mẫu (ẩn với Nghỉ/Việc cần làm). */
+/** The price and booking part of the form (hidden for Rest/To-do). */
 function PricedFields({ f, set }: { readonly f: ItemForm; readonly set: (p: Partial<ItemForm>) => void }) {
   return (
     <>
@@ -69,7 +69,7 @@ function PricedFields({ f, set }: { readonly f: ItemForm; readonly set: (p: Part
   );
 }
 
-/** Ô tên và loại của mục tự do (địa điểm trong kho lấy tên từ kho nên không có hai ô này). */
+/** The name and kind boxes of a free-form item (a catalog place takes its name from the catalog so it has no these two boxes). */
 function FreeFields({ f, set }: { readonly f: ItemForm; readonly set: (p: Partial<ItemForm>) => void }) {
   const placeholder = f.type === 'rest' ? T.editor.placeholderRest : f.type === 'task' ? T.editor.placeholderTask : T.editor.placeholderFree;
   return (
@@ -84,7 +84,7 @@ function FreeFields({ f, set }: { readonly f: ItemForm; readonly set: (p: Partia
   );
 }
 
-/** Nút "Xóa khỏi chuyến đi" của một mục có sẵn: xóa mềm ngay (có Hoàn tác, D19), không hỏi lại. */
+/** The 'Remove from the trip' button of an existing item: soft-deletes at once (with Undo, D19), without asking again. */
 function DeleteItemButton({ item, onDone }: { readonly item: TripItem; readonly onDone: () => void }) {
   const trash = useTrashItem();
   const { trip, cat } = useTripView();
@@ -102,7 +102,7 @@ function DeleteItemButton({ item, onDone }: { readonly item: TripItem; readonly 
   );
 }
 
-/** Tờ thêm/sửa một mục: tên và loại (mục tự do), ngày, giờ, thời lượng, ghi chú, chi phí (D17/D18), đã bao gồm + giá tham khảo, đặt chỗ. Lưu có Hoàn tác. */
+/** The sheet to add/edit one item: name and kind (free-form item), day, time, duration, note, cost (D17/D18), included + reference price, booking. Saving has Undo. */
 export function ItemEditorSheet({ itemId, preset, initial, onClose }: { readonly itemId: string | null; readonly preset: ItemKind | null; readonly initial?: Pick<ItemForm, 'title' | 'day'> & Partial<Pick<ItemForm, 'note'>>; readonly onClose: () => void }) {
   const { actions } = useTrips();
   const undoable = useUndoable();

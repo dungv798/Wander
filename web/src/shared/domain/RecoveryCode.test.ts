@@ -5,7 +5,7 @@ import type { RandomSource } from './RecoveryCode.ts';
 
 let tick = 0;
 const counting: RandomSource = {
-  /** Điền byte tăng dần để kết quả xác định (có trộn để thử thách không bị lặp một chỉ số). */
+  /** Fills increasing bytes so the result is deterministic (with a shuffle so it does not repeat one index). */
   fill(bytes: Uint8Array): void {
     bytes.forEach((_, i) => {
       tick += 7;

@@ -13,7 +13,7 @@ interface SwipeControlsProps {
   readonly onAct: (kind: SwipeKind) => void;
 }
 
-/** Hai nút ✕ (bỏ qua) và ✓ (chọn) tương đương quẹt, cùng dòng gợi ý; nút được nhấn sáng đồng bộ với lượt demo. */
+/** Two buttons, X (skip) and a check (choose), equivalent to swiping, with the same hint line; the pressed button lights up in sync with the demo round. */
 export function SwipeControls({ lit, hint, onAct }: SwipeControlsProps) {
   return (
     <div className="ob-controls">
@@ -32,7 +32,7 @@ interface SelectedTrayViewProps {
   readonly onLanded: (id: number) => void;
 }
 
-/** Khay "đã chọn": ảnh thu nhỏ đã đáp xuống, bộ đếm, và các ảnh đang bay xuống từ thẻ vừa chọn. */
+/** The 'selected' tray: the shrunken photos that have landed, the counter, and the photos flying down from the card just chosen. */
 export function SelectedTrayView({ thumbs, chips, onLanded }: SelectedTrayViewProps) {
   return (
     <>

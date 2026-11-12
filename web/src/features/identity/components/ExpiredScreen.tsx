@@ -7,14 +7,14 @@ import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
 import { expiredBranch } from '../model/identitySnapshot.ts';
 
 /**
- * Màn hết phiên (S19) khi máy chủ không còn nhận phiên của máy này (bị thu hồi từ nơi khác). Hai nhánh theo điều đã biết lần cuối:
- * A còn mã hoặc thiết bị khác → "Mở trên máy này"; B không còn gì để khôi phục → nói thẳng không khôi phục được (D20, D26).
- * Không nêu thời hạn phiên (chưa chốt).
+ * The session-ended screen (S19) when the server no longer accepts this device's session (revoked from elsewhere). Two branches by what was last known:
+ * A there is still a code or another device -> 'Open on this device'; B there is nothing left to recover -> says plainly that it cannot be recovered (D20, D26).
+ * It states no session lifetime (not decided yet).
  */
 export function ExpiredScreen() {
   const { session, actions } = useIdentity();
   const branch = expiredBranch(session.known);
-  /** Quên phiên cũ của máy này rồi đi tới màn khác. */
+  /** Forgets this device's old session and then goes to another screen. */
   const leave = (to: typeof VIEW.RECOVER | typeof VIEW.EXPLORE): void => {
     actions.loseSession();
     navigate(to);

@@ -14,7 +14,7 @@ import { MOMENTS_COPY } from '../model/moments.copy.ts';
 import { CreditPill } from './CreditPill.tsx';
 import '../moments.css';
 
-/** Dải ảnh đời sống: ẩn khi rỗng, chỉ hiện bộ lọc khi có nhiều chủ đề. */
+/** The life-photo strip: hidden when empty, the filter shows only when there are several themes. */
 export function MomentsSection({ dest }: { readonly dest: DestinationDetail }) {
   const [theme, setTheme] = useState<MomentTheme | typeof ALL_MOMENTS>(ALL_MOMENTS);
   const [opened, setOpened] = useState<MomentView | null>(null);

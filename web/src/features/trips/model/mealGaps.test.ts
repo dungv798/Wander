@@ -5,7 +5,7 @@ import type { TripItem } from './trip.types.ts';
 
 const DAY = '2026-11-01';
 const place = () => null;
-/** Chỉ những trường cần cho luật nhắc; không phải dữ liệu gửi API. */
+/** Only the fields the reminder rule needs; not data sent to the API. */
 function item(fields: Partial<TripItem> = {}) {
   return { day: DAY, type: 'sightseeing' as const, title: 'Đồi thông', placeId: null, timeOfDay: null, durationMin: null, ...fields };
 }

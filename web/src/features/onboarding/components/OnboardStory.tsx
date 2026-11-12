@@ -21,7 +21,7 @@ import { PlanScene } from './PlanScene.tsx';
 import { ShareScene } from './ShareScene.tsx';
 import { SwipeScene } from './SwipeScene.tsx';
 
-/** Chọn thành phần của cảnh theo chỉ số. */
+/** Chooses the scene's component by index. */
 function SceneView({ scene, ...props }: SceneProps & { readonly scene: number }) {
   if (scene === SCENE.SWIPE) return <SwipeScene {...props} />;
   if (scene === SCENE.PLAN) return <PlanScene {...props} />;
@@ -29,7 +29,7 @@ function SceneView({ scene, ...props }: SceneProps & { readonly scene: number })
   return <DiscoverScene {...props} />;
 }
 
-/** Dấu thương hiệu chung, tên bước và lợi ích của cảnh; đổi cảnh chuyển focus vào tiêu đề để bàn phím không lạc vị trí. */
+/** The shared brand mark, the step name and the benefit of the scene; changing scene moves the focus to the title so the keyboard does not lose its place. */
 function SceneHeading({ scene, focus }: { readonly scene: number; readonly focus: boolean }) {
   const ref = useRef<HTMLHeadingElement | null>(null);
   useEffect(() => {
@@ -55,7 +55,7 @@ interface StageProps {
   readonly reduced: boolean;
 }
 
-/** Sân khấu các cảnh: cảnh cũ trượt ra, cảnh mới trượt vào cùng hướng người xem đi (Tiếp = sang trái, Quay lại = sang phải). Giữa cảnh 1 và cảnh 2 (cùng một thẻ ảnh) thì thẻ bay từ cảnh này sang cảnh kia còn phần còn lại mờ dần. Cảnh cũ bị khóa (không tự chuyển, không nhận chạm) cho tới khi biến mất. */
+/** The stage of the scenes: the old scene slides out, the new scene slides in in the same direction the viewer is going (Next = to the left, Back = to the right). Between scene 1 and scene 2 (the same photo card) the card flies from one scene to the other while the rest fades. The old scene is locked (no auto-advance, no touch) until it disappears. */
 function Stage({ flow, dest, reduced }: StageProps) {
   const { prev, dir } = useSceneTransition(flow.scene, reduced);
   const stage = useRef<HTMLElement | null>(null);
@@ -76,12 +76,12 @@ function Stage({ flow, dest, reduced }: StageProps) {
   );
 }
 
-/** Giới thiệu bốn bước trên cùng hệ vật liệu B; có demo tự chạy, điều hướng và giảm chuyển động, hoàn tất hoặc bỏ qua sẽ nhớ đã xem. */
+/** The four-step intro on the same B material system; it has a self-running demo, navigation and reduced motion, and finishing or skipping remembers it was seen. */
 export function OnboardStory({ dest }: { readonly dest: DestinationDetail }) {
   const { finish } = useOnboarding();
   const reduced = usePrefersReducedMotion();
   const flow = useOnboardFlow();
-  /** Ghi nhận đã xem rồi về Khám phá (không đẩy lịch sử: Back không quay lại giới thiệu). */
+  /** Records it as seen and then goes to Discover (without pushing history: Back does not return to the intro). */
   const done = (): void => {
     finish();
     replaceRoute(VIEW.EXPLORE);

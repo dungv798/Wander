@@ -4,8 +4,8 @@ import type { PlaceView } from '../model/Catalog.types.ts';
 import { CATEGORY_ICON } from '../model/discover.const.ts';
 
 /**
- * Ô giữ chỗ khi địa điểm CHƯA có ảnh đã tuyển: biểu tượng và tên loại thật của địa điểm, kèm dòng "Chưa có ảnh".
- * Không dùng ảnh của nơi khác hay ảnh dựng; chỉ để địa điểm vẫn tìm được, chọn được và xếp được vào lịch.
+ * The placeholder when a place has NO curated photo yet: an icon and the real kind name of the place, with a 'No photo yet' line.
+ * It does not use another place's photo or a generated one; it only keeps the place findable, selectable and schedulable.
  */
 export function PlacePlaceholder({ place, className }: { readonly place: Pick<PlaceView, 'category' | 'categoryName' | 'name'>; readonly className?: string }) {
   return (

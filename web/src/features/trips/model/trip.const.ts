@@ -1,7 +1,7 @@
 import type { IconName } from '../../../shared/ui/icons/iconPaths.const.ts';
 import type { ItemKind } from './trip.types.ts';
 
-/** Thuộc tính của từng loại mục. `plain` = Nghỉ/Việc cần làm: không giá, không đặt chỗ (`ItemType.isPriced`/`supportsBooking` của backend). */
+/** The properties of each item kind. `plain` = Rest/To-do: no price, no booking (the backend's `ItemType.isPriced`/`supportsBooking`). */
 export const ITEM_KINDS: Readonly<Record<ItemKind, { readonly label: string; readonly icon: IconName; readonly cat: string; readonly plain: boolean }>> = {
   sightseeing: { label: 'Tham quan', icon: 'map-pin', cat: 'cat-canh', plain: false },
   food: { label: 'Ăn uống', icon: 'tools-kitchen-2', cat: 'cat-am', plain: false },
@@ -14,13 +14,13 @@ export const ITEM_KINDS: Readonly<Record<ItemKind, { readonly label: string; rea
   task: { label: 'Việc cần làm', icon: 'list-check', cat: 'cat-canh', plain: true },
 };
 
-/** Thứ tự hiển thị các loại mục (chọn loại, tổng theo loại). */
+/** The display order of the item kinds (kind choice, total by kind). */
 export const KIND_ORDER: readonly ItemKind[] = ['sightseeing', 'food', 'transport', 'lodging', 'car_rental', 'shopping', 'tour', 'rest', 'task'];
 
-/** Loại mục suy ra từ loại địa điểm trong kho khi thêm địa điểm vào chuyến. */
+/** The item kind inferred from the place kind in the catalog when adding a place to a trip. */
 export const PLACE_KIND: Readonly<Record<string, ItemKind>> = { canh: 'sightseeing', van: 'sightseeing', leo: 'sightseeing', am: 'food', luu: 'lodging', cho: 'shopping' };
 
-/** Kiểu chuyến (chọn nhiều, tối đa `LIMITS.MAX_STYLES`) và nhịp (chọn một): chỉ là nhãn (Q11, DR-002). Mã trùng backend. */
+/** The trip style (choose several, at most `LIMITS.MAX_STYLES`) and pace (choose one): labels only (Q11, DR-002). The codes match the backend. */
 export const TRIP_STYLES: readonly { readonly code: string; readonly label: string }[] = [
   { code: 'relax', label: 'Nghỉ dưỡng' },
   { code: 'explore', label: 'Khám phá' },
@@ -37,7 +37,7 @@ export const TRIP_PACES: readonly { readonly code: string; readonly label: strin
   { code: 'packed', label: 'Dày' },
 ];
 
-/** "Ai đi" ở bước tạo chuyến theo bước: nhãn kiểu chuyến, chưa phải danh sách thành viên (F2). */
+/** 'Who is going' in the step-by-step trip wizard: the trip-kind labels, not a member list yet (F2). */
 export const TRIP_KINDS: readonly { readonly code: string; readonly label: string }[] = [
   { code: 'solo', label: 'Một mình' },
   { code: 'family', label: 'Gia đình' },
@@ -46,21 +46,21 @@ export const TRIP_KINDS: readonly { readonly code: string; readonly label: strin
   { code: 'work', label: 'Công việc' },
 ];
 
-/** Nhãn tiếng Việt của một mã kiểu chuyến; mã lạ (backend thêm mới) thì hiện nguyên mã. */
+/** The Vietnamese label of a trip-kind code; an unknown code (newly added by the backend) is shown as the raw code. */
 export function kindLabel(code: string): string {
   return TRIP_KINDS.find((k) => k.code === code)?.label ?? code;
 }
 
-/** Số bước của trình tạo chuyến theo bước. */
+/** The number of steps of the step-by-step trip wizard. */
 export const WIZARD_STEPS = ['where', 'when', 'who', 'interests', 'budget', 'review'] as const;
 export type WizardStep = (typeof WIZARD_STEPS)[number];
 
-/** Thứ Bảy là ngày gợi ý bắt đầu chuyến mới (giống prototype); chuyến mặc định 3 ngày. */
+/** Saturday is the suggested start day of a new trip (like the prototype); a trip defaults to 3 days. */
 export const DEFAULT_START_WEEKDAY = 6;
 export const DEFAULT_TRIP_DAYS = 3;
 export const DAYS_IN_WEEK = 7;
-/** Hai ngày gần nhất trên thẻ; ngày còn lại dùng picker chung để thẻ không dài theo số ngày chuyến. */
+/** The two nearest days on the card; the other days use the shared picker so the card does not grow with the number of days of the trip. */
 export const QUICK_ASSIGN_DAYS = 2;
 
-/** Nấc tờ kéo của màn chuyến đi. */
+/** The draggable-sheet steps of the trip screen. */
 export type SheetSnap = 'peek' | 'half' | 'full';

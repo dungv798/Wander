@@ -1,4 +1,4 @@
-/** Đường dẫn API sở thích theo danh tính (khớp `PlanningApiConstants` của backend). */
+/** The path of the preferences-by-identity API (matching the backend's `PlanningApiConstants`). */
 export const PREFERENCES_API = {
   ROOT: '/api/preferences',
   INTERESTS: '/api/preferences/interests',

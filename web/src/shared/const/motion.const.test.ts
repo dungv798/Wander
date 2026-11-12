@@ -6,7 +6,7 @@ import { MOTION, MOTION_RANGE } from './motion.const.ts';
 
 const TOKENS = fs.readFileSync(new URL('../../styles/tokens.css', import.meta.url), 'utf8');
 
-/** Đọc một token thời lượng (ms) trong khối `:root` đầu tiên của tokens.css. */
+/** Reads a duration token (ms) in the first `:root` block of tokens.css. */
 function tokenMs(name: string): number {
   const match = new RegExp(`${name}:\\s*(\\d+)ms`).exec(TOKENS);
   assert.ok(match, `thiếu token ${name}`);

@@ -1,4 +1,4 @@
-/* Lịch mẫu: hàng thẻ cuộn ngang ở trang Khám phá và danh sách theo ngày trong tờ chi tiết. Chỉ dùng token. */
+/* Sample itineraries: a horizontally scrolling row of cards on the Discover page and the day-by-day list in the detail sheet. Tokens only. */
 .tplrow { display: flex; gap: 12px; overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding: 4px var(--gutter) 12px; scroll-snap-type: x proximity; scrollbar-width: none; }
 .tplrow::-webkit-scrollbar { display: none; }
 .tplcard { flex: 0 0 240px; scroll-snap-align: start; display: grid; text-align: left; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow); color: var(--ink); }

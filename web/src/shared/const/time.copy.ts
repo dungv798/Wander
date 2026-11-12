@@ -1,4 +1,4 @@
-/** Chữ cho thời gian tương đối ("x phút trước") dùng chung nhiều tính năng. */
+/** The relative-time text ('x minutes ago') shared by several features. */
 export const AGO_COPY = {
   now: 'vừa xong',
   minutes: '{n} phút trước',

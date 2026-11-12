@@ -9,13 +9,13 @@ import { HttpCatalogRepository } from '../api/HttpCatalogRepository.ts';
 import * as S from '../model/discoverState.ts';
 import type { CategoryFilter, Decision, DiscoverState } from '../model/discoverState.ts';
 
-/** Các thao tác trên trạng thái khám phá (mỗi thao tác là một hàm thuần ở `discoverState.ts`). */
+/** The actions on the discover state (each action is a pure function in `discoverState.ts`). */
 export interface DiscoverActions {
   readonly decide: (placeId: string, d: Decision) => void;
   readonly undo: () => void;
   readonly unpick: (placeId: string) => void;
   readonly clearPicked: (ids: readonly string[]) => void;
-  /** Đánh dấu các nơi đã thích là đã vào chuyến đi (sau khi lưu thành công). */
+  /** Marks the places that were liked as already in a trip (after a successful save). */
   readonly markSaved: (ids: readonly string[]) => void;
   readonly restart: () => void;
   readonly setPhoto: (placeId: string, index: number) => void;
@@ -35,12 +35,12 @@ const DiscoverContext = createContext<DiscoverContextValue | null>(null);
 
 interface DiscoverProviderProps {
   readonly children: ReactNode;
-  /** Thay kho/cửa hàng khi test hoặc khi nối backend thật. */
+  /** Replaces the repository/store in tests or when connecting the real backend. */
   readonly catalog?: CatalogRepository;
   readonly store?: PersistentStore<DiscoverState>;
 }
 
-/** Cấp kho biên tập và trạng thái khám phá (lưu cục bộ) cho cây giao diện: một nguồn sự thật cho mỗi loại dữ liệu. */
+/** Provides the editorial catalog and the discover state (stored locally) to the UI tree: a single source of truth for each kind of data. */
 export function DiscoverProvider({ children, catalog, store }: DiscoverProviderProps) {
   const [defaultRepo] = useState(() => new HttpCatalogRepository(apiClient));
   const repo = catalog ?? defaultRepo;
@@ -67,7 +67,7 @@ export function DiscoverProvider({ children, catalog, store }: DiscoverProviderP
   return <DiscoverContext.Provider value={value}>{children}</DiscoverContext.Provider>;
 }
 
-/** Truy cập kho biên tập, trạng thái và thao tác khám phá; ném lỗi nếu quên bọc `DiscoverProvider`. */
+/** Access to the editorial catalog, the state and the discover actions; throws if `DiscoverProvider` was forgotten. */
 export function useDiscover(): DiscoverContextValue {
   const ctx = useContext(DiscoverContext);
   if (!ctx) throw new Error('useDiscover phải nằm trong DiscoverProvider');

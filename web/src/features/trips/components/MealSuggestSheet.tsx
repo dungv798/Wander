@@ -15,12 +15,12 @@ import { dayAnchors, displayKind, formatDistance, rankPoi } from '../model/poiRa
 import { MEAL_GAPS_COPY as M } from '../model/mealGaps.copy.ts';
 import './mealSuggest.css';
 
-/** Liên kết xem một quán trên OpenStreetMap (nguồn dữ liệu của gợi ý); mở tab mới, không rời lịch. */
+/** A link to view a venue on OpenStreetMap (the source of the suggestion data); opens a new tab, does not leave the schedule. */
 function poiMapHref(poi: PoiSuggestion): string {
   return `https://www.openstreetmap.org/?mlat=${poi.lat}&mlon=${poi.lon}#map=18/${poi.lat}/${poi.lon}`;
 }
 
-/** Thẻ quán: tên, loại (đã đối chiếu tên), lý do gợi ý (khoảng cách tới mốc), địa chỉ, giờ nguồn chưa kiểm; hai hành động: thêm vào bữa và xem bản đồ. Không có ảnh/giá/rating vì nguồn không có. */
+/** The venue card: name, kind (name cross-checked), the reason for the suggestion (distance to the landmark), address, source hours not verified; two actions: add to the meal and view the map. No photo/price/rating because the source has none. */
 function PoiCard({ poi, anchor, gap, onSelect }: { readonly poi: PoiSuggestion; readonly anchor: string; readonly gap: MealGap; readonly onSelect: () => void }) {
   const kind = displayKind(poi);
   return <li className="meal-poi-row">
@@ -41,7 +41,7 @@ function PoiCard({ poi, anchor, gap, onSelect }: { readonly poi: PoiSuggestion; 
   </li>;
 }
 
-/** Chọn "Gần điểm nào": các mốc có tọa độ trong ngày và trọng tâm; mốc mặc định được nêu rõ bằng giá trị đang chọn. */
+/** Chooses 'Near which point': the landmarks that have coordinates in the day and the centroid; the default landmark is stated clearly by the value currently chosen. */
 function AnchorPicker({ options, value, onChange }: { readonly options: readonly { readonly key: string; readonly name: string }[]; readonly value: string; readonly onChange: (key: string) => void }) {
   if (options.length < R.minAnchors) return null;
   return <label className="field">{C.anchorLabel}
@@ -49,7 +49,7 @@ function AnchorPicker({ options, value, onChange }: { readonly options: readonly
   </label>;
 }
 
-/** Tờ tải lười gợi ý theo ngày: top vài quán gần mốc chọn, xếp theo loại bữa; chọn quán chỉ mở bản nháp, việc lưu do trình sửa hiện có xử lý. */
+/** The lazy-loaded sheet of suggestions by day: the top few venues near the chosen landmark, ordered by meal kind; choosing a venue only opens a draft, saving is handled by the existing editor. */
 export function MealSuggestSheet({ day, gap, onClose }: { readonly day: string; readonly gap: MealGap; readonly onClose: () => void }) {
   const { trip, cat, setOverlay } = useTripView();
   const options = useMemo(() => dayAnchors(trip.items, day, cat.place, C.centroid), [trip.items, day, cat]);
@@ -61,7 +61,7 @@ export function MealSuggestSheet({ day, gap, onClose }: { readonly day: string; 
   const [radius, setRadius] = useState<number>(R.radiusM);
   const [all, setAll] = useState(false);
   const { result, retry } = useMealSuggestions(trip.destinationId, mealPoiKind(gap), anchor, radius);
-  /** Bán kính đổi cùng trạng thái tải để danh sách cũ không còn bấm được. */
+  /** The radius changes along with the loading state so the old list can no longer be tapped. */
   const expand = (): void => { retry(); setRadius(R.expandedRadiusM); };
   const ranked = result.status === 'ready' ? rankPoi(result.poi, gap) : [];
   const shown = all ? ranked : ranked.slice(0, R.previewCount);

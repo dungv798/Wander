@@ -5,8 +5,8 @@ import { parentRoute, routeDepth, withRouteDepth } from './backNavigation.ts';
 import { isOverlayEntry, withoutOverlay } from './overlayHistory.ts';
 
 /**
- * Một tuyến đã phân tích: tên màn, mã tham số chính (mã điểm đến ở `dest`/`deck`, mã chuyến ở `trip`) và tham số phụ
- * (mã chuyến khi đang thêm địa điểm từ bộ thẻ; tab `ov`/số ngày ở `trip`).
+ * A parsed route: the screen name, the main parameter id (the destination id in `dest`/`deck`, the trip id in `trip`) and the secondary parameter
+ * (the trip id when adding a place from the deck; the tab `ov`/day number in `trip`).
  */
 export interface Route {
   readonly view: ViewName;
@@ -16,17 +16,17 @@ export interface Route {
 
 const VIEWS_WITH_DEST: readonly ViewName[] = [VIEW.DEST, VIEW.DECK];
 const VIEWS_WITH_ID: readonly ViewName[] = [VIEW.DEST, VIEW.DECK, VIEW.TRIP, VIEW.TODAY, VIEW.EXPORT, VIEW.JOIN, VIEW.DESTINATIONS];
-/** Màn có mã chuyến đi tùy chọn: `#/today` (chuyến đang diễn ra) hoặc `#/today/<mã>`. */
+/** A screen with an optional trip id: `#/today` (the trip in progress) or `#/today/<id>`. */
 const VIEWS_OPTIONAL_ID: readonly ViewName[] = [VIEW.TODAY, VIEW.DESTINATIONS];
 const KNOWN: readonly ViewName[] = Object.values(VIEW);
 const HOME: Route = { view: VIEW.EXPLORE, id: null, sub: null };
-/** Mã hợp lệ: chữ thường, số, gạch ngang (đi vào đường dẫn tải dữ liệu nên phải chặt). */
+/** A valid id: lowercase, digits, hyphens (it goes into a data-loading path so it must be strict). */
 const ID_PATTERN = /^[a-z0-9-]{1,64}$/;
-/** Mã liên kết mời: 256 bit base64url (43 ký tự, có chữ hoa và gạch dưới) nên có mẫu riêng. */
+/** An invite-link code: 256-bit base64url (43 characters, with uppercase and underscore) so it has its own pattern. */
 const INVITE_CODE_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 let latestDepth = 0;
 
-/** Phân tích `location.hash` (dạng `#/dest/ha-giang`, `#/trip/<mã>/2`) thành tuyến; địa chỉ lạ về Khám phá. */
+/** Parses `location.hash` (like `#/dest/ha-giang`, `#/trip/<id>/2`) into a route; an unknown address goes to Discover. */
 export function parseHash(hash: string): Route {
   const parts = hash.replace(/^#\/?/, '').split('?')[0]?.split('/').filter(Boolean) ?? [];
   const view = parts[0] === 'd' ? VIEW.DEST : KNOWN.find((v) => v === parts[0]);
@@ -40,14 +40,14 @@ export function parseHash(hash: string): Route {
   return { view, id, sub: sub && ID_PATTERN.test(sub) ? sub : null };
 }
 
-/** Dựng địa chỉ hash cho một màn. */
+/** Builds the hash address for a screen. */
 export function toHash(view: ViewName, id?: string | null, sub?: string | null): string {
   if (view === VIEW.EXPLORE) return '#/';
   const tail = [id, id ? sub : null].filter(Boolean).join('/');
   return tail ? `#/${view}/${tail}` : `#/${view}`;
 }
 
-/** Chuyển màn bằng cách đổi hash (nút Back của trình duyệt hoạt động đúng). */
+/** Switches screen by changing the hash (the browser Back button works correctly). */
 export function navigate(view: ViewName, id?: string | null, sub?: string | null): void {
   const next = toHash(view, id, sub);
   if (location.hash === next) return;
@@ -57,13 +57,13 @@ export function navigate(view: ViewName, id?: string | null, sub?: string | null
   window.dispatchEvent(new HashChangeEvent('hashchange'));
 }
 
-/** Thay hash không thêm mục vào lịch sử (đổi tab ngày không làm đầy nút Back). */
+/** Replaces the hash without adding a history entry (changing the day tab does not fill up the Back button). */
 export function replaceRoute(view: ViewName, id?: string | null, sub?: string | null): void {
   history.replaceState(withoutOverlay(history.state), '', toHash(view, id, sub));
   window.dispatchEvent(new HashChangeEvent('hashchange'));
 }
 
-/** Về đúng mục trước trong ứng dụng; mở liên kết trực tiếp thì thay bằng màn cha, tránh vòng lặp Back. */
+/** Goes back to the exact previous entry in the app; when a link was opened directly it uses the parent screen instead, avoiding a Back loop. */
 export function goBack(): void {
   if (isOverlayEntry(history.state, location.hash) || routeDepth(history.state) > 0) { history.back(); return; }
   const route = parseHash(location.hash);
@@ -71,10 +71,10 @@ export function goBack(): void {
   replaceRoute(parent.view, parent.id);
 }
 
-/** Đăng ký nghe đổi hash. */
+/** Subscribes to hash changes. */
 function subscribe(onChange: () => void): () => void {
   if (history.state === null) history.replaceState(withRouteDepth(null, latestDepth), '');
-  /** Đánh dấu cả liên kết hash gốc; mục Back/Forward đã có state được giữ nguyên. */
+  /** Marks the original hash link too; Back/Forward entries that already have state are kept as they are. */
   const changed = (event: HashChangeEvent): void => {
     if (event.oldURL && history.state === null) history.replaceState(withRouteDepth(null, latestDepth + 1), '');
     latestDepth = routeDepth(history.state);
@@ -84,7 +84,7 @@ function subscribe(onChange: () => void): () => void {
   return () => window.removeEventListener('hashchange', changed);
 }
 
-/** Tuyến hiện tại; render lại khi hash đổi. */
+/** The current route; re-renders when the hash changes. */
 export function useRoute(): Route {
   const hash = useSyncExternalStore(subscribe, () => location.hash, () => '');
   return parseHash(hash);

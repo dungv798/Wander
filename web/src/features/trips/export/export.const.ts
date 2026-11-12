@@ -1,4 +1,4 @@
-/** Kích thước PNG và nhịp chữ đủ chỗ cho dấu tiếng Việt; phân đoạn để tránh giới hạn canvas. */
+/** The PNG size and the text rhythm leave room for Vietnamese accents; segmented to avoid the canvas limit. */
 export const PNG = {
   width: 1080, maxHeight: 1920, minHeight: 1350, margin: 72, coverHeight: 380, gap: 24, tightGap: 6,
   titleSize: 58, headingSize: 38, bodySize: 32, smallSize: 26,

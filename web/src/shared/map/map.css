@@ -1,19 +1,19 @@
-/* Bản đồ MapLibre và lớp ghim native. Màu lấy từ token --map-* và token chung. */
+/* The MapLibre map and the native pin layer. Colors come from the --map-* tokens and the shared tokens. */
 .tmroot { position: relative; overflow: hidden; isolation: isolate; background: var(--map-low); touch-action: none; user-select: none; -webkit-user-select: none; }
 .tmroot :is(.tm-err:not(.tm-degraded), .tm-loading) { inset: var(--map-content-top, 0px) var(--map-content-right, 0px) var(--map-content-bottom, 0px) var(--map-content-left, 0px); }
 .tm-static { touch-action: auto; }
-/* Nền WebGL phủ khung; nút +/− và ghi công theo token, ghim/nhãn dùng lớp native. */
-.tmroot .tm-gl, .tmroot .tm-gl.maplibregl-map { position: absolute; inset: 0; } /* thắng .maplibregl-map { position: relative } nạp sau */
+/* The WebGL background covers the frame; the +/- buttons and the attribution follow the tokens, pins/labels use native layers. */
+.tmroot .tm-gl, .tmroot .tm-gl.maplibregl-map { position: absolute; inset: 0; } /* wins over .maplibregl-map { position: relative } loaded later */
 .tm-static .maplibregl-canvas { touch-action: auto; }
 .tmroot .maplibregl-ctrl-group { border-radius: 22px; overflow: hidden; background: var(--glass); box-shadow: var(--sh-float); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .tmroot .maplibregl-ctrl-group button { width: 44px; height: 44px; }
 .tmroot .maplibregl-ctrl-attrib { font: 500 10px/1.4 var(--font-body); }
 .tmroot .maplibregl-ctrl-attrib::after { content: none; }
 .tmroot .maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button { min-height: 0; height: var(--fluent-sm); }
-/* Nhãn khoảng cách tuyến giữ HTML; ghim, cụm và tên do MapLibre vẽ. */
+/* The route distance label stays HTML; pins, clusters and names are drawn by MapLibre. */
 .tm-labels { position: absolute; inset: 0; pointer-events: none; }
 .tm-seg-label { position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none; will-change: transform; }
-/* Danh sách thay thế canvas: trình đọc màn hình thấy đầy đủ, bàn phím vào thì hiện. */
+/* The list that replaces the canvas: screen readers see it in full, keyboard entry shows it. */
 .tm-accessible:not(:focus-within) { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .tm-accessible:focus-within { position: absolute; inset: var(--s-3); z-index: 3; margin: 0; padding: var(--s-3); overflow: auto; background: var(--surface); color: var(--ink); border-radius: var(--r-sm); }
 .tm-accessible button { min-height: var(--tap); color: inherit; }
@@ -22,14 +22,14 @@
 
 @media (prefers-reduced-motion: reduce) { .tm-seg-label { animation: none; } }
 
-/* lỗi tải bản đồ: thông báo + nút thử lại */
+/* map loading error: a notice + a retry button */
 .tm-err { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: 10px; padding: 16px; text-align: center; background: var(--map-low); color: var(--ink); font-weight: 600; }
 .tm-err button { min-height: var(--tap); padding: 0 20px; border: 1px solid var(--btn-edge); border-radius: var(--r-pill); background: var(--btn-bg); color: var(--ink); box-shadow: var(--btn-shadow); font-weight: 700; }
-/* Cảnh báo nền suy giảm chỉ chiếm nội dung, vẫn cho kéo bản đồ và chạm ghim bên dưới. */
+/* The degraded-base warning only occupies content, it still lets the map be dragged and the pin below be tapped. */
 .tm-err.tm-degraded { inset: var(--s-3) var(--s-3) auto; padding: var(--s-3); gap: var(--s-2); border-radius: var(--r-sm); background: var(--glass); box-shadow: var(--sh-float); pointer-events: none; }
 .tm-degraded button { pointer-events: auto; }
 .tmroot:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
-/* Thẻ nổi có kích thước ổn định, không phụ thuộc camera hoặc số dòng của tên địa điểm. */
+/* The floating card has a stable size, independent of the camera or the number of lines of the place name. */
 .tm-preview { position: absolute; top: calc(var(--s-8) + var(--s-2)); left: var(--s-3); right: var(--s-3); z-index: 3; box-sizing: border-box; max-width: calc(var(--s-8) * 6); height: calc(var(--s-8) * 3); padding: var(--s-3); border-radius: var(--r-md); background: var(--surface); color: var(--ink); box-shadow: var(--sh-float); touch-action: auto; }
 .tm-preview-body { display: flex; gap: var(--s-3); height: calc(var(--s-7) * 2); }
 .tm-preview-thumb { width: calc(var(--s-7) * 2); height: calc(var(--s-7) * 2); flex: none; overflow: hidden; border-radius: var(--r-sm); background: var(--map-low); }
@@ -41,10 +41,10 @@
 .tm-preview-actions button { min-height: var(--tap); flex: 1; border: 1px solid var(--btn-edge); border-radius: var(--r-pill); background: var(--btn-bg); color: var(--ink); box-shadow: var(--btn-shadow); font: var(--text-button); cursor: pointer; }
 .tm-preview-actions button:last-child { background: var(--control-surface); border-color: var(--control-edge); box-shadow: var(--control-inner-light); }
 
-/* Một ngón cuộn trang; handler MapLibre nhận hai ngón trên bản đồ nhúng. */
+/* One finger scrolls the page; the MapLibre handler receives two fingers on the embedded map. */
 .tm-cooperative { touch-action: pan-x pan-y; }
 
-/* Đang tải / không khả dụng: khung luôn có lời giải thích và lối thay thế */
+/* Loading / unavailable: the frame always has an explanation and an alternative */
 .tm-loading { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; padding: var(--s-4); text-align: center; color: var(--muted); font: var(--text-secondary); pointer-events: none; animation: tmPulse 1.6s ease-in-out infinite; }
 @keyframes tmPulse { 50% { opacity: .55; } }
 .tm-err small { color: var(--muted); font-weight: 500; }

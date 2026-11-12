@@ -8,17 +8,17 @@ import type { GeoPoint } from '../../../shared/lib/geo.ts';
 import { ITEM_KINDS } from './trip.const.ts';
 import type { ItemKind, Trip, TripItem } from './trip.types.ts';
 
-/** Mọi ngày `yyyy-mm-dd` của chuyến, gồm hai đầu (R5). */
+/** Every `yyyy-mm-dd` day of the trip, both ends included (R5). */
 export function tripDays(t: Pick<Trip, 'startDate' | 'endDate'>): string[] {
   return DateRange.of(t.startDate, t.endDate).days();
 }
 
-/** Loại mục không có giá và không đặt chỗ (Nghỉ, Việc cần làm). */
+/** Item kinds with no price and no booking (Rest, To-do). */
 export function isPlain(kind: ItemKind): boolean {
   return ITEM_KINDS[kind].plain;
 }
 
-/** Các mục của một ngày theo thứ tự `position` (mục chưa có thứ tự xếp cuối, giữ thứ tự thêm vào). */
+/** The items of a day by `position` order (an item with no order goes last, keeping the order added). */
 export function dayItems(t: Pick<Trip, 'items'>, day: string): TripItem[] {
   return t.items
     .map((it, index) => ({ it, index }))
@@ -27,28 +27,28 @@ export function dayItems(t: Pick<Trip, 'items'>, day: string): TripItem[] {
     .map((x) => x.it);
 }
 
-/** Các mục "Chưa có ngày". */
+/** The 'No date yet' items. */
 export function unassignedItems(t: Pick<Trip, 'items'>): TripItem[] {
   return t.items.filter((i) => i.day === null);
 }
 
-/** Tổng hợp chi phí của chuyến (D17/D18). Mọi số là nghìn đồng. */
+/** The cost summary of a trip (D17/D18). Every number is in thousand VND. */
 export interface CostSummary {
-  /** "Tổng phải trả thêm": chỉ cộng mục đã biết giá và KHÔNG "đã bao gồm". */
+  /** 'Extra to pay': only adds items with a known price and NOT 'included'. */
   readonly totalK: number;
   readonly knownCount: number;
-  /** Số mục có giá nhưng chưa biết giá (ô trống), không tính mục "đã bao gồm". */
+  /** The number of items that have a price but whose price is unknown (an empty box), not counting 'included' items. */
   readonly unknownCount: number;
   readonly includedCount: number;
   readonly booked: number;
-  /** Số mục có thể đặt chỗ (loại có giá). */
+  /** The number of items that can be booked (kinds that have a price). */
   readonly bookable: number;
   readonly byKind: Readonly<Partial<Record<ItemKind, number>>>;
   readonly byDayK: Readonly<Record<string, number>>;
   readonly unknownByDay: Readonly<Record<string, number>>;
 }
 
-/** Tính chi phí theo quy tắc: trống = chưa biết; 0 = biết bằng không; "đã bao gồm" không cộng; Nghỉ/Việc cần làm không có giá. */
+/** Computes the cost by the rule: empty = unknown; 0 = known to be zero; 'included' is not added; Rest/To-do have no price. */
 export function summarizeCosts(t: Pick<Trip, 'items'>): CostSummary {
   let totalK = 0;
   let knownCount = 0;
@@ -80,18 +80,18 @@ export function summarizeCosts(t: Pick<Trip, 'items'>): CostSummary {
   return { totalK, knownCount, unknownCount, includedCount, booked, bookable, byKind, byDayK, unknownByDay };
 }
 
-/** So sánh ngân sách với "tổng phải trả thêm". */
+/** Compares the budget with 'extra to pay'. */
 export interface BudgetStatus {
   readonly budgetK: number;
   readonly leftK: number;
   readonly over: boolean;
-  /** Phần trăm đã dùng, kẹp 0..100 (ngân sách 0 mà có chi thì 100). */
+  /** The percentage used, clamped to 0..100 (a budget of 0 with spending is 100). */
   readonly pct: number;
 }
 
 const PERCENT = 100;
 
-/** Trạng thái ngân sách; null nếu chưa đặt ngân sách. */
+/** The budget state; null if no budget is set. */
 export function budgetStatus(budgetK: number | null, totalK: number): BudgetStatus | null {
   if (budgetK === null) return null;
   const leftK = budgetK - totalK;
@@ -99,7 +99,7 @@ export function budgetStatus(budgetK: number | null, totalK: number): BudgetStat
   return { budgetK, leftK, over: leftK < 0, pct };
 }
 
-/** Quãng đường ước tính (km, đường núi = chim bay × hệ số) cộng dồn qua các mục có tọa độ liền nhau; mục không tọa độ bị bỏ qua. */
+/** The estimated distance (km, mountain road = straight line x a factor) accumulated over adjacent items that have coordinates; an item with no coordinates is skipped. */
 export function roadKm(items: readonly TripItem[], coordOf: (placeId: string) => GeoPoint | null): number {
   let sum = 0;
   let last: GeoPoint | null = null;
@@ -112,7 +112,7 @@ export function roadKm(items: readonly TripItem[], coordOf: (placeId: string) =>
   return sum;
 }
 
-/** Tổng thời gian đi (phút) = cộng các chặng ĐÃ làm tròn để hiển thị, nên luôn khớp với từng chặng trong ngày. */
+/** The total travel time (minutes) = the sum of the legs ALREADY rounded for display, so it always matches each leg in the day. */
 export function roadMinutes(items: readonly TripItem[], coordOf: (placeId: string) => GeoPoint | null): number {
   const legs: number[] = [];
   let last: GeoPoint | null = null;
@@ -125,12 +125,12 @@ export function roadMinutes(items: readonly TripItem[], coordOf: (placeId: strin
   return sumRoundedMinutes(legs);
 }
 
-/** Số mục là địa điểm trong kho. */
+/** The number of items that are places in the catalog. */
 export function placeCount(t: Pick<Trip, 'items'>): number {
   return t.items.filter((i) => i.placeId !== null).length;
 }
 
-/** Diễn đạt độ đầy đủ của giá; số 0 chỉ hiện khi có giá đã nhập, không tính mục đã bao gồm. */
+/** Expresses how complete the pricing is; the number 0 only shows when there is an entered price, not counting included items. */
 export function costSummaryText(costs: Pick<CostSummary, 'knownCount' | 'totalK' | 'unknownCount'>): string {
   if (!costs.knownCount) return T.cost.noneKnown;
   const amount = formatVnd(costs.totalK * FORMAT.VND_PER_THOUSAND);

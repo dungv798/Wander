@@ -10,12 +10,12 @@ import type { TripCatalog } from '../model/tripView.ts';
 import { itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Mỗi lần vừa khung dùng chung: không bay (tránh chuyển động ở khung nhỏ), chừa lề cho ghim ảnh. */
+/** Each shared fit-to-frame: no flying (avoiding motion in a small frame), leaving a margin for the photo pin. */
 const FIT: MapFit = { ids: null, options: { animate: false, padding: 40 } };
 
 /**
- * Bản đồ tuyến THẬT của hôm nay: các nơi có tọa độ của ngày đang xem, đánh số theo thứ tự, nối tuyến kèm km ước tính;
- * nơi đã xong mờ đi. Cùng kiểu nền, ghim và ghi công với bản đồ chuyến; không có nơi nào có tọa độ thì không vẽ gì (không bịa vị trí).
+ * The REAL route map of today: the places with coordinates of the day being viewed, numbered in order, connected by a route with an estimated km;
+ * a place that is done fades. The same base, pin and attribution style as the trip map; if no place has coordinates nothing is drawn (no invented position).
  */
 export function TodayMap({ cat, items }: { readonly cat: TripCatalog; readonly items: readonly TripItem[] }) {
   const markers = useMemo<MapMarker[]>(() => items.flatMap((item, index) => {

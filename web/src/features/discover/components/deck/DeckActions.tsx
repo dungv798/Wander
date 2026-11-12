@@ -18,7 +18,7 @@ interface RoundProps {
   readonly onClick: () => void;
 }
 
-/** Một nút tròn của hàng hành động kèm chú thích bên dưới. */
+/** One round button of the action row, with a caption below. */
 function Round({ cls, icon, label, caption, disabled, onClick }: RoundProps) {
   return (
     <div className="act">
@@ -30,7 +30,7 @@ function Round({ cls, icon, label, caption, disabled, onClick }: RoundProps) {
   );
 }
 
-/** Hàng nút dưới bộ thẻ: Hoàn tác, Bỏ qua, Chọn, Chi tiết (thay thế đầy đủ cho cử chỉ quẹt, a11y). */
+/** The button row under the deck: Undo, Skip, Select, Details (a full replacement for the swipe gesture, accessibility). */
 export function DeckActions({ canUndo, onUndo, onSwipe }: DeckActionsProps) {
   return (
     <div className="actions">

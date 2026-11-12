@@ -6,19 +6,19 @@ import { Button } from '../../../shared/ui/Button.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 import { TripFormLayout } from './TripFormLayout.tsx';
 
-/** Nạp form nhanh khi người dùng chuẩn bị mở tờ tạo chuyến. */
+/** Loads the quick form when the user is about to open the trip-creating sheet. */
 function loadCreate() { return import('./CreateTripSheetContent.tsx'); }
-/** Nạp trình từng bước độc lập với form nhanh. */
+/** Loads the step-by-step wizard independently of the quick form. */
 function loadWizard() { return import('./TripWizard.tsx'); }
 const Create = lazy(() => loadCreate().then(module => ({ default: module.CreateTripSheet })));
 const Wizard = lazy(() => loadWizard().then(module => ({ default: module.TripWizard })));
 
-/** Làm ấm chunk trên hover/focus/chạm; lỗi tải sẽ được thử lại khi mở thật. */
+/** Warms the chunk on hover/focus/touch; a load error is retried when it is really opened. */
 export function preloadCreateTrip() { void loadCreate().catch(() => undefined); }
-/** Làm ấm trình từng bước mà không dựng hoặc đổi dữ liệu biểu mẫu. */
+/** Warms the wizard without building or changing the form data. */
 export function preloadTripWizard() { void loadWizard().catch(() => undefined); }
 
-/** Giữ chiều cao form và khả năng đóng trong lúc chunk chưa sẵn sàng. */
+/** Keeps the form height and the ability to close while the chunk is not ready. */
 function PendingTripForm({ onClose }: { readonly onClose: () => void }) {
   return <Sheet label={T.create.title} onClose={onClose}>
     <TripFormLayout actions={<Button kind="ghost" block onClick={onClose}>{T.create.cancel}</Button>}>
@@ -27,12 +27,12 @@ function PendingTripForm({ onClose }: { readonly onClose: () => void }) {
   </Sheet>;
 }
 
-/** Chỉ tải form khi mở, giữ nguyên props và DOM của form sau khi tải. */
+/** Loads the form only when opened, keeping the form's props and DOM unchanged after loading. */
 export function LazyCreateTripSheet(props: ComponentProps<typeof Create>) {
   return <Suspense fallback={<PendingTripForm onClose={props.onClose} />}><Create {...props} /></Suspense>;
 }
 
-/** Giữ bản nháp ở thành phần gọi khi chuyển sang trình từng bước tải lười. */
+/** Keeps the draft in the calling component when switching to the lazy-loaded wizard. */
 export function LazyTripWizard(props: ComponentProps<typeof Wizard>) {
   return <Suspense fallback={<PendingTripForm onClose={props.onClose} />}><Wizard {...props} /></Suspense>;
 }

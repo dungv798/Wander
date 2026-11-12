@@ -1,4 +1,4 @@
-/** Hằng số của rating Wander; khớp `RatingConstants` của backend. */
+/** Constants of Wander rating; they match the backend's `RatingConstants`. */
 export const RATING = {
   STAR_VALUES: [1, 2, 3, 4, 5],
   MAX_STARS: 5,
@@ -8,11 +8,11 @@ export const RATING = {
   EMPTY_STAR: '☆',
   AVERAGE_DIGITS: 1,
   LOCALE: 'vi-VN',
-  /** Số lời bình hiện sẵn; phần còn lại mở bằng "Xem tất cả". */
+  /** The number of comments shown by default; the rest open with 'See all'. */
   PREVIEW_COMMENTS: 2,
 } as const;
 
-/** Đường dẫn API rating của một quán. */
+/** The rating API path of a venue. */
 export const RATING_API = {
   PLACE: '/api/places',
   RATING: 'rating',

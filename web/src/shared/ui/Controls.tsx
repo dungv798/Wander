@@ -9,7 +9,7 @@ interface CheckRowProps {
   readonly hidden?: boolean;
 }
 
-/** Ô tích có nhãn bên phải (vùng bấm là cả hàng). */
+/** A tick box with the label on the right (the tap area is the whole row). */
 export function CheckRow({ checked, onChange, children, hidden }: CheckRowProps) {
   return (
     <label className="checkrow" hidden={hidden}>
@@ -27,7 +27,7 @@ interface ChipToggleProps {
   readonly children: ReactNode;
 }
 
-/** Nút bật/tắt dạng viên thuốc (`aria-pressed`), dùng cho bộ lọc, sở thích, kiểu chuyến. */
+/** A pill-shaped toggle button (`aria-pressed`), used for filters, interests, trip kinds. */
 export function ChipToggle({ pressed, onClick, icon, className, children }: ChipToggleProps) {
   return (
     <button className={['fchip', 'g-chip', 'glass-control', className].filter(Boolean).join(' ')} type="button" aria-pressed={pressed} onClick={onClick}>
@@ -38,7 +38,7 @@ export function ChipToggle({ pressed, onClick, icon, className, children }: Chip
   );
 }
 
-/** Khung cảnh báo trong biểu mẫu; `alert` cho lỗi (đọc ngay), mặc định `status`. */
+/** A warning frame in a form; `alert` for an error (read at once), `status` by default. */
 export function WarnBox({ children, role = 'alert' }: { readonly children: ReactNode; readonly role?: 'alert' | 'status' }) {
   return (
     <div className="warnbox" role={role}>
@@ -56,7 +56,7 @@ interface ProgressProps {
 
 const PERCENT = 100;
 
-/** Thanh tiến độ có `role=progressbar` (số đã xếp/tổng, ngân sách đã dùng). */
+/** A progress bar with `role=progressbar` (the number scheduled/total, the budget used). */
 export function Progress({ label, value, max, over }: ProgressProps) {
   const pct = max ? Math.min(PERCENT, Math.round((value / max) * PERCENT)) : 0;
   return (

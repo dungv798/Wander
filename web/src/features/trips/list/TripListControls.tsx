@@ -9,7 +9,7 @@ import { TRIP_SORTS, TRIP_STATUSES } from './tripList.ts';
 import { LIST_COPY as L } from './list.copy.ts';
 import './tripList.css';
 
-/** Barre tìm/lọc gọn; tờ chọn áp dụng ngay và giữ các lựa chọn khác. */
+/** A compact search/filter bar; the choosing sheet applies at once and keeps the other choices. */
 export function TripListControls({ options, counts, onChange }: { readonly options: TripListOptions; readonly counts: Readonly<Record<TripStatus, number>>; readonly onChange: (value: TripListOptions) => void }) {
   const [sorting, setSorting] = useState(false);
   return <section className="trip-list-controls stack pad-x" aria-label={L.filters}>

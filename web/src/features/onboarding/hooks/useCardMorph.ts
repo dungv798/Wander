@@ -9,23 +9,23 @@ const HALF_TURN_DEG = 180;
 const CAPTION_DELAY_MS = 120;
 const EASE = 'cubic-bezier(.22, 1, .36, 1)';
 
-/** Góc xoay (độ) và độ phóng của một ma trận biến đổi. */
+/** The rotation angle (degrees) and the scale of a transform matrix. */
 function rotation(m: DOMMatrix): number {
   return (Math.atan2(m.b, m.a) * HALF_TURN_DEG) / Math.PI;
 }
 
-/** Độ phóng của một ma trận biến đổi. */
+/** The scale of a transform matrix. */
 function scaling(m: DOMMatrix): number {
   return Math.hypot(m.a, m.b);
 }
 
-/** Tâm của phần tử theo tọa độ màn hình (không đổi khi phần tử xoay quanh tâm). */
+/** The center of an element in screen coordinates (unchanged when the element rotates around its center). */
 function centerOf(el: HTMLElement): { x: number; y: number } {
   const r = el.getBoundingClientRect();
   return { x: r.left + r.width / HALF, y: r.top + r.height / HALF };
 }
 
-/** Cho thẻ mới "bay" từ đúng vị trí, góc xoay và cỡ của thẻ cũ về chỗ của nó (dùng thuộc tính translate/rotate/scale riêng nên không đụng tới transform của thẻ); thẻ cũ ẩn đi ngay vì cùng một ảnh. */
+/** Makes the new card 'fly' from exactly the position, rotation angle and size of the old card to its own place (using the separate translate/rotate/scale properties so the card's transform is not touched); the old card hides at once because it is the same photo. */
 function morph(from: HTMLElement, to: HTMLElement): void {
   const a = centerOf(from);
   const b = centerOf(to);
@@ -43,9 +43,9 @@ function morph(from: HTMLElement, to: HTMLElement): void {
 }
 
 /**
- * Chuyển cảnh "cùng một thẻ": khi hai cảnh liền kề có thẻ cùng ảnh (thẻ Đà Lạt ở cảnh 1 và thẻ đầu bộ bài ở cảnh 2), thẻ mới di chuyển mượt từ vị trí thẻ cũ
- * trong lúc phần còn lại mờ dần, nên người xem thấy đó là một vật thể liên tục. Không tìm thấy thẻ hoặc khác ảnh thì bỏ qua (cảnh vẫn mờ dần bình thường).
- * `token` đổi mỗi lần chuyển cảnh để chạy lại.
+ * The 'same card' scene transition: when two adjacent scenes have a card with the same photo (the Da Lat card in scene 1 and the first card of the deck in scene 2), the new card moves smoothly from the old card's position
+ * while the rest fades, so the viewer sees it as one continuous object. If the card is not found or the photo differs it is skipped (the scene still fades normally).
+ * `token` changes on every scene change to re-run.
  */
 export function useCardMorph(stage: RefObject<HTMLElement | null>, enabled: boolean, token: string): void {
   useLayoutEffect(() => {

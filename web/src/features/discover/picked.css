@@ -1,4 +1,4 @@
-/* Bộ sưu tập B: hành động ở đầu, ảnh nhỏ và tên đọc được, không lặp lưới ảnh khám phá. */
+/* Collection B: the action at the top, a small photo and a readable name, not repeating the discover photo grid. */
 #screen[data-view='picked'] .pagehead { padding-top: 24px; padding-bottom: 14px; }
 #screen[data-view='picked'] .pagehead h1 { margin: 5px 0; font: 700 28px / 1.3 var(--font-display); }
 #screen[data-view='picked'] .pagehead .note { font-size: 11px; line-height: 1.7; }

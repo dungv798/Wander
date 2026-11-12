@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TRANSITION_MS } from '../model/onboarding.const.ts';
 
-/** Trạng thái chuyển cảnh: cảnh cũ còn đang trượt ra (null = không chuyển) và hướng đi (1 = tiến, -1 = lùi). */
+/** The scene transition state: the old scene is still sliding out (null = no transition) and the direction (1 = forward, -1 = back). */
 export interface SceneTransition {
   readonly prev: number | null;
   readonly dir: 1 | -1;
@@ -14,8 +14,8 @@ interface Tracked {
 }
 
 /**
- * Giữ cảnh cũ trên màn hình thêm `TRANSITION_MS` khi đổi cảnh để nó trượt ra trong lúc cảnh mới trượt vào (cảnh không bị dựng lại nên giữ nguyên trạng thái).
- * Giảm chuyển động thì đổi ngay không giữ cảnh cũ.
+ * Keeps the old scene on the screen for `TRANSITION_MS` more on a scene change so it slides out while the new scene slides in (a scene is not rebuilt so it keeps its state).
+ * Under reduced motion it changes at once without keeping the old scene.
  */
 export function useSceneTransition(scene: number, reduced: boolean): SceneTransition {
   const [tracked, setTracked] = useState<Tracked>({ scene, prev: null, dir: 1 });

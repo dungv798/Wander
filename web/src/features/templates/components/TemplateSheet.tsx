@@ -22,7 +22,7 @@ interface SheetProps {
   readonly onClose: () => void;
 }
 
-/** Danh sách theo ngày của lịch mẫu: tên + khu vực từng nơi (ảnh nhỏ), ghi chú ngày và dòng nhắc khi ngày chưa có nơi mới. */
+/** The day-by-day list of a sample itinerary: the name + area of each place (a small photo), the day note and a reminder line when a day has no new place. */
 function TemplateDays({ template }: { readonly template: TemplateView }) {
   return (
     <div className="stack">
@@ -51,7 +51,7 @@ function TemplateDays({ template }: { readonly template: TemplateView }) {
   );
 }
 
-/** Biểu mẫu tạo chuyến từ lịch mẫu: tên + ngày đi (ngày về tự tính). Lỗi chỉ hiện sau khi bấm tạo, ngay trong tờ. */
+/** The form that creates a trip from a sample itinerary: name + start date (the end date is computed). Errors show only after pressing create, right in the sheet. */
 function UseForm({ template, destId, onBack, onClose }: SheetProps & { readonly onBack: () => void }) {
   const toast = useToast();
   const requireIdentity = useRequireIdentity();
@@ -62,7 +62,7 @@ function UseForm({ template, destId, onBack, onClose }: SheetProps & { readonly 
   const [start, setStart] = useState(() => nextWeekday(todayLocal(), DEFAULT_START_WEEKDAY));
   const [error, setError] = useState('');
   const valid = parseIsoDate(start) !== null;
-  /** Kiểm tra rồi (qua cổng danh tính) tạo chuyến, mở chuyến và báo đã tạo. */
+  /** Validates, then (through the identity gate) creates the trip, opens the trip and notifies that it was created. */
   const submit = (): void => {
     const trimmed = name.trim();
     if (!trimmed) return setError(T.sheet.errors.name);
@@ -98,7 +98,7 @@ function UseForm({ template, destId, onBack, onClose }: SheetProps & { readonly 
   );
 }
 
-/** Tờ chi tiết một lịch mẫu: tóm tắt, nhãn "Bản nháp" nếu chưa duyệt, các ngày; "Dùng lịch này" mở biểu mẫu tạo chuyến. */
+/** The detail sheet of one sample itinerary: a summary, the 'Draft' label if not approved, the days; 'Use this itinerary' opens the trip-creating form. */
 export function TemplateSheet({ template, destId, onClose }: SheetProps) {
   const [using, setUsing] = useState(false);
   return (

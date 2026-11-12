@@ -1,4 +1,4 @@
-/* Danh sách điện thoại cuộn theo trang; bản đồ và điều hướng là các lớp độc lập. */
+/* The phone list scrolls with the page; the map and the navigation are independent layers. */
 @media (max-width: 767px) {
   :root { --font-body: var(--mobile-font); --font-display: var(--mobile-font); }
   html { background-color: var(--mobile-canvas); }
@@ -83,7 +83,7 @@
     box-shadow: none; font: var(--text-secondary); font-weight: 500;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
-  /* Chip đang chọn: cam đặc như mẫu (chữ trắng trên --control-accent đạt 4,5:1). */
+  /* The selected chip: solid orange like the sample (white text on --control-accent reaches 4.5:1). */
   :root .app[data-document-scroll] .pl-filters .fchip[aria-pressed='true'] {
     color: var(--white); background: var(--control-accent); border-color: var(--control-accent);
     box-shadow: none; font-weight: 700;
@@ -114,7 +114,7 @@
   :root .app #tabbar .tab {
     align-content: center; padding: var(--s-1); gap: 0; border-radius: var(--r-pill); font: var(--mobile-nav-font);
   }
-  /* Nhãn mọi tab cùng cỡ; tab đang chọn chỉ đổi nền và độ đậm (không đổi cỡ chữ như bản trước). */
+  /* Every tab label has the same size; the selected tab changes only the background and the weight (the font size does not change as in the previous version). */
   :root .app #tabbar .tab span { font: var(--mobile-nav-font); color: var(--muted); }
   :root .app #tabbar .tab[aria-current='page'] {
     background: var(--mobile-glass-selected); box-shadow: var(--mobile-glass-selected-shadow);
@@ -144,10 +144,10 @@
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
   :root .app #tabbar::before { background: var(--mobile-nav-glass); }
-  /* Thanh trên/dưới trượt ra khi cuộn xuống (useScrollChrome); focus bàn phím luôn đưa chúng trở lại. */
+  /* The top/bottom bars slide out when scrolling down (useScrollChrome); keyboard focus always brings them back. */
   html[data-chrome='hidden'] .app[data-document-scroll] .map-chrome:not(:has(:focus-visible)) { transform: translateY(-100%); }
   html[data-chrome='hidden'] .app[data-document-scroll] #tabbar:not(:has(:focus-visible)) { transform: translateY(calc(100% + var(--mobile-dock-total))); }
-  /* Ghi nguồn bản đồ: ở chế độ xem trước nút "i" không chạm được (lớp xem trước nằm trên) nên thay bằng dòng chữ; ở chế độ bản đồ nâng lên trên thanh tab. */
+  /* The map attribution: in preview mode the 'i' button cannot be touched (the preview layer is on top) so it is replaced by a line of text; in map mode it is raised above the tab bar. */
   .app[data-document-scroll][data-sheet='open'] .shell-map .maplibregl-ctrl-bottom-right { display: none; }
   .app[data-document-scroll][data-sheet='peek'] .shell-map .maplibregl-ctrl-bottom-right { bottom: calc(var(--mobile-dock-total) + var(--s-2)); }
   .mobile-map-credit {
@@ -188,18 +188,18 @@
   --mobile-glass-fallback: var(--surface); --mobile-glass-shadow: var(--sh-1); --mobile-glass-selected-shadow: var(--sh-1);
   --mobile-header-scrim: var(--mobile-canvas);
 }
-/* Giảm trong suốt: mọi bề mặt điều khiển thành đặc hoàn toàn (header cũng vậy, tránh chữ nội dung lộ ra sau logo). */
+/* Reduced transparency: every control surface becomes fully solid (the header too, so content text does not show behind the logo). */
 @media (prefers-reduced-transparency: reduce) {
   :root { --mobile-glass: var(--mobile-glass-fallback); --mobile-nav-glass: var(--mobile-glass-fallback); --mobile-header-scrim: var(--mobile-canvas); }
 }
 @media (prefers-contrast: more) {
   :root { --mobile-glass-edge: var(--ink); --mobile-glass: var(--mobile-glass-fallback); --mobile-nav-glass: var(--mobile-glass-fallback); --mobile-header-scrim: var(--mobile-canvas); }
 }
-/* Giảm chuyển động: thanh trên/dưới đổi trạng thái tức thì. */
+/* Reduced motion: the top/bottom bars change state instantly. */
 @media (prefers-reduced-motion: reduce) {
   :root .app .map-chrome, :root .app #tabbar { transition: none; }
 }
-/* Xoay ngang trên điện thoại hẹp (B-11, DR-037): chiều cao chỉ còn khoảng 340 px nên bỏ dải bản đồ xem trước và để thanh dưới nằm theo dòng chảy trang thay vì cố định; nhờ đó danh sách có chỗ. Nút "Bản đồ" ở đầu trang vẫn mở bản đồ đầy màn. */
+/* Landscape on a narrow phone (B-11, DR-037): the height is only about 340 px so the preview map strip is dropped and the bottom bar flows with the page instead of being fixed; that leaves room for the list. The 'Map' button at the top of the page still opens the full-screen map. */
 @media (max-width: 767px) and (max-height: 450px) {
   :root { --mobile-map-preview: 0px; --mobile-dock-total: var(--s-4); }
   .mobile-map-preview { display: none; }

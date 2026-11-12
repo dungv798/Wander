@@ -1,7 +1,7 @@
-/** Vai trong chuyến (Q6). */
+/** The role in a trip (Q6). */
 export type MemberRole = 'organizer' | 'member';
 
-/** Một thành viên; {@code self} đánh dấu chính người đang xem. Không có mã danh tính. */
+/** One member; {@code self} marks the person who is viewing. There is no identity id. */
 export interface Member {
   readonly id: string;
   readonly displayName: string;
@@ -10,7 +10,7 @@ export interface Member {
   readonly self: boolean;
 }
 
-/** Trạng thái liên kết mời hiện có (KHÔNG có mã). */
+/** The state of the existing invite link (NO code). */
 export interface InviteStatus {
   readonly id: string;
   readonly createdAt: number;
@@ -18,29 +18,29 @@ export interface InviteStatus {
   readonly active: boolean;
 }
 
-/** Liên kết vừa tạo: mã chỉ có ở đây, đúng một lần. */
+/** The link that was just created: the code is only here, exactly once. */
 export interface CreatedInvite {
   readonly id: string;
   readonly code: string;
   readonly expiresAt: number;
 }
 
-/** Xem trước một liên kết mời còn dùng được. */
+/** A preview of an invite link that is still usable. */
 export interface InvitePreview {
   readonly tripName: string;
   readonly memberCount: number;
 }
 
-/** Kết quả vào chuyến. */
+/** The result of joining a trip. */
 export interface Joined {
   readonly tripId: string;
   readonly member: Member;
 }
 
-/** Trạng thái đề nghị xóa. */
+/** The state of a deletion request. */
 export type RequestStatus = 'pending' | 'approved' | 'rejected';
 
-/** Một đề nghị xóa mục. {@code requesterName} null nếu người đề nghị đã rời chuyến. */
+/** A request to delete an item. {@code requesterName} is null if the requester has left the trip. */
 export interface DeletionRequest {
   readonly id: string;
   readonly itemId: string;
@@ -52,7 +52,7 @@ export interface DeletionRequest {
   readonly decidedAt: number | null;
 }
 
-/** Một hạng mục checklist: {@code done} là của chính người xem, {@code doneBy} là mã những thành viên đã xong. */
+/** A checklist item: {@code done} is the viewer's own, {@code doneBy} are the ids of the members who finished. */
 export interface ChecklistItem {
   readonly id: string;
   readonly group: string;
@@ -62,10 +62,10 @@ export interface ChecklistItem {
   readonly doneBy: readonly string[];
 }
 
-/** Cổng tới API cộng tác. Mọi thất bại là `ApiError` có mã của backend. */
+/** The gateway to the collaboration API. Every failure is an `ApiError` with the backend's code. */
 export interface CollabGateway {
   members(tripId: string): Promise<Member[]>;
-  /** Trạng thái liên kết mời (chỉ Organizer); chưa có thì null. */
+  /** The state of the invite link (Organizer only); null if there is none yet. */
   invite(tripId: string): Promise<InviteStatus | null>;
   createInvite(tripId: string): Promise<CreatedInvite>;
   revokeInvite(tripId: string): Promise<void>;

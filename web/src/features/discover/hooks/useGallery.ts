@@ -4,8 +4,8 @@ import { usePrefersReducedMotion } from '../../../shared/hooks/useMediaQuery.ts'
 import { galleryIndex, galleryIndexAt } from '../model/galleryPosition.ts';
 
 /**
- * Thư viện ảnh cuộn ngang có điểm dừng: theo dõi ảnh đang xem, chuyển ảnh bằng nút/phím, và kéo bằng chuột trên máy tính
- * (cảm ứng đã cuộn tự nhiên). Giảm chuyển động thì nhảy thẳng thay vì cuộn mượt.
+ * A horizontally scrolling photo gallery with snap points: tracks the photo being viewed, switches photos by button/key, and drags with the mouse on a computer
+ * (touch already scrolls naturally). With reduced motion it jumps directly instead of scrolling smoothly.
  */
 export function useGallery(count: number) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -14,13 +14,13 @@ export function useGallery(count: number) {
   const mouse = useRef({ down: false, startX: 0, startLeft: 0 });
   const currentIndex = useRef(0);
 
-  /** Một bước luôn bằng khung gallery, độc lập lối mở từ bản đồ hay bộ thẻ. */
+  /** One step always equals the gallery frame, independent of whether it was opened from the map or the deck. */
   const step = useCallback((): number => {
     const g = ref.current;
     return Math.max(1, g?.clientWidth ?? 1);
   }, []);
 
-  /** Chỉ số ảnh hiện tại suy từ vị trí cuộn. */
+  /** The current photo index derived from the scroll position. */
   const read = useCallback((): number => {
     const g = ref.current;
     return g ? galleryIndexAt(g.scrollLeft, step(), count) : 0;
@@ -44,7 +44,7 @@ export function useGallery(count: number) {
     };
   }, [count, read, step]);
 
-  /** Cuộn tới ảnh `delta` bước từ ảnh hiện tại (kẹp trong khoảng). */
+  /** Scrolls to the photo `delta` steps from the current photo (clamped to the range). */
   const go = useCallback(
     (delta: number): void => {
       const g = ref.current;

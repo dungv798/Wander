@@ -4,7 +4,7 @@ import { HALF } from '../../../shared/const/math.const.ts';
 import type { PlaceView } from '../../discover/index.ts';
 import { SWIPE } from '../model/onboarding.const.ts';
 
-/** Ảnh thu nhỏ đang bay từ thẻ vừa chọn xuống khay "đã chọn" (tọa độ theo sân khấu, px). */
+/** A shrunken photo flying from the card just chosen down to the 'selected' tray (coordinates relative to the stage, px). */
 export interface FlyingChip {
   readonly id: number;
   readonly place: PlaceView;
@@ -14,24 +14,24 @@ export interface FlyingChip {
   readonly ty: number;
 }
 
-/** Khay "đã chọn": ảnh đã đáp xuống và ảnh đang bay. */
+/** The 'selected' tray: the photos that have landed and the photos in flight. */
 export interface SelectedTray {
   readonly thumbs: readonly PlaceView[];
   readonly chips: readonly FlyingChip[];
-  /** Cho ảnh của địa điểm bay từ khung thẻ `from` (tọa độ màn hình) xuống chỗ tiếp theo của khay. */
+  /** Makes a place's photo fly from the card frame `from` (screen coordinates) to the next slot of the tray. */
   readonly fly: (place: PlaceView, from: DOMRect) => void;
-  /** Ảnh bay xong: thêm vào khay (bộ đếm tăng cùng lúc). */
+  /** The photo has finished flying: adds it to the tray (the counter goes up at the same time). */
   readonly land: (id: number) => void;
   readonly clear: () => void;
 }
 
-/** Quản lý khay "đã chọn" của cảnh quẹt; `stage` là phần tử sân khấu làm gốc tọa độ. */
+/** Manages the 'selected' tray of the swipe scene; `stage` is the stage element that is the origin of the coordinates. */
 export function useSelectedTray(stage: RefObject<HTMLElement | null>): SelectedTray {
   const [thumbs, setThumbs] = useState<readonly PlaceView[]>([]);
   const [chips, setChips] = useState<readonly FlyingChip[]>([]);
   const [seq, setSeq] = useState(0);
   const fly = useCallback(
-    /** Tính điểm đi/đến theo sân khấu rồi thêm một ảnh bay. */
+    /** Computes the start/end points relative to the stage and then adds one flying photo. */
     (place: PlaceView, from: DOMRect) => {
       const box = stage.current?.getBoundingClientRect();
       if (!box) return;
@@ -43,7 +43,7 @@ export function useSelectedTray(stage: RefObject<HTMLElement | null>): SelectedT
     [stage, thumbs.length, chips.length, seq],
   );
   const land = useCallback(
-    /** Chuyển ảnh đã bay xong từ danh sách bay sang khay (hai cập nhật riêng, không lồng nhau). */
+    /** Moves the photo that has finished flying from the flying list to the tray (two separate updates, not nested). */
     (id: number) => {
       const chip = chips.find((c) => c.id === id);
       if (!chip) return;

@@ -15,11 +15,11 @@ import { usePlaceSheet } from '../../hooks/PlaceSheetProvider.tsx';
 interface PlaceGalleryProps {
   readonly place: PlaceView;
   readonly onClose: () => void;
-  /** Cho phép màn cha gắn phím ←/→ vào đúng thư viện ảnh. */
+  /** Lets the parent screen attach the left/right keys to the right photo gallery. */
   readonly registerGo: (go: (delta: number) => void) => void;
 }
 
-/** Thư viện ảnh đầu tờ chi tiết: cuộn/kéo/nút/phím, số ảnh, chấm, nhãn loại, nút đóng và nút nguồn ảnh (ghi công bắt buộc). */
+/** The photo gallery at the top of the detail sheet: scroll/drag/buttons/keys, the photo count, dots, a kind label, a close button and the photo-source button (attribution required). */
 export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps): ReactNode {
   const { openingPhoto } = usePlaceSheet();
   const photos = [...place.photos];
@@ -35,7 +35,7 @@ export function PlaceGallery({ place, onClose, registerGo }: PlaceGalleryProps):
 
   return (
     <div className={`gal cat-${place.category}`}>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- vùng cuộn ngang phải focus được bằng bàn phím (WCAG 2.1.1) */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- a horizontal scroll area must be focusable by keyboard (WCAG 2.1.1) */}
       <div ref={ref} className="gallery" tabIndex={0} aria-label={fill(COPY.place.photosOf, { name: place.name })} {...pointer}>
         {photos.length ? photos.map((p) => (
           <RevealImage key={p.url} alt={place.name} src={p.url} />

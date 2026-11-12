@@ -21,21 +21,21 @@ interface ItemProps {
   readonly onCompleted?: () => void;
 }
 
-/** Giữ liên kết chỉ đường bên ngoài như màn cũ; thiếu tọa độ thì không đưa liên kết phỏng đoán. */
+/** Keeps the external directions link like the old screen; with no coordinates it gives no guessed link. */
 export function MapLink({ item, cat }: Pick<ItemProps, 'item' | 'cat'>) {
   const place = cat.place(item.placeId);
   if (!place || place.lat === null || place.lon === null) return null;
   return <a className="btn ghost glass-control maplink" href={`https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lon}`} target="_blank" rel="noopener noreferrer" aria-label={fill(C.mapAria, { name: itemName(item, cat) })}><Icon name="map-pin" size="s" />{C.map}</a>;
 }
 
-/** Ghi dấu của chính người gọi rồi đọc lại chuyến; khóa nút khi đang gửi và giữ nguyên dữ liệu nếu lỗi. */
+/** Records the caller's own mark and then re-reads the trip; it locks the button while sending and keeps the data if there is an error. */
 function DoneButton({ trip, item, cat, onCompleted }: ItemProps) {
   const { actions } = useTrips();
   const fire = useFire();
   const [busy, setBusy] = useState(false);
   const place = isPlaceItem(item);
   const label = place ? (item.done ? C.unmarkVisited : C.markVisited) : C.toggle;
-  /** Chờ actions đọc lại trạng thái máy chủ trước khi mở danh sách đã xong. */
+  /** Waits for the actions to re-read the server state before opening the done list. */
   const toggle = (): void => {
     setBusy(true);
     fire(actions.toggleDone(trip.id, item.id).then(() => { if (!item.done) onCompleted?.(); }).finally(() => setBusy(false)));
@@ -47,7 +47,7 @@ function DoneButton({ trip, item, cat, onCompleted }: ItemProps) {
   </div>;
 }
 
-/** Thẻ nổi bật dùng ảnh catalog có ghi công; khoảng cách chỉ tính từ mục ngay trước khi đủ cả hai tọa độ. */
+/** The highlighted card uses a catalog photo with attribution; the distance is computed only from the item right before when both coordinates exist. */
 export function NextCard({ trip, item, cat, previous, onCompleted }: ItemProps & { readonly previous: TripItem | null }) {
   const place = cat.place(item.placeId);
   const photo = place?.photos[0];
@@ -66,7 +66,7 @@ export function NextCard({ trip, item, cat, previous, onCompleted }: ItemProps &
   </section>;
 }
 
-/** Dòng gọn giữ giờ thật, bản đồ và thao tác tích/bỏ tích việc hoặc địa điểm của chính người dùng. */
+/** A compact row keeping the real time, the map and the tick/untick action of a task or a place for the user themself. */
 export function TodayItem({ trip, item, cat, onCompleted }: ItemProps) {
   return <li className={`todayrow ${item.done ? 'done' : ''}`}>
     <span className="tdtime">{item.timeOfDay ?? C.noTime}</span>

@@ -1,4 +1,4 @@
-/** Chữ hiển thị (tiếng Việt), gom theo nhóm; sẵn sàng cho i18n. KHÔNG viết chữ cứng trong thành phần: lấy từ đây (chuẩn FE §8). */
+/** The display text (Vietnamese), grouped; ready for i18n. Do NOT write hard-coded text in components: take it from here (FE standard section 8). */
 export const COPY = {
   destinations: {
     title: 'Bạn muốn đi đâu?',
@@ -232,7 +232,7 @@ export const COPY = {
   slots: { sang: 'Sáng', trua: 'Trưa', chieu: 'Chiều', toi: 'Tối' },
 } as const;
 
-/** Thay các `{khóa}` trong mẫu chữ bằng giá trị tương ứng; khóa thiếu giữ nguyên để lộ lỗi thay vì ẩn. */
+/** Replaces the `{key}` in a text template with the matching values; a missing key is kept as it is to expose the error instead of hiding it. */
 export function fill(template: string, values: Readonly<Record<string, string | number>>): string {
   return template.replace(/\{(\w+)\}/g, (whole, key: string) => (key in values ? String(values[key]) : whole));
 }

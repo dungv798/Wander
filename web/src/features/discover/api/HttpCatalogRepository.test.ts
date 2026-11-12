@@ -10,7 +10,7 @@ const validDestination = (id = 'ha-giang'): Record<string, unknown> => ({ id, na
 const validSummary = (id = 'ha-giang'): Record<string, unknown> => ({ id, name: 'Hà Giang', region: 'Đông Bắc', lat: 23, lon: 105 });
 const isInternal = (e: unknown): boolean => e instanceof ApiError && e.code === 'INTERNAL';
 
-/** Kho dựng trên fetch giả; trả thêm danh sách lời gọi (URL và tín hiệu hủy). */
+/** A repository built on a fake fetch; also returns the list of calls (URL and cancel signal). */
 function repo(handler: (url: string) => Response | Promise<Response>): {
   readonly repository: HttpCatalogRepository;
   readonly urls: string[];
@@ -112,7 +112,7 @@ test('người gọi hủy thì nhận AbortError nhưng yêu cầu dùng chung 
   assert.equal(r.signals[0], undefined, 'không gắn tín hiệu của một người gọi vào yêu cầu dùng chung');
 });
 
-/** Cài `localStorage` giả toàn cục trong lúc chạy `body`, rồi gỡ (kho bản lưu dùng kho mặc định của trình duyệt). */
+/** Installs a fake global `localStorage` while `body` runs, then removes it (the saved-copy store uses the browser's default store). */
 async function withLocalStorage(body: () => Promise<void>): Promise<void> {
   const data = new Map<string, string>();
   const fake = { getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => { data.set(k, v); }, removeItem: (k: string) => { data.delete(k); } };
@@ -129,7 +129,7 @@ test('B-09: máy chủ không trả lời (lỗi mạng hoặc 5xx) thì dùng b
       if (mode === 'missing') return json({ code: 'NOT_FOUND' }, 404);
       return json({ destination: validDestination() });
     };
-    // mỗi lần dùng kho mới để bỏ bản nhớ trong bộ nhớ, chỉ còn bản ở localStorage
+    // each time use a new store to drop the in-memory copy, leaving only the copy in localStorage
     await repo(handler).repository.destination('ha-giang');
     mode = 'down';
     assert.equal((await repo(handler).repository.destination('ha-giang')).id, 'ha-giang');

@@ -11,7 +11,7 @@ const D2 = '2026-11-02';
 const D3 = '2026-11-03';
 const trip = (items: TripItem[], over: Partial<Trip> = {}): Trip => ({ id: 't', name: 'A', role: 'organizer', memberCount: 1, selfMemberId: null, destinationId: 'ha-giang', startDate: D1, endDate: D3, datesTentative: false, kind: null, interests: [], styles: [], pace: null, budgetK: null, items, trash: [], createdAt: 1, ...over });
 
-/** Cổng giả: ghi lại lời gọi; `load` trả các chuyến đã đặt sẵn theo thứ tự (cái cuối lặp lại). */
+/** A fake gateway: it records calls; `load` returns the preset trips in order (the last one repeats). */
 function harness(loads: Trip[], initial: Trip[] = [], failAddItemAt = 0): { readonly actions: ReturnType<typeof createTripsActions>; readonly calls: string[]; readonly inputs: ItemInput[]; readonly store: PersistentStore<TripsState> } {
   const calls: string[] = [];
   const inputs: ItemInput[] = [];
@@ -141,7 +141,7 @@ test('hoàn tác: chạy các lệnh ngược theo thứ tự (lịch → khôi 
   assert.deepEqual(h.calls.map((c) => c.split(' ')[0]), ['schedule', 'update']);
 });
 
-/** Cổng có trạng thái: `setDone`/`reorderDay` đổi dữ liệu thật, `load` trả bản hiện tại (mô phỏng máy chủ để thử hàng đợi). */
+/** A stateful gateway: `setDone`/`reorderDay` change the real data, `load` returns the current copy (simulating the server to try the queue). */
 function live(t: Trip): { readonly actions: ReturnType<typeof createTripsActions>; readonly calls: string[]; readonly server: { trip: Trip } } {
   const server = { trip: t };
   const calls: string[] = [];
@@ -198,7 +198,7 @@ test('hai lần đổi chỗ lên liên tiếp: lần sau tính từ thứ tự 
 test('hoàn tác khi chuyến đã đổi từ nơi khác: không gửi lệnh nào, báo CONCURRENT_MODIFICATION và kho được cập nhật theo máy chủ', async () => {
   const before = trip([item('a', D1, 0)]);
   const h = live(trip([item('a', D1, 0)]));
-  h.server.trip = trip([item('a', D1, 0), item('z', D1, 1)]); // máy khác vừa thêm một mục
+  h.server.trip = trip([item('a', D1, 0), item('z', D1, 1)]); // another device just added an item
   await assert.rejects(h.actions.revert(before), (e: unknown) => (e as { code?: string }).code === 'CONCURRENT_MODIFICATION');
   assert.deepEqual(h.calls, []);
   assert.equal(h.actions.current('t')?.items.length, 2);

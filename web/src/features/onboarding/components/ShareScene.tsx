@@ -16,7 +16,7 @@ import { InvitePanel, Members, ProposalPanel } from './SharePanels.tsx';
 import { ReplayButton } from './SwipeParts.tsx';
 import { TouchDot } from './TouchDot.tsx';
 
-/** Minh họa mời nhóm, thành viên thêm nơi muốn ghé và chủ chuyến xếp ngày; danh sách và ghim cập nhật cùng nhau, không ghi lên server. */
+/** Illustrates inviting a group, a member adding a place they want to visit and the trip owner scheduling a day; the list and the pins update together, nothing is written to the server. */
 export function ShareScene({ dest, reduced, auto, onInteract, onCue }: SceneProps) {
   const baseDays = useMemo(() => buildTrip((id) => placeById(dest, id)), [dest]);
   const proposal = useMemo(() => placeById(dest, PROPOSAL.placeId), [dest]);

@@ -7,10 +7,10 @@ import { useDiscover } from './DiscoverProvider.tsx';
 import { topicDestinations } from '../api/topicDestinations.ts';
 import { summaryTopicDestinations } from '../model/discoveryFilters.ts';
 
-/** Chủ đề Khám phá dùng mã loại thật để chuyển tiếp bộ lọc khi mở điểm đến. */
+/** The Discover topic uses the real kind codes to carry the filter over when a destination is opened. */
 export type DiscoveryTopic = 'all' | CategoryCode;
 
-/** Danh sách và bản đồ cùng dùng metadata tóm tắt để đổi chủ đề, không tải chi tiết cả nước. */
+/** The list and the map both use the summary metadata to change the topic, without loading the detail of the whole country. */
 function useTopicState() {
   const source = useCurrentDestination();
   const { catalog } = useDiscover();
@@ -30,13 +30,13 @@ function useTopicState() {
 
 const DiscoveryTopicContext = createContext<ReturnType<typeof useTopicState> | null>(null);
 
-/** Chia sẻ cùng bộ lọc và kết quả cho danh sách lẫn bản đồ, tránh lọc danh sách nhưng giữ ghim cũ. */
+/** Shares the same filter and results for both the list and the map, avoiding a filtered list that keeps old pins. */
 export function DiscoveryTopicProvider({ children }: { readonly children: ReactNode }) {
   const value = useTopicState();
   return <DiscoveryTopicContext.Provider value={value}>{children}</DiscoveryTopicContext.Provider>;
 }
 
-/** Đọc chủ đề hiện tại; không dựng riêng yêu cầu tải catalog ở mỗi thành phần. */
+/** Reads the current topic; does not build a separate catalog load request in every component. */
 export function useDiscoveryTopic() {
   const context = useContext(DiscoveryTopicContext);
   if (!context) throw new Error('DiscoveryTopicProvider');

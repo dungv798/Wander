@@ -22,16 +22,16 @@ test('mọi lần lỗi đều lùi nhịp gấp đôi và dừng ở trần', (
   assert.equal(delay, P.MAX_DELAY_MS);
 });
 
-/** Đợi chuỗi await/catch/finally của một lượt mà không dùng giờ thật. */
+/** Waits for the await/catch/finally chain of one round without using real time. */
 async function settle(): Promise<void> { for (let i = 0; i < 12; i++) await Promise.resolve(); }
 
-/** Tài liệu giả phát visibilitychange để kiểm vòng đời mà không cần DOM/React. */
+/** A fake document that fires visibilitychange to check the lifecycle without a DOM/React. */
 class Visibility extends EventTarget {
   hidden = false;
   setHidden(value: boolean): void { this.hidden = value; this.dispatchEvent(new Event(P.VISIBILITY_EVENT)); }
 }
 
-/** Thu các tác động quan sát được của poll, tránh gọi mạng hay ghi bí mật phiên. */
+/** Collects the observable effects of the poll, avoiding a network call or writing the session secret. */
 function fixture(readStatus: (signal: AbortSignal) => Promise<PairingStatus> = async () => 'pending') {
   const visibility = new Visibility();
   const outcomes: string[] = [];

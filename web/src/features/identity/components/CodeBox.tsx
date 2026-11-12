@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { RecoveryCode } from '../../../shared/domain/RecoveryCode.ts';
 
-/** Có đang ẩn tab/cửa sổ không (mã được làm mờ để ảnh chụp chuyển tab, ảnh xem trước không lộ mã). */
+/** Whether the tab/window is hidden (the code is blurred so a tab-switch screenshot or a preview image does not reveal the code). */
 function useDocumentHidden(): boolean {
   const [hidden, setHidden] = useState(() => document.hidden);
   useEffect(() => {
-    /** Cập nhật cờ khi tab hiện/ẩn. */
+    /** Updates the flag when the tab is shown/hidden. */
     const onChange = (): void => setHidden(document.hidden);
     document.addEventListener('visibilitychange', onChange);
     return () => document.removeEventListener('visibilitychange', onChange);
@@ -13,7 +13,7 @@ function useDocumentHidden(): boolean {
   return hidden;
 }
 
-/** Hộp hiện mã khôi phục: 6 nhóm × 5 ký hiệu (3 nhóm mỗi hàng), mờ đi khi tab bị ẩn. `label` là nhãn cho trình đọc màn hình. */
+/** The box that shows the recovery code: 6 groups x 5 symbols (3 groups per row), blurred when the tab is hidden. `label` is the label for screen readers. */
 export function CodeBox({ code, label }: { readonly code: RecoveryCode; readonly label: string }) {
   const hidden = useDocumentHidden();
   return (

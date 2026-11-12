@@ -6,7 +6,7 @@ export type CoordinateOf = (placeId: string) => GeoPoint | null;
 export type DeferredReason = 'capacity' | 'location' | 'booking' | 'time' | 'pending' | 'manual' | 'choice' | 'stay';
 export interface DeferredPlanItem { readonly itemId: string; readonly reason: DeferredReason }
 
-/** Các phút là ước tính; thời lượng thật thiếu được giữ riêng, không biến trọng số nội bộ thành dữ kiện. */
+/** The minutes are estimates; a missing real duration is kept separately, an internal weight is not turned into a fact. */
 export interface PlanDayPreview {
   readonly day: string;
   readonly itemIds: readonly string[];
@@ -24,7 +24,7 @@ export interface PlanDayPreview {
   readonly empty: boolean;
 }
 
-/** Kế hoạch chỉ chứa mục chưa có ngày được đề nghị; deferred vẫn nằm nguyên trong chuyến để tự chọn. */
+/** The plan contains only the suggested items with no day; deferred stays in the trip as is to be chosen by hand. */
 export interface PlanPreview {
   readonly plan: DayPlan;
   readonly days: readonly PlanDayPreview[];

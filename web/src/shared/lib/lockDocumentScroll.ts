@@ -2,9 +2,9 @@ let locks = 0;
 let restore: (() => void) | null = null;
 
 /**
- * Khóa cuộn nền bằng `overflow: hidden` trên <html> và <body>; không đổi `position` nên vị trí cuộn giữ nguyên, không cần khôi phục.
- * (Bản trước dùng `body { position: fixed }`: gây crash WebKit Windows khi mở chi tiết địa điểm và dễ làm thanh Safari nhảy.)
- * Các lớp lồng nhau (bản đồ + hộp thoại) chỉ mở khóa khi lớp cuối cùng đóng. Cần Safari iOS 16+ để `overflow: hidden` chặn cuộn cảm ứng.
+ * Locks the background scroll with `overflow: hidden` on <html> and <body>; it does not change `position` so the scroll position is kept, no restoring needed.
+ * (The earlier version used `body { position: fixed }`: it crashed WebKit on Windows when opening a place detail and easily made the Safari bar jump.)
+ * Nested layers (map + dialog) unlock only when the last layer closes. Needs Safari iOS 16+ for `overflow: hidden` to block touch scrolling.
  */
 export function lockDocumentScroll(): () => void {
   if (locks === 0) {

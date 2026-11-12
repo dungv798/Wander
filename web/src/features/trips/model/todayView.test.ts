@@ -5,10 +5,10 @@ import { itemsByTime, pickTodayTrip, todayView } from './todayView.ts';
 import type { Trip } from './trip.types.ts';
 
 let n = 0;
-/** Mã tăng dần để test xác định. */
+/** An increasing id so the test is deterministic. */
 const ids = (): string => `id${(n += 1)}`;
 
-/** Chuyến 3 ngày 10/11–12/11 có hai mục ở ngày 2. */
+/** A 3-day trip 10/11-12/11 with two items on day 2. */
 function trip(over: Partial<Trip> = {}): Trip {
   let t = createTrip(S0, { name: 'T', destinationId: 'd', startDate: '2026-11-10', endDate: '2026-11-12' }, [{ id: 'a', category: 'van' }, { id: 'b', category: 'am' }], ids, 1).trip;
   t = t.items.reduce((acc, i) => assignDay(acc, i.id, '2026-11-11'), t);

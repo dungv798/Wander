@@ -9,7 +9,7 @@ import type { RouteSegment } from './map.types.ts';
 export type SegmentFeature = Feature<LineString, RouteSegment>;
 const EMPTY_LINES = { type: 'FeatureCollection' as const, features: [] };
 
-/** Thêm tuyến ước tính, vùng chạm rộng và mũi tên canvas không cần tải sprite qua mạng. */
+/** Adds the estimated route, a wide hit area and a canvas arrow without loading a sprite over the network. */
 export function addRouteLayers(map: MlMap, host: HTMLElement): void {
   if (map.getSource(MAP.ROUTE_SOURCE_ID)) return;
   map.addSource(MAP.ROUTE_SOURCE_ID, { type: 'geojson', data: EMPTY_LINES });
@@ -24,7 +24,7 @@ export function addRouteLayers(map: MlMap, host: HTMLElement): void {
   addRouteArrow(map, host);
 }
 
-/** Vẽ chevron hướng sang phải; MapLibre tự quay theo tiếp tuyến của đường. */
+/** Draws a chevron pointing right; MapLibre rotates it by itself along the tangent of the line. */
 function addRouteArrow(map: MlMap, host: HTMLElement): void {
   ROUTE.TOKENS.forEach((_, day) => {
     const imageId = `${ROUTE.ARROW_IMAGE}-${day}`;
@@ -48,7 +48,7 @@ function addRouteArrow(map: MlMap, host: HTMLElement): void {
   } });
 }
 
-/** Đồng bộ từng feature với metadata; nguồn hit luôn đầy đủ trong khi hiệu ứng đang vẽ. */
+/** Syncs each feature with the metadata; the hit source is always complete while the effect is drawing. */
 export function setRouteLines(map: MlMap, features: readonly SegmentFeature[], hit = true): void {
   const data = { type: 'FeatureCollection' as const, features: [...features] };
   (map.getSource(MAP.ROUTE_SOURCE_ID) as GeoJSONSource | undefined)?.setData(data);

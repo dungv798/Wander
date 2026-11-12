@@ -1,4 +1,4 @@
-/** Ảnh chọn riêng cho thẻ, giữ chủ thể khi crop ngang; không dùng lại ảnh banner. */
+/** Photos chosen specifically for the card, keeping the subject when cropped horizontally; the banner photo is not reused. */
 export const HOME_PHOTOS: Readonly<Record<string, { readonly file: string; readonly position: string }>> = {
   'da-lat': { file: 'ho-xuan-huong-2-w1280-9d989b3de5.webp', position: '35% 65%' },
   'da-nang': { file: 'bai-bien-my-khe-2-w1280-b244125b7f.webp', position: '50% 65%' },
@@ -14,10 +14,10 @@ export const HOME_PHOTOS: Readonly<Record<string, { readonly file: string; reado
   'vinh-hy': { file: 'vinh-vinh-hy-6-w1280-c4ae110fdd.webp', position: '60% 60%' },
 } as const;
 
-/** Banner có ảnh riêng, tiêu điểm dành cho khung ngang thấp. */
+/** The banner has its own photo, with a focal point for a low horizontal frame. */
 export const HOME_BANNER = { file: 'ho-tuyen-lam-1-w1280-0c24449240.webp', position: '50% 65%' } as const;
 
-/** Ảnh cảnh quan rõ nét từ chính kho điểm đến, giữ bờ thông khi cắt ảnh. */
+/** A sharp landscape photo from the destination catalog itself, keeping the pine shore when cropped. */
 export const HOME_MOOD_PHOTOS: Readonly<Record<string, Partial<Record<string, { readonly file: string; readonly position: string }>>>> = {
   'da-lat': { canh: { file: 'ho-xuan-huong-2-w1280-9d989b3de5.webp', position: '55% 65%' } },
 };

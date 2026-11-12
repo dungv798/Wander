@@ -1,4 +1,4 @@
-/** Câu mời và mô tả ngắn biên tập từ tagline catalog để đọc trọn trên thẻ nhỏ. */
+/** An invitation line and a short editorial description from the catalog tagline so they read fully on a small card. */
 export const HOME_COPY = {
   country: 'Việt Nam',
   countryTitle: 'Khám phá Việt Nam',

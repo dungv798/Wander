@@ -1,4 +1,4 @@
-/* Trang chủ (hai trạng thái): đầu trang gọn, hero điểm đến bằng ảnh thật, lưới thẻ ảnh. Chữ trên ảnh luôn có lớp tối ở đáy. Chỉ dùng token. */
+/* The home page (two states): a compact top, a destination hero with a real photo, a grid of photo cards. Text on a photo always has a dark layer at the bottom. Tokens only. */
 .national-home { display: grid; gap: var(--s-4); padding-block: var(--s-4) var(--s-8); }
 .nh-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); min-width: 0; }
 .nh-head .nh-brand { display: flex; align-items: center; gap: var(--s-2); margin: 0; color: var(--ink); font: var(--text-section); }
@@ -11,7 +11,7 @@
 :root #screen .national-home .search { margin: 0; width: 100%; min-height: var(--tap); padding: var(--s-3) var(--s-4); color: var(--ink); background: var(--control-surface); border: var(--glass-border) solid var(--control-edge); box-shadow: none; text-shadow: none; letter-spacing: normal; }
 :root #screen .national-home .search .ic { color: var(--ink); }
 
-/* Hero điểm đến: ảnh phủ thẻ, tên lớn, MỘT nút chính; không băng chung chung. */
+/* The destination hero: a photo covers the card, a large name, ONE main button; no generic banner. */
 .home-hero-card { position: relative; isolation: isolate; display: grid; align-items: end; min-height: var(--layout-destination-hero); border-radius: var(--r-lg); overflow: hidden; background: var(--photo-bg); color: var(--on-photo); box-shadow: var(--sh-1); }
 .home-hero-card > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
 .home-hero-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--hero-bottom-scrim), transparent 78%); }
@@ -31,7 +31,7 @@
 
 .nh-grid { margin: var(--s-3) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
 .nh-grid li { min-width: 0; display: flex; }
-/* Thẻ ảnh điểm đến: tên nằm trên ảnh, số nơi là nhãn nhỏ ở góc. */
+/* The destination photo card: the name sits on the photo, the number of places is a small label in the corner. */
 .nh-card { position: relative; isolation: isolate; display: block; width: 100%; aspect-ratio: var(--layout-tile-ratio); padding: 0; border: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--photo-bg); color: var(--on-photo); text-align: left; }
 .nh-card > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
 .nh-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--hero-bottom-scrim), transparent 62%); }
@@ -48,17 +48,17 @@
 .national-home .resume b { font: var(--text-home-card); }
 .national-home .resume span span { font: var(--text-home-description); color: var(--muted); }
 .national-home .resume img { width: var(--s-7); height: var(--s-7); object-fit: cover; border-radius: var(--r-sm); }
-/* Loại trải nghiệm: cùng ngôn ngữ thẻ ảnh với điểm đến (tên + số nơi trên ảnh). */
+/* Experience kind: the same photo-card language as the destination (name + number of places on the photo). */
 .national-home .home-body .mood { position: relative; isolation: isolate; display: block; flex: 0 0 var(--home-card-width); height: auto; aspect-ratio: 4 / 5; background: var(--photo-bg); color: var(--on-photo); border: 0; }
 .national-home .home-body .mood img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
 .national-home .home-body .mood::after { display: block; z-index: -1; background: linear-gradient(to top, var(--hero-bottom-scrim), transparent 62%); }
 :root #screen .national-home .home-body .mood-in { position: absolute; inset: auto var(--s-3) var(--s-3); width: auto; padding: 0; gap: var(--s-1); text-shadow: var(--glass-photo-shadow); }
 .national-home .home-body .mood b { font: var(--text-home-card); }
 .national-home .home-body .mood-in > span { font: var(--text-secondary); color: var(--on-photo); }
-/* Nút "Bản đồ" chỉ có nghĩa khi tờ che bản đồ (điện thoại). */
+/* The 'Map' button only means something when the sheet covers the map (phone). */
 .map-peek { justify-self: start; }
 .picked-map-peek { display: grid; }
-/* Nhãn điều hướng đủ lớn và cùng nhịp chữ; không đổi cấu trúc thanh nổi. */
+/* The navigation labels are large enough and have the same text rhythm; the floating bar structure does not change. */
 :root:not([data-look='classic']) #tabbar .tab,
 :root:not([data-look='classic']) #tabbar .tab[aria-current='page'] { font: var(--text-home-nav); letter-spacing: normal; }
 @media (min-width: 768px) {

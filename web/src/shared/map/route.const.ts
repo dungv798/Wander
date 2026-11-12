@@ -1,4 +1,4 @@
-/** Thông số tuyến ước tính; kích thước tính theo px, thời lượng tính theo ms. */
+/** The parameters of the estimated route; sizes in px, durations in ms. */
 export const ROUTE = {
   HIT_LAYER: 'wander-route-hit',
   ARROW_LAYER: 'wander-route-arrows',

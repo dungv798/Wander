@@ -3,20 +3,20 @@ import { randomId } from '../../../shared/lib/randomId.ts';
 import type { Trip, TripItem, TripsState } from './trip.types.ts';
 import { dayItems, tripDays } from './tripMath.ts';
 
-/** Nguồn mã định danh (thay được khi test, nguyên lý D). */
+/** The source of ids (replaceable in tests, the D principle). */
 export type IdSource = () => string;
 
-/** Nguồn mã mặc định: xem `shared/lib/randomId.ts`. */
+/** The default id source: see `shared/lib/randomId.ts`. */
 export { randomId };
 
-/** Trạng thái ban đầu: chưa có chuyến nào. */
+/** The initial state: no trip yet. */
 export const INITIAL_TRIPS_STATE: TripsState = { trips: [] };
 
-/** Hậu tố đầu tiên khi tên trùng (" - 2") và độ dài mã ngắn khi hết hậu tố. */
+/** The first suffix when a name clashes (' - 2') and the length of the short code when suffixes run out. */
 const FIRST_SUFFIX = 2;
 const SHORT_ID_LENGTH = 4;
 
-/** Tên chuyến không trùng (DR-006): thêm hậu tố " - 2", " - 3"… khi trùng (cắt phần đầu để tên vẫn ≤ 120 ký tự); quá 200 lần thử thì thêm mã ngắn. */
+/** A trip name that does not clash (DR-006): adds the suffix ' - 2', ' - 3'... on a clash (cutting the start so the name stays <= 120 characters); after 200 tries it adds a short code. */
 export function uniqueName(trips: readonly Trip[], base: string, id: IdSource = randomId): string {
   const names = new Set(trips.map((t) => t.name));
   if (!names.has(base)) return base;
@@ -25,7 +25,7 @@ export function uniqueName(trips: readonly Trip[], base: string, id: IdSource = 
   return withSuffix(` - ${id().slice(0, SHORT_ID_LENGTH)}`);
 }
 
-/** Thông tin để tạo một chuyến mới. */
+/** The information to create a new trip. */
 export interface NewTrip {
   readonly name: string;
   readonly destinationId: string;
@@ -39,18 +39,18 @@ export interface NewTrip {
   readonly budgetK?: number | null;
 }
 
-/** Địa điểm cần thêm vào chuyến (chỉ cần mã và loại địa điểm trong kho để suy ra loại mục). */
+/** The place to add to the trip (only the id and the place kind in the catalog are needed to infer the item kind). */
 export interface PlaceRef {
   readonly venue?: { readonly kind: 'restaurant' | 'cafe' | 'bar' | 'lodging' } | null;
   readonly id: string;
-  /** Tên hiển thị (nếu có): backend bắt buộc mục có tiêu đề, nên mục từ kho mang tên làm tiêu đề lưu kèm. */
+  /** The display name (if any): the backend requires an item to have a title, so an item from the catalog carries its name as the stored title. */
   readonly name?: string;
   readonly category: string;
 }
 
 /**
- * Đánh số lại thứ tự 0..n-1 trong từng ngày (giữ thứ tự hiện có; mục `position` trống xếp cuối theo thứ tự thêm) và bỏ thứ tự của mục
- * chưa có ngày. Gọi sau mọi thao tác đổi ngày/thêm/bớt để không còn lỗ hổng hay trùng số (bất biến 0..n-1 như backend `Trip.renumber`).
+ * Renumbers the order 0..n-1 within each day (keeping the existing order; an item with an empty `position` goes last in the order added) and drops the order of items
+ * with no day yet. Called after every change of day/add/remove so there are no gaps or repeated numbers (the 0..n-1 invariant like the backend's `Trip.renumber`).
  */
 export function normalize(t: Trip): Trip {
   const order = new Map<string, number>();
@@ -58,31 +58,31 @@ export function normalize(t: Trip): Trip {
   return { ...t, items: t.items.map((i) => (i.day ? { ...i, position: order.get(i.id) ?? null } : { ...i, position: null })) };
 }
 
-/** Thay đổi cho phép khi sửa một mục. */
+/** The changes allowed when editing an item. */
 export type ItemPatch = Partial<Omit<TripItem, 'id' | 'placeId'>>;
 
-/** Kết quả gợi ý xếp ngày: mã mục → ngày và vị trí. */
+/** The day-scheduling suggestion result: item id -> day and position. */
 export type DayPlan = Readonly<Record<string, { readonly day: string; readonly position: number }>>;
 
-/** Thông tin sửa chuyến (tên, ngày) và tùy chọn dời lịch. */
+/** The trip edit information (name, dates) and the option to shift the schedule. */
 export interface TripEdit {
   readonly name: string;
   readonly startDate: string;
   readonly endDate: string;
-  /** Giữ nguyên số ngày thì dời cả lịch theo ngày mới. */
+  /** Keeping the number of days shifts the whole schedule by the new dates. */
   readonly shift: boolean;
-  /** Bỏ nhãn "chưa chắc" (đã chốt ngày). */
+  /** Drops the 'tentative' label (the dates are confirmed). */
   readonly confirmDates: boolean;
 }
 
-/** Kết quả sửa chuyến: chuyến mới, số mục và mã các mục rơi khỏi khoảng ngày (về "Chưa có ngày", A1 DR-011). */
+/** The trip edit result: the new trip, the number of items and the ids of items that fall out of the date range (back to 'No date yet', A1 DR-011). */
 export interface EditResult {
   readonly trip: Trip;
   readonly lost: number;
   readonly lostIds: readonly string[];
 }
 
-/** Sửa tên/ngày chuyến. Mục nằm ở ngày bị cắt về "Chưa có ngày" thay vì chặn (DR-011 A1 = b); mã các mục bị đẩy ra trả ở `lostIds`. */
+/** Edits the trip name/dates. Items on a day that is cut go back to 'No date yet' instead of blocking (DR-011 A1 = b); the ids of the items pushed out are returned in `lostIds`. */
 export function editTrip(t: Trip, e: TripEdit): EditResult {
   const oldDays = tripDays(t);
   const newDays = tripDays({ startDate: e.startDate, endDate: e.endDate });
@@ -94,7 +94,7 @@ export function editTrip(t: Trip, e: TripEdit): EditResult {
   };
   const lostIds = t.items.filter((i) => i.day && !mapDay(i.day)).map((i) => i.id);
   const items = t.items.map((i) => ({ ...i, day: mapDay(i.day) }));
-  /** Thùng rác dời theo lịch cùng quy tắc (ngày không nằm trong khoảng cũ giữ nguyên để khôi phục báo đúng lý do). */
+  /** The trash shifts with the schedule by the same rule (a day not in the old range is kept so restoring reports the right reason). */
   const trash = t.trash.map((x) => (same && x.day && oldDays.includes(x.day) ? { ...x, day: newDays[oldDays.indexOf(x.day)] ?? null } : x));
   return { trip: normalize({ ...t, name: e.name, startDate: e.startDate, endDate: e.endDate, datesTentative: e.confirmDates ? false : t.datesTentative, items, trash }), lost: lostIds.length, lostIds };
 }

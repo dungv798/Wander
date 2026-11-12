@@ -28,24 +28,24 @@ type Mode = 'new' | 'add' | 'keep';
 
 interface CreateTripSheetProps {
   readonly destId: string;
-  /** Các nơi đã chọn đang lưu (rỗng = tạo chuyến trống). */
+  /** The selected places being saved (empty = create an empty trip). */
   readonly picked: readonly (PlaceRef & { readonly name: string })[];
   readonly onClose: () => void;
 }
 
-/** Lời nhắc dưới ô ngân sách khi giá trị nhập sai (rỗng khi ổn hoặc để trống). */
+/** The hint under the budget box when the value typed is wrong (empty when fine or left blank). */
 function budgetHint(text: string): string {
   const r = parseMoneyField(text, '');
   return r.ok ? '' : r.error;
 }
 
-/** Giá trị mặc định của biểu mẫu: thứ Bảy tới, 3 ngày, tên không trùng. */
+/** The default values of the form: next Saturday, 3 days, a name that does not clash. */
 function defaultValues(): TripFormValues {
   const start = nextWeekday(todayLocal(), DEFAULT_START_WEEKDAY);
   return { name: '', start, end: addDays(start, DEFAULT_TRIP_DAYS - 1), tentative: false, days: String(DEFAULT_TRIP_DAYS), styles: [], pace: null, budget: '' };
 }
 
-/** Ba lựa chọn khi có nơi đã chọn: tạo chuyến mới, thêm vào chuyến sẵn có, hoặc để lại. */
+/** Three choices when there are selected places: create a new trip, add to an existing trip, or leave. */
 function ModeOption({ mode, current, title, children, onPick }: { readonly mode: Mode; readonly current: Mode; readonly title: string; readonly children?: React.ReactNode; readonly onPick: (m: Mode) => void }) {
   const on = mode === current;
   return (
@@ -70,7 +70,7 @@ function ModeOption({ mode, current, title, children, onPick }: { readonly mode:
   );
 }
 
-/** Ba cách xử lý các nơi đã chọn: tạo chuyến mới (kèm biểu mẫu), thêm vào chuyến sẵn có (nếu có), hoặc để lại. */
+/** Three ways to handle the selected places: create a new trip (with the form), add to an existing trip (if any), or leave. */
 function PickedModes({ mode, onMode, form, trips, tripId, onTrip }: { readonly mode: Mode; readonly onMode: (m: Mode) => void; readonly form: React.ReactNode; readonly trips: readonly { readonly id: string; readonly name: string }[]; readonly tripId: string; readonly onTrip: (id: string) => void }) {
   return (
     <div className="stack" role="radiogroup" aria-label={T.create.modeGroup}>
@@ -96,7 +96,7 @@ function PickedModes({ mode, onMode, form, trips, tripId, onTrip }: { readonly m
   );
 }
 
-/** Kết thúc tạo/lưu: đánh dấu các nơi đã vào chuyến (B-06), đóng tờ, mở chuyến và báo đã lưu. */
+/** Finishes creating/saving: marks the places as already in a trip (B-06), closes the sheet, opens the trip and notifies that it was saved. */
 function useFinish(picked: readonly PlaceRef[], onClose: () => void): { readonly finish: (id: string, name: string) => void; readonly keep: () => void } {
   const toast = useToast();
   const { actions: discover } = useDiscover();
@@ -114,14 +114,14 @@ function useFinish(picked: readonly PlaceRef[], onClose: () => void): { readonly
   };
 }
 
-/** Tên và lời dẫn giải thích các nơi chưa được tự gán ngày sau khi lưu. */
+/** The title and the lead explaining the places that were not given a day automatically after saving. */
 function CreateHeading({ heading, hasPicked, destName }: { readonly heading: string; readonly hasPicked: boolean; readonly destName: string }) {
   return <div><h2>{heading}</h2><p className="note spaced">{hasPicked ? T.create.subtitleSave : fill(T.create.subtitleEmpty, { dest: destName })}</p></div>;
 }
 
 /**
- * Tờ "Tạo chuyến đi" / "Lưu N địa điểm thành chuyến đi?". Có nơi đã chọn thì có ba cách: chuyến mới, thêm vào chuyến sẵn có, giữ lại.
- * Chuyến mới nhận các nơi ở mục "Chưa có ngày". Lưu xong các nơi được đánh dấu "đã vào chuyến" (vẫn ở màn Đã chọn nhưng không còn chờ lưu) và mở chuyến. Chưa có danh tính ẩn danh thì hỏi lưu lần đầu trước (F2).
+ * The 'Create trip' / 'Save N places as a trip?' sheet. With selected places there are three ways: a new trip, add to an existing trip, keep.
+ * A new trip receives the places in the 'No date yet' section. After saving the places are marked 'already in a trip' (still on the Selected screen but no longer waiting to be saved) and the trip opens. With no anonymous identity yet it asks first-time saving (F2).
  */
 export function CreateTripSheet({ destId, picked, onClose }: CreateTripSheetProps) {
   const { state, actions } = useTrips();

@@ -1,9 +1,9 @@
-/** Lỗi gọi API/kho dữ liệu, mang mã máy chủ (docs/ux/error-codes.md) để giao diện chọn lời nhắc tiếng Việt. */
+/** An API/data-store call error, carrying the server code (docs/ux/error-codes.md) so the UI picks a Vietnamese hint. */
 export class ApiError extends Error {
   readonly code: string;
   readonly status: number | null;
 
-  /** Tạo lỗi với mã (ví dụ `NOT_FOUND`, `NETWORK`) và mã HTTP nếu có. */
+  /** Creates an error with a code (for example `NOT_FOUND`, `NETWORK`) and the HTTP status if any. */
   constructor(code: string, status: number | null = null) {
     super(code);
     this.name = 'ApiError';
@@ -11,7 +11,7 @@ export class ApiError extends Error {
     this.status = status;
   }
 
-  /** Lỗi do mất kết nối hoặc kho không tải được (khác với lỗi nghiệp vụ). */
+  /** An error from a lost connection or a store that could not load (unlike a business error). */
   get isNetwork(): boolean {
     return this.code === 'NETWORK';
   }

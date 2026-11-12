@@ -3,9 +3,9 @@ import type { ChangeEvent, ReactNode } from 'react';
 
 interface BaseProps {
   readonly label: string;
-  /** Gợi ý dưới ô (ví dụ "= 150.000 ₫"); không phải lỗi. */
+  /** A hint under the box (for example '= 150,000 VND'); not an error. */
   readonly hint?: string;
-  /** Lỗi cạnh đúng ô; được liên kết với điều khiển và thông báo cho trình đọc màn hình. */
+  /** The error beside the right box; linked to the control and announced to screen readers. */
   readonly error?: string;
   readonly hidden?: boolean;
 }
@@ -18,10 +18,10 @@ interface InputProps extends BaseProps {
   readonly inputMode?: 'numeric' | 'text';
   readonly placeholder?: string;
   readonly maxLength?: number;
-  /** Ô nhập mã (khôi phục/ghép): tắt gợi ý tự động, gõ chữ hoa, không gạch chân chính tả. */
+  /** A code input box (recovery/pairing): turns off auto suggestions, types uppercase, no spelling underline. */
   readonly code?: boolean;
   readonly disabled?: boolean;
-  /** Chỉ đọc nhưng vẫn chọn/chép được (ví dụ liên kết mời vừa tạo). */
+  /** Read-only but still selectable/copyable (for example the invite link that was just created). */
   readonly readOnly?: boolean;
 }
 
@@ -40,10 +40,10 @@ interface SelectProps extends BaseProps {
   readonly children: ReactNode;
 }
 
-/** Thuộc tính của ô nhập mã: không tự điền, tự viết hoa, không kiểm chính tả. */
+/** The properties of a code input box: no autofill, auto capitalization, no spell check. */
 const CODE_INPUT = { autoComplete: 'off', autoCapitalize: 'characters', spellCheck: false } as const;
 
-/** Ô nhập có nhãn hiện sẵn (không chỉ placeholder), gợi ý và `aria-describedby`; gồm ô chữ/ngày/giờ, vùng chữ và danh sách chọn. */
+/** An input box with a visible label (not only a placeholder), a hint and `aria-describedby`; covering text/date/time boxes, a text area and a select list. */
 export function Field(props: InputProps | TextareaProps | SelectProps) {
   const id = useId();
   const labelId = `${id}-label`;

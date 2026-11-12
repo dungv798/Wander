@@ -14,10 +14,10 @@ import type { DeletedTrip } from '../api/TripsGateway.ts';
 import { useTrips } from '../hooks/TripsProvider.tsx';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
 
-/** Cổng dùng để liệt kê chuyến đã xóa (không đi qua kho vì chúng không còn là chuyến "đang có"). */
+/** The gateway used to list deleted trips (it does not go through the store because they are no longer an 'existing' trip). */
 const GATEWAY = new HttpTripsGateway(apiClient);
 
-/** Tờ "Chuyến đã xóa gần đây": liệt kê chuyến xóa mềm (xóa gần nhất trước) với nút Khôi phục; khôi phục xong mở chuyến đó. */
+/** The 'Recently deleted trips' sheet: lists soft-deleted trips (most recently deleted first) with a Restore button; after restoring it opens that trip. */
 export function DeletedTripsSheet({ onClose }: { readonly onClose: () => void }) {
   const { actions } = useTrips();
   const toast = useToast();
@@ -38,7 +38,7 @@ export function DeletedTripsSheet({ onClose }: { readonly onClose: () => void })
     };
   }, [report]);
 
-  /** Khôi phục một chuyến rồi mở nó. */
+  /** Restores a trip and then opens it. */
   const restore = (t: DeletedTrip): void => {
     setBusy(true);
     actions.restoreTrip(t.id).then(() => {

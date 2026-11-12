@@ -8,7 +8,7 @@ import { useIdentity } from '../hooks/identityContext.ts';
 import { IDENTITY_COPY as C } from '../model/identity.copy.ts';
 import { ActivitySection, CodeSection, DevicesSection, PairSection } from './SecuritySections.tsx';
 
-/** Đầu trang Bảo mật: quay lại màn trước, hoặc Khám phá khi mở URL trực tiếp. */
+/** The head of the Security page: back to the previous screen, or to Discover when the URL was opened directly. */
 function SecurityHead() {
   return (
     <div className="pagehead pad-x">
@@ -22,7 +22,7 @@ function SecurityHead() {
   );
 }
 
-/** Không nạp được danh tính (mạng): KHÔNG coi là chưa có danh tính; cho thử lại. */
+/** The identity could not be loaded (network): do NOT treat it as having no identity; allow a retry. */
 export function RetryState() {
   const { actions } = useIdentity();
   return (
@@ -33,14 +33,14 @@ export function RetryState() {
   );
 }
 
-/** Màn Bảo mật (S11): trạng thái mã khôi phục, thiết bị tin cậy, hoạt động gần đây, thêm thiết bị mới. Chưa có danh tính thì nói rõ và dẫn đi tiếp. */
+/** The Security screen (S11): the recovery-code status, trusted devices, recent activity, add a new device. With no identity yet it says so plainly and leads on. */
 export function SecurityScreen() {
   const { status, identity, session, actions } = useIdentity();
   const [hadUnseen, setHadUnseen] = useState(false);
   const [wasRecovered] = useState(() => session.recovered);
   const unseen = identity?.unseen === true;
   const here = identity !== null;
-  // Nhớ rằng LẦN MỞ NÀY có hoạt động chưa xem (để hiện hộp nhắc), rồi đánh dấu đã xem ở máy chủ.
+  // Remembers that THIS OPEN has unseen activity (to show the reminder box) and then marks it seen on the server.
   if (unseen && !hadUnseen) setHadUnseen(true);
   useEffect(() => {
     if (unseen) void actions.markSeen().catch(() => undefined);

@@ -1,4 +1,4 @@
-/** Chỉ giới thiệu phương thức chia sẻ đã nối máy chủ; không tạo liên kết xem giả của prototype. */
+/** It only introduces the sharing methods already wired to the server; it creates no fake view link of the prototype. */
 export const SHARE_COPY = {
   title: 'Chia sẻ chuyến đi',
   description: 'Rủ bạn đi cùng, hoặc gửi một bản lịch trình.',

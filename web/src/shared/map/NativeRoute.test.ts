@@ -5,7 +5,7 @@ import { NativeRoute } from './NativeRoute.ts';
 import { MAP } from './map.const.ts';
 import { ROUTE } from './route.const.ts';
 
-/** Khung DOM/GL tối thiểu để kiểm hiệu ứng hữu hạn và cùng callback bàn phím/native. */
+/** A minimal DOM/GL frame to check the finite effect and the same keyboard/native callback. */
 function fixture(t: test.TestContext) {
   const originals = new Map(['window', 'document', 'requestAnimationFrame', 'cancelAnimationFrame'].map((name) => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
   let reduced = false, serial = 0;

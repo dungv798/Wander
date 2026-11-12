@@ -1,4 +1,4 @@
-/** Chữ của màn Điểm đến (danh sách nơi + lọc); chữ dùng chung nằm ở `copy.vi.ts`. */
+/** The copy of the Destination screen (the place list + filter); the shared copy is in `copy.vi.ts`. */
 export const DEST_COPY = {
   listTitle: 'Những nơi & trải nghiệm',
   suggestions: '{n} gợi ý',

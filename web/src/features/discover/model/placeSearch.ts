@@ -6,26 +6,26 @@ interface SearchablePlace {
   readonly categoryName: string;
   readonly area: string;
   readonly hook: string;
-  /** Mã loại (tùy chọn): để tìm theo từ đồng nghĩa của loại, ví dụ "trekking" → Leo núi. */
+  /** The kind code (optional): to search by synonyms of the kind, for example 'trekking' -> Hiking. */
   readonly category?: string;
 }
 
-/** Từ đồng nghĩa (đã chuẩn hóa không dấu) người dùng hay gõ cho một loại; chỉ loại leo núi/trekking có. */
+/** Synonyms (normalized without accents) that users often type for a kind; only the hiking/trekking kind has them. */
 const CATEGORY_ALIASES: Readonly<Record<string, readonly string[]>> = {
   [TREK_CATEGORY]: ['trekking', 'trek', 'hiking', 'hike', 'leo nui', 'treking'],
 };
 
-/** Truy vấn là một tiền tố/chuỗi con của từ đồng nghĩa của loại nơi này. */
+/** The query is a prefix/substring of a synonym of this place's kind. */
 function matchesAlias(place: SearchablePlace, q: string): boolean {
   return (CATEGORY_ALIASES[place.category ?? ''] ?? []).some((alias) => alias.includes(q));
 }
 
-/** Số kết quả địa điểm tối đa hiện cùng lúc ở màn tìm kiếm. */
+/** The maximum number of place results shown at once on the search screen. */
 export const PLACE_SEARCH_LIMIT = 30;
 
 /**
- * Tìm địa điểm của MỘT điểm đến theo tên, loại, khu vực hoặc đặc trưng ngắn (không dấu, không phân biệt hoa thường).
- * Truy vấn rỗng trả danh sách theo thứ tự biên tập. Tên khớp được xếp trước các khớp ở trường khác.
+ * Searches the places of ONE destination by name, kind, area or a short characteristic (accent-insensitive, case-insensitive).
+ * An empty query returns the list in editorial order. A name match is ranked before matches in other fields.
  */
 export function searchPlaces<T extends SearchablePlace>(places: readonly T[], query: string): T[] {
   const q = normalizeSearch(query);

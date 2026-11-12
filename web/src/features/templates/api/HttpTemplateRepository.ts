@@ -4,19 +4,19 @@ import { CLIENT_ERROR, HTTP } from '../../../shared/api/http.const.ts';
 import type { TemplateRepository } from './TemplateRepository.ts';
 import { TEMPLATES_API } from './templatesApi.const.ts';
 
-/** Có phải đối tượng thường (không null, không mảng). */
+/** Whether it is a plain object (not null, not an array). */
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
-/** Một ngày của API (`placeIds`, `note`) thành dạng thô mà bộ ánh xạ lịch mẫu của giao diện đọc (`places`, `note`); thiếu `placeIds` ⇒ danh sách rỗng. */
+/** A day from the API (`placeIds`, `note`) into the raw form that the UI's template mapper reads (`places`, `note`); missing `placeIds` => an empty list. */
 function toRawDay(day: unknown): unknown {
   if (!isRecord(day)) return day;
   const { placeIds, ...rest } = day;
   return { ...rest, places: Array.isArray(placeIds) ? placeIds : [] };
 }
 
-/** Một lịch mẫu của API thành dạng thô; phần tử không phải đối tượng bị bỏ (trả null để lọc). */
+/** A template from the API into the raw form; an element that is not an object is dropped (returns null to filter). */
 function toRawTemplate(template: unknown): Record<string, unknown> | null {
   if (!isRecord(template)) return null;
   const days = template['days'];
@@ -24,20 +24,20 @@ function toRawTemplate(template: unknown): Record<string, unknown> | null {
 }
 
 /**
- * Kho đọc lịch mẫu từ `GET /api/catalog/destinations/{id}/templates` (công khai). API trả `days[].placeIds`; giao diện đọc
- * `days[].places` nên đổi khóa ở đây, các bước kiểm tra và ghép với kho địa điểm vẫn do `toTemplateViews` đảm nhiệm.
- * Kết quả được NHỚ theo điểm đến (nhiều màn cùng cần); lỗi không được nhớ nên thử lại được.
+ * The repository that reads sample itineraries from `GET /api/catalog/destinations/{id}/templates` (public). The API returns `days[].placeIds`; the UI reads
+ * `days[].places` so the key is changed here, while the checks and joining with the place catalog are still done by `toTemplateViews`.
+ * The result is REMEMBERED by destination (several screens need it); an error is not remembered so it can be retried.
  */
 export class HttpTemplateRepository implements TemplateRepository {
   private readonly client: ApiClient;
   private readonly cache = new Map<string, Promise<unknown>>();
 
-  /** Dùng máy khách HTTP đã cho (tiêm được khi test). */
+  /** Uses the given HTTP client (injectable in tests). */
   constructor(client: ApiClient) {
     this.client = client;
   }
 
-  /** Lịch mẫu thô của một điểm đến; điểm đến không có (404) hoặc chưa có lịch thì không phải lỗi. Yêu cầu dùng chung nên không nhận tín hiệu hủy của từng người gọi. */
+  /** The raw sample itineraries of a destination; a destination that does not exist (404) or has no itinerary yet is not an error. The request is shared so it does not accept each caller's cancel signal. */
   templates(destId: string): Promise<unknown> {
     const hit = this.cache.get(destId);
     if (hit) return hit;
@@ -47,7 +47,7 @@ export class HttpTemplateRepository implements TemplateRepository {
     return request;
   }
 
-  /** Gọi API lịch mẫu và đổi sang dạng thô của giao diện. */
+  /** Calls the sample-itinerary API and changes it to the UI's raw form. */
   private async fetchTemplates(destId: string): Promise<unknown> {
     let body: unknown;
     try {

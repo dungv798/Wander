@@ -10,7 +10,7 @@ import { measurePlanRoute } from './planSummary.ts';
 
 interface WorkingDay { readonly day: string; readonly items: TripItem[] }
 
-/** Gom mục cố định một lượt theo ngày, giữ thứ tự người dùng; không sửa items của Trip. */
+/** Packs the fixed items in one pass by day, keeping the user's order; it does not edit the Trip's items. */
 function workingDays(trip: Trip): WorkingDay[] {
   const buckets = new Map<string, TripItem[]>();
   for (const item of trip.items) if (item.day) {
@@ -21,7 +21,7 @@ function workingDays(trip: Trip): WorkingDay[] {
   return tripDays(trip).map(day => ({ day, items: (buckets.get(day) ?? []).sort((a, b) => (a.position ?? Number.MAX_SAFE_INTEGER) - (b.position ?? Number.MAX_SAFE_INTEGER)) }));
 }
 
-/** Chưa có chỗ nghỉ được xác minh: nối từ điểm cuối ngày trước, không mặc định quay về hub hay dịch chuyển tức thì. */
+/** No verified lodging yet: it connects from the end point of the previous day, not defaulting to going back to a hub or moving instantly. */
 function dayOrigin(days: readonly WorkingDay[], index: number, coordinateOf: CoordinateOf, hub: GeoPoint | null): GeoPoint | null {
   for (let previous = index - 1; previous >= 0; previous--) {
     const items = days[previous]!.items;
@@ -33,7 +33,7 @@ function dayOrigin(days: readonly WorkingDay[], index: number, coordinateOf: Coo
   return hub;
 }
 
-/** Thử thêm vào cuối ngày theo cùng thứ tự sẽ gửi lên server; tính phút chưa làm tròn và cả chặng đến. */
+/** Tries adding to the end of the day in the same order that would be sent to the server; computes unrounded minutes and the leg to get there. */
 function fits(day: WorkingDay, item: TripItem, origin: GeoPoint | null, coordinateOf: CoordinateOf, durationOf: DurationOf): boolean {
   const route = measurePlanRoute(day.items, coordinateOf, origin);
   const point = itemPoint(item, coordinateOf);
@@ -43,7 +43,7 @@ function fits(day: WorkingDay, item: TripItem, origin: GeoPoint | null, coordina
   return visits <= planningCapacity([...day.items, item], durationOf) && total <= P.dayTotalMin;
 }
 
-/** Chỉ đặt vào ngày còn vừa; hết ngày giữ mục trong deferred, không ép phần dư vào ngày cuối. */
+/** Places only in a day that still fits; when days run out it keeps the item in deferred, not forcing the remainder into the last day. */
 export function packPlan(trip: Trip, candidates: readonly TripItem[], coordinateOf: CoordinateOf, hub: GeoPoint | null, durationOf: DurationOf) {
   const days = workingDays(trip);
   const plan: Record<string, DayPlan[string]> = {};

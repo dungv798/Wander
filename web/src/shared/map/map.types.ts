@@ -1,9 +1,9 @@
-/** Kiểu dữ liệu bản đồ MapLibre và cổng React dùng chung. */
+/** The data types of the MapLibre map and the shared React gate. */
 
-/** Một điểm: [x, y] (kinh độ/vĩ độ hoặc điểm ảnh màn hình tùy ngữ cảnh). */
+/** A point: [x, y] (longitude/latitude or a screen pixel point depending on context). */
 export type Pt = readonly [number, number];
 
-/** Ghim đầu vào: tọa độ địa lý + hiển thị. `kind: 'hub'` là mốc (không gộp cụm). */
+/** An input pin: geographic coordinates + display. `kind: 'hub'` is a landmark (not clustered). */
 export interface MapMarker {
   readonly id: string;
   readonly lat: number;
@@ -15,18 +15,18 @@ export interface MapMarker {
   readonly kind?: 'hub' | 'sticker';
 }
 
-/** Ghim kèm tọa độ [kinh độ, vĩ độ] để MapLibre chiếu lên màn hình. */
+/** A pin with coordinates [longitude, latitude] for MapLibre to project onto the screen. */
 export interface ProjectedMarker extends MapMarker {
   readonly p: Pt;
 }
 
-/** Kích thước khung hiển thị. */
+/** The size of the display frame. */
 export interface Size {
   readonly w: number;
   readonly h: number;
 }
 
-/** Phần khung bị che (ví dụ tờ kéo phía dưới) để camera căn giữa vùng nhìn thấy thật. */
+/** The part of the frame that is covered (for example a draggable sheet below) so the camera centers the really visible area. */
 export interface Insets {
   readonly top: number;
   readonly right: number;
@@ -34,19 +34,19 @@ export interface Insets {
   readonly left: number;
 }
 
-/** Chế độ hiển thị ghim: duyệt (gộp cụm) hoặc tuyến (đánh số, không gộp). */
+/** The pin display mode: browse (clustered) or route (numbered, not clustered). */
 export type MapMode = 'browse' | 'route';
 
-/** Tuyến: các mã ghim theo thứ tự và nhãn từng đoạn (nhãn đoạn i nằm ở labels[i-1]... theo vị trí ghim đích). */
+/** Route: the pin ids in order and the label of each segment (the label of segment i is at labels[i-1]... by the destination pin's position). */
 export interface MapRoute {
   readonly ids: readonly string[];
   readonly labels: readonly string[];
   readonly segments?: readonly RouteSegment[];
-  /** Khóa tab ngày; mỗi khóa chỉ chạy hiệu ứng vẽ một lần trong vòng đời bản đồ. */
+  /** The day tab key; each key runs the drawing effect only once in the map's lifetime. */
   readonly viewKey?: string;
 }
 
-/** Đoạn ước tính nối đúng hai ghim, không đại diện tuyến đường thực tế. */
+/** The estimated segment connects exactly two pins, it does not represent a real route. */
 export interface RouteSegment {
   readonly id: string;
   readonly order: number;
@@ -56,29 +56,29 @@ export interface RouteSegment {
   readonly km: number;
 }
 
-/** Tùy chọn vừa khung. */
+/** Fit-to-frame options. */
 export interface FitOptions {
-  /** Các điểm địa lý bổ sung cần thấy ở cảnh toàn quốc, không biến chúng thành ghim tương tác. */
+  /** Additional geographic points that need to be seen in the nationwide scene, without making them interactive pins. */
   readonly contextPoints?: readonly Pt[];
   readonly padding?: number;
   readonly animate?: boolean;
-  /** Trần zoom MapLibre cho lần vừa khung này (cụm được phóng gần hơn ghim thường). */
+  /** The MapLibre zoom ceiling for this fit (a cluster is zoomed in closer than an ordinary pin). */
   readonly maxZoom?: number;
-  /** Giữ tương thích API TerrainMapView; MapLibre dùng maxZoom thay cho hệ số camera cũ. */
+  /** Keeps the `TerrainMapView` API compatible; MapLibre uses maxZoom in place of the old camera factor. */
   readonly maxZoomFactor?: number;
-  /** Người dùng đã tự kéo/phóng và mọi điểm cần vừa khung đã nằm trong tầm nhìn thì giữ nguyên camera (đổi tab ngày không reset chỗ vừa zoom). */
+  /** If the user has dragged/zoomed by themself and every point to fit is already in view, the camera is kept as it is (changing the day tab does not reset the place just zoomed). */
   readonly keepIfVisible?: boolean;
 }
 
-/** Tùy chọn khởi tạo bản đồ. */
+/** The map initialization options. */
 export interface GeoMapOptions {
   readonly dest: string;
   readonly interactive?: boolean;
-  /** Một ngón cuộn trang, hai ngón kéo/phóng bản đồ nhúng. */
+  /** One finger scrolls the page, two fingers drag/zoom the embedded map. */
   readonly cooperativeGestures?: boolean;
   readonly towns?: boolean;
   readonly credit?: boolean;
-  /** Chừa dải ghi công ở đáy khi vừa khung (mặc định theo `credit`); tắt khi ghi công được đặt chỗ khác. */
+  /** Leaves the attribution strip at the bottom when fitting (default by `credit`); off when the attribution is placed elsewhere. */
   readonly creditBand?: boolean;
   readonly label: string;
   readonly onPin?: (id: string) => void;

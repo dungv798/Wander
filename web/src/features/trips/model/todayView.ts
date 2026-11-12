@@ -2,10 +2,10 @@ import { inclusiveDays } from '../../../shared/lib/dates.ts';
 import type { Trip, TripItem } from './trip.types.ts';
 import { dayItems, summarizeCosts, tripDays } from './tripMath.ts';
 
-/** Mốc thời gian đẩy mục không có giờ xuống cuối khi xếp theo giờ. */
+/** The time mark that pushes an item with no time to the end when sorting by time. */
 const NO_TIME = '99:99';
 
-/** Trạng thái của màn "Hôm nay" cho một chuyến (S17). Chuyến chưa chắc ngày thì KHÔNG đoán hôm nay là ngày nào. */
+/** The state of the 'Today' screen for one trip (S17). A trip with tentative dates does NOT guess which day is today. */
 export type TodayState =
   | { readonly kind: 'tentative' }
   | { readonly kind: 'before'; readonly daysLeft: number }
@@ -13,7 +13,7 @@ export type TodayState =
   | { readonly kind: 'empty'; readonly dayNumber: number; readonly day: string }
   | { readonly kind: 'day'; readonly dayNumber: number; readonly day: string; readonly items: readonly TripItem[]; readonly totalK: number; readonly unknownCount: number };
 
-/** Các mục của ngày xếp theo giờ (mục có giờ trước, cùng giờ giữ thứ tự xếp; mục không giờ xuống cuối theo thứ tự xếp). */
+/** The items of a day sorted by time (items with a time first, same time keeps the schedule order; items with no time go to the end in the schedule order). */
 export function itemsByTime(items: readonly TripItem[]): TripItem[] {
   return items
     .map((it, index) => ({ it, index }))
@@ -21,7 +21,7 @@ export function itemsByTime(items: readonly TripItem[]): TripItem[] {
     .map((x) => x.it);
 }
 
-/** Trạng thái "Hôm nay" của một chuyến tại ngày `today` (`yyyy-mm-dd`, theo lịch của máy người dùng). */
+/** The 'Today' state of one trip on day `today` (`yyyy-mm-dd`, by the user's device calendar). */
 export function todayView(trip: Trip, today: string): TodayState {
   if (trip.datesTentative) return { kind: 'tentative' };
   if (today < trip.startDate) return { kind: 'before', daysLeft: inclusiveDays(today, trip.startDate) - 1 };
@@ -35,8 +35,8 @@ export function todayView(trip: Trip, today: string): TodayState {
 }
 
 /**
- * Chọn chuyến cho "Hôm nay": đang diễn ra (chắc ngày) → sắp tới gần nhất → vừa kết thúc gần nhất → chuyến đầu danh sách.
- * Không có chuyến thì null.
+ * Chooses the trip for 'Today': in progress (confirmed dates) -> the nearest upcoming -> the most recently ended -> the first trip in the list.
+ * No trip returns null.
  */
 export function pickTodayTrip(trips: readonly Trip[], today: string): Trip | null {
   const sure = trips.filter((t) => !t.datesTentative);

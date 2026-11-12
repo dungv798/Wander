@@ -1,24 +1,24 @@
 import { ApiError } from './ApiError.ts';
 import { ABORT_ERROR_NAME, CLIENT_ERROR, HEADER, HTTP } from './http.const.ts';
 
-/** Phần tối thiểu của `fetch` mà `ApiClient` cần (tiêm được khi test). */
+/** The minimal part of `fetch` that `ApiClient` needs (injectable in tests). */
 export type FetchLike = (input: string, init?: RequestInit) => Promise<Response>;
 
-/** Nguồn tiêu đề bổ sung cho MỖI lời gọi (ví dụ `Authorization: Bearer …`); gọi lại mỗi lần nên bí mật đổi là có hiệu lực ngay. */
+/** The source of extra headers for EACH call (for example `Authorization: Bearer ...`); called again each time so a changed secret takes effect at once. */
 export type HeaderSource = () => Record<string, string>;
 
-/** Phần tối thiểu của bộ theo dõi lời gọi mà `ApiClient` cần: báo bắt đầu, trả hàm báo kết thúc (B-05). */
+/** The minimal part of the call tracker that `ApiClient` needs: reports start, returns a function that reports end (B-05). */
 export interface RequestObserver {
   readonly begin: () => () => void;
 }
 
-/** Có phải lỗi hủy: `AbortError` của `fetch`/`json()`, hoặc bất kỳ lỗi nào khi `signal` đã bị hủy (hủy bằng `abort(lý do)` ném chính lý do). */
+/** Whether it is a cancel error: `AbortError` of `fetch`/`json()`, or any error when `signal` has been aborted (cancelling with `abort(reason)` throws the reason itself). */
 function isAbort(e: unknown, signal?: AbortSignal): boolean {
   if (signal?.aborted) return true;
   return typeof e === 'object' && e !== null && (e as { name?: unknown }).name === ABORT_ERROR_NAME;
 }
 
-/** Lỗi từ phản hồi không thành công: lấy mã từ thân `application/problem+json` (RFC 9457) của backend, thành viên `code`; thân không đọc được ⇒ `INTERNAL`. Không bao giờ lộ lời báo thô; hủy khi đang đọc thân được ném lại. */
+/** An error from an unsuccessful response: takes the code from the backend's `application/problem+json` (RFC 9457) body, the `code` member; an unreadable body => `INTERNAL`. It never exposes the raw message; a cancel while reading the body is rethrown. */
 async function toApiError(res: Response, signal?: AbortSignal): Promise<ApiError> {
   try {
     const body = (await res.json()) as { code?: unknown } | null;
@@ -26,37 +26,37 @@ async function toApiError(res: Response, signal?: AbortSignal): Promise<ApiError
     if (typeof code === 'string' && code) return new ApiError(code, res.status);
   } catch (e) {
     if (isAbort(e, signal)) throw e;
-    // thân không phải JSON (cổng proxy trả HTML…): rơi xuống INTERNAL bên dưới
+    // the body is not JSON (a proxy gateway returned HTML...): falls through to INTERNAL below
   }
   return new ApiError(CLIENT_ERROR.INTERNAL, res.status);
 }
 
 /**
- * Máy khách HTTP duy nhất của giao diện: gọi `/api/**` bằng JSON, đổi mọi thất bại thành `ApiError` có mã (khớp
- * `docs/ux/error-codes.md`) để màn hình chọn lời nhắc tiếng Việt. Hủy bằng `AbortSignal` (ở bước gọi hoặc đang đọc thân) được
- * ném lại nguyên dạng, không bao giờ bị gán nhầm là lỗi mạng hay lỗi máy chủ.
- * Tiêm `fetch` và nguồn tiêu đề để kiểm thử mà không cần mạng.
+ * The UI's single HTTP client: calls `/api/**` with JSON, turns every failure into an `ApiError` with a code (matching
+ * `docs/ux/error-codes.md`) so the screen picks a Vietnamese hint. A cancel by `AbortSignal` (at the call step or while reading the body) is
+ * rethrown as it is, never mistaken for a network error or a server error.
+ * Injects `fetch` and the header source to test without a network.
  */
 export class ApiClient {
   private readonly fetchImpl: FetchLike;
   private readonly extraHeaders: HeaderSource;
   private readonly observer: RequestObserver | undefined;
 
-  /** Tạo máy khách; mặc định dùng `fetch` của trình duyệt và không thêm tiêu đề nào. */
+  /** Creates the client; by default it uses the browser's `fetch` and adds no header. */
   constructor(fetchImpl: FetchLike = (input, init) => fetch(input, init), extraHeaders: HeaderSource = () => ({}), observer?: RequestObserver) {
     this.fetchImpl = fetchImpl;
     this.extraHeaders = extraHeaders;
     this.observer = observer;
   }
 
-  /** GET một đường dẫn và trả JSON đã phân tích. */
+  /** GETs a path and returns the parsed JSON. */
   get<T>(path: string, signal?: AbortSignal): Promise<T> {
     return this.send<T>('GET', path, undefined, signal);
   }
 
   /**
-   * Gửi một yêu cầu; `body` (nếu có) được mã hóa JSON. Trả JSON đã phân tích, hoặc `undefined` khi máy chủ trả 204.
-   * Mất kết nối ⇒ `ApiError('NETWORK')`; mã HTTP lỗi ⇒ `ApiError` mang mã của backend; thân 2xx hỏng ⇒ `ApiError('INTERNAL')`.
+   * Sends a request; `body` (if any) is JSON-encoded. Returns the parsed JSON, or `undefined` when the server returns 204.
+   * A lost connection => `ApiError('NETWORK')`; an error HTTP status => an `ApiError` carrying the backend's code; a broken 2xx body => `ApiError('INTERNAL')`.
    */
   async send<T = unknown>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
     const done = this.observer?.begin();
@@ -67,7 +67,7 @@ export class ApiClient {
     }
   }
 
-  /** Một vòng gửi và đọc phản hồi (tách khỏi `send` để `send` luôn báo kết thúc cho bộ theo dõi). */
+  /** One round of sending and reading the response (split from `send` so `send` always reports the end to the tracker). */
   private async exchange<T>(method: string, path: string, body: unknown, signal: AbortSignal | undefined): Promise<T> {
     const headers: Record<string, string> = { [HEADER.ACCEPT]: HEADER.JSON, ...this.extraHeaders() };
     const init: RequestInit = { method, headers };

@@ -10,7 +10,7 @@ import { placeFacts } from '../../model/placeFacts.ts';
 import { PlaceDisclosure, PlaceMoreButton } from './PlaceDisclosure.tsx';
 import { safeHttpUrl } from '../../../../shared/lib/safeUrl.ts';
 
-/** Khối nhãn biên tập "Wander gợi ý" (thay điểm sao; KHÔNG phải đánh giá người dùng, DR-007). */
+/** The block of the editorial label 'Wander suggests' (in place of a star score; NOT a user rating, DR-007). */
 export function EditorialRate({ place }: { readonly place: PlaceView }) {
   const v = VERDICT_STYLE[place.verdict];
   return (
@@ -27,7 +27,7 @@ export function EditorialRate({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Các hàng icon và chữ gọn; giờ và mùa đã có khối riêng nên không lặp trong lưới. */
+/** Compact icon and text rows; the time and the season already have their own block so they are not repeated in the grid. */
 export function QuickFacts({ place }: { readonly place: PlaceView }) {
   const facts = placeFacts(place);
   return (
@@ -44,7 +44,7 @@ export function QuickFacts({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Các điểm nổi bật dạng nhãn. */
+/** The highlights as labels. */
 export function Highlights({ place }: { readonly place: PlaceView }) {
   if (!place.highlights.length) return null;
   return (
@@ -62,7 +62,7 @@ export function Highlights({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Bốn buổi trong ngày: buổi nên đi được tô và ghi "Nên đi", kèm lý do. */
+/** The four parts of the day: the part to go is highlighted and marked 'Best time', with the reason. */
 export function TimeOfDay({ place }: { readonly place: PlaceView }) {
   return (
     <PlaceDisclosure title={COPY.place.whenToGo} icon="sun" defaultOpen>
@@ -83,7 +83,7 @@ export function TimeOfDay({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Mười hai tháng, tháng đẹp được tô. */
+/** The twelve months, the good months highlighted. */
 export function SeasonMonths({ place }: { readonly place: PlaceView }) {
   const months = Array.from({ length: UI.MONTHS_IN_YEAR }, (_, i) => i + 1);
   return (
@@ -99,7 +99,7 @@ export function SeasonMonths({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Mẹo của Wander (bản nháp biên tập). */
+/** Wander's tip (an editorial draft). */
 export function Tips({ place }: { readonly place: PlaceView }) {
   return (
     <PlaceDisclosure title={COPY.place.tips} icon="bulb" className="tipbox">
@@ -113,7 +113,7 @@ export function Tips({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Đoạn "Về nơi này" thu gọn ba dòng, bấm "Xem thêm" để mở hết (mô tả Wikipedia, CC BY-SA). */
+/** The 'About this place' paragraph collapsed to three lines, tap 'See more' to open it fully (the Wikipedia description, CC BY-SA). */
 export function About({ place }: { readonly place: PlaceView }) {
   const [open, setOpen] = useState(false);
   const id = useId();
@@ -129,7 +129,7 @@ export function About({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Ghi công dữ liệu và ảnh (bắt buộc theo giấy phép): tác giả, giấy phép, liên kết gốc, bài Wikipedia. */
+/** Attribution of the data and photos (required by the license): the author, the license, the original link, the Wikipedia article. */
 export function DataCredits({ place }: { readonly place: PlaceView }) {
   return (
     <PlaceDisclosure title={COPY.place.dataTitle} icon="info-circle">
@@ -156,7 +156,7 @@ export function DataCredits({ place }: { readonly place: PlaceView }) {
   );
 }
 
-/** Liên kết mở vị trí trên OpenStreetMap (chỉ khi địa điểm có tọa độ). */
+/** A link that opens the location on OpenStreetMap (only when the place has coordinates). */
 export function OsmLink({ place }: { readonly place: PlaceView }) {
   if (place.lat == null || place.lon == null) return null;
   const href = `https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lon}#map=13/${place.lat}/${place.lon}`;

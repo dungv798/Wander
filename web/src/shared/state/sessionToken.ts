@@ -1,34 +1,34 @@
 import { STORAGE } from '../const/app.const.ts';
 import { PersistentStore } from './PersistentStore.ts';
 
-/** Bí mật phiên của MÁY NÀY (Bearer). Lưu ở localStorage theo quyết định AD-1 (giữ tới khi xét lại ở RG-6); server chỉ giữ băm. */
+/** The session secret of THIS DEVICE (Bearer). Stored in localStorage per decision AD-1 (kept until reviewed in RG-6); the server keeps only the hash. */
 export interface TokenState {
   readonly token: string | null;
 }
 
-/** Độ dài tối thiểu và bảng ký tự của bí mật phiên (khớp `IdentityConstants.SESSION_TOKEN_REGEX` của backend: 43–128 ký tự base64url). */
+/** The minimum length and the alphabet of the session secret (matching the backend's `IdentityConstants.SESSION_TOKEN_REGEX`: 43-128 base64url characters). */
 const TOKEN_PATTERN = /^[A-Za-z0-9_-]{43,128}$/;
 
-/** Làm sạch giá trị đã lưu: chỉ nhận chuỗi đúng dạng bí mật phiên; mọi thứ khác coi như chưa có phiên. */
+/** Cleans the stored value: only a string of the right session-secret shape is accepted; anything else counts as no session yet. */
 export function sanitizeToken(raw: unknown): TokenState | null {
   const token = typeof raw === 'object' && raw !== null ? (raw as { token?: unknown }).token : null;
   return { token: typeof token === 'string' && TOKEN_PATTERN.test(token) ? token : null };
 }
 
-/** Kho bí mật phiên dùng chung cho cả máy khách HTTP (gắn tiêu đề) lẫn tính năng danh tính (tạo, thu hồi). */
+/** The session-secret store shared by the HTTP client (attaches the header) and the identity feature (create, revoke). */
 export const sessionTokenStore = new PersistentStore<TokenState>(STORAGE.TOKEN, { token: null }, sanitizeToken);
 
-/** Bí mật phiên hiện tại hoặc null nếu máy này chưa có phiên. */
+/** The current session secret or null if this device has no session yet. */
 export function currentToken(): string | null {
   return sessionTokenStore.getSnapshot().token;
 }
 
-/** Lưu bí mật phiên mới (sau khi tạo danh tính, khôi phục hoặc được ghép). */
+/** Stores a new session secret (after creating an identity, recovering or being paired). */
 export function setToken(token: string): void {
   sessionTokenStore.update(() => ({ token }));
 }
 
-/** Quên bí mật phiên (hết phiên hoặc chủ động rời). */
+/** Forgets the session secret (the session ended or an intentional leave). */
 export function clearToken(): void {
   sessionTokenStore.update(() => ({ token: null }));
 }

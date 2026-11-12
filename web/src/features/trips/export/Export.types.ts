@@ -1,7 +1,7 @@
 import type { DestinationDetail } from '../../discover/index.ts';
 import type { Trip } from '../model/trip.types.ts';
 
-/** `summary`: mỗi ngày một đoạn tên các nơi (dễ gửi nhóm); `days`: từng mục theo thứ tự kèm giờ/giá đã biết. */
+/** `summary`: one paragraph per day with the names of the places (easy to send to a group); `days`: each item in order with the known time/price. */
 export type ExportStyle = 'summary' | 'days';
 export interface ExportInput { readonly trip: Trip; readonly destination: DestinationDetail; readonly style?: ExportStyle }
 export type TextRole = 'title' | 'heading' | 'body' | 'small';
