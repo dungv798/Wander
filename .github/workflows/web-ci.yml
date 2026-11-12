@@ -4,10 +4,10 @@ name: web-ci
 
 on:
   pull_request:
-    paths: ["web/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
+    paths: ["web/**", "tools/catalog/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
   push:
     branches: [main]
-    paths: ["web/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
+    paths: ["web/**", "tools/catalog/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
 
 permissions:
   contents: read
@@ -41,3 +41,6 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      # Catalog tooling (photo upload signing + POI pipeline); plain node:test, no browser or network.
+      - run: node --test tools/catalog/*.test.mjs
+        working-directory: .
