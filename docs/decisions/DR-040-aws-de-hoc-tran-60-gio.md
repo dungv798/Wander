@@ -6,7 +6,7 @@
 | Mã | Nội dung | Hệ quả |
 |---|---|---|
 | AWS-1 | Dự án được phép dùng AWS **để học**, trần **60 giờ làm việc** (DR-037 STR-1 cho phép với điều kiện có trần thời gian) | Mọi việc AWS (CDK, VPC, ALB, ECS, RDS, CloudFront, quan sát) tính vào 60 giờ. Hết trần thì dừng và báo, không tự gia hạn. Nhật ký giờ ở mục dưới, ước lượng của tôi (không đo được thời gian của PO). |
-| AWS-2 | Hướng kỹ thuật đã có ở ADR-006 (APPROVED 24/10): ECS Fargate + ALB + RDS single-AZ, CloudFront cùng origin, CDK TypeScript, 1 task, bộ đếm trong bộ nhớ | Không mở lại. Với AWS, `WANDER_TRUSTED_PROXY_HOPS` = 2 (CloudFront → ALB) theo thiết kế, nên việc đo hop trên Render bỏ. Render/Neon + ping keep-warm giữ làm nơi chạy hiện tại cho tới khi AWS chạy được. |
+| AWS-2 | Hướng kỹ thuật đã có ở ADR-006 (APPROVED 24/10): ECS Fargate + ALB + RDS single-AZ, CloudFront cùng origin, CDK TypeScript, 1 task, bộ đếm trong bộ nhớ | Không mở lại. Với AWS, `WANDER_TRUSTED_PROXY_HOPS` = 2 (CloudFront → ALB) theo thiết kế, nên đo hop chỉ cần khi còn ở Render (xem cập nhật bên dưới). Render/Neon + ping keep-warm giữ làm nơi chạy hiện tại cho tới khi AWS chạy được. |
 | AWS-3 | AD-17 (trace OpenTelemetry/ADOT), AD-19 (Resilience4j, job queue), ADR-011 (Modulith + outbox) giữ mở "để học" (DR-038) | Chỉ làm bên trong trần 60 giờ, sau khi lõi AWS (CDK → deploy được) chạy. |
 | T10 | Câu hỏi TOCTOU phiên đã thu hồi (`open-decisions.md`): PO trả lời chung "tất cả" cho cả danh sách | Diễn giải thận trọng: **chấp nhận (a) cho người quen** như đã khuyến nghị; phương án (b) `SELECT … FOR SHARE` ở mọi lệnh ghi chưa làm (đổi kiến trúc nhiều module) cho tới khi PO nói rõ. |
 
