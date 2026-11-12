@@ -64,6 +64,21 @@ class SessionLifetimeIT extends ApiTestSupport {
         assertThat(call("GET", "/api/sessions", owner.token()).status()).isEqualTo(401);
     }
 
+    /** Danh tính bỏ qua mã: ép hết phiên ở 90 ngày sẽ làm mất chuyến vĩnh viễn, nên chỉ có hạn trượt (DR-039). */
+    @Test
+    @DisplayName("chưa có mã khôi phục: phiên tạo 91 ngày trước nhưng vừa dùng vẫn hợp lệ; bỏ 15 ngày thì 401")
+    void codelessIdentityKeepsSlidingSessionPastAbsoluteCap() {
+        Res created = call("POST", "/api/identity", null, map("skipRecoveryCode", true));
+        assertThat(created.status()).isEqualTo(201);
+        String token = created.str("token");
+        jdbc.sql("UPDATE sessions SET created_at = CURRENT_TIMESTAMP - INTERVAL '91 days' WHERE token_hash = ?")
+                .param(Secrets.hashToken(token)).update();
+        assertThat(call("GET", "/api/sessions", token).status()).isEqualTo(200);
+        jdbc.sql("UPDATE sessions SET last_seen_at = CURRENT_TIMESTAMP - INTERVAL '15 days' WHERE token_hash = ?")
+                .param(Secrets.hashToken(token)).update();
+        assertThat(call("GET", "/api/sessions", token).status()).isEqualTo(401);
+    }
+
     /** Dùng phiên trước hạn trượt cập nhật mốc hoạt động và cho phép yêu cầu tiếp theo. */
     @Test
     @DisplayName("phiên dùng sau 13 ngày được gia hạn trượt")

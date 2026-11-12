@@ -68,7 +68,7 @@ public class IdentityService {
     /** Kiểm tra hạn và thu hồi trước khi gia hạn trượt; mọi phiên không hợp lệ đều mất quyền như nhau. */
     public Optional<AuthenticatedPrincipal> authenticateSession(String token) {
         Instant now = Timestamps.now(clock);
-        Optional<Session> session = store.findSessionByTokenHash(Secrets.hashToken(token)).filter(found -> found.isActive(now));
+        Optional<Session> session = store.findSessionByTokenHash(Secrets.hashToken(token)).filter(found -> found.isActive(now, () -> store.findActiveCode(found.identityId()).isPresent()));
         session.filter(found -> found.needsTouch(now)).ifPresent(found -> store.touchSession(found.id(), now));
         return session.map(found -> new AuthenticatedPrincipal(found.identityId(), found.id()));
     }
@@ -78,7 +78,7 @@ public class IdentityService {
     public List<SessionView> listActiveSessions(AuthenticatedPrincipal principal) {
         Instant now = Timestamps.now(clock);
         return store.activeSessions(principal.identityId()).stream()
-                .filter(session -> session.isActive(now))
+                .filter(session -> session.isActive(now, () -> store.findActiveCode(principal.identityId()).isPresent()))
                 .map(session -> new SessionView(session.id().toString(), Timestamps.format(session.createdAt()),
                         Timestamps.format(session.lastSeenAt()), session.id().equals(principal.sessionId()), session.deviceName()))
                 .toList();

@@ -34,11 +34,17 @@ public final class IdentityModel {
             return !lastSeenAt.plus(IdentityConstants.SESSION_TOUCH_INTERVAL_MINUTES, ChronoUnit.MINUTES).isAfter(now);
         }
 
-        /** Phiên chưa bị thu hồi và chưa chạm hạn trượt hoặc hạn tuyệt đối tại thời điểm kiểm tra. */
-        public boolean isActive(Instant now) {
-            return revokedAt == null
-                    && lastSeenAt.plus(IdentityConstants.SESSION_IDLE_DAYS, ChronoUnit.DAYS).isAfter(now)
-                    && createdAt.plus(IdentityConstants.SESSION_ABSOLUTE_DAYS, ChronoUnit.DAYS).isAfter(now);
+        /**
+         * Phiên chưa bị thu hồi, chưa chạm hạn trượt, và chưa chạm hạn tuyệt đối. Hạn tuyệt đối CHỈ áp dụng cho danh tính đã có mã khôi phục
+         * (hết phiên thì vào lại bằng mã); danh tính chưa có mã mà bị ép hết phiên thì mất chuyến vĩnh viễn nên chỉ có hạn trượt (DR-039).
+         * {@code hasRecoveryCode} chỉ được gọi khi đã quá hạn tuyệt đối, để yêu cầu bình thường không tốn thêm một truy vấn.
+         */
+        public boolean isActive(Instant now, java.util.function.BooleanSupplier hasRecoveryCode) {
+            if (revokedAt != null || !lastSeenAt.plus(IdentityConstants.SESSION_IDLE_DAYS, ChronoUnit.DAYS).isAfter(now)) {
+                return false;
+            }
+            boolean withinAbsolute = createdAt.plus(IdentityConstants.SESSION_ABSOLUTE_DAYS, ChronoUnit.DAYS).isAfter(now);
+            return withinAbsolute || !hasRecoveryCode.getAsBoolean();
         }
     }
 
