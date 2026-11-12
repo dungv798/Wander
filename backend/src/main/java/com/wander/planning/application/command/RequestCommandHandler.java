@@ -32,11 +32,10 @@ public class RequestCommandHandler {
     /** Thành viên gửi đề nghị xóa mục của người khác; trả đề nghị. */
     public DeletionRequest submit(RequestCommands.Submit command) {
         Trip trip = load(command.actor(), command.tripId());
-        UUID itemId = Ids.parse(command.input().get(PlanningFields.REQUEST_ITEM_ID) instanceof String raw ? raw : "")
+        UUID itemId = Ids.parse(command.itemId() == null ? "" : command.itemId())
                 .orElseThrow(() -> WanderException.invalid(ErrorCodes.REQUIRED, PlanningMessages.ITEM_REQUIRED, PlanningFields.REQUEST_ITEM_ID));
         Item item = trip.item(itemId);
-        Object reason = command.input().get(PlanningFields.REASON);
-        DeletionRequest request = trip.circle().submitDeletion(command.actor(), item, reason instanceof String text ? text : null, Timestamps.now(clock));
+        DeletionRequest request = trip.circle().submitDeletion(command.actor(), item, command.reason(), Timestamps.now(clock));
         trips.save(trip);
         return request;
     }

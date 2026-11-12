@@ -58,6 +58,8 @@ tasks.test {
     // không giữ nhiều bản catalog/Hibernate trong heap mặc định 512 MB của test worker.
     maxHeapSize = "1g"
     systemProperty("spring.test.context.cache.maxSize", "2")
+    // OpenApiContractIT rewrites backend/openapi.yaml when run with -Pwander.openapi.update=true (see docs/architecture/api-contract.md)
+    systemProperty("wander.openapi.update", providers.gradleProperty("wander.openapi.update").getOrElse("false"))
     // Kết quả từng test hiện ra log để đọc được khi chạy qua tools/dev.ps1
     testLogging {
         events("passed", "skipped", "failed")

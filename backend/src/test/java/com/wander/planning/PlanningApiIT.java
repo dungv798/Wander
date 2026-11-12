@@ -59,7 +59,7 @@ class PlanningApiIT extends ApiTestSupport {
         Res missing = call("GET", "/api/trips/00000000-0000-0000-0000-000000000000", b.token());
         Res foreign = call("GET", "/api/trips/" + trip, b.token());
         assertThat(foreign.status()).isEqualTo(404);
-        assertThat(foreign.body()).isEqualTo(missing.body());
+        assertThat(withoutInstance(foreign)).isEqualTo(withoutInstance(missing));
         assertThat(call("GET", "/api/trips/khong-phai-uuid", b.token()).status()).isEqualTo(404);
 
         assertThat(call("PATCH", "/api/trips/" + trip, b.token(), Map.of("name", "bị chiếm")).status()).isEqualTo(404);

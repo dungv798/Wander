@@ -49,12 +49,10 @@ public class MembershipCommandHandler {
 
     /** Vào chuyến bằng mã; trả mã chuyến và thành viên. Mã sai dạng/không có chuyến ⇒ cùng một lỗi INVALID_INVITE. */
     public Joined join(MembershipCommands.Join command) {
-        Object rawCode = command.input().get(PlanningFields.INVITE_CODE);
-        String code = rawCode instanceof String text ? text : null;
+        String code = command.code();
         if (!hasher.isWellFormed(code)) throw invalidInvite();
         Trip trip = trips.findByInviteHash(hasher.hash(code)).orElseThrow(MembershipCommandHandler::invalidInvite);
-        Object rawName = command.input().get(PlanningFields.DISPLAY_NAME);
-        TripMember member = trip.joinWithInvite(command.actor(), rawName instanceof String name ? name : null, hasher.hash(code), Timestamps.now(clock));
+        TripMember member = trip.joinWithInvite(command.actor(), command.displayName(), hasher.hash(code), Timestamps.now(clock));
         trips.save(trip);
         return new Joined(trip.id(), member);
     }
@@ -79,8 +77,7 @@ public class MembershipCommandHandler {
     /** Đổi tên hiển thị của chính mình. */
     public TripMember renameSelf(MembershipCommands.RenameSelf command) {
         Trip trip = load(command.actor(), command.tripId());
-        Object rawName = command.input().get(PlanningFields.DISPLAY_NAME);
-        TripMember renamed = trip.circle().renameMember(command.actor(), rawName instanceof String name ? name : null, Timestamps.now(clock));
+        TripMember renamed = trip.circle().renameMember(command.actor(), command.displayName(), Timestamps.now(clock));
         trips.save(trip);
         return renamed;
     }

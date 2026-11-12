@@ -1,6 +1,5 @@
 package com.wander.rating.application.service;
 
-import com.wander.rating.application.input.RatingFields;
 import com.wander.rating.application.input.RatingInput;
 import com.wander.rating.application.view.RatingViews;
 import com.wander.rating.domain.constant.RatingConstants;
@@ -16,7 +15,6 @@ import com.wander.shared.kernel.util.Ids;
 import com.wander.shared.kernel.util.Timestamps;
 import java.time.Clock;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,10 +41,10 @@ public class RatingService {
     }
 
     /** Chấm hoặc sửa điểm của người gọi cho quán; mỗi danh tính tối đa một điểm cho mỗi quán. */
-    public RatingViews.PlaceRatingView rate(AuthenticatedPrincipal principal, String placeRefRaw, Map<String, Object> body) {
+    public RatingViews.PlaceRatingView rate(AuthenticatedPrincipal principal, String placeRefRaw, Integer starsRaw, String commentRaw) {
         String placeRef = RatingInput.placeRef(placeRefRaw);
-        int stars = RatingInput.stars(body.get(RatingFields.STARS));
-        String comment = RatingInput.comment(body.get(RatingFields.COMMENT));
+        int stars = RatingInput.stars(starsRaw);
+        String comment = RatingInput.comment(commentRaw);
         UUID identityId = principal.identityId();
         if (!store.exists(identityId, placeRef) && store.countByIdentity(identityId) >= RatingConstants.MAX_RATINGS_PER_IDENTITY) {
             throw WanderException.conflict(RatingErrorCodes.RATING_LIMIT_REACHED, RatingMessages.RATING_LIMIT_REACHED);

@@ -1,6 +1,5 @@
 package com.wander.identity.application.service;
 
-import com.wander.identity.application.input.IdentityFields;
 import com.wander.identity.application.input.IdentityInput;
 import com.wander.identity.application.view.IdentityViews.Approved;
 import com.wander.identity.application.view.IdentityViews.Denied;
@@ -24,7 +23,6 @@ import com.wander.shared.kernel.util.Timestamps;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,9 +44,9 @@ public class DeviceLinkService {
     }
 
     /** Thiết bị mới tự sinh bí mật phiên, chỉ gửi lên để server giữ băm; nhận mã ghép để thiết bị cũ nhập. */
-    public DeviceLinkCreated createLink(Map<String, Object> input) {
-        String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(input.get(IdentityFields.SESSION_TOKEN)));
-        String deviceName = IdentityInput.deviceName(input.get(IdentityFields.DEVICE_NAME));
+    public DeviceLinkCreated createLink(String sessionToken, String deviceNameRaw) {
+        String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(sessionToken));
+        String deviceName = IdentityInput.deviceName(deviceNameRaw);
         if (store.isTokenHashInUse(tokenHash)) throw IdentityInput.tokenInUse();
         Instant now = Timestamps.now(clock);
         String pairingCode = Secrets.newShortCode();
@@ -72,14 +70,14 @@ public class DeviceLinkService {
      * Máy duyệt xem trước yêu cầu (DR-018 E1: "thao tác nêu rõ trên máy duyệt"): tên máy tự khai, thời điểm và các lựa chọn số
      * khớp cố định lúc tạo. Không đổi trạng thái, không tạo phiên.
      */
-    public LinkPreview previewLink(Map<String, Object> input) {
-        DeviceLink link = findPendingLink(input, false);
+    public LinkPreview previewLink(String pairingCode) {
+        DeviceLink link = findPendingLink(pairingCode, false);
         return new LinkPreview(link.id().toString(), link.deviceName(), Timestamps.format(link.createdAt()), link.challenge().options());
     }
 
     /** Máy duyệt từ chối chủ động: yêu cầu thành denied và không bao giờ duyệt lại được. */
-    public Denied denyLink(Map<String, Object> input) {
-        store.saveDeviceLink(findPendingLink(input, true).deny());
+    public Denied denyLink(String pairingCode) {
+        store.saveDeviceLink(findPendingLink(pairingCode, true).deny());
         return Denied.YES;
     }
 
@@ -90,9 +88,9 @@ public class DeviceLinkService {
      * lỗi trước khi ghi hoặc ngay sau lần ghi từ chối.
      */
     @Transactional(noRollbackFor = WanderException.class)
-    public Approved approveLink(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        int chosen = IdentityInput.matchNumber(input.get(IdentityFields.NUMBER));
-        DeviceLink link = findPendingLink(input, true);
+    public Approved approveLink(AuthenticatedPrincipal principal, String pairingCode, Integer number) {
+        int chosen = IdentityInput.matchNumber(number);
+        DeviceLink link = findPendingLink(pairingCode, true);
         Instant now = Timestamps.now(clock);
         if (!link.challenge().matches(chosen)) {
             store.saveDeviceLink(link.deny());
@@ -108,8 +106,8 @@ public class DeviceLinkService {
      * Yêu cầu ghép đang chờ và còn hạn theo mã ghép người dùng nhập; {@code lock} = khóa dòng (duyệt/từ chối) hay đọc thường (xem
      * trước). Sai, hết hạn hoặc đã xử lý ⇒ INVALID_PAIRING_CODE.
      */
-    private DeviceLink findPendingLink(Map<String, Object> input, boolean lock) {
-        String code = Secrets.normalize(input.get(IdentityFields.PAIRING_CODE), IdentityConstants.SHORT_CODE_SYMBOLS);
+    private DeviceLink findPendingLink(String pairingCodeRaw, boolean lock) {
+        String code = Secrets.normalize(pairingCodeRaw, IdentityConstants.SHORT_CODE_SYMBOLS);
         if (code == null) throw invalidPairingCode();
         String pairingCode = Secrets.formatShort(code);
         Instant now = Timestamps.now(clock);

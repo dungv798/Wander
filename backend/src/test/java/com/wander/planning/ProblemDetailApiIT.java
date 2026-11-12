@@ -3,7 +3,6 @@ package com.wander.planning;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wander.support.ApiTestSupport;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
@@ -48,10 +47,4 @@ class ProblemDetailApiIT extends ApiTestSupport {
         assertThat(withoutInstance(foreign)).isEqualTo(withoutInstance(unknown));
     }
 
-    /** The response body as a map without the {@code instance} member. */
-    private static Map<Object, Object> withoutInstance(Res res) {
-        Map<Object, Object> copy = new HashMap<>((Map<?, ?>) res.body());
-        copy.remove("instance");
-        return copy;
-    }
 }

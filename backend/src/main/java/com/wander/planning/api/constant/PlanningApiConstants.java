@@ -39,26 +39,11 @@ public final class PlanningApiConstants {
     /** Khôi phục một chuyến đã xóa mềm. */
     public static final String TRIP_RESTORE_PATH = TRIP_PATH + "/restore";
 
-    /** Khóa JSON của danh sách chuyến. */
-    public static final String KEY_TRIPS = "trips";
-
     /** Sở thích theo danh tính (BE-10). */
     public static final String PREFERENCES_PATH = "/api/preferences";
 
     /** Phần đường dẫn của sở thích. */
     public static final String INTERESTS_PATH = "/interests";
-
-    /** Khóa JSON của danh sách sở thích. */
-    public static final String KEY_INTERESTS = "interests";
-
-    /** Khóa JSON của một chuyến. */
-    public static final String KEY_TRIP = "trip";
-
-    /** Khóa JSON của một mục. */
-    public static final String KEY_ITEM = "item";
-
-    /** Khóa JSON của danh sách mục. */
-    public static final String KEY_ITEMS = "items";
 
     private PlanningApiConstants() {
     }
@@ -87,18 +72,6 @@ public final class PlanningApiConstants {
     /** Vào chuyến bằng liên kết (cần phiên). */
     public static final String INVITE_JOIN_PATH = "/join";
 
-    /** Khóa JSON của liên kết mời. */
-    public static final String KEY_INVITE = "invite";
-
-    /** Khóa JSON của một thành viên. */
-    public static final String KEY_MEMBER = "member";
-
-    /** Khóa JSON của danh sách thành viên. */
-    public static final String KEY_MEMBERS = "members";
-
-    /** Khóa JSON mã chuyến vừa vào. */
-    public static final String KEY_TRIP_ID = "tripId";
-
     /** Tên đoạn đường dẫn "me" dùng cho thành viên hiện tại. */
     public static final String ME = "me";
 
@@ -113,12 +86,6 @@ public final class PlanningApiConstants {
 
     /** Từ chối đề nghị. */
     public static final String REQUEST_REJECT_PATH = REQUEST_PATH + "/reject";
-
-    /** Khóa JSON của một đề nghị. */
-    public static final String KEY_REQUEST = "request";
-
-    /** Khóa JSON của danh sách đề nghị. */
-    public static final String KEY_REQUESTS = "requests";
 
     /** Checklist chuẩn bị của một chuyến. */
     public static final String CHECKLIST_PATH = TRIP_PATH + "/checklist";

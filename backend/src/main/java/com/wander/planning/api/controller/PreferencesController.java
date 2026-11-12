@@ -1,14 +1,14 @@
 package com.wander.planning.api.controller;
 
 import com.wander.planning.api.constant.PlanningApiConstants;
+import com.wander.planning.api.request.InterestsRequest;
+import com.wander.planning.api.response.PlanningResponses;
 import com.wander.planning.application.command.PlanningCommandHandler;
-import com.wander.planning.application.command.PlanningCommands;
 import com.wander.planning.application.query.PlanningQueries;
 import com.wander.shared.kernel.security.AuthenticatedPrincipal;
-import com.wander.shared.web.request.JsonBody;
-import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,14 +28,14 @@ public class PreferencesController {
 
     /** Sở thích hiện có của danh tính đang gọi (mã + nhãn, theo thứ tự cố định); chưa đặt thì rỗng. */
     @GetMapping
-    public Map<String, Object> preferences(AuthenticatedPrincipal principal) {
-        return Map.of(PlanningApiConstants.KEY_INTERESTS, queries.interestPreferences(principal.identityId()));
+    public PlanningResponses.InterestsResponse preferences(AuthenticatedPrincipal principal) {
+        return new PlanningResponses.InterestsResponse(queries.interestPreferences(principal.identityId()));
     }
 
     /** Thay toàn bộ sở thích (idempotent); danh sách rỗng hoặc null xóa; trả sở thích sau khi đặt. */
     @PutMapping(PlanningApiConstants.INTERESTS_PATH)
-    public Map<String, Object> setInterests(AuthenticatedPrincipal principal, JsonBody body) {
-        commands.setInterestPreferences(new PlanningCommands.SetInterestPreferences(principal.identityId(), body.asMap()));
-        return Map.of(PlanningApiConstants.KEY_INTERESTS, queries.interestPreferences(principal.identityId()));
+    public PlanningResponses.InterestsResponse setInterests(AuthenticatedPrincipal principal, @RequestBody InterestsRequest body) {
+        commands.setInterestPreferences(body.toCommand(principal.identityId()));
+        return new PlanningResponses.InterestsResponse(queries.interestPreferences(principal.identityId()));
     }
 }

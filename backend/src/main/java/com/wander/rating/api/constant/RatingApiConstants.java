@@ -12,8 +12,14 @@ public final class RatingApiConstants {
     /** Báo cáo một lời bình. */
     public static final String REPORT_PATH = "/ratings/{ratingId}/report";
 
-    /** Khóa JSON của read model rating trong phản hồi. */
-    public static final String KEY_RATING = "rating";
+    /** Lowest star value, as documented in the OpenAPI schema. */
+    public static final String STARS_MIN = "1";
+
+    /** Highest star value, as documented in the OpenAPI schema. */
+    public static final String STARS_MAX = "5";
+
+    /** Maximum comment length, as documented in the OpenAPI schema (the rating rules enforce it). */
+    public static final int COMMENT_MAX = 280;
 
     private RatingApiConstants() {
     }

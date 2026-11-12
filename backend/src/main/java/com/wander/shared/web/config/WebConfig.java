@@ -4,11 +4,11 @@ import com.wander.shared.kernel.constant.CommonConstants;
 import com.wander.shared.kernel.constant.ConfigConstants;
 import com.wander.shared.web.constant.HttpConstants;
 import com.wander.shared.web.filter.ContentSecurityPolicy;
+import com.wander.shared.web.filter.RequestBodyLimitFilter;
 import com.wander.shared.web.filter.ResponseHeadersFilter;
 import com.wander.shared.web.ratelimit.RateLimits;
 import com.wander.shared.web.request.ClientAddress;
 import com.wander.shared.web.request.CurrentPrincipal;
-import com.wander.shared.web.request.JsonBodyArgumentResolver;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,19 +29,16 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
-import tools.jackson.databind.ObjectMapper;
 
 /** Cấu hình web chung: đồng hồ, địa chỉ người gọi, giới hạn tần suất, header, bộ đọc tham số và phục vụ giao diện tĩnh. */
 @Configuration
 @EnableConfigurationProperties(RateLimits.Properties.class)
 public class WebConfig implements WebMvcConfigurer {
 
-    private final ObjectMapper mapper;
     private final String webDir;
 
     /** Nhận công cụ JSON và thư mục giao diện đã build (rỗng = chỉ chạy API). */
-    public WebConfig(ObjectMapper mapper, @Value(ConfigConstants.WEB_DIR_EXPRESSION) String webDir) {
-        this.mapper = mapper;
+    public WebConfig(@Value(ConfigConstants.WEB_DIR_EXPRESSION) String webDir) {
         this.webDir = webDir;
     }
 
@@ -75,9 +72,16 @@ public class WebConfig implements WebMvcConfigurer {
         return registration;
     }
 
+    /** Caps request bodies of the API (413 above the limit); runs right after the response-header filter. */
+    @Bean
+    public FilterRegistrationBean<RequestBodyLimitFilter> requestBodyLimitFilter() {
+        FilterRegistrationBean<RequestBodyLimitFilter> registration = new FilterRegistrationBean<>(new RequestBodyLimitFilter());
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+        return registration;
+    }
+
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new JsonBodyArgumentResolver(mapper));
         resolvers.add(new CurrentPrincipal());
     }
 

@@ -1,12 +1,13 @@
 package com.wander.catalog.api.controller;
 
 import com.wander.catalog.api.constant.CatalogApiConstants;
+import com.wander.catalog.api.response.CatalogResponses;
 import com.wander.catalog.application.query.CatalogQueries;
 import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.shared.web.ratelimit.RateLimits;
 import com.wander.shared.web.request.ClientAddress;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Danh sách route công khai nằm ở {@code SecurityConfig} của module identity (một nguồn duy nhất).
  */
 @RestController
+@SecurityRequirements
 @RequestMapping(CatalogApiConstants.BASE_PATH)
 public class CatalogController {
 
@@ -35,24 +37,24 @@ public class CatalogController {
 
     /** Danh sách điểm đến khớp chuỗi tìm kiếm (rỗng = tất cả); chuỗi quá dài bị cắt. */
     @GetMapping(CatalogApiConstants.DESTINATIONS_PATH)
-    public Map<String, Object> searchDestinations(HttpServletRequest request,
+    public CatalogResponses.DestinationsResponse searchDestinations(HttpServletRequest request,
             @RequestParam(name = CatalogApiConstants.QUERY_PARAM, defaultValue = "") String query) {
         limitByAddress(request);
-        return Map.of(CatalogApiConstants.KEY_DESTINATIONS, queries.searchDestinations(truncateQuery(query)));
+        return new CatalogResponses.DestinationsResponse(queries.searchDestinations(truncateQuery(query)));
     }
 
     /** Chi tiết một điểm đến theo mã; không có thì 404. */
     @GetMapping(CatalogApiConstants.DESTINATION_PATH)
-    public Map<String, Object> getDestination(HttpServletRequest request, @PathVariable String id) {
+    public CatalogResponses.DestinationResponse getDestination(HttpServletRequest request, @PathVariable String id) {
         limitByAddress(request);
-        return Map.of(CatalogApiConstants.KEY_DESTINATION, queries.destination(id));
+        return new CatalogResponses.DestinationResponse(queries.destination(id));
     }
 
     /** Lịch mẫu của một điểm đến (N-2); điểm đến không có thì 404, chưa có lịch thì danh sách rỗng. */
     @GetMapping(CatalogApiConstants.TEMPLATES_PATH)
-    public Map<String, Object> getTemplates(HttpServletRequest request, @PathVariable String id) {
+    public CatalogResponses.TemplatesResponse getTemplates(HttpServletRequest request, @PathVariable String id) {
         limitByAddress(request);
-        return Map.of(CatalogApiConstants.KEY_TEMPLATES, queries.templates(id));
+        return new CatalogResponses.TemplatesResponse(queries.templates(id));
     }
 
     /** Giới hạn tốc độ đọc kho địa điểm công khai theo địa chỉ người gọi; vượt ngưỡng thì 429. */

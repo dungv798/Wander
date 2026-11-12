@@ -112,6 +112,13 @@ public abstract class ApiTestSupport {
         org.assertj.core.api.Assertions.assertThat(res.str("detail")).isNotBlank();
     }
 
+    /** The response body as a map without the {@code instance} member (the request path the caller itself sent). */
+    protected static Map<Object, Object> withoutInstance(Res res) {
+        Map<Object, Object> copy = new java.util.HashMap<>((Map<?, ?>) res.body());
+        copy.remove("instance");
+        return copy;
+    }
+
     protected Res call(String method, String path, String token, Object body) {
         try {
             String json = body == null ? null : (body instanceof String s ? s : JSON.writeValueAsString(body));

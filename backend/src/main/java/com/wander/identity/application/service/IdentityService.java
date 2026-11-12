@@ -17,11 +17,11 @@ import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.error.WanderException;
 import com.wander.shared.kernel.security.AuthenticatedPrincipal;
 import com.wander.shared.kernel.util.Ids;
+import com.wander.shared.kernel.util.Patch;
 import com.wander.shared.kernel.util.Timestamps;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -88,11 +88,11 @@ public class IdentityService {
      * Đổi hoặc xóa tên của CHÍNH thiết bị đang gọi (không đổi được tên máy khác). Phải nêu trường {@code deviceName}; giá trị
      * null hoặc trống = xóa tên. Trả về phiên sau khi đổi.
      */
-    public SessionView renameCurrentDevice(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        if (!input.containsKey(IdentityFields.DEVICE_NAME)) {
+    public SessionView renameCurrentDevice(AuthenticatedPrincipal principal, Patch<String> newName) {
+        if (!newName.isPresent()) {
             throw WanderException.invalid(ErrorCodes.REQUIRED, IdentityMessages.DEVICE_NAME_REQUIRED, IdentityFields.DEVICE_NAME);
         }
-        String deviceName = IdentityInput.deviceName(input.get(IdentityFields.DEVICE_NAME));
+        String deviceName = IdentityInput.deviceName(newName.value());
         Session session = store.findActiveSession(principal.sessionId(), principal.identityId()).orElseThrow(WanderException::notFound);
         store.renameSession(session.id(), deviceName);
         return new SessionView(session.id().toString(), Timestamps.format(session.createdAt()),

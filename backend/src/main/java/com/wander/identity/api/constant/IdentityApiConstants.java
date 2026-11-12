@@ -93,9 +93,6 @@ public final class IdentityApiConstants {
      */
     public static final String PUBLIC_CATALOG_PATTERN = BASE_PATH + "/catalog/**";
 
-    /** Khóa JSON của danh sách phiên. */
-    public static final String KEY_SESSIONS = "sessions";
-
     /** Header chứa bí mật phiên. */
     public static final String HEADER_AUTHORIZATION = "Authorization";
 

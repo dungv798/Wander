@@ -1,0 +1,3060 @@
+openapi: 3.1.0
+info:
+  description: "Trip planning API: anonymous identity and recovery, trips, days, items\
+    \ and costs, sharing, and the read-only place catalog. Errors are RFC 9457 problem\
+    \ details with a stable `code` member."
+  title: Wander API
+  version: "1.0"
+servers:
+- url: /
+security:
+- bearerAuth: []
+paths:
+  /api/catalog/destinations:
+    get:
+      operationId: searchDestinations
+      parameters:
+      - in: query
+        name: q
+        required: false
+        schema:
+          type: string
+          default: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DestinationsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - catalog-controller
+  /api/catalog/destinations/{id}:
+    get:
+      operationId: getDestination
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DestinationResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - catalog-controller
+  /api/catalog/destinations/{id}/poi:
+    get:
+      operationId: searchPoi
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: kind
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: near
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: radiusM
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PoiResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - poi-controller
+  /api/catalog/destinations/{id}/templates:
+    get:
+      operationId: getTemplates
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplatesResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - catalog-controller
+  /api/device-links:
+    post:
+      operationId: createDeviceLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDeviceLinkRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceLinkCreated"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - identity-controller
+  /api/device-links/approve:
+    post:
+      operationId: approveDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PairingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Approved"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/device-links/deny:
+    post:
+      operationId: denyDeviceLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PairingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Denied"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/device-links/preview:
+    post:
+      operationId: previewDeviceLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PairingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkPreview"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/device-links/{id}:
+    get:
+      operationId: deviceLinkStatus
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceLinkStatus"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - identity-controller
+  /api/events:
+    get:
+      operationId: events
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventsView"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/events/seen:
+    post:
+      operationId: markEventsSeen
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventsView"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/identity:
+    post:
+      operationId: createIdentity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIdentityRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatedIdentity"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - identity-controller
+  /api/invites/join:
+    post:
+      operationId: join
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JoinRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JoinedResponse"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - invite-controller
+  /api/invites/preview:
+    post:
+      operationId: preview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvitePreviewRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvitePreviewResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - invite-controller
+  /api/places/{placeRef}/rating:
+    delete:
+      operationId: remove
+      parameters:
+      - in: path
+        name: placeRef
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RatingResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - rating-controller
+    get:
+      operationId: view
+      parameters:
+      - in: path
+        name: placeRef
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RatingResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - rating-controller
+    put:
+      operationId: rate
+      parameters:
+      - in: path
+        name: placeRef
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RatingResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - rating-controller
+  /api/places/{placeRef}/ratings/{ratingId}/report:
+    post:
+      operationId: report
+      parameters:
+      - in: path
+        name: placeRef
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: ratingId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - rating-controller
+  /api/preferences:
+    get:
+      operationId: preferences
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InterestsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - preferences-controller
+  /api/preferences/interests:
+    put:
+      operationId: setInterests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InterestsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InterestsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - preferences-controller
+  /api/recovery-code:
+    get:
+      operationId: codeStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CodeStatus"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/recovery-code/begin:
+    post:
+      operationId: beginReplacement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BeginReplacementRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplacementBegun"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/recovery-code/confirm:
+    post:
+      operationId: confirmReplacement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfirmReplacementRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Committed"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/recovery/complete:
+    post:
+      operationId: completeRecovery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompleteRecoveryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Committed"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - identity-controller
+  /api/recovery/start:
+    post:
+      operationId: startRecovery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartRecoveryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecoveryStarted"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      security: []
+      tags:
+      - identity-controller
+  /api/sessions:
+    get:
+      operationId: listSessions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/sessions/current:
+    patch:
+      operationId: renameCurrentDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameDeviceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionView"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/sessions/others:
+    delete:
+      operationId: revokeOtherSessions
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/sessions/{id}:
+    delete:
+      operationId: revokeSession
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/step-up/approve:
+    post:
+      operationId: approveStepUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApprovalRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Approved"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/step-up/deny:
+    post:
+      operationId: denyStepUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApprovalRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Denied"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/step-up/preview:
+    post:
+      operationId: previewStepUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApprovalRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StepUpPreview"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/step-up/requests:
+    post:
+      operationId: requestStepUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestStepUpRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StepUpCreated"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - identity-controller
+  /api/trips:
+    get:
+      operationId: listTrips
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+    post:
+      operationId: createTrip
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTripRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripResponse"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/deleted:
+    get:
+      operationId: deletedTrips
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeletedTripsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}:
+    delete:
+      operationId: deleteTrip
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+    get:
+      operationId: getTripDetail
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripDetail"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+    patch:
+      operationId: updateTrip
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTripRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/checklist:
+    get:
+      operationId: list_1
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChecklistItemsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - checklist-controller
+    post:
+      operationId: add
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChecklistItemRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChecklistItemResponse"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - checklist-controller
+  /api/trips/{tripId}/checklist/{itemId}:
+    delete:
+      operationId: remove_1
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - checklist-controller
+    patch:
+      operationId: edit
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChecklistItemRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChecklistItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - checklist-controller
+  /api/trips/{tripId}/checklist/{itemId}/done:
+    put:
+      operationId: setDone
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoneRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChecklistItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - checklist-controller
+  /api/trips/{tripId}/days/{day}/reorder:
+    post:
+      operationId: reorderDay
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: day
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReorderRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/deletion-requests:
+    get:
+      operationId: list
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - request-controller
+    post:
+      operationId: submit
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitDeletionRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestResponse"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - request-controller
+  /api/trips/{tripId}/deletion-requests/{requestId}:
+    delete:
+      operationId: cancel
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: requestId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - request-controller
+  /api/trips/{tripId}/deletion-requests/{requestId}/approve:
+    post:
+      operationId: approve
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: requestId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - request-controller
+  /api/trips/{tripId}/deletion-requests/{requestId}/reject:
+    post:
+      operationId: reject
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: requestId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - request-controller
+  /api/trips/{tripId}/invites:
+    get:
+      operationId: invite
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InviteResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+    post:
+      operationId: createInvite
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatedInviteResponse"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+  /api/trips/{tripId}/invites/active:
+    delete:
+      operationId: revokeInvite
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+  /api/trips/{tripId}/items:
+    post:
+      operationId: addItem
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+          description: Created
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/items/{itemId}:
+    delete:
+      operationId: softDeleteItem
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+    get:
+      operationId: getItem
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+    patch:
+      operationId: editItem
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/items/{itemId}/done:
+    put:
+      operationId: setTaskDone
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoneRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/items/{itemId}/permanent:
+    delete:
+      operationId: purgeItem
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/items/{itemId}/restore:
+    post:
+      operationId: restoreItem
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/members:
+    get:
+      operationId: members
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+  /api/trips/{tripId}/members/me:
+    delete:
+      operationId: leave
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+    patch:
+      operationId: renameSelf
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameSelfRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+  /api/trips/{tripId}/members/{memberId}:
+    delete:
+      operationId: removeMember
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - membership-controller
+  /api/trips/{tripId}/restore:
+    post:
+      operationId: restoreTrip
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/schedule:
+    post:
+      operationId: applySchedule
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScheduleRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripDetail"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+  /api/trips/{tripId}/trash:
+    get:
+      operationId: getTrash
+      parameters:
+      - in: path
+        name: tripId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemsResponse"
+          description: OK
+        default:
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+          description: "Any error: an RFC 9457 problem. Switch on the stable `code`;\
+            \ `field` names the invalid input."
+      tags:
+      - trip-controller
+components:
+  schemas:
+    ApprovalRequest:
+      type: object
+      properties:
+        approvalCode:
+          type: string
+        number:
+          type: integer
+          format: int32
+    Approved:
+      type: object
+      properties:
+        approved:
+          type: boolean
+    AssignmentBody:
+      type: object
+      properties:
+        day:
+          type: string
+        itemId:
+          type: string
+        position:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+    Attribution:
+      type: object
+      properties:
+        credit:
+          type: string
+        license:
+          type: string
+        licenseUrl:
+          type: string
+        snapshotAt:
+          type: string
+        sourceKind:
+          type: string
+        sourceUrl:
+          type: string
+    Away:
+      type: object
+      properties:
+        approximate:
+          type: boolean
+        km:
+          type: integer
+          format: int32
+        minutes:
+          type: integer
+          format: int32
+        refId:
+          type: string
+        refName:
+          type: string
+    BeginReplacementRequest:
+      type: object
+      properties:
+        evidence:
+          $ref: "#/components/schemas/EvidenceBody"
+    Budget:
+      type: object
+      properties:
+        budgetFormatted:
+          type: string
+        budgetK:
+          type: integer
+          format: int64
+        extraFormatted:
+          type: string
+        extraK:
+          type: integer
+          format: int64
+        gapFormatted:
+          type: string
+        gapK:
+          type: integer
+          format: int64
+        over:
+          type: boolean
+        unknownCount:
+          type: integer
+          format: int32
+    Candidate:
+      type: object
+      properties:
+        address:
+          type: string
+        attribution:
+          $ref: "#/components/schemas/Attribution"
+        distanceM:
+          type: number
+          format: double
+        id:
+          type: string
+        kind:
+          type: string
+        lat:
+          type: number
+          format: double
+        lon:
+          type: number
+          format: double
+        name:
+          type: string
+        openingHoursRaw:
+          type: string
+        openingHoursStatus:
+          type: string
+        phone:
+          type: string
+        verificationStatus:
+          type: string
+        website:
+          type: string
+    ChecklistItemRequest:
+      type: object
+      properties:
+        group:
+          type: string
+        title:
+          type: string
+    ChecklistItemResponse:
+      type: object
+      properties:
+        item:
+          $ref: "#/components/schemas/ChecklistItemView"
+    ChecklistItemView:
+      type: object
+      properties:
+        done:
+          type: boolean
+        doneBy:
+          type: array
+          items:
+            type: string
+        group:
+          type: string
+        id:
+          type: string
+        position:
+          type: integer
+          format: int32
+        title:
+          type: string
+    ChecklistItemsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChecklistItemView"
+    Choice:
+      type: object
+      properties:
+        code:
+          type: string
+        label:
+          type: string
+    CodeStatus:
+      type: object
+      properties:
+        createdAt:
+          type: string
+        hasCode:
+          type: boolean
+    CommentView:
+      type: object
+      properties:
+        comment:
+          type: string
+        id:
+          type: string
+        mine:
+          type: boolean
+        stars:
+          type: integer
+          format: int32
+        updatedAt:
+          type: string
+    Committed:
+      type: object
+      properties:
+        committed:
+          type: boolean
+    CompleteRecoveryRequest:
+      type: object
+      properties:
+        attemptId:
+          type: string
+        replacementCode:
+          type: string
+    ConfirmReplacementRequest:
+      type: object
+      properties:
+        pendingId:
+          type: string
+        replacementCode:
+          type: string
+    CoverBody:
+      type: object
+      properties:
+        kind:
+          type: string
+        ref:
+          type: string
+    CoverView:
+      type: object
+      properties:
+        kind:
+          type: string
+        ref:
+          type: string
+    CreateDeviceLinkRequest:
+      type: object
+      properties:
+        deviceName:
+          type: string
+        sessionToken:
+          type: string
+    CreateIdentityRequest:
+      type: object
+      properties:
+        deviceName:
+          type: string
+        skipRecoveryCode:
+          type: boolean
+    CreateTripRequest:
+      type: object
+      properties:
+        budget:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+        datesTentative:
+          type: boolean
+        destination:
+          type: string
+        endDate:
+          type: string
+        interests:
+          type: array
+          items:
+            type: string
+        kind:
+          type: string
+        name:
+          type: string
+        pace:
+          type: string
+        startDate:
+          type: string
+        styles:
+          type: array
+          items:
+            type: string
+    CreatedIdentity:
+      type: object
+      properties:
+        identityId:
+          type: string
+        recoveryCode:
+          type: string
+        token:
+          type: string
+    CreatedInviteResponse:
+      type: object
+      properties:
+        invite:
+          $ref: "#/components/schemas/CreatedInviteView"
+    CreatedInviteView:
+      type: object
+      properties:
+        code:
+          type: string
+        expiresAt:
+          type: string
+        id:
+          type: string
+    DayTotal:
+      type: object
+      properties:
+        date:
+          type: string
+        extraFormatted:
+          type: string
+        extraK:
+          type: integer
+          format: int64
+    DayView:
+      type: object
+      properties:
+        date:
+          type: string
+        index:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemView"
+        weekday:
+          type: integer
+          format: int32
+        weekdayLabel:
+          type: string
+    DeletedTrip:
+      type: object
+      properties:
+        deletedAt:
+          type: string
+        trip:
+          $ref: "#/components/schemas/TripView"
+    DeletedTripsResponse:
+      type: object
+      properties:
+        trips:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeletedTrip"
+    DeletionRequestView:
+      type: object
+      properties:
+        decidedAt:
+          type: string
+        id:
+          type: string
+        itemId:
+          type: string
+        reason:
+          type: string
+        requestedAt:
+          type: string
+        requesterId:
+          type: string
+        requesterName:
+          type: string
+        status:
+          type: string
+    Denied:
+      type: object
+      properties:
+        denied:
+          type: boolean
+    DestinationDetail:
+      type: object
+      properties:
+        coverPhoto:
+          $ref: "#/components/schemas/PhotoView"
+        coverUrl:
+          type: string
+        guide:
+          type: array
+          items:
+            $ref: "#/components/schemas/GuideSectionView"
+        id:
+          type: string
+        moments:
+          type: array
+          items:
+            $ref: "#/components/schemas/MomentView"
+        name:
+          type: string
+        places:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlaceView"
+        references:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReferenceView"
+        region:
+          type: string
+        tagline:
+          type: string
+    DestinationResponse:
+      type: object
+      properties:
+        destination:
+          $ref: "#/components/schemas/DestinationDetail"
+    DestinationSummary:
+      type: object
+      properties:
+        bestMonths:
+          type: array
+          items:
+            type: integer
+            format: int32
+        categories:
+          type: array
+          items:
+            type: string
+        coverPhoto:
+          $ref: "#/components/schemas/PhotoView"
+        coverUrl:
+          type: string
+        id:
+          type: string
+        lat:
+          type: number
+          format: double
+        lon:
+          type: number
+          format: double
+        name:
+          type: string
+        placeCount:
+          type: integer
+          format: int32
+        previews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Preview"
+        region:
+          type: string
+        tagline:
+          type: string
+    DestinationsResponse:
+      type: object
+      properties:
+        destinations:
+          type: array
+          items:
+            $ref: "#/components/schemas/DestinationSummary"
+    DeviceLinkCreated:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+        matchNumber:
+          type: integer
+          format: int32
+        pairingCode:
+          type: string
+        requestId:
+          type: string
+    DeviceLinkStatus:
+      type: object
+      properties:
+        status:
+          type: string
+    DoneRequest:
+      type: object
+      properties:
+        done:
+          type: boolean
+    EventView:
+      type: object
+      properties:
+        at:
+          type: string
+        deviceName:
+          type: string
+        kind:
+          type: string
+    EventsView:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/EventView"
+        unseen:
+          type: boolean
+    EvidenceBody:
+      type: object
+      properties:
+        code:
+          type: string
+        requestId:
+          type: string
+        type:
+          type: string
+    GuideItemView:
+      type: object
+      properties:
+        icon:
+          type: string
+        placeId:
+          type: string
+        text:
+          type: string
+        title:
+          type: string
+    GuideSectionView:
+      type: object
+      properties:
+        bestMonths:
+          type: array
+          items:
+            type: integer
+            format: int32
+        category:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/GuideItemView"
+        layout:
+          type: string
+        notes:
+          type: array
+          items:
+            type: string
+        rainyMonths:
+          type: array
+          items:
+            type: integer
+            format: int32
+        summary:
+          type: string
+        title:
+          type: string
+    InterestsRequest:
+      type: object
+      properties:
+        interests:
+          type: array
+          items:
+            type: string
+    InterestsResponse:
+      type: object
+      properties:
+        interests:
+          type: array
+          items:
+            $ref: "#/components/schemas/Choice"
+    InvitePreviewRequest:
+      type: object
+      properties:
+        code:
+          type: string
+    InvitePreviewResponse:
+      type: object
+      properties:
+        invite:
+          $ref: "#/components/schemas/InvitePreviewView"
+    InvitePreviewView:
+      type: object
+      properties:
+        memberCount:
+          type: integer
+          format: int64
+        tripName:
+          type: string
+    InviteResponse:
+      type: object
+      properties:
+        invite:
+          $ref: "#/components/schemas/InviteView"
+    InviteView:
+      type: object
+      properties:
+        active:
+          type: boolean
+        createdAt:
+          type: string
+        expiresAt:
+          type: string
+        id:
+          type: string
+    ItemRequest:
+      type: object
+      properties:
+        booking:
+          type: string
+        cost:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+        day:
+          type: string
+        durationMin:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+        included:
+          type: boolean
+        note:
+          type: string
+        placeId:
+          type: string
+        position:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+        referenceCost:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+        timeOfDay:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+    ItemResponse:
+      type: object
+      properties:
+        item:
+          $ref: "#/components/schemas/ItemView"
+    ItemView:
+      type: object
+      properties:
+        addedBy:
+          type: string
+        booking:
+          type: string
+        bookingLabel:
+          type: string
+        costFormatted:
+          type: string
+        costK:
+          type: integer
+          format: int64
+        day:
+          type: string
+        deletedAt:
+          type: string
+        done:
+          type: boolean
+        doneBy:
+          type: array
+          items:
+            type: string
+        durationMin:
+          type: integer
+          format: int32
+        id:
+          type: string
+        included:
+          type: boolean
+        note:
+          type: string
+        placeId:
+          type: string
+        position:
+          type: integer
+          format: int32
+        referenceFormatted:
+          type: string
+        referenceK:
+          type: integer
+          format: int64
+        timeOfDay:
+          type: string
+        title:
+          type: string
+        tripId:
+          type: string
+        type:
+          type: string
+        typeLabel:
+          type: string
+    ItemsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemView"
+    JoinRequest:
+      type: object
+      properties:
+        code:
+          type: string
+        displayName:
+          type: string
+    JoinedResponse:
+      type: object
+      properties:
+        member:
+          $ref: "#/components/schemas/MemberView"
+        tripId:
+          type: string
+    LinkPreview:
+      type: object
+      properties:
+        createdAt:
+          type: string
+        deviceName:
+          type: string
+        options:
+          type: array
+          items:
+            type: integer
+            format: int32
+        requestId:
+          type: string
+    MemberResponse:
+      type: object
+      properties:
+        member:
+          $ref: "#/components/schemas/MemberView"
+    MemberView:
+      type: object
+      properties:
+        displayName:
+          type: string
+        id:
+          type: string
+        joinedAt:
+          type: string
+        role:
+          type: string
+        self:
+          type: boolean
+    MembersResponse:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/MemberView"
+    Mine:
+      type: object
+      properties:
+        comment:
+          type: string
+        stars:
+          type: integer
+          format: int32
+        updatedAt:
+          type: string
+    MomentView:
+      type: object
+      properties:
+        authorUrl:
+          type: string
+        caption:
+          type: string
+        id:
+          type: string
+        photo:
+          $ref: "#/components/schemas/PhotoView"
+        theme:
+          type: string
+        themeLabel:
+          type: string
+    PairingRequest:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        pairingCode:
+          type: string
+    PendingTask:
+      type: object
+      properties:
+        day:
+          type: string
+        id:
+          type: string
+        timeOfDay:
+          type: string
+        title:
+          type: string
+    PhotoView:
+      type: object
+      properties:
+        author:
+          type: string
+        authorUrl:
+          type: string
+        caption:
+          type: string
+        id:
+          type: string
+        license:
+          type: string
+        sourceUrl:
+          type: string
+        srcSet:
+          type: string
+        thumbUrl:
+          type: string
+        url:
+          type: string
+    PlaceRatingView:
+      type: object
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/CommentView"
+        mine:
+          $ref: "#/components/schemas/Mine"
+        summary:
+          $ref: "#/components/schemas/Summary"
+    PlaceView:
+      type: object
+      properties:
+        area:
+          type: string
+        away:
+          type: array
+          items:
+            $ref: "#/components/schemas/Away"
+        bestLabel:
+          type: string
+        bestMonths:
+          type: array
+          items:
+            type: integer
+            format: int32
+        bestSlots:
+          type: array
+          items:
+            type: string
+        category:
+          type: string
+        categoryName:
+          type: string
+        difficulty:
+          type: string
+        duration:
+          type: string
+        highlights:
+          type: array
+          items:
+            type: string
+        hook:
+          type: string
+        id:
+          type: string
+        lat:
+          type: number
+          format: double
+        lon:
+          type: number
+          format: double
+        name:
+          type: string
+        photos:
+          type: array
+          items:
+            $ref: "#/components/schemas/PhotoView"
+        slotReason:
+          type: string
+        summary:
+          type: string
+        tips:
+          type: array
+          items:
+            type: string
+        venue:
+          $ref: "#/components/schemas/VenueView"
+        verdict:
+          type: string
+        verdictLabel:
+          type: string
+        verdictReason:
+          type: string
+        wikipediaTitle:
+          type: string
+    PoiResponse:
+      type: object
+      properties:
+        poi:
+          type: array
+          items:
+            $ref: "#/components/schemas/Candidate"
+    Preview:
+      type: object
+      properties:
+        name:
+          type: string
+        placeId:
+          type: string
+        url:
+          type: string
+    Problem:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "Stable machine-readable error code, for example REQUIRED,\
+            \ NOT_FOUND or CONCURRENT_MODIFICATION."
+        detail:
+          type: string
+        field:
+          type: string
+        instance:
+          type: string
+        status:
+          type: integer
+          format: int32
+        title:
+          type: string
+        type:
+          type: string
+    RateRequest:
+      type: object
+      properties:
+        comment:
+          type: string
+          maxLength: 280
+        stars:
+          type: integer
+          format: int32
+          maximum: 5
+          minimum: 1
+      required:
+      - stars
+    RatingResponse:
+      type: object
+      properties:
+        rating:
+          $ref: "#/components/schemas/PlaceRatingView"
+    RecoveryStarted:
+      type: object
+      properties:
+        attemptId:
+          type: string
+        expiresAt:
+          type: string
+        replacementCode:
+          type: string
+    ReferenceView:
+      type: object
+      properties:
+        approximate:
+          type: boolean
+        id:
+          type: string
+        lat:
+          type: number
+          format: double
+        lon:
+          type: number
+          format: double
+        name:
+          type: string
+    RenameDeviceRequest:
+      type: object
+      properties:
+        deviceName:
+          type: string
+    RenameSelfRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+    ReorderRequest:
+      type: object
+      properties:
+        orderedIds:
+          type: array
+          items:
+            type: string
+    ReplacementBegun:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+        pendingId:
+          type: string
+        replacementCode:
+          type: string
+    RequestResponse:
+      type: object
+      properties:
+        request:
+          $ref: "#/components/schemas/DeletionRequestView"
+    RequestStepUpRequest:
+      type: object
+      properties:
+        operation:
+          type: string
+    RequestsResponse:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeletionRequestView"
+    ScheduleRequest:
+      type: object
+      properties:
+        assignments:
+          type: array
+          items:
+            $ref: "#/components/schemas/AssignmentBody"
+        endDate:
+          type: string
+        startDate:
+          type: string
+    SessionView:
+      type: object
+      properties:
+        createdAt:
+          type: string
+        current:
+          type: boolean
+        deviceName:
+          type: string
+        id:
+          type: string
+        lastSeenAt:
+          type: string
+    SessionsResponse:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SessionView"
+    StartRecoveryRequest:
+      type: object
+      properties:
+        attemptId:
+          type: string
+        code:
+          type: string
+        deviceName:
+          type: string
+        sessionToken:
+          type: string
+    StepUpCreated:
+      type: object
+      properties:
+        approvalCode:
+          type: string
+        expiresAt:
+          type: string
+        matchNumber:
+          type: integer
+          format: int32
+        requestId:
+          type: string
+    StepUpPreview:
+      type: object
+      properties:
+        createdAt:
+          type: string
+        operation:
+          type: string
+        options:
+          type: array
+          items:
+            type: integer
+            format: int32
+        requestId:
+          type: string
+        requesterDeviceName:
+          type: string
+    SubmitDeletionRequest:
+      type: object
+      properties:
+        itemId:
+          type: string
+        reason:
+          type: string
+    Summary:
+      type: object
+      properties:
+        average:
+          type: number
+          format: double
+        count:
+          type: integer
+          format: int64
+    TemplateDayView:
+      type: object
+      properties:
+        note:
+          type: string
+        placeIds:
+          type: array
+          items:
+            type: string
+    TemplateView:
+      type: object
+      properties:
+        days:
+          type: array
+          items:
+            $ref: "#/components/schemas/TemplateDayView"
+        id:
+          type: string
+        status:
+          type: string
+        summary:
+          type: string
+        title:
+          type: string
+    TemplatesResponse:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: "#/components/schemas/TemplateView"
+    Totals:
+      type: object
+      properties:
+        byDay:
+          type: array
+          items:
+            $ref: "#/components/schemas/DayTotal"
+        byType:
+          type: array
+          items:
+            $ref: "#/components/schemas/TypeTotal"
+        extraFormatted:
+          type: string
+        extraK:
+          type: integer
+          format: int64
+        unscheduledFormatted:
+          type: string
+        unscheduledK:
+          type: integer
+          format: int64
+    TripDetail:
+      type: object
+      properties:
+        budget:
+          $ref: "#/components/schemas/Budget"
+        dayCount:
+          type: integer
+          format: int32
+        days:
+          type: array
+          items:
+            $ref: "#/components/schemas/DayView"
+        pendingTasks:
+          type: array
+          items:
+            $ref: "#/components/schemas/PendingTask"
+        totals:
+          $ref: "#/components/schemas/Totals"
+        trashCount:
+          type: integer
+          format: int32
+        trip:
+          $ref: "#/components/schemas/TripView"
+        unscheduled:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemView"
+    TripResponse:
+      type: object
+      properties:
+        trip:
+          $ref: "#/components/schemas/TripView"
+    TripView:
+      type: object
+      properties:
+        budgetFormatted:
+          type: string
+        budgetK:
+          type: integer
+          format: int64
+        cover:
+          $ref: "#/components/schemas/CoverView"
+        createdAt:
+          type: string
+        datesTentative:
+          type: boolean
+        destination:
+          type: string
+        endDate:
+          type: string
+        id:
+          type: string
+        interests:
+          type: array
+          items:
+            $ref: "#/components/schemas/Choice"
+        kind:
+          $ref: "#/components/schemas/Choice"
+        memberCount:
+          type: integer
+          format: int32
+        name:
+          type: string
+        pace:
+          $ref: "#/components/schemas/Choice"
+        role:
+          type: string
+        selfMemberId:
+          type: string
+        startDate:
+          type: string
+        styles:
+          type: array
+          items:
+            $ref: "#/components/schemas/Choice"
+        updatedAt:
+          type: string
+    TripsResponse:
+      type: object
+      properties:
+        trips:
+          type: array
+          items:
+            $ref: "#/components/schemas/TripView"
+    TypeTotal:
+      type: object
+      properties:
+        extraFormatted:
+          type: string
+        extraK:
+          type: integer
+          format: int64
+        type:
+          type: string
+        typeLabel:
+          type: string
+    UpdateTripRequest:
+      type: object
+      properties:
+        budget:
+          description: "A whole number, sent either as a JSON number or as a string\
+            \ of digits (empty string means not provided)."
+          oneOf:
+          - type: integer
+            format: int32
+          - type: string
+        cover:
+          $ref: "#/components/schemas/CoverBody"
+        datesTentative:
+          type: boolean
+        destination:
+          type: string
+        endDate:
+          type: string
+        interests:
+          type: array
+          items:
+            type: string
+        kind:
+          type: string
+        name:
+          type: string
+        pace:
+          type: string
+        startDate:
+          type: string
+        styles:
+          type: array
+          items:
+            type: string
+    VenueView:
+      type: object
+      properties:
+        address:
+          type: string
+        checkedAt:
+          type: string
+        kind:
+          type: string
+        kindName:
+          type: string
+        phone:
+          type: string
+        priceNote:
+          type: string
+        serviceHours:
+          type: string
+        sourceUrl:
+          type: string
+        website:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      description: "Opaque session token returned by POST /api/identity (or by device\
+        \ pairing / recovery), sent as `Authorization: Bearer <token>`."
+      scheme: bearer
+      type: http

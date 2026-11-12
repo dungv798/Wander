@@ -15,17 +15,8 @@ public final class CatalogApiConstants {
     /** Lịch mẫu của một điểm đến (N-2). */
     public static final String TEMPLATES_PATH = DESTINATION_PATH + "/templates";
 
-    /** Khóa JSON của danh sách lịch mẫu. */
-    public static final String KEY_TEMPLATES = "templates";
-
     /** Tên tham số tìm kiếm. */
     public static final String QUERY_PARAM = "q";
-
-    /** Khóa JSON của danh sách điểm đến. */
-    public static final String KEY_DESTINATIONS = "destinations";
-
-    /** Khóa JSON của một điểm đến. */
-    public static final String KEY_DESTINATION = "destination";
 
     private CatalogApiConstants() {
     }

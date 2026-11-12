@@ -1,5 +1,6 @@
 package com.wander.identity.application.service;
 
+import com.wander.identity.application.input.EvidenceInput;
 import com.wander.identity.application.input.IdentityFields;
 import com.wander.identity.application.input.IdentityInput;
 import com.wander.identity.application.view.IdentityViews.Approved;
@@ -31,7 +32,6 @@ import com.wander.shared.kernel.util.Ids;
 import com.wander.shared.kernel.util.Timestamps;
 import java.time.Clock;
 import java.time.Instant;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -69,11 +69,11 @@ public class RecoveryService {
      * Bước 1–2: kiểm tra mã hiện hành, tạo lần thử chờ và phát hành mã thay thế (chưa hợp lệ).
      * Mã cũ CHƯA bị tiêu thụ; chưa có phiên nào được tạo (INV-15).
      */
-    public RecoveryStarted startRecovery(Map<String, Object> input) {
-        String attemptKey = IdentityInput.attemptKey(input.get(IdentityFields.ATTEMPT_ID));
-        String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(input.get(IdentityFields.SESSION_TOKEN)));
-        String deviceName = IdentityInput.deviceName(input.get(IdentityFields.DEVICE_NAME));
-        String normalized = Secrets.normalize(input.get(IdentityFields.CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
+    public RecoveryStarted startRecovery(String attemptId, String sessionToken, String deviceNameRaw, String code) {
+        String attemptKey = IdentityInput.attemptKey(attemptId);
+        String tokenHash = Secrets.hashToken(IdentityInput.sessionToken(sessionToken));
+        String deviceName = IdentityInput.deviceName(deviceNameRaw);
+        String normalized = Secrets.normalize(code, IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null) throw invalidCode();
 
         RecoveryCode oldCode = findActiveCode(normalized).orElseThrow(RecoveryService::invalidCode);
@@ -99,9 +99,9 @@ public class RecoveryService {
      * Bước 3–4: chủ nhập lại mã thay thế, rồi commit nguyên tử: vô hiệu mã cũ + kích hoạt mã thay thế + tạo phiên (INV-11).
      * Không thu hồi phiên nào khác (D23, INV-10). Gọi lại sau commit với cùng lần thử là idempotent (INV-12).
      */
-    public Committed completeRecovery(Map<String, Object> input) {
-        String attemptKey = IdentityInput.attemptKey(input.get(IdentityFields.ATTEMPT_ID));
-        String normalized = Secrets.normalize(input.get(IdentityFields.REPLACEMENT_CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
+    public Committed completeRecovery(String attemptId, String replacementCode) {
+        String attemptKey = IdentityInput.attemptKey(attemptId);
+        String normalized = Secrets.normalize(replacementCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null) throw invalidReplacement();
         RecoveryAttempt metadata = store.findAttempt(attemptKey).orElseThrow(RecoveryService::invalidCode);
         store.lockIdentity(metadata.identityId());
@@ -130,10 +130,10 @@ public class RecoveryService {
      * Pha 1: tạo mã thay thế chờ. Mã hiện hành (nếu có) vẫn hợp lệ đến khi pha 2 commit (INV-13).
      * Có mã hiện hành thì bắt buộc xác thực lại: trình mã hiện hành, hoặc phê duyệt từ thiết bị khác.
      */
-    public ReplacementBegun beginReplacement(AuthenticatedPrincipal principal, Map<String, Object> input) {
+    public ReplacementBegun beginReplacement(AuthenticatedPrincipal principal, EvidenceInput evidence) {
         store.lockIdentity(principal.identityId());
         Optional<RecoveryCode> current = store.findActiveCode(principal.identityId());
-        current.ifPresent(code -> requireStepUpEvidence(principal, input, code));
+        current.ifPresent(code -> requireStepUpEvidence(principal, evidence, code));
         // Tại mọi thời điểm chỉ có một mã thay thế chờ.
         store.voidPendingReplacements(principal.identityId());
         String replacement = Secrets.newRecoveryCode();
@@ -147,10 +147,10 @@ public class RecoveryService {
     }
 
     /** Pha 2: chủ nhập lại mã thay thế; commit vô hiệu mã cũ và kích hoạt mã mới trong một giao dịch. */
-    public Committed confirmReplacement(AuthenticatedPrincipal principal, Map<String, Object> input) {
+    public Committed confirmReplacement(AuthenticatedPrincipal principal, String pendingId, String replacementCode) {
         store.lockIdentity(principal.identityId());
-        String normalized = Secrets.normalize(input.get(IdentityFields.REPLACEMENT_CODE), IdentityConstants.RECOVERY_CODE_SYMBOLS);
-        if (normalized == null || !(input.get(IdentityFields.PENDING_ID) instanceof String pendingId)) throw invalidReplacement();
+        String normalized = Secrets.normalize(replacementCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
+        if (normalized == null || pendingId == null) throw invalidReplacement();
         CodeReplacement replacement = Ids.parse(pendingId)
                 .flatMap(id -> store.findPendingReplacement(id, principal.identityId()))
                 .orElseThrow(() -> WanderException.notFound(IdentityMessages.NO_PENDING_REPLACEMENT));
@@ -173,8 +173,8 @@ public class RecoveryService {
     // ---------- Xác thực lại bằng phê duyệt từ thiết bị tin cậy khác (D25, MĐ-1) ----------
 
     /** Xin phê duyệt xác thực lại cho một thao tác nhạy cảm; trả mã ngắn để thiết bị khác nhập. */
-    public StepUpCreated requestStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        if (!(input.get(IdentityFields.OPERATION) instanceof String operation) || !IdentityConstants.STEP_UP_OPERATIONS.contains(operation)) {
+    public StepUpCreated requestStepUp(AuthenticatedPrincipal principal, String operation) {
+        if (operation == null || !IdentityConstants.STEP_UP_OPERATIONS.contains(operation)) {
             throw WanderException.invalid(IdentityErrorCodes.INVALID_OPERATION, IdentityMessages.INVALID_OPERATION, IdentityFields.OPERATION);
         }
         Instant now = Timestamps.now(clock);
@@ -191,16 +191,16 @@ public class RecoveryService {
      * Máy duyệt xem trước yêu cầu xác thực lại (DR-018 E1): thao tác, tên máy đang xin (tự khai, chưa xác minh), thời điểm và các
      * lựa chọn số khớp cố định lúc tạo. Không đổi trạng thái.
      */
-    public StepUpPreview previewStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        StepUpRequest request = findApprovableStepUp(principal, input, false);
+    public StepUpPreview previewStepUp(AuthenticatedPrincipal principal, String approvalCode) {
+        StepUpRequest request = findApprovableStepUp(principal, approvalCode, false);
         String requesterName = store.findActiveSession(request.sessionId(), principal.identityId()).map(Session::deviceName).orElse(null);
         return new StepUpPreview(request.id().toString(), request.operation(), requesterName, Timestamps.format(request.createdAt()),
                 request.challenge().options());
     }
 
     /** Máy duyệt từ chối chủ động: yêu cầu thành denied và không bao giờ duyệt lại được. */
-    public Denied denyStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        store.saveStepUp(findApprovableStepUp(principal, input, true).deny());
+    public Denied denyStepUp(AuthenticatedPrincipal principal, String approvalCode) {
+        store.saveStepUp(findApprovableStepUp(principal, approvalCode, true).deny());
         return Denied.YES;
     }
 
@@ -211,9 +211,9 @@ public class RecoveryService {
      * phương thức này SAU lần ghi sẽ commit dở; chỉ ném lỗi trước khi ghi hoặc ngay sau lần ghi từ chối.
      */
     @Transactional(noRollbackFor = WanderException.class)
-    public Approved approveStepUp(AuthenticatedPrincipal principal, Map<String, Object> input) {
-        int chosen = IdentityInput.matchNumber(input.get(IdentityFields.NUMBER));
-        StepUpRequest request = findApprovableStepUp(principal, input, true);
+    public Approved approveStepUp(AuthenticatedPrincipal principal, String approvalCode, Integer number) {
+        int chosen = IdentityInput.matchNumber(number);
+        StepUpRequest request = findApprovableStepUp(principal, approvalCode, true);
         if (!request.challenge().matches(chosen)) {
             store.saveStepUp(request.deny());
             throw WanderException.forbidden(IdentityErrorCodes.MATCH_MISMATCH, IdentityMessages.MATCH_MISMATCH);
@@ -226,8 +226,8 @@ public class RecoveryService {
      * Yêu cầu xác thực lại đang chờ, còn hạn, đúng danh tính và do phiên KHÁC xin; {@code lock} = khóa dòng (duyệt/từ chối, để
      * đồng thời chỉ một lượt thắng) hay đọc thường (xem trước). Sai mã ⇒ INVALID_APPROVAL_CODE.
      */
-    private StepUpRequest findApprovableStepUp(AuthenticatedPrincipal principal, Map<String, Object> input, boolean lock) {
-        String code = Secrets.normalize(input.get(IdentityFields.APPROVAL_CODE), IdentityConstants.SHORT_CODE_SYMBOLS);
+    private StepUpRequest findApprovableStepUp(AuthenticatedPrincipal principal, String approvalCodeRaw, boolean lock) {
+        String code = Secrets.normalize(approvalCodeRaw, IdentityConstants.SHORT_CODE_SYMBOLS);
         if (code == null) throw invalidApprovalCode();
         String approvalCode = Secrets.formatShort(code);
         Instant now = Timestamps.now(clock);
@@ -239,30 +239,30 @@ public class RecoveryService {
     // ---------- hỗ trợ ----------
 
     /** Bắt buộc có bằng chứng xác thực lại hợp lệ (trình mã hiện hành hoặc phê duyệt từ thiết bị khác) trước khi tạo mã mới. */
-    private void requireStepUpEvidence(AuthenticatedPrincipal principal, Map<String, Object> input, RecoveryCode current) {
+    private void requireStepUpEvidence(AuthenticatedPrincipal principal, EvidenceInput evidence, RecoveryCode current) {
         WanderException denied = WanderException.forbidden(IdentityErrorCodes.STEP_UP_REQUIRED, IdentityMessages.STEP_UP_REQUIRED_FOR_NEW_CODE);
-        if (!(input.get(IdentityFields.EVIDENCE) instanceof Map<?, ?> evidence)) throw denied;
-        Object type = evidence.get(IdentityFields.EVIDENCE_TYPE);
+        if (evidence == null) throw denied;
+        String type = evidence.type();
         if (IdentityFields.EVIDENCE_TYPE_CODE.equals(type)) {
-            requireMatchesCurrentCode(evidence.get(IdentityFields.CODE), current, denied);
+            requireMatchesCurrentCode(evidence.code(), current, denied);
         } else if (IdentityFields.EVIDENCE_TYPE_APPROVAL.equals(type)) {
-            consumeStepUp(principal, evidence.get(IdentityFields.REQUEST_ID), IdentityConstants.OPERATION_REGENERATE_CODE);
+            consumeStepUp(principal, evidence.requestId(), IdentityConstants.OPERATION_REGENERATE_CODE);
         } else {
             throw denied;
         }
     }
 
     /** Mã người dùng trình phải khớp mã khôi phục hiện hành; không khớp thì ném lỗi {@code denied}. */
-    private void requireMatchesCurrentCode(Object typedCode, RecoveryCode current, WanderException denied) {
+    private void requireMatchesCurrentCode(String typedCode, RecoveryCode current, WanderException denied) {
         String normalized = Secrets.normalize(typedCode, IdentityConstants.RECOVERY_CODE_SYMBOLS);
         if (normalized == null || !hasher.matches(normalized, current.codeHash(), current.keyVersion())) throw denied;
     }
 
     /** Dùng (một lần) phê duyệt đã được duyệt cho đúng phiên và thao tác; không có thì ném STEP_UP_REQUIRED. */
-    private void consumeStepUp(AuthenticatedPrincipal principal, Object requestId, String operation) {
+    private void consumeStepUp(AuthenticatedPrincipal principal, String requestId, String operation) {
         WanderException denied = WanderException.forbidden(IdentityErrorCodes.STEP_UP_REQUIRED, IdentityMessages.STEP_UP_REQUIRED);
-        if (!(requestId instanceof String raw)) throw denied;
-        StepUpRequest request = Ids.parse(raw)
+        if (requestId == null) throw denied;
+        StepUpRequest request = Ids.parse(requestId)
                 .flatMap(id -> store.findUsableStepUp(id, principal.identityId(), principal.sessionId(), operation, Timestamps.now(clock)))
                 .orElseThrow(() -> denied);
         store.saveStepUp(request.consume());

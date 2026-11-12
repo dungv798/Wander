@@ -12,7 +12,9 @@ import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -31,6 +33,18 @@ public class ApiExceptionHandler {
                 .cacheControl(CacheControl.noStore())
                 .contentType(HttpConstants.PROBLEM_JSON_UTF8)
                 .body(Problems.of(HttpStatuses.of(e.kind()), e.code(), e.getMessage(), e.field(), e.details()));
+    }
+
+    /** A request body that cannot be read (bad JSON, wrong type for a field, oversized): reported as the matching input error. */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ProblemDetail> handleUnreadableBody(HttpMessageNotReadableException e) {
+        return handleBusinessError(RequestErrors.from(e));
+    }
+
+    /** A request record that violates its Bean Validation constraints: reported as the matching input error. */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ProblemDetail> handleInvalidBody(MethodArgumentNotValidException e) {
+        return handleBusinessError(RequestErrors.fromValidation(e.getBindingResult()));
     }
 
     /** Hai thao tác sửa cùng một dữ liệu cùng lúc: báo 409 để người dùng tải lại. */

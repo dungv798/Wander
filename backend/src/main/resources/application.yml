@@ -1,6 +1,13 @@
 # Cấu hình theo 12-factor: mọi giá trị môi trường lấy từ biến môi trường để chạy được cả máy cá nhân lẫn AWS
 # (ECS/App Runner đặt biến môi trường; mật khẩu DB lấy từ Secrets Manager — xem docs/architecture/aws-deployment.md).
 spring:
+  jackson:
+    mapper:
+      # Strict request types: a number where a string is expected is an error, not silently converted (the API validates its own formats).
+      allow-coercion-of-scalars: false
+    deserialization:
+      # 4.5 where an integer is expected is an error, not 4.
+      accept-float-as-int: false
   application:
     name: wander-backend
   datasource:
@@ -76,6 +83,7 @@ springdoc:
   api-docs:
     version: openapi_3_1
   writer-with-order-by-keys: true
+  default-produces-media-type: application/json
   swagger-ui:
     tags-sorter: alpha
     operations-sorter: alpha
