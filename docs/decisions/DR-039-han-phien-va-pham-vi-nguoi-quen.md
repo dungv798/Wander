@@ -15,4 +15,4 @@ Không mâu thuẫn: DR-037 STR-1 cho phép AWS khi PO làm để học và đ�
 
 ## Còn chờ PO
 - Chốt nơi chạy (Render tiếp hay AWS để học) và trần giờ/tiền nếu AWS.
-- Duyệt mô hình đe dọa (`docs/security/threat-model-1a.md`).
+- ~~Duyệt mô hình đe dọa~~ (PO đã duyệt 12/11/2026).

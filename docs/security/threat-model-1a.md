@@ -1,6 +1,6 @@
 # Mô hình đe dọa Lát 1a — bản nháp 1 trang (12/11/2026)
 
-**Trạng thái:** `PROPOSED`, chờ PO duyệt (DR-039). Phạm vi phát hành: **chỉ người quen**; "người lạ" vẫn bị chặn bởi RG-2/5/6 (CLAUDE.md).
+**Trạng thái:** `APPROVED` (PO duyệt 12/11/2026, DR-039). Phạm vi phát hành: **chỉ người quen**; "người lạ" vẫn bị chặn bởi RG-2/5/6 (CLAUDE.md).
 **Nguồn và độ tin cậy:** báo cáo rà an ninh 12/11/2026 của `wander-security-reviewer` (đọc mã, tài liệu và tên test; chưa đọc thân test), `docs/autopilot/q16-design-draft.md`, DR-001/018/035. Mục nào chưa có bằng chứng ghi `UNVERIFIED`. Không phải tuyên bố "an toàn": G7 vẫn `UNVERIFIED`.
 
 ## 1. Tài sản
