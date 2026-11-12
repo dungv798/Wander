@@ -44,7 +44,7 @@ class DeletionRequestApiIT extends ApiTestSupport {
         assertThat(approved.str("request.status")).isEqualTo("approved");
         assertThat(call("GET", "/api/trips/" + s.trip() + "/trash", s.org().token()).list("items")).hasSize(1);
         assertThat(call("GET", "/api/trips/" + s.trip() + "/deletion-requests", s.guest().token()).str("requests.0.status")).isEqualTo("approved");
-        assertThat(call("POST", "/api/trips/" + s.trip() + "/deletion-requests/" + id + "/reject", s.org().token()).str("error.code")).isEqualTo("ALREADY_DECIDED");
+        assertThat(call("POST", "/api/trips/" + s.trip() + "/deletion-requests/" + id + "/reject", s.org().token()).str("code")).isEqualTo("ALREADY_DECIDED");
     }
 
     @Test
@@ -79,12 +79,12 @@ class DeletionRequestApiIT extends ApiTestSupport {
     @DisplayName("quy tắc: mục của mình ⇒ xóa thẳng (409); Organizer không cần đề nghị (409); trùng đề nghị (409); lý do quá dài và thiếu mục (400); hủy khi còn chờ")
     void rules() {
         Setup s = setup();
-        assertThat(submit(s, s.guestItem(), null).str("error.code")).isEqualTo("OWN_ITEM_DELETE_DIRECTLY");
-        assertThat(call("POST", "/api/trips/" + s.trip() + "/deletion-requests", s.org().token(), map("itemId", s.guestItem())).str("error.code")).isEqualTo("ORGANIZER_DELETES_DIRECTLY");
+        assertThat(submit(s, s.guestItem(), null).str("code")).isEqualTo("OWN_ITEM_DELETE_DIRECTLY");
+        assertThat(call("POST", "/api/trips/" + s.trip() + "/deletion-requests", s.org().token(), map("itemId", s.guestItem())).str("code")).isEqualTo("ORGANIZER_DELETES_DIRECTLY");
         assertThat(submit(s, s.orgItem(), "x".repeat(201)).status()).isEqualTo(400);
         assertThat(call("POST", "/api/trips/" + s.trip() + "/deletion-requests", s.guest().token(), Map.of()).status()).isEqualTo(400);
         String id = submit(s, s.orgItem(), null).str("request.id");
-        assertThat(submit(s, s.orgItem(), null).str("error.code")).isEqualTo("REQUEST_EXISTS");
+        assertThat(submit(s, s.orgItem(), null).str("code")).isEqualTo("REQUEST_EXISTS");
         assertThat(call("DELETE", "/api/trips/" + s.trip() + "/deletion-requests/" + id, s.guest().token()).status()).isEqualTo(204);
         assertThat(call("GET", "/api/trips/" + s.trip() + "/deletion-requests", s.org().token()).list("requests")).isEmpty();
     }

@@ -115,7 +115,7 @@ class SecurityIT extends ApiTestSupport {
         Res r = call("GET", "/api/trips", null);
         assertThat(r.status()).isEqualTo(401);
         assertThat(r.code()).isEqualTo("UNAUTHENTICATED");
-        assertThat(r.raw().headers().firstValue("Content-Type").orElse("")).contains("application/json");
+        assertProblem(r, 401, "UNAUTHENTICATED");
         assertThat(r.raw().headers().firstValue("Cache-Control")).hasValue("no-store");
         assertThat(r.raw().headers().firstValue("X-Content-Type-Options")).hasValue("nosniff");
         assertThat(r.raw().headers().firstValue("Strict-Transport-Security")).hasValue("max-age=31536000");

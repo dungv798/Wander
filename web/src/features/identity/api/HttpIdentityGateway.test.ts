@@ -12,7 +12,7 @@ interface Call {
 }
 
 const json = (body: unknown, status = 200): Response => new Response(JSON.stringify(body), { status });
-const err = (code: string, status: number): Response => json({ error: { code } }, status);
+const err = (code: string, status: number): Response => json({ code }, status);
 
 /** Cổng dựng trên fetch giả: `handler` nhận từng lời gọi và trả phản hồi; trả thêm danh sách lời gọi để kiểm. */
 function gateway(handler: (c: Call) => Response): { readonly gw: HttpIdentityGateway; readonly calls: Call[] } {

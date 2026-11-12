@@ -30,8 +30,8 @@ test('GET thành công: trả JSON đã phân tích, gửi method GET và Accept
   assert.equal(f.calls[0]?.init?.signal, abort.signal);
 });
 
-test('lỗi có thân {error:{code}} thành ApiError mang đúng mã và mã HTTP; không lộ lời báo thô', async () => {
-  const f = fakeFetch(() => json({ error: { code: 'RATE_LIMITED', message: 'chi tiết nội bộ' } }, 429));
+test('lỗi có thân {code} thành ApiError mang đúng mã và mã HTTP; không lộ lời báo thô', async () => {
+  const f = fakeFetch(() => json({ code: 'RATE_LIMITED' }, 429));
   await assert.rejects(new ApiClient(f.fetchImpl).get('/api/x'), (e: unknown) => {
     assert.ok(e instanceof ApiError);
     assert.equal(e.code, 'RATE_LIMITED');
@@ -95,7 +95,7 @@ test('hủy bằng abort(lý do): fetch ném chính lý do, vẫn được ném 
 });
 
 test('thân lỗi sai hình dạng (code không phải chuỗi, rỗng, error null) hoặc 5xx có thân JSON không mã đều thành INTERNAL', async () => {
-  for (const body of [{ error: { code: 123 } }, { error: { code: '' } }, { error: null }, { khac: 1 }, null]) {
+  for (const body of [{ code: 123 }, { code: '' }, { code: null }, { khac: 1 }, null]) {
     const f = fakeFetch(() => json(body, 503));
     await assert.rejects(new ApiClient(f.fetchImpl).get('/api/x'), (e: unknown) => e instanceof ApiError && e.code === 'INTERNAL' && e.status === 503);
   }
@@ -108,7 +108,7 @@ test('bộ theo dõi lời gọi: mỗi lời gọi được báo bắt đầu v
   await ok.get('/api/x');
   assert.deepEqual(events, ['begin', 'end']);
   events.length = 0;
-  await assert.rejects(new ApiClient(fakeFetch(() => json({ error: { code: 'NOT_FOUND' } }, 404)).fetchImpl, undefined, tracker).get('/api/x'));
+  await assert.rejects(new ApiClient(fakeFetch(() => json({ code: 'NOT_FOUND' }, 404)).fetchImpl, undefined, tracker).get('/api/x'));
   await assert.rejects(new ApiClient(() => Promise.reject(new TypeError('offline')), undefined, tracker).get('/api/x'));
   const abort = new AbortController();
   abort.abort();

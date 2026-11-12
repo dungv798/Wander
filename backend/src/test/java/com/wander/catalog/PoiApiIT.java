@@ -73,7 +73,7 @@ class PoiApiIT extends ApiTestSupport {
             Res result = call("GET", PATH + "?" + query, null);
             assertThat(result.status()).as(query).isEqualTo(400);
             assertThat(result.code()).isIn("MALFORMED", "OUT_OF_RANGE");
-            assertThat(result.str("error.field")).isEqualTo(query.split("=")[0]);
+            assertThat(result.str("field")).isEqualTo(query.split("=")[0]);
         }
     }
 }

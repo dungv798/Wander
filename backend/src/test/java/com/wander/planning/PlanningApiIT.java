@@ -249,7 +249,7 @@ class PlanningApiIT extends ApiTestSupport {
         assertThat(call("POST", path, u.token(), with(base, "cost", "1.5")).code()).isEqualTo("MALFORMED");
         assertThat(call("POST", path, u.token(), with(base, "cost", 1.5)).code()).isEqualTo("MALFORMED");
         assertThat(call("POST", path, u.token(), with(base, "cost", "150k")).code()).isEqualTo("MALFORMED");
-        assertThat(call("POST", path, u.token(), with(base, "cost", "abc")).str("error.field")).isEqualTo("cost");
+        assertThat(call("POST", path, u.token(), with(base, "cost", "abc")).str("field")).isEqualTo("cost");
         assertThat(call("POST", path, u.token(), with(base, "cost", 1_000_000_001L)).code()).isEqualTo("TOO_LARGE");
         assertThat(call("POST", path, u.token(), with(base, "cost", "00000000000150")).status()).isEqualTo(201);
         assertThat(call("POST", path, u.token(), map("day", DAY2, "type", "food", "title", "x", "cost", 100, "referenceCost", 5))

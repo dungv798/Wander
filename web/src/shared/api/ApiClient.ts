@@ -18,11 +18,11 @@ function isAbort(e: unknown, signal?: AbortSignal): boolean {
   return typeof e === 'object' && e !== null && (e as { name?: unknown }).name === ABORT_ERROR_NAME;
 }
 
-/** Lỗi từ phản hồi không thành công: lấy mã từ thân `{error:{code}}` của backend; thân không đọc được ⇒ `INTERNAL`. Không bao giờ lộ lời báo thô; hủy khi đang đọc thân được ném lại. */
+/** Lỗi từ phản hồi không thành công: lấy mã từ thân `application/problem+json` (RFC 9457) của backend, thành viên `code`; thân không đọc được ⇒ `INTERNAL`. Không bao giờ lộ lời báo thô; hủy khi đang đọc thân được ném lại. */
 async function toApiError(res: Response, signal?: AbortSignal): Promise<ApiError> {
   try {
-    const body = (await res.json()) as { error?: { code?: unknown } } | null;
-    const code = body?.error?.code;
+    const body = (await res.json()) as { code?: unknown } | null;
+    const code = body?.code;
     if (typeof code === 'string' && code) return new ApiError(code, res.status);
   } catch (e) {
     if (isAbort(e, signal)) throw e;

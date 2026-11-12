@@ -85,12 +85,12 @@ class MembershipApiIT extends ApiTestSupport {
         }
         for (Res r : previews) {
             assertThat(r.status()).isEqualTo(400);
-            assertThat(r.str("error.code")).isEqualTo("INVALID_INVITE");
-            assertThat(r.str("error.message")).isEqualTo(previews.get(0).str("error.message"));
+            assertThat(r.str("code")).isEqualTo("INVALID_INVITE");
+            assertThat(r.str("detail")).isEqualTo(previews.get(0).str("detail"));
         }
         for (Res r : joins) {
             assertThat(r.status()).isEqualTo(400);
-            assertThat(r.str("error.code")).isEqualTo("INVALID_INVITE");
+            assertThat(r.str("code")).isEqualTo("INVALID_INVITE");
         }
         assertThat(deleted).isNotBlank();
         assertThat(call("GET", "/api/trips", guest.token()).list("trips")).isEmpty();
@@ -108,7 +108,7 @@ class MembershipApiIT extends ApiTestSupport {
         for (int i = 3; i <= 9; i++) assertThat(join(newUser(), code, "TV" + i).status()).isEqualTo(201);
         Res full = join(newUser(), code, "Thừa");
         assertThat(full.status()).isEqualTo(409);
-        assertThat(full.str("error.code")).isEqualTo("TRIP_FULL");
+        assertThat(full.str("code")).isEqualTo("TRIP_FULL");
     }
 
     @Test
@@ -147,13 +147,13 @@ class MembershipApiIT extends ApiTestSupport {
         assertThat(call("DELETE", "/api/trips/" + trip + "/members/" + memberId, guest.token()).status()).as("thành viên không gỡ ai").isEqualTo(403);
         Res selfRemove = call("DELETE", "/api/trips/" + trip + "/members/" + organizerMemberId, org.token());
         assertThat(selfRemove.status()).isEqualTo(409);
-        assertThat(selfRemove.str("error.code")).isEqualTo("ORGANIZER_CANNOT_LEAVE");
+        assertThat(selfRemove.str("code")).isEqualTo("ORGANIZER_CANNOT_LEAVE");
         assertThat(call("DELETE", "/api/trips/" + trip + "/members/me", org.token()).status()).isEqualTo(409);
 
         assertThat(call("DELETE", "/api/trips/" + trip + "/members/" + memberId, org.token()).status()).isEqualTo(204);
         assertThat(call("GET", "/api/trips/" + trip, guest.token()).status()).isEqualTo(404);
         assertThat(call("GET", "/api/trips/" + trip + "/members", guest.token()).status()).isEqualTo(404);
-        assertThat(join(guest, code, "An").str("error.code")).isEqualTo("INVALID_INVITE");
+        assertThat(join(guest, code, "An").str("code")).isEqualTo("INVALID_INVITE");
         assertThat(call("GET", "/api/trips/" + trip + "/invites", org.token()).str("invite")).isNull();
 
         String fresh = inviteCode(org, trip);
@@ -179,7 +179,7 @@ class MembershipApiIT extends ApiTestSupport {
             String p = (String) c[1];
             Res asMember = call(m, p, guest.token(), Map.of("name", "X"));
             assertThat(asMember.status()).as(m + " " + p + " thành viên").isEqualTo(403);
-            assertThat(asMember.str("error.code")).isEqualTo("NOT_ORGANIZER");
+            assertThat(asMember.str("code")).isEqualTo("NOT_ORGANIZER");
             assertThat(call(m, p, outsider.token(), Map.of("name", "X")).status()).as(m + " " + p + " người ngoài").isEqualTo(404);
         }
         assertThat(call("GET", "/api/trips/" + trip, org.token()).status()).isEqualTo(200);
@@ -201,7 +201,7 @@ class MembershipApiIT extends ApiTestSupport {
         assertThat(call("PATCH", "/api/trips/" + trip + "/items/" + mine, guest.token(), Map.of("note", "ghi chú")).status()).isEqualTo(200);
         Res others = call("PATCH", "/api/trips/" + trip + "/items/" + orgItem, guest.token(), Map.of("note", "x"));
         assertThat(others.status()).isEqualTo(403);
-        assertThat(others.str("error.code")).isEqualTo("NOT_YOUR_ITEM");
+        assertThat(others.str("code")).isEqualTo("NOT_YOUR_ITEM");
         assertThat(call("DELETE", "/api/trips/" + trip + "/items/" + orgItem, guest.token()).status()).isEqualTo(403);
         assertThat(call("DELETE", "/api/trips/" + trip + "/items/" + mine, guest.token()).status()).isEqualTo(200);
         assertThat(call("POST", "/api/trips/" + trip + "/items/" + mine + "/restore", guest.token()).status()).isEqualTo(200);
@@ -253,7 +253,7 @@ class MembershipApiIT extends ApiTestSupport {
         String trip = newTrip(org.token());
         String first = inviteCode(org, trip);
         String second = inviteCode(org, trip);
-        assertThat(join(newUser(), first, "Cũ").str("error.code")).isEqualTo("INVALID_INVITE");
+        assertThat(join(newUser(), first, "Cũ").str("code")).isEqualTo("INVALID_INVITE");
         assertThat(join(guest, second, "An").status()).isEqualTo(201);
         Res renamed = call("PATCH", "/api/trips/" + trip + "/members/me", guest.token(), Map.of("displayName", "An Nguyễn", "role", "organizer"));
         assertThat(renamed.status()).isEqualTo(200);

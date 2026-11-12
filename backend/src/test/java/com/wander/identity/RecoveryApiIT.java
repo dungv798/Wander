@@ -234,8 +234,8 @@ class RecoveryApiIT extends ApiTestSupport {
         Res invalid = start("khong phai ma").r();
         Res unknown = start(UNKNOWN_CODE).r();
         Res used = start(user.recoveryCode()).r();
-        Map<String, Object> expectedBody = Map.of("error", Map.of(
-                "code", "INVALID_CODE", "message", "Mã không hợp lệ hoặc đã được dùng."));
+        Map<String, Object> expectedBody = Map.of("type", "urn:wander:problem:invalid-code", "title", "Bad Request", "status", 400,
+                "detail", "Mã không hợp lệ hoặc đã được dùng.", "code", "INVALID_CODE", "instance", "/api/recovery/start");
 
         for (Res rejection : List.of(invalid, unknown, used)) {
             assertThat(rejection.status()).isEqualTo(400);
@@ -250,8 +250,8 @@ class RecoveryApiIT extends ApiTestSupport {
     void tripDetailsAreNeverRecoveryEvidence() {
         User user = newUser();
         newTrip(user.token());
-        Map<String, Object> expectedBody = Map.of("error", Map.of(
-                "code", "INVALID_CODE", "message", "Mã không hợp lệ hoặc đã được dùng."));
+        Map<String, Object> expectedBody = Map.of("type", "urn:wander:problem:invalid-code", "title", "Bad Request", "status", 400,
+                "detail", "Mã không hợp lệ hoặc đã được dùng.", "code", "INVALID_CODE", "instance", "/api/recovery/start");
         for (String guess : List.of("Hà Giang – Tà Xùa", "Hà Giang", "2026-08-29", "Hà Giang 2026-08-29 2026-09-06")) {
             Res rejection = start(guess).r();
             assertThat(rejection.status()).as(guess).isEqualTo(400);

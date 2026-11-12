@@ -62,7 +62,7 @@ class CoverApiIT extends ApiTestSupport {
             Res response = call("PATCH", path, organizer.token(), map("cover", invalid, "name", "Không được lưu"));
             assertThat(response.status()).isEqualTo(400);
             assertThat(response.code()).isEqualTo("INVALID_COVER");
-            assertThat(response.str("error.field")).isEqualTo("cover");
+            assertThat(response.str("field")).isEqualTo("cover");
             Res unchanged = call("GET", path, organizer.token());
             assertThat(unchanged.at("trip.cover")).isEqualTo(valid);
             assertThat(unchanged.str("trip.name")).isEqualTo(name);

@@ -34,3 +34,10 @@ management:
     # Endpoint tổng hợp /actuator/health là công khai; chỉ báo DB sẽ truy vấn Neon mỗi lần gọi và giữ DB thức (N5, rà an ninh 02/11/2026).
     db:
       enabled: false
+
+# No API documentation endpoints on the public free-tier deployment.
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

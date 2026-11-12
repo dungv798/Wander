@@ -89,6 +89,37 @@ public final class HttpConstants {
     /** Separator between CSP source expressions. */
     public static final String CSP_SOURCE_SEPARATOR = " ";
 
+    /** Media type of error bodies: RFC 9457 problem details, explicitly UTF-8 (Safari otherwise reads error bodies as Latin-1). */
+    public static final MediaType PROBLEM_JSON_UTF8 = new MediaType(MediaType.APPLICATION_PROBLEM_JSON, StandardCharsets.UTF_8);
+
+    /** Prefix of the problem {@code type} URN; the lower-cased error code is appended. */
+    public static final String PROBLEM_TYPE_PREFIX = "urn:wander:problem:";
+
+    /** Problem extension member: stable machine-readable error code. */
+    public static final String PROBLEM_PROPERTY_CODE = "code";
+
+    /** Problem extension member: name of the invalid input field. */
+    public static final String PROBLEM_PROPERTY_FIELD = "field";
+
+    /** Problem extension member: structured details. */
+    public static final String PROBLEM_PROPERTY_DETAILS = "details";
+
+    /** Underscore, replaced by a hyphen in problem type URNs. */
+    public static final char UNDERSCORE = '_';
+
+    /** Hyphen used in problem type URNs. */
+    public static final char HYPHEN = '-';
+
+    /** Path prefixes of the API documentation (Swagger UI and the OpenAPI document), served outside the free profile. */
+    public static final String[] DOCS_PATH_PREFIXES = {"/swagger-ui", "/v3/api-docs"};
+
+    /**
+     * CSP for the API documentation pages only: the same strict policy except that Swagger UI's own inline styles are allowed and
+     * it may not load anything but images from this origin or data URIs. Never applied to the application itself.
+     */
+    public static final String VALUE_CONTENT_SECURITY_POLICY_DOCS = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+            + "img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
+
     /** Separator between a URL scheme and the authority. */
     public static final String SCHEME_SEPARATOR = "://";
 

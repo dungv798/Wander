@@ -54,8 +54,8 @@ test('nạp tất cả: danh sách rồi chi tiết + thùng rác từng chuyế
 test('phản hồi hỏng thành INTERNAL; chuyến bị xóa giữa chừng thì bỏ qua, lỗi khác không bị nuốt', async () => {
   await assert.rejects(gateway(() => json({ nope: 1 })).gw.loadAll(), (e: unknown) => e instanceof ApiError && e.code === 'INTERNAL');
   // chuyến vừa bị xóa ở máy khác (404 lúc đọc chi tiết) thì bỏ qua, các lỗi khác vẫn báo
-  assert.deepEqual(await gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ error: { code: 'NOT_FOUND' } }, 404))).gw.loadAll(), []);
-  await assert.rejects(gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ error: { code: 'INTERNAL' } }, 500))).gw.loadAll(), (e: unknown) => e instanceof ApiError && e.status === 500);
+  assert.deepEqual(await gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ code: 'NOT_FOUND' }, 404))).gw.loadAll(), []);
+  await assert.rejects(gateway((c) => (c.url === '/api/trips' ? json({ trips: [VIEW] }) : json({ code: 'INTERNAL' }, 500))).gw.loadAll(), (e: unknown) => e instanceof ApiError && e.status === 500);
 });
 
 test('tạo chuyến: ánh xạ tên trường (destination, budget) và trả mã chuyến mới', async () => {

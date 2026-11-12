@@ -70,3 +70,12 @@ wander:
 logging:
   level:
     org.hibernate.SQL: ${WANDER_LOG_SQL:info}
+
+# API contract (springdoc). Swagger UI and /v3/api-docs are served outside the "free" profile; sorted keys keep the committed backend/openapi.yaml stable.
+springdoc:
+  api-docs:
+    version: openapi_3_1
+  writer-with-order-by-keys: true
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha

@@ -17,7 +17,6 @@ class PoiRateLimitIT extends ApiTestSupport {
         assertThat(call("GET", "/api/catalog/destinations/da-lat/poi?kind=sai", null).status()).isEqualTo(400);
         assertThat(call("GET", "/api/catalog/destinations", null).status()).isEqualTo(200);
         Res limited = call("GET", "/api/catalog/destinations/da-lat/poi", null);
-        assertThat(limited.status()).isEqualTo(429);
-        assertThat(limited.code()).isEqualTo("RATE_LIMITED");
+        assertProblem(limited, 429, "RATE_LIMITED");
     }
 }

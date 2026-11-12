@@ -30,6 +30,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     // Khung xác thực (ADR-005): SecurityFilterChain + AuthenticationProvider; token phiên vẫn tự quản lý (Bearer, băm trong DB)
     implementation("org.springframework.boot:spring-boot-starter-security")
+    // Bean Validation for typed request records and the generated OpenAPI contract (served outside the "free" profile only)
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
     implementation("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("org.postgresql:postgresql")
 

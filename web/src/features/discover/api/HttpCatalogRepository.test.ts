@@ -62,7 +62,7 @@ test('metadata chủ đề additive: giữ mã thật, từ chối mảng sai đ
 });
 
 test('mã lạ: 404 của máy chủ thành ApiError NOT_FOUND để giao diện hiện đúng lời nhắc', async () => {
-  const r = repo(() => json({ error: { code: 'NOT_FOUND', message: 'x' } }, 404));
+  const r = repo(() => json({ code: 'NOT_FOUND' }, 404));
   await assert.rejects(r.repository.destination('khong-co'), (e: unknown) => e instanceof ApiError && e.code === 'NOT_FOUND' && e.status === 404);
 });
 
@@ -91,7 +91,7 @@ test('thân sai hình dạng thành INTERNAL, không để lọt giá trị hỏ
 
 test('điểm đến được nhớ: nhiều nơi cùng tải chỉ gọi MỘT lần; lỗi không được nhớ nên thử lại được', async () => {
   let fail = true;
-  const r = repo(() => (fail ? json({ error: { code: 'INTERNAL' } }, 500) : json({ destination: validDestination() })));
+  const r = repo(() => (fail ? json({ code: 'INTERNAL' }, 500) : json({ destination: validDestination() })));
   await assert.rejects(r.repository.destination('ha-giang'));
   fail = false;
   const [a, b, c] = await Promise.all([r.repository.destination('ha-giang'), r.repository.destination('ha-giang'), r.repository.destination('ha-giang')]);
@@ -126,7 +126,7 @@ test('B-09: máy chủ không trả lời (lỗi mạng hoặc 5xx) thì dùng b
     const handler = (): Response => {
       if (mode === 'down') throw new TypeError('Failed to fetch');
       if (mode === 'bad-gateway') return json({}, 502);
-      if (mode === 'missing') return json({ error: { code: 'NOT_FOUND' } }, 404);
+      if (mode === 'missing') return json({ code: 'NOT_FOUND' }, 404);
       return json({ destination: validDestination() });
     };
     // mỗi lần dùng kho mới để bỏ bản nhớ trong bộ nhớ, chỉ còn bản ở localStorage

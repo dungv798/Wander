@@ -32,8 +32,8 @@ test('rỗng là thành công; dữ liệu hỏng không bị coi là rỗng', a
 test('mạng, 429, 404 và JSON hỏng đi qua lỗi ApiClient', async () => {
   for (const [fetcher, code] of [
     [async () => { throw new TypeError('offline'); }, 'NETWORK'],
-    [async () => Response.json({ error: { code: 'RATE_LIMITED' } }, { status: 429 }), 'RATE_LIMITED'],
-    [async () => Response.json({ error: { code: 'NOT_FOUND' } }, { status: 404 }), 'NOT_FOUND'],
+    [async () => Response.json({ code: 'RATE_LIMITED' }, { status: 429 }), 'RATE_LIMITED'],
+    [async () => Response.json({ code: 'NOT_FOUND' }, { status: 404 }), 'NOT_FOUND'],
     [async () => new Response('broken'), 'INTERNAL'],
   ] as const) await assert.rejects(new PoiApi(new ApiClient(fetcher)).nearby('da-lat', 'food', near), (e: unknown) => e instanceof ApiError && e.code === code);
 });
