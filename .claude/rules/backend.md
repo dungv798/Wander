@@ -13,7 +13,7 @@ paths:
 
 **Quy ước đầy đủ (APPROVED 27/10/2026): `docs/architecture/backend-conventions.md` (60 quy tắc + "Quy ước mã bắt buộc"). Tóm tắt bắt buộc cho mã mới và mã được sửa:**
 - Tên theo nghĩa, một mẫu (NAM-5): lớp = vai trò, method = động từ + đối tượng; cấm lớp tên Helper/Util/Manager/Base/Common/Data/Info.
-- Mọi method (kể cả private) có Javadoc tiếng Việt ngay trên tên (DOC-1). Method ≤ 40 dòng, ≤ 6 tham số, độ phức tạp ≤ 10 (SIM-1).
+- Mọi method (kể cả private) có Javadoc **tiếng Anh** ngay trên tên (DOC-1; từ 12/11/2026 chú thích mã bằng tiếng Anh, thông báo cho người dùng giữ tiếng Việt). Method ≤ 40 dòng, ≤ 6 tham số, độ phức tạp ≤ 10 (SIM-1).
 - Không chuỗi/số ma thuật (CON-2/3). Hằng số 3 tầng (CON-1): nền `shared.kernel.CommonConstants`; hệ thống `SystemConstants`/`ErrorCodes`/`ErrorMessages`/`ConfigConstants`/`HttpConstants`; chức năng `<ChứcNăng>Constants|Messages|ErrorCodes|Fields` cạnh nơi dùng.
 - Logic dùng từ 2 nơi gom về một chỗ (DRY-1); tìm trong `shared.kernel` (`Texts`, `ImmutableLists`, `CodedValue`) trước khi viết mới.
 - Cổng: `./gradlew checkstyleMain` (trong `check`). Toàn bộ `backend/src/main` đã sạch (27/10/2026); `backend/config/checkstyle/suppressions.xml` chỉ miễn tệp hằng số và lớp khởi động, không thêm gì vào đó.

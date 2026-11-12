@@ -80,7 +80,7 @@ React hiện đại dùng **thành phần hàm**; ép lớp (class component) ch
 Phía **backend** ACID là thật và đã có (`docs/architecture/README.md`, ADR-003). Nếu PO muốn nghĩa khác của "ACID" cho FE, nói để chỉnh mục này.
 
 ## 7. Chú thích trước mỗi hàm/phương thức
-- **Bắt buộc** một khối TSDoc `/** … */` trước **mọi** hàm, phương thức, hook, thành phần (kể cả hàm nhỏ). Nội dung: **một câu tiếng Việt nói hàm LÀM GÌ và vì sao khi không hiển nhiên**; `@param`/`@returns` khi kiểu chưa đủ nói rõ; `@throws` nếu có.
+- **Bắt buộc** một khối TSDoc `/** … */` trước **mọi** hàm, phương thức, hook, thành phần (kể cả hàm nhỏ). Nội dung: **một câu tiếng Anh nói hàm LÀM GÌ và vì sao khi không hiển nhiên** (từ 12/11/2026 chú thích mã bằng tiếng Anh; chữ hiển thị cho người dùng giữ tiếng Việt); `@param`/`@returns` khi kiểu chưa đủ nói rõ; `@throws` nếu có.
 - Không viết chú thích lặp lại tên hàm ("hàm lấy chuyến đi"). Chú thích nói điều mà tên không nói (ràng buộc, đơn vị, trường hợp biên: ví dụ "tiền tính bằng nghìn đồng, null là chưa biết, 0 là biết bằng không").
 - Lưu ý: quy ước chung của máy này ("chú thích vừa phải như mã xung quanh") **bị quy tắc này thay thế cho `web/`** vì PO nêu rõ.
 

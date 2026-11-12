@@ -9,7 +9,7 @@ paths:
 **Chuẩn đầy đủ (PO, 26/10/2026): `docs/architecture/frontend-standards.md`. Đọc trước khi viết hoặc rà mã FE.** Tóm tắt bắt buộc:
 
 - **Cấu trúc:** `app/` · `features/<tên>/{components,hooks,api,model,index.ts}` · `shared/{ui,lib,const,types,api}` · `styles/tokens.css`. Phụ thuộc một chiều `app → features → shared`. Tên tệp có nghĩa: `PascalCase.tsx`, `useXxx.ts`, `xxx.api.ts`, `xxx.const.ts`, `Xxx.types.ts`.
-- **Mọi hàm/phương thức/hook/thành phần có khối TSDoc trước nó** (một câu tiếng Việt nói LÀM GÌ + điều tên không nói: đơn vị, trường hợp biên). Quy tắc này thay cho "chú thích vừa phải" ở `web/`.
+- **Mọi hàm/phương thức/hook/thành phần có khối TSDoc trước nó** (một câu **tiếng Anh** nói LÀM GÌ; từ 12/11/2026 chú thích mã bằng tiếng Anh, chữ hiển thị giữ tiếng Việt + điều tên không nói: đơn vị, trường hợp biên). Quy tắc này thay cho "chú thích vừa phải" ở `web/`.
 - **Không hard-code chuỗi hay số:** chữ hiển thị ở `shared/const/copy.vi.ts`; giới hạn, thời lượng, ngưỡng ở `*.const.ts` (khớp backend); màu/khoảng cách chỉ qua token CSS (`styles/tokens.css`, bộ màu thương hiệu duy nhất; không hex ngoài tệp đó).
 - **SOLID** cho mọi mã; **OOP** cho lớp miền và dịch vụ (`Money`, `DateRange`, `RecoveryCode`, `ApiClient`); thành phần UI là hàm (idiom của React), tái sử dụng bằng ghép thành phần. Thành phần dùng chung ở `shared/ui`, không sao chép.
 - **ACID** là thuộc tính của DB (backend đã có). Phía FE áp dụng bản dịch ở mục 6 của chuẩn (cập nhật lạc quan hoàn lại được, nguồn sự thật duy nhất, hủy yêu cầu cũ, không mất bản nháp).

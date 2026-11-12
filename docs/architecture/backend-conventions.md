@@ -114,7 +114,7 @@ Tầng A (hỏi PO), B (quyết và ghi `decisions.md` §2), C (làm luôn): `.c
 
 | ID | Quy tắc | Thi hành |
 |---|---|---|
-| NAM-1 | Định danh bằng tiếng Anh; Javadoc, comment và message người dùng bằng tiếng Việt (đúng như code hiện có). | review |
+| NAM-1 | Định danh bằng tiếng Anh; Javadoc và comment bằng tiếng Anh (từ 12/11/2026, đợt nâng cấp portfolio); message cho người dùng bằng tiếng Việt. | review |
 | NAM-2 | Hậu tố: `*Controller`, `*Commands`/`*CommandHandler`, `*Queries`, `*Entity`, `*JpaRepository`, `Jpa*` (adapter), `*Mapper`. | mới · ArchUnit |
 | NAM-3 | Không dùng `Optional` làm tham số hay field; không trả `null` thay cho tập rỗng. | review |
 | NAM-4 | Định dạng mã tự động (Spotless) và chạy trong `check`. | mới · Gradle |
@@ -132,7 +132,7 @@ PO yêu cầu: tên theo nghĩa và một mẫu cho toàn source; gom hàm dùng
 | CON-2 | Không chuỗi ma thuật: mã lỗi, lời báo, khóa JSON, đường dẫn, tên header, regex, khóa cấu hình, JPQL đều nằm trong `*Constants`, `*ErrorCodes`, `*Messages`, `*Fields`. Ngoại lệ: chuỗi rỗng; chú thích khai báo `@SuppressWarnings`, `@Table`, `@Column`, `@JoinColumn`, `@Entity`; giá trị trong khai báo hằng `enum`; mã test | Checkstyle `IllegalTokenText` |
 | CON-3 | Không số ma thuật (ngoài -1, 0, 1, 2): giới hạn, thời lượng, kích thước, hệ số nằm trong `*Constants` | Checkstyle `MagicNumber` |
 | CON-4 | Mỗi hằng có Javadoc một dòng (nghĩa + đơn vị). Lời báo có tham số dùng `String.formatted` với `%s`/`%d` và ghi tham số trong Javadoc | review |
-| DOC-1 | Mọi method (kể cả private) có Javadoc ngay trên tên (trên các annotation): một câu tiếng Việt nói LÀM GÌ + điều tên không nói (đơn vị, trường hợp biên, ném lỗi gì). Ngoại lệ: `@Override` | Checkstyle `MissingJavadocMethod` |
+| DOC-1 | Mọi method (kể cả private) có Javadoc ngay trên tên (trên các annotation): một câu tiếng Anh nói LÀM GÌ + điều tên không nói (đơn vị, trường hợp biên, ném lỗi gì). Ngoại lệ: `@Override` | Checkstyle `MissingJavadocMethod` |
 | NAM-5 | Tên nói đúng nghĩa, theo một mẫu: lớp = danh từ theo vai trò (`TripCommandHandler`); method = động từ + đối tượng (`handleConcurrentModification`, `toPlaceView`); boolean `is/has/can`; chuyển đổi `toXxx`; kiểm tra `requireXxx` (ném lỗi) hoặc `isXxx` (trả boolean). Cấm tên lớp mơ hồ kết thúc bằng Helper, Util, Utils, Utility, Manager, Misc, Stuff, Base, Common, Data, Info, Thing. Không đặt tham số một chữ cái (trừ biến của `catch` và lambda ngắn) | Checkstyle `TypeName`; review |
 | DRY-1 | Logic hoặc giá trị dùng từ 2 nơi: gom về một chỗ, trong module (`<Module>Validation`, hàm private) hoặc `shared.kernel` nếu nhiều module cần (`Texts`, `ImmutableLists`, `CodedValue`). Trước khi viết hàm tiện ích, tìm trong `shared.kernel` | review |
 | SIM-1 | Tránh phức tạp: method ≤ 40 dòng, ≤ 6 tham số, độ phức tạp vòng ≤ 10, lồng if/for ≤ 2 tầng, biểu thức luận lý ≤ 4 toán tử, tệp ≤ 400 dòng. Vượt thì tách method nhỏ có tên nói nghĩa | Checkstyle |
