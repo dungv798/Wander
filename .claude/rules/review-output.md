@@ -1,6 +1,6 @@
 ---
 paths:
-  - docs/autopilot/**
+  - .claude/autopilot/**
   - docs/reviews/**
 ---
 # Review output contract

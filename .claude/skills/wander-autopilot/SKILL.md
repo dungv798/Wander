@@ -2,7 +2,7 @@
 name: wander-autopilot
 description: Run ONE focused Wander planning target end to end, unattended and resumable. Checklist of stages, parallel specialist reviews (max 2 rounds), reconcile, consolidate, validate, checkpointed report. Never edits the master plan, never promotes a proposal to a decision. Use `dry-run <target>` first or `resume`.
 argument-hint: "<focused target, e.g. 'Q16 auth and recovery'> | dry-run <target> | resume [run-id]"
-allowed-tools: Read Grep Glob Agent Write(/docs/autopilot/**) Edit(/docs/autopilot/**) Bash(node .claude/scripts/autopilot.mjs *)
+allowed-tools: Read Grep Glob Agent Write(/.claude/autopilot/**) Edit(/.claude/autopilot/**) Bash(node .claude/scripts/autopilot.mjs *)
 ---
 
 # wander-autopilot
@@ -19,8 +19,8 @@ You are the orchestrator and arbiter. State, limits and checks live in determini
 
 ## Hard rules (the guard hook enforces the starred ones)
 - Planning only. No product code, schemas, auth implementation, secrets. *
-- `docs/wander-master-plan.md` is read-only. *  Changes the plan would need go in a patch proposal file under `docs/autopilot/`, never in the plan.
-- During a run you may write only under `docs/autopilot/`; Bash is only `node .claude/scripts/autopilot.mjs …`. Read files ONLY with Read/Grep/Glob. Never use Bash for `cat`, `ls`, `head`, `sha256sum` or anything else: each such call is a guard denial, and three denials stop the run (`STOP_GUARD_DENIALS`). *
+- `docs/wander-master-plan.md` is read-only. *  Changes the plan would need go in a patch proposal file under `.claude/autopilot/`, never in the plan.
+- During a run you may write only under `.claude/autopilot/`; Bash is only `node .claude/scripts/autopilot.mjs …`. Read files ONLY with Read/Grep/Glob. Never use Bash for `cat`, `ls`, `head`, `sha256sum` or anything else: each such call is a guard denial, and three denials stop the run (`STOP_GUARD_DENIALS`). *
 - One CLI command per Bash call: no `&&`, `;`, pipes or redirects (the guard denies them, and denials count toward the stop).
 - Run `node .claude/scripts/autopilot.mjs cite-check <files>` on every file you wrote (reconcile, consolidate, deliverables, report) BEFORE `stage done`, and fix what it flags first. If a finished stage's saved output still needs a small correction, edit it and then run `node .claude/scripts/autopilot.mjs amend --file <path> --reason "<what changed and why>"` (logged; max 10). Never leave a finished output edited without `amend`: `validate` fails on the hash mismatch.
 - Never hand-edit `checkpoint.json`, `ACTIVE.json`, `dispatch.log`, `denials.log`, `authorizations.json`. *
@@ -37,7 +37,7 @@ You are the orchestrator and arbiter. State, limits and checks live in determini
 | `PROPOSED` / `INFERENCE` | Keep as is; say what approval would change. |
 | `CONTRADICTION` | Quote both statements verbatim in the decisions block; never resolve by overwriting. |
 | `UNVERIFIED` | State the missing evidence. |
-Auto-resolving into the canonical plan: `docs/autopilot/authorizations.json` lists authorized classes (currently none) and the plan is also write-protected. So: **record the recommendation, then continue all work that does not depend on that decision.** If a blocker stops further work, `stage block … --blocker "<precise blocker>"`, checkpoint, and report it once. Do not re-ask.
+Auto-resolving into the canonical plan: `.claude/autopilot/authorizations.json` lists authorized classes (currently none) and the plan is also write-protected. So: **record the recommendation, then continue all work that does not depend on that decision.** If a blocker stops further work, `stage block … --blocker "<precise blocker>"`, checkpoint, and report it once. Do not re-ask.
 
 ## Start
 1. `node .claude/scripts/autopilot.mjs init --target "<target>"`. If it refuses with `LEASE_ACTIVE`, do **Resume** instead. If `PREFLIGHT_FAILED`, report the failing checks and stop.
@@ -56,7 +56,7 @@ Repeat: `node .claude/scripts/autopilot.mjs next`.
 - Otherwise run every stage in `runnable` (independent stages in the same message). For each: `stage start <id>` → do the recipe → `stage done <id> --inputs <paths> --outputs <paths>` (or `stage fail`/`stage block`). A refused call (`exit 3`) is a stop signal, not something to work around.
 
 ## Stage recipes (details and templates: `.claude/skills/wander-autopilot/reference.md`)
-Run files go in `docs/autopilot/runs/<run-id>/` (`stages/`, `agents/`, `deliverables/`).
+Run files go in `.claude/autopilot/runs/<run-id>/` (`stages/`, `agents/`, `deliverables/`).
 1. **preflight** — `stage start preflight`, then `preflight` (it marks the stage). FAIL → `stage block` with the failing checks.
 2. **scope** — read the section map; Grep IDs from the target; Read only those plan sections. Write `stages/scope.md`: sections read, each ID with its status token, what is in/out of scope, which OPEN/PROPOSED items touch the target. Inputs: the plan and the section map.
 3. **route** — `route-hint --target "<target>"`; confirm or adjust (smallest set that covers the target; never "all four" by default). Write `stages/route.md` with agents chosen and one line each why, and why others were not.
@@ -72,5 +72,5 @@ Run files go in `docs/autopilot/runs/<run-id>/` (`stages/`, `agents/`, `delivera
 `node .claude/scripts/autopilot.mjs close --outcome complete` (or `blocked`). The script fills the files-changed and validation blocks of `report.md` itself and releases the lease. Then reply briefly: outcome, what was reviewed, decisions awaiting the user (one line each), report path, validation result, and say plainly if the executor was `emulated` or any check was `WARN`/`UNVERIFIED`. State that nothing in the master plan changed.
 
 ## Limits you must be honest about
-Permissions: this skill's `allowed-tools` apply only while the skill's own turn runs. Interactive sessions in a trusted folder also get the project `permissions.allow`. For `claude -p` in a folder that has not been trusted, the project allow rules are ignored, so the caller must grant the three narrow rules on the command line (see `docs/autopilot/README.md`); without them the run stops safely at the first save, as `blocked`.
+Permissions: this skill's `allowed-tools` apply only while the skill's own turn runs. Interactive sessions in a trusted folder also get the project `permissions.allow`. For `claude -p` in a folder that has not been trusted, the project allow rules are ignored, so the caller must grant the three narrow rules on the command line (see `.claude/autopilot/README.md`); without them the run stops safely at the first save, as `blocked`.
 You cannot bypass permission prompts, context limits, network failures or service interruptions. If the session ends mid-run the checkpoint survives; the user starts `resume`. Never claim a run was unattended-safe beyond what the checkpoint and `validation.json` show.

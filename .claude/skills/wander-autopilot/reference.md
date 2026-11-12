@@ -23,9 +23,9 @@ Independent work continues when one branch is blocked. A blocked stage blocks on
 Not enforceable in-session (use CLI flags): token/cost budget → `--max-budget-usd`, `--max-turns` with `claude -p`.
 
 ## What resume verifies
-Every finished stage records sha256 of its inputs and outputs. `resume` re-hashes them: a changed input, a modified or missing output, or a stale upstream stage marks the stage `stale` (re-done); everything else is reused. A changed plan is a hard stop. Files changed outside `docs/autopilot/` are reported as drift (and fail validation `write_scope`).
+Every finished stage records sha256 of its inputs and outputs. `resume` re-hashes them: a changed input, a modified or missing output, or a stale upstream stage marks the stage `stale` (re-done); everything else is reused. A changed plan is a hard stop. Files changed outside `.claude/autopilot/` are reported as drift (and fail validation `write_scope`).
 
-## Stage output files (all under `docs/autopilot/runs/<run-id>/`)
+## Stage output files (all under `.claude/autopilot/runs/<run-id>/`)
 `stages/scope.md`, `stages/route.md`, `stages/reconcile.md`, `stages/consolidate.md` · `agents/<agent>-r<n>.md` (verbatim specialist report) · `deliverables/*.md` · `report.md` · script-written: `checkpoint.json`, `dispatch.log`, `denials.log`, `validation.json`.
 
 ## report.md template (Vietnamese)

@@ -10,7 +10,7 @@ Java 21 · Spring Boot 4 · **Clean Architecture + DDD + CQRS** · modular monol
 - Versions: Java 21 + Spring Boot 4.1 (ADR-004, APPROVED). Open technical decisions for the PO: `docs/architecture/open-decisions.md` (AD-1…AD-10). Defaults, gates, progress: `docs/implementation/decisions.md`.
 - Setup and run guide for humans: `README.md` (install, run, dev mode, tests, env vars, troubleshooting).
 - Run/verify on Windows: `powershell -ExecutionPolicy Bypass -File tools\dev.ps1 <doctor|backend-test|e2e|verify|run>`; logs in `.logs/`. Never claim a test result you did not read from a log.
-- The old TypeScript server was removed (ADR-007, AD-10); the API contract lives in `web/src/api.ts` and the Java `*IT` tests. Old copy: `git show b6bd606:legacy/ts-server/<file>`.
+- The old TypeScript server was removed (ADR-007, AD-10); the API contract lives in `web/src/api.ts` and the Java `*IT` tests. Old copy: `git show b6bd606:legacy/ts-server/<file>`; removed docs/research, docs/autopilot, legacy/web-v1, tools/look|tvc|video: `git show pre-portfolio-cleanup:<path>`.
 
 ## Design first (PO, 25/10/2026) — `.claude/rules/design-first.md`
 **Cổng DG-1 ĐÃ ĐÓNG (PO duyệt 25/10/2026: `DR-010`; A1/A2/B1 ở `DR-011`): backend mới làm theo `docs/ux/data-needs.md` §2, dừng đúng chỗ khi gặp câu Tầng A còn mở (A3, B2, B3, B4, E1, Q-d, Q6–Q9, Q12).** Kỹ năng bắt buộc theo từng giai đoạn (`spec-driven-development`, `planning-and-task-breakdown`, `ui-ux-pro-max`, agent UX/UI, `wander-skeptic-qa`, `systematic-debugging`, `test-driven-development`), gọi bằng công cụ Skill và ghi "Công cụ đã dùng" cuối mỗi báo cáo. Điều phối: `/wander-design`. Đặc tả: `docs/ux/design-spec.md`.
@@ -46,7 +46,7 @@ Q13 and 1b questions Q6–Q9, Q12 (plus Q10, Q15 deferred). Resolved since the p
 
 ## Agents and skills (project-local) — guide: `docs/agent-system.md`
 - **Agents** (`.claude/agents/`, read-only, never delegate, contract preloaded from the `wander-kit` skill): `wander-software-architect` (design, system design, AD-x options, teaches), `wander-security-reviewer` (design + code), `wander-product-analyst` (scope, acceptance criteria), `wander-skeptic-qa` (challenges claims, edge cases, missing tests), `wander-code-reviewer` (Java/TS change review via code-review-graph).
-- **Skills** (type them): `/wander-status` (where are we, next step) · `/wander-council <AD-x|Q-x|câu hỏi>` (agents debate within a budget, PO decides, ADR written) · `/wander-feature <story>` (implement end to end) · `/wander-verify [cmd]` (real test runs, results from logs) · `/wander-review <target>` (analysis only) · `/wander-decision-audit <claim>` · `/wander-spec-review <file>` · `/wander-autopilot` (unattended planning runs, state in `docs/autopilot/`).
+- **Skills** (type them): `/wander-status` (where are we, next step) · `/wander-council <AD-x|Q-x|câu hỏi>` (agents debate within a budget, PO decides, ADR written) · `/wander-feature <story>` (implement end to end) · `/wander-verify [cmd]` (real test runs, results from logs) · `/wander-review <target>` (analysis only) · `/wander-decision-audit <claim>` · `/wander-spec-review <file>` · `/wander-autopilot` (unattended planning runs, state in `.claude/autopilot/`).
 - **Rules** (`.claude/rules/`): always — `planning-safety.md`, `decision-materiality.md`; loaded with matching files — `backend.md`, `frontend.md`, `wander-product-context.md` (plan section map), `review-output.md`.
 - **Budgets:** multi-agent ≤ 2 rounds and ≤ 6 dispatches; implementation ≤ 3 verify-fix cycles; off-scope questions are parked, not chased.
 

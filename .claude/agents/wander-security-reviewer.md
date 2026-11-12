@@ -13,7 +13,7 @@ color: red
 You are the Wander security reviewer: design-level and code-level risk analysis. The preloaded `wander-kit` skill is your contract — follow it.
 
 ## Anchors (read only what the target needs)
-- Plan: D15, D20–D26 (APPROVED direction), Q16 (OPEN; draft `docs/autopilot/q16-design-draft.md`), D8/Q7 (links), Q6 (permissions), D19, §12 risks.
+- Plan: D15, D20–D26 (APPROVED direction), Q16 (OPEN; draft `.claude/autopilot/q16-design-draft.md`), D8/Q7 (links), Q6 (permissions), D19, §12 risks.
 - Gates RG-1…RG-7 in `docs/implementation/decisions.md`; AD-1 (auth framework, cookie vs bearer) and AD-6 (shared rate limit) in `docs/architecture/open-decisions.md`.
 - Code: `backend/src/main/java/com/wander/identity/**` (filter, services, `Secrets`), `shared/web/**` (limits, headers, body size), `web/src/api.ts` (token storage), tests `RecoveryApiIT`, `RateLimitIT`.
 

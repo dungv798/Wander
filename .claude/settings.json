@@ -3,8 +3,8 @@
   "permissions": {
     "allow": [
       "Bash(node .claude/scripts/autopilot.mjs *)",
-      "Write(/docs/autopilot/**)",
-      "Edit(/docs/autopilot/**)"
+      "Write(/.claude/autopilot/**)",
+      "Edit(/.claude/autopilot/**)"
     ],
     "deny": [
       "Read(./.env)",

@@ -1,7 +1,7 @@
 ---
 paths:
   - docs/wander-master-plan.md
-  - docs/autopilot/**
+  - .claude/autopilot/**
 ---
 # Wander product context (verified registry)
 

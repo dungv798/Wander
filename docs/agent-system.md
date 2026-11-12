@@ -31,7 +31,7 @@ PO ──► Phiên Claude Code chính (điều phối + trọng tài duy nhất
 | Chạy test thật | `/wander-verify` (backend) · `/wander-verify e2e` · `/wander-verify verify` (tất cả) |
 | Kiểm một câu/đề xuất với kế hoạch | `/wander-decision-audit <câu>` |
 | Review spec trước khi code | `/wander-spec-review <file>` |
-| Review planning không cần người trông, tiếp tục được | `/wander-autopilot <mục tiêu>` (xem `docs/autopilot/README.md`) |
+| Review planning không cần người trông, tiếp tục được | `/wander-autopilot <mục tiêu>` (xem `.claude/autopilot/README.md`) |
 | Hỏi một góc nhìn duy nhất (rẻ nhất) | `@agent-wander-software-architect so sánh cookie HttpOnly và bearer cho AD-1, đừng chọn hộ` |
 
 `/wander-status` có thể được Claude tự gọi khi bạn hỏi "tiến độ thế nào"; các skill còn lại chỉ chạy khi bạn gõ (tắt tự kích hoạt để không tốn ngữ cảnh và không tự chạy việc tốn kém).
@@ -64,7 +64,7 @@ PO ──► Phiên Claude Code chính (điều phối + trọng tài duy nhất
 | Quy ước backend (tầng, công thức thay đổi, bẫy JPA, chạy test) | `.claude/rules/backend.md` | Khi mở file `backend/**` |
 | Quy ước giao diện + e2e | `.claude/rules/frontend.md` | Khi mở `web/**`, `e2e/**` |
 | Bản đồ mục của kế hoạch + sổ trạng thái + băm sha256 | `.claude/rules/wander-product-context.md` | Khi mở kế hoạch / autopilot; agent đọc theo yêu cầu |
-| Mẫu báo cáo đầy đủ | `.claude/rules/review-output.md` | Khi mở `docs/autopilot/**`, `docs/reviews/**` |
+| Mẫu báo cáo đầy đủ | `.claude/rules/review-output.md` | Khi mở `.claude/autopilot/**`, `docs/reviews/**` |
 | Hợp đồng chung của agent | `.claude/skills/wander-kit/SKILL.md` | Nạp sẵn vào mỗi agent (không phải lệnh) |
 | Bảng định tuyến + mẫu brief | `.claude/skills/wander-review/reference.md` | Khi chạy review/council/autopilot |
 | Ảnh chụp trạng thái | `tools/wander-status.mjs` | `/wander-status`, `/wander-verify` |
