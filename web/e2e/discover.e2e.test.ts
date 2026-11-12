@@ -356,7 +356,7 @@ test('điện thoại: nút Bản đồ ở điểm đến thu tờ về bản �
   await page.locator('.app[data-sheet="peek"]').waitFor();
   assert.equal(await page.locator('canvas.maplibregl-canvas').count(), 1);
   assert.deepEqual(await page.locator('.shell-map-view .tm-accessible button').evaluateAll(elements => elements.map(element => (element as HTMLElement).dataset['id'])), markers, 'thu tờ giữ nguyên ID dữ liệu; số ghim nhìn thấy có thể đổi theo camera');
-  await page.getByRole('button', { name: 'Mở lại bảng nội dung' }).click();
+  await page.getByRole('button', { name: 'Danh sách', exact: true }).click();
   await page.locator('.app[data-sheet="open"]').waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
@@ -389,6 +389,8 @@ test('lỗi tải kiểu bản đồ: có thông báo và nút Thử lại, các
   await page.locator('.shell-map-view .tm-err').waitFor({ timeout: 30000 });
   assert.equal(await page.locator('.dest-head h1').textContent(), 'Hà Giang', 'trang vẫn dựng được khi bản đồ lỗi');
   await page.unroute('**/styles/liberty');
+  // Điện thoại: dải xem trước phủ lên bản đồ ở chế độ danh sách, nên vào chế độ bản đồ rồi mới bấm Thử lại.
+  await page.getByRole('button', { name: 'Bản đồ', exact: true }).click();
   await page.locator('.shell-map-view .tm-err button').click();
   await waitForNativeMap(page, '.shell-map-view');
   await ctx.close();
@@ -398,6 +400,8 @@ test('bản đồ native: bàn phím mở chi tiết qua danh sách ghim thay th
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/dest/ha-giang');
   await waitForNativeMap(page, '.shell-map-view');
+  // Điện thoại: danh sách ghim chỉ dùng được ở chế độ bản đồ (chế độ danh sách chỉ còn dải xem trước).
+  await page.getByRole('button', { name: 'Bản đồ', exact: true }).click();
   const button = page.locator('.shell-map-view .tm-accessible button').first();
   const name = await button.textContent();
   await button.focus();

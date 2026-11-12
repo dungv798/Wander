@@ -148,10 +148,10 @@ test('trang chủ: không có bản đồ nhúng; đúng một canvas; nút Bả
   await waitForNativeMap(page, '.shell-map-view');
   assert.equal(await page.locator('canvas.maplibregl-canvas').count(), 1, 'toàn trang chỉ có một canvas bản đồ');
   assert.equal(await page.locator('.app').getAttribute('data-sheet'), 'open');
-  await page.getByRole('button', { name: 'Thu bảng để xem bản đồ', exact: true }).click();
+  await page.getByRole('button', { name: 'Bản đồ', exact: true }).click();
   await page.locator('.app[data-sheet="peek"]').waitFor();
   assert.equal(await page.locator('canvas.maplibregl-canvas').count(), 1, 'thu tờ không tạo thêm bản đồ');
-  await page.getByRole('button', { name: 'Mở lại bảng nội dung' }).click();
+  await page.getByRole('button', { name: 'Danh sách', exact: true }).click();
   await page.locator('.app[data-sheet="open"]').waitFor();
   assert.deepEqual(errors, []);
   await ctx.close();
