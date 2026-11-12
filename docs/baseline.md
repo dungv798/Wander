@@ -32,12 +32,17 @@ Where the jar weight is: `src/main/resources/catalog/photos` = 602 JPGs, **261,1
 
 ## Docker image and cold start
 
+> **Correction (2026-11-12, Phase 2a):** the first version of this file reported 939,060,713 bytes (~896 MiB) from
+> `docker image inspect --format '{{.Size}}'`. On Docker's containerd image store that figure counts the compressed blobs *and*
+> the unpacked snapshots, so it roughly double-counts. The layer sizes are the honest number: Alpine base 9.1 MB, apk packages 37.9 MB,
+> JRE 165 MB, `app.jar` 321 MB, `web/dist` 10.4 MB = 543.6 MB. The jar is 59 % of the image; there is no duplication.
+
 Command: `docker build -t wander:baseline .` (root `Dockerfile`: web build → backend bootJar → JRE runtime).
 
 | Metric | Value |
 |---|---|
 | Build wall time | 217 s (Docker layer-cache state not controlled) |
-| Image size | **939,060,713 bytes (~896 MiB)** as reported by `docker image inspect` (uncompressed) |
+| Image size (sum of layer sizes) | **543,604,736 bytes (518.4 MiB)**: `docker history wander:baseline --human=false --format '{{.Size}}'`, summed |
 
 Cold start: `docker run` on the compose network against an **empty** database (so Flyway applies all 19 migrations),
 polling `GET /actuator/health/readiness` every 0.5 s until HTTP 200. Env as in `Dockerfile`
