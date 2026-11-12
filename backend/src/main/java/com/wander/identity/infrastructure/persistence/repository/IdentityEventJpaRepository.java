@@ -2,6 +2,7 @@ package com.wander.identity.infrastructure.persistence.repository;
 
 import com.wander.identity.infrastructure.persistence.constant.IdentityQueryConstants;
 import com.wander.identity.infrastructure.persistence.entity.IdentityEventEntity;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,12 @@ public interface IdentityEventJpaRepository extends JpaRepository<IdentityEventE
 
     /** Sự kiện của danh tính, mới nhất trước (theo khóa tự tăng), giới hạn theo trang. */
     List<IdentityEventEntity> findByIdentityIdOrderByIdDesc(UUID identityId, Pageable page);
+
+    /** Inserts the event unless an event with the same id is already recorded; returns the rows inserted (0 = duplicate delivery). */
+    @Modifying
+    @Query(value = IdentityQueryConstants.INSERT_EVENT_IF_ABSENT, nativeQuery = true)
+    int insertIfAbsent(@Param("eventId") UUID eventId, @Param("identity") UUID identity, @Param("kind") String kind,
+                       @Param("deviceName") String deviceName, @Param("occurredAt") Instant occurredAt);
 
     /** Xóa các sự kiện cũ vượt quá {@code keep} sự kiện mới nhất của danh tính. */
     @Modifying

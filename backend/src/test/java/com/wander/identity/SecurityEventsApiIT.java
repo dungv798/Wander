@@ -3,6 +3,9 @@ package com.wander.identity;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wander.support.ApiTestSupport;
+import static org.awaitility.Awaitility.await;
+
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,17 @@ class SecurityEventsApiIT extends ApiTestSupport {
 
     private static final String EVENTS = "/api/events";
     private static final String SEEN = "/api/events/seen";
+
+    /**
+     * Reads the activity log once the outbox has delivered every pending security event: the log is written after the commit of the
+     * action that caused it (ADR-011), so a test must not read it before the recorder has run.
+     */
+    private Res events(String token) {
+        await().atMost(Duration.ofSeconds(10)).untilAsserted(() -> assertThat(jdbc.sql(
+                "SELECT count(*) FROM event_publication WHERE completion_date IS NULL AND listener_id LIKE '%SecurityEventRecorder%'")
+                .query(Long.class).single()).isZero());
+        return call("GET", EVENTS, token);
+    }
 
     private List<String> kinds(Res r) {
         List<String> kinds = new ArrayList<>();
@@ -36,7 +50,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
     void createdWithCode() {
         Res created = call("POST", "/api/identity", null, map("deviceName", "iPhone"));
         String token = created.str("token");
-        Res events = call("GET", EVENTS, token);
+        Res events = events(token);
         assertThat(events.status()).as(String.valueOf(events.body())).isEqualTo(200);
         assertThat(kinds(events)).containsExactly("code", "created");
         assertThat(events.str("events.1.deviceName")).isEqualTo("iPhone");
@@ -48,7 +62,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
     @DisplayName("tạo danh tính bỏ qua mã: chỉ có created")
     void createdWithoutCode() {
         Res created = call("POST", "/api/identity", null, map("skipRecoveryCode", true));
-        assertThat(kinds(call("GET", EVENTS, created.str("token")))).containsExactly("created");
+        assertThat(kinds(events(created.str("token")))).containsExactly("created");
     }
 
     @Test
@@ -56,7 +70,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
     void pairedRaisesUnseenUntilSeen() {
         User u = newUser();
         pair(u, "Laptop");
-        Res events = call("GET", EVENTS, u.token());
+        Res events = events(u.token());
         assertThat(kinds(events).get(0)).isEqualTo("paired");
         assertThat(events.str("events.0.deviceName")).isEqualTo("Laptop");
         assertThat(events.at("unseen")).isEqualTo(true);
@@ -64,10 +78,10 @@ class SecurityEventsApiIT extends ApiTestSupport {
         Res seen = call("POST", SEEN, u.token());
         assertThat(seen.status()).isEqualTo(200);
         assertThat(seen.at("unseen")).isEqualTo(false);
-        assertThat(call("GET", EVENTS, u.token()).at("unseen")).isEqualTo(false);
+        assertThat(events(u.token()).at("unseen")).isEqualTo(false);
 
         pair(u, "iPad");
-        assertThat(call("GET", EVENTS, u.token()).at("unseen")).as("thiết bị mới sau lần xem lại bật cờ").isEqualTo(true);
+        assertThat(events(u.token()).at("unseen")).as("thiết bị mới sau lần xem lại bật cờ").isEqualTo(true);
     }
 
     @Test
@@ -82,7 +96,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
             if ("Laptop".equals(view.get("deviceName"))) laptopId = (String) view.get("id");
         }
         assertThat(call("DELETE", "/api/sessions/" + laptopId, u.token()).status()).isEqualTo(204);
-        Res events = call("GET", EVENTS, u.token());
+        Res events = events(u.token());
         assertThat(kinds(events).get(0)).isEqualTo("revoked");
         assertThat(events.str("events.0.deviceName")).isEqualTo("Laptop");
         assertThat(events.at("unseen")).isEqualTo(false);
@@ -98,7 +112,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
                 map("code", u.recoveryCode(), "attemptId", attempt, "sessionToken", token, "deviceName", "Máy mới"));
         assertThat(call("POST", "/api/recovery/complete", null, map("attemptId", attempt, "replacementCode", started.str("replacementCode"))).status())
                 .isEqualTo(200);
-        Res events = call("GET", EVENTS, u.token());
+        Res events = events(u.token());
         assertThat(kinds(events).get(0)).isEqualTo("recovered");
         assertThat(events.str("events.0.deviceName")).isEqualTo("Máy mới");
         assertThat(events.at("unseen")).isEqualTo(true);
@@ -112,7 +126,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
         assertThat(begin.status()).as(String.valueOf(begin.body())).isEqualTo(200);
         Res confirm = call("POST", "/api/recovery-code/confirm", u.token(), map("pendingId", begin.str("pendingId"), "replacementCode", begin.str("replacementCode")));
         assertThat(confirm.status()).as(String.valueOf(confirm.body())).isEqualTo(200);
-        assertThat(kinds(call("GET", EVENTS, u.token())).get(0)).isEqualTo("code");
+        assertThat(kinds(events(u.token())).get(0)).isEqualTo("code");
     }
 
     @Test
@@ -124,9 +138,10 @@ class SecurityEventsApiIT extends ApiTestSupport {
                     .param(u.identityId()).param("cũ " + i).param(String.valueOf(i + 1)).update();
         }
         pair(u, "Laptop");
+        events(u.token());
         long count = jdbc.sql("SELECT count(*) FROM identity_events WHERE identity_id = ?::uuid").param(u.identityId()).query(Long.class).single();
         assertThat(count).isEqualTo(50);
-        Res events = call("GET", EVENTS, u.token());
+        Res events = events(u.token());
         assertThat(events.list("events")).hasSize(50);
         assertThat(kinds(events).get(0)).isEqualTo("paired");
     }
@@ -137,8 +152,8 @@ class SecurityEventsApiIT extends ApiTestSupport {
         User a = newUser();
         User b = newUser();
         pair(a, "Laptop");
-        assertThat(kinds(call("GET", EVENTS, b.token()))).as("B chỉ có sự kiện của chính mình").containsExactly("code", "created");
-        assertThat(call("GET", EVENTS, null).status()).isEqualTo(401);
+        assertThat(kinds(events(b.token()))).as("B chỉ có sự kiện của chính mình").containsExactly("code", "created");
+        assertThat(events(null).status()).isEqualTo(401);
         assertThat(call("POST", SEEN, null).status()).isEqualTo(401);
     }
 
@@ -154,8 +169,8 @@ class SecurityEventsApiIT extends ApiTestSupport {
             if ("Laptop".equals(view.get("deviceName"))) foreignId = (String) view.get("id");
         }
         assertThat(call("DELETE", "/api/sessions/" + foreignId, b.token()).status()).isEqualTo(404);
-        assertThat(kinds(call("GET", EVENTS, b.token()))).doesNotContain("revoked");
-        assertThat(kinds(call("GET", EVENTS, a.token()))).doesNotContain("revoked");
+        assertThat(kinds(events(b.token()))).doesNotContain("revoked");
+        assertThat(kinds(events(a.token()))).doesNotContain("revoked");
     }
 
     @Test
@@ -170,7 +185,7 @@ class SecurityEventsApiIT extends ApiTestSupport {
             assertThat(call("POST", "/api/recovery/complete", null, map("attemptId", attempt, "replacementCode", started.str("replacementCode")))
                     .status()).isEqualTo(200);
             code = started.str("replacementCode");
-            assertThat(call("GET", EVENTS, u.token()).at("unseen")).as("vòng %d", round).isEqualTo(true);
+            assertThat(events(u.token()).at("unseen")).as("vòng %d", round).isEqualTo(true);
             assertThat(call("POST", SEEN, u.token()).at("unseen")).isEqualTo(false);
         }
     }

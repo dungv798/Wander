@@ -43,7 +43,7 @@ public interface IdentityStore {
     Optional<Session> findActiveSession(UUID sessionId, UUID identityId);
 
     /** Ghi một sự kiện bảo mật rồi cắt bớt, chỉ giữ {@code keepLatest} sự kiện mới nhất của danh tính. */
-    void addEvent(SecurityEvent event, int keepLatest);
+    boolean addEvent(UUID eventId, SecurityEvent event, int keepLatest);
 
     /** Tối đa {@code limit} sự kiện gần nhất của danh tính, mới nhất trước. */
     List<SecurityEvent> recentEvents(UUID identityId, int limit);

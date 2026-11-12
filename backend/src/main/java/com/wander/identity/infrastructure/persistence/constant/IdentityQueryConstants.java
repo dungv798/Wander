@@ -20,6 +20,10 @@ public final class IdentityQueryConstants {
     private static final String VOID = "'" + IdentityPersistenceConstants.STATE_VOID + "'";
     private static final String APPROVED = "'" + IdentityPersistenceConstants.STATE_APPROVED + "'";
 
+    /** Idempotent append of a security event: a second delivery of the same event id inserts nothing. */
+    public static final String INSERT_EVENT_IF_ABSENT = "INSERT INTO identity_events (event_id, identity_id, kind, device_name, occurred_at) "
+            + "VALUES (:eventId, :identity, :kind, :deviceName, :occurredAt) ON CONFLICT (event_id) DO NOTHING";
+
     /** Xóa sự kiện cũ vượt quá số giữ lại của một danh tính (SQL thuần vì cần OFFSET). */
     public static final String PRUNE_EVENTS = "DELETE FROM identity_events WHERE identity_id = :identity AND id IN ("
             + "SELECT id FROM identity_events WHERE identity_id = :identity ORDER BY id DESC OFFSET :keep)";

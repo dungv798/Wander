@@ -1,0 +1,36 @@
+@startuml
+title <size:24>WanderApplication</size>
+
+set separator none
+top to bottom direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Component>
+
+System_Boundary("WanderApplication_boundary", "WanderApplication", $tags="") {
+  Container_Boundary("WanderApplication.WanderApplication_boundary", "WanderApplication", $tags="") {
+    Component(WanderApplication.WanderApplication.Shared, "Shared", $techn="Module", $descr="", $tags="", $link="")
+    Component(WanderApplication.WanderApplication.Catalog, "Catalog", $techn="Module", $descr="", $tags="", $link="")
+    Component(WanderApplication.WanderApplication.Identity, "Identity", $techn="Module", $descr="", $tags="", $link="")
+    Component(WanderApplication.WanderApplication.Planning, "Planning", $techn="Module", $descr="", $tags="", $link="")
+    Component(WanderApplication.WanderApplication.Rating, "Rating", $techn="Module", $descr="", $tags="", $link="")
+  }
+
+}
+
+Rel(WanderApplication.WanderApplication.Rating, WanderApplication.WanderApplication.Shared, "depends on", $techn="", $tags="", $link="")
+Rel(WanderApplication.WanderApplication.Identity, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
+Rel(WanderApplication.WanderApplication.Catalog, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
+Rel(WanderApplication.WanderApplication.Planning, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

@@ -85,6 +85,15 @@ public final class IdentityConstants {
     /** Số sự kiện bảo mật giữ lại cho mỗi danh tính và trả về cho "Hoạt động gần đây" (BE-11). */
     public static final int MAX_EVENTS_PER_IDENTITY = 50;
 
+    /** Metric: security events appended to the activity log; tagged with the event kind. */
+    public static final String METRIC_EVENTS_RECORDED = "wander.identity.events.recorded";
+
+    /** Metric: deliveries of a security event that was already recorded (at-least-once delivery), ignored by the recorder. */
+    public static final String METRIC_EVENTS_DUPLICATE = "wander.identity.events.duplicate";
+
+    /** Tag name that holds the event kind. */
+    public static final String METRIC_TAG_KIND = "kind";
+
     /** Biểu thức cấu hình lấy khóa băm mã khôi phục; KHÔNG có giá trị mặc định (thiếu thì Spring không khởi động). */
     public static final String RECOVERY_PEPPER_EXPRESSION = "${wander.security.recovery-pepper}";
 

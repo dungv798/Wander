@@ -1,0 +1,23 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`com.wander.shared`
+|Spring components
+|_Configuration properties_
+
+* `c.w.s.web.ratelimit.RateLimits.Properties`
+
+_Others_
+
+* `c.w.s.web.config.ApiWriteLimitConfig`
+* `c.w.s.web.config.JsonStrictnessConfig`
+* `c.w.s.web.config.OpenApiConfig`
+* `c.w.s.web.config.OpenApiRequestTypes`
+* `c.w.s.web.config.WebConfig`
+* `c.w.s.web.config.WebManifestMimeConfig`
+* `c.w.s.web.error.ApiExceptionHandler`
+* `c.w.s.web.json.WanderJsonModule`
+* `c.w.s.web.ratelimit.RateLimits`
+* `c.w.s.web.request.ClientAddress`
+* `c.w.s.web.request.EmptyBodyAdvice`
+|===

@@ -1,6 +1,23 @@
 # Cấu hình theo 12-factor: mọi giá trị môi trường lấy từ biến môi trường để chạy được cả máy cá nhân lẫn AWS
 # (ECS/App Runner đặt biến môi trường; mật khẩu DB lấy từ Secrets Manager — xem docs/architecture/aws-deployment.md).
 spring:
+  modulith:
+    events:
+      jdbc:
+        # The event publication table is created by Flyway (V21), never by Modulith (ddl-auto is validate).
+        schema-initialization:
+          enabled: false
+      # Completed publications stay in the table (status COMPLETED) so they can be counted and inspected.
+      completion-mode: update
+      # After a restart, publications that were stored but not completed are delivered again (at-least-once delivery).
+      republish-outstanding-events-on-restart: true
+  task:
+    execution:
+      pool:
+        # One worker: listeners run in publication order and use little memory on a 512 MiB instance.
+        core-size: 1
+        max-size: 1
+        queue-capacity: 1000
   jackson:
     mapper:
       # Strict request types: a number where a string is expected is an error, not silently converted (the API validates its own formats).

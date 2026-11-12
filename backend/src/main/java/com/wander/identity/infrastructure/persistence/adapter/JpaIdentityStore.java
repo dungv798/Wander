@@ -14,7 +14,6 @@ import com.wander.identity.infrastructure.persistence.constant.IdentityPersisten
 import com.wander.identity.infrastructure.persistence.entity.CodeReplacementEntity;
 import com.wander.identity.infrastructure.persistence.entity.DeviceLinkEntity;
 import com.wander.identity.infrastructure.persistence.entity.IdentityEntity;
-import com.wander.identity.infrastructure.persistence.entity.IdentityEventEntity;
 import com.wander.identity.infrastructure.persistence.entity.RecoveryAttemptEntity;
 import com.wander.identity.infrastructure.persistence.entity.RecoveryCodeEntity;
 import com.wander.identity.infrastructure.persistence.entity.SessionEntity;
@@ -113,14 +112,13 @@ class JpaIdentityStore implements IdentityStore {
     }
 
     @Override
-    public void addEvent(SecurityEvent event, int keepLatest) {
-        IdentityEventEntity entity = new IdentityEventEntity();
-        entity.setIdentityId(event.identityId());
-        entity.setKind(event.kind().code());
-        entity.setDeviceName(event.deviceName());
-        entity.setOccurredAt(event.occurredAt());
-        events.saveAndFlush(entity);
+    public boolean addEvent(UUID eventId, SecurityEvent event, int keepLatest) {
+        int inserted = events.insertIfAbsent(eventId, event.identityId(), event.kind().code(), event.deviceName(), event.occurredAt());
+        if (inserted == 0) {
+            return false;
+        }
         events.pruneOlderThan(event.identityId(), keepLatest);
+        return true;
     }
 
     @Override

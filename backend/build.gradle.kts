@@ -22,6 +22,13 @@ repositories {
     mavenCentral()
 }
 
+// Spring Modulith (ADR-011): module verification, the transactional event publication registry (outbox) and module documentation.
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.modulith:spring-modulith-bom:2.1.2")
+    }
+}
+
 dependencies {
     // Web (Spring MVC trên Tomcat), JPA/Hibernate, Flyway, Actuator (health check cho load balancer AWS)
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
@@ -33,6 +40,8 @@ dependencies {
     // Bean Validation for typed request records and the generated OpenAPI contract (served outside the "free" profile only)
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
+    implementation("org.springframework.modulith:spring-modulith-starter-core")
+    implementation("org.springframework.modulith:spring-modulith-starter-jdbc")
     implementation("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("org.postgresql:postgresql")
 
@@ -43,6 +52,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:testcontainers-postgresql")
+    testImplementation("org.springframework.modulith:spring-modulith-starter-test")
+    testImplementation("org.awaitility:awaitility")
+    testImplementation("org.springframework.modulith:spring-modulith-docs")
     testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
