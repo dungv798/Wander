@@ -1,6 +1,6 @@
 // Run: node --test .claude/scripts/autopilot.test.mjs
 // Each test works on a throw-away copy of the project, never on the real .claude/autopilot state.
-import test from 'node:test';
+import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -9,11 +9,21 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const REAL = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+/** Only what the autopilot reads or watches: copying the whole project (gigabytes of local data) filled the disk. */
+const SANDBOX_FILES = ['.claude', 'CLAUDE.md', 'docs/wander-master-plan.md', 'docs/agent-system.md'];
+const sandboxes = [];
 function sandbox() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wander-ap-'));
-  fs.cpSync(REAL, dir, { recursive: true, filter: (s) => !/[\\/](\.git|node_modules|\.gradle|\.logs|build|\.code-review-graph)([\\/]|$)/.test(s) && !/\.claude[\\/]autopilot[\\/](runs|ACTIVE\.json)/.test(s) });
+  sandboxes.push(dir);
+  for (const rel of SANDBOX_FILES) {
+    const from = path.join(REAL, rel);
+    if (!fs.existsSync(from)) continue;
+    fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    fs.cpSync(from, path.join(dir, rel), { recursive: true, filter: (s) => !/\.claude[\\/]autopilot[\\/](runs|ACTIVE\.json)/.test(s) });
+  }
   return dir;
 }
+after(() => { for (const dir of sandboxes) fs.rmSync(dir, { recursive: true, force: true }); });
 const cli = (dir, ...args) => { const r = spawnSync(process.execPath, [path.join(dir, '.claude/scripts/autopilot.mjs'), ...args], { cwd: dir, encoding: 'utf8' }); let j = null; try { j = JSON.parse(r.stdout); } catch { /* */ } return { code: r.status, json: j, err: r.stderr }; };
 const guard = (dir, payload) => { const r = spawnSync(process.execPath, [path.join(dir, '.claude/hooks/autopilot-guard.mjs')], { cwd: dir, input: typeof payload === 'string' ? payload : JSON.stringify({ cwd: dir, ...payload }), encoding: 'utf8' }); return { code: r.status, err: r.stderr }; };
 const w = (dir, rel, txt) => { fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true }); fs.writeFileSync(path.join(dir, rel), txt); };
@@ -178,7 +188,7 @@ test('validate + close: honest report passes; close writes script-generated bloc
   assert.equal(v.json.checks.find((c) => c.id === 'dispatch_evidence').status, 'WARN', 'emulated dispatches are flagged UNVERIFIED');
   const c = cli(d, 'close', '--outcome', 'complete'); assert.equal(c.code, 0, JSON.stringify(c.json));
   const rep = fs.readFileSync(path.join(d, run, 'report.md'), 'utf8');
-  assert.match(rep, /\| plan_unchanged \| PASS/); assert.match(rep, /docs\/autopilot\/runs\/v2\//);
+  assert.match(rep, /\| plan_unchanged \| PASS/); assert.match(rep, /\.claude\/autopilot\/runs\/v2\//);
   assert.equal(fs.existsSync(path.join(d, '.claude/autopilot/ACTIVE.json')), false);
   assert.equal(guard(d, { tool_name: 'Write', tool_input: { file_path: 'src/a.js' } }).code, 0, 'guard relaxes after close');
   assert.equal(cli(d, 'resume', '--run', 'v2').json.status, 'complete');

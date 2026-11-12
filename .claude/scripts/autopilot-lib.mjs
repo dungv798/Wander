@@ -112,7 +112,8 @@ export function watchedSet() {
   const w = {};
   const add = (rel) => { if (exists(rel)) w[rel] = sha256File(abs(rel)); };
   [PLAN, 'CLAUDE.md', '.claude/settings.json', AUTH, 'docs/agent-system.md'].forEach(add);
-  for (const rel of walk('.claude')) if (/\.(md|json|mjs)$/.test(rel) && !rel.endsWith('.test.mjs')) add(rel);
+  // The autopilot's own state (lease, run logs, checkpoints) changes by design; only the authorizations file is watched.
+  for (const rel of walk('.claude')) if (/\.(md|json|mjs)$/.test(rel) && !rel.endsWith('.test.mjs') && !(isUnder(rel, AP_DIR) && rel !== AUTH)) add(rel);
   return w;
 }
 
