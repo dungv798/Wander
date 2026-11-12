@@ -4,10 +4,10 @@ name: web-ci
 
 on:
   pull_request:
-    paths: ["web/**", "tools/catalog/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
+    paths: ["web/**", "backend/openapi.yaml", "tools/catalog/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
   push:
     branches: [main]
-    paths: ["web/**", "tools/catalog/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
+    paths: ["web/**", "backend/openapi.yaml", "tools/catalog/**", "package.json", "package-lock.json", ".github/workflows/web-ci.yml"]
 
 permissions:
   contents: read
@@ -37,6 +37,11 @@ jobs:
       - run: npm ci --no-audit --no-fund
         working-directory: .
       - run: npm ci --no-audit --no-fund
+      # The web types are generated from backend/openapi.yaml; a stale generated file would hide API drift.
+      - run: npm run gen:api
+        working-directory: .
+      - run: git diff --exit-code -- web/src/shared/api/contract.generated.ts
+        working-directory: .
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test

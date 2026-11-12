@@ -4,7 +4,7 @@ SHELL := /bin/sh
 GRADLE := cd backend && sh ./gradlew --console=plain
 
 .DEFAULT_GOAL := help
-.PHONY: help doctor docker-check db-up test check backend-build web-build web-check run e2e verify
+.PHONY: help doctor docker-check db-up test check backend-build web-build web-check gen-api run e2e verify
 
 help: ## List the targets
 	@grep -E '^[a-z0-9-]+:.*## ' $(MAKEFILE_LIST) | sed -E 's/:.*## /	/'
@@ -39,6 +39,10 @@ web-check: ## Web typecheck, lint, unit tests
 	npm --prefix web run typecheck
 	npm --prefix web run lint
 	npm --prefix web test
+
+gen-api: docker-check ## Regenerate backend/openapi.yaml from the application, then the web TypeScript types
+	cd backend && sh ./gradlew test --console=plain --tests com.wander.shared.OpenApiContractIT -Pwander.openapi.update=true
+	npm run gen:api
 
 run: db-up web-build ## Run backend (port 8787) serving web/dist; needs WANDER_RECOVERY_PEPPER (>= 32 bytes) in the environment
 	@test -n "$$WANDER_RECOVERY_PEPPER" || { echo "Set WANDER_RECOVERY_PEPPER to a random string of at least 32 bytes." >&2; exit 1; }

@@ -1,6 +1,7 @@
 import { ApiError } from '../../../shared/api/ApiError.ts';
 import type { ApiClient } from '../../../shared/api/ApiClient.ts';
 import { CLIENT_ERROR, HTTP } from '../../../shared/api/http.const.ts';
+import type { ApiMember } from '../../../shared/api/contract.ts';
 import type { Trip } from '../model/trip.types.ts';
 import type { DeletedTrip, ItemChange, ItemInput, NewTripInput, ScheduleChange, TripPatch, TripsGateway } from './TripsGateway.ts';
 import { detailItems, toTrash, toTrip } from './tripMapper.ts';
@@ -22,9 +23,9 @@ function pick(source: object, names: Readonly<Record<string, string>>): Body {
 }
 
 /** Tên trường FE → tên trường API của chuyến. */
-const TRIP_FIELDS = { name: 'name', destinationId: 'destination', startDate: 'startDate', endDate: 'endDate', budgetK: 'budget', styles: 'styles', pace: 'pace', datesTentative: 'datesTentative', kind: 'kind', interests: 'interests', cover: 'cover' } as const;
+const TRIP_FIELDS = { name: 'name', destinationId: 'destination', startDate: 'startDate', endDate: 'endDate', budgetK: 'budget', styles: 'styles', pace: 'pace', datesTentative: 'datesTentative', kind: 'kind', interests: 'interests', cover: 'cover' } as const satisfies Readonly<Record<string, ApiMember<'UpdateTripRequest'>>>;
 /** Tên trường FE → tên trường API của mục. */
-const ITEM_FIELDS = { type: 'type', title: 'title', placeId: 'placeId', day: 'day', position: 'position', timeOfDay: 'timeOfDay', durationMin: 'durationMin', note: 'note', costK: 'cost', included: 'included', referenceK: 'referenceCost', booking: 'booking' } as const;
+const ITEM_FIELDS = { type: 'type', title: 'title', placeId: 'placeId', day: 'day', position: 'position', timeOfDay: 'timeOfDay', durationMin: 'durationMin', note: 'note', costK: 'cost', included: 'included', referenceK: 'referenceCost', booking: 'booking' } as const satisfies Readonly<Record<string, ApiMember<'ItemRequest'>>>;
 
 /** Lấy phần tử `key` của thân phản hồi; thiếu hoặc sai dạng là lỗi nội bộ (không để giao diện dùng dữ liệu hỏng). */
 function part(body: unknown, key: string): Body {
