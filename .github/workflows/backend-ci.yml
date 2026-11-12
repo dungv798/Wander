@@ -5,10 +5,10 @@ name: backend-ci
 on:
   workflow_dispatch:
   pull_request:
-    paths: ["backend/**", ".gitleaks.toml", "tools/quality.ps1", ".github/workflows/backend-ci.yml"]
+    paths: ["backend/**", "Makefile", "tools/e2e.sh", ".gitleaks.toml", "tools/quality.ps1", ".github/workflows/backend-ci.yml"]
   push:
     branches: [main]
-    paths: ["backend/**", ".gitleaks.toml", "tools/quality.ps1", ".github/workflows/backend-ci.yml"]
+    paths: ["backend/**", "Makefile", "tools/e2e.sh", ".gitleaks.toml", "tools/quality.ps1", ".github/workflows/backend-ci.yml"]
 
 permissions:
   contents: read
@@ -32,6 +32,9 @@ jobs:
           distribution: temurin
           java-version: "21"
       - uses: gradle/actions/setup-gradle@v4
+      # The Makefile is the cross-platform entry point; -n parses it and prints the commands without running them.
+      - run: make -n test
+        working-directory: .
       # Testcontainers cần Docker; runner ubuntu có sẵn.
       - run: sh ./gradlew check --console=plain
       - uses: actions/upload-artifact@v4
