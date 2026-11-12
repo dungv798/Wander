@@ -1,6 +1,6 @@
 # ADR-018 — Rate limiting: a small in-memory fixed-window limiter, kept; what it costs and when to replace it
 
-- **Status:** `ACCEPTED` — records and justifies the approach already approved as AD-6 in [ADR-006](ADR-006-huong-trien-khai-aws.md) ("keep in-memory counters, exactly one task during RG-1; Redis deferred"). No behaviour changes with this ADR; it adds the alternatives that were weighed, the measured evidence, and the conditions under which the decision should be revisited. Added in the portfolio upgrade of 12/11/2026.
+- **Status:** `ACCEPTED` — records and justifies the approach already approved as AD-6 in [ADR-006](ADR-006-aws-fargate-cdk.md) ("keep in-memory counters, exactly one task during RG-1; Redis deferred"). No behaviour changes with this ADR; it adds the alternatives that were weighed, the measured evidence, and the conditions under which the decision should be revisited. Added in the portfolio upgrade of 12/11/2026.
 - **Related:** ADR-006 (AD-6, deployment), ADR-017 (the `429` is an RFC 9457 problem with code `RATE_LIMITED`), [`docs/operations/observability.md`](../../operations/observability.md) (the rejection counter).
 
 ## Context

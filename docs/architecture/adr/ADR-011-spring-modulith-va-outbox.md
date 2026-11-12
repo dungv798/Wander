@@ -37,10 +37,10 @@
 
 ## Implementation (12/11/2026, portfolio upgrade)
 
-The condition of this ADR is met (four business modules: `catalog`, `identity`, `planning`, `rating`), so the decision was carried out. Details and the reasoning for the chosen first use are in [`events.md`](events.md).
+The condition of this ADR is met (four business modules: `catalog`, `identity`, `planning`, `rating`), so the decision was carried out. Details and the reasoning for the chosen first use are in [`events.md`](../events.md).
 
 - **Dependencies:** Spring Modulith 2.1.2 (`spring-modulith-starter-core`, `spring-modulith-starter-jdbc`; tests: `spring-modulith-starter-test`, `spring-modulith-docs`). **Compatibility with Spring Boot 4.1.2 is now verified** by running the full backend build and tests. The constraint above that said `UNVERIFIED` is closed.
 - **Schema:** table `event_publication` (the v2 schema shipped in `spring-modulith-events-jdbc` 2.1.2) is created by Flyway `V21`; `spring.modulith.events.jdbc.schema-initialization.enabled=false`, completion mode `update` (completed rows stay, status `COMPLETED`).
 - **First use:** the identity security-event log. Services publish `SecurityEventOccurred` (a plain record in `identity.domain.model`) inside their transaction; `SecurityEventRecorder` (`@ApplicationModuleListener`) appends it to `identity_events` after commit, idempotently by event id (`V20`, unique `event_id`, `ON CONFLICT DO NOTHING`).
-- **Module rules:** `shared` is declared an OPEN module (`shared/package-info.java`); `ModulesTest` runs `ApplicationModules.verify()`, asserts that business modules depend only on `shared`, and regenerates the module diagrams in [`modules/`](modules/). ArchUnit stays for the layer rules.
+- **Module rules:** `shared` is declared an OPEN module (`shared/package-info.java`); `ModulesTest` runs `ApplicationModules.verify()`, asserts that business modules depend only on `shared`, and regenerates the module diagrams in [`modules/`](../modules/). ArchUnit stays for the layer rules.
 - **Honest finding:** the modules had no synchronous calls to each other and there is no cross-module cascade (for example identity deletion) in the product today, so there was no cross-module call to turn into an event. The first use is therefore an in-module decoupling, chosen because it shortens pessimistic-lock time in the recovery and pairing flows and isolates a failing log write from the user action. The mechanism is what a second module would subscribe to.
