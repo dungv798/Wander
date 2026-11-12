@@ -3,6 +3,7 @@ package com.wander.catalog;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.wander.catalog.application.query.CatalogQueries;
+import com.wander.catalog.application.query.PhotoUrls;
 import com.wander.catalog.domain.constant.CatalogConstants;
 import com.wander.catalog.domain.model.Destination;
 import com.wander.catalog.domain.model.GeoPoint;
@@ -40,6 +41,24 @@ class CatalogQueriesTest {
         assertThat(summary.coverPhoto().author()).isEqualTo(cover.author());
         assertThat(summary.coverPhoto().license()).isEqualTo(cover.license());
         assertThat(summary.coverPhoto().sourceUrl()).isEqualTo(cover.sourceUrl());
+    }
+
+    /** A photo with a thumbnail exposes its stable id, both URLs and a ready-made srcset; a single-size photo exposes neither thumb nor srcset. */
+    @Test
+    @DisplayName("PhotoView exposes stable id, thumbUrl and srcSet for two-variant photos")
+    void photoViewExposesVariants() {
+        Photo cover = new Photo("da-lat-ho-1-w1280-3fa9c1d2ab.webp", null, "Tác giả", "CC BY 4.0", "https://example.org/cover", "", "", "da-lat-ho-1-w480-0123456789.webp");
+        var view = queriesFor(destination(cover)).searchDestinations("").getFirst().coverPhoto();
+
+        assertThat(view.id()).isEqualTo("da-lat-ho-1");
+        assertThat(view.url()).isEqualTo("/catalog/photos/da-lat-ho-1-w1280-3fa9c1d2ab.webp");
+        assertThat(view.thumbUrl()).isEqualTo("/catalog/photos/da-lat-ho-1-w480-0123456789.webp");
+        assertThat(view.srcSet()).isEqualTo("/catalog/photos/da-lat-ho-1-w480-0123456789.webp 480w, /catalog/photos/da-lat-ho-1-w1280-3fa9c1d2ab.webp 1280w");
+
+        var single = queriesFor(destination(null)).destination("ha-giang").places().getFirst().photos().getFirst();
+        assertThat(single.thumbUrl()).isNull();
+        assertThat(single.srcSet()).isNull();
+        assertThat(single.id()).isEqualTo("place");
     }
 
     /** Domain cho phép thiếu tọa độ; read model giữ null và không ước tính khoảng cách. */
@@ -89,6 +108,6 @@ class CatalogQueriesTest {
             public List<ItineraryTemplate> templates(String destinationId) {
                 return List.of();
             }
-        });
+        }, new PhotoUrls(""));
     }
 }

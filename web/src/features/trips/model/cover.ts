@@ -25,7 +25,7 @@ export function parseCover(raw: unknown): TripCover | null {
 function catalogPhotos(dest: DestinationDetail): CoverPhoto[] {
   const seen = new Set<string>();
   return dest.places.flatMap(place => place.photos.flatMap(photo => {
-    const ref = COVER.photoPath.exec(photo.url)?.[1];
+    const ref = photo.id ?? COVER.photoPath.exec(photo.url)?.[1];
     if (!ref || ref.length > COVER.maxRefLength || seen.has(ref)) return [];
     seen.add(ref);
     return [{ ...photo, ref, place: place.name }];

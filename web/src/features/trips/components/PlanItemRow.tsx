@@ -1,6 +1,7 @@
 import { fill } from '../../../shared/const/copy.vi.ts';
 import { Icon } from '../../../shared/ui/Icon.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
+import { thumbOrUrl } from '../../discover/index.ts';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { itemName } from '../model/tripView.ts';
 import { TRIPS_COPY as T } from '../model/trips.copy.ts';
@@ -25,7 +26,7 @@ export function PlanItemRow({ itemId, day = '', index, existing = false, reason,
   const name = itemName(item, cat);
   return <li className="plan-stop" data-kept={existing}>
     <div className="plan-stop-photo">
-      {photo ? <RevealImage alt="" src={photo.url} loading="lazy" /> : <Icon semantic name="map-pin" />}
+      {photo ? <RevealImage alt="" src={thumbOrUrl(photo)} loading="lazy" /> : <Icon semantic name="map-pin" />}
       {index !== undefined ? <span>{index + 1}</span> : null}
     </div>
     <div className="plan-stop-main">

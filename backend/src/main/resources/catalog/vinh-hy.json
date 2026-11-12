@@ -194,25 +194,29 @@
       ],
       "photos": [
         {
-          "file": "vinh-vinh-hy-1.jpg",
+          "file": "vinh-vinh-hy-1-w1280-aabbea48ca.webp",
+          "thumbFile": "vinh-vinh-hy-1-w480-fda1c0b0b2.webp",
           "author": "Karel Bilek",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vinh_hy_bay.jpg"
         },
         {
-          "file": "vinh-vinh-hy-4.jpg",
+          "file": "vinh-vinh-hy-4-w1280-3cb89ab7c8.webp",
+          "thumbFile": "vinh-vinh-hy-4-w480-b16287eb9b.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A0ng_c%C3%A1_V%C4%A9nh_Hy.jpg"
         },
         {
-          "file": "vinh-vinh-hy-5.jpg",
+          "file": "vinh-vinh-hy-5-w1280-915e0ac87a.webp",
+          "thumbFile": "vinh-vinh-hy-5-w480-be3fb75bb5.webp",
           "author": "Windrain",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_th%C3%A1ng_02-2022.jpg"
         },
         {
-          "file": "vinh-vinh-hy-6.jpg",
+          "file": "vinh-vinh-hy-6-w1280-c4ae110fdd.webp",
+          "thumbFile": "vinh-vinh-hy-6-w480-9241c8e7a2.webp",
           "author": "Phương Huy",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(29).jpg"
@@ -260,25 +264,29 @@
       ],
       "photos": [
         {
-          "file": "thap-po-klong-garai-1.jpg",
+          "file": "thap-po-klong-garai-1-w1280-d5d0c40a0e.webp",
+          "thumbFile": "thap-po-klong-garai-1-w480-e46e913f0d.webp",
           "author": "Vinnie Cartabiano",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:-i---i-_(39930272721).jpg"
         },
         {
-          "file": "thap-po-klong-garai-2.jpg",
+          "file": "thap-po-klong-garai-2-w1280-166d1de253.webp",
+          "thumbFile": "thap-po-klong-garai-2-w480-fe3bb2cd4d.webp",
           "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_Po_Klaung_Garai,_Phan_Rang.JPG"
         },
         {
-          "file": "thap-po-klong-garai-3.jpg",
+          "file": "thap-po-klong-garai-3-w1280-82d32be8d9.webp",
+          "thumbFile": "thap-po-klong-garai-3-w480-ffc048305d.webp",
           "author": "Dongson*vmvn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_Po_Klaung_Garai,_Phan_Rang,_Ninh_Thu%E1%BA%ADn.JPG"
         },
         {
-          "file": "thap-po-klong-garai-4.jpg",
+          "file": "thap-po-klong-garai-4-w1280-96dc77ae48.webp",
+          "thumbFile": "thap-po-klong-garai-4-w480-4adb4eaada.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Po_Klong_Garai,_Champa_Hindu_temples_complex_03.jpg"
@@ -321,13 +329,15 @@
       ],
       "photos": [
         {
-          "file": "vuon-quoc-gia-nui-chua-1.jpg",
+          "file": "vuon-quoc-gia-nui-chua-1-w1280-1c7e7e1f19.webp",
+          "thumbFile": "vuon-quoc-gia-nui-chua-1-w480-8d338f6579.webp",
           "author": "Suriya Vij",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Turtle_Nesting_Beach,_Nui_Chua_National_Park.jpg"
         },
         {
-          "file": "vuon-quoc-gia-nui-chua-2.jpg",
+          "file": "vuon-quoc-gia-nui-chua-2-w1280-c258ba2c8f.webp",
+          "thumbFile": "vuon-quoc-gia-nui-chua-2-w480-125de49ae5.webp",
           "author": "Dotrihieu",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coastal_view_from_Nui_Chua_National_Park.jpg"
@@ -370,19 +380,22 @@
       ],
       "photos": [
         {
-          "file": "hang-rai-1.jpg",
+          "file": "hang-rai-1-w1280-6e0c134970.webp",
+          "thumbFile": "hang-rai-1-w480-1a752dd0fa.webp",
           "author": "Sketyl none",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%A0ng_R%C3%A1i_(37071594904).jpg"
         },
         {
-          "file": "hang-rai-2.jpg",
+          "file": "hang-rai-2-w1280-fa66acba82.webp",
+          "thumbFile": "hang-rai-2-w480-cb0ddc385d.webp",
           "author": "Sketyl none",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%A0ng_R%C3%A1i_(37780900851).jpg"
         },
         {
-          "file": "hang-rai-3.jpg",
+          "file": "hang-rai-3-w1280-91b5116743.webp",
+          "thumbFile": "hang-rai-3-w480-993ef6db2b.webp",
           "author": "P.T.Đ",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_R%C3%A1i_in_Ninh_Thuan_Province,_Vietnam.jpg"
@@ -425,13 +438,15 @@
       ],
       "photos": [
         {
-          "file": "bai-bien-ninh-chu-1.jpg",
+          "file": "bai-bien-ninh-chu-1-w1280-a58aa9cf42.webp",
+          "thumbFile": "bai-bien-ninh-chu-1-w480-5dfd40ffc4.webp",
           "author": "Lam Tr Th",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ninh_Chu_Beach_(B%C3%A3i_bi%E1%BB%83n_ninh_ch%E1%BB%AF_Ninh_Thu%E1%BA%ADn_)_-_panoramio.jpg"
         },
         {
-          "file": "bai-bien-ninh-chu-2.jpg",
+          "file": "bai-bien-ninh-chu-2-w1280-23f3a9f7dc.webp",
+          "thumbFile": "bai-bien-ninh-chu-2-w480-d20a70ad14.webp",
           "author": "Phương Huy at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_bi%E1%BB%83n_Ninh_Ch%E1%BB%AF.JPG"
@@ -473,7 +488,8 @@
       ],
       "photos": [
         {
-          "file": "ca-na-1.jpg",
+          "file": "ca-na-1-w1280-c2baf7b87b.webp",
+          "thumbFile": "ca-na-1-w480-1107717652.webp",
           "author": "Petertan at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Na_beach,_Ninh_Thuan.JPG"
@@ -521,7 +537,8 @@
       ],
       "photos": [
         {
-          "file": "thap-hoa-lai-1.jpg",
+          "file": "thap-hoa-lai-1-w1280-1e347ad3e5.webp",
+          "thumbFile": "thap-hoa-lai-1-w480-012a191299.webp",
           "author": "Original uploader was Dongson*vmvn at vi.wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_H%C3%B2a_Lai,_Ninh_Thu%E1%BA%ADn.JPG"
@@ -569,7 +586,8 @@
       ],
       "photos": [
         {
-          "file": "thap-po-rome-1.jpg",
+          "file": "thap-po-rome-1-w1280-c301fd5bd2.webp",
+          "thumbFile": "thap-po-rome-1-w480-cde0dba2d9.webp",
           "author": "Dongson*vmvn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A1p_Po_Rome,_Ninh_Thu%E1%BA%ADn.JPG"
@@ -605,13 +623,15 @@
       ],
       "photos": [
         {
-          "file": "food-extra-0-1.jpg",
+          "file": "food-extra-0-1-w1280-abc91f16db.webp",
+          "thumbFile": "food-extra-0-1-w480-270db5cdb1.webp",
           "author": "Saigon Time",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
         },
         {
-          "file": "food-extra-0-2.jpg",
+          "file": "food-extra-0-2-w1280-bcc2228638.webp",
+          "thumbFile": "food-extra-0-2-w480-63e5c92ba9.webp",
           "author": "VinhNguyen.1257",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_(Vietnamese_mini_pancake)_clay_cooking_pots.jpg"
@@ -647,7 +667,8 @@
       ],
       "photos": [
         {
-          "file": "food-banh-canh-cha-ca-2.jpg",
+          "file": "food-banh-canh-cha-ca-2-w1280-81327f10b4.webp",
+          "thumbFile": "food-banh-canh-cha-ca-2-w480-6a5c69ab12.webp",
           "author": "SauceSupreme",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_canh.jpg"
@@ -680,13 +701,15 @@
       ],
       "photos": [
         {
-          "file": "ref-vinh-hy-bau-truc-2.jpg",
+          "file": "ref-vinh-hy-bau-truc-2-w1280-3fff4a303e.webp",
+          "thumbFile": "ref-vinh-hy-bau-truc-2-w480-ba3cf48fc9.webp",
           "author": "Liftold",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%E1%BB%91m_B%C3%A0u_Tr%C3%BAc.JPG"
         },
         {
-          "file": "ref-vinh-hy-bau-truc-1.jpg",
+          "file": "ref-vinh-hy-bau-truc-1-w1280-7511d53f49.webp",
+          "thumbFile": "ref-vinh-hy-bau-truc-1-w480-5a152d29ac.webp",
           "author": "Windrain",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%A3p_t%C3%A1c_x%C3%A3_G%E1%BB%91m_Ch%C4%83m_B%C3%A0u_Tr%C3%BAc.jpg"
@@ -736,7 +759,8 @@
       "id": "commons-vinh-hy-20261105-27",
       "theme": "nghe",
       "caption": "Thuyền cá nghỉ trong vịnh Vĩnh Hy",
-      "file": "vinh-hy-moment-20261105-27.jpg",
+      "file": "vinh-hy-moment-20261105-27-w1280-3f26145ed3.webp",
+      "thumbFile": "vinh-hy-moment-20261105-27-w480-70eb95e306.webp",
       "author": "Phương Huy",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(35d).jpg"
@@ -745,7 +769,8 @@
       "id": "commons-vinh-hy-20261105-28",
       "theme": "nghe",
       "caption": "Một góc nuôi biển bên làng Vĩnh Hy",
-      "file": "vinh-hy-moment-20261105-28.jpg",
+      "file": "vinh-hy-moment-20261105-28-w1280-867339ee49.webp",
+      "thumbFile": "vinh-hy-moment-20261105-28-w480-f6c87bef0f.webp",
       "author": "Phương Huy",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(37).jpg"
@@ -754,7 +779,8 @@
       "id": "food-research-vinh-hy",
       "theme": "mon-an",
       "caption": "Bánh căn vùng nắng gió · một món muốn thử (ảnh minh họa)",
-      "file": "food-extra-0-1.jpg",
+      "file": "food-extra-0-1-w1280-abc91f16db.webp",
+      "thumbFile": "food-extra-0-1-w480-270db5cdb1.webp",
       "author": "Saigon Time",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_c%C4%83n_in_phan_rang,_vietnam.jpg"
@@ -763,14 +789,16 @@
       "id": "wave-pexels-35105957",
       "theme": "nghe",
       "caption": "Nhìn đất thành hình dưới đôi tay người thợ gốm",
-      "file": "wave-pexels-35105957.jpg",
+      "file": "wave-pexels-35105957-w1280-5998dc1876.webp",
+      "thumbFile": "wave-pexels-35105957-w480-1d145737ab.webp",
       "author": "Quang Nguyen Vinh",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/artisan-crafting-pottery-with-traditional-technique-35105957/"
     }
   ],
   "coverPhoto": {
-    "file": "vinh-hy-moment-20261105-27.jpg",
+    "file": "vinh-hy-moment-20261105-27-w1280-3f26145ed3.webp",
+    "thumbFile": "vinh-hy-moment-20261105-27-w480-70eb95e306.webp",
     "author": "Phương Huy",
     "license": "CC BY-SA 4.0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C4%A9nh_Hy_%E1%BB%9F_Ninh_Thu%E1%BA%ADn,_th%C3%A1ng_7_n%C4%83m_2012_(35d).jpg"

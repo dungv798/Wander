@@ -6,7 +6,7 @@ import { Icon } from '../../../shared/ui/Icon.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import { useToast } from '../../../shared/ui/Toast.tsx';
-import { firstPhotoUrl } from '../../discover/index.ts';
+import { firstPhotoThumbUrl } from '../../discover/index.ts';
 import { useReportError } from '../../identity/index.ts';
 import { useTripView } from '../hooks/TripViewContext.tsx';
 import { useTrips } from '../hooks/TripsProvider.tsx';
@@ -62,7 +62,7 @@ export function AddManySheet({ onClose }: { readonly onClose: () => void }) {
       </div>
       <div className="add-many-list"><fieldset disabled={busy}>
         <legend className="sr">{T.addMany.open}</legend>
-        {visible.map(place => <CheckRow key={place.id} checked={chosen.includes(place.id)} onChange={() => setChosen(value => togglePlace(value, place.id))}><span className="add-many-place"><RevealImage src={firstPhotoUrl(place)} width={PLACE_THUMB_SIZE} height={PLACE_THUMB_SIZE} loading="lazy" /><span><b>{place.name}</b><br /><span className="note">{place.categoryName}</span></span></span></CheckRow>)}
+        {visible.map(place => <CheckRow key={place.id} checked={chosen.includes(place.id)} onChange={() => setChosen(value => togglePlace(value, place.id))}><span className="add-many-place"><RevealImage src={firstPhotoThumbUrl(place)} width={PLACE_THUMB_SIZE} height={PLACE_THUMB_SIZE} loading="lazy" /><span><b>{place.name}</b><br /><span className="note">{place.categoryName}</span></span></span></CheckRow>)}
         {!visible.length ? <p role="status" className="note">{T.addMany.empty}</p> : null}
       </fieldset></div>
       <div className="add-many-footer glass-control">

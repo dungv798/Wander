@@ -26,3 +26,9 @@ test('ảnh chọn phải thuộc catalog điểm đến; ảnh ngoài 12 vẫn 
   assert.deepEqual(gradientStyle({ kind: 'gradient', ref: 'cover-1' }), { background: 'var(--cover-1)' });
   assert.equal(gradientStyle({ kind: 'gradient', ref: 'cover-999' }), undefined);
 });
+
+test('covers use the stable photo id, so a stored ref keeps working after the file is re-encoded under a hashed name', () => {
+  const hashed = { ...dest, places: [{ name: 'Hồ', photos: [{ id: 'ho-1', url: '/catalog/photos/ho-1-w1280-3fa9c1d2ab.webp', thumbUrl: '/catalog/photos/ho-1-w480-0123456789.webp', author: 'A', license: 'CC BY 4.0', sourceUrl: 'https://example.org/p' }] }] } as unknown as DestinationDetail;
+  assert.equal(coverPhotos(hashed)[0]?.ref, 'ho-1');
+  assert.equal(coverUrl({ kind: 'photo', ref: 'ho-1' }, hashed, 'old'), '/catalog/photos/ho-1-w1280-3fa9c1d2ab.webp');
+});

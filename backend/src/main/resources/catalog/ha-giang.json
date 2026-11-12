@@ -316,19 +316,22 @@
       ],
       "photos": [
         {
-          "file": "demo-people-29843930.jpg",
+          "file": "demo-people-29843930-w1280-20d70688a2.webp",
+          "thumbFile": "demo-people-29843930-w480-5052bde0cd.webp",
           "author": "Hòa Lê Đình",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/market-scene-with-traditional-attire-in-ha-giang-29843930/"
         },
         {
-          "file": "demo-people-16020286.jpg",
+          "file": "demo-people-16020286-w1280-8929474089.webp",
+          "thumbFile": "demo-people-16020286-w480-ac252fa2cc.webp",
           "author": "Pavithra Selvam",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/elderly-vegetables-seller-at-bazaar-16020286/"
         },
         {
-          "file": "demo-people-37970026.jpg",
+          "file": "demo-people-37970026-w1280-0a293ba759.webp",
+          "thumbFile": "demo-people-37970026-w480-673f886957.webp",
           "author": "Duong Nguyen",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/bustling-street-market-scene-in-ha-giang-vietnam-37970026/"
@@ -376,19 +379,22 @@
       ],
       "photos": [
         {
-          "file": "demo-people-30592067.jpg",
+          "file": "demo-people-30592067-w1280-ae900cf1b5.webp",
+          "thumbFile": "demo-people-30592067-w480-c188177b50.webp",
           "author": "Q. Hưng Phạm",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/traditional-vietnamese-scene-in-ha-giang-village-30592067/"
         },
         {
-          "file": "demo-people-37970026.jpg",
+          "file": "demo-people-37970026-w1280-0a293ba759.webp",
+          "thumbFile": "demo-people-37970026-w480-673f886957.webp",
           "author": "Duong Nguyen",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/bustling-street-market-scene-in-ha-giang-vietnam-37970026/"
         },
         {
-          "file": "demo-people-16020286.jpg",
+          "file": "demo-people-16020286-w1280-8929474089.webp",
+          "thumbFile": "demo-people-16020286-w480-ac252fa2cc.webp",
           "author": "Pavithra Selvam",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/elderly-vegetables-seller-at-bazaar-16020286/"
@@ -426,19 +432,22 @@
       ],
       "photos": [
         {
-          "file": "demo-people-30592067.jpg",
+          "file": "demo-people-30592067-w1280-ae900cf1b5.webp",
+          "thumbFile": "demo-people-30592067-w480-c188177b50.webp",
           "author": "Q. Hưng Phạm",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/traditional-vietnamese-scene-in-ha-giang-village-30592067/"
         },
         {
-          "file": "demo-people-29843930.jpg",
+          "file": "demo-people-29843930-w1280-20d70688a2.webp",
+          "thumbFile": "demo-people-29843930-w480-5052bde0cd.webp",
           "author": "Hòa Lê Đình",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/market-scene-with-traditional-attire-in-ha-giang-29843930/"
         },
         {
-          "file": "demo-people-16020286.jpg",
+          "file": "demo-people-16020286-w1280-8929474089.webp",
+          "thumbFile": "demo-people-16020286-w480-ac252fa2cc.webp",
           "author": "Pavithra Selvam",
           "license": "Pexels License",
           "sourceUrl": "https://www.pexels.com/photo/elderly-vegetables-seller-at-bazaar-16020286/"
@@ -476,25 +485,29 @@
       ],
       "photos": [
         {
-          "file": "deo-ma-pi-leng-1.jpg",
+          "file": "deo-ma-pi-leng-1-w800-5b0f3e9770.webp",
+          "thumbFile": "deo-ma-pi-leng-1-w480-75de65301d.webp",
           "author": "Hoach Le Dinh",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng,_Vietnam.jpg"
         },
         {
-          "file": "deo-ma-pi-leng-2.jpg",
+          "file": "deo-ma-pi-leng-2-w800-13ca1935ac.webp",
+          "thumbFile": "deo-ma-pi-leng-2-w480-0a254e7a93.webp",
           "author": "Hoach Le Dinh",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng_Pass,_Vietnam.jpg"
         },
         {
-          "file": "deo-ma-pi-leng-3.jpg",
+          "file": "deo-ma-pi-leng-3-w800-7d88ed82f6.webp",
+          "thumbFile": "deo-ma-pi-leng-3-w480-1eb58de1a1.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A8o_M%C3%A3_P%C3%AD_L%C3%A8ng,_th%C3%A1ng_2_n%C4%83m_2022.jpg"
         },
         {
-          "file": "deo-ma-pi-leng-4.jpg",
+          "file": "deo-ma-pi-leng-4-w800-84eba38bfa.webp",
+          "thumbFile": "deo-ma-pi-leng-4-w480-188a78b90f.webp",
           "author": "Khánh Hmoong",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg"
@@ -536,19 +549,22 @@
       ],
       "photos": [
         {
-          "file": "cot-co-lung-cu-1.jpg",
+          "file": "cot-co-lung-cu-1-w800-2fdc0ec91a.webp",
+          "thumbFile": "cot-co-lung-cu-1-w480-b6cdbd8b4f.webp",
           "author": "Leminhel at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%99t_c%E1%BB%9D_L%C5%A9ng_C%C3%BA.JPG"
         },
         {
-          "file": "cot-co-lung-cu-2.jpg",
+          "file": "cot-co-lung-cu-2-w800-89797d4c80.webp",
+          "thumbFile": "cot-co-lung-cu-2-w480-961d72bcf3.webp",
           "author": "Lost Cosmonauts",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lung_cu_view.jpg"
         },
         {
-          "file": "cot-co-lung-cu-3.jpg",
+          "file": "cot-co-lung-cu-3-w800-79a45e23d3.webp",
+          "thumbFile": "cot-co-lung-cu-3-w480-fbaec1bb1c.webp",
           "author": "Leminhel at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C3%A1_c%E1%BB%9D_Vi%E1%BB%87t_Nam_tr%C3%AAn_%C4%91%E1%BB%89nh_C%E1%BB%99t_c%E1%BB%9D_L%C5%A9ng_C%C3%BA.JPG"
@@ -591,25 +607,29 @@
       ],
       "photos": [
         {
-          "file": "deo-ma-pi-leng-1.jpg",
+          "file": "deo-ma-pi-leng-1-w800-5b0f3e9770.webp",
+          "thumbFile": "deo-ma-pi-leng-1-w480-75de65301d.webp",
           "author": "Hoach Le Dinh",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng,_Vietnam.jpg"
         },
         {
-          "file": "deo-ma-pi-leng-2.jpg",
+          "file": "deo-ma-pi-leng-2-w800-13ca1935ac.webp",
+          "thumbFile": "deo-ma-pi-leng-2-w480-0a254e7a93.webp",
           "author": "Hoach Le Dinh",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng_Pass,_Vietnam.jpg"
         },
         {
-          "file": "deo-ma-pi-leng-3.jpg",
+          "file": "deo-ma-pi-leng-3-w800-7d88ed82f6.webp",
+          "thumbFile": "deo-ma-pi-leng-3-w480-1eb58de1a1.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A8o_M%C3%A3_P%C3%AD_L%C3%A8ng,_th%C3%A1ng_2_n%C4%83m_2022.jpg"
         },
         {
-          "file": "deo-ma-pi-leng-4.jpg",
+          "file": "deo-ma-pi-leng-4-w800-84eba38bfa.webp",
+          "thumbFile": "deo-ma-pi-leng-4-w480-188a78b90f.webp",
           "author": "Khánh Hmoong",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg"
@@ -651,25 +671,29 @@
       ],
       "photos": [
         {
-          "file": "song-nho-que-1.jpg",
+          "file": "song-nho-que-1-w800-6d279bda3d.webp",
+          "thumbFile": "song-nho-que-1-w480-6aacf42477.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%C3%B4ng_Nho_Qu%E1%BA%BF_2022_-_NKS.jpg"
         },
         {
-          "file": "song-nho-que-2.jpg",
+          "file": "song-nho-que-2-w800-bc5d4e4d21.webp",
+          "thumbFile": "song-nho-que-2-w480-37c927e99d.webp",
           "author": "Benjamin Smith",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_9.jpg"
         },
         {
-          "file": "song-nho-que-3.jpg",
+          "file": "song-nho-que-3-w800-0e9f276109.webp",
+          "thumbFile": "song-nho-que-3-w480-37f1930f2a.webp",
           "author": "Benjamin Smith",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_1.jpg"
         },
         {
-          "file": "song-nho-que-4.jpg",
+          "file": "song-nho-que-4-w800-787ffc6664.webp",
+          "thumbFile": "song-nho-que-4-w480-b4bdbbb196.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:TuSan_Canyon.jpg"
@@ -721,19 +745,22 @@
       ],
       "photos": [
         {
-          "file": "dinh-vuong-1.jpg",
+          "file": "dinh-vuong-1-w800-f4c562db89.webp",
+          "thumbFile": "dinh-vuong-1-w480-a4d578e108.webp",
           "author": "Khánh Hmoong",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_th%E1%BB%B1_vua_M%C3%A8o_h%E1%BB%8D_V%C6%B0%C6%A1ng_-_Vuong%E2%80%99s_Palace,_%C4%90%E1%BB%93ng_V%C4%83n.jpg"
         },
         {
-          "file": "dinh-vuong-2.jpg",
+          "file": "dinh-vuong-2-w800-4cdb2722c4.webp",
+          "thumbFile": "dinh-vuong-2-w480-609316af1e.webp",
           "author": "BacLuong at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:SaPhin_HaGiang_Vietnam.JPG"
         },
         {
-          "file": "dinh-vuong-3.jpg",
+          "file": "dinh-vuong-3-w800-0b49f6c5d7.webp",
+          "thumbFile": "dinh-vuong-3-w480-153c530669.webp",
           "author": "The original uploader was BacLuong at Vietnamese Wikipedia.",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Turtle_Hill_@SaPhin_HaGiang_Vietnam.jpg"
@@ -785,19 +812,22 @@
       ],
       "photos": [
         {
-          "file": "pho-co-dong-van-1.jpg",
+          "file": "pho-co-dong-van-1-w800-b2515e7b9e.webp",
+          "thumbFile": "pho-co-dong-van-1-w480-3691aa12c1.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Qu%E1%BA%A3ng_%C4%90%C3%B4ng_22_H%C3%A0ng_Bu%E1%BB%93m.jpg"
         },
         {
-          "file": "pho-co-dong-van-2.jpg",
+          "file": "pho-co-dong-van-2-w800-b28c328137.webp",
+          "thumbFile": "pho-co-dong-van-2-w480-b21ae81701.webp",
           "author": "HuangWending18072009",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dong_Van_old_town.jpg"
         },
         {
-          "file": "pho-co-dong-van-3.jpg",
+          "file": "pho-co-dong-van-3-w800-f2b6c6fa61.webp",
+          "thumbFile": "pho-co-dong-van-3-w480-fbb0b23510.webp",
           "author": "Khoitran1957",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ph%E1%BB%97_C%E1%BB%95.jpg"
@@ -839,37 +869,43 @@
       ],
       "photos": [
         {
-          "file": "cao-nguyen-da-1.jpg",
+          "file": "cao-nguyen-da-1-w800-839d61eb8d.webp",
+          "thumbFile": "cao-nguyen-da-1-w480-7ca73903bd.webp",
           "author": "Zennysmile",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Road_to_Dong_Van.jpg"
         },
         {
-          "file": "cao-nguyen-da-2.jpg",
+          "file": "cao-nguyen-da-2-w800-c6002f41c0.webp",
+          "thumbFile": "cao-nguyen-da-2-w480-617c49fe13.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BA%BBm_Tu_S%E1%BA%A3n_2-2022.jpg"
         },
         {
-          "file": "cao-nguyen-da-3.jpg",
+          "file": "cao-nguyen-da-3-w800-16be5147bf.webp",
+          "thumbFile": "cao-nguyen-da-3-w480-5b7208a4d0.webp",
           "author": "Benjamin Smith",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_2.jpg"
         },
         {
-          "file": "cao-nguyen-da-4.jpg",
+          "file": "cao-nguyen-da-4-w1280-359060bfca.webp",
+          "thumbFile": "cao-nguyen-da-4-w480-9aa529b434.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_%C4%91%C3%A1_m%E1%BA%B7t_tr%C4%83ng_%C4%90%E1%BB%93ng_V%C4%83n_-_NKS.jpg"
         },
         {
-          "file": "cao-nguyen-da-5.jpg",
+          "file": "cao-nguyen-da-5-w1280-288d6b85a1.webp",
+          "thumbFile": "cao-nguyen-da-5-w480-3042958854.webp",
           "author": "Hoangvantoanajc",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_nguy%C3%AAn_%C4%91%C3%A1.JPG"
         },
         {
-          "file": "cao-nguyen-da-6.jpg",
+          "file": "cao-nguyen-da-6-w1280-da8c6e4bfa.webp",
+          "thumbFile": "cao-nguyen-da-6-w480-ecaa3aa013.webp",
           "author": "BacLuong at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:SaPhin_HaGiang_Vietnam.JPG"
@@ -911,25 +947,29 @@
       ],
       "photos": [
         {
-          "file": "hoang-su-phi-1.jpg",
+          "file": "hoang-su-phi-1-w800-01c5522837.webp",
+          "thumbFile": "hoang-su-phi-1-w480-d6fc00562e.webp",
           "author": "Quangpraha",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ru%E1%BB%99ng_b%E1%BA%ADc_thang_%E1%BB%9F_Ho%C3%A0ng_Su_Ph%C3%AC.jpg"
         },
         {
-          "file": "hoang-su-phi-2.jpg",
+          "file": "hoang-su-phi-2-w800-635f36a91f.webp",
+          "thumbFile": "hoang-su-phi-2-w480-e6f95dc4ba.webp",
           "author": "Nguyễn Trọng Nguyễn 2000",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:PH%C3%99_SA_TR%C3%8AN_CAO_NGUY%C3%8AN_%C4%90%C3%81.jpg"
         },
         {
-          "file": "hoang-su-phi-3.jpg",
+          "file": "hoang-su-phi-3-w800-8fefb1cc9d.webp",
+          "thumbFile": "hoang-su-phi-3-w480-0a3db5a8ae.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3n_Ph%C3%B9ng_-_NKS.jpg"
         },
         {
-          "file": "hoang-su-phi-4.jpg",
+          "file": "hoang-su-phi-4-w800-45c6684b86.webp",
+          "thumbFile": "hoang-su-phi-4-w480-6f37059fa0.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ru%E1%BB%99ng_b%E1%BA%ADc_thang_B%E1%BA%A3n_Ph%C3%B9ng_1_-_NKS.jpg"
@@ -976,13 +1016,15 @@
       ],
       "photos": [
         {
-          "file": "cong-troi-quan-ba-1.jpg",
+          "file": "cong-troi-quan-ba-1-w800-aff1ff8d92.webp",
+          "thumbFile": "cong-troi-quan-ba-1-w480-ec094222ee.webp",
           "author": "BacLuong at Vietnamese Wikipedia",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:DongHa-QuanBa_HaGiang%272007.jpg"
         },
         {
-          "file": "cong-troi-quan-ba-2.jpg",
+          "file": "cong-troi-quan-ba-2-w800-8b8a01e6c0.webp",
+          "thumbFile": "cong-troi-quan-ba-2-w480-3502b55961.webp",
           "author": "The original uploader was Thái Nhi at Vietnamese Wikipedia.",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:DuonglencongtroiQuanBa.jpg"
@@ -1025,7 +1067,8 @@
       ],
       "photos": [
         {
-          "file": "tay-con-linh-1.jpg",
+          "file": "tay-con-linh-1-w800-7f8787589c.webp",
+          "thumbFile": "tay-con-linh-1-w480-3c49e51e4d.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tayconlinh_summit.jpg"
@@ -1058,7 +1101,8 @@
       "tips": [],
       "photos": [
         {
-          "file": "nui-co-tien-1.jpg",
+          "file": "nui-co-tien-1-w1280-7505679fc5.webp",
+          "thumbFile": "nui-co-tien-1-w480-490be66d00.webp",
           "author": "Sketyl none",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:N%C3%BAi_C%C3%B4_Ti%C3%AAn,_Qu%E1%BA%A3n_B%E1%BA%A1_(47742798901).jpg"
@@ -1091,13 +1135,15 @@
       "tips": [],
       "photos": [
         {
-          "file": "cot-moc-km0-ha-giang-1.jpg",
+          "file": "cot-moc-km0-ha-giang-1-w1280-ff97de26d5.webp",
+          "thumbFile": "cot-moc-km0-ha-giang-1-w480-46c31637a2.webp",
           "author": "HuangWending18072009",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milestone_0_in_Ha_Giang_Province.jpg"
         },
         {
-          "file": "cot-moc-km0-ha-giang-2.jpg",
+          "file": "cot-moc-km0-ha-giang-2-w1280-880231a775.webp",
+          "thumbFile": "cot-moc-km0-ha-giang-2-w480-11b1417b2c.webp",
           "author": "Vuong Tri Binh",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ha_Giang_Km0_in_2014_02.jpg"
@@ -1156,7 +1202,8 @@
       "tips": [],
       "photos": [
         {
-          "file": "lang-van-hoa-lung-cam-1.jpg",
+          "file": "lang-van-hoa-lung-cam-1-w1280-4a63071256.webp",
+          "thumbFile": "lang-van-hoa-lung-cam-1-w480-cb685b8a0b.webp",
           "author": "Vuong Tri Binh",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lungcam_cultural_tourist_village_farms_in_2014.jpg"
@@ -1293,13 +1340,15 @@
       "tips": [],
       "photos": [
         {
-          "file": "doc-tham-ma-1.jpg",
+          "file": "doc-tham-ma-1-w1280-91da0e37f9.webp",
+          "thumbFile": "doc-tham-ma-1-w480-0a0120f72d.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:D%E1%BB%91c_Th%E1%BA%A9m_M%C3%A3_2022_-_NKS.jpg"
         },
         {
-          "file": "doc-tham-ma-2.jpg",
+          "file": "doc-tham-ma-2-w1280-27f84cecec.webp",
+          "thumbFile": "doc-tham-ma-2-w480-ef6baf0956.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tham_Ma_pass_-_Dong_Van.jpg"
@@ -1410,7 +1459,8 @@
       "tips": [],
       "photos": [
         {
-          "file": "cho-meo-vac-1.jpg",
+          "file": "cho-meo-vac-1-w1280-01455a78cf.webp",
+          "thumbFile": "cho-meo-vac-1-w480-49bdd676da.webp",
           "author": "HuangWending18072009",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Meo_Vac_Center_Market.jpg"
@@ -1446,13 +1496,15 @@
       ],
       "photos": [
         {
-          "file": "food-banh-cuon-1.jpg",
+          "file": "food-banh-cuon-1-w1280-f32e248776.webp",
+          "thumbFile": "food-banh-cuon-1-w480-2f8a583295.webp",
           "author": "Lưu Ly",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
         },
         {
-          "file": "food-banh-cuon-2.jpg",
+          "file": "food-banh-cuon-2-w1280-3a5ea6bde4.webp",
+          "thumbFile": "food-banh-cuon-2-w480-7cb529751a.webp",
           "author": "Casablanca1911 at vi.wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_cu%E1%BB%91n_Thanh_Tr%C3%AC.jpg"
@@ -1488,7 +1540,8 @@
       ],
       "photos": [
         {
-          "file": "food-thang-co-1.jpg",
+          "file": "food-thang-co-1-w1280-58712c7b5a.webp",
+          "thumbFile": "food-thang-co-1-w480-b1cfc2c2db.webp",
           "author": "Alpha",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BA%AFng_c%E1%BB%91.jpg"
@@ -1524,7 +1577,8 @@
       ],
       "photos": [
         {
-          "file": "food-extra-9-1.jpg",
+          "file": "food-extra-9-1-w1280-db914d593b.webp",
+          "thumbFile": "food-extra-9-1-w480-887a58a911.webp",
           "author": "Khương Việt Hà",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:X%C3%B4i_ng%C5%A9_s%E1%BA%AFc.JPG"
@@ -1608,7 +1662,8 @@
       "id": "commons-ha-giang-20261105-4",
       "theme": "cho",
       "caption": "Chợ Sà Phìn trong một sáng mưa",
-      "file": "ha-giang-moment-20261105-4.jpg",
+      "file": "ha-giang-moment-20261105-4-w1280-15fa79e278.webp",
+      "thumbFile": "ha-giang-moment-20261105-4-w480-b1c00aa50d.webp",
       "author": "Vuong Tri Binh",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sa_Phin_Hmong_marketplace_during_the_rain_1.jpg"
@@ -1617,7 +1672,8 @@
       "id": "commons-ha-giang-20261105-20",
       "theme": "cho",
       "caption": "Những sạp rau ở chợ vùng cao Hà Giang",
-      "file": "ha-giang-moment-20261105-20.jpg",
+      "file": "ha-giang-moment-20261105-20-w1280-c8c313c526.webp",
+      "thumbFile": "ha-giang-moment-20261105-20-w480-1fd0215ad5.webp",
       "author": "Vuong Tri Binh",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rural_market_sellers_in_Ha_Giang_province_in_2014.jpg"
@@ -1626,7 +1682,8 @@
       "id": "pexels-37970026",
       "theme": "cho",
       "caption": "Một sáng chợ Hà Giang, rẽ vào con ngõ đầy sắc màu",
-      "file": "pexels-37970026.jpg",
+      "file": "pexels-37970026-w1280-ced4231365.webp",
+      "thumbFile": "pexels-37970026-w480-4acaec9b76.webp",
       "author": "Duong Nguyen",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/bustling-street-market-scene-in-ha-giang-vietnam-37970026/"
@@ -1635,7 +1692,8 @@
       "id": "pexels-16020286",
       "theme": "nghe",
       "caption": "Một góc bán rau ở chợ Hà Giang",
-      "file": "pexels-16020286.jpg",
+      "file": "pexels-16020286-w1280-241c62f3b8.webp",
+      "thumbFile": "pexels-16020286-w480-f6e05f454d.webp",
       "author": "Pavithra Selvam",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/elderly-vegetables-seller-at-bazaar-16020286/"
@@ -1644,7 +1702,8 @@
       "id": "food-research-ha-giang",
       "theme": "mon-an",
       "caption": "Bánh cuốn Đồng Văn · một món muốn thử (ảnh minh họa)",
-      "file": "food-banh-cuon-1.jpg",
+      "file": "food-banh-cuon-1-w1280-f32e248776.webp",
+      "thumbFile": "food-banh-cuon-1-w480-2f8a583295.webp",
       "author": "Lưu Ly",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
@@ -1653,14 +1712,16 @@
       "id": "wave-pexels-32727685",
       "theme": "nghe",
       "caption": "Một góc phơi ngô và nhịp sống Hà Giang",
-      "file": "wave-pexels-32727685.jpg",
+      "file": "wave-pexels-32727685-w1280-e7ef071d17.webp",
+      "thumbFile": "wave-pexels-32727685-w480-899c546d13.webp",
       "author": "Vietnam Hidden Light",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/traditional-vietnamese-weaving-scene-in-ha-giang-32727685/"
     }
   ],
   "coverPhoto": {
-    "file": "deo-ma-pi-leng-1.jpg",
+    "file": "deo-ma-pi-leng-1-w800-5b0f3e9770.webp",
+    "thumbFile": "deo-ma-pi-leng-1-w480-75de65301d.webp",
     "author": "Hoach Le Dinh",
     "license": "CC0",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A3_P%C3%AD_L%C3%A8ng,_Vietnam.jpg"

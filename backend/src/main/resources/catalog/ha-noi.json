@@ -969,13 +969,15 @@
       ],
       "photos": [
         {
-          "file": "ho-hoan-kiem-1.jpg",
+          "file": "ho-hoan-kiem-1-w1280-c5d8672f8e.webp",
+          "thumbFile": "ho-hoan-kiem-1-w480-9d0d48e430.webp",
           "author": "Chuhai07",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoan_Kiem_10082026.jpg"
         },
         {
-          "file": "ho-hoan-kiem-2.jpg",
+          "file": "ho-hoan-kiem-2-w1280-84ba2bc74f.webp",
+          "thumbFile": "ho-hoan-kiem-2-w480-9cc31ac8a5.webp",
           "author": "Bem photography:",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_Hoan_Kiem_(13574475044).jpg"
@@ -1023,7 +1025,8 @@
       ],
       "photos": [
         {
-          "file": "den-ngoc-son-1.jpg",
+          "file": "den-ngoc-son-1-w1280-9508f8388f.webp",
+          "thumbFile": "den-ngoc-son-1-w480-ab6b2acd0b.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%95ng_%C4%91%E1%BB%81n_Ng%E1%BB%8Dc_S%C6%A1n.jpg"
@@ -1061,19 +1064,22 @@
       ],
       "photos": [
         {
-          "file": "van-mieu-quoc-tu-giam-1.jpg",
+          "file": "van-mieu-quoc-tu-giam-1-w1280-232121526c.webp",
+          "thumbFile": "van-mieu-quoc-tu-giam-1-w480-0515e9be66.webp",
           "author": "The original uploader was Chuoibk at English Wikipedia .",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hanoi_Temple_of_Literature.jpg"
         },
         {
-          "file": "van-mieu-quoc-tu-giam-2.jpg",
+          "file": "van-mieu-quoc-tu-giam-2-w1280-6b6fa5b42c.webp",
+          "thumbFile": "van-mieu-quoc-tu-giam-2-w480-25383d4b58.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:03801-Hanoi_(32800622512).jpg"
         },
         {
-          "file": "van-mieu-quoc-tu-giam-3.jpg",
+          "file": "van-mieu-quoc-tu-giam-3-w1280-1c25067d01.webp",
+          "thumbFile": "van-mieu-quoc-tu-giam-3-w480-a4f38dce7c.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:03806-Hanoi_(32111269204).jpg"
@@ -1111,13 +1117,15 @@
       ],
       "photos": [
         {
-          "file": "lang-chu-tich-ho-chi-minh-1.jpg",
+          "file": "lang-chu-tich-ho-chi-minh-1-w1280-c82f675d9a.webp",
+          "thumbFile": "lang-chu-tich-ho-chi-minh-1-w480-f30bcc38d9.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_B%C3%A1c_-_NKS.jpg"
         },
         {
-          "file": "lang-chu-tich-ho-chi-minh-2.jpg",
+          "file": "lang-chu-tich-ho-chi-minh-2-w1280-338c7fcd3c.webp",
+          "thumbFile": "lang-chu-tich-ho-chi-minh-2-w480-21b3e4df31.webp",
           "author": "Gregor Dodson",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho_chi_minh_mausoleum.jpg"
@@ -1156,19 +1164,22 @@
       ],
       "photos": [
         {
-          "file": "hoang-thanh-thang-long-1.jpg",
+          "file": "hoang-thanh-thang-long-1-w1280-4d8a15d0d7.webp",
+          "thumbFile": "hoang-thanh-thang-long-1-w480-2ab557d771.webp",
           "author": "Grenouille vert",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Main_Gate_-_Citadel_of_Hanoi.jpg"
         },
         {
-          "file": "hoang-thanh-thang-long-2.jpg",
+          "file": "hoang-thanh-thang-long-2-w1280-4424b103dd.webp",
+          "thumbFile": "hoang-thanh-thang-long-2-w480-e7a181f6e0.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:03934-Hanoi_(32573170290).jpg"
         },
         {
-          "file": "hoang-thanh-thang-long-3.jpg",
+          "file": "hoang-thanh-thang-long-3-w1280-7babe832f1.webp",
+          "thumbFile": "hoang-thanh-thang-long-3-w480-da291c6ada.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:04529-Hanoi_(32206504662).jpg"
@@ -1216,19 +1227,22 @@
       ],
       "photos": [
         {
-          "file": "chua-mot-cot-1.jpg",
+          "file": "chua-mot-cot-1-w1280-aac1e19365.webp",
+          "thumbFile": "chua-mot-cot-1-w480-d2394f3f4f.webp",
           "author": "Clay Gilliland",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hanoi,_Vietnam_(12041825854).jpg"
         },
         {
-          "file": "chua-mot-cot-2.jpg",
+          "file": "chua-mot-cot-2-w1280-022dc9831d.webp",
+          "thumbFile": "chua-mot-cot-2-w480-960a78e0d9.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:04254-Hanoi_(31979406784).jpg"
         },
         {
-          "file": "chua-mot-cot-3.jpg",
+          "file": "chua-mot-cot-3-w1280-9df57494fe.webp",
+          "thumbFile": "chua-mot-cot-3-w480-942997f0c6.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:04261-Hanoi_(32007887633).jpg"
@@ -1276,13 +1290,15 @@
       ],
       "photos": [
         {
-          "file": "nha-tho-lon-ha-noi-1.jpg",
+          "file": "nha-tho-lon-ha-noi-1-w1280-638835072a.webp",
+          "thumbFile": "nha-tho-lon-ha-noi-1-w480-cb0694ea32.webp",
           "author": "Bonjin/凡人[ラナ]",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hanoi_sjc.jpg"
         },
         {
-          "file": "nha-tho-lon-ha-noi-2.jpg",
+          "file": "nha-tho-lon-ha-noi-2-w1280-2c319562b7.webp",
+          "thumbFile": "nha-tho-lon-ha-noi-2-w480-2d4b454aa7.webp",
           "author": "John Ragai",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:St._Joseph%27s_Cathedral_-_50129345872.jpg"
@@ -1330,13 +1346,15 @@
       ],
       "photos": [
         {
-          "file": "nha-hat-lon-ha-noi-1.jpg",
+          "file": "nha-hat-lon-ha-noi-1-w1280-e52c7b665d.webp",
+          "thumbFile": "nha-hat-lon-ha-noi-1-w480-95c0d01d0a.webp",
           "author": "Dennis G. Jarvis",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hanoi_Opera_House_1.jpg"
         },
         {
-          "file": "nha-hat-lon-ha-noi-2.jpg",
+          "file": "nha-hat-lon-ha-noi-2-w1280-c84c811909.webp",
+          "thumbFile": "nha-hat-lon-ha-noi-2-w480-5e2df337d6.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hanoi_Opera_House,_24_December_2016.jpg"
@@ -1374,13 +1392,15 @@
       ],
       "photos": [
         {
-          "file": "ho-tay-1.jpg",
+          "file": "ho-tay-1-w1280-821f23ccc8.webp",
+          "thumbFile": "ho-tay-1-w480-d092370432.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%93_T%C3%A2y_ho%C3%A0ng_h%C3%B4n_-_NKS.jpg"
         },
         {
-          "file": "ho-tay-2.jpg",
+          "file": "ho-tay-2-w1024-00c33424e9.webp",
+          "thumbFile": "ho-tay-2-w480-22af2eb7c8.webp",
           "author": "Rungbachduong",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:West_Lake_(Hanoi).jpg"
@@ -1419,7 +1439,8 @@
       ],
       "photos": [
         {
-          "file": "chua-tran-quoc-1.jpg",
+          "file": "chua-tran-quoc-1-w1280-a61d1f9f0c.webp",
+          "thumbFile": "chua-tran-quoc-1-w480-93f593978b.webp",
           "author": "Thang Nguyen",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_Tr%E1%BA%A5n_Qu%E1%BB%91c,_H%C3%A0_N%E1%BB%99i.jpg"
@@ -1457,7 +1478,8 @@
       ],
       "photos": [
         {
-          "file": "cau-long-bien-1.jpg",
+          "file": "cau-long-bien-1-w1280-a5a267291d.webp",
+          "thumbFile": "cau-long-bien-1-w480-11a256b07f.webp",
           "author": "Pierre De Hanscutter",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Long_bien_bridge.jpg"
@@ -1505,7 +1527,8 @@
       ],
       "photos": [
         {
-          "file": "nha-tu-hoa-lo-1.jpg",
+          "file": "nha-tu-hoa-lo-1-w1280-13cef22ccb.webp",
+          "thumbFile": "nha-tu-hoa-lo-1-w480-9382ab9856.webp",
           "author": "thalling55",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ho%E1%BA%A3_L%C3%B2.jpg"
@@ -1553,7 +1576,8 @@
       ],
       "photos": [
         {
-          "file": "bat-trang-1.jpg",
+          "file": "bat-trang-1-w1280-5166d1ef12.webp",
+          "thumbFile": "bat-trang-1-w480-264b9ae9aa.webp",
           "author": "Donald Trung",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bat_Trang_communal_house_(2018)_01.jpg"
@@ -1589,13 +1613,15 @@
       ],
       "photos": [
         {
-          "file": "food-pho-1.jpg",
+          "file": "food-pho-1-w1280-139a74aae6.webp",
+          "thumbFile": "food-pho-1-w480-fc677e0fc7.webp",
           "author": "Codename5281",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ph%E1%BB%9F_b%C3%B2,_C%E1%BA%A7u_Gi%E1%BA%A5y,_H%C3%A0_N%E1%BB%99i.jpg"
         },
         {
-          "file": "food-pho-2.jpg",
+          "file": "food-pho-2-w1280-0649ac1643.webp",
+          "thumbFile": "food-pho-2-w480-9f6b5e5971.webp",
           "author": "Anonymous Cow",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chicken-pho-vietnamese-soup.JPG"
@@ -1631,13 +1657,15 @@
       ],
       "photos": [
         {
-          "file": "food-bun-cha-1.jpg",
+          "file": "food-bun-cha-1-w1280-8aa0fe001d.webp",
+          "thumbFile": "food-bun-cha-1-w480-bb6064d1b2.webp",
           "author": "Viethavvh",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_Th%E1%BB%A5y_Khu%C3%AA.jpg"
         },
         {
-          "file": "food-bun-cha-2.jpg",
+          "file": "food-bun-cha-2-w1280-418f7598e5.webp",
+          "thumbFile": "food-bun-cha-2-w480-f83a01b275.webp",
           "author": "Larry",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_ch%E1%BA%A3_H%C3%A0ng_M%C3%A0nh.jpg"
@@ -1673,13 +1701,15 @@
       ],
       "photos": [
         {
-          "file": "food-ca-phe-trung-1.jpg",
+          "file": "food-ca-phe-trung-1-w1280-bdbbe7d128.webp",
+          "thumbFile": "food-ca-phe-trung-1-w480-2dc7971ae5.webp",
           "author": "travel oriented",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C3%A0_ph%C3%AA_tr%E1%BB%A9ng.jpg"
         },
         {
-          "file": "food-ca-phe-trung-3.jpg",
+          "file": "food-ca-phe-trung-3-w1280-44254fa01d.webp",
+          "thumbFile": "food-ca-phe-trung-3-w480-15a07bcbca.webp",
           "author": "travel oriented",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C3%A0_ph%C3%AA_tr%E1%BB%A9ng_%C4%91%C3%A1.jpg"
@@ -1717,7 +1747,8 @@
       ],
       "photos": [
         {
-          "file": "wave-ha-noi-bao-tang-dan-toc-1.jpg",
+          "file": "wave-ha-noi-bao-tang-dan-toc-1-w1280-9b58b18e36.webp",
+          "thumbFile": "wave-ha-noi-bao-tang-dan-toc-1-w480-0019b3c10e.webp",
           "author": "vi:User:Rungbachduong",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dan_toc_hoc_1.jpg"
@@ -1755,13 +1786,15 @@
       ],
       "photos": [
         {
-          "file": "wave-ha-noi-bao-tang-my-thuat-2.jpg",
+          "file": "wave-ha-noi-bao-tang-my-thuat-2-w1280-567b12b858.webp",
+          "thumbFile": "wave-ha-noi-bao-tang-my-thuat-2-w480-7353fefaad.webp",
           "author": "Smuconlaw .",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vietnam_National_Museum_of_Fine_Arts,_Hanoi,_Vietnam_-_20131030-03.JPG"
         },
         {
-          "file": "wave-ha-noi-bao-tang-my-thuat-1.jpg",
+          "file": "wave-ha-noi-bao-tang-my-thuat-1-w1280-8a9b5e56ad.webp",
+          "thumbFile": "wave-ha-noi-bao-tang-my-thuat-1-w480-2fb8a311c2.webp",
           "author": "Daaé",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vietnam_National_Museum_of_Fine_Arts_01.JPG"
@@ -1799,13 +1832,15 @@
       ],
       "photos": [
         {
-          "file": "wave-ha-noi-duong-lam-1.jpg",
+          "file": "wave-ha-noi-duong-lam-1-w1280-289a28ddc8.webp",
+          "thumbFile": "wave-ha-noi-duong-lam-1-w480-b74b44b53e.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%E1%BB%95ng_v%C3%A0o_l%C3%A0ng_c%E1%BB%95_%C4%90%C6%B0%E1%BB%9Dng_L%C3%A2m.jpg"
         },
         {
-          "file": "wave-ha-noi-duong-lam-2.jpg",
+          "file": "wave-ha-noi-duong-lam-2-w1280-45f4834e40.webp",
+          "thumbFile": "wave-ha-noi-duong-lam-2-w480-4594da42c9.webp",
           "author": "Original uploader was Ngokhong at vi.wikipedia",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:DenNgoQuyen.jpg"
@@ -1843,13 +1878,15 @@
       ],
       "photos": [
         {
-          "file": "wave-ha-noi-ba-vi-2.jpg",
+          "file": "wave-ha-noi-ba-vi-2-w1280-387470058e.webp",
+          "thumbFile": "wave-ha-noi-ba-vi-2-w480-8089bd2ed0.webp",
           "author": "[Tycho] talk , http://shansov.net",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ba_V%C3%AC_National_Park,_foggy_road.jpg"
         },
         {
-          "file": "wave-ha-noi-ba-vi-1.jpg",
+          "file": "wave-ha-noi-ba-vi-1-w1280-6e8367223a.webp",
+          "thumbFile": "wave-ha-noi-ba-vi-1-w480-d32e56e03d.webp",
           "author": "Khương Việt Hà ( thảo luận )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vuon_QG_Ba_Vi_2.JPG"
@@ -1885,13 +1922,15 @@
       ],
       "photos": [
         {
-          "file": "venue-ha-noi-metropole-3.jpg",
+          "file": "venue-ha-noi-metropole-3-w1280-0f32ce32ec.webp",
+          "thumbFile": "venue-ha-noi-metropole-3-w480-e37019abe3.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sofitel_Metropole,_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg"
         },
         {
-          "file": "venue-ha-noi-metropole-2.jpg",
+          "file": "venue-ha-noi-metropole-2-w1280-dc6acc79ca.webp",
+          "thumbFile": "venue-ha-noi-metropole-2-w480-17fcbaf70b.webp",
           "author": "Guerinf",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%B4tel_M%C3%A9tropole_(3).jpg"
@@ -1936,13 +1975,15 @@
       ],
       "photos": [
         {
-          "file": "venue-ha-noi-giang-1.jpg",
+          "file": "venue-ha-noi-giang-1-w1280-93b3216f3c.webp",
+          "thumbFile": "venue-ha-noi-giang-1-w480-ab1b1a25c8.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Giang_Caf%C3%A9_(Caf%C3%A9_Gi%E1%BA%A3ng)_-_Nguyen_Huu_Huan_Street,_Hanoi,_Vietnam_-_DSC03676.JPG"
         },
         {
-          "file": "venue-ha-noi-giang-2.jpg",
+          "file": "venue-ha-noi-giang-2-w1280-4df22fda0e.webp",
+          "thumbFile": "venue-ha-noi-giang-2-w480-41575f0287.webp",
           "author": "Daderot",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Giang_Caf%C3%A9_-_Nguyen_Huu_Huan_Street,_Hanoi,_Vietnam_-_DSC03675.JPG"
@@ -1985,13 +2026,15 @@
       ],
       "photos": [
         {
-          "file": "completion-d5086c5527d48b33.jpg",
+          "file": "completion-d5086c5527d48b33-w1024-8758cb54e0.webp",
+          "thumbFile": "completion-d5086c5527d48b33-w480-806d4ba387.webp",
           "author": "Kaeru",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/51035756584@N01/35375574831"
         },
         {
-          "file": "completion-2c73d1071448dc32.jpg",
+          "file": "completion-2c73d1071448dc32-w1024-4b72c8c972.webp",
+          "thumbFile": "completion-2c73d1071448dc32-w480-91760acea4.webp",
           "author": "Kaeru",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/51035756584@N01/35506207095"
@@ -2036,13 +2079,15 @@
       ],
       "photos": [
         {
-          "file": "dish-ha-noi-cha-ca-1.jpg",
+          "file": "dish-ha-noi-cha-ca-1-w1280-5a0575a97a.webp",
+          "thumbFile": "dish-ha-noi-cha-ca-1-w480-a4147e6be5.webp",
           "author": "Phương Huy",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng_H%C3%A0_N%E1%BB%99i_th%C3%A1ng_2_n%C4%83m_2018_(1).jpg"
         },
         {
-          "file": "dish-ha-noi-cha-ca-2.jpg",
+          "file": "dish-ha-noi-cha-ca-2-w1280-000f04124a.webp",
+          "thumbFile": "dish-ha-noi-cha-ca-2-w480-1a05bc5900.webp",
           "author": "Lionel Ng from Singapore",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_c%C3%A1_L%C3%A3_V%E1%BB%8Dng.jpg"
@@ -2078,7 +2123,8 @@
       ],
       "photos": [
         {
-          "file": "dish-ha-noi-bun-thang-1.jpg",
+          "file": "dish-ha-noi-bun-thang-1-w1280-c070748db7.webp",
+          "thumbFile": "dish-ha-noi-bun-thang-1-w480-5267f5b163.webp",
           "author": "Nguyễn Thanh Quang",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_thang.JPG"
@@ -2210,7 +2256,8 @@
       ],
       "photos": [
         {
-          "file": "venue-ha-noi-metropole-3.jpg",
+          "file": "venue-ha-noi-metropole-3-w1280-0f32ce32ec.webp",
+          "thumbFile": "venue-ha-noi-metropole-3-w480-e37019abe3.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sofitel_Metropole,_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg",
@@ -2505,7 +2552,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-cf1d9297bd6222851f.jpg",
+          "file": "venue-fill-cf1d9297bd6222851f-w1280-851ca3ee25.webp",
+          "thumbFile": "venue-fill-cf1d9297bd6222851f-w480-f4118aef83.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585555",
@@ -2554,7 +2602,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-cf1d9297bd6222851f.jpg",
+          "file": "venue-fill-cf1d9297bd6222851f-w1280-851ca3ee25.webp",
+          "thumbFile": "venue-fill-cf1d9297bd6222851f-w480-f4118aef83.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585555",
@@ -2892,7 +2941,8 @@
       ],
       "photos": [
         {
-          "file": "completion-6bed19f0fd68c72e.jpg",
+          "file": "completion-6bed19f0fd68c72e-w1023-f1eea8707e.webp",
+          "thumbFile": "completion-6bed19f0fd68c72e-w480-181e1af3ea.webp",
           "author": "randwill",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/20354625@N00/35552795592"
@@ -3473,13 +3523,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-03e248c2b0052d9e78.jpg",
+          "file": "venue-fill-03e248c2b0052d9e78-w1024-4bad4258ff.webp",
+          "thumbFile": "venue-fill-03e248c2b0052d9e78-w480-e8540e689f.webp",
           "author": "David Berkowitz",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/25897810@N00/8998530792"
         },
         {
-          "file": "venue-fill-b432cf88db5fef5aea.jpg",
+          "file": "venue-fill-b432cf88db5fef5aea-w1024-2f3570eac1.webp",
+          "thumbFile": "venue-fill-b432cf88db5fef5aea-w480-b0957fbeb1.webp",
           "author": "Brian Harries",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/129936023@N02/28994529656"
@@ -3527,7 +3579,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-0aff50e206281b97a2.jpg",
+          "file": "venue-fill-0aff50e206281b97a2-w1024-7d82e2a657.webp",
+          "thumbFile": "venue-fill-0aff50e206281b97a2-w480-757364253f.webp",
           "author": "Bex Walton",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/7831824@N04/26401920403"
@@ -4397,7 +4450,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-cf1d9297bd6222851f.jpg",
+          "file": "venue-fill-cf1d9297bd6222851f-w1280-851ca3ee25.webp",
+          "thumbFile": "venue-fill-cf1d9297bd6222851f-w480-f4118aef83.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585555",
@@ -4774,7 +4828,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-42b06f0e70f6e47bcc.jpg",
+          "file": "venue-fill-42b06f0e70f6e47bcc-w1024-e9c6da8477.webp",
+          "thumbFile": "venue-fill-42b06f0e70f6e47bcc-w480-b11595d203.webp",
           "author": "Series: Presidential Photographs, 1/20/2009 - 1/20/2017 Collection: Records of the White House Photo Office (Obama Administration), 1/20/2009 - 1/20/2017",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:President_Barack_Obama_with_Anthony_Bourdain_at_B%C3%BAn_cha_Huong_Lien_Restaurant_in_Hanoi,_Vietnam.jpg",
@@ -5037,19 +5092,22 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-6ddee9d05f19edff12.jpg",
+          "file": "venue-fill-6ddee9d05f19edff12-w1280-f1436b746f.webp",
+          "thumbFile": "venue-fill-6ddee9d05f19edff12-w480-9c9612a54f.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585223"
         },
         {
-          "file": "venue-fill-81246e1fe9817e2635.jpg",
+          "file": "venue-fill-81246e1fe9817e2635-w1280-95562716d2.webp",
+          "thumbFile": "venue-fill-81246e1fe9817e2635-w480-f6ee1d7bce.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585222"
         },
         {
-          "file": "venue-fill-ff29047620869382d5.jpg",
+          "file": "venue-fill-ff29047620869382d5-w1280-dbb2c3b281.webp",
+          "thumbFile": "venue-fill-ff29047620869382d5-w480-776d94b441.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585267"
@@ -5098,7 +5156,8 @@
       ],
       "photos": [
         {
-          "file": "venue-ha-noi-metropole-3.jpg",
+          "file": "venue-ha-noi-metropole-3-w1280-0f32ce32ec.webp",
+          "thumbFile": "venue-ha-noi-metropole-3-w480-e37019abe3.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sofitel_Metropole,_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg",
@@ -5153,7 +5212,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-53b88e2b1dbd8c7dc4.jpg",
+          "file": "venue-fill-53b88e2b1dbd8c7dc4-w1280-6b0b825d07.webp",
+          "thumbFile": "venue-fill-53b88e2b1dbd8c7dc4-w480-6c46998de2.webp",
           "author": "Phan Minh Tuấn",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kh%C3%A1ch_s%E1%BA%A1n_Movenpick,_H%C3%A0_N%E1%BB%99i_001.JPG",
@@ -5204,7 +5264,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-53b88e2b1dbd8c7dc4.jpg",
+          "file": "venue-fill-53b88e2b1dbd8c7dc4-w1280-6b0b825d07.webp",
+          "thumbFile": "venue-fill-53b88e2b1dbd8c7dc4-w480-6c46998de2.webp",
           "author": "Phan Minh Tuấn",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kh%C3%A1ch_s%E1%BA%A1n_Movenpick,_H%C3%A0_N%E1%BB%99i_001.JPG",
@@ -5254,7 +5315,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-53b88e2b1dbd8c7dc4.jpg",
+          "file": "venue-fill-53b88e2b1dbd8c7dc4-w1280-6b0b825d07.webp",
+          "thumbFile": "venue-fill-53b88e2b1dbd8c7dc4-w480-6c46998de2.webp",
           "author": "Phan Minh Tuấn",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kh%C3%A1ch_s%E1%BA%A1n_Movenpick,_H%C3%A0_N%E1%BB%99i_001.JPG",
@@ -5697,7 +5759,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-65c94410082cc27673.jpg",
+          "file": "venue-fill-65c94410082cc27673-w768-47dade2ac0.webp",
+          "thumbFile": "venue-fill-65c94410082cc27673-w480-4083efb4a4.webp",
           "author": "Alan & Flora Botting",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://www.flickr.com/photos/39686434@N02/49771881558",
@@ -5747,7 +5810,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-65c94410082cc27673.jpg",
+          "file": "venue-fill-65c94410082cc27673-w768-47dade2ac0.webp",
+          "thumbFile": "venue-fill-65c94410082cc27673-w480-4083efb4a4.webp",
           "author": "Alan & Flora Botting",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://www.flickr.com/photos/39686434@N02/49771881558",
@@ -5974,13 +6038,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-cf1d9297bd6222851f.jpg",
+          "file": "venue-fill-cf1d9297bd6222851f-w1280-851ca3ee25.webp",
+          "thumbFile": "venue-fill-cf1d9297bd6222851f-w480-f4118aef83.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585555"
         },
         {
-          "file": "venue-fill-38da65beed2b76f171.jpg",
+          "file": "venue-fill-38da65beed2b76f171-w1280-bf106e71a3.webp",
+          "thumbFile": "venue-fill-38da65beed2b76f171-w480-7aa54e6ab3.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=122585556"
@@ -6031,13 +6097,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-8e98ecf9b97c29be60.jpg",
+          "file": "venue-fill-8e98ecf9b97c29be60-w1280-a593ee4f54.webp",
+          "thumbFile": "venue-fill-8e98ecf9b97c29be60-w480-1ccbf5f6e6.webp",
           "author": "missbossy",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:InterContinental_Hanoi_Westlake_Hotel.jpg"
         },
         {
-          "file": "venue-fill-6ad1edc48d8bbced2a.jpg",
+          "file": "venue-fill-6ad1edc48d8bbced2a-w1280-7832cb1103.webp",
+          "thumbFile": "venue-fill-6ad1edc48d8bbced2a-w480-a384532094.webp",
           "author": "missbossy",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:InterContinental_Hanoi_Westlake_Hotel_2.jpg"
@@ -6293,7 +6361,8 @@
       ],
       "photos": [
         {
-          "file": "venue-ha-noi-metropole-3.jpg",
+          "file": "venue-ha-noi-metropole-3-w1280-0f32ce32ec.webp",
+          "thumbFile": "venue-ha-noi-metropole-3-w480-e37019abe3.webp",
           "author": "The Hanoian",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sofitel_Metropole,_Ng%C3%B4_Quy%E1%BB%81n_-_2022-09-02_01.jpg",
@@ -6897,7 +6966,8 @@
       ],
       "photos": [
         {
-          "file": "completion-eccd8807f66b2ac8.jpg",
+          "file": "completion-eccd8807f66b2ac8-w1024-fd7ef299ac.webp",
+          "thumbFile": "completion-eccd8807f66b2ac8-w480-f6c8e88ffc.webp",
           "author": "mikecogh",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://www.flickr.com/photos/89165847@N00/18523253249"
@@ -6989,7 +7059,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-14cc36a64ae68ee0b4.jpg",
+          "file": "venue-fill-14cc36a64ae68ee0b4-w1280-a121e6fbae.webp",
+          "thumbFile": "venue-fill-14cc36a64ae68ee0b4-w480-2316da474c.webp",
           "author": "Amenoc",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pan_Pacific_Hanoi.jpg"
@@ -7039,7 +7110,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-97e03b8d3b4fc2a2bb.jpg",
+          "file": "venue-fill-97e03b8d3b4fc2a2bb-w1024-b5e43a600a.webp",
+          "thumbFile": "venue-fill-97e03b8d3b4fc2a2bb-w480-3e1a063cb6.webp",
           "author": "Brian Jeffery Beggerly",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/94509941@N00/51366966618",
@@ -7134,7 +7206,8 @@
       "id": "cho-1",
       "theme": "cho",
       "caption": "Một khu chợ ở Hà Nội",
-      "file": "ha-noi-moment-cho-1.jpg",
+      "file": "ha-noi-moment-cho-1-w768-e26a16d7ad.webp",
+      "thumbFile": "ha-noi-moment-cho-1-w480-928ddedb4c.webp",
       "author": "dane brian",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/12955651@N07/4167237733"
@@ -7143,7 +7216,8 @@
       "id": "cho-2",
       "theme": "cho",
       "caption": "Chợ ở Hà Nội, Việt Nam",
-      "file": "ha-noi-moment-cho-2.jpg",
+      "file": "ha-noi-moment-cho-2-w1024-aa57acfbe5.webp",
+      "thumbFile": "ha-noi-moment-cho-2-w480-f8acb590a1.webp",
       "author": "James Chutter",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/55375388@N00/4539066112"
@@ -7152,7 +7226,8 @@
       "id": "mon-an-4",
       "theme": "mon-an",
       "caption": "Tour ẩm thực ở Hà Nội",
-      "file": "ha-noi-moment-mon-an-4.jpg",
+      "file": "ha-noi-moment-mon-an-4-w768-af2eddda4f.webp",
+      "thumbFile": "ha-noi-moment-mon-an-4-w480-31edba6f72.webp",
       "author": "milst1",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/9036889@N06/49370676916"
@@ -7161,7 +7236,8 @@
       "id": "nguoi-5",
       "theme": "nguoi",
       "caption": "Cảnh phố điển hình ở Hà Nội",
-      "file": "ha-noi-moment-nguoi-5.jpg",
+      "file": "ha-noi-moment-nguoi-5-w1023-279bb0c0b6.webp",
+      "thumbFile": "ha-noi-moment-nguoi-5-w480-657e4623b8.webp",
       "author": "PiktourUK",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/69706441@N03/33351525816"
@@ -7170,7 +7246,8 @@
       "id": "nghe-6",
       "theme": "nghe",
       "caption": "Ngư dân ở Hà Nội",
-      "file": "ha-noi-moment-nghe-6.jpg",
+      "file": "ha-noi-moment-nghe-6-w1024-72f8edad72.webp",
+      "thumbFile": "ha-noi-moment-nghe-6-w480-82d01ad8af.webp",
       "author": "Global Water Forum",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/82536057@N04/8535961515"
@@ -7209,7 +7286,8 @@
       "id": "food-research-ha-noi",
       "theme": "mon-an",
       "caption": "Phở Hà Nội · một món muốn thử (ảnh minh họa)",
-      "file": "food-pho-1.jpg",
+      "file": "food-pho-1-w1280-139a74aae6.webp",
+      "thumbFile": "food-pho-1-w480-fc677e0fc7.webp",
       "author": "Codename5281",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ph%E1%BB%9F_b%C3%B2,_C%E1%BA%A7u_Gi%E1%BA%A5y,_H%C3%A0_N%E1%BB%99i.jpg"

@@ -238,19 +238,22 @@
       ],
       "photos": [
         {
-          "file": "ha-long-vinh-ha-long-1.jpg",
+          "file": "ha-long-vinh-ha-long-1-w1280-8c806bf391.webp",
+          "thumbFile": "ha-long-vinh-ha-long-1-w480-535619ba31.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_H%E1%BA%A1_Long_-_NKS.jpg"
         },
         {
-          "file": "ha-long-vinh-ha-long-2.jpg",
+          "file": "ha-long-vinh-ha-long-2-w1280-792c72255c.webp",
+          "thumbFile": "ha-long-vinh-ha-long-2-w480-2fb3c05f27.webp",
           "author": "Thomas Hirsch / User:Ravn",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Halong_Bay_in_Vietnam.jpg"
         },
         {
-          "file": "ha-long-vinh-ha-long-3.jpg",
+          "file": "ha-long-vinh-ha-long-3-w1024-fe1e2a34b4.webp",
+          "thumbFile": "ha-long-vinh-ha-long-3-w480-675587cddf.webp",
           "author": "Thierry Borie colour adjusted by Lycaon",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Halong_ensemble_(colour_corrected).jpg"
@@ -284,7 +287,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-tuan-chau-1.jpg",
+          "file": "ha-long-tuan-chau-1-w1280-417014b5de.webp",
+          "thumbFile": "ha-long-tuan-chau-1-w480-1bafc35913.webp",
           "author": "Takeshi aka. Momotaro from Tokyo, Japan",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tu%E1%BA%A7n_Ch%C3%A2u.jpg"
@@ -318,7 +322,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-dong-thien-cung-1.jpg",
+          "file": "ha-long-dong-thien-cung-1-w1280-ee47899138.webp",
+          "thumbFile": "ha-long-dong-thien-cung-1-w480-67b61465c5.webp",
           "author": "Erik A. Drabløs",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thien_Cung.jpg"
@@ -350,7 +355,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-hang-sung-sot-1.jpg",
+          "file": "ha-long-hang-sung-sot-1-w1280-67fb9a7c8e.webp",
+          "thumbFile": "ha-long-hang-sung-sot-1-w480-e8f8c3f3aa.webp",
           "author": "Mike Colvin from Manchester, UK",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_S%E1%BB%ADng_S%E1%BB%91t_3.jpg"
@@ -382,7 +388,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-dao-ti-top-1.jpg",
+          "file": "ha-long-dao-ti-top-1-w1280-a307fba34c.webp",
+          "thumbFile": "ha-long-dao-ti-top-1-w480-2932d21839.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BA%A3o_Ti_T%E1%BB%91p.jpg"
@@ -414,7 +421,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-bao-tang-quang-ninh-1.jpg",
+          "file": "ha-long-bao-tang-quang-ninh-1-w1280-bb675a65b8.webp",
+          "thumbFile": "ha-long-bao-tang-quang-ninh-1-w480-0c8f90f5b4.webp",
           "author": "Hoangkid",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quang_Ninh_Museum_facade_1.jpg"
@@ -446,7 +454,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-nui-bai-tho-1.jpg",
+          "file": "ha-long-nui-bai-tho-1-w1280-07c57f2134.webp",
+          "thumbFile": "ha-long-nui-bai-tho-1-w480-088aaf8e1d.webp",
           "author": "Zack Knowles",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ha_Long_City_-_panoramio_(1).jpg"
@@ -478,7 +487,8 @@
       ],
       "photos": [
         {
-          "file": "ha-long-cau-bai-chay-1.jpg",
+          "file": "ha-long-cau-bai-chay-1-w1280-bd128a07de.webp",
+          "thumbFile": "ha-long-cau-bai-chay-1-w480-7c0a8dc3cc.webp",
           "author": "Jean-Pierre Dalbéra",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Le_pont_suspendu_d%27Halong.jpg"
@@ -539,7 +549,8 @@
       ],
       "photos": [
         {
-          "file": "food-cha-muc-1.jpg",
+          "file": "food-cha-muc-1-w1280-e87bba311a.webp",
+          "thumbFile": "food-cha-muc-1-w480-4812b9ee20.webp",
           "author": "Hoangkid (Đặng Thái Hoàng)",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_m%E1%BB%B1c.jpg"
@@ -577,7 +588,8 @@
       ],
       "photos": [
         {
-          "file": "wave-ha-long-yen-tu-1.jpg",
+          "file": "wave-ha-long-yen-tu-1-w1280-fe65f373b4.webp",
+          "thumbFile": "wave-ha-long-yen-tu-1-w480-b69e10e86f.webp",
           "author": "Thang Nguyen from Nottingham, United Kingdom",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:N%C3%BAi_Y%C3%AAn_T%E1%BB%AD.jpg"
@@ -892,7 +904,8 @@
       "id": "pexels-7276642",
       "theme": "hanh-trinh",
       "caption": "Chèo kayak giữa những vách núi đá Hạ Long",
-      "file": "pexels-7276642.jpg",
+      "file": "pexels-7276642-w1280-e0c0adc761.webp",
+      "thumbFile": "pexels-7276642-w480-584ddeb47d.webp",
       "author": "Rachel Claire",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/people-kayaking-in-ha-long-bay-in-vietnam-7276642/"
@@ -901,7 +914,8 @@
       "id": "food-research-ha-long",
       "theme": "mon-an",
       "caption": "Chả mực Hạ Long · một món muốn thử (ảnh minh họa)",
-      "file": "food-cha-muc-1.jpg",
+      "file": "food-cha-muc-1-w1280-e87bba311a.webp",
+      "thumbFile": "food-cha-muc-1-w480-4812b9ee20.webp",
       "author": "Hoangkid (Đặng Thái Hoàng)",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BA%A3_m%E1%BB%B1c.jpg"
@@ -910,7 +924,8 @@
       "id": "wave-pexels-36204575",
       "theme": "hanh-trinh",
       "caption": "Ở lại thêm chút nữa khi vịnh Hạ Long lên màu",
-      "file": "wave-pexels-36204575.jpg",
+      "file": "wave-pexels-36204575-w1280-69aa03422d.webp",
+      "thumbFile": "wave-pexels-36204575-w480-8a160a931f.webp",
       "author": "Quý Nguyễn",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/sunset-over-halong-bay-with-fishing-boats-36204575/"

@@ -14,6 +14,12 @@ export type GuideLayout = 'months' | 'checklist' | 'cards' | 'places' | 'rows';
 
 /** Một ảnh kèm ghi công tác giả và giấy phép (bắt buộc hiển thị). */
 export interface PhotoView {
+  /** Stable photo id (file name without width/hash suffix); trip covers persist it. Null for external photos. */
+  readonly id?: string | null;
+  /** 480 px variant for lists and cards; null when the photo has a single size or is external. */
+  readonly thumbUrl?: string | null;
+  /** `srcset` value listing the available widths; null when there is only one. */
+  readonly srcSet?: string | null;
   readonly authorUrl?: string;
   readonly caption?: string;
   readonly url: string;

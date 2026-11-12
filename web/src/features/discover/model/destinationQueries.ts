@@ -20,6 +20,16 @@ export function firstPhotoUrl(p: PlaceView | null | undefined): string {
   return p?.photos[0]?.url ?? '';
 }
 
+/** Image to show in a small list or card slot: the 480 px variant when the photo has one, else the main image. */
+export function thumbOrUrl(photo: PhotoView | null | undefined): string {
+  return photo?.thumbUrl ?? photo?.url ?? '';
+}
+
+/** Thumbnail of the first photo of a place for list rows and cards; empty string when there is no photo. */
+export function firstPhotoThumbUrl(p: PlaceView | null | undefined): string {
+  return thumbOrUrl(p?.photos[0]);
+}
+
 /** Ảnh thứ `i` của địa điểm, kẹp trong khoảng hợp lệ. */
 export function photoAt(p: PlaceView, i: number): PhotoView | undefined {
   return p.photos[Math.max(0, Math.min(p.photos.length - 1, i))];

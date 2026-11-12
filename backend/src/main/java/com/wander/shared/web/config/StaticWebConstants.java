@@ -11,8 +11,11 @@ final class StaticWebConstants {
     /** Vị trí ảnh kho địa điểm trong classpath. */
     static final String PHOTO_CLASSPATH_LOCATION = "classpath:/catalog/photos/";
 
-    /** Thời gian cache công khai của ảnh kho địa điểm. */
-    static final Duration PHOTO_CACHE_DURATION = Duration.ofDays(1);
+    /**
+     * Public cache lifetime of catalog photos: one year plus {@code immutable}. Safe because every photo file name carries a hash
+     * of its content (see tools/catalog/optimize-photos.mjs); a changed image gets a new name.
+     */
+    static final Duration PHOTO_CACHE_DURATION = Duration.ofDays(365);
 
     /** Mẫu khớp mọi đường dẫn còn lại (dành cho giao diện). */
     static final String ALL_PATHS_PATTERN = "/**";

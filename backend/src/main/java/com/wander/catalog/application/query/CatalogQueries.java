@@ -28,15 +28,17 @@ import org.springframework.stereotype.Service;
 public class CatalogQueries {
 
     private final PlaceCatalog catalog;
+    private final PhotoUrls photoUrls;
 
-    /** Nhận cổng tới kho địa điểm. */
-    public CatalogQueries(PlaceCatalog catalog) {
+    /** Nhận cổng tới kho địa điểm và bộ dựng đường dẫn ảnh. */
+    public CatalogQueries(PlaceCatalog catalog, PhotoUrls photoUrls) {
         this.catalog = catalog;
+        this.photoUrls = photoUrls;
     }
 
     /** Tóm tắt các điểm đến khớp chuỗi tìm kiếm (rỗng = tất cả). */
     public List<CatalogViews.DestinationSummary> searchDestinations(String query) {
-        return catalog.searchDestinations(query).stream().map(CatalogQueries::toSummary).toList();
+        return catalog.searchDestinations(query).stream().map(this::toSummary).toList();
     }
 
     /** Chi tiết một điểm đến (mốc, cẩm nang, địa điểm); không có trong kho thì ném lỗi không tìm thấy. */
@@ -47,11 +49,11 @@ public class CatalogQueries {
                 destination.references().stream().map(CatalogQueries::toReferenceView).toList(),
                 destination.guide().stream().map(CatalogQueries::toSectionView).toList(),
                 destination.places().stream().map(place -> toPlaceView(destination, place)).toList(),
-                destination.moments().stream().map(CatalogQueries::toMomentView).toList(), toPhotoView(coverPhoto(destination)));
+                destination.moments().stream().map(this::toMomentView).toList(), toPhotoView(coverPhoto(destination)));
     }
 
     /** Dạng hiển thị của một khoảnh khắc (mã chủ đề viết thường như hợp đồng API). */
-    private static CatalogViews.MomentView toMomentView(Moment moment) {
+    private CatalogViews.MomentView toMomentView(Moment moment) {
         return new CatalogViews.MomentView(moment.id(), moment.theme().code(), moment.theme().label(), moment.caption(),
                 toPhotoView(moment.photo()), moment.authorUrl());
     }
@@ -66,13 +68,13 @@ public class CatalogQueries {
     }
 
     /** Tóm tắt điểm đến; JSON chưa có tâm riêng nên lấy trung bình các địa điểm có tọa độ, thiếu hết trả null. */
-    private static CatalogViews.DestinationSummary toSummary(Destination destination) {
+    private CatalogViews.DestinationSummary toSummary(Destination destination) {
         List<Integer> bestMonths = destination.guide().stream()
                 .filter(section -> section.layout() == GuideSection.Layout.MONTHS)
                 .findFirst().map(GuideSection::bestMonths).orElse(List.of());
         // Xem trước chỉ lấy nơi có ảnh thật: nơi chưa có ảnh không giả bằng ảnh của nơi khác.
         List<CatalogViews.Preview> previews = destination.places().stream().filter(place -> !place.photos().isEmpty()).limit(CatalogConstants.PREVIEW_PLACE_COUNT)
-                .map(place -> new CatalogViews.Preview(place.id(), place.name(), photoUrl(place.photos().getFirst()))).toList();
+                .map(place -> new CatalogViews.Preview(place.id(), place.name(), photoUrls.url(place.photos().getFirst()))).toList();
         List<GeoPoint> locations = destination.places().stream().map(Place::location).filter(Objects::nonNull).toList();
         Double lat = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lat).average().orElseThrow();
         Double lon = locations.isEmpty() ? null : locations.stream().mapToDouble(GeoPoint::lon).average().orElseThrow();
@@ -82,18 +84,13 @@ public class CatalogQueries {
     }
 
     /** Đường dẫn công khai của ảnh bìa điểm đến (ảnh đầu của địa điểm bìa). */
-    private static String coverUrl(Destination destination) {
-        return photoUrl(coverPhoto(destination));
+    private String coverUrl(Destination destination) {
+        return photoUrls.url(coverPhoto(destination));
     }
 
     /** Giữ nguyên ảnh bìa đã tuyển, đồng thời trả đủ ghi công thay vì chỉ đường dẫn ảnh. */
     private static Photo coverPhoto(Destination destination) {
         return destination.coverPhoto() != null ? destination.coverPhoto() : destination.coverPlace().photos().getFirst();
-    }
-
-    /** Đường dẫn công khai của một ảnh. */
-    private static String photoUrl(Photo photo) {
-        return photo.isExternal() ? photo.externalUrl() : CatalogConstants.PHOTO_URL_PREFIX + photo.file();
     }
 
     /** Dạng hiển thị của mốc tham chiếu. */
@@ -111,7 +108,7 @@ public class CatalogQueries {
     }
 
     /** Dạng hiển thị của một địa điểm, kèm khoảng cách ước tính từ từng mốc tham chiếu của điểm đến. */
-    private static CatalogViews.PlaceView toPlaceView(Destination destination, Place place) {
+    private CatalogViews.PlaceView toPlaceView(Destination destination, Place place) {
         // Thứ tự = thứ tự mốc trong dữ liệu; mốc đầu là mốc chính.
         List<CatalogViews.Away> away = place.location() == null ? List.of()
                 : destination.references().stream().map(reference -> toAway(reference, place)).toList();
@@ -121,7 +118,7 @@ public class CatalogQueries {
         return new CatalogViews.PlaceView(place.id(), place.name(), place.category().code(), place.category().label(), place.area(),
                 place.hook(), place.summary(), lat, lon, place.bestMonths(), place.bestLabel(), place.duration(), place.difficulty(),
                 place.highlights(), place.verdict().code(), place.verdict().label(), place.verdictReason(), slots, place.slotReason(),
-                place.tips(), place.photos().stream().map(CatalogQueries::toPhotoView).toList(), away, place.wikipediaTitle(), toVenueView(place.venue()));
+                place.tips(), place.photos().stream().map(this::toPhotoView).toList(), away, place.wikipediaTitle(), toVenueView(place.venue()));
     }
 
     /** Dịch địa chỉ có nguồn sang read model, không để domain đi qua API. */
@@ -137,7 +134,8 @@ public class CatalogQueries {
     }
 
     /** Dạng hiển thị của một ảnh kèm thông tin ghi công. */
-    private static CatalogViews.PhotoView toPhotoView(Photo photo) {
-        return new CatalogViews.PhotoView(photoUrl(photo), photo.author(), photo.license(), photo.sourceUrl(), photo.caption(), photo.authorUrl());
+    private CatalogViews.PhotoView toPhotoView(Photo photo) {
+        return new CatalogViews.PhotoView(photoUrls.url(photo), photo.author(), photo.license(), photo.sourceUrl(), photo.caption(), photo.authorUrl(),
+                photo.id(), photoUrls.thumbUrl(photo), photoUrls.srcSet(photo));
     }
 }

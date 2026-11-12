@@ -27,9 +27,9 @@ export const PLACE_PHOTO_INDEX: Readonly<Record<string, number>> = { 'nha-tho-co
 
 /** Ảnh riêng cho thẻ điểm đến ở cảnh mở đầu (ảnh có giấy phép trong kho) và điểm lấy nét khi cắt thẻ cao. */
 export const DESTINATION_PHOTOS: Readonly<Record<string, { readonly url: string; readonly position: string }>> = {
-  'da-lat': { url: '/catalog/photos/nha-tho-con-ga-2.jpg', position: 'center' },
-  'ha-giang': { url: '/catalog/photos/hoang-su-phi-2.jpg', position: 'center 60%' },
-  'ta-xua': { url: '/catalog/photos/ta-xua-1.jpg', position: '38% center' },
+  'da-lat': { url: '/catalog/photos/nha-tho-con-ga-2-w1280-a1ffaede55.webp', position: 'center' },
+  'ha-giang': { url: '/catalog/photos/hoang-su-phi-2-w800-635f36a91f.webp', position: 'center 60%' },
+  'ta-xua': { url: '/catalog/photos/ta-xua-1-w1280-e935c21120.webp', position: '38% center' },
 };
 
 /** Hình học và nhịp của cảnh quẹt (px, ms). */

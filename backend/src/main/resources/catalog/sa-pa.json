@@ -239,19 +239,22 @@
       ],
       "photos": [
         {
-          "file": "sapa-fansipan-1.jpg",
+          "file": "sapa-fansipan-1-w1280-73ae814a28.webp",
+          "thumbFile": "sapa-fansipan-1-w480-a03170eeb1.webp",
           "author": "Isderion ( talk )",
           "license": "CC BY-SA 3.0 de",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fansipan_Summit.jpg"
         },
         {
-          "file": "sapa-fansipan-2.jpg",
+          "file": "sapa-fansipan-2-w1280-1f86a29b37.webp",
+          "thumbFile": "sapa-fansipan-2-w480-f864eadd3a.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amit%C4%81bha_statue_on_Fansipan_1.jpg"
         },
         {
-          "file": "sapa-fansipan-3.jpg",
+          "file": "sapa-fansipan-3-w1280-25d0b55472.webp",
+          "thumbFile": "sapa-fansipan-3-w480-d2b7090b4d.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amit%C4%81bha_statue_on_Fansipan_2.jpg"
@@ -284,7 +287,8 @@
       ],
       "photos": [
         {
-          "file": "sapa-nui-ham-rong-1.jpg",
+          "file": "sapa-nui-ham-rong-1-w1146-eb8335a5d9.webp",
+          "thumbFile": "sapa-nui-ham-rong-1-w480-a11ecf63f0.webp",
           "author": "wtpwt",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nui_Ham_Rong_mua_xuan.jpg"
@@ -319,7 +323,8 @@
       ],
       "photos": [
         {
-          "file": "sapa-ban-cat-cat-1.jpg",
+          "file": "sapa-ban-cat-cat-1-w1024-cff13f66a8.webp",
+          "thumbFile": "sapa-ban-cat-cat-1-w480-35d7ad7b93.webp",
           "author": "Liftold ( thảo luận )",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%A3n_C%C3%A1t_C%C3%A1t.jpg"
@@ -351,7 +356,8 @@
       ],
       "photos": [
         {
-          "file": "sa-pa-ta-phin-1.jpg",
+          "file": "sa-pa-ta-phin-1-w1280-e21410a15e.webp",
+          "thumbFile": "sa-pa-ta-phin-1-w480-2ddcb59c6d.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Landscape_in_T%E1%BA%A3_Ph%C3%ACn_3.jpg"
@@ -383,7 +389,8 @@
       ],
       "photos": [
         {
-          "file": "sa-pa-ta-van-1.jpg",
+          "file": "sa-pa-ta-van-1-w1280-bd1ece248a.webp",
+          "thumbFile": "sa-pa-ta-van-1-w480-cebc6a2a9f.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_T%E1%BA%A3_Van_14.jpg"
@@ -415,7 +422,8 @@
       ],
       "photos": [
         {
-          "file": "sa-pa-thac-bac-1.jpg",
+          "file": "sa-pa-thac-bac-1-w1280-073a8a9d44.webp",
+          "thumbFile": "sa-pa-thac-bac-1-w480-007e9323ae.webp",
           "author": "Lori_NY",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thacbac3.jpg"
@@ -447,7 +455,8 @@
       ],
       "photos": [
         {
-          "file": "sa-pa-deo-o-quy-ho-1.jpg",
+          "file": "sa-pa-deo-o-quy-ho-1-w1280-c9e851e098.webp",
+          "thumbFile": "sa-pa-deo-o-quy-ho-1-w480-0f1439e35f.webp",
           "author": "Kiếm Anh",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:O_Quy_Ho_pass.jpg"
@@ -483,7 +492,8 @@
       ],
       "photos": [
         {
-          "file": "food-thit-trau-gac-bep-1.jpg",
+          "file": "food-thit-trau-gac-bep-1-w1280-af4f21c7b6.webp",
+          "thumbFile": "food-thit-trau-gac-bep-1-w480-7d67a494a9.webp",
           "author": "Cabokho",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg"
@@ -573,13 +583,15 @@
       ],
       "photos": [
         {
-          "file": "wave-sa-pa-hoang-lien-1.jpg",
+          "file": "wave-sa-pa-hoang-lien-1-w1280-385b1df1f6.webp",
+          "thumbFile": "wave-sa-pa-hoang-lien-1-w480-0f46f2f220.webp",
           "author": "Viethavvh at vi.wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vuon_QG_Hoang_Lien.JPG"
         },
         {
-          "file": "wave-sa-pa-hoang-lien-2.jpg",
+          "file": "wave-sa-pa-hoang-lien-2-w1280-26eb5a51af.webp",
+          "thumbFile": "wave-sa-pa-hoang-lien-2-w480-cd459a1d2f.webp",
           "author": "Ondřej Žváček",
           "license": "CC BY 2.5",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoang_Lien.jpg"
@@ -659,7 +671,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-a8b06aa8f86670e216.jpg",
+          "file": "venue-fill-a8b06aa8f86670e216-w1280-82a9f3072c.webp",
+          "thumbFile": "venue-fill-a8b06aa8f86670e216-w480-4eb755cb2d.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_Coupole_architecture_Sa_Pa_Viet_Nam.jpg"
@@ -708,7 +721,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-a8b06aa8f86670e216.jpg",
+          "file": "venue-fill-a8b06aa8f86670e216-w1280-82a9f3072c.webp",
+          "thumbFile": "venue-fill-a8b06aa8f86670e216-w480-4eb755cb2d.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_Coupole_architecture_Sa_Pa_Viet_Nam.jpg",
@@ -758,7 +772,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-a8b06aa8f86670e216.jpg",
+          "file": "venue-fill-a8b06aa8f86670e216-w1280-82a9f3072c.webp",
+          "thumbFile": "venue-fill-a8b06aa8f86670e216-w480-4eb755cb2d.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_de_la_Coupole_architecture_Sa_Pa_Viet_Nam.jpg",
@@ -824,7 +839,8 @@
       "id": "pexels-235925",
       "theme": "nghe",
       "caption": "Theo nhịp mùa gặt trên những thửa ruộng Sa Pa",
-      "file": "pexels-235925.jpg",
+      "file": "pexels-235925-w1280-7b6603cbdb.webp",
+      "thumbFile": "pexels-235925-w480-d783b2e3ab.webp",
       "author": "Pixabay",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/people-on-rice-terraces-235925/"
@@ -833,7 +849,8 @@
       "id": "pexels-36074826",
       "theme": "nguoi",
       "caption": "Sa Pa lên đèn, gặp nhau trước ga",
-      "file": "pexels-36074826.jpg",
+      "file": "pexels-36074826-w1280-6066c51f4f.webp",
+      "thumbFile": "pexels-36074826-w480-8391f2f43e.webp",
       "author": "Haneul Trac",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/vibrant-night-scene-at-sun-plaza-sapa-station-vietnam-36074826/"
@@ -842,7 +859,8 @@
       "id": "food-research-sa-pa",
       "theme": "mon-an",
       "caption": "Thịt trâu gác bếp · một món muốn thử (ảnh minh họa)",
-      "file": "food-thit-trau-gac-bep-1.jpg",
+      "file": "food-thit-trau-gac-bep-1-w1280-af4f21c7b6.webp",
+      "thumbFile": "food-thit-trau-gac-bep-1-w480-7d67a494a9.webp",
       "author": "Cabokho",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Th%E1%BB%8Bt_tr%C3%A2u_g%C3%A1c_b%E1%BA%BFp_Lam_S%C6%A1n_Food.jpg"
@@ -851,7 +869,8 @@
       "id": "wave-pexels-37667705",
       "theme": "nguoi",
       "caption": "Một cuộc gặp trên đường ở Sa Pa",
-      "file": "wave-pexels-37667705.jpg",
+      "file": "wave-pexels-37667705-w1280-f18b7a41c4.webp",
+      "thumbFile": "wave-pexels-37667705-w480-6f84e2fc24.webp",
       "author": "Duong Nguyen",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/hmong-women-in-traditional-clothing-sa-pa-37667705/"
@@ -860,7 +879,8 @@
       "id": "wave-pexels-35294293",
       "theme": "cho",
       "caption": "Theo sắc áo vào một buổi chợ vùng cao",
-      "file": "wave-pexels-35294293.jpg",
+      "file": "wave-pexels-35294293-w1280-8ba82ffd64.webp",
+      "thumbFile": "wave-pexels-35294293-w480-5572a8df2a.webp",
       "author": "Nguyen Ngoc Tien",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/vibrant-hill-tribe-market-scene-in-vietnam-35294293/"
@@ -869,14 +889,16 @@
       "id": "wave-pexels-40581284",
       "theme": "nguoi",
       "caption": "Một giai điệu giữa những thửa ruộng Sa Pa",
-      "file": "wave-pexels-40581284.jpg",
+      "file": "wave-pexels-40581284-w1280-5edcc2e4af.webp",
+      "thumbFile": "wave-pexels-40581284-w480-02e75b7256.webp",
       "author": "Tuấn Nguyễn",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/ethnic-woman-playing-traditional-musical-instrument-40581284/"
     }
   ],
   "coverPhoto": {
-    "file": "pexels-235925.jpg",
+    "file": "pexels-235925-w1280-7b6603cbdb.webp",
+    "thumbFile": "pexels-235925-w480-d783b2e3ab.webp",
     "author": "Pixabay",
     "license": "Giấy phép Pexels",
     "sourceUrl": "https://www.pexels.com/photo/people-on-rice-terraces-235925/"

@@ -4,7 +4,7 @@ import { Icon } from '../../../../shared/ui/Icon.tsx';
 import { RevealImage } from '../../../../shared/ui/RevealImage.tsx';
 import { PlacePlaceholder } from '../PlacePlaceholder.tsx';
 import type { PlaceView } from '../../model/Catalog.types.ts';
-import { firstPhotoUrl } from '../../model/destinationQueries.ts';
+import { firstPhotoThumbUrl } from '../../model/destinationQueries.ts';
 import { DEST_COPY } from '../../model/dest.copy.ts';
 
 interface PlaceRowProps {
@@ -23,7 +23,7 @@ export function PlaceRow({ place, chosen, onOpen, onToggle }: PlaceRowProps) {
   return (
     <li className={`place-row cat-${place.category}`} data-place-id={place.id}>
       <button className="pr-photo" type="button" data-place-photo={place.id} aria-label={fill(DEST_COPY.openNamed, { name: place.name })} onClick={onOpen}>
-        {place.photos.length ? <RevealImage alt="" src={firstPhotoUrl(place)} loading="lazy" /> : <PlacePlaceholder place={place} />}
+        {place.photos.length ? <RevealImage alt="" src={firstPhotoThumbUrl(place)} loading="lazy" /> : <PlacePlaceholder place={place} />}
         <span className="pr-cat">{place.id.startsWith('exp-') ? DEST_COPY.experience : place.categoryName}</span>
         {place.photos[0]?.caption ? <span className="pr-photo-caption">{place.photos[0].caption}</span> : null}
       </button>

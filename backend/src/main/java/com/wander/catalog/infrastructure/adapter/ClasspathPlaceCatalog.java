@@ -199,7 +199,8 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
 
     /** Ảnh bìa riêng (tùy chọn) của điểm đến; thiếu thì null. */
     private static Photo toCoverPhoto(PhotoFile source) {
-        return source == null ? null : new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), source.caption(), source.authorUrl());
+        return source == null ? null : new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), source.caption(),
+                source.authorUrl(), source.thumbFile());
     }
 
     /** Ảnh bìa riêng, nếu là tệp cục bộ, phải có trong thư mục ảnh của classpath. */
@@ -210,9 +211,11 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
     /** Ảnh cục bộ phải tồn tại dưới thư mục ảnh; bỏ qua ảnh ngoài và ảnh tùy chọn chưa khai báo. */
     private static void requireClasspathPhoto(Photo photo, String objectId, String missingMessage) {
         if (photo == null || photo.isExternal()) return;
-        String path = CatalogConstants.PHOTO_CLASSPATH_DIR + photo.file();
-        if (!new ClassPathResource(path).exists()) {
-            throw new IllegalStateException(missingMessage.formatted(path, objectId));
+        for (String name : photo.thumbFile() == null ? List.of(photo.file()) : List.of(photo.file(), photo.thumbFile())) {
+            String path = CatalogConstants.PHOTO_CLASSPATH_DIR + name;
+            if (!new ClassPathResource(path).exists()) {
+                throw new IllegalStateException(missingMessage.formatted(path, objectId));
+            }
         }
     }
 
@@ -222,7 +225,8 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
             MomentTheme theme = MomentTheme.fromCode(source.theme())
                     .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.MOMENT_THEME_INVALID.formatted(source.theme())));
             return new Moment(source.id(), theme, source.caption(),
-                    new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), null, source.authorUrl()), source.authorUrl());
+                    new Photo(source.file(), source.url(), source.author(), source.license(), source.sourceUrl(), null, source.authorUrl(), source.thumbFile()),
+                    source.authorUrl());
         }).toList();
     }
 
@@ -233,7 +237,8 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                 .orElseThrow(() -> new IllegalArgumentException(CatalogMessages.VERDICT_INVALID.formatted(source.verdict())));
         GeoPoint location = source.lat() == null || source.lon() == null ? null : new GeoPoint(source.lat(), source.lon());
         List<Photo> photos = source.photos().stream()
-                .map(photo -> new Photo(photo.file(), photo.url(), photo.author(), photo.license(), photo.sourceUrl(), photo.caption(), photo.authorUrl())).toList();
+                .map(photo -> new Photo(photo.file(), photo.url(), photo.author(), photo.license(), photo.sourceUrl(), photo.caption(), photo.authorUrl(),
+                        photo.thumbFile())).toList();
         return new Place(source.id(), destinationId, source.name(), category, source.area(), source.hook(), source.summary(), location,
                 source.bestMonths(), source.bestLabel(), source.duration(), source.difficulty(), source.highlights(), verdict,
                 source.verdictReason(), toTimeSlots(source.bestSlots()), source.slotReason(), source.tips(), photos, source.wikipediaTitle(), toVenue(source.venue()));
@@ -286,7 +291,7 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                            List<SectionFile> guide, List<PlaceFile> places, List<MomentFile> moments, PhotoFile coverPhoto) {
     }
 
-    record MomentFile(String id, String theme, String caption, String file, String url, String author, String license, String sourceUrl, String authorUrl) {
+    record MomentFile(String id, String theme, String caption, String file, String thumbFile, String url, String author, String license, String sourceUrl, String authorUrl) {
     }
 
     record TemplatesFile(String destinationId, List<TemplateEntry> templates) {
@@ -317,6 +322,6 @@ public class ClasspathPlaceCatalog implements PlaceCatalog {
                      String phone, String serviceHours, String priceNote) {
     }
 
-    record PhotoFile(String file, String url, String author, String license, String sourceUrl, String caption, String authorUrl) {
+    record PhotoFile(String file, String thumbFile, String url, String author, String license, String sourceUrl, String caption, String authorUrl) {
     }
 }

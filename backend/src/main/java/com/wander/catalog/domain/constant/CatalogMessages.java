@@ -107,6 +107,8 @@ public final class CatalogMessages {
     public static final String REFERENCE_COORDINATES_MISSING = "Mốc tham chiếu %s thiếu tọa độ";
     /** Ảnh thiếu một trường; tham số: nhãn trường. */
     public static final String PHOTO_FIELD_MISSING = "Ảnh thiếu %s";
+    /** Ảnh thu nhỏ đi kèm ảnh ngoài. */
+    public static final String PHOTO_THUMB_NEEDS_FILE = "Ảnh thu nhỏ chỉ đi kèm ảnh lưu cục bộ, không đi kèm ảnh ngoài";
     /** Tên tệp ảnh sai dạng; tham số: tên tệp. */
     public static final String PHOTO_FILE_NAME_INVALID = "Tên tệp ảnh chỉ gồm chữ thường, số, gạch ngang và đuôi jpg/jpeg/png/webp: %s";
     /** Liên kết nguồn ảnh không phải https; tham số: liên kết. */

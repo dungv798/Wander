@@ -8,11 +8,17 @@
       "status": "reference",
       "days": [
         {
-          "places": ["vinh-vinh-hy", "vuon-quoc-gia-nui-chua"],
+          "places": [
+            "vinh-vinh-hy",
+            "vuon-quoc-gia-nui-chua"
+          ],
           "note": "Xuất phát từ khu Vĩnh Hy, kết thúc tại Vĩnh Hy hoặc quay về Phan Rang tùy nơi ở. Hai điểm cách nhau khoảng 6 km (ước tính); phương tiện giả định: xe máy hoặc ô tô. Nhịp vừa phải, 2 điểm."
         },
         {
-          "places": ["bai-bien-ninh-chu", "thap-po-klong-garai"],
+          "places": [
+            "bai-bien-ninh-chu",
+            "thap-po-klong-garai"
+          ],
           "note": "Xuất phát từ Phan Rang hoặc Vĩnh Hy (Ninh Chữ cách Vĩnh Hy khoảng 22 km chim bay, ước tính). Hai điểm cách nhau khoảng 11 km. Nhịp nhẹ, 2 điểm."
         }
       ]
@@ -24,7 +30,11 @@
       "status": "reference",
       "days": [
         {
-          "places": ["thap-po-klong-garai", "thap-hoa-lai", "thap-po-rome"],
+          "places": [
+            "thap-po-klong-garai",
+            "thap-hoa-lai",
+            "thap-po-rome"
+          ],
           "note": "Xuất phát và kết thúc ở khu Phan Rang – Tháp Chàm. Phương tiện giả định: xe máy hoặc ô tô. Ngày có nhiều đoạn di chuyển, nhịp vừa phải; giờ mở cửa các tháp chưa xác minh."
         }
       ]

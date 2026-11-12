@@ -265,31 +265,36 @@
       ],
       "photos": [
         {
-          "file": "pho-co-hoi-an-1.jpg",
+          "file": "pho-co-hoi-an-1-w1280-37bee7f5cf.webp",
+          "thumbFile": "pho-co-hoi-an-1-w480-150361e532.webp",
           "author": "Ryan Milani",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boat_by_the_water_-_Hoi_An_(16922189291).jpg"
         },
         {
-          "file": "pho-co-hoi-an-2.jpg",
+          "file": "pho-co-hoi-an-2-w1280-634bff5e33.webp",
+          "thumbFile": "pho-co-hoi-an-2-w480-4c06345c42.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:10511-Hoi-An_(37158496013).jpg"
         },
         {
-          "file": "pho-co-hoi-an-3.jpg",
+          "file": "pho-co-hoi-an-3-w1280-41960e88cf.webp",
+          "thumbFile": "pho-co-hoi-an-3-w480-bdb580fae9.webp",
           "author": "xiquinhosilva",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:10519-Hoi-An_(37621340030).jpg"
         },
         {
-          "file": "pho-co-hoi-an-4.jpg",
+          "file": "pho-co-hoi-an-4-w1280-0daaa20954.webp",
+          "thumbFile": "pho-co-hoi-an-4-w480-91e0afa602.webp",
           "author": "Alexkom000",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024-12-20_Hoi_An_Old_Town_at_night_2.jpg"
         },
         {
-          "file": "pho-co-hoi-an-5.jpg",
+          "file": "pho-co-hoi-an-5-w1280-646da0e3ff.webp",
+          "thumbFile": "pho-co-hoi-an-5-w480-154b8e3938.webp",
           "author": "Steffen Schmitz ( more photos )",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Ancient_Town,_2020-01_CN-06.jpg"
@@ -337,31 +342,36 @@
       ],
       "photos": [
         {
-          "file": "chua-cau-hoi-an-1.jpg",
+          "file": "chua-cau-hoi-an-1-w1280-65183edcca.webp",
+          "thumbFile": "chua-cau-hoi-an-1-w480-41242f216c.webp",
           "author": "User dalbera on Flickr",
           "license": "CC BY 1.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cau_Nhat_Ban.jpg"
         },
         {
-          "file": "chua-cau-hoi-an-2.jpg",
+          "file": "chua-cau-hoi-an-2-w1280-77a50868fe.webp",
+          "thumbFile": "chua-cau-hoi-an-2-w480-ab1151264d.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_H%E1%BB%99i_An_-_Japanese_Covered_Bridge_(Ch%C3%B9a_C%E1%BA%A7u)_after_renovation_-_img_11.jpg"
         },
         {
-          "file": "chua-cau-hoi-an-3.jpg",
+          "file": "chua-cau-hoi-an-3-w1280-46a6a69714.webp",
+          "thumbFile": "chua-cau-hoi-an-3-w480-07121b02eb.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_H%E1%BB%99i_An_-_Japanese_Covered_Bridge_(Ch%C3%B9a_C%E1%BA%A7u)_after_renovation_-_interior_-_img_03.jpg"
         },
         {
-          "file": "chua-cau-hoi-an-4.jpg",
+          "file": "chua-cau-hoi-an-4-w1280-3df6bbe46d.webp",
+          "thumbFile": "chua-cau-hoi-an-4-w480-6e50586c82.webp",
           "author": "Suicasmo",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_C%E1%BA%A7u_20190920-2.jpg"
         },
         {
-          "file": "chua-cau-hoi-an-5.jpg",
+          "file": "chua-cau-hoi-an-5-w1280-ef20c1e606.webp",
+          "thumbFile": "chua-cau-hoi-an-5-w480-de80547108.webp",
           "author": "François Guerraz",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%C3%B9a_C%E1%BA%A7u,_H%E1%BB%99i_An.jpg"
@@ -409,19 +419,22 @@
       ],
       "photos": [
         {
-          "file": "hoi-quan-phuc-kien-1.jpg",
+          "file": "hoi-quan-phuc-kien-1-w1280-d0f9f024c4.webp",
+          "thumbFile": "hoi-quan-phuc-kien-1-w480-d15215f101.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An_2024_-_Fujian_Assembly_Hall_(H%E1%BB%99i_qu%C3%A1n_Ph%C3%BAc_Ki%E1%BA%BFn_,_%E6%9C%83%E5%AE%89%E7%A6%8F%E5%BB%BA%E6%9C%83%E9%A4%A8)_-_img_02.jpg"
         },
         {
-          "file": "hoi-quan-phuc-kien-2.jpg",
+          "file": "hoi-quan-phuc-kien-2-w1280-8689e3f695.webp",
+          "thumbFile": "hoi-quan-phuc-kien-2-w480-e9f87142c4.webp",
           "author": "Liftold ( thảo luận )",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_Qu%C3%A1n_Ph%C3%BAc_Ki%E1%BA%BFn.JPG"
         },
         {
-          "file": "hoi-quan-phuc-kien-3.jpg",
+          "file": "hoi-quan-phuc-kien-3-w1280-8a9b14c21e.webp",
+          "thumbFile": "hoi-quan-phuc-kien-3-w480-2e3a7867c7.webp",
           "author": "AJ Oswald",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Ph%C3%BAc_Ki%E1%BA%BFn.jpg"
@@ -469,7 +482,8 @@
       ],
       "photos": [
         {
-          "file": "nha-co-tan-ky-1.jpg",
+          "file": "nha-co-tan-ky-1-w850-5467f9f786.webp",
+          "thumbFile": "nha-co-tan-ky-1-w480-54e43ad9a3.webp",
           "author": "ChieuTimViet",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nh%C3%A0_c%E1%BB%95_T%E1%BA%A5n_K%C3%BD_H%E1%BB%99i_An_-_panoramio.jpg"
@@ -517,13 +531,15 @@
       ],
       "photos": [
         {
-          "file": "nha-co-phung-hung-wave-20261105-14.jpg",
+          "file": "nha-co-phung-hung-wave-20261105-14-w1280-7ee0a0adef.webp",
+          "thumbFile": "nha-co-phung-hung-wave-20261105-14-w480-dca7f80750.webp",
           "author": "Dennis G. Jarvis",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:DGJ_0967_-_Phung_Hung_Old_House_(3415825802).jpg"
         },
         {
-          "file": "nha-co-phung-hung-wave-20261105-1.jpg",
+          "file": "nha-co-phung-hung-wave-20261105-1-w1280-8a3655649e.webp",
+          "thumbFile": "nha-co-phung-hung-wave-20261105-1-w480-1a259883bb.webp",
           "author": "Khương Việt Hà",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phung_Hung_old_house_2_(inside).JPG"
@@ -566,13 +582,15 @@
       ],
       "photos": [
         {
-          "file": "rung-dua-bay-mau-1.jpg",
+          "file": "rung-dua-bay-mau-1-w1280-79b63379f3.webp",
+          "thumbFile": "rung-dua-bay-mau-1-w480-a7bf45898b.webp",
           "author": "Justin",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nypa_fruticans_353792454.jpg"
         },
         {
-          "file": "rung-dua-bay-mau-2.jpg",
+          "file": "rung-dua-bay-mau-2-w1280-6ae6310f39.webp",
+          "thumbFile": "rung-dua-bay-mau-2-w480-26e2b502fe.webp",
           "author": "Justin",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nypa_fruticans_353792455.jpg"
@@ -619,13 +637,15 @@
       ],
       "photos": [
         {
-          "file": "lang-gom-thanh-ha-1.jpg",
+          "file": "lang-gom-thanh-ha-1-w1280-06f7191b08.webp",
+          "thumbFile": "lang-gom-thanh-ha-1-w480-a36b94c773.webp",
           "author": "LÊ TẤN LỘC",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ngh%E1%BB%87_nh%C3%A2n_l%C3%A0ng_g%E1%BB%91m_Thanh_H%C3%A0.JPG"
         },
         {
-          "file": "lang-gom-thanh-ha-2.jpg",
+          "file": "lang-gom-thanh-ha-2-w1280-503dc57423.webp",
+          "thumbFile": "lang-gom-thanh-ha-2-w480-44049fee73.webp",
           "author": "LÊ TẤN LỘC",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%E1%BA%A3n_ph%E1%BA%A9m_l%C3%A0ng_g%E1%BB%91m_Thanh_H%C3%A02.JPG"
@@ -666,7 +686,8 @@
       ],
       "photos": [
         {
-          "file": "cu-lao-cham-1.jpg",
+          "file": "cu-lao-cham-1-w1280-1454c5af00.webp",
+          "thumbFile": "cu-lao-cham-1-w480-a55f84408c.webp",
           "author": "Robert Quan",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cham_island_homestay.jpg"
@@ -713,31 +734,36 @@
       ],
       "photos": [
         {
-          "file": "thanh-dia-my-son-1.jpg",
+          "file": "thanh-dia-my-son-1-w1280-68d3029ded.webp",
+          "thumbFile": "thanh-dia-my-son-1-w480-3f2e7d3db8.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_-_M%E1%BB%B9_S%C6%A1n_Group_B,_C_and_D_-_img_23.jpg"
         },
         {
-          "file": "thanh-dia-my-son-2.jpg",
+          "file": "thanh-dia-my-son-2-w1280-72b69c4e32.webp",
+          "thumbFile": "thanh-dia-my-son-2-w480-ec302af898.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024_-_M%E1%BB%B9_S%C6%A1n_Sanctuary_Temple_E7_-_img_01.jpg"
         },
         {
-          "file": "thanh-dia-my-son-3.jpg",
+          "file": "thanh-dia-my-son-3-w1280-e7838a9e81.webp",
+          "thumbFile": "thanh-dia-my-son-3-w480-52e100e656.webp",
           "author": "Andre Hospers",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%E1%BB%B9_S%C6%A1n_Vietnam_Temple.jpg"
         },
         {
-          "file": "thanh-dia-my-son-4.jpg",
+          "file": "thanh-dia-my-son-4-w1280-a05d0733c0.webp",
+          "thumbFile": "thanh-dia-my-son-4-w480-4ac7bd5412.webp",
           "author": "Philip Nalangan",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:My_Son_Sanctuary_Vietnam_06.jpg"
         },
         {
-          "file": "thanh-dia-my-son-5.jpg",
+          "file": "thanh-dia-my-son-5-w1280-dd767702ad.webp",
+          "thumbFile": "thanh-dia-my-son-5-w480-b6bbbc3014.webp",
           "author": "shankar s. from Dubai, united arab emirates",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_far_view_of_the_ruins_at_My_Son_(30992152933).jpg"
@@ -784,19 +810,22 @@
       ],
       "photos": [
         {
-          "file": "lang-rau-tra-que-1.jpg",
+          "file": "lang-rau-tra-que-1-w1280-36afe81d5b.webp",
+          "thumbFile": "lang-rau-tra-que-1-w480-093fde886c.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vegetables_in_Tr%C3%A0_Qu%E1%BA%BF_1.jpg"
         },
         {
-          "file": "lang-rau-tra-que-2.jpg",
+          "file": "lang-rau-tra-que-2-w1280-71e9d568f8.webp",
+          "thumbFile": "lang-rau-tra-que-2-w480-bcfac3385b.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vegetables_in_Tr%C3%A0_Qu%E1%BA%BF_2.jpg"
         },
         {
-          "file": "lang-rau-tra-que-3.jpg",
+          "file": "lang-rau-tra-que-3-w1280-7a374a4b6e.webp",
+          "thumbFile": "lang-rau-tra-que-3-w480-63717e5eef.webp",
           "author": "Trần Đức Bắc",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoian_-_excursi%C3%B3n_al_pueblo_Tra_Que.jpg"
@@ -844,19 +873,22 @@
       ],
       "photos": [
         {
-          "file": "chua-ong-hoi-an-1.jpg",
+          "file": "chua-ong-hoi-an-1-w1280-242180332a.webp",
+          "thumbFile": "chua-ong-hoi-an-1-w480-0692092022.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quan_C%C3%B4ng_Mi%E1%BA%BFu_(Ch%C3%B9a_%C3%94ng)_01.jpg"
         },
         {
-          "file": "chua-ong-hoi-an-2.jpg",
+          "file": "chua-ong-hoi-an-2-w1280-52f7beabe6.webp",
+          "thumbFile": "chua-ong-hoi-an-2-w480-a85e02f946.webp",
           "author": "User thalling55 on Flickr",
           "license": "CC BY 1.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mieu_Quan_Cong.jpg"
         },
         {
-          "file": "chua-ong-hoi-an-3.jpg",
+          "file": "chua-ong-hoi-an-3-w1280-f89124d906.webp",
+          "thumbFile": "chua-ong-hoi-an-3-w480-ae5ec55be1.webp",
           "author": "Vuong Tri Binh",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chua_Ong_temple_of_Hoi_An_in_2015_01.jpg"
@@ -899,7 +931,8 @@
       ],
       "photos": [
         {
-          "file": "bai-bien-cua-dai-1.jpg",
+          "file": "bai-bien-cua-dai-1-w1280-424c8b5e11.webp",
+          "thumbFile": "bai-bien-cua-dai-1-w480-267420e628.webp",
           "author": "AJ Oswald",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_bi%E1%BB%83n_C%E1%BB%ADa_%C4%90%E1%BA%A1i.jpg"
@@ -947,19 +980,22 @@
       ],
       "photos": [
         {
-          "file": "hoi-quan-quang-dong-1.jpg",
+          "file": "hoi-quan-quang-dong-1-w1280-3f965e59e4.webp",
+          "thumbFile": "hoi-quan-quang-dong-1-w480-8059409738.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Qu%E1%BA%A3ng_%C4%90%C3%B4ng_22_H%C3%A0ng_Bu%E1%BB%93m.jpg"
         },
         {
-          "file": "hoi-quan-quang-dong-2.jpg",
+          "file": "hoi-quan-quang-dong-2-w1280-e18cf913ce.webp",
+          "thumbFile": "hoi-quan-quang-dong-2-w480-491579eb65.webp",
           "author": "ssedro",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_qu%C3%A1n_Qu%E1%BA%A3ng_%C4%90%C3%B4ng,_H%E1%BB%99i_An.jpg"
         },
         {
-          "file": "hoi-quan-quang-dong-3.jpg",
+          "file": "hoi-quan-quang-dong-3-w1280-c650be7f03.webp",
+          "thumbFile": "hoi-quan-quang-dong-3-w480-0fb1204ce7.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cantonese_Assembly_Hall_of_Hoi_An_(2024)_-_img_01.jpg"
@@ -1007,7 +1043,8 @@
       ],
       "photos": [
         {
-          "file": "bao-tang-sa-huynh-1.jpg",
+          "file": "bao-tang-sa-huynh-1-w1280-8b7bb4b793.webp",
+          "thumbFile": "bao-tang-sa-huynh-1-w480-6785769183.webp",
           "author": "librarianidol",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sa_Huynh_Museum,_Hoi_An.jpg"
@@ -1054,19 +1091,22 @@
       ],
       "photos": [
         {
-          "file": "cho-hoi-an-1.jpg",
+          "file": "cho-hoi-an-1-w1280-b3d6f63072.webp",
+          "thumbFile": "cho-hoi-an-1-w480-a54e9e4e2d.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ch%E1%BB%A3_H%E1%BB%99i_An_-_Hoi_An_Market_(2024)_-_img_01.jpg"
         },
         {
-          "file": "cho-hoi-an-2.jpg",
+          "file": "cho-hoi-an-2-w1280-d76ce4b9ab.webp",
+          "thumbFile": "cho-hoi-an-2-w480-8887d27989.webp",
           "author": "ShiraAki",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoian_market.jpg"
         },
         {
-          "file": "cho-hoi-an-3.jpg",
+          "file": "cho-hoi-an-3-w1280-f51aad8229.webp",
+          "thumbFile": "cho-hoi-an-3-w480-da53aeb372.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoi_An_Market.jpg"
@@ -1114,13 +1154,15 @@
       ],
       "photos": [
         {
-          "file": "hoi-quan-trieu-chau-1.jpg",
+          "file": "hoi-quan-trieu-chau-1-w1280-dde8175b53.webp",
+          "thumbFile": "hoi-quan-trieu-chau-1-w480-d4487b3416.webp",
           "author": "Steffen Schmitz ( more photos )",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Trieu_Chau_Assembly_Hall,_2020-01_CN-02.jpg"
         },
         {
-          "file": "hoi-quan-trieu-chau-2.jpg",
+          "file": "hoi-quan-trieu-chau-2-w1280-d9b29b3a7b.webp",
+          "thumbFile": "hoi-quan-trieu-chau-2-w480-469736c43b.webp",
           "author": "Franzfoto",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoi_An_-_Trieu_Chau_Assembly_hall_1766_04.jpg"
@@ -1156,13 +1198,15 @@
       ],
       "photos": [
         {
-          "file": "food-cao-lau-3.jpg",
+          "file": "food-cao-lau-3-w1280-bcd3fca3cf.webp",
+          "thumbFile": "food-cao-lau-3-w480-11c9f7c1a6.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_l%E1%BA%A7u_H%E1%BB%99i_An_(2024).jpg"
         },
         {
-          "file": "food-cao-lau-2.jpg",
+          "file": "food-cao-lau-2-w1280-97a5e664e0.webp",
+          "thumbFile": "food-cao-lau-2-w480-8b36a25201.webp",
           "author": "Dragfyre",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_Lau_Hoi_An.JPG"
@@ -1198,7 +1242,8 @@
       ],
       "photos": [
         {
-          "file": "food-extra-3-1.jpg",
+          "file": "food-extra-3-1-w1280-53ab0c6f15.webp",
+          "thumbFile": "food-extra-3-1-w480-a054fc171a.webp",
           "author": "Stu Spivack",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_m%C3%AC.jpg"
@@ -1236,7 +1281,8 @@
       ],
       "photos": [
         {
-          "file": "wave-hoi-an-bao-tang-hoi-an-1.jpg",
+          "file": "wave-hoi-an-bao-tang-hoi-an-1-w1280-4fea56f4e1.webp",
+          "thumbFile": "wave-hoi-an-bao-tang-hoi-an-1-w480-29d213584e.webp",
           "author": "Mztourist",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hoi_An_Museum_main_building.jpg"
@@ -1308,13 +1354,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-c84a203a714b6a9a64.jpg",
+          "file": "venue-fill-c84a203a714b6a9a64-w1024-912e29cba4.webp",
+          "thumbFile": "venue-fill-c84a203a714b6a9a64-w480-892537f2fd.webp",
           "author": "Bex.Walton",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/7831824@N04/28504229895"
         },
         {
-          "file": "venue-fill-5edb1d8aa763c57807.jpg",
+          "file": "venue-fill-5edb1d8aa763c57807-w1024-03232ac465.webp",
+          "thumbFile": "venue-fill-5edb1d8aa763c57807-w480-361f1b6718.webp",
           "author": "Bex.Walton",
           "license": "CC BY 2.0",
           "sourceUrl": "https://www.flickr.com/photos/7831824@N04/28504237765"
@@ -1357,19 +1405,22 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-1a90089b8ca05cb5cb.jpg",
+          "file": "venue-fill-1a90089b8ca05cb5cb-w960-5b04525565.webp",
+          "thumbFile": "venue-fill-1a90089b8ca05cb5cb-w480-165b2be1dd.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=151094332"
         },
         {
-          "file": "venue-fill-451bf0ca46dcfb24e7.jpg",
+          "file": "venue-fill-451bf0ca46dcfb24e7-w1280-c8e66637c5.webp",
+          "thumbFile": "venue-fill-451bf0ca46dcfb24e7-w480-1660e55f96.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=151094328"
         },
         {
-          "file": "venue-fill-792b84ab71d1d905e4.jpg",
+          "file": "venue-fill-792b84ab71d1d905e4-w1280-4b15fc91d6.webp",
+          "thumbFile": "venue-fill-792b84ab71d1d905e4-w480-b752d92d4b.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=151094329"
@@ -1484,7 +1535,8 @@
       ],
       "photos": [
         {
-          "file": "dish-hoi-an-banh-vac-1.jpg",
+          "file": "dish-hoi-an-banh-vac-1-w1280-feafd888c1.webp",
+          "thumbFile": "dish-hoi-an-banh-vac-1-w480-5fe237bead.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_bao_b%C3%A1nh_v%E1%BA%A1c_-_hoi_an_(2024).jpg"
@@ -1606,13 +1658,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-ed53db45b08e431bad.jpg",
+          "file": "venue-fill-ed53db45b08e431bad-w1280-982be69ae5.webp",
+          "thumbFile": "venue-fill-ed53db45b08e431bad-w480-35159be833.webp",
           "author": "yuichiro anazawa",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=57767803"
         },
         {
-          "file": "venue-fill-a53b3ff98169282b6b.jpg",
+          "file": "venue-fill-a53b3ff98169282b6b-w1280-3ed56c6b5f.webp",
+          "thumbFile": "venue-fill-a53b3ff98169282b6b-w480-f40fb4255b.webp",
           "author": "yuichiro anazawa",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=57767795"
@@ -1706,7 +1760,8 @@
       "id": "cho-1",
       "theme": "cho",
       "caption": "Gian rau củ ở chợ Hội An",
-      "file": "hoi-an-moment-cho-1.jpg",
+      "file": "hoi-an-moment-cho-1-w1024-c5d6c257d9.webp",
+      "thumbFile": "hoi-an-moment-cho-1-w480-46f5915450.webp",
       "author": "PiktourUK",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/69706441@N03/33391127275"
@@ -1715,7 +1770,8 @@
       "id": "cho-2",
       "theme": "cho",
       "caption": "Chợ Hội An, Việt Nam",
-      "file": "hoi-an-moment-cho-2.jpg",
+      "file": "hoi-an-moment-cho-2-w768-f549b80d28.webp",
+      "thumbFile": "hoi-an-moment-cho-2-w480-22a9f16394.webp",
       "author": "dane brian",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/12955651@N07/4166015655"
@@ -1724,7 +1780,8 @@
       "id": "mon-an-3",
       "theme": "mon-an",
       "caption": "Người bán đồ ăn đường phố Hội An",
-      "file": "hoi-an-moment-mon-an-3.jpg",
+      "file": "hoi-an-moment-mon-an-3-w877-350e8ff39f.webp",
+      "thumbFile": "hoi-an-moment-mon-an-3-w480-b75b5fa6fa.webp",
       "author": "PiktourUK",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/69706441@N03/32548205264"
@@ -1733,7 +1790,8 @@
       "id": "mon-an-4",
       "theme": "mon-an",
       "caption": "Món ăn đường phố ở Hội An",
-      "file": "hoi-an-moment-mon-an-4.jpg",
+      "file": "hoi-an-moment-mon-an-4-w768-5839ec6f07.webp",
+      "thumbFile": "hoi-an-moment-mon-an-4-w480-d5a5ced9b7.webp",
       "author": "joaquinuy",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/81989974@N00/2320892762"
@@ -1742,7 +1800,8 @@
       "id": "nghe-5",
       "theme": "nghe",
       "caption": "Ngư dân lúc hoàng hôn ở Hội An",
-      "file": "hoi-an-moment-nghe-5.jpg",
+      "file": "hoi-an-moment-nghe-5-w768-c1476aa041.webp",
+      "thumbFile": "hoi-an-moment-nghe-5-w480-5655481e86.webp",
       "author": "chacrebleu",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/14156469@N04/3438254478"
@@ -1751,7 +1810,8 @@
       "id": "nghe-6",
       "theme": "nghe",
       "caption": "Ngư dân ở Hội An",
-      "file": "hoi-an-moment-nghe-6.jpg",
+      "file": "hoi-an-moment-nghe-6-w768-b14fd26a6f.webp",
+      "thumbFile": "hoi-an-moment-nghe-6-w480-8336d4e66e.webp",
       "author": "lightwrite",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/77442936@N00/14361477040"
@@ -1780,7 +1840,8 @@
       "id": "pexels-29374692",
       "theme": "mon-an",
       "caption": "Dừng bên quầy món ăn nhỏ giữa Hội An",
-      "file": "pexels-29374692.jpg",
+      "file": "pexels-29374692-w1280-9036f73a1f.webp",
+      "thumbFile": "pexels-29374692-w480-223a157381.webp",
       "author": "Võ Văn Tiến",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/street-food-vendor-in-h-i-an-vietnam-29374692/"
@@ -1789,7 +1850,8 @@
       "id": "pexels-2010701",
       "theme": "mon-an",
       "caption": "Đứng chờ món nướng giữa buổi chợ đêm Hội An",
-      "file": "pexels-2010701.jpg",
+      "file": "pexels-2010701-w1280-fe3cc87ee8.webp",
+      "thumbFile": "pexels-2010701-w480-81885438f5.webp",
       "author": "Pragyan Bezbaruah",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/people-watching-barbecues-getting-cooked-2010701/"
@@ -1798,7 +1860,8 @@
       "id": "food-research-hoi-an",
       "theme": "mon-an",
       "caption": "Cao lầu · một món muốn thử (ảnh minh họa)",
-      "file": "food-cao-lau-3.jpg",
+      "file": "food-cao-lau-3-w1280-bcd3fca3cf.webp",
+      "thumbFile": "food-cao-lau-3-w480-11c9f7c1a6.webp",
       "author": "Chainwit.",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cao_l%E1%BA%A7u_H%E1%BB%99i_An_(2024).jpg"
@@ -1807,7 +1870,8 @@
       "id": "wave-pexels-5681228",
       "theme": "cho",
       "caption": "Rẽ vào một góc chợ rau Hội An",
-      "file": "wave-pexels-5681228.jpg",
+      "file": "wave-pexels-5681228-w1280-812dd416eb.webp",
+      "thumbFile": "wave-pexels-5681228-w480-f7c074e5f7.webp",
       "author": "Jean Papillon",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/people-selling-vegetables-in-the-market-5681228/"
@@ -1816,7 +1880,8 @@
       "id": "wave-pexels-35261229",
       "theme": "nghe",
       "caption": "Nhìn gần đôi tay làm đèn lồng ở Hội An",
-      "file": "wave-pexels-35261229.jpg",
+      "file": "wave-pexels-35261229-w1280-6cc7ae238d.webp",
+      "thumbFile": "wave-pexels-35261229-w480-8c18644ff7.webp",
       "author": "Xuân Anh Nguyễn",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/colorful-lantern-market-scene-with-artisans-35261229/"
@@ -1825,7 +1890,8 @@
       "id": "wave-pexels-34949987",
       "theme": "nguoi",
       "caption": "Một tà áo dài giữa sắc đèn Hội An",
-      "file": "wave-pexels-34949987.jpg",
+      "file": "wave-pexels-34949987-w1280-6e7f7b48ec.webp",
+      "thumbFile": "wave-pexels-34949987-w480-31c9dbd23b.webp",
       "author": "Võ Văn Tiến",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/colorful-lantern-display-in-hoi-an-vietnam-34949987/"

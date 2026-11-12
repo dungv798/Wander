@@ -12,9 +12,16 @@ import java.util.regex.Pattern;
  * (ADR-009), nên các trường đó là bắt buộc. Nguồn ảnh là ĐÚNG MỘT trong hai: {@code file} (tệp lưu cục bộ trong kho) hoặc
  * {@code externalUrl} (ảnh tải thẳng từ máy chủ ngoài thuộc danh sách cho phép, DR-034: Unsplash bắt buộc hotlink).
  */
-public record Photo(String file, String externalUrl, String author, String license, String sourceUrl, String caption, String authorUrl) {
+public record Photo(String file, String externalUrl, String author, String license, String sourceUrl, String caption, String authorUrl,
+                    String thumbFile) {
 
     private static final Pattern FILE_NAME = Pattern.compile(CatalogConstants.PHOTO_FILE_REGEX);
+    private static final Pattern VARIANT_NAME = Pattern.compile(CatalogConstants.PHOTO_VARIANT_REGEX);
+
+    /** Photo without a separate thumbnail variant (external photos and single-variant files). */
+    public Photo(String file, String externalUrl, String author, String license, String sourceUrl, String caption, String authorUrl) {
+        this(file, externalUrl, author, license, sourceUrl, caption, authorUrl, null);
+    }
 
     /** Ảnh đã có chú thích vẫn đọc được khi chưa có liên kết tác giả. */
     public Photo(String file, String externalUrl, String author, String license, String sourceUrl, String caption) {
@@ -33,6 +40,7 @@ public record Photo(String file, String externalUrl, String author, String licen
 
     public Photo {
         file = Texts.isNullOrBlank(file) ? null : file.trim();
+        thumbFile = Texts.isNullOrBlank(thumbFile) ? null : thumbFile.trim();
         externalUrl = Texts.isNullOrBlank(externalUrl) ? null : externalUrl.trim();
         CatalogValidation.require((file == null) != (externalUrl == null), CatalogMessages.PHOTO_NEEDS_ONE_SOURCE);
         author = requiredPhotoField(author, CatalogMessages.LABEL_PHOTO_AUTHOR);
@@ -55,7 +63,9 @@ public record Photo(String file, String externalUrl, String author, String licen
                 CatalogConstants.PHOTO_CAPTION_MAX_LENGTH);
         if (file != null) {
             CatalogValidation.require(FILE_NAME.matcher(file).matches(), CatalogMessages.PHOTO_FILE_NAME_INVALID, file);
+            CatalogValidation.require(thumbFile == null || FILE_NAME.matcher(thumbFile).matches(), CatalogMessages.PHOTO_FILE_NAME_INVALID, thumbFile);
         } else {
+            CatalogValidation.require(thumbFile == null, CatalogMessages.PHOTO_THUMB_NEEDS_FILE);
             requireAllowedExternalUrl(externalUrl);
         }
     }
@@ -63,6 +73,37 @@ public record Photo(String file, String externalUrl, String author, String licen
     /** Ảnh tải thẳng từ máy chủ ngoài (không có tệp cục bộ). */
     public boolean isExternal() {
         return externalUrl != null;
+    }
+
+    /**
+     * Stable identifier of a local photo: the file name without the width/hash suffix and extension
+     * ({@code ho-xuan-huong-1-w1280-3fa9c1d2ab.webp} and the legacy {@code ho-xuan-huong-1.jpg} are both {@code ho-xuan-huong-1}).
+     * Persisted trip covers reference this value, so it must not change when a photo is re-encoded. {@code null} for external photos.
+     */
+    public String id() {
+        return file == null ? null : slugOf(file);
+    }
+
+    /** Pixel width encoded in the file name of the main variant, or {@code null} when the name carries none. */
+    public Integer width() {
+        return file == null ? null : widthOf(file);
+    }
+
+    /** Pixel width encoded in the thumbnail's file name, or {@code null} when there is no thumbnail. */
+    public Integer thumbWidth() {
+        return thumbFile == null ? null : widthOf(thumbFile);
+    }
+
+    /** File name without the {@code -w<width>-<hash>} suffix (when present) and the extension. */
+    private static String slugOf(String name) {
+        var variant = VARIANT_NAME.matcher(name);
+        return variant.matches() ? variant.group(1) : name.substring(0, name.lastIndexOf('.'));
+    }
+
+    /** Width taken from the {@code -w<width>-<hash>} suffix, or {@code null} for names without one. */
+    private static Integer widthOf(String name) {
+        var variant = VARIANT_NAME.matcher(name);
+        return variant.matches() ? Integer.valueOf(variant.group(2)) : null;
     }
 
     /** URL ngoài phải là https và máy chủ nằm trong danh sách cho phép (khớp CSP {@code img-src}). */

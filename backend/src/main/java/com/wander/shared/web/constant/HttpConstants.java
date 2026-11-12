@@ -83,13 +83,31 @@ public final class HttpConstants {
     /** Header chính sách nội dung. */
     public static final String HEADER_CONTENT_SECURITY_POLICY = "Content-Security-Policy";
 
+    /** Default {@code img-src} directive: this origin, inline data/blob images and Unsplash. */
+    public static final String CSP_IMG_SRC_DEFAULT = "img-src 'self' data: blob: https://images.unsplash.com";
+
+    /** Separator between CSP source expressions. */
+    public static final String CSP_SOURCE_SEPARATOR = " ";
+
+    /** Separator between a URL scheme and the authority. */
+    public static final String SCHEME_SEPARATOR = "://";
+
+    /** Separator between a host and its port. */
+    public static final String PORT_SEPARATOR = ":";
+
+    /** The https URL scheme. */
+    public static final String SCHEME_HTTPS = "https";
+
+    /** Property with the optional external origin of the catalog photos; same property the catalog module reads. */
+    public static final String PHOTO_BASE_URL_EXPRESSION = "${wander.catalog.photo-base-url:}";
+
     /**
      * CSP chặt: không script ngoài, không nhúng khung, chỉ cùng nguồn gốc, TRỪ hai máy chủ bản đồ đã duyệt ở ADR-015
      * (kiểu, ô vector, phông và biểu tượng ở tiles.openfreemap.org; ô độ cao ở s3.amazonaws.com) và worker/ảnh {@code blob:}
      * mà MapLibre GL tạo ra, cùng ảnh Unsplash tải thẳng từ images.unsplash.com (DR-034: điều khoản Unsplash bắt buộc hotlink). Không dùng ký tự đại diện.
      */
     public static final String VALUE_CONTENT_SECURITY_POLICY = "default-src 'self'; script-src 'self'; style-src 'self'; "
-            + "img-src 'self' data: blob: https://images.unsplash.com; connect-src 'self' https://tiles.openfreemap.org https://s3.amazonaws.com; "
+            + CSP_IMG_SRC_DEFAULT + "; connect-src 'self' https://tiles.openfreemap.org https://s3.amazonaws.com; "
             + "worker-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 
     /**

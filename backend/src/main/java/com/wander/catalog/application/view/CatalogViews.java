@@ -16,7 +16,12 @@ public final class CatalogViews {
                                      List<Preview> previews, Double lat, Double lon, PhotoView coverPhoto, List<String> categories) {
     }
 
-    public record PhotoView(String url, String author, String license, String sourceUrl, String caption, String authorUrl) {
+    /**
+     * A photo with attribution. {@code id} is the stable photo identifier (trip covers store it), {@code thumbUrl} the 480 px
+     * variant and {@code srcSet} the ready-made {@code srcset} value; the last three are {@code null} when not applicable.
+     */
+    public record PhotoView(String url, String author, String license, String sourceUrl, String caption, String authorUrl,
+                            String id, String thumbUrl, String srcSet) {
     }
 
     /** Khoảng cách ước tính từ một mốc tham chiếu. {@code approximate} = tọa độ mốc chưa kiểm chứng. */

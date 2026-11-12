@@ -213,13 +213,15 @@
       ],
       "photos": [
         {
-          "file": "phong-nha-dong-phong-nha-1.jpg",
+          "file": "phong-nha-dong-phong-nha-1-w1280-92b763831d.webp",
+          "thumbFile": "phong-nha-dong-phong-nha-1-w480-e0652ae0ed.webp",
           "author": "Genghiskhanviet",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phongnhakebang2.jpg"
         },
         {
-          "file": "phong-nha-dong-phong-nha-3.jpg",
+          "file": "phong-nha-dong-phong-nha-3-w1280-14a7f9a67f.webp",
+          "thumbFile": "phong-nha-dong-phong-nha-3-w480-fb9b945c35.webp",
           "author": "Edgardo W. Olivera from Montevideo, Uruguay",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cueva_Phong_Nha,_Vietnam_(38652790530).jpg"
@@ -253,13 +255,15 @@
       ],
       "photos": [
         {
-          "file": "phong-nha-dong-thien-duong-1.jpg",
+          "file": "phong-nha-dong-thien-duong-1-w1280-fb378e45e7.webp",
+          "thumbFile": "phong-nha-dong-thien-duong-1-w480-acc2abb918.webp",
           "author": "Preparetavalise.com",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grotte_Thien_Duong.jpg"
         },
         {
-          "file": "phong-nha-dong-thien-duong-2.jpg",
+          "file": "phong-nha-dong-thien-duong-2-w1280-89a857560d.webp",
+          "thumbFile": "phong-nha-dong-thien-duong-2-w480-b071b8501c.webp",
           "author": "Genghiskhan",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThienDuongCave1.jpg"
@@ -294,13 +298,15 @@
       ],
       "photos": [
         {
-          "file": "phong-nha-vuon-quoc-gia-1.jpg",
+          "file": "phong-nha-vuon-quoc-gia-1-w1280-95236e566a.webp",
+          "thumbFile": "phong-nha-vuon-quoc-gia-1-w480-ae9107dda8.webp",
           "author": "Genghiskhanviet",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phongnhakebang6.jpg"
         },
         {
-          "file": "phong-nha-vuon-quoc-gia-2.jpg",
+          "file": "phong-nha-vuon-quoc-gia-2-w1280-efa1681592.webp",
+          "thumbFile": "phong-nha-vuon-quoc-gia-2-w480-06d28393d4.webp",
           "author": "Genghiskhanviet",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phongnhatourism.jpg"
@@ -334,7 +340,8 @@
       ],
       "photos": [
         {
-          "file": "phong-nha-hang-en-1.jpg",
+          "file": "phong-nha-hang-en-1-w1280-7633a8696d.webp",
+          "thumbFile": "phong-nha-hang-en-1-w480-d6c67725d9.webp",
           "author": "Jérémie B.",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hang_%C3%89n_Cave_-_201505_-_JB.jpg"
@@ -368,7 +375,8 @@
       ],
       "photos": [
         {
-          "file": "phong-nha-son-doong-1.jpg",
+          "file": "phong-nha-son-doong-1-w1280-4402820eaf.webp",
+          "thumbFile": "phong-nha-son-doong-1-w480-134bae0cce.webp",
           "author": "Trantuanviet",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_Beam_Through_the_Darkness_-_Son_Doong_Cave.jpg"
@@ -400,7 +408,8 @@
       ],
       "photos": [
         {
-          "file": "phong-nha-song-son-1.jpg",
+          "file": "phong-nha-song-son-1-w1280-8ac3fe84fd.webp",
+          "thumbFile": "phong-nha-song-son-1-w480-9580145690.webp",
           "author": "BacLuong at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Song_Son_@Quang_Binh.jpg"
@@ -436,7 +445,8 @@
       ],
       "photos": [
         {
-          "file": "food-ca-phe-phin-1.jpg",
+          "file": "food-ca-phe-phin-1-w1280-c2bdf4cd46.webp",
+          "thumbFile": "food-ca-phe-phin-1-w480-794d07eb31.webp",
           "author": "Clarin",
           "license": "CC BY 2.5",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"
@@ -566,7 +576,8 @@
       "id": "pexels-33092448",
       "theme": "hanh-trinh",
       "caption": "Theo chuyến thuyền trên sông ở Phong Nha",
-      "file": "pexels-33092448.jpg",
+      "file": "pexels-33092448-w1280-e4433aa774.webp",
+      "thumbFile": "pexels-33092448-w480-8037da3429.webp",
       "author": "Huy Nguyen",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/scenic-boat-ride-near-phong-nha-cave-33092448/"
@@ -575,7 +586,8 @@
       "id": "food-research-phong-nha",
       "theme": "mon-an",
       "caption": "Cà phê sau một ngày khám phá · một món muốn thử (ảnh minh họa)",
-      "file": "food-ca-phe-phin-1.jpg",
+      "file": "food-ca-phe-phin-1-w1280-c2bdf4cd46.webp",
+      "thumbFile": "food-ca-phe-phin-1-w480-794d07eb31.webp",
       "author": "Clarin",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"

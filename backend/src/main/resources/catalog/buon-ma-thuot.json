@@ -164,7 +164,8 @@
       ],
       "photos": [
         {
-          "file": "buon-ma-thuot-thac-dray-nur-1.jpg",
+          "file": "buon-ma-thuot-thac-dray-nur-1-w1280-63041ccd54.webp",
+          "thumbFile": "buon-ma-thuot-thac-dray-nur-1-w480-fe8bdab31f.webp",
           "author": "Y Kpia Mlo",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Draynur_falls.jpg"
@@ -198,13 +199,15 @@
       ],
       "photos": [
         {
-          "file": "buon-ma-thuot-ho-lak-1.jpg",
+          "file": "buon-ma-thuot-ho-lak-1-w1024-2d326d66f2.webp",
+          "thumbFile": "buon-ma-thuot-ho-lak-1-w480-05909f17ac.webp",
           "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lak_Lake.jpg"
         },
         {
-          "file": "buon-ma-thuot-ho-lak-2.jpg",
+          "file": "buon-ma-thuot-ho-lak-2-w1280-ab1b0f9ba1.webp",
+          "thumbFile": "buon-ma-thuot-ho-lak-2-w480-48d2b11a78.webp",
           "author": "Đỗ Tuấn Hưng",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buonjuin.jpg"
@@ -238,7 +241,8 @@
       ],
       "photos": [
         {
-          "file": "buon-ma-thuot-yok-don-1.jpg",
+          "file": "buon-ma-thuot-yok-don-1-w1280-3c0b4b7682.webp",
+          "thumbFile": "buon-ma-thuot-yok-don-1-w480-a779208a13.webp",
           "author": "Đỗ Tuấn Hưng",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yokdon01.JPG"
@@ -270,13 +274,15 @@
       ],
       "photos": [
         {
-          "file": "ref-buon-ma-thuot-thac-dray-sap-3.jpg",
+          "file": "ref-buon-ma-thuot-thac-dray-sap-3-w1280-eb1c8f26a1.webp",
+          "thumbFile": "ref-buon-ma-thuot-thac-dray-sap-3-w480-f4dd5be1e6.webp",
           "author": "Dotuanhungdaklak at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Draysap01.JPG"
         },
         {
-          "file": "ref-buon-ma-thuot-thac-dray-sap-4.jpg",
+          "file": "ref-buon-ma-thuot-thac-dray-sap-4-w1280-ec0f2b7ec5.webp",
+          "thumbFile": "ref-buon-ma-thuot-thac-dray-sap-4-w480-93c47db28e.webp",
           "author": "Dotuanhungdaklak at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Draysap02.JPG"
@@ -308,13 +314,15 @@
       ],
       "photos": [
         {
-          "file": "ref-buon-ma-thuot-buon-don-2.jpg",
+          "file": "ref-buon-ma-thuot-buon-don-2-w1280-cc422100fa.webp",
+          "thumbFile": "ref-buon-ma-thuot-buon-don-2-w480-73ddee6664.webp",
           "author": "Đỗ Tuấn Hưng",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bandon05.JPG"
         },
         {
-          "file": "ref-buon-ma-thuot-buon-don-1.jpg",
+          "file": "ref-buon-ma-thuot-buon-don-1-w1280-5f2f442777.webp",
+          "thumbFile": "ref-buon-ma-thuot-buon-don-1-w480-7777187c84.webp",
           "author": "Đỗ Tuấn Hưng",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bandon02.JPG"
@@ -350,7 +358,8 @@
       ],
       "photos": [
         {
-          "file": "food-bun-do-1.jpg",
+          "file": "food-bun-do-1-w1000-58801f57e3.webp",
+          "thumbFile": "food-bun-do-1-w480-f74224c539.webp",
           "author": "Nlam.94",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%9AN_%C4%90%E1%BB%8E_%C4%90%E1%BA%AEK_L%E1%BA%AEK.jpg"
@@ -386,7 +395,8 @@
       ],
       "photos": [
         {
-          "file": "food-ca-phe-phin-1.jpg",
+          "file": "food-ca-phe-phin-1-w1280-c2bdf4cd46.webp",
+          "thumbFile": "food-ca-phe-phin-1-w480-794d07eb31.webp",
           "author": "Clarin",
           "license": "CC BY 2.5",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_Phe_Sua_Da.jpg"
@@ -474,13 +484,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-1d12d117ddb12c9aa8.jpg",
+          "file": "venue-fill-1d12d117ddb12c9aa8-w1280-72bbd880ba.webp",
+          "thumbFile": "venue-fill-1d12d117ddb12c9aa8-w480-b7615081f2.webp",
           "author": "Phan Thanh Huyền",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langcaphetrungnguyen.JPG"
         },
         {
-          "file": "venue-fill-fda34023ec57d24aeb.jpg",
+          "file": "venue-fill-fda34023ec57d24aeb-w1280-e1e66e96d0.webp",
+          "thumbFile": "venue-fill-fda34023ec57d24aeb-w480-5364df37b2.webp",
           "author": "vi:User:Pttp1991",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lang_ca_phe_Trung_Nguyen.JPG"
@@ -523,7 +535,8 @@
       ],
       "photos": [
         {
-          "file": "dish-buon-ma-thuot-com-lam-2.jpg",
+          "file": "dish-buon-ma-thuot-com-lam-2-w1024-636d46024a.webp",
+          "thumbFile": "dish-buon-ma-thuot-com-lam-2-w480-5a5d57ea0d.webp",
           "author": "Lam Nguyen from Ho Chi Minh City, Vietnam",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C6%A1m_lam_T%C3%A2y_Nguy%C3%AAn.jpg"
@@ -537,7 +550,8 @@
       "id": "pexels-3263933",
       "theme": "mon-an",
       "caption": "Một khoảng nghỉ trong quán cà phê ở Đắk Lắk",
-      "file": "pexels-3263933.jpg",
+      "file": "pexels-3263933-w1280-0484aaec07.webp",
+      "thumbFile": "pexels-3263933-w480-9235f8d496.webp",
       "author": "Nam Phong Bùi",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/man-seated-at-a-table-in-a-cafe-3263933/"
@@ -546,7 +560,8 @@
       "id": "food-research-buon-ma-thuot",
       "theme": "mon-an",
       "caption": "Bún đỏ Buôn Ma Thuột · một món muốn thử (ảnh minh họa)",
-      "file": "food-bun-do-1.jpg",
+      "file": "food-bun-do-1-w1000-58801f57e3.webp",
+      "thumbFile": "food-bun-do-1-w480-f74224c539.webp",
       "author": "Nlam.94",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%9AN_%C4%90%E1%BB%8E_%C4%90%E1%BA%AEK_L%E1%BA%AEK.jpg"
@@ -555,7 +570,8 @@
       "id": "wave-pexels-21353296",
       "theme": "nguoi",
       "caption": "Tìm hiểu trang phục và đời sống ở Buôn Ma Thuột",
-      "file": "wave-pexels-21353296.jpg",
+      "file": "wave-pexels-21353296-w1280-fed5ca65ed.webp",
+      "thumbFile": "wave-pexels-21353296-w480-2412ae86e1.webp",
       "author": "Long Bà Mùi",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/man-in-a-montagnard-shirt-standing-in-the-doorway-21353296/"
@@ -564,7 +580,8 @@
       "id": "wave-pexels-21033104",
       "theme": "mon-an",
       "caption": "Nhìn một mùa trái chín ngay trên cây",
-      "file": "wave-pexels-21033104.jpg",
+      "file": "wave-pexels-21033104-w1280-d2df166b34.webp",
+      "thumbFile": "wave-pexels-21033104-w480-ba24092a90.webp",
       "author": "Long Bà Mùi",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/tree-with-leaves-and-blossoming-fruit-21033104/"

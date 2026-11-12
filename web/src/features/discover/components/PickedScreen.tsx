@@ -10,7 +10,7 @@ import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
 import { useResource } from '../../../shared/hooks/useResource.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
 import type { DestinationDetail, PlaceView } from '../model/Catalog.types.ts';
-import { firstPhotoUrl } from '../model/destinationQueries.ts';
+import { firstPhotoThumbUrl } from '../model/destinationQueries.ts';
 import { pickedOf, savedPicksOf } from '../model/discoverState.ts';
 import { DestinationGate } from './DestinationGate.tsx';
 import { MapPeekButton } from './MapPeekButton.tsx';
@@ -33,7 +33,7 @@ function PickedRow({ place, saved }: { readonly place: PlaceView; readonly saved
   return (
     <div className={`tile picked-row cat-${place.category}`}>
       <button data-place-photo={place.id} className="tilebtn" type="button" aria-label={fill(COPY.picked.view, { name: place.name })} onClick={() => sheet.open(place.id)}>
-        {place.photos.length ? <RevealImage alt="" src={firstPhotoUrl(place)} /> : <PlacePlaceholder place={place} />}
+        {place.photos.length ? <RevealImage alt="" src={firstPhotoThumbUrl(place)} /> : <PlacePlaceholder place={place} />}
         <span className="in">
           <h3>{place.name}</h3>
           <p>{place.area}</p>

@@ -14,6 +14,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class ResponseHeadersFilter extends OncePerRequestFilter {
 
+    private final String contentSecurityPolicy;
+
+    /** @param contentSecurityPolicy value of the CSP header sent with UI responses (see {@link ContentSecurityPolicy}) */
+    public ResponseHeadersFilter(String contentSecurityPolicy) {
+        this.contentSecurityPolicy = contentSecurityPolicy;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
@@ -34,10 +41,10 @@ public class ResponseHeadersFilter extends OncePerRequestFilter {
     }
 
     /** Header cho giao diện: chống nhúng khung, CSP chặt, cache lâu cho tệp có băm, còn lại phải xác nhận lại. */
-    private static void applyUiHeaders(HttpServletResponse response, String path) {
+    private void applyUiHeaders(HttpServletResponse response, String path) {
         response.setHeader(HttpConstants.HEADER_X_FRAME_OPTIONS, HttpConstants.VALUE_DENY);
         response.setHeader(HttpConstants.HEADER_REFERRER_POLICY, HttpConstants.VALUE_NO_REFERRER);
-        response.setHeader(HttpConstants.HEADER_CONTENT_SECURITY_POLICY, HttpConstants.VALUE_CONTENT_SECURITY_POLICY);
+        response.setHeader(HttpConstants.HEADER_CONTENT_SECURITY_POLICY, contentSecurityPolicy);
         boolean isHashedAsset = path.startsWith(HttpConstants.ASSETS_PATH_PREFIX);
         response.setHeader(HttpConstants.HEADER_CACHE_CONTROL,
                 isHashedAsset ? HttpConstants.VALUE_CACHE_IMMUTABLE_ASSET : HttpConstants.VALUE_CACHE_NO_CACHE);

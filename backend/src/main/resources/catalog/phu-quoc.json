@@ -363,7 +363,8 @@
       ],
       "photos": [
         {
-          "file": "phu-quoc-bai-sao-1.jpg",
+          "file": "phu-quoc-bai-sao-1-w1280-faaf35264b.webp",
+          "thumbFile": "phu-quoc-bai-sao-1-w480-843b915e3e.webp",
           "author": "[//commons.wikimedia.org/wiki/User:Trantuonglam Trantuonglam]",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bai-sao-phu-quoc-tuonglamphotos.jpg"
@@ -397,19 +398,22 @@
       ],
       "photos": [
         {
-          "file": "phu-quoc-dinh-cau-1.jpg",
+          "file": "phu-quoc-dinh-cau-1-w1280-1cc310bdd1.webp",
+          "thumbFile": "phu-quoc-dinh-cau-1-w480-5f39dfcd46.webp",
           "author": "Tonbi ko",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_Cau.JPG"
         },
         {
-          "file": "phu-quoc-dinh-cau-2.jpg",
+          "file": "phu-quoc-dinh-cau-2-w1280-71f6500adc.webp",
+          "thumbFile": "phu-quoc-dinh-cau-2-w480-56a46a353e.webp",
           "author": "Sketyl none",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_C%E1%BA%ADu_(37111073673).jpg"
         },
         {
-          "file": "phu-quoc-dinh-cau-3.jpg",
+          "file": "phu-quoc-dinh-cau-3-w1280-8eecb3fbb8.webp",
+          "thumbFile": "phu-quoc-dinh-cau-3-w480-1ed097f302.webp",
           "author": "Hoangvantoanajc",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dinh_C%E1%BA%ADu_Ph%C3%BA_Qu%E1%BB%91c.jpg"
@@ -468,7 +472,8 @@
       ],
       "photos": [
         {
-          "file": "phu-quoc-nha-tu-phu-quoc-1.jpg",
+          "file": "phu-quoc-nha-tu-phu-quoc-1-w1280-7453b17ac8.webp",
+          "thumbFile": "phu-quoc-nha-tu-phu-quoc-1-w480-a5446d8bc8.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tr%E1%BA%A1i_giam_Ph%C3%BA_Qu%E1%BB%91c.jpg"
@@ -500,7 +505,8 @@
       ],
       "photos": [
         {
-          "file": "ref-phu-quoc-hon-thom-3.jpg",
+          "file": "ref-phu-quoc-hon-thom-3-w1280-626f0909a6.webp",
+          "thumbFile": "ref-phu-quoc-hon-thom-3-w480-b9f6b820e6.webp",
           "author": "Klientos",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%B2n_Th%C6%A1m_cable_car_pylon.jpg"
@@ -532,7 +538,8 @@
       ],
       "photos": [
         {
-          "file": "ref-phu-quoc-ganh-dau-3.jpg",
+          "file": "ref-phu-quoc-ganh-dau-3-w1280-09f5d2f0f0.webp",
+          "thumbFile": "ref-phu-quoc-ganh-dau-3-w480-bfb367534d.webp",
           "author": "Tokeisan",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%81n_th%E1%BB%9D_Nguy%E1%BB%85n_Trung_Tr%E1%BB%B1c_%E1%BB%9F_Ph%C3%BA_Qu%E1%BB%91c.JPG"
@@ -589,7 +596,8 @@
       ],
       "photos": [
         {
-          "file": "phu-quoc-an-thoi-1.jpg",
+          "file": "phu-quoc-an-thoi-1-w1280-626f0909a6.webp",
+          "thumbFile": "phu-quoc-an-thoi-1-w480-b9f6b820e6.webp",
           "author": "Klientos",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%B2n_Th%C6%A1m_cable_car_pylon.jpg"
@@ -625,7 +633,8 @@
       ],
       "photos": [
         {
-          "file": "food-extra-4-3.jpg",
+          "file": "food-extra-4-3-w1280-be05968552.webp",
+          "thumbFile": "food-extra-4-3-w480-cda1075f17.webp",
           "author": "Phương Huy",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_qu%E1%BA%ADy_%E1%BB%9F_qu%C3%A1n_Qu%C3%AA_T%C3%B4i_ng%C3%A0y_15_th%C3%A1ng_10_n%C4%83m_2018_(1).jpg"
@@ -663,13 +672,15 @@
       ],
       "photos": [
         {
-          "file": "supp-phu-quoc-suoi-tranh-2.jpg",
+          "file": "supp-phu-quoc-suoi-tranh-2-w1280-cd214872a3.webp",
+          "thumbFile": "supp-phu-quoc-suoi-tranh-2-w480-b2a966de0e.webp",
           "author": "Sketyl none",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_(37732301196).jpg"
         },
         {
-          "file": "supp-phu-quoc-suoi-tranh-3.jpg",
+          "file": "supp-phu-quoc-suoi-tranh-3-w1280-e2cb14ed54.webp",
+          "thumbFile": "supp-phu-quoc-suoi-tranh-3-w480-076b696839.webp",
           "author": "Sketyl none",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Su%E1%BB%91i_Tranh_Ph%C3%BA_Qu%E1%BB%91c_(37111056503).jpg"
@@ -966,7 +977,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-25d3e659e1a07cd6ee.jpg",
+          "file": "venue-fill-25d3e659e1a07cd6ee-w1280-a56a3bb966.webp",
+          "thumbFile": "venue-fill-25d3e659e1a07cd6ee-w480-1ef2094c92.webp",
           "author": "Nguyễn Thanh Quang",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=6605900",
@@ -1016,7 +1028,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-25d3e659e1a07cd6ee.jpg",
+          "file": "venue-fill-25d3e659e1a07cd6ee-w1280-a56a3bb966.webp",
+          "thumbFile": "venue-fill-25d3e659e1a07cd6ee-w480-1ef2094c92.webp",
           "author": "Nguyễn Thanh Quang",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=6605900",
@@ -1066,7 +1079,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-25d3e659e1a07cd6ee.jpg",
+          "file": "venue-fill-25d3e659e1a07cd6ee-w1280-a56a3bb966.webp",
+          "thumbFile": "venue-fill-25d3e659e1a07cd6ee-w480-1ef2094c92.webp",
           "author": "Nguyễn Thanh Quang",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=6605900",
@@ -1555,13 +1569,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-3baa9f122ddd614268.jpg",
+          "file": "venue-fill-3baa9f122ddd614268-w1280-1b1ad7702d.webp",
+          "thumbFile": "venue-fill-3baa9f122ddd614268-w480-37a0a628e3.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256474"
         },
         {
-          "file": "venue-fill-c86dbef047cf06c1b0.jpg",
+          "file": "venue-fill-c86dbef047cf06c1b0-w1280-1a9a61e737.webp",
+          "thumbFile": "venue-fill-c86dbef047cf06c1b0-w480-34c41bb6ab.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187917197"
@@ -1618,7 +1634,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-3baa9f122ddd614268.jpg",
+          "file": "venue-fill-3baa9f122ddd614268-w1280-1b1ad7702d.webp",
+          "thumbFile": "venue-fill-3baa9f122ddd614268-w480-37a0a628e3.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256474",
@@ -1668,7 +1685,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-3baa9f122ddd614268.jpg",
+          "file": "venue-fill-3baa9f122ddd614268-w1280-1b1ad7702d.webp",
+          "thumbFile": "venue-fill-3baa9f122ddd614268-w480-37a0a628e3.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256474",
@@ -1717,7 +1735,8 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-138319645d23b8dddc.jpg",
+          "file": "venue-fill-138319645d23b8dddc-w1280-3404805578.webp",
+          "thumbFile": "venue-fill-138319645d23b8dddc-w480-fa95913d9e.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187255967"
@@ -1851,13 +1870,15 @@
       ],
       "photos": [
         {
-          "file": "venue-fill-07d3db04405b74bd8d.jpg",
+          "file": "venue-fill-07d3db04405b74bd8d-w1280-6bd4713297.webp",
+          "thumbFile": "venue-fill-07d3db04405b74bd8d-w480-d31ea47fdd.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=187256229"
         },
         {
-          "file": "venue-fill-718d5b92ec8495d809.jpg",
+          "file": "venue-fill-718d5b92ec8495d809-w1280-b5f3f51ced.webp",
+          "thumbFile": "venue-fill-718d5b92ec8495d809-w480-1f3cfec583.webp",
           "author": "Vivu Vietnam",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nha-hang-pink-pearl.jpg"
@@ -2013,7 +2034,8 @@
       "id": "pexels-29999414",
       "theme": "nghe",
       "caption": "Theo nhịp phơi cá cơm ở Phú Quốc",
-      "file": "pexels-29999414.jpg",
+      "file": "pexels-29999414-w1280-1ccd96853d.webp",
+      "thumbFile": "pexels-29999414-w480-b87730d800.webp",
       "author": "Văn Long Bùi",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/traditional-anchovy-drying-in-phu-quoc-vietnam-29999414/"
@@ -2022,7 +2044,8 @@
       "id": "food-research-phu-quoc",
       "theme": "mon-an",
       "caption": "Bún quậy · một món muốn thử (ảnh minh họa)",
-      "file": "food-extra-4-3.jpg",
+      "file": "food-extra-4-3-w1280-be05968552.webp",
+      "thumbFile": "food-extra-4-3-w480-cda1075f17.webp",
       "author": "Phương Huy",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_qu%E1%BA%ADy_%E1%BB%9F_qu%C3%A1n_Qu%C3%AA_T%C3%B4i_ng%C3%A0y_15_th%C3%A1ng_10_n%C4%83m_2018_(1).jpg"
@@ -2031,7 +2054,8 @@
       "id": "wave-pexels-8407278",
       "theme": "cho",
       "caption": "Một buổi đi chợ giữa đời sống Phú Quốc",
-      "file": "wave-pexels-8407278.jpg",
+      "file": "wave-pexels-8407278-w1280-ef3797886a.webp",
+      "thumbFile": "wave-pexels-8407278-w480-52716439c4.webp",
       "author": "Minh Tri",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/photograph-of-vendors-wearing-asian-conical-hats-8407278/"

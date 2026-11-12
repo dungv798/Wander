@@ -310,13 +310,15 @@
       ],
       "photos": [
         {
-          "file": "hoang-thanh-hue-1.jpg",
+          "file": "hoang-thanh-hue-1-w1280-7d5636a653.webp",
+          "thumbFile": "hoang-thanh-hue-1-w480-0ca0d365dd.webp",
           "author": "Wikimedia Commons",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ngomon2.jpg"
         },
         {
-          "file": "hoang-thanh-hue-2.jpg",
+          "file": "hoang-thanh-hue-2-w1280-f86b9391dd.webp",
+          "thumbFile": "hoang-thanh-hue-2-w480-b9dc093103.webp",
           "author": "Dieulefils, P. (18..-18..?). Photographe Rigal (18..-18..?). Photographe",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:18_photogr._d%27Annam_et_du_Tonkin,_par_P._Dieulefils,_photogr._%C3%A0_Hanoi,_et_Rigal,_dont_les_portraits_du_jeune_roi_d%27Annam,_Tam-tha%C3%AF,_et_du_d%C3%A9funt_roi,_Dong-Khanh,_don_Camille_Paris_en_1892_-_btv1b531743452_(14_of_18).jpg"
@@ -364,13 +366,15 @@
       ],
       "photos": [
         {
-          "file": "chua-thien-mu-1.jpg",
+          "file": "chua-thien-mu-1-w1280-34e95dead7.webp",
+          "thumbFile": "chua-thien-mu-1-w480-90b05263af.webp",
           "author": "RThiele",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:225Park_der_Thien_Mu_Pagode.jpg"
         },
         {
-          "file": "chua-thien-mu-2.jpg",
+          "file": "chua-thien-mu-2-w1280-b1292ae743.webp",
+          "thumbFile": "chua-thien-mu-2-w480-fc1c3cd39b.webp",
           "author": "Unknown author Unknown author",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Annam_-_Hu%C3%A9_-_Pagode_de_Confucius_La_Tour,_les_Pagodons_de_la_Cloche_du_G%C3%A9nie_et_du_Tam-Tam.jpg"
@@ -410,13 +414,15 @@
       ],
       "photos": [
         {
-          "file": "lang-khai-dinh-1.jpg",
+          "file": "lang-khai-dinh-1-w1280-b65655160e.webp",
+          "thumbFile": "lang-khai-dinh-1-w480-970e2b9249.webp",
           "author": "NKSTTSSHNVN",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh_-_NKS.jpg"
         },
         {
-          "file": "lang-khai-dinh-2.jpg",
+          "file": "lang-khai-dinh-2-w1280-71c653843a.webp",
+          "thumbFile": "lang-khai-dinh-2-w480-237ba477de.webp",
           "author": "dronepicr",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Emperor_Khai_Dinh_in_Hue_(39543600561).jpg"
@@ -456,13 +462,15 @@
       ],
       "photos": [
         {
-          "file": "lang-minh-mang-1.jpg",
+          "file": "lang-minh-mang-1-w1280-5b301bf9ea.webp",
+          "thumbFile": "lang-minh-mang-1-w480-0c293dbba5.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_Minh_M%E1%BA%A1ng_-_Minh_L%C3%A2u_(2024)_-_img_02.jpg"
         },
         {
-          "file": "lang-minh-mang-2.jpg",
+          "file": "lang-minh-mang-2-w1280-962ca571de.webp",
+          "thumbFile": "lang-minh-mang-2-w480-2ea7d05a55.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_Minh_M%E1%BA%A1ng_-_Mausoleum_of_Emperor_Minh_M%E1%BA%A1ng_(2024)_-_img_05.jpg"
@@ -502,19 +510,22 @@
       ],
       "photos": [
         {
-          "file": "lang-tu-duc-1.jpg",
+          "file": "lang-tu-duc-1-w1280-659d2a90e3.webp",
+          "thumbFile": "lang-tu-duc-1-w480-4279b19ef5.webp",
           "author": "Unknown author Unknown author",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Annam_-_Hu%C3%A9_-_Pavillons_sur_le_bassin_fleuri_au_Tombeau_de_Tu-Duc.jpg"
         },
         {
-          "file": "lang-tu-duc-2.jpg",
+          "file": "lang-tu-duc-2-w1280-0e0a7063dd.webp",
+          "thumbFile": "lang-tu-duc-2-w480-7517e64b1d.webp",
           "author": "Esmée Winnubst",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:4.4_Hue-32_(35792236574).jpg"
         },
         {
-          "file": "lang-tu-duc-3.jpg",
+          "file": "lang-tu-duc-3-w1280-8f578548d1.webp",
+          "thumbFile": "lang-tu-duc-3-w480-c162d9a93c.webp",
           "author": "Esmée Winnubst",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:4.4_Hue-33_(35792226214).jpg"
@@ -561,13 +572,15 @@
       ],
       "photos": [
         {
-          "file": "cau-truong-tien-1.jpg",
+          "file": "cau-truong-tien-1-w1280-7e79d3c912.webp",
+          "thumbFile": "cau-truong-tien-1-w480-4292a0eb39.webp",
           "author": "ntt",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hue,_le_pont_Trang_Tien.jpg"
         },
         {
-          "file": "cau-truong-tien-2.jpg",
+          "file": "cau-truong-tien-2-w1280-e6cc4291ac.webp",
+          "thumbFile": "cau-truong-tien-2-w480-64ed0901f3.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024-07_C%E1%BA%A7u_Tr%C6%B0%E1%BB%9Dng_Ti%E1%BB%81n_-_Truong_Tien_Bridge_-_Hu%E1%BA%BF_-_img_09.jpg"
@@ -615,19 +628,22 @@
       ],
       "photos": [
         {
-          "file": "song-huong-1.jpg",
+          "file": "song-huong-1-w1280-e6a7743af0.webp",
+          "thumbFile": "song-huong-1-w480-24e1b8184b.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%C3%B4ng_H%C6%B0%C6%A1ng_(Hu%E1%BA%BF).jpg"
         },
         {
-          "file": "song-huong-2.jpg",
+          "file": "song-huong-2-w1280-772c816043.webp",
+          "thumbFile": "song-huong-2-w480-9da8134de9.webp",
           "author": "Contributeur2019",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:1_Hu%C3%A9,_Vi%C3%AAt_Nam._Bateau_dragon_touristique,_pr%C3%A8s_de_la_Pagode_de_la_dame_c%C3%A9leste_(29_mars_2015).jpg"
         },
         {
-          "file": "song-huong-3.jpg",
+          "file": "song-huong-3-w1280-417a8156ad.webp",
+          "thumbFile": "song-huong-3-w480-3b218e7e18.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:2024-07_C%E1%BA%A7u_Tr%C6%B0%E1%BB%9Dng_Ti%E1%BB%81n_-_Truong_Tien_Bridge_-_Hu%E1%BA%BF_-_img_03.jpg"
@@ -667,7 +683,8 @@
       ],
       "photos": [
         {
-          "file": "dan-nam-giao-1.jpg",
+          "file": "dan-nam-giao-1-w1280-2e20a273f2.webp",
+          "thumbFile": "dan-nam-giao-1-w480-5ca12dbf3b.webp",
           "author": "Lưu Ly at vi.wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dan_Nam_Giao_Hue.jpg"
@@ -714,13 +731,15 @@
       ],
       "photos": [
         {
-          "file": "cho-dong-ba-1.jpg",
+          "file": "cho-dong-ba-1-w1280-ddc0010eb8.webp",
+          "thumbFile": "cho-dong-ba-1-w480-63ea841f06.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dong_Ba_Market_(Hue)_-_Ch%E1%BB%A3_%C4%90%C3%B4ng_Ba_Hu%E1%BA%BF_(July_2024)_-_img_03.jpg"
         },
         {
-          "file": "cho-dong-ba-2.jpg",
+          "file": "cho-dong-ba-2-w1280-0c03acc581.webp",
+          "thumbFile": "cho-dong-ba-2-w480-5b7f2b44cd.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dong_Ba_Market_(Hue)_-_Ch%E1%BB%A3_%C4%90%C3%B4ng_Ba_Hu%E1%BA%BF_(July_2024)_-_img_02.jpg"
@@ -768,7 +787,8 @@
       ],
       "photos": [
         {
-          "file": "cung-an-dinh-1.jpg",
+          "file": "cung-an-dinh-1-w1280-a11ce6a7ba.webp",
+          "thumbFile": "cung-an-dinh-1-w480-dfc483ef7f.webp",
           "author": "Lưu Ly",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:AnDinhResidence5.jpg"
@@ -811,13 +831,15 @@
       ],
       "photos": [
         {
-          "file": "lang-co-1.jpg",
+          "file": "lang-co-1-w1280-961cd72961.webp",
+          "thumbFile": "lang-co-1-w480-d7ba9ec4bc.webp",
           "author": "Vincent Guth",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ngC%C3%B4.jpg"
         },
         {
-          "file": "lang-co-2.jpg",
+          "file": "lang-co-2-w1280-4759d1b48b.webp",
+          "thumbFile": "lang-co-2-w480-6056ee2d2c.webp",
           "author": "Genghiskhanviet",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Langco_in_Vietnam.jpg"
@@ -858,13 +880,15 @@
       ],
       "photos": [
         {
-          "file": "vuon-quoc-gia-bach-ma-1.jpg",
+          "file": "vuon-quoc-gia-bach-ma-1-w1280-6e6f222c64.webp",
+          "thumbFile": "vuon-quoc-gia-bach-ma-1-w480-db874f0987.webp",
           "author": "Andre Hospers",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bach_Ma_Natinal_Park_Franse_villa_(42091).jpg"
         },
         {
-          "file": "vuon-quoc-gia-bach-ma-2.jpg",
+          "file": "vuon-quoc-gia-bach-ma-2-w1280-5d7a2720bf.webp",
+          "thumbFile": "vuon-quoc-gia-bach-ma-2-w480-573b8c2018.webp",
           "author": "Andre Hospers",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bach_Ma_Natinal_Park_Franse_villa.jpg"
@@ -900,13 +924,15 @@
       ],
       "photos": [
         {
-          "file": "food-bun-bo-hue-1.jpg",
+          "file": "food-bun-bo-hue-1-w1280-aed5cee176.webp",
+          "thumbFile": "food-bun-bo-hue-1-w480-f80849cfdc.webp",
           "author": "Kham Tran - www.khamtran.com",
           "license": "CC BY 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bun-Bo-Hue-from-Huong-Giang-2011.jpg"
         },
         {
-          "file": "food-bun-bo-hue-2.jpg",
+          "file": "food-bun-bo-hue-2-w1280-bf89e01d26.webp",
+          "thumbFile": "food-bun-bo-hue-2-w480-2719d835c9.webp",
           "author": "Beelerb",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_%E1%BB%9F_%C4%90%C3%A0_N%E1%BA%B5ng.jpg"
@@ -942,7 +968,8 @@
       ],
       "photos": [
         {
-          "file": "food-banh-beo-1.jpg",
+          "file": "food-banh-beo-1-w1280-3707b5e173.webp",
+          "thumbFile": "food-banh-beo-1-w480-d73b144a28.webp",
           "author": "Nha Nghi La from Ho Chi Minh, Viet Nam",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o_ch%C3%A9n.jpg"
@@ -978,7 +1005,8 @@
       ],
       "photos": [
         {
-          "file": "food-banh-bot-loc-3.jpg",
+          "file": "food-banh-bot-loc-3-w1280-79b3adc97e.webp",
+          "thumbFile": "food-banh-bot-loc-3-w480-19240c8624.webp",
           "author": "Yun Huang Yong",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_b%C3%A8o,_b%E1%BB%99t_l%E1%BB%8Dc...jpg"
@@ -1016,13 +1044,15 @@
       ],
       "photos": [
         {
-          "file": "wave-hue-lang-gia-long-1.jpg",
+          "file": "wave-hue-lang-gia-long-1-w1050-c08045c39b.webp",
+          "thumbFile": "wave-hue-lang-gia-long-1-w480-71e941c3ef.webp",
           "author": "LÊ TẤN LỘC",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%C4%83ng_vua_Gia_Long_3.JPG"
         },
         {
-          "file": "wave-hue-lang-gia-long-2.jpg",
+          "file": "wave-hue-lang-gia-long-2-w1024-9916f238ca.webp",
+          "thumbFile": "wave-hue-lang-gia-long-2-w480-fc63c6b0c7.webp",
           "author": "BluesyPete",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tombe_de_Gia_Long.JPG"
@@ -1060,13 +1090,15 @@
       ],
       "photos": [
         {
-          "file": "wave-hue-chua-tu-hieu-2.jpg",
+          "file": "wave-hue-chua-tu-hieu-2-w1280-b1c83334bf.webp",
+          "thumbFile": "wave-hue-chua-tu-hieu-2-w480-8ce48c5537.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%E1%BB%AB_Hi%E1%BA%BFu_Pagoda_03.jpg"
         },
         {
-          "file": "wave-hue-chua-tu-hieu-1.jpg",
+          "file": "wave-hue-chua-tu-hieu-1-w1280-e3c16617f9.webp",
+          "thumbFile": "wave-hue-chua-tu-hieu-1-w480-25e525e4f6.webp",
           "author": "Lưu Ly",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tu_Hieu_Pagoda.jpg"
@@ -1104,7 +1136,8 @@
       ],
       "photos": [
         {
-          "file": "wave-hue-pha-tam-giang-1.jpg",
+          "file": "wave-hue-pha-tam-giang-1-w1280-e436f707ce.webp",
+          "thumbFile": "wave-hue-pha-tam-giang-1-w480-54a6ff50e9.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_the_Tam_Giang_Lagoon.jpg"
@@ -1142,7 +1175,8 @@
       ],
       "photos": [
         {
-          "file": "wave-hue-dien-hon-chen-1.jpg",
+          "file": "wave-hue-dien-hon-chen-1-w1280-35f36b1fdf.webp",
+          "thumbFile": "wave-hue-dien-hon-chen-1-w480-cc78726692.webp",
           "author": "Lưu Ly ( thảo luận )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90i%E1%BB%87n_H%C3%B2n_Ch%C3%A9n1.jpg"
@@ -1178,19 +1212,22 @@
       ],
       "photos": [
         {
-          "file": "venue-hue-saigon-morin-1.jpg",
+          "file": "venue-hue-saigon-morin-1-w1280-b322a87690.webp",
+          "thumbFile": "venue-hue-saigon-morin-1-w480-4b55b54256.webp",
           "author": "dronepicr",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hue_Hotel_Saigon_(24675543497).jpg"
         },
         {
-          "file": "venue-hue-saigon-morin-2.jpg",
+          "file": "venue-hue-saigon-morin-2-w1280-3d3b29a58d.webp",
+          "thumbFile": "venue-hue-saigon-morin-2-w480-a380400d01.webp",
           "author": "Chainwit.",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_Saigon_Morin,_Hue_(2024)_03.jpg"
         },
         {
-          "file": "completion-c769c08b028bd3a3.jpg",
+          "file": "completion-c769c08b028bd3a3-w768-a7bf2a8162.webp",
+          "thumbFile": "completion-c769c08b028bd3a3-w480-65ca86082b.webp",
           "author": "lightwrite",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://www.flickr.com/photos/77442936@N00/14545207101"
@@ -1234,7 +1271,8 @@
       ],
       "photos": [
         {
-          "file": "dish-hue-com-hen-1.jpg",
+          "file": "dish-hue-com-hen-1-w1280-2497d39b8b.webp",
+          "thumbFile": "dish-hue-com-hen-1-w480-4ffc45ef75.webp",
           "author": "Lucas Jans from USA",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%E1%BA%BFn_tr%E1%BB%99n.jpg"
@@ -1270,7 +1308,8 @@
       ],
       "photos": [
         {
-          "file": "dish-hue-banh-nam-1.jpg",
+          "file": "dish-hue-banh-nam-1-w1280-fea2cedec3.webp",
+          "thumbFile": "dish-hue-banh-nam-1-w480-f01fc878f0.webp",
           "author": "Christopher Crouzet",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_N%E1%BA%ADm.jpg"
@@ -1718,7 +1757,8 @@
       "id": "cho-1",
       "theme": "cho",
       "caption": "Một khu chợ ở Huế",
-      "file": "hue-moment-cho-1.jpg",
+      "file": "hue-moment-cho-1-w680-95c6996a0e.webp",
+      "thumbFile": "hue-moment-cho-1-w480-6532c893cb.webp",
       "author": "Tormod Sandtorv",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/14585659@N07/3884181351"
@@ -1727,7 +1767,8 @@
       "id": "mon-an-2",
       "theme": "mon-an",
       "caption": "Bún bò, món đường phố ở Huế",
-      "file": "hue-moment-mon-an-2.jpg",
+      "file": "hue-moment-mon-an-2-w681-e397391248.webp",
+      "thumbFile": "hue-moment-mon-an-2-w480-b1227c14b6.webp",
       "author": "jonolist",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://www.flickr.com/photos/46635911@N00/726765337"
@@ -1736,7 +1777,8 @@
       "id": "nguoi-3",
       "theme": "nguoi",
       "caption": "Người quét dọn ở Kinh thành Huế",
-      "file": "hue-moment-nguoi-3.jpg",
+      "file": "hue-moment-nguoi-3-w1024-67d8b0344f.webp",
+      "thumbFile": "hue-moment-nguoi-3-w480-a44f7d4ce0.webp",
       "author": "Vu Pham in Vietnam",
       "license": "CC BY 2.0",
       "sourceUrl": "https://www.flickr.com/photos/36668777@N07/3380583752"
@@ -1765,7 +1807,8 @@
       "id": "commons-hue-20261105-17",
       "theme": "mon-an",
       "caption": "Dừng bên một quầy trái cây gần cầu Trường Tiền",
-      "file": "hue-moment-20261105-17.jpg",
+      "file": "hue-moment-20261105-17-w1280-f5ab4ad283.webp",
+      "thumbFile": "hue-moment-20261105-17-w480-aaab10ba4b.webp",
       "author": "Christophe95",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Food_stand_in_Hu%E1%BA%BF.jpg"
@@ -1774,7 +1817,8 @@
       "id": "pexels-36776136",
       "theme": "mon-an",
       "caption": "Ghé một hàng ăn nhỏ trong buổi chợ Huế",
-      "file": "pexels-36776136.jpg",
+      "file": "pexels-36776136-w1280-2cf8b6f430.webp",
+      "thumbFile": "pexels-36776136-w480-0e72cebe9d.webp",
       "author": "nhavantuonglai",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/street-vendor-preparing-vietnamese-cuisine-in-hue-36776136/"
@@ -1783,7 +1827,8 @@
       "id": "pexels-4619765",
       "theme": "mon-an",
       "caption": "Bún, rau thơm và chút cay trong một góc chợ Huế",
-      "file": "pexels-4619765.jpg",
+      "file": "pexels-4619765-w1280-89a677aa03.webp",
+      "thumbFile": "pexels-4619765-w480-a8e35c7bee.webp",
       "author": "Pew Nguyen",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/white-pasta-and-peppers-in-bowls-4619765/"
@@ -1792,7 +1837,8 @@
       "id": "pexels-4619764",
       "theme": "nghe",
       "caption": "Dừng trước một quầy sợi và vải đầy màu sắc ở Huế",
-      "file": "pexels-4619764.jpg",
+      "file": "pexels-4619764-w1280-00180b2d8d.webp",
+      "thumbFile": "pexels-4619764-w480-083084784e.webp",
       "author": "Pew Nguyen",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/woman-in-black-and-white-striped-long-sleeve-shirt-sitting-in-front-of-her-store-4619764/"
@@ -1801,7 +1847,8 @@
       "id": "food-research-hue",
       "theme": "mon-an",
       "caption": "Bún bò Huế · một món muốn thử (ảnh minh họa)",
-      "file": "food-bun-bo-hue-1.jpg",
+      "file": "food-bun-bo-hue-1-w1280-aed5cee176.webp",
+      "thumbFile": "food-bun-bo-hue-1-w480-f80849cfdc.webp",
       "author": "Kham Tran - www.khamtran.com",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bun-Bo-Hue-from-Huong-Giang-2011.jpg"

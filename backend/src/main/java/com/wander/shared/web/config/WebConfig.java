@@ -3,6 +3,7 @@ package com.wander.shared.web.config;
 import com.wander.shared.kernel.constant.CommonConstants;
 import com.wander.shared.kernel.constant.ConfigConstants;
 import com.wander.shared.web.constant.HttpConstants;
+import com.wander.shared.web.filter.ContentSecurityPolicy;
 import com.wander.shared.web.filter.ResponseHeadersFilter;
 import com.wander.shared.web.ratelimit.RateLimits;
 import com.wander.shared.web.request.ClientAddress;
@@ -67,8 +68,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     /** Bộ lọc header bảo mật/cache, chạy đầu tiên trong chuỗi bộ lọc. */
     @Bean
-    public FilterRegistrationBean<ResponseHeadersFilter> responseHeadersFilter() {
-        FilterRegistrationBean<ResponseHeadersFilter> registration = new FilterRegistrationBean<>(new ResponseHeadersFilter());
+    public FilterRegistrationBean<ResponseHeadersFilter> responseHeadersFilter(@Value(HttpConstants.PHOTO_BASE_URL_EXPRESSION) String photoBaseUrl) {
+        FilterRegistrationBean<ResponseHeadersFilter> registration =
+                new FilterRegistrationBean<>(new ResponseHeadersFilter(ContentSecurityPolicy.forPhotoBaseUrl(photoBaseUrl)));
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return registration;
     }
@@ -88,7 +90,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(StaticWebConstants.PHOTO_URL_PATTERN)
                 .addResourceLocations(StaticWebConstants.PHOTO_CLASSPATH_LOCATION)
-                .setCacheControl(CacheControl.maxAge(StaticWebConstants.PHOTO_CACHE_DURATION).cachePublic());
+                .setCacheControl(CacheControl.maxAge(StaticWebConstants.PHOTO_CACHE_DURATION).cachePublic().immutable());
         webRoot().ifPresent(root -> registry.addResourceHandler(StaticWebConstants.ALL_PATHS_PATTERN)
                 .addResourceLocations(new FileSystemResource(root + CommonConstants.SLASH))
                 .resourceChain(false)

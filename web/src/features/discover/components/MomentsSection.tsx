@@ -7,6 +7,7 @@ import { Chip } from '../../../shared/ui/Chip.tsx';
 import { RevealImage } from '../../../shared/ui/RevealImage.tsx';
 import { Sheet } from '../../../shared/ui/Sheet.tsx';
 import type { DestinationDetail, MomentTheme, MomentView } from '../model/Catalog.types.ts';
+import { thumbOrUrl } from '../model/destinationQueries.ts';
 import { filterMoments, momentThemes } from '../model/moments.ts';
 import { ALL_MOMENTS } from '../model/moments.const.ts';
 import { MOMENTS_COPY } from '../model/moments.copy.ts';
@@ -30,7 +31,7 @@ export function MomentsSection({ dest }: { readonly dest: DestinationDetail }) {
     <div className="hscroll moment-rail">
       {filterMoments(moments, selected).map(moment => <article className="moment-card" key={moment.id}>
         <button type="button" className="moment-photo" aria-label={fill(MOMENTS_COPY.open, { caption: moment.caption })} onClick={() => setOpened(moment)}>
-          <RevealImage src={moment.photo.url} alt={moment.caption} loading="lazy" />
+          <RevealImage src={thumbOrUrl(moment.photo)} alt={moment.caption} loading="lazy" />
         </button>
         <div className="moment-copy"><Chip>{moment.themeLabel}</Chip><p>{moment.caption}</p></div>
       </article>)}

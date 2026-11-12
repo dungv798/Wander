@@ -243,13 +243,15 @@
       ],
       "photos": [
         {
-          "file": "ganh-da-dia-1.jpg",
+          "file": "ganh-da-dia-1-w1280-764f56b8b8.webp",
+          "thumbFile": "ganh-da-dia-1-w480-ffd712b59d.webp",
           "author": "Đông Hồ",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%C3%A0nh_%C4%90%C3%A1_%C4%90%C4%A9a.jpg"
         },
         {
-          "file": "ganh-da-dia-2.jpg",
+          "file": "ganh-da-dia-2-w1280-2c3916b075.webp",
+          "thumbFile": "ganh-da-dia-2-w480-10f47fb9f8.webp",
           "author": "Đông Hồ",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:G%C3%A0nh_%C4%90%C3%A1_%C4%90%C4%A9a_-_Ph%C3%BA_Y%C3%AAn.jpg"
@@ -292,19 +294,22 @@
       ],
       "photos": [
         {
-          "file": "mui-dien-1.jpg",
+          "file": "mui-dien-1-w1280-b69bd2aae0.webp",
+          "thumbFile": "mui-dien-1-w480-ea837c5596.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Cape_2.jpg"
         },
         {
-          "file": "mui-dien-2.jpg",
+          "file": "mui-dien-2-w1280-8682185b10.webp",
+          "thumbFile": "mui-dien-2-w480-d336df9e3a.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Cape_3.jpg"
         },
         {
-          "file": "mui-dien-3.jpg",
+          "file": "mui-dien-3-w1280-5587712946.webp",
+          "thumbFile": "mui-dien-3-w480-d7b06bd0a6.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dien_Cape_Lighthouse.jpg"
@@ -348,13 +353,15 @@
       ],
       "photos": [
         {
-          "file": "vinh-xuan-dai-1.jpg",
+          "file": "vinh-xuan-dai-1-w1280-88a36fdfcc.webp",
+          "thumbFile": "vinh-xuan-dai-1-w480-5002ace2a4.webp",
           "author": "Nguyễn Đông Sơn at Vietnamese Wikipedia",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xuan_Dai_Bay,_Phu_Yen,_Vietnam.JPG"
         },
         {
-          "file": "vinh-xuan-dai-2.jpg",
+          "file": "vinh-xuan-dai-2-w1280-ffdf250747.webp",
+          "thumbFile": "vinh-xuan-dai-2-w480-c2d1b0efc0.webp",
           "author": "Quangpraha",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_Xu%C3%A2n_%C4%90%C3%A0i.jpg"
@@ -401,7 +408,8 @@
       ],
       "photos": [
         {
-          "file": "thap-nhan-1.jpg",
+          "file": "thap-nhan-1-w1280-ca60ffb199.webp",
+          "thumbFile": "thap-nhan-1-w480-1993c23584.webp",
           "author": "Ms Sarah Welch",
           "license": "CC0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thap_Nhan_Hindu_temple,_Tuy_Hoa,_Phu_Yen_province,_Vietnam_23.jpg"
@@ -449,7 +457,8 @@
       ],
       "photos": [
         {
-          "file": "nha-tho-mang-lang-1.jpg",
+          "file": "nha-tho-mang-lang-1-w1280-64a937acc8.webp",
+          "thumbFile": "nha-tho-mang-lang-1-w480-d2e9e04e60.webp",
           "author": "Đông Hồ",
           "license": "CC BY-SA 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nh%C3%A0_th%E1%BB%9D_M%E1%BA%B1ng_L%C4%83ng_-_Ph%C3%BA_Y%C3%AAn.jpg"
@@ -496,7 +505,8 @@
       ],
       "photos": [
         {
-          "file": "dam-o-loan-1.jpg",
+          "file": "dam-o-loan-1-w1280-385e531df1.webp",
+          "thumbFile": "dam-o-loan-1-w480-7d8513ba58.webp",
           "author": "Linhcandng ( thảo luận )",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%E1%BA%A7m_%C3%94_Loan,_An_Hi%E1%BB%87p,_Tuy_An,_Ph%C3%BA_Y%C3%AAn.jpeg"
@@ -540,7 +550,8 @@
       ],
       "photos": [
         {
-          "file": "deo-ca-1.jpg",
+          "file": "deo-ca-1-w1280-3ef5ba07c1.webp",
+          "thumbFile": "deo-ca-1-w480-42935b607f.webp",
           "author": "DHN",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%90%C3%A8o_C%E1%BA%A3.jpg"
@@ -622,7 +633,8 @@
       ],
       "photos": [
         {
-          "file": "phu-yen-vung-ro-1.jpg",
+          "file": "phu-yen-vung-ro-1-w1280-d700a741de.webp",
+          "thumbFile": "phu-yen-vung-ro-1-w480-32997c1480.webp",
           "author": "Bùi Thụy Đào Nguyên",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_V%C5%A9ng_R%C3%B4.jpg"
@@ -683,7 +695,8 @@
       ],
       "photos": [
         {
-          "file": "food-banh-trang-3.jpg",
+          "file": "food-banh-trang-3-w1280-2c6fbbf80c.webp",
+          "thumbFile": "food-banh-trang-3-w480-ca75b3ddc7.webp",
           "author": "Phương Huy ( thảo luận )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_n%C4%83m_2013_t%E1%BA%A1i_B%C3%ACnh_T%C3%A2n.jpg"
@@ -716,13 +729,15 @@
       ],
       "photos": [
         {
-          "file": "ref-phu-yen-bai-xep-2.jpg",
+          "file": "ref-phu-yen-bai-xep-2-w1280-a2dc60dddb.webp",
+          "thumbFile": "ref-phu-yen-bai-xep-2-w480-03e8c221b0.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_X%C3%A9p_2.jpg"
         },
         {
-          "file": "ref-phu-yen-bai-xep-1.jpg",
+          "file": "ref-phu-yen-bai-xep-1-w1280-a3a1cb68db.webp",
+          "thumbFile": "ref-phu-yen-bai-xep-1-w480-b919a3a1ae.webp",
           "author": "Christophe95",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A3i_X%C3%A9p_5.jpg"
@@ -895,7 +910,8 @@
       "id": "commons-phu-yen-20261105-3",
       "theme": "nghe",
       "caption": "Nhịp thuyền cá ở vịnh Vũng Rô",
-      "file": "phu-yen-moment-20261105-3.jpg",
+      "file": "phu-yen-moment-20261105-3-w1280-44ec8022f1.webp",
+      "thumbFile": "phu-yen-moment-20261105-3-w480-1dc5e0cf30.webp",
       "author": "Christophe95",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vung_Ro_Bay_3.jpg"
@@ -904,7 +920,8 @@
       "id": "food-research-phu-yen",
       "theme": "mon-an",
       "caption": "Tìm hiểu bánh tráng Hòa Đa · một món muốn thử (ảnh minh họa)",
-      "file": "food-banh-trang-3.jpg",
+      "file": "food-banh-trang-3-w1280-2c6fbbf80c.webp",
+      "thumbFile": "food-banh-trang-3-w480-ca75b3ddc7.webp",
       "author": "Phương Huy ( thảo luận )",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_tr%C3%A1ng_cu%E1%BB%91n_n%C4%83m_2013_t%E1%BA%A1i_B%C3%ACnh_T%C3%A2n.jpg"
@@ -913,7 +930,8 @@
       "id": "wave-pexels-39567585",
       "theme": "nghe",
       "caption": "Một nhịp chèo trên vùng nước Phú Yên",
-      "file": "wave-pexels-39567585.jpg",
+      "file": "wave-pexels-39567585-w1280-fa97954635.webp",
+      "thumbFile": "wave-pexels-39567585-w480-796f4153dd.webp",
       "author": "Ninh Tien Dat",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/39567585/"

@@ -8,7 +8,13 @@
       "status": "reference",
       "days": [
         {
-          "places": ["pho-co-hoi-an", "chua-cau-hoi-an", "hoi-quan-phuc-kien", "hoi-quan-quang-dong", "cho-hoi-an"],
+          "places": [
+            "pho-co-hoi-an",
+            "chua-cau-hoi-an",
+            "hoi-quan-phuc-kien",
+            "hoi-quan-quang-dong",
+            "cho-hoi-an"
+          ],
           "note": "Xuất phát và kết thúc ở khu phố cổ. Phương tiện giả định: đi bộ hoặc xe đạp (các nơi cách nhau khoảng 1 km đường chim bay, ước tính). Nhịp thong thả: 4–5 điểm, nghỉ giữa ngày do bạn chọn."
         }
       ]
@@ -20,11 +26,20 @@
       "status": "reference",
       "days": [
         {
-          "places": ["pho-co-hoi-an", "chua-cau-hoi-an", "hoi-quan-phuc-kien", "hoi-quan-trieu-chau", "cho-hoi-an"],
+          "places": [
+            "pho-co-hoi-an",
+            "chua-cau-hoi-an",
+            "hoi-quan-phuc-kien",
+            "hoi-quan-trieu-chau",
+            "cho-hoi-an"
+          ],
           "note": "Xuất phát và kết thúc ở khu phố cổ, đi bộ hoặc xe đạp. Nhịp thong thả, 4–5 điểm."
         },
         {
-          "places": ["lang-rau-tra-que", "rung-dua-bay-mau"],
+          "places": [
+            "lang-rau-tra-que",
+            "rung-dua-bay-mau"
+          ],
           "note": "Xuất phát từ phố cổ, về lại phố cổ. Phương tiện giả định: xe đạp hoặc xe máy; Trà Quế cách phố cổ khoảng 3 km, rừng dừa khoảng 5 km (chim bay, ước tính). Nhịp nhẹ: 2 điểm."
         }
       ]
@@ -36,11 +51,15 @@
       "status": "reference",
       "days": [
         {
-          "places": ["thanh-dia-my-son"],
+          "places": [
+            "thanh-dia-my-son"
+          ],
           "note": "Xuất phát và về lại Hội An. Mỹ Sơn cách phố cổ khoảng 26 km chim bay (ước tính); phương tiện giả định: xe máy hoặc ô tô. Một điểm trong ngày."
         },
         {
-          "places": ["cu-lao-cham"],
+          "places": [
+            "cu-lao-cham"
+          ],
           "note": "Xuất phát từ khu bến Cửa Đại, về lại Hội An trong ngày. Đi bằng tàu; lịch tàu và điều kiện biển chưa xác minh, có thể phải đổi ngày. Một điểm trong ngày."
         }
       ]

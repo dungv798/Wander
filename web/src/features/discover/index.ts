@@ -20,7 +20,7 @@ export type { AddingMode } from './model/addingMode.ts';
 export { PickedScreen } from './components/PickedScreen.tsx';
 export { DestinationGate } from './components/DestinationGate.tsx';
 export { CATEGORY_ICON, CATEGORY_NAME, COMING_SOON } from './model/discover.const.ts';
-export { firstPhotoUrl, mainAway, placeById, coverPlace } from './model/destinationQueries.ts';
+export { firstPhotoUrl, firstPhotoThumbUrl, thumbOrUrl, mainAway, placeById, coverPlace } from './model/destinationQueries.ts';
 export { hubMarker, placeMarkers } from './model/mapMarkers.ts';
 export { pendingPickCount, pickedOf, savedPicksOf } from './model/discoverState.ts';
 export type { DestinationDetail, PlaceView, CategoryCode } from './model/Catalog.types.ts';

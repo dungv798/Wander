@@ -11,7 +11,7 @@ import { Button } from '../../../shared/ui/Button.tsx';
 import { IconButton } from '../../../shared/ui/IconButton.tsx';
 import { useCurrentDestination } from '../hooks/CurrentDestinationProvider.tsx';
 import { filterDestinations } from '../model/destinationSelection.ts';
-import { firstPhotoUrl } from '../model/destinationQueries.ts';
+import { firstPhotoThumbUrl } from '../model/destinationQueries.ts';
 import type { DestinationDetail, DestinationSummary } from '../model/Catalog.types.ts';
 import { PLACE_SEARCH_LIMIT, searchPlaces } from '../model/placeSearch.ts';
 import { usePlaceSheet } from '../hooks/PlaceSheetProvider.tsx';
@@ -137,7 +137,7 @@ function PlaceResults({ dest, query }: { readonly dest: DestinationDetail; reado
       {hits.slice(0, PLACE_SEARCH_LIMIT).map((place) => (
         <li key={place.id}>
           <button type="button" onClick={() => open(place.id)}>
-            <RevealImage src={firstPhotoUrl(place)} alt="" loading="lazy" />
+            <RevealImage src={firstPhotoThumbUrl(place)} alt="" loading="lazy" />
             <span><strong>{place.name}</strong><span>{place.categoryName} · {place.area}</span></span>
           </button>
         </li>

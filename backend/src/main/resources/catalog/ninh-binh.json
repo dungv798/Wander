@@ -249,7 +249,8 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-trang-an-1.jpg",
+          "file": "ninh-binh-trang-an-1-w1280-13d7a0a705.webp",
+          "thumbFile": "ninh-binh-trang-an-1-w480-8f9387dd20.webp",
           "author": "Richard Mortel from Riyadh, Saudi Arabia",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trang_An_Scenic_Landscape_Complex,_northern_Vietnam_(354)_(38540830421).jpg"
@@ -283,13 +284,15 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-tam-coc-2.jpg",
+          "file": "ninh-binh-tam-coc-2-w1280-f86eb2565c.webp",
+          "thumbFile": "ninh-binh-tam-coc-2-w480-8f34d29dc7.webp",
           "author": "Vinnie Cartabiano",
           "license": "CC BY 2.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:-i---i-_(43520225892).jpg"
         },
         {
-          "file": "ninh-binh-tam-coc-3.jpg",
+          "file": "ninh-binh-tam-coc-3-w1280-f93fc72723.webp",
+          "thumbFile": "ninh-binh-tam-coc-3-w480-c2f3876ad4.webp",
           "author": "Ji-Elle",
           "license": "CC BY-SA 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bananiers_%C3%A0_Tam_Coc.jpg"
@@ -323,7 +326,8 @@
       ],
       "photos": [
         {
-          "file": "pexels-19578152.jpg",
+          "file": "pexels-19578152-w1280-91b00427f3.webp",
+          "thumbFile": "pexels-19578152-w480-2c50be00bd.webp",
           "author": "Quý Nguyễn",
           "license": "Giấy phép Pexels",
           "sourceUrl": "https://www.pexels.com/photo/hang-mua-viewpoint-19578152/"
@@ -357,13 +361,15 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-cuc-phuong-1.jpg",
+          "file": "ninh-binh-cuc-phuong-1-w1280-76004cba97.webp",
+          "thumbFile": "ninh-binh-cuc-phuong-1-w480-ccc83c1807.webp",
           "author": "Kien1980v ( thảo luận )",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cuc_Phuong_01.jpg"
         },
         {
-          "file": "ninh-binh-cuc-phuong-2.jpg",
+          "file": "ninh-binh-cuc-phuong-2-w1280-3cb0739208.webp",
+          "thumbFile": "ninh-binh-cuc-phuong-2-w480-944aff668f.webp",
           "author": "No machine-readable author provided. Ravikiran r assumed (based on copyright claims).",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cuc.Phuong.National.Park.jpg"
@@ -395,7 +401,8 @@
       ],
       "photos": [
         {
-          "file": "ref-ninh-binh-co-do-hoa-lu-4.jpg",
+          "file": "ref-ninh-binh-co-do-hoa-lu-4-w1280-2005c29e49.webp",
+          "thumbFile": "ref-ninh-binh-co-do-hoa-lu-4-w480-7dd84c6525.webp",
           "author": "Kien1980v at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Codohoalu-1.jpg"
@@ -427,7 +434,8 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-chua-bai-dinh-1.jpg",
+          "file": "ninh-binh-chua-bai-dinh-1-w1280-9e0ccbb2cd.webp",
+          "thumbFile": "ninh-binh-chua-bai-dinh-1-w480-0b9b20b351.webp",
           "author": "Kien1980v ( thảo luận ) 01:40, ngày 3 tháng 9 năm 2017 (UTC)",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chua_Bai_Dinh_X8.JPG"
@@ -459,7 +467,8 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-chua-bich-dong-1.jpg",
+          "file": "ninh-binh-chua-bich-dong-1-w1280-3ce78ab255.webp",
+          "thumbFile": "ninh-binh-chua-bich-dong-1-w480-1555519cd1.webp",
           "author": "Jakub Hałun",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bich_Dong_Pagoda,_Ninh_Binh,_Vietnam,_20240203_1126_5619.jpg"
@@ -491,7 +500,8 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-dong-am-tien-1.jpg",
+          "file": "ninh-binh-dong-am-tien-1-w1280-0267273ca3.webp",
+          "thumbFile": "ninh-binh-dong-am-tien-1-w480-a8c28d85be.webp",
           "author": "Kien1980v at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chuaamtien5.JPG"
@@ -523,7 +533,8 @@
       ],
       "photos": [
         {
-          "file": "ninh-binh-nha-tho-phat-diem-1.jpg",
+          "file": "ninh-binh-nha-tho-phat-diem-1-w1280-f3de2c9d7b.webp",
+          "thumbFile": "ninh-binh-nha-tho-phat-diem-1-w480-581c98899e.webp",
           "author": "Kien1980v at Vietnamese Wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phatdiemk-77.jpg"
@@ -559,7 +570,8 @@
       ],
       "photos": [
         {
-          "file": "food-extra-8-3.jpg",
+          "file": "food-extra-8-3-w1280-9400dade08.webp",
+          "thumbFile": "food-extra-8-3-w480-64dfbb4b91.webp",
           "author": "Thịt_dê_Ninh_Bình.JPG : Nguyễn Thanh Quang derivative work: Phó Nháy ( talk )",
           "license": "CC BY-SA 3.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A1i_d%C3%AA.jpg"
@@ -595,13 +607,15 @@
       ],
       "photos": [
         {
-          "file": "food-banh-cuon-1.jpg",
+          "file": "food-banh-cuon-1-w1280-f32e248776.webp",
+          "thumbFile": "food-banh-cuon-1-w480-2f8a583295.webp",
           "author": "Lưu Ly",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banh_cuon.jpg"
         },
         {
-          "file": "food-banh-cuon-2.jpg",
+          "file": "food-banh-cuon-2-w1280-3a5ea6bde4.webp",
+          "thumbFile": "food-banh-cuon-2-w480-7cb529751a.webp",
           "author": "Casablanca1911 at vi.wikipedia",
           "license": "Public domain",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%C3%A1nh_cu%E1%BB%91n_Thanh_Tr%C3%AC.jpg"
@@ -634,7 +648,8 @@
       ],
       "photos": [
         {
-          "file": "ref-ninh-binh-dam-van-long-1.jpg",
+          "file": "ref-ninh-binh-dam-van-long-1-w1280-5dbcf5c292.webp",
+          "thumbFile": "ref-ninh-binh-dam-van-long-1-w480-a487bee1c2.webp",
           "author": "Andre Hospers",
           "license": "CC BY 4.0",
           "sourceUrl": "https://commons.wikimedia.org/wiki/File:Van_Long_Nature_Reserve_Riet_Grotten_Kalksteen_Ninh_Binh.jpg"
@@ -989,7 +1004,8 @@
       "id": "pexels-28949259",
       "theme": "hanh-trinh",
       "caption": "Cùng xuống thuyền giữa núi đá Ninh Bình",
-      "file": "pexels-28949259.jpg",
+      "file": "pexels-28949259-w1280-79dc87743e.webp",
+      "thumbFile": "pexels-28949259-w480-b9030b6fc2.webp",
       "author": "Viett Anh",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/scenic-boat-ride-in-ninh-binh-vietnam-28949259/"
@@ -998,7 +1014,8 @@
       "id": "pexels-19578152",
       "theme": "hanh-trinh",
       "caption": "Đi theo những bậc đá lên điểm nhìn Hang Múa",
-      "file": "pexels-19578152.jpg",
+      "file": "pexels-19578152-w1280-91b00427f3.webp",
+      "thumbFile": "pexels-19578152-w480-2c50be00bd.webp",
       "author": "Quý Nguyễn",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/hang-mua-viewpoint-19578152/"
@@ -1007,7 +1024,8 @@
       "id": "food-research-ninh-binh",
       "theme": "mon-an",
       "caption": "Dê núi Ninh Bình · một món muốn thử (ảnh minh họa)",
-      "file": "food-extra-8-3.jpg",
+      "file": "food-extra-8-3-w1280-9400dade08.webp",
+      "thumbFile": "food-extra-8-3-w480-64dfbb4b91.webp",
       "author": "Thịt_dê_Ninh_Bình.JPG : Nguyễn Thanh Quang derivative work: Phó Nháy ( talk )",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A1i_d%C3%AA.jpg"
@@ -1016,7 +1034,8 @@
       "id": "wave-pexels-25575383",
       "theme": "nghe",
       "caption": "Nhìn nhịp sống từ mặt nước Ninh Bình",
-      "file": "wave-pexels-25575383.jpg",
+      "file": "wave-pexels-25575383-w1280-eabf7e8bd8.webp",
+      "thumbFile": "wave-pexels-25575383-w480-af1a25d2c6.webp",
       "author": "Ninh Tien Dat",
       "license": "Giấy phép Pexels",
       "sourceUrl": "https://www.pexels.com/photo/man-in-conical-hat-on-boat-on-river-in-ninh-binh-vietnam-25575383/"

@@ -73,6 +73,27 @@ public final class CatalogConstants {
     /** Tên tệp ảnh hợp lệ: chữ thường, số, gạch ngang và đuôi ảnh phổ biến. */
     public static final String PHOTO_FILE_REGEX = "[a-z0-9][a-z0-9-]*\\.(jpg|jpeg|png|webp)";
 
+    /** Optimized variant name {@code <slug>-w<width>-<hash10>.webp}: group 1 = slug (stable photo id), group 2 = pixel width. */
+    public static final String PHOTO_VARIANT_REGEX = "^([a-z0-9][a-z0-9-]*)-w(\\d+)-[0-9a-f]{10}\\.webp$";
+
+    /** Property holding the optional origin that serves the catalog photos (empty = this application). */
+    public static final String PHOTO_BASE_URL_EXPRESSION = "${wander.catalog.photo-base-url:}";
+
+    /** Accepted photo origin: https host with optional port and path, no query, fragment or credentials. */
+    public static final String PHOTO_BASE_URL_REGEX = "^https://[a-z0-9]([a-z0-9.-]*[a-z0-9])?(:\\d{1,5})?(/[A-Za-z0-9._~/-]*)?$";
+
+    /** Startup error for a photo origin that does not match {@link #PHOTO_BASE_URL_REGEX}; parameter: the value. */
+    public static final String PHOTO_BASE_URL_INVALID = "wander.catalog.photo-base-url phải là địa chỉ https gốc (ví dụ https://photos.example.com): %s";
+
+    /** URL path separator. */
+    public static final String URL_SEPARATOR = "/";
+
+    /** One {@code srcset} entry: URL and its pixel width descriptor. */
+    public static final String SRCSET_ENTRY_FORMAT = "%s %dw";
+
+    /** Separator between {@code srcset} entries. */
+    public static final String SRCSET_SEPARATOR = ", ";
+
     /** Liên kết nguồn ảnh phải bắt đầu bằng tiền tố này. */
     public static final String HTTPS_PREFIX = "https://";
     /** Giao thức bắt buộc của liên kết ghi công. */

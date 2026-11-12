@@ -28,6 +28,41 @@ class CatalogApiIT extends ApiTestSupport {
 
 
     @Test
+    @DisplayName("local photos expose a stable id; thumbUrl and srcSet are consistent; external photos have neither")
+    void photosExposeStableIdThumbnailAndSrcSet() {
+        Res r = call("GET", "/api/catalog/destinations/ha-giang", null);
+        int local = 0;
+        for (Object place : r.list("destination.places")) {
+            for (Object value : (List<?>) ((Map<?, ?>) place).get("photos")) {
+                Map<?, ?> photo = (Map<?, ?>) value;
+                String url = (String) photo.get("url");
+                if (!url.startsWith("/catalog/photos/")) {
+                    assertThat(photo.get("id")).isNull();
+                    assertThat(photo.get("thumbUrl")).isNull();
+                    continue;
+                }
+                local++;
+                assertThat((String) photo.get("id")).isNotBlank().matches("[a-z0-9-]+");
+                assertThat(url).contains("/" + photo.get("id") + "-w");
+                if (photo.get("thumbUrl") != null) {
+                    assertThat(photo.get("srcSet")).isEqualTo(photo.get("thumbUrl") + " " + widthOf((String) photo.get("thumbUrl")) + "w, " + url + " " + widthOf(url) + "w");
+                    assertThat(widthOf((String) photo.get("thumbUrl"))).isLessThan(widthOf(url));
+                } else {
+                    assertThat(photo.get("srcSet")).isNull();
+                }
+            }
+        }
+        assertThat(local).as("ha-giang has local photos").isPositive();
+    }
+
+    /** Pixel width encoded in a variant file name ({@code ...-w480-<hash>.webp}). */
+    private static int widthOf(String url) {
+        var m = java.util.regex.Pattern.compile("-w(\\d+)-[0-9a-f]{10}\\.webp$").matcher(url);
+        assertThat(m.find()).as(url).isTrue();
+        return Integer.parseInt(m.group(1));
+    }
+
+    @Test
     @DisplayName("20 điểm đến đại diện các vùng đều có tâm trong biên Việt Nam và ghi công bìa")
     void destinationCentersAreInVietnam() {
         Res response = call("GET", "/api/catalog/destinations", null);
@@ -208,13 +243,13 @@ class CatalogApiIT extends ApiTestSupport {
         String url = call("GET", "/api/catalog/destinations/ha-giang", u.token()).str("destination.places.0.photos.0.url");
         Res photo = call("GET", url, null);
         assertThat(photo.status()).isEqualTo(200);
-        assertThat(photo.raw().headers().firstValue("Content-Type").orElse("")).startsWith("image/jpeg");
-        assertThat(photo.raw().headers().firstValue("Cache-Control").orElse("")).contains("max-age=86400").contains("public");
+        assertThat(photo.raw().headers().firstValue("Content-Type").orElse("")).startsWith("image/webp");
+        assertThat(photo.raw().headers().firstValue("Cache-Control").orElse("")).contains("max-age=31536000").contains("public").contains("immutable");
         assertThat(photo.raw().headers().firstValue("X-Content-Type-Options")).hasValue("nosniff");
 
         Res missing = call("GET", "/catalog/photos/khong-co.jpg", null);
         assertThat(missing.status()).isEqualTo(404);
-        assertThat(missing.raw().headers().firstValue("Cache-Control").orElse("")).doesNotContain("max-age=86400");
+        assertThat(missing.raw().headers().firstValue("Cache-Control").orElse("")).doesNotContain("max-age=31536000");
         assertThat(call("GET", "/catalog/photos/..%2f..%2fapplication.yml", null).status()).isIn(400, 404);
         assertThat(call("GET", "/catalog/photos/%2e%2e/ha-giang.json", null).status()).isIn(400, 404);
     }
