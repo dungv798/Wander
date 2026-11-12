@@ -180,8 +180,10 @@ async function checkPlaceDetail(activeBrowser: Browser): Promise<void> {
   try {
     await page.goto(`${url}/?intro=0#/dest/ha-giang`);
     await page.waitForSelector('.place-row');
-    await page.locator('.pr-title').nth(2).scrollIntoViewIfNeeded();
-    await page.locator('.pr-title').nth(2).click();
+    // Scroll by hand and click with `force`: Playwright's own scroll waits for the element to be "stable", which never happens
+    // on headless WebKit under Linux (CI) because the list keeps repainting; this test is about the detail sheet, not about stability.
+    await page.locator('.pr-title').nth(2).evaluate(element => element.scrollIntoView({ block: 'center' }));
+    await page.locator('.pr-title').nth(2).click({ force: true });
     await page.waitForSelector('[role="dialog"]', { timeout: 15000 });
     const widths = await page.locator('.place-scroll').evaluate(el => ({ scroll: el.scrollWidth, client: el.clientWidth }));
     assert.ok(widths.scroll <= widths.client, `chi tiết địa điểm không được tràn ngang (${widths.scroll} > ${widths.client})`);
