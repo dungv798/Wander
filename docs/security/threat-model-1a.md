@@ -23,7 +23,8 @@
 | T5 | Dò mã khôi phục | 150 bit, giới hạn tốc độ; rủi ro chủ yếu là tính sẵn sàng, không phải đoán mã | Thấp |
 | T6 | Mất mã / bỏ qua mã rồi hết phiên | SES-1: chưa có mã thì chỉ hạn trượt; có mã thì trần 90 ngày. UI cảnh báo trước hạn: `UNVERIFIED` | Vừa (mất dữ liệu, không phải lộ) |
 | T7 | Rò dữ liệu qua bản lưu `localStorage` hoặc tệp mã `.txt` tải về | Người dùng chọn; cần câu cảnh báo (`UNVERIFIED` đã có hay chưa) | Thấp |
-| T8 | Lệch thời gian phản hồi lộ mã đúng/sai | Thân lỗi đồng nhất có test (INV-6); thời gian của `hasher.matches`: `UNVERIFIED` | Chưa biết |
+| T8 | Lệch thời gian phản hồi lộ mã đúng/sai | Thân lỗi đồng nhất có test (INV-6). Đọc mã 12/11: tra mã bằng HMAC có pepper rồi so digest bằng `MessageDigest.isEqual` (hằng thời gian); kẻ tấn công không điều khiển được tiền tố hash nên không có oracle từng phần. Chỉ lộ được "mã này hợp lệ" khi đã đoán trúng 150 bit. Chưa đo bằng thực nghiệm (`UNVERIFIED` phần đo) | Thấp |
+| T10 | Yêu cầu ghi đã qua bộ lọc trước lúc thu hồi phiên vẫn ghi xong sau đó (TOCTOU; `planning` không kiểm lại phiên khi ghi) | Cửa sổ cỡ một yêu cầu; chưa có test; đã gác ở `open-decisions.md` (phương án chấp nhận hoặc `SELECT … FOR SHARE`) | Chấp nhận cho người quen; xem lại trước khi mở cho người lạ |
 | T9 | Ping keep-warm bị Render coi là lách gói | Rủi ro điều khoản, mức độ không biết (DR-037) | Vận hành |
 
 ## 4. Tiêu chí "đủ an toàn cho người quen" (đo được, `PROPOSED`)

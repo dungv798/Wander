@@ -5,7 +5,7 @@ Nguồn định nghĩa: `docs/autopilot/q16-design-draft.md` mục INV (dòng 12
 | Mã | Tình trạng | Test (lớp: tên rút gọn) |
 |---|---|---|
 | INV-1 | Có | `PlanningApiIT`: yêu cầu không có phiên hợp lệ bị từ chối; `SecurityIT` (kiểm kê route, theo báo cáo rà) |
-| INV-2 | Một nửa | `PlanningApiIT`/`RecoveryApiIT`: phiên đã thu hồi mất quyền ở yêu cầu kế tiếp. **Thiếu:** yêu cầu gửi *trước* lúc thu hồi nhưng chưa ghi (kiểm quyền lại ngay lúc ghi) |
+| INV-2 | Một nửa | `PlanningApiIT`/`RecoveryApiIT`: phiên đã thu hồi mất quyền ở yêu cầu kế tiếp. **Nửa sau là khoảng hở thật, không chỉ thiếu test:** lệnh ghi `planning` không kiểm lại phiên (T10, `open-decisions.md`) |
 | INV-3, INV-4 | N/A 1a | Thuộc Lát 1b (member/link mời) |
 | INV-5 | Có (mới 12/11) | `RecoveryApiIT`: INV-5/NEG-1 tên chuyến, điểm đến, ngày đi bị từ chối như mã sai |
 | INV-6 | Có | `RecoveryApiIT`: mã sai/không tồn tại/đã dùng cùng HTTP 400 `INVALID_CODE`; mọi lý do từ chối cho cùng phản hồi |
