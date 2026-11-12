@@ -97,6 +97,10 @@ export const TRIPS_COPY = {
     allTrip: 'Xem cả chuyến',
     demo: { title: 'BẢN THỬ', note: 'Chỉ có khi phát triển: chọn một ngày bất kỳ để xem màn này như thể hôm nay là ngày đó.', label: 'Giả lập ngày', reset: 'Dùng ngày thật' },
   },
+  stale: {
+    text: 'Đang xem bản đã lưu {ago}. Chưa kết nối được máy chủ nên chưa sửa được.',
+    retry: 'Thử lại',
+  },
   export: {
     title: 'Lưu hoặc gửi lịch trình',
     open: 'Lưu hoặc gửi lịch trình',

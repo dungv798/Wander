@@ -162,6 +162,43 @@ test('nút "+" ở thanh dưới: có nơi đã chọn thì mở "Lưu N địa 
   await ctx.close();
 });
 
+test('B-09: máy chủ không trả lời thì chuyến hiện từ bản đã lưu kèm dải báo; lỗi lưu ở lại tới khi bấm Đóng', async () => {
+  const { ctx } = await phone();
+  const page = await open(ctx, '#/trips', true);
+  await page.locator('.tcard').first().waitFor();
+  await page.waitForFunction(() => localStorage.getItem('wander.web.trips.cache.v1') !== null);
+  // Từ giờ máy chủ "không trả lời" với mọi lệnh gọi chuyến đi; giao diện và danh mục vẫn tải được.
+  await ctx.route('**/api/trips', (route) => route.abort());
+  await page.reload();
+  await page.getByText(/Đang xem bản đã lưu/).waitFor();
+  assert.ok((await page.locator('.tcard').count()) >= 1, 'danh sách chuyến vẫn hiện từ bản đã lưu');
+  assert.equal(await page.getByText('Chưa tải được chuyến đi').count(), 0, 'không rơi vào màn lỗi trống');
+  // Lệnh ghi thất bại: thông báo lỗi phải ở lại lâu hơn thông báo thường (2,6 giây) cho tới khi bấm Đóng.
+  await page.getByRole('button', { name: 'Tạo chuyến đi mới' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Tạo chuyến đi', exact: true }).click();
+  const alert = page.locator('.toast[role="alert"]');
+  await alert.waitFor();
+  await page.waitForTimeout(4000);
+  assert.equal(await alert.count(), 1, 'lỗi vẫn còn sau 4 giây');
+  await alert.getByRole('button', { name: 'Đóng', exact: true }).click();
+  assert.equal(await alert.count(), 0);
+  await ctx.close();
+});
+
+test('B-09: mở trang khi MỌI lệnh /api lỗi (máy chủ ngủ, cả kiểm tra phiên) vẫn thấy chuyến đã lưu kèm dải báo', async () => {
+  const { ctx } = await phone();
+  const page = await open(ctx, '#/trips', true);
+  await page.locator('.tcard').first().waitFor();
+  await page.waitForFunction(() => localStorage.getItem('wander.web.trips.cache.v1') !== null);
+  // chỉ chặn đường dẫn API thật (bắt đầu bằng /api/); glob '**/api/**' sẽ chặn cả module nguồn src/features/*/api/ của Vite
+  await ctx.route((url) => url.pathname.startsWith('/api/'), (route) => route.abort());
+  await page.reload();
+  await page.getByText(/Đang xem bản đã lưu/).waitFor();
+  assert.ok((await page.locator('.tcard').count()) >= 1, 'danh sách chuyến hiện từ bản đã lưu');
+  assert.equal(await page.getByText('Chưa tải được chuyến đi').count(), 0);
+  await ctx.close();
+});
+
 test('tạo từng bước: sai ngày bị chặn ở đúng bước; kiểu chuyến, sở thích, ngân sách được LƯU vào chuyến (DR-018 F2)', async () => {
   const { ctx, errors } = await phone();
   const page = await open(ctx, '#/trips');
@@ -533,6 +570,9 @@ test('xóa địa điểm từ tờ chi tiết của chuyến; khôi phục khi 
   assert.deepEqual((await trashCounts(page)).ids, ['a2']);
   // dời ngày đi lên một ngày: ngày đầu không còn trong chuyến
   await page.getByRole('tab', { name: 'Tổng quan' }).click();
+  // mở thẳng ngày 1 thì tờ ở nấc cao nhất (B-01) và che nút trên bản đồ: hạ tờ xuống nấc vừa trước khi bấm
+  await page.locator('.grab').press('ArrowDown');
+  await page.locator('.sheetbody[data-snap="half"]').waitFor();
   await page.getByRole('button', { name: 'Sửa chuyến đi' }).click();
   const edit = page.getByRole('dialog', { name: 'Sửa chuyến đi' });
   const start = await edit.getByLabel('Ngày đi').inputValue();

@@ -11,7 +11,7 @@ export function useReportError(): (error: unknown) => void {
     /** Giữ mã lỗi trong thông báo để người dùng có thể báo hỗ trợ. */
     (error: unknown): void => {
       const d = describeError(error);
-      toast.show(`${d.title}. ${d.text} ${fill(ERROR_CODE_LABEL, { code: d.code })}`);
+      toast.error(`${d.title}. ${d.text} ${fill(ERROR_CODE_LABEL, { code: d.code })}`);
     },
     [toast],
   );

@@ -111,3 +111,33 @@ test('người gọi hủy thì nhận AbortError nhưng yêu cầu dùng chung 
   assert.equal(r.urls.length, 1, 'không gọi lại vì yêu cầu đầu vẫn hoàn tất');
   assert.equal(r.signals[0], undefined, 'không gắn tín hiệu của một người gọi vào yêu cầu dùng chung');
 });
+
+/** Cài `localStorage` giả toàn cục trong lúc chạy `body`, rồi gỡ (kho bản lưu dùng kho mặc định của trình duyệt). */
+async function withLocalStorage(body: () => Promise<void>): Promise<void> {
+  const data = new Map<string, string>();
+  const fake = { getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => { data.set(k, v); }, removeItem: (k: string) => { data.delete(k); } };
+  Object.defineProperty(globalThis, 'localStorage', { value: fake, configurable: true });
+  try { await body(); } finally { Reflect.deleteProperty(globalThis, 'localStorage'); }
+}
+
+test('B-09: máy chủ không trả lời (lỗi mạng hoặc 5xx) thì dùng bản điểm đến đã nhớ; không tìm thấy thì không', async () => {
+  await withLocalStorage(async () => {
+    let mode: 'ok' | 'down' | 'bad-gateway' | 'missing' = 'ok';
+    const handler = (): Response => {
+      if (mode === 'down') throw new TypeError('Failed to fetch');
+      if (mode === 'bad-gateway') return json({}, 502);
+      if (mode === 'missing') return json({ error: { code: 'NOT_FOUND' } }, 404);
+      return json({ destination: validDestination() });
+    };
+    // mỗi lần dùng kho mới để bỏ bản nhớ trong bộ nhớ, chỉ còn bản ở localStorage
+    await repo(handler).repository.destination('ha-giang');
+    mode = 'down';
+    assert.equal((await repo(handler).repository.destination('ha-giang')).id, 'ha-giang');
+    mode = 'bad-gateway';
+    assert.equal((await repo(handler).repository.destination('ha-giang')).id, 'ha-giang');
+    mode = 'missing';
+    await assert.rejects(repo(handler).repository.destination('ha-giang'), (e: unknown) => e instanceof ApiError && e.code === 'NOT_FOUND');
+    mode = 'down';
+    await assert.rejects(repo(handler).repository.destination('da-lat'), (e: unknown) => e instanceof ApiError && e.isNetwork, 'chưa từng tải thì vẫn báo lỗi');
+  });
+});

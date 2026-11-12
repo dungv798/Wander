@@ -30,6 +30,7 @@ import { UnassignedTab } from './UnassignedTab.tsx';
 import { TripMap } from './TripMap.tsx';
 import { TripOverlays } from './TripOverlays.tsx';
 import { modeOfTab, validTab } from '../model/tripTabs.ts';
+import { StaleTripsNotice } from './StaleTripsNotice.tsx';
 import { useScrollCollapse } from '../hooks/useScrollCollapse.ts';
 
 const ANNOUNCE_DELAY_MS = 30;
@@ -154,5 +155,5 @@ export function TripScreen({ tripId, sub }: { readonly tripId: string; readonly 
   if (!trip) {
     return <EmptyState role="status" title={T.view.notFoundTitle} text={T.view.notFoundText} actions={<Button onClick={() => navigate(VIEW.TRIPS)}>{T.view.backToList}</Button>} />;
   }
-  return <DestinationGate destId={trip.destinationId}>{(dest) => <TripContent key={trip.id} trip={trip} dest={dest} sub={sub} />}</DestinationGate>;
+  return <><StaleTripsNotice /><DestinationGate destId={trip.destinationId}>{(dest) => <TripContent key={trip.id} trip={trip} dest={dest} sub={sub} />}</DestinationGate></>;
 }

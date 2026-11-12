@@ -687,3 +687,11 @@ PO chọn phương án A của `docs/design/safari-ui-research-2-2026-11-10.md` 
 | Chi tiết địa điểm | Hết tràn ngang (`.place-scroll` chỉ cuộn dọc, `minmax(0,1fr)`) | IMPLEMENTED |
 
 Kiểm chứng: lint, 481 unit, build PASS; E2E mobile 7/7 ba lần liên tiếp (Chrome và WebKit Windows, gồm mở chi tiết địa điểm). Số đo và ảnh: `.logs/ios27-audit/`. Chưa đo trên iPhone: thanh Safari, safe area, bàn phím, độ mượt, `overflow:hidden` chặn cuộn nền, thanh tab so với thanh nổi Safari 26. Đo desktop cho thấy chi phí luồng chính tăng nhẹ (<1ms/khung) do hook cuộn; mở/đóng bản đồ còn 1–3 khung >34ms chưa rõ nguyên nhân (nhiễu máy chưa loại trừ).
+
+## B-01 và B-09 (11–12/11/2026, DR-037; Tầng B, DEFAULTED)
+
+| Mục | Mặc định | Trạng thái |
+|---|---|---|
+| B-01 màn chuyến (điện thoại) | Ẩn thanh dưới ở màn chuyến; mở thẳng vào Lịch thì tờ ở nấc cao nhất, tab khác mở nấc vừa (nấc chỉ dùng lúc dựng, đổi tab không tự đổi nấc vì đã có test "giữ nấc khi đổi tab"); cuộn danh sách lịch quá 40 px (và còn ≥ 200 px chỗ cuộn) thì ẩn ảnh bìa, GIỮ hàng tab Tổng quan/Lịch/… để vẫn đổi tab được. Hệ quả: mở thẳng ngày 1 thì tờ cao che nút trên bản đồ tới khi kéo xuống | IMPLEMENTED, e2e xanh; chưa thử iPhone thật |
+| B-09 xem khi máy chủ không trả lời | Danh sách chuyến lần nạp thành công gần nhất lưu ở `localStorage` (`wander.web.trips.cache.v1`, chỉ đọc), điểm đến đã mở lưu theo mã. Khi máy chủ lỗi (mất kết nối/5xx), hoặc bước kiểm tra phiên danh tính lỗi, mà có bản lưu thì hiện bản đó kèm dải "Đang xem bản đã lưu …" và nút Thử lại; chưa sửa được. Bản lưu chỉ bị xóa khi danh tính là `anonymous`/`expired` (không xóa khi đang `loading`/`error`). Thông báo lỗi (Toast) không tự tắt tới khi bấm Đóng | IMPLEMENTED; e2e: chặn riêng `/api/trips` và chặn mọi `/api/*` đều xanh. Chưa đo với Render ngủ thật |
+| Phạm vi lưu | Bản lưu nằm trên máy, cùng mức nhạy cảm với bí mật phiên đã ở `localStorage` (RG-6); không lưu bí mật mới | DEFAULTED |

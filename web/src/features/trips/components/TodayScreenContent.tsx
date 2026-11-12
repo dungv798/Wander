@@ -25,6 +25,7 @@ import { TodayMap } from '../today/TodayMap.tsx';
 import { NextCard, TodayItem } from '../today/TodayItems.tsx';
 import '../today/today.css';
 import { costSummaryText, summarizeCosts } from '../model/tripMath.ts';
+import { StaleTripsNotice } from './StaleTripsNotice.tsx';
 
 const MINUTE_MS = 60_000;
 
@@ -118,5 +119,5 @@ export function TodayScreen({ tripId }: { readonly tripId: string | null }) {
   if (!trip) {
     return <EmptyState pageTitle role="status" title={C.noTrip.title} text={C.noTrip.text} actions={<Button onClick={goBack}>{C.noTrip.action}</Button>} />;
   }
-  return <TodayFor key={trip.id} trip={trip} />;
+  return <><StaleTripsNotice /><TodayFor key={trip.id} trip={trip} /></>;
 }

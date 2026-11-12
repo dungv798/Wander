@@ -6,6 +6,10 @@ import { CATALOG_API, CATALOG_CATEGORIES } from './catalogApi.const.ts';
 import type { CatalogRepository } from './CatalogRepository.ts';
 import { parseMoments } from '../model/moments.ts';
 import { isVenueView } from '../model/venue.ts';
+import { loadCachedDestination, saveCachedDestination } from '../model/destinationCache.ts';
+
+/** Mã HTTP từ đây trở lên là máy chủ lỗi hoặc không sẵn sàng (cổng 502/503 khi máy chủ đang ngủ). */
+const SERVER_ERROR_FROM = 500;
 
 /** Có phải đối tượng thường (không null, không mảng). */
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -70,8 +74,25 @@ export class HttpCatalogRepository implements CatalogRepository {
     return request;
   }
 
-  /** Gọi API một điểm đến và kiểm hình dạng. */
+  /**
+   * Điểm đến mới nhất: gọi API và nhớ bản đó ở máy; khi máy chủ không trả lời (mất kết nối hoặc lỗi 5xx) mà có bản đã nhớ thì dùng nó để chuyến và màn "Hôm nay"
+   * vẫn mở được (B-09). Lỗi khác (không tìm thấy, thân sai dạng) không dùng bản nhớ.
+   */
   private async fetchDestination(id: string): Promise<DestinationDetail> {
+    try {
+      const detail = await this.requestDestination(id);
+      saveCachedDestination(detail, Date.now());
+      return detail;
+    } catch (error) {
+      const unreachable = error instanceof ApiError && (error.isNetwork || (error.status !== null && error.status >= SERVER_ERROR_FROM));
+      const kept = unreachable ? loadCachedDestination(id) : null;
+      if (kept) return kept;
+      throw error;
+    }
+  }
+
+  /** Gọi API một điểm đến và kiểm hình dạng. */
+  private async requestDestination(id: string): Promise<DestinationDetail> {
     const body = await this.client.get<unknown>(`${CATALOG_API.DESTINATIONS}/${encodeURIComponent(id)}`);
     const detail = isRecord(body) ? body['destination'] : undefined;
     if (!isDetail(detail)) throw new ApiError(CLIENT_ERROR.INTERNAL);

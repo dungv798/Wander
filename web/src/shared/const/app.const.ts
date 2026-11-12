@@ -9,6 +9,8 @@ export const STORAGE = {
   LOCKS: 'wander.web.locks.v1',
   /** Đã xem giới thiệu lần đầu (chỉ hiện một lần). */
   ONBOARDING: 'wander.web.onboarding.v1',
+  /** Bản chỉ đọc của các chuyến lần nạp thành công gần nhất, để xem khi máy chủ không trả lời (B-09). Bị xóa khi hết phiên. */
+  TRIPS_CACHE: 'wander.web.trips.cache.v1',
 } as const;
 
 /** Điểm ngắt giao diện (px), khớp CSS của prototype (docs/ux/screens.md "Khung thích ứng"). */

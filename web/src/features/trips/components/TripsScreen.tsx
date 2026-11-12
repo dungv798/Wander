@@ -22,6 +22,7 @@ import { TripCard } from './TripCard.tsx';
 import type { Trip } from '../model/trip.types.ts';
 import { TRIP_COVERS } from '../model/tripCovers.const.ts';
 import { coverUrl } from '../model/cover.ts';
+import { StaleTripsNotice } from './StaleTripsNotice.tsx';
 
 const DeletedTripsSheet = lazy(() => import('./DeletedTripsSheet.tsx').then(module => ({ default: module.DeletedTripsSheet })));
 
@@ -69,6 +70,7 @@ export function TripsScreen({ destId }: { readonly destId: string }) {
   return (
     <>
       <TripsHeading />
+      <StaleTripsNotice />
       {hasPending ? <div className="stack pad-x spaced-lg">{destinations.map(dest => <DestinationGate key={dest.id} destId={dest.id}>{detail => <PendingSelection dest={detail} onSave={picked => { select(dest.id); setSaving({ destId: dest.id, picked }); }} />}</DestinationGate>)}</div> : null}
       {showFilters ? <TripListControls options={options} counts={countTripStatuses(state.trips, today)} onChange={setOptions} /> : null}
       {status === 'loading' && !state.trips.length ? (
