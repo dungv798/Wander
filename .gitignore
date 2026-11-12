@@ -42,3 +42,6 @@ tools/codex-skills/
 
 # Autopilot run logs are local working state
 .claude/autopilot/runs/
+
+# Catalog tooling inputs and the photo manifest are source data, not build output (the generic data/ rule above would hide new files)
+!tools/catalog/data/
