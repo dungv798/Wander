@@ -1,8 +1,8 @@
 // Nhập địa điểm từ OpenStreetMap theo danh sách biên tập tay (DR-033, D-A). CHỈ THÊM; không sửa/xóa địa điểm có sẵn.
 //   node tools/catalog/import-osm-places.mjs --dest=ha-giang
-// Nguồn: tools/catalog/osm-additions/<dest>.json (người duyệt chọn từ docs/research/osm-candidates/<dest>.json) → catalog/<dest>.json.
+// Nguồn: tools/catalog/data/osm-additions/<dest>.json (người duyệt chọn từ tools/catalog/data/osm-candidates/<dest>.json) → catalog/<dest>.json.
 // Tên và tọa độ lấy từ OSM (ODbL); mô tả ngắn chỉ nêu dữ kiện (khu vực, nguồn), KHÔNG viết lời khuyên khẳng định.
-// Vị trí = OSM_UNVERIFIED; trạng thái ghi ở docs/research/osm-additions/<dest>.json và nơi chưa chắc vị trí không được đưa vào lịch mẫu.
+// Vị trí = OSM_UNVERIFIED; trạng thái ghi ở tools/catalog/data/osm-additions/<dest>.json và nơi chưa chắc vị trí không được đưa vào lịch mẫu.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,7 +15,7 @@ const UNKNOWN = 'Chưa rõ';
 const catalogPath = path.join(ROOT, 'backend/src/main/resources/catalog', `${DEST}.json`);
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 const specs = JSON.parse(fs.readFileSync(path.join(here, 'osm-additions', `${DEST}.json`), 'utf8'));
-const candidates = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/research/osm-candidates', `${DEST}.json`), 'utf8')).places;
+const candidates = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/catalog/data/osm-candidates', `${DEST}.json`), 'utf8')).places;
 
 const season = catalog.guide.find((g) => g.layout === 'MONTHS');
 const months = season?.bestMonths ?? [];
@@ -52,7 +52,7 @@ for (const spec of specs) {
   console.log(`  ✓ ${spec.id}: ${spec.name} (${hit.osm}, ${hit.lat}, ${hit.lon})`);
 }
 fs.writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
-const outDir = path.join(ROOT, 'docs/research/osm-additions');
+const outDir = path.join(ROOT, 'tools/catalog/data/osm-additions');
 fs.mkdirSync(outDir, { recursive: true });
 const provPath = path.join(outDir, `${DEST}.json`);
 const old = fs.existsSync(provPath) ? JSON.parse(fs.readFileSync(provPath, 'utf8')) : { places: {} };

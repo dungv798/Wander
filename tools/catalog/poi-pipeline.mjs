@@ -34,8 +34,8 @@ const pois = (raw.elements ?? []).map((e) => ({
   lat: e.lat ?? e.center?.lat, lon: e.lon ?? e.center?.lon, coordinateKind: e.type === 'node' ? 'point' : 'polygon-center', tags: e.tags ?? {},
 })).filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lon));
 const snapshot = { fetchedAt: new Date().toISOString(), osmTimestamp: raw.osm3s?.timestamp_osm_base, bbox: `around:${RADIUS_M},${center.join(',')}`, attribution: '© OpenStreetMap contributors', license: 'ODbL-1.0', licenseUrl: 'https://www.openstreetmap.org/copyright', pois };
-fs.mkdirSync(path.join(ROOT, 'docs/research/poi-snapshots'), { recursive: true });
-fs.writeFileSync(path.join(ROOT, 'docs/research/poi-snapshots', `${DEST}.json`), JSON.stringify(snapshot));
+fs.mkdirSync(path.join(ROOT, 'tools/catalog/data/poi-snapshots'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'tools/catalog/data/poi-snapshots', `${DEST}.json`), JSON.stringify(snapshot));
 // Overpass có thể trả polygon cắt vòng tròn nhưng tâm nằm ngoài; giữ snapshot gốc, chỉ nhập tâm nằm trong phạm vi đã khai báo.
 const bounded = { ...snapshot, pois: snapshot.pois.filter(poi => distanceMeters(center, [poi.lat, poi.lon]) <= RADIUS_M) };
 const result = buildPoi(bounded, { destinationId: DEST, center, radiusM: RADIUS_M });

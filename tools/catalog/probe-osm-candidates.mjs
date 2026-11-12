@@ -1,6 +1,6 @@
 // Khảo sát ứng viên địa điểm từ OpenStreetMap quanh một điểm đến (DR-033, D-A). CHỈ ĐỌC và ghi tệp nghiên cứu, không sửa catalog.
 //   node tools/catalog/probe-osm-candidates.mjs --dest=hoi-an
-// Đầu ra: docs/research/osm-candidates/<dest>.json (tên, loại OSM, tọa độ, nhãn nguồn); in số lượng và nơi trùng catalog hiện có.
+// Đầu ra: tools/catalog/data/osm-candidates/<dest>.json (tên, loại OSM, tọa độ, nhãn nguồn); in số lượng và nơi trùng catalog hiện có.
 // Giấy phép dữ liệu: ODbL (OpenStreetMap contributors). Mọi dòng là THAM KHẢO: vị trí lấy từ OSM, chưa kiểm độc lập.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -51,7 +51,7 @@ for (const el of data.elements ?? []) {
   const kind = el.tags.tourism ?? el.tags.historic ?? el.tags.natural ?? el.tags.leisure ?? el.tags.amenity;
   rows.push({ osm: `${el.type}/${el.id}`, name, kind, lat: +lat.toFixed(5), lon: +lon.toFixed(5), wikipedia: el.tags.wikipedia ?? null, wikidata: el.tags.wikidata ?? null, inCatalog: existing.has(key), verification: { position: 'OSM_UNVERIFIED', status: 'UNVERIFIED' } });
 }
-const out = path.join(ROOT, 'docs/research/osm-candidates', `${DEST}.json`);
+const out = path.join(ROOT, 'tools/catalog/data/osm-candidates', `${DEST}.json`);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, JSON.stringify({ dest: DEST, source: 'OpenStreetMap contributors (ODbL), Overpass', fetchedAt: new Date().toISOString(), center: { lat: ref.lat, lon: ref.lon, radiusKm: radius / KM }, count: rows.length, places: rows }, null, 1));
 console.log(`${DEST}: ${rows.length} ứng viên (${rows.filter((r) => r.inCatalog).length} trùng catalog, ${rows.filter((r) => r.wikipedia || r.wikidata).length} có wikipedia/wikidata) → ${path.relative(ROOT, out)}`);

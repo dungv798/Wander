@@ -69,7 +69,7 @@ test('từ chối tọa độ sai/ngoài điểm đến và nguồn lặp', () =
 });
 
 test('snapshot thật dựng ổn định; mọi giá trị có nguồn, không nhập ảnh hoặc rating', async () => {
-  const snapshot = JSON.parse(await readFile(new URL('../../docs/research/da-lat-poi-trial/pois.json', import.meta.url)));
+  const snapshot = JSON.parse(await readFile(new URL('./data/da-lat-poi-trial/pois.json', import.meta.url)));
   const built = buildPoi(snapshot);
   assert.equal(built.statistics.before, 817);
   assert.equal(built.statistics.named, 631);
