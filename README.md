@@ -135,7 +135,7 @@ Measured on 2026-11-12 with `make verify`-equivalent commands (Docker running):
 | Static analysis | Checkstyle with zero warnings |
 | Web | typecheck, ESLint, stylelint; 505 unit tests |
 | End to end | 126 browser scenarios against the real backend |
-| CI | `backend-ci` (check, gitleaks, Trivy on the jar), `web-ci`, weekly full-history secret scan. Added and **not yet run on GitHub**: `e2e` (the same `tools/e2e.sh`), `codeql` (Java, TypeScript) and Dependabot |
+| CI | `backend-ci` (check, gitleaks, Trivy on the jar), `web-ci`, weekly full-history secret scan. Added: `e2e` (the same `tools/e2e.sh`, WebKit installed in the job), `codeql` (Java, TypeScript; it runs once the repository is public or has Code Security) and Dependabot |
 
 Baseline numbers and how they were measured: [`docs/baseline.md`](docs/baseline.md).
 
