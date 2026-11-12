@@ -1,15 +1,18 @@
 package com.wander.shared.web.error;
 
 import com.wander.shared.web.constant.HttpConstants;
+import com.wander.shared.web.constant.ObservabilityConstants;
 import java.net.URI;
 import java.util.Locale;
+import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
 /**
  * Builds the API's error bodies as RFC 9457 problem details ({@code application/problem+json}). Besides the standard members
  * ({@code type}, {@code title}, {@code status}, {@code detail}) every problem carries the stable machine-readable {@code code}
- * the web client switches on, and optionally the offending {@code field} and structured {@code details}.
+ * the web client switches on, the {@code requestId} of the request being handled (the same value as the {@code X-Request-Id} header
+ * and the log lines of that request), and optionally the offending {@code field} and structured {@code details}.
  */
 public final class Problems {
 
@@ -30,6 +33,10 @@ public final class Problems {
         problem.setType(URI.create(HttpConstants.PROBLEM_TYPE_PREFIX + code.toLowerCase(Locale.ROOT).replace(HttpConstants.UNDERSCORE, HttpConstants.HYPHEN)));
         problem.setTitle(status.getReasonPhrase());
         problem.setProperty(HttpConstants.PROBLEM_PROPERTY_CODE, code);
+        String requestId = MDC.get(ObservabilityConstants.REQUEST_ID_KEY);
+        if (requestId != null) {
+            problem.setProperty(ObservabilityConstants.REQUEST_ID_KEY, requestId);
+        }
         if (field != null) {
             problem.setProperty(HttpConstants.PROBLEM_PROPERTY_FIELD, field);
         }

@@ -1,0 +1,14 @@
+# Local Prometheus for Wander (docker compose --profile observability up -d). Not used in production: the public instance does not expose metrics.
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: wander-backend
+    metrics_path: /actuator/prometheus
+    static_configs:
+      # Backend started with `make run` / `gradlew bootRun` on the host.
+      - targets: ["host.docker.internal:8787"]
+        labels: { how: host }
+      # Backend started with `docker compose --profile app up`.
+      - targets: ["backend:8787"]
+        labels: { how: compose }

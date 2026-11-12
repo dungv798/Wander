@@ -6,6 +6,29 @@ import java.time.Duration;
 final class RateLimitConstants {
 
     /** Số lần tạo danh tính tối đa mỗi giờ cho một địa chỉ (mặc định, đổi qua cấu hình). */
+    /** Name of the counter of rejected calls; tagged with the limiter that rejected them. */
+    static final String REJECTED_METRIC = "wander.ratelimit.rejected";
+
+    /** Tag name that holds the limiter. */
+    static final String LIMITER_TAG = "limiter";
+
+    /** Limiter names used as the tag value. */
+    static final String NAME_IDENTITY = "identity";
+    /** Unauthenticated recovery and device pairing, per address. */
+    static final String NAME_RECOVERY = "recovery";
+    /** Approvals, step-up and recovery-code regeneration, per session. */
+    static final String NAME_APPROVAL = "approval";
+    /** Public catalog reads, per address. */
+    static final String NAME_CATALOG = "catalog";
+    /** Pairing requests, per address. */
+    static final String NAME_PAIRING_REQUEST = "pairing-request";
+    /** Step-up requests, per identity. */
+    static final String NAME_STEP_UP_REQUEST = "step-up-request";
+    /** API writes, per identity. */
+    static final String NAME_WRITES = "writes";
+    /** Pairing status polls, per address. */
+    static final String NAME_LINK_POLL = "link-poll";
+
     static final int DEFAULT_IDENTITY_PER_HOUR = 30;
 
     /** Số lần khôi phục/ghép thiết bị chưa xác thực tối đa mỗi giờ cho một địa chỉ. */

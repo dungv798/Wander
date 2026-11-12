@@ -1,0 +1,52 @@
+{
+  "title": "Wander backend",
+  "uid": "wander-backend",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": { "from": "now-30m", "to": "now" },
+  "panels": [
+    {
+      "id": 1, "type": "timeseries", "title": "Requests per second by route",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "wander-prometheus" },
+      "targets": [ { "refId": "A", "legendFormat": "{{method}} {{uri}}", "expr": "sum by (method, uri) (rate(http_server_requests_seconds_count{uri=~\"/api.*\"}[1m]))" } ]
+    },
+    {
+      "id": 2, "type": "timeseries", "title": "p95 latency by route (seconds)",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "wander-prometheus" },
+      "targets": [ { "refId": "A", "legendFormat": "{{uri}}", "expr": "histogram_quantile(0.95, sum by (le, uri) (rate(http_server_requests_seconds_bucket{uri=~\"/api.*\"}[2m])))" } ]
+    },
+    {
+      "id": 3, "type": "timeseries", "title": "Responses by status class",
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "wander-prometheus" },
+      "targets": [ { "refId": "A", "legendFormat": "{{outcome}}", "expr": "sum by (outcome) (rate(http_server_requests_seconds_count[1m]))" } ]
+    },
+    {
+      "id": 4, "type": "timeseries", "title": "Rate-limit rejections by limiter",
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "wander-prometheus" },
+      "targets": [ { "refId": "A", "legendFormat": "{{limiter}}", "expr": "sum by (limiter) (increase(wander_ratelimit_rejected_total[5m]))" } ]
+    },
+    {
+      "id": 5, "type": "timeseries", "title": "Security events recorded (outbox) by kind, last 5 min",
+      "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "wander-prometheus" },
+      "targets": [
+        { "refId": "A", "legendFormat": "{{kind}}", "expr": "sum by (kind) (increase(wander_identity_events_recorded_total[5m]))" },
+        { "refId": "B", "legendFormat": "duplicate deliveries ignored", "expr": "sum(increase(wander_identity_events_duplicate_total[5m]))" }
+      ]
+    },
+    {
+      "id": 6, "type": "timeseries", "title": "JVM heap used (bytes) and DB connections in use",
+      "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "wander-prometheus" },
+      "targets": [
+        { "refId": "A", "legendFormat": "heap used", "expr": "sum(jvm_memory_used_bytes{area=\"heap\"})" },
+        { "refId": "B", "legendFormat": "hikari active connections", "expr": "hikaricp_connections_active" }
+      ]
+    }
+  ]
+}

@@ -240,7 +240,7 @@ class RecoveryApiIT extends ApiTestSupport {
         for (Res rejection : List.of(invalid, unknown, used)) {
             assertThat(rejection.status()).isEqualTo(400);
             assertThat(rejection.code()).isEqualTo("INVALID_CODE");
-            assertThat(rejection.body()).isEqualTo(expectedBody);
+            assertThat(withoutRequestId(rejection)).isEqualTo(expectedBody);
         }
     }
 
@@ -255,7 +255,7 @@ class RecoveryApiIT extends ApiTestSupport {
         for (String guess : List.of("Hà Giang – Tà Xùa", "Hà Giang", "2026-08-29", "Hà Giang 2026-08-29 2026-09-06")) {
             Res rejection = start(guess).r();
             assertThat(rejection.status()).as(guess).isEqualTo(400);
-            assertThat(rejection.body()).as(guess).isEqualTo(expectedBody);
+            assertThat(withoutRequestId(rejection)).as(guess).isEqualTo(expectedBody);
         }
     }
 
@@ -267,7 +267,7 @@ class RecoveryApiIT extends ApiTestSupport {
         Res garbage = start("khong phai ma").r();
         Res missing = call("POST", "/api/recovery/start", null, map("attemptId", newAttemptId(), "sessionToken", newSessionToken()));
         assertThat(unknownButValid.status()).isEqualTo(400);
-        assertThat(unknownButValid.body()).isEqualTo(garbage.body()).isEqualTo(missing.body());
+        assertThat(withoutRequestId(unknownButValid)).isEqualTo(withoutRequestId(garbage)).isEqualTo(withoutRequestId(missing));
         Res weak = call("POST", "/api/recovery/start", null, map("code", u.recoveryCode(), "attemptId", newAttemptId(), "sessionToken", "ngan"));
         assertThat(weak.code()).isEqualTo("INVALID_SESSION_TOKEN");
         Res reuse = call("POST", "/api/recovery/start", null, map("code", u.recoveryCode(), "attemptId", newAttemptId(), "sessionToken", u.token()));

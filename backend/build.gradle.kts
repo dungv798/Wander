@@ -35,6 +35,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-flyway")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
     // Khung xác thực (ADR-005): SecurityFilterChain + AuthenticationProvider; token phiên vẫn tự quản lý (Bearer, băm trong DB)
     implementation("org.springframework.boot:spring-boot-starter-security")
     // Bean Validation for typed request records and the generated OpenAPI contract (served outside the "free" profile only)

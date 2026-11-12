@@ -55,10 +55,16 @@ server:
   shutdown: graceful
 
 management:
+  metrics:
+    distribution:
+      # Histogram buckets of request durations, so Prometheus can compute p95 per route (the Grafana dashboard uses them).
+      percentiles-histogram:
+        http.server.requests: true
   endpoints:
     web:
       exposure:
-        include: health
+        # /actuator/prometheus is for local and compose use (docs/operations/observability.md); the free profile exposes only health.
+        include: health,prometheus
   endpoint:
     health:
       probes:

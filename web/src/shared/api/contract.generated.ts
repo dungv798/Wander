@@ -1345,6 +1345,7 @@ export interface components {
             detail?: string;
             field?: string;
             instance?: string;
+            requestId?: string;
             /** Format: int32 */
             status?: number;
             title?: string;

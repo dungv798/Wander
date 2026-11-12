@@ -5,10 +5,12 @@ import com.wander.shared.kernel.constant.ConfigConstants;
 import com.wander.shared.web.constant.HttpConstants;
 import com.wander.shared.web.filter.ContentSecurityPolicy;
 import com.wander.shared.web.filter.RequestBodyLimitFilter;
+import com.wander.shared.web.filter.RequestIdFilter;
 import com.wander.shared.web.filter.ResponseHeadersFilter;
 import com.wander.shared.web.ratelimit.RateLimits;
 import com.wander.shared.web.request.ClientAddress;
 import com.wander.shared.web.request.CurrentPrincipal;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -59,16 +61,24 @@ public class WebConfig implements WebMvcConfigurer {
 
     /** Ba bộ giới hạn tần suất theo cấu hình. */
     @Bean
-    public RateLimits rateLimits(RateLimits.Properties props, Clock clock) {
-        return new RateLimits(props, clock);
+    public RateLimits rateLimits(RateLimits.Properties props, Clock clock, MeterRegistry meters) {
+        return new RateLimits(props, clock, meters);
     }
 
-    /** Bộ lọc header bảo mật/cache, chạy đầu tiên trong chuỗi bộ lọc. */
+    /** Gives every request an id (header, logging context, error bodies) and logs one line when it is handled; runs first. */
+    @Bean
+    public FilterRegistrationBean<RequestIdFilter> requestIdFilter() {
+        FilterRegistrationBean<RequestIdFilter> registration = new FilterRegistrationBean<>(new RequestIdFilter());
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return registration;
+    }
+
+    /** Bộ lọc header bảo mật/cache, chạy ngay sau bộ lọc request id. */
     @Bean
     public FilterRegistrationBean<ResponseHeadersFilter> responseHeadersFilter(@Value(HttpConstants.PHOTO_BASE_URL_EXPRESSION) String photoBaseUrl) {
         FilterRegistrationBean<ResponseHeadersFilter> registration =
                 new FilterRegistrationBean<>(new ResponseHeadersFilter(ContentSecurityPolicy.forPhotoBaseUrl(photoBaseUrl)));
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
         return registration;
     }
 
@@ -76,7 +86,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public FilterRegistrationBean<RequestBodyLimitFilter> requestBodyLimitFilter() {
         FilterRegistrationBean<RequestBodyLimitFilter> registration = new FilterRegistrationBean<>(new RequestBodyLimitFilter());
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
         return registration;
     }
 

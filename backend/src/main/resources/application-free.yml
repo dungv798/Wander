@@ -21,7 +21,19 @@ server:
     enabled: true
     min-response-size: 1024
     mime-types: application/json,application/javascript,text/javascript,text/css,text/html,text/plain,image/svg+xml
+# One JSON object per log line on the public deployment (Spring Boot structured logging, ECS format): the request id, route, status and
+# duration of every API call are separate fields, so Render's log search can filter on them. Local runs keep readable text logs.
+logging:
+  structured:
+    format:
+      console: ecs
+
 management:
+  endpoints:
+    web:
+      exposure:
+        # Metrics are not published on the public instance (the Prometheus endpoint would be reachable by anyone).
+        include: health
   endpoint:
     health:
       show-details: never

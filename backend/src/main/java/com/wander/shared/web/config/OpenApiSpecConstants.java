@@ -54,7 +54,7 @@ public final class OpenApiSpecConstants {
     static final String DEFAULT_RESPONSE = "default";
 
     /** Names of the members of the problem schema. */
-    static final String[] PROBLEM_TEXT_MEMBERS = {"type", "title", "detail", "instance", "code", "field"};
+    static final String[] PROBLEM_TEXT_MEMBERS = {"type", "title", "detail", "instance", "code", "field", "requestId"};
 
     private OpenApiSpecConstants() {
     }

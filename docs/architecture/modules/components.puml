@@ -27,9 +27,9 @@ System_Boundary("WanderApplication_boundary", "WanderApplication", $tags="") {
 }
 
 Rel(WanderApplication.WanderApplication.Rating, WanderApplication.WanderApplication.Shared, "depends on", $techn="", $tags="", $link="")
-Rel(WanderApplication.WanderApplication.Identity, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
-Rel(WanderApplication.WanderApplication.Catalog, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
 Rel(WanderApplication.WanderApplication.Planning, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
+Rel(WanderApplication.WanderApplication.Catalog, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
+Rel(WanderApplication.WanderApplication.Identity, WanderApplication.WanderApplication.Shared, "uses", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 hide stereotypes

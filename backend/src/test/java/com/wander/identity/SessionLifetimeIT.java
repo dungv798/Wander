@@ -49,7 +49,7 @@ class SessionLifetimeIT extends ApiTestSupport {
         assertThat(jdbc.sql("SELECT revoked_at IS NOT NULL FROM sessions WHERE token_hash = ?")
                 .param(Secrets.hashToken(second)).query(Boolean.class).single()).isTrue();
         Res revoked = call("GET", "/api/sessions", second);
-        assertThat(expired.body()).isEqualTo(revoked.body());
+        assertThat(withoutRequestId(expired)).isEqualTo(withoutRequestId(revoked));
         assertThat(expired.raw().headers().firstValue("WWW-Authenticate"))
                 .isEqualTo(revoked.raw().headers().firstValue("WWW-Authenticate"));
     }

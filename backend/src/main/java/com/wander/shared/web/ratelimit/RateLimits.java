@@ -5,6 +5,7 @@ import com.wander.shared.kernel.constant.ErrorCodes;
 import com.wander.shared.kernel.constant.ErrorMessages;
 import com.wander.shared.kernel.error.ErrorKind;
 import com.wander.shared.kernel.error.WanderException;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.time.Clock;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -41,9 +42,11 @@ public final class RateLimits {
     private final FixedWindowRateLimiter stepUpRequests;
     private final FixedWindowRateLimiter writes;
     private final FixedWindowRateLimiter linkPolls;
+    private final MeterRegistry meters;
 
     /** Tạo các bộ đếm theo cấu hình: ba bộ cửa sổ một giờ và một bộ cửa sổ một phút cho kho địa điểm. */
-    public RateLimits(Properties props, Clock clock) {
+    public RateLimits(Properties props, Clock clock, MeterRegistry meters) {
+        this.meters = meters;
         this.identity = newLimiter(props.identityPerHour(), clock);
         this.recovery = new FixedWindowRateLimiter(props.recoveryPerHour(), RateLimitConstants.WINDOW, clock, true);
         this.approval = newLimiter(props.approvalPerHour(), clock);
@@ -56,42 +59,42 @@ public final class RateLimits {
 
     /** Tạo danh tính, theo địa chỉ. */
     public void identity(String clientAddress) {
-        check(identity, clientAddress);
+        check(RateLimitConstants.NAME_IDENTITY, identity, clientAddress);
     }
 
     /** Khôi phục / ghép thiết bị chưa xác thực, theo địa chỉ. */
     public void recovery(String clientAddress) {
-        check(recovery, clientAddress);
+        check(RateLimitConstants.NAME_RECOVERY, recovery, clientAddress);
     }
 
     /** Duyệt ghép thiết bị, xác thực lại, tái tạo mã: theo phiên. */
     public void approval(String sessionKey) {
-        check(approval, sessionKey);
+        check(RateLimitConstants.NAME_APPROVAL, approval, sessionKey);
     }
 
     /** Tạo yêu cầu ghép thiết bị (DR-018 E1: tối đa 3 yêu cầu mỗi 10 phút), theo địa chỉ vì máy mới chưa có danh tính. */
     public void pairingRequest(String clientAddress) {
-        check(pairingRequests, clientAddress);
+        check(RateLimitConstants.NAME_PAIRING_REQUEST, pairingRequests, clientAddress);
     }
 
     /** Xin xác thực lại (DR-018 E1: tối đa 3 yêu cầu mỗi 10 phút), theo danh tính. */
     public void stepUpRequest(String identityKey) {
-        check(stepUpRequests, identityKey);
+        check(RateLimitConstants.NAME_STEP_UP_REQUEST, stepUpRequests, identityKey);
     }
 
     /** Đọc kho địa điểm công khai (chưa cần phiên), theo địa chỉ. */
     public void catalog(String clientAddress) {
-        check(catalog, clientAddress);
+        check(RateLimitConstants.NAME_CATALOG, catalog, clientAddress);
     }
 
     /** Ghi API theo danh tính, không thể tăng ngân sách chỉ bằng việc ghép thêm thiết bị. */
     public void write(String identityKey) {
-        check(writes, identityKey);
+        check(RateLimitConstants.NAME_WRITES, writes, identityKey);
     }
 
     /** Thiết bị mới hỏi trạng thái yêu cầu ghép (hỏi lặp mỗi giây), theo địa chỉ; tách khỏi hạn mức khôi phục theo giờ. */
     public void linkPoll(String clientAddress) {
-        check(linkPolls, clientAddress);
+        check(RateLimitConstants.NAME_LINK_POLL, linkPolls, clientAddress);
     }
 
     /** Tạo bộ đếm cho phép {@code maxPerHour} lần mỗi cửa sổ chuẩn. */
@@ -99,9 +102,10 @@ public final class RateLimits {
         return new FixedWindowRateLimiter(maxPerHour, RateLimitConstants.WINDOW, clock);
     }
 
-    /** Ghi nhận một lần gọi; vượt giới hạn thì ném lỗi RATE_LIMITED (429). */
-    private static void check(FixedWindowRateLimiter limiter, String key) {
+    /** Ghi nhận một lần gọi; vượt giới hạn thì đếm vào metric {@code wander.ratelimit.rejected} (tag = tên bộ giới hạn) và ném lỗi RATE_LIMITED (429). */
+    private void check(String limiterName, FixedWindowRateLimiter limiter, String key) {
         if (!limiter.hit(key)) {
+            meters.counter(RateLimitConstants.REJECTED_METRIC, RateLimitConstants.LIMITER_TAG, limiterName).increment();
             throw new WanderException(ErrorKind.RATE_LIMITED, ErrorCodes.RATE_LIMITED, ErrorMessages.RATE_LIMITED, null, null);
         }
     }

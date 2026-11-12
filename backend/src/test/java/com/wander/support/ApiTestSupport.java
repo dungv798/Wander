@@ -113,9 +113,17 @@ public abstract class ApiTestSupport {
     }
 
     /** The response body as a map without the {@code instance} member (the request path the caller itself sent). */
+    /** The problem body without {@code requestId}, which is different for every request; for comparing two refusals of the same kind. */
+    protected static Map<Object, Object> withoutRequestId(Res res) {
+        Map<Object, Object> copy = new java.util.HashMap<>((Map<?, ?>) res.body());
+        copy.remove("requestId");
+        return copy;
+    }
+
     protected static Map<Object, Object> withoutInstance(Res res) {
         Map<Object, Object> copy = new java.util.HashMap<>((Map<?, ?>) res.body());
         copy.remove("instance");
+        copy.remove("requestId");
         return copy;
     }
 

@@ -2671,6 +2671,8 @@ components:
           type: string
         instance:
           type: string
+        requestId:
+          type: string
         status:
           type: integer
           format: int32
