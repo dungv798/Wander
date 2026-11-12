@@ -42,7 +42,7 @@ Tags (all pushed): `pre-portfolio-cleanup`, `phase-1-done`, `phase-2a-done`, `ph
 | Image bytes, Da Lat page | 7,542,897 B | 1,913,579 B | -74.6 % | browser resource timing, [`photos.md`](operations/photos.md) |
 | Executable jar | 320,933,047 B | 208,777,841 B | -34.9 % (it was 193,790,547 B after Phase 2; Modulith, springdoc and Micrometer added about 15 MB) | `./gradlew bootJar` |
 | Docker image (sum of layers) | 518.4 MiB | 411.5 MiB | -20.6 % | `docker history --human=false`, summed |
-| Repository `.git` (rewritten clone, unpublished) | 465,062,965 B | 181,153,151 B | -61 % | `git count-objects`, [`history-rewrite.md`](operations/history-rewrite.md) |
+| Repository `.git` (rewritten clone, unpublished) | 465,062,965 B | 181,818,357 B | -60.9 % | `git count-objects`, [`history-rewrite.md`](operations/history-rewrite.md) |
 | SQL statements, one trip read | not measured | 6 (same for 1 and 25 items) | n/a | `QueryCountIT` |
 | SQL statements, trip list | not measured | 2 (same for 1 and 12 trips) | n/a | `QueryCountIT` |
 | Throughput, developer machine, 20 virtual users | not measured | 267 req/s, p95 118.6 ms, 0 % errors (24,090 requests) | n/a | k6, [`performance.md`](performance.md) |
@@ -93,7 +93,9 @@ These are listed for the owner to do; nothing below was done or attempted.
    commit `480978dc76` and already on `origin/main`. It was not cleaned from history by this work. Rotate it first; the rewritten history
    removes the file but does not make a published key safe.
 2. Create the Cloudflare R2 bucket, set `WANDER_PHOTO_BASE_URL`, run `tools/catalog/upload-photos.mjs` ([`photos.md`](operations/photos.md)).
-3. Publish the rewritten history (`D:\Wander-rewritten`) with a force push: commands and the refresh step are in
+3. Publish the rewritten history with a force push. The final prepared clone is `D:\wander-backup-20261112-rewritten-final`
+   (132 commits, 9 `phase-*` tags, tip tree identical to `portfolio-upgrade` at commit `be723dd`, tree `258e8f3…`; the only later commit changes these two notes, so refresh the rewrite once more before publishing if you want it byte-identical). `D:\Wander-rewritten` is an older, stale
+   preparation that this work could not delete (the tool blocks removal), so delete it yourself. Commands and the refresh step are in
    [`history-rewrite.md`](operations/history-rewrite.md). It is prepared, verified (tip tree identical, all suites green) and **not pushed**.
 4. Open the pull request (`https://github.com/dungv798/Wander/pull/new/portfolio-upgrade`), merge it, redeploy Render by hand.
 5. Make the repository public and set the GitHub About text and topics (`docs/github-about.md`).

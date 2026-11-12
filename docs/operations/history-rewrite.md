@@ -15,6 +15,11 @@ What the rewrite does and does not change:
 - **`main` stops being runnable.** Its old tip needs the original JPGs, which are now gone from history. Only `portfolio-upgrade`
   (WebP photos) is a working application. That is why the recommended push below makes `portfolio-upgrade` the new `main`.
 
+> Status at the end of the portfolio upgrade (12/11/2026): the final preparation is in `D:\wander-backup-20261112-rewritten-final`
+> (made from the mirror `D:\wander-backup-20261112-final.git`; 132 commits; tip tree identical to `portfolio-upgrade` at commit `be723dd` (later commits only edit these notes), tree hash
+> `258e8f3…`; `.git` 465,062,965 -> 181,818,357 bytes). `D:\Wander-rewritten` is an older preparation and can be deleted. Use the
+> directory above wherever the commands below say `D:\Wander-rewritten`. Not pushed.
+
 ## Preparing it again (any time)
 
 ```bash
