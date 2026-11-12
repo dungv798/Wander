@@ -1,5 +1,8 @@
 # ADR-010 — Module `catalog`: kho địa điểm biên tập, chỉ đọc
 
+> **English title:** The read-only catalog module
+> **Summary (EN):** A third module owns destinations, places, photos and guides as classpath JSON, loaded and validated at startup (a missing photo or invalid data stops the application). planning never imports catalog; photos are public under /catalog/photos/**; travel time and distance are labelled estimates.
+
 - **Trạng thái:** `APPROVED` — PO chọn "Module mới `catalog` (Recommended)" ngày 25/10/2026 khi được hỏi cổng `PlaceCatalog` của ADR-009 đặt ở đâu.
 - **Liên quan:** ADR-002/003 (Clean Architecture, module), ADR-009 (nguồn dữ liệu miễn phí, qua cổng `PlaceCatalog`), AD-8 (ArchUnit hay Spring Modulith, "xem lại khi có module thứ ba"), DR-005, DR-007.
 

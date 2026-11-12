@@ -1,5 +1,8 @@
 # ADR-003 — Cách áp dụng Clean Architecture, DDD và CQRS trong backend
 
+> **English title:** How Clean Architecture, DDD and CQRS are applied in the backend
+> **Summary (EN):** A modular monolith. Each module has domain / application / infrastructure / api layers; aggregates own their invariants; one transaction per use case; commands return ids and queries return flat read models without loading aggregates. Modules never import each other (only the shared kernel); ArchUnit enforces the layering.
+
 - **Trạng thái:** `APPROVED` — PO duyệt ngày 24/10/2026 ("Duyệt, sửa 3 chỗ chữ trước") sau phiên `/wander-council` về các quyết định kỹ thuật còn lại; 3 chỗ chữ đã sửa ở §1, §3, §5. Claude thiết kế để hiện thực ADR-002. Đang chạy trong code.
 - **Việc kèm theo (Tier B, chưa làm):** thêm test `*IT` hai request song song cùng một chuyến, một request nhận `409 CONCURRENT_MODIFICATION` (§4 hiện có cơ chế trong code nhưng chưa thấy test bao phủ).
 - **Phạm vi:** `backend/src/main/java/com/wander/**`.

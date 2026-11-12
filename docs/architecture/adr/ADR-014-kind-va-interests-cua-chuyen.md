@@ -1,5 +1,8 @@
 # ADR-014 — `kind` ("ai đi") và `interests` (sở thích) là thuộc tính của chuyến; tập mã `interests` do planning tự định nghĩa
 
+> **English title:** Trip kind and interests: vocabulary owned by planning
+> **Summary (EN):** Who is going (kind) and the trip interests are labels on a trip. planning defines its own enums, and a test keeps the interest codes identical to the catalog categories, so the modules stay decoupled.
+
 - **Trạng thái:** `APPROVED`. Việc lưu hai trường vào chuyến (đổi schema) đã được PO duyệt ở `DR-018` (G2/F2, 26/10/2026). PO chọn "A. Enum riêng ở planning + test khớp với catalog (Recommended)" ngày 27/10/2026 cho câu hỏi tập mã `interests` sống ở đâu. Khuyến nghị của agent trùng lựa chọn của PO.
 - **Phạm vi:** chỉ là nhãn như `styles` và `pace` (Q11): không gợi ý, không đổi hành vi nào khác.
 

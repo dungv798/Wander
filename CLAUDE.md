@@ -8,7 +8,7 @@ Java 21 · Spring Boot 4 · **Clean Architecture + DDD + CQRS** · modular monol
 - Layout rules enforced by `backend/src/test/java/com/wander/ArchitectureTest.java` (ArchUnit).
 - Chuẩn mã FE (PO 26/10/2026: SOLID, comment trước mỗi hàm, không hard-code, tệp const, cấu trúc theo tính năng, thành phần dùng lại): `docs/architecture/frontend-standards.md`; bộ màu thương hiệu duy nhất: `web/src/styles/tokens.css` (PO 08/11/2026, DR-036; `docs/ux/prototype/tokens.css` chỉ là bản lịch sử của prototype).
 - Versions: Java 21 + Spring Boot 4.1 (ADR-004, APPROVED). Open technical decisions for the PO: `docs/architecture/open-decisions.md` (AD-1…AD-10). Defaults, gates, progress: `docs/implementation/decisions.md`.
-- Setup and run guide for humans: `README.md` (install, run, dev mode, tests, env vars, troubleshooting).
+- Setup and run guide for humans: `README.vi.md` (install, run, dev mode, tests, env vars, troubleshooting); English overview: `README.md`; pipeline notes: `docs/operations/`.
 - Run/verify on Windows: `powershell -ExecutionPolicy Bypass -File tools\dev.ps1 <doctor|backend-test|e2e|verify|run>`; logs in `.logs/`. Never claim a test result you did not read from a log.
 - The old TypeScript server was removed (ADR-007, AD-10); the API contract lives in `web/src/api.ts` and the Java `*IT` tests. Old copy: `git show b6bd606:legacy/ts-server/<file>`; removed docs/research, docs/autopilot, legacy/web-v1, tools/look|tvc|video: `git show pre-portfolio-cleanup:<path>`.
 

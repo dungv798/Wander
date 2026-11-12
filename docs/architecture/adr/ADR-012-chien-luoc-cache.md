@@ -1,5 +1,8 @@
 # ADR-012 — Chiến lược cache: chính sách + HTTP cache trước, Caffeine khi có ứng viên (AD-16)
 
+> **English title:** Cache strategy: policy and HTTP caching first, Caffeine when a candidate exists
+> **Summary (EN):** Cache only shared, slowly changing data; never share-cache user trips or session lookups. Use ETag/Cache-Control on public GETs; add Caffeine or a shared cache only when there is a measured need.
+
 - **Trạng thái:** `APPROVED` — PO chọn "B. Chính sách + HTTP cache, Caffeine khi có ứng viên (Recommended)" ngày 27/10/2026, sau khi xem trang kế hoạch `Wander Backend Blueprint` (mục AD-16). Khuyến nghị của agent trùng lựa chọn của PO.
 - **Phạm vi:** quyết định hướng và chính sách. **Chưa thêm dependency** `spring-boot-starter-cache`/`caffeine`; dependency đó được thêm khi có ứng viên đầu tiên và đã được duyệt tại đây.
 

@@ -1,5 +1,8 @@
 # ADR-011 — Thêm Spring Modulith và nền sự kiện (outbox) khi tạo module thứ tư (AD-15, gộp AD-5 và AD-8)
 
+> **English title:** Spring Modulith and an event outbox when the fourth module exists
+> **Summary (EN):** Keep ArchUnit for layer rules; add Spring Modulith (module verification and the event publication registry) when a fourth module appears. Domain events are at-least-once and consumers must be idempotent.
+
 - **Trạng thái:** `APPROVED` — PO chọn "B. Thêm khi tạo module thứ tư (Recommended)" ngày 27/10/2026, sau khi xem trang kế hoạch `Wander Backend Blueprint` (mục AD-15). Khuyến nghị của agent trùng lựa chọn của PO.
 - **Phạm vi:** quyết định hướng. **Chưa thêm dependency nào**; việc thêm xảy ra trong PR tạo module thứ tư (dự kiến `content`, pha admin, theo thứ tự pha ở `DR-019`).
 - **Cập nhật:** AD-8 (`DEFAULTED`: giữ ArchUnit, xem lại khi có module thứ tư) được xem lại tại đây; AD-5 (domain event + outbox, `OPEN`) được trả lời một phần (nền tảng chọn, chưa có sự kiện nào).

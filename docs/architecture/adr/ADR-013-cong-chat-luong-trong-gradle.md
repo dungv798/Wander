@@ -1,5 +1,8 @@
 # ADR-013 — Cổng chất lượng viết thành tác vụ Gradle; CI viết sẵn nhưng chưa bật (AD-18)
 
+> **English title:** Quality gates as Gradle tasks; CI only runs them
+> **Summary (EN):** `./gradlew check` is the gate (tests, ArchUnit, JaCoCo thresholds set from measured values, style checks); CI just runs that command. No deployment pipeline, cloud credentials or secrets in CI. (CI has since been enabled: backend-ci, web-ci.)
+
 - **Trạng thái:** `APPROVED` — PO chọn "B. Cổng trong Gradle, workflow viết sẵn chưa bật (Recommended)" ngày 27/10/2026, sau khi xem trang kế hoạch `Wander Backend Blueprint` (mục AD-18). Khuyến nghị của agent trùng lựa chọn của PO.
 - **Phạm vi:** quyết định hướng. **Không tạo pipeline triển khai, không secret, không tài nguyên cloud** (`planning-safety.md` mục 5). Repo chưa có remote (`git remote -v` rỗng, kiểm tra 27/10/2026): việc đẩy mã lên nơi nào là quyết định riêng của PO, em không làm khi chưa được nói.
 
