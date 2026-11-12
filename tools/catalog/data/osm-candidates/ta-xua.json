@@ -1,0 +1,125 @@
+{
+ "dest": "ta-xua",
+ "source": "OpenStreetMap contributors (ODbL), Overpass",
+ "fetchedAt": "2026-11-03T01:34:11.962Z",
+ "center": {
+  "lat": 21.3,
+  "lon": 104.4,
+  "radiusKm": 30
+ },
+ "count": 8,
+ "places": [
+  {
+   "osm": "node/4416131101",
+   "name": "Tượng đài Mai Sơn",
+   "kind": "monument",
+   "lat": 21.13927,
+   "lon": 104.19496,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4842817621",
+   "name": "Ta xua",
+   "kind": "attraction",
+   "lat": 21.32696,
+   "lon": 104.42294,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": true,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9050905320",
+   "name": "Bản Cu Vai",
+   "kind": "viewpoint",
+   "lat": 21.51218,
+   "lon": 104.37504,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10290384601",
+   "name": "Núi Phu Sa Phìn",
+   "kind": "peak",
+   "lat": 21.4089,
+   "lon": 104.32555,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11336022692",
+   "name": "Núi Phu Chiêm Ban",
+   "kind": "peak",
+   "lat": 21.35447,
+   "lon": 104.42998,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12691287501",
+   "name": "Turtle Head Rock",
+   "kind": "attraction",
+   "lat": 21.43972,
+   "lon": 104.33862,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12761669401",
+   "name": "Đồi thông Eo gió",
+   "kind": "park",
+   "lat": 21.46506,
+   "lon": 104.38384,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13724978102",
+   "name": "Cây cô đơn Tà Xùa",
+   "kind": "viewpoint",
+   "lat": 21.26531,
+   "lon": 104.53844,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  }
+ ]
+}

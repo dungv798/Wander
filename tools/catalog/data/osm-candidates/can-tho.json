@@ -1,0 +1,1343 @@
+{
+ "dest": "can-tho",
+ "source": "OpenStreetMap contributors (ODbL), Overpass",
+ "fetchedAt": "2026-11-06T02:40:27.787Z",
+ "center": {
+  "lat": 10.0342,
+  "lon": 105.7882,
+  "radiusKm": 20
+ },
+ "count": 95,
+ "places": [
+  {
+   "osm": "node/951963161",
+   "name": "Fruit garden",
+   "kind": "attraction",
+   "lat": 10.02871,
+   "lon": 105.73239,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1793968790",
+   "name": "Chợ An Hòa",
+   "kind": "marketplace",
+   "lat": 10.04916,
+   "lon": 105.77241,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1797968016",
+   "name": "Nhà cổ Bình Thủy",
+   "kind": "archaeological_site",
+   "lat": 10.067,
+   "lon": 105.74963,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1810811790",
+   "name": "Chợ Tân Lược",
+   "kind": "marketplace",
+   "lat": 10.1411,
+   "lon": 105.7167,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2598517874",
+   "name": "Chợ Cần Thơ",
+   "kind": "marketplace",
+   "lat": 10.02806,
+   "lon": 105.78709,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2598517882",
+   "name": "Chợ Hưng Lợi",
+   "kind": "marketplace",
+   "lat": 10.02386,
+   "lon": 105.76171,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3108158476",
+   "name": "Chợ Cái Răng",
+   "kind": "marketplace",
+   "lat": 10.00601,
+   "lon": 105.75098,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3482839700",
+   "name": "Floating Market",
+   "kind": "marketplace",
+   "lat": 10.01547,
+   "lon": 105.64841,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3507987206",
+   "name": "Chợ An Lạc",
+   "kind": "marketplace",
+   "lat": 10.02567,
+   "lon": 105.78314,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3867250436",
+   "name": "Chợ nổi Phong Điền",
+   "kind": "marketplace",
+   "lat": 9.99374,
+   "lon": 105.66771,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4299949764",
+   "name": "Nha may X55",
+   "kind": "memorial",
+   "lat": 10.08501,
+   "lon": 105.73611,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4374993693",
+   "name": "khám lớn Cần Thơ",
+   "kind": "museum",
+   "lat": 10.03609,
+   "lon": 105.78831,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4375003793",
+   "name": "Người tình nhà cổ Bình Thủy",
+   "kind": "attraction",
+   "lat": 10.06715,
+   "lon": 105.74952,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4465710189",
+   "name": "Cầu đi bộ Ninh Kiều",
+   "kind": "attraction",
+   "lat": 10.03704,
+   "lon": 105.79124,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4524319889",
+   "name": "Cần thơ karaoke",
+   "kind": "attraction",
+   "lat": 10.04346,
+   "lon": 105.78664,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4547623589",
+   "name": "Khu ăn uống chợ đêm bến Ninh Kiều",
+   "kind": "marketplace",
+   "lat": 10.03153,
+   "lon": 105.78757,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4644080489",
+   "name": "Snake Farm",
+   "kind": "attraction",
+   "lat": 10.00617,
+   "lon": 105.6829,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4730514522",
+   "name": "Bờ kè sông Hậu",
+   "kind": "attraction",
+   "lat": 10.04905,
+   "lon": 105.79104,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5177435713",
+   "name": "Chợ Trần Việt Châu",
+   "kind": "marketplace",
+   "lat": 10.04603,
+   "lon": 105.76798,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5177612395",
+   "name": "Cong vien song Hau",
+   "kind": "theme_park",
+   "lat": 10.04874,
+   "lon": 105.79169,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5211512490",
+   "name": "Công Viên Lưu Hữu Phước",
+   "kind": "theme_park",
+   "lat": 10.03244,
+   "lon": 105.78136,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5211512515",
+   "name": "Siêu thị Vinmart+",
+   "kind": "marketplace",
+   "lat": 10.03455,
+   "lon": 105.7757,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5211519523",
+   "name": "Công ty Cổ phần nông sản thực phẩm xuất khẩu Cần thơ",
+   "kind": "marketplace",
+   "lat": 10.03931,
+   "lon": 105.77688,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5253292065",
+   "name": "Nhà Lồng 3",
+   "kind": "marketplace",
+   "lat": 10.00592,
+   "lon": 105.75067,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5256962158",
+   "name": "Tượng đài Chiến Thắng",
+   "kind": "monument",
+   "lat": 10.05598,
+   "lon": 105.76835,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5316455021",
+   "name": "Bãi biển nhân tạo Cần Thơ",
+   "kind": "beach",
+   "lat": 10.04337,
+   "lon": 105.79581,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5346561555",
+   "name": "Khu di tích vườn mận",
+   "kind": "park",
+   "lat": 10.01765,
+   "lon": 105.73396,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5351083643",
+   "name": "Khu vui chơi giải trí Funny Land",
+   "kind": "theme_park",
+   "lat": 9.98888,
+   "lon": 105.7138,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5485018721",
+   "name": "Chợ Bà Bộ",
+   "kind": "marketplace",
+   "lat": 10.0368,
+   "lon": 105.74485,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6278214586",
+   "name": "Tarot Museum",
+   "kind": "museum",
+   "lat": 10.03481,
+   "lon": 105.78337,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6308020518",
+   "name": "Rice Noodle Manufacture",
+   "kind": "attraction",
+   "lat": 9.99713,
+   "lon": 105.73976,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6516450285",
+   "name": "Fish sauce factory",
+   "kind": "attraction",
+   "lat": 9.99513,
+   "lon": 105.73922,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9921294673",
+   "name": "Song Ngu Farm",
+   "kind": "attraction",
+   "lat": 10.00554,
+   "lon": 105.73913,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11263075942",
+   "name": "Công viên Hồng Phát",
+   "kind": "park",
+   "lat": 10.02453,
+   "lon": 105.74965,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11449076782",
+   "name": "Phong Điền Floating Market",
+   "kind": "attraction",
+   "lat": 9.9904,
+   "lon": 105.66351,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11617175975",
+   "name": "Vườn Sinh Thái Ba Láng",
+   "kind": "attraction",
+   "lat": 9.97813,
+   "lon": 105.73964,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12334098401",
+   "name": "Orchard with fruit tasting",
+   "kind": "attraction",
+   "lat": 9.99213,
+   "lon": 105.73712,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12839265101",
+   "name": "Floating Market tourist",
+   "kind": "attraction",
+   "lat": 9.95998,
+   "lon": 105.91894,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13119009964",
+   "name": "Ngô Minh Chiêu",
+   "kind": "tomb",
+   "lat": 10.01911,
+   "lon": 105.7687,
+   "wikipedia": "vi:Ngô Minh Chiêu",
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13274327665",
+   "name": "Công viên quảng trường Phong Điền",
+   "kind": "park",
+   "lat": 10.00009,
+   "lon": 105.66522,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13446199572",
+   "name": "Chợ Trường Long",
+   "kind": "marketplace",
+   "lat": 9.98109,
+   "lon": 105.63506,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13542306322",
+   "name": "Trung Tâm Hành Chính Phường Bình Minh",
+   "kind": "park",
+   "lat": 10.06991,
+   "lon": 105.81362,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/89608604",
+   "name": "Bảo tàng thành phố Cần Thơ",
+   "kind": "museum",
+   "lat": 10.03499,
+   "lon": 105.7868,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/89748554",
+   "name": "Công viên Hùng Vương",
+   "kind": "park",
+   "lat": 10.0446,
+   "lon": 105.78035,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/89890559",
+   "name": "Chợ Cái Khế",
+   "kind": "marketplace",
+   "lat": 10.04393,
+   "lon": 105.78448,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/90071490",
+   "name": "Bảo tàng Hồ Chí Minh",
+   "kind": "museum",
+   "lat": 10.0358,
+   "lon": 105.78582,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/90080529",
+   "name": "Công viên Đồ Chiểu",
+   "kind": "park",
+   "lat": 10.03725,
+   "lon": 105.78733,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/90080614",
+   "name": "Công viên Tao Đàn",
+   "kind": "park",
+   "lat": 10.03558,
+   "lon": 105.78692,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/119276185",
+   "name": "Khuôn viên Nông Nghiệp",
+   "kind": "park",
+   "lat": 10.03003,
+   "lon": 105.76766,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/136482742",
+   "name": "Chợ An Bình",
+   "kind": "marketplace",
+   "lat": 10.00774,
+   "lon": 105.74918,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/165794325",
+   "name": "Vườn Bàng",
+   "kind": "park",
+   "lat": 10.03142,
+   "lon": 105.7716,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/165936606",
+   "name": "Chợ Xuân Khánh",
+   "kind": "marketplace",
+   "lat": 10.02661,
+   "lon": 105.77687,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/166905353",
+   "name": "XK Club",
+   "kind": "attraction",
+   "lat": 10.04583,
+   "lon": 105.78683,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/168524339",
+   "name": "Công viên Ninh Kiều",
+   "kind": "park",
+   "lat": 10.03381,
+   "lon": 105.78923,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/169517705",
+   "name": "Chợ Trà Ôn",
+   "kind": "marketplace",
+   "lat": 9.96673,
+   "lon": 105.92029,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/182127677",
+   "name": "Chợ",
+   "kind": "marketplace",
+   "lat": 10.03455,
+   "lon": 105.78193,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/442682076",
+   "name": "An Thới",
+   "kind": "marketplace",
+   "lat": 10.06168,
+   "lon": 105.76542,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/455035897",
+   "name": "Bãi xe C2",
+   "kind": "park",
+   "lat": 10.0293,
+   "lon": 105.76854,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/455038118",
+   "name": "Bãi đậu xe C1",
+   "kind": "park",
+   "lat": 10.0311,
+   "lon": 105.77001,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/459852445",
+   "name": "Chợ An Cư",
+   "kind": "marketplace",
+   "lat": 10.03762,
+   "lon": 105.78106,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/533290595",
+   "name": "Nhà lưới thực hành - MDI",
+   "kind": "park",
+   "lat": 10.02782,
+   "lon": 105.76408,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/538704184",
+   "name": "Chợ Mỹ Hòa",
+   "kind": "marketplace",
+   "lat": 10.02438,
+   "lon": 105.83905,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/538704193",
+   "name": "Chợ Đông Bình",
+   "kind": "marketplace",
+   "lat": 10.04455,
+   "lon": 105.83535,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/539952959",
+   "name": "Chợ Nhà Hát",
+   "kind": "marketplace",
+   "lat": 10.06777,
+   "lon": 105.82161,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/539954305",
+   "name": "Công viên SVĐ",
+   "kind": "park",
+   "lat": 10.06601,
+   "lon": 105.8076,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/539956497",
+   "name": "Chợ Tạm Đông Bình",
+   "kind": "marketplace",
+   "lat": 10.06334,
+   "lon": 105.82567,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/542682506",
+   "name": "Công Viên Khu Dân Cư Hưng Thạnh",
+   "kind": "park",
+   "lat": 10.0067,
+   "lon": 105.77834,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/543238430",
+   "name": "Công viên 178",
+   "kind": "park",
+   "lat": 10.02178,
+   "lon": 105.76739,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/543243102",
+   "name": "Công viên KDC Nam Long ( Nam Long Residential Park )",
+   "kind": "park",
+   "lat": 10.00847,
+   "lon": 105.78593,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/543431370",
+   "name": "Chợ Thạnh Hoà",
+   "kind": "marketplace",
+   "lat": 9.9223,
+   "lon": 105.72148,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/543810249",
+   "name": "Chợ Mỹ Khánh",
+   "kind": "marketplace",
+   "lat": 9.99649,
+   "lon": 105.71558,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/597850419",
+   "name": "Chợ An Khánh",
+   "kind": "marketplace",
+   "lat": 10.03896,
+   "lon": 105.75442,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/653726077",
+   "name": "Khu Du Lịch Sinh Thái Mỹ Khánh",
+   "kind": "theme_park",
+   "lat": 9.99288,
+   "lon": 105.70527,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/659304527",
+   "name": "Chợ Bình Minh",
+   "kind": "marketplace",
+   "lat": 10.0672,
+   "lon": 105.82236,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/659304532",
+   "name": "Chợ Cái Vồn",
+   "kind": "marketplace",
+   "lat": 10.06555,
+   "lon": 105.82272,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/659304563",
+   "name": "Công viên Thị xã Bình Minh",
+   "kind": "park",
+   "lat": 10.07003,
+   "lon": 105.821,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/659304582",
+   "name": "Công viên",
+   "kind": "park",
+   "lat": 10.06665,
+   "lon": 105.79704,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/696794568",
+   "name": "Chợ đêm Cần Thơ",
+   "kind": "marketplace",
+   "lat": 10.03225,
+   "lon": 105.78739,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/914641554",
+   "name": "Tượng đài lưu niệm xã Phong Hòa",
+   "kind": "monument",
+   "lat": 10.17126,
+   "lon": 105.67078,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1061941524",
+   "name": "Công viên 2 Tháng 9",
+   "kind": "park",
+   "lat": 10.10399,
+   "lon": 105.75731,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1062498633",
+   "name": "Công viên Nguyễn Phương Danh",
+   "kind": "park",
+   "lat": 9.99621,
+   "lon": 105.67202,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1153689641",
+   "name": "Công viên An Bình",
+   "kind": "park",
+   "lat": 10.00969,
+   "lon": 105.73755,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1212216289",
+   "name": "Công viên bờ sông KDC An Khánh",
+   "kind": "park",
+   "lat": 10.04466,
+   "lon": 105.75583,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1227132982",
+   "name": "NHÀ DÁT VÀNG CẦN THƠ",
+   "kind": "attraction",
+   "lat": 10.04276,
+   "lon": 105.7582,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1227132983",
+   "name": "Zone 7 Coffee",
+   "kind": "attraction",
+   "lat": 10.04316,
+   "lon": 105.75889,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1227502287",
+   "name": "Chợ Phong Điền",
+   "kind": "marketplace",
+   "lat": 9.99745,
+   "lon": 105.66913,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1414054480",
+   "name": "Công viên Đài Truyền hình Bình Minh",
+   "kind": "park",
+   "lat": 10.05669,
+   "lon": 105.82086,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1418962136",
+   "name": "Chợ Giáo Mẹo",
+   "kind": "marketplace",
+   "lat": 10.0465,
+   "lon": 105.86508,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1433968746",
+   "name": "Khu di tích lịch sử chiến thắng ông Hào",
+   "kind": "yes",
+   "lat": 9.97849,
+   "lon": 105.62626,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1435243084",
+   "name": "Cái Chanh",
+   "kind": "marketplace",
+   "lat": 9.95904,
+   "lon": 105.761,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1455066447",
+   "name": "Chợ nổi Cái Răng",
+   "kind": "attraction",
+   "lat": 10.00249,
+   "lon": 105.74517,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": true,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1462868868",
+   "name": "Chợ Khu Công Nghiệp Bình Minh",
+   "kind": "marketplace",
+   "lat": 10.0407,
+   "lon": 105.82801,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1466431647",
+   "name": "Công viên Mỹ Khánh",
+   "kind": "park",
+   "lat": 9.99853,
+   "lon": 105.7159,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1496343293",
+   "name": "Chợ Long Phú",
+   "kind": "marketplace",
+   "lat": 10.0783,
+   "lon": 105.91297,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "relation/1326051",
+   "name": "Bảo tàng Quân khu 9",
+   "kind": "museum",
+   "lat": 10.03609,
+   "lon": 105.78523,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  }
+ ]
+}

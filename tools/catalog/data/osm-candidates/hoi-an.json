@@ -1,0 +1,1273 @@
+{
+ "dest": "hoi-an",
+ "source": "OpenStreetMap contributors (ODbL), Overpass",
+ "fetchedAt": "2026-11-03T00:12:37.782Z",
+ "center": {
+  "lat": 15.8801,
+  "lon": 108.338,
+  "radiusKm": 14
+ },
+ "count": 90,
+ "places": [
+  {
+   "osm": "node/2076855866",
+   "name": "Nhà cổ Đức An",
+   "kind": "museum",
+   "lat": 15.87705,
+   "lon": 108.32736,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2076855954",
+   "name": "Nhà cổ Quân Thắng",
+   "kind": "museum",
+   "lat": 15.8771,
+   "lon": 108.32929,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2076856032",
+   "name": "Boa tang gom su mau dich",
+   "kind": "museum",
+   "lat": 15.87727,
+   "lon": 108.32955,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2092582385",
+   "name": "Hội quán Hải Nam",
+   "kind": "attraction",
+   "lat": 15.87787,
+   "lon": 108.332,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2617007574",
+   "name": "Kazimierz Kwiatkowski",
+   "kind": "monument",
+   "lat": 15.87728,
+   "lon": 108.32779,
+   "wikipedia": "en:Kazimierz Kwiatkowski (architect)",
+   "wikidata": "Q11738068",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2987298385",
+   "name": "Công Viên Vườn Tượng",
+   "kind": "park",
+   "lat": 15.87645,
+   "lon": 108.32484,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3189923484",
+   "name": "Sa Huynh",
+   "kind": "museum",
+   "lat": 15.87703,
+   "lon": 108.32642,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4012510801",
+   "name": "Cây đa cổ thụ",
+   "kind": "park",
+   "lat": 15.78362,
+   "lon": 108.32063,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4171925609",
+   "name": "Thuan Tinh Island",
+   "kind": "attraction",
+   "lat": 15.86442,
+   "lon": 108.36438,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4171964292",
+   "name": "Cua Dai",
+   "kind": "attraction",
+   "lat": 15.89806,
+   "lon": 108.36623,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4171964390",
+   "name": "Thanh Ha Pottery Village",
+   "kind": "attraction",
+   "lat": 15.87713,
+   "lon": 108.29899,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4171971289",
+   "name": "Kim Bong Carpentry Village",
+   "kind": "attraction",
+   "lat": 15.86559,
+   "lon": 108.32562,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4171971589",
+   "name": "כפר הקדרים טאן הא",
+   "kind": "attraction",
+   "lat": 15.88326,
+   "lon": 108.33147,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4279640089",
+   "name": "Nhà cổ Phùng Hưng",
+   "kind": "museum",
+   "lat": 15.87722,
+   "lon": 108.32579,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4452884989",
+   "name": "cầu tre",
+   "kind": "attraction",
+   "lat": 15.81647,
+   "lon": 108.35695,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4517387589",
+   "name": "Triem Tay Village",
+   "kind": "attraction",
+   "lat": 15.87213,
+   "lon": 108.30559,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4955662821",
+   "name": "Đài Kỷ Niệm Danh Nhân Chí Sĩ Quảng Nam",
+   "kind": "memorial",
+   "lat": 15.87917,
+   "lon": 108.32379,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5153761923",
+   "name": "Phùng Hung",
+   "kind": "attraction",
+   "lat": 15.87704,
+   "lon": 108.32632,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5276546923",
+   "name": "Nguyen Duy Hieu",
+   "kind": "monument",
+   "lat": 15.88515,
+   "lon": 108.32562,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5403993021",
+   "name": "Cua Dai Beach",
+   "kind": "attraction",
+   "lat": 15.90318,
+   "lon": 108.35723,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5444978923",
+   "name": "Nghĩa trang Liệt Sĩ",
+   "kind": "monument",
+   "lat": 15.88981,
+   "lon": 108.31793,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5513474821",
+   "name": "Terracotta Park",
+   "kind": "museum",
+   "lat": 15.8779,
+   "lon": 108.30014,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5674096859",
+   "name": "Diep Dong Nguyen",
+   "kind": "museum",
+   "lat": 15.87663,
+   "lon": 108.32856,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6091196615",
+   "name": "Phan Kim Chi Art Gallery",
+   "kind": "gallery",
+   "lat": 15.87748,
+   "lon": 108.32855,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6099308589",
+   "name": "Chợ Đêm",
+   "kind": "attraction",
+   "lat": 15.87578,
+   "lon": 108.32593,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6372734486",
+   "name": "Duy vinh",
+   "kind": "attraction",
+   "lat": 15.84161,
+   "lon": 108.34957,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6422678433",
+   "name": "Chợ Nam Phước market",
+   "kind": "marketplace",
+   "lat": 15.84342,
+   "lon": 108.28081,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6627739386",
+   "name": "Casa Tan my",
+   "kind": "attraction",
+   "lat": 15.87648,
+   "lon": 108.32708,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6873083990",
+   "name": "Lantern street",
+   "kind": "attraction",
+   "lat": 15.8761,
+   "lon": 108.3284,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7127442985",
+   "name": "Hoi An Traditional Art Performance House",
+   "kind": "attraction",
+   "lat": 15.87607,
+   "lon": 108.32965,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7127464285",
+   "name": "Hoi An Museum of Traditional Medicine",
+   "kind": "museum",
+   "lat": 15.87665,
+   "lon": 108.32984,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7259793385",
+   "name": "Sauce Nuoc Mam",
+   "kind": "museum",
+   "lat": 15.86516,
+   "lon": 108.38896,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7298327487",
+   "name": "ĐứcMẹTràKiệu",
+   "kind": "monument",
+   "lat": 15.82431,
+   "lon": 108.23342,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7520818185",
+   "name": "Tháp Bằng An",
+   "kind": "ruins",
+   "lat": 15.88452,
+   "lon": 108.23269,
+   "wikipedia": "vi:Tháp Bằng An",
+   "wikidata": "Q10825831",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7689987500",
+   "name": "Cẩm Kim",
+   "kind": "attraction",
+   "lat": 15.86379,
+   "lon": 108.32478,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7836461885",
+   "name": "Đức Mẹ Trà kiệu",
+   "kind": "monument",
+   "lat": 15.82429,
+   "lon": 108.23356,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/8616526723",
+   "name": "Cầu Gò Nổi mới",
+   "kind": "castle",
+   "lat": 15.85125,
+   "lon": 108.26264,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/8616536620",
+   "name": "Nhà Thờ Bình An",
+   "kind": "memorial",
+   "lat": 15.85373,
+   "lon": 108.27243,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/8883385553",
+   "name": "TASY STUDIO",
+   "kind": "gallery",
+   "lat": 15.92569,
+   "lon": 108.2939,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10709724108",
+   "name": "Làng đúc đồng Phước Kiều",
+   "kind": "attraction",
+   "lat": 15.87009,
+   "lon": 108.26136,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10709724420",
+   "name": "Làng mắm Cửa Khe",
+   "kind": "attraction",
+   "lat": 15.80881,
+   "lon": 108.40966,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10709738006",
+   "name": "Làng mộc Kim Bồng",
+   "kind": "attraction",
+   "lat": 15.86452,
+   "lon": 108.3253,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10709738405",
+   "name": "Làng mộc Thanh Hà",
+   "kind": "attraction",
+   "lat": 15.87771,
+   "lon": 108.30091,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10723988763",
+   "name": "Đài tưởng niệm thảm sát Hà My",
+   "kind": "memorial",
+   "lat": 15.92524,
+   "lon": 108.30655,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11259291337",
+   "name": "Hội Quán Phước Kiến",
+   "kind": "attraction",
+   "lat": 15.87741,
+   "lon": 108.3306,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11364104179",
+   "name": "Fruits and vegetables",
+   "kind": "marketplace",
+   "lat": 15.87618,
+   "lon": 108.33157,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11364117282",
+   "name": "Produce",
+   "kind": "marketplace",
+   "lat": 15.89167,
+   "lon": 108.31423,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11374783349",
+   "name": "Basket Boat Station",
+   "kind": "attraction",
+   "lat": 15.85763,
+   "lon": 108.35116,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11374805869",
+   "name": "Broken Bamboo Bridge and Palmoil Forest",
+   "kind": "attraction",
+   "lat": 15.85813,
+   "lon": 108.35088,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11425562478",
+   "name": "Crowd watching",
+   "kind": "viewpoint",
+   "lat": 15.87649,
+   "lon": 108.32685,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11581700332",
+   "name": "Military blockhouse ruins",
+   "kind": "ruins",
+   "lat": 15.87949,
+   "lon": 108.33359,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11586091345",
+   "name": "DI TÍCH LỊCH SỬ CÁCH MẠNG",
+   "kind": "memorial",
+   "lat": 15.88573,
+   "lon": 108.3361,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11896339273",
+   "name": "CSO Gallery",
+   "kind": "gallery",
+   "lat": 15.8856,
+   "lon": 108.35057,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12344125229",
+   "name": "Di San Vô Giá",
+   "kind": "museum",
+   "lat": 15.87718,
+   "lon": 108.33424,
+   "wikipedia": "en:Precious Heritage Art Gallery Museum",
+   "wikidata": "Q30744118",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13149084101",
+   "name": "Mini-Golf Hoi An",
+   "kind": "theme_park",
+   "lat": 15.91295,
+   "lon": 108.33869,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13293830517",
+   "name": "Bảo Tàng Thó Sản",
+   "kind": "museum",
+   "lat": 15.87719,
+   "lon": 108.32979,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13797708575",
+   "name": "Hoi An Basket Boat",
+   "kind": "attraction",
+   "lat": 15.87648,
+   "lon": 108.37363,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/14078442086",
+   "name": "Hoi An Hideout Fishing Barbecue Tour",
+   "kind": "attraction",
+   "lat": 15.86962,
+   "lon": 108.36701,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/14130293535",
+   "name": "Tượng đài Dũng sĩ Điện Ngọc",
+   "kind": "monument",
+   "lat": 15.95557,
+   "lon": 108.25558,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/14131302",
+   "name": "Hoi An Memories Land",
+   "kind": "theme_park",
+   "lat": 15.87506,
+   "lon": 108.33982,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/35952504",
+   "name": "Chợ Hội An",
+   "kind": "marketplace",
+   "lat": 15.8768,
+   "lon": 108.33136,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/35952574",
+   "name": "Cầu An Hội",
+   "kind": "attraction",
+   "lat": 15.87649,
+   "lon": 108.32646,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/35952591",
+   "name": "Chợ vải Hội An",
+   "kind": "attraction",
+   "lat": 15.87708,
+   "lon": 108.33252,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/39268284",
+   "name": "Chùa Cầu",
+   "kind": "attraction",
+   "lat": 15.87712,
+   "lon": 108.32602,
+   "wikipedia": "vi:Chùa Cầu",
+   "wikidata": "Q1091054",
+   "inCatalog": true,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/210931546",
+   "name": "Chợ Bà Lê",
+   "kind": "marketplace",
+   "lat": 15.88359,
+   "lon": 108.3493,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/210933183",
+   "name": "Di tích Đình Thanh Tẩy",
+   "kind": "building",
+   "lat": 15.89135,
+   "lon": 108.35225,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/448044645",
+   "name": "Hội quán Triều Châu",
+   "kind": "attraction",
+   "lat": 15.87791,
+   "lon": 108.33303,
+   "wikipedia": "vi:Hội quán Triều Châu (Hội An)",
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/565275128",
+   "name": "Bãi Đậu xe",
+   "kind": "park",
+   "lat": 15.87595,
+   "lon": 108.32311,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/565300448",
+   "name": "Hội Quán Quảng Triệu",
+   "kind": "attraction",
+   "lat": 15.87736,
+   "lon": 108.32657,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/565325074",
+   "name": "Tượng Đài Nguyễn Duy Hiệu",
+   "kind": "park",
+   "lat": 15.88506,
+   "lon": 108.32533,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/565581385",
+   "name": "Chợ Cẩm Phô",
+   "kind": "marketplace",
+   "lat": 15.87888,
+   "lon": 108.3217,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/565586453",
+   "name": "Khu văn hóa thể thao phường Tân An",
+   "kind": "park",
+   "lat": 15.89079,
+   "lon": 108.31944,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/565592419",
+   "name": "Bảo tàng Hội An",
+   "kind": "museum",
+   "lat": 15.88031,
+   "lon": 108.32947,
+   "wikipedia": null,
+   "wikidata": "Q114397271",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/584941415",
+   "name": "Bảo tàng Điện Bàn",
+   "kind": "museum",
+   "lat": 15.88743,
+   "lon": 108.25512,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/593636098",
+   "name": "Local Morning Market",
+   "kind": "marketplace",
+   "lat": 15.88502,
+   "lon": 108.32977,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/595299310",
+   "name": "Tan Ky",
+   "kind": "museum",
+   "lat": 15.87646,
+   "lon": 108.32783,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/626704914",
+   "name": "Hùng Đông về và bạn tránh",
+   "kind": "gallery",
+   "lat": 15.87745,
+   "lon": 108.33037,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/631064893",
+   "name": "Quan Công Miếu",
+   "kind": "attraction",
+   "lat": 15.87754,
+   "lon": 108.33139,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/782381624",
+   "name": "VinWonders Nam Hội An",
+   "kind": "theme_park",
+   "lat": 15.78885,
+   "lon": 108.41088,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/791093474",
+   "name": "Chợ Mộc Bài",
+   "kind": "marketplace",
+   "lat": 15.79686,
+   "lon": 108.31246,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1077108382",
+   "name": "Công viên Hội An",
+   "kind": "park",
+   "lat": 15.88026,
+   "lon": 108.33405,
+   "wikipedia": "vi:Công viên Hội An",
+   "wikidata": "Q113003348",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1152993502",
+   "name": "Khu tưởng niệm Hà My",
+   "kind": "monument",
+   "lat": 15.92518,
+   "lon": 108.30649,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1205391949",
+   "name": "Bãi biển Tân Trà",
+   "kind": "beach",
+   "lat": 15.98403,
+   "lon": 108.27991,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1205391950",
+   "name": "Vanessa Beach",
+   "kind": "beach",
+   "lat": 15.97011,
+   "lon": 108.28759,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1238122735",
+   "name": "Khu bảo tồn thiên nhiên Cù Lao Chàm",
+   "kind": "nature_reserve",
+   "lat": 15.93727,
+   "lon": 108.47901,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1246229021",
+   "name": "nghĩa trang liệt sĩ tổ quốc ghi công",
+   "kind": "memorial",
+   "lat": 15.88467,
+   "lon": 108.34071,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1551512248",
+   "name": "Chợ Điện Dương",
+   "kind": "marketplace",
+   "lat": 15.92156,
+   "lon": 108.3006,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1551512251",
+   "name": "Chợ Điện Ngọc",
+   "kind": "marketplace",
+   "lat": 15.95323,
+   "lon": 108.25885,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1551512257",
+   "name": "Chợ Trung tâm Khu đô thị mới Điện Nam - Điện Ngọc",
+   "kind": "marketplace",
+   "lat": 15.91577,
+   "lon": 108.27061,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "relation/3938690",
+   "name": "Vườn Tượng An Hội",
+   "kind": "park",
+   "lat": 15.8761,
+   "lon": 108.3257,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  }
+ ]
+}

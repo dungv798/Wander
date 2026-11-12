@@ -1,0 +1,2967 @@
+{
+ "dest": "sa-pa",
+ "source": "OpenStreetMap contributors (ODbL), Overpass",
+ "fetchedAt": "2026-11-06T02:38:50.602Z",
+ "center": {
+  "lat": 22.3357,
+  "lon": 103.8426,
+  "radiusKm": 80
+ },
+ "count": 211,
+ "places": [
+  {
+   "osm": "node/854823033",
+   "name": "Carved Boulder Museum",
+   "kind": "museum",
+   "lat": 22.30407,
+   "lon": 103.89856,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/991996791",
+   "name": "Cát Cát",
+   "kind": "attraction",
+   "lat": 22.32853,
+   "lon": 103.83468,
+   "wikipedia": "vi:Bản Cát Cát",
+   "wikidata": "Q10743160",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1500165429",
+   "name": "Viewpoint blocked October 2026",
+   "kind": "viewpoint",
+   "lat": 22.32722,
+   "lon": 103.84856,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1754818866",
+   "name": "Lâu đài Hoàng A Tưởng",
+   "kind": "museum",
+   "lat": 22.541,
+   "lon": 104.29556,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1754964332",
+   "name": "Đài truyền hình Bắc Hà",
+   "kind": "viewpoint",
+   "lat": 22.53676,
+   "lon": 104.28975,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1754984136",
+   "name": "Chợ Cán Cấu",
+   "kind": "marketplace",
+   "lat": 22.61734,
+   "lon": 104.30059,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/1755563883",
+   "name": "Chợ Cốc Ly",
+   "kind": "marketplace",
+   "lat": 22.5014,
+   "lon": 104.19811,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2024643568",
+   "name": "Tu viện Tả Phìn",
+   "kind": "ruins",
+   "lat": 22.37738,
+   "lon": 103.85132,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2027787358",
+   "name": "View Point, altitute 2143m",
+   "kind": "viewpoint",
+   "lat": 22.33434,
+   "lon": 103.77977,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/2440165326",
+   "name": "Trạm Tôn",
+   "kind": "viewpoint",
+   "lat": 22.35507,
+   "lon": 103.76072,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3087559433",
+   "name": "Cột mốc biên giới 102",
+   "kind": "boundary_stone",
+   "lat": 22.50733,
+   "lon": 103.96508,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3223469462",
+   "name": "Waterfall Quy Khach",
+   "kind": "viewpoint",
+   "lat": 22.2941,
+   "lon": 103.90538,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3668724311",
+   "name": "Bảo Tàng Sapa",
+   "kind": "museum",
+   "lat": 22.33554,
+   "lon": 103.8401,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/3844120381",
+   "name": "rice terraces",
+   "kind": "viewpoint",
+   "lat": 22.49494,
+   "lon": 104.27272,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4095268204",
+   "name": "Núi Pu Ta Leng",
+   "kind": "peak",
+   "lat": 22.42321,
+   "lon": 103.60362,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4130687672",
+   "name": "Bảo tàng Lào Cai",
+   "kind": "museum",
+   "lat": 22.48959,
+   "lon": 103.96296,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4170056090",
+   "name": "Y Tý",
+   "kind": "attraction",
+   "lat": 22.49577,
+   "lon": 103.16892,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4252023719",
+   "name": "Waterfall",
+   "kind": "viewpoint",
+   "lat": 22.36085,
+   "lon": 103.7903,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4370771787",
+   "name": "Heaven's Gate",
+   "kind": "viewpoint",
+   "lat": 22.35297,
+   "lon": 103.76481,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4539038792",
+   "name": "Su Pan",
+   "kind": "attraction",
+   "lat": 22.29366,
+   "lon": 103.92284,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4539039789",
+   "name": "Hau Thao",
+   "kind": "attraction",
+   "lat": 22.30415,
+   "lon": 103.90783,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4539039890",
+   "name": "Hâu Thào village",
+   "kind": "viewpoint",
+   "lat": 22.31793,
+   "lon": 103.89619,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4561184895",
+   "name": "Heaven Sapa",
+   "kind": "viewpoint",
+   "lat": 22.33031,
+   "lon": 103.83597,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4642545219",
+   "name": "Núi Lùng Cúng",
+   "kind": "peak",
+   "lat": 21.9025,
+   "lon": 104.23087,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4643533611",
+   "name": "Núi Ky Quan San",
+   "kind": "peak",
+   "lat": 22.50714,
+   "lon": 103.58768,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4643713925",
+   "name": "Núi Pu Tra",
+   "kind": "peak",
+   "lat": 22.16835,
+   "lon": 103.58924,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4747025455",
+   "name": "Núi Tả Gia Khâu",
+   "kind": "peak",
+   "lat": 22.40099,
+   "lon": 103.37077,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4811351954",
+   "name": "Chợ Sa Pa",
+   "kind": "marketplace",
+   "lat": 22.33829,
+   "lon": 103.85198,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4841433821",
+   "name": "Ham Rong Mountain",
+   "kind": "peak",
+   "lat": 22.33363,
+   "lon": 103.8468,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4887485025",
+   "name": "Chợ phiên Sín Chéng",
+   "kind": "marketplace",
+   "lat": 22.66093,
+   "lon": 104.22752,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/4909020925",
+   "name": "Hang động Pusamcap",
+   "kind": "attraction",
+   "lat": 22.38594,
+   "lon": 103.40998,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5147709269",
+   "name": "Chợ Thị trấn Phong Thổ",
+   "kind": "marketplace",
+   "lat": 22.5438,
+   "lon": 103.28687,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5147712825",
+   "name": "Cột mốc 66 (2)",
+   "kind": "boundary_stone",
+   "lat": 22.60751,
+   "lon": 103.16566,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5300993321",
+   "name": "Old valley path",
+   "kind": "viewpoint",
+   "lat": 22.39948,
+   "lon": 103.86992,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5303225645",
+   "name": "Chợ Bình Minh",
+   "kind": "marketplace",
+   "lat": 22.42263,
+   "lon": 104.02675,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5487844821",
+   "name": "Chợ Si Ma Cai",
+   "kind": "marketplace",
+   "lat": 22.69898,
+   "lon": 104.28615,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5498109822",
+   "name": "Terrace with great view",
+   "kind": "viewpoint",
+   "lat": 21.77534,
+   "lon": 104.27044,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5552264122",
+   "name": "Cầu Treo Chu Va 8",
+   "kind": "attraction",
+   "lat": 22.33963,
+   "lon": 103.66956,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5634866922",
+   "name": "stunning valley full of great views",
+   "kind": "attraction",
+   "lat": 22.56295,
+   "lon": 104.40395,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5634895221",
+   "name": "Fork road, take right side up the hill",
+   "kind": "attraction",
+   "lat": 22.5982,
+   "lon": 104.40529,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5666127968",
+   "name": "Viewing tower",
+   "kind": "viewpoint",
+   "lat": 21.77187,
+   "lon": 104.27074,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5918784285",
+   "name": "Muong hoa valley",
+   "kind": "viewpoint",
+   "lat": 22.33618,
+   "lon": 103.83956,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/5918784286",
+   "name": "Terrace rice fields shin chai",
+   "kind": "viewpoint",
+   "lat": 22.40243,
+   "lon": 103.83665,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6067714091",
+   "name": "Đài Tưởng Niệm Liệt Sỹ Lào Cai",
+   "kind": "monument",
+   "lat": 22.49159,
+   "lon": 103.96846,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6114429388",
+   "name": "Ta Giang Phing",
+   "kind": "viewpoint",
+   "lat": 22.45789,
+   "lon": 103.76753,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6114429389",
+   "name": "Ta Van",
+   "kind": "viewpoint",
+   "lat": 22.30386,
+   "lon": 103.89022,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6341293085",
+   "name": "360 Viewpoint over rice fields",
+   "kind": "viewpoint",
+   "lat": 22.54504,
+   "lon": 104.31047,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6389781102",
+   "name": "102(1)",
+   "kind": "boundary_stone",
+   "lat": 22.50727,
+   "lon": 103.96366,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6502046987",
+   "name": "Di tích Đèo Văn Long",
+   "kind": "ruins",
+   "lat": 22.07742,
+   "lon": 103.16042,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6518257863",
+   "name": "113",
+   "kind": "boundary_stone",
+   "lat": 22.62491,
+   "lon": 104.02809,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6621347673",
+   "name": "Tượng đài Bác Hồ với nhân dân các dân tộc tỉnh Lai Châu",
+   "kind": "attraction",
+   "lat": 22.39241,
+   "lon": 103.47269,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6630705664",
+   "name": "Long Tỷ Phùng",
+   "kind": "peak",
+   "lat": 22.37127,
+   "lon": 103.46354,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6630908343",
+   "name": "Nà Ngào",
+   "kind": "peak",
+   "lat": 22.53967,
+   "lon": 103.32845,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6700415165",
+   "name": "Núi Nùng Nàng",
+   "kind": "peak",
+   "lat": 22.34924,
+   "lon": 103.42806,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6709995293",
+   "name": "Đài tưởng niệm Liệt sĩ",
+   "kind": "monument",
+   "lat": 22.32446,
+   "lon": 103.61862,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6712202605",
+   "name": "Thác Tác Tình",
+   "kind": "attraction",
+   "lat": 22.34762,
+   "lon": 103.61346,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6718378795",
+   "name": "Phìn Hồ",
+   "kind": "peak",
+   "lat": 22.36158,
+   "lon": 103.55667,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6720307382",
+   "name": "Núi Hang Dơi",
+   "kind": "peak",
+   "lat": 22.5173,
+   "lon": 103.33167,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6735476566",
+   "name": "Núi Hồ Sao Chải",
+   "kind": "peak",
+   "lat": 22.61108,
+   "lon": 103.35382,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6735481349",
+   "name": "Núi Mù Sang",
+   "kind": "peak",
+   "lat": 22.64904,
+   "lon": 103.26577,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6735481625",
+   "name": "Núi Lý Chải",
+   "kind": "peak",
+   "lat": 22.67688,
+   "lon": 103.37118,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6784238480",
+   "name": "Mam xoi",
+   "kind": "viewpoint",
+   "lat": 21.79408,
+   "lon": 104.15191,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/6873081194",
+   "name": "Cave",
+   "kind": "attraction",
+   "lat": 22.35167,
+   "lon": 103.8555,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7041239590",
+   "name": "Tran Ton Pass",
+   "kind": "viewpoint",
+   "lat": 22.34558,
+   "lon": 103.82449,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7201870366",
+   "name": "Núi Muối",
+   "kind": "peak",
+   "lat": 22.5027,
+   "lon": 103.59783,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985188",
+   "name": "91 (2)",
+   "kind": "boundary_stone",
+   "lat": 22.78795,
+   "lon": 103.63812,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985189",
+   "name": "91 (1)",
+   "kind": "boundary_stone",
+   "lat": 22.78735,
+   "lon": 103.63598,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985190",
+   "name": "92 (1)",
+   "kind": "boundary_stone",
+   "lat": 22.79381,
+   "lon": 103.64545,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985191",
+   "name": "92 (2)",
+   "kind": "boundary_stone",
+   "lat": 22.79474,
+   "lon": 103.64483,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985192",
+   "name": "92 (3)",
+   "kind": "boundary_stone",
+   "lat": 22.79597,
+   "lon": 103.64639,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985193",
+   "name": "100 (1)",
+   "kind": "boundary_stone",
+   "lat": 22.5162,
+   "lon": 103.95174,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7786985194",
+   "name": "100 (2)",
+   "kind": "boundary_stone",
+   "lat": 22.51577,
+   "lon": 103.94928,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7855250590",
+   "name": "99(1)",
+   "kind": "boundary_stone",
+   "lat": 22.5287,
+   "lon": 103.93272,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7855250592",
+   "name": "103(1)",
+   "kind": "boundary_stone",
+   "lat": 22.50882,
+   "lon": 103.96421,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7855250593",
+   "name": "101(2)",
+   "kind": "boundary_stone",
+   "lat": 22.50613,
+   "lon": 103.96512,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7855250594",
+   "name": "101(1)",
+   "kind": "boundary_stone",
+   "lat": 22.50694,
+   "lon": 103.9634,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/7930629962",
+   "name": "Chợ Huyện Sìn Hồ",
+   "kind": "marketplace",
+   "lat": 22.35965,
+   "lon": 103.24913,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/8101025699",
+   "name": "Núi Nhìu Cồ San",
+   "kind": "peak",
+   "lat": 22.58402,
+   "lon": 103.58326,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/8250975417",
+   "name": "Rừng Tre",
+   "kind": "attraction",
+   "lat": 21.74108,
+   "lon": 104.16752,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358736",
+   "name": "56/1",
+   "kind": "boundary_stone",
+   "lat": 22.51673,
+   "lon": 103.09834,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358737",
+   "name": "56/2",
+   "kind": "boundary_stone",
+   "lat": 22.51648,
+   "lon": 103.11331,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358742",
+   "name": "61(1)",
+   "kind": "boundary_stone",
+   "lat": 22.56029,
+   "lon": 103.18259,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358743",
+   "name": "61(2)",
+   "kind": "boundary_stone",
+   "lat": 22.55992,
+   "lon": 103.18324,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358744",
+   "name": "61(3)",
+   "kind": "boundary_stone",
+   "lat": 22.55967,
+   "lon": 103.18306,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358745",
+   "name": "62(1)",
+   "kind": "boundary_stone",
+   "lat": 22.56943,
+   "lon": 103.17314,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358746",
+   "name": "62(2)",
+   "kind": "boundary_stone",
+   "lat": 22.5692,
+   "lon": 103.1734,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358747",
+   "name": "63(1)",
+   "kind": "boundary_stone",
+   "lat": 22.57273,
+   "lon": 103.17134,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358748",
+   "name": "63(2)",
+   "kind": "boundary_stone",
+   "lat": 22.57269,
+   "lon": 103.17212,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358749",
+   "name": "64(1)",
+   "kind": "boundary_stone",
+   "lat": 22.59799,
+   "lon": 103.15978,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358750",
+   "name": "64(2)",
+   "kind": "boundary_stone",
+   "lat": 22.59863,
+   "lon": 103.1595,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358751",
+   "name": "64(3)",
+   "kind": "boundary_stone",
+   "lat": 22.60227,
+   "lon": 103.16122,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358752",
+   "name": "65(1)",
+   "kind": "boundary_stone",
+   "lat": 22.60032,
+   "lon": 103.16176,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358753",
+   "name": "65(2)",
+   "kind": "boundary_stone",
+   "lat": 22.59894,
+   "lon": 103.16291,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358754",
+   "name": "65(3)",
+   "kind": "boundary_stone",
+   "lat": 22.59703,
+   "lon": 103.16232,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9166358755",
+   "name": "66(1)",
+   "kind": "boundary_stone",
+   "lat": 22.60815,
+   "lon": 103.16493,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748877",
+   "name": "67(1)",
+   "kind": "boundary_stone",
+   "lat": 22.63104,
+   "lon": 103.17655,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748878",
+   "name": "67(2)",
+   "kind": "boundary_stone",
+   "lat": 22.62978,
+   "lon": 103.17656,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748879",
+   "name": "68(1)",
+   "kind": "boundary_stone",
+   "lat": 22.67211,
+   "lon": 103.26038,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748880",
+   "name": "68(2)",
+   "kind": "boundary_stone",
+   "lat": 22.67096,
+   "lon": 103.2608,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748881",
+   "name": "69(1)",
+   "kind": "boundary_stone",
+   "lat": 22.68136,
+   "lon": 103.27869,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748882",
+   "name": "69(2)",
+   "kind": "boundary_stone",
+   "lat": 22.6808,
+   "lon": 103.27945,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748883",
+   "name": "69(3)",
+   "kind": "boundary_stone",
+   "lat": 22.67981,
+   "lon": 103.27905,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748884",
+   "name": "70(1)",
+   "kind": "boundary_stone",
+   "lat": 22.71088,
+   "lon": 103.28765,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748885",
+   "name": "70(2)",
+   "kind": "boundary_stone",
+   "lat": 22.71112,
+   "lon": 103.28798,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748886",
+   "name": "71(1)",
+   "kind": "boundary_stone",
+   "lat": 22.76055,
+   "lon": 103.30751,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748887",
+   "name": "71(2)",
+   "kind": "boundary_stone",
+   "lat": 22.76021,
+   "lon": 103.30764,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748888",
+   "name": "72(1)",
+   "kind": "boundary_stone",
+   "lat": 22.78077,
+   "lon": 103.31993,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748889",
+   "name": "72(2)",
+   "kind": "boundary_stone",
+   "lat": 22.78081,
+   "lon": 103.32019,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748890",
+   "name": "73(1)",
+   "kind": "boundary_stone",
+   "lat": 22.81013,
+   "lon": 103.3223,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748891",
+   "name": "73(2)",
+   "kind": "boundary_stone",
+   "lat": 22.80979,
+   "lon": 103.32221,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748900",
+   "name": "81/1",
+   "kind": "boundary_stone",
+   "lat": 22.70548,
+   "lon": 103.43357,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748901",
+   "name": "81/2",
+   "kind": "boundary_stone",
+   "lat": 22.70429,
+   "lon": 103.43282,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748904",
+   "name": "83/1",
+   "kind": "boundary_stone",
+   "lat": 22.6795,
+   "lon": 103.45964,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748905",
+   "name": "83/2",
+   "kind": "boundary_stone",
+   "lat": 22.61015,
+   "lon": 103.50872,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748907",
+   "name": "85(1)",
+   "kind": "boundary_stone",
+   "lat": 22.59516,
+   "lon": 103.53036,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748908",
+   "name": "85(2)",
+   "kind": "boundary_stone",
+   "lat": 22.59467,
+   "lon": 103.53024,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748909",
+   "name": "86(1)",
+   "kind": "boundary_stone",
+   "lat": 22.65636,
+   "lon": 103.57455,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748910",
+   "name": "86(2)",
+   "kind": "boundary_stone",
+   "lat": 22.65621,
+   "lon": 103.57532,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748911",
+   "name": "87(2)",
+   "kind": "boundary_stone",
+   "lat": 22.68069,
+   "lon": 103.56793,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748912",
+   "name": "87(1)",
+   "kind": "boundary_stone",
+   "lat": 22.68089,
+   "lon": 103.56775,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748913",
+   "name": "88(1)",
+   "kind": "boundary_stone",
+   "lat": 22.69068,
+   "lon": 103.56467,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9168748914",
+   "name": "88(2)",
+   "kind": "boundary_stone",
+   "lat": 22.68848,
+   "lon": 103.56537,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169213993",
+   "name": "89(1)",
+   "kind": "boundary_stone",
+   "lat": 22.70836,
+   "lon": 103.56654,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169213994",
+   "name": "89(2)",
+   "kind": "boundary_stone",
+   "lat": 22.7076,
+   "lon": 103.56741,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169213997",
+   "name": "90(1)",
+   "kind": "boundary_stone",
+   "lat": 22.75503,
+   "lon": 103.60491,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169213998",
+   "name": "90(2)",
+   "kind": "boundary_stone",
+   "lat": 22.75464,
+   "lon": 103.60733,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169213999",
+   "name": "93(1)",
+   "kind": "boundary_stone",
+   "lat": 22.769,
+   "lon": 103.67087,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214000",
+   "name": "93(2)",
+   "kind": "boundary_stone",
+   "lat": 22.76692,
+   "lon": 103.66987,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214001",
+   "name": "94(1)",
+   "kind": "boundary_stone",
+   "lat": 22.6942,
+   "lon": 103.75038,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214002",
+   "name": "94(2)",
+   "kind": "boundary_stone",
+   "lat": 22.69289,
+   "lon": 103.74825,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214003",
+   "name": "95(1)",
+   "kind": "boundary_stone",
+   "lat": 22.68865,
+   "lon": 103.75139,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214004",
+   "name": "95(2)",
+   "kind": "boundary_stone",
+   "lat": 22.68757,
+   "lon": 103.75054,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214005",
+   "name": "96(1)",
+   "kind": "boundary_stone",
+   "lat": 22.64035,
+   "lon": 103.81355,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214006",
+   "name": "96(2)",
+   "kind": "boundary_stone",
+   "lat": 22.63915,
+   "lon": 103.81119,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214007",
+   "name": "97(1)",
+   "kind": "boundary_stone",
+   "lat": 22.59389,
+   "lon": 103.85001,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214008",
+   "name": "97(2)",
+   "kind": "boundary_stone",
+   "lat": 22.59182,
+   "lon": 103.84952,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214009",
+   "name": "98(1)",
+   "kind": "boundary_stone",
+   "lat": 22.56562,
+   "lon": 103.88202,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214010",
+   "name": "98(2)",
+   "kind": "boundary_stone",
+   "lat": 22.56235,
+   "lon": 103.88262,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9169214011",
+   "name": "99(2)",
+   "kind": "boundary_stone",
+   "lat": 22.52756,
+   "lon": 103.93152,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/9694214285",
+   "name": "屏边烈士纪念碑",
+   "kind": "memorial",
+   "lat": 22.98742,
+   "lon": 103.69181,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10767471110",
+   "name": "Cầu treo Tả Lèng",
+   "kind": "attraction",
+   "lat": 22.42675,
+   "lon": 103.54988,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10767551657",
+   "name": "Núi Tả Liên Sơn",
+   "kind": "peak",
+   "lat": 22.46323,
+   "lon": 103.55611,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10873054332",
+   "name": "Núi Khang Su Văn",
+   "kind": "peak",
+   "lat": 22.75351,
+   "lon": 103.44015,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10873072788",
+   "name": "Đỉnh Xin Chải",
+   "kind": "peak",
+   "lat": 22.42865,
+   "lon": 103.58932,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/10873083305",
+   "name": "Núi Chung Nhía Vũ",
+   "kind": "peak",
+   "lat": 22.61332,
+   "lon": 103.50387,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11363476673",
+   "name": "Núi Nam Kang Ho Tao",
+   "kind": "peak",
+   "lat": 22.15038,
+   "lon": 103.97037,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11377886669",
+   "name": "Khu Du Lịch Cầu Kính Rồng Mây",
+   "kind": "attraction",
+   "lat": 22.3727,
+   "lon": 103.75729,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11621998449",
+   "name": "Núi Ngũ Chỉ Sơn",
+   "kind": "peak",
+   "lat": 22.40973,
+   "lon": 103.74258,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11624629968",
+   "name": "Núi Hàm Rồng",
+   "kind": "peak",
+   "lat": 22.33258,
+   "lon": 103.86243,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": true,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11625311033",
+   "name": "Núi Pờ Ma Lung",
+   "kind": "peak",
+   "lat": 22.62695,
+   "lon": 103.48587,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11736197269",
+   "name": "Ruộng bậc thang Nấm Linh Chi",
+   "kind": "viewpoint",
+   "lat": 21.85657,
+   "lon": 104.02579,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11736210869",
+   "name": "Móng ngựa Lao Chải",
+   "kind": "viewpoint",
+   "lat": 21.85335,
+   "lon": 104.02967,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11738285079",
+   "name": "Núi Phu Nậm Than",
+   "kind": "peak",
+   "lat": 21.96699,
+   "lon": 103.98532,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11738285080",
+   "name": "Núi Tau Linh",
+   "kind": "peak",
+   "lat": 21.77246,
+   "lon": 103.96414,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11738285081",
+   "name": "Núi Pu Ngừu San",
+   "kind": "peak",
+   "lat": 22.61969,
+   "lon": 103.44947,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11738285082",
+   "name": "Núi Phu San Sao",
+   "kind": "peak",
+   "lat": 22.12936,
+   "lon": 103.23407,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11738285084",
+   "name": "Núi Phu Min",
+   "kind": "peak",
+   "lat": 21.94601,
+   "lon": 104.43255,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11738285085",
+   "name": "Núi Khau Bôn",
+   "kind": "peak",
+   "lat": 22.35554,
+   "lon": 104.56902,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11763842628",
+   "name": "Núi Khau Phạ",
+   "kind": "peak",
+   "lat": 21.74055,
+   "lon": 104.25416,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/11871599148",
+   "name": "Alpine Coaster Sapa",
+   "kind": "park",
+   "lat": 22.32229,
+   "lon": 103.86656,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12487485701",
+   "name": "Pingbian Daweishan National Park",
+   "kind": "park",
+   "lat": 22.9672,
+   "lon": 103.69894,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12756714062",
+   "name": "Tea Fields View",
+   "kind": "viewpoint",
+   "lat": 22.26467,
+   "lon": 103.69573,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12767875301",
+   "name": "Parachute site",
+   "kind": "attraction",
+   "lat": 21.75499,
+   "lon": 104.26459,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/12768302901",
+   "name": "Buddha",
+   "kind": "monument",
+   "lat": 22.35252,
+   "lon": 103.76525,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13016900508",
+   "name": "Gian Hàng Trạm Dừng Nghỉ KM 237 Lào Cai",
+   "kind": "marketplace",
+   "lat": 22.36275,
+   "lon": 104.08184,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13084344806",
+   "name": "Cuu Hop Lop",
+   "kind": "attraction",
+   "lat": 22.35181,
+   "lon": 103.81746,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13084364009",
+   "name": "Po Mu",
+   "kind": "attraction",
+   "lat": 22.34422,
+   "lon": 103.82044,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13282179820",
+   "name": "Phan Si Păng",
+   "kind": "peak",
+   "lat": 22.30308,
+   "lon": 103.77544,
+   "wikipedia": "vi:Fansipan",
+   "wikidata": "Q123782",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/13357189296",
+   "name": "Cột mốc 103 (2)",
+   "kind": "boundary_stone",
+   "lat": 22.50847,
+   "lon": 103.96548,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/14229884501",
+   "name": "Bamboo forest",
+   "kind": "viewpoint",
+   "lat": 22.29378,
+   "lon": 103.90067,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/14335263401",
+   "name": "Little Love Cave",
+   "kind": "cave_entrance",
+   "lat": 22.33386,
+   "lon": 103.8459,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/14335266401",
+   "name": "Love Cave",
+   "kind": "cave_entrance",
+   "lat": 22.33339,
+   "lon": 103.84628,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "node/14348643202",
+   "name": "Love market",
+   "kind": "marketplace",
+   "lat": 22.33946,
+   "lon": 103.85131,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/85529099",
+   "name": "Cầu treo Cát Cát",
+   "kind": "attraction",
+   "lat": 22.32875,
+   "lon": 103.82945,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/234956885",
+   "name": "Chợ Bắc Hà",
+   "kind": "marketplace",
+   "lat": 22.53559,
+   "lon": 104.29215,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/304226055",
+   "name": "Công viên Thuỷ Vỹ",
+   "kind": "park",
+   "lat": 22.51055,
+   "lon": 103.9678,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/411389992",
+   "name": "Công viên Nhạc Sơn",
+   "kind": "park",
+   "lat": 22.48584,
+   "lon": 103.96752,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/548984559",
+   "name": "Chợ Cam Đường",
+   "kind": "marketplace",
+   "lat": 22.42052,
+   "lon": 104.02196,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/570841208",
+   "name": "Chợ Mường Khương",
+   "kind": "marketplace",
+   "lat": 22.75939,
+   "lon": 104.12777,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/661734154",
+   "name": "Chợ Kim Tân",
+   "kind": "marketplace",
+   "lat": 22.47467,
+   "lon": 103.97398,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/661734160",
+   "name": "Công viên Bắc Cường",
+   "kind": "park",
+   "lat": 22.47338,
+   "lon": 103.98057,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/661754770",
+   "name": "Bảo tàng tỉnh Lào Cai",
+   "kind": "museum",
+   "lat": 22.4442,
+   "lon": 104.0096,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/661755085",
+   "name": "Công viên Hồ Chí Minh",
+   "kind": "park",
+   "lat": 22.49826,
+   "lon": 103.97211,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/672018312",
+   "name": "Cầu Treo Lao Chải San II",
+   "kind": "attraction",
+   "lat": 22.30958,
+   "lon": 103.86069,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/692422183",
+   "name": "Chợ Nậm Cản",
+   "kind": "marketplace",
+   "lat": 22.02175,
+   "lon": 103.15389,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/692422397",
+   "name": "Chợ Đồi Cao",
+   "kind": "marketplace",
+   "lat": 22.0694,
+   "lon": 103.15781,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/692586170",
+   "name": "Chợ Trung tâm Thị xã Mường Lay",
+   "kind": "marketplace",
+   "lat": 22.02391,
+   "lon": 103.15787,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705445518",
+   "name": "Chợ Lai Châu",
+   "kind": "marketplace",
+   "lat": 22.39984,
+   "lon": 103.45589,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705445555",
+   "name": "Bảo tàng dân tộc tỉnh Lai Châu",
+   "kind": "museum",
+   "lat": 22.39156,
+   "lon": 103.47162,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705675076",
+   "name": "Chợ Trung tâm Thương mại",
+   "kind": "marketplace",
+   "lat": 22.38308,
+   "lon": 103.47127,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705956769",
+   "name": "Chợ Đông Phong",
+   "kind": "marketplace",
+   "lat": 22.38302,
+   "lon": 103.48824,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705960772",
+   "name": "Trường Mầm non Đoàn Kết",
+   "kind": "marketplace",
+   "lat": 22.3957,
+   "lon": 103.45903,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705986961",
+   "name": "Công viên Hồ Thuỷ Sơn",
+   "kind": "park",
+   "lat": 22.38908,
+   "lon": 103.46836,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705986971",
+   "name": "Công viên 1-6",
+   "kind": "park",
+   "lat": 22.39566,
+   "lon": 103.45721,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/705986988",
+   "name": "Chợ Nậm Loỏng",
+   "kind": "marketplace",
+   "lat": 22.40493,
+   "lon": 103.4332,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/712584152",
+   "name": "Chợ San Thàng",
+   "kind": "marketplace",
+   "lat": 22.39348,
+   "lon": 103.50132,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/713387724",
+   "name": "Chợ Than Uyên",
+   "kind": "marketplace",
+   "lat": 21.95011,
+   "lon": 103.88359,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/713668277",
+   "name": "Chợ Tam Đường",
+   "kind": "marketplace",
+   "lat": 22.32037,
+   "lon": 103.62485,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/713668317",
+   "name": "Công viên Tả Liên Sơn",
+   "kind": "park",
+   "lat": 22.32433,
+   "lon": 103.62141,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1055051249",
+   "name": "Công viên Pu Ta Leng",
+   "kind": "park",
+   "lat": 22.32109,
+   "lon": 103.62324,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1055051250",
+   "name": "Công viên Ao cá Bác Hồ",
+   "kind": "park",
+   "lat": 22.3967,
+   "lon": 103.46441,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1235174572",
+   "name": "Công viên Thuỷ Hoa",
+   "kind": "park",
+   "lat": 22.50578,
+   "lon": 103.96216,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1324773443",
+   "name": "Không Gian Văn Hóa - Sapa Tinh Hoa Hội Tụ",
+   "kind": "park",
+   "lat": 22.33569,
+   "lon": 103.84086,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1417144582",
+   "name": "Đền Bảo Hà",
+   "kind": "attraction",
+   "lat": 22.17112,
+   "lon": 104.35155,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1419391636",
+   "name": "Night market",
+   "kind": "marketplace",
+   "lat": 22.3386,
+   "lon": 103.85155,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1419391643",
+   "name": "Cho sapa",
+   "kind": "marketplace",
+   "lat": 22.339,
+   "lon": 103.85228,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1452788356",
+   "name": "Cốc Lều B Market",
+   "kind": "marketplace",
+   "lat": 22.50136,
+   "lon": 103.96828,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1452788357",
+   "name": "Cốc Lều A Market",
+   "kind": "marketplace",
+   "lat": 22.50088,
+   "lon": 103.96782,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "way/1452901440",
+   "name": "Chợ du lịch Lào Cai",
+   "kind": "marketplace",
+   "lat": 22.49387,
+   "lon": 103.97571,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "relation/7144302",
+   "name": "Vườn quốc gia Hoàng Liên",
+   "kind": "nature_reserve",
+   "lat": 22.24867,
+   "lon": 103.87218,
+   "wikipedia": "vi:Vườn quốc gia Hoàng Liên",
+   "wikidata": "Q1137913",
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  },
+  {
+   "osm": "relation/8133037",
+   "name": "Quảng trường Nhân Dân",
+   "kind": "attraction",
+   "lat": 22.3901,
+   "lon": 103.47435,
+   "wikipedia": null,
+   "wikidata": null,
+   "inCatalog": false,
+   "verification": {
+    "position": "OSM_UNVERIFIED",
+    "status": "UNVERIFIED"
+   }
+  }
+ ]
+}
