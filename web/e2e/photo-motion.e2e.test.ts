@@ -5,7 +5,7 @@ import { preview } from 'vite';
 import type { PreviewServer } from 'vite';
 import { chromium } from 'playwright-core';
 import type { Browser } from 'playwright-core';
-import { mockApi, readCatalog } from '../../tools/look/capture-fixtures.mjs';
+import { mockApi, readCatalog } from './support/capture-fixtures.mjs';
 import type { DestinationDetail } from '../src/features/discover/model/Catalog.types.ts';
 
 let server: PreviewServer;

@@ -70,7 +70,6 @@ node web/scripts/swipe-perf.mjs # đo độ mượt kéo thẻ (trình duyệt k
 
 Trong chế độ `dev`, các màn cần "thiết bị khác" hay máy chủ (ghép thiết bị, hết phiên, lỗi theo mã, giả lập ngày ở Hôm nay) có hộp **BẢN THỬ/GIẢ LẬP**; hộp này không hiển thị ở bản dựng (`vite build`), dù chữ của nó vẫn nằm trong gói JS. Danh tính ẩn danh, mã khôi phục và thiết bị đang chạy trên **máy chủ giả lưu trong trình duyệt** (`wander.web.server.v1`, chỉ giữ băm giả của mã), nên khôi phục chuyến đi thật chờ backend (FE-10). Lần đầu mở ứng dụng sẽ vào màn giới thiệu; thêm `?intro=0` vào địa chỉ để bỏ qua.
 
-Giao diện gọi API thật qua `/api` (khi phát triển Vite chuyển tiếp tới backend ở cổng 8787). Kịch bản trình duyệt thật nằm ở `web/e2e/` (cần backend chạy ở cổng 8787; `toolsdev.ps1 e2e` tự dựng và chạy). Bản giao diện cũ giữ ở `legacy/web-v1/`.
 
 Không dùng PowerShell hay Windows? Các lệnh trên giống nhau trên macOS/Linux (`./gradlew bootRun`); chỉ `tools/dev.ps1` là dành cho Windows.
 
@@ -131,7 +130,6 @@ Dự án có workflow cho Claude Code (`.claude/`, hướng dẫn: [`docs/agent-
 |---|---|
 | `backend/` | Backend Java (modular monolith `identity`, `planning`, `shared`), migration Flyway, test |
 | `web/` | Giao diện React + TypeScript (Vite) theo chuẩn `docs/architecture/frontend-standards.md`: `src/{app,features,shared,styles}`; API giả cho tới FE-10 |
-| `legacy/web-v1/` | Giao diện React cũ (thay bởi `web/` mới; giữ để tham khảo, có thể xóa) |
 | `web/e2e/` | Kịch bản trình duyệt thật (Playwright core) trên backend thật |
 | `tools/` | `dev.ps1` (lệnh Windows), `wander-status.mjs` |
 | `docs/` | Kế hoạch (`wander-master-plan.md`, **chỉ PO sửa**), kiến trúc + ADR, quyết định sản phẩm (`decisions/`), mặc định và cổng phát hành (`implementation/decisions.md`) |

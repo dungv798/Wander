@@ -82,4 +82,6 @@ export default tseslint.config(
     rules: { 'no-magic-numbers': 'off', 'max-lines-per-function': 'off' },
   },
   { files: ['*.config.{js,ts}'], languageOptions: { globals: { ...globals.node } } },
+  // Node-run helpers shared by the browser e2e scenarios (not bundled into the app).
+  { files: ['e2e/support/**/*.mjs'], languageOptions: { globals: { ...globals.node } } },
 );

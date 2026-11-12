@@ -18,7 +18,7 @@
   --mobile-dock-height: 68px;
   --mobile-header-total: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px));
   --mobile-dock-total: calc(var(--mobile-dock-height) + max(var(--s-3), env(safe-area-inset-bottom, 0px)));
-  /* Bề mặt điều khiển theo mẫu của PO (docs/UI-sample): gần đặc + viền mảnh + bóng mềm, KHÔNG blur trên nội dung đang cuộn.
+  /* Bề mặt điều khiển theo mẫu của PO (mẫu giao diện của PO): gần đặc + viền mảnh + bóng mềm, KHÔNG blur trên nội dung đang cuộn.
      Lý do: Safari 26 có lỗi lấy màu thanh khi phần tử cố định ở mép có backdrop-filter (WebKit 319479); chi phí blur trên iPhone chưa có số đo. */
   --mobile-glass: rgb(255 255 255 / .98);
   --mobile-nav-glass: rgb(255 255 255 / .985);

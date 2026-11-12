@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOT = path.resolve(import.meta.dirname, '../..');
+const ROOT = path.resolve(import.meta.dirname, '../../..');
 const CATALOG = path.join(ROOT, 'backend/src/main/resources/catalog');
 const CATEGORY = { canh: 'Cảnh quan', van: 'Văn hóa', am: 'Ẩm thực', leo: 'Leo núi', luu: 'Lưu trú', cho: 'Chợ' };
 const VERDICT = { must: 'Nên ghé', worth: 'Đáng đi', ifconv: 'Chỉ ghé nếu tiện' };

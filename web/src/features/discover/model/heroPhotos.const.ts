@@ -1,4 +1,4 @@
-/** Ảnh hero xếp hạng offline theo sáng, sắc, tương phản và ổn định vùng chữ; xem tools/look/hero-selection.md. */
+/** Ảnh hero xếp hạng offline theo sáng, sắc, tương phản và ổn định vùng chữ. */
 export const HERO_PHOTOS: Readonly<Record<string, readonly string[]>> = {
   "da-lat": [
     "ho-tuyen-lam-1.jpg",

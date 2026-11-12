@@ -1,4 +1,4 @@
-/** Mô hình chuyến đi ở FE. Tên trường bám hợp đồng backend (`TripDetail`/`Item` ở legacy/web-v1/src/api.ts, DR-018): `costK`, `referenceK`, `timeOfDay`, `durationMin`, `booking`, `done`. */
+/** Mô hình chuyến đi ở FE. Tên trường bám hợp đồng backend (`TripDetail`/`Item` ở `web/src/api.ts`): `costK`, `referenceK`, `timeOfDay`, `durationMin`, `booking`, `done`. */
 
 /** Chín loại mục (D13), mã trùng `ItemType` của backend. */
 export type ItemKind = 'sightseeing' | 'food' | 'transport' | 'lodging' | 'car_rental' | 'shopping' | 'tour' | 'rest' | 'task';
