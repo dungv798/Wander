@@ -1,5 +1,13 @@
 {
   "mcpServers": {
+    "wander-codex": {
+      "type": "stdio",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": ["D:\\Wander\\tools\\codex-mcp\\server.mjs"],
+      "env": {
+        "CODEX_MCP_CLI": "C:\\Users\\dungv\\AppData\\Roaming\\npm\\node_modules\\@openai\\codex\\bin\\codex.js"
+      }
+    },
     "code-review-graph": {
       "type": "stdio",
       "command": "C:\\Users\\dungv\\.local\\bin\\code-review-graph.exe",
