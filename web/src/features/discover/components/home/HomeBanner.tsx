@@ -7,11 +7,11 @@ import type { DestinationDetail } from '../../model/Catalog.types.ts';
 import { HOME } from '../../model/home.const.ts';
 import { HOME_COPY } from '../../model/home.copy.ts';
 import { HOME_BANNER } from '../../model/homePhotos.const.ts';
-import { HERO_PHOTOS } from '../../model/heroPhotos.const.ts';
+import { HERO_COVER_FIRST, HERO_PHOTOS } from '../../model/heroPhotos.const.ts';
 
 /** One invitation line on its own background; the chosen banner is lower and opens the right deck. */
 export function HomeBanner({ dest }: { readonly dest?: DestinationDetail }) {
-  const file = dest ? HERO_PHOTOS[dest.id]?.[0] : HOME_BANNER.file;
+  const file = dest ? (HERO_COVER_FIRST.has(dest.id) ? undefined : HERO_PHOTOS[dest.id]?.[0]) : HOME_BANNER.file;
   const src = file ? `/catalog/photos/${file}` : dest?.coverUrl;
   return (
     <button className={`nh-intro${dest ? ' nh-intro-selected' : ''}`} type="button" onClick={() => navigate(dest ? VIEW.DECK : VIEW.DESTINATIONS, dest?.id)} aria-label={dest ? fill(COPY.home.exploreDestination, { dest: dest.name }) : COPY.home.searchDestinations}>

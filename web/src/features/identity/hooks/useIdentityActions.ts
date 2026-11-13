@@ -4,6 +4,7 @@ import type { PersistentStore } from '../../../shared/state/PersistentStore.ts';
 import { clearToken, currentToken, setToken } from '../../../shared/state/sessionToken.ts';
 import type { IdentityGateway } from '../api/IdentityGateway.ts';
 import { clearFailures, recordFailure } from '../model/attemptLock.ts';
+import { IDENTITY } from '../model/identity.const.ts';
 import type { LockState } from '../model/attemptLock.ts';
 import type { PairingRequest, SessionState } from '../model/identity.types.ts';
 import type { IdentityActions, RecoveryAttempt } from './identityContext.ts';
@@ -88,6 +89,10 @@ export function createIdentityActions(deps: IdentityActionDeps): IdentityActions
       throw e;
     }
   };
+  /** Reloads a few more times shortly after an action whose security event the server records asynchronously; a failed reload is ignored (the next one or the page load fixes it). */
+  const refreshUntilEventsSettle = (): void => {
+    for (const ms of IDENTITY.EVENT_SETTLE_MS) setTimeout(() => void refresh().catch(() => undefined), ms);
+  };
   return {
     ensureIdentity: async () => {
       if (currentToken()) return;
@@ -97,11 +102,13 @@ export function createIdentityActions(deps: IdentityActionDeps): IdentityActions
     confirmReplacement: (pendingId, code) => guarded(async () => {
       await gateway.confirmReplacement(pendingId, code);
       await refresh();
+      refreshUntilEventsSettle();
     }),
     requestStepUp: () => guarded(() => gateway.requestStepUp()),
     revoke: (deviceId) => guarded(async () => {
       await gateway.revoke(deviceId);
       await refresh();
+      refreshUntilEventsSettle();
     }),
     markSeen: () => guarded(async () => {
       await gateway.markSeen();

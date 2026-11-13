@@ -142,8 +142,8 @@ Nguyên nhân đã tái hiện (đọc từ ảnh/số đo, 25/10): (1) cuộn: 
 - [~] ~~PO duyệt nội dung biên tập nháp của 11 điểm đến~~ — BỎ (DR-041)
 - [~] ~~Màn chọn điểm đến + bản đồ Việt Nam bay tới điểm nhập~~ — BỎ (DR-041)
 - [~] ~~Giao diện kiểu Roameo: chọn font/icon~~ — BỎ (DR-041)
-- [ ] Gỡ TerrainMap*, build-map.mjs, web/public/map/ha-giang sau khi bản đồ mới ổn định (giữ: việc dọn dẹp, PO 13/11/2026)
-- [ ] Xóa web/spike/ (bộ đo tạm) khi không còn cần (giữ: việc dọn dẹp, PO 13/11/2026)
+- [x] Gỡ TerrainMap*, build-map.mjs, web/public/map/ha-giang (kiểm 13/11/2026: không còn tệp theo dõi nào; `TerrainMapView.tsx` hiện là lớp bọc MapLibre đang dùng, giữ nguyên)
+- [x] Xóa web/spike/ (kiểm 13/11/2026: thư mục không còn trong repo)
 
 ## Dọn sổ 13/11/2026 (các ô cũ còn trống ở trên, ghi để khỏi nhầm là còn việc)
 - U8 "Kiểm cuối" (dòng ở vòng điều chỉnh UX 25/10): không làm riêng; pha tiếp theo là dựng FE thật (DR-019) và đã qua nhiều vòng kiểm (`flows`/e2e/Taste ở các mục FE). Đóng, không phải "đã chạy lại".
