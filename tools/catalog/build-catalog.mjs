@@ -17,7 +17,7 @@ const REFRESH = process.argv.includes('--refresh');
 const DEST = arg('dest', '');
 const APPEND_ONLY = process.argv.includes('--append-only');
 
-const UA = 'WanderCatalog/0.1 (learning project; contact binkuteqn289@gmail.com)';
+const UA = 'WanderCatalog/0.1 (learning project; contact https://github.com/dungv798/Wander)';
 const VI = 'https://vi.wikipedia.org/w/api.php';
 const COMMONS = 'https://commons.wikimedia.org/w/api.php';
 const WIKIDATA = 'https://www.wikidata.org/w/api.php';
