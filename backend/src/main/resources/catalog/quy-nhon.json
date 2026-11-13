@@ -1235,10 +1235,10 @@
     }
   ],
   "coverPhoto": {
-    "url": "https://images.unsplash.com/photo-1722944175475-6bbc2d6812c6?ixid=M3wxMTIzOTE3fDB8MXxzZWFyY2h8MXx8UXV5JTIwTmhvbiUyMFZpZXRuYW18ZW58MXx8fHwxNzkzODQ1Mzg5fDA&ixlib=rb-4.1.0&w=1000&q=75&fm=jpg&fit=max",
-    "author": "Alice Dang",
-    "authorUrl": "https://unsplash.com/@tzoanh?utm_source=wander&utm_medium=referral",
-    "license": "Giấy phép Unsplash",
-    "sourceUrl": "https://unsplash.com/photos/a-view-of-a-beach-from-a-high-point-of-view-qyV0Q_FDiUk?utm_source=wander&utm_medium=referral"
+    "file": "wave-pexels-30277984-w1280-96580a9b86.webp",
+    "thumbFile": "wave-pexels-30277984-w480-eb848ebd6c.webp",
+    "author": "Vũ Bụi",
+    "license": "Giấy phép Pexels",
+    "sourceUrl": "https://www.pexels.com/photo/sunrise-boat-at-beach-in-quy-nh-n-vietnam-30277984/"
   }
 }

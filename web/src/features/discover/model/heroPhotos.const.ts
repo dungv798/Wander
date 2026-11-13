@@ -1,5 +1,5 @@
 /** Destinations whose banner is their approved Unsplash cover (the most recognisable view), not the first catalog photo below. */
-export const HERO_COVER_FIRST: ReadonlySet<string> = new Set(['da-lat', 'ha-noi', 'ho-chi-minh', 'hoi-an', 'hue', 'ta-xua']);
+export const HERO_COVER_FIRST: ReadonlySet<string> = new Set(['da-lat', 'ha-giang', 'ha-noi', 'ho-chi-minh', 'hoi-an', 'hue', 'nha-trang', 'quy-nhon', 'ta-xua']);
 
 /** Hero photos per destination, picked by eye for a wide, low banner; the first one is the banner and the rest rotate in the hero. Every file is a photo of that destination's own places. */
 export const HERO_PHOTOS: Readonly<Record<string, readonly string[]>> = {
@@ -102,10 +102,10 @@ export const HERO_PHOTOS: Readonly<Record<string, readonly string[]>> = {
     "thap-doi-1-w1280-6607675a5f.webp"
   ],
   "sa-pa": [
+    "sapa-nui-ham-rong-1-w1146-eb8335a5d9.webp",
     "sa-pa-ta-phin-1-w1280-e21410a15e.webp",
     "wave-sa-pa-hoang-lien-2-w1280-26eb5a51af.webp",
-    "sa-pa-thac-bac-1-w1280-073a8a9d44.webp",
-    "sapa-nui-ham-rong-1-w1146-eb8335a5d9.webp"
+    "sa-pa-thac-bac-1-w1280-073a8a9d44.webp"
   ],
   "ta-xua": [
     "ta-xua-1-w1280-e935c21120.webp",
