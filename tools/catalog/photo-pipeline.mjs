@@ -17,7 +17,7 @@ const WORK_DIR = path.join(ROOT, 'docs/research/photo-candidates');
 const COMMONS = 'https://commons.wikimedia.org/w/api.php';
 const WIKIDATA = 'https://www.wikidata.org/w/api.php';
 const VI = 'https://vi.wikipedia.org/w/api.php';
-const UA = 'WanderCatalog/0.2 (learning project; contact binkuteqn289@gmail.com)';
+const UA = 'WanderCatalog/0.2 (learning project; contact https://github.com/dungv798/Wander)';
 
 const [, , COMMAND = '', ...rest] = process.argv;
 const arg = (k, d) => (rest.find((a) => a.startsWith(`--${k}=`)) ?? `--${k}=${d}`).split('=')[1];

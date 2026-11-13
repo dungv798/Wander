@@ -12,7 +12,7 @@ const ROOT = path.resolve(here, '../..');
 const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) ?? `--${k}=${d}`).split('=')[1];
 const DEST = arg('dest', '');
 const OVERPASS = arg('endpoint', 'https://overpass-api.de/api/interpreter');
-const UA = 'WanderPOI/0.2 (learning project; contact binkuteqn289@gmail.com)';
+const UA = 'WanderPOI/0.2 (learning project; contact https://github.com/dungv798/Wander)';
 const RADIUS_M = Number(arg('radius', '15000'));
 if (!Number.isFinite(RADIUS_M) || RADIUS_M <= 0 || RADIUS_M > 15_000) throw new Error('Bán kính phải lớn hơn 0 và không vượt 15000m');
 const CATEGORY_RE = '^(restaurant|cafe|fast_food|bar|pub|ice_cream)$';

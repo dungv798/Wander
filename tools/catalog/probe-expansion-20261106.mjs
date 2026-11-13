@@ -22,7 +22,7 @@ for (const [id, pattern] of Object.entries(terms)) {
   const ref = dest.references[0];
   const query = `[out:json][timeout:60];nwr["name"~"${pattern}",i](around:110000,${ref.lat},${ref.lon});out center tags;`;
   try {
-    const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`, { headers: { 'User-Agent': 'WanderCatalog/0.2 (local research; contact binkuteqn289@gmail.com)' }, signal: AbortSignal.timeout(90000) });
+    const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`, { headers: { 'User-Agent': 'WanderCatalog/0.2 (local research; contact https://github.com/dungv798/Wander)' }, signal: AbortSignal.timeout(90000) });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const raw = await res.json();
     data[id] = { fetchedAt: new Date().toISOString(), osmTimestamp: raw.osm3s?.timestamp_osm_base, query, attribution: '© OpenStreetMap contributors', license: 'ODbL-1.0', elements: raw.elements ?? [] };

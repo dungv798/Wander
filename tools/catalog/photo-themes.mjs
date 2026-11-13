@@ -13,7 +13,7 @@ const CATALOG_DIR = path.join(ROOT, 'backend/src/main/resources/catalog');
 const PHOTO_DIR = path.join(CATALOG_DIR, 'photos');
 const WORK_DIR = path.join(ROOT, 'docs/research/photo-candidates');
 const API = 'https://api.openverse.org/v1/images/';
-const UA = 'WanderCatalog/0.2 (learning project; contact binkuteqn289@gmail.com)';
+const UA = 'WanderCatalog/0.2 (learning project; contact https://github.com/dungv798/Wander)';
 
 const [, , COMMAND = '', ...rest] = process.argv;
 const arg = (k, d) => (rest.find((a) => a.startsWith(`--${k}=`)) ?? `--${k}=${d}`).split('=')[1];

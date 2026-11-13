@@ -22,7 +22,7 @@ for (const [id, query] of Object.entries(queries)) {
   if (data[id]?.hits?.length) continue;
   try {
     const url = `https://nominatim.openstreetmap.org/search?${new URLSearchParams({ q: query, format: 'jsonv2', limit: '3', countrycodes: 'vn' })}`;
-    const res = await fetch(url, { headers: { 'User-Agent': 'WanderCatalog/0.2 (local data preparation; contact binkuteqn289@gmail.com)' }, signal: AbortSignal.timeout(20000) });
+    const res = await fetch(url, { headers: { 'User-Agent': 'WanderCatalog/0.2 (local data preparation; contact https://github.com/dungv798/Wander)' }, signal: AbortSignal.timeout(20000) });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     data[id] = { query, fetchedAt: new Date().toISOString(), attribution: '© OpenStreetMap contributors (ODbL)', hits: await res.json() };
   } catch (error) { data[id] = { query, error: String(error.message) }; }
