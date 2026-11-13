@@ -12,8 +12,13 @@
 | ORD-4 | Sáu mục tính năng cũ trong `todo.md` | **Bỏ các mục tính năng, giữ 2 mục dọn dẹp** | Bỏ: nội dung điểm đến dưới 10 nơi, duyệt nội dung 11 điểm đến, màn chọn điểm đến + bản đồ Việt Nam, giao diện Roameo. Giữ: gỡ `TerrainMap*`/`build-map.mjs`/`web/public/map/ha-giang` và xóa `web/spike/`. |
 | ORD-5 | 11 script review dùng một lần ở `tools/` | Gộp vào "làm hết" (xóa được vì còn trong lịch sử git) | Đã `git rm` 11 tệp: `build-b-parity-review`, `capture-b-reference`, `debug-b-trip-choice`, 8 tệp `review-*`. Giữ `dev.ps1`, `e2e.sh`, `quality.ps1`, `wander-status.mjs`, `profile-wander-performance.mjs`. Khôi phục: `git show <commit-truoc>:tools/<tệp>`. |
 
-## Chưa hỏi / còn chờ PO (Tầng A)
-- T10: chấp nhận khoảng hở TOCTOU phiên đã thu hồi cho người quen (DR-040 đã diễn giải thận trọng là chấp nhận (a)).
-- Mục học tự nguyện AD-17, AD-19, ADR-011: có đặt trần giờ không.
-- Giữ hay bỏ `keep-warm.yml` (rủi ro điều khoản Render, T9).
-- Thời điểm bỏ file research chứa 2 key Google Maps của bên thứ ba khỏi lịch sử (trước khi public là khuyến nghị).
+## Lượt hai cùng ngày (PO chọn đúng phương án khuyến nghị cả bốn câu)
+| Mã | Câu hỏi | Lựa chọn của PO | Hệ quả |
+|---|---|---|---|
+| ORD-6 | T10: khoảng hở TOCTOU của phiên đã thu hồi | **Chấp nhận (a) cho người quen** | Phương án (b) `SELECT … FOR SHARE` không làm. Đã ghi ở threat-model T10 và `open-decisions.md`; xem lại trước khi mở cho người lạ. |
+| ORD-7 | AD-17, AD-19, ADR-011 "học tự nguyện" | **Chưa làm, đặt sau** | Giữ mở; không phát sinh việc. Làm khi PO nêu số giờ (STR-1 = C). |
+| ORD-8 | `keep-warm.yml` | **Giữ, gỡ ngay nếu Render phản đối** | Chỉ chạy sau khi merge vào `main`. Rủi ro điều khoản (T9) vẫn được PO biết và chấp nhận. |
+| ORD-9 | Hai key Google Maps của bên thứ ba trong lịch sử (commit `480978dc76`) | **Bỏ khỏi lịch sử trước khi public** | Gộp vào lần force-push lịch sử viết lại (`history-rewrite.md` bước 4). Claude chỉ chuẩn bị bản sạch; PO tự force-push. |
+
+## Còn chờ PO
+Không còn câu Tầng A nào mở từ lượt này. Việc chỉ PO làm được: xem bảng "Lộ trình còn lại" (Chặng 1 đến 3).
