@@ -2,6 +2,8 @@
 
 Ba việc dưới đây tôi (Claude) không làm thay được: cần bảng điều khiển Render/Neon của bạn, hai mạng khác nhau, hoặc người thật. Làm theo thứ tự. Mọi bí mật (pepper, mật khẩu DB) chỉ để trong trình quản lý mật khẩu của bạn, **không dán vào chat hay repo**. Nguồn quy trình: `docs/implementation/free-deployment-runbook.md` §4 bước 4 và §6; kết quả rà an ninh ở `docs/security/threat-model-1a.md`.
 
+> **Cập nhật 13/11/2026 (DR-042):** việc 1 đã làm một phần qua Chrome của PO: hop=1 chốt trên Render, header giả không đổi được thùng; **bước mạng 4G (bước 4) bị bỏ qua theo lựa chọn của PO**. Việc 2 (sao lưu pepper + restore) và việc 3 (3 người quen) vẫn chưa làm. Phát hiện kèm theo: hop=0 không tạo "một thùng chung" như mô tả bên dưới (8 × 201 với hạn mức 2).
+
 ## 1. Đo số hop proxy trên Render (RG-5) — khoảng 1,5 giờ
 Mục đích: biết Render nối `X-Forwarded-For` thế nào để đặt `WANDER_TRUSTED_PROXY_HOPS` **bằng đúng số proxy thật**. Mặc định 0 là an toàn nhưng cả hệ thống chung một thùng giới hạn (30 lượt tạo danh tính/giờ).
 Cách đo không cần endpoint gỡ lỗi: dùng chính giới hạn tốc độ làm "cảm biến".
