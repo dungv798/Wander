@@ -1,0 +1,12 @@
+# CodeQL scans the code that runs in production (backend/src, web/src). The folders below are offline or developer-only:
+# catalog curation scripts, the historical UI prototype under docs/, build and screenshot scripts, and the browser end-to-end tests.
+# Their findings (mostly "file data in a network request" for scripts that download photos from a URL list) do not describe a risk to users.
+# Owner decision 13/11/2026 (the alternative was to keep all 110 findings open).
+name: wander codeql config
+paths-ignore:
+  - tools
+  - docs
+  - web/scripts
+  - web/e2e
+  - web/spike
+  - "**/*.test.ts"
