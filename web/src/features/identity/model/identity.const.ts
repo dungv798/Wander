@@ -23,6 +23,11 @@ export const IDENTITY = {
   ATTEMPT_TTL_MS: 900_000,
   /** The polling rhythm to check a pairing request/expiry while waiting, ms. */
   POLL_MS: 1000,
+  /**
+   * The server records security events (revoked device, new recovery code) just AFTER the request commits, so the first reload may not list them yet;
+   * these follow-up reloads (ms after the action) pick the event up without the user reloading the page.
+   */
+  EVENT_SETTLE_MS: [500, 1500, 4000],
 } as const;
 
 /** The file name of the downloaded recovery code. */

@@ -15,7 +15,7 @@ export function DestinationCard({ destination, onSelect }: DestinationCardProps)
   const photo = HOME_PHOTOS[destination.id];
   return (
     <button className="nh-card" type="button" onClick={onSelect}>
-      <RevealImage src={photo ? `/catalog/photos/${photo.file}` : destination.coverUrl} style={{ objectPosition: photo?.position }} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
+      <RevealImage src={photo?.file ? `/catalog/photos/${photo.file}` : destination.coverUrl} style={{ objectPosition: photo?.position }} alt="" width={HOME.IMAGE_WIDTH} height={HOME.IMAGE_HEIGHT} loading="lazy" />
       <span className="nh-card-copy">
         <b>{destination.name}</b>
         <span className="nh-tag">{HOME_COPY.hooks[destination.id] ?? destination.tagline}</span>

@@ -6,10 +6,10 @@ name: codeql
 on:
   workflow_dispatch:
   pull_request:
-    paths: ["backend/src/**", "web/src/**", "tools/**/*.mjs", ".github/workflows/codeql.yml"]
+    paths: ["backend/src/**", "web/src/**", ".github/workflows/codeql.yml", ".github/codeql/**"]
   push:
     branches: [main]
-    paths: ["backend/src/**", "web/src/**", "tools/**/*.mjs", ".github/workflows/codeql.yml"]
+    paths: ["backend/src/**", "web/src/**", ".github/workflows/codeql.yml", ".github/codeql/**"]
   schedule:
     - cron: "23 4 * * 1"
 
@@ -42,6 +42,7 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: none
           queries: security-extended
+          config-file: ./.github/codeql/codeql-config.yml
       - uses: github/codeql-action/analyze@v4
         with:
           category: "/language:${{ matrix.language }}"
