@@ -32,7 +32,7 @@ jobs:
       DEVICE: ${{ inputs.device }}
       WARMUP: ${{ inputs.warmup_seconds }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: tools/ios-sim
 
