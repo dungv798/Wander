@@ -31,7 +31,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       # The Makefile is the cross-platform entry point; -n parses it and prints the commands without running them.
       - run: make -n test
         working-directory: .
@@ -66,7 +66,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - run: sh ./gradlew bootJar --console=plain
         working-directory: backend
       - run: >
