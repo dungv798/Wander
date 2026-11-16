@@ -6,7 +6,8 @@ name: keep-warm
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    # Phút lệch giờ tròn (7, 17, …) vì GitHub hay trễ/bỏ lượt ở :00, :10, :30 khi hàng đợi đông.
+    - cron: "7,17,27,37,47,57 * * * *"
   workflow_dispatch:
 
 permissions: {}
@@ -19,6 +20,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
-      - name: Gọi /actuator/health
-        # Lúc máy chủ đang ngủ, lượt gọi chờ tới ~215 s mới trả lời; --max-time 300 đủ cho lần đánh thức.
-        run: curl --fail --silent --show-error --max-time 300 --output /dev/null --write-out 'HTTP %{http_code} trong %{time_total}s\n' "$WANDER_HEALTH_URL"
+      - name: Gọi /actuator/health (thử lại, không bao giờ làm job đỏ)
+        # Lúc máy chủ đang ngủ, lượt gọi chờ tới ~215 s mới trả lời; --max-time 240 đủ cho lần đánh thức.
+        # Không dùng --fail: Render có thể trả 4xx/5xx (trang chờ) trong lúc đánh thức, curl --fail sẽ thoát mã 22 và job đỏ (lượt #7 ngày 13/11).
+        # Mục đích của job chỉ là "chạm" máy chủ để Render tính có truy cập, nên mọi phản hồi đều đạt; không phản hồi sau 3 lần thì chỉ cảnh báo.
+        run: |
+          for attempt in 1 2 3; do
+            code=$(curl --silent --max-time 240 --output /dev/null --write-out '%{http_code} trong %{time_total}s' "$WANDER_HEALTH_URL" || true)
+            echo "Lần $attempt: HTTP $code"
+            case "$code" in 2*) exit 0 ;; esac
+            sleep 20
+          done
+          echo "::warning::Máy chủ chưa trả 2xx sau 3 lần thử (lần cuối: $code). Không coi là lỗi vì lượt gọi đã đánh thức Render."
+          exit 0
