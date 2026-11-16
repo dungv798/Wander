@@ -56,7 +56,7 @@ jobs:
           ls -la shots
 
       - name: Tải ảnh lên
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: safari-ios-autoscroll
           path: shots/*.png
