@@ -1,5 +1,5 @@
 # Build từ root repo; không cần DB hay secret ở thời điểm build.
-FROM node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85 AS web-build
+FROM node:26-alpine@sha256:6bd9ab43c0ec0190ca7b2d193906cb8b7edf6e7f4afa43ddeccd6452710bffb5 AS web-build
 WORKDIR /src
 COPY web/package.json web/package-lock.json ./web/
 RUN npm ci --prefix web --no-audit --no-fund
