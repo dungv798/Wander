@@ -2,7 +2,7 @@
 // Quyết định stack: docs/architecture/adr/ADR-002-java-spring-stack.md (PO duyệt 24/10/2026).
 plugins {
     java
-    id("org.springframework.boot") version "4.1.2"
+    id("org.springframework.boot") version "4.2.0"
     id("io.spring.dependency-management") version "1.1.7"
     jacoco
     // Cổng quy ước mã (ADR-013, backend-conventions.md): DOC-1 Javadoc, CON-* không chuỗi/số ma thuật, NAM-5, SIM-1
@@ -25,7 +25,7 @@ repositories {
 // Spring Modulith (ADR-011): module verification, the transactional event publication registry (outbox) and module documentation.
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.modulith:spring-modulith-bom:2.1.2")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:2.2.0")
     }
 }
 
@@ -40,7 +40,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     // Bean Validation for typed request records and the generated OpenAPI contract (served outside the "free" profile only)
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0")
     implementation("org.springframework.modulith:spring-modulith-starter-core")
     implementation("org.springframework.modulith:spring-modulith-starter-jdbc")
     implementation("org.flywaydb:flyway-database-postgresql")
@@ -56,7 +56,7 @@ dependencies {
     testImplementation("org.springframework.modulith:spring-modulith-starter-test")
     testImplementation("org.awaitility:awaitility")
     testImplementation("org.springframework.modulith:spring-modulith-docs")
-    testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.5.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
